@@ -1,0 +1,56 @@
+.box {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  padding: 30px;
+  gap: 20px;
+}
+
+.box > div {
+  padding: 100px 20px;
+  height: 500px;
+  display: grid;
+  gap: 14px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  border-radius: 6px; 
+  transform: scale(1);
+  transition: transform .3s;  
+}
+
+.box > div:hover {
+    transform: scale(1.05); 
+} 
+  
+.box button {
+    background-color: white; 
+    border: 2px solid var(--color-btn);
+    width: 50%;  
+    padding: 4px 10px; 
+    margin: auto; 
+    color: var(--color-btn);  
+    font-weight: bold;  
+    border-radius: 10px;  
+} 
+
+.box>div:hover .btn{
+    background-color: var(--color-btn); 
+    color: rgb(255, 255, 255);  
+} 
+
+h2 {
+  font-size: x-large;
+  font-weight: bold;
+}
+
+@media only screen and (min-width: 100px) and (max-width: 550px) {
+  .box {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media only screen and (min-width: 550px) and (max-width: 900px) {
+  .box {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

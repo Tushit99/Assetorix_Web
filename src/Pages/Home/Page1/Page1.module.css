@@ -1,0 +1,25 @@
+
+.fields{
+    width: 100%; 
+    margin: 8% auto 0 auto; 
+    text-align: center; 
+    display: grid; 
+}
+
+.fields>div:nth-child(1){ 
+    margin: auto 20%; 
+    text-align: center;  
+    display: flex; 
+    align-items: center; 
+}
+
+.fields>div:nth-child(2){ 
+    margin: auto 20%; 
+    text-align: center;  
+    display: flex; 
+    align-items: center; 
+}
+
+
+
+

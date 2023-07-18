@@ -1,0 +1,43 @@
+.logo {
+  font-family: cursive;
+  font-size: medium;
+  font-weight: bold;
+}
+
+.logo span {
+  font-size: x-large;
+  font-weight: bold;
+  color: rgb(0, 255, 0);
+}
+
+.ham_body {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: repeat(26, auto);
+  gap: 5px;
+}
+
+.ham_body > * {
+  width: 100%;
+  background-color: var(--color-btn);
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  padding: 0 14px;
+  border-radius: 7px;
+  color: white;
+}
+
+/* hamburger Animation  */
+
+/* .raise:hover,
+.raise:focus {
+  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  transform: translateY(-0.25em);
+} */
+
+.ham_body > *:hover {
+  background: #848bf1;   
+  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  transform: translateY(-0.25em);
+}
