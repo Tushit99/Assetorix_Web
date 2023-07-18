@@ -4,7 +4,8 @@ body {
   font-family: sans-serif;
   --main-one: #0b2033;
   --dark-text-color: #ffffff;
-  --color-btn: rgb(245, 101, 101);
+  --color-btn: rgb(245, 101, 101); 
+  --color-green: rgb(0, 255, 0) ;
 }
 
 

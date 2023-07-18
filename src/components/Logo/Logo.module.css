@@ -10,22 +10,25 @@
   color: rgb(0, 255, 0);
 }
 
+
+
 .ham_body {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  grid-template-rows: repeat(26, auto);
-  gap: 5px;
+  grid-template-rows: repeat(24, auto);
+  gap: 10px;  
 }
 
 .ham_body > * {
   width: 100%;
   background-color: var(--color-btn);
-  display: flex;
+  display: flex; 
   align-items: center;
   justify-content: left;
   padding: 0 14px;
-  border-radius: 7px;
-  color: white;
+  border-radius: 4px;
+  color: white; 
+  transition: all 0.5s ;
 }
 
 /* hamburger Animation  */
@@ -36,8 +39,8 @@
   transform: translateY(-0.25em);
 } */
 
-.ham_body > *:hover {
-  background: #848bf1;   
-  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
-  transform: translateY(-0.25em);
+.ham_body > *:hover {    
+  box-shadow: 0 0.5em 0.5em -0.4em var(--color-green);
+  transform: translateX(0.65em);  
+  /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;  */
 }

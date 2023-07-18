@@ -26,11 +26,11 @@ const Hamburger = () => {
             <Drawer 
                 isOpen={isOpen}
                 placement="left"
-                onClose={onClose}
+                onClose={onClose}  
                 finalFocusRef={btnRef}
             >
                 <DrawerOverlay />
-                <DrawerContent>
+                <DrawerContent backgroundColor={"#0b2033"}>
                     <DrawerCloseButton />
                     <DrawerHeader>
                         <Logo />

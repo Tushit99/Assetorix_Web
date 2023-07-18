@@ -21,7 +21,7 @@ const Navebar = () => {
                 <button className={style.signup} >
                     <Link to={"/signup"}>
                         Sign In
-                    </Link>
+                    </Link> 
                 </button>
             </div>
         </div>
