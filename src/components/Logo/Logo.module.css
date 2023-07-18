@@ -1,16 +1,15 @@
 .logo {
   font-family: cursive;
   font-size: medium;
-  font-weight: bold;
+  font-weight: bold; 
+  color: white; 
 }
 
 .logo span {
   font-size: x-large;
   font-weight: bold;
   color: rgb(0, 255, 0);
-}
-
-
+} 
 
 .ham_body {
   display: grid;
@@ -44,3 +43,10 @@
   transform: translateX(0.65em);  
   /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;  */
 }
+
+.ham_body > *:active {    
+    box-shadow: 0 0.5em 0.5em -0.4em var(--color-green);
+    transform: translate(0em);  
+    /* transform: translateY(-0.2em);   */
+    /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;  */
+  }

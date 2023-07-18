@@ -10,8 +10,8 @@ const Navebar = () => {
             <div className={style.hamburger_menu}>
                 <Hamburger /> 
             </div>
-            <div>
-                <Logo />
+            <div className={style.nav_logo}>
+                <Logo /> 
             </div> 
             <div className={style.nav_link}>
                 <Link to={"/"}>Home</Link>

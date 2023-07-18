@@ -19,7 +19,7 @@ const Hamburger = () => {
     const btnRef = useRef();
 
     return (
-        <>
+        <> 
             <Button ref={btnRef} backgroundColor="#0b2033" _hover={{ backgroundColor: "#0b2033" }} onClick={onOpen}>
                 <HamburgerIcon w={10} h={10} color="red.500" />
             </Button>
@@ -31,7 +31,7 @@ const Hamburger = () => {
             >
                 <DrawerOverlay />
                 <DrawerContent backgroundColor={"#0b2033"}>
-                    <DrawerCloseButton />
+                    <DrawerCloseButton backgroundColor={"white"} />
                     <DrawerHeader>
                         <Logo />
                     </DrawerHeader>

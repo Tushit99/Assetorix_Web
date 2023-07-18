@@ -26,7 +26,7 @@ const Footer = () => {
     <div>
       <Box className={style.footer}>
         <Container as={Stack} maxW={'6xl'} py={10}>
-          <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={8}>
+          <SimpleGrid columns={{ base: 2, md: 4 }} spacing={8}>
             <Stack align={'flex-start'}>
               <ListHeader>Product</ListHeader>
               <Link href={'#'}>Overview</Link>
