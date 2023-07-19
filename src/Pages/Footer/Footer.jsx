@@ -78,7 +78,7 @@ const Footer = () => {
             <Logo />
           </Flex>
         </Box>
-        {/* some company info */}
+        {/* some company info */} 
         <Text className={style.groupof}>
           AssetOrix Group is committed to ensuring digital accessibility for
           individuals with disabilities. We are continuously working to improve
@@ -102,7 +102,7 @@ const Footer = () => {
           <h1>
             <FaLinkedinIn size={"24px"} />
           </h1>
-        </Box>
+        </Box>  
       </Box>
     </div>
   );
