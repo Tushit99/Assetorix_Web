@@ -1,12 +1,15 @@
 import React from 'react'
 import style from "./Logo.module.css";
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';  
+import logo from "./weblogo.png"; 
 
 const Logo = () => {
   return (
-    <Link to={"/"}>
-      <h2 className={style.logo}> <span>ASSET</span>ORIX </h2>
-    </Link>
+    <h2 className={style.logo}>
+      <Link to={"/"}>
+        <img src={logo} alt="logo" />  
+      </Link>
+    </h2>
   )
 }
 

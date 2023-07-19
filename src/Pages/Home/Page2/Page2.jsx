@@ -1,6 +1,6 @@
 import { Box, Grid, GridItem, Heading } from "@chakra-ui/react";
 import React from "react";
-import style from "./Page2.module.css";
+// import style from "./Page2.module.css";
 import { Link } from "react-router-dom";
 
 const Page2 = () => {

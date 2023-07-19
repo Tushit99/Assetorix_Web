@@ -1,101 +1,114 @@
 import {
   Box,
-  Container,
   Link,
-  SimpleGrid,
-  Stack,
   Text,
   Flex,
-  Tag,
   useColorModeValue,
-} from '@chakra-ui/react';
-import React from 'react'
-import Logo from '../../components/Logo/Logo'; 
-import style from "./Footer.module.css"; 
-
-const ListHeader = ({ children }) => {
-  return (
-    <Text fontWeight={'500'} fontSize={'lg'} mb={2}>
-      {children}
-    </Text>
-  );
-}; 
+  Divider,
+} from "@chakra-ui/react";
+import React from "react";
+import Logo from "../../components/Logo/Logo";
+import style from "./Footer.module.css";
+import {
+  BsArrowRight,
+  BsFacebook,
+  BsInstagram,
+  BsTwitter,
+} from "react-icons/bs"; 
+import {FaLinkedinIn} from "react-icons/fa"; 
 
 const Footer = () => {
   return (
     <div>
+      <Divider h={2} orientation="horizontal" />
       <Box className={style.footer}>
-        <Container as={Stack} maxW={'6xl'} py={10}>
-          <SimpleGrid columns={{ base: 2, md: 4 }} spacing={8}>
-            <Stack align={'flex-start'}>
-              <ListHeader>Product</ListHeader>
-              <Link href={'#'}>Overview</Link>
-              <Stack direction={'row'} align={'center'} spacing={2}>
-                <Link href={'#'}>Features</Link>
-                <Tag
-                  size={'sm'}
-                  bg={useColorModeValue('green.300', 'green.800')}
-                  ml={2}
-                  color={'white'}>
-                  New
-                </Tag>
-              </Stack>
-              <Link href={'#'}>Tutorials</Link>
-              <Link href={'#'}>Pricing</Link>
-              <Link href={'#'}>Releases</Link>
-            </Stack>
-            <Stack align={'flex-start'}>
-              <ListHeader>Company</ListHeader>
-              <Link href={'#'}>About Us</Link>
-              <Link href={'#'}>Press</Link>
-              <Link href={'#'}>Careers</Link>
-              <Link href={'#'}>Contact Us</Link>
-              <Link href={'#'}>Partners</Link>
-            </Stack>
-            <Stack align={'flex-start'}>
-              <ListHeader>Legal</ListHeader>
-              <Link href={'#'}>Cookies Policy</Link>
-              <Link href={'#'}>Privacy Policy</Link>
-              <Link href={'#'}>Terms of Service</Link>
-              <Link href={'#'}>Law Enforcement</Link>
-              <Link href={'#'}>Status</Link>
-            </Stack>
-            <Stack align={'flex-start'}>
-              <ListHeader>Follow Us</ListHeader>
-              <Link href={'#'}>Facebook</Link>
-              <Link href={'#'}>Twitter</Link>
-              <Link href={'#'}>Dribbble</Link>
-              <Link href={'#'}>Instagram</Link>
-              <Link href={'#'}>LinkedIn</Link>
-            </Stack>
-          </SimpleGrid>
-        </Container>
-        <Box py={10}>
+        {/* footer */}
+        <Box
+          maxW={"6xl"}
+          p={4}
+          display={"flex"}
+          alignItems={"center"}
+          justifyContent={"center"}
+          textAlign={"center"}
+          flexWrap={"wrap"}
+          gap={"20px"}
+        >
+          <Link href={"#"}>About</Link>
+          <Link href={"#"}>Research </Link>
+          <Link href={"#"}>Pricing</Link>
+          <Link href={"#"}>Careers </Link>
+          <Link href={"#"}>About Us</Link>
+          <Link href={"#"}>Help </Link>
+          <Link href={"#"}>Fair Housing Guide</Link>
+          <Link href={"#"}>Advertise</Link>
+          <Link href={"#"}>Contact Us</Link>
+          <Link href={"#"}>Partners</Link>
+          <Link href={"#"}>Cookies Policy</Link>
+          <Link href={"#"}>Privacy Policy</Link>
+          <Link href={"#"}>Terms of Service</Link>
+          <Link href={"#"}>Law Enforcement</Link>
+          <Link href={"#"}>Facebook</Link>
+          <Link href={"#"}>Twitter</Link>
+          <Link href={"#"}>Dribbble</Link>
+          <Link href={"#"}>Instagram</Link>
+          <Link href={"#"}>LinkedIn</Link>
+        </Box>
+        {/* footer Warning line  */}
+        <Box className={style.info_warning}>
+          <h3>
+            Do Not Sell or Share My Personal Information <BsArrowRight />
+          </h3>
+        </Box>
+        <Box py={4}>
           <Flex
-            align={'center'}
+            align={"center"}
             _before={{
               content: '""',
-              borderBottom: '1px solid',
-              borderColor: useColorModeValue('gray.200', 'gray.700'),
-              flexGrow: 1,
+              borderBottom: "1px solid",
+              borderColor: useColorModeValue("gray.200", "gray.700"),
+              flexGrow: 1, 
               mr: 8,
             }}
             _after={{
               content: '""',
-              borderBottom: '1px solid',
-              borderColor: useColorModeValue('gray.200', 'gray.700'),
-              flexGrow: 1,
+              borderBottom: "1px solid",
+              borderColor: useColorModeValue("gray.200", "gray.700"),
+              flexGrow: 1,  
               ml: 8,
-            }}>
-            {/* company Logo */} 
-            <Logo /> 
-          </Flex> 
+            }}
+          >
+            {/* company Logo */}
+            <Logo />
+          </Flex>
+        </Box>
+        {/* some company info */}
+        <Text className={style.groupof}>
+          AssetOrix Group is committed to ensuring digital accessibility for
+          individuals with disabilities. We are continuously working to improve
+          the accessibility of our web experience for everyone, and we welcome
+          feedback and accommodation requests. If you wish to report an issue or
+          seek an accommodation, please
+        </Text>
+        <Text className={style.underline}>let us know.</Text>
+
+        {/* line with logo */}
+        <Box className={style.contact}> 
+          <h1>
+            <BsFacebook size={"24px"} />
+          </h1>
+          <h1>
+            <BsInstagram size={"24px"} />
+          </h1>
+          <h1>
+            <BsTwitter size={"24px"} />
+          </h1> 
+          <h1>
+            <FaLinkedinIn size={"24px"} />
+          </h1>
         </Box>
       </Box>
     </div>
-  )
-}
+  );
+};
 
-export default Footer; 
-
- 
+export default Footer;

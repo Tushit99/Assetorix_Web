@@ -13,6 +13,7 @@ const Home = () => {
       <Page2 />   
       {/* House */}  
       <House />   
+      {/* product Slider  */}   
     </div>
   );
 };

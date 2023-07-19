@@ -15,7 +15,7 @@ import {
 
 export default function About() {
     return (
-        <Container maxW={'7xl'} margin={"40px 0"}>
+        <Container maxW={'7xl'} margin={"40px auto"}> 
             <Stack
                 align={'center'}
                 spacing={{ base: 8, md: 10 }}

@@ -49,9 +49,9 @@ const Page1 = () => {
                         >
                             Show me more
                         </Button>
-                    </Stack>
+                    </Stack> 
                 </Stack>
-                <div className={style.fields}>
+                <div className={style.fields}> 
                     <div >
                         <Button
                             w={"140px"}

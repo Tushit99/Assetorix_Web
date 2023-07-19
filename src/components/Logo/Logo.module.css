@@ -2,14 +2,19 @@
   font-family: cursive;
   font-size: medium;
   font-weight: bold; 
-  color: white; 
 }
 
-.logo span {
+/* .logo span {
   font-size: x-large;
   font-weight: bold;
   color: rgb(0, 255, 0);
-} 
+}  */ 
+.logo img{
+  text-align: left;     
+  width: 100px;   
+  object-fit: contain;   
+  max-height: 45px; 
+}
 
 .ham_body {
   display: grid;

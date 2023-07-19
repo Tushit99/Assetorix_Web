@@ -20,6 +20,14 @@
     align-items: center; 
 }
 
+@media screen and (min-width:100px) and (max-width:550px) {
+    .fields>div:nth-child(1){
+        margin: 0; 
+    } 
+    .fields>div:nth-child(2){
+        margin: 0;  
+    }
+}
 
 
 

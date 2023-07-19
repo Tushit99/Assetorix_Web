@@ -1,7 +1,56 @@
 
 .footer{
-    background-color: var(--main-one);   
-    color: var(--dark-text-color) ;
+     background-color: var(--main-one);    
+     color: var(--dark-text-color) ;   
+    /* color: black;   */
 }
+
+.info_warning h3{
+    display: flex;   
+    align-items: center; 
+    justify-content: center; 
+    gap: 6px;  
+    cursor: pointer ;  
+}
+
+.info_warning h3:hover{
+    text-decoration: underline;  
+    color:rgb(0, 128, 255); 
+}
+
+.groupof{
+    margin: 30px auto 0 auto; 
+    width: 90%; 
+}
+
+.underline{
+    text-decoration: underline;  
+    cursor: pointer; 
+}
+
+
+/* contact icon */
+
+.contact{
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 10px; 
+    padding: 24px 0;  
+}
+
+.contact h1{  
+    background-color: rgba(255, 255, 255, 0.699);  
+    border-radius: 50%; 
+    color: blue;   
+    padding: 4px;  
+    object-fit: contain;  
+    transition: all 0.3s ease-in-out ; 
+}  
+
+.contact h1:hover{
+    transform: scale(1.3); 
+}
+
 
 
