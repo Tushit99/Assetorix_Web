@@ -3,11 +3,13 @@ import style from "../place.module.css";
 import { GrLocation } from "react-icons/gr";
 import { Button } from "@chakra-ui/react";
 import { ViewIcon } from "@chakra-ui/icons";
+import { Link } from "react-router-dom";
 
-const Product = ({ id, img, name, location, price }) => {
+const Product = ({ id, img, name, location, price,page }) => {
+
     return (
-        <div key={id} className={style.detail_box}>
-            <img src={img} alt="imglink" />
+        <Link to={`/${page}/${id}`} key={id} className={style.detail_box}>
+            <img src={img} alt="imglink" /> 
             <div>
                 <h5> FOR SALE </h5>
                 <h2>{name} </h2>
@@ -22,7 +24,7 @@ const Product = ({ id, img, name, location, price }) => {
                     VIEW DETAILS
                 </Button>
             </div>
-        </div>
+        </Link>
     );
 };
 export default Product;

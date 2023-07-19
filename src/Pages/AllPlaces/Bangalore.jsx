@@ -35,16 +35,16 @@ const data = [
 
 const Bangalore = () => {
   return (
-    <div className={style.head_box}>
+    <z className={style.head_box}>
       <div>
         <h1>Lets find your dream property at  <span> BANGALORE </span></h1>
       </div>
       <div className={style.products}>
         {data.map((e) => (
-          <Product {...e} key={e.id} />
+          <Product {...e} bangalore={"bangalore"} key={e.id} />
         ))}
       </div>
-    </div>
+    </z>
   )
 }
 

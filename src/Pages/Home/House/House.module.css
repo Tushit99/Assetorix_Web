@@ -7,8 +7,7 @@
 }
 
 .box > div {
-  padding: 100px 20px;
-  height: 500px;
+  padding: 50px 20px; 
   display: grid;
   gap: 14px;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,

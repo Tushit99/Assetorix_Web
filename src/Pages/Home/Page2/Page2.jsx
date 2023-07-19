@@ -62,14 +62,14 @@ const Page2 = () => {
                     >
                         BANGALORE
                     </GridItem>
-                </Link>
+                </Link> 
                 <Link to={"/pune"}>
                     <GridItem
                         w="100%"
                         padding={"60px"}
                         backgroundColor={"rgb(174, 174, 174)"}
                         borderRadius={"10px"}
-                    >
+                    > 
                         PUNE
                     </GridItem>
                 </Link>

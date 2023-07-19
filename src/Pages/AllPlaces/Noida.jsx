@@ -41,7 +41,7 @@ const Noida = () => {
       </div>
       <div className={style.products}>
         {data.map((e) => (
-          <Product {...e} key={e.id} />
+          <Product {...e} page={"noida"} key={e.id} />
         ))}
       </div>
     </div>

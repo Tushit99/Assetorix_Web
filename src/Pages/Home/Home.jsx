@@ -3,7 +3,6 @@ import Page1 from "./Page1/Page1";
 import Page2 from "./Page2/Page2";  
 import House from "./House/House";
 
-
 const Home = () => {
   return (
     <div >
@@ -13,7 +12,7 @@ const Home = () => {
       <Page2 />   
       {/* House */}  
       <House />   
-      {/* product Slider  */}   
+      {/* product Slider  */}     
     </div>
   );
 };

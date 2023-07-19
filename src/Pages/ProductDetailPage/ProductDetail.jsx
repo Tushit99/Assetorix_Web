@@ -1,6 +1,5 @@
 import {
-    Box,
-    chakra,
+    Box, 
     Container,
     Stack,
     Text,
@@ -11,15 +10,15 @@ import {
     Heading,
     SimpleGrid,
     StackDivider,
-    useColorModeValue,
-    VisuallyHidden,
+    useColorModeValue, 
     List,
     ListItem,
-  } from '@chakra-ui/react';
-  import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
+  } from '@chakra-ui/react'; 
   import { MdLocalShipping } from 'react-icons/md';
   
-const ProductDetail =()=> {
+const ProductDetail =()=> {  
+  // const 
+
     return (
       <Container maxW={'7xl'}>
         <SimpleGrid
@@ -27,14 +26,14 @@ const ProductDetail =()=> {
           spacing={{ base: 8, md: 10 }}
           py={{ base: 18, md: 24 }}>
           <Flex>
-            <Image
+            <Image 
               rounded={'md'}
               alt={'product image'}
               src={
-                'https://images.unsplash.com/photo-1596516109370-29001ec8ec36?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyODE1MDl8MHwxfGFsbHx8fHx8fHx8fDE2Mzg5MzY2MzE&ixlib=rb-1.2.1&q=80&w=1080'
+                'https://www.investoxpert.com/_next/image?url=https%3A%2F%2Fdestinationcompress.s3.ap-south-1.amazonaws.com%2F3fe61d4a-4d8d-4f72-84c9-0d29d5f5bd93.jpg&w=1920&q=75'
               }
               fit={'cover'}
-              align={'center'}
+              align={'center'} 
               w={'100%'}
               h={{ base: '100%', sm: '400px', lg: '500px' }}
             />
@@ -45,13 +44,13 @@ const ProductDetail =()=> {
                 lineHeight={1.1}
                 fontWeight={600}
                 fontSize={{ base: '2xl', sm: '4xl', lg: '5xl' }}>
-                Automatic Watch
+                Godrej Exquisite Noida
               </Heading>
               <Text
                 color={useColorModeValue('gray.900', 'gray.400')}
                 fontWeight={300}
                 fontSize={'2xl'}>
-                $350.00 USD
+                Price: ₹2.43 Cr to 3.00 Cr
               </Text>
             </Box>
   

@@ -4,14 +4,13 @@ import {
   Text,
   Flex,
   useColorModeValue,
-  Divider,
 } from "@chakra-ui/react";
 import React from "react";
 import Logo from "../../components/Logo/Logo";
 import style from "./Footer.module.css";
 import {
   BsArrowRight,
-  BsFacebook,
+  BsFacebook, 
   BsInstagram,
   BsTwitter,
 } from "react-icons/bs"; 
@@ -19,13 +18,11 @@ import {FaLinkedinIn} from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <div>
-      <Divider h={2} orientation="horizontal" />
+    <div> 
       <Box className={style.footer}>
         {/* footer */}
-        <Box
-          maxW={"6xl"}
-          p={4}
+        <Box  
+          p={10}
           display={"flex"}
           alignItems={"center"}
           justifyContent={"center"}
@@ -93,8 +90,8 @@ const Footer = () => {
 
         {/* line with logo */}
         <Box className={style.contact}> 
-          <h1>
-            <BsFacebook size={"24px"} />
+          <h1> 
+            <BsFacebook size={"24px"} /> 
           </h1>
           <h1>
             <BsInstagram size={"24px"} />

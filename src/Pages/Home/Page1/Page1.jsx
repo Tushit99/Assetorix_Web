@@ -1,11 +1,12 @@
 import React from "react";
 import {
     Stack,
+    Box, 
     Flex,
     Button,
     Text,
     VStack,
-    useBreakpointValue, 
+    useBreakpointValue,
     Input,
     Select,
 } from "@chakra-ui/react";
@@ -15,7 +16,7 @@ const Page1 = () => {
     return (
         <Flex
             w={"full"}
-            h={"90vh"}
+            h={"95vh"}
             backgroundImage={
                 "url(https://images.unsplash.com/photo-1600267175161-cfaa711b4a81?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80)"
             }
@@ -28,80 +29,69 @@ const Page1 = () => {
                 px={useBreakpointValue({ base: 4, md: 8 })}
                 bgGradient={"linear(to-r, blackAlpha.600, transparent)"}
             >
-                <Stack maxW={"2xl"} align={"flex-start"} spacing={6}>
+                <Box w={"full"} align={"flex-start"} spacing={6}>
                     <Text
                         color={"white"}
-                        fontWeight={700} 
-                        lineHeight={1.2}
-                        fontSize={useBreakpointValue({ base: "3xl", md: "4xl" })}
+                        fontWeight={700}
+                        lineHeight={1.2} 
+                        fontSize={useBreakpointValue({ base: "4xl", md: "5xl" })}
                     >
                         Agents. Tours. Home Loans. Homes.
                     </Text>
-                    <Stack direction={"row"}>
-                        <Button bg={"rgb(245,101,101)"} rounded={"full"} color={"white"}>
-                            Show me more
-                        </Button>
-                        <Button
-                            bg={"whiteAlpha.300"}
-                            rounded={"full"}
-                            color={"white"}
-                            _hover={{ bg: "whiteAlpha.500" }}
-                        >
-                            Show me more
-                        </Button>
-                    </Stack> 
-                </Stack>
-                <div className={style.fields}> 
-                    <div >
-                        <Button
-                            w={"140px"}
-                            borderRadius={"4px"}
-                            _hover={{ color: "white" }}
-                            color={"white"}
-                            backgroundColor={"rgb(245,101,101)"}
-                            border={"1px solid black"}
-                        >
-                            Buy Property
-                        </Button>
-                        <Button
-                            w={"140px"}
-                            borderRadius={"4px"}
-                            color={"white"}
-                            _hover={{ color: "white" }}
-                            backgroundColor={"rgb(11,32,51)"}
-                            border={"1px solid black"}
-                        >
-                            Rent Property
-                        </Button>
-                    </div>
-                    <div alignItems='center' gap={"2px"} >
-                        <Select
-                            size="md"
-                            w={"174px"}
-                            backgroundColor={"white"}
-                            color={"black"}
-                            outline={0}
-                            borderRadius={0}
-                            border={0}
-                        > 
-                            <option value="Residential" borderRadius={0} >Residential</option>
-                            <option value="Commercial" borderRadius={0} > Commercial</option>
-                        </Select>
-                        <Input
-                            type="text"
-                            border={0}
-                            height={"38px"}
-                            w={"100%"}
-                            marginLeft={"2px"} 
-                            placeholder={"Search locality, landmark, project or builder"}
-                            color={"black"}
-                            fontSize={"lg"}
-                            fontWeight={400}
-                            backgroundColor={"white"}
-                            borderRadius={0}
-                        />
-                    </div>
-                </div>
+                    <Box direction={"row"} w={"100%"} >
+                        <div className={style.fields}>
+                            <div >
+                                <Button
+                                    w={"148px"}
+                                    borderradius={"4px"}
+                                    _hover={{ color: "white" }} 
+                                    color={"white"}
+                                    backgroundColor={"rgb(245,101,101)"}
+                                    border={"1px solid black"}
+                                >
+                                    Buy Property
+                                </Button>
+                                <Button
+                                    w={"148px"}
+                                    borderradius={"4px"}
+                                    color={"white"}
+                                    _hover={{ color: "white" }}
+                                    backgroundColor={"rgb(11,32,51)"}
+                                    border={"1px solid black"}
+                                >
+                                    Rent Property
+                                </Button>
+                            </div>
+                            <div >
+                                <Select
+                                    size="md"
+                                    w={"174px"} 
+                                    backgroundColor={"white"}
+                                    color={"black"}
+                                    outline={0}
+                                    style={{ borderradius: "20px" }}
+                                    border={0}
+                                >
+                                    <option value="Residential" borderradius={0} >Residential</option>
+                                    <option value="Commercial" borderradius={0} > Commercial</option>
+                                </Select>
+                                <Input
+                                    type="text"
+                                    border={0}
+                                    height={"38px"}
+                                    w={"100%"}
+                                    marginLeft={"2px"}
+                                    placeholder={"Search locality, landmark, project or builder"}
+                                    color={"black"}
+                                    fontSize={"lg"}
+                                    fontWeight={400}
+                                    backgroundColor={"white"}
+                                    borderradius={0}
+                                />
+                            </div>
+                        </div>
+                    </Box>
+                </Box>
             </VStack>
         </Flex>
     );

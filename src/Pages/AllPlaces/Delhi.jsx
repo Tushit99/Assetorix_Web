@@ -41,7 +41,7 @@ const Delhi = () => {
       </div>
       <div className={style.products}>
         {data.map((e) => (
-          <Product {...e} key={e.id} />
+          <Product {...e} page={"delhi"} key={e.id} />
         ))}
       </div>
     </div>
