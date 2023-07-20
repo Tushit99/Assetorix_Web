@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 
 const Page1 = () => {
     return (
-        <>
+        <> 
             <Box
                 w={"full"}
                 h={"95vh"}
@@ -88,7 +88,7 @@ const Page1 = () => {
                         </div>
                     </Box>
                 </Box>
-                <Box flex={2} display={"flex"} flexDirection={"column"} alignItems={"flex-start"} fontSize={"3xl"} > 
+                <Box flex={2} display={"flex"} flexDirection={"column"} alignItems={"flex-start"} fontSize={"3xl"} className={style.links} > 
                     <h3>SERVICES</h3> 
                     <Link to={"/Construction_Management"} >Construction Management</Link>  
                     <Link to={"#"} >Partner with Us</Link>  

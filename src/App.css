@@ -2,13 +2,24 @@
   text-align: center;
 }
 
-
 .info{
   margin-top: 60px;  
 }
 
+.scrole_button{
+  position: fixed; 
+  top: 400px;  
+  left: 100px;   
+  display: grid; 
+  gap: 20px; 
+}
 
-
+.scrole_button button{
+  background-color: white;  
+  padding: 10px; 
+  color: black;  
+  border-radius: 50px;
+}
 
 
 
