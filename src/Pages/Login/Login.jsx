@@ -12,16 +12,16 @@ import {
     Box
 } from '@chakra-ui/react';
 import style from "./Login.module.css";
-import img from "./sideimg.png"; 
+import img from "./sideimg.png";
 
 const Login = () => {
     return (
         <>
-            <Box position={"relative"} minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
+            <Box position={"relative"} w={"full"} minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
                 <div className={style.detail}>
-                    <Flex p={8} flex={1} align={'center'} justify={'center'}>
-                        <Stack spacing={4} w={'full'} maxW={'md'}>
-                            <Heading fontSize={'2xl'}>Login in to your account</Heading>
+                    <Flex >
+                        <Box spacing={4} gap={"20px"} className={style.log_info} >
+                            <Heading fontSize={'2xl'}>Login to your account</Heading>
                             <FormControl id="email">
                                 <FormLabel>Email address</FormLabel>
                                 <Input type="email" />
@@ -36,18 +36,18 @@ const Login = () => {
                                     align={'start'}
                                     justify={'space-between'}>
                                     <Checkbox>Remember me</Checkbox>
-                                    <Link color={'blue.500'}>Forgot password?</Link>
+                                    <Link color={'blue'}>Forgot password?</Link>
                                 </Stack>
                                 <Button colorScheme={'blue'} variant={'solid'}>
                                     Sign in
                                 </Button>
                             </Stack>
-                        </Stack>
+                        </Box>
                     </Flex>
                     <Flex flex={1}>
-                        <Image  
+                        <Image
                             alt={'Login Image'}
-                            objectFit={'cover'} 
+                            objectFit={'cover'}
                             src={img}
                         />
                     </Flex>
