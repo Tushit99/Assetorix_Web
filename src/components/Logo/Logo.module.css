@@ -13,7 +13,7 @@
   text-align: left;     
   width: 100px;   
   object-fit: contain;   
-  max-height: 45px; 
+  /* max-height: 45px;  */
 }
 
 .ham_body {

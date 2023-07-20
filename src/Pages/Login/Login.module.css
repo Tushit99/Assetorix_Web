@@ -10,10 +10,7 @@
   left: 0;
   right: 0;
 }
- 
-img{
-    height: 90vh; 
-}
+
 
 .detail {
   display: flex; 

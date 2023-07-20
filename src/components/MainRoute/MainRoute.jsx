@@ -30,7 +30,7 @@ const MainRoute = () => {
         <Route path='/bangalore' element={<Bangalore />} />
         <Route path='/gurugram' element={<Gurugram />} />
         <Route path='/mumbai' element={<Mumbai />} />
-        <Route path='/noida' element={<Noida />} />
+        <Route path='/noida' element={<Noida />} /> 
         <Route path='/pune' element={<Pune />} />
 
         {/* Product detail page */}
