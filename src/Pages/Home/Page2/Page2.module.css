@@ -13,7 +13,7 @@
 
 .box > *:nth-child(1) {
   background-image: url("../homeImage/noida.jpg");
-  height: 150px;
+  height: 200px; 
   background-size: cover; 
   background-repeat: no-repeat;
   background-position: center;
@@ -31,7 +31,7 @@
 
 .box > *:nth-child(2) {
   background-image: url("../homeImage/Gurugram.jpg");
-  height: 150px;
+  height: 200px; 
   background-size: cover;
   background-repeat: no-repeat;
   background-position: bottom;
@@ -49,7 +49,7 @@
 
 .box > *:nth-child(3) {
   background-image: url("../homeImage/delhi.jpg");
-  height: 150px;
+  height: 200px; 
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top;
@@ -67,10 +67,10 @@
 
 .box > *:nth-child(4) {
   background-image: url("../homeImage/mumbai.jpg");
-  height: 150px;
+  height: 200px; 
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: bottom;
+  background-position: bottom; 
   filter: grayscale(100%);
   -webkit-filter: grayscale(100%);
   border-radius: 10px;
@@ -78,14 +78,14 @@
   align-items: center;
   justify-content: center;
   font-size: x-large;
-  font-weight: 900;
+  font-weight: 900; 
   color: white;
   text-shadow: rgb(0, 0, 0) 1px 0 10px;
 }
 
 .box > *:nth-child(5) {
   background-image: url("../homeImage/bangalore.jpg");
-  height: 150px;
+  height: 200px; 
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -103,7 +103,7 @@
 
 .box > *:nth-child(6) {
   background-image: url("../homeImage/pune.jpg");
-  height: 150px;
+  height: 200px; 
   background-size: cover;
   background-repeat: no-repeat;
   background-position: bottom;

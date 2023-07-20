@@ -1,4 +1,9 @@
 
+.home_top *{
+    border: 2px ;
+}
+
+
 .fields{
     width: 100%; 
     margin: 20px auto; 

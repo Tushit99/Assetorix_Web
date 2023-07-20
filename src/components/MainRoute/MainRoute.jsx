@@ -12,6 +12,8 @@ import Gurugram from '../../Pages/AllPlaces/Gurugram'
 import ProductDetail from '../../Pages/ProductDetailPage/ProductDetail'
 import Error from '../../Pages/ErrorPage/Error'
 import Login from '../../Pages/Login/Login'
+import Construction from '../../Pages/DiscriptivePages/ConstructionManagement.jsx/Construction'
+import Property from '../../Pages/DiscriptivePages/PropertyMarkiting/Property'
 
 const MainRoute = () => {
   return (
@@ -40,6 +42,10 @@ const MainRoute = () => {
         <Route path='/mumbai/:id' element={<ProductDetail />} />
         <Route path='/noida/:id' element={<ProductDetail />} />
         <Route path='/pune/:id' element={<ProductDetail />} />
+
+
+        <Route path='/Construction_Management' element={<Construction />} /> 
+        <Route path='/Property_Marketing' element={<Property />} /> 
 
         <Route path='*' element={<Error />} />
 

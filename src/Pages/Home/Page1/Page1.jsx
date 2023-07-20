@@ -1,8 +1,6 @@
 import React from "react";
 import {
-    Stack,
-    Box, 
-    Flex,
+    Box,
     Button,
     Text,
     VStack,
@@ -11,29 +9,27 @@ import {
     Select,
 } from "@chakra-ui/react";
 import style from "./Page1.module.css";
+import { Link } from "react-router-dom";
 
 const Page1 = () => {
     return (
-        <Flex
-            w={"full"}
-            h={"95vh"}
-            backgroundImage={
-                "url(https://images.unsplash.com/photo-1600267175161-cfaa711b4a81?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80)"
-            }
-            backgroundSize={"cover"}
-            backgroundPosition={"center center"}
-        >
-            <VStack
+        <>
+            <Box
                 w={"full"}
-                justify={"center"}
-                px={useBreakpointValue({ base: 4, md: 8 })}
-                bgGradient={"linear(to-r, blackAlpha.600, transparent)"}
+                h={"95vh"}
+                backgroundImage={
+                    "url(https://images.unsplash.com/photo-1600267175161-cfaa711b4a81?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80)"
+                }
+                backgroundSize={"cover"} 
+                display={"flex"}  
+                className={style.home_top}
+                backgroundPosition={"center center"}
             >
-                <Box w={"full"} align={"flex-start"} spacing={6}>
+                <Box w={"full"} flex={5} align={"flex-start"} spacing={6}>
                     <Text
                         color={"white"}
                         fontWeight={700}
-                        lineHeight={1.2} 
+                        lineHeight={1.2}
                         fontSize={useBreakpointValue({ base: "4xl", md: "5xl" })}
                     >
                         Agents. Tours. Home Loans. Homes.
@@ -44,7 +40,7 @@ const Page1 = () => {
                                 <Button
                                     w={"148px"}
                                     borderradius={"4px"}
-                                    _hover={{ color: "white" }} 
+                                    _hover={{ color: "white" }}
                                     color={"white"}
                                     backgroundColor={"rgb(245,101,101)"}
                                     border={"1px solid black"}
@@ -65,7 +61,7 @@ const Page1 = () => {
                             <div >
                                 <Select
                                     size="md"
-                                    w={"174px"} 
+                                    w={"174px"}
                                     backgroundColor={"white"}
                                     color={"black"}
                                     outline={0}
@@ -92,8 +88,20 @@ const Page1 = () => {
                         </div>
                     </Box>
                 </Box>
-            </VStack>
-        </Flex>
+                <Box flex={2} display={"flex"} flexDirection={"column"} alignItems={"flex-start"} fontSize={"3xl"} > 
+                    <h3>SERVICES</h3> 
+                    <Link to={"/Construction_Management"} >Construction Management</Link>  
+                    <Link to={"#"} >Partner with Us</Link>  
+                    <Link to={"/Property_Marketing"} >Property Marketing</Link>  
+                    <Link to={"#"} >Acquisitions & Dispositions</Link>  
+                    <Link to={"#"} >Consulting</Link>  
+                    <Link to={"#"} >Market Research</Link>  
+                    <Link to={"#"} >Property & Portfolio Sales</Link>  
+                    <Link to={"#"} >OVERSEAS REAL-ESTATE</Link>  
+                    <Link to={"#"} >USA Real-Estate</Link>   
+                </Box>
+            </Box>
+        </>
     );
 };
 

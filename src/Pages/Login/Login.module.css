@@ -17,6 +17,7 @@
   color: rgb(0, 0, 0);  
   width: 90%; 
   margin: auto;  
+  height: 80vh; 
 } 
 
 .detail>*{ 
@@ -25,6 +26,16 @@
   align-items: center; 
   justify-content: center; 
 } 
+
+.detail button{
+  background-color: rgb(62, 62, 228); 
+  color: white;
+}
+
+.detail button:hover{
+  background-color: rgb(50, 50, 245); 
+  color: white; 
+}
 
 /* .detail *{
   border: 2px solid white;
@@ -162,3 +173,39 @@
     border-radius: 50%;
   }
 }
+
+
+@media screen and (min-width: 100px) and (max-width: 550px) {
+  .login_img{
+    display: none; 
+  }
+  .detail *{
+    border: 2px solid white;
+  } 
+  .detail{ 
+    padding: 30px 0;  
+    height: 70vh;  
+  }
+}
+
+
+@media screen and (min-width: 550px) and (max-width: 980px) {
+  .login_img{
+    display: none; 
+  } 
+  .login_img img{
+    width: 0; 
+  }
+  
+  /* .detail *{
+    border: 2px solid white;
+  }  */
+  .detail{ 
+    padding: 30px 0;  
+    height: 60vh;    
+  } 
+
+  
+}
+
+

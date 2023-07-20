@@ -14,7 +14,8 @@
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
   border-radius: 6px; 
   transform: scale(1);
-  transition: transform .3s;  
+  object-fit: contain; 
+  transition: transform .3s ;  
 }
 
 .box > div:hover {
