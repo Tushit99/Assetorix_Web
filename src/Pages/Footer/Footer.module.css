@@ -33,24 +33,57 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 20px;
   padding: 24px 0;
 }
 
 .contact h1 {
-  border-radius: 10%;
-  /* color: rgb(245,101,101);     */
+  border-radius: 18%;
+  /* color: rgb(245,101,101);  */
   color: white;
   padding: 10px;
-  background-color: #0c58a0;
   object-fit: contain;
   cursor: pointer; 
-  border: 2px solid rgb(255, 255, 255);
+  overflow: hidden; 
+  /* border: 2px solid rgb(255, 255, 255); */
   transition: all 0.3s ease-in-out;
+  background-color: #97c6f2bc;
 }
 
-.contact h1:hover {
-  background-color: rgb(255, 255, 255);
-  transform: scale(1.4);
-  color: rgb(6, 116, 231);
+.contact h1 h5{ 
+  /* background-color: rgb(255, 255, 255); */
+  /* transform: scale(1.4); */  
+  transition: transform 0.3s ease-in-out;  
+} 
+
+
+.contact h1:hover{
+    transform: scale(1.2); 
+    color: transparent;   
+}  
+
+
+.contact h1:hover *:nth-child(1){
+    stroke: rgb(255, 255, 255);  
+    stroke-width: 0.4px; 
 }
+
+.contact h1:hover *:nth-child(2){
+    stroke: rgb(255, 255, 255);  
+    stroke-width: 0.4px; 
+}
+
+.contact h1:hover *:nth-child(3){
+    stroke: rgb(255, 255, 255);  
+    stroke-width: 0.3px; 
+}
+
+.contact h1:hover *:nth-child(4){
+    stroke: rgb(255, 255, 255);  
+    stroke-width: 100%; 
+}
+
+
+
+
+

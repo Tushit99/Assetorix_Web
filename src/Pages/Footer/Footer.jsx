@@ -6,22 +6,22 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import React from "react";
-import Logo from "../../components/Logo/Logo";
+import Logo from "../../components/Logo/Logo"; 
 import style from "./Footer.module.css";
 import {
   BsArrowRight,
-  BsFacebook, 
+  BsFacebook,
   BsInstagram,
   BsTwitter,
-} from "react-icons/bs"; 
-import {FaLinkedinIn} from "react-icons/fa"; 
+} from "react-icons/bs";
+import { BiLogoLinkedin } from "react-icons/bi";
 
 const Footer = () => {
   return (
-    <div> 
+    <div>
       <Box className={style.footer}>
         {/* footer */}
-        <Box  
+        <Box
           p={10}
           display={"flex"}
           alignItems={"center"}
@@ -63,14 +63,14 @@ const Footer = () => {
               content: '""',
               borderBottom: "1px solid",
               borderColor: useColorModeValue("gray.200", "gray.700"),
-              flexGrow: 1, 
+              flexGrow: 1,
               mr: 8,
             }}
             _after={{
               content: '""',
               borderBottom: "1px solid",
               borderColor: useColorModeValue("gray.200", "gray.700"),
-              flexGrow: 1,  
+              flexGrow: 1,
               ml: 8,
             }}
           >
@@ -78,7 +78,7 @@ const Footer = () => {
             <Logo />
           </Flex>
         </Box>
-        {/* some company info */} 
+        {/* some company info */}
         <Text className={style.groupof}>
           AssetOrix Group is committed to ensuring digital accessibility for
           individuals with disabilities. We are continuously working to improve
@@ -89,20 +89,20 @@ const Footer = () => {
         <Text className={style.underline}>let us know.</Text>
 
         {/* line with logo */}
-        <Box className={style.contact}> 
-          <h1> 
-            <BsFacebook size={"24px"} /> 
+        <Box className={style.contact}>
+          <h1>
+            <BsFacebook size={"24px"} style={{ fillRule: 'evenodd' }} />
           </h1>
           <h1>
-            <BsInstagram size={"24px"} />
+            <BsInstagram size={"24px"} style={{ fillRule: 'evenodd' }} />
           </h1>
           <h1>
-            <BsTwitter size={"24px"} />
-          </h1> 
-          <h1>
-            <FaLinkedinIn size={"24px"} />
+            <BsTwitter size={"24px"} style={{ fillRule: 'evenodd' }} />
           </h1>
-        </Box>  
+          <h1>
+            <BiLogoLinkedin size={"24px"} style={{ fillRule: 'evenodd' }} />
+          </h1>
+        </Box>
       </Box>
     </div>
   );

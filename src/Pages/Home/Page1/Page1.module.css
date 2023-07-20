@@ -23,6 +23,25 @@
     text-align: center;  
     display: flex; 
     align-items: center; 
+} 
+
+
+.links{
+    gap: 18px;  
+    height: 90%; 
+    padding: 30px; 
+    background-color: rgba(123, 115, 231, 0.34); 
+    clip-path: polygon(0 0, 100% 0, 80% 50%, 100% 100%, 0 100%); 
+}
+
+.links *{  
+    text-decoration: none; 
+    transition: all 0.3s ease-in-out;
+}
+
+.links *:hover{
+    text-decoration: underline; 
+    transform: scale(1.1); 
 }
 
 @media screen and (min-width:100px) and (max-width:550px) {
