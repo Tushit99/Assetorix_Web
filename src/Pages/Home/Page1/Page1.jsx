@@ -2,8 +2,7 @@ import React from "react";
 import {
     Box,
     Button,
-    Text,
-    VStack,
+    Text, 
     useBreakpointValue,
     Input,
     Select,
@@ -88,18 +87,7 @@ const Page1 = () => {
                             </div>
                         </div>
                     </Box>
-                </Box>
-                <Box flex={2} display={"flex"} flexDirection={"column"} alignItems={"flex-start"} fontSize={"3xl"} className={style.links} >  
-                    <Link to={"/Construction_Management"} >Construction Management</Link>  
-                    <Link to={"#"} >Partner with Us</Link>  
-                    <Link to={"/Property_Marketing"} >Property Marketing</Link>  
-                    <Link to={"#"} >Acquisitions & Dispositions</Link>  
-                    <Link to={"#"} >Consulting</Link>  
-                    <Link to={"#"} >Market Research</Link>  
-                    <Link to={"#"} >Property & Portfolio Sales</Link>  
-                    <Link to={"#"} >OVERSEAS REAL-ESTATE</Link>  
-                    <Link to={"#"} >USA Real-Estate</Link>   
-                </Box>
+                </Box> 
             </Box>
         </>
     );

@@ -8,8 +8,8 @@
 
 .scrole_button{
   position: fixed; 
-  top: 400px;  
-  left: 100px;   
+  top: 80%;   
+  right: 40px;   
   display: grid; 
   gap: 20px; 
 }
@@ -18,7 +18,7 @@
   background-color: white;  
   padding: 10px; 
   color: black;  
-  border-radius: 50px;
+  border-radius: 50px; 
 }
 
 

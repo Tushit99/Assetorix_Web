@@ -1,7 +1,8 @@
 .logo {
   font-family: cursive;
   font-size: medium;
-  font-weight: bold; 
+  font-weight: bold;   
+  padding: 8px 0;  
 }
 
 /* .logo span {
@@ -11,7 +12,7 @@
 }  */ 
 .logo img{
   text-align: left;     
-  width: 100px;   
+  width: 70px;   
   object-fit: contain;   
   /* max-height: 45px;  */
 }
