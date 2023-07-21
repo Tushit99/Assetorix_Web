@@ -17,7 +17,7 @@ const Page1 = () => {
                 w={"full"}
                 h={"95vh"}
                 backgroundImage={
-                    "url('https://media.bizj.us/view/img/12240780/gettyimages-1160735734*750xx2121-1193-0-111.jpg')"
+                    "url('https://images.pexels.com/photos/1797393/pexels-photo-1797393.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')"
                 }
                 backgroundSize={"cover"}
                 display={{ base: "grid", lg: "flex" }}
