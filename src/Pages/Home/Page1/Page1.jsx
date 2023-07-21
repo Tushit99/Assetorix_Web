@@ -2,7 +2,7 @@ import React from "react";
 import {
     Box,
     Button,
-    Text, 
+    Text,
     useBreakpointValue,
     Input,
     Select,
@@ -12,53 +12,34 @@ import { Link } from "react-router-dom";
 
 const Page1 = () => {
     return (
-        <> 
+        <>
             <Box
                 w={"full"}
                 h={"95vh"}
                 backgroundImage={
-                    "url(https://images.unsplash.com/photo-1600267175161-cfaa711b4a81?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80)"
+                    "url('https://media.bizj.us/view/img/12240780/gettyimages-1160735734*750xx2121-1193-0-111.jpg')"
                 }
-                backgroundSize={"cover"} 
-                display={{base:"grid",lg:"flex"}}   
-                alignItems={"center"} 
-                className={style.home_top}
-                backgroundPosition={"center center"}
+                backgroundSize={"cover"}
+                display={{ base: "grid", lg: "flex" }}
+                alignItems={"center"}
+                backgroundPosition={"center"} 
             >
-                <Box w={"full"} flex={5} align={"flex-start"} spacing={6}>
+                <Box
+                    w={"full"}
+                    className={style.topbox}
+                >
                     <Text
                         color={"white"}
                         fontWeight={700}
-                        lineHeight={1.2}
+                        lineHeight={1.2} 
+                        textShadow={"#000000 3px 4px 20px"}
                         fontSize={useBreakpointValue({ base: "4xl", md: "5xl" })}
                     >
                         Agents. Tours. Home Loans. Homes.
                     </Text>
-                    <Box direction={"row"} w={"100%"} >
+                    <Box w={"100%"}>
                         <div className={style.fields}>
-                            <div >
-                                <Button
-                                    w={"148px"}
-                                    borderradius={"4px"}
-                                    _hover={{ color: "white" }}
-                                    color={"white"}
-                                    backgroundColor={"rgb(245,101,101)"}
-                                    border={"1px solid black"}
-                                >
-                                    Buy Property
-                                </Button>
-                                <Button
-                                    w={"148px"}
-                                    borderradius={"4px"}
-                                    color={"white"}
-                                    _hover={{ color: "white" }}
-                                    backgroundColor={"rgb(11,32,51)"}
-                                    border={"1px solid black"}
-                                >
-                                    Rent Property
-                                </Button>
-                            </div>
-                            <div >
+                            <div>
                                 <Select
                                     size="md"
                                     w={"174px"}
@@ -68,26 +49,56 @@ const Page1 = () => {
                                     style={{ borderradius: "20px" }}
                                     border={0}
                                 >
-                                    <option value="Residential" borderradius={0} >Residential</option>
-                                    <option value="Commercial" borderradius={0} > Commercial</option>
+                                    <option value="Residential" borderradius={0}>
+                                        Residential
+                                    </option>
+                                    <option value="Commercial" borderradius={0}>  
+                                        Commercial
+                                    </option>
                                 </Select>
                                 <Input
                                     type="text"
                                     border={0}
                                     height={"38px"}
-                                    w={"100%"}
+                                    w={"60%"} 
                                     marginLeft={"2px"}
                                     placeholder={"Search locality, landmark, project or builder"}
                                     color={"black"}
                                     fontSize={"lg"}
+                                    _active={{border:"0px",outline:"0px"}}
+                                    boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"} 
                                     fontWeight={400}
                                     backgroundColor={"white"}
                                     borderradius={0}
                                 />
                             </div>
+                            <div>
+                                <Button
+                                    w={"148px"}
+                                    borderradius={"4px"}
+                                    _hover={{ color: "white" }} 
+                                    fontSize={"lg"}   
+                                    color={"white"}
+                                    backgroundColor={"rgb(114,154,191)"}
+                                    border={"1px solid black"}
+                                >
+                                    Buy Property
+                                </Button>
+                                <Button
+                                    w={"148px"}
+                                    borderradius={"4px"}
+                                    color={"white"}
+                                    _hover={{ color: "white" }} 
+                                    fontSize={"lg"}
+                                    backgroundColor={"rgb(11,32,51)"}
+                                    border={"1px solid black"}
+                                >
+                                    Rent Property
+                                </Button>
+                            </div> 
                         </div>
                     </Box>
-                </Box> 
+                </Box>
             </Box>
         </>
     );

@@ -1,27 +1,45 @@
 
-.home_top *{
-    border: 2px ;
+.topbox{
+    position: relative; 
+    height: 95vh; 
+    /* border: 2px solid green;   */
 }
 
+.topbox>*:nth-child(1){
+    position: absolute; 
+    top: 10%; 
+    left: 5%; 
+    /* border: 2px solid yellow;  */
+} 
+
+.topbox>*:nth-child(2){ 
+    position: absolute;  
+    bottom: 10%; 
+} 
 
 .fields{
-    width: 100%; 
-    margin: 20px auto; 
+    width: 100%;  
+    margin: 20px 0; 
     text-align: center; 
     display: grid; 
+    gap: 20px; 
 }
 
 .fields>div:nth-child(1){ 
-    margin: auto 20%; 
+    /* border: 2px solid rgb(255, 0, 0);  */
+    margin: auto 5%; 
     text-align: center;  
     display: flex; 
-    align-items: center; 
+    align-items: center;  
 }
 
+/* textShadow={"#000000 3px 1px 20px"}  */
+
 .fields>div:nth-child(2){ 
-    margin: auto 20%; 
+    margin: auto 5%; 
     text-align: center;  
     display: flex; 
+    gap: 20px;
     align-items: center; 
 } 
 

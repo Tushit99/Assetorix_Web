@@ -12,7 +12,8 @@
 }  */ 
 .logo img{
   text-align: left;     
-  width: 70px;   
+  width: 50px;   
+  border-radius: 50%;  
   object-fit: contain;   
   /* max-height: 45px;  */
 }
