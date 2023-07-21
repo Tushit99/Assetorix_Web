@@ -8,7 +8,7 @@ import {
     Select,
 } from "@chakra-ui/react";
 import style from "./Page1.module.css";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom"; 
 
 const Page1 = () => {
     return (
@@ -22,7 +22,7 @@ const Page1 = () => {
                 backgroundSize={"cover"}
                 display={{ base: "grid", lg: "flex" }}
                 alignItems={"center"}
-                backgroundPosition={"center"} 
+                backgroundPosition={"center"}
             >
                 <Box
                     w={"full"}
@@ -31,7 +31,7 @@ const Page1 = () => {
                     <Text
                         color={"white"}
                         fontWeight={700}
-                        lineHeight={1.2} 
+                        lineHeight={1.2}
                         textShadow={"#000000 3px 4px 20px"}
                         fontSize={useBreakpointValue({ base: "4xl", md: "5xl" })}
                     >
@@ -46,14 +46,14 @@ const Page1 = () => {
                                     backgroundColor={"white"}
                                     color={"black"}
                                     outline={0}
-                                    boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"} 
+                                    boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}
                                     style={{ borderradius: "20px" }}
                                     border={0}
                                 >
                                     <option value="Residential" borderradius={0}>
                                         Residential
                                     </option>
-                                    <option value="Commercial" borderradius={0}>  
+                                    <option value="Commercial" borderradius={0}>
                                         Commercial
                                     </option>
                                 </Select>
@@ -61,13 +61,13 @@ const Page1 = () => {
                                     type="text"
                                     border={0}
                                     height={"38px"}
-                                    w={"60%"} 
+                                    w={"60%"}
                                     marginLeft={"2px"}
                                     placeholder={"Search locality, landmark, project or builder"}
                                     color={"black"}
                                     fontSize={"lg"}
-                                    _active={{border:"0px",outline:"0px"}}
-                                    boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"} 
+                                    _active={{ border: "0px", outline: "0px" }}
+                                    boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}
                                     fontWeight={400}
                                     backgroundColor={"white"}
                                     borderradius={0}
@@ -77,10 +77,10 @@ const Page1 = () => {
                                 <Button
                                     w={"148px"}
                                     borderradius={"4px"}
-                                    _hover={{ color: "white" }} 
-                                    fontSize={"lg"}   
+                                    _hover={{ color: "white" }}
+                                    fontSize={"lg"}
                                     color={"white"}
-                                    boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}  
+                                    boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}
                                     backgroundColor={"rgb(114,154,191)"}
                                     border={"1px solid black"}
                                 >
@@ -90,15 +90,15 @@ const Page1 = () => {
                                     w={"148px"}
                                     borderradius={"4px"}
                                     color={"white"}
-                                    _hover={{ color: "white" }} 
-                                    boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"} 
+                                    _hover={{ color: "white" }}
+                                    boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}
                                     fontSize={"lg"}
                                     backgroundColor={"rgb(11,32,51)"}
                                     border={"1px solid black"}
                                 >
                                     Rent Property
                                 </Button>
-                            </div> 
+                            </div>
                         </div>
                     </Box>
                 </Box>

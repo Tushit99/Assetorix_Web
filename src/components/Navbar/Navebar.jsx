@@ -104,8 +104,8 @@ const Navebar = () => {
                         <PopoverHeader > Welcome User </PopoverHeader>
                         <PopoverBody >
                             <div className={style.user_section}> 
-                                <Link>Signin</Link> 
-                                <Link> Login </Link>
+                                <Link to={"/signup"}>Signin</Link> 
+                                <Link to={"/login"} > Login </Link>
                             </div>
                         </PopoverBody>
                     </PopoverContent>
