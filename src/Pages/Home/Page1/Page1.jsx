@@ -46,6 +46,7 @@ const Page1 = () => {
                                     backgroundColor={"white"}
                                     color={"black"}
                                     outline={0}
+                                    boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"} 
                                     style={{ borderradius: "20px" }}
                                     border={0}
                                 >
@@ -79,6 +80,7 @@ const Page1 = () => {
                                     _hover={{ color: "white" }} 
                                     fontSize={"lg"}   
                                     color={"white"}
+                                    boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}  
                                     backgroundColor={"rgb(114,154,191)"}
                                     border={"1px solid black"}
                                 >
@@ -89,6 +91,7 @@ const Page1 = () => {
                                     borderradius={"4px"}
                                     color={"white"}
                                     _hover={{ color: "white" }} 
+                                    boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"} 
                                     fontSize={"lg"}
                                     backgroundColor={"rgb(11,32,51)"}
                                     border={"1px solid black"}
