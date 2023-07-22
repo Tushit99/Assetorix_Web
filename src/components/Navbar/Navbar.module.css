@@ -140,5 +140,46 @@
     }
 }
 
+@media screen and (min-width:550px) and (max-width: 980px) {
+    .navbar>div:nth-child(1){
+        display: block;  
+    }
 
+    .navbar{
+        padding: 2px 0px;
+    }
+    
+    .thin{
+        display: none; 
+    }
+
+    .bold{
+        display: none; 
+    }
+
+    .navbar>div:nth-child(1){
+        flex: 1; 
+        text-align: center; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+    }
+
+
+    .navbar>div:nth-child(2){
+        flex: 1; 
+        text-align: center; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+    }
+
+    .navbar>div:nth-child(3){
+        flex: 1; 
+        text-align: center; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+    }
+}
 

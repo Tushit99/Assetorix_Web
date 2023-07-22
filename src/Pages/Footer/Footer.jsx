@@ -6,7 +6,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import React from "react";
-import Logo from "../../components/Logo/Logo"; 
+import Logo from "../../components/Logo/Logo";
 import style from "./Footer.module.css";
 import {
   BsArrowRight,
@@ -21,35 +21,43 @@ const Footer = () => {
     <div>
       <Box className={style.footer}>
         {/* footer */}
-        <Box
-          p={10}
-          display={"flex"}
-          alignItems={"center"}
-          justifyContent={"center"}
-          textAlign={"center"}
-          flexWrap={"wrap"}
-          gap={"20px"}
-        >
-          <Link href={"#"}>About</Link>
-          <Link href={"#"}>Research </Link>
-          <Link href={"#"}>Pricing</Link>
-          <Link href={"#"}>Careers </Link>
-          <Link href={"#"}>About Us</Link>
-          <Link href={"#"}>Help </Link>
-          <Link href={"#"}>Fair Housing Guide</Link>
-          <Link href={"#"}>Advertise</Link>
-          <Link href={"#"}>Contact Us</Link>
-          <Link href={"#"}>Partners</Link>
-          <Link href={"#"}>Cookies Policy</Link>
-          <Link href={"#"}>Privacy Policy</Link>
-          <Link href={"#"}>Terms of Service</Link>
-          <Link href={"#"}>Law Enforcement</Link>
-          <Link href={"#"}>Facebook</Link>
-          <Link href={"#"}>Twitter</Link>
-          <Link href={"#"}>Dribbble</Link>
-          <Link href={"#"}>Instagram</Link>
-          <Link href={"#"}>LinkedIn</Link>
-        </Box>
+        <div className={style.footer_option}>
+          <Box
+            p={10}
+            display={"flex"}
+            alignItems={"center"}
+            justifyContent={"center"}
+            textAlign={"center"}
+            flexWrap={"wrap"}
+            gap={"20px"}
+          >
+            <Link href={"#"}>About</Link>
+            <Link href={"#"}>Research </Link>
+            <Link href={"#"}>Pricing</Link>
+            <Link href={"#"}>Careers </Link>
+            <Link href={"#"}>About Us</Link>
+            <Link href={"#"}>Help </Link>
+            <Link href={"#"}>Fair Housing Guide</Link>
+            <Link href={"#"}>Advertise</Link>
+            <Link href={"#"}>Contact Us</Link>
+            <Link href={"#"}>Partners</Link>
+            <Link href={"#"}>Cookies Policy</Link>
+            <Link href={"#"}>Privacy Policy</Link>
+            <Link href={"#"}>Terms of Service</Link>
+            <Link href={"#"}>Law Enforcement</Link>
+            <Link href={"#"}>Facebook</Link>
+            <Link href={"#"}>Twitter</Link>
+            <Link href={"#"}>Dribbble</Link>
+            <Link href={"#"}>Instagram</Link> 
+            <Link href={"#"}>LinkedIn</Link>
+          </Box>
+          <div>
+            <h2>CONTACT</h2>
+            <p>Ametheus Holdings Pvt Ltd Address: 27, 2nd Floor, Hauz Khas Village, New Delhi 110016, India  Phone: +91-11-41670666, +91-1140074433, +91-9999099538</p>
+            <p>Email: info@ametheus.com</p> 
+          </div>
+        </div>
+
         {/* footer Warning line  */}
         <Box className={style.info_warning}>
           <h3>
@@ -91,16 +99,16 @@ const Footer = () => {
         {/* line with logo */}
         <Box className={style.contact}>
           <h1>
-            <BsFacebook size={"24px"} style={{ fillRule: 'evenodd' }} />
-          </h1>
-          <h1>
-            <BsInstagram size={"24px"} style={{ fillRule: 'evenodd' }} />
+            <BiLogoLinkedin size={"24px"} style={{ fillRule: 'evenodd' }} />
           </h1>
           <h1>
             <BsTwitter size={"24px"} style={{ fillRule: 'evenodd' }} />
           </h1>
           <h1>
-            <BiLogoLinkedin size={"24px"} style={{ fillRule: 'evenodd' }} />
+            <BsFacebook size={"24px"} style={{ fillRule: 'evenodd' }} />
+          </h1>
+          <h1>
+            <BsInstagram size={"24px"} style={{ fillRule: 'evenodd' }} />
           </h1>
         </Box>
       </Box>

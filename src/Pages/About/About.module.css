@@ -1,0 +1,5 @@
+
+.head_line>*:nth-child(1){
+    font-weight: bolder;  
+}
+

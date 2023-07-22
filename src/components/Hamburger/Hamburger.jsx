@@ -46,13 +46,7 @@ const Hamburger = () => {
                         <Link to={"#"}>Agent Finder</Link>
                         <Link to={"#"}>Help </Link> 
 
-                    </DrawerBody>
-
-                    <DrawerFooter>
-                        <Button variant='outline' mr={3} onClick={onClose}>
-                            Cancel
-                        </Button>
-                    </DrawerFooter>
+                    </DrawerBody> 
                 </DrawerContent>
             </Drawer>
         </>

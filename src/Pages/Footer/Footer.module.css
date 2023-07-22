@@ -27,6 +27,21 @@
   cursor: pointer;
 }
 
+.footer_option{
+  display: flex; 
+  align-items: center; 
+  justify-content: space-around; 
+}
+
+.footer_option>*:nth-child(1){
+  flex: 9;
+}
+
+.footer_option>*:nth-child(2){
+  flex: 2; 
+  text-align: left; 
+}
+
 /* contact icon */
 
 .contact {
@@ -43,47 +58,42 @@
   color: white;
   padding: 10px;
   object-fit: contain;
-  cursor: pointer; 
-  overflow: hidden; 
+  cursor: pointer;
+  overflow: hidden;
   /* border: 2px solid rgb(255, 255, 255); */
   transition: all 0.3s ease-in-out;
   background-color: #97c6f2bc;
 }
 
-.contact h1 h5{ 
+.contact h1 h5 {
   /* background-color: rgb(255, 255, 255); */
-  /* transform: scale(1.4); */  
-  transition: transform 0.3s ease-in-out;  
+  /* transform: scale(1.4); */
+  transition: transform 0.3s ease-in-out;
+}
+
+.contact h1:hover {
+  transform: scale(1.2);
+  color: transparent;
+}
+
+.contact h1:hover *:nth-child(1) {
+  stroke: rgb(255, 255, 255);
+  stroke-width: 0.5px;
+}
+
+.contact h1:hover *:nth-child(2) {
+  stroke: rgb(255, 255, 255);
+  stroke-width: 0.4px;
+}
+
+.contact h1:hover *:nth-child(3) {
+  stroke: rgb(255, 255, 255);
+  stroke-width: 0.5px;
+}
+
+.contact h1:hover *:nth-child(4) {
+  stroke: rgb(255, 255, 255);
+  stroke-width: 0.4px;
 } 
-
-
-.contact h1:hover{
-    transform: scale(1.2); 
-    color: transparent;   
-}  
-
-
-.contact h1:hover *:nth-child(1){
-    stroke: rgb(255, 255, 255);  
-    stroke-width: 0.4px; 
-}
-
-.contact h1:hover *:nth-child(2){
-    stroke: rgb(255, 255, 255);  
-    stroke-width: 0.4px; 
-}
-
-.contact h1:hover *:nth-child(3){
-    stroke: rgb(255, 255, 255);  
-    stroke-width: 0.3px; 
-}
-
-.contact h1:hover *:nth-child(4){
-    stroke: rgb(255, 255, 255);  
-    stroke-width: 100%; 
-}
-
-
-
 
 
