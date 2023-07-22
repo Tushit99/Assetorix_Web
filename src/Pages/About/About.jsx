@@ -19,7 +19,7 @@ export default function About() {
         textAlign={"left"}
         spacing={{ base: 8, md: 10 }}
         py={{ base: 20, md: 28 }}
-        direction={{ base: "column", md: "row" }}
+        direction={{ base: "column", md: "row" }} 
       >
         <Stack flex={1} spacing={{ base: 5, md: 10 }}>
           <Heading
@@ -29,8 +29,8 @@ export default function About() {
           >
             REAL ESTATE
           </Heading>
-          <Text>
-            Ametheus® connects people & property perfectly. Ametheus® provides
+          <Text textAlign={"justify"}> 
+            Assetorix® connects people & property perfectly. Assetorix® provides
             services in the acquisition and disposition of income-producing
             properties for third-party owners and corporate occupiers. By
             utilizing deep market intelligence, transaction expertise, a
@@ -55,26 +55,18 @@ export default function About() {
           <Text className={style.head_line}>
             <Text>Our clients include:</Text>
             <Text> Ω Domestic and foreign-based real estate investors</Text>
-            <Text>Ω Opportunity funds</Text>
+            <Text>Ω Opportunity funds</Text> 
             <Text>Ω Owner/developers</Text>
           </Text>
         </Stack>
         <Flex
           flex={1}
           justify={"center"}
-          align={"center"}
+          align={"baseline"} 
           position={"relative"}
-          w={"full"}
-        >
-          <Blob
-            w={"150%"}
-            h={"150%"}
-            position={"absolute"}
-            top={"-20%"}
-            left={0}
-            zIndex={-1}
-            color={useColorModeValue("red.50", "red.400")}
-          />
+          w={"full"} 
+        //   border={"2px solid black"} 
+        > 
           <Box
             position={"relative"}
             rounded={"2xl"}
@@ -94,10 +86,11 @@ export default function About() {
               left={"50%"}
               top={"50%"}
               transform={"translateX(-50%) translateY(-50%)"}
-            />
-            <video autoPlay muted>
-              <source
-                src={"https://www.ametheus.com/Real-Estate-Ametheus.mp4"}
+            /> 
+            <video autoPlay muted loop >
+              <source 
+                src={"https://www.ametheus.com/Real-Estate-Ametheus.mp4"} 
+                type="video/mp4" 
               />
             </video>
           </Box>

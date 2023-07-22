@@ -7,9 +7,14 @@
     z-index: 100;
     top: 0; 
     left: 0; 
+    color: black; 
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;  
     right: 0; 
-    background-color: rgb(11,32,51) ;  
-}
+    border-bottom: 1px solid rgba(0, 0, 0, 0.265); 
+    background-color: rgb(254, 254, 95) ;    
+} 
+
+
 
 .navbar>div:nth-child(1){
     display: none;   
@@ -18,7 +23,7 @@
 }
 
 .navbar>div:nth-child(2){ 
-    flex: 1; 
+    flex: 5; 
     max-width: 180px;  
     /* border: 2px solid yellow;   */
 
@@ -30,11 +35,6 @@
     flex: 9; 
     align-items: center; 
     justify-content: space-around;  
-}
-
-.thin{
-    font-weight: 100; 
-    background-color: green; 
 } 
 
 .user_section{
@@ -42,47 +42,7 @@
     align-items: center; 
     justify-content: space-around;  
 } 
-
-.nav_link>*{
-    padding: 10px ; 
-    background-color: unset;  
-    font-size: large;  
-    color: white; 
-    border-radius: 4px;
-} 
-
-.bold{
-    font-weight: bolder;    
-    animation: flick 2s linear infinite;
-    background-color: rgb(114,154,191) ; 
-}
-
-/* Nav blink animation  */ 
-
-@keyframes flick {
-    0%, 100% {
-        transform: scale(1.01);
-    }
-    10%, 90% {
-        transform: scale(1.02);
-    }
-    20%, 80% {
-        transform: scale(1.03);
-    }
-    30%, 70% {
-        transform: scale(1.03);
-    }
-    40%, 60% {
-        transform: scale(1.02);
-    }
-    50% {
-        transform: scale(1.01);
-    }
-} 
-
-
-/* nav animation end */
-
+ 
 
 .user_section{ 
     text-align: end; 

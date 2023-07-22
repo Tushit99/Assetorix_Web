@@ -93,7 +93,22 @@
 
 .contact h1:hover *:nth-child(4) {
   stroke: rgb(255, 255, 255);
-  stroke-width: 0.4px;
+  stroke-width: 0.4px;  
 } 
 
+
+@media screen and (min-width:100px) and (max-width:980px) {
+  .footer_option{
+    display: grid; 
+    text-align: center; 
+  }
+
+  .footer_option>*:nth-child(2){
+    text-align: center; 
+    display: grid; 
+    gap: 10px; 
+    margin: 5px 0; 
+  } 
+
+}
 

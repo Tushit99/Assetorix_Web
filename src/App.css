@@ -2,24 +2,25 @@
   text-align: center;
 }
 
-.info{
-  margin-top: 60px;  
+.info {
+  margin-top: 50px;
 }
 
-.scrole_button{
-  position: fixed; 
-  top: 80%;   
-  right: 40px;   
-  display: grid; 
-  gap: 20px; 
+.scrole_button {
+  position: fixed;
+  top: 80%;
+  right: 40px;
+  display: grid;
+  gap: 20px;
 }
 
-.scrole_button button{
-  background-color: white;  
-  padding: 10px; 
-  color: black;  
-  border-radius: 50px; 
+.scrole_button button {
+  background-color: var(--blue-light);
+  padding: 6px;
+  color: black;
+  border-radius: 50px;
+  position: relative; 
 }
 
-
+/* down button */ 
 

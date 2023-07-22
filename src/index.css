@@ -1,9 +1,11 @@
 
 body {
   margin: 0;
-  font-family: sans-serif;
+  font-family: 'Open Sans', sans-serif; 
   --main-one: #0b2033;
-  --dark-text-color: #ffffff;
+  /* --yellow-col: rgba(255, 255, 123, 0.726) ;  */
+  --dark-text-color: #ffffff; 
+  --blue-light: rgb(114,154,191) ;
   --color-btn: rgb(245, 101, 101); 
   --color-green: rgb(0, 255, 0) ;  
 }
@@ -37,11 +39,8 @@ body::-webkit-scrollbar-thumb {
     to(rgb(245, 101, 101)),
     color-stop(0.6, rgb(245, 101, 101))
   );
-} 
+}  
 
 
-/* @media screen and (min-width:100px) and (max-width:550px) {
-    
-} */
 
 

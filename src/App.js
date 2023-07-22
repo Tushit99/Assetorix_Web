@@ -1,8 +1,8 @@
-import { ImArrowDown2, ImArrowUp2 } from "react-icons/im";
 import "./App.css";
 import Footer from "./Pages/Footer/Footer";
 import MainRoute from "./components/MainRoute/MainRoute";
 import Navebar from "./components/Navbar/Navebar";
+import { MdKeyboardDoubleArrowDown, MdKeyboardDoubleArrowUp } from "react-icons/md";
 
 function App() {
   const scrollToTop = () => {
@@ -37,10 +37,10 @@ function App() {
       </div>
       <div className="scrole_button">
         <button onClick={handleScrollToTop}> 
-          <ImArrowUp2 color="black" />
+          <MdKeyboardDoubleArrowUp size={"25px"} color="black" />
         </button>
         <button onClick={handleScrollToBottom}> 
-          <ImArrowDown2 />
+          <MdKeyboardDoubleArrowDown size={"25px"} color="black" />
         </button>
       </div>
     </div>
