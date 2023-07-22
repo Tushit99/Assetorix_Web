@@ -3,18 +3,21 @@ import Logo from "../Logo/Logo";
 import style from "./Navbar.module.css";
 import { Link } from "react-router-dom";
 import { PiUserListLight } from "react-icons/pi"
-import { Button, Menu, MenuButton, MenuList, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger } from "@chakra-ui/react";
+import { Box, Button, Menu, MenuButton, MenuList, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger } from "@chakra-ui/react";
+import Hamburger from "../Hamburger/Hamburger";
 
 const Navebar = () => {
     return (
-        <div className={style.navbar}>
-            <div className={style.log}>
-                <Link to={"/"}>
-                    <Logo />
-                </Link>
+        <div className={style.navbar} >
+            <div className={style.nav_hamb} >
+                <Hamburger /> 
             </div>
-            {/* Other pages Link */}
-            <div className={style.nav_link}>
+            <div className={style.logo}  >
+                <Link to={"/"} >
+                    <Logo /> 
+                </Link> 
+            </div> 
+            <div className={style.nav_link} >
                 <Link to={"/about"} className={style.bold}> About </Link>
                 <Link to={"/about"} className={style.thin} > Buy </Link>
                 <Link to={"/"} className={style.thin} > Rent </Link>
@@ -29,8 +32,10 @@ const Navebar = () => {
                         _hover={{ backgroundColor: "unset" }}
                         _active={{ backgroundColor: "unset" }}
                         as={Button}
+                        className={style.thin} 
+                        display={{base:"none",lg:"block"}}
                         fontSize={"lg"}
-                        fontWeight={"400"}
+                        fontWeight={"200"}
                     >
                         Services
                     </MenuButton>
@@ -40,7 +45,7 @@ const Navebar = () => {
                         backgroundColor={"rgb(11,32,51)"}
                         textAlign={"left"}
                         marginTop={-2}
-                        color={"white"}
+                        color={"white"} 
                         padding={"10px"}
                     >
                         <Link to={"/Construction_Management"}>Construction Management</Link>
@@ -52,37 +57,10 @@ const Navebar = () => {
                         <Link to={"#"}>Property & Portfolio Sales</Link>
                     </MenuList>
                 </Menu>
-                <Link to="#" > Contact</Link>
-                <Link to="#">Advertise</Link>
+                <Link to="#" className={style.thin}> Contact</Link>
+                <Link to="#" className={style.thin}>Advertise</Link>
                 <Link to="#" className={style.bold}>Agent Finder</Link>
                 <Link to="#" className={style.bold}>Help </Link>
-                {/* <Menu padding={0} >
-                    <MenuButton
-                        padding={"0px"}
-                        color={"white"}
-                        as={Button}
-                        fontSize={"lg"}
-                        _hover={{ background: "unset" }}
-                        _active={{ background: "unset" }}
-                        fontWeight={"400"}
-                    >
-                        <PiUserListLight size={"30px"} />
-                    </MenuButton>
-                    <MenuList
-                        display={"grid"}
-                        gap={"20px"}
-                        backgroundColor={"rgb(11,32,51)"}
-                        textAlign={"left"}
-                        marginTop={-2}
-                        color={"white"}
-                        padding={"10px"}
-                    >
-                        <div className={style.user_section}>
-                            <Button>Signin</Button>
-                            <Button> Login </Button>
-                        </div>
-                    </MenuList>
-                </Menu> */}
                 <Popover>
                     <PopoverTrigger>
                         <Button
@@ -91,7 +69,7 @@ const Navebar = () => {
                             as={Button}
                             fontSize={"lg"}
                             border={0}
-                            backgroundColor={"unset"} 
+                            backgroundColor={"unset"}
                             _hover={{ background: "unset" }}
                             _active={{ background: "unset" }}
                             fontWeight={"400"}
@@ -100,16 +78,16 @@ const Navebar = () => {
                         </Button>
                     </PopoverTrigger>
                     <PopoverContent border={0} backgroundColor={"rgb(11,32,51)"}>
-                        <PopoverArrow backgroundColor={"rgb(11,32,51)"} /> 
+                        <PopoverArrow backgroundColor={"rgb(11,32,51)"} />
                         <PopoverHeader > Welcome User </PopoverHeader>
                         <PopoverBody >
-                            <div className={style.user_section}> 
-                                <Link to={"/signup"}>Signin</Link> 
+                            <div className={style.user_section}>
+                                <Link to={"/signup"}>Signin</Link>
                                 <Link to={"/login"} > Login </Link>
                             </div>
                         </PopoverBody>
                     </PopoverContent>
-                </Popover> 
+                </Popover>
             </div>
         </div>
     );
