@@ -14,7 +14,7 @@ import {
     PopoverContent,
     PopoverHeader,
     PopoverTrigger,
-} from "@chakra-ui/react";
+} from "@chakra-ui/react"; 
 import Hamburger from "../Hamburger/Hamburger"; 
 import {BsFillTelephoneFill} from "react-icons/bs"; 
 
@@ -48,7 +48,7 @@ const Navebar = () => {
                 </Link>
                 <Link to="#" className={style.bold}>
                     Agent Finder
-                </Link>
+                </Link> 
                 <Menu padding={0}>
                     <MenuButton
                         padding={"0px"}
@@ -61,17 +61,18 @@ const Navebar = () => {
                         display={{ base: "none", lg: "block" }}
                         fontSize={"lg"}
                         fontWeight={"bold"}
+                        zIndex={200}
                     >
                         Services
                     </MenuButton>
                     <MenuList
                         display={"grid"}
                         className={style.service_box}
-                        backgroundColor={"rgb(254, 254, 95)"}
+                        backgroundColor={"rgb(46,49,146)"}
                         textAlign={"left"}
-                        marginTop={-2}
-
-                        padding={"2px"}
+                        marginTop={-2} 
+                        gap={1}
+                        padding={"4px"} 
                     >
                         <Link to={"/Construction_Management"}>Construction Management</Link>
                         <Link to={"#"}>Partner with Us</Link>
@@ -102,8 +103,7 @@ const Navebar = () => {
                             backgroundColor={"unset"} 
                             _hover={{ background: "unset" }}
                             _active={{ background: "unset" }}
-                            fontWeight={"400"} 
-                            height={"61px"} 
+                            fontWeight={"400"}  
                         >
                             <PiUserListLight color="black" size={"30px"} />
                         </Button>

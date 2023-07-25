@@ -23,17 +23,17 @@
   
 .box button {
     background-color: white; 
-    border: 2px solid var(--color-btn);
+    border: 2px solid var(--main-one);
     width: 50%;  
     padding: 4px 10px; 
     margin: auto; 
-    color: var(--color-btn);  
+    color: var(--main-one);  
     font-weight: bold;  
     border-radius: 10px;  
 } 
 
 .box>div:hover .btn{
-    background-color: var(--color-btn); 
+    background-color: var(--main-one); 
     color: rgb(255, 255, 255);  
 } 
 
