@@ -23,12 +23,12 @@ const Page2 = () => {
         gap={6}
         padding={"20px 0"}
       >
-        <Link to={"/noida"}> NOIDA </Link>
-        <Link to={"/gurugram"}>GURUGRAM</Link>
         <Link to={"/delhi"}>DELHI</Link>
+        <Link to={"/gurugram"}>GURUGRAM</Link>
+        <Link to={"/noida"}> NOIDA </Link>
         <Link to={"/mumbai"}>MUMBAI</Link>
-        <Link to={"/bangalore"}>BANGALORE</Link>
-        <Link to={"/pune"}>PUNE</Link>
+        <Link to={"/bangalore"}>BANGALORE</Link> 
+        <Link to={"/pune"}>KOLKATA</Link>
       </Grid>
     </Box>
   );

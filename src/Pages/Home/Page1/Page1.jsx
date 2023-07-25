@@ -7,7 +7,8 @@ import {
     Input,
     Select,
 } from "@chakra-ui/react";
-import style from "./Page1.module.css";
+import style from "./Page1.module.css"; 
+import img from "./back.jpg";
 
 const Page1 = () => {
     return (
@@ -15,9 +16,7 @@ const Page1 = () => {
             <Box
                 w={"full"}
                 h={"95vh"}
-                backgroundImage={
-                    "url('https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')"
-                }
+                backgroundImage={img}
                 backgroundSize={"cover"}
                 display={{ base: "grid", lg: "flex" }}
                 alignItems={"center"}
