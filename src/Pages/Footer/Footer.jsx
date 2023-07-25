@@ -129,7 +129,7 @@ const Footer = () => {
             Marketed by <span className={style.red}>Unifie Entertainment technology LLP </span>
           </h3>
         </Box>
-        <Box textAlign={"justify"}> 
+        <Box >  
           Email: info@assetorix.com | Call Us at: +91-9999099538
         </Box>
         <Box>
