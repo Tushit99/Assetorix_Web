@@ -29,44 +29,44 @@ const TopDevelopers = () => {
               <img src={m3m} alt="" />    
             </Box>  
             <Box>
-                <img src={goorej} alt="goorejimg" />
+                <img src={goorej} alt="goorej_img" />
             </Box>
             <Box>
-                <img src={shapoourji} alt="goorejimg" />
+                <img src={shapoourji} alt="shapoourji_img" />
             </Box>
             <Box>
-                <img src={Emaar} alt="goorejimg" />
+                <img src={Emaar} alt="Emaar_img" />
             </Box>
             <Box>
              <img src={raheja} alt="rahejaimgs" />    
             </Box> 
             <Box>
-              <img src={omaxe} alt="" />  
+              <img src={omaxe} alt="omaxe_img" />  
             </Box>  
             <Box>
-              <img src={mahindra} alt="" />    
+              <img src={mahindra} alt="mahindra_img" />    
             </Box>
             <Box>
-              <img src={ireo} alt="" />    
+              <img src={ireo} alt="ireo_img" />    
             </Box>
             
             <Box>
-              <img src={trump} alt="" />    
+              <img src={trump} alt="trump_img" />    
             </Box>
             <Box>
-              <img src={cetral} alt="" />    
+              <img src={cetral} alt="cetral_img" />    
             </Box>
             <Box>
-              <img src={adani} alt="" />    
+              <img src={adani} alt="adani_img" />    
             </Box> 
             <Box>
-              <img src={pioneer} alt="" />    
+              <img src={pioneer} alt="pioneer_img" />    
             </Box>
             <Box padding={"40px"}>
-              <img src={soba} alt="" />    
-            </Box>
+              <img src={soba} alt="soba_img" />  
+            </Box> 
         </div> 
-        <button>SEE ALL</button>
+        <button className={style.seeall}>SEE ALL</button>
     </div>
   )
 }

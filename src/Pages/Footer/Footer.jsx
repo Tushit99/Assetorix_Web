@@ -64,7 +64,7 @@ const Footer = () => {
               </Box>
               <Box flex={9} textAlign={"left"}>
                 <p>Email: info@ametheus.com</p>
-              </Box>
+              </Box> 
             </Box>
           </Box>
         </Box>
@@ -72,7 +72,7 @@ const Footer = () => {
         {/* footer Warning line  */}
         <Box className={style.info_warning}>
           <h3 >
-            Do Not Sell or Share My Personal Information <BsArrowRight />
+            Do Not Sell or Share My Personal Information &#62; <BsArrowRight />
           </h3>
         </Box>
         <Box py={4}>
@@ -129,7 +129,7 @@ const Footer = () => {
             Marketed by <span className={style.red}>Unifie Entertainment technology LLP </span>
           </h3>
         </Box>
-        <Box >  
+        <Box>  
           Email: info@assetorix.com | Call Us at: +91-9999099538
         </Box>
         <Box>

@@ -7,8 +7,7 @@ import {
     Input,
     Select,
 } from "@chakra-ui/react";
-import style from "./Page1.module.css";
-// import { Link } from "react-router-dom"; 
+import style from "./Page1.module.css"; 
 
 const Page1 = () => {
     return (
@@ -77,7 +76,7 @@ const Page1 = () => {
                             </div>
                             <div>
                                 <Button
-                                    w={"148px"}
+                                    w={"170px"}
                                     borderradius={"4px"}
                                     _hover={{ color: "white" }}
                                     fontSize={"lg"}
@@ -89,7 +88,7 @@ const Page1 = () => {
                                     Buy Property
                                 </Button>
                                 <Button
-                                    w={"148px"}
+                                    w={"170px"}
                                     borderradius={"4px"}
                                     color={"white"}
                                     _hover={{ color: "white" }}
@@ -102,7 +101,7 @@ const Page1 = () => {
                                 </Button>
                                 <Select
                                     size="md"
-                                    w={"174px"}
+                                    w={"170px"}
                                     backgroundColor={"rgb(46,49,146)"}
                                     color={"white"}
                                     outline={0}

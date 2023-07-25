@@ -1,46 +1,65 @@
-
-
-.devloper{
-    display: grid; 
-    align-items: center; 
-    grid-template-columns: repeat(4,1fr); 
-    grid-template-rows: repeat(3,auto); 
-    margin: auto; 
-    width: 700px;     
-    justify-content: center; 
-    /* background-color: ; */
-    gap: 16px; 
-    /* border: 2px solid black;  */
+.devloper {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(4, 1fr);
+    margin: auto;
+    width: 700px;
+    justify-content: center;
+    gap: 16px;
 }
 
-.top_dev{
-    background-color: rgb(240,239,237);  
+.top_dev {
+    background-color: rgb(240, 239, 237);
 }
 
-.devloper>*{
-    /* border: 2px solid yellow;   */
+.devloper>* { 
     object-fit: contain; 
-    /* aspect-ratio: 2/3;  */
-    margin: auto; 
-    display: flex ;
-    align-items: center; 
-    justify-content: center; 
-    height: 120px; 
-    object-fit: contain; 
-    background-color: white; 
-    padding: 30px;   
-    border-radius: 20px; 
-
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 120px;
+    object-fit: contain;
+    background-color: white;
+    padding: 30px;
+    border-radius: 20px;
 }
 
-.devloper img{
-    width: 100%;     
+.devloper img {
+    width: 100%;
 }
 
-.top_dev>h1{
-    font-size: xx-large; 
-    font-weight: bold;  
-    padding: 30px; 
+.top_dev>h1 {
+    font-size: xx-large;
+    font-weight: bold;
+    padding: 30px;
 }
 
+.seeall{
+    margin: 30px 0; 
+    background-color: rgb(255, 255, 255);  
+    padding: 6px 20px; 
+    font-weight: 500; 
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; 
+    border-radius: 16px; 
+    transition: all 0.4s;
+} 
 
+.seeall:hover{
+    background-color: var(--main-one); 
+    color: white; 
+}
+
+@media screen and (min-width: 100px) and (max-width: 550px) {
+    .devloper {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 0 20px;
+    }
+}
+
+@media screen and (min-width: 550px) and (max-width: 980px) {
+    .devloper {
+        grid-template-columns: repeat(3, 1fr);
+        padding: 0 20px;
+    }
+}

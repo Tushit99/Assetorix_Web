@@ -52,6 +52,27 @@
     .fields>div:nth-child(2){
         margin: 0;  
     }
+
+    .fields>div:nth-child(1){ 
+        margin: auto 5%; 
+        text-align: center;  
+        display: flex; 
+        flex-wrap: wrap; 
+        gap: 18px;
+        align-items: center;  
+    } 
+
+    .fields input{
+        width: 100%; 
+    }
+
+    .fields>div:nth-child(2){ 
+        margin: auto 5%; 
+        text-align: center;  
+        display: grid;  
+        gap: 20px;  
+    }  
+    
 }
 
 
