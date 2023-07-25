@@ -92,19 +92,18 @@ const Navebar = () => {
                     <BsFillTelephoneFill />
                 </div>
                 <Popover>
-                    <PopoverTrigger>
+                    <PopoverTrigger >
                         <Button
                             padding={"0px"}
-                            color={"white"}
+                            color={"white"} 
                             as={Button}
                             fontSize={"lg"}
-                            border={0}
-                            backgroundColor={"unset"}
+                            // border={"2px solid green"}
+                            backgroundColor={"unset"} 
                             _hover={{ background: "unset" }}
                             _active={{ background: "unset" }}
-                            fontWeight={"400"}
-
-                        // clip-path: polygon(0 0, 100% 0, 90% 100%, 0% 100%)
+                            fontWeight={"400"} 
+                            height={"61px"} 
                         >
                             <PiUserListLight color="black" size={"30px"} />
                         </Button>

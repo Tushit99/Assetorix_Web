@@ -7,7 +7,7 @@ body {
   --blue-light: rgb(114,154,191) ;
   --color-btn: rgb(245, 101, 101); 
   --color-green: rgb(0, 255, 0) ;  
-  --head-color: rgb(254, 254, 95) ;  
+  --head-color: rgb(254, 254, 95) ;     
 }
 
 
@@ -30,14 +30,14 @@ body::-webkit-scrollbar-track {
 
 body::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background-color: #ffffff;
+  background-color: #ffffff; 
   background-image: -webkit-gradient(
     linear, 
     40% 0%,
     75% 84%,
-    from(rgb(245, 101, 101)),
-    to(rgb(245, 101, 101)),
-    color-stop(0.6, rgb(245, 101, 101))
+    from(rgb(101, 113, 245)),
+    to(rgb(101, 202, 245)),
+    color-stop(0.6, rgb(101, 111, 245))
   );
 }  
 
