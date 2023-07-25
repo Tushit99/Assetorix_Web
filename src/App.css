@@ -8,7 +8,7 @@
 
 .scrole_button {
   position: fixed;
-  top: 80%;
+  top: 78%; 
   right: 10px; 
   display: grid;
   gap: 20px;

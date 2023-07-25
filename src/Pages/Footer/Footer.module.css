@@ -6,21 +6,6 @@
   position: relative;
 }
 
-.info_warning {
-  width: 400px;
-  margin: auto;
-}
-
-.info_warning h3 {
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-  gap: 6px;
-  cursor: pointer;
-  margin: 14px 0;
-  max-width: 90%;
-}
-
 .footer_description {
   display: flex;
   align-items: baseline;
@@ -59,11 +44,6 @@
   width: 40px;
   border-radius: 20px;
   left: 0;
-}
-
-.info_warning h3:hover {
-  text-decoration: underline;
-  color: rgb(0, 128, 255);
 }
 
 .groupof {

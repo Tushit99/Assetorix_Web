@@ -50,22 +50,22 @@ const Page1 = () => {
                                     style={{ borderradius: "20px" }}
                                     border={0}
                                 >
-                                    <option value="delhi" color="black" borderradius={0}>
+                                    <option value="delhi" >
                                         Delhi
                                     </option>
-                                    <option value="noida" color="black" borderradius={0}>
+                                    <option value="noida" >
                                         Gurugram
                                     </option>
-                                    <option value="noida" color="black" borderradius={0}>
+                                    <option value="noida" >
                                         Noida
                                     </option>
-                                    <option value="noida" color="black" borderradius={0}>
+                                    <option value="noida" >
                                         Mumbai
                                     </option>
-                                    <option value="noida" color="black" borderradius={0}>
+                                    <option value="noida" >
                                         Bangalore
                                     </option>
-                                    <option value="noida" color="black" borderradius={0}>
+                                    <option value="noida" >
                                         Kolkata 
                                     </option>
                                 </Select>
@@ -129,7 +129,7 @@ const Page1 = () => {
                                     w={"60%"}
                                     marginLeft={"2px"}
                                     placeholder={"Search locality, project or builder"}
-                                    color={"black"}
+                                    color={"black"} 
                                     fontSize={{ base: "xs", lg: "lg" }}
                                     _active={{ border: "0px", outline: "0px" }}
                                     boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}

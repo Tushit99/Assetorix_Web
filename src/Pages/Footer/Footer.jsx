@@ -64,16 +64,9 @@ const Footer = () => {
               </Box>
               <Box flex={9} textAlign={"left"}>
                 <p>Email: info@ametheus.com</p>
-              </Box> 
+              </Box>
             </Box>
           </Box>
-        </Box>
-
-        {/* footer Warning line  */}
-        <Box className={style.info_warning}>
-          <h3 >
-            Do Not Sell or Share My Personal Information &#62; <BsArrowRight />
-          </h3>
         </Box>
         <Box py={4}>
           <Flex
@@ -99,13 +92,8 @@ const Footer = () => {
         </Box>
         {/* some company info */}
         <Text className={style.groupof}>
-          AssetOrix Group is committed to ensuring digital accessibility for
-          individuals with disabilities. We are continuously working to improve
-          the accessibility of our web experience for everyone, and we welcome
-          feedback and accommodation requests. If you wish to report an issue or
-          seek an accommodation, please
+          ©2010 - 2023 All rights reserved with Ametheus Holdings Pvt Ltd.
         </Text>
-        <Text className={style.underline}>let us know.</Text>
 
         {/* line with logo */}
         <Box className={style.contact}>
@@ -125,11 +113,11 @@ const Footer = () => {
       </Box>
       <div className={style.location_detail}>
         <Box>
-          <h3> <span className={style.blue}>assetorix.com</span>  - a concern of Ametheus Holdings Limited 
+          <h3> <span className={style.blue}>assetorix.com</span>  - a concern of Ametheus Holdings Limited
             Marketing partner - <br className={style.br} /> <span className={style.red}>Unifie Entertainment technology LLP </span>
           </h3>
         </Box>
-        <Box >    
+        <Box >
           Email: info@assetorix.com | Call Us at: +91-9999099538
         </Box>
         <Box>
