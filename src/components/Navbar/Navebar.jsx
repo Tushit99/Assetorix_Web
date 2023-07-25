@@ -28,7 +28,7 @@ const Navebar = () => {
                     <Logo />
                 </Link>
             </div>
-            <div className={style.nav_link}> 
+            <div className={style.nav_link}>
                 <Link to={"/"} className={style.thin}>
                     Buy
                 </Link>
@@ -40,12 +40,18 @@ const Navebar = () => {
                 </Link>
                 <Link to="#" className={style.bold}>
                     Home Loans
-                </Link>
+                </Link> 
 
+                <Link to="#" className={style.thin}>
+                    Advertise
+                </Link>
+                <Link to="#" className={style.bold}>
+                    Agent Finder
+                </Link>
                 <Menu padding={0}>
                     <MenuButton
                         padding={"0px"}
-                        // color={"white"}
+                        color={"white"}
                         backgroundColor={"unset"}
                         _hover={{ backgroundColor: "unset" }}
                         _active={{ backgroundColor: "unset" }}
@@ -53,18 +59,18 @@ const Navebar = () => {
                         className={style.thin}
                         display={{ base: "none", lg: "block" }}
                         fontSize={"lg"}
-                        fontWeight={"200"}
+                        fontWeight={"bold"}
                     >
                         Services
                     </MenuButton>
                     <MenuList
                         display={"grid"}
-                        gap={"20px"}
-                        backgroundColor={"rgb(11,32,51)"}
+                        className={style.service_box}
+                        backgroundColor={"rgb(254, 254, 95)"}
                         textAlign={"left"}
-                        marginTop={-2}
-                        color={"white"}
-                        padding={"10px"}
+                        marginTop={-2} 
+                        
+                        padding={"2px"}
                     >
                         <Link to={"/Construction_Management"}>Construction Management</Link>
                         <Link to={"#"}>Partner with Us</Link>
@@ -74,44 +80,41 @@ const Navebar = () => {
                         <Link to={"#"}>Market Research</Link>
                         <Link to={"#"}>Property & Portfolio Sales</Link>
                     </MenuList>
-                </Menu> 
-                <Link to="#" className={style.thin}>
-                    Advertise
-                </Link>
-                <Link to="#" className={style.bold}>
-                    Agent Finder
-                </Link>
+                </Menu>
                 <Link to="#" className={style.bold}>
                     Help
                 </Link>
-                <Popover>
-                    <PopoverTrigger>
-                        <Button
-                            padding={"0px"}
-                            color={"white"}
-                            as={Button}
-                            fontSize={"lg"}
-                            border={0}
-                            backgroundColor={"unset"}
-                            _hover={{ background: "unset" }}
-                            _active={{ background: "unset" }}
-                            fontWeight={"400"}
-                        >
-                            <PiUserListLight color="blue" size={"30px"} />
-                        </Button>
-                    </PopoverTrigger>
-                    <PopoverContent border={0} >
-                        <PopoverArrow  />
-                        <PopoverHeader> Welcome User </PopoverHeader>
-                        <PopoverBody>
-                            <div className={style.user_section}>
-                                <Link to={"/signup"}>Signin</Link>
-                                <Link to={"/login"}> Login </Link>
-                            </div>
-                        </PopoverBody>
-                    </PopoverContent>
-                </Popover>
             </div>
+            <Popover>
+                <Link style={{ color: "white", fontWeight: "bold" }}>Contact</Link>
+                <PopoverTrigger>
+                    <Button
+                        padding={"0px"}
+                        color={"white"}
+                        as={Button}
+                        fontSize={"lg"}
+                        border={0}
+                        backgroundColor={"unset"}
+                        _hover={{ background: "unset" }}
+                        _active={{ background: "unset" }}
+                        fontWeight={"400"}
+
+                    // clip-path: polygon(0 0, 100% 0, 90% 100%, 0% 100%)
+                    >
+                        <PiUserListLight color="white" size={"30px"} />
+                    </Button>
+                </PopoverTrigger>
+                <PopoverContent border={0} >
+                    <PopoverArrow />
+                    <PopoverHeader> Welcome User </PopoverHeader>
+                    <PopoverBody>
+                        <div className={style.user_section}>
+                            <Link to={"/signup"}>Signin</Link>
+                            <Link to={"/login"}> Login </Link>
+                        </div>
+                    </PopoverBody>
+                </PopoverContent>
+            </Popover>
         </div>
     );
 };

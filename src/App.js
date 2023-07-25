@@ -11,7 +11,7 @@ function App() {
       if (window.scrollY !== 0) {
         window.scrollBy(0, scrollStep);
       } else {
-        clearInterval(scrollInterval);
+        clearInterval(scrollInterval); 
       }
     }, 15);
   };
@@ -37,10 +37,10 @@ function App() {
       </div>
       <div className="scrole_button">
         <button onClick={handleScrollToTop}> 
-          <MdKeyboardDoubleArrowUp size={"25px"} color="black" />
+          <MdKeyboardDoubleArrowUp size={"25px"} color="white" />
         </button>
         <button onClick={handleScrollToBottom}> 
-          <MdKeyboardDoubleArrowDown size={"25px"} color="black" />
+          <MdKeyboardDoubleArrowDown size={"25px"} color="white" />
         </button>
       </div>
     </div>

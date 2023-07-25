@@ -2,12 +2,12 @@
 body {
   margin: 0;
   font-family: 'Open Sans', sans-serif; 
-  --main-one: #0b2033;
-  /* --yellow-col: rgba(255, 255, 123, 0.726) ;  */
+  --main-one: #0b2033; 
   --dark-text-color: #ffffff; 
   --blue-light: rgb(114,154,191) ;
   --color-btn: rgb(245, 101, 101); 
   --color-green: rgb(0, 255, 0) ;  
+  --head-color: rgb(254, 254, 95) ;  
 }
 
 

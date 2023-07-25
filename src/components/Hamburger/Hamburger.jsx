@@ -12,17 +12,17 @@ const Hamburger = () => {
 
     return (
         <>
-            <Button ref={btnRef} colorScheme='undefined' onClick={onOpen}>
+            <Button ref={btnRef}  onClick={onOpen}>
                 <HiMenu size={"46px"} />
             </Button>
             <Drawer
                 isOpen={isOpen}
-                placement='left'
-                onClose={onClose}
+                placement='left' 
+                onClose={onClose}   
                 finalFocusRef={btnRef}
             >
                 <DrawerOverlay />
-                <DrawerContent backgroundColor={"rgb(11,32,51)"} color={"white"} >
+                <DrawerContent className={style.drawer} >
                     <DrawerCloseButton />
                     <DrawerHeader>
                         <Logo />

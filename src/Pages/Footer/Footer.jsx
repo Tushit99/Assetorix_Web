@@ -15,52 +15,63 @@ import {
   BsTwitter,
 } from "react-icons/bs";
 import { BiLogoLinkedin } from "react-icons/bi";
+import { IoIosArrowForward } from "react-icons/io";
 
 const Footer = () => {
   return (
-    <div>
+    <div className={style.ft}>
       <Box className={style.footer}>
         {/* footer */}
-        <div className={style.footer_option}>
-          <Box
-            p={10}
-            display={"flex"}
-            alignItems={"center"}
-            justifyContent={"center"}
-            textAlign={"center"}
-            flexWrap={"wrap"}
-            gap={"20px"}
-          >
-            <Link href={"#"}>About</Link>
-            <Link href={"#"}>Research </Link>
-            <Link href={"#"}>Pricing</Link>
-            <Link href={"#"}>Careers </Link>
-            <Link href={"#"}>About Us</Link>
-            <Link href={"#"}>Help </Link>
-            <Link href={"#"}>Fair Housing Guide</Link>
-            <Link href={"#"}>Advertise</Link>
-            <Link href={"#"}>Contact Us</Link>
-            <Link href={"#"}>Partners</Link>
-            <Link href={"#"}>Cookies Policy</Link>
-            <Link href={"#"}>Privacy Policy</Link>
-            <Link href={"#"}>Terms of Service</Link>
-            <Link href={"#"}>Law Enforcement</Link>
-            <Link href={"#"}>Facebook</Link>
-            <Link href={"#"}>Twitter</Link>
-            <Link href={"#"}>Dribbble</Link>
-            <Link href={"#"}>Instagram</Link> 
-            <Link href={"#"}>LinkedIn</Link>
+        <Box className={style.footer_description} >
+          <Box >
+            <h2>Business Line</h2>
+            <Link href={"#"}>Buy</Link>
+            <Link href={"#"}>Rent </Link>
+            <Link href={"#"}>Sale</Link>
+            <Link href={"#"}>Home Loan </Link>
+            <Link href={"#"}>Advertise </Link>
+            <Link href={"#"}>Agent Finder </Link>
           </Box>
-          <div>
+          <Box >
+            <h2>Company</h2>
+            <Link href={"#"}>Home</Link>
+            <Link href={"#"}>About Assotorix</Link>
+            <Link href={"#"}>Corporate Service</Link>
+            <Link href={"#"}> Developer Partners </Link>
+            <Link>  </Link>
+          </Box>
+          <Box >
+            <h2>Help Center</h2>
+            <Link href={"#"}>Purchase Term & Condition</Link>
+            <Link href={"#"}>Disclaimer</Link>
+            <Link href={"#"}>Privacy</Link>
+            <Link href={"#"}>Terms of use this website</Link>
+
+          </Box>
+          <Box>
             <h2>CONTACT</h2>
-            <p>Ametheus Holdings Pvt Ltd Address: 27, 2nd Floor, Hauz Khas Village, New Delhi 110016, India  Phone: +91-11-41670666, +91-1140074433, +91-9999099538</p>
-            <p>Email: info@ametheus.com</p> 
-          </div>
-        </div>
+            <Box display={"flex"} alignItems={"flex-start"} w={"100%"} justifyContent={"center"} >
+              <Box flex={1} paddingTop={1} >
+                <IoIosArrowForward size={"16px"} />
+              </Box>
+              <Box flex={9} textAlign={"left"} >
+                <p>Ametheus Holdings Pvt Ltd Address: 27, 2nd Floor, Hauz Khas Village, New Delhi 110016, India  Phone: +91-11-41670666, +91-1140074433, +91-9999099538</p>
+              </Box>
+            </Box>
+            <Box display={"flex"} alignItems={"flex-start"} w={"100%"}>
+              <Box flex={1} paddingTop={1}>
+                <IoIosArrowForward size={"16px"} />
+              </Box>
+              <Box flex={9} textAlign={"left"}>
+                <p>Email: info@ametheus.com</p>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
 
         {/* footer Warning line  */}
         <Box className={style.info_warning}>
-          <h3>
+          <h3 >
             Do Not Sell or Share My Personal Information <BsArrowRight />
           </h3>
         </Box>
@@ -99,19 +110,33 @@ const Footer = () => {
         {/* line with logo */}
         <Box className={style.contact}>
           <h1>
-            <BiLogoLinkedin size={"24px"} style={{ fillRule: 'evenodd' }} />
+            <BiLogoLinkedin size={"24px"} />
           </h1>
           <h1>
-            <BsTwitter size={"24px"} style={{ fillRule: 'evenodd' }} />
+            <BsTwitter size={"24px"} />
           </h1>
           <h1>
-            <BsFacebook size={"24px"} style={{ fillRule: 'evenodd' }} />
+            <BsFacebook size={"24px"} />
           </h1>
           <h1>
-            <BsInstagram size={"24px"} style={{ fillRule: 'evenodd' }} />
+            <BsInstagram size={"24px"} />
           </h1>
         </Box>
       </Box>
+      <div className={style.location_detail}>
+        <Box>
+          <h3> <span className={style.blue}>assetorix.com</span>  - a concern of Ametheus Holdings Limited &
+            <br />
+            Marketed by <span className={style.red}>Unifie Entertainment technology LLP </span>
+          </h3>
+        </Box>
+        <Box>
+          Email: info@assetorix.com | Call Us at: +91-9999099538
+        </Box>
+        <Box>
+          <button>LOCATE US <IoIosArrowForward size={"26px"} /> </button>
+        </Box>
+      </div>
     </div>
   );
 };

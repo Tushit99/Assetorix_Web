@@ -2,7 +2,7 @@ import React from 'react'
 import style from "./Logo.module.css";
 import { Link } from 'react-router-dom';  
 // import logo from "./weblogo.png"; 
-// import log from "./lgo.png"
+import log from "./lgo.png"
 
 const Logo = () => {
   return (

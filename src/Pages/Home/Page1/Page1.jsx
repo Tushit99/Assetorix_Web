@@ -17,7 +17,7 @@ const Page1 = () => {
                 w={"full"}
                 h={"95vh"}
                 backgroundImage={
-                    "url('https://images.pexels.com/photos/1797393/pexels-photo-1797393.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')"
+                    "url('https://images.pexels.com/photos/1475938/pexels-photo-1475938.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')"
                 }
                 backgroundSize={"cover"}
                 display={{ base: "grid", lg: "flex" }}
@@ -32,10 +32,12 @@ const Page1 = () => {
                         color={"white"}
                         fontWeight={700}
                         lineHeight={1.2}
+                        textAlign={"left"}
                         textShadow={"#000000 3px 4px 20px"}
-                        fontSize={useBreakpointValue({ base: "4xl", md: "5xl" })}
+                        fontSize={useBreakpointValue({ base: "5xl", md: "6xl" })}
                     >
-                        Agents. Tours. Home Loans. Homes.
+                        "I Think" to "I Own" 
+                        {/* Want I Think to I Own Status ? */}
                     </Text>
                     <Box w={"100%"}>
                         <div className={style.fields}>
@@ -93,11 +95,28 @@ const Page1 = () => {
                                     _hover={{ color: "white" }}
                                     boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}
                                     fontSize={"lg"}
-                                    backgroundColor={"rgb(11,32,51)"}
+                                    backgroundColor={"rgb(94, 174, 248)"}
                                     border={"1px solid black"}
                                 >
                                     Rent Property
                                 </Button>
+                                <Select
+                                    size="md"
+                                    w={"174px"}
+                                    backgroundColor={"rgb(46,49,146)"}
+                                    color={"white"}
+                                    outline={0}
+                                    boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}
+                                    style={{ borderradius: "20px" }}
+                                    border={0}
+                                >
+                                    <option value="delhi" borderradius={0}>
+                                       Delhi 
+                                    </option>
+                                    <option value="noida" borderradius={0}>
+                                        Noida
+                                    </option>
+                                </Select>
                             </div>
                         </div>
                     </Box>
