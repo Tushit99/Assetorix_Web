@@ -7,8 +7,9 @@ import {
     Input,
     Select,
 } from "@chakra-ui/react";
-import style from "./Page1.module.css"; 
-import img from "./back.jpg";
+import style from "./Page1.module.css";
+import img from "./back.webp";
+import { GrFormSearch } from "react-icons/gr";
 
 const Page1 = () => {
     return (
@@ -24,15 +25,14 @@ const Page1 = () => {
             >
                 <Box
                     w={"full"}
-                    className={style.topbox}
-                >
+                    className={style.topbox} >
                     <Text
                         color={"white"}
                         fontWeight={700}
                         lineHeight={1.2}
                         textAlign={"left"}
                         textShadow={"#000000 3px 4px 20px"}
-                        fontSize={useBreakpointValue({ base: "5xl", md: "6xl" })}
+                        fontSize={useBreakpointValue({ base: "4xl", md: "6xl" })}
                     >
                         "I Think" to "I Own"
                         {/* Want I Think to I Own Status ? */}
@@ -42,9 +42,73 @@ const Page1 = () => {
                             <div>
                                 <Select
                                     size="md"
-                                    w={"174px"}
+                                    backgroundColor={"rgb(46,49,146)"}
+                                    color={"white"}
+                                    outline={0}
+                                    fontSize={{ base: "sm", lg: "lg" }}
+                                    boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}
+                                    style={{ borderradius: "20px" }}
+                                    border={0}
+                                >
+                                    <option value="delhi" color="black" borderradius={0}>
+                                        Delhi
+                                    </option>
+                                    <option value="noida" color="black" borderradius={0}>
+                                        Gurugram
+                                    </option>
+                                    <option value="noida" color="black" borderradius={0}>
+                                        Noida
+                                    </option>
+                                    <option value="noida" color="black" borderradius={0}>
+                                        Mumbai
+                                    </option>
+                                    <option value="noida" color="black" borderradius={0}>
+                                        Bangalore
+                                    </option>
+                                    <option value="noida" color="black" borderradius={0}>
+                                        Kolkata 
+                                    </option>
+                                </Select>
+                                <Button
+                                    borderradius={"4px"}
+                                    _hover={{ color: "white" }}
+                                    fontSize={{ base: "sm", lg: "lg" }}
+                                    color={"white"}
+                                    boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}
+                                    backgroundColor={"rgb(114,154,191)"}
+                                // border={"1px solid black"}
+                                >
+                                    Buy
+                                </Button>
+                                <Button
+                                    borderradius={"4px"}
+                                    color={"white"}
+                                    _hover={{ color: "white" }}
+                                    boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}
+                                    fontSize={{ base: "sm", lg: "lg" }}
+                                    backgroundColor={"rgb(94, 174, 248)"}
+                                // border={"1px solid black"}
+                                >
+                                    Sale
+                                </Button>
+                                <Button
+                                    borderradius={"4px"}
+                                    color={"white"}
+                                    _hover={{ color: "white" }}
+                                    boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}
+                                    fontSize={{ base: "sm", lg: "lg" }}
+                                    backgroundColor={"rgb(16, 101, 180)"}
+                                // border={"1px solid black"}
+                                >
+                                    Rent
+                                </Button>
+                            </div>
+                            <div>
+                                <Select
+                                    size="md"
                                     backgroundColor={"white"}
                                     color={"black"}
+                                    fontSize={{ base: "10px", lg: "lg" }}
                                     outline={0}
                                     boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}
                                     style={{ borderradius: "20px" }}
@@ -61,73 +125,19 @@ const Page1 = () => {
                                     type="text"
                                     border={0}
                                     height={"38px"}
+                                    maxWidth={"400px"} 
                                     w={"60%"}
                                     marginLeft={"2px"}
-                                    placeholder={"Search locality, landmark, project or builder"}
+                                    placeholder={"Search locality, project or builder"}
                                     color={"black"}
-                                    fontSize={"lg"}
+                                    fontSize={{ base: "xs", lg: "lg" }}
                                     _active={{ border: "0px", outline: "0px" }}
                                     boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}
                                     fontWeight={400}
                                     backgroundColor={"white"}
                                     borderradius={0}
                                 />
-                            </div>
-                            <div>
-                                <Button
-                                    w={"170px"}
-                                    borderradius={"4px"}
-                                    _hover={{ color: "white" }}
-                                    fontSize={"lg"}
-                                    color={"white"}
-                                    boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}
-                                    backgroundColor={"rgb(114,154,191)"}
-                                    border={"1px solid black"}
-                                >
-                                    Buy Property
-                                </Button>
-                                <Button
-                                    w={"170px"}
-                                    borderradius={"4px"}
-                                    color={"white"}
-                                    _hover={{ color: "white" }}
-                                    boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}
-                                    fontSize={"lg"}
-                                    backgroundColor={"rgb(94, 174, 248)"}
-                                    border={"1px solid black"}
-                                >
-                                    Sale Property
-                                </Button>
-                                <Button
-                                    w={"170px"}
-                                    borderradius={"4px"}
-                                    color={"white"}
-                                    _hover={{ color: "white" }}
-                                    boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}
-                                    fontSize={"lg"}
-                                    backgroundColor={"rgb(16, 101, 180)"}
-                                    border={"1px solid black"}
-                                >
-                                    Rent Property
-                                </Button>
-
-                                <Select
-                                    size="md"
-                                    w={"170px"}
-                                    backgroundColor={"rgb(46,49,146)"}
-                                    color={"white"}
-                                    outline={0}
-                                    boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}
-                                    style={{ borderradius: "20px" }}
-                                    border={0}
-                                >
-                                    <option value="delhi" borderradius={0}>
-                                        Delhi
-                                    </option>
-                                    <option value="noida" borderradius={0}>
-                                        Noida
-                                    </option>
-                                </Select>
+                                <Button padding={0} m={"2px"}> <GrFormSearch size={"30px"} /> </Button>
                             </div>
                         </div>
                     </Box>
