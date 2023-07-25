@@ -7,7 +7,7 @@ import {
     Input,
     Select,
 } from "@chakra-ui/react";
-import style from "./Page1.module.css"; 
+import style from "./Page1.module.css";
 
 const Page1 = () => {
     return (
@@ -16,7 +16,7 @@ const Page1 = () => {
                 w={"full"}
                 h={"95vh"}
                 backgroundImage={
-                    "url('https://images.pexels.com/photos/1475938/pexels-photo-1475938.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')"
+                    "url('https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')"
                 }
                 backgroundSize={"cover"}
                 display={{ base: "grid", lg: "flex" }}
@@ -35,7 +35,7 @@ const Page1 = () => {
                         textShadow={"#000000 3px 4px 20px"}
                         fontSize={useBreakpointValue({ base: "5xl", md: "6xl" })}
                     >
-                        "I Think" to "I Own" 
+                        "I Think" to "I Own"
                         {/* Want I Think to I Own Status ? */}
                     </Text>
                     <Box w={"100%"}>
@@ -97,8 +97,21 @@ const Page1 = () => {
                                     backgroundColor={"rgb(94, 174, 248)"}
                                     border={"1px solid black"}
                                 >
+                                    Sale Property
+                                </Button>
+                                <Button
+                                    w={"170px"}
+                                    borderradius={"4px"}
+                                    color={"white"}
+                                    _hover={{ color: "white" }}
+                                    boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}
+                                    fontSize={"lg"}
+                                    backgroundColor={"rgb(16, 101, 180)"}
+                                    border={"1px solid black"}
+                                >
                                     Rent Property
                                 </Button>
+
                                 <Select
                                     size="md"
                                     w={"170px"}
@@ -110,7 +123,7 @@ const Page1 = () => {
                                     border={0}
                                 >
                                     <option value="delhi" borderradius={0}>
-                                       Delhi 
+                                        Delhi
                                     </option>
                                     <option value="noida" borderradius={0}>
                                         Noida

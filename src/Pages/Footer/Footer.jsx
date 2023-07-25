@@ -35,7 +35,7 @@ const Footer = () => {
           <Box >
             <h2>Company</h2>
             <Link href={"#"}>Home</Link>
-            <Link href={"#"}>About Assotorix</Link>
+            <Link href={"#"}>About Assetorix</Link>
             <Link href={"#"}>Corporate Service</Link>
             <Link href={"#"}> Developer Partners </Link>
             <Link>  </Link>
@@ -125,8 +125,8 @@ const Footer = () => {
       </Box>
       <div className={style.location_detail}>
         <Box>
-          <h3> <span className={style.blue}>assetorix.com</span>  - a concern of Ametheus Holdings Limited &
-            Marketed by <br className={style.br} /> <span className={style.red}>Unifie Entertainment technology LLP </span>
+          <h3> <span className={style.blue}>assetorix.com</span>  - a concern of Ametheus Holdings Limited 
+            Marketing partner - <br className={style.br} /> <span className={style.red}>Unifie Entertainment technology LLP </span>
           </h3>
         </Box>
         <Box >    

@@ -61,7 +61,7 @@ const Navebar = () => {
                             Services
                         </Button>
                     </PopoverTrigger>
-                    <PopoverContent border={0}>
+                    <PopoverContent boxShadow={"rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px"}>
                         <PopoverArrow />
                         <PopoverBody className={style.box_cs}> 
                             <Link to={"/Construction_Management"}>Construction Management</Link>
@@ -91,10 +91,10 @@ const Navebar = () => {
                             Help
                         </Button>
                     </PopoverTrigger>
-                    <PopoverContent border={0} >
+                    <PopoverContent boxShadow={"rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px"} >
                         <PopoverArrow />
                         <PopoverBody className={style.box_cs}> 
-                            help
+                            <Link to="#">help</Link>
                         </PopoverBody>
                     </PopoverContent>
                 </Popover> 
