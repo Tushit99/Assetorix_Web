@@ -15,7 +15,8 @@ import {
     PopoverHeader,
     PopoverTrigger,
 } from "@chakra-ui/react";
-import Hamburger from "../Hamburger/Hamburger";
+import Hamburger from "../Hamburger/Hamburger"; 
+import {BsFillTelephoneFill} from "react-icons/bs"; 
 
 const Navebar = () => {
     return (
@@ -40,7 +41,7 @@ const Navebar = () => {
                 </Link>
                 <Link to="#" className={style.bold}>
                     Home Loans
-                </Link> 
+                </Link>
 
                 <Link to="#" className={style.thin}>
                     Advertise
@@ -68,8 +69,8 @@ const Navebar = () => {
                         className={style.service_box}
                         backgroundColor={"rgb(254, 254, 95)"}
                         textAlign={"left"}
-                        marginTop={-2} 
-                        
+                        marginTop={-2}
+
                         padding={"2px"}
                     >
                         <Link to={"/Construction_Management"}>Construction Management</Link>
@@ -84,37 +85,42 @@ const Navebar = () => {
                 <Link to="#" className={style.bold}>
                     Help
                 </Link>
-            </div>
-            <Popover>
-                <Link style={{ color: "white", fontWeight: "bold" }}>Contact</Link>
-                <PopoverTrigger>
-                    <Button
-                        padding={"0px"}
-                        color={"white"}
-                        as={Button}
-                        fontSize={"lg"}
-                        border={0}
-                        backgroundColor={"unset"}
-                        _hover={{ background: "unset" }}
-                        _active={{ background: "unset" }}
-                        fontWeight={"400"}
+            </div> 
+            <div className={style.right_section}>
+                <div className={style.contact}>
+                    <Link>Contact</Link> 
+                    <BsFillTelephoneFill />
+                </div>
+                <Popover>
+                    <PopoverTrigger>
+                        <Button
+                            padding={"0px"}
+                            color={"white"}
+                            as={Button}
+                            fontSize={"lg"}
+                            border={0}
+                            backgroundColor={"unset"}
+                            _hover={{ background: "unset" }}
+                            _active={{ background: "unset" }}
+                            fontWeight={"400"}
 
-                    // clip-path: polygon(0 0, 100% 0, 90% 100%, 0% 100%)
-                    >
-                        <PiUserListLight color="white" size={"30px"} />
-                    </Button>
-                </PopoverTrigger>
-                <PopoverContent border={0} >
-                    <PopoverArrow />
-                    <PopoverHeader> Welcome User </PopoverHeader>
-                    <PopoverBody>
-                        <div className={style.user_section}>
-                            <Link to={"/signup"}>Signin</Link>
-                            <Link to={"/login"}> Login </Link>
-                        </div>
-                    </PopoverBody>
-                </PopoverContent>
-            </Popover>
+                        // clip-path: polygon(0 0, 100% 0, 90% 100%, 0% 100%)
+                        >
+                            <PiUserListLight color="black" size={"30px"} />
+                        </Button>
+                    </PopoverTrigger>
+                    <PopoverContent border={0} >
+                        <PopoverArrow />
+                        <PopoverHeader> Welcome User </PopoverHeader>
+                        <PopoverBody>
+                            <div className={style.user_section}>
+                                <Link to={"/signup"}>Signin</Link>
+                                <Link to={"/login"}> Login </Link>
+                            </div>
+                        </PopoverBody>
+                    </PopoverContent>
+                </Popover>
+            </div>
         </div>
     );
 };

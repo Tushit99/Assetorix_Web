@@ -2,7 +2,7 @@
 body {
   margin: 0;
   font-family: 'Open Sans', sans-serif; 
-  --main-one: #0b2033; 
+  --main-one: rgb(46,49,146); 
   --dark-text-color: #ffffff; 
   --blue-light: rgb(114,154,191) ;
   --color-btn: rgb(245, 101, 101); 

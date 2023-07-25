@@ -12,8 +12,13 @@ const Hamburger = () => {
 
     return (
         <>
-            <Button ref={btnRef}  onClick={onOpen}>
-                <HiMenu size={"46px"} />
+            <Button ref={btnRef} 
+            backgroundColor={"unset"}  
+            onClick={onOpen} 
+            _hover={{backgroundColor:"unset"}}  
+            _active={{backgroundColor:"unset"}} 
+            >
+                <HiMenu size={"40px"}  />
             </Button>
             <Drawer
                 isOpen={isOpen}
