@@ -4,19 +4,15 @@ import style from "./Navbar.module.css";
 import { Link } from "react-router-dom";
 import { PiUserListLight } from "react-icons/pi";
 import {
-    Button,
-    Menu,
-    MenuButton,
-    MenuList,
+    Button, 
     Popover,
     PopoverArrow,
     PopoverBody,
     PopoverContent,
     PopoverHeader,
     PopoverTrigger,
-} from "@chakra-ui/react"; 
+} from "@chakra-ui/react";
 import Hamburger from "../Hamburger/Hamburger"; 
-import {BsFillTelephoneFill} from "react-icons/bs"; 
 
 const Navebar = () => {
     return (
@@ -48,64 +44,78 @@ const Navebar = () => {
                 </Link>
                 <Link to="#" className={style.bold}>
                     Agent Finder
-                </Link> 
-                <Menu padding={0}>
-                    <MenuButton
-                        padding={"0px"}
-                        color={"white"}
-                        backgroundColor={"unset"}
-                        _hover={{ backgroundColor: "unset" }}
-                        _active={{ backgroundColor: "unset" }}
-                        as={Button}
-                        className={style.thin}
-                        display={{ base: "none", lg: "block" }}
-                        fontSize={"lg"}
-                        fontWeight={"bold"}
-                        zIndex={200}
-                    >
-                        Services
-                    </MenuButton>
-                    <MenuList
-                        display={"grid"}
-                        className={style.service_box}
-                        backgroundColor={"rgb(46,49,146)"}
-                        textAlign={"left"}
-                        marginTop={-2} 
-                        gap={1}
-                        padding={"4px"} 
-                    >
-                        <Link to={"/Construction_Management"}>Construction Management</Link>
-                        <Link to={"#"}>Partner with Us</Link>
-                        <Link to={"/Property_Marketing"}>Property Marketing</Link>
-                        <Link to={"#"}>Acquisitions & Dispositions</Link>
-                        <Link to={"#"}>Consulting</Link>
-                        <Link to={"#"}>Market Research</Link>
-                        <Link to={"#"}>Property & Portfolio Sales</Link>
-                    </MenuList>
-                </Menu>
-                <Link to="#" className={style.bold}>
-                    Help
                 </Link>
-            </div> 
+                {/* Services */}
+                <Popover>
+                    <PopoverTrigger >
+                        <Button
+                            padding={"0px"}
+                            color={"white"}
+                            as={Button}
+                            fontSize={"lg"}
+                            backgroundColor={"unset"}
+                            _hover={{ background: "unset" }}
+                            _active={{ background: "unset" }}
+                            fontWeight={"bold"} 
+                        >
+                            Services
+                        </Button>
+                    </PopoverTrigger>
+                    <PopoverContent border={0}>
+                        <PopoverArrow />
+                        <PopoverBody className={style.box_cs}> 
+                            <Link to={"/Construction_Management"}>Construction Management</Link>
+                            <Link to={"#"}>Partner with Us</Link>
+                            <Link to={"/Property_Marketing"}>Property Marketing</Link>
+                            <Link to={"#"}>Acquisitions & Dispositions</Link>
+                            <Link to={"#"}>Consulting</Link>
+                            <Link to={"#"}>Market Research</Link>
+                            <Link to={"#"}>Property & Portfolio Sales</Link>
+                        </PopoverBody>
+                    </PopoverContent>
+                </Popover>
+ 
+                {/* help */}
+                <Popover>
+                    <PopoverTrigger >
+                        <Button
+                            padding={"0px"}
+                            color={"white"}
+                            as={Button}
+                            fontSize={"lg"}
+                            backgroundColor={"unset"}
+                            _hover={{ background: "unset" }}
+                            _active={{ background: "unset" }}
+                            fontWeight={"bold"} 
+                        >
+                            Help
+                        </Button>
+                    </PopoverTrigger>
+                    <PopoverContent border={0} >
+                        <PopoverArrow />
+                        <PopoverBody className={style.box_cs}> 
+                            help
+                        </PopoverBody>
+                    </PopoverContent>
+                </Popover> 
+            </div>
             <div className={style.right_section}>
                 <div className={style.contact}>
                     <Link>Contact</Link> 
-                    <BsFillTelephoneFill />
                 </div>
                 <Popover>
                     <PopoverTrigger >
                         <Button
                             padding={"0px"}
-                            color={"white"} 
+                            color={"white"}
                             as={Button}
                             fontSize={"lg"}
-                            // border={"2px solid green"}
-                            backgroundColor={"unset"} 
+                            backgroundColor={"unset"}
                             _hover={{ background: "unset" }}
                             _active={{ background: "unset" }}
-                            fontWeight={"400"}  
+                            fontWeight={"bolder"}
                         >
-                            <PiUserListLight color="black" size={"30px"} />
+                            <PiUserListLight o fontWeight={"500"} color="blue" size={"30px"} />
                         </Button>
                     </PopoverTrigger>
                     <PopoverContent border={0} >

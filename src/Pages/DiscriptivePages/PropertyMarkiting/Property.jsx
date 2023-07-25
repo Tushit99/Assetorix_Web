@@ -4,7 +4,7 @@ import React from "react";
 const Property = () => {
   return (
     <Box w={"90%"} margin={"auto"}>
-      <Box textAlign={"justify"} w={"70%"} >  
+      <Box textAlign={"justify"} w={"70%"} padding={"0px auto"}>   
         <img src="https://www.ametheus.com/wp-content/uploads/2020/11/Property-1024x342.jpg" alt="property_img" />
         <Heading m={"20px 0"} as='h3' size='lg'> PROPERTY MARKETING </Heading>
         <Heading as='h4' m={"20px 0"} size='md' fontWeight={"400"} > MARKETING OF PROPERTIES BY AMETHEUS HOLDINGS PVT LTD </Heading>

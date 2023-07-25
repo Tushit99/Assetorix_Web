@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { HiMenu } from "react-icons/hi";
 import Logo from "../Logo/Logo";
 import { Link } from "react-router-dom";
-import style from "./Hamburger.module.css"; 
+import style from "./Hamburger.module.css";
 
 
 const Hamburger = () => {
@@ -12,46 +12,48 @@ const Hamburger = () => {
 
     return (
         <>
-            <Button ref={btnRef} 
-            backgroundColor={"unset"}  
-            onClick={onOpen} 
-            _hover={{backgroundColor:"unset"}}  
-            _active={{backgroundColor:"unset"}} 
+            <Button ref={btnRef}
+                backgroundColor={"unset"}
+                onClick={onOpen}
+                _hover={{ backgroundColor: "unset" }}
+                _active={{ backgroundColor: "unset" }}
             >
-                <HiMenu size={"40px"}  />
+                <HiMenu size={"40px"} />
             </Button>
             <Drawer
                 isOpen={isOpen}
-                placement='left' 
-                onClose={onClose}   
+                placement='left'
+                onClose={onClose}
                 finalFocusRef={btnRef}
             >
                 <DrawerOverlay />
                 <DrawerContent className={style.drawer} >
                     <DrawerCloseButton />
                     <DrawerHeader>
-                        <Logo />
+                        <div onClick={onClose}>
+                            <Logo />
+                        </div>
                     </DrawerHeader>
 
-                    <DrawerBody className={style.links} display={"grid"}  > 
-                        <Link to={"/about"}> About </Link>
-                        <Link to={"#"}> Buy </Link>
-                        <Link to={"#"}> Rent </Link>
-                        <Link to={"#"}> Sale </Link>
-                        <Link to={"#"}>Home Loans </Link>
-                        <Link to={"/Construction_Management"}>Construction Management</Link>
-                        <Link to={"#"}>Partner with Us</Link>
-                        <Link to={"/Property_Marketing"}>Property Marketing</Link>
-                        <Link to={"#"}>Acquisitions & Dispositions</Link>
-                        <Link to={"#"}>Consulting</Link>
-                        <Link to={"#"}>Market Research</Link>
-                        <Link to={"#"}>Property & Portfolio Sales</Link>
-                        <Link to={"#"} > Contact</Link>
-                        <Link to={"#"}>Advertise</Link>
-                        <Link to={"#"}>Agent Finder</Link>
-                        <Link to={"#"}>Help </Link> 
+                    <DrawerBody className={style.links} display={"grid"}  >
+                        <Link to={"/about"} onClick={onClose}> About </Link>
+                        <Link to={"#"} onClick={onClose}> Buy </Link>
+                        <Link to={"#"} onClick={onClose}> Rent </Link>
+                        <Link to={"#"} onClick={onClose}> Sale </Link>
+                        <Link to={"#"} onClick={onClose}>Home Loans </Link>
+                        <Link to={"/Construction_Management"} onClick={onClose}>Construction Management</Link>
+                        <Link to={"#"} onClick={onClose}>Partner with Us</Link>
+                        <Link to={"/Property_Marketing"} onClick={onClose}>Property Marketing</Link>
+                        <Link to={"#"} onClick={onClose}>Acquisitions & Dispositions</Link>
+                        <Link to={"#"} onClick={onClose}>Consulting</Link>
+                        <Link to={"#"} onClick={onClose}>Market Research</Link>
+                        <Link to={"#"} onClick={onClose}>Property & Portfolio Sales</Link>
+                        <Link to={"#"} onClick={onClose}> Contact</Link>
+                        <Link to={"#"} onClick={onClose}>Advertise</Link>
+                        <Link to={"#"} onClick={onClose}>Agent Finder</Link>
+                        <Link to={"#"} onClick={onClose}>Help </Link>
 
-                    </DrawerBody> 
+                    </DrawerBody>
                 </DrawerContent>
             </Drawer>
         </>

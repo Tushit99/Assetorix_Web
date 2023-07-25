@@ -126,10 +126,10 @@ const Footer = () => {
       <div className={style.location_detail}>
         <Box>
           <h3> <span className={style.blue}>assetorix.com</span>  - a concern of Ametheus Holdings Limited &
-            Marketed by <span className={style.red}>Unifie Entertainment technology LLP </span>
+            Marketed by <br className={style.br} /> <span className={style.red}>Unifie Entertainment technology LLP </span>
           </h3>
         </Box>
-        <Box>  
+        <Box >    
           Email: info@assetorix.com | Call Us at: +91-9999099538
         </Box>
         <Box>

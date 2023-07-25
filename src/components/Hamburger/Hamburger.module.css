@@ -13,7 +13,7 @@
 }
  
 .drawer{
-    background-color: var(--head-color); 
+    background-color: white;  
     color: var(--blue-light);  
 }
 
