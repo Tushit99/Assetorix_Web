@@ -16,9 +16,11 @@ const Hamburger = () => {
                 backgroundColor={"unset"}
                 onClick={onOpen}
                 _hover={{ backgroundColor: "unset" }}
-                _active={{ backgroundColor: "unset" }}
+                _active={{ backgroundColor: "unset" }} 
+                padding={0} 
+                m={0} 
             >
-                <HiMenu size={"40px"} />
+                <HiMenu size={"30px"} color="blue" />
             </Button>
             <Drawer
                 isOpen={isOpen}

@@ -135,6 +135,10 @@
   color: orange;
 }
 
+.brs{
+  display: none; 
+}
+
 .location_detail > *:nth-child(1) {
   flex: 5;
   font-size: large;
@@ -169,7 +173,7 @@
   margin-top: 30px;
 }
 
-.location_detail * {
+.location_detail>* {
   text-align: justify;
 }
 
@@ -227,7 +231,7 @@
   .location_detail {
     display: grid;
     align-items: baseline;
-    justify-content: left;
+    justify-content: left; 
   }
 
   .footer_description > * {
@@ -248,5 +252,14 @@
 
   .location_detail > *:nth-child(2) {
     text-align: left;
+  } 
+
+  .brs{
+    display: block; 
   }
+
+  .line{
+    display: none; 
+  }
+
 }

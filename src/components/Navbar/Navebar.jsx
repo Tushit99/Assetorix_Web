@@ -14,7 +14,8 @@ import { Link } from "react-router-dom";
 //     Select,
 // } from "@chakra-ui/react";
 import Hamburger from "../Hamburger/Hamburger";
-import { Select } from "@chakra-ui/react";
+import { Select } from "@chakra-ui/react"; 
+import {BiSolidUserDetail} from "react-icons/bi"
 
 const Navebar = () => {
     return (
@@ -26,22 +27,19 @@ const Navebar = () => {
                 <div className={style.logo}>
                     <Logo />
                 </div>
-                <div className={style.country}>
-                    <select>
-                        <option value="india">India</option>
-                        <option value="usa">USA</option>
-                    </select> 
-                </div>
                 <div className={style.login_data}>
+                    <div className={style.country}>
+                        <select>
+                            <option value="india">India</option>
+                            <option value="usa">USA</option>
+                        </select>
+                    </div>
                     <Link>home</Link>
                     <Link>About us</Link>
                     <Link>Contact</Link>
-                    <div>
-                        <select >
-                            <option value="login">Login</option>
-                            <option value="Signin">Sign Up</option>
-                        </select>
-                    </div>
+                </div>
+                <div className={style.login_box}>
+                    <Link> <BiSolidUserDetail size={"20px"} color="blue" /> </Link> 
                 </div>
             </div>
             <div className={style.nav_bottom}>

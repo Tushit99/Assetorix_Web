@@ -8,14 +8,15 @@ import {
 import React from "react";
 import Logo from "../../components/Logo/Logo";
 import style from "./Footer.module.css";
-import { 
+import {
+  BsArrowDownShort,
   BsFacebook,
   BsInstagram,
   BsTwitter,
 } from "react-icons/bs";
 import { BiLogoLinkedin } from "react-icons/bi";
-import { IoIosArrowForward } from "react-icons/io"; 
-import insta from "./insta.png"; 
+import { IoIosArrowForward } from "react-icons/io";
+import insta from "./insta.png";
 
 const Footer = () => {
   return (
@@ -70,7 +71,7 @@ const Footer = () => {
         </Box>
         <Box py={4}>
           <Flex
-            align={"center"} 
+            align={"center"}
             _before={{
               content: '""',
               borderBottom: "1px solid",
@@ -107,19 +108,25 @@ const Footer = () => {
             <BsFacebook size={"24px"} />
           </h1>
           <h1>
-            <BsInstagram size={"24px"} className={style.insta_icon} />    
-            <img src={insta} alt="imstagram" className={style.insta_logo} width={"24px"} /> 
+            <BsInstagram size={"24px"} className={style.insta_icon} />
+            <img src={insta} alt="imstagram" className={style.insta_logo} width={"24px"} />
           </h1>
         </Box>
       </Box>
       <div className={style.location_detail}>
         <Box>
-          <h3> <span className={style.blue}>assetorix.com</span>  - a concern of Ametheus Holdings Limited <br />
-            Marketing partner - <br className={style.br} /> <span className={style.red}>Unifie Entertainment technology LLP </span>
+          <h3 > <span className={style.blue}>assetorix.com </span>
+            <span style={{fontSize:"16px"}}>
+              by Ametheus Holdings Pvt Ltd <br />
+            </span>
+          </h3>
+          <h3> 
+            <span style={{ display: "flex", alignItems: "center",fontSize:"14px" }}> Marketing partner: </span> 
+            <span className={style.red}>Unifie Entertainment technology LLP </span>
           </h3>
         </Box>
         <Box >
-          Email: info@assetorix.com | Call Us at: +91-9999099538
+          Email: info@assetorix.com <span className={style.line}> | </span> <br className={style.brs} /> Call Us at: +91-9999099538
         </Box>
         <Box>
           <button>LOCATE US <IoIosArrowForward size={"26px"} /> </button>
