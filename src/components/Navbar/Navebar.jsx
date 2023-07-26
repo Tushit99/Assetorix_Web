@@ -50,7 +50,7 @@ const Navebar = () => {
                 <Link>Advertise</Link>
                 <Link>Agent Finder</Link>
                 <Link>Help</Link>
-                <Link>Services</Link>
+                <Link> Corporate Services</Link>
             </div>
         </div>
     );
