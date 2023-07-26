@@ -114,7 +114,7 @@ const Footer = () => {
       </Box>
       <div className={style.location_detail}>
         <Box>
-          <h3> <span className={style.blue}>assetorix.com</span>  - a concern of Ametheus Holdings Limited
+          <h3> <span className={style.blue}>assetorix.com</span>  - a concern of Ametheus Holdings Limited <br />
             Marketing partner - <br className={style.br} /> <span className={style.red}>Unifie Entertainment technology LLP </span>
           </h3>
         </Box>

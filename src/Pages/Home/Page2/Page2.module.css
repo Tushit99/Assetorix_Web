@@ -117,4 +117,72 @@
   font-weight: 900;
   color: white;
   text-shadow: rgb(0, 0, 0) 1px 0 10px;
+} 
+
+
+
+
+
+.box3 > * {
+  overflow: hidden; 
+  transition: all 0.3s ease-in-out; 
 }
+
+.box3 > *:hover{
+    transform: scale(1.08);  
+  }
+
+.box3 > *:nth-child(1) {
+  height: 200px; 
+  background-size: cover; 
+  background-repeat: no-repeat;
+  background-position: bottom; 
+  /* filter: grayscale(100%); 
+  -webkit-filter: grayscale(100%);  */
+  border-radius: 10px;
+  background-image: url("./new_york.jpeg");
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: x-large;
+  font-weight: 900;
+  color: white;
+  text-shadow: rgb(0, 0, 0) 1px 0 10px;
+}
+
+.box3 > *:nth-child(2) {
+  background-image: url("./new_jercy.jpeg");  
+  height: 200px; 
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  /* filter: grayscale(100%);
+  -webkit-filter: grayscale(100%); */
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: x-large;
+  font-weight: 900;
+  color: white;
+  text-shadow: rgb(0, 0, 0) 1px 0 10px;
+}
+
+.box3 > *:nth-child(3) {
+  background-image: url("./miami.jpeg"); 
+  height: 200px; 
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+  /* filter: grayscale(100%);
+  -webkit-filter: grayscale(100%); */
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: x-large;
+  font-weight: 900;
+  color: white;
+  text-shadow: rgb(0, 0, 0) 1px 0 10px;
+}
+
