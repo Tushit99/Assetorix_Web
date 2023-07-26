@@ -22,6 +22,12 @@
     margin: auto; 
 }
 
+/* select city css */
+
+.select_city *{ 
+    color: black; 
+}
+
 /* top section end */
 
 .topbox>*:nth-child(1){
@@ -64,6 +70,8 @@
     align-items: center;  
     
 } 
+
+
 
 
 

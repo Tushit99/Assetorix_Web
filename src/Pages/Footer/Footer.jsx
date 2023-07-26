@@ -8,14 +8,14 @@ import {
 import React from "react";
 import Logo from "../../components/Logo/Logo";
 import style from "./Footer.module.css";
-import {
-  BsArrowRight,
+import { 
   BsFacebook,
   BsInstagram,
   BsTwitter,
 } from "react-icons/bs";
 import { BiLogoLinkedin } from "react-icons/bi";
-import { IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowForward } from "react-icons/io"; 
+import insta from "./insta.png"; 
 
 const Footer = () => {
   return (
@@ -70,7 +70,7 @@ const Footer = () => {
         </Box>
         <Box py={4}>
           <Flex
-            align={"center"}
+            align={"center"} 
             _before={{
               content: '""',
               borderBottom: "1px solid",
@@ -107,7 +107,8 @@ const Footer = () => {
             <BsFacebook size={"24px"} />
           </h1>
           <h1>
-            <BsInstagram size={"24px"} />
+            <BsInstagram size={"24px"} className={style.insta_icon} />    
+            <img src={insta} alt="imstagram" className={style.insta_logo} width={"24px"} /> 
           </h1>
         </Box>
       </Box>

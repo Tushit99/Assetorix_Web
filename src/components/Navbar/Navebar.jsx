@@ -30,7 +30,7 @@ const Navebar = () => {
                     Buy
                 </Link>
                 <Link to={"/"} className={style.thin}>
-                    Rent
+                    Rent 
                 </Link>
                 <Link to={"/"} className={style.thin}>
                     Sale
@@ -49,9 +49,9 @@ const Navebar = () => {
                 <Popover>
                     <PopoverTrigger >
                         <Button
-                            padding={"0px"}
+                            padding={0} 
                             color={"white"}
-                            as={Button}
+                            as={Button} 
                             fontSize={"lg"}
                             backgroundColor={"unset"}
                             _hover={{ background: "unset" }}

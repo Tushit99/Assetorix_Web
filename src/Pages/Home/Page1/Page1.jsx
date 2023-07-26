@@ -42,12 +42,12 @@ const Page1 = () => {
                             <div>
                                 <Select
                                     size="md"
-                                    backgroundColor={"rgb(46,49,146)"}
-                                    color={"white"}
-                                    outline={0}
+                                    backgroundColor={"rgb(46,49,146)"} 
+                                    color={"white"} 
                                     fontSize={{ base: "sm", lg: "lg" }}
                                     boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}
-                                    style={{ borderradius: "20px" }}
+                                    style={{ borderradius: "20px" }} 
+                                    className={style.select_city}
                                     border={0}
                                 >
                                     <option value="delhi" >

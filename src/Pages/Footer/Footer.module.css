@@ -88,6 +88,10 @@
   transform: scale(1.2);
 }
 
+.insta_logo{ 
+  display: none;  
+}
+
 .contact h1:nth-child(1):hover {
   color: rgb(18, 107, 196);
 }
@@ -100,10 +104,14 @@
   color: #4267b2;
 }
 
-.contact h1:nth-child(4):hover {
-  /* color: transparent; */
-  color: red;
+.contact h1:nth-child(4):hover .insta_icon{
+  display: none; 
 }
+
+.contact h1:nth-child(4):hover .insta_logo{
+  display: flex;  
+}
+
 
 .location_detail {
   position: absolute;

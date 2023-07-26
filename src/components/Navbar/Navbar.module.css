@@ -36,7 +36,8 @@
   position: relative;  
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px; 
-  color: white;
+  color: white; 
+  margin-right: -30px ;
   font-weight: bolder; 
   padding: 6px 34px 6px 20px;  
 }
@@ -81,7 +82,7 @@
 .box_cs{
     display: grid; 
     text-align: left; 
-    color: black; 
+    color: rgb(61, 55, 55);  
     font-weight: 400;   
     margin: 0; 
     padding: 0; 
@@ -89,7 +90,6 @@
 
 .box_cs>*{
     padding: 6px 10px;   
-    color: rgb(241,241,241); 
 }
 
 .box_cs>*:hover{
