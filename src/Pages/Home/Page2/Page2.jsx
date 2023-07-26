@@ -38,7 +38,7 @@ const Page2 = () => {
           DISCOVER YOUR PROPERTY IN
         </Heading>
         <Heading as="h3" size="xl">
-          POPULAR NORTH AMARICAN CITIES
+          POPULAR NORTH AMERICAN CITIES
         </Heading>
         <Grid
           className={style.box3}

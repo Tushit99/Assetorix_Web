@@ -31,7 +31,7 @@ const TopDevelopers = () => {
   return ( 
     <div>
       <div className={style.top_dev} >
-        <h1> TOP DEVELOPER IN INDIA </h1>
+        <h1> TOP DEVELOPERS IN INDIA </h1>
         <div className={style.devloper}>
           <Box>
             <img src={dlf} alt="dlfimg" />
@@ -80,7 +80,7 @@ const TopDevelopers = () => {
         <button className={style.seeall}>SEE ALL</button>
       </div>
       <div className={style.top_dev} >
-        <h1> TOP DEVELOPER IN AMARICA </h1>
+        <h1> TOP DEVELOPERS IN AMERICA (EAST COAST) </h1>
         <div className={style.devloper}>
           <Box>
             <img src={baine} alt="baineimg" />

@@ -123,7 +123,62 @@
   border: 2px solid black; 
 } */
 
-@media screen and (min-width: 100px) and (max-width: 980px) {
+@media screen and (min-width: 550px) and (max-width: 980px) {
+  .top_navbar > * {
+    flex: 1; 
+  }
+
+  .top_navbar > div:nth-child(1) {
+    display: flex;
+  }
+
+  .login_data>*:nth-child(2){
+    display: none;
+  }
+  .login_data>*:nth-child(3){
+    display: none;
+  }
+  .login_data>*:nth-child(4){
+    display: none;
+  }
+
+  .logo {
+    padding: 0;
+    display: flex; 
+    align-items: center; 
+    justify-content: start;   
+    /* border: 2px solid black;  */
+  } 
+
+  .top_navbar{
+    display: grid; 
+    grid-template-areas: "ham logo country login";
+    height: fit-content;   
+    height: 50px; 
+  }
+
+  .hamburger{
+    display: flex; 
+    align-items:  center; 
+    justify-content: center; 
+  }
+
+  .logo img {
+    width: 120px;    
+  } 
+
+  .country *{
+    width: 90px;
+    border: 2px solid blue; 
+  }
+
+  .country{
+    width: 90px; 
+    padding: 0; 
+  }
+}
+
+@media screen and (min-width: 100px) and (max-width: 550px) {
   .top_navbar > * {
     flex: 1; 
   }
