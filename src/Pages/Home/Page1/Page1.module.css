@@ -1,8 +1,47 @@
 
+.pagetop{
+    position: relative; 
+    min-height: 100vh; 
+}
+
+.video_panal{
+    max-height: 100vh ; 
+    overflow: hidden;  
+    position: absolute;  
+    width: 100%; 
+    object-fit: cover;   
+}
+
 .topbox{
     position: relative; 
     height: 95vh; 
     /* border: 2px solid green;   */
+}
+
+/* buy */  
+
+.buy{ 
+    display: flex; 
+    flex-wrap: wrap; 
+    align-items: center;   
+    text-align: justify;    
+    gap: 10px; 
+    margin: 20px 0;
+}
+
+.buy *{
+    font-size: small;   
+    background-color: white; 
+    box-shadow: rgba(101, 148, 70, 0.25) 0px 30px 60px -12px inset, rgba(85, 165, 81, 0.3) 0px 18px 36px -18px inset;
+    padding: 2px 8px; 
+    color: rgb(75, 70, 70); 
+    border-radius: 10px; 
+}
+
+.start_btn{
+    width: 100%; 
+    background-color: var(--main-one); 
+    color: white; 
 }
 
 /* top button */

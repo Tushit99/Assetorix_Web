@@ -15,14 +15,11 @@ const Product = ({ id, img, name, location, price,page }) => {
                 <h2>{name} </h2>
                 <h3>Price: ₹{price}</h3>
                 <h3>
-                    <GrLocation color={"rgb(255, 0, 0)"} /> {location}
+                    <GrLocation color={"rgb(0, 153, 255)"} /> {location}
                 </h3>  
-                <Button 
-                    rightIcon={<ViewIcon />}
-                    backgroundColor={"rgb(245, 101, 101)"} 
-                    color={"white"}> 
-                    VIEW DETAILS
-                </Button>
+                <button style={{backgroundColor:"rgb(0, 153, 255)",width:"300px",borderRadius:"10px",margin:"10px auto",color:"#fffff",fontWeight:"500",padding:"6px auto"}}>   
+                    See Detail
+                </button>
             </div>
         </Link>
     );

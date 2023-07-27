@@ -14,8 +14,8 @@ import { Link } from "react-router-dom";
 //     Select,
 // } from "@chakra-ui/react";
 import Hamburger from "../Hamburger/Hamburger";
-import { Select } from "@chakra-ui/react"; 
-import {BiSolidUserDetail} from "react-icons/bi"
+import { Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Button } from "@chakra-ui/react";
+import { BiSolidUserDetail } from "react-icons/bi"
 
 const Navebar = () => {
     return (
@@ -39,18 +39,34 @@ const Navebar = () => {
                     <Link>Contact</Link>
                 </div>
                 <div className={style.login_box}>
-                    <Link> <BiSolidUserDetail size={"20px"} color="blue" /> </Link> 
+                    <Link> <BiSolidUserDetail size={"20px"} color="blue" /> </Link>
                 </div>
             </div>
             <div className={style.nav_bottom}>
-                <Link>Buy</Link>
-                <Link>Rent</Link>
-                <Link>Sale</Link>
+                <Link to={"/buy"}>Buy</Link>
+                <Link>Sell</Link>
                 <Link>Home Loans</Link>
+                <Link>Rent</Link>
                 <Link>Advertise</Link>
                 <Link>Agent Finder</Link>
-                <Link>Help</Link>
-                <Link> Corporate Services</Link>
+                <Popover >
+                    <PopoverTrigger>
+                        <button>Corporate Services</button>
+                    </PopoverTrigger>
+                    <PopoverContent>
+                        <PopoverArrow />
+                        <PopoverBody className={style.option} >
+                            <Link to={"/Construction_Management"}>Construction Management</Link>
+                            <Link to={"/partner"}>Partner with Us</Link>
+                            <Link to={"/Property_Marketing"}>Property Marketing</Link>
+                            <Link to={"/acquisitions_and_dispositions"}>Acquisitions & Dispositions</Link>
+                            <Link to={"/consulting"}>Consulting</Link>
+                            <Link to={"/marketresearch"}>Market Research</Link>
+                            <Link to={"/portfolio_planning"}>Property & Portfolio Sales</Link> 
+                            <Link to={"/usa_real_state"} > USA Real State</Link> 
+                        </PopoverBody>
+                    </PopoverContent>
+                </Popover> 
             </div>
         </div>
     );

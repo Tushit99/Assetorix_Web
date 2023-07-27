@@ -1,0 +1,31 @@
+.buy_top{
+    padding: 60px 0; 
+    border: 2px solid black;  
+    display: flex; 
+}
+
+
+.sort{
+    flex: 2;
+    display: flex ;  
+    align-items: baseline; 
+    justify-content: flex-start; 
+    flex-direction: column; 
+    gap: 20px;  
+    text-align: left;  
+}
+
+
+.contain{
+    display: grid; 
+    grid-template-columns: repeat(2,1fr); 
+    width: 90%;  
+    gap: 30px; 
+    flex: 7;
+    margin: auto;  
+}
+
+.contain img{
+    width: 100%; 
+}
+

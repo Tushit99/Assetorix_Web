@@ -1,0 +1,23 @@
+.link_box{
+    display: flex; 
+    flex-direction: column;  
+    text-align: left;  
+    /* border: 2px solid black;  */
+    position: absolute; 
+    top: 0; 
+    left: 0;  
+    right: 0;  
+    gap: 6px; 
+}
+
+.link_box>*{
+    padding: 2px 6px;  
+    font-size: large;  
+} 
+
+.link_box>*:hover{
+    background-color: rgb(219, 238, 255);
+}
+
+ 
+
