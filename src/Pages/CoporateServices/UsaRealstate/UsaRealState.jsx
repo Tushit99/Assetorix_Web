@@ -1,8 +1,9 @@
 import { Box, Heading, ListItem, Text, UnorderedList } from "@chakra-ui/react";
 import React from "react";
 import { Link } from "react-router-dom";
-import style from "./UsaRealState.module.css"; 
-import img from "./American-Housing-Market.webp"; 
+import style from "./UsaRealState.module.css";
+import img from "./American-Housing-Market.webp";
+import ServiceLink from "../Links/ServiceLink";
 
 const UsaRealState = () => {
     return (
@@ -87,23 +88,12 @@ const UsaRealState = () => {
                     {/* point - 3 */}
                     <ListItem>Does the foreign owner seek to keep the identity of the owner confidential?</ListItem>
                     {/* point - 4 */}
-                    <ListItem>Does the owner seek “asset protection” i.e. to shield the property from the claims of creditors?</ListItem> 
+                    <ListItem>Does the owner seek “asset protection” i.e. to shield the property from the claims of creditors?</ListItem>
                 </UnorderedList>
 
             </Box>
             <Box padding={"0 40px"} textAlign={"left"} position={"relative"} flex={2}>
-                <Box className={style.link_box}>
-                    <Link to={"/Construction_Management"}>Construction Management</Link>
-                    <Link to={"/partner"}>Partner with Us</Link>
-                    <Link to={"/Property_Marketing"}>Property Marketing</Link>
-                    <Link to={"/acquisitions_and_dispositions"}>
-                        Acquisitions & Dispositions
-                    </Link>
-                    <Link to={"/consulting"}>Consulting</Link>
-                    <Link to={"/marketresearch"}>Market Research</Link>
-                    <Link to={"/portfolio_planning"}>Property & Portfolio Sales</Link> 
-                    <Link to={"/usa_real_state"} > USA Real State</Link> 
-                </Box>
+                <ServiceLink />
             </Box>
         </Box>
     );

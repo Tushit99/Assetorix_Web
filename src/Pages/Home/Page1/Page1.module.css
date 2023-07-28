@@ -6,6 +6,7 @@
 
 .video_panal{
     max-height: 100vh ; 
+    height: 100vh;   
     overflow: hidden;  
     position: absolute;  
     width: 100%; 

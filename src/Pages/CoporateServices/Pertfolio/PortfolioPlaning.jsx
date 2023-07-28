@@ -3,6 +3,7 @@ import style from "./PortfolioPlaning.module.css";
 import { Box, Divider, Heading, ListItem, Text, UnorderedList } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import img from "./Portfolio-1024x342.jpg";
+import ServiceLink from '../Links/ServiceLink';
 
 const PortfolioPlaning = () => {
     return (
@@ -42,26 +43,18 @@ const PortfolioPlaning = () => {
                 <Text textAlign={"justify"}>
                     If, on the basis of our analysis, you decide to sell your portfolio in total or in parts, we can organise this as your partner in a well-structured and decisive way.
                 </Text>
-                <UnorderedList margin={"20px"} textAlign={"justify"}>  
-                    <ListItem>Strategic hold/sell advice for your property portfolio, including short- and long-term value assessment and feasibility</ListItem> 
+                <UnorderedList margin={"20px"} textAlign={"justify"}>
+                    <ListItem>Strategic hold/sell advice for your property portfolio, including short- and long-term value assessment and feasibility</ListItem>
                     {/* 1 */}
-                    <ListItem>Detailed analysis of the commercial aspects of your buildings, and factors that increase or reduce the value</ListItem>  
+                    <ListItem>Detailed analysis of the commercial aspects of your buildings, and factors that increase or reduce the value</ListItem>
                     {/* 2 */}
-                    <ListItem>Opportunities in the international market from a global perspective up-to-date, highly qualified expertise, enabling us to give you a well-substantiated, clear picture within a short period of time</ListItem> 
+                    <ListItem>Opportunities in the international market from a global perspective up-to-date, highly qualified expertise, enabling us to give you a well-substantiated, clear picture within a short period of time</ListItem>
                     {/* 3 */}
                 </UnorderedList>
                 <Text textAlign={"justify"} as='h3' size='sm'> Our Real-Estate  web-portal is www.assetorix.com </Text>
             </Box>
             <Box padding={"0 40px"} textAlign={"left"} position={"relative"} flex={2}>
-                <Box className={style.link_box}>
-                    <Link to={"/Construction_Management"} >Construction Management</Link>
-                    <Link to={"/partner"} >Partner with Us</Link>
-                    <Link to={"/Property_Marketing"} >Property Marketing</Link>
-                    <Link to={"/acquisitions_and_dispositions"} >Acquisitions & Dispositions</Link>
-                    <Link to={"/consulting"} >Consulting</Link>
-                    <Link to={"/marketresearch"} >Market Research</Link>
-                    <Link to={"/portfolio_planning"} >Property & Portfolio Sales</Link>
-                </Box>
+                <ServiceLink />
             </Box>
         </Box>
     )

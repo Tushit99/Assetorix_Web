@@ -33,8 +33,8 @@ const Hamburger = () => {
                     <DrawerCloseButton />
                     <DrawerHeader>
                         <div onClick={onClose}>
-                            <Logo />
-                        </div>
+                            <Logo />  
+                        </div> 
                     </DrawerHeader>
 
                     <DrawerBody className={style.links} display={"flex"} flexDirection={"column"} gap={3} >

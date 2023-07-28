@@ -9,6 +9,7 @@ import {
     Tab,
     TabPanels,
     TabPanel,
+    TabIndicator,
 } from "@chakra-ui/react";
 import React from "react";
 import style from "./construction.module.css";
@@ -31,30 +32,29 @@ const Construction = () => {
                 fontSize={"lg"}
                 padding={"20px"}
             >
-                <Text textAlign={"justify"}>
+                <Text textAlign={"justify"} fontSize={"sm"}>
                     Assetorex provides state-of-the-art construction management services
                     for all project types and delivery methods. Project delivery method
                     selection depends, among other factors, upon the Client’s risk
                     tolerance, in-house staff capabilities, and best method for realizing
                     cost, schedule, and quality goals for your specific project.
-                    www.assetorix.com
+                    www.assetorix.com 
                 </Text>
 
                 {/* pages */}
                 <Tabs display={"flex"} >
-                    <TabList
-                        display={"flex"}
-                        flexDirection={"column"} 
-                        className={style.option_box}
-                        backgroundColor={"rgb(244,244,244)"}  
+                    <TabList 
+                        display={"flex"}  
+                        flexDirection={"column"}  
+                        fontSize={"sm"}   
                     >
-                        <Tab>Construction Management</Tab>
-                        <Tab>Construction Management As Agent</Tab>
-                        <Tab>Construction Management- Variants</Tab>
-                        <Tab>Pre-Construction Services / Consulting Services</Tab>
-                        <Tab>Program Management</Tab>
-                        <Tab>Lump-Sum Contracting</Tab>
-                    </TabList>
+                        <Tab _selected={{borderLeft:"3px solid rgb(230,37,82)",backgroundColor:"white"}} >Construction Management</Tab>
+                        <Tab _selected={{borderLeft:"3px solid rgb(230,37,82)",backgroundColor:"white"}} >Construction Management As Agent</Tab>
+                        <Tab _selected={{borderLeft:"3px solid rgb(230,37,82)",backgroundColor:"white"}} >Construction Management- Variants</Tab>
+                        <Tab _selected={{borderLeft:"3px solid rgb(230,37,82)",backgroundColor:"white"}} >Pre-Construction Services / Consulting Services</Tab>
+                        <Tab _selected={{borderLeft:"3px solid rgb(230,37,82)",backgroundColor:"white"}} >Program Management</Tab>
+                        <Tab _selected={{borderLeft:"3px solid rgb(230,37,82)",backgroundColor:"white"}} >Lump-Sum Contracting</Tab>
+                    </TabList> 
 
                     <TabPanels className={style.management_box}>
                         <TabPanel>

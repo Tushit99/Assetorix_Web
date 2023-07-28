@@ -3,6 +3,7 @@ import React from 'react'
 import img from "./Consulting-1024x342.jpg"; 
 import style from "./Consulting.module.css"; 
 import { Link } from 'react-router-dom';
+import ServiceLink from '../Links/ServiceLink';
 
 const Consulting = () => {
     return (
@@ -56,15 +57,7 @@ const Consulting = () => {
                 <Text  fontSize={"sm"} m={"10px 0"} >Our Real-Estate  web-portal is www.assetorix.com</Text>
             </Box>
             <Box padding={"0 40px"} textAlign={"left"} position={"relative"} flex={2}>
-                <Box className={style.link_box}>
-                    <Link to={"/Construction_Management"} >Construction Management</Link>
-                    <Link to={"/partner"} >Partner with Us</Link>
-                    <Link to={"/Property_Marketing"} >Property Marketing</Link>
-                    <Link to={"/acquisitions_and_dispositions"} >Acquisitions & Dispositions</Link>
-                    <Link to={"/consulting"} >Consulting</Link>
-                    <Link to={"/marketresearch"} >Market Research</Link>
-                    <Link to={"/portfolio_planning"} >Property & Portfolio Sales</Link>
-                </Box>
+            <ServiceLink /> 
             </Box>
         </Box>
     )

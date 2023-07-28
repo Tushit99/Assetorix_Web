@@ -7,6 +7,7 @@ import img3 from "./img3.png";
 import img4 from "./Show-home-bedroom_ACPL3.jpg"
 import { Link } from 'react-router-dom';
 import style from "./Property.module.css";
+import ServiceLink from '../Links/ServiceLink';
 
 
 const PropertyMarketing = () => {
@@ -265,15 +266,7 @@ const PropertyMarketing = () => {
         </Text>
       </Box>
       <Box padding={"0 40px"} textAlign={"left"} position={"relative"} flex={2}>
-        <Box className={style.link_box}>
-          <Link to={"/Construction_Management"} >Construction Management</Link>
-          <Link to={"/partner"} >Partner with Us</Link>
-          <Link to={"/Property_Marketing"} >Property Marketing</Link>
-          <Link to={"/acquisitions_and_dispositions"} >Acquisitions & Dispositions</Link>
-          <Link to={"/consulting"} >Consulting</Link>
-          <Link to={"/marketresearch"} >Market Research</Link>
-          <Link to={"/portfolio_planning"} >Property & Portfolio Sales</Link>
-        </Box>
+        <ServiceLink />
       </Box>
     </Box>
   );
