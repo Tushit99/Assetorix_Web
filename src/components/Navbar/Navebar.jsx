@@ -1,20 +1,9 @@
 import React from "react";
 import Logo from "../Logo/Logo";
 import style from "./Navbar.module.css";
-import { Link } from "react-router-dom";
-// import { PiUserListLight } from "react-icons/pi"; 
-// import {
-//     Button,
-//     Popover,
-//     PopoverArrow,
-//     PopoverBody,
-//     PopoverContent,
-//     PopoverHeader,
-//     PopoverTrigger,
-//     Select,
-// } from "@chakra-ui/react";
+import { Link } from "react-router-dom"; 
 import Hamburger from "../Hamburger/Hamburger";
-import { Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Button } from "@chakra-ui/react";
+import { Popover, PopoverArrow, PopoverBody, PopoverContent, PopoverHeader, PopoverTrigger, Button } from "@chakra-ui/react";
 import { BiSolidUserDetail } from "react-icons/bi"
 
 const Navebar = () => {
@@ -29,7 +18,7 @@ const Navebar = () => {
                 </div>
                 <div className={style.login_data}>
                     <div className={style.country} >
-                        <select style={{border:"0px",outline:"0px"}}>
+                        <select style={{ border: "0px", outline: "0px" }}>
                             <option value="india">India</option>
                             <option value="usa">USA</option>
                         </select>
@@ -39,7 +28,22 @@ const Navebar = () => {
                     <Link>Contact</Link>
                 </div>
                 <div className={style.login_box}>
-                    <Link> <BiSolidUserDetail size={"20px"} color="blue" /> </Link>
+                    <Popover>
+                        <PopoverTrigger>
+                            <Button>
+                                {/* icon */}
+                                <BiSolidUserDetail size={"20px"} color="blue" />
+                            </Button>
+                        </PopoverTrigger>
+                        <PopoverContent>
+                            <PopoverArrow />
+                            <PopoverHeader>Welcome to Assetorix</PopoverHeader>
+                            <PopoverBody display={"flex"} justifyContent={"space-around"} alignItems={"center"}>
+                                <Link className={style.logbtn} to={"/login"}>Login</Link>
+                                <Link className={style.logbtn} to={"/signup"}>Signin</Link>
+                            </PopoverBody>
+                        </PopoverContent>
+                    </Popover>
                 </div>
             </div>
             <div className={style.nav_bottom}>
@@ -60,13 +64,13 @@ const Navebar = () => {
                             <Link to={"/partner"}>Partner with Us</Link>
                             <Link to={"/Property_Marketing"}>Property Marketing</Link>
                             <Link to={"/acquisitions_and_dispositions"}>Acquisitions & Dispositions</Link>
-                            <Link to={"/consulting"}>Consulting</Link>
+                            {/* <Link to={"/consulting"}>Consulting</Link> */}
                             <Link to={"/marketresearch"}>Market Research</Link>
-                            <Link to={"/portfolio_planning"}>Property & Portfolio Sales</Link> 
-                            <Link to={"/usa_real_state"} > USA Real State</Link> 
+                            <Link to={"/portfolio_planning"}>Property & Portfolio Sales</Link>
+                            <Link to={"/usa_real_state"} > USA Real State</Link>
                         </PopoverBody>
                     </PopoverContent>
-                </Popover> 
+                </Popover>
             </div>
         </div>
     );

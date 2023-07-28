@@ -1,11 +1,9 @@
 import { Box, Heading, Text } from '@chakra-ui/react';
 import React from 'react'
-import img from "./Consulting-1024x342.jpg";
-import style from "./Consulting.module.css";
-import { Link } from 'react-router-dom';
+import img from "./Consulting-1024x342.jpg"; 
 import ServiceLink from '../Links/ServiceLink';
 
-const Consulting = () => {
+const ConsultingPage = () => {
     return (
         <Box w={"90%"} margin={"auto"} paddingTop={"70px"} display={"flex"} gap={10}>
             <Box textAlign={"justify"} w={"70%"} flex={7} padding={"0px auto"}>
@@ -63,4 +61,4 @@ const Consulting = () => {
     )
 }
 
-export default Consulting; 
+export default ConsultingPage; 

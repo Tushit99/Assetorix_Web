@@ -48,7 +48,8 @@ const Page1 = () => {
                     color={"white"}
                     fontWeight={700}
                     lineHeight={1.2}
-                    textAlign={"left"}
+                    textAlign={"left"} 
+                    userSelect={"none"} 
                     textShadow={"#000000 3px 4px 20px"}
                     fontSize={useBreakpointValue({ base: "4xl", md: "6xl" })}
                 >

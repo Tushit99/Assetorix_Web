@@ -36,6 +36,18 @@
   grid-area: logo;
 }
 
+.logbtn{
+  border: 1px solid blue; 
+  padding: 4px 10px; 
+  cursor: pointer; 
+  border-radius: 10px; 
+} 
+
+.logbtn:hover{
+  background-color: rgb(46,49,146); 
+  color: white; 
+}
+
 .logo img {
   top: 20%;
 }

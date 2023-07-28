@@ -1,15 +1,18 @@
 .logo {
   font-family: cursive;
   font-size: medium;
-  font-weight: bold;   
-  padding: 0px ;  
+  font-weight: bold;
+  padding: 0px;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
 }
 
-.logo img{
-  text-align: left;     
-  width: 200px; 
-  transform: scale(1.3);    
-  object-fit: contain;   
+.logo img {
+  text-align: left;
+  width: 200px;
+  transform: scale(1.3);
+  object-fit: contain;
   /* max-height: 45px;  */
 }
 
@@ -17,19 +20,19 @@
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   grid-template-rows: repeat(24, auto);
-  gap: 10px;  
+  gap: 10px;
 }
 
 .ham_body > * {
   width: 100%;
   background-color: var(--color-btn);
-  display: flex; 
+  display: flex;
   align-items: center;
   justify-content: left;
   padding: 0 14px;
   border-radius: 4px;
-  color: white; 
-  transition: all 0.5s ;
+  color: white;
+  transition: all 0.5s;
 }
 
 /* hamburger Animation  */
@@ -40,15 +43,15 @@
   transform: translateY(-0.25em);
 } */
 
-.ham_body > *:hover {    
+.ham_body > *:hover {
   box-shadow: 0 0.5em 0.5em -0.4em var(--color-green);
-  transform: translateX(0.65em);  
+  transform: translateX(0.65em);
   /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;  */
 }
 
-.ham_body > *:active {    
-    box-shadow: 0 0.5em 0.5em -0.4em var(--color-green);
-    transform: translate(0em);  
-    /* transform: translateY(-0.2em);   */
-    /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;  */
-  }
+.ham_body > *:active {
+  box-shadow: 0 0.5em 0.5em -0.4em var(--color-green);
+  transform: translate(0em);
+  /* transform: translateY(-0.2em);   */
+  /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;  */
+}

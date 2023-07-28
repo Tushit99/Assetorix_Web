@@ -16,11 +16,11 @@ import Construction from '../../Pages/CoporateServices/ConstructionManagement/Co
 import PropertyMarketing from '../../Pages/CoporateServices/PropertyMarkiting/PropertyMarketing'
 import Buy from '../../Pages/buy/Buy'
 import Acquisition from '../../Pages/CoporateServices/Acquisition/Acquisition'
-import Partner from '../../Pages/CoporateServices/PartnerWithUs/Partner' 
-import Consulting from "../../Pages/CoporateServices/Consulting/Consulting"
+import Partner from '../../Pages/CoporateServices/PartnerWithUs/Partner'  
 import MarketResearch from '../../Pages/CoporateServices/MarketResearch/MarketResearch'
 import PortfolioPlaning from '../../Pages/CoporateServices/Pertfolio/PortfolioPlaning'
-import UsaRealState from '../../Pages/CoporateServices/UsaRealstate/UsaRealState'
+import UsaRealState from '../../Pages/CoporateServices/UsaRealstate/UsaRealState'  
+// import ConsultingPage from '../../Pages/CoporateServices/Consulting/consulting'
  
 const MainRoute = () => {
   return (
@@ -51,15 +51,13 @@ const MainRoute = () => {
         <Route path='/pune/:id' element={<ProductDetail />} />
 
         {/* buy rent sale */} 
-        <Route path='/buy' element={<Buy />} />  
-        {/* <Route path='/rent' element={< />} />   */}
-        {/* <Route path='/sale' element={<Buy />} />   */}
+        <Route path='/buy' element={<Buy />} />   
 
         <Route path='/Construction_Management' element={<Construction />} />
         <Route path='/Property_Marketing' element={<PropertyMarketing />} /> 
         <Route path='/partner' element={<Partner />} /> 
         <Route path='/acquisitions_and_dispositions' element={<Acquisition />} />  
-        <Route path='/consulting' element={<Consulting />} /> 
+        {/* <Route path='/consulting' element={<ConsultingPage />} />  */}
         <Route path='/market_research' element={<MarketResearch />} />   
         <Route path='/portfolio_planning' element={<PortfolioPlaning />} /> 
         <Route path='/usa_real_state' element={<UsaRealState />} /> 
