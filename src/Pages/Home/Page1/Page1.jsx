@@ -94,7 +94,7 @@ const Page1 = () => {
                                     _hover={{color:"white"}}  
                                     >Buy</Button>
                                 </PopoverTrigger>
-                                <PopoverContent w={"400px"} >
+                                <PopoverContent w={{base:"320px",md:"400px"}} > 
                                     <PopoverArrow />
                                     <PopoverCloseButton />
                                     <PopoverHeader>
