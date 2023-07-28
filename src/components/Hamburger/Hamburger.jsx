@@ -58,24 +58,20 @@ const Hamburger = () => {
                         color={"black"}
                         gap={3}
                     > 
-                        <Link to={"/about"} onClick={onClose}>
-                            {" "}
-                            About{" "}
+                        <Link to={"/about"} onClick={onClose}> 
+                            About
                         </Link>
                         <Link to={"/buy"} onClick={onClose}>
-                            {" "}
-                            Buy{" "}
+                            Buy
+                        </Link>
+                        <Link to={"#"} onClick={onClose}> 
+                            Rent
+                        </Link>
+                        <Link to={"#"} onClick={onClose}> 
+                            Sell
                         </Link>
                         <Link to={"#"} onClick={onClose}>
-                            {" "}
-                            Rent{" "}
-                        </Link>
-                        <Link to={"#"} onClick={onClose}>
-                            {" "}
-                            Sell{" "}
-                        </Link>
-                        <Link to={"#"} onClick={onClose}>
-                            Home Loans{" "}
+                            Home Loans
                         </Link>
                         <Link to={"#"} onClick={onClose}>
                             Advertise
@@ -122,8 +118,7 @@ const Hamburger = () => {
                             </MenuList>
                         </Menu>
                         {/* ======= Contact =======  */}  
-                        <Link to={"#"} onClick={onClose}>
-                            {" "}
+                        <Link to={"#"} onClick={onClose}> 
                             Contact
                         </Link>
                     </DrawerBody>

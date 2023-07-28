@@ -44,7 +44,7 @@ const MarketResearch = () => {
                     Our Real-Estate  web-portal is www.assetorix.com
                 </Text>
             </Box>
-            <Box padding={"0 40px"} textAlign={"left"} position={"relative"} flex={2}>
+            <Box padding={"0 40px"} display={{base:"none",md:"block"}}  textAlign={"left"} position={"relative"} flex={2}>
                 <ServiceLink />
             </Box>
         </Box>

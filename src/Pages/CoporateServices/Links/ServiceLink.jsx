@@ -11,7 +11,7 @@ const ServiceLink = () => {
             <Link to={"/Property_Marketing"} >Property Marketing</Link>
             <Link to={"/acquisitions_and_dispositions"} >Acquisitions & Dispositions</Link>
             <Link to={"/consulting"} >Consulting</Link>
-            <Link to={"/marketresearch"} >Market Research</Link>
+            <Link to={"/market_research"} >Market Research</Link>
             <Link to={"/portfolio_planning"} >Property & Portfolio Sales</Link>
         </Box>
     )
