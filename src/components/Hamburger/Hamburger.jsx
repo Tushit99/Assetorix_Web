@@ -1,5 +1,4 @@
-import {
-    Box,
+import {  
     Button,
     Drawer,
     DrawerBody,
@@ -10,8 +9,7 @@ import {
     Menu,
     MenuButton,
     MenuItem,
-    MenuList,
-    Select,
+    MenuList, 
     useDisclosure,
 } from "@chakra-ui/react";
 import { useRef } from "react";
@@ -87,7 +85,7 @@ const Hamburger = () => {
                         </Link>
                         {/* ======= Menu ====== */}
                         <Menu>
-                            <MenuButton as={Button}  rightIcon={<ChevronUpIcon />}>
+                            <MenuButton as={Button} textAlign={"left"} backgroundColor={"white"} rightIcon={<ChevronUpIcon />}>
                                 Actions
                             </MenuButton>
                             <MenuList > 
@@ -135,4 +133,5 @@ const Hamburger = () => {
     );
 };
 
-export default Hamburger;
+export default Hamburger; 
+
