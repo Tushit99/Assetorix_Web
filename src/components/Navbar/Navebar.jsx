@@ -28,8 +28,8 @@ const Navebar = () => {
                     <Logo />
                 </div>
                 <div className={style.login_data}>
-                    <div className={style.country}>
-                        <select>
+                    <div className={style.country} >
+                        <select style={{border:"0px",outline:"0px"}}>
                             <option value="india">India</option>
                             <option value="usa">USA</option>
                         </select>

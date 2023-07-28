@@ -18,6 +18,7 @@ import {
     TabPanel,
     TabList,
     TabPanels,
+    Checkbox,
 } from "@chakra-ui/react";
 import style from "./Page1.module.css";
 // import img from "./back.webp"; 
@@ -51,8 +52,7 @@ const Page1 = () => {
                     textShadow={"#000000 3px 4px 20px"}
                     fontSize={useBreakpointValue({ base: "4xl", md: "6xl" })}
                 >
-                    "I Think" to "I Own"
-                    {/* Want I Think to I Own Status ? */}
+                    “I Think” to “I Own”
                 </Text>
                 <Box w={"100%"}>
                     <div className={style.fields}>
@@ -61,11 +61,13 @@ const Page1 = () => {
                                 size="md"
                                 backgroundColor={"rgb(46,49,146)"}
                                 color={"white"}
+                                outline={0}
                                 fontSize={{ base: "sm", lg: "lg" }}
                                 boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}
-                                style={{ borderradius: "20px" }}
+                                style={{ borderradius: "20px" }} 
+                                fontWeight={"500"}
                                 className={style.select_city}
-                                border={0}
+                                border={0} 
                             >
                                 <option value="delhi" >
                                     Delhi
@@ -88,13 +90,13 @@ const Page1 = () => {
                             </Select>
                             <Popover>
                                 <PopoverTrigger>
-                                    <Button 
-                                    backgroundColor={"rgb(110, 137, 226)"} 
-                                    color={"white"} 
-                                    _hover={{color:"white"}}  
+                                    <Button
+                                        backgroundColor={"rgb(110, 137, 226)"}
+                                        color={"white"}
+                                        _hover={{ color: "white" }}
                                     >Buy</Button>
                                 </PopoverTrigger>
-                                <PopoverContent w={{base:"320px",md:"400px"}} > 
+                                <PopoverContent w={{ base: "320px", md: "400px" }} >
                                     <PopoverArrow />
                                     <PopoverCloseButton />
                                     <PopoverHeader>
@@ -102,42 +104,72 @@ const Page1 = () => {
                                     </PopoverHeader>
                                     <PopoverBody>
                                         {/* one */}
-                                        <Tabs variant='enclosed'> 
+                                        <Tabs variant='enclosed'>
                                             <TabList>
                                                 <Tab>Residential</Tab>
                                                 <Tab>Commercial</Tab>
                                             </TabList>
                                             <TabPanels >
                                                 <TabPanel>
-                                                    <Box className={style.buy}> 
-                                                        <button>Flat/Apartment</button>
-                                                        <button>Independent House/villa</button>
-                                                        <button>Independent/builder Floor</button>
-                                                        <button>Plot/Land</button>
-                                                        <button>1 RK/ Studio Apartment</button>
-                                                        <button>Serviced Apartment</button>
-                                                        <button>Farmhouse</button>
-                                                        <button>other</button>
+                                                    <Box className={style.buy}>
+                                                        <Checkbox iconSize={'0px'} colorScheme={'green'}>
+                                                            Flat/Apartment
+                                                        </Checkbox>
+                                                        <Checkbox iconSize={'0px'} colorScheme={'green'}>
+                                                            Independent House/villa
+                                                        </Checkbox>
+                                                        <Checkbox iconSize={'0px'} colorScheme={'green'}>
+                                                            Independent/builder Floor
+                                                        </Checkbox>
+                                                        <Checkbox iconSize={'0px'} colorScheme={'green'}>
+                                                            Serviced Apartment
+                                                        </Checkbox>
+                                                        <Checkbox iconSize={'0px'} colorScheme={'green'}>
+                                                            Plot/Land
+                                                        </Checkbox>
+                                                        <Checkbox iconSize={'0px'} colorScheme={'green'}>
+                                                            1 RK/ Studio Apartment
+                                                        </Checkbox>
+                                                        <Checkbox iconSize={'0px'} colorScheme={'green'}>
+                                                            Farmhouse
+                                                        </Checkbox>
+                                                        <Checkbox iconSize={'0px'} colorScheme={'green'}>
+                                                            other
+                                                        </Checkbox>
                                                     </Box>
                                                     <Button className={style.start_btn}>Start Now</Button>
                                                 </TabPanel>
                                                 <TabPanel>
                                                     <Box className={style.buy}>
-                                                        <button>Office</button>
-                                                        <button>Retail</button>
-                                                        <button>Plot/Land</button>
-                                                        <button>Storage</button>
-                                                        <button>Industry</button>
-                                                        <button>Hospitality</button>
-                                                        <button>Other</button>
+                                                        <Checkbox size={"md"} color={"black"}>
+                                                            Office
+                                                        </Checkbox>
+                                                        <Checkbox >
+                                                            Retail
+                                                        </Checkbox>
+                                                        <Checkbox >
+                                                            Plot/Land
+                                                        </Checkbox>
+                                                        <Checkbox >
+                                                            Storage
+                                                        </Checkbox>
+                                                        <Checkbox >
+                                                            Industry
+                                                        </Checkbox>
+                                                        <Checkbox >
+                                                            Hospitality
+                                                        </Checkbox>
+                                                        <Checkbox >
+                                                            Other
+                                                        </Checkbox>
                                                     </Box>
                                                     <Button className={style.start_btn}>Start Now</Button>
-                                                </TabPanel> 
+                                                </TabPanel>
                                             </TabPanels>
                                         </Tabs>
                                     </PopoverBody>
-                                </PopoverContent>
-                            </Popover>
+                                </PopoverContent >
+                            </Popover >
                             <Button
                                 borderradius={"4px"}
                                 color={"white"}
@@ -145,9 +177,8 @@ const Page1 = () => {
                                 boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}
                                 fontSize={{ base: "sm", lg: "lg" }}
                                 backgroundColor={"rgb(94, 174, 248)"}
-                            // border={"1px solid black"}
-                            >
-                                Sale
+                            > 
+                                Sell
                             </Button>
                             <Button
                                 borderradius={"4px"}
@@ -160,14 +191,15 @@ const Page1 = () => {
                             >
                                 Rent
                             </Button>
-                        </div>
+                        </div >
                         <div>
                             <Select
                                 size="md"
                                 backgroundColor={"white"}
                                 color={"black"}
-                                fontSize={{ base: "10px", lg: "lg" }}
-                                outline={0}
+                                fontSize={{ base: "11px", lg: "lg" }}
+                                outline={0} 
+                                fontWeight={"md"}
                                 boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}
                                 style={{ borderradius: "20px" }}
                                 border={0}
@@ -197,11 +229,11 @@ const Page1 = () => {
                             />
                             <Button padding={0} m={"2px"}> <GrFormSearch size={"30px"} /> </Button>
                         </div>
-                    </div>
-                </Box>
-            </Box>
+                    </div >
+                </Box >
+            </Box >
             {/* </Box> */}
-        </div>
+        </div >
     );
 };
 

@@ -48,17 +48,17 @@ const Construction = () => {
                         flexDirection={"column"}  
                         fontSize={"sm"}   
                     >
-                        <Tab _selected={{borderLeft:"3px solid rgb(230,37,82)",backgroundColor:"white"}} >Construction Management</Tab>
-                        <Tab _selected={{borderLeft:"3px solid rgb(230,37,82)",backgroundColor:"white"}} >Construction Management As Agent</Tab>
-                        <Tab _selected={{borderLeft:"3px solid rgb(230,37,82)",backgroundColor:"white"}} >Construction Management- Variants</Tab>
-                        <Tab _selected={{borderLeft:"3px solid rgb(230,37,82)",backgroundColor:"white"}} >Pre-Construction Services / Consulting Services</Tab>
-                        <Tab _selected={{borderLeft:"3px solid rgb(230,37,82)",backgroundColor:"white"}} >Program Management</Tab>
-                        <Tab _selected={{borderLeft:"3px solid rgb(230,37,82)",backgroundColor:"white"}} >Lump-Sum Contracting</Tab>
+                        <Tab fontSize={{base:"sm",md:"md"}} textAlign={"left"} _selected={{borderLeft:"3px solid rgb(230,37,82)",backgroundColor:"white"}} >Construction Management</Tab>
+                        <Tab fontSize={{base:"sm",md:"md"}} textAlign={"left"} _selected={{borderLeft:"3px solid rgb(230,37,82)",backgroundColor:"white"}} >Construction Management As Agent</Tab>
+                        <Tab fontSize={{base:"sm",md:"md"}} textAlign={"left"} _selected={{borderLeft:"3px solid rgb(230,37,82)",backgroundColor:"white"}} >Construction Management- Variants</Tab>
+                        <Tab fontSize={{base:"sm",md:"md"}} textAlign={"left"} _selected={{borderLeft:"3px solid rgb(230,37,82)",backgroundColor:"white"}} >Pre-Construction Services / Consulting Services</Tab>
+                        <Tab fontSize={{base:"sm",md:"md"}} textAlign={"left"} _selected={{borderLeft:"3px solid rgb(230,37,82)",backgroundColor:"white"}} >Program Management</Tab>
+                        <Tab fontSize={{base:"sm",md:"md"}} textAlign={"left"} _selected={{borderLeft:"3px solid rgb(230,37,82)",backgroundColor:"white"}} >Lump-Sum Contracting</Tab>
                     </TabList> 
 
                     <TabPanels className={style.management_box}>
                         <TabPanel>
-                            <Heading as="h4" size="md">
+                            <Heading as="h4" size="md" margin={"10px 0"}>
                                 Construction Management
                             </Heading>
                             <Text textAlign={"justify"}>
@@ -67,7 +67,7 @@ const Construction = () => {
                                 converts to a Guaranteed Maximum Price (GMP) contract. Ametheus
                                 holds all sub-contracts and thus assumes performance risk.
                             </Text>
-                            <UnorderedList textAlign={"left"}>
+                            <UnorderedList textAlign={"left"} margin={"10px 16px"}>
                                 <ListItem>Pre-Construction Services</ListItem>
                                 <ListItem>
                                     Construction Phasing, Scheduling, and Site Logistics Planning

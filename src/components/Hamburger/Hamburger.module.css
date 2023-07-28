@@ -18,5 +18,8 @@
     color: var(--blue-light);  
 }
 
+.options *{
+    border: 2px solid black;  
+}
 
 

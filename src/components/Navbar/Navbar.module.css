@@ -185,13 +185,14 @@
   } 
 
   .country *{
-    width: 90px;
-    border: 2px solid blue; 
+    width: 90px;  
   }
 
   .country{
     width: 90px; 
     padding: 0; 
+    border: 0; 
+    outline: 0; 
   }
 }
 

@@ -53,7 +53,7 @@
 }
 
 .fields>div:nth-child(2)>*:nth-child(1){
-     width: 14%;  
+     width: 15%;   
 }
 
 .topbox>*:nth-child(2){ 
@@ -148,7 +148,12 @@
     }
 
     .fields>div:nth-child(2)>*:nth-child(1){
-         width: 40%; 
+         width: 55%; 
+         font-size: medium; 
+    }
+
+    .fields>div:nth-child(1)>*:nth-child(1){
+        width: 130%; 
     }
 
     .topbox>*:nth-child(2){ 
