@@ -26,7 +26,7 @@ const Footer = () => {
       <Box className={style.footer}>
         {/* footer */}
         <Box className={style.footer_description} >
-          <Box >
+          <Box>
             <h2>Business Line</h2>
             <Link href={"#"}>Buy</Link>
             <Link href={"#"}>Rent </Link>
