@@ -16,28 +16,28 @@ import img from "./sideimg.png";
 
 const Login = () => {
     return (
-        <> 
-            <Box position={"relative"} w={"full"} maxH={'100vh'} direction={{ base: 'column', md: 'row' }}>
-                <div className={style.detail}>
+        <div className={style.signin_topbox}> 
+            <Box position={"relative"} w={"full"} marginTop={{base:"0px",md:"50px"}} maxH={'100vh'} direction={{ base: 'column', md: 'row' }}>
+                <div className={style.detail}> 
                     <Flex >
-                        <Box spacing={4} gap={"20px"} className={style.log_info} >
-                            <Heading fontSize={{base:'4xl',lg:'2xl'}}>Login to your account</Heading>
+                        <Box spacing={4} gap={{base:"10px",md:"20px"}} className={style.log_info} >
+                            <Heading fontSize={{base:'2xl',md:'4xl',lg:'2xl'}}>Login to your account</Heading>
                             <FormControl id="email">
-                                <FormLabel fontSize={{base:'2xl',lg:'xl'}}>Email address</FormLabel>
+                                <FormLabel fontSize={{base:'md',lg:'xl'}}>Email address</FormLabel>
                                 <Input type="email" />
                             </FormControl>
                             <FormControl id="password">
-                                <FormLabel fontSize={{base:'2xl',lg:'xl'}}>Password</FormLabel>
+                                <FormLabel fontSize={{base:'md',lg:'xl'}}>Password</FormLabel>
                                 <Input type="password" />
-                            </FormControl>
+                            </FormControl> 
                             <Stack spacing={6}>
                                 <Stack 
                                     direction={{ base: 'column', sm: 'row' }}  
                                     align={'start'} 
                                     justify={'space-between'}>
-                                    <Checkbox size='lg'>Remember me</Checkbox>
+                                    <Checkbox size={{base:"md",md:'lg'}}>Remember me</Checkbox>
                                     <Link color={'blue'}>Forgot password?</Link>
-                                </Stack>
+                                </Stack> 
                                 <Button variant={'solid'} fontSize={{base:'2xl',lg:'xl'}} >
                                     Sign in
                                 </Button>
@@ -52,24 +52,8 @@ const Login = () => {
                         />
                     </Flex>
                 </div>
-            </Box>
-
-            {/* styling components */}
-            <div className={style.area} >
-                <ul className={style.circles}>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
-            </div >
-        </>
+            </Box> 
+        </div>
     );
 }
 

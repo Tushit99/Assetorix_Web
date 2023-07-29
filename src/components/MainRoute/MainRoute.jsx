@@ -20,6 +20,7 @@ import Partner from '../../Pages/CoporateServices/PartnerWithUs/Partner'
 import MarketResearch from '../../Pages/CoporateServices/MarketResearch/MarketResearch'
 import PortfolioPlaning from '../../Pages/CoporateServices/Pertfolio/PortfolioPlaning'
 import UsaRealState from '../../Pages/CoporateServices/UsaRealstate/UsaRealState'  
+import Contact from '../../Pages/Contact/Contact'
 // import ConsultingPage from '../../Pages/CoporateServices/Consulting/consulting'
  
 const MainRoute = () => {
@@ -29,7 +30,9 @@ const MainRoute = () => {
         {/* home */}
         <Route path='/' element={<Home />} />
         {/* about */}
-        <Route path='/about' element={<About />} />
+        <Route path='/about' element={<About />} /> 
+        {/* contact Page */}
+        <Route path='/contact' element={<Contact />} />  
         {/* signin Page */}
         <Route path='/signup' element={<Singup />} />
         {/* Login Page */}

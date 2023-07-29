@@ -52,20 +52,8 @@
 
 .products img {
   width: 100%;
-} 
+}  
 
-/* Product Page CSS */
-
-.detail_box h5 {
-  color: rgb(237, 98, 132);
-  font-size: small;
-}
-
-.detail_box h3 {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
 
 @media screen and (min-width:100px) and (max-width:550px) {
   .head_box > div > h1 {

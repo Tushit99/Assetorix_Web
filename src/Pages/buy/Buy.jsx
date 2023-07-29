@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import style from "./Buy.module.css";
-import Product from '../AllPlaces/ProductPage/Product';
+import Product from '../AllPlaces/ProductPage/Product'; 
 
 const data = [
     {
@@ -33,7 +33,8 @@ const data = [
     },
 ]
 
-const Buy = () => {
+const Buy = () => { 
+
     return (
         <div className={style.buy_top}>
             <div className={style.sort}>
@@ -42,11 +43,14 @@ const Buy = () => {
                     <option value="rent">For Rent</option>
                 </select>
                 <select>
-                    <option value=""></option>
+                    <option value="high">High to Low</option>
+                    <option value="low to high">Low to High</option>
                 </select>
+                
+
             </div>
             <div className={style.contain}>
-                {data.map((e) => ( 
+                {data.map((e) => (
                     <Product {...e} bangalore={"bangalore"} key={e.id} />
                 ))}
             </div>

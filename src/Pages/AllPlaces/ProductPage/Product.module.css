@@ -1,0 +1,22 @@
+/* Product Page CSS */
+
+.detail_box h5 {
+    color: rgb(237, 98, 132);
+    font-size: small;
+  }
+  
+  .detail_box h3 {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  } 
+
+img{
+    width: 100%; 
+} 
+
+.detail{
+    border: 2px solid black; 
+}
+
+

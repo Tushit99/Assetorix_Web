@@ -191,7 +191,7 @@ const Construction = () => {
                     </TabPanels>
                 </Tabs>
             </Box>
-            <Box flex={3}>
+            <Box flex={3} display={{base:"none",lg:"block"}}>
                 <img
                     src={
                         "https://www.ametheus.com/wp-content/uploads/2022/10/aerial-view-of-shanghai-lujiazui-financial-district-royalty-free-image-928266082-1557158532-685x1024.jpg"

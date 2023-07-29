@@ -1,0 +1,42 @@
+
+.top_head{
+    padding: auto ;
+    width: 90%; 
+    margin: 120px auto 80px auto;  
+    text-align: left;   
+    justify-content: space-around;    
+    gap: 10px;    
+}
+
+.top_head>*:nth-child(1){ 
+    padding: 20px ;  
+    text-align: justify;  
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+.top_head>*:nth-child(1)>*{
+    margin: 12px auto; 
+    font-size: medium;   
+}
+
+.top_head>*:nth-child(2){ 
+    padding: 10px ;   
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+
+.mapouter{
+    position: relative;  
+    text-align: right;  
+    height: 500; 
+    width: 600;
+}
+
+.gmap_canvas{
+    overflow: hidden; 
+    background: none!important; 
+    height: 500; 
+    width: 600; 
+}
+
+

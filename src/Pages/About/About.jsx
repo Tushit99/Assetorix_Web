@@ -7,8 +7,7 @@ import {
   Text,
   Icon,
   IconButton,
-  createIcon,
-  useColorModeValue,
+  createIcon, 
 } from "@chakra-ui/react";
 import style from "./About.module.css";
 

@@ -1,9 +1,9 @@
 import React from "react";
 import Logo from "../Logo/Logo";
 import style from "./Navbar.module.css";
-import { Link } from "react-router-dom"; 
+import { Link } from "react-router-dom";
 import Hamburger from "../Hamburger/Hamburger";
-import { Popover, PopoverArrow, PopoverBody, PopoverContent, PopoverHeader, PopoverTrigger, Button } from "@chakra-ui/react";
+import { Popover, PopoverArrow, PopoverBody, PopoverContent, PopoverHeader, PopoverTrigger, Button, Box, Text } from "@chakra-ui/react";
 import { BiSolidUserDetail } from "react-icons/bi"
 
 const Navebar = () => {
@@ -23,14 +23,14 @@ const Navebar = () => {
                             <option value="usa">USA</option>
                         </select>
                     </div>
-                    <Link>home</Link>
-                    <Link>About us</Link>
-                    <Link>Contact</Link>
+                    <Link to={"/"}>home</Link>
+                    <Link to={"/about"}>About us</Link>
+                    <Link to={"/contact"}>Contact</Link>
                 </div>
                 <div className={style.login_box}>
                     <Popover>
                         <PopoverTrigger>
-                            <Button>
+                            <Button borderRadius={"30px"}>
                                 {/* icon */}
                                 <BiSolidUserDetail size={"20px"} color="blue" />
                             </Button>
@@ -38,9 +38,12 @@ const Navebar = () => {
                         <PopoverContent>
                             <PopoverArrow />
                             <PopoverHeader>Welcome to Assetorix</PopoverHeader>
-                            <PopoverBody display={"flex"} justifyContent={"space-around"} alignItems={"center"}>
-                                <Link className={style.logbtn} to={"/login"}>Login</Link>
-                                <Link className={style.logbtn} to={"/signup"}>Signin</Link>
+                            <PopoverBody > 
+                                <Text margin={"0 0 8px 0"}>Login for more futuristic experience</Text>
+                                <Box display={"flex"} justifyContent={"space-around"} margin={"0 0 8px 0"} alignItems={"center"}>
+                                    <Link className={style.logbtn} to={"/login"}>Login</Link>
+                                    <Link className={style.logbtn} to={"/signup"}>Signin</Link>
+                                </Box>
                             </PopoverBody>
                         </PopoverContent>
                     </Popover>
@@ -48,7 +51,7 @@ const Navebar = () => {
             </div>
             <div className={style.nav_bottom}>
                 <Link to={"/buy"}>Buy</Link>
-                <Link>Sell</Link>
+                <Link >Sell</Link>
                 <Link>Home Loans</Link>
                 <Link>Rent</Link>
                 <Link>Advertise</Link>

@@ -1,0 +1,25 @@
+
+.form{
+    padding: 20px; 
+    margin-top: 20px; 
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; 
+}
+
+.form *{
+    border: 1px solid rgb(211, 211, 211); 
+    margin: 4px 0; 
+    border-radius: 6px; 
+    outline: 0; 
+    padding: 2px 10px ;  
+    width: 100%; 
+    background-color: rgb(244, 244, 244) ; 
+}
+
+.submit{
+    background-color: red;  
+    color: white;   
+    font-weight: bold;  
+    font-size: large;
+}
+
+

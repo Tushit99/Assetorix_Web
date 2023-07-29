@@ -1,54 +1,54 @@
-import { Box, Divider, Heading, Text } from "@chakra-ui/react";
-import React from "react";
-import img from "./Partner-with-Us.jpg";
+import { Box, Divider, Heading, Text } from "@chakra-ui/react";  
+import React from "react";  
+import img from "./Partner-with-Us.jpg";  
+import style from "./Partner.module.css";  
 
-const Partner = () => {
-  return (
-    <Box
-      width={"80%"}
+const Partner = () => {  
+  return (  
+    <Box  
+      width={{base:"90%",lg:"80%"}}  
       textAlign={"left"}
-      margin={"100px auto"}
-      display={"flex"}
-      alignItems={"center"}
-      justifyContent={"space-around"}
+      margin={{base:"40px auto",md:"100px auto"}}
+      display={{base:"grid",lg:"flex"}}
+      alignItems={"flex-start"}  
+      justifyContent={"space-around"}  
     >
-      <Box flex={7} display={"grid"} gap={6}>  
-        {/* name */}
+      <Box flex={6} display={"grid"} borderRadius={"6px"} className={style.form} >   
+        {/* name */} 
         <input type="text" placeholder={"Name"} />
-        {/* identity */}
+        {/* identity */} 
         <select id="">
-          <option value="your identity">your identity</option>
+          <option value="your identity">Your identity</option>
           <option value="owner">Owner</option>
           <option value="ownersrepresentative">Owner's Representative</option>
           <option value="agent">Agent</option>
         </select>
-        {/* Email */}
-        <input type="text" placeholder={"Email"} />
+        {/* Email */} 
+        <input type="email" placeholder={"Email"} />
         {/* mobile no.  */}
-        <input type="text" placeholder={"Mobile No."} />
+        <input type="number" placeholder={"Mobile No."} />
         {/* tlephone no.  */}
-        <input type="text" placeholder={"Telephone no."} />
+        <input type="number" placeholder={"Telephone no."} />
         {/* Property Title */}
         <select>
           <option value="Property Title">Property Title</option>
-          <option value="Private free hold land">
-            {" "}
-            Private free hold land{" "}
+          <option value="Private_free_hold_land"> 
+            Private free hold land 
           </option>
-          <option value="Private lease hold land">
+          <option value="Private_lease_hold_land">
             Private lease hold land
           </option>
-          <option value="Lease land from Government">
+          <option value="Lease_land_from_Government">
             Lease land from Government
           </option>
-          <option value="Sanad land from Government">
+          <option value="Sanad_land_from_Government">
             Sanad land from Government
           </option>
-          <option value="Lease from Municipal Corporation">
+          <option value="Lease_from_Municipal_Corporation">
             Lease from Municipal Corporation
           </option>
         </select>
-        {/* Property Country */}
+        {/* Property Country */} 
         <select>
           <option>Property Country</option>
           <option>Afghanistan</option>
@@ -298,49 +298,49 @@ const Partner = () => {
         <input type="text" placeholder={"Property City"} /> 
         <input type="text" placeholder={"Property Locality"} />
         <input type="text" placeholder={"FSI Potential"} />
-        <input type="text" placeholder={"Size of Property in "} />
+        <input type="text" placeholder={"Size of Property"} />
         <select>
-          <option value="">Nature and transaction</option>
-          <option value="">Outright</option>
-          <option value="">JV</option>
-          <option value="">Redevelopment</option>
-          <option value="">Others</option>
+          <option value="Nature_and_transaction">Nature and transaction</option>
+          <option value="Outright">Outright</option>
+          <option value="JV">JV</option>
+          <option value="Redevelopment">Redevelopment</option>
+          <option value="Others">Others</option>
         </select>
         <select>
-          <option value="" class=" ">
+          <option value="Category_of_Development_Proposal" >
             Category of Development Proposal
           </option>
-          <option value="Residential" class=" ">
+          <option value="Residential" >
             Residential
           </option>
-          <option value="Commercial" class=" ">
+          <option value="Commercial" >
             Commercial
           </option>
-          <option value="Township" class=" ">
+          <option value="Township" >
             Township
           </option>
-          <option value="Hotel" class=" ">
+          <option value="Hotel" >
             Hotel
           </option>
-          <option value="Resort" class=" ">
+          <option value="Resort" >
             Resort
           </option>
-          <option value="Mall" class=" ">
+          <option value="Mall" >
             Mall
           </option>
-          <option value="Hospital" class=" ">
+          <option value="Hospital" >
             Hospital
           </option>
-          <option value="School" class=" ">
+          <option value="School" >
             School
           </option>
-          <option value="Others" class=" ">
-            Others
+          <option value="Others" >
+            Others 
           </option>
         </select>
-        <input type="text" />
+        <button className={style.submit}>Submit</button>
       </Box>
-      <Box flex={5}>
+      <Box flex={4} textAlign={"justify"} padding={"20px"}>
         <img src={img} alt="" />
         <Heading as={"h2"} marginTop={"8px"} size={"md"}>
           PARTNER WITH US

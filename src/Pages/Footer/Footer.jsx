@@ -18,7 +18,9 @@ import { BiLogoLinkedin } from "react-icons/bi";
 import { IoIosArrowForward } from "react-icons/io";
 import insta from "./insta.png";
 
-const Footer = () => {
+const Footer = () => {   
+
+   
   return (
     <div className={style.ft}>
       <Box className={style.footer}>
@@ -128,9 +130,7 @@ const Footer = () => {
         <Box >
           Email: info@assetorix.com <span className={style.line}> | </span> <br className={style.brs} /> Call Us at: +91-9999099538
         </Box>
-        <Box>
-          <button>LOCATE US <IoIosArrowForward size={"26px"} /> </button>
-        </Box>
+        
       </div>
     </div>
   );
