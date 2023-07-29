@@ -42,7 +42,7 @@ const Navebar = () => {
                                 <Text margin={"0 0 8px 0"}>Login for more futuristic experience</Text>
                                 <Box display={"flex"} justifyContent={"space-around"} margin={"0 0 8px 0"} alignItems={"center"}>
                                     <Link className={style.logbtn} to={"/login"}>Login</Link>
-                                    <Link className={style.logbtn} to={"/signup"}>Signin</Link>
+                                    <Link className={style.logbtn} to={"/signup"}>Sign Up</Link>
                                 </Box>
                             </PopoverBody>
                         </PopoverContent>

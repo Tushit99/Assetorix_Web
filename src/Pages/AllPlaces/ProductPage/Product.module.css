@@ -9,11 +9,7 @@
     display: flex;
     align-items: center;
     gap: 5px;
-  } 
-
-img{
-    width: 100%; 
-} 
+  }  
 
 .detail{
     border: 2px solid black; 
