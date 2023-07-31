@@ -18,7 +18,20 @@
 
 /* .top_navbar>div{
   border: 2px solid black; 
-} */
+} */ 
+
+.buy{
+  display: flex;  
+  flex-wrap: wrap; 
+  gap: 10px; 
+  justify-content: flex-start; 
+  align-items: center; 
+}
+
+.start_btn{
+  width: 100%; 
+  margin: 10px auto;  
+}
  
 .hamburger {
   display: none;

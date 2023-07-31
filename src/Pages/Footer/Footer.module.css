@@ -7,8 +7,7 @@
 }
 
 .footer_description {
-  display: flex;
-  align-items: baseline;
+  display: flex; 
   justify-content: space-around;
   /* border: 2px solid yellow;  */
   height: auto;
