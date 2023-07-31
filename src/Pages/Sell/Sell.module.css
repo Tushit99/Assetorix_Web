@@ -1,0 +1,38 @@
+
+.sell{
+    padding-top: 110px;  
+    /* border: 2px solid black;   */
+    display: flex; 
+    width: 90%;  
+    margin: auto; 
+}
+
+.sell img{
+    width: 80%;  
+    margin: auto; 
+}
+
+.sell>*:nth-child(1){
+    flex: 7;  
+    /* border: 2px solid green;   */
+    padding: 20px ;  
+    text-align: left; 
+} 
+
+.sell>*:nth-child(2){
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px; 
+    flex: 5; 
+    /* border: 2px solid rgb(0, 8, 255);  */
+    padding: 20px; 
+}
+
+.grid{
+    display: flex ; 
+    flex-wrap: wrap;  
+    gap: 10px; 
+    /* border: 2px solid yellow;  */
+    align-items: center; 
+}
+
+
+

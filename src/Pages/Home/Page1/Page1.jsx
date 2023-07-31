@@ -193,30 +193,12 @@ const Page1 = () => {
                                 Rent
                             </Button>
                         </div >
-                        <div>
-                            <Select
-                                size="md"
-                                backgroundColor={"white"}
-                                color={"black"}
-                                fontSize={{ base: "11px", lg: "lg" }}
-                                outline={0} 
-                                fontWeight={"md"}
-                                boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}
-                                style={{ borderradius: "20px" }}
-                                border={0}
-                            >
-                                <option value="Residential" borderradius={0}>
-                                    Residential
-                                </option>
-                                <option value="Commercial" borderradius={0}>
-                                    Commercial
-                                </option>
-                            </Select>
+                        <div> 
                             <Input
                                 type="text"
                                 border={0}
                                 height={"38px"}
-                                maxWidth={"400px"}
+                                minWidth={"400px"}
                                 w={"60%"}
                                 marginLeft={"2px"}
                                 placeholder={"Search locality, project or builder"}
@@ -228,7 +210,7 @@ const Page1 = () => {
                                 backgroundColor={"white"}
                                 borderradius={0}
                             />
-                            <Button padding={0} m={"2px"}> <GrFormSearch size={"30px"} /> </Button>
+                            <Button padding={0} backgroundColor={"rgb(46,49,146)"} m={"2px"}> <GrFormSearch size={"30px"} color={"#fffff"} /> </Button>
                         </div>
                     </div >
                 </Box >

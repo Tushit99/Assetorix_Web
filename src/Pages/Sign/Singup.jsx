@@ -15,9 +15,9 @@ const Singup = () => {
   const [name, setname] = useState(""); 
   const [email, setemail] = useState(""); 
   const [password,setpassword] = useState(""); 
-  const [number,setnumber] = useState(""); 
+  const [number,setnumber] = useState("");  
 
-  console.log(name); 
+
 
   return (
     <Stack minH={'60vh'} direction={{ base: 'column', md: 'row' }} padding={"20px 0"}>
@@ -46,8 +46,8 @@ const Singup = () => {
               align={'start'}
               justify={'space-between'}>
             </Stack>
-            <Button colorScheme={'blue'} variant={'solid'}>
-              Sign in
+            <Button colorScheme={'blue'}  variant={'solid'}>
+              Sign up
             </Button>
           </Stack>
         </Stack>

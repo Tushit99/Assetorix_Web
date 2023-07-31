@@ -22,6 +22,7 @@ import {
     PopoverCloseButton,
 } from "@chakra-ui/react";
 import { BiSolidUserDetail } from "react-icons/bi";
+import { IoIosArrowDown } from "react-icons/io";
 
 const Navebar = () => {
     return (
@@ -46,8 +47,8 @@ const Navebar = () => {
                 </div>
                 <div className={style.login_box}>
                     <Popover>
-                        <PopoverTrigger>
-                            <Button borderRadius={"30px"}>
+                        <PopoverTrigger> 
+                            <Button borderRadius={"30px"} rightIcon={<IoIosArrowDown size={"20px"} color="blue" />}>
                                 {/* icon */}
                                 <BiSolidUserDetail size={"20px"} color="blue" />
                             </Button>
@@ -63,7 +64,7 @@ const Navebar = () => {
                                     display={"flex"}
                                     justifyContent={"space-around"}
                                     margin={"0 0 8px 0"}
-                                    alignItems={"center"}
+                                    alignItems={"center"} 
                                 >
                                     <Link className={style.logbtn} to={"/login"}>
                                         Login
@@ -96,7 +97,7 @@ const Navebar = () => {
                         <PopoverHeader>Buy Property</PopoverHeader>
                         <PopoverBody>
                             {/* one */}
-                            <Tabs variant="enclosed">
+                            <Tabs variant="enclosed"> 
                                 <TabList>
                                     <Tab>Residential</Tab>
                                     <Tab>Commercial</Tab>

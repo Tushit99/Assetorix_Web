@@ -21,6 +21,7 @@ import MarketResearch from '../../Pages/CoporateServices/MarketResearch/MarketRe
 import PortfolioPlaning from '../../Pages/CoporateServices/Pertfolio/PortfolioPlaning'
 import UsaRealState from '../../Pages/CoporateServices/UsaRealstate/UsaRealState'  
 import Contact from '../../Pages/Contact/Contact'
+import Sell from '../../Pages/Sell/Sell'
 // import ConsultingPage from '../../Pages/CoporateServices/Consulting/consulting'
  
 const MainRoute = () => {
@@ -29,6 +30,8 @@ const MainRoute = () => {
       <Routes>
         {/* home */}
         <Route path='/' element={<Home />} />
+        {/* sell */} 
+        <Route path='/sell' element={<Sell />} />
         {/* about */}
         <Route path='/about' element={<About />} /> 
         {/* contact Page */}
@@ -51,7 +54,7 @@ const MainRoute = () => {
         <Route path='/gurugram/:id' element={<ProductDetail />} />
         <Route path='/mumbai/:id' element={<ProductDetail />} />
         <Route path='/noida/:id' element={<ProductDetail />} />
-        <Route path='/pune/:id' element={<ProductDetail />} />
+        <Route path='/pune/:id' element={<ProductDetail />} /> 
 
         {/* buy rent sale */} 
         <Route path='/buy' element={<Buy />} />   
