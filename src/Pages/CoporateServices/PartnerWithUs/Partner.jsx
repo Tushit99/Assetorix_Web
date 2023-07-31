@@ -1,29 +1,29 @@
-import { Box, Divider, Heading, Text } from "@chakra-ui/react";  
-import React from "react";  
-import img from "./Partner-with-Us.jpg";  
-import style from "./Partner.module.css";  
+import { Box, Divider, Heading, Text } from "@chakra-ui/react";
+import React from "react";
+import img from "./Partner-with-Us.jpg";
+import style from "./Partner.module.css";
 
-const Partner = () => {  
-  return (  
-    <Box  
-      width={{base:"90%",lg:"80%"}}  
+const Partner = () => {
+  return (
+    <Box
+      width={{ base: "90%", lg: "80%" }}
       textAlign={"left"}
-      margin={{base:"40px auto",md:"100px auto"}}
-      display={{base:"grid",lg:"flex"}}
-      alignItems={"flex-start"}  
-      justifyContent={"space-around"}  
+      margin={{ base: "40px auto", md: "100px auto" }}
+      display={{ base: "grid", lg: "flex" }}
+      alignItems={"flex-start"}
+      justifyContent={"space-around"}
     >
-      <Box flex={6} display={"grid"} borderRadius={"6px"} className={style.form} >   
-        {/* name */} 
+      <Box flex={6} display={"grid"} borderRadius={"6px"} className={style.form} >
+        {/* name */}
         <input type="text" placeholder={"Name"} />
-        {/* identity */} 
+        {/* identity */}
         <select id="">
           <option value="your identity">Your identity</option>
           <option value="owner">Owner</option>
           <option value="ownersrepresentative">Owner's Representative</option>
           <option value="agent">Agent</option>
         </select>
-        {/* Email */} 
+        {/* Email */}
         <input type="email" placeholder={"Email"} />
         {/* mobile no.  */}
         <input type="number" placeholder={"Mobile No."} />
@@ -32,8 +32,8 @@ const Partner = () => {
         {/* Property Title */}
         <select>
           <option value="Property Title">Property Title</option>
-          <option value="Private_free_hold_land"> 
-            Private free hold land 
+          <option value="Private_free_hold_land">
+            Private free hold land
           </option>
           <option value="Private_lease_hold_land">
             Private lease hold land
@@ -48,7 +48,7 @@ const Partner = () => {
             Lease from Municipal Corporation
           </option>
         </select>
-        {/* Property Country */} 
+        {/* Property Country */}
         <select>
           <option>Property Country</option>
           <option>Afghanistan</option>
@@ -295,7 +295,7 @@ const Partner = () => {
         </select>
         {/* Property Status */}
         <input type="text" placeholder={"Property State"} />
-        <input type="text" placeholder={"Property City"} /> 
+        <input type="text" placeholder={"Property City"} />
         <input type="text" placeholder={"Property Locality"} />
         <input type="text" placeholder={"FSI Potential"} />
         <input type="text" placeholder={"Size of Property"} />
@@ -335,7 +335,7 @@ const Partner = () => {
             School
           </option>
           <option value="Others" >
-            Others 
+            Others
           </option>
         </select>
         <button className={style.submit}>Submit</button>
