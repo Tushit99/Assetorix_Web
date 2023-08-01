@@ -93,7 +93,8 @@ const Page1 = () => {
                                 <PopoverTrigger>
                                     <Button
                                         backgroundColor={"rgb(110, 137, 226)"}
-                                        color={"white"}
+                                        color={"white"} 
+                                        fontSize={"lg"}
                                         _hover={{ color: "white" }}
                                     >Buy</Button>
                                 </PopoverTrigger>
