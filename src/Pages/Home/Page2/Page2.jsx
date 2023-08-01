@@ -1,8 +1,7 @@
-import { Box, Grid, GridItem, Heading } from "@chakra-ui/react";
+import { Box, Grid, Heading } from "@chakra-ui/react";
 import React from "react";
 import { Link } from "react-router-dom";
-import style from "./Page2.module.css";
-import noida from "../homeImage/noida.jpg";  
+import style from "./Page2.module.css"; 
 
 const Page2 = () => {
   return (

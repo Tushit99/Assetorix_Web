@@ -20,10 +20,9 @@ import {
     TabPanels,
     Checkbox,
 } from "@chakra-ui/react";
-import style from "./Page1.module.css";
-// import img from "./back.webp"; 
-import video from "./Ametheus.mp4";
-import { GrFormSearch } from "react-icons/gr";
+import style from "./Page1.module.css"; 
+import video from "./Ametheus.mp4"; 
+import { Search2Icon } from "@chakra-ui/icons";
 
 const Page1 = () => {
     return (
@@ -41,7 +40,7 @@ const Page1 = () => {
             <video autoPlay loop muted className={style.video_panal} >
                 <source src={video} type="video/mp4" />
             </video>
-            <Box
+            <Box 
                 w={"full"}
                 className={style.topbox} >
                 <Text
@@ -49,6 +48,7 @@ const Page1 = () => {
                     fontWeight={700}
                     lineHeight={1.2}
                     textAlign={"left"} 
+                    marginTop={20}
                     userSelect={"none"} 
                     textShadow={"#000000 3px 4px 20px"}
                     fontSize={useBreakpointValue({ base: "4xl", md: "6xl" })}
@@ -198,8 +198,7 @@ const Page1 = () => {
                                 type="text"
                                 border={0}
                                 height={"38px"}
-                                minWidth={"400px"}
-                                w={"60%"}
+                                minWidth={{base:"320px",md:"400px",lg:"400px"}} 
                                 marginLeft={"2px"}
                                 placeholder={"Search locality, project or builder"}
                                 color={"black"}
@@ -210,7 +209,7 @@ const Page1 = () => {
                                 backgroundColor={"white"}
                                 borderradius={0}
                             />
-                            <Button padding={0} backgroundColor={"rgb(46,49,146)"} m={"2px"}> <GrFormSearch size={"30px"} color={"#fffff"} /> </Button>
+                            <Button padding={0} color={"white"} backgroundColor={"rgb(46,49,146)"} > <Search2Icon size={"30px"} className={style.white} /> </Button>
                         </div>
                     </div >
                 </Box >

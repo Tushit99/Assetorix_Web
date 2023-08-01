@@ -1,6 +1,5 @@
 import { Box, Heading, ListItem, Text, UnorderedList } from "@chakra-ui/react";
-import React from "react";
-import { Link } from "react-router-dom";
+import React from "react"; 
 import style from "./UsaRealState.module.css";
 import img from "./American-Housing-Market.webp";
 import ServiceLink from "../Links/ServiceLink";
@@ -9,7 +8,7 @@ const UsaRealState = () => {
     return (
         <Box
             w={"90%"}
-            margin={"auto"}
+            margin={"60px auto 30px auto"}
             paddingTop={"70px"}
             display={"flex"}
             gap={10}

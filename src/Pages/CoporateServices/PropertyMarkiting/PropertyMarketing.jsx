@@ -4,15 +4,14 @@ import img1 from "./Property-1024x342.jpg";
 import img2 from "./ACPL_Property1.jpg";
 import video from "./Walkthrough.mp4";
 import img3 from "./img3.png";
-import img4 from "./Show-home-bedroom_ACPL3.jpg"
-import { Link } from 'react-router-dom';
+import img4 from "./Show-home-bedroom_ACPL3.jpg" 
 import style from "./Property.module.css";
 import ServiceLink from '../Links/ServiceLink';
 
 
 const PropertyMarketing = () => {
   return (
-    <Box w={"90%"} margin={"auto"} paddingTop={"70px"} display={"flex"} gap={10}>
+    <Box w={"90%"} margin={"60px auto 30px auto"} paddingTop={"70px"} display={"flex"} gap={10}>
       <Box textAlign={"justify"} w={"70%"} flex={7} padding={"0px auto"}>
         <img src={img1} alt="property_img" />
         <Heading m={"20px 0"} as='h3' size='lg'> PROPERTY MARKETING </Heading>

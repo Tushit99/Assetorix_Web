@@ -4,8 +4,7 @@ import {
   Stack,
   Text,
   Image, 
-  VStack,
-  Button,
+  VStack, 
   Heading,
   SimpleGrid,
   StackDivider,
@@ -15,8 +14,7 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
-} from '@chakra-ui/react';
-import { MdLocalShipping } from 'react-icons/md'; 
+} from '@chakra-ui/react'; 
 import style from "./Product.module.css"; 
 
 const imgs =[ 

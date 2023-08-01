@@ -7,21 +7,37 @@ import {
   Input,
   Stack,
   Image,
+  useToast,
 } from '@chakra-ui/react';
 import sideimg from "./backimg.png";
 import { useState } from 'react';
 
 const Singup = () => { 
+  const toast = useToast()
   const [name, setname] = useState(""); 
   const [email, setemail] = useState(""); 
   const [password,setpassword] = useState(""); 
   const [number,setnumber] = useState("");  
 
-
+  const handlesave =()=>{ 
+    let obj = {
+      name,
+      email, 
+      password, 
+      number 
+    } 
+    console.log(obj);  
+    toast({
+      title: 'Account created.',
+      description: "Your Account is created successfully", 
+      status: 'success',
+      duration: 3000, 
+    })
+  }
 
   return (
     <Stack minH={'60vh'} direction={{ base: 'column', md: 'row' }} padding={"20px 0"}>
-      <Flex p={{base:"4",lg:"8"}}  flex={1} align={"baseline"} justify={'center'} >
+      <Flex p={{base:"4",lg:"8"}} marginTop={"30px"} flex={1} align={"baseline"} justify={'center'} >
         <Stack spacing={4} w={'full'} maxW={'md'} padding={"30px"} marginTop={{base:"20px",lg:"50px"}} boxShadow={"rgba(0, 0, 0, 0.24) 0px 3px 8px "} borderRadius={"8px"} >
           <Heading fontSize={'3xl'} >Sign up to your account</Heading>
           <FormControl id="name">
@@ -46,7 +62,7 @@ const Singup = () => {
               align={'start'}
               justify={'space-between'}>
             </Stack>
-            <Button colorScheme={'blue'}  variant={'solid'}>
+            <Button colorScheme={'blue'} onClick={handlesave} variant={'solid'}>
               Sign up
             </Button>
           </Stack>

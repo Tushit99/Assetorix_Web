@@ -1,7 +1,7 @@
 import { WarningTwoIcon } from '@chakra-ui/icons';
-import { Box, Heading, Text, Button } from '@chakra-ui/react';
+import { Box, Text, Button } from '@chakra-ui/react';
 
-const Error = () => {
+const Error = () => { 
     return (
         <Box height={"92vh"} display={"flex"} alignItems={"center"} justifyContent={"center"}>
             <Box textAlign="center" display={"grid"} py={10} px={6} >

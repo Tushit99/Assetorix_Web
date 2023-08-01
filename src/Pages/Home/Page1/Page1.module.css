@@ -13,9 +13,13 @@
     object-fit: cover;   
 }
 
+.white{
+    color: white; 
+}
+
 .topbox{
     position: relative; 
-    height: 95vh; 
+    height: 100vh; 
     /* border: 2px solid green;   */
 }
 
@@ -28,14 +32,12 @@
     text-align: justify;    
     gap: 10px; 
     margin: 20px 0;
-}
+} 
 
-.buy *{
+.buy>*{
     font-size: small;   
     background-color: white; 
-    box-shadow: rgba(101, 148, 70, 0.25) 0px 30px 60px -12px inset, rgba(85, 165, 81, 0.3) 0px 18px 36px -18px inset;
-    padding: 2px 8px; 
-    color: rgb(75, 70, 70); 
+    padding: 2px 8px;  
     border-radius: 10px; 
 }
 
@@ -48,19 +50,12 @@
 /* top button */
 
 .fields>div:nth-child(1)>*{
-    width: 10%;    
-    margin: 0;     
+    width: 10%;         
 }
 
 .fields>div:nth-child(2)>*:nth-child(1){
      width: 15%;   
-}
-
-.topbox>*:nth-child(2){ 
-    position: absolute;  
-    bottom: 40%;  
-    margin: auto; 
-}
+} 
 
 /* select city css */
 
@@ -84,11 +79,15 @@
 } 
 
 .fields{
+    max-width: 100%; 
     width: 100%;  
     margin: 20px 0; 
     text-align: center; 
     display: grid; 
+    position: absolute; 
+    bottom: -40px;
     gap: 20px; 
+    /* border: 2px solid burlywood; */
 }
 
 .fields>div:nth-child(1){ 

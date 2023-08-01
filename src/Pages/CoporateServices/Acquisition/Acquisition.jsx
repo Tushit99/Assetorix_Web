@@ -6,7 +6,7 @@ import ServiceLink from '../Links/ServiceLink';
 
 const Acquisition = () => {
     return (
-        <Box w={"90%"} margin={"auto"} paddingTop={"70px"} display={"flex"} gap={10}>
+        <Box w={"90%"} margin={"60px auto 30px auto"} paddingTop={"70px"} display={"flex"} gap={10}>
             <Box width={"100%"} textAlign={"left"} flex={7} margin={"10px auto"}>
                 <img src={img} alt="property_img" />
                 <Heading m={"20px 0"} as='h3' size='lg'> ACQUISITIONS AND DISPOSITIONS </Heading>

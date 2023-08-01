@@ -8,7 +8,7 @@ const initialState = {
   isLoading: false,
   isError: false,
   admin: [],
-  success: 0,
+  success: 0, 
 };
 
 export const reducer = (state = initialState, { type, payload }) => {
@@ -19,7 +19,7 @@ export const reducer = (state = initialState, { type, payload }) => {
       return { ...state, isLoading: false, admin: payload };
     case ADMIN_lOGIN_ERROR:
       return { ...state, isLoading: false, isError: true };
-    default:
+    default: 
       return state;
   }
 };

@@ -1,8 +1,7 @@
 import React from "react";
 import Page1 from "./Page1/Page1";
 import Page2 from "./Page2/Page2";
-import House from "./House/House";
-import { ImArrowUp2, ImArrowDown2 } from "react-icons/im";
+import House from "./House/House"; 
 import TopDevelopers from "./TopDevelopers/TopDevelopers";
 
 const Home = () => {

@@ -8,8 +8,7 @@ import {
 import React from "react";
 import Logo from "../../components/Logo/Logo";
 import style from "./Footer.module.css";
-import {
-  BsArrowDownShort,
+import { 
   BsFacebook,
   BsInstagram,
   BsTwitter,

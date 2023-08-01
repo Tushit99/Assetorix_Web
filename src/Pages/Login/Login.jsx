@@ -19,6 +19,8 @@ const Login = () => {
     const [email, setEmail] = useState("");  
     const [password, setPassword] = useState("");  
 
+    console.log(email,password); 
+
     return (
         <div className={style.signin_topbox}> 
             <Box position={"relative"} w={"full"} marginTop={{base:"0px",md:"50px"}} maxH={'100vh'} direction={{ base: 'column', md: 'row' }}>

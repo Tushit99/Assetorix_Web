@@ -4,8 +4,8 @@
     /* border: 2px solid black;   */
     display: flex; 
     width: 90%;  
-    margin: auto; 
-}
+    margin: auto;  
+}  
 
 .sell img{
     width: 80%;  
@@ -20,7 +20,7 @@
 } 
 
 .sell>*:nth-child(2){
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px; 
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; 
     flex: 5; 
     /* border: 2px solid rgb(0, 8, 255);  */
     padding: 20px; 

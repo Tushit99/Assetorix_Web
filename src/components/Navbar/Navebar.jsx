@@ -18,8 +18,7 @@ import {
     TabPanel,
     TabList,
     TabPanels,
-    Checkbox,
-    PopoverCloseButton,
+    Checkbox, 
 } from "@chakra-ui/react";
 import { BiSolidUserDetail } from "react-icons/bi";
 import { IoIosArrowDown } from "react-icons/io";
@@ -173,7 +172,7 @@ const Navebar = () => {
                                 Acquisitions & Dispositions
                             </Link>
                             {/* <Link to={"/consulting"}>Consulting</Link> */}
-                            <Link to={"/marketresearch"}>Market Research</Link>
+                            <Link to={"/market_research"}>Market Research</Link>
                             <Link to={"/portfolio_planning"}>Property & Portfolio Sales</Link>
                             <Link to={"/usa_real_state"}> USA Real State</Link>
                         </PopoverBody>
