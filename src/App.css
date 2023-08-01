@@ -17,12 +17,37 @@
 }
 
 .scrole_button button {
-  background-color: var(--blue-light);
   padding: 6px;
+  background-color: var(--blue-light);
   color: black;
   border-radius: 50px;
   position: relative; 
+}  
+
+.scrole_button button:hover{
+  -webkit-animation: rotate-center 0.6s ease-in-out both;
+	        animation: rotate-center 0.6s ease-in-out both; 
 }
 
 /* down button */ 
+@-webkit-keyframes rotate-center {
+  0% {
+    -webkit-transform: rotate(0);
+            transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+@keyframes rotate-center {
+  0% {
+    -webkit-transform: rotate(0);
+            transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
 
