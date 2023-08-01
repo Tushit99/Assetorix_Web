@@ -198,7 +198,7 @@ const Page1 = () => {
                                 type="text"
                                 border={0}
                                 height={"38px"}
-                                minWidth={{base:"320px",md:"400px",lg:"400px"}} 
+                                minWidth={"86%"} 
                                 marginLeft={"2px"}
                                 placeholder={"Search locality, project or builder"}
                                 color={"black"}
