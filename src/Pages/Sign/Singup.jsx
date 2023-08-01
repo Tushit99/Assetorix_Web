@@ -8,16 +8,19 @@ import {
   Stack,
   Image,
   useToast,
+  Box,
 } from '@chakra-ui/react';
 import sideimg from "./backimg.png";
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Singup = () => { 
-  const toast = useToast()
+  const toast = useToast(); 
   const [name, setname] = useState(""); 
   const [email, setemail] = useState(""); 
   const [password,setpassword] = useState(""); 
   const [number,setnumber] = useState("");  
+  const navigate = useNavigate(); 
 
   const handlesave =()=>{ 
     let obj = {
@@ -25,14 +28,27 @@ const Singup = () => {
       email, 
       password, 
       number 
-    } 
-    console.log(obj);  
-    toast({
-      title: 'Account created.',
-      description: "Your Account is created successfully", 
-      status: 'success',
-      duration: 3000, 
-    })
+    }  
+    if(name.length<=2 || email.length<=2 || password.length<=2 || number.length<=2){
+      toast({
+        position: 'bottom-right',
+        render: () => (
+          <Box color='white' p={3} bg='blue.500'>
+            Please fill all required information
+          </Box>
+        ),
+      })
+    }
+    else{ 
+      console.log(obj);  
+      toast({
+        title: 'Account created.',
+        description: "Your Account is created successfully", 
+        status: 'success',
+        duration: 2000, 
+      })
+      navigate("/login"); 
+    }
   }
 
   return (
