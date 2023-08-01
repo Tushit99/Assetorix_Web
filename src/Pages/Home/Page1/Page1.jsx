@@ -210,7 +210,7 @@ const Page1 = () => {
                                 backgroundColor={"white"}
                                 borderradius={0}
                             />
-                            <Button padding={0} color={"white"} backgroundColor={"rgb(46,49,146)"} > <Search2Icon size={"30px"} className={style.white} /> </Button>
+                            <Button padding={0} color={"white"} margin={"0 5px"} backgroundColor={"rgb(46,49,146)"} > <Search2Icon size={"30px"} className={style.white} /> </Button>
                         </div>
                     </div >
                 </Box >
