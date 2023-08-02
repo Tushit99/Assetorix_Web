@@ -197,7 +197,7 @@ const Page1 = () => {
                         <div> 
                             <Input
                                 type="text"
-                                border={0}
+                                border={0} 
                                 height={"38px"}
                                 minWidth={{base:"86%",lg:"600px"}} 
                                 marginLeft={"2px"}
@@ -205,15 +205,16 @@ const Page1 = () => {
                                 color={"black"}
                                 fontSize={{ base: "xs", lg: "lg" }}
                                 _active={{ border: "0px", outline: "0px" }}
-                                boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}
-                                fontWeight={400}
+                                boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"} 
+                                fontWeight={400}  
                                 backgroundColor={"white"}
-                                borderradius={0}
+                                // borderRightRadius={"30%"}   
+                                clipPath={"polygon(0 0, 100% 0, 98% 50%, 100% 100%, 0 100%)"}
                             />
-                            <Button padding={0} color={"white"} margin={"0 5px"} backgroundColor={"rgb(46,49,146)"} > <Search2Icon size={"30px"} className={style.white} /> </Button>
+                            <Button margin={"0 0 0 8px"} _hover={{backgroundColor:"rgb(12,32,50)"}} backgroundColor={"rgb(46,49,146)"} > <Search2Icon size={"30px"} className={style.white} /> </Button>
                         </div>
                     </div >
-                </Box >
+                </Box > 
             </Box >
             {/* </Box> */}
         </div >
