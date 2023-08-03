@@ -1,21 +1,27 @@
-import { Heading, Text } from '@chakra-ui/react';
-import React, { useEffect } from 'react' ; 
-import style from "./Privacy.module.css"; 
+import { Button, Heading, Text } from '@chakra-ui/react';
+import React, { useEffect } from 'react';
+import style from "./Privacy.module.css";
+import { FaFileDownload } from 'react-icons/fa';
 
 
-const Privacy = () => { 
+const Privacy = () => {
 
     useEffect(() => {
         // 👇️ scroll to top on page load
-        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
-      }, []);
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    }, []);
 
     return (
         <div className={style.privacy_top}>
+            <div className={style.download_btn}>
+                <Button rightIcon={<FaFileDownload />} colorScheme='blue' variant='outline'>
+                    download
+                </Button>
+            </div>
             <Heading as={"h2"} size={"md"}>
                 GENERAL INFORMATION
             </Heading>
-            <Text> 
+            <Text>
                 This Privacy Policy (“Policy”) applies to the website www.assetorix.com, or the mobile application [‘Assetorix’](together, “Website”) owned and operated by Ametheus Holdings Private Limited (“Company”, “we”, “us”, “our” or “Assetorix” a reference to which shall also include its affiliates) which is a private limited company incorporated under the Indian Companies Act, 2013. The Company recognizes the importance of maintaining the privacy of its users (“User”, “you”, “your”, “yourself”) and the confidentiality of your information. That's why we insist upon the highest standards for secure transactions and User information privacy. This Policy sets forth the information collecting, processing and dissemination practices of the Company and the modes through which you can exercise your privacy rights. The Policy is accessible via a hyperlink at the https://assetorix.com/privacy. The Policy should be read along with our Terms of Use (https://assetorix.com/user-terms-conditions), for a full understanding of the Company’s practices as well as the Users’ rights and responsibilities when interacting with the Website and availing the services (including but not limited to the service of property identification, support services entailing site visits and price negotiation, facilitation of financial, administrative and legal aid, and relationship management services) provided by it (“Services”). By visiting the Website, you agree to be bound by the terms and conditions of this Policy and the Terms of Use of the Website, as they apply to you. If you do not agree with any of the terms contained in this Policy or the Terms of Use, please do not use or access the Website.
             </Text>
             <Text>
@@ -233,7 +239,7 @@ const Privacy = () => {
                 11.1 This Policy, along with the Terms of Use, is governed by laws prevailing in India.
             </Text>
             <Text>
-                11.2 Only the courts in Delhi, India will have jurisdiction with regard to disputes arising from this Policy. 
+                11.2 Only the courts in Delhi, India will have jurisdiction with regard to disputes arising from this Policy.
             </Text>
 
         </div>

@@ -74,7 +74,7 @@ const Login = () => {
                                     <Link color={'blue'}>Forgot password?</Link>
                                 </Stack>
                                 <Button variant={'solid'} onClick={handlelogin} fontSize={{ base: '2xl', lg: 'xl' }} >
-                                    Sign in
+                                    Login
                                 </Button>
                             </Stack>
                         </Box>

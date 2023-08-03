@@ -1,17 +1,23 @@
 import React, { useEffect } from 'react';
 import style from "./UserTerm.module.css";
-import { Heading, ListItem, Text, UnorderedList } from '@chakra-ui/react';
+import { Button, Heading, ListItem, Text, UnorderedList } from '@chakra-ui/react';
+import { FaFileDownload } from 'react-icons/fa';
 
 
-const UserTerm = () => { 
+const UserTerm = () => {
 
     useEffect(() => {
         // 👇️ scroll to top on page load
-        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
-      }, []);
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    }, []);
 
     return (
         <div className={style.userterm}>
+            <div className={style.download_btn}>
+                <Button rightIcon={<FaFileDownload />} colorScheme='blue' variant='outline'>
+                    download
+                </Button>
+            </div>
             <Heading as={"h2"} size={"md"}>INTRODUCTION</Heading>
             <Text>This website assetorix.com, including any subdomains thereof, and any other websites through which its services are made available, our mobile, tablet and other smart device applications, and application program interfaces etc, , (hereinafter collectively referred to as " assetorix.com ") is owned, hosted and operated by Ametheus Holdings Pvt Ltd (hereinafter referred to as AHPL), a company incorporated in India under the Companies Act, 1956 and having its registered office at 27, 2nd Floor, Hauz Khas Village, New Delhi - 110016. These user terms and conditions, privacy policy and payment terms & conditions guidelines regulating use of these Services constitute a legally binding agreement between assetorix.com and the User (the “Agreement”).
             </Text>
@@ -475,8 +481,8 @@ const UserTerm = () => {
                 The User may not transfer, sub-contract or otherwise deal with its rights and/or obligations under these Terms, without express written consent from the Company.
             </Text>
             <Text>
-                e) Grievance Handling: In the event a User has any grievances, come across any violation of these Terms or becomes aware of any objectionable content on the Website, the User may report the same to the following e-mail id: care@assetorix.com 
-            </Text>  
+                e) Grievance Handling: In the event a User has any grievances, come across any violation of these Terms or becomes aware of any objectionable content on the Website, the User may report the same to the following e-mail id: care@assetorix.com
+            </Text>
         </div>
     )
 }

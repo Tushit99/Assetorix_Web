@@ -1,16 +1,22 @@
-import { Heading, Text } from '@chakra-ui/react';
+import { Button, Heading, Text } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 import style from "./PurchaseTerm.module.css";
+import { FaFileDownload } from 'react-icons/fa';
 
-const PurchaseTerm = () => { 
+const PurchaseTerm = () => {
 
     useEffect(() => {
         // 👇️ scroll to top on page load
-        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
-      }, []);
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    }, []);
 
     return (
         <div className={style.purchase}>
+            <div className={style.download_btn}>
+                <Button rightIcon={<FaFileDownload />} colorScheme='blue' variant='outline'>
+                    download
+                </Button>
+            </div>
             <Heading as={"h1"} size={"lg"} textAlign={"left"}>PAYMENT TERMS & CONDITIONS </Heading>
             <Text fontSize={"sm"}>
                 Please read this document carefully. By accessing or using assetorix.com, you agree to be bound by the terms and conditions set forth below. If you do not agree with any of these terms and conditions, you should not access or use assetorix.com.
@@ -163,7 +169,7 @@ const PurchaseTerm = () => {
             <Heading as={"h3"} size={"sm"}>
                 Amendment
             </Heading>
-            <Text fontSize={"sm"}> 
+            <Text fontSize={"sm"}>
                 Please report any violations of these terms and conditions to AHPL at legal@assetorix.com
 
             </Text>
