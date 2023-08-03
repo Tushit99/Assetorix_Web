@@ -21,8 +21,9 @@ import MarketResearch from '../../Pages/CoporateServices/MarketResearch/MarketRe
 import PortfolioPlaning from '../../Pages/CoporateServices/Pertfolio/PortfolioPlaning'
 import UsaRealState from '../../Pages/CoporateServices/UsaRealstate/UsaRealState'  
 import Contact from '../../Pages/Contact/Contact'
-import Sell from '../../Pages/Sell/Sell'
-import PurchaseTerm from '../../Pages/Footer/HelpCenter/PurchaseTerm'
+import Sell from '../../Pages/Sell/Sell' 
+import PurchaseTerm from '../../Pages/Footer/HelpCenter/PerchaseTerm/PurchaseTerm'
+import UserTerm from '../../Pages/Footer/HelpCenter/UserTerm/UserTerm'
 // import ConsultingPage from '../../Pages/CoporateServices/Consulting/consulting'
  
 const MainRoute = () => {
@@ -69,8 +70,9 @@ const MainRoute = () => {
         <Route path='/portfolio_planning' element={<PortfolioPlaning />} /> 
         <Route path='/usa_real_state' element={<UsaRealState />} />  
 
-        {/* footer ==> Help Center  */}
-        <Route path='/Purchase_term_Condition' element={<PurchaseTerm />} />
+        {/* footer ==> Help Center  */} 
+        <Route path='/Purchase_term_Condition' element={<PurchaseTerm />} /> 
+        <Route path='/user_term_condition' element={<UserTerm />} />
 
         <Route path='*' element={<Error />} />
 

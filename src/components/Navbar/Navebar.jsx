@@ -101,8 +101,8 @@ const Navebar = () => {
                         >
                             Buy
                         </Button>
-                    </PopoverTrigger>
-                    <PopoverContent w={{ base: "320px", md: "400px" }}>
+                    </PopoverTrigger> 
+                    <PopoverContent w={{ base: "320px", md: "400px" }} color={"black"}>
                         <PopoverArrow /> 
                         <PopoverHeader>Buy Property</PopoverHeader>
                         <PopoverBody>
