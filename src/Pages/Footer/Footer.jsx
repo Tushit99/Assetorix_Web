@@ -46,8 +46,8 @@ const Footer = () => {
             <h2>Help Center</h2>
             <Link to={"/user_term_condition"}>User Terms & Condition </Link> 
             <Link to={"/Purchase_term_Condition"}>Payment Term & Condition</Link>
-            <Link to={"#"}>Privacy</Link>
-            <Link to={"#"}>Disclaimer</Link>
+            <Link to={"/privacy"}>Privacy</Link>
+            <Link to={"/disclaimer"}>Disclaimer</Link>
 
           </Box>
           <Box>

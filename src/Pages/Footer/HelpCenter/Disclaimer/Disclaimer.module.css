@@ -1,0 +1,12 @@
+
+.disclamer{
+    padding-top: 140px;  
+    text-align: justify;  
+    display: grid; 
+    gap: 16px; 
+    width: 90%; 
+    font-size: small;  
+    margin: auto;  
+}
+
+

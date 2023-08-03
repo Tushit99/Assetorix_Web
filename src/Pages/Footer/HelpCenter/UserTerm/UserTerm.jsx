@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import style from "./UserTerm.module.css";
 import { Heading, ListItem, Text, UnorderedList } from '@chakra-ui/react';
 
 
-const UserTerm = () => {
+const UserTerm = () => { 
+
+    useEffect(() => {
+        // 👇️ scroll to top on page load
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+      }, []);
+
     return (
         <div className={style.userterm}>
             <Heading as={"h2"} size={"md"}>INTRODUCTION</Heading>

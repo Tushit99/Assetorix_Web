@@ -24,6 +24,8 @@ import Contact from '../../Pages/Contact/Contact'
 import Sell from '../../Pages/Sell/Sell' 
 import PurchaseTerm from '../../Pages/Footer/HelpCenter/PerchaseTerm/PurchaseTerm'
 import UserTerm from '../../Pages/Footer/HelpCenter/UserTerm/UserTerm'
+import Privacy from '../../Pages/Footer/HelpCenter/Privacy/Privacy'
+import Disclaimer from '../../Pages/Footer/HelpCenter/Disclaimer/Disclaimer'
 // import ConsultingPage from '../../Pages/CoporateServices/Consulting/consulting'
  
 const MainRoute = () => {
@@ -72,7 +74,9 @@ const MainRoute = () => {
 
         {/* footer ==> Help Center  */} 
         <Route path='/Purchase_term_Condition' element={<PurchaseTerm />} /> 
-        <Route path='/user_term_condition' element={<UserTerm />} />
+        <Route path='/user_term_condition' element={<UserTerm />} /> 
+        <Route path='/privacy' element={<Privacy />} />   
+        <Route path='/disclaimer' element={<Disclaimer />} />  
 
         <Route path='*' element={<Error />} />
 

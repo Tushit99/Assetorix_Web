@@ -1,8 +1,14 @@
 import { Heading, Text } from '@chakra-ui/react';
-import React from 'react';
+import React, { useEffect } from 'react';
 import style from "./PurchaseTerm.module.css";
 
-const PurchaseTerm = () => {
+const PurchaseTerm = () => { 
+
+    useEffect(() => {
+        // 👇️ scroll to top on page load
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+      }, []);
+
     return (
         <div className={style.purchase}>
             <Heading as={"h1"} size={"lg"} textAlign={"left"}>PAYMENT TERMS & CONDITIONS </Heading>
