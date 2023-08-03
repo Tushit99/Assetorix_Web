@@ -110,7 +110,7 @@ const Navebar = () => {
                             <Tabs variant="enclosed"> 
                                 <TabList>
                                     <Tab>Residential</Tab>
-                                    <Tab>Commercial</Tab>
+                                    <Tab>Commercial</Tab> 
                                 </TabList>
                                 <TabPanels>
                                     <TabPanel>

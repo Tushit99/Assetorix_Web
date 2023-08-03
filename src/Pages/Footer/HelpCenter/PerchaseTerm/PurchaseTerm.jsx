@@ -5,7 +5,7 @@ import style from "./PurchaseTerm.module.css";
 const PurchaseTerm = () => {
     return (
         <div className={style.purchase}>
-            <Heading as={"h1"} size={"lg"} >PAYMENT TERMS & CONDITIONS </Heading>
+            <Heading as={"h1"} size={"lg"} textAlign={"left"}>PAYMENT TERMS & CONDITIONS </Heading>
             <Text fontSize={"sm"}>
                 Please read this document carefully. By accessing or using assetorix.com, you agree to be bound by the terms and conditions set forth below. If you do not agree with any of these terms and conditions, you should not access or use assetorix.com.
             </Text>
