@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Logo from "../Logo/Logo";
-import style from "./Navbar.module.css";
+import style from "./TopNavbar.module.css";
 import { Link } from "react-router-dom";
 import Hamburger from "../Hamburger/Hamburger";
 import {
@@ -18,34 +18,25 @@ import {
     TabPanel,
     TabList,
     TabPanels,
-    Checkbox, 
+    Checkbox,
 } from "@chakra-ui/react";
 import { BiSolidUserDetail } from "react-icons/bi";
 import { IoIosArrowDown } from "react-icons/io";
 
-const Navebar = () => { 
-    const [scroll, setScroll] = useState(0);   
-
-    useEffect(() => { 
-      window.addEventListener("scroll", () => {
-        setScroll(window.pageYOffset);
-      });
-    }, []);   
-
-    // console.log(scroll); 
+const TopNavbar = () => {
 
 
     return (
         <div className={style.head_nav}>
-            <div className={scroll > 20 ? style.top_navbar3 : style.top_navbar}>
-                <div className={style.hamburger}>
+            <div className={style.top_navbar3}>
+                <div className={style.hamburger2}>
                     <Hamburger />
                 </div>
                 <div className={style.logo}>
                     <Logo />
                 </div>
-                <div className={scroll > 20 ? style.login_data2 : style.login_data}>
-                    <div className={scroll > 20 ? style.country2 : style.country }>
+                <div className={style.login_data2}>
+                    <div className={style.country}>
                         <select style={{ border: "0px", outline: "0px" }}>
                             <option value="india">India</option>
                             <option value="usa">USA</option>
@@ -57,7 +48,7 @@ const Navebar = () => {
                 </div>
                 <div className={style.login_box}>
                     <Popover>
-                        <PopoverTrigger> 
+                        <PopoverTrigger>
                             <Button borderRadius={"30px"} rightIcon={<IoIosArrowDown size={"20px"} color="rgb(46,49,146)" />}>
                                 {/* icon */}
                                 <BiSolidUserDetail size={"24px"} color="rgb(46,49,146)" />
@@ -74,7 +65,7 @@ const Navebar = () => {
                                     display={"flex"}
                                     justifyContent={"space-around"}
                                     margin={"0 0 8px 0"}
-                                    alignItems={"center"} 
+                                    alignItems={"center"}
                                 >
                                     <Link className={style.logbtn} to={"/login"}>
                                         Login
@@ -88,13 +79,13 @@ const Navebar = () => {
                     </Popover>
                 </div>
             </div>
-            <div className={scroll > 20 ? style.nav_bottom2 : style.nav_bottom }>
+            <div className={style.nav_bottom2}>
                 {/* Buy button  */}
                 <Popover>
                     <PopoverTrigger>
                         <Button
                             backgroundColor={"unset"}
-                            color={"auto"} 
+                            color={"auto"}
                             fontWeight={400}
                             _hover={{ color: "unset" }}
                             _active={{ color: "unset" }}
@@ -103,11 +94,11 @@ const Navebar = () => {
                         </Button>
                     </PopoverTrigger>
                     <PopoverContent w={{ base: "320px", md: "400px" }}>
-                        <PopoverArrow /> 
+                        <PopoverArrow />
                         <PopoverHeader>Buy Property</PopoverHeader>
                         <PopoverBody>
                             {/* one */}
-                            <Tabs variant="enclosed"> 
+                            <Tabs variant="enclosed">
                                 <TabList>
                                     <Tab>Residential</Tab>
                                     <Tab>Commercial</Tab>
@@ -171,7 +162,7 @@ const Navebar = () => {
                     <PopoverTrigger>
                         <button>Corporate Services</button>
                     </PopoverTrigger>
-                    <PopoverContent padding={0}>
+                    <PopoverContent>
                         <PopoverArrow />
                         <PopoverBody className={style.option}>
                             <Link to={"/Construction_Management"}>
@@ -194,4 +185,4 @@ const Navebar = () => {
     );
 };
 
-export default Navebar;
+export default TopNavbar;

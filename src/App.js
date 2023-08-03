@@ -1,17 +1,26 @@
+import { useLocation } from "react-router-dom";
 import "./App.css";
 import Footer from "./Pages/Footer/Footer";
 import MainRoute from "./components/MainRoute/MainRoute";
 import Navebar from "./components/Navbar/Navebar";
-import { MdKeyboardDoubleArrowDown, MdKeyboardDoubleArrowUp } from "react-icons/md";
+import {
+  MdKeyboardDoubleArrowDown,
+  MdKeyboardDoubleArrowUp,
+} from "react-icons/md";
+import TopNavbar from "./components/TopNavbar/TopNavbar";
 
 function App() {
+  const location = useLocation();
+
+  console.log(location);
+
   const scrollToTop = () => {
     const scrollStep = -window.scrollY / (500 / 15);
     const scrollInterval = setInterval(() => {
       if (window.scrollY !== 0) {
         window.scrollBy(0, scrollStep);
       } else {
-        clearInterval(scrollInterval); 
+        clearInterval(scrollInterval);
       }
     }, 15);
   };
@@ -30,16 +39,16 @@ function App() {
 
   return (
     <div className="App">
-      <Navebar />
+      {location.pathname == "/" ? <Navebar /> : <TopNavbar />}
       <div className="info">
         <MainRoute />
         <Footer />
       </div>
       <div className="scrole_button">
-        <button onClick={handleScrollToTop}> 
+        <button onClick={handleScrollToTop}>
           <MdKeyboardDoubleArrowUp size={"25px"} color="white" />
         </button>
-        <button onClick={handleScrollToBottom}> 
+        <button onClick={handleScrollToBottom}>
           <MdKeyboardDoubleArrowDown size={"25px"} color="white" />
         </button>
       </div>

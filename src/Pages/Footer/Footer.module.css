@@ -3,6 +3,7 @@
   color: var(--dark-text-color);
   /* color: black;   */
   padding-top: 80px;
+  margin-top: 80px;
   position: relative;
 }
 
@@ -71,18 +72,18 @@
   padding: 24px 0;
 }
 
-.contact h1 {
+.contact>*{
   border-radius: 18%;
   color: white;
   padding: 10px;
   object-fit: contain;
   cursor: pointer;
   overflow: hidden;
-  transition: all 0.3s ease-in-out;
+  transition: all 1s ease-in-out;
   background-color: #97c6f2bc;
 }
 
-.contact h1:hover {
+.contact>*:hover {
   background-color: var(--dark-text-color);
   transform: scale(1.2);
 }
@@ -91,23 +92,23 @@
   display: none;  
 }
 
-.contact h1:nth-child(1):hover {
+.contact>*:nth-child(1):hover {
   color: rgb(18, 107, 196);
 }
 
-.contact h1:nth-child(2):hover {
+.contact>*:nth-child(2):hover {
   color: rgb(29, 161, 242);
 }
 
-.contact h1:nth-child(3):hover {
+.contact>*:nth-child(3):hover {
   color: #4267b2;
 }
 
-.contact h1:nth-child(4):hover .insta_icon{
+.contact>*:nth-child(4):hover .insta_icon{
   display: none; 
 }
 
-.contact h1:nth-child(4):hover .insta_logo{
+.contact>*:nth-child(4):hover .insta_logo{
   display: flex;  
 }
 

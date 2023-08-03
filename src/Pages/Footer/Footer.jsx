@@ -1,6 +1,5 @@
 import {
-  Box,
-  Link,
+  Box, 
   Text,
   Flex,
   useColorModeValue,
@@ -16,6 +15,7 @@ import {
 import { BiLogoLinkedin } from "react-icons/bi";
 import { IoIosArrowForward } from "react-icons/io";
 import insta from "./insta.png";
+import { Link } from "react-router-dom";
 
 const Footer = () => {   
 
@@ -27,27 +27,27 @@ const Footer = () => {
         <Box className={style.footer_description} >
           <Box>
             <h2>Business Line</h2>
-            <Link href={"#"}>Buy</Link>
-            <Link href={"#"}>Rent </Link>
-            <Link href={"#"}>Sale</Link>
-            <Link href={"#"}>Home Loan </Link>
-            <Link href={"#"}>Advertise </Link>
-            <Link href={"#"}>Agent Finder </Link>
+            <Link to={"#"}>Buy</Link>
+            <Link to={"#"}>Rent </Link>
+            <Link to={"#"}>Sale</Link>
+            <Link to={"#"}>Home Loan </Link>
+            <Link to={"#"}>Advertise </Link>
+            <Link to={"#"}>Agent Finder </Link>
+            <Link to={"#"}>Corporate Service</Link>
           </Box>
           <Box >
             <h2>Company</h2>
-            <Link href={"#"}>Home</Link>
-            <Link href={"#"}>About Assetorix</Link>
-            <Link href={"#"}>Corporate Service</Link>
-            <Link href={"#"}> Developer Partners </Link>
-            <Link>  </Link>
+            <Link to={"#"}>Home</Link>
+            <Link to={"#"}>About Assetorix</Link>
+            <Link to={"#"}> Developer Partners </Link>
+            <Link to={"/contact"}> Contact </Link>
           </Box>
           <Box >
             <h2>Help Center</h2>
-            <Link href={"#"}>Purchase Term & Condition</Link>
-            <Link href={"#"}>Disclaimer</Link>
-            <Link href={"#"}>Privacy</Link>
-            <Link href={"#"}>Terms of use this website</Link>
+            <Link to={"#"}>User Terms & Condition </Link> 
+            <Link to={"/Purchase_term_Condition"}>Payment Term & Condition</Link>
+            <Link to={"#"}>Privacy</Link>
+            <Link to={"#"}>Disclaimer</Link>
 
           </Box>
           <Box>
@@ -65,7 +65,7 @@ const Footer = () => {
                 <IoIosArrowForward size={"16px"} />
               </Box>
               <Box flex={9} textAlign={"left"}>
-                <p>Email: info@ametheus.com</p>
+                <p>Email: info@assetorix.com</p>
               </Box>
             </Box>
           </Box>
@@ -99,19 +99,19 @@ const Footer = () => {
 
         {/* line with logo */}
         <Box className={style.contact}>
-          <h1>
+          <Link  to="#"> 
             <BiLogoLinkedin size={"24px"} />
-          </h1>
-          <h1>
+          </Link>
+          <Link target="_blank" to="https://twitter.com/assetorix">
             <BsTwitter size={"24px"} />
-          </h1>
-          <h1>
+          </Link>
+          <Link to="#">
             <BsFacebook size={"24px"} />
-          </h1>
-          <h1>
+          </Link>
+          <Link to="#">
             <BsInstagram size={"24px"} className={style.insta_icon} />
             <img src={insta} alt="imstagram" className={style.insta_logo} width={"24px"} />
-          </h1>
+          </Link>
         </Box>
       </Box>
       <div className={style.location_detail}>
@@ -130,7 +130,7 @@ const Footer = () => {
           Email: info@assetorix.com <span className={style.line}> | </span> <br className={style.brs} /> Call Us at: +91-9999099538
         </Box>
         
-      </div>
+      </div> 
     </div>
   );
 };

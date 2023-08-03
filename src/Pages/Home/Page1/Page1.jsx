@@ -56,11 +56,11 @@ const Page1 = () => {
                     “I Think” to “I Own”
                 </Text>
                 <Box w={"100%"}>
-                    <div className={style.fields}>
+                    <div className={style.fields}> 
                         <div>
                             <Select
                                 size="md"
-                                backgroundColor={"rgb(46,49,146)"}
+                                backgroundColor={"#d2ab67cb"}
                                 color={"white"}
                                 outline={0}
                                 fontSize={{ base: "sm", lg: "lg" }}
@@ -92,7 +92,7 @@ const Page1 = () => {
                             <Popover>
                                 <PopoverTrigger>
                                     <Button
-                                        backgroundColor={"rgb(110, 137, 226)"}
+                                        backgroundColor={"#d2ab67cb"}
                                         color={"white"} 
                                         fontSize={"lg"}
                                         _hover={{ color: "white" }}
@@ -178,7 +178,7 @@ const Page1 = () => {
                                 _hover={{ color: "white" }}
                                 boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}
                                 fontSize={{ base: "sm", lg: "lg" }}
-                                backgroundColor={"rgb(94, 174, 248)"}
+                                backgroundColor={"#d2ab67cb"}
                             > 
                                 Sell
                             </Button>
@@ -188,7 +188,7 @@ const Page1 = () => {
                                 _hover={{ color: "white" }}
                                 boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}
                                 fontSize={{ base: "sm", lg: "lg" }}
-                                backgroundColor={"rgb(16, 101, 180)"}
+                                backgroundColor={"#d2ab67cb"}
                             // border={"1px solid black"}
                             >
                                 Rent
@@ -199,19 +199,20 @@ const Page1 = () => {
                                 type="text"
                                 border={0} 
                                 height={"38px"}
-                                minWidth={{base:"86%",lg:"600px"}} 
-                                marginLeft={"2px"}
+                                minWidth={{base:"85%",lg:"600px"}} 
+                                marginLeft={"2px"} 
                                 placeholder={"Search locality, project or builder"}
                                 color={"black"}
                                 fontSize={{ base: "xs", lg: "lg" }}
                                 _active={{ border: "0px", outline: "0px" }}
                                 boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"} 
                                 fontWeight={400}  
-                                backgroundColor={"white"}
+                                backgroundColor={"rgba(255, 255, 255, 0.767)"}
                                 // borderRightRadius={"30%"}   
-                                clipPath={"polygon(0 0, 100% 0, 98% 50%, 100% 100%, 0 100%)"}
-                            />
-                            <Button margin={"0 0 0 8px"} _hover={{backgroundColor:"rgb(12,32,50)"}} backgroundColor={"rgb(46,49,146)"} > <Search2Icon size={"30px"} className={style.white} /> </Button>
+                                clipPath={{base:"polygon(0 0, 100% 0, 97.4% 50%, 100% 100%, 0 100%)",md:"polygon(0 0, 100% 0, 98% 50%, 100% 100%, 0 100%)"}}
+                            /> 
+                            <span id={style.btn_serch}></span>
+                            <Button _hover={{backgroundColor:"#d2ab67"}} backgroundColor={"#d2ab67b0"} > <Search2Icon size={"30px"} className={style.white} /> </Button>
                         </div>
                     </div >
                 </Box > 

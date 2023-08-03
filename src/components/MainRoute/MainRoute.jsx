@@ -22,6 +22,7 @@ import PortfolioPlaning from '../../Pages/CoporateServices/Pertfolio/PortfolioPl
 import UsaRealState from '../../Pages/CoporateServices/UsaRealstate/UsaRealState'  
 import Contact from '../../Pages/Contact/Contact'
 import Sell from '../../Pages/Sell/Sell'
+import PurchaseTerm from '../../Pages/Footer/HelpCenter/PurchaseTerm'
 // import ConsultingPage from '../../Pages/CoporateServices/Consulting/consulting'
  
 const MainRoute = () => {
@@ -66,7 +67,10 @@ const MainRoute = () => {
         {/* <Route path='/consulting' element={<ConsultingPage />} />  */}
         <Route path='/market_research' element={<MarketResearch />} />   
         <Route path='/portfolio_planning' element={<PortfolioPlaning />} /> 
-        <Route path='/usa_real_state' element={<UsaRealState />} /> 
+        <Route path='/usa_real_state' element={<UsaRealState />} />  
+
+        {/* footer ==> Help Center  */}
+        <Route path='/Purchase_term_Condition' element={<PurchaseTerm />} />
 
         <Route path='*' element={<Error />} />
 

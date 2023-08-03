@@ -11,9 +11,17 @@
 .top_navbar {
   display: flex;
   height: 60px;
-  background-color: white;
+  background-color: rgba(0, 0, 0, 0.37);
   left: 0;
   color: black;
+}
+
+.top_navbar3{
+  display: flex;
+  height: 60px;
+  background-color: rgb(255, 255, 255);
+  left: 0;
+  color: white; 
 }
 
 /* .top_navbar>div{
@@ -76,37 +84,46 @@
   grid-area: country;   
 }
 
-.country > * {
+.country>*{
   padding: 2px 10px 2px 10px;
-  background-color: rgb(244, 244, 244);
-  color: rgb(105, 101, 101);
+  background-color: rgba(244, 244, 244, 0);
+  color: rgb(255, 255, 255);  
+  border-radius: 20px;
+} 
+
+.country2{
+  flex: 3; 
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  grid-area: country;   
+}
+
+.country2>*{
+  padding: 2px 10px 2px 10px;
+  background-color: rgba(244, 244, 244, 0);
+  color: rgb(0, 0, 0);  
   border-radius: 20px;
 }
 
-.login_data > *:nth-child(1) {
+.country>*>*{ 
+  background-color: rgba(244, 244, 244, 0.384);
+  color: rgb(0, 0, 0);  
+}  
+
+.login_data > *{
   padding: 2px 10px 2px 10px;
-  background-color: rgb(244, 244, 244);
-  color: rgb(105, 101, 101);
+  background-color: rgba(244, 244, 244, 0);
+  color: rgb(255, 255, 255); 
+  border-radius: 20px; 
+} 
+
+.login_data2 > *{
+  color: black;
+  padding: 2px 10px 2px 10px;
+  background-color: rgba(244, 244, 244, 0);
   border-radius: 20px; 
 }
-.login_data > *:nth-child(2) {
-  padding: 2px 10px 2px 10px;
-  background-color: rgb(244, 244, 244);
-  color: rgb(105, 101, 101);
-  border-radius: 20px;
-}
-.login_data > *:nth-child(3) {
-  padding: 2px 10px 2px 10px;
-  background-color: rgb(244, 244, 244);
-  color: rgb(105, 101, 101);
-  border-radius: 20px;
-} 
-.login_data > *:nth-child(4) {
-  padding: 2px 10px 2px 10px;
-  background-color: rgb(244, 244, 244);
-  color: rgb(105, 101, 101);
-  border-radius: 20px;
-} 
 
 .login_box{ 
   flex: 1; 
@@ -118,9 +135,17 @@
 
 .login_box>*{
   padding: 2px 10px 2px 10px;
-  background-color: rgb(244, 244, 244);
+  background-color: rgba(244, 244, 244, 0);
   color: rgb(105, 101, 101);
   border-radius: 20px; 
+}
+
+.login_box button:hover{ 
+  background-color: rgba(255, 255, 255, 0.447); 
+}
+
+.login_box button{ 
+  background-color: unset; 
 }
 
 .top_navbar > div:nth-child(4) {
@@ -128,6 +153,13 @@
 }
 
 .login_data {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 50px;
+}   
+
+.login_data2 {
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -140,6 +172,7 @@
   align-items: left ; 
   text-align: left;  
   justify-content: left;  
+  color: black;
 }
 
 .option>*{
@@ -147,7 +180,7 @@
 }
 
 .option>*:hover{
-  background-color: rgb(128, 128, 255);  
+  background-color: #d2ab67;  
   color: white; 
 }
 
@@ -157,12 +190,24 @@
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: space-around; 
+  /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+  padding: 3px 0;
+  background-color: rgba(0, 0, 0, 0.37);
+  color: rgb(255, 255, 255);
+}
+
+.nav_bottom2{
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  display: flex;
+  align-items: center;
   justify-content: space-around;
   padding: 3px 0;
-  background-color: rgb(241, 241, 241);
-  color: rgb(75, 72, 72);
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
 }
+
 
 /* .nav_bottom *{
   border: 2px solid black; 
@@ -178,7 +223,7 @@
   }
 
   .login_data>*:nth-child(2){
-    display: none;
+    display: none; 
   }
   .login_data>*:nth-child(3){
     display: none;
@@ -214,9 +259,20 @@
 
   .country *{
     width: 90px;  
+  } 
+
+  .country2 *{
+    width: 90px;   
   }
 
   .country{
+    width: 90px; 
+    padding: 0; 
+    border: 0; 
+    outline: 0; 
+  } 
+
+  .country2{
     width: 90px; 
     padding: 0; 
     border: 0; 
@@ -278,6 +334,16 @@
   }
 
   .country{
+    width: 90px; 
+    padding: 0; 
+  }
+
+  .country2 *{
+    width: 90px;
+    border: 2px solid blue; 
+  }
+
+  .country2{
     width: 90px; 
     padding: 0; 
   }
