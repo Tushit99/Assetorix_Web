@@ -1,12 +1,18 @@
 import React from 'react';
 import style from "./Sell.module.css";
 import img from "./download.jpg";
-import { Box, Button, Checkbox, Heading, Input, Tab, TabList, TabPanel, TabPanels, Tabs, Text } from '@chakra-ui/react';
+import { Box, Button, FormLabel, HStack, Heading, Input, PinInput, PinInputField, Tab, TabList, TabPanel, TabPanels, Tabs, Text } from '@chakra-ui/react';
 
 const Sell = () => {
+
+
+    const handlechange = (e) =>{
+        console.log(e)
+    }
+
     return (
         <div className={style.sell}>
-            <Box display={{base:"none",md:"block"}}>
+            <Box display={{ base: "none", md: "block" }}>
                 <Heading as={"h2"} size={"lg"}>Sell or rent your property faster on Assetorix.com </Heading>
                 <img src={img} alt="img" />
             </Box>
@@ -15,8 +21,8 @@ const Sell = () => {
                 <Heading as={"h5"} margin={"8px auto"} size={"xs"} textAlign={"left"} fontWeight={"400"} >Add Basic Details</Heading>
                 <Heading as={"h5"} margin={"8px auto"} size={"sm"} textAlign={"left"} fontWeight={"600"} > You're looking to ... </Heading>
                 <Tabs
-                    variant='soft-rounded' 
-                    padding={"10px 0 0 0"}  
+                    variant='soft-rounded'
+                    padding={"10px 0 0 0"}
                     boxShadow={"rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset"}
                     margin={"10px 0"}
                     borderRadius={6}
@@ -26,7 +32,7 @@ const Sell = () => {
                         <Tab>Rent/Lease</Tab>
                         <Tab>PG</Tab>
                     </TabList>
-                    <TabPanels>
+                    <TabPanels> 
                         {/* sell options */}
                         <TabPanel>
                             <Tabs variant='enclosed'>
@@ -37,55 +43,55 @@ const Sell = () => {
                                 <TabPanels>
                                     <TabPanel>
                                         <Box className={style.grid}>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            <button onClick={()=>handlechange("Flat/Apartment")} className={style.btn}>
                                                 Flat/Apartment
-                                            </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            </button>
+                                            <button onClick={()=>handlechange("ndependent House/villa")} className={style.btn}>
                                                 Independent House/villa
-                                            </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            </button>
+                                            <button onClick={()=>handlechange("Independent/builder Floor")} className={style.btn}>
                                                 Independent/builder Floor
-                                            </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            </button>
+                                            <button onClick={()=>handlechange("Serviced Apartment")} className={style.btn}>
                                                 Serviced Apartment
-                                            </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            </button>
+                                            <button onClick={()=>handlechange("Plot/Land")} className={style.btn}>
                                                 Plot/Land
-                                            </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            </button>
+                                            <button onClick={()=>handlechange("1 RK/ Studio Apartment")} className={style.btn}>
                                                 1 RK/ Studio Apartment
-                                            </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            </button>
+                                            <button onClick={()=>handlechange("Farmhouse")} className={style.btn}>
                                                 Farmhouse
-                                            </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            </button>
+                                            <button onClick={()=>handlechange("other")} className={style.btn}>
                                                 other
-                                            </Checkbox>
+                                            </button>
                                         </Box>
                                     </TabPanel>
                                     <TabPanel>
-                                        <Box  className={style.grid}>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                        <Box className={style.grid}>
+                                            <button onClick={()=>handlechange("Office")} className={style.btn}>
                                                 Office
-                                            </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            </button>
+                                            <button onClick={()=>handlechange("Retail")} className={style.btn}>
                                                 Retail
-                                            </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            </button>
+                                            <button onClick={()=>handlechange("Plot/Land")} className={style.btn}>
                                                 Plot/Land
-                                            </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            </button>
+                                            <button onClick={()=>handlechange("Storage")} className={style.btn}>
                                                 Storage
-                                            </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            </button>
+                                            <button onClick={()=>handlechange("Industry")} className={style.btn}>
                                                 Industry
-                                            </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            </button>
+                                            <button onClick={()=>handlechange("Hospitality")} className={style.btn}>
                                                 Hospitality
-                                            </Checkbox> 
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            </button>
+                                            <button onClick={()=>handlechange("Other")} className={style.btn}>
                                                 Other
-                                            </Checkbox>
+                                            </button>
                                         </Box>
                                     </TabPanel>
                                 </TabPanels>
@@ -102,93 +108,206 @@ const Sell = () => {
                                 <TabPanels>
                                     <TabPanel>
                                         <Box className={style.grid}>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            <button onClick={()=>handlechange("Flat/Apartment")} className={style.btn}>
                                                 Flat/Apartment
-                                            </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            </button>
+                                            <button onClick={()=>handlechange("Independent House/villa")} className={style.btn}>
                                                 Independent House/villa
-                                            </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            </button>
+                                            <button onClick={()=>handlechange("Independent/builder Floor")} className={style.btn}>
                                                 Independent/builder Floor
-                                            </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            </button>
+                                            <button onClick={()=>handlechange("Serviced Apartment")} className={style.btn}>
                                                 Serviced Apartment
-                                            </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            </button>
+                                            <button onClick={()=>handlechange("Plot/Land")} className={style.btn}>
                                                 Plot/Land
-                                            </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            </button>
+                                            <button onClick={()=>handlechange("1 RK/ Studio Apartment")} className={style.btn}>
                                                 1 RK/ Studio Apartment
-                                            </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            </button>
+                                            <button onClick={()=>handlechange("Farmhouse")} className={style.btn}>
                                                 Farmhouse
-                                            </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            </button>
+                                            <button onClick={()=>handlechange("other")} className={style.btn}>
                                                 other
-                                            </Checkbox>
+                                            </button>
                                         </Box>
                                     </TabPanel>
                                     <TabPanel>
-                                        <Box  className={style.grid}>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                        <Box className={style.grid}>
+                                            <button onClick={()=>handlechange("Office")} className={style.btn}>
                                                 Office
-                                            </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            </button>
+                                            <button onClick={()=>handlechange("Retail")} className={style.btn}>
                                                 Retail
-                                            </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            </button>
+                                            <button onClick={()=>handlechange("Plot/Land")} className={style.btn}>
                                                 Plot/Land
-                                            </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            </button>
+                                            <button onClick={()=>handlechange("Storage")} className={style.btn}>
                                                 Storage
-                                            </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            </button>
+                                            <button onClick={()=>handlechange("Industry")} className={style.btn}>
                                                 Industry
-                                            </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            </button>
+                                            <button onClick={()=>handlechange("Hospitality")} className={style.btn}>
                                                 Hospitality
-                                            </Checkbox> 
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            </button>
+                                            <button onClick={()=>handlechange("Other")} className={style.btn}>
                                                 Other
-                                            </Checkbox>
+                                            </button>
                                         </Box>
                                     </TabPanel>
                                 </TabPanels>
-                            </Tabs>  
+                            </Tabs>
                         </TabPanel>
                         {/* PG options */}
                         <TabPanel>
                             <Box className={style.grid}>
-                                <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                <button onClick={()=>handlechange("Flat/Apartment")} className={style.btn}>
                                     Flat/Apartment
-                                </Checkbox>
-                                <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                </button>
+                                <button onClick={()=>handlechange("Independent House/villa")} className={style.btn}>
                                     Independent House/villa
-                                </Checkbox>
-                                <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                </button>
+                                <button onClick={()=>handlechange("Independent/builder Floor")} className={style.btn}>
                                     Independent/builder Floor
-                                </Checkbox>
-                                <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                </button>
+                                <button onClick={()=>handlechange("Serviced Apartment")} className={style.btn}>
                                     Serviced Apartment
-                                </Checkbox>
-                                <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                </button>
+                                <button onClick={()=>handlechange("1 RK/ Studio Apartment")} className={style.btn}>
                                     1 RK/ Studio Apartment
-                                </Checkbox>
+                                </button>
                             </Box>
                         </TabPanel>
                     </TabPanels>
                 </Tabs>
+                <Heading as={"h3"} size={"md"} textAlign={"left"} fontWeight={500} > Your Address Detail: </Heading>
+                <Box display={"grid"} gap={"14px"} margin={"15px 0"}>
+                    <Box>
+                        <FormLabel> Door no. </FormLabel>
+                        <Input
+                            required 
+                            type="text"
+                            border={"2px solid rgb(193, 206, 250)"}
+                            _hover={{ border: "2px solid rgb(171, 81, 255)" }}
+                            placeholder="Enter door no"
+                            autoComplete={"off"}
+                        />
+                    </Box>
+                    <Box>
+                        <FormLabel> Floor no. </FormLabel>
+                        <Input
+                            required
+                            type="text"
+                            border={"2px solid rgb(193, 206, 250)"}
+                            _hover={{ border: "2px solid rgb(171, 81, 255)" }}
+                            placeholder="Enter floor no"
+                            autoComplete={"off"}
+                        />
+                    </Box>
+                    <Box>
+                        <FormLabel> House no. </FormLabel>
+                        <Input
+                            required
+                            type="text"
+                            border={"2px solid rgb(193, 206, 250)"}
+                            _hover={{ border: "2px solid rgb(171, 81, 255)" }}
+                            placeholder="Enter house no"
+                            autoComplete={"off"}
+                        />
+                    </Box>
+                    <Box>
+                        <FormLabel> Block no. </FormLabel>
+                        <Input
+                            required
+                            type="text"
+                            border={"2px solid rgb(193, 206, 250)"}
+                            _hover={{ border: "2px solid rgb(171, 81, 255)" }}
+                            placeholder="Enter block no"
+                            autoComplete={"off"}
+                        />
+                    </Box>
+                    <Box>
+                        <FormLabel> Streat name </FormLabel>
+                        <Input
+                            required
+                            type="text"
+                            border={"2px solid rgb(193, 206, 250)"}
+                            _hover={{ border: "2px solid rgb(171, 81, 255)" }}
+                            placeholder="Enter Streat name"
+                            autoComplete={"off"}
+                        />
+                    </Box>
+                    <Box>
+                        <FormLabel> Area name (locality Name) </FormLabel>
+                        <Input
+                            required
+                            type="text"
+                            border={"2px solid rgb(193, 206, 250)"}
+                            _hover={{ border: "2px solid rgb(171, 81, 255)" }}
+                            placeholder="Enter area name"
+                            autoComplete={"off"}
+                        />
+                    </Box>
+                    <Box>
+                        <FormLabel> district </FormLabel>
+                        <Input
+                            required
+                            type="text"
+                            border={"2px solid rgb(193, 206, 250)"}
+                            _hover={{ border: "2px solid rgb(171, 81, 255)" }}
+                            placeholder="Enter district"
+                            autoComplete={"off"}
+                        />
+                    </Box>
+                    <Box>
+                        <FormLabel> Pincode </FormLabel>
+                        <HStack>
+                            <PinInput placeholder=''>
+                                <PinInputField />
+                                <PinInputField />
+                                <PinInputField />
+                                <PinInputField />
+                            </PinInput>
+                        </HStack>
+                    </Box>
+                    <Box>
+                        <FormLabel> State </FormLabel>
+                        <Input
+                            required
+                            type="text"
+                            border={"2px solid rgb(193, 206, 250)"}
+                            _hover={{ border: "2px solid rgb(171, 81, 255)" }}
+                            placeholder="Enter state"
+                            autoComplete={"off"}
+                        />
+                    </Box>
+                    <Box>
+                        <FormLabel> Country </FormLabel>
+                        <Input
+                            required
+                            type="text"
+                            border={"2px solid rgb(193, 206, 250)"}
+                            _hover={{ border: "2px solid rgb(171, 81, 255)" }}
+                            placeholder="Enter country"
+                            autoComplete={"off"}
+                        />
+                    </Box>
+                </Box>
                 <Heading as={"h3"} size={"md"} textAlign={"left"} fontWeight={500} margin={"0 0 10px 0"} >Your contact detail for the tenants to reach you</Heading>
                 <Input type='number' placeholder={"Phone Number"} maxLength={"12"} />
                 <Text margin={"10px auto"}>Are you a registered user? Login</Text>
-                {/* Start Button */}
-                <Button
+                {/* Start button */}
+                <button onClick={()=>handlechange("")}
                     w={"100%"}
                     backgroundColor={"rgb(46,49,146)"}
                     color={"white"}
                     borderRadius={0}
                     _hover={{ backgroundColor: "rgb(46,49,146)" }}
-                    margin={"6px 0 0 0"}>Start Now</Button>
+                    margin={"6px 0 0 0"}>Start Now</button>
             </div>
         </div>
     )

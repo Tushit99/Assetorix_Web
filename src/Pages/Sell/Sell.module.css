@@ -7,6 +7,15 @@
     margin: auto;  
 }  
 
+.btn{ 
+    padding: 0 6px;  
+    font-size: medium;   
+    border-radius: 6px; 
+    cursor: pointer; 
+    background-color: rgb(143, 132, 223);  
+    color: white;   
+}
+
 .sell img{
     width: 80%;  
     margin: auto; 

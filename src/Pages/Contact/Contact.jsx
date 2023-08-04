@@ -1,5 +1,5 @@
 import { Box, Divider, Heading, Text } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import Reactw from 'react';
 import style from "./Contact.module.css";
 
 const Contact = () => {

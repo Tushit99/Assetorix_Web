@@ -7,14 +7,6 @@
     z-index: 100;
     /* border: 2px solid black;  */
   }
-  
-  .top_navbar {
-    display: flex;
-    height: 60px;
-    background-color: rgba(0, 0, 0, 0.37);
-    left: 0;
-    color: black;
-  }
 
   .hamburger2{
     display: none;  
@@ -38,7 +30,7 @@
     gap: 10px; 
     justify-content: flex-start; 
     align-items: center; 
-  }
+  }nav_bottom2
   
   .start_btn{
     width: 100%; 
@@ -101,7 +93,7 @@
     color: rgb(0, 0, 0);  
   }  
   
-  .login_data > *{
+  .login_data2 > *{
     padding: 2px 10px 2px 10px;
     background-color: rgba(244, 244, 244, 0);
     color: rgb(255, 255, 255); 
@@ -142,7 +134,7 @@
     flex: 1;
   }
   
-  .login_data {
+  .login_data2 {
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -210,13 +202,13 @@
       display: flex;
     }
   
-    .login_data>*:nth-child(2){
+    .login_data2>*:nth-child(2){
       display: none; 
     }
-    .login_data>*:nth-child(3){
+    .login_data2>*:nth-child(3){
       display: none;
     }
-    .login_data>*:nth-child(4){
+    .login_data2>*:nth-child(4){
       display: none;
     }
   
@@ -235,7 +227,7 @@
       height: 50px; 
     }
   
-    .hamburger{
+    .hamburger2{
       display: flex; 
       align-items:  center; 
       justify-content: center; 
@@ -269,21 +261,21 @@
   }
   
   @media screen and (min-width: 100px) and (max-width: 550px) {
-    .top_navbar > * {
+    .top_navbar3 > * {
       flex: 1; 
     }
   
-    .top_navbar > div:nth-child(1) {
+    .top_navbar3 > div:nth-child(1) {
       display: flex;
     }
   
-    .login_data>*:nth-child(2){
+    .login_data2>*:nth-child(2){
       display: none;
     }
-    .login_data>*:nth-child(3){
+    .login_data2>*:nth-child(3){
       display: none;
     }
-    .login_data>*:nth-child(4){
+    .login_data2>*:nth-child(4){
       display: none;
     }
   
@@ -295,21 +287,20 @@
       /* border: 2px solid black;  */
     }
   
-    .nav_bottom {
+    .nav_bottom2 {
       display: none;
     }
   
-    .top_navbar{
+    .top_navbar3{
       display: grid; 
       grid-template-areas: "ham logo country login";
       height: fit-content;   
       height: 50px; 
     }
   
-    .hamburger{
+    .hamburger2{
       display: flex; 
-      align-items:  center; 
-      justify-content: center; 
+      align-items:  center;  
     }
   
     .logo img {

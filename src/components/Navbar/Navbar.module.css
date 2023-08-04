@@ -232,6 +232,25 @@
     display: none;
   }
 
+  /* sd */
+  .top_navbar3 > * {
+    flex: 1; 
+  }
+
+  .top_navbar3 > div:nth-child(1) {
+    display: flex;
+  }
+
+  .login_data2>*:nth-child(2){
+    display: none; 
+  }
+  .login_data2>*:nth-child(3){
+    display: none;
+  }
+  .login_data2>*:nth-child(4){
+    display: none;
+  }
+
   .logo {
     padding: 0;
     display: flex; 
@@ -239,6 +258,13 @@
     justify-content: start;   
     /* border: 2px solid black;  */
   } 
+
+  .top_navbar{
+    display: grid; 
+    grid-template-areas: "ham logo country login";
+    height: fit-content;   
+    height: 50px; 
+  }
 
   .top_navbar{
     display: grid; 
@@ -299,6 +325,25 @@
     display: none;
   }
 
+  /* m */
+  .top_navbar3 > * {
+    flex: 1; 
+  }
+
+  .top_navbar3 > div:nth-child(1) {
+    display: flex;
+  }
+
+  .login_data2>*:nth-child(2){
+    display: none;
+  }
+  .login_data2>*:nth-child(3){
+    display: none;
+  }
+  .login_data2>*:nth-child(4){
+    display: none;
+  }
+
   .logo {
     padding: 0;
     display: flex; 
@@ -311,7 +356,19 @@
     display: none;
   }
 
+  .nav_bottom2 {
+    display: none;
+  }
+
+
   .top_navbar{
+    display: grid; 
+    grid-template-areas: "ham logo country login";
+    height: fit-content;   
+    height: 50px; 
+  }
+
+  .top_navbar3{
     display: grid; 
     grid-template-areas: "ham logo country login";
     height: fit-content;   
