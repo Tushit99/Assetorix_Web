@@ -9,12 +9,23 @@ import {
   Image,
   useToast,
   Box,
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
+  HStack,
+  PinInput,
+  PinInputField,
+  Text,
 } from "@chakra-ui/react";
 import sideimg from "./backimg.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { signinuser } from "../../Redux/userauth/action";
+import { useDispatch, useSelector } from "react-redux"; 
 
 const Singup = () => {
   const data = useSelector((store) => store.userreducer);
@@ -25,35 +36,38 @@ const Singup = () => {
   const [number, setnumber] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [val, setVal] = "";
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handlesave = () => {
-    if ( name.length == "" || email.length == "" || password.length == "" || number.length == "" ) {
+    if (
+      name.length <= 2 ||
+      email.length <= 4 ||
+      password.length <= 7 ||
+      number.length <= 9
+    ) {
       toast({
-        position: "bottom-right",
+        position: "top-right",
         render: () => (
           <Box color="white" p={3} bg="blue.500">
-            Please fill all required information 
+            Please fill all required information
           </Box>
         ),
       });
     } else {
       let obj = {
-        avatar: "", 
+        avatar: "",
         name,
         email,
         password,
         mobile: number,
       };
-      dispatch(signinuser(obj)); 
-      toast({ 
-        title: "Account created.",
-        description: "Your Account is created successfully",
-        status: "success",
-        duration: 2000, 
-      });  
-      navigate("/login");
+      // dispatch(signinuser(obj));
+      onOpen();
     }
   };
+
+  const handleotp = () => {};
 
   return (
     <Stack
@@ -81,7 +95,7 @@ const Singup = () => {
           <FormControl id="name">
             <FormLabel>Name</FormLabel>
             <Input
-              required
+              required={true}
               type="text"
               onChange={(e) => setname(e.target.value)}
               border={"2px solid rgb(193, 206, 250)"}
@@ -93,7 +107,6 @@ const Singup = () => {
           <FormControl id="email">
             <FormLabel>Email address</FormLabel>
             <Input
-              required
               type="email"
               onChange={(e) => setemail(e.target.value)}
               border={"2px solid rgb(193, 206, 250)"}
@@ -105,7 +118,6 @@ const Singup = () => {
           <FormControl id="password">
             <FormLabel>Password</FormLabel>
             <Input
-              required
               type="password"
               onChange={(e) => setpassword(e.target.value)}
               border={"2px solid rgb(193, 206, 250)"}
@@ -117,7 +129,6 @@ const Singup = () => {
           <FormControl id="mobile">
             <FormLabel>Mobile no.</FormLabel>
             <Input
-              required
               type="number"
               onChange={(e) => setnumber(e.target.value)}
               border={"2px solid rgb(193, 206, 250)"}
@@ -135,14 +146,47 @@ const Singup = () => {
             <Button colorScheme={"blue"} onClick={handlesave} variant={"solid"}>
               Sign up
             </Button>
+            {/* external box */}
+            <Modal isOpen={isOpen} onClose={onClose}>
+              <ModalOverlay />
+              <ModalContent padding={"20px"}>
+                <ModalHeader>OTP Verification</ModalHeader>
+                <ModalCloseButton />
+                <ModalBody>
+                  <Text margin={"0 0 14px 0"}>
+                    Please verify you otp send to your email
+                  </Text>
+                  <HStack>
+                    <PinInput
+                      value={val}
+                      onChange={(e) => setVal(e.target.value)}
+                      placeholder=""
+                      otp
+                    >
+                      <PinInputField />
+                      <PinInputField />
+                      <PinInputField />
+                      <PinInputField />
+                      <PinInputField />
+                      <PinInputField />
+                    </PinInput>
+                  </HStack>
+                </ModalBody>
+                <ModalFooter>
+                  <Button onClick={handleotp}>Verify OTP</Button>
+                </ModalFooter>
+              </ModalContent>
+            </Modal>
+            {/* modal box end */}
           </Stack>
         </Stack>
       </Flex>
       <Flex
         flex={1}
-        display={{ base: "none", md: "block" }}
+        display={{ base: "none", md: "flex" }}
         objectFit={"contain"}
         padding={"30px"}
+        alignItems={"end"}
       >
         <Image alt={"Login Image"} objectFit={"cover"} src={sideimg} />
       </Flex>

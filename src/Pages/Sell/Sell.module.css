@@ -12,7 +12,16 @@
     font-size: medium;   
     border-radius: 6px; 
     cursor: pointer; 
-    background-color: rgb(143, 132, 223);  
+    background-color: rgb(100,181,246);  
+    color: white;   
+}
+
+.setbtn{
+    padding: 0 6px;  
+    font-size: medium;   
+    border-radius: 6px; 
+    cursor: pointer; 
+    background-color: #d2ab67;  
     color: white;   
 }
 
