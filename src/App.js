@@ -10,9 +10,7 @@ import {
 import TopNavbar from "./components/TopNavbar/TopNavbar";
 
 function App() {
-  const location = useLocation();
-
-  console.log(location);
+  const location = useLocation(); 
 
   const scrollToTop = () => {
     const scrollStep = -window.scrollY / (500 / 15);
@@ -20,7 +18,7 @@ function App() {
       if (window.scrollY !== 0) {
         window.scrollBy(0, scrollStep);
       } else {
-        clearInterval(scrollInterval);
+        clearInterval(scrollInterval); 
       }
     }, 15);
   };

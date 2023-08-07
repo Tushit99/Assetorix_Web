@@ -23,9 +23,10 @@ import {
   Text,
 } from "@chakra-ui/react";
 import sideimg from "./backimg.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux"; 
+import { useDispatch, useSelector } from "react-redux";
+import { signinuser } from "../../Redux/userauth/action";
 
 const Singup = () => {
   const data = useSelector((store) => store.userreducer);
@@ -40,34 +41,107 @@ const Singup = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handlesave = () => {
-    if (
-      name.length <= 2 ||
-      email.length <= 4 ||
-      password.length <= 7 ||
-      number.length <= 9
-    ) {
+    var lowerCase = /[a-z]/g;
+    var upperCase = /[A-Z]/g;
+    var numbers = /[0-9]/g;
+    if (name.length <= 2) {
       toast({
         position: "top-right",
         render: () => (
           <Box color="white" p={3} bg="blue.500">
-            Please fill all required information
+            Please fill your name
           </Box>
         ),
       });
-    } else {
-      let obj = {
-        avatar: "",
+    }
+    else if (number.length <= 9 || number.length > 10) {
+      toast({
+        position: "top-right",
+        render: () => (
+          <Box color="white" p={3} bg="blue.500">
+            mobile no. should be of 10 digits only
+          </Box>
+        ),
+      });
+    }
+    else if (password.length == "") {
+      toast({
+        position: "top-right",
+        render: () => (
+          <Box color="white" p={3} bg="blue.500">
+            Please Enter your password!
+          </Box>
+        ),
+      });
+    }
+    else if (!password.match(lowerCase)) {
+      toast({
+        position: "top-right",
+        render: () => (
+          <Box color="white" p={3} bg="blue.500">
+            Password should contains lowercase letters!
+          </Box>
+        ),
+      });
+    } else if (!password.match(upperCase)) {
+      toast({
+        position: "top-right",
+        render: () => (
+          <Box color="white" p={3} bg="blue.500">
+            Password should contain uppercase letters!
+          </Box>
+        ),
+      });
+    } else if (!password.match(numbers)) {
+      toast({
+        position: "top-right",
+        render: () => (
+          <Box color="white" p={3} bg="blue.500">
+            Password should contains numbers also!
+          </Box>
+        ),
+      });
+    } else if (password.length < 6) {
+      toast({
+        position: "top-right",
+        render: () => (
+          <Box color="white" p={3} bg="blue.500">
+            Password length should be more than 5
+          </Box>
+        ),
+      });
+    }
+    else {
+      let body = {
         name,
-        email,
         password,
         mobile: number,
       };
-      // dispatch(signinuser(obj));
-      onOpen();
+      dispatch(signinuser(body));
     }
   };
 
-  const handleotp = () => {};
+  useEffect(() => {
+    if (data.isError) {
+      toast({
+        title: `${data.error}`,
+        status: 'warning',
+        duration: 2000,
+      });
+    }
+    if (data.success == 0) {
+      toast({
+        title: 'Account created.',
+        description: ".",
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+      })
+      navigate("/");
+    }
+  }, [data]);
+
+  // const handleotp = () => { };
 
   return (
     <Stack
@@ -104,7 +178,7 @@ const Singup = () => {
               autoComplete={"off"}
             />
           </FormControl>
-          <FormControl id="email">
+          {/* <FormControl id="email">
             <FormLabel>Email address</FormLabel>
             <Input
               type="email"
@@ -112,6 +186,17 @@ const Singup = () => {
               border={"2px solid rgb(193, 206, 250)"}
               _hover={{ border: "2px solid rgb(171, 81, 255)" }}
               placeholder="Enter email..."
+              autoComplete={"off"}
+              />
+            </FormControl> */}
+          <FormControl id="mobile">
+            <FormLabel>Mobile no.</FormLabel>
+            <Input
+              type="number"
+              onChange={(e) => setnumber(e.target.value)}
+              border={"2px solid rgb(193, 206, 250)"}
+              _hover={{ border: "2px solid rgb(171, 81, 255)" }}
+              placeholder="mobile no..."
               autoComplete={"off"}
             />
           </FormControl>
@@ -126,17 +211,6 @@ const Singup = () => {
               autoComplete={"off"}
             />
           </FormControl>
-          <FormControl id="mobile">
-            <FormLabel>Mobile no.</FormLabel>
-            <Input
-              type="number"
-              onChange={(e) => setnumber(e.target.value)}
-              border={"2px solid rgb(193, 206, 250)"}
-              _hover={{ border: "2px solid rgb(171, 81, 255)" }}
-              placeholder="mobile no..."
-              autoComplete={"off"}
-            />
-          </FormControl>
           <Stack spacing={6}>
             <Stack
               direction={{ base: "column", sm: "row" }}
@@ -146,37 +220,6 @@ const Singup = () => {
             <Button colorScheme={"blue"} onClick={handlesave} variant={"solid"}>
               Sign up
             </Button>
-            {/* external box */}
-            <Modal isOpen={isOpen} onClose={onClose}>
-              <ModalOverlay />
-              <ModalContent padding={"20px"}>
-                <ModalHeader>OTP Verification</ModalHeader>
-                <ModalCloseButton />
-                <ModalBody>
-                  <Text margin={"0 0 14px 0"}>
-                    Please verify you otp send to your email
-                  </Text>
-                  <HStack>
-                    <PinInput
-                      value={val}
-                      onChange={(e) => setVal(e.target.value)}
-                      placeholder=""
-                      otp
-                    >
-                      <PinInputField />
-                      <PinInputField />
-                      <PinInputField />
-                      <PinInputField />
-                      <PinInputField />
-                      <PinInputField />
-                    </PinInput>
-                  </HStack>
-                </ModalBody>
-                <ModalFooter>
-                  <Button onClick={handleotp}>Verify OTP</Button>
-                </ModalFooter>
-              </ModalContent>
-            </Modal>
             {/* modal box end */}
           </Stack>
         </Stack>

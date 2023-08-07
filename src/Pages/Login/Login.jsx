@@ -16,21 +16,24 @@ import style from "./Login.module.css";
 import img from "./sideimg.png";
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginuser } from '../../Redux/userauth/action';
+// import axios from 'axios';
 
 const Login = () => {
-    const toast = useToast(); 
+    const data = useSelector((store) => store.userreducer);
+    const toast = useToast();
     const [email, setEmail] = useState("");
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
     const [password, setPassword] = useState("");
+    const dispatch = useDispatch();
 
-    const handlelogin = () => {
-        let obj = {
-            email,
-            password
-        }
+    
+
+    const handlelogin = async () => {
         if (email.length <= 2 || password.length <= 2) {
             toast({
-                position: 'bottom-right',
+                position: 'top-right',
                 render: () => (
                     <Box color='white' p={3} bg='blue.500'>
                         Please fill all required information
@@ -39,16 +42,35 @@ const Login = () => {
             })
         }
         else {
-            console.log(obj);
+            // console.log(obj);  
+            let obj = {
+                mobile: email,
+                password
+            }
             toast({
                 title: 'Login Successfull',
                 description: "You logged in successfully",
                 status: 'success',
                 duration: 2000,
             })
-            navigate("/");
-        }
-    }
+            dispatch(loginuser(obj));    
+            // try {
+                // const res = await fetch("https://assetorix.onrender.com/user/login", {
+                //     method: 'POST',  
+                //     headers: {  
+                //         'Content-Type': 'application/json',  
+                //     }, 
+                //     body: JSON.stringify(obj),  
+                // });
+                // const data = res.json() ;  
+                // console.log(data);  
+            // }
+            // catch (err) {
+            //     console.log(err);
+            // }
+        }  
+    } 
+     console.log(data); 
 
     return (
         <div className={style.signin_topbox}>
@@ -57,9 +79,9 @@ const Login = () => {
                     <Flex >
                         <Box spacing={4} gap={{ base: "10px", md: "20px" }} className={style.log_info} >
                             <Heading fontSize={{ base: '2xl', md: '4xl', lg: '2xl' }}>Login to your account</Heading>
-                            <FormControl id="email">
-                                <FormLabel fontSize={{ base: 'md', lg: 'xl' }}>Email address</FormLabel>
-                                <Input type="email" onChange={(e) => setEmail(e.target.value)} />
+                            <FormControl id="number">
+                                <FormLabel fontSize={{ base: 'md', lg: 'xl' }}>Mobile no.</FormLabel>
+                                <Input type="text" onChange={(e) => setEmail(e.target.value)} />
                             </FormControl>
                             <FormControl id="password">
                                 <FormLabel fontSize={{ base: 'md', lg: 'xl' }}>Password</FormLabel>

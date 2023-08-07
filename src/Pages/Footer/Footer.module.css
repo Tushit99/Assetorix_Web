@@ -25,15 +25,19 @@
   align-items: baseline;
   justify-content: left;
   gap: 14px;
-  flex: 1;
+  flex: 1; 
   padding: 20px;
   /* border: 2px solid yellow;   */
+} 
+
+.footer_description > *>*:hover {
+  text-decoration: underline; 
 }
 
 .footer_description h2 {
   font-size: large;
   position: relative;
-  margin-bottom: 10px;
+  margin-bottom: 10px;  
 }
 
 .footer_description h2::after {
@@ -41,6 +45,7 @@
   position: absolute;
   border: 2px solid red;
   bottom: -10px;
+  text-decoration:none;  
   width: 40px;
   border-radius: 20px;
   left: 0;
