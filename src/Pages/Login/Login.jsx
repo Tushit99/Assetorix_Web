@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react';
 import style from "./Login.module.css";
 import img from "./sideimg.png";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginuser } from '../../Redux/userauth/action';
@@ -23,54 +23,103 @@ import { loginuser } from '../../Redux/userauth/action';
 const Login = () => {
     const data = useSelector((store) => store.userreducer);
     const toast = useToast();
-    const [email, setEmail] = useState("");
+    const [mobile, setMobile] = useState("");
     const navigate = useNavigate();
     const [password, setPassword] = useState("");
     const dispatch = useDispatch();
 
-    
+
 
     const handlelogin = async () => {
-        if (email.length <= 2 || password.length <= 2) {
+        if (mobile.length <= 9 || mobile.length >= 11) {
             toast({
                 position: 'top-right',
                 render: () => (
                     <Box color='white' p={3} bg='blue.500'>
-                        Please fill all required information
+                        Mobile number is invalide!
+                    </Box>
+                ), 
+            })
+        }
+        var lowerCase = /[a-z]/g;
+        var upperCase = /[A-Z]/g; 
+        var numbers = /[0-9]/g;  
+        if (password.length == "") {
+            toast({
+                position: "top-right",
+                render: () => (
+                    <Box color="white" p={3} bg="blue.500">
+                        Please Enter your password!
                     </Box>
                 ),
-            })
+            });
+        }
+        else if (!password.match(lowerCase)) {
+            toast({
+                position: "top-right",
+                render: () => (
+                    <Box color="white" p={3} bg="blue.500">
+                        Password should contains lowercase letters!
+                    </Box>
+                ),
+            });
+        } else if (!password.match(upperCase)) {
+            toast({
+                position: "top-right",
+                render: () => (
+                    <Box color="white" p={3} bg="blue.500"> 
+                        Password should contain uppercase letters!
+                    </Box>
+                ),
+            }); 
+        } else if (!password.match(numbers)) {
+            toast({
+                position: "top-right",
+                render: () => (
+                    <Box color="white" p={3} bg="blue.500">
+                        Password should contains numbers also!
+                    </Box>
+                ),
+            });
+        } else if (password.length < 6) {
+            toast({
+                position: "top-right",
+                render: () => (
+                    <Box color="white" p={3} bg="blue.500">
+                        Password length should be more than 5
+                    </Box>
+                ),
+            });
         }
         else {
             // console.log(obj);  
-            let obj = {
-                mobile: email,
+            let body = {
+                mobile, 
                 password
             }
+            dispatch(loginuser(body)); 
+        }
+    }
+
+    useEffect(() => {
+        if (data.isError) {
             toast({
-                title: 'Login Successfull',
-                description: "You logged in successfully",
+                title: `${data.error}`,
+                status: 'warning',
+                duration: 4000,
+            });
+        }
+        if (data.success == 0) {
+            toast({
+                title: 'Login Succesfull',
                 status: 'success',
-                duration: 2000,
+                duration: 4000,
             })
-            dispatch(loginuser(obj));    
-            // try {
-                // const res = await fetch("https://assetorix.onrender.com/user/login", {
-                //     method: 'POST',  
-                //     headers: {  
-                //         'Content-Type': 'application/json',  
-                //     }, 
-                //     body: JSON.stringify(obj),  
-                // });
-                // const data = res.json() ;  
-                // console.log(data);  
-            // }
-            // catch (err) {
-            //     console.log(err);
-            // }
-        }  
-    } 
-     console.log(data); 
+            navigate("/");
+        }
+    }, [data]);
+
+    // console.log(data);
 
     return (
         <div className={style.signin_topbox}>
@@ -81,22 +130,23 @@ const Login = () => {
                             <Heading fontSize={{ base: '2xl', md: '4xl', lg: '2xl' }}>Login to your account</Heading>
                             <FormControl id="number">
                                 <FormLabel fontSize={{ base: 'md', lg: 'xl' }}>Mobile no.</FormLabel>
-                                <Input type="text" onChange={(e) => setEmail(e.target.value)} />
+                                <Input type="number" onChange={(e) => setMobile(e.target.value)} value={mobile} required />
                             </FormControl>
                             <FormControl id="password">
                                 <FormLabel fontSize={{ base: 'md', lg: 'xl' }}>Password</FormLabel>
-                                <Input type="password" onChange={(e) => setPassword(e.target.value)} />
+                                <Input type="password" onChange={(e) => setPassword(e.target.value)} value={password} required />
                             </FormControl>
                             <Stack spacing={6}>
-                                <Stack
+                                <Link to={""}></Link>
+                                {/* <Stack
                                     direction={{ base: 'column', sm: 'row' }}
                                     align={'start'}
                                     justify={'space-between'}>
                                     <Checkbox size={{ base: "md", md: 'lg' }}>Remember me</Checkbox>
                                     <Link color={'blue'}>Forgot password?</Link>
-                                </Stack>
-                                <Button variant={'solid'} onClick={handlelogin} fontSize={{ base: '2xl', lg: 'xl' }} >
-                                    Login
+                                </Stack>  */}
+                                <Button variant={'solid'} minWidth={400} onClick={handlelogin} fontSize={{ base: '2xl', lg: 'xl' }} >
+                                    Login  
                                 </Button>
                             </Stack>
                         </Box>

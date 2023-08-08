@@ -9,3 +9,5 @@ export const USER_SIGNIN_ERROR = "user/signin/error";
 export const USER_lOGIN_UPDATE = "user/login/update";
 export const USER_lOGIN_DELETE = "user/login/delete";  
 
+export const USER_LOGOUT = "user/logout";
+

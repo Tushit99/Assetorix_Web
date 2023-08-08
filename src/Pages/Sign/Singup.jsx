@@ -9,24 +9,13 @@ import {
   Image,
   useToast,
   Box,
-  useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
-  HStack,
-  PinInput,
-  PinInputField,
-  Text,
+  useDisclosure, 
 } from "@chakra-ui/react";
 import sideimg from "./backimg.png";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { signinuser } from "../../Redux/userauth/action";
+import { signinuser } from "../../Redux/userauth/action";   
 
 const Singup = () => {
   const data = useSelector((store) => store.userreducer);
@@ -37,8 +26,8 @@ const Singup = () => {
   const [number, setnumber] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [val, setVal] = "";
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  // const [val, setVal] = "";
+  // const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handlesave = () => {
     var lowerCase = /[a-z]/g;
@@ -60,7 +49,7 @@ const Singup = () => {
         render: () => (
           <Box color="white" p={3} bg="blue.500">
             mobile no. should be of 10 digits only
-          </Box>
+          </Box> 
         ),
       });
     }
@@ -126,22 +115,22 @@ const Singup = () => {
       toast({
         title: `${data.error}`,
         status: 'warning',
-        duration: 2000,
+        duration: 2000, 
       });
     }
     if (data.success == 0) {
       toast({
-        title: 'Account created.',
-        description: ".",
+        title: 'Account created Successfully', 
         status: 'success',
-        duration: 9000,
-        isClosable: true,
+        duration: 4000, 
       })
       navigate("/");
     }
   }, [data]);
 
-  // const handleotp = () => { };
+  console.log(data); 
+
+  // const handleotp = () => { }; 
 
   return (
     <Stack
@@ -230,7 +219,7 @@ const Singup = () => {
         objectFit={"contain"}
         padding={"30px"}
         alignItems={"end"}
-      >
+      > 
         <Image alt={"Login Image"} objectFit={"cover"} src={sideimg} />
       </Flex>
     </Stack>

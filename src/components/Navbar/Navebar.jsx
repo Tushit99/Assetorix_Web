@@ -18,25 +18,45 @@ import {
     TabPanel,
     TabList,
     TabPanels,
-    Checkbox, 
+    Checkbox,
 } from "@chakra-ui/react";
 import { BiSolidUserDetail } from "react-icons/bi";
 import { IoIosArrowDown } from "react-icons/io";
+import { useDispatch, useSelector } from "react-redux";
+import { changecountry } from "../../Redux/globalval/action";
 
-const Navebar = () => { 
-    const [scroll, setScroll] = useState(0);   
+const Navebar = () => {
+    const data = useSelector((state) => state.userreducer);
+    const [scroll, setScroll] = useState(0);
+    const [country, setCountry] = useState("india");
+    const dispatch = useDispatch();
 
-    useEffect(() => { 
-      window.addEventListener("scroll", () => {
-        setScroll(window.pageYOffset);
-      });
-    }, []);   
+    useEffect(() => {
+        window.addEventListener("scroll", () => {
+            setScroll(window.pageYOffset);
+        });
 
-    // console.log(scroll); 
+        let storedVal = localStorage.getItem("astcountry");
+        if (!storedVal) {
+            dispatch(changecountry("india"));
+            setCountry("india");
+        } else {
+            dispatch(changecountry(storedVal));
+            setCountry(storedVal);
+        }
+    }, []);
 
+    const handlecountry = (val) => {
+        setCountry(val);
+        localStorage.setItem("astcountry", val);
+        dispatch(changecountry(val));
+    };
+
+    console.log(data.user.name);
 
     return (
         <div className={style.head_nav}>
+            {/*  Top Navbar Section (logo home about contact) */}
             <div className={scroll > 20 ? style.top_navbar3 : style.top_navbar}>
                 <div className={style.hamburger}>
                     <Hamburger />
@@ -45,8 +65,12 @@ const Navebar = () => {
                     <Logo />
                 </div>
                 <div className={scroll > 20 ? style.login_data2 : style.login_data}>
-                    <div className={scroll > 20 ? style.country2 : style.country }>
-                        <select style={{ border: "0px", outline: "0px" }}>
+                    <div className={scroll > 20 ? style.country2 : style.country}>
+                        <select
+                            onChange={(e) => handlecountry(e.target.value)}
+                            value={country}
+                            style={{ border: "0px", outline: "0px" }}
+                        >
                             <option value="india">India</option>
                             <option value="usa">USA</option>
                         </select>
@@ -55,26 +79,32 @@ const Navebar = () => {
                     <Link to={"/about"}>About us</Link>
                     <Link to={"/contact"}>Contact</Link>
                 </div>
+                {/* login signin button */}
                 <div className={style.login_box}>
                     <Popover>
-                        <PopoverTrigger> 
-                            <Button borderRadius={"30px"} rightIcon={<IoIosArrowDown size={"20px"} color="rgb(46,49,146)" />}>
-                                {/* icon */}
-                                <BiSolidUserDetail size={"24px"} color="rgb(46,49,146)" />
-                            </Button>
+                        <PopoverTrigger>
+                            <Button borderRadius={"30px"}  rightIcon={<IoIosArrowDown size={"20px"} _hover={{backgroundColor:"unset"}} color="rgb(46,49,146)" />} > 
+                            {data.user.name ? 
+                                 <span className={style.alpha}>
+                                     {(data.user.name[0]).toUpperCase()}
+                                 </span>
+                                : 
+                                <BiSolidUserDetail size={"24px"} color="rgb(46,49,146)" />  
+                            }
+                            </Button> 
                         </PopoverTrigger>
                         <PopoverContent>
                             <PopoverArrow />
                             <PopoverHeader>Welcome to Assetorix</PopoverHeader>
                             <PopoverBody>
-                                <Text margin={"0 0 8px 0"}>
+                                <Text margin={"0 0 8px 0"}> 
                                     Login for more futuristic experience
                                 </Text>
                                 <Box
                                     display={"flex"}
                                     justifyContent={"space-around"}
                                     margin={"0 0 8px 0"}
-                                    alignItems={"center"} 
+                                    alignItems={"center"}
                                 >
                                     <Link className={style.logbtn} to={"/login"}>
                                         Login
@@ -88,29 +118,30 @@ const Navebar = () => {
                     </Popover>
                 </div>
             </div>
-            <div className={scroll > 20 ? style.nav_bottom2 : style.nav_bottom }>
+            {/* bottom section (buy, sell , home Loans , rent , advertise , agent finder , corporate services) */}
+            <div className={scroll > 20 ? style.nav_bottom2 : style.nav_bottom}>
                 {/* Buy button  */}
                 <Popover>
                     <PopoverTrigger>
                         <Button
                             backgroundColor={"unset"}
-                            color={"auto"} 
+                            color={"auto"}
                             fontWeight={400}
                             _hover={{ color: "unset" }}
                             _active={{ color: "unset" }}
                         >
                             Buy
                         </Button>
-                    </PopoverTrigger> 
+                    </PopoverTrigger>
                     <PopoverContent w={{ base: "320px", md: "400px" }} color={"black"}>
-                        <PopoverArrow /> 
+                        <PopoverArrow />
                         <PopoverHeader>Buy Property</PopoverHeader>
                         <PopoverBody>
                             {/* one */}
-                            <Tabs variant="enclosed"> 
+                            <Tabs variant="enclosed">
                                 <TabList>
                                     <Tab>Residential</Tab>
-                                    <Tab>Commercial</Tab> 
+                                    <Tab>Commercial</Tab>
                                 </TabList>
                                 <TabPanels>
                                     <TabPanel>
@@ -140,7 +171,13 @@ const Navebar = () => {
                                                 other
                                             </Checkbox>
                                         </Box>
-                                        <Button backgroundColor={"rgb(46,49,146)"} color={"white"} className={style.start_btn}>Start Now</Button>
+                                        <Button
+                                            backgroundColor={"rgb(46,49,146)"}
+                                            color={"white"}
+                                            className={style.start_btn}
+                                        >
+                                            Start Now
+                                        </Button>
                                     </TabPanel>
                                     <TabPanel>
                                         <Box className={style.buy}>
@@ -154,7 +191,13 @@ const Navebar = () => {
                                             <Checkbox>Hospitality</Checkbox>
                                             <Checkbox>Other</Checkbox>
                                         </Box>
-                                        <Button backgroundColor={"rgb(46,49,146)"} color={"white"} className={style.start_btn}>Start Now</Button>
+                                        <Button
+                                            backgroundColor={"rgb(46,49,146)"}
+                                            color={"white"}
+                                            className={style.start_btn}
+                                        >
+                                            Start Now
+                                        </Button>
                                     </TabPanel>
                                 </TabPanels>
                             </Tabs>

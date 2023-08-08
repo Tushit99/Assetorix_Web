@@ -1,8 +1,7 @@
 
-
 .signin_topbox{
   overflow: hidden; 
-  width: 100%; 
+  width: 100%;   
   position: relative;       
 } 
 
@@ -11,7 +10,7 @@
   color: rgb(0, 0, 0);  
   width: 90%; 
   margin: auto;  
-  height: 80vh; 
+  min-height: 80vh; 
 } 
 
 .detail>*{ 
@@ -24,6 +23,7 @@
 .detail button{
   background-color: rgb(62, 62, 228); 
   color: white;
+  width: 100%; 
 }
 
 .detail button:hover{

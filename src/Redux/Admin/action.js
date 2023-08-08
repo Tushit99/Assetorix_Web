@@ -13,7 +13,7 @@ export const getadmin = (param) => async (dispatch) => {
         dispatch({ type: ADMIN_lOGIN_SUCCESS, payload: e.data });
         return e.data; 
       });  
-    console.log(res);  
+    // console.log(res);  
   } catch (err) {
     dispatch({ type: ADMIN_lOGIN_ERROR }); 
   } 
