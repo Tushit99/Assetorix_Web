@@ -136,8 +136,7 @@ const Login = () => {
                                 <FormLabel fontSize={{ base: 'md', lg: 'xl' }}>Password</FormLabel>
                                 <Input type="password" onChange={(e) => setPassword(e.target.value)} value={password} required />
                             </FormControl>
-                            <Stack spacing={6}>
-                                <Link to={""}></Link>
+                            <Stack spacing={6} width={"100%"}> 
                                 {/* <Stack
                                     direction={{ base: 'column', sm: 'row' }}
                                     align={'start'}
@@ -145,7 +144,7 @@ const Login = () => {
                                     <Checkbox size={{ base: "md", md: 'lg' }}>Remember me</Checkbox>
                                     <Link color={'blue'}>Forgot password?</Link>
                                 </Stack>  */}
-                                <Button variant={'solid'} minWidth={400} onClick={handlelogin} fontSize={{ base: '2xl', lg: 'xl' }} >
+                                <Button variant={'solid'} w={"full"} onClick={handlelogin} fontSize={{ base: '2xl', lg: 'xl' }} >
                                     Login  
                                 </Button>
                             </Stack>
