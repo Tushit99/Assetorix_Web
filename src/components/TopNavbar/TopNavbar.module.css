@@ -23,6 +23,21 @@
   /* .top_navbar>div{
     border: 2px solid black; 
   } */ 
+
+  .logbtn {
+    border: 1px solid rgb(163, 163, 255);
+    padding: 4px 30px;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: rgba(163, 163, 255, 0.566) 2px 3px 0 1px;
+    transition: all 0.4s ease-in-out;
+  }
+  
+  .logbtn:hover {
+    background-color: rgb(46, 49, 146);
+    color: white;
+    box-shadow: rgba(163, 163, 255, 0.566) 0px 0px 3px;
+  }
   
   .buy{
     display: flex;  
@@ -52,21 +67,43 @@
     padding-left: 50px;
     grid-area: logo;
   }
+
   
-  .logbtn{
-    border: 1px solid rgb(163, 163, 255); 
-    padding: 4px 30px; 
-    cursor: pointer;  
-    border-radius: 10px; 
-    box-shadow: rgba(163, 163, 255, 0.566) 2px 3px 0 1px; 
-    transition: all 0.4s ease-in-out;  
-  }  
-  
-  .logbtn:hover{
-    background-color: rgb(46,49,146); 
-    color: white; 
-    box-shadow: rgba(163, 163, 255, 0.566) 0px 0px 3px ; 
-  }
+/* after login log_links */
+
+.log_links{
+  display: grid; 
+  text-align: left;
+  gap: 2px;
+}
+
+.log_links *{
+  background-color: rgb(255, 255, 255); 
+  padding: 0 10px; 
+  /* border-radius: 10px;   */
+}
+
+.log_links *:hover{
+  background-color: rgb(226, 226, 226);
+  color: black; 
+}
+
+.logout_btn {
+  border: 1px solid rgb(163, 163, 255);
+  padding: 4px 30px;
+  width: 100%; 
+  margin: 10px 0;
+  cursor: pointer;
+  border-radius: 10px;
+  box-shadow: rgba(163, 163, 255, 0.566) 2px 3px 0 1px;
+  transition: all 0.4s ease-in-out; 
+}
+
+.logout_btn:hover {
+  /* background-color: rgb(46, 49, 146);
+  color: white; */
+  box-shadow: rgba(163, 163, 255, 0.566) 0px 0px 3px;
+} 
   
   .logo img {
     top: 20%;

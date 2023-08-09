@@ -1,0 +1,10 @@
+.edit_btn{
+    font-weight: 500; 
+    color: rgb(0, 87, 226); 
+} 
+
+.edit_btn:hover{
+    text-decoration: underline;
+}
+
+ 

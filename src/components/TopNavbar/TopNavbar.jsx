@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "../Logo/Logo";
 import style from "./TopNavbar.module.css";
 import { Link } from "react-router-dom";
@@ -22,8 +22,48 @@ import {
 } from "@chakra-ui/react";
 import { BiSolidUserDetail } from "react-icons/bi";
 import { IoIosArrowDown } from "react-icons/io";
+import { useDispatch, useSelector } from "react-redux";
+import { userPreLog } from "../../Redux/userauth/action";
+import { changecountry } from "../../Redux/globalval/action";
 
 const TopNavbar = () => {
+    const data = useSelector((state) => state.userreducer);
+    const [scroll, setScroll] = useState(0);
+    const [country, setCountry] = useState("india");
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        window.addEventListener("scroll", () => {
+            setScroll(window.pageYOffset);
+        });
+
+        let userid = localStorage.getItem("usrId") || undefined;
+        let usertoken = localStorage.getItem("AstToken") || undefined;
+
+        if (userid && usertoken) {
+            let body = {
+                id: userid,
+                authorization: usertoken,
+            };
+            // console.log(body)
+            dispatch(userPreLog(body));
+        }
+
+        let storedVal = localStorage.getItem("astcountry");
+        if (!storedVal) {
+            dispatch(changecountry("india"));
+            setCountry("india");
+        } else {
+            dispatch(changecountry(storedVal));
+            setCountry(storedVal);
+        }
+    }, []);
+
+    const handlecountry = (val) => {
+        setCountry(val);
+        localStorage.setItem("astcountry", val);
+        dispatch(changecountry(val));
+    };
 
 
     return (
@@ -46,36 +86,71 @@ const TopNavbar = () => {
                     <Link to={"/about"}>About us</Link>
                     <Link to={"/contact"}>Contact</Link>
                 </div>
+                {/* login signin button */}
                 <div className={style.login_box}>
                     <Popover>
                         <PopoverTrigger>
-                            <Button borderRadius={"30px"} rightIcon={<IoIosArrowDown size={"20px"} color="rgb(46,49,146)" />}>
-                                {/* icon */}
-                                <BiSolidUserDetail size={"24px"} color="rgb(46,49,146)" />
+                            <Button
+                                borderRadius={"30px"}
+                                rightIcon={
+                                    <IoIosArrowDown
+                                        size={"20px"}
+                                        _hover={{ backgroundColor: "unset" }}
+                                        color="rgb(46,49,146)"
+                                    />
+                                }
+                            >
+                                {data.user.name ? (
+                                    <span className={style.alpha}>
+                                        {data.user.name[0].toUpperCase()}
+                                    </span>
+                                ) : (
+                                    <BiSolidUserDetail size={"24px"} color="rgb(46,49,146)" />
+                                )}
                             </Button>
                         </PopoverTrigger>
-                        <PopoverContent>
-                            <PopoverArrow />
-                            <PopoverHeader>Welcome to Assetorix</PopoverHeader>
-                            <PopoverBody>
-                                <Text margin={"0 0 8px 0"}>
-                                    Login for more futuristic experience
-                                </Text>
-                                <Box
-                                    display={"flex"}
-                                    justifyContent={"space-around"}
-                                    margin={"0 0 8px 0"}
-                                    alignItems={"center"}
-                                >
-                                    <Link className={style.logbtn} to={"/login"}>
-                                        Login
-                                    </Link>
-                                    <Link className={style.logbtn} to={"/signup"}>
-                                        Sign Up
-                                    </Link>
-                                </Box>
-                            </PopoverBody>
-                        </PopoverContent>
+                        {data.user.name ? (
+                            <PopoverContent >
+                                <PopoverArrow />
+                                <PopoverHeader>Welcome to Assetorix</PopoverHeader>
+                                <PopoverBody >
+                                    <Text margin={"0 0 8px 0"}>
+                                        Hello {(data.user.name).toUpperCase()}
+                                    </Text>
+                                    <Box className={style.log_links}> 
+                                        <Link to={"/profile"}> Profile </Link> 
+                                        <Link> Wishlist </Link>  
+                                        <Link> recently visited </Link>
+                                        <Link> Listings </Link>  
+                                        <Link> Purchased </Link>  
+                                    </Box>
+                                    <Button className={style.logout_btn} > Logout </Button>  
+                                </PopoverBody>
+                            </PopoverContent>
+                        ) : (
+                            <PopoverContent>
+                                <PopoverArrow />
+                                <PopoverHeader>Welcome to Assetorix</PopoverHeader>
+                                <PopoverBody>
+                                    <Text margin={"0 0 8px 0"}>
+                                        Login for more futuristic experience
+                                    </Text>
+                                    <Box
+                                        display={"flex"}
+                                        justifyContent={"space-around"}
+                                        margin={"0 0 8px 0"}
+                                        alignItems={"center"}
+                                    >
+                                        <Link className={style.logbtn} to={"/login"}>
+                                            Login
+                                        </Link>
+                                        <Link className={style.logbtn} to={"/signup"}>
+                                            Sign Up
+                                        </Link>
+                                    </Box>
+                                </PopoverBody>
+                            </PopoverContent>
+                        )}
                     </Popover>
                 </div>
             </div>

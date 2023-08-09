@@ -1,5 +1,7 @@
 import {
+  USER_DATA_UPDATE,
   USER_LOGOUT,
+  USER_PREE_LOGIN,
   USER_SIGNIN_ERROR,
   USER_SIGNIN_LOADING,
   USER_SIGNIN_SUCCESS,
@@ -15,6 +17,7 @@ const initialState = {
   user: [],
   success: 4,
   token: "",
+  name: "",
 };
 
 export const reducer = (state = initialState, { type, payload }) => {
@@ -29,6 +32,7 @@ export const reducer = (state = initialState, { type, payload }) => {
         token: payload.token,
         isError: false,
         success: 0,
+        name: payload.name,
       };
     case USER_lOGIN_ERROR:
       return {
@@ -48,6 +52,7 @@ export const reducer = (state = initialState, { type, payload }) => {
         user: payload,
         isError: false,
         success: 0,
+        name: payload.name,
       };
     case USER_SIGNIN_ERROR:
       return {
@@ -66,6 +71,26 @@ export const reducer = (state = initialState, { type, payload }) => {
         error: "",
         success: 4,
         isError: false,
+      };
+    case USER_PREE_LOGIN:
+      return {
+        ...state,
+        isLoading: false,
+        token: payload.token,
+        user: payload,
+        isError: false,
+        success: 0,
+        name: payload.name,
+      };
+    case USER_DATA_UPDATE:
+      return {
+        ...state,
+        isLoading: false,
+        token: payload.token,
+        user: payload,
+        isError: false,
+        success: 0,
+        name: payload.name,
       };
     default:
       return state;

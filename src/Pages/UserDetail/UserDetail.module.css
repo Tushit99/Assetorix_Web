@@ -1,0 +1,32 @@
+
+.mainbox{  
+    width: 95%; 
+    margin: auto; 
+    display: grid; 
+    gap: 20px; 
+    /* border: 2px solid black;   */
+} 
+
+.user_profile{ 
+    padding-top: 120px ;     
+}
+
+.container{ 
+    display: grid; 
+    gap: 20px; 
+    padding: 20px 50px; 
+    width: 100%;    
+    text-align: left;  
+    border: 1px solid black;  
+} 
+
+.edit_btn{
+    font-weight: 500; 
+    color: rgb(0, 87, 226); 
+} 
+
+.edit_btn:hover{
+    text-decoration: underline;
+}
+
+
