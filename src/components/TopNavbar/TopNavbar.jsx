@@ -71,8 +71,8 @@ const TopNavbar = () => {
             <div className={style.top_navbar3}>
                 <div className={style.hamburger2}>
                     <Hamburger />
-                </div>
-                <div className={style.logo}>
+                </div> 
+                <div className={style.logo}> 
                     <Logo />
                 </div>
                 <div className={style.login_data2}>

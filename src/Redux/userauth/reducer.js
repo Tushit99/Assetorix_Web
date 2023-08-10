@@ -66,7 +66,7 @@ export const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         isLoading: false,
-        token: "",
+        token: "", 
         user: [],
         error: "",
         success: 4,
@@ -85,9 +85,8 @@ export const reducer = (state = initialState, { type, payload }) => {
     case USER_DATA_UPDATE:
       return {
         ...state,
-        isLoading: false,
-        token: payload.token,
-        user: payload,
+        isLoading: false, 
+        user: payload, 
         isError: false,
         success: 0,
         name: payload.name,

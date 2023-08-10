@@ -11,19 +11,20 @@ const MobileChanger = () => {
     const [mobile, setmobile] = useState(""); 
     const dispatch = useDispatch(); 
 
-    console.log(data); 
+    // console.log(data); 
     const handleupdate = () => {
         let id = data.user._id;
         let authorization = data.user.token;
 
-        let config = {
-            headers: {
+        let headers = {
+            'Content-Type': 'application/json',
                 id,
                 authorization
-            },
-            body: { mobile: mobile }
-        } 
-        dispatch(handleChanges(config)); 
+        }
+        let body = { mobile: mobile }
+        dispatch(handleChanges(headers, body)); 
+        onClose();
+
     }
 
     useEffect(()=>{

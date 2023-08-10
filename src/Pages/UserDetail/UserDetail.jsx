@@ -56,7 +56,7 @@ const UserDetail = () => {
                             size={"xs"}
                             fontWeight={"bold"}
                         >
-                            Email
+                            Email 
                         </Heading>
                         <Box display={"flex"} alignItems={"center"} gap={6}>
                             <Text> {data.user.email ? data.user.email : ""} </Text>

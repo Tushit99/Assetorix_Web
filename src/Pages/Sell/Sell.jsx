@@ -55,7 +55,6 @@ const Sell = () => {
           textAlign={"left"}
           fontWeight={"600"}
         >
-
           You're looking to ...
         </Heading>
         <Tabs
@@ -111,7 +110,8 @@ const Sell = () => {
                           handlechange("sell", "Independent/builder Floor")
                         }
                         className={
-                          look === "Independent/builder Floor" && type === "sell"
+                          look === "Independent/builder Floor" &&
+                            type === "sell"
                             ? style.setbtn
                             : style.btn
                         }
@@ -498,7 +498,6 @@ const Sell = () => {
           </TabPanels>
         </Tabs>
         <Heading as={"h3"} size={"md"} textAlign={"left"} fontWeight={500}>
-
           Your Address Detail:
         </Heading>
         <Box display={"grid"} gap={"14px"} margin={"15px 0"}>

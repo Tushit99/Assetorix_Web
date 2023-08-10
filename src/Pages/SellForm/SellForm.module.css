@@ -1,0 +1,73 @@
+.post_property {
+  padding-top: 120px;
+  display: flex;
+  width: 90%;
+  margin: auto;
+  gap: 20px;
+}
+
+.post_property > *:nth-child(1) {
+  flex: 3;
+  /* border: 2px solid rgb(0, 60, 255); */
+}
+
+.post_property > *:nth-child(2) {
+  flex: 1;
+  border: 2px solid rgb(255, 0, 0);
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 8px;    
+}
+
+.setbtn {
+    border-radius: 10px;
+    background-color: rgb(46,49,146);
+    color: white;
+    padding: 4px 10px;
+}
+
+.btn {
+  border-radius: 10px;
+  background-color: rgb(114,154,191);
+  color: white;
+  padding: 4px 10px;
+}
+
+.inp_form_numbers{
+    display: grid; 
+    grid-template-columns: repeat(3,1fr); 
+    gap: 4%; 
+    margin: 20px 0;  
+}
+
+.select_land{
+    display: flex; 
+    gap: 2%; 
+    margin: 12px 0;
+    width: 240px; 
+}
+
+.select_land>*:nth-child(1){
+    flex: 5;
+}
+
+.select_land>*:nth-child(2){
+    flex: 3;
+}
+
+.optional_box{
+    text-align: left; 
+    margin: 20px 0 ; 
+    display: grid; 
+    gap: 8px;   
+}
+
+.optional_box>*:nth-child(2){
+    display: flex; 
+    align-items: center; 
+    gap: 20px;  
+}
+

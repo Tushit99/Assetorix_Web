@@ -119,7 +119,7 @@ const Login = () => {
         }
     }, [data]);
 
-    // console.log(data);
+    console.log(data);
 
     return (
         <div className={style.signin_topbox}>

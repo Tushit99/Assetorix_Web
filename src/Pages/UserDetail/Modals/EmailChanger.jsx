@@ -14,14 +14,15 @@ const EmailChanger = () => {
         let id = data.user._id;
         let authorization = data.user.token;
 
-        let config = {
-            headers: {
+        let headers = {
+            'Content-Type': 'application/json',
                 id,
                 authorization
-            },
-            body: { email: val }
-        } 
-        dispatch(handleChanges(config)); 
+        }
+        let body = { email: val }
+        dispatch(handleChanges(headers, body));
+        onClose();
+
     } 
 
     useEffect(()=>{

@@ -61,39 +61,41 @@ export const signinuser = (param) => async (dispatch) => {
 };
 
 export const userPreLog = (param) => async (dispatch) => {
-  let config = {
-    headers: param,
-  };
+  // let config = {
+  //   headers: param,
+  // }; 
+  // console.log(param);  
   try {
-    await axios
-      .get("https://assetorix.onrender.com/user/", config)
-      .then((e) => {
+    await axios.get("https://assetorix.onrender.com/user/", {headers: param}).then((e) => {
         console.log(e.data);
-        let token = localStorage.getItem("AstToken");
+        let token = localStorage.getItem("AstToken"); 
         localStorage.setItem("AstUser",e.data.name); 
         dispatch({ type: USER_PREE_LOGIN, payload: { ...e.data, token } });
       });
   } catch (err) {
-    console.log(err.message);
+    console.log(err);
   } 
-};
+}; 
 
-export const handleChanges = (body) => async (dispatch) => {
+export const handleChanges = (headers,body) => async (dispatch) => {
   try {
     await axios
-      .patch("https://assetorix.onrender.com/user/update", body)
-      .then((e) => {
+      .patch("https://assetorix.onrender.com/user/update", body, {headers}).then((e) => {
         console.log(e); 
-        let token = localStorage.getItem("AstToken");
+        let token = localStorage.getItem("AstToken"); 
+        localStorage.setItem("AstUser",e.data.name); 
         dispatch({type:USER_DATA_UPDATE , payload: {...e.data,token}}); 
       });
   } catch (err) {
     console.log(err)
   }
-};
+}; 
+ 
+
 
 export const userlogout = () => (dispatch) => {
   localStorage.removeItem("AstToken");
-  localStorage.removeItem("AstUser");
+  localStorage.removeItem("AstUser"); 
+  localStorage.removeItem("usrId"); 
   dispatch({ type: USER_LOGOUT });
 };

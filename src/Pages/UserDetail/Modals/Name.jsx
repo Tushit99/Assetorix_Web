@@ -2,26 +2,26 @@ import { Button, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalF
 import React, { useEffect, useState } from 'react'
 import style from "./Allmodal.module.css";
 import { useDispatch, useSelector } from 'react-redux';
-import { handleChanges, userPreLog } from '../../../Redux/userauth/action';
+import { handleChanges } from '../../../Redux/userauth/action';
 
 const Name = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const data = useSelector((store) => store.userreducer);
     const [name, setname] = useState("");
-    const dispatch = useDispatch(); 
+    const dispatch = useDispatch();
 
     const handleupdate = () => {
         let id = data.user._id;
         let authorization = data.user.token;
 
-        let config = {
-            headers: {
+        let headers = {
+            'Content-Type': 'application/json',
                 id,
                 authorization
-            },
-            body: { name: name }
-        } 
-        dispatch(handleChanges(config));   
+        }
+        let body = { name: name }
+        dispatch(handleChanges(headers, body));
+        onClose();
     }
 
     useEffect(() => {

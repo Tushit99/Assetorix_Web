@@ -24,7 +24,7 @@ import { BiSolidUserDetail } from "react-icons/bi";
 import { IoIosArrowDown } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { changecountry } from "../../Redux/globalval/action";
-import { userPreLog } from "../../Redux/userauth/action";
+import { userPreLog, userlogout } from "../../Redux/userauth/action";
 
 const Navebar = () => {
     const data = useSelector((state) => state.userreducer);
@@ -38,14 +38,14 @@ const Navebar = () => {
         });
 
         let userid = localStorage.getItem("usrId") || undefined;
-        let usertoken = localStorage.getItem("AstToken") || undefined;
+        let authorization = localStorage.getItem("AstToken") || undefined; 
 
-        if (userid && usertoken) {
+        if (userid && authorization) {  
             let body = {
                 id: userid,
-                authorization: usertoken,
+                authorization,
             };
-            // console.log(body)
+            // console.log(body) 
             dispatch(userPreLog(body));
         }
 
@@ -63,7 +63,11 @@ const Navebar = () => {
         setCountry(val);
         localStorage.setItem("astcountry", val);
         dispatch(changecountry(val));
-    };
+    }; 
+
+    const handlelogout =()=>{
+        dispatch(userlogout()); 
+    }
 
     console.log(data);
 
@@ -130,7 +134,7 @@ const Navebar = () => {
                                         <Link> Listings </Link>  
                                         <Link> Purchased </Link>  
                                     </Box>
-                                    <Button className={style.logout_btn} > Logout </Button>  
+                                    <Button onClick={handlelogout} className={style.logout_btn} > Logout </Button>  
                                 </PopoverBody>
                             </PopoverContent>
                         ) : (
