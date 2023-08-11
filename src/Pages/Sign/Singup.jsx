@@ -9,13 +9,13 @@ import {
   Image,
   useToast,
   Box,
-  useDisclosure, 
+  useDisclosure,
 } from "@chakra-ui/react";
 import sideimg from "./backimg.png";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { signinuser } from "../../Redux/userauth/action";   
+import { signinuser } from "../../Redux/userauth/action";
 
 const Singup = () => {
   const data = useSelector((store) => store.userreducer);
@@ -27,7 +27,24 @@ const Singup = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   // const [val, setVal] = "";
-  // const { isOpen, onOpen, onClose } = useDisclosure();
+  // const { isOpen, onOpen, onClose } = useDisclosure(); 
+
+  const handleInputChange = (event) => {
+    const value = event.target.value;
+    const sanitizedValue = value.replace(/[^a-zA-Z\s]/g, ''); // Regex to remove special characters
+
+
+    // Check if the original value differs from the sanitized value
+    if (value !== sanitizedValue) {
+      toast({
+        title: 'Special characters are not allowed',
+        status: 'warning',
+        duration: 1000, 
+      })
+    } else {
+      setname(sanitizedValue);
+    }
+  };
 
   const handlesave = () => {
     var lowerCase = /[a-z]/g;
@@ -49,7 +66,7 @@ const Singup = () => {
         render: () => (
           <Box color="white" p={3} bg="blue.500">
             mobile no. should be of 10 digits only
-          </Box> 
+          </Box>
         ),
       });
     }
@@ -115,20 +132,20 @@ const Singup = () => {
       toast({
         title: `${data.error}`,
         status: 'warning',
-        duration: 2000, 
+        duration: 2000,
       });
     }
     if (data.success == 0) {
       toast({
-        title: 'Account created Successfully', 
+        title: 'Account created Successfully',
         status: 'success',
-        duration: 4000, 
+        duration: 4000,
       })
       navigate("/");
     }
   }, [data]);
 
-  console.log(data); 
+  console.log(data);
 
   // const handleotp = () => { }; 
 
@@ -160,7 +177,8 @@ const Singup = () => {
             <Input
               required={true}
               type="text"
-              onChange={(e) => setname(e.target.value)}
+              value={name}
+              onChange={handleInputChange}
               border={"2px solid rgb(193, 206, 250)"}
               _hover={{ border: "2px solid rgb(171, 81, 255)" }}
               placeholder="Enter name..."
@@ -219,7 +237,7 @@ const Singup = () => {
         objectFit={"contain"}
         padding={"30px"}
         alignItems={"end"}
-      > 
+      >
         <Image alt={"Login Image"} objectFit={"cover"} src={sideimg} />
       </Flex>
     </Stack>
