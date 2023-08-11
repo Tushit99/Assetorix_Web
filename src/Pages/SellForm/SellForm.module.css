@@ -24,6 +24,7 @@
   gap: 8px;
 }
 
+
 .setbtn {
   border-radius: 10px;
   background-color: rgb(149, 152, 241);
@@ -38,6 +39,32 @@
   color: rgb(15, 66, 137);
   padding: 4px 10px;
   border: 1px solid rgb(222, 222, 255);
+}
+
+.location_form{
+  margin: 20px 0; 
+  display: grid; 
+  gap: 10px; 
+}
+
+.furnished_detail{
+  display: grid; 
+  margin: 20px 10px;  
+  padding: 10px ;  
+  border: 2px solid black; 
+  grid-template-columns: repeat(3,1fr);  
+}
+
+.furnished_detail>*{
+  display: flex; 
+  align-items: center; 
+  gap: 10px;  
+  margin: 10px;  
+}
+
+.select_opt{
+  padding: 0 10px ;
+  outline: 0; 
 }
 
 .inp_form_numbers {

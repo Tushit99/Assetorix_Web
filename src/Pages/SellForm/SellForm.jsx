@@ -3,6 +3,14 @@ import { useState } from 'react';
 import style from "./SellForm.module.css";
 import { Box, Button, ButtonGroup, Heading, IconButton, Input, Select, Tab, TabList, TabPanel, TabPanels, Tabs, Text } from '@chakra-ui/react';
 import { AddIcon, MinusIcon } from '@chakra-ui/icons';
+import { Checkbox } from '@chakra-ui/react';
+import {
+    NumberInput,
+    NumberInputField,
+    NumberInputStepper,
+    NumberIncrementStepper,
+    NumberDecrementStepper,
+  } from '@chakra-ui/react'
 
 
 const SellForm = () => {
@@ -10,11 +18,35 @@ const SellForm = () => {
     const [type, settype] = useState("");
     const [parking, setParking] = useState(0);
     const [openparking, setOpenparking] = useState(0);
+    const [light, setLight] = useState(0);
+    const [fans, setFans] = useState(0);
+    const [ac, setAc] = useState(0);
+    const [tv, setTv] = useState(0);
+    const [Beds, setBeds] = useState(0);
+    const [wardrobe, setWardrobe] = useState(0);
+    const [geyser, setGeyser] = useState(0);
+    const [furnishedarr, setfurnishedarr] = useState([]);
 
     const handlechange = (type, look) => {
         settype(type);
         setlook(look);
     };
+
+    const furnisheddetails = (e) => {
+        let newCat = [...furnishedarr];
+        let value = e.target.value;
+
+        console.log(e.target.value);
+
+        if (newCat.includes(value)) {
+            newCat.splice(newCat.indexOf(value), 1);
+        } else {
+            newCat.push(value);
+        }
+        setfurnishedarr(newCat);
+    }
+
+    console.log(furnishedarr);
 
     return (
         <div className={style.post_property}>
@@ -47,7 +79,7 @@ const SellForm = () => {
                                                         look === "Flat/Apartment" && type === "sell"
                                                             ? style.setbtn
                                                             : style.btn
-                                                    } 
+                                                    }
                                                 >
                                                     Flat/Apartment
                                                 </button>
@@ -417,16 +449,16 @@ const SellForm = () => {
                     </Tabs>
                 </Box>
                 {/* location Detail */}
-                <form className={style.form}>
+                <Box className={style.location_form}>
                     <Heading as={"h2"} size={"lg"} > Where is your property located? </Heading>
                     <Heading as={"h5"} size={"sm"}> An accurate location helps you connect with right buyers.</Heading>
-                    <Input type='text' placeholder='city' fontSize={"sm"} variant='flushed' />
-                    <Input type='text' placeholder='Apartment / Society' fontSize={"sm"} variant='flushed' />
-                    <Input type='text' placeholder='Locality' fontSize={"sm"} variant='flushed' />
-                    <Input type='text' placeholder='House No. ' fontSize={"sm"} variant='flushed' />
-                </form> 
-                
-                <Box>
+                    <Input type='text' padding={"0 10px"} placeholder='Enter City' fontSize={"md"} variant='flushed' />
+                    <Input type='text' padding={"0 10px"} placeholder='Apartment / Society' fontSize={"md"} variant='flushed' />
+                    <Input type='text' padding={"0 10px"} placeholder='Locality' fontSize={"md"} variant='flushed' />
+                    <Input type='text' padding={"0 10px"} placeholder='House No. (optional)' fontSize={"md"} variant='flushed' />
+                </Box>
+
+                <Box marginTop={12}>
                     <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"} > Tell us about your property </Heading>
                     <Heading as={"h4"} size={"sm"} margin={"0 0 30px 0 "} > Add Room Details </Heading>
                     <Box className={style.inp_form_numbers}>
@@ -434,7 +466,7 @@ const SellForm = () => {
                             <Text> No. of Beadrooms </Text>
                             <Input type="number" variant='flushed' padding={"0 2px"} placeholder={"Enter number of bedrooms"} />
                         </Box>
-                        <Box textAlign={"left"} > 
+                        <Box textAlign={"left"} >
                             <Text> No. of Bathrooms </Text>
                             <Input type="number" variant='flushed' padding={"0 2px"} placeholder={"Enter number of bathrooms"} />
                         </Box>
@@ -449,7 +481,7 @@ const SellForm = () => {
                         <Text margin={"5px 0"} > Atleast one area type is mandatory </Text>
                         <ButtonGroup className={style.select_land} size='sm' isAttached variant='outline'>
                             <Input type="number" variant='flushed' padding={"0 2px"} placeholder={"Enter Plot area"} />
-                            <Select variant='flushed'>
+                            <select className={style.select}>
                                 <option value="sq.ft">sq.ft</option>
                                 <option value="sq.yards">sq.yards</option>
                                 <option value="sq.m">sq.m</option>
@@ -468,29 +500,107 @@ const SellForm = () => {
                                 <option value="rood">rood</option>
                                 <option value="chataks">chataks</option>
                                 <option value="perch">perch</option>
-                            </Select>
+                            </select>
                         </ButtonGroup>
                     </Box>
                     {/* other Room  */}
                     <Box className={style.optional_box}>
                         <Heading as={"h3"} size={"md"}> Other rooms (optional) </Heading>
                         <Box>
-                            <Button>Pooja Room</Button> 
-                            <Button> Study Room </Button>
-                            <Button> Servent Room </Button>
-                            <Button> Store Room </Button>
-                        </Box>  
-                        <Box>
-
+                            <button className={style.btn}>Pooja Room</button>
+                            <button className={style.btn}> Study Room </button>
+                            <button className={style.btn}> Servent Room </button>
+                            <button className={style.btn}> Store Room </button>
                         </Box>
                     </Box>
                     {/* furnish */}
                     <Box className={style.optional_box}>
                         <Heading as={"h3"} size={"md"}> Furnishing (optional) </Heading>
                         <Box>
-                            <Button>Furnished</Button>
-                            <Button> Semi-furnished </Button>
-                            <Button> Un-furnished </Button>
+                            <button className={style.btn}>Furnished</button>
+                            <button className={style.btn}> Semi-furnished </button>
+                            <button className={style.btn}> Un-furnished </button>
+                        </Box>
+                        {/* if furnished detail */}
+                        <Box>
+                            <Heading as={"h4"} size={"md"}> At least three furnishings are mandatory for furnished </Heading>
+                            <Box className={style.furnished_detail}>
+                                <Box>
+                                    <button className={style.mns_btn} disabled={light === 0} onClick={() => setLight(light - 1)} > <MinusIcon fontSize={"12px"} /> </button>
+                                    <h3>{light}</h3>
+                                    <button className={style.pls_btn} onClick={() => setLight(light + 1)} > <AddIcon fontSize={"12px"} /> </button>
+                                    <h3> Light </h3>
+                                </Box>
+                                <Box>
+                                    <button className={style.mns_btn} disabled={fans === 0} onClick={() => setFans(fans - 1)} > <MinusIcon fontSize={"12px"} /> </button>
+                                    <h3>{fans}</h3>
+                                    <button className={style.pls_btn} onClick={() => setFans(fans + 1)} > <AddIcon fontSize={"12px"} /> </button>
+                                    <h3> Fans </h3>
+                                </Box>
+                                <Box>
+                                    <button className={style.mns_btn} disabled={ac === 0} onClick={() => setAc(ac - 1)} > <MinusIcon fontSize={"12px"} /> </button>
+                                    <h3>{ac}</h3>
+                                    <button className={style.pls_btn} onClick={() => setAc(ac + 1)} > <AddIcon fontSize={"12px"} /> </button>
+                                    <h3> AC </h3>
+                                </Box>
+                                <Box>
+                                    <button className={style.mns_btn} disabled={tv === 0} onClick={() => setTv(tv - 1)} > <MinusIcon fontSize={"12px"} /> </button>
+                                    <h3>{tv}</h3>
+                                    <button className={style.pls_btn} onClick={() => setTv(tv + 1)} > <AddIcon fontSize={"12px"} /> </button>
+                                    <h3> TV </h3>
+                                </Box>
+                                <Box>
+                                    <button className={style.mns_btn} disabled={Beds === 0} onClick={() => setBeds(Beds - 1)} > <MinusIcon fontSize={"12px"} /> </button>
+                                    <h3>{Beds}</h3>
+                                    <button className={style.pls_btn} onClick={() => setBeds(Beds + 1)} > <AddIcon fontSize={"12px"} /> </button>
+                                    <h3> Beds </h3>
+                                </Box>
+                                <Box>
+                                    <button className={style.mns_btn} disabled={wardrobe === 0} onClick={() => setWardrobe(wardrobe - 1)} > <MinusIcon fontSize={"12px"} /> </button>
+                                    <h3>{wardrobe}</h3>
+                                    <button className={style.pls_btn} onClick={() => setWardrobe(wardrobe + 1)} > <AddIcon fontSize={"12px"} /> </button>
+                                    <h3> Wardrobe </h3>
+                                </Box>
+                                <Box>
+                                    <button className={style.mns_btn} disabled={geyser === 0} onClick={() => setGeyser(geyser - 1)} > <MinusIcon fontSize={"12px"} /> </button>
+                                    <h3>{geyser}</h3>
+                                    <button className={style.pls_btn} onClick={() => setGeyser(geyser + 1)} > <AddIcon fontSize={"12px"} /> </button>
+                                    <h3> Geyser </h3>
+                                </Box>
+                                <Box>
+                                    <Checkbox onChange={furnisheddetails} isChecked={furnishedarr.includes("Sofa")} value={"Sofa"} icon={<AddIcon />} >Sofa</Checkbox>
+                                </Box>
+                                <Box>
+                                    <Checkbox onChange={furnisheddetails} isChecked={furnishedarr.includes("Washing_Machine")} value={"Washing_Machine"} icon={<AddIcon />} >Washing Machine</Checkbox>
+                                </Box>
+                                <Box>
+                                    <Checkbox onChange={furnisheddetails} isChecked={furnishedarr.includes("Stove")} value={"Stove"} icon={<AddIcon />} >Stove</Checkbox>
+                                </Box>
+                                <Box>
+                                    <Checkbox onChange={furnisheddetails} isChecked={furnishedarr.includes("Fridge")} value={"Fridge"} icon={<AddIcon />} >Fridge</Checkbox>
+                                </Box>
+                                <Box>
+                                    <Checkbox onChange={furnisheddetails} isChecked={furnishedarr.includes("Water_Purifier")} value={"Water_Purifier"} icon={<AddIcon />} >Water Purifier</Checkbox>
+                                </Box>
+                                <Box>
+                                    <Checkbox onChange={furnisheddetails} isChecked={furnishedarr.includes("Microwave")} value={"Microwave"} icon={<AddIcon />} >Microwave</Checkbox>
+                                </Box>
+                                <Box>
+                                    <Checkbox onChange={furnisheddetails} isChecked={furnishedarr.includes("Modular_Kitchen")} value={"Modular_Kitchen"} icon={<AddIcon />} >Modular Kitchen</Checkbox>
+                                </Box>
+                                <Box>
+                                    <Checkbox onChange={furnisheddetails} isChecked={furnishedarr.includes("Chimney")} value={"Chimney"} icon={<AddIcon />} >Chimney</Checkbox>
+                                </Box>
+                                <Box>
+                                    <Checkbox onChange={furnisheddetails} isChecked={furnishedarr.includes("Dinning_Table")} value={"Dinning_Table"} icon={<AddIcon />} >Dinning Table</Checkbox>
+                                </Box>
+                                <Box>
+                                    <Checkbox onChange={furnisheddetails} isChecked={furnishedarr.includes("Curtains")} value={"Curtains"} icon={<AddIcon />} >Curtains</Checkbox>
+                                </Box>
+                                <Box>
+                                    <Checkbox onChange={furnisheddetails} isChecked={furnishedarr.includes("Exhaust_Fan")} value={"Exhaust_Fan"} icon={<AddIcon />} >Exhaust Fan</Checkbox>
+                                </Box>
+                            </Box>
                         </Box>
                     </Box>
                     {/* reserved */}
@@ -508,40 +618,53 @@ const SellForm = () => {
                                 <button className={style.pls_btn} disabled={openparking === 0} onClick={() => setOpenparking(openparking - 1)}> <MinusIcon fontSize={"12px"} /> </button>
                                 <h3>{openparking}</h3>
                                 <button className={style.mns_btn} onClick={() => setOpenparking(openparking + 1)}> <AddIcon fontSize={"12px"} /> </button>
-                            </Box> 
+                            </Box>
                         </div>
                     </Box>
+                    {/* floor details */}
                     <Box textAlign={"left"}>
                         <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"} textAlign={"left"}> Floor Details </Heading>
                         <Text textAlign={"left"} margin={"10px 0"}> Total no of floors and your floor details </Text>
-                        <Box display={"flex"} alignItems={"center"} gap={20} >
-                            <Input variant='flushed' placeholder='Total Floors' />
-                            <Select> 
+                        <Box display={"flex"} alignItems={"center"} gap={5} >
+                            <NumberInput variant='flushed' defaultValue={1} min={1} max={20}>
+                                <NumberInputField /> 
+                                <NumberInputStepper>
+                                    <NumberIncrementStepper />
+                                    <NumberDecrementStepper />
+                                </NumberInputStepper>
+                            </NumberInput>
+                            <Select variant='filled' _hover={{ backgroundColor: "rgb(225, 241, 255)" }} backgroundColor={"rgb(231, 244, 255)"}>
+                                <option value="Ground">Ground</option>
                                 <option value="Basement">Basement</option>
                                 <option value="Lower Ground">Lower Ground</option>
-                                <option value="Ground">Ground</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
-                                <option value="4">4</option>    
+                                <option value="4">4</option>
                             </Select>
                         </Box>
                     </Box>
+                    {/* Availability status */}
                     <Box textAlign={"left"}>
                         <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}> Availability Status </Heading>
-                        <Button borderRadius={"100px"} border={"1px solid rgba(113, 210, 255, 0.897)"} margin={"8px 6px 0 0"} backgroundColor={"blue.50"} >Ready to move</Button>
-                        <Button borderRadius={"100px"} border={"1px solid rgba(113, 210, 255, 0.897)"} margin={"8px 6px 0 0"} backgroundColor={"blue.50"} > Under construction</Button>
+                        <Box className={style.grid}>
+                            <button className={style.btn} borderRadius={"100px"} border={"1px solid rgba(113, 210, 255, 0.897)"} margin={"8px 6px 0 0"} backgroundColor={"blue.50"} >Ready to move</button>
+                            <button className={style.btn} borderRadius={"100px"} border={"1px solid rgba(113, 210, 255, 0.897)"} margin={"8px 6px 0 0"} backgroundColor={"blue.50"} > Under construction</button>
+                        </Box>
                     </Box>
+                    {/* Age of Property */}
                     <Box textAlign={"left"}>
                         <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"} textAlign={"left"}> Age of Property </Heading>
-                        <Button borderRadius={"100px"} border={"1px solid rgba(113, 210, 255, 0.897)"} margin={"8px 6px 0 0"} backgroundColor={"blue.50"} > 0-1 years </Button>
-                        <Button borderRadius={"100px"} border={"1px solid rgba(113, 210, 255, 0.897)"} margin={"8px 6px 0 0"} backgroundColor={"blue.50"} > 1-5 years </Button>
-                        <Button borderRadius={"100px"} border={"1px solid rgba(113, 210, 255, 0.897)"} margin={"8px 6px 0 0"} backgroundColor={"blue.50"} > 5-10 years </Button>
-                        <Button borderRadius={"100px"} border={"1px solid rgba(113, 210, 255, 0.897)"} margin={"8px 6px 0 0"} backgroundColor={"blue.50"} > 10+ years </Button>
+                        <Box className={style.grid}>
+                            <button className={style.btn} borderRadius={"100px"} border={"1px solid rgba(113, 210, 255, 0.897)"} margin={"8px 6px 0 0"} backgroundColor={"blue.50"} > 0-1 years </button>
+                            <button className={style.btn} borderRadius={"100px"} border={"1px solid rgba(113, 210, 255, 0.897)"} margin={"8px 6px 0 0"} backgroundColor={"blue.50"} > 1-5 years </button>
+                            <button className={style.btn} borderRadius={"100px"} border={"1px solid rgba(113, 210, 255, 0.897)"} margin={"8px 6px 0 0"} backgroundColor={"blue.50"} > 5-10 years </button>
+                            <button className={style.btn} borderRadius={"100px"} border={"1px solid rgba(113, 210, 255, 0.897)"} margin={"8px 6px 0 0"} backgroundColor={"blue.50"} > 10+ years </button>
+                        </Box>
                     </Box>
                 </Box>
             </Box>
-            <Box backgroundColor={"rgba(114, 154, 191, 0.594)"} borderRadius={10} >
+            <Box backgroundColor={"rgb(232, 244, 255)"} borderRadius={10} >
 
             </Box>
         </div>
