@@ -10,7 +10,7 @@ import {
     NumberInputStepper,
     NumberIncrementStepper,
     NumberDecrementStepper,
-  } from '@chakra-ui/react'
+} from '@chakra-ui/react'
 
 
 const SellForm = () => {
@@ -627,7 +627,7 @@ const SellForm = () => {
                         <Text textAlign={"left"} margin={"10px 0"}> Total no of floors and your floor details </Text>
                         <Box display={"flex"} alignItems={"center"} gap={5} >
                             <NumberInput variant='flushed' defaultValue={1} min={1} max={20}>
-                                <NumberInputField /> 
+                                <NumberInputField />
                                 <NumberInputStepper>
                                     <NumberIncrementStepper />
                                     <NumberDecrementStepper />
@@ -660,6 +660,29 @@ const SellForm = () => {
                             <button className={style.btn} borderRadius={"100px"} border={"1px solid rgba(113, 210, 255, 0.897)"} margin={"8px 6px 0 0"} backgroundColor={"blue.50"} > 1-5 years </button>
                             <button className={style.btn} borderRadius={"100px"} border={"1px solid rgba(113, 210, 255, 0.897)"} margin={"8px 6px 0 0"} backgroundColor={"blue.50"} > 5-10 years </button>
                             <button className={style.btn} borderRadius={"100px"} border={"1px solid rgba(113, 210, 255, 0.897)"} margin={"8px 6px 0 0"} backgroundColor={"blue.50"} > 10+ years </button>
+                        </Box>
+                    </Box>
+                    <Box>
+                        <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"} textAlign={"left"}> Add pricing and details... </Heading>
+                        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}> Ownership </Heading>
+                        <Box className={style.grid}>
+                            <button className={style.btn} borderRadius={"100px"} border={"1px solid rgba(113, 210, 255, 0.897)"} margin={"8px 6px 0 0"} backgroundColor={"blue.50"} > Freehold </button>
+                            <button className={style.btn} borderRadius={"100px"} border={"1px solid rgba(113, 210, 255, 0.897)"} margin={"8px 6px 0 0"} backgroundColor={"blue.50"} > Leasehold </button>
+                            <button className={style.btn} borderRadius={"100px"} border={"1px solid rgba(113, 210, 255, 0.897)"} margin={"8px 6px 0 0"} backgroundColor={"blue.50"} > Co-operative society </button>
+                            <button className={style.btn} borderRadius={"100px"} border={"1px solid rgba(113, 210, 255, 0.897)"} margin={"8px 6px 0 0"} backgroundColor={"blue.50"} > Powerw of Attorney </button>
+                        </Box>
+                    </Box>
+                    <Box>
+                        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}> Price Details </Heading>
+                        <Box display={"flex"} alignItems={"center"} gap={5} >
+                            <Box display={"grid"} gap={0} >
+                                <Heading as={"h3"} size={"xs"} fontWeight={400} textAlign={"left"}> ₹ Price Details </Heading>
+                                <Input type='number' variant='flushed' />
+                            </Box>
+                            <Box display={"grid"} gap={0} >
+                                <Heading as={"h3"} size={"xs"} fontWeight={400} textAlign={"left"}> ₹ Price Per sq.ft. </Heading>
+                                <Input type='number' variant='flushed' />
+                            </Box> 
                         </Box>
                     </Box>
                 </Box>
