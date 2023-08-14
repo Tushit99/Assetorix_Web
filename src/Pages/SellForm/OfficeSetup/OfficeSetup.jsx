@@ -1,7 +1,13 @@
 import { Box, Heading, Input } from '@chakra-ui/react'
-import React from 'react'
+import React, { useState } from 'react'
 
-const OfficeSetup = () => {
+const OfficeSetup = () => { 
+    const [furnish, setFurnish] = useState("");
+    const [condition, setCondition] = useState("");
+    const [oxygen, setOxygen] = useState("");
+    const [ups, setUps] = useState("");
+
+
     return (
         <div>
             <Box padding={"10px 0"}>

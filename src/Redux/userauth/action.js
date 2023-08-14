@@ -25,11 +25,9 @@ export const loginuser = (param) => async (dispatch) => {
           localStorage.setItem("usrId", e.data.id);
           console.log("success status power");
           return e.status;
-        } else {
-          console.log("something went wrong");
-        }
+        } 
       });
-  } catch (err) {
+  } catch (err) { 
     console.log("som wrg", err);
     dispatch({ type: USER_lOGIN_ERROR, payload: err.response.data.msg });
   }
