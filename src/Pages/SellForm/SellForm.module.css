@@ -81,19 +81,19 @@
 }
 
 .parking {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  display: flex;  
   margin: 20px 0;
-}
+  align-items: center;  
+} 
 
 .inc_dec {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: flex-start; 
   width: 100%;
-  gap: 10px;
+  flex: 1;
+  gap: 10px; 
 }
 
 .pls_btn {
@@ -103,7 +103,15 @@
   justify-content: center;
   border: 1px solid rgb(122, 193, 255);
   padding: 8px;
-  border-radius: 50%;
+  border-radius: 50%; 
+} 
+
+.number_btn{
+  border: 1px solid rgb(122, 193, 255);
+  padding: 4px 12px;
+  display: flex; 
+  align-items: center;
+  border-radius: 50%; 
 }
 
 .mns_btn {
@@ -122,7 +130,7 @@
 
 .select_land > *:nth-child(2) {
   flex: 3;
-}
+} 
 
 .optional_box {
   text-align: left;
