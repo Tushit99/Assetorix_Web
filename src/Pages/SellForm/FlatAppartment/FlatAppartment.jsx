@@ -26,10 +26,10 @@ import {
     NumberInputStepper,
     NumberIncrementStepper,
     NumberDecrementStepper,
-} from "@chakra-ui/react"; 
-import style from "./FlatAppartment.module.css"; 
+} from "@chakra-ui/react";
+import style from "./FlatAppartment.module.css";
 
-const FlatAppartment = () => { 
+const FlatAppartment = () => {
     const [parking, setParking] = useState(0);
     const [openparking, setOpenparking] = useState(0);
     const [light, setLight] = useState(0);
@@ -39,8 +39,10 @@ const FlatAppartment = () => {
     const [Beds, setBeds] = useState(0);
     const [wardrobe, setWardrobe] = useState(0);
     const [geyser, setGeyser] = useState(0);
-    const [furnishedarr, setfurnishedarr] = useState([]);
-
+    const [furnishedarr, setfurnishedarr] = useState([]); 
+    const [extraroom, setExtraRoom] = useState("");     
+    const [furnished, setFurnished] = useState(""); 
+ 
 
 
     const furnisheddetails = (e) => {
@@ -57,11 +59,24 @@ const FlatAppartment = () => {
         setfurnishedarr(newCat);
     };
 
+    // please don'nt change any function without any prior knowledge 
+    const checkFurnished =(e)=>{
+        e.preventDefault(); 
+        setFurnished(e.target.value);   
+    }
+
+    const handlerooms =(e)=>{
+        e.preventDefault(); 
+        setExtraRoom(e.target.value); 
+    }
+
+    // const 
+
     // console.log(furnishedarr);
 
 
     return (
-        <div>
+        <form >
             <Box className={style.location_form}>
                 <Heading as={"h2"} size={"lg"}>
 
@@ -74,6 +89,7 @@ const FlatAppartment = () => {
                 <Input
                     type="text"
                     padding={"0 10px"}
+                    required
                     placeholder="Enter City"
                     fontSize={"md"}
                     variant="flushed"
@@ -81,6 +97,7 @@ const FlatAppartment = () => {
                 <Input
                     type="text"
                     padding={"0 10px"}
+                    required
                     placeholder="Apartment / Society"
                     fontSize={"md"}
                     variant="flushed"
@@ -88,6 +105,7 @@ const FlatAppartment = () => {
                 <Input
                     type="text"
                     padding={"0 10px"}
+                    required
                     placeholder="Locality"
                     fontSize={"md"}
                     variant="flushed"
@@ -95,6 +113,7 @@ const FlatAppartment = () => {
                 <Input
                     type="text"
                     padding={"0 10px"}
+                    required
                     placeholder="House No. (optional)"
                     fontSize={"md"}
                     variant="flushed"
@@ -117,6 +136,7 @@ const FlatAppartment = () => {
                             type="number"
                             variant="flushed"
                             padding={"0 2px"}
+                            required  
                             placeholder={"Enter number of bedrooms"}
                         />
                     </Box>
@@ -125,6 +145,7 @@ const FlatAppartment = () => {
                         <Input
                             type="number"
                             variant="flushed"
+                            required  
                             padding={"0 2px"}
                             placeholder={"Enter number of bathrooms"}
                         />
@@ -134,17 +155,13 @@ const FlatAppartment = () => {
                         <Input
                             type="number"
                             variant="flushed"
+                            required  
                             padding={"0 2px"}
                             placeholder={"Enter number of balconies"}
                         />
                     </Box>
-                </Box>
-                {/* ================================ */}
-                {/* office setup */}
-
-                {/* facilities availble */}
-
-                {/* ================================ */}
+                </Box> 
+                {/* ====================================== */}
                 {/* add area details */}
                 <Box textAlign={"left"} padding={"10px 0"} >
                     <Heading as={"h3"} margin={"5px 0"} size={"md"}>
@@ -161,9 +178,10 @@ const FlatAppartment = () => {
                             type="number"
                             variant="flushed"
                             padding={"0 2px"}
+                            required   
                             placeholder={"Enter Plot area"}
                         />
-                        <select className={style.select}>
+                        <select className={style.select} required>
                             <option value="sq.ft">sq.ft</option>
                             <option value="sq.yards">sq.yards</option>
                             <option value="sq.m">sq.m</option>
@@ -190,27 +208,26 @@ const FlatAppartment = () => {
                     <Heading as={"h3"} size={"md"}>
                         Other rooms (optional)
                     </Heading>
-                    <Box>
-                        <button className={style.btn}>Pooja Room</button>
-                        <button className={style.btn}> Study Room </button>
-                        <button className={style.btn}> Servent Room </button>
-                        <button className={style.btn}> Store Room </button>
-                    </Box>
-                </Box>
+                    <Box > 
+                        <button value={"Pooja Room"} className={ extraroom === "Pooja Room" ? style.setbtn : style.btn} onClick={handlerooms} > Pooja Room </button>
+                        <button value={"Study Room"} className={ extraroom === "Study Room" ? style.setbtn : style.btn} onClick={handlerooms} > Study Room </button>
+                        <button value={"Servent Room"} className={ extraroom === "Servent Room" ? style.setbtn : style.btn} onClick={handlerooms} > Servent Room </button>
+                        <button value={"Store Room"} className={ extraroom === "Store Room" ? style.setbtn : style.btn} onClick={handlerooms} > Store Room </button>
+                    </Box> 
+                </Box> 
                 {/* furnish */}
                 <Box padding={"10px 0"} display={"grid"} gap={6} className={style.optional_box}>
                     <Heading as={"h3"} size={"md"}>
-
                         Furnishing (optional)
                     </Heading>
                     <Box>
-                        <button className={style.btn}>Furnished</button>
-                        <button className={style.btn}> Semi-furnished </button>
-                        <button className={style.btn}> Un-furnished </button>
+                        <button value={"Furnished"} className={ furnished ==="Furnished" ? style.setbtn : style.btn} onClick={checkFurnished}> Furnished</button>
+                        <button value={"Semi-furnished"} className={ furnished ==="Semi-furnished" ? style.setbtn : style.btn} onClick={checkFurnished} > Semi-furnished </button>
+                        <button value={"Un-furnished"} className={ furnished ==="Un-furnished" ? style.setbtn : style.btn} onClick={checkFurnished} > Un-furnished </button>
                     </Box>
                     {/* if furnished detail */}
-                    <Box padding={"10px 0"} display={"grid"} gap={6}>
-                        <Heading as={"h4"} size={"md"}>
+                    <Box display={furnished=="Furnished" || furnished=="Semi-furnished" ? "grid" : "none" } padding={"10px 0"} gap={6}>
+                        <Heading as={"h4"} size={"sm"}>
                             At least three furnishings are mandatory for furnished
                         </Heading>
                         <Box className={style.furnished_detail}>
@@ -899,7 +916,7 @@ const FlatAppartment = () => {
                 _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                 color={"#ffffff"}
             > Post Property </Button>
-        </div>
+        </form>
     )
 }
 
