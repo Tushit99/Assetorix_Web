@@ -39,10 +39,14 @@ const FlatAppartment = () => {
     const [Beds, setBeds] = useState(0);
     const [wardrobe, setWardrobe] = useState(0);
     const [geyser, setGeyser] = useState(0);
-    const [furnishedarr, setfurnishedarr] = useState([]); 
-    const [extraroom, setExtraRoom] = useState("");     
-    const [furnished, setFurnished] = useState(""); 
- 
+    const [furnishedarr, setfurnishedarr] = useState([]);
+    const [extraroom, setExtraRoom] = useState("");
+    const [furnished, setFurnished] = useState("");
+    const [availability, setAvailability] = useState("");
+    const [fromyear, setFromyear] = useState("");
+    const [expectedyear, setExpectedYear] = useState("");
+    const [ownership, setOwnerShip] = useState("");  
+
 
 
     const furnisheddetails = (e) => {
@@ -60,19 +64,35 @@ const FlatAppartment = () => {
     };
 
     // please don'nt change any function without any prior knowledge 
-    const checkFurnished =(e)=>{
-        e.preventDefault(); 
-        setFurnished(e.target.value);   
+    const checkFurnished = (e) => {
+        e.preventDefault();
+        setFurnished(e.target.value);
     }
 
-    const handlerooms =(e)=>{
-        e.preventDefault(); 
-        setExtraRoom(e.target.value); 
+    const handlerooms = (e) => {
+        e.preventDefault();
+        setExtraRoom(e.target.value);
     }
 
-    // const 
+    const handleAvailable = (e) => {
+        e.preventDefault();
+        setAvailability(e.target.value);
+    }
 
-    // console.log(furnishedarr);
+    const handleyear = (e) => {
+        e.preventDefault();
+        setFromyear(e.target.value)
+    }
+
+    const handleExpectedYear = (e) => {
+        e.preventDefault();
+        setExpectedYear(e.target.value)
+    } 
+
+    const handleownership =(e)=>{
+        e.preventDefault();
+        setOwnerShip(e.target.value); 
+    }
 
 
     return (
@@ -136,7 +156,7 @@ const FlatAppartment = () => {
                             type="number"
                             variant="flushed"
                             padding={"0 2px"}
-                            required  
+                            required
                             placeholder={"Enter number of bedrooms"}
                         />
                     </Box>
@@ -145,7 +165,7 @@ const FlatAppartment = () => {
                         <Input
                             type="number"
                             variant="flushed"
-                            required  
+                            required
                             padding={"0 2px"}
                             placeholder={"Enter number of bathrooms"}
                         />
@@ -155,12 +175,12 @@ const FlatAppartment = () => {
                         <Input
                             type="number"
                             variant="flushed"
-                            required  
+                            required
                             padding={"0 2px"}
                             placeholder={"Enter number of balconies"}
                         />
                     </Box>
-                </Box> 
+                </Box>
                 {/* ====================================== */}
                 {/* add area details */}
                 <Box textAlign={"left"} padding={"10px 0"} >
@@ -178,7 +198,7 @@ const FlatAppartment = () => {
                             type="number"
                             variant="flushed"
                             padding={"0 2px"}
-                            required   
+                            required
                             placeholder={"Enter Plot area"}
                         />
                         <select className={style.select} required>
@@ -208,25 +228,25 @@ const FlatAppartment = () => {
                     <Heading as={"h3"} size={"md"}>
                         Other rooms (optional)
                     </Heading>
-                    <Box > 
-                        <button value={"Pooja Room"} className={ extraroom === "Pooja Room" ? style.setbtn : style.btn} onClick={handlerooms} > Pooja Room </button>
-                        <button value={"Study Room"} className={ extraroom === "Study Room" ? style.setbtn : style.btn} onClick={handlerooms} > Study Room </button>
-                        <button value={"Servent Room"} className={ extraroom === "Servent Room" ? style.setbtn : style.btn} onClick={handlerooms} > Servent Room </button>
-                        <button value={"Store Room"} className={ extraroom === "Store Room" ? style.setbtn : style.btn} onClick={handlerooms} > Store Room </button>
-                    </Box> 
-                </Box> 
+                    <Box >
+                        <button value={"Pooja Room"} className={extraroom === "Pooja Room" ? style.setbtn : style.btn} onClick={handlerooms} > Pooja Room </button>
+                        <button value={"Study Room"} className={extraroom === "Study Room" ? style.setbtn : style.btn} onClick={handlerooms} > Study Room </button>
+                        <button value={"Servent Room"} className={extraroom === "Servent Room" ? style.setbtn : style.btn} onClick={handlerooms} > Servent Room </button>
+                        <button value={"Store Room"} className={extraroom === "Store Room" ? style.setbtn : style.btn} onClick={handlerooms} > Store Room </button>
+                    </Box>
+                </Box>
                 {/* furnish */}
                 <Box padding={"10px 0"} display={"grid"} gap={6} className={style.optional_box}>
                     <Heading as={"h3"} size={"md"}>
                         Furnishing (optional)
                     </Heading>
                     <Box>
-                        <button value={"Furnished"} className={ furnished ==="Furnished" ? style.setbtn : style.btn} onClick={checkFurnished}> Furnished</button>
-                        <button value={"Semi-furnished"} className={ furnished ==="Semi-furnished" ? style.setbtn : style.btn} onClick={checkFurnished} > Semi-furnished </button>
-                        <button value={"Un-furnished"} className={ furnished ==="Un-furnished" ? style.setbtn : style.btn} onClick={checkFurnished} > Un-furnished </button>
+                        <button value={"Furnished"} className={furnished === "Furnished" ? style.setbtn : style.btn} onClick={checkFurnished}> Furnished</button>
+                        <button value={"Semi-furnished"} className={furnished === "Semi-furnished" ? style.setbtn : style.btn} onClick={checkFurnished} > Semi-furnished </button>
+                        <button value={"Un-furnished"} className={furnished === "Un-furnished" ? style.setbtn : style.btn} onClick={checkFurnished} > Un-furnished </button>
                     </Box>
                     {/* if furnished detail */}
-                    <Box display={furnished=="Furnished" || furnished=="Semi-furnished" ? "grid" : "none" } padding={"10px 0"} gap={6}>
+                    <Box display={furnished == "Furnished" || furnished == "Semi-furnished" ? "grid" : "none"} padding={"10px 0"} gap={6}>
                         <Heading as={"h4"} size={"sm"}>
                             At least three furnishings are mandatory for furnished
                         </Heading>
@@ -561,19 +581,23 @@ const FlatAppartment = () => {
                     </Heading>
                     <Box className={style.grid}>
                         <button
-                            className={style.btn}
+                            className={availability == "Ready to move" ? style.setbtn : style.btn}
                             borderRadius={"100px"}
                             border={"1px solid rgba(113, 210, 255, 0.897)"}
                             margin={"8px 6px 0 0"}
+                            value={"Ready to move"}
+                            onClick={handleAvailable}
                             backgroundColor={"blue.50"}
                         >
                             Ready to move
                         </button>
                         <button
-                            className={style.btn}
+                            className={availability == "Under construction" ? style.setbtn : style.btn}
                             borderRadius={"100px"}
                             border={"1px solid rgba(113, 210, 255, 0.897)"}
                             margin={"8px 6px 0 0"}
+                            onClick={handleAvailable}
+                            value={"Under construction"}
                             backgroundColor={"blue.50"}
                         >
                             Under construction
@@ -581,7 +605,7 @@ const FlatAppartment = () => {
                     </Box>
                 </Box>
                 {/* Age of Property */}
-                <Box textAlign={"left"} className={style.optional_box} >
+                {availability == "Ready to move" ? <Box textAlign={"left"} className={style.optional_box} >
                     <Heading
                         as={"h3"}
                         size={"md"}
@@ -592,8 +616,10 @@ const FlatAppartment = () => {
                     </Heading>
                     <Box className={style.grid}>
                         <button
-                            className={style.btn}
+                            className={ fromyear == "0-1 year" ? style.setbtn : style.btn}
                             borderRadius={"100px"}
+                            onClick={handleyear}
+                            value={"0-1 year"} 
                             border={"1px solid rgba(113, 210, 255, 0.897)"}
                             margin={"8px 6px 0 0"}
                             backgroundColor={"blue.50"}
@@ -601,8 +627,10 @@ const FlatAppartment = () => {
                             0-1 years
                         </button>
                         <button
-                            className={style.btn}
+                            className={ fromyear == "1-5 years" ? style.setbtn : style.btn}
                             borderRadius={"100px"}
+                            onClick={handleyear}
+                            value={"1-5 years"}
                             border={"1px solid rgba(113, 210, 255, 0.897)"}
                             margin={"8px 6px 0 0"}
                             backgroundColor={"blue.50"}
@@ -610,8 +638,10 @@ const FlatAppartment = () => {
                             1-5 years
                         </button>
                         <button
-                            className={style.btn}
+                            className={ fromyear == "5-10 years" ? style.setbtn : style.btn}
                             borderRadius={"100px"}
+                            onClick={handleyear}
+                            value={"5-10 years"}
                             border={"1px solid rgba(113, 210, 255, 0.897)"}
                             margin={"8px 6px 0 0"}
                             backgroundColor={"blue.50"}
@@ -619,8 +649,10 @@ const FlatAppartment = () => {
                             5-10 years
                         </button>
                         <button
-                            className={style.btn}
+                            className={ fromyear == "10+ years" ? style.setbtn : style.btn}
                             borderRadius={"100px"}
+                            onClick={handleyear}
+                            value={"10+ years"}
                             border={"1px solid rgba(113, 210, 255, 0.897)"}
                             margin={"8px 6px 0 0"}
                             backgroundColor={"blue.50"}
@@ -629,6 +661,26 @@ const FlatAppartment = () => {
                         </button>
                     </Box>
                 </Box>
+                    :
+                    <Box>
+                        <Heading
+                            as={"h3"}
+                            size={"md"}
+                            margin={"30px 0 10px 0"}
+                            textAlign={"left"}
+                        >
+                            Possession By
+                        </Heading>
+                        <Select placeholder='Expected by' onChange={handleExpectedYear}>
+                            <option value="3 months">3 months</option>
+                            <option value="6 months">6 months</option>
+                            <option value="1 year">1 year</option>
+                            <option value="5 year">5 year</option>
+                            <option value="10 year">10 year</option>
+                        </Select>
+                    </Box>
+                }
+
                 {/* Add pricing and details */}
                 <Box>
                     <Heading
@@ -639,45 +691,54 @@ const FlatAppartment = () => {
                     >
                         Add pricing and details...
                     </Heading>
+                    {/* OwnerShip detail */}
                     <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                         Ownership
                     </Heading>
-                    <Box className={style.grid}>
+                    <Box className={style.grid} gap={4}>
                         <button
-                            className={style.btn}
+                            className={ ownership == "Freehold" ? style.setbtn : style.btn}
                             borderRadius={"100px"}
                             border={"1px solid rgba(113, 210, 255, 0.897)"}
-                            margin={"8px 6px 0 0"}
+                            margin={"8px 6px 0 0"} 
+                            onClick={handleownership}
+                            value={"Freehold"}
                             backgroundColor={"blue.50"}
                         >
                             Freehold
                         </button>
                         <button
-                            className={style.btn}
+                            className={ ownership == "Leasehold" ? style.setbtn : style.btn}
                             borderRadius={"100px"}
                             border={"1px solid rgba(113, 210, 255, 0.897)"}
                             margin={"8px 6px 0 0"}
+                            onClick={handleownership}
+                            value={"Leasehold"}
                             backgroundColor={"blue.50"}
                         >
                             Leasehold
                         </button>
                         <button
-                            className={style.btn}
+                            className={ ownership == "Co-operative society" ? style.setbtn : style.btn}
                             borderRadius={"100px"}
                             border={"1px solid rgba(113, 210, 255, 0.897)"}
                             margin={"8px 6px 0 0"}
+                            onClick={handleownership}
+                            value={"Co-operative society"}
                             backgroundColor={"blue.50"}
-                        >
+                        > 
                             Co-operative society
                         </button>
                         <button
-                            className={style.btn}
+                            className={ ownership == "Power of Attorney" ? style.setbtn : style.btn}
                             borderRadius={"100px"}
                             border={"1px solid rgba(113, 210, 255, 0.897)"}
-                            margin={"8px 6px 0 0"}
+                            margin={"8px 6px 0 0"} 
+                            onClick={handleownership} 
+                            value={"Power of Attorney"}
                             backgroundColor={"blue.50"}
                         >
-                            Powerw of Attorney
+                            Power of Attorney
                         </button>
                     </Box>
                 </Box>
