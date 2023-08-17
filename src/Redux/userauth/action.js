@@ -62,7 +62,7 @@ export const userPreLog = (param) => async (dispatch) => {
   // let config = {
   //   headers: param,
   // }; 
-  // console.log(param);  
+  console.log(param);  
   try {
     await axios.get("https://assetorix.onrender.com/user/", {headers: param}).then((e) => {
         console.log(e.data);
