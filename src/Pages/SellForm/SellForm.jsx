@@ -11,6 +11,7 @@ import {
     Tabs, 
 } from "@chakra-ui/react"; 
 import FlatAppartment from "./FlatAppartment/FlatAppartment";
+import IndependentHouse from "./IndependentHouse/IndependentHouse";
 
 const SellForm = () => {
     const [look, setlook] = useState("");
@@ -19,9 +20,7 @@ const SellForm = () => {
     const handlechange = (type, look) => {
         settype(type);
         setlook(look);
-    };
-
-    console.log(type,look);  
+    };   
 
 
 
@@ -502,7 +501,9 @@ const SellForm = () => {
                     </Tabs>
                 </Box>
                 {/* Flat/Apartment */}
-                { type=="sell" && look=="Flat/Apartment" && <FlatAppartment />}
+                { type=="sell" && look=="Flat/Apartment" && <FlatAppartment />} 
+                {/* Independent House/villa */}
+                { type=="sell" && look=="Independent House/villa" && <IndependentHouse />} 
             </Box>
             <Box backgroundColor={"rgb(232, 244, 255)"} borderRadius={10}></Box>
         </div>
