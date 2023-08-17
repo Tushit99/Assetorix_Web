@@ -42,6 +42,7 @@
   margin: 10px;
 }
 
+
 .select_opt {
   padding: 0 10px;
   outline: 0;
@@ -49,7 +50,7 @@
 
 .inp_form_numbers {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr); 
   gap: 4%;
   margin: 20px 0;
 }

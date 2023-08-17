@@ -3,11 +3,15 @@ import {
     Box,
     Button,
     ButtonGroup,
+    HStack,
     Heading,
     Input,
+    PinInput,
+    PinInputField,
     Select,
     Text,
     Textarea,
+    useToast,
 } from "@chakra-ui/react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { Checkbox } from "@chakra-ui/react";
@@ -15,8 +19,12 @@ import style from "./FlatAppartment.module.css";
 import axios from "axios";
 
 const FlatAppartment = () => {
+    const toast = useToast();
+    const [country, setCountry] = useState("");
     const [city, setCity] = useState("");
     const [appartment, setApartment] = useState("");
+    const [pincode, setPincode] = useState("");
+    const [state, setState] = useState("");
     const [locality, setLocality] = useState("");
     const [houseNo, setHouseNo] = useState("");
     const [bedroom, setBedRoom] = useState(0);
@@ -56,23 +64,23 @@ const FlatAppartment = () => {
     const [totalfloors, setTotalFloors] = useState("");
     const [floorOn, setFloorOn] = useState("");
 
-    const handleSubmitData = async () => {
+    const handleSubmitData = async (e) => {  
+        e.preventDefault(); 
         let obj = {
-            city,
-            appartment,
-            locality,
-            houseNumber: houseNo,
+            lookingFor: "Sell",
+            Property: "Residential",
+            PropertyType: "Flat/Apartment",
+            address: {
+                houseNumber: houseNo,
+                city,
+                state,
+                appartment,
+                locality,
+            },
             bedroom,
             bathroom,
             balconey,
-            parking,
-            openparking,
             furnishedarr,
-            otherRoom: extraroom,
-            furnished,
-            AvailabilityStatus: availability,
-            PropertyStatus: fromyear,
-            expectedyear,
             ownership,
             pricedetail,
             priceSqr,
@@ -81,8 +89,7 @@ const FlatAppartment = () => {
             prpertyFeature,
             buildingFeature,
             additinalft,
-            watersource,
-            overLook,
+            watersource, 
             otherFeature,
             powerbackup,
             propertyFacing,
@@ -100,31 +107,19 @@ const FlatAppartment = () => {
             houseNo &&
             bedroom &&
             bathroom &&
-            balconey &&
-            parking &&
-            openparking &&
-            furnishedarr &&
-            extraroom &&
-            furnished &&
-            availability &&
-            fromyear &&
-            expectedyear &&
+            balconey && 
+            furnishedarr && 
             ownership &&
             pricedetail &&
             priceSqr &&
-            inclusivePrices &&
-            aminity &&
-            prpertyFeature &&
-            buildingFeature &&
+            inclusivePrices &&  
             additinalft &&
             watersource &&
-            overLook &&
-            otherFeature &&
+            overLook && 
             powerbackup &&
             propertyFacing &&
             flooring &&
-            facing &&
-            locationAdv &&
+            facing && 
             totalfloors &&
             floorOn
         ) {
@@ -138,6 +133,24 @@ const FlatAppartment = () => {
                 obj["geyser"] = geyser;
             }
 
+            if(furnished.length>0){
+                obj["furnished"]=furnished ;
+            }
+            if(openparking>0){
+                obj["openparking"] = openparking; 
+            }
+            if (extraroom.length > 0) {
+                obj["otherRoom"] = extraroom
+            }
+            if(parking>0){
+                obj["parking"] = parking ;  
+            }
+            if (availability == "Ready to move" && fromyear != "") {
+                obj["PropertyStatus"] = fromyear;
+            }
+            if (availability == "Under construction" && expectedyear != "") {
+                obj["expectedByYear"] = expectedyear;
+            }
             let id = localStorage.getItem("usrId");
             let authorization = localStorage.getItem("AstToken");
 
@@ -146,13 +159,55 @@ const FlatAppartment = () => {
             await axios
                 .post("https://assetorix.onrender.com/property/", obj, { headers: head })
                 .then((e) => {
-                    console.log(e);
+                    toast({
+                        title: e.data.msg,
+                        description: e.data.msg,
+                        status: 'success', 
+                        duration: 2000, 
+                    })
                 });
         }
-
+        else {
+            toast({
+                title: 'Form un-filled',
+                description: "Please fill all required fields.",
+                status: 'info',
+                duration: 2000,
+                position: 'top-right'
+            })
+        }
+        console.log("reached"); 
     };
 
+    const handlepinfetch = (e) => {
+        e.preventDefault();
+        setPincode((prev) => e.target.value);
+        console.log(e.target.value.length);
+        if (e.target.value.length == 6) {
+            // console.log("working"); 
+            pinfetch(e.target.value);
+        }
+        else {
+            console.log(e.target.value);
+        }
+    }
+
+
+    const pinfetch = async (pin) => {
+        try {
+            console.log(pin);
+            let res = await fetch(`https://www.postpincode.in/api/getPostalArea.php?pincode=${pin}`);
+            let data = await res.json();
+            console.log(data);
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
+
+    // please don'nt change any function without any prior knowledge
     const furnisheddetails = (e) => {
+        e.preventDefault();
         let newCat = [...furnishedarr];
         let value = e.target.value;
 
@@ -166,14 +221,13 @@ const FlatAppartment = () => {
         setfurnishedarr(newCat);
     };
 
-    // please don'nt change any function without any prior knowledge
     const checkFurnished = (e) => {
         e.preventDefault();
         setFurnished(e.target.value);
     };
 
     const handlerooms = (e) => {
-        e.preventDefault();
+        e.preventDefault(); 
         let newarr = [...extraroom];
         let value = e.target.value;
 
@@ -206,6 +260,7 @@ const FlatAppartment = () => {
     };
 
     const handleAdditionalFeature = (e) => {
+        e.preventDefault();
         let newarr = [...additinalft];
         let value = e.target.value;
 
@@ -231,6 +286,7 @@ const FlatAppartment = () => {
     };
 
     const handlePropertyFeature = (e) => {
+        e.preventDefault();
         let newarr = [...prpertyFeature];
         let value = e.target.value;
 
@@ -243,6 +299,7 @@ const FlatAppartment = () => {
     };
 
     const HandleBuildingFeature = (e) => {
+        e.preventDefault();
         let newarr = [...buildingFeature];
         let value = e.target.value;
 
@@ -255,6 +312,7 @@ const FlatAppartment = () => {
     };
 
     const handleoverlooking = (e) => {
+        e.preventDefault();
         let newarr = [...overLook];
         let value = e.target.value;
 
@@ -267,6 +325,7 @@ const FlatAppartment = () => {
     };
 
     const handleotherfeature = (e) => {
+        e.preventDefault();
         let newarr = [...otherFeature];
         let value = e.target.value;
 
@@ -279,6 +338,7 @@ const FlatAppartment = () => {
     };
 
     const handlelocationadvantages = (e) => {
+        e.preventDefault();
         let newarr = [...locationAdv];
         let value = e.target.value;
 
@@ -291,7 +351,7 @@ const FlatAppartment = () => {
     };
 
     return (
-        <div>
+        <form onSubmit={handleSubmitData}>
             {/* property location */}
             <Box className={style.location_form}>
                 <Heading size={"lg"}>Where is your property located?</Heading>
@@ -299,23 +359,23 @@ const FlatAppartment = () => {
                     An accurate location helps you connect with right buyers.
                 </Heading>
                 <Input
-                    type="text"
+                    type="number"
                     padding={"0 10px"}
                     required
-                    placeholder="Enter City"
+                    placeholder="Enter Pincode"
                     fontSize={"md"}
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
+                    value={pincode}
+                    onChange={handlepinfetch}
                     variant="flushed"
                 />
                 <Input
                     type="text"
                     padding={"0 10px"}
                     required
-                    placeholder="Apartment / Society"
+                    placeholder="House No. (optional)"
+                    value={houseNo}
+                    onChange={(e) => setHouseNo(e.target.value)}
                     fontSize={"md"}
-                    value={appartment}
-                    onChange={(e) => setApartment(e.target.value)}
                     variant="flushed"
                 />
                 <Input
@@ -332,12 +392,43 @@ const FlatAppartment = () => {
                     type="text"
                     padding={"0 10px"}
                     required
-                    placeholder="House No. (optional)"
-                    value={houseNo}
-                    onChange={(e) => setHouseNo(e.target.value)}
+                    placeholder="Apartment / Society"
+                    fontSize={"md"}
+                    value={appartment}
+                    onChange={(e) => setApartment(e.target.value)}
+                    variant="flushed"
+                />
+                <Input
+                    type="text"
+                    padding={"0 10px"}
+                    required
+                    placeholder="Enter City"
+                    fontSize={"md"}
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                    variant="flushed"
+                />
+                <Input
+                    type="text"
+                    padding={"0 10px"}
+                    required
+                    placeholder="Enter State"
+                    value={state}
+                    onChange={(e) => setState(e.target.value)}
                     fontSize={"md"}
                     variant="flushed"
                 />
+                <Input
+                    type="text"
+                    padding={"0 10px"}
+                    required
+                    placeholder="Enter Country"
+                    value={country}
+                    onChange={(e) => setCountry(e.target.value)}
+                    fontSize={"md"}
+                    variant="flushed"
+                />
+
             </Box>
             {/* Property Detail */}
             <Box marginTop={12}>
@@ -347,11 +438,11 @@ const FlatAppartment = () => {
                 <Heading as={"h4"} size={"sm"} margin={"0 0 30px 0 "}>
                     Add Room Details
                 </Heading>
-                <Box className={style.inp_form_numbers}>
-                    <Box textAlign={"left"}>
+                <Box as={"div"} className={style.inp_form_numbers}>
+                    <Box textAlign={"left"} >
                         <Text> No. of Beadrooms </Text>
                         <Input
-                            type="number"
+                            type="number" 
                             variant="flushed"
                             padding={"0 2px"}
                             onChange={(e) => setBedRoom(e.target.value)}
@@ -399,7 +490,7 @@ const FlatAppartment = () => {
                         variant="outline"
                     >
                         <Input
-                            type="number"
+                            type="tel"
                             variant="flushed"
                             padding={"0 2px"}
                             required
@@ -445,8 +536,8 @@ const FlatAppartment = () => {
                             }
                             onClick={handlerooms}
                         >
-                            {" "}
-                            Pooja Room{" "}
+
+                            Pooja Room
                         </button>
                         <button
                             value={"Study Room"}
@@ -455,8 +546,8 @@ const FlatAppartment = () => {
                             }
                             onClick={handlerooms}
                         >
-                            {" "}
-                            Study Room{" "}
+
+                            Study Room
                         </button>
                         <button
                             value={"Servent Room"}
@@ -465,8 +556,8 @@ const FlatAppartment = () => {
                             }
                             onClick={handlerooms}
                         >
-                            {" "}
-                            Servent Room{" "}
+
+                            Servent Room
                         </button>
                         <button
                             value={"Store Room"}
@@ -475,8 +566,8 @@ const FlatAppartment = () => {
                             }
                             onClick={handlerooms}
                         >
-                            {" "}
-                            Store Room{" "}
+
+                            Store Room
                         </button>
                     </Box>
                 </Box>
@@ -496,7 +587,7 @@ const FlatAppartment = () => {
                             className={furnished === "Furnished" ? style.setbtn : style.btn}
                             onClick={checkFurnished}
                         >
-                            {" "}
+
                             Furnished
                         </button>
                         <button
@@ -506,8 +597,8 @@ const FlatAppartment = () => {
                             }
                             onClick={checkFurnished}
                         >
-                            {" "}
-                            Semi-furnished{" "}
+
+                            Semi-furnished
                         </button>
                         <button
                             value={"Un-furnished"}
@@ -516,8 +607,8 @@ const FlatAppartment = () => {
                             }
                             onClick={checkFurnished}
                         >
-                            {" "}
-                            Un-furnished{" "}
+
+                            Un-furnished
                         </button>
                     </Box>
                     {/* if furnished detail */}
@@ -538,14 +629,20 @@ const FlatAppartment = () => {
                                 <button
                                     className={style.mns_btn}
                                     disabled={light === 0}
-                                    onClick={() => setLight(light - 1)}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        setLight(light - 1)
+                                    }}
                                 >
                                     <MinusIcon fontSize={"12px"} />
                                 </button>
                                 <h3>{light}</h3>
                                 <button
                                     className={style.pls_btn}
-                                    onClick={() => setLight(light + 1)}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        setLight(light + 1)
+                                    }}
                                 >
                                     <AddIcon fontSize={"12px"} />
                                 </button>
@@ -555,14 +652,20 @@ const FlatAppartment = () => {
                                 <button
                                     className={style.mns_btn}
                                     disabled={fans === 0}
-                                    onClick={() => setFans(fans - 1)}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        setFans(fans - 1)
+                                    }}
                                 >
                                     <MinusIcon fontSize={"12px"} />
                                 </button>
                                 <h3>{fans}</h3>
                                 <button
                                     className={style.pls_btn}
-                                    onClick={() => setFans(fans + 1)}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        setFans(fans + 1)
+                                    }}
                                 >
                                     <AddIcon fontSize={"12px"} />
                                 </button>
@@ -572,12 +675,17 @@ const FlatAppartment = () => {
                                 <button
                                     className={style.mns_btn}
                                     disabled={ac === 0}
-                                    onClick={() => setAc(ac - 1)}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        setAc(ac - 1)
+                                    }}
                                 >
                                     <MinusIcon fontSize={"12px"} />
                                 </button>
                                 <h3>{ac}</h3>
-                                <button className={style.pls_btn} onClick={() => setAc(ac + 1)}>
+                                <button className={style.pls_btn} onClick={(e) => {
+                                        e.preventDefault();
+                                        setAc(ac + 1)}}>
                                     <AddIcon fontSize={"12px"} />
                                 </button>
                                 <h3> AC </h3>
@@ -586,12 +694,17 @@ const FlatAppartment = () => {
                                 <button
                                     className={style.mns_btn}
                                     disabled={tv === 0}
-                                    onClick={() => setTv(tv - 1)}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        setTv(tv - 1)
+                                    }}
                                 >
                                     <MinusIcon fontSize={"12px"} />
                                 </button>
                                 <h3>{tv}</h3>
-                                <button className={style.pls_btn} onClick={() => setTv(tv + 1)}>
+                                <button className={style.pls_btn} onClick={(e) => {
+                                        e.preventDefault();
+                                        setTv(tv + 1)}}>
                                     <AddIcon fontSize={"12px"} />
                                 </button>
                                 <h3> TV </h3>
@@ -600,14 +713,20 @@ const FlatAppartment = () => {
                                 <button
                                     className={style.mns_btn}
                                     disabled={Beds === 0}
-                                    onClick={() => setBeds(Beds - 1)}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        setBeds(Beds - 1)
+                                    }}
                                 >
                                     <MinusIcon fontSize={"12px"} />
                                 </button>
                                 <h3>{Beds}</h3>
                                 <button
                                     className={style.pls_btn}
-                                    onClick={() => setBeds(Beds + 1)}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        setBeds(Beds + 1)
+                                    }}
                                 >
                                     <AddIcon fontSize={"12px"} />
                                 </button>
@@ -617,14 +736,20 @@ const FlatAppartment = () => {
                                 <button
                                     className={style.mns_btn}
                                     disabled={wardrobe === 0}
-                                    onClick={() => setWardrobe(wardrobe - 1)}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        setWardrobe(wardrobe - 1)
+                                    }}
                                 >
                                     <MinusIcon fontSize={"12px"} />
                                 </button>
                                 <h3>{wardrobe}</h3>
                                 <button
                                     className={style.pls_btn}
-                                    onClick={() => setWardrobe(wardrobe + 1)}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        setWardrobe(wardrobe + 1)
+                                    }}
                                 >
                                     <AddIcon fontSize={"12px"} />
                                 </button>
@@ -634,14 +759,20 @@ const FlatAppartment = () => {
                                 <button
                                     className={style.mns_btn}
                                     disabled={geyser === 0}
-                                    onClick={() => setGeyser(geyser - 1)}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        setGeyser(geyser - 1)
+                                    }}
                                 >
                                     <MinusIcon fontSize={"12px"} />
                                 </button>
                                 <h3>{geyser}</h3>
                                 <button
                                     className={style.pls_btn}
-                                    onClick={() => setGeyser(geyser + 1)}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        setGeyser(geyser + 1)
+                                    }}
                                 >
                                     <AddIcon fontSize={"12px"} />
                                 </button>
@@ -660,8 +791,8 @@ const FlatAppartment = () => {
                             <Box>
                                 <Checkbox
                                     onChange={furnisheddetails}
-                                    isChecked={furnishedarr.includes("Washing_Machine")}
-                                    value={"Washing_Machine"}
+                                    isChecked={furnishedarr.includes("Washing Machine")}
+                                    value={"Washing Machine"}
                                     icon={<AddIcon />}
                                 >
                                     Washing Machine
@@ -690,8 +821,8 @@ const FlatAppartment = () => {
                             <Box>
                                 <Checkbox
                                     onChange={furnisheddetails}
-                                    isChecked={furnishedarr.includes("Water_Purifier")}
-                                    value={"Water_Purifier"}
+                                    isChecked={furnishedarr.includes("Water Purifier")}
+                                    value={"Water Purifier"}
                                     icon={<AddIcon />}
                                 >
                                     Water Purifier
@@ -710,8 +841,8 @@ const FlatAppartment = () => {
                             <Box>
                                 <Checkbox
                                     onChange={furnisheddetails}
-                                    isChecked={furnishedarr.includes("Modular_Kitchen")}
-                                    value={"Modular_Kitchen"}
+                                    isChecked={furnishedarr.includes("Modular Kitchen")}
+                                    value={"Modular Kitchen"}
                                     icon={<AddIcon />}
                                 >
                                     Modular Kitchen
@@ -730,8 +861,8 @@ const FlatAppartment = () => {
                             <Box>
                                 <Checkbox
                                     onChange={furnisheddetails}
-                                    isChecked={furnishedarr.includes("Dinning_Table")}
-                                    value={"Dinning_Table"}
+                                    isChecked={furnishedarr.includes("Dinning Table")}
+                                    value={"Dinning Table"}
                                     icon={<AddIcon />}
                                 >
                                     Dinning Table
@@ -750,8 +881,8 @@ const FlatAppartment = () => {
                             <Box>
                                 <Checkbox
                                     onChange={furnisheddetails}
-                                    isChecked={furnishedarr.includes("Exhaust_Fan")}
-                                    value={"Exhaust_Fan"}
+                                    isChecked={furnishedarr.includes("Exhaust Fan")}
+                                    value={"Exhaust Fan"}
                                     icon={<AddIcon />}
                                 >
                                     Exhaust Fan
@@ -771,14 +902,18 @@ const FlatAppartment = () => {
                             <button
                                 className={style.pls_btn}
                                 disabled={parking === 0}
-                                onClick={() => setParking(parking - 1)}
+                                onClick={(e) => {
+                                    e.preventDefault();  
+                                    setParking(parking - 1)}}
                             >
                                 <MinusIcon fontSize={"12px"} />
                             </button>
                             <h3>{parking}</h3>
                             <button
                                 className={style.mns_btn}
-                                onClick={() => setParking(parking + 1)}
+                                onClick={(e) => {
+                                    e.preventDefault();   
+                                    setParking(parking + 1)}}
                             >
                                 <AddIcon fontSize={"12px"} />
                             </button>
@@ -788,14 +923,18 @@ const FlatAppartment = () => {
                             <button
                                 className={style.pls_btn}
                                 disabled={openparking === 0}
-                                onClick={() => setOpenparking(openparking - 1)}
+                                onClick={(e) => {
+                                    e.preventDefault();   
+                                    setOpenparking(openparking - 1)}}
                             >
                                 <MinusIcon fontSize={"12px"} />
                             </button>
                             <h3>{openparking}</h3>
                             <button
                                 className={style.mns_btn}
-                                onClick={() => setOpenparking(openparking + 1)}
+                                onClick={(e) => {
+                                    e.preventDefault();  
+                                    setOpenparking(openparking + 1)}}
                             >
                                 <AddIcon fontSize={"12px"} />
                             </button>
@@ -888,7 +1027,7 @@ const FlatAppartment = () => {
                     </Box>
                 </Box>
                 {/* Age of Property */}
-                {availability == "Ready to move" ? (
+                {availability == "Ready to move"  && (
                     <Box textAlign={"left"} className={style.optional_box}>
                         <Heading
                             as={"h3"}
@@ -945,7 +1084,9 @@ const FlatAppartment = () => {
                             </button>
                         </Box>
                     </Box>
-                ) : (
+                )} 
+
+                {availability == "Under construction" && (
                     <Box>
                         <Heading
                             as={"h3"}
@@ -1080,23 +1221,23 @@ const FlatAppartment = () => {
                         onChange={(e) => setInclusivePrice(e.target.value)}
                         value={"All inclusive price"}
                     >
-                        All inclusive price{" "}
+                        All inclusive price
                     </Checkbox>
                     <Checkbox
                         isChecked={inclusivePrices == "Tax and Govt. charges excuded"}
                         onChange={(e) => setInclusivePrice(e.target.value)}
                         value={"Tax and Govt. charges excuded"}
                     >
-                        {" "}
-                        Tax and Govt. charges excuded{" "}
+
+                        Tax and Govt. charges excuded
                     </Checkbox>
                     <Checkbox
                         isChecked={inclusivePrices == "Price Negotiable"}
                         onChange={(e) => setInclusivePrice(e.target.value)}
                         value={"Price Negotiable"}
                     >
-                        {" "}
-                        Price Negotiable{" "}
+
+                        Price Negotiable
                     </Checkbox>
                 </Box>
                 <Box>
@@ -1114,7 +1255,7 @@ const FlatAppartment = () => {
                 <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
                     Add amenities/unique features
                 </Heading>
-                <Heading as={"h5"} size={"xs"} margin={"10px 0"} textAlign={"left"}>
+                <Heading as={"h5"} size={"xs"} fontWeight={400} margin={"10px 0"} textAlign={"left"}>
                     All fields on this page are optional
                 </Heading>
             </Box>
@@ -1131,8 +1272,7 @@ const FlatAppartment = () => {
                         onClick={handleAminities}
                         value={"Maintenance Staff"}
                     >
-                        {" "}
-                        Maintenance Staff{" "}
+                        Maintenance Staff
                     </button>
                     <button
                         className={
@@ -1141,8 +1281,8 @@ const FlatAppartment = () => {
                         onClick={handleAminities}
                         value={"Water Storage"}
                     >
-                        {" "}
-                        Water Storage{" "}
+
+                        Water Storage
                     </button>
                     <button
                         className={
@@ -1153,8 +1293,8 @@ const FlatAppartment = () => {
                         onClick={handleAminities}
                         value={"Security/ Fire Alarm"}
                     >
-                        {" "}
-                        Security/ Fire Alarm{" "}
+
+                        Security/ Fire Alarm
                     </button>
                     <button
                         className={
@@ -1163,16 +1303,16 @@ const FlatAppartment = () => {
                         onClick={handleAminities}
                         value={"Visitor Parking"}
                     >
-                        {" "}
-                        Visitor Parking{" "}
+
+                        Visitor Parking
                     </button>
                     <button
                         className={aminity.includes("Park") ? style.setbtn : style.btn}
                         onClick={handleAminities}
                         value={"Park"}
                     >
-                        {" "}
-                        Park{" "}
+
+                        Park
                     </button>
                     <button
                         className={
@@ -1181,8 +1321,8 @@ const FlatAppartment = () => {
                         onClick={handleAminities}
                         value={"Intercom Facility"}
                     >
-                        {" "}
-                        Intercom Facility{" "}
+
+                        Intercom Facility
                     </button>
                     <button
                         className={
@@ -1193,16 +1333,16 @@ const FlatAppartment = () => {
                         onClick={handleAminities}
                         value={"Feng Shui / Vaastu Compliant"}
                     >
-                        {" "}
-                        Feng Shui / Vaastu Compliant{" "}
+
+                        Feng Shui / Vaastu Compliant
                     </button>
                     <button
                         className={aminity.includes("Lift") ? style.setbtn : style.btn}
                         onClick={handleAminities}
                         value={"Lift"}
                     >
-                        {" "}
-                        Lift(s){" "}
+
+                        Lift(s)
                     </button>
                 </Box>
             </Box>
@@ -1221,7 +1361,7 @@ const FlatAppartment = () => {
                         value={"High Ceiling Height"}
                         onClick={handlePropertyFeature}
                     >
-                        {" "}
+
                         High Ceiling Height
                     </button>
                     <button
@@ -1233,8 +1373,8 @@ const FlatAppartment = () => {
                         value={"False Ceiling Lighting"}
                         onClick={handlePropertyFeature}
                     >
-                        {" "}
-                        False Ceiling Lighting{" "}
+
+                        False Ceiling Lighting
                     </button>
                     <button
                         className={
@@ -1243,8 +1383,8 @@ const FlatAppartment = () => {
                         value={"Piped-gas"}
                         onClick={handlePropertyFeature}
                     >
-                        {" "}
-                        Piped-gas{" "}
+
+                        Piped-gas
                     </button>
                     <button
                         className={
@@ -1255,8 +1395,8 @@ const FlatAppartment = () => {
                         value={"Internet/wi-fi connectivity"}
                         onClick={handlePropertyFeature}
                     >
-                        {" "}
-                        Internet/wi-fi connectivity{" "}
+
+                        Internet/wi-fi connectivity
                     </button>
                     <button
                         className={
@@ -1267,8 +1407,8 @@ const FlatAppartment = () => {
                         value={"Centrally Air Renovated"}
                         onClick={handlePropertyFeature}
                     >
-                        {" "}
-                        Centrally Air Renovated{" "}
+
+                        Centrally Air Renovated
                     </button>
                     <button
                         className={
@@ -1279,8 +1419,8 @@ const FlatAppartment = () => {
                         value={"Water Purifier"}
                         onClick={handlePropertyFeature}
                     >
-                        {" "}
-                        Water Purifier{" "}
+
+                        Water Purifier
                     </button>
                     <button
                         className={
@@ -1291,8 +1431,8 @@ const FlatAppartment = () => {
                         value={"Recently Renovated"}
                         onClick={handlePropertyFeature}
                     >
-                        {" "}
-                        Recently Renovated{" "}
+
+                        Recently Renovated
                     </button>
                     <button
                         className={
@@ -1303,8 +1443,8 @@ const FlatAppartment = () => {
                         value={"Private Garden / Terrace"}
                         onClick={handlePropertyFeature}
                     >
-                        {" "}
-                        Private Garden / Terrace{" "}
+
+                        Private Garden / Terrace
                     </button>
                     <button
                         className={
@@ -1315,8 +1455,8 @@ const FlatAppartment = () => {
                         value={"Natural Light"}
                         onClick={handlePropertyFeature}
                     >
-                        {" "}
-                        Natural Light{" "}
+
+                        Natural Light
                     </button>
                     <button
                         className={
@@ -1325,8 +1465,8 @@ const FlatAppartment = () => {
                         value={"Airy Roooms"}
                         onClick={handlePropertyFeature}
                     >
-                        {" "}
-                        Airy Roooms{" "}
+
+                        Airy Roooms
                     </button>
                     <button
                         className={
@@ -1337,8 +1477,8 @@ const FlatAppartment = () => {
                         value={"Spacious Interiors"}
                         onClick={handlePropertyFeature}
                     >
-                        {" "}
-                        Spacious Interiors{" "}
+
+                        Spacious Interiors
                     </button>
                 </Box>
             </Box>
@@ -1357,8 +1497,8 @@ const FlatAppartment = () => {
                         onClick={HandleBuildingFeature}
                         value={"Water softening plant"}
                     >
-                        {" "}
-                        Water softening plant{" "}
+
+                        Water softening plant
                     </button>
                     <button
                         className={
@@ -1369,8 +1509,8 @@ const FlatAppartment = () => {
                         onClick={HandleBuildingFeature}
                         value={"Shopping Centre"}
                     >
-                        {" "}
-                        Shopping Centre{" "}
+
+                        Shopping Centre
                     </button>
                     <button
                         className={
@@ -1381,8 +1521,8 @@ const FlatAppartment = () => {
                         onClick={HandleBuildingFeature}
                         value={"Fitness Centre / GYM"}
                     >
-                        {" "}
-                        Fitness Centre / GYM{" "}
+
+                        Fitness Centre / GYM
                     </button>
                     <button
                         className={
@@ -1393,8 +1533,8 @@ const FlatAppartment = () => {
                         onClick={HandleBuildingFeature}
                         value={"Swimming Pool"}
                     >
-                        {" "}
-                        Swimming Pool{" "}
+
+                        Swimming Pool
                     </button>
                     <button
                         className={
@@ -1405,8 +1545,8 @@ const FlatAppartment = () => {
                         onClick={HandleBuildingFeature}
                         value={"Club house / Community Center"}
                     >
-                        {" "}
-                        Club house / Community Center{" "}
+
+                        Club house / Community Center
                     </button>
                     <button
                         className={
@@ -1417,8 +1557,8 @@ const FlatAppartment = () => {
                         onClick={HandleBuildingFeature}
                         value={"Security Personnel"}
                     >
-                        {" "}
-                        Security Personnel{" "}
+
+                        Security Personnel
                     </button>
                 </Box>
             </Box>
@@ -1437,8 +1577,8 @@ const FlatAppartment = () => {
                         value={"Separate entry for sevant room"}
                         onClick={handleAdditionalFeature}
                     >
-                        {" "}
-                        Separate entry for sevant room{" "}
+
+                        Separate entry for sevant room
                     </button>
                     <button
                         className={
@@ -1447,8 +1587,8 @@ const FlatAppartment = () => {
                         value={"Waste Disposal"}
                         onClick={handleAdditionalFeature}
                     >
-                        {" "}
-                        Waste Disposal{" "}
+
+                        Waste Disposal
                     </button>
                     <button
                         className={
@@ -1459,8 +1599,8 @@ const FlatAppartment = () => {
                         value={"No open drainage around"}
                         onClick={handleAdditionalFeature}
                     >
-                        {" "}
-                        No open drainage around{" "}
+
+                        No open drainage around
                     </button>
                     <button
                         className={
@@ -1471,8 +1611,8 @@ const FlatAppartment = () => {
                         value={"Rain Water Harvesting"}
                         onClick={handleAdditionalFeature}
                     >
-                        {" "}
-                        Rain Water Harvesting{" "}
+
+                        Rain Water Harvesting
                     </button>
                     <button
                         className={
@@ -1483,8 +1623,8 @@ const FlatAppartment = () => {
                         value={"Bank Attached Property"}
                         onClick={handleAdditionalFeature}
                     >
-                        {" "}
-                        Bank Attached Property{" "}
+
+                        Bank Attached Property
                     </button>
                     <button
                         className={
@@ -1495,8 +1635,8 @@ const FlatAppartment = () => {
                         value={"Low Density Society"}
                         onClick={handleAdditionalFeature}
                     >
-                        {" "}
-                        Low Density Society{" "}
+
+                        Low Density Society
                     </button>
                 </Box>
             </Box>
@@ -1510,29 +1650,35 @@ const FlatAppartment = () => {
                         className={
                             watersource == "Municipal corporation" ? style.setbtn : style.btn
                         }
-                        onClick={(e) => setWaterSource(e.target.value)}
+                        onClick={(e) => {
+                            e.preventDefault(); 
+                            setWaterSource(e.target.value)}}
                         value={"Municipal corporation"}
                     >
-                        {" "}
-                        Municipal corporation{" "}
+
+                        Municipal corporation
                     </button>
                     <button
                         className={
                             watersource == "Borewell/Tank" ? style.setbtn : style.btn
                         }
-                        onClick={(e) => setWaterSource(e.target.value)}
+                        onClick={(e) => {
+                            e.preventDefault(); 
+                            setWaterSource(e.target.value)}}
                         value={"Borewell/Tank"}
                     >
-                        {" "}
-                        Borewell/Tank{" "}
+
+                        Borewell/Tank
                     </button>
                     <button
                         className={watersource == "24*7 Water" ? style.setbtn : style.btn}
-                        onClick={(e) => setWaterSource(e.target.value)}
+                        onClick={(e) => {
+                            e.preventDefault(); 
+                            setWaterSource(e.target.value)}}
                         value={"24*7 Water"}
                     >
-                        {" "}
-                        24*7 Water{" "}
+
+                        24*7 Water
                     </button>
                 </Box>
             </Box>
@@ -1547,8 +1693,8 @@ const FlatAppartment = () => {
                         onClick={handleoverlooking}
                         value={"Pool"}
                     >
-                        {" "}
-                        Pool{" "}
+
+                        Pool
                     </button>
                     <button
                         className={
@@ -1557,16 +1703,16 @@ const FlatAppartment = () => {
                         onClick={handleoverlooking}
                         value={"Park/Garden"}
                     >
-                        {" "}
-                        Park/Garden{" "}
+
+                        Park/Garden
                     </button>
                     <button
                         className={overLook.includes("Club") ? style.setbtn : style.btn}
                         onClick={handleoverlooking}
                         value={"Club"}
                     >
-                        {" "}
-                        Club{" "}
+
+                        Club
                     </button>
                     <button
                         className={
@@ -1575,16 +1721,16 @@ const FlatAppartment = () => {
                         onClick={handleoverlooking}
                         value={"Main Road"}
                     >
-                        {" "}
-                        Main Road{" "}
+
+                        Main Road
                     </button>
                     <button
                         className={overLook.includes("Other") ? style.setbtn : style.btn}
                         onClick={handleoverlooking}
                         value={"Other"}
                     >
-                        {" "}
-                        Other{" "}
+
+                        Other
                     </button>
                 </Box>
             </Box>
@@ -1600,8 +1746,8 @@ const FlatAppartment = () => {
                         value={"In a gated society"}
                         onChange={handleotherfeature}
                     >
-                        {" "}
-                        In a gated society{" "}
+
+                        In a gated society
                     </Checkbox>
                     <Checkbox
                         size={"lg"}
@@ -1609,8 +1755,8 @@ const FlatAppartment = () => {
                         value={"Corner Property"}
                         onChange={handleotherfeature}
                     >
-                        {" "}
-                        Corner Property{" "}
+
+                        Corner Property
                     </Checkbox>
                     <Checkbox
                         size={"lg"}
@@ -1618,8 +1764,8 @@ const FlatAppartment = () => {
                         value={"Pet Friendly"}
                         onChange={handleotherfeature}
                     >
-                        {" "}
-                        Pet Friendly{" "}
+
+                        Pet Friendly
                     </Checkbox>
                     <Checkbox
                         size={"lg"}
@@ -1627,8 +1773,8 @@ const FlatAppartment = () => {
                         value={"Wheelchair friendly"}
                         onChange={handleotherfeature}
                     >
-                        {" "}
-                        Wheelchair friendly{" "}
+
+                        Wheelchair friendly
                     </Checkbox>
                 </Box>
             </Box>
@@ -1641,26 +1787,32 @@ const FlatAppartment = () => {
                     <button
                         className={powerbackup == "None" ? style.setbtn : style.btn}
                         value={"None"}
-                        onClick={(e) => setPowerbackup(e.target.value)}
+                        onClick={(e) => {
+                            e.preventDefault(); 
+                            setPowerbackup(e.target.value)}}
                     >
-                        {" "}
-                        None{" "}
+
+                        None
                     </button>
                     <button
                         className={powerbackup == "Partial" ? style.setbtn : style.btn}
                         value={"Partial"}
-                        onClick={(e) => setPowerbackup(e.target.value)}
+                        onClick={(e) => {
+                            e.preventDefault(); 
+                            setPowerbackup(e.target.value)}}
                     >
-                        {" "}
-                        Partial{" "}
+
+                        Partial
                     </button>
                     <button
                         className={powerbackup == "Full" ? style.setbtn : style.btn}
                         value={"Full"}
-                        onClick={(e) => setPowerbackup(e.target.value)}
+                        onClick={(e) => {
+                            e.preventDefault(); 
+                            setPowerbackup(e.target.value)}}
                     >
-                        {" "}
-                        Full{" "}
+
+                        Full
                     </button>
                 </Box>
             </Box>
@@ -1672,75 +1824,91 @@ const FlatAppartment = () => {
                 <Box>
                     <button
                         className={propertyFacing == "North" ? style.setbtn : style.btn}
-                        onClick={(e) => setPropertyFacing(e.target.value)}
+                        onClick={(e) => {
+                            e.preventDefault(); 
+                            setPropertyFacing(e.target.value)}}
                         value={"North"}
                     >
-                        {" "}
-                        North{" "}
+
+                        North
                     </button>
                     <button
                         className={propertyFacing == "South" ? style.setbtn : style.btn}
-                        onClick={(e) => setPropertyFacing(e.target.value)}
+                        onClick={(e) => {
+                            e.preventDefault(); 
+                            setPropertyFacing(e.target.value)}}
                         value={"South"}
                     >
-                        {" "}
-                        South{" "}
+
+                        South
                     </button>
                     <button
                         className={propertyFacing == "East" ? style.setbtn : style.btn}
-                        onClick={(e) => setPropertyFacing(e.target.value)}
+                        onClick={(e) => {
+                            e.preventDefault(); 
+                            setPropertyFacing(e.target.value)}}
                         value={"East"}
                     >
-                        {" "}
-                        East{" "}
+
+                        East
                     </button>
                     <button
                         className={propertyFacing == "West" ? style.setbtn : style.btn}
-                        onClick={(e) => setPropertyFacing(e.target.value)}
+                        onClick={(e) => {
+                            e.preventDefault(); 
+                            setPropertyFacing(e.target.value)}}
                         value={"West"}
                     >
-                        {" "}
-                        West{" "}
+
+                        West
                     </button>
                     <button
                         className={
                             propertyFacing == "North-East" ? style.setbtn : style.btn
                         }
-                        onClick={(e) => setPropertyFacing(e.target.value)}
+                        onClick={(e) => {
+                            e.preventDefault(); 
+                            setPropertyFacing(e.target.value)}}
                         value={"North-East"}
                     >
-                        {" "}
-                        North-East{" "}
+
+                        North-East
                     </button>
                     <button
                         className={
                             propertyFacing == "North-West" ? style.setbtn : style.btn
                         }
-                        onClick={(e) => setPropertyFacing(e.target.value)}
+                        onClick={(e) => {
+                            e.preventDefault(); 
+                            setPropertyFacing(e.target.value)}}
                         value={"North-West"}
                     >
-                        {" "}
-                        North-West{" "}
+
+                        North-West
                     </button>
                     <button
                         className={
                             propertyFacing == "South-East" ? style.setbtn : style.btn
                         }
-                        onClick={(e) => setPropertyFacing(e.target.value)}
+                        onClick={(e) => {
+                            e.preventDefault(); 
+                            setPropertyFacing(e.target.value)}}
                         value={"South-East"}
                     >
-                        {" "}
-                        South-East{" "}
+
+                        South-East
                     </button>
                     <button
                         className={
                             propertyFacing == "South-West" ? style.setbtn : style.btn
                         }
-                        onClick={(e) => setPropertyFacing(e.target.value)}
+                        onClick={(e) => {
+                            e.preventDefault(); 
+                            setPropertyFacing(e.target.value)}}
                         value={"South-West"}
                     >
-                        {" "}
-                        South-West{" "}
+
+                        South-West
                     </button>
                 </Box>
             </Box>
@@ -1757,7 +1925,7 @@ const FlatAppartment = () => {
                         <option value=""> Select </option>
                         <option value="Marble"> Marble </option>
                         <option value="Concrete"> Concrete </option>
-                        <option value="Poloshed_concrete"> Poloshed concrete </option>
+                        <option value="Poloshed concrete"> Poloshed concrete </option>
                         <option value="Granite"> Granite </option>
                         <option value="Ceramic"> Ceramic </option>
                         <option value="Mosaic"> Mosaic </option>
@@ -1806,8 +1974,8 @@ const FlatAppartment = () => {
                         value={"Close to Station"}
                         onClick={handlelocationadvantages}
                     >
-                        {" "}
-                        Close to Station{" "}
+
+                        Close to Station
                     </button>
                     <button
                         className={
@@ -1816,8 +1984,8 @@ const FlatAppartment = () => {
                         value={"Close to School"}
                         onClick={handlelocationadvantages}
                     >
-                        {" "}
-                        Close to School{" "}
+
+                        Close to School
                     </button>
                     <button
                         className={
@@ -1828,8 +1996,8 @@ const FlatAppartment = () => {
                         value={"Close to Hospital"}
                         onClick={handlelocationadvantages}
                     >
-                        {" "}
-                        Close to Hospital{" "}
+
+                        Close to Hospital
                     </button>
                     <button
                         className={
@@ -1838,8 +2006,8 @@ const FlatAppartment = () => {
                         value={"Close to Market"}
                         onClick={handlelocationadvantages}
                     >
-                        {" "}
-                        Close to Market{" "}
+
+                        Close to Market
                     </button>
                     <button
                         className={
@@ -1850,8 +2018,8 @@ const FlatAppartment = () => {
                         value={"Close to Railway Station"}
                         onClick={handlelocationadvantages}
                     >
-                        {" "}
-                        Close to Railway Station{" "}
+
+                        Close to Railway Station
                     </button>
                     <button
                         className={
@@ -1862,8 +2030,8 @@ const FlatAppartment = () => {
                         value={"Close to Airport"}
                         onClick={handlelocationadvantages}
                     >
-                        {" "}
-                        Close to Airport{" "}
+
+                        Close to Airport
                     </button>
                     <button
                         className={
@@ -1872,8 +2040,7 @@ const FlatAppartment = () => {
                         value={"Close to Mall"}
                         onClick={handlelocationadvantages}
                     >
-                        {" "}
-                        Close to Mall{" "}
+                        Close to Mall
                     </button>
                     <button
                         className={
@@ -1884,8 +2051,7 @@ const FlatAppartment = () => {
                         value={"Close to highway"}
                         onClick={handlelocationadvantages}
                     >
-                        {" "}
-                        Close to highway{" "}
+                        Close to highway
                     </button>
                 </Box>
             </Box>
@@ -1902,16 +2068,15 @@ const FlatAppartment = () => {
             </Heading>
             <Button
                 margin={"20px 0"}
-                onClick={handleSubmitData}
+                type="submit"
                 w={"100%"}
                 backgroundColor={"rgb(46,49,146)"}
                 _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                 color={"#ffffff"}
-            >
-                {" "}
-                Post Property{" "}
+            > 
+                Post Property
             </Button>
-        </div>
+        </form>
     );
 };
 
