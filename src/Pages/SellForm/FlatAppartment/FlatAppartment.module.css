@@ -27,6 +27,10 @@
   gap: 10px;
 }
 
+.input_borders{
+  border: 0 ; 
+}
+
 .furnished_detail {
   display: grid;
   margin: 20px 10px;

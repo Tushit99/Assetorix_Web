@@ -39,7 +39,7 @@ export const signinuser = (param) => async (dispatch) => {
     let res = await axios
       .post("https://assetorix.onrender.com/user/register", param)
       .then((e) => {
-        dispatch({ type: USER_SIGNIN_SUCCESS, payload: e.data });
+        dispatch({ type: USER_SIGNIN_SUCCESS, payload: e.data }); 
         if (e.status > 200 && e.status < 300) {
           localStorage.setItem("AstToken", e.data.token);
           localStorage.setItem("AstUser", e.data.name);
@@ -58,10 +58,8 @@ export const signinuser = (param) => async (dispatch) => {
   }
 };
 
-export const userPreLog = (param) => async (dispatch) => {
-  // let config = {
-  //   headers: param,
-  // }; 
+export const userPreLog = (param) => async (dispatch) => {  
+  
   console.log(param);  
   try {
     await axios.get("https://assetorix.onrender.com/user/", {headers: param}).then((e) => {

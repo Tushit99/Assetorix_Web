@@ -4,7 +4,9 @@ import {
     Button,
     ButtonGroup, 
     Heading,
-    Input, 
+    Input,
+    NumberInput,
+    NumberInputField, 
     Select,
     Text,
     Textarea,
@@ -18,6 +20,7 @@ import axios from "axios";
 const IndependentHouse = () =>  {
     const toast = useToast();
     const [country, setCountry] = useState("");
+    const [facingwidth, setFacingWidth] = useState("Meter");
     const [city, setCity] = useState("");
     const [appartment, setApartment] = useState("");
     const [pincode, setPincode] = useState("");
@@ -35,6 +38,7 @@ const IndependentHouse = () =>  {
     const [tv, setTv] = useState(0);
     const [Beds, setBeds] = useState(0);
     const [wardrobe, setWardrobe] = useState(0);
+    const [areaPer, setAreaPer] = useState("sq.ft");
     const [geyser, setGeyser] = useState(0);
     const [furnishedarr, setfurnishedarr] = useState([]);
     const [extraroom, setExtraRoom] = useState([]);
@@ -45,7 +49,7 @@ const IndependentHouse = () =>  {
     const [ownership, setOwnerShip] = useState("");
     const [pricedetail, setPricedetail] = useState("");
     const [priceSqr, setPriceSqr] = useState("");
-    const [inclusivePrices, setInclusivePrice] = useState("");
+    const [inclusivePrices, setInclusivePrice] = useState([]);
     const [aminity, setAminity] = useState([]);
     const [prpertyFeature, setPropertyFeature] = useState("");
     const [buildingFeature, setBuildingFeature] = useState([]);
@@ -59,43 +63,93 @@ const IndependentHouse = () =>  {
     const [facing, setFacing] = useState("");
     const [locationAdv, setLocationAdv] = useState([]);
     const [totalfloors, setTotalFloors] = useState("");
-    const [floorOn, setFloorOn] = useState("");
+    const [floorOn, setFloorOn] = useState("Ground");
 
-    const handleSubmitData = async (e) => {  
-        e.preventDefault(); 
+    const handleSubmitData = async (e) => {
+        e.preventDefault();
         let obj = {
-            lookingFor: "Sell", 
-            Property: "Residential", 
-            PropertyType: "Independent House", 
+            lookingFor: "Sell",
+            propertyGroup: "Residential",
+            propertyType: "Flat/Apartment",
+            houseNumber: houseNo,
+            apartmentName: appartment,
             address: {
-                houseNumber: houseNo,
+                locality,
+                pincode,
                 city,
                 state,
-                appartment,
-                locality,
+                country,
             },
-            bedroom, 
+            bedroom,
             bathroom,
-            balconey,
-            furnishedarr,
+            balcony: balconey,
             ownership,
-            pricedetail,
-            priceSqr,
+            price: pricedetail,
+            priceUnit: priceSqr,
             inclusivePrices,
             aminity,
             prpertyFeature,
             buildingFeature,
             additinalft,
-            watersource, 
+            watersource,
             otherFeature,
             powerbackup,
             propertyFacing,
             flooring,
             facing,
-            locationAdv,
             totalfloors,
-            floorOn, 
+            floorOn,
         };
+
+        const showToastError = (message) => {
+            toast({
+                title: message + ' un-filled',
+                status: 'error',
+                duration: 2000,
+                position: 'top-right'
+            });
+        }
+
+
+        if (!locality) {
+            showToastError('locality');
+        } else if (!bedroom) {
+            showToastError('bedroom');
+        } else if (!bathroom) {
+            showToastError('bathroom');
+        } else if (!balconey) {
+            showToastError('balconey');
+        } else if (!furnishedarr) {
+            showToastError('Furnished Field');
+        } else if (!ownership) {
+            showToastError('OwnerShip');
+        } else if (!pricedetail) {
+            showToastError('PriceDetail');
+        } else if (!priceSqr) {
+            showToastError('Price Per sq.ft');
+        } else if (!additinalft) {
+            showToastError('Property description');
+        } else if (!watersource) {
+            showToastError('Water Source');
+        } else if (!overLook) {
+            showToastError('Overlooking');
+        } else if (!powerbackup) {
+            showToastError('Power Backup');
+        } else if (!propertyFacing) {
+            showToastError('Property Facing');
+        } else if (!flooring) {
+            showToastError('Flooring');
+        } else if (!facing) {
+            showToastError('Facing');
+        } else if (!totalfloors) {
+            showToastError('Total Floors');
+        } else if (!floorOn) {
+            showToastError('Floor number');
+        }
+
+        if (locationAdv) {
+            obj["locationAdv"] = locationAdv
+        }
 
         if (
             city &&
@@ -104,43 +158,62 @@ const IndependentHouse = () =>  {
             houseNo &&
             bedroom &&
             bathroom &&
-            balconey && 
-            furnishedarr && 
+            balconey &&
+            furnishedarr &&
             ownership &&
             pricedetail &&
             priceSqr &&
-            inclusivePrices &&  
+            inclusivePrices &&
             additinalft &&
             watersource &&
-            overLook && 
+            overLook &&
             powerbackup &&
             propertyFacing &&
             flooring &&
-            facing && 
+            facing &&
             totalfloors &&
             floorOn
         ) {
+
+            let id = localStorage.getItem("usrId") || undefined;
+            let authorization = localStorage.getItem("AstToken") || undefined;
+
+            let head = { id, authorization };
+
+            if (!id || !authorization) {
+                toast({
+                    title: 'Kindly log in to access property posting.',
+                    description: "Login required for posting property.",
+                    status: 'error',
+                    duration: 2000,
+                    position: 'top-right'
+                })
+            }
+
+
             if (furnished == "Furnished" || furnished == "Semi-furnished") {
-                obj["light"] = light; 
+                obj["light"] = light;
                 obj["fans"] = fans;
                 obj["ac"] = ac;
-                obj["tv"] = tv; 
+                obj["tv"] = tv;
                 obj["Beds"] = Beds;
                 obj["wardrobe"] = wardrobe;
                 obj["geyser"] = geyser;
+                obj["furnishedList"] = furnishedarr
+
             }
 
-            if(furnished.length>0){
-                obj["furnished"]=furnished ;
+            if (furnished.length > 0) {
+                obj["furnished"] = furnished;
             }
-            if(openparking>0){
-                obj["openparking"] = openparking; 
+            if (openparking > 0) {
+                obj["openparking"] = openparking;
             }
             if (extraroom.length > 0) {
                 obj["otherRoom"] = extraroom
             }
-            if(parking>0){
-                obj["parking"] = parking ;  
+            if (parking > 0) {
+                obj["parking"] = parking;
             }
             if (availability == "Ready to move" && fromyear != "") {
                 obj["PropertyStatus"] = fromyear;
@@ -148,21 +221,19 @@ const IndependentHouse = () =>  {
             if (availability == "Under construction" && expectedyear != "") {
                 obj["expectedByYear"] = expectedyear;
             }
-            let id = localStorage.getItem("usrId");
-            let authorization = localStorage.getItem("AstToken");
+            else {
+                await axios
+                    .post("https://assetorix.onrender.com/property/", obj, { headers: head })
+                    .then((e) => {
+                        toast({
+                            title: e.data.msg,
+                            description: e.data.msg,
+                            status: 'success',
+                            duration: 2000,
+                        })
+                    });
+            }
 
-            let head = { id, authorization };
-
-            await axios
-                .post("https://assetorix.onrender.com/property/", obj, { headers: head })
-                .then((e) => {
-                    toast({
-                        title: e.data.msg,
-                        description: e.data.msg,
-                        status: 'success', 
-                        duration: 2000, 
-                    })
-                });
         }
         else {
             toast({
@@ -173,7 +244,7 @@ const IndependentHouse = () =>  {
                 position: 'top-right'
             })
         }
-        console.log("reached"); 
+        console.log("reached");
     };
 
     const handlepinfetch = (e) => {
@@ -224,7 +295,7 @@ const IndependentHouse = () =>  {
     };
 
     const handlerooms = (e) => {
-        e.preventDefault(); 
+        e.preventDefault();
         let newarr = [...extraroom];
         let value = e.target.value;
 
@@ -347,6 +418,18 @@ const IndependentHouse = () =>  {
         setLocationAdv(newarr);
     };
 
+    const handleinclusiveandtax = (e) => {
+        let newarr = [...inclusivePrices];
+        let value = e;
+
+        if (newarr.includes(value)) {
+            newarr.splice(newarr.indexOf(value), 1);
+        } else {
+            newarr.push(value);
+        } 
+        setInclusivePrice(newarr);
+    }
+
     return (
         <form onSubmit={handleSubmitData}>
             {/* property location */}
@@ -354,17 +437,18 @@ const IndependentHouse = () =>  {
                 <Heading size={"lg"}>Where is your property located?</Heading>
                 <Heading size={"sm"}>
                     An accurate location helps you connect with right buyers.
-                </Heading>
-                <Input
-                    type="number"
-                    padding={"0 10px"}
-                    required
-                    placeholder="Enter Pincode"
-                    fontSize={"md"}
-                    value={pincode}
-                    onChange={handlepinfetch}
-                    variant="flushed"
-                />
+                </Heading> 
+                <NumberInput>
+                    <NumberInputField
+                        padding={"0 10px"}
+                        required
+                        placeholder="Enter Pincode"
+                        fontSize={"md"}
+                        value={pincode}
+                        onChange={handlepinfetch}
+                        variant="flushed"
+                    />
+                </NumberInput>
                 <Input
                     type="text"
                     padding={"0 10px"}
@@ -438,39 +522,39 @@ const IndependentHouse = () =>  {
                 <Box as={"div"} className={style.inp_form_numbers}>
                     <Box textAlign={"left"} >
                         <Text> No. of Beadrooms </Text>
-                        <Input
-                            type="number" 
-                            variant="flushed"
-                            padding={"0 2px"}
-                            onChange={(e) => setBedRoom(e.target.value)}
-                            value={bedroom}
-                            required
-                            placeholder={"Enter number of bedrooms"}
-                        />
+                        <NumberInput>
+                            <NumberInputField
+                                variant="flushed"
+                                padding={"0 2px"}
+                                onChange={(e) => setBedRoom(e.target.value)}
+                                value={bedroom}
+                                required
+                            />
+                        </NumberInput>
                     </Box>
                     <Box textAlign={"left"}>
                         <Text> No. of Bathrooms </Text>
-                        <Input
-                            type="number"
-                            variant="flushed"
-                            onChange={(e) => setBathroom(e.target.value)}
-                            value={bathroom}
-                            required
-                            padding={"0 2px"}
-                            placeholder={"Enter number of bathrooms"}
-                        />
+                        <NumberInput>
+                            <NumberInputField
+                                variant="flushed"
+                                onChange={(e) => setBathroom(e.target.value)}
+                                value={bathroom}
+                                required
+                                padding={"0 2px"}
+                            />
+                        </NumberInput>
                     </Box>
                     <Box textAlign={"left"}>
                         <Text> No. of Balconies </Text>
-                        <Input
-                            type="number"
-                            variant="flushed"
-                            onChange={(e) => setBalcony(e.target.value)}
-                            value={balconey}
-                            required
-                            padding={"0 2px"}
-                            placeholder={"Enter number of balconies"}
-                        />
+                        <NumberInput>
+                            <NumberInputField
+                                variant="flushed"
+                                onChange={(e) => setBalcony(e.target.value)}
+                                value={balconey}
+                                required
+                                padding={"0 2px"}
+                            />
+                        </NumberInput>
                     </Box>
                 </Box>
                 {/* ====================================== */}
@@ -493,7 +577,9 @@ const IndependentHouse = () =>  {
                             required
                             placeholder={"Enter Plot area"}
                         />
-                        <select className={style.select} required>
+                        <select value={areaPer} onChange={(e) => {
+                            setAreaPer(e.target.value);
+                        }} className={style.select} required>
                             <option value="sq.ft">sq.ft</option>
                             <option value="sq.yards">sq.yards</option>
                             <option value="sq.m">sq.m</option>
@@ -681,8 +767,9 @@ const IndependentHouse = () =>  {
                                 </button>
                                 <h3>{ac}</h3>
                                 <button className={style.pls_btn} onClick={(e) => {
-                                        e.preventDefault();
-                                        setAc(ac + 1)}}>
+                                    e.preventDefault();
+                                    setAc(ac + 1)
+                                }}>
                                     <AddIcon fontSize={"12px"} />
                                 </button>
                                 <h3> AC </h3>
@@ -700,8 +787,9 @@ const IndependentHouse = () =>  {
                                 </button>
                                 <h3>{tv}</h3>
                                 <button className={style.pls_btn} onClick={(e) => {
-                                        e.preventDefault();
-                                        setTv(tv + 1)}}>
+                                    e.preventDefault();
+                                    setTv(tv + 1)
+                                }}>
                                     <AddIcon fontSize={"12px"} />
                                 </button>
                                 <h3> TV </h3>
@@ -900,8 +988,9 @@ const IndependentHouse = () =>  {
                                 className={style.pls_btn}
                                 disabled={parking === 0}
                                 onClick={(e) => {
-                                    e.preventDefault();  
-                                    setParking(parking - 1)}}
+                                    e.preventDefault();
+                                    setParking(parking - 1)
+                                }}
                             >
                                 <MinusIcon fontSize={"12px"} />
                             </button>
@@ -909,8 +998,9 @@ const IndependentHouse = () =>  {
                             <button
                                 className={style.mns_btn}
                                 onClick={(e) => {
-                                    e.preventDefault();   
-                                    setParking(parking + 1)}}
+                                    e.preventDefault();
+                                    setParking(parking + 1)
+                                }}
                             >
                                 <AddIcon fontSize={"12px"} />
                             </button>
@@ -921,8 +1011,9 @@ const IndependentHouse = () =>  {
                                 className={style.pls_btn}
                                 disabled={openparking === 0}
                                 onClick={(e) => {
-                                    e.preventDefault();   
-                                    setOpenparking(openparking - 1)}}
+                                    e.preventDefault();
+                                    setOpenparking(openparking - 1)
+                                }}
                             >
                                 <MinusIcon fontSize={"12px"} />
                             </button>
@@ -930,8 +1021,9 @@ const IndependentHouse = () =>  {
                             <button
                                 className={style.mns_btn}
                                 onClick={(e) => {
-                                    e.preventDefault();  
-                                    setOpenparking(openparking + 1)}}
+                                    e.preventDefault();
+                                    setOpenparking(openparking + 1)
+                                }}
                             >
                                 <AddIcon fontSize={"12px"} />
                             </button>
@@ -957,13 +1049,13 @@ const IndependentHouse = () =>  {
                             placeholder="Total Floors"
                             onChange={(e) => setTotalFloors(e.target.value)}
                             value={totalfloors}
+                            required
                             variant="flushed"
                             w={180}
                         />
                         <Select
                             variant="filled"
                             borderRadius={0}
-                            placeholder="Property on Floor"
                             onChange={(e) => setFloorOn(e.target.value)}
                             value={floorOn}
                             w={180}
@@ -1024,7 +1116,7 @@ const IndependentHouse = () =>  {
                     </Box>
                 </Box>
                 {/* Age of Property */}
-                {availability == "Ready to move"  && (
+                {availability == "Ready to move" && (
                     <Box textAlign={"left"} className={style.optional_box}>
                         <Heading
                             as={"h3"}
@@ -1081,7 +1173,7 @@ const IndependentHouse = () =>  {
                             </button>
                         </Box>
                     </Box>
-                )} 
+                )}
 
                 {availability == "Under construction" && (
                     <Box>
@@ -1190,6 +1282,7 @@ const IndependentHouse = () =>  {
                             <Input
                                 type="number"
                                 value={pricedetail}
+                                required
                                 onChange={(e) => setPricedetail(e.target.value)}
                                 variant="flushed"
                             />
@@ -1206,6 +1299,7 @@ const IndependentHouse = () =>  {
                             <Input
                                 type="number"
                                 value={priceSqr}
+                                required
                                 onChange={(e) => setPriceSqr(e.target.value)}
                                 variant="flushed"
                             />
@@ -1214,23 +1308,33 @@ const IndependentHouse = () =>  {
                 </Box>
                 <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
                     <Checkbox
-                        isChecked={inclusivePrices == "All inclusive price"}
-                        onChange={(e) => setInclusivePrice(e.target.value)}
+                        isChecked={inclusivePrices.includes("All inclusive price")}
+                        onChange={(e) => {
+                            e.preventDefault();
+                            handleinclusiveandtax(e.target.value)
+                        }}
                         value={"All inclusive price"}
+
                     >
                         All inclusive price
                     </Checkbox>
                     <Checkbox
-                        isChecked={inclusivePrices == "Tax and Govt. charges excuded"}
-                        onChange={(e) => setInclusivePrice(e.target.value)}
+                        isChecked={inclusivePrices.includes("Tax and Govt. charges excuded")}
+                        onChange={(e) => {
+                            e.preventDefault();
+                            handleinclusiveandtax(e.target.value)
+                        }}
                         value={"Tax and Govt. charges excuded"}
                     >
 
                         Tax and Govt. charges excuded
                     </Checkbox>
                     <Checkbox
-                        isChecked={inclusivePrices == "Price Negotiable"}
-                        onChange={(e) => setInclusivePrice(e.target.value)}
+                        isChecked={inclusivePrices.includes("Price Negotiable")}
+                        onChange={(e) => {
+                            e.preventDefault();
+                            handleinclusiveandtax(e.target.value)
+                        }}
                         value={"Price Negotiable"}
                     >
 
@@ -1648,8 +1752,9 @@ const IndependentHouse = () =>  {
                             watersource == "Municipal corporation" ? style.setbtn : style.btn
                         }
                         onClick={(e) => {
-                            e.preventDefault(); 
-                            setWaterSource(e.target.value)}}
+                            e.preventDefault();
+                            setWaterSource(e.target.value)
+                        }}
                         value={"Municipal corporation"}
                     >
 
@@ -1660,8 +1765,9 @@ const IndependentHouse = () =>  {
                             watersource == "Borewell/Tank" ? style.setbtn : style.btn
                         }
                         onClick={(e) => {
-                            e.preventDefault(); 
-                            setWaterSource(e.target.value)}}
+                            e.preventDefault();
+                            setWaterSource(e.target.value)
+                        }}
                         value={"Borewell/Tank"}
                     >
 
@@ -1670,8 +1776,9 @@ const IndependentHouse = () =>  {
                     <button
                         className={watersource == "24*7 Water" ? style.setbtn : style.btn}
                         onClick={(e) => {
-                            e.preventDefault(); 
-                            setWaterSource(e.target.value)}}
+                            e.preventDefault();
+                            setWaterSource(e.target.value)
+                        }}
                         value={"24*7 Water"}
                     >
 
@@ -1785,8 +1892,9 @@ const IndependentHouse = () =>  {
                         className={powerbackup == "None" ? style.setbtn : style.btn}
                         value={"None"}
                         onClick={(e) => {
-                            e.preventDefault(); 
-                            setPowerbackup(e.target.value)}}
+                            e.preventDefault();
+                            setPowerbackup(e.target.value)
+                        }}
                     >
 
                         None
@@ -1795,8 +1903,9 @@ const IndependentHouse = () =>  {
                         className={powerbackup == "Partial" ? style.setbtn : style.btn}
                         value={"Partial"}
                         onClick={(e) => {
-                            e.preventDefault(); 
-                            setPowerbackup(e.target.value)}}
+                            e.preventDefault();
+                            setPowerbackup(e.target.value)
+                        }}
                     >
 
                         Partial
@@ -1805,8 +1914,9 @@ const IndependentHouse = () =>  {
                         className={powerbackup == "Full" ? style.setbtn : style.btn}
                         value={"Full"}
                         onClick={(e) => {
-                            e.preventDefault(); 
-                            setPowerbackup(e.target.value)}}
+                            e.preventDefault();
+                            setPowerbackup(e.target.value)
+                        }}
                     >
 
                         Full
@@ -1822,8 +1932,9 @@ const IndependentHouse = () =>  {
                     <button
                         className={propertyFacing == "North" ? style.setbtn : style.btn}
                         onClick={(e) => {
-                            e.preventDefault(); 
-                            setPropertyFacing(e.target.value)}}
+                            e.preventDefault();
+                            setPropertyFacing(e.target.value)
+                        }}
                         value={"North"}
                     >
 
@@ -1832,8 +1943,9 @@ const IndependentHouse = () =>  {
                     <button
                         className={propertyFacing == "South" ? style.setbtn : style.btn}
                         onClick={(e) => {
-                            e.preventDefault(); 
-                            setPropertyFacing(e.target.value)}}
+                            e.preventDefault();
+                            setPropertyFacing(e.target.value)
+                        }}
                         value={"South"}
                     >
 
@@ -1842,8 +1954,9 @@ const IndependentHouse = () =>  {
                     <button
                         className={propertyFacing == "East" ? style.setbtn : style.btn}
                         onClick={(e) => {
-                            e.preventDefault(); 
-                            setPropertyFacing(e.target.value)}}
+                            e.preventDefault();
+                            setPropertyFacing(e.target.value)
+                        }}
                         value={"East"}
                     >
 
@@ -1852,8 +1965,9 @@ const IndependentHouse = () =>  {
                     <button
                         className={propertyFacing == "West" ? style.setbtn : style.btn}
                         onClick={(e) => {
-                            e.preventDefault(); 
-                            setPropertyFacing(e.target.value)}}
+                            e.preventDefault();
+                            setPropertyFacing(e.target.value)
+                        }}
                         value={"West"}
                     >
 
@@ -1864,8 +1978,9 @@ const IndependentHouse = () =>  {
                             propertyFacing == "North-East" ? style.setbtn : style.btn
                         }
                         onClick={(e) => {
-                            e.preventDefault(); 
-                            setPropertyFacing(e.target.value)}}
+                            e.preventDefault();
+                            setPropertyFacing(e.target.value)
+                        }}
                         value={"North-East"}
                     >
 
@@ -1876,8 +1991,9 @@ const IndependentHouse = () =>  {
                             propertyFacing == "North-West" ? style.setbtn : style.btn
                         }
                         onClick={(e) => {
-                            e.preventDefault(); 
-                            setPropertyFacing(e.target.value)}}
+                            e.preventDefault();
+                            setPropertyFacing(e.target.value)
+                        }}
                         value={"North-West"}
                     >
 
@@ -1888,8 +2004,9 @@ const IndependentHouse = () =>  {
                             propertyFacing == "South-East" ? style.setbtn : style.btn
                         }
                         onClick={(e) => {
-                            e.preventDefault(); 
-                            setPropertyFacing(e.target.value)}}
+                            e.preventDefault();
+                            setPropertyFacing(e.target.value)
+                        }}
                         value={"South-East"}
                     >
 
@@ -1900,8 +2017,9 @@ const IndependentHouse = () =>  {
                             propertyFacing == "South-West" ? style.setbtn : style.btn
                         }
                         onClick={(e) => {
-                            e.preventDefault(); 
-                            setPropertyFacing(e.target.value)}}
+                            e.preventDefault();
+                            setPropertyFacing(e.target.value)
+                        }}
                         value={"South-West"}
                     >
 
@@ -1941,11 +2059,14 @@ const IndependentHouse = () =>  {
                 <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
                     Width of facing road
                 </Heading>
-                <Box>
-                    <Select onChange={(e) => setFacing(e.target.value)} value={facing}>
-                        <option value="Select"> Select </option>
-                        <option value="Feet"> Feet </option>
+                <Box display={"flex"} gap={"20px"} w={"300px"} >
+                    <Input type="number" variant='flushed' flex={1} required value={facingwidth} onChange={(e) => {
+                        e.preventDefault();
+                        setFacingWidth(e.target.value);
+                    }} />
+                    <Select flex={1} onChange={(e) => setFacing(e.target.value)} value={facing}>
                         <option value="Meter"> Meter </option>
+                        <option value="Feet"> Feet </option>
                     </Select>
                 </Box>
             </Box>
@@ -2070,7 +2191,7 @@ const IndependentHouse = () =>  {
                 backgroundColor={"rgb(46,49,146)"}
                 _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                 color={"#ffffff"}
-            > 
+            >
                 Post Property
             </Button>
         </form>
