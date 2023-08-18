@@ -23,7 +23,7 @@ import {
 import { BiSolidUserDetail } from "react-icons/bi";
 import { IoIosArrowDown } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
-import { userPreLog } from "../../Redux/userauth/action";
+import { userPreLog, userlogout } from "../../Redux/userauth/action";
 import { changecountry } from "../../Redux/globalval/action";
 
 const TopNavbar = () => {
@@ -65,6 +65,9 @@ const TopNavbar = () => {
         dispatch(changecountry(val));
     };
 
+    const handlelogout =()=>{
+        dispatch(userlogout()); 
+    }
 
     return (
         <div className={style.head_nav}>
@@ -77,7 +80,8 @@ const TopNavbar = () => {
                 </div>
                 <div className={style.login_data2}>
                     <div className={style.country}>
-                        <select style={{ border: "0px", outline: "0px" }}>
+                        <select  onChange={(e) => handlecountry(e.target.value)}
+                            value={country} style={{ border: "0px", outline: "0px" }}>
                             <option value="india">India</option>
                             <option value="usa">USA</option>
                         </select>
@@ -124,7 +128,7 @@ const TopNavbar = () => {
                                         <Link> Listings </Link>  
                                         <Link> Purchased </Link>  
                                     </Box>
-                                    <Button className={style.logout_btn} > Logout </Button>  
+                                    <Button onClick={handlelogout} className={style.logout_btn} > Logout </Button>  
                                 </PopoverBody>
                             </PopoverContent>
                         ) : (
