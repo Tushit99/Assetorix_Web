@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Box,
     Button,
@@ -17,8 +17,10 @@ import { Checkbox } from "@chakra-ui/react";
 import style from "./FlatAppartment.module.css";
 import axios from "axios";
 import { CleanInputText } from "../code";
+import { useSelector } from "react-redux";
 
 const FlatAppartment = () => {
+    const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
     const [facingwidth, setFacingWidth] = useState("");
@@ -61,20 +63,22 @@ const FlatAppartment = () => {
     const [powerbackup, setPowerbackup] = useState("");
     const [propertyFacing, setPropertyFacing] = useState("");
     const [flooring, setFlooring] = useState("");
-    const [facing, setFacing] = useState("");
+    const [facing, setFacing] = useState("Meter");
     const [locationAdv, setLocationAdv] = useState([]);
     const [totalfloors, setTotalFloors] = useState("");
     const [floorOn, setFloorOn] = useState("Ground");
     const [plotArea, setPlotArea] = useState("");
     const [desc, setDesc] = useState("");
+    const [pincollection, setPinCollection] = useState([]);
 
+    console.log(pincollection);
 
     const handleSubmitData = async (e) => {
         e.preventDefault();
         let obj = {
             lookingFor: "Sell",
             propertyGroup: "Residential",
-            propertyType: "Flat / Apartment", 
+            propertyType: "Flat / Apartment",
             houseNumber: houseNo,
             apartmentName: appartment,
             address: {
@@ -104,8 +108,10 @@ const FlatAppartment = () => {
             facing,
             totalFloors: totalfloors,
             floorOn,
-            areaPer
+            areaPer,
+            Country: `${isCountry.country == "india" ? "₹" : "$"}`
         };
+        console.log(obj.Country);
 
         const showToastError = (message) => {
             toast({
@@ -229,7 +235,6 @@ const FlatAppartment = () => {
             }
 
 
-
             else {
                 await axios
                     .post("https://assetorix.onrender.com/property/", obj, { headers: head })
@@ -256,25 +261,25 @@ const FlatAppartment = () => {
         console.log("reached");
     };
 
-    const handlepinfetch = (e) => { 
+    const handlepinfetch = (e) => {
         setPincode(e.target.value);
-        // console.log(e.target.value.length);
-        // if (e.target.value.length == 6) {
-        //     // console.log("working"); 
-        //     pinfetch(e.target.value);
-        // }
-        // else {
-        //     console.log(e.target.value);
-        // }
+        if (e.target.value.length == 6) {
+            pinfetch(e.target.value);
+        }
+        else {
+            console.log(e.target.value);
+        }
     }
 
 
     const pinfetch = async (pin) => {
         try {
             console.log(pin);
-            let res = await fetch(`https://www.postpincode.in/api/getPostalArea.php?pincode=${pin}`);
-            let data = await res.json();
-            console.log(data);
+            let res = await axios.get(`https://assetorix.onrender.com/pincode/?pincode=${pin}`);
+            setState(res.data[0].state);
+            setCity(res.data[0].city);
+            setCountry(res.data[0].country);
+            setPinCollection(res.data);
         }
         catch (err) {
             console.log(err);
@@ -452,13 +457,13 @@ const FlatAppartment = () => {
     }
 
     const areaCalucation = () => {
-        let max = Math.max(Number(pricedetail), Number(plotArea));
-        let min = Math.min(Number(pricedetail), Number(plotArea));
-        let ans = Math.round(max / min);
-        setPriceSqr(ans);
+        if (pricedetail && plotArea) {
+            let max = Math.max(Number(pricedetail), Number(plotArea));
+            let min = Math.min(Number(pricedetail), Number(plotArea));
+            let ans = Math.round(max / min);
+            setPriceSqr(ans);
+        }
     }
-
-    console.log(priceSqr);
 
     // const createtemplatefloors = () => {
     //     let options = "";
@@ -482,15 +487,7 @@ const FlatAppartment = () => {
                 <Heading size={"sm"}>
                     An accurate location helps you connect with right buyers.
                 </Heading>
-                <NumberInput>
-                    <NumberInputField
-                        padding={"0 10px"}
-                        required 
-                        fontSize={"md"}  
-                        value={pincode}
-                        onChange={handlepinfetch} 
-                    />
-                </NumberInput>
+
                 <Input
                     type="text"
                     padding={"0 10px"}
@@ -505,22 +502,51 @@ const FlatAppartment = () => {
                     type="text"
                     padding={"0 10px"}
                     required
-                    placeholder="Locality"
-                    value={locality}
-                    onChange={(e) => setLocality(e.target.value)}
-                    fontSize={"md"}
-                    variant="flushed"
-                />
-                <Input
-                    type="text"
-                    padding={"0 10px"}
-                    required
                     placeholder="Apartment / Society"
                     fontSize={"md"}
                     value={appartment}
                     onChange={(e) => setApartment(e.target.value)}
                     variant="flushed"
                 />
+                <NumberInput>
+                    <NumberInputField
+                        placeholder={"Enter pincode"}
+                        padding={"0 10px"}
+                        borderRight={0}
+                        borderLeft={0}
+                        borderTop={0}
+                        borderRadius={0}
+                        _active={{
+                            borderRight: "0",
+                            borderLeft: "0",
+                            borderTop: "0",
+                            borderRadius: "0",
+                        }}
+                        required
+                        fontSize={"md"}
+                        value={pincode}
+                        onChange={handlepinfetch}
+                    />
+                </NumberInput>
+                <Input
+                    type="text"
+                    padding={"0 10px"}
+                    required
+                    placeholder="Locality"
+                    list="browsers"
+                    value={locality}
+                    onChange={(e) => setLocality(e.target.value)}
+                    fontSize={"md"}
+                    variant="flushed"
+                />
+                {pincollection.length ? (
+                    <datalist id="browsers">
+                        {pincollection.map((e) => (
+                            <option value={e.locality} />
+                        ))}
+                    </datalist>
+                ) : ""}
+
                 <Input
                     type="text"
                     padding={"0 10px"}
@@ -616,7 +642,8 @@ const FlatAppartment = () => {
                             <NumberInputField
                                 padding={"0 2px"}
                                 value={plotArea}
-                                onChange={(e) => { 
+                                onChange={(e) => {
+                                    areaCalucation();
                                     setPlotArea(e.target.value);
                                 }}
                                 required
@@ -1112,7 +1139,6 @@ const FlatAppartment = () => {
                                         setTotalFloors(e.target.value);
                                     }
                                 }}
-                                value={totalfloors}
                                 required
                                 w={180}
                             />
@@ -1139,10 +1165,9 @@ const FlatAppartment = () => {
                             <option value="Ground">Ground</option>
                             <option value="Basement">Basement</option>
                             <option value="Lower Ground">Lower Ground</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
+                            {Array.from(Array(Number(totalfloors)).keys()).map((e) => {
+                                return <option value={e + 1}>{e + 1}</option>
+                            })}
                         </Select>
                     </Box>
                 </Box>
@@ -1342,13 +1367,13 @@ const FlatAppartment = () => {
                                 fontWeight={400}
                                 textAlign={"left"}
                             >
-                                ₹ Price Details
+                                {isCountry.country == "india" ? "₹" : "$"} Price Details
                             </Heading>
                             <NumberInput>
                                 <NumberInputField
                                     value={pricedetail}
                                     required
-                                    onChange={(e) => { 
+                                    onChange={(e) => {
                                         setPricedetail(e.target.value);
                                         areaCalucation();
                                     }}
@@ -1362,12 +1387,12 @@ const FlatAppartment = () => {
                                 fontWeight={400}
                                 textAlign={"left"}
                             >
-                                ₹ Price Per {areaPer}
+                                {isCountry.country == "india" ? "₹" : "$"} Price Per {areaPer}
                             </Heading>
                             <NumberInput value={priceSqr}>
-                                <NumberInputField 
+                                <NumberInputField
                                     required
-                                    readOnly 
+                                    readOnly
                                 />
                             </NumberInput>
                         </Box>
@@ -1416,8 +1441,8 @@ const FlatAppartment = () => {
                         Adding description will increase your listing visibility
                     </Heading>
                     <Textarea height={140} value={desc} onChange={(e) => {
-                        let my_cleantext = CleanInputText(e.target.value); 
-                        setDesc(my_cleantext); 
+                        let my_cleantext = CleanInputText(e.target.value);
+                        setDesc(my_cleantext);
                     }} ></Textarea>
                 </Box>
             </Box>
@@ -1874,7 +1899,7 @@ const FlatAppartment = () => {
                         className={
                             overLook.includes("Park / Garden") ? style.setbtn : style.btn
                         }
-                        onClick={handleoverlooking} 
+                        onClick={handleoverlooking}
                         value={"Park / Garden"}
                     >
 
@@ -2264,7 +2289,7 @@ const FlatAppartment = () => {
             >
                 Post Property
             </Button>
-        </form>
+        </form >
     );
 };
 
