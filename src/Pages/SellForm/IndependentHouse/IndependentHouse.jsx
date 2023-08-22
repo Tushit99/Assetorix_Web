@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import {
     Box,
     Button,
-    ButtonGroup, 
+    ButtonGroup,
     Heading,
     Input,
+    InputGroup,
     NumberInput,
-    NumberInputField, 
+    NumberInputField,
     Select,
     Text,
     Textarea,
@@ -14,11 +15,11 @@ import {
 } from "@chakra-ui/react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { Checkbox } from "@chakra-ui/react";
-import style from "./IndependentHouse.module.css"; 
-import axios from "axios"; 
+import style from "./IndependentHouse.module.css";
+import axios from "axios";
 import { useSelector } from "react-redux";
 
-const IndependentHouse = () =>  {
+const IndependentHouse = () => {
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
@@ -85,12 +86,12 @@ const IndependentHouse = () =>  {
                 city,
                 state,
                 country,
-            }, 
+            },
             roomDetails: {
                 bedroom,
                 bathroom,
                 balcony: balconey
-            }, 
+            },
             ownership,
             price: +pricedetail,
             priceUnit: +priceSqr,
@@ -106,7 +107,7 @@ const IndependentHouse = () =>  {
             propertyFacing,
             flooring,
             facing,
-            totalFloors: +totalfloors, 
+            totalFloors: +totalfloors,
             floorOn,
             areaUnit: areaPer,
             Country: `${isCountry.country == "india" ? "₹" : "$"}`
@@ -1386,7 +1387,7 @@ const IndependentHouse = () =>  {
                                 {isCountry.country == "india" ? "₹" : "$"} Price Details
                             </Heading>
                             <NumberInput >
-                                <NumberInputField 
+                                <NumberInputField
                                     value={pricedetail}
                                     required
                                     onChange={(e) => {
@@ -1412,7 +1413,7 @@ const IndependentHouse = () =>  {
                                 />
                             </NumberInput>
                         </Box>
-                    </Box> 
+                    </Box>
                 </Box>
                 <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
                     <Checkbox
@@ -1448,6 +1449,21 @@ const IndependentHouse = () =>  {
 
                         Price Negotiable
                     </Checkbox>
+                </Box>
+                <Box>
+                    <Heading as={"h4"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+                        Additional Pricing Detail (Optional)
+                    </Heading>
+                    <InputGroup w={"300px"}>
+                        <Input type='text' placeholder='' />
+                        <Select>
+                            <option value=""></option>
+                        </Select>
+                    </InputGroup>
+                    <Input type="text" />
+                    <Input type="text" />
+                    <Input type="text" />
+                    <Input type="text" />
                 </Box>
                 <Box>
                     <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
@@ -2309,5 +2325,5 @@ const IndependentHouse = () =>  {
     );
 };
 
-export default IndependentHouse;   
+export default IndependentHouse;
 
