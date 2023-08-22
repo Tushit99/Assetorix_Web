@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
     Box,
     Button,
@@ -72,27 +72,29 @@ const FlatAppartment = () => {
     const [pincollection, setPinCollection] = useState([]);
 
 
-    const handleSubmitData = async (e) => { 
+    const handleSubmitData = async (e) => {
         e.preventDefault();
         let obj = {
             lookingFor: "Sell",
             propertyGroup: "Residential",
             propertyType: "Flat / Apartment",
-            houseNumber: houseNo,
-            apartmentName: appartment,
             address: {
+                apartmentName: appartment,
+                houseNumber: houseNo,
                 locality,
                 pincode,
                 city,
                 state,
                 country,
-            },
-            bedroom,
-            bathroom,
-            balcony: balconey,
+            }, 
+            roomDetails: {
+                bedroom,
+                bathroom,
+                balcony: balconey
+            }, 
             ownership,
-            price: pricedetail,
-            priceUnit: priceSqr,
+            price: +pricedetail,
+            priceUnit: +priceSqr,
             inclusivePrices,
             amenities,
             propertyFeatures,
@@ -105,10 +107,10 @@ const FlatAppartment = () => {
             propertyFacing,
             flooring,
             facing,
-            totalFloors: totalfloors,
+            totalFloors: +totalfloors, 
             floorOn,
             areaUnit: areaPer,
-            // Country: `${isCountry.country == "india" ? "₹" : "$"}`
+            Country: `${isCountry.country == "india" ? "₹" : "$"}`
         };
 
         const showToastError = (message) => {
@@ -188,7 +190,7 @@ const FlatAppartment = () => {
             let id = localStorage.getItem("usrId") || undefined;
             let authorization = localStorage.getItem("AstToken") || undefined;
 
-            let head = { id, authorization, 'Content-type': 'application/json' }; 
+            let head = { id, authorization, 'Content-type': 'application/json' };
 
 
             if (!id || !authorization) {
@@ -199,7 +201,7 @@ const FlatAppartment = () => {
                     duration: 2000,
                     position: 'top-right'
                 })
-                return 
+                return
             }
 
 
@@ -245,15 +247,15 @@ const FlatAppartment = () => {
                 // });
                 // let data = await response.json(); 
                 // console.log("data",data); 
-                    await axios.post("https://assetorix.onrender.com/property/", obj, { headers: head })
-                        .then((e) => {
-                            toast({
-                                title: e.data.msg,
-                                description: e.data.msg,
-                                status: 'success',
-                                duration: 2000,
-                            })
-                        });
+                await axios.post("https://assetorix.onrender.com/property/", obj, { headers: head })
+                    .then((e) => {
+                        toast({
+                            title: e.data.msg,
+                            description: e.data.msg,
+                            status: 'success',
+                            duration: 2000,
+                        })
+                    });
             } catch (error) {
                 // toast({
                 //     title: error.response.data.msg,
@@ -495,7 +497,7 @@ const FlatAppartment = () => {
 
 
     return (
-        <form onSubmit={handleSubmitData}> 
+        <form onSubmit={handleSubmitData}>
             {/* property location */}
             <Box className={style.location_form}>
                 <Heading size={"lg"}>Where is your property located?</Heading>
@@ -1384,8 +1386,8 @@ const FlatAppartment = () => {
                             >
                                 {isCountry.country == "india" ? "₹" : "$"} Price Details
                             </Heading>
-                            <NumberInput>
-                                <NumberInputField
+                            <NumberInput >
+                                <NumberInputField 
                                     value={pricedetail}
                                     required
                                     onChange={(e) => {
@@ -1411,7 +1413,7 @@ const FlatAppartment = () => {
                                 />
                             </NumberInput>
                         </Box>
-                    </Box>
+                    </Box> 
                 </Box>
                 <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
                     <Checkbox
@@ -1426,15 +1428,15 @@ const FlatAppartment = () => {
                         All inclusive price
                     </Checkbox>
                     <Checkbox
-                        isChecked={inclusivePrices.includes("Tax and Govt. charges excuded")}
+                        isChecked={inclusivePrices.includes("Tax and Govt. charges excluded")}
                         onChange={(e) => {
                             e.preventDefault();
                             handleinclusiveandtax(e.target.value)
                         }}
-                        value={"Tax and Govt. charges excuded"}
+                        value={"Tax and Govt. charges excluded"}
                     >
 
-                        Tax and Govt. charges excuded
+                        Tax and Govt. charges excluded
                     </Checkbox>
                     <Checkbox
                         isChecked={inclusivePrices.includes("Price Negotiable")}

@@ -71,27 +71,29 @@ const IndependentHouse = () =>  {
     const [pincollection, setPinCollection] = useState([]);
 
 
-    const handleSubmitData = async (e) => { 
+    const handleSubmitData = async (e) => {
         e.preventDefault();
         let obj = {
             lookingFor: "Sell",
             propertyGroup: "Residential",
             propertyType: "Independent House / villa",
-            houseNumber: houseNo,
-            apartmentName: appartment,
             address: {
+                apartmentName: appartment,
+                houseNumber: houseNo,
                 locality,
                 pincode,
                 city,
                 state,
                 country,
-            },
-            bedroom,
-            bathroom,
-            balcony: balconey,
+            }, 
+            roomDetails: {
+                bedroom,
+                bathroom,
+                balcony: balconey
+            }, 
             ownership,
-            price: pricedetail,
-            priceUnit: priceSqr,
+            price: +pricedetail,
+            priceUnit: +priceSqr,
             inclusivePrices,
             amenities,
             propertyFeatures,
@@ -104,10 +106,10 @@ const IndependentHouse = () =>  {
             propertyFacing,
             flooring,
             facing,
-            totalFloors: totalfloors,
+            totalFloors: +totalfloors, 
             floorOn,
             areaUnit: areaPer,
-            // Country: `${isCountry.country == "india" ? "₹" : "$"}`
+            Country: `${isCountry.country == "india" ? "₹" : "$"}`
         };
 
         const showToastError = (message) => {
@@ -187,7 +189,7 @@ const IndependentHouse = () =>  {
             let id = localStorage.getItem("usrId") || undefined;
             let authorization = localStorage.getItem("AstToken") || undefined;
 
-            let head = { id, authorization, 'Content-type': 'application/json' }; 
+            let head = { id, authorization, 'Content-type': 'application/json' };
 
 
             if (!id || !authorization) {
@@ -198,7 +200,7 @@ const IndependentHouse = () =>  {
                     duration: 2000,
                     position: 'top-right'
                 })
-                return 
+                return
             }
 
 
@@ -244,15 +246,15 @@ const IndependentHouse = () =>  {
                 // });
                 // let data = await response.json(); 
                 // console.log("data",data); 
-                    await axios.post("https://assetorix.onrender.com/property/", obj, { headers: head })
-                        .then((e) => {
-                            toast({
-                                title: e.data.msg,
-                                description: e.data.msg,
-                                status: 'success',
-                                duration: 2000,
-                            })
-                        });
+                await axios.post("https://assetorix.onrender.com/property/", obj, { headers: head })
+                    .then((e) => {
+                        toast({
+                            title: e.data.msg,
+                            description: e.data.msg,
+                            status: 'success',
+                            duration: 2000,
+                        })
+                    });
             } catch (error) {
                 // toast({
                 //     title: error.response.data.msg,
@@ -494,7 +496,7 @@ const IndependentHouse = () =>  {
 
 
     return (
-        <form onSubmit={handleSubmitData}> 
+        <form onSubmit={handleSubmitData}>
             {/* property location */}
             <Box className={style.location_form}>
                 <Heading size={"lg"}>Where is your property located?</Heading>
@@ -748,14 +750,15 @@ const IndependentHouse = () =>  {
                     className={style.optional_box}
                 >
                     <Heading as={"h3"} size={"md"}>
-                        Furnishing (optional) 
+                        Furnishing (optional)
                     </Heading>
                     <Box>
                         <button
                             value={"Furnished"}
                             className={furnished === "Furnished" ? style.setbtn : style.btn}
-                            onClick={checkFurnished} 
-                        > 
+                            onClick={checkFurnished}
+                        >
+
                             Furnished
                         </button>
                         <button
@@ -764,7 +767,8 @@ const IndependentHouse = () =>  {
                                 furnished === "Semi-furnished" ? style.setbtn : style.btn
                             }
                             onClick={checkFurnished}
-                        > 
+                        >
+
                             Semi-furnished
                         </button>
                         <button
@@ -774,6 +778,7 @@ const IndependentHouse = () =>  {
                             }
                             onClick={checkFurnished}
                         >
+
                             Un-furnished
                         </button>
                     </Box>
@@ -787,7 +792,7 @@ const IndependentHouse = () =>  {
                         padding={"10px 0"}
                         gap={6}
                     >
-                        <Heading as={"h5"} fontWeight={400} size={"sm"} color={"#656565"}>
+                        <Heading as={"h4"} fontWeight={400} size={"sm"} color={"#656565"}>
                             At least three furnishings are mandatory for furnished
                         </Heading>
                         <Box className={style.furnished_detail}>
@@ -1147,13 +1152,39 @@ const IndependentHouse = () =>  {
                                         });
                                     }
                                     else {
-                                        setTotalFloors(e.target.value); 
-                                    } 
+                                        setTotalFloors(e.target.value);
+                                    }
                                 }}
                                 required
                                 w={180}
                             />
-                        </NumberInput> 
+                        </NumberInput>
+                        <Select
+                            id="floorSelectTag"
+                            variant="filled"
+                            onChange={(e) => setFloorOn(e.target.value)}
+                            value={floorOn}
+                            w={180}
+                            borderRadius={0}
+                            _hover={{
+                                backgroundColor: "rgb(255, 255, 255)",
+                                borderBottom: "1px solid blue",
+                                borderLeft: "0",
+                                borderRight: "0",
+                                borderTop: "0",
+                            }}
+                            borderTop={"0"}
+                            borderLeft={"0"}
+                            borderBottom={"1px solid blue"}
+                            backgroundColor={"rgb(255, 255, 255)"}
+                        >
+                            <option value="Ground">Ground</option>
+                            <option value="Basement">Basement</option>
+                            <option value="Lower Ground">Lower Ground</option>
+                            {Array.from(Array(Number(totalfloors)).keys()).map((e) => {
+                                return <option value={e + 1}>{e + 1}</option>
+                            })}
+                        </Select>
                     </Box>
                 </Box>
                 {/* Availability status */}
@@ -1354,8 +1385,8 @@ const IndependentHouse = () =>  {
                             >
                                 {isCountry.country == "india" ? "₹" : "$"} Price Details
                             </Heading>
-                            <NumberInput>
-                                <NumberInputField
+                            <NumberInput >
+                                <NumberInputField 
                                     value={pricedetail}
                                     required
                                     onChange={(e) => {
@@ -1381,7 +1412,7 @@ const IndependentHouse = () =>  {
                                 />
                             </NumberInput>
                         </Box>
-                    </Box>
+                    </Box> 
                 </Box>
                 <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
                     <Checkbox
@@ -1396,15 +1427,15 @@ const IndependentHouse = () =>  {
                         All inclusive price
                     </Checkbox>
                     <Checkbox
-                        isChecked={inclusivePrices.includes("Tax and Govt. charges excuded")}
+                        isChecked={inclusivePrices.includes("Tax and Govt. charges excluded")}
                         onChange={(e) => {
                             e.preventDefault();
                             handleinclusiveandtax(e.target.value)
                         }}
-                        value={"Tax and Govt. charges excuded"}
+                        value={"Tax and Govt. charges excluded"}
                     >
 
-                        Tax and Govt. charges excuded
+                        Tax and Govt. charges excluded
                     </Checkbox>
                     <Checkbox
                         isChecked={inclusivePrices.includes("Price Negotiable")}
@@ -2276,7 +2307,7 @@ const IndependentHouse = () =>  {
             </Button>
         </form >
     );
-}; 
+};
 
 export default IndependentHouse;   
 
