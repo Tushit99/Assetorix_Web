@@ -245,7 +245,7 @@ const FlatAppartment = () => {
                 //     headers: head,
                 //     body: JSON.stringify(obj)
                 // });
-                // let data = await response.json(); 
+                // let data = await response.json();  
                 // console.log("data",data); 
                 await axios.post("https://assetorix.onrender.com/property/", obj, { headers: head })
                     .then((e) => {

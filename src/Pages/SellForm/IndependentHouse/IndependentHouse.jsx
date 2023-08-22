@@ -19,11 +19,12 @@ import style from "./IndependentHouse.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
+import { CleanInputText } from "../code";
 
 const IndependentHouse = () => {
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
-    const [country, setCountry] = useState("");
+    const [country, setCountry] = useState(""); 
     const [facingwidth, setFacingWidth] = useState("");
     const [city, setCity] = useState("");
     const [appartment, setApartment] = useState("");
