@@ -18,14 +18,17 @@ export const loginuser = (param) => async (dispatch) => {
       .post("https://assetorix.onrender.com/user/login", param)
       .then((e) => {
         console.log(e);
-        dispatch({ type: USER_lOGIN_SUCCESS, payload: e.data });
-        if (e.status > 200 && e.status < 300) {
+        dispatch({ type: USER_lOGIN_SUCCESS, payload: e.data }); 
+        if (e.data.msg=="Login Successful") { 
           localStorage.setItem("AstToken", e.data.token);
           localStorage.setItem("AstUser", e.data.name);
           localStorage.setItem("usrId", e.data.id);
           console.log("success status power");
           return e.status;
         } 
+        else{
+            dispatch({ type: USER_lOGIN_ERROR, payload: err.response.data.msg }); 
+        }
       });
   } catch (err) { 
     console.log("som wrg", err);
@@ -42,7 +45,7 @@ export const signinuser = (param) => async (dispatch) => {
         dispatch({ type: USER_SIGNIN_SUCCESS, payload: e.data }); 
         if (e.status > 200 && e.status < 300) {
           localStorage.setItem("AstToken", e.data.token);
-          localStorage.setItem("AstUser", e.data.name);
+          localStorage.setItem("AstUser", e.data.name); 
           localStorage.setItem("usrId", e.data.id);
           // console.log("successfully signin");
         } else {

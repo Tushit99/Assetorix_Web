@@ -1,5 +1,4 @@
-import * as React from "react";
-import { useState } from "react";
+import {useEffect, useState } from "react";
 import style from "./SellForm.module.css";
 import {
     Box, 
@@ -22,6 +21,10 @@ const SellForm = () => {
         setlook(look);
     };   
 
+    useEffect(()=>{
+        settype("sell"); 
+        setlook("Flat/Apartment"); 
+    },[])
 
 
     return (
@@ -499,7 +502,7 @@ const SellForm = () => {
                             </TabPanel>
                         </TabPanels>
                     </Tabs>
-                </Box>
+                </Box> 
                 {/* Flat/Apartment */}
                 { type=="sell" && look=="Flat/Apartment" && <FlatAppartment />} 
                 {/* Independent House/villa */}

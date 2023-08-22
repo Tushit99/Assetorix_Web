@@ -14,10 +14,10 @@ import {
 } from "@chakra-ui/react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { Checkbox } from "@chakra-ui/react";
-import style from "./FlatAppartment.module.css";
-import axios from "axios";
-import { CleanInputText } from "../code";
 import { useSelector } from "react-redux";
+import { CleanInputText } from "../code";
+import axios from "axios";
+import style from "./FlatAppartment.module.css";
 
 const FlatAppartment = () => {
     const isCountry = useSelector((state) => state.gloalval);
@@ -41,8 +41,8 @@ const FlatAppartment = () => {
     const [tv, setTv] = useState(0);
     const [Beds, setBeds] = useState(0);
     const [wardrobe, setWardrobe] = useState(0);
-    const [areaPer, setAreaPer] = useState("sq.ft");
     const [geyser, setGeyser] = useState(0);
+    const [areaPer, setAreaPer] = useState("sq.ft");
     const [furnishedarr, setfurnishedarr] = useState([]);
     const [extraroom, setExtraRoom] = useState([]);
     const [furnished, setFurnished] = useState("");
@@ -71,9 +71,8 @@ const FlatAppartment = () => {
     const [desc, setDesc] = useState("");
     const [pincollection, setPinCollection] = useState([]);
 
-    console.log(pincollection);
 
-    const handleSubmitData = async (e) => {
+    const handleSubmitData = async (e) => { 
         e.preventDefault();
         let obj = {
             lookingFor: "Sell",
@@ -108,10 +107,9 @@ const FlatAppartment = () => {
             facing,
             totalFloors: totalfloors,
             floorOn,
-            areaPer,
-            Country: `${isCountry.country == "india" ? "₹" : "$"}`
+            areaUnit: areaPer,
+            // Country: `${isCountry.country == "india" ? "₹" : "$"}`
         };
-        console.log(obj.Country);
 
         const showToastError = (message) => {
             toast({
@@ -190,7 +188,8 @@ const FlatAppartment = () => {
             let id = localStorage.getItem("usrId") || undefined;
             let authorization = localStorage.getItem("AstToken") || undefined;
 
-            let head = { id, authorization };
+            let head = { id, authorization, 'Content-type': 'application/json' }; 
+
 
             if (!id || !authorization) {
                 toast({
@@ -200,17 +199,20 @@ const FlatAppartment = () => {
                     duration: 2000,
                     position: 'top-right'
                 })
+                return 
             }
 
 
             if (furnished == "Furnished" || furnished == "Semi-furnished") {
-                obj["light"] = light;
-                obj["fans"] = fans;
-                obj["ac"] = ac;
-                obj["tv"] = tv;
-                obj["Beds"] = Beds;
-                obj["wardrobe"] = wardrobe;
-                obj["geyser"] = geyser;
+                obj.furnishedObj = {
+                    light,
+                    fans,
+                    ac,
+                    tv,
+                    Beds,
+                    wardrobe,
+                    geyser,
+                }
                 obj["furnishedList"] = furnishedarr
 
             }
@@ -233,20 +235,34 @@ const FlatAppartment = () => {
             if (availability == "Under construction" && expectedyear != "") {
                 obj["expectedByYear"] = expectedyear;
             }
-
-
-            else {
-                await axios
-                    .post("https://assetorix.onrender.com/property/", obj, { headers: head })
-                    .then((e) => {
-                        toast({
-                            title: e.data.msg,
-                            description: e.data.msg,
-                            status: 'success',
-                            duration: 2000,
-                        })
-                    });
+            // else {
+            try {
+                // console.log("mydata",JSON.stringify(obj)); 
+                // let response = await fetch("https://assetorix.onrender.com/property/", {
+                //     method: "POST",
+                //     headers: head,
+                //     body: JSON.stringify(obj)
+                // });
+                // let data = await response.json(); 
+                // console.log("data",data); 
+                    await axios.post("https://assetorix.onrender.com/property/", obj, { headers: head })
+                        .then((e) => {
+                            toast({
+                                title: e.data.msg,
+                                description: e.data.msg,
+                                status: 'success',
+                                duration: 2000,
+                            })
+                        });
+            } catch (error) {
+                // toast({
+                //     title: error.response.data.msg,
+                //     status: 'success',
+                //     duration: 2000,
+                // }) 
+                console.log(error);
             }
+            // }
 
         }
         else {
@@ -258,7 +274,6 @@ const FlatAppartment = () => {
                 position: 'top-right'
             })
         }
-        console.log("reached");
     };
 
     const handlepinfetch = (e) => {
@@ -480,7 +495,7 @@ const FlatAppartment = () => {
 
 
     return (
-        <form onSubmit={handleSubmitData}>
+        <form onSubmit={handleSubmitData}> 
             {/* property location */}
             <Box className={style.location_form}>
                 <Heading size={"lg"}>Where is your property located?</Heading>
@@ -776,7 +791,7 @@ const FlatAppartment = () => {
                         padding={"10px 0"}
                         gap={6}
                     >
-                        <Heading as={"h4"} size={"sm"}>
+                        <Heading as={"h4"} fontWeight={400} size={"sm"} color={"#656565"}>
                             At least three furnishings are mandatory for furnished
                         </Heading>
                         <Box className={style.furnished_detail}>
@@ -1387,7 +1402,7 @@ const FlatAppartment = () => {
                                 fontWeight={400}
                                 textAlign={"left"}
                             >
-                                {isCountry.country == "india" ? "₹" : "$"} Price Per {areaPer}
+                                {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
                             </Heading>
                             <NumberInput value={priceSqr}>
                                 <NumberInputField

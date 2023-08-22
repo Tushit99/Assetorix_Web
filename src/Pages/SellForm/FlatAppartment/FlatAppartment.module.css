@@ -1,9 +1,9 @@
-
 .setbtn {
   border-radius: 10px;
   background-color: rgb(149, 152, 241);
   color: rgb(255, 255, 255);
   padding: 4px 10px;
+  border-radius: 0; 
   border: 1px solid rgb(222, 222, 255);
 }
 
@@ -12,30 +12,31 @@
   background-color: rgb(242, 249, 255);
   color: rgb(15, 66, 137);
   padding: 4px 10px;
+  border-radius: 0; 
   border: 1px solid rgb(222, 222, 255);
 }
 
 .grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16 px; 
-  }
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16 px;
+}
 
-.location_form { 
+.location_form {
   margin: 20px 0;
   display: grid;
   gap: 10px;
 }
 
-.input_borders{
-  border: 0 ; 
+.input_borders {
+  border: 0;
 }
 
 .furnished_detail {
   display: grid;
-  margin: 20px 10px;
-  padding: 10px;
-  border: 2px solid black;
+  padding: 10px; 
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 0; 
   grid-template-columns: repeat(3, 1fr);
 }
 
@@ -46,7 +47,6 @@
   margin: 10px;
 }
 
-
 .select_opt {
   padding: 0 10px;
   outline: 0;
@@ -54,7 +54,7 @@
 
 .inp_form_numbers {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); 
+  grid-template-columns: repeat(3, 1fr);
   gap: 4%;
   margin: 20px 0;
 }
@@ -130,5 +130,3 @@
   align-items: center;
   gap: 20px;
 }
-
-

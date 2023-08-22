@@ -2,7 +2,8 @@
 .setbtn {
     border-radius: 10px;
     background-color: rgb(149, 152, 241);
-    color: rgb(255, 255, 255);
+    color: rgb(255, 255, 255); 
+    border-radius: 0;
     padding: 4px 10px;
     border: 1px solid rgb(222, 222, 255);
   }
@@ -12,6 +13,7 @@
     background-color: rgb(242, 249, 255);
     color: rgb(15, 66, 137);
     padding: 4px 10px;
+    border-radius: 0; 
     border: 1px solid rgb(222, 222, 255);
   }
   
@@ -28,10 +30,10 @@
   }
   
   .furnished_detail {
-    display: grid;
-    margin: 20px 10px;
-    padding: 10px;
-    border: 2px solid black;
+    display: grid; 
+    padding: 10px; 
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; 
+    border-radius: 0; 
     grid-template-columns: repeat(3, 1fr);
   }
   
