@@ -15,27 +15,7 @@ body {
   padding: 0;   
 } 
 
-body p::selection{
-  background-color: rgb(46,49,146);  
-  color: white;  
-}
-
-body h1::selection{
-  background-color: rgb(0, 0, 0);  
-  color: rgb(250, 46, 46);  
-}
-
-body h2::selection{
-  background-color: rgb(0, 0, 0);  
-  color: rgb(250, 46, 46);  
-}
-
-body h3::selection{
-  background-color: rgb(0, 0, 0);  
-  color: rgb(250, 46, 46);  
-}
-
-body h4::selection{
+body *::selection{
   background-color: rgb(0, 0, 0);  
   color: rgb(250, 46, 46);  
 }

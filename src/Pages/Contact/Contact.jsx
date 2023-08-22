@@ -24,7 +24,7 @@ const Contact = () => {
                     Ametheus Holdings Pvt Ltd <br />
                     27, 2nd Floor, Hauz Khas Village, New Delhi 110016, India
                 </Text>
-                <Heading as={"h4"} size={"md"} fontWeight={"bold"}> WARNING: #THIS WEBSITE IS UNDER TRIAL VERSION. WE ARE REQUESTING YOU NOT TO PURCHASE FROM THIS SITE UNTIL FURTHER INFORMATION PROVIDED# </Heading>
+                <Heading as={"h4"} size={"md"} fontWeight={"bold"} color={"#ff0000"}> WARNING: #THIS WEBSITE IS UNDER TRIAL VERSION.# </Heading>
             </Box>
             {/* <map> 
                 <area shape="" coords="" href="https://www.google.com/maps/search/27a+second+floor,+hauz+khas+vilage/@28.5501009,77.1763438,14z/data=!3m1!4b1?entry=ttu" alt="this_is_map" />

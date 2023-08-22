@@ -106,11 +106,19 @@ const FlatAppartment = () => {
             overLookings: overLook,
             propertyFacing,
             flooring,
-            facing,
+            roadFacingWidth: facingwidth,
+            roadFacingWidthType :facing,
             totalFloors: +totalfloors, 
-            floorOn,
+            floorOn,  
+            plotArea, 
+            parking:{
+                openParking: openparking, 
+                closedParking: parking, 
+            }, 
             areaUnit: areaPer,
-            Country: `${isCountry.country == "india" ? "₹" : "$"}`
+            otherRoom: extraroom,
+            description :desc ,
+            countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`
         };
 
         const showToastError = (message) => {
@@ -124,40 +132,42 @@ const FlatAppartment = () => {
 
 
         if (!locality) {
-            showToastError('locality');
+            showToastError('Provide locality');
         } else if (!bedroom) {
-            showToastError('bedroom');
+            showToastError('Provide bedroom');
         } else if (!bathroom) {
-            showToastError('bathroom');
+            showToastError('Provide bathroom');
         } else if (!balconey) {
-            showToastError('balconey');
+            showToastError('Provide balconey');
         } else if (!furnishedarr) {
-            showToastError('Furnished Field');
+            showToastError('Provide Furnished Field');
         } else if (!ownership) {
-            showToastError('OwnerShip');
+            showToastError('Provide OwnerShip');
         } else if (!pricedetail) {
-            showToastError('PriceDetail');
+            showToastError('Provide PriceDetail');
         } else if (!priceSqr) {
-            showToastError('Price Per sq.ft');
+            showToastError('Provide Price Per sq.ft');
         } else if (!additinalft) {
-            showToastError('Property description');
+            showToastError('Provide Property description');
         } else if (!watersource) {
-            showToastError('Water Source');
+            showToastError('Provide Water Source');
         } else if (!overLook) {
-            showToastError('Overlooking');
+            showToastError('Provide Overlooking');
         } else if (!powerbackup) {
-            showToastError('Power Backup');
+            showToastError('Provide Power Backup');
         } else if (!propertyFacing) {
-            showToastError('Property Facing');
+            showToastError('Provide Property Facing');
         } else if (!flooring) {
-            showToastError('Flooring');
+            showToastError('Provide Flooring');
         } else if (!facing) {
-            showToastError('Facing');
+            showToastError('Provide Facing');
         } else if (!totalfloors) {
-            showToastError('Total Floors');
+            showToastError('Provide Total Floors');
         } else if (!floorOn) {
-            showToastError('Floor number');
-        }
+            showToastError('Provide Floor number');
+        } else if(!facingwidth){
+            showToastError("Provide facing width")
+        } 
 
         if (locationAdv) {
             obj["locationAdv"] = locationAdv
@@ -185,25 +195,22 @@ const FlatAppartment = () => {
             facing &&
             totalfloors &&
             floorOn
-        ) {
-
+        ) { 
             let id = localStorage.getItem("usrId") || undefined;
             let authorization = localStorage.getItem("AstToken") || undefined;
 
-            let head = { id, authorization, 'Content-type': 'application/json' };
-
+            let head = { id, authorization, 'Content-type': 'application/json' };  
 
             if (!id || !authorization) {
                 toast({
                     title: 'Kindly log in to access property posting.',
                     description: "Login required for posting property.",
-                    status: 'error',
+                    status: 'error', 
                     duration: 2000,
                     position: 'top-right'
                 })
                 return
-            }
-
+            }  
 
             if (furnished == "Furnished" || furnished == "Semi-furnished") {
                 obj.furnishedObj = {
@@ -215,27 +222,20 @@ const FlatAppartment = () => {
                     wardrobe,
                     geyser,
                 }
-                obj["furnishedList"] = furnishedarr
-
+                obj["furnishedList"] = furnishedarr ;
             }
 
             if (furnished.length > 0) {
                 obj["furnished"] = furnished;
-            }
-            if (openparking > 0) {
-                obj["openParking"] = openparking;
-            }
-            if (extraroom.length > 0) {
-                obj["otherRoom"] = extraroom
-            }
-            if (parking > 0) {
-                obj["parking"] = parking;
-            }
+            }  
             if (availability == "Ready to move" && fromyear != "") {
                 obj["PropertyStatus"] = fromyear;
+                obj["availabilityStatus"]= availability; 
             }
             if (availability == "Under construction" && expectedyear != "") {
                 obj["expectedByYear"] = expectedyear;
+                obj["availabilityStatus"]= availability; 
+
             }
             // else {
             try {
@@ -257,11 +257,11 @@ const FlatAppartment = () => {
                         })
                     });
             } catch (error) {
-                // toast({
-                //     title: error.response.data.msg,
-                //     status: 'success',
-                //     duration: 2000,
-                // }) 
+                toast({
+                    title: error.response.data.msg,
+                    status: 'error',
+                    duration: 2000,
+                }) 
                 console.log(error);
             }
             // }

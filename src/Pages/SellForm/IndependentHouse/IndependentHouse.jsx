@@ -18,6 +18,7 @@ import { Checkbox } from "@chakra-ui/react";
 import style from "./IndependentHouse.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 
 const IndependentHouse = () => {
     const isCountry = useSelector((state) => state.gloalval);
@@ -70,6 +71,13 @@ const IndependentHouse = () => {
     const [plotArea, setPlotArea] = useState("");
     const [desc, setDesc] = useState("");
     const [pincollection, setPinCollection] = useState([]);
+    const [additionalPrice, setAdditionalPrice] = useState(false);
+    const [maintenancePrice, setMaintenancePrice] = useState("");
+    const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("");
+    const [expectedRentel, setExpectedRentel] = useState("");
+    const [bookingAmount, setBookingAmount] = useState("");
+    const [annualDuesPayble, setAnnualDuesPayble] = useState("");
+
 
 
     const handleSubmitData = async (e) => {
@@ -106,11 +114,18 @@ const IndependentHouse = () => {
             overLookings: overLook,
             propertyFacing,
             flooring,
-            facing,
             totalFloors: +totalfloors,
             floorOn,
+            roadFacingWidth: Number(facingwidth),
+            roadFacingWidthType: facing,
+            parking: {
+                openParking: openparking,
+                closedParking: parking,
+            },
             areaUnit: areaPer,
-            Country: `${isCountry.country == "india" ? "₹" : "$"}`
+            otherRoom: extraroom,
+            availabilityStatus: availability,
+            countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`
         };
 
         const showToastError = (message) => {
@@ -124,39 +139,41 @@ const IndependentHouse = () => {
 
 
         if (!locality) {
-            showToastError('locality');
+            showToastError('Provide locality');
         } else if (!bedroom) {
-            showToastError('bedroom');
+            showToastError('Provide bedroom');
         } else if (!bathroom) {
-            showToastError('bathroom');
+            showToastError('Provide bathroom');
         } else if (!balconey) {
-            showToastError('balconey');
+            showToastError('Provide balconey');
         } else if (!furnishedarr) {
-            showToastError('Furnished Field');
+            showToastError('Provide Furnished Field');
         } else if (!ownership) {
-            showToastError('OwnerShip');
+            showToastError('Provide OwnerShip');
         } else if (!pricedetail) {
-            showToastError('PriceDetail');
+            showToastError('Provide PriceDetail');
         } else if (!priceSqr) {
-            showToastError('Price Per sq.ft');
+            showToastError('Provide Price Per sq.ft');
         } else if (!additinalft) {
-            showToastError('Property description');
+            showToastError('Provide Property description');
         } else if (!watersource) {
-            showToastError('Water Source');
+            showToastError('Provide Water Source');
         } else if (!overLook) {
-            showToastError('Overlooking');
+            showToastError('Provide Overlooking');
         } else if (!powerbackup) {
-            showToastError('Power Backup');
+            showToastError('Provide Power Backup');
         } else if (!propertyFacing) {
-            showToastError('Property Facing');
+            showToastError('Provide Property Facing');
         } else if (!flooring) {
-            showToastError('Flooring');
+            showToastError('Provide Flooring');
         } else if (!facing) {
-            showToastError('Facing');
+            showToastError('Provide Facing');
         } else if (!totalfloors) {
-            showToastError('Total Floors');
+            showToastError('Provide Total Floors');
         } else if (!floorOn) {
-            showToastError('Floor number');
+            showToastError('Provide Floor number');
+        } else if (!availability) {
+            showToastError('Provide Availability Status');
         }
 
         if (locationAdv) {
@@ -186,12 +203,10 @@ const IndependentHouse = () => {
             totalfloors &&
             floorOn
         ) {
-
             let id = localStorage.getItem("usrId") || undefined;
             let authorization = localStorage.getItem("AstToken") || undefined;
 
             let head = { id, authorization, 'Content-type': 'application/json' };
-
 
             if (!id || !authorization) {
                 toast({
@@ -204,7 +219,6 @@ const IndependentHouse = () => {
                 return
             }
 
-
             if (furnished == "Furnished" || furnished == "Semi-furnished") {
                 obj.furnishedObj = {
                     light,
@@ -215,38 +229,19 @@ const IndependentHouse = () => {
                     wardrobe,
                     geyser,
                 }
-                obj["furnishedList"] = furnishedarr
-
+                obj["furnishedList"] = furnishedarr;
             }
 
             if (furnished.length > 0) {
                 obj["furnished"] = furnished;
             }
-            if (openparking > 0) {
-                obj["openParking"] = openparking;
-            }
-            if (extraroom.length > 0) {
-                obj["otherRoom"] = extraroom
-            }
-            if (parking > 0) {
-                obj["parking"] = parking;
-            }
             if (availability == "Ready to move" && fromyear != "") {
-                obj["PropertyStatus"] = fromyear;
+                obj["propertyStatus"] = fromyear;
             }
             if (availability == "Under construction" && expectedyear != "") {
                 obj["expectedByYear"] = expectedyear;
             }
-            // else {
             try {
-                // console.log("mydata",JSON.stringify(obj)); 
-                // let response = await fetch("https://assetorix.onrender.com/property/", {
-                //     method: "POST",
-                //     headers: head,
-                //     body: JSON.stringify(obj)
-                // });
-                // let data = await response.json(); 
-                // console.log("data",data); 
                 await axios.post("https://assetorix.onrender.com/property/", obj, { headers: head })
                     .then((e) => {
                         toast({
@@ -257,11 +252,11 @@ const IndependentHouse = () => {
                         })
                     });
             } catch (error) {
-                // toast({
-                //     title: error.response.data.msg,
-                //     status: 'success',
-                //     duration: 2000,
-                // }) 
+                toast({
+                    title: error.response.data.msg,
+                    status: 'error',
+                    duration: 2000,
+                })
                 console.log(error);
             }
             // }
@@ -1450,26 +1445,40 @@ const IndependentHouse = () => {
                         Price Negotiable
                     </Checkbox>
                 </Box>
-                <Box>
-                    <Heading as={"h4"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+                <Box display={"grid"}>
+                    <Heading as={"h4"} size={"sm"} margin={"10px 0"} fontWeight={700} textAlign={"left"}>
                         Additional Pricing Detail (Optional)
                     </Heading>
-                    <InputGroup w={"300px"}>
-                        <Input type='text' placeholder='' />
-                        <Select>
-                            <option value=""></option>
+                    <InputGroup w={"300px"} margin={"10px 0"}>
+                        <Input w={"60%"} type='text' onClick={(e)=>setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
+                        <Select w={"40%"} borderRadius={0} >
+                            <option value="Monthly">Monthly</option>
+                            <option value="Yearly">Yearly</option>
                         </Select>
                     </InputGroup>
-                    <Input type="text" />
-                    <Input type="text" />
-                    <Input type="text" />
-                    <Input type="text" />
+                    {additionalPrice && <>
+                        <Input type="text" w={"300px"} placeholder="Expected rental" margin={"0"} />
+                        <Input type="text" w={"300px"} placeholder="Booking Amount" margin={"10px 0 0 0"} />
+                        <Input type="text" w={"300px"} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
+                    </>
+                    }
+                    <Heading
+                        as={"h3"}
+                        size={"sm"}
+                        margin={"10px 0"}
+                        color={"#002aff"}
+                        fontWeight={500}
+                        cursor={"pointer"}
+                        onClick={() => setAdditionalPrice(!additionalPrice)}
+                        textAlign={"left"}>
+                        {additionalPrice ? <IoIosArrowUp style={{ display: "inline" }} /> : <IoIosArrowDown style={{ display: "inline" }} />} Add more pricing details
+                    </Heading>
                 </Box>
                 <Box>
-                    <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                    <Heading as={"h3"} size={"md"} fontWeight={600} margin={"10px 0"} textAlign={"left"}>
                         What makes your property unique
                     </Heading>
-                    <Heading as={"h3"} size={"xs"} margin={"10px 0"} textAlign={"left"}>
+                    <Heading as={"h3"} size={"xs"} fontWeight={400} color={"#777777"} margin={"10px 0"} textAlign={"left"}>
                         Adding description will increase your listing visibility
                     </Heading>
                     <Textarea height={140} value={desc} onChange={(e) => {
@@ -1502,6 +1511,16 @@ const IndependentHouse = () => {
                     >
                         Maintenance Staff
                     </button>
+                    <button
+                        className={
+                            amenities.includes("Rain Water Harvesting") ? style.setbtn : style.btn
+                        }
+                        onClick={handleAminities}
+                        value={"Rain Water Harvesting"}
+                    >
+                        Rain Water Harvesting
+                    </button>
+
                     <button
                         className={
                             amenities.includes("Water Storage") ? style.setbtn : style.btn
@@ -1565,6 +1584,15 @@ const IndependentHouse = () => {
                         Feng Shui / Vaastu Compliant
                     </button>
                     <button
+                        className={
+                            amenities.includes("Pivate Garden / Terrace") ? style.setbtn : style.btn
+                        }
+                        onClick={handleAminities}
+                        value={"Pivate Garden / Terrace"}
+                    >
+                        Pivate Garden / Terrace
+                    </button>
+                    <button
                         className={amenities.includes("Lift") ? style.setbtn : style.btn}
                         onClick={handleAminities}
                         value={"Lift"}
@@ -1589,7 +1617,6 @@ const IndependentHouse = () => {
                         value={"High Ceiling Height"}
                         onClick={handlePropertyFeature}
                     >
-
                         High Ceiling Height
                     </button>
                     <button
@@ -1601,7 +1628,6 @@ const IndependentHouse = () => {
                         value={"False Ceiling Lighting"}
                         onClick={handlePropertyFeature}
                     >
-
                         False Ceiling Lighting
                     </button>
                     <button
@@ -1611,7 +1637,6 @@ const IndependentHouse = () => {
                         value={"Piped-gas"}
                         onClick={handlePropertyFeature}
                     >
-
                         Piped-gas
                     </button>
                     <button
@@ -1623,7 +1648,6 @@ const IndependentHouse = () => {
                         value={"Internet / wi-fi connectivity"}
                         onClick={handlePropertyFeature}
                     >
-
                         Internet/wi-fi connectivity
                     </button>
                     <button
@@ -1635,7 +1659,6 @@ const IndependentHouse = () => {
                         value={"Centrally Air Renovated"}
                         onClick={handlePropertyFeature}
                     >
-
                         Centrally Air Renovated
                     </button>
                     <button
@@ -1647,7 +1670,6 @@ const IndependentHouse = () => {
                         value={"Water Purifier"}
                         onClick={handlePropertyFeature}
                     >
-
                         Water Purifier
                     </button>
                     <button
@@ -1659,20 +1681,18 @@ const IndependentHouse = () => {
                         value={"Recently Renovated"}
                         onClick={handlePropertyFeature}
                     >
-
                         Recently Renovated
                     </button>
                     <button
                         className={
-                            propertyFeatures.includes("Private Garden / Terrace")
+                            propertyFeatures.includes("Security / Fire Alarm")
                                 ? style.setbtn
                                 : style.btn
                         }
-                        value={"Private Garden / Terrace"}
+                        value={"Security / Fire Alarm"}
                         onClick={handlePropertyFeature}
                     >
-
-                        Private Garden / Terrace
+                        Security / Fire Alarm
                     </button>
                     <button
                         className={
@@ -1683,7 +1703,6 @@ const IndependentHouse = () => {
                         value={"Natural Light"}
                         onClick={handlePropertyFeature}
                     >
-
                         Natural Light
                     </button>
                     <button
@@ -1693,7 +1712,6 @@ const IndependentHouse = () => {
                         value={"Airy Roooms"}
                         onClick={handlePropertyFeature}
                     >
-
                         Airy Roooms
                     </button>
                     <button
@@ -1705,7 +1723,6 @@ const IndependentHouse = () => {
                         value={"Spacious Interiors"}
                         onClick={handlePropertyFeature}
                     >
-
                         Spacious Interiors
                     </button>
                 </Box>
@@ -1715,31 +1732,7 @@ const IndependentHouse = () => {
                 <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
                     Society/Building feature
                 </Heading>
-                <Box>
-                    <button
-                        className={
-                            buildingFeature.includes("Water softening plant")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        onClick={HandleBuildingFeature}
-                        value={"Water softening plant"}
-                    >
-
-                        Water softening plant
-                    </button>
-                    <button
-                        className={
-                            buildingFeature.includes("Shopping Centre")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        onClick={HandleBuildingFeature}
-                        value={"Shopping Centre"}
-                    >
-
-                        Shopping Centre
-                    </button>
+                <Box>  
                     <button
                         className={
                             buildingFeature.includes("Fitness Centre / GYM")
@@ -1807,17 +1800,7 @@ const IndependentHouse = () => {
                     >
 
                         Separate entry for sevant room
-                    </button>
-                    <button
-                        className={
-                            additinalft.includes("Waste Disposal") ? style.setbtn : style.btn
-                        }
-                        value={"Waste Disposal"}
-                        onClick={handleAdditionalFeature}
-                    >
-
-                        Waste Disposal
-                    </button>
+                    </button> 
                     <button
                         className={
                             additinalft.includes("No open drainage around")
@@ -2064,7 +2047,6 @@ const IndependentHouse = () => {
                         }}
                         value={"North"}
                     >
-
                         North
                     </button>
                     <button
@@ -2212,15 +2194,15 @@ const IndependentHouse = () => {
                 <Box>
                     <button
                         className={
-                            locationAdv.includes("Close to Station")
+                            locationAdv.includes("Close to Metro Station")
                                 ? style.setbtn
                                 : style.btn
                         }
-                        value={"Close to Station"}
+                        value={"Close to Metro Station"}
                         onClick={handlelocationadvantages}
                     >
 
-                        Close to Station
+                        Close to Metro Station
                     </button>
                     <button
                         className={
