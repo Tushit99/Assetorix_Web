@@ -76,7 +76,7 @@ const ServicedApartment = () => {
     const [pincollection, setPinCollection] = useState([]);
     const [additionalPrice, setAdditionalPrice] = useState(false);
     const [maintenancePrice, setMaintenancePrice] = useState("");
-    const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("");
+    const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
     const [expectedRental, setExpectedRental] = useState("");
     const [bookingAmount, setBookingAmount] = useState("");
     const [annualDuesPayable, setAnnualDuesPayable] = useState("");
@@ -122,9 +122,9 @@ const ServicedApartment = () => {
             totalFloors: +totalfloors,
             floorOn,
             plotArea,
-            parking: { 
-                openParking: openparking,
-                closedParking: parking,
+            parking: {
+                openParking: openparking.toString(),
+                closeParking: parking.toString(),  
             },
             areaUnit: areaPer,
             otherRoom: extraroom,
@@ -1546,14 +1546,14 @@ const ServicedApartment = () => {
                     </button>
                     <button
                         className={
-                            amenities.includes("Waste Disposal") ? style.setbtn : style.btn
+                            amenities.includes("Security / Fire Alarm") ? style.setbtn : style.btn
                         }
                         onClick={handleAminities}
-                        value={"Waste Disposal"}
+                        value={"Security / Fire Alarm"}
                     >
-                        Waste Disposal
+                        Security / Fire Alarm
                     </button>
-                    <button
+                    <button 
                         className={
                             amenities.includes("Water Storage") ? style.setbtn : style.btn
                         }
@@ -1590,11 +1590,11 @@ const ServicedApartment = () => {
                         Feng Shui / Vaastu Compliant
                     </button>
                     <button
-                        className={amenities.includes("Piped-gas") ? style.setbtn : style.btn}
+                        className={amenities.includes("Lift") ? style.setbtn : style.btn}
                         onClick={handleAminities}
-                        value={"Piped-gas"}
+                        value={"Lift"}
                     >
-                        Piped-gas
+                        Lift(s) 
                     </button>
                 </Box>
             </Box>
@@ -1630,6 +1630,29 @@ const ServicedApartment = () => {
                     </button>
                     <button
                         className={
+                            propertyFeatures.includes("Piped-gas")
+                                ? style.setbtn
+                                : style.btn
+                        }
+                        value={"Piped-gas"}
+                        onClick={handlePropertyFeature}
+                    >
+
+                        Piped-gas
+                    </button>
+                    <button
+                        className={
+                            propertyFeatures.includes("Water purifier")
+                                ? style.setbtn
+                                : style.btn
+                        }
+                        value={"Water purifier"}
+                        onClick={handlePropertyFeature}
+                    >
+                        Water purifier
+                    </button>
+                    <button
+                        className={
                             propertyFeatures.includes("Internet / wi-fi connectivity")
                                 ? style.setbtn
                                 : style.btn
@@ -1650,18 +1673,7 @@ const ServicedApartment = () => {
                         onClick={handlePropertyFeature}
                     >
                         Intercom Facility
-                    </button>
-                    <button
-                        className={
-                            propertyFeatures.includes("Security/ Fire Alarm")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        value={"Security/ Fire Alarm"}
-                        onClick={handlePropertyFeature}
-                    >
-                        Security/ Fire Alarm
-                    </button>
+                    </button> 
                     <button
                         className={
                             propertyFeatures.includes("Centrally Air Renovated")
@@ -1738,14 +1750,14 @@ const ServicedApartment = () => {
                 <Box>
                     <button
                         className={
-                            buildingFeature.includes("Lift")
+                            buildingFeature.includes("water softening plant")
                                 ? style.setbtn
                                 : style.btn
                         }
                         onClick={HandleBuildingFeature}
-                        value={"Lift"}
+                        value={"water softening plant"}
                     >
-                        Lift(s)
+                        water softening plant
                     </button>
                     <button
                         className={
@@ -1756,7 +1768,6 @@ const ServicedApartment = () => {
                         onClick={HandleBuildingFeature}
                         value={"Fitness Centre / GYM"}
                     >
-
                         Fitness Centre / GYM
                     </button>
                     <button
@@ -1768,7 +1779,6 @@ const ServicedApartment = () => {
                         onClick={HandleBuildingFeature}
                         value={"Swimming Pool"}
                     >
-
                         Swimming Pool
                     </button>
                     <button
@@ -1780,20 +1790,18 @@ const ServicedApartment = () => {
                         onClick={HandleBuildingFeature}
                         value={"Club house / Community Center"}
                     >
-
                         Club house / Community Center
                     </button>
                     <button
                         className={
-                            buildingFeature.includes("Security Personnel")
+                            buildingFeature.includes("Shopping Centre")
                                 ? style.setbtn
                                 : style.btn
                         }
                         onClick={HandleBuildingFeature}
-                        value={"Security Personnel"}
+                        value={"Shopping Centre"}
                     >
-
-                        Security Personnel
+                        Shopping Centre
                     </button>
                 </Box>
             </Box>
@@ -1805,15 +1813,36 @@ const ServicedApartment = () => {
                 <Box>
                     <button
                         className={
-                            additinalft.includes("Separate entry for sevant room")
+                            additinalft.includes("Separate entry for servant room")
                                 ? style.setbtn
                                 : style.btn
                         }
-                        value={"Separate entry for sevant room"}
+                        value={"Separate entry for servant room"}
                         onClick={handleAdditionalFeature}
                     >
-
-                        Separate entry for sevant room
+                        Separate entry for servant room
+                    </button>
+                    <button
+                        className={
+                            additinalft.includes("Waste Disposal")
+                                ? style.setbtn
+                                : style.btn
+                        }
+                        value={"Waste Disposal"}
+                        onClick={handleAdditionalFeature}
+                    >
+                        Waste Disposal
+                    </button>
+                    <button
+                        className={
+                            additinalft.includes("Rain Water Harvesting") 
+                                ? style.setbtn
+                                : style.btn
+                        }
+                        value={"Rain Water Harvesting"}
+                        onClick={handleAdditionalFeature}
+                    >
+                        Rain Water Harvesting
                     </button>
                     <button
                         className={

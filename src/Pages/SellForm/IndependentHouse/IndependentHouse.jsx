@@ -73,18 +73,17 @@ const IndependentHouse = () => {
     const [pincollection, setPinCollection] = useState([]);
     const [additionalPrice, setAdditionalPrice] = useState(false);
     const [maintenancePrice, setMaintenancePrice] = useState("");
-    const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("");
+    const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
     const [expectedRentel, setExpectedRentel] = useState("");
     const [bookingAmount, setBookingAmount] = useState("");
-    const [annualDuesPayble, setAnnualDuesPayble] = useState("");
-
+    const [annualDuesPayble, setAnnualDuesPayble] = useState(""); 
 
     const handleSubmitData = async (e) => {
         e.preventDefault();
         let obj = {
             lookingFor: "Sell",
             propertyGroup: "Residential",
-            propertyType: "Independent House / villa",
+            propertyType: "Independent House / Villa",
             address: {
                 apartmentName: appartment,
                 houseNumber: houseNo,
@@ -118,18 +117,20 @@ const IndependentHouse = () => {
             totalFloors: +totalfloors, 
             plotArea,
             parking: {
-                openParking: openparking,
-                closedParking: parking,
+                openParking: openparking.toString(),
+                closeParking: parking.toString(),  
             },
             areaUnit: areaPer,
             otherRoom: extraroom,
             description: desc,
             countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
-            maintenancePrice,
-            maintenanceTimePeriod,
-            expectedRentel,
-            bookingAmount,
-            annualDuesPayble 
+            additionalPricingDetails :{
+                maintenancePrice,
+                maintenanceTimePeriod, 
+                expectedRental: expectedRentel,
+                bookingAmount,
+                annualDuesPayable: annualDuesPayble 
+            }, 
         };
 
         const showToastError = (message) => {

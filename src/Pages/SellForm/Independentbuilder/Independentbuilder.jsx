@@ -75,7 +75,7 @@ const Independentbuilder = () => {
     const [pincollection, setPinCollection] = useState([]);
     const [additionalPrice, setAdditionalPrice] = useState(false);
     const [maintenancePrice, setMaintenancePrice] = useState("");
-    const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("");
+    const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
     const [expectedRentel, setExpectedRentel] = useState("");
     const [bookingAmount, setBookingAmount] = useState("");
     const [annualDuesPayble, setAnnualDuesPayble] = useState("");
@@ -86,7 +86,7 @@ const Independentbuilder = () => {
         let obj = {
             lookingFor: "Sell",
             propertyGroup: "Residential",
-            propertyType: "Flat / Apartment",
+            propertyType: "Independent / Builder Floor",
             address: {
                 apartmentName: appartment,
                 houseNumber: houseNo,
@@ -120,10 +120,10 @@ const Independentbuilder = () => {
             totalFloors: +totalfloors,
             floorOn,
             plotArea,
-            parking: { 
-                openParking: openparking,
-                closedParking: parking,
-            },
+            parking: {
+                openParking: openparking.toString(),
+                closeParking: parking.toString(),  
+            }, 
             areaUnit: areaPer,
             otherRoom: extraroom,
             description: desc,
@@ -1551,10 +1551,10 @@ const Independentbuilder = () => {
                     </button>
                     <button
                         className={
-                            amenities.includes("Water Storage") ? style.setbtn : style.btn
+                            amenities.includes("Rain Water Harvesting") ? style.setbtn : style.btn
                         }
                         onClick={handleAminities}
-                        value={"Water Storage"}
+                        value={"Rain Water Harvesting"}
                     >
                         Rain Water Harvesting
                     </button>
