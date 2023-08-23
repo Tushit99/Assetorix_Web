@@ -63,7 +63,7 @@ export const signinuser = (param) => async (dispatch) => {
 
 export const userPreLog = (param) => async (dispatch) => {  
   
-  console.log(param);  
+  console.log(process.env.REACT_APP_URL);  
   try {
     await axios.get(`${process.env.REACT_APP_URL}/user/`, {headers: param}).then((e) => {
         console.log(e.data);
