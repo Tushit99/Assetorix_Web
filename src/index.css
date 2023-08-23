@@ -20,6 +20,11 @@ body *::selection{
   color: rgb(250, 46, 46);  
 }
 
+body input::selection{ 
+  background-color: rgb(255, 255, 255);  
+  color: rgb(0, 0, 0);  
+}
+
 body::-webkit-scrollbar {
   width: 10px;
   background-color: #f5f5f5;  

@@ -16,14 +16,14 @@ import {
 } from "@chakra-ui/react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { Checkbox } from "@chakra-ui/react";
-import style from "./ServicedApartment.module.css";
-import axios from "axios"; 
+import style from "./RKStudio.module.css";
+import axios from "axios";
 import { useSelector } from "react-redux";
 import { CleanInputText } from "../code";
-import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'; 
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
 
-const ServicedApartment = () => {
+const RKStudio = () => {
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
@@ -34,8 +34,8 @@ const ServicedApartment = () => {
     const [state, setState] = useState("");
     const [locality, setLocality] = useState("");
     const [houseNo, setHouseNo] = useState("");
-    const [bedroom, setBedRoom] = useState(0);
-    const [bathroom, setBathroom] = useState(0);
+    const [bedroom, setBedRoom] = useState(1);
+    const [bathroom, setBathroom] = useState(1);
     const [balconey, setBalcony] = useState(0);
     const [parking, setParking] = useState(0);
     const [openparking, setOpenparking] = useState(0);
@@ -77,10 +77,9 @@ const ServicedApartment = () => {
     const [additionalPrice, setAdditionalPrice] = useState(false);
     const [maintenancePrice, setMaintenancePrice] = useState("");
     const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
-    const [expectedRental, setExpectedRental] = useState("");
     const [bookingAmount, setBookingAmount] = useState("");
     const [annualDuesPayable, setAnnualDuesPayable] = useState("");
-    const [membershipCharge,setMembershipCharge] = useState(""); 
+    const [membershipCharge, setMembershipCharge] = useState("");
 
 
     const handleSubmitData = async (e) => {
@@ -88,7 +87,7 @@ const ServicedApartment = () => {
         let obj = {
             lookingFor: "Sell",
             propertyGroup: "Residential",
-            propertyType: "Serviced Apartment",
+            propertyType: "1RK / Studio Apartment",
             address: {
                 apartmentName: appartment,
                 houseNumber: houseNo,
@@ -124,20 +123,19 @@ const ServicedApartment = () => {
             plotArea,
             parking: {
                 openParking: openparking.toString(),
-                closeParking: parking.toString(),  
+                closeParking: parking.toString(),
             },
             areaUnit: areaPer,
             otherRoom: extraroom,
             description: desc,
-            countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`, 
-            additionalPricingDetails :{
+            countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
+            additionalPricingDetails: {
                 maintenancePrice,
                 maintenanceTimePeriod, 
-                expectedRental,
                 bookingAmount,
-                annualDuesPayable ,
+                annualDuesPayable,
                 membershipCharge
-            }, 
+            },
         };
 
         const showToastError = (message) => {
@@ -625,24 +623,44 @@ const ServicedApartment = () => {
                 <Box as={"div"} className={style.inp_form_numbers}>
                     <Box textAlign={"left"} >
                         <Text> No. of Bedrooms </Text>
-                        <NumberInput>
+                        <NumberInput value={bedroom}>
                             <NumberInputField
                                 variant="flushed"
                                 padding={"0 2px"}
-                                onChange={(e) => setBedRoom(e.target.value)}
-                                value={bedroom}
-                                required
+                                readOnly 
+                                border={0}
+                                onClick={() => {
+                                    toast({
+                                        title: 'Pre-defined',
+                                        description: "value modification not allowed",
+                                        status: 'info',
+                                        duration: 2000, 
+                                        position: 'top-right',  
+                                        isClosable: true,
+                                    })
+                                }}
+                            // value={bedroom}
                             />
                         </NumberInput>
                     </Box>
                     <Box textAlign={"left"}>
                         <Text> No. of Bathrooms </Text>
-                        <NumberInput>
+                        <NumberInput value={bathroom}>
                             <NumberInputField
                                 variant="flushed"
-                                onChange={(e) => setBathroom(e.target.value)}
+                                readOnly 
+                                border={0}
+                                onClick={() => {
+                                    toast({
+                                        title: 'Pre-defined',
+                                        description: "value modification not allowed",
+                                        status: 'info',
+                                        duration: 2000,
+                                        position: 'top-right', 
+                                        isClosable: true 
+                                    })
+                                }}
                                 value={bathroom}
-                                required
                                 padding={"0 2px"}
                             />
                         </NumberInput>
@@ -1480,10 +1498,9 @@ const ServicedApartment = () => {
                         </Select>
                     </InputGroup>
                     {additionalPrice && <>
-                        <Input type="text" w={"300px"} value={expectedRental} onChange={(e) => setExpectedRental(e.target.value)} placeholder="Expected rental" margin={"0"} />
                         <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-                        <Input type="text" w={"300px"} value={annualDuesPayable} onChange={(e) => setAnnualDuesPayable(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} /> 
-                        <Input type="text" w={"300px"} value={membershipCharge} onChange={(e) => setMembershipCharge(e.target.value)} placeholder="Membership charge" margin={"10px 0 0 0"} /> 
+                        <Input type="text" w={"300px"} value={annualDuesPayable} onChange={(e) => setAnnualDuesPayable(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
+                        <Input type="text" w={"300px"} value={membershipCharge} onChange={(e) => setMembershipCharge(e.target.value)} placeholder="Membership charge" margin={"10px 0 0 0"} />
                     </>
                     }
                     <Heading
@@ -1553,14 +1570,14 @@ const ServicedApartment = () => {
                     >
                         Security / Fire Alarm
                     </button>
-                    <button 
+                    <button
                         className={
-                            amenities.includes("Water Storage") ? style.setbtn : style.btn
+                            amenities.includes("Security Personnel") ? style.setbtn : style.btn
                         }
                         onClick={handleAminities}
-                        value={"Water Storage"}
+                        value={"Security Personnel"}
                     >
-                        Rain Water Harvesting
+                        Security Personnel
                     </button>
                     <button
                         className={
@@ -1594,7 +1611,7 @@ const ServicedApartment = () => {
                         onClick={handleAminities}
                         value={"Lift"}
                     >
-                        Lift(s) 
+                        Lift(s)
                     </button>
                 </Box>
             </Box>
@@ -1673,7 +1690,7 @@ const ServicedApartment = () => {
                         onClick={handlePropertyFeature}
                     >
                         Intercom Facility
-                    </button> 
+                    </button>
                     <button
                         className={
                             propertyFeatures.includes("Centrally Air Renovated")
@@ -1835,7 +1852,7 @@ const ServicedApartment = () => {
                     </button>
                     <button
                         className={
-                            additinalft.includes("Rain Water Harvesting") 
+                            additinalft.includes("Rain Water Harvesting")
                                 ? style.setbtn
                                 : style.btn
                         }
@@ -2339,4 +2356,5 @@ const ServicedApartment = () => {
     );
 };
 
-export default ServicedApartment;  
+export default RKStudio;
+

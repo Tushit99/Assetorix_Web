@@ -16,14 +16,14 @@ import {
 } from "@chakra-ui/react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { Checkbox } from "@chakra-ui/react";
-import style from "./ServicedApartment.module.css";
+import style from "./FarmHouse.module.css"; 
 import axios from "axios"; 
 import { useSelector } from "react-redux";
 import { CleanInputText } from "../code";
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'; 
 
 
-const ServicedApartment = () => {
+const FarmHouse = () => {
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
@@ -88,7 +88,7 @@ const ServicedApartment = () => {
         let obj = {
             lookingFor: "Sell",
             propertyGroup: "Residential",
-            propertyType: "Serviced Apartment",
+            propertyType: "",
             address: {
                 apartmentName: appartment,
                 houseNumber: houseNo,
@@ -2339,4 +2339,4 @@ const ServicedApartment = () => {
     );
 };
 
-export default ServicedApartment;  
+export default FarmHouse
