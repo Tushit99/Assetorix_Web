@@ -3,7 +3,7 @@ import {
   USER_DATA_UPDATE,
   USER_LOGOUT,
   USER_PREE_LOGIN,
-  USER_SIGNIN_ERROR,
+  USER_SIGNIN_ERROR
   USER_SIGNIN_LOADING,
   USER_SIGNIN_SUCCESS,
   USER_lOGIN_ERROR,
@@ -27,7 +27,7 @@ export const loginuser = (param) => async (dispatch) => {
           return e.status;
         } 
         else{
-            dispatch({ type: USER_lOGIN_ERROR, payload: err.response.data.msg }); 
+            dispatch({ type: USER_lOGIN_ERROR, payload: "somthing went wrong" }); 
         }
       });
   } catch (err) { 
