@@ -20,14 +20,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginuser } from '../../Redux/userauth/action';
 // import axios from 'axios';
 
-const Login = () => {
+const Login = ({onpage}) => {
     const data = useSelector((store) => store.userreducer);
     const toast = useToast();
     const [mobile, setMobile] = useState("");
     const navigate = useNavigate();
     const [password, setPassword] = useState("");
     const dispatch = useDispatch();
-
 
 
     const handlelogin = async () => {
@@ -115,7 +114,12 @@ const Login = () => {
                 status: 'success',
                 duration: 4000,
             })
-            navigate("/");
+            // if(onpage!=""){
+            //     console.log()
+            //     navigate(`${onpage}`); 
+            // }else{
+                navigate("/");
+            // }
         }
     }, [data]);
 

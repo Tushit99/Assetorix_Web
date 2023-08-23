@@ -24,7 +24,7 @@ import { CleanInputText } from "../code";
 const IndependentHouse = () => {
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
-    const [country, setCountry] = useState(""); 
+    const [country, setCountry] = useState("");
     const [facingwidth, setFacingWidth] = useState("");
     const [city, setCity] = useState("");
     const [appartment, setApartment] = useState("");
@@ -68,7 +68,6 @@ const IndependentHouse = () => {
     const [facing, setFacing] = useState("Meter");
     const [locationAdv, setLocationAdv] = useState([]);
     const [totalfloors, setTotalFloors] = useState("");
-    const [floorOn, setFloorOn] = useState("Ground");
     const [plotArea, setPlotArea] = useState("");
     const [desc, setDesc] = useState("");
     const [pincollection, setPinCollection] = useState([]);
@@ -78,7 +77,6 @@ const IndependentHouse = () => {
     const [expectedRentel, setExpectedRentel] = useState("");
     const [bookingAmount, setBookingAmount] = useState("");
     const [annualDuesPayble, setAnnualDuesPayble] = useState("");
-
 
 
     const handleSubmitData = async (e) => {
@@ -115,18 +113,23 @@ const IndependentHouse = () => {
             overLookings: overLook,
             propertyFacing,
             flooring,
-            totalFloors: +totalfloors,
-            floorOn,
-            roadFacingWidth: Number(facingwidth),
+            roadFacingWidth: facingwidth,
             roadFacingWidthType: facing,
+            totalFloors: +totalfloors, 
+            plotArea,
             parking: {
                 openParking: openparking,
                 closedParking: parking,
             },
             areaUnit: areaPer,
             otherRoom: extraroom,
-            availabilityStatus: availability,
-            countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`
+            description: desc,
+            countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
+            maintenancePrice,
+            maintenanceTimePeriod,
+            expectedRentel,
+            bookingAmount,
+            annualDuesPayble 
         };
 
         const showToastError = (message) => {
@@ -171,10 +174,8 @@ const IndependentHouse = () => {
             showToastError('Provide Facing');
         } else if (!totalfloors) {
             showToastError('Provide Total Floors');
-        } else if (!floorOn) {
-            showToastError('Provide Floor number');
-        } else if (!availability) {
-            showToastError('Provide Availability Status');
+        } else if (!facingwidth) {
+            showToastError("Provide facing width")
         }
 
         if (locationAdv) {
@@ -201,8 +202,7 @@ const IndependentHouse = () => {
             propertyFacing &&
             flooring &&
             facing &&
-            totalfloors &&
-            floorOn
+            totalfloors 
         ) {
             let id = localStorage.getItem("usrId") || undefined;
             let authorization = localStorage.getItem("AstToken") || undefined;
@@ -238,12 +238,23 @@ const IndependentHouse = () => {
             }
             if (availability == "Ready to move" && fromyear != "") {
                 obj["propertyStatus"] = fromyear;
+                obj["availabilityStatus"] = availability;
             }
             if (availability == "Under construction" && expectedyear != "") {
                 obj["expectedByYear"] = expectedyear;
+                obj["availabilityStatus"] = availability;
+
             }
+            // else {
             try {
-                await axios.post("https://assetorix.onrender.com/property/", obj, { headers: head })
+                // let response = await fetch("http://localhost:4500/property/", {
+                //     method: "POST",
+                //     headers: head,
+                //     body: JSON.stringify(obj)
+                // });
+                // let data = await response.json();  
+                // console.log("data",data); 
+                await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
                     .then((e) => {
                         toast({
                             title: e.data.msg,
@@ -718,14 +729,14 @@ const IndependentHouse = () => {
                             Study Room
                         </button>
                         <button
-                            value={"Servent Room"}
+                            value={"Servant Room"}
                             className={
-                                extraroom.includes("Servent Room") ? style.setbtn : style.btn
+                                extraroom.includes("Servant Room") ? style.setbtn : style.btn
                             }
                             onClick={handlerooms}
                         >
 
-                            Servent Room
+                            Servant Room
                         </button>
                         <button
                             value={"Store Room"}
@@ -1126,7 +1137,7 @@ const IndependentHouse = () => {
                         Floor Details
                     </Heading>
                     <Text textAlign={"left"} margin={"10px 0"}>
-                        Total no of floors and your floor details
+                        Total no of floors 
                     </Text>
                     <Box display={"flex"} alignItems={"center"} gap={5}>
                         <NumberInput
@@ -1155,33 +1166,7 @@ const IndependentHouse = () => {
                                 required
                                 w={180}
                             />
-                        </NumberInput>
-                        <Select
-                            id="floorSelectTag"
-                            variant="filled"
-                            onChange={(e) => setFloorOn(e.target.value)}
-                            value={floorOn}
-                            w={180}
-                            borderRadius={0}
-                            _hover={{
-                                backgroundColor: "rgb(255, 255, 255)",
-                                borderBottom: "1px solid blue",
-                                borderLeft: "0",
-                                borderRight: "0",
-                                borderTop: "0",
-                            }}
-                            borderTop={"0"}
-                            borderLeft={"0"}
-                            borderBottom={"1px solid blue"}
-                            backgroundColor={"rgb(255, 255, 255)"}
-                        >
-                            <option value="Ground">Ground</option>
-                            <option value="Basement">Basement</option>
-                            <option value="Lower Ground">Lower Ground</option>
-                            {Array.from(Array(Number(totalfloors)).keys()).map((e) => {
-                                return <option value={e + 1}>{e + 1}</option>
-                            })}
-                        </Select>
+                        </NumberInput> 
                     </Box>
                 </Box>
                 {/* Availability status */}
@@ -1451,16 +1436,16 @@ const IndependentHouse = () => {
                         Additional Pricing Detail (Optional)
                     </Heading>
                     <InputGroup w={"300px"} margin={"10px 0"}>
-                        <Input w={"60%"} type='text' onClick={(e)=>setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
-                        <Select w={"40%"} borderRadius={0} >
+                        <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
+                        <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
                             <option value="Monthly">Monthly</option>
                             <option value="Yearly">Yearly</option>
                         </Select>
                     </InputGroup>
                     {additionalPrice && <>
-                        <Input type="text" w={"300px"} placeholder="Expected rental" margin={"0"} />
-                        <Input type="text" w={"300px"} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-                        <Input type="text" w={"300px"} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
+                        <Input type="text" w={"300px"} value={expectedRentel} onChange={(e) => setExpectedRentel(e.target.value)} placeholder="Expected rental" margin={"0"} />
+                        <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
+                        <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
                     </>
                     }
                     <Heading
@@ -1733,7 +1718,7 @@ const IndependentHouse = () => {
                 <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
                     Society/Building feature
                 </Heading>
-                <Box>  
+                <Box>
                     <button
                         className={
                             buildingFeature.includes("Fitness Centre / GYM")
@@ -1801,7 +1786,7 @@ const IndependentHouse = () => {
                     >
 
                         Separate entry for sevant room
-                    </button> 
+                    </button>
                     <button
                         className={
                             additinalft.includes("No open drainage around")
