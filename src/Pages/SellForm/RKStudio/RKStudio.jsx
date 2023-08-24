@@ -2243,15 +2243,15 @@ const RKStudio = () => {
                 <Box>
                     <button
                         className={
-                            locationAdv.includes("Close to Station")
+                            locationAdv.includes("Close to Metro Station")
                                 ? style.setbtn
                                 : style.btn
                         }
-                        value={"Close to Station"}
+                        value={"Close to Metro Station"}
                         onClick={handlelocationadvantages}
                     >
 
-                        Close to Station
+                        Close to Metro Station
                     </button>
                     <button
                         className={

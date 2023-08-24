@@ -34,40 +34,17 @@ const PlotLand = () => {
     const [state, setState] = useState("");
     const [locality, setLocality] = useState("");
     const [houseNo, setHouseNo] = useState("");
-    const [parking, setParking] = useState(0);
-    const [openparking, setOpenparking] = useState(0);
-    const [light, setLight] = useState(0);
-    const [fans, setFans] = useState(0);
-    const [ac, setAc] = useState(0);
-    const [tv, setTv] = useState(0);
-    const [Beds, setBeds] = useState(0);
-    const [wardrobe, setWardrobe] = useState(0);
-    const [geyser, setGeyser] = useState(0);
     const [areaPer, setAreaPer] = useState("sq.ft");
-    const [furnishedarr, setfurnishedarr] = useState([]);
-    const [extraroom, setExtraRoom] = useState([]);
-    const [furnished, setFurnished] = useState("");
-    const [availability, setAvailability] = useState("");
-    const [fromyear, setFromyear] = useState("");
-    const [expectedyear, setExpectedYear] = useState("");
     const [ownership, setOwnerShip] = useState("");
     const [pricedetail, setPricedetail] = useState("");
     const [priceSqr, setPriceSqr] = useState("");
     const [inclusivePrices, setInclusivePrice] = useState([]);
-    const [amenities, setAminity] = useState([]);
-    const [propertyFeatures, setPropertyFeature] = useState("");
-    const [buildingFeature, setBuildingFeature] = useState([]);
-    const [additinalft, setAdditinalFeature] = useState("");
-    const [watersource, setWaterSource] = useState([]);
+    const [amenities, setAminity] = useState([]);   
     const [overLook, setoverlook] = useState([]);
-    const [otherFeature, setOtherFeature] = useState([]);
-    const [powerbackup, setPowerbackup] = useState("");
-    const [propertyFacing, setPropertyFacing] = useState("");
-    const [flooring, setFlooring] = useState("");
+    const [otherFeature, setOtherFeature] = useState([]); 
+    const [propertyFacing, setPropertyFacing] = useState(""); 
     const [facing, setFacing] = useState("Meter");
     const [locationAdv, setLocationAdv] = useState([]);
-    const [totalfloors, setTotalFloors] = useState("");
-    const [floorOn, setFloorOn] = useState("Ground");
     const [plotArea, setPlotArea] = useState("");
     const [desc, setDesc] = useState("");
     const [pincollection, setPinCollection] = useState([]);
@@ -86,10 +63,14 @@ const PlotLand = () => {
     const [openSides, setOpenSides] = useState("");
     const [constructionType, setConstructionType] = useState([]);
     const [expectedBy, setexpectedBy] = useState([]);
+    const [expectedByYear, setExpectedByYear] = useState("");
+    const [authorisedBy, setAuthorisedBy] = useState([]); 
 
+
+    // please don'nt change any function without any prior knowledge  
 
     useEffect(() => {
-        let num = Date().split(" ")[3];
+        let num = Number(Date().split(" ")[3]);
         let yearbox = [];
         for (let i = num; i < num + 10; i++) {
             yearbox.push(i);
@@ -102,7 +83,7 @@ const PlotLand = () => {
         let obj = {
             lookingFor: "Sell",
             propertyGroup: "Residential",
-            propertyType: "Serviced Apartment",
+            propertyType: "Plot / Land",
             address: {
                 apartmentName: appartment,
                 plotNumber: houseNo,
@@ -120,27 +101,13 @@ const PlotLand = () => {
             price: +pricedetail,
             priceUnit: +priceSqr,
             inclusivePrices,
-            amenities,
-            propertyFeatures,
-            society_buildingFeatures: buildingFeature,
-            additionalFeatures: additinalft,
-            waterSources: watersource,
-            otherFeatures: otherFeature,
-            powerBackup: powerbackup,
-            overLookings: overLook,
+            amenities, 
             propertyFacing,
-            flooring,
+            
             roadFacingWidth: facingwidth,
             roadFacingWidthType: facing,
-            totalFloors: +totalfloors,
-            floorOn,
             plotArea,
             plotAreaUnit: areaPer,
-            parking: {
-                openParking: openparking.toString(),
-                closeParking: parking.toString(),
-            },
-            otherRoom: extraroom,
             description: desc,
             countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
             additionalPricingDetails: {
@@ -165,32 +132,18 @@ const PlotLand = () => {
 
         if (!locality) {
             showToastError('Provide locality');
-        } else if (!furnishedarr) {
-            showToastError('Provide Furnished Field');
         } else if (!ownership) {
             showToastError('Provide OwnerShip');
         } else if (!pricedetail) {
             showToastError('Provide PriceDetail');
         } else if (!priceSqr) {
             showToastError('Provide Price Per sq.ft');
-        } else if (!additinalft) {
-            showToastError('Provide Property description');
-        } else if (!watersource) {
-            showToastError('Provide Water Source');
         } else if (!overLook) {
             showToastError('Provide Overlooking');
-        } else if (!powerbackup) {
-            showToastError('Provide Power Backup');
-        } else if (!propertyFacing) {
+        }   else if (!propertyFacing) {
             showToastError('Provide Property Facing');
-        } else if (!flooring) {
-            showToastError('Provide Flooring');
-        } else if (!facing) {
+        }   else if (!facing) {
             showToastError('Provide Facing');
-        } else if (!totalfloors) {
-            showToastError('Provide Total Floors');
-        } else if (!floorOn) {
-            showToastError('Provide Floor number');
         } else if (!facingwidth) {
             showToastError("Provide facing width")
         }
@@ -202,20 +155,13 @@ const PlotLand = () => {
         if (
             city &&
             locality &&
-            furnishedarr &&
             ownership &&
             pricedetail &&
             priceSqr &&
-            inclusivePrices &&
-            additinalft &&
-            watersource &&
-            overLook &&
-            powerbackup &&
+            inclusivePrices && 
+            overLook && 
             propertyFacing &&
-            flooring &&
-            facing &&
-            totalfloors &&
-            floorOn
+            facing
         ) {
             let id = localStorage.getItem("usrId") || undefined;
             let authorization = localStorage.getItem("AstToken") || undefined;
@@ -233,31 +179,7 @@ const PlotLand = () => {
                 return
             }
 
-            if (furnished == "Furnished" || furnished == "Semi-Furnished") {
-                obj.furnishedObj = {
-                    light,
-                    fans,
-                    ac,
-                    tv,
-                    Beds,
-                    wardrobe,
-                    geyser,
-                }
-                obj["furnishedList"] = furnishedarr;
-            }
 
-            if (furnished.length > 0) {
-                obj["furnished"] = furnished;
-            }
-            if (availability == "Ready to move" && fromyear != "") {
-                obj["propertyStatus"] = fromyear;
-                obj["availabilityStatus"] = availability;
-            }
-            if (availability == "Under construction" && expectedyear != "") {
-                obj["expectedByYear"] = expectedyear;
-                obj["availabilityStatus"] = availability;
-
-            }
             // else {
             try {
                 // let response = await fetch("http://localhost:4500/property/", {
@@ -345,30 +267,9 @@ const PlotLand = () => {
         }
     }
 
-    // please don'nt change any function without any prior knowledge
-    const furnisheddetails = (e) => {
-        e.preventDefault();
-        let newCat = [...furnishedarr];
-        let value = e.target.value;
-
-        console.log(e.target.value);
-
-        if (newCat.includes(value)) {
-            newCat.splice(newCat.indexOf(value), 1);
-        } else {
-            newCat.push(value);
-        }
-        setfurnishedarr(newCat);
-    };
-
-    const checkFurnished = (e) => {
-        e.preventDefault();
-        setFurnished(e.target.value);
-    };
-
-    const handlerooms = (e) => {
-        e.preventDefault();
-        let newarr = [...extraroom];
+    const handleAuthorityBy =(e)=>{
+        e.preventDefault(); 
+        let newarr = [...authorisedBy];
         let value = e.target.value;
 
         if (newarr.includes(value)) {
@@ -376,41 +277,13 @@ const PlotLand = () => {
         } else {
             newarr.push(value);
         }
-        setExtraRoom(newarr);
-    };
-
-    const handleAvailable = (e) => {
-        e.preventDefault();
-        setAvailability(e.target.value);
-    };
-
-    const handleyear = (e) => {
-        e.preventDefault();
-        setFromyear(e.target.value);
-    };
-
-    const handleExpectedYear = (e) => {
-        e.preventDefault();
-        setExpectedYear(e.target.value);
-    };
+        setAuthorisedBy(newarr);
+    }
 
     const handleownership = (e) => {
         e.preventDefault();
         setOwnerShip(e.target.value);
-    };
-
-    const handleAdditionalFeature = (e) => {
-        e.preventDefault();
-        let newarr = [...additinalft];
-        let value = e.target.value;
-
-        if (newarr.includes(value)) {
-            newarr.splice(newarr.indexOf(value), 1);
-        } else {
-            newarr.push(value);
-        }
-        setAdditinalFeature(newarr);
-    };
+    }; 
 
     const handleAminities = (e) => {
         e.preventDefault();
@@ -423,33 +296,7 @@ const PlotLand = () => {
             newarr.push(value);
         }
         setAminity(newarr);
-    };
-
-    const handlePropertyFeature = (e) => {
-        e.preventDefault();
-        let newarr = [...propertyFeatures];
-        let value = e.target.value;
-
-        if (newarr.includes(value)) {
-            newarr.splice(newarr.indexOf(value), 1);
-        } else {
-            newarr.push(value);
-        }
-        setPropertyFeature(newarr);
-    };
-
-    const HandleBuildingFeature = (e) => {
-        e.preventDefault();
-        let newarr = [...buildingFeature];
-        let value = e.target.value;
-
-        if (newarr.includes(value)) {
-            newarr.splice(newarr.indexOf(value), 1);
-        } else {
-            newarr.push(value);
-        }
-        setBuildingFeature(newarr);
-    };
+    }; 
 
     const handleoverlooking = (e) => {
         e.preventDefault();
@@ -501,19 +348,7 @@ const PlotLand = () => {
         }
         setInclusivePrice(newarr);
     }
-
-    const handleWaterSource = (e) => {
-        let newarr = [...watersource];
-        let value = e;
-
-        if (newarr.includes(value)) {
-            newarr.splice(newarr.indexOf(value), 1);
-        } else {
-            newarr.push(value);
-        }
-        console.log(newarr);
-        setWaterSource(newarr);
-    }
+ 
 
     const areaCalucation = () => {
         if (pricedetail && plotArea) {
@@ -754,18 +589,18 @@ const PlotLand = () => {
                         <button value={"Other"} onClick={handleConstructionType} className={constructionType.includes("Other") ? style.setbtn : style.btn} > Other </button>
                     </Box>
                 </Box>
-                {/*  */}
+                {/* Possession By */}
                 <Box>
                     <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
-                        Price Details
+                        Possession By
                     </Heading>
                     <Box>
-                        <Select>
+                        <Select variant={"flushed"} padding={"0 10px"} value={expectedByYear} onChange={(e) => setExpectedByYear(e.target.value)}>
                             <option value="Immediate">Immediate</option>
                             <option value="Within 3 Months">Within 3 Months</option>
                             <option value="Within 6 Months">Within 6 Months</option>
                             {expectedBy.map((e) => (
-                                <option value={e}> {e} </option>  
+                                <option value={e}> {e} </option>
                             ))}
                         </Select>
                     </Box>
@@ -835,6 +670,54 @@ const PlotLand = () => {
                         </button>
                     </Box>
                 </Box>
+                {/* authority approved by */}
+                <Box>
+                    <Heading
+                        as={"h3"}
+                        size={"md"}
+                        margin={"30px 0 10px 0"}
+                        textAlign={"left"}
+                    >
+                       Which authority the property is approved by ?
+                    </Heading> 
+                    <Box className={style.grid} gap={4}>
+                        <button
+                            className={authorisedBy.includes("DDA") ? style.setbtn : style.btn}
+                            borderRadius={"100px"} 
+                            border={"1px solid rgba(113, 210, 255, 0.897)"}
+                            margin={"8px 6px 0 0"} 
+                            onClick={handleAuthorityBy}
+                            value={"DDA"} 
+                            backgroundColor={"blue.50"}
+                        >
+                            DDA
+                        </button>
+                        <button
+                            className={authorisedBy.includes("MCD") ? style.setbtn : style.btn}
+                            borderRadius={"100px"}
+                            border={"1px solid rgba(113, 210, 255, 0.897)"}
+                            margin={"8px 6px 0 0"} 
+                            onClick={handleAuthorityBy}
+                            value={"MCD"}
+                            backgroundColor={"blue.50"}
+                        >
+                            MCD
+                        </button>
+                        <button
+                            className={
+                                authorisedBy.includes("NDMC") ? style.setbtn : style.btn
+                            }
+                            borderRadius={"100px"}
+                            border={"1px solid rgba(113, 210, 255, 0.897)"}
+                            margin={"8px 6px 0 0"} 
+                            onClick={handleAuthorityBy} 
+                            value={"NDMC"}
+                            backgroundColor={"blue.50"}
+                        >
+                            NDMC
+                        </button> 
+                    </Box>
+                </Box>
                 {/* Price Details */}
                 <Box>
                     <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
@@ -878,7 +761,8 @@ const PlotLand = () => {
                             </NumberInput>
                         </Box>
                     </Box>
-                </Box>
+                </Box> 
+                {/* inclusive Prices */}
                 <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
                     <Checkbox
                         isChecked={inclusivePrices.includes("All inclusive price")}
@@ -913,7 +797,8 @@ const PlotLand = () => {
 
                         Price Negotiable
                     </Checkbox>
-                </Box>
+                </Box> 
+                {/* additional Price */}
                 <Box display={"grid"}>
                     <Heading as={"h4"} size={"sm"} margin={"10px 0"} fontWeight={700} textAlign={"left"}>
                         Additional Pricing Detail (Optional)
@@ -943,7 +828,8 @@ const PlotLand = () => {
                         textAlign={"left"}>
                         {additionalPrice ? <IoIosArrowUp style={{ display: "inline" }} /> : <IoIosArrowDown style={{ display: "inline" }} />} Add more pricing details
                     </Heading>
-                </Box>
+                </Box> 
+                {/* what makes property unique */}
                 <Box>
                     <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
                         What makes your property unique
@@ -989,16 +875,7 @@ const PlotLand = () => {
                         value={"Water Storage"}
                     >
                         Water Storage
-                    </button>
-                    <button
-                        className={
-                            amenities.includes("Security / Fire Alarm") ? style.setbtn : style.btn
-                        }
-                        onClick={handleAminities}
-                        value={"Security / Fire Alarm"}
-                    >
-                        Security / Fire Alarm
-                    </button>
+                    </button> 
                     <button
                         className={
                             amenities.includes("Water Storage") ? style.setbtn : style.btn
@@ -1007,23 +884,7 @@ const PlotLand = () => {
                         value={"Water Storage"}
                     >
                         Rain Water Harvesting
-                    </button>
-                    <button
-                        className={
-                            amenities.includes("Visitor Parking") ? style.setbtn : style.btn
-                        }
-                        onClick={handleAminities}
-                        value={"Visitor Parking"}
-                    >
-                        Visitor Parking
-                    </button>
-                    <button
-                        className={amenities.includes("Park") ? style.setbtn : style.btn}
-                        onClick={handleAminities}
-                        value={"Park"}
-                    >
-                        Park
-                    </button>
+                    </button> 
                     <button
                         className={
                             amenities.includes("Feng Shui / Vaastu Compliant")
@@ -1034,343 +895,7 @@ const PlotLand = () => {
                         value={"Feng Shui / Vaastu Compliant"}
                     >
                         Feng Shui / Vaastu Compliant
-                    </button>
-                    <button
-                        className={amenities.includes("Lift") ? style.setbtn : style.btn}
-                        onClick={handleAminities}
-                        value={"Lift"}
-                    >
-                        Lift(s)
-                    </button>
-                </Box>
-            </Box>
-            {/* Property Features */}
-            <Box className={style.optional_box}>
-                <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
-                    Property Features
-                </Heading>
-                <Box>
-                    <button
-                        className={
-                            propertyFeatures.includes("High Ceiling Height")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        value={"High Ceiling Height"}
-                        onClick={handlePropertyFeature}
-                    >
-
-                        High Ceiling Height
-                    </button>
-                    <button
-                        className={
-                            propertyFeatures.includes("False Ceiling Lighting")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        value={"False Ceiling Lighting"}
-                        onClick={handlePropertyFeature}
-                    >
-
-                        False Ceiling Lighting
-                    </button>
-                    <button
-                        className={
-                            propertyFeatures.includes("Piped-gas")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        value={"Piped-gas"}
-                        onClick={handlePropertyFeature}
-                    >
-
-                        Piped-gas
-                    </button>
-                    <button
-                        className={
-                            propertyFeatures.includes("Water purifier")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        value={"Water purifier"}
-                        onClick={handlePropertyFeature}
-                    >
-                        Water purifier
-                    </button>
-                    <button
-                        className={
-                            propertyFeatures.includes("Internet / wi-fi connectivity")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        value={"Internet / wi-fi connectivity"}
-                        onClick={handlePropertyFeature}
-                    >
-
-                        Internet/wi-fi connectivity
-                    </button>
-                    <button
-                        className={
-                            propertyFeatures.includes("Intercom Facility")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        value={"Intercom Facility"}
-                        onClick={handlePropertyFeature}
-                    >
-                        Intercom Facility
-                    </button>
-                    <button
-                        className={
-                            propertyFeatures.includes("Centrally Air Renovated")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        value={"Centrally Air Renovated"}
-                        onClick={handlePropertyFeature}
-                    >
-                        Centrally Air Conditioned
-                    </button>
-                    <button
-                        className={
-                            propertyFeatures.includes("Recently Renovated")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        value={"Recently Renovated"}
-                        onClick={handlePropertyFeature}
-                    >
-                        Recently Renovated
-                    </button>
-                    <button
-                        className={
-                            propertyFeatures.includes("Private Garden / Terrace")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        value={"Private Garden / Terrace"}
-                        onClick={handlePropertyFeature}
-                    >
-                        Private Garden / Terrace
-                    </button>
-                    <button
-                        className={
-                            propertyFeatures.includes("Natural Light")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        value={"Natural Light"}
-                        onClick={handlePropertyFeature}
-                    >
-                        Natural Light
-                    </button>
-                    <button
-                        className={
-                            propertyFeatures.includes("Airy Roooms") ? style.setbtn : style.btn
-                        }
-                        value={"Airy Roooms"}
-                        onClick={handlePropertyFeature}
-                    >
-
-                        Airy Roooms
-                    </button>
-                    <button
-                        className={
-                            propertyFeatures.includes("Spacious Interiors")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        value={"Spacious Interiors"}
-                        onClick={handlePropertyFeature}
-                    >
-
-                        Spacious Interiors
-                    </button>
-                </Box>
-            </Box>
-            {/* Society/Building feature */}
-            <Box className={style.optional_box}>
-                <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
-                    Society/Building feature
-                </Heading>
-                <Box>
-                    <button
-                        className={
-                            buildingFeature.includes("water softening plant")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        onClick={HandleBuildingFeature}
-                        value={"water softening plant"}
-                    >
-                        water softening plant
-                    </button>
-                    <button
-                        className={
-                            buildingFeature.includes("Fitness Centre / GYM")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        onClick={HandleBuildingFeature}
-                        value={"Fitness Centre / GYM"}
-                    >
-                        Fitness Centre / GYM
-                    </button>
-                    <button
-                        className={
-                            buildingFeature.includes("Swimming Pool")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        onClick={HandleBuildingFeature}
-                        value={"Swimming Pool"}
-                    >
-                        Swimming Pool
-                    </button>
-                    <button
-                        className={
-                            buildingFeature.includes("Club house / Community Center")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        onClick={HandleBuildingFeature}
-                        value={"Club house / Community Center"}
-                    >
-                        Club house / Community Center
-                    </button>
-                    <button
-                        className={
-                            buildingFeature.includes("Shopping Centre")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        onClick={HandleBuildingFeature}
-                        value={"Shopping Centre"}
-                    >
-                        Shopping Centre
-                    </button>
-                </Box>
-            </Box>
-            {/* Additional Features */}
-            <Box className={style.optional_box}>
-                <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
-                    Additional Features
-                </Heading>
-                <Box>
-                    <button
-                        className={
-                            additinalft.includes("Separate entry for servant room")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        value={"Separate entry for servant room"}
-                        onClick={handleAdditionalFeature}
-                    >
-                        Separate entry for servant room
-                    </button>
-                    <button
-                        className={
-                            additinalft.includes("Waste Disposal")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        value={"Waste Disposal"}
-                        onClick={handleAdditionalFeature}
-                    >
-                        Waste Disposal
-                    </button>
-                    <button
-                        className={
-                            additinalft.includes("Rain Water Harvesting")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        value={"Rain Water Harvesting"}
-                        onClick={handleAdditionalFeature}
-                    >
-                        Rain Water Harvesting
-                    </button>
-                    <button
-                        className={
-                            additinalft.includes("No open drainage around")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        value={"No open drainage around"}
-                        onClick={handleAdditionalFeature}
-                    >
-
-                        No open drainage around
-                    </button>
-                    <button
-                        className={
-                            additinalft.includes("Bank Attached Property")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        value={"Bank Attached Property"}
-                        onClick={handleAdditionalFeature}
-                    >
-
-                        Bank Attached Property
-                    </button>
-                    <button
-                        className={
-                            additinalft.includes("Low Density Society")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        value={"Low Density Society"}
-                        onClick={handleAdditionalFeature}
-                    >
-
-                        Low Density Society
-                    </button>
-                </Box>
-            </Box>
-            {/* Water Source */}
-            <Box className={style.optional_box}>
-                <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
-                    Water Source
-                </Heading>
-                <Box>
-                    <button
-                        className={
-                            watersource.includes("Municipal corporation") ? style.setbtn : style.btn
-                        }
-                        onClick={(e) => {
-                            e.preventDefault();
-                            handleWaterSource(e.target.value)
-                        }}
-                        value={"Municipal corporation"}
-                    >
-
-                        Municipal corporation
-                    </button>
-                    <button
-                        className={
-                            watersource.includes("Borewell / Tank") ? style.setbtn : style.btn
-                        }
-                        onClick={(e) => {
-                            e.preventDefault();
-                            handleWaterSource(e.target.value)
-                        }}
-                        value={"Borewell / Tank"}
-                    >
-
-                        Borewell/Tank
-                    </button>
-                    <button
-                        className={watersource.includes("24*7 Water") ? style.setbtn : style.btn}
-                        onClick={(e) => {
-                            e.preventDefault();
-                            handleWaterSource(e.target.value)
-                        }}
-                        value={"24*7 Water"}
-                    >
-
-                        24*7 Water
-                    </button>
+                    </button> 
                 </Box>
             </Box>
             {/* Overlooking */}
@@ -1448,68 +973,9 @@ const PlotLand = () => {
                     >
 
                         Corner Property
-                    </Checkbox>
-                    <Checkbox
-                        size={"lg"}
-                        isChecked={otherFeature.includes("Pet Friendly")}
-                        value={"Pet Friendly"}
-                        onChange={handleotherfeature}
-                    >
-
-                        Pet Friendly
-                    </Checkbox>
-                    <Checkbox
-                        size={"lg"}
-                        isChecked={otherFeature.includes("Wheelchair friendly")}
-                        value={"Wheelchair friendly"}
-                        onChange={handleotherfeature}
-                    >
-
-                        Wheelchair friendly
-                    </Checkbox>
+                    </Checkbox> 
                 </Box>
-            </Box>
-            {/* Power Back up */}
-            <Box className={style.optional_box}>
-                <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
-                    Power Back up
-                </Heading>
-                <Box>
-                    <button
-                        className={powerbackup == "None" ? style.setbtn : style.btn}
-                        value={"None"}
-                        onClick={(e) => {
-                            e.preventDefault();
-                            setPowerbackup(e.target.value)
-                        }}
-                    >
-
-                        None
-                    </button>
-                    <button
-                        className={powerbackup == "Partial" ? style.setbtn : style.btn}
-                        value={"Partial"}
-                        onClick={(e) => {
-                            e.preventDefault();
-                            setPowerbackup(e.target.value)
-                        }}
-                    >
-
-                        Partial
-                    </button>
-                    <button
-                        className={powerbackup == "Full" ? style.setbtn : style.btn}
-                        value={"Full"}
-                        onClick={(e) => {
-                            e.preventDefault();
-                            setPowerbackup(e.target.value)
-                        }}
-                    >
-
-                        Full
-                    </button>
-                </Box>
-            </Box>
+            </Box> 
             {/* Property facing */}
             <Box className={style.optional_box}>
                 <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
@@ -1614,34 +1080,7 @@ const PlotLand = () => {
                     </button>
                 </Box>
             </Box>
-
-            <Box className={style.optional_box}>
-                <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
-                    Type of flooring
-                </Heading>
-                <Box>
-                    <Select
-                        onChange={(e) => setFlooring(e.target.value)}
-                        value={flooring}
-                    >
-                        <option value=""> Select </option>
-                        <option value="Marble"> Marble </option>
-                        <option value="Concrete"> Concrete </option>
-                        <option value="Poloshed concrete"> Poloshed concrete </option>
-                        <option value="Granite"> Granite </option>
-                        <option value="Ceramic"> Ceramic </option>
-                        <option value="Mosaic"> Mosaic </option>
-                        <option value="Cement"> Cement </option>
-                        <option value="Stone"> Stone </option>
-                        <option value="Vinyl"> Vinyl </option>
-                        <option value="Wood"> Wood </option>
-                        <option value="Vitified"> Vitified </option>
-                        <option value="Spartex"> Spartex </option>
-                        <option value="IPSFinish"> IPSFinish </option>
-                        <option value="Other"> Other </option>
-                    </Select>
-                </Box>
-            </Box>
+            {/* facing road */}
             <Box className={style.optional_box}>
                 <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
                     Width of facing road
@@ -1657,6 +1096,7 @@ const PlotLand = () => {
                     </Select>
                 </Box>
             </Box>
+            {/* Location Advantages */}
             <Box className={style.optional_box}>
                 <Heading size={"md"} margin={"10px 0 4px 0"} textAlign={"left"}>
                     Location Advantages
@@ -1672,15 +1112,15 @@ const PlotLand = () => {
                 <Box>
                     <button
                         className={
-                            locationAdv.includes("Close to Station")
+                            locationAdv.includes("Close to Metro Station")
                                 ? style.setbtn
                                 : style.btn
                         }
-                        value={"Close to Station"}
+                        value={"Close to Metro Station"}
                         onClick={handlelocationadvantages}
                     >
 
-                        Close to Station
+                        Close to Metro Station
                     </button>
                     <button
                         className={

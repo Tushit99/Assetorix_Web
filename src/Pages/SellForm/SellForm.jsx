@@ -20,6 +20,7 @@ import PlotLand from "./PlotLand/PlotLand";
 const SellForm = () => {
     const [look, setlook] = useState("");
     const [type, settype] = useState(""); 
+    const [typeofplace, setTypeOf] = useState(""); 
 
     const handlechange = (type, look) => {
         settype(type);
@@ -51,7 +52,7 @@ const SellForm = () => {
                                     bg: "blue.50",
                                     border: "1px solid rgba(85, 91, 255, 0.236)",
                                     borderRadius: "18px",
-                                }}
+                                }} 
                             >
                                 Sell
                             </Tab>
@@ -96,7 +97,8 @@ const SellForm = () => {
                                                 bg: "blue.50",
                                                 border: "1px solid rgba(85, 91, 255, 0.236)",
                                                 borderRadius: "18px",
-                                            }}
+                                            }} 
+                                            onClick={()=>setTypeOf("Commercial")}
                                         >
                                             Commercial
                                         </Tab>
@@ -527,7 +529,7 @@ const SellForm = () => {
                  {type=="sell" && look=="Farmhouse" && <FarmHouse />} 
 
                  {/* Plot/Land */} 
-                 {type=="sell" && look=="Plot/Land" && <PlotLand /> }
+                 {(type=="sell" && typeofplace==="Residential" && look=="Plot/Land") && <PlotLand /> }
 
             </Box>
             <Box backgroundColor={"rgb(232, 244, 255)"} borderRadius={10}></Box>
