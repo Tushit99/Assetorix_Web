@@ -24,8 +24,8 @@ const Login = ({onpage}) => {
     const data = useSelector((store) => store.userreducer);
     const toast = useToast();
     const [mobile, setMobile] = useState("");
-    const navigate = useNavigate();
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
 
@@ -103,9 +103,10 @@ const Login = ({onpage}) => {
     useEffect(() => {
         if (data.isError) {
             toast({
-                title: `${data.error}`,
+                title: `  ${data.error}`,
                 status: 'warning',
                 duration: 4000,
+                isClosable:true 
             });
         }
         if (data.success == 0) {
