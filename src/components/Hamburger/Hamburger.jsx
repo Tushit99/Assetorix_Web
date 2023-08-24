@@ -67,7 +67,7 @@ const Hamburger = () => {
                         <Link to={"#"} onClick={onClose}> 
                             Rent
                         </Link>
-                        <Link to={"#"} onClick={onClose}> 
+                        <Link to={"/post"} onClick={onClose}> 
                             Sell
                         </Link>
                         <Link to={"#"} onClick={onClose}>
@@ -118,7 +118,7 @@ const Hamburger = () => {
                             </MenuList>
                         </Menu>
                         {/* ======= Contact =======  */}  
-                        <Link to={"#"} onClick={onClose}> 
+                        <Link to={"/contact"} onClick={onClose}> 
                             Contact
                         </Link>
                     </DrawerBody>

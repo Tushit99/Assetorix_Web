@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from 'react'
+import { useState } from "react";
 import {
     Box,
     Button,
@@ -15,13 +16,13 @@ import {
 } from "@chakra-ui/react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { Checkbox } from "@chakra-ui/react";
-import style from "./IndependentHouse.module.css";
+import style from "./Independentbuilder.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { CleanInputText } from "../code";
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
-const IndependentHouse = () => {
+const Independentbuilder = () => {
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
@@ -68,6 +69,7 @@ const IndependentHouse = () => {
     const [facing, setFacing] = useState("Meter");
     const [locationAdv, setLocationAdv] = useState([]);
     const [totalfloors, setTotalFloors] = useState("");
+    const [floorOn, setFloorOn] = useState("Ground");
     const [plotArea, setPlotArea] = useState("");
     const [desc, setDesc] = useState("");
     const [pincollection, setPinCollection] = useState([]);
@@ -76,14 +78,15 @@ const IndependentHouse = () => {
     const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
     const [expectedRentel, setExpectedRentel] = useState("");
     const [bookingAmount, setBookingAmount] = useState("");
-    const [annualDuesPayble, setAnnualDuesPayble] = useState(""); 
+    const [annualDuesPayble, setAnnualDuesPayble] = useState("");
+
 
     const handleSubmitData = async (e) => {
         e.preventDefault();
         let obj = {
             lookingFor: "Sell",
             propertyGroup: "Residential",
-            propertyType: "Independent House / Villa",
+            propertyType: "Independent / Builder Floor",
             address: {
                 apartmentName: appartment,
                 houseNumber: houseNo,
@@ -114,22 +117,23 @@ const IndependentHouse = () => {
             flooring,
             roadFacingWidth: facingwidth,
             roadFacingWidthType: facing,
-            totalFloors: +totalfloors, 
+            totalFloors: +totalfloors,
+            floorOn,
             plotArea,
             parking: {
                 openParking: openparking.toString(),
                 closeParking: parking.toString(),  
-            },
+            }, 
             areaUnit: areaPer,
             otherRoom: extraroom,
             description: desc,
-            countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
+            countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`, 
             additionalPricingDetails :{
                 maintenancePrice,
-                maintenanceTimePeriod, 
-                expectedRental: expectedRentel,
+                maintenanceTimePeriod,
+                expectedRental:expectedRentel,
                 bookingAmount,
-                annualDuesPayable: annualDuesPayble 
+                annualDuesPayable:annualDuesPayble 
             }, 
         };
 
@@ -175,6 +179,8 @@ const IndependentHouse = () => {
             showToastError('Provide Facing');
         } else if (!totalfloors) {
             showToastError('Provide Total Floors');
+        } else if (!floorOn) {
+            showToastError('Provide Floor number');
         } else if (!facingwidth) {
             showToastError("Provide facing width")
         }
@@ -203,7 +209,8 @@ const IndependentHouse = () => {
             propertyFacing &&
             flooring &&
             facing &&
-            totalfloors 
+            totalfloors &&
+            floorOn
         ) {
             let id = localStorage.getItem("usrId") || undefined;
             let authorization = localStorage.getItem("AstToken") || undefined;
@@ -1138,7 +1145,7 @@ const IndependentHouse = () => {
                         Floor Details
                     </Heading>
                     <Text textAlign={"left"} margin={"10px 0"}>
-                        Total no of floors 
+                        Total no of floors and your floor details
                     </Text>
                     <Box display={"flex"} alignItems={"center"} gap={5}>
                         <NumberInput
@@ -1167,7 +1174,33 @@ const IndependentHouse = () => {
                                 required
                                 w={180}
                             />
-                        </NumberInput> 
+                        </NumberInput>
+                        <Select
+                            id="floorSelectTag"
+                            variant="filled"
+                            onChange={(e) => setFloorOn(e.target.value)}
+                            value={floorOn}
+                            w={180}
+                            borderRadius={0}
+                            _hover={{
+                                backgroundColor: "rgb(255, 255, 255)",
+                                borderBottom: "1px solid blue",
+                                borderLeft: "0",
+                                borderRight: "0",
+                                borderTop: "0",
+                            }}
+                            borderTop={"0"}
+                            borderLeft={"0"}
+                            borderBottom={"1px solid blue"}
+                            backgroundColor={"rgb(255, 255, 255)"}
+                        >
+                            <option value="Ground">Ground</option>
+                            <option value="Basement">Basement</option>
+                            <option value="Lower Ground">Lower Ground</option>
+                            {Array.from(Array(Number(totalfloors)).keys()).map((e) => {
+                                return <option value={e + 1}>{e + 1}</option>
+                            })}
+                        </Select>
                     </Box>
                 </Box>
                 {/* Availability status */}
@@ -1462,10 +1495,10 @@ const IndependentHouse = () => {
                     </Heading>
                 </Box>
                 <Box>
-                    <Heading as={"h3"} size={"md"} fontWeight={600} margin={"10px 0"} textAlign={"left"}>
+                    <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
                         What makes your property unique
                     </Heading>
-                    <Heading as={"h3"} size={"xs"} fontWeight={400} color={"#777777"} margin={"10px 0"} textAlign={"left"}>
+                    <Heading as={"h3"} size={"xs"} margin={"10px 0"} textAlign={"left"}>
                         Adding description will increase your listing visibility
                     </Heading>
                     <Textarea height={140} value={desc} onChange={(e) => {
@@ -1500,35 +1533,30 @@ const IndependentHouse = () => {
                     </button>
                     <button
                         className={
+                            amenities.includes("Water Storage") ? style.setbtn : style.btn
+                        }
+                        onClick={handleAminities}
+                        value={"Water Storage"}
+                    >
+                        Water Storage
+                    </button>
+                    <button
+                        className={
+                            amenities.includes("Waste Disposal") ? style.setbtn : style.btn
+                        }
+                        onClick={handleAminities}
+                        value={"Waste Disposal"}
+                    >
+                        Waste Disposal
+                    </button>
+                    <button
+                        className={
                             amenities.includes("Rain Water Harvesting") ? style.setbtn : style.btn
                         }
                         onClick={handleAminities}
                         value={"Rain Water Harvesting"}
                     >
                         Rain Water Harvesting
-                    </button>
-
-                    <button
-                        className={
-                            amenities.includes("Water Storage") ? style.setbtn : style.btn
-                        }
-                        onClick={handleAminities}
-                        value={"Water Storage"}
-                    >
-
-                        Water Storage
-                    </button>
-                    <button
-                        className={
-                            amenities.includes("Security / Fire Alarm")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        onClick={handleAminities}
-                        value={"Security / Fire Alarm"}
-                    >
-
-                        Security/ Fire Alarm
                     </button>
                     <button
                         className={
@@ -1537,7 +1565,6 @@ const IndependentHouse = () => {
                         onClick={handleAminities}
                         value={"Visitor Parking"}
                     >
-
                         Visitor Parking
                     </button>
                     <button
@@ -1545,18 +1572,7 @@ const IndependentHouse = () => {
                         onClick={handleAminities}
                         value={"Park"}
                     >
-
                         Park
-                    </button>
-                    <button
-                        className={
-                            amenities.includes("Intercom Facility") ? style.setbtn : style.btn
-                        }
-                        onClick={handleAminities}
-                        value={"Intercom Facility"}
-                    >
-
-                        Intercom Facility
                     </button>
                     <button
                         className={
@@ -1567,25 +1583,14 @@ const IndependentHouse = () => {
                         onClick={handleAminities}
                         value={"Feng Shui / Vaastu Compliant"}
                     >
-
                         Feng Shui / Vaastu Compliant
                     </button>
                     <button
-                        className={
-                            amenities.includes("Pivate Garden / Terrace") ? style.setbtn : style.btn
-                        }
+                        className={amenities.includes("Piped-gas") ? style.setbtn : style.btn}
                         onClick={handleAminities}
-                        value={"Pivate Garden / Terrace"}
+                        value={"Piped-gas"}
                     >
-                        Pivate Garden / Terrace
-                    </button>
-                    <button
-                        className={amenities.includes("Lift") ? style.setbtn : style.btn}
-                        onClick={handleAminities}
-                        value={"Lift"}
-                    >
-
-                        Lift(s)
+                        Piped-gas
                     </button>
                 </Box>
             </Box>
@@ -1604,6 +1609,7 @@ const IndependentHouse = () => {
                         value={"High Ceiling Height"}
                         onClick={handlePropertyFeature}
                     >
+
                         High Ceiling Height
                     </button>
                     <button
@@ -1615,16 +1621,8 @@ const IndependentHouse = () => {
                         value={"False Ceiling Lighting"}
                         onClick={handlePropertyFeature}
                     >
+
                         False Ceiling Lighting
-                    </button>
-                    <button
-                        className={
-                            propertyFeatures.includes("Piped-gas") ? style.setbtn : style.btn
-                        }
-                        value={"Piped-gas"}
-                        onClick={handlePropertyFeature}
-                    >
-                        Piped-gas
                     </button>
                     <button
                         className={
@@ -1635,7 +1633,30 @@ const IndependentHouse = () => {
                         value={"Internet / wi-fi connectivity"}
                         onClick={handlePropertyFeature}
                     >
+
                         Internet/wi-fi connectivity
+                    </button>
+                    <button
+                        className={
+                            propertyFeatures.includes("Intercom Facility")
+                                ? style.setbtn
+                                : style.btn
+                        }
+                        value={"Intercom Facility"}
+                        onClick={handlePropertyFeature}
+                    >
+                        Intercom Facility
+                    </button>
+                    <button
+                        className={
+                            propertyFeatures.includes("Security/ Fire Alarm")
+                                ? style.setbtn
+                                : style.btn
+                        }
+                        value={"Security/ Fire Alarm"}
+                        onClick={handlePropertyFeature}
+                    >
+                        Security/ Fire Alarm
                     </button>
                     <button
                         className={
@@ -1646,18 +1667,7 @@ const IndependentHouse = () => {
                         value={"Centrally Air Renovated"}
                         onClick={handlePropertyFeature}
                     >
-                        Centrally Air Renovated
-                    </button>
-                    <button
-                        className={
-                            propertyFeatures.includes("Water Purifier")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        value={"Water Purifier"}
-                        onClick={handlePropertyFeature}
-                    >
-                        Water Purifier
+                        Centrally Air Conditioned
                     </button>
                     <button
                         className={
@@ -1672,14 +1682,14 @@ const IndependentHouse = () => {
                     </button>
                     <button
                         className={
-                            propertyFeatures.includes("Security / Fire Alarm")
+                            propertyFeatures.includes("Private Garden / Terrace")
                                 ? style.setbtn
                                 : style.btn
                         }
-                        value={"Security / Fire Alarm"}
+                        value={"Private Garden / Terrace"}
                         onClick={handlePropertyFeature}
                     >
-                        Security / Fire Alarm
+                        Private Garden / Terrace
                     </button>
                     <button
                         className={
@@ -1699,6 +1709,7 @@ const IndependentHouse = () => {
                         value={"Airy Roooms"}
                         onClick={handlePropertyFeature}
                     >
+
                         Airy Roooms
                     </button>
                     <button
@@ -1710,6 +1721,7 @@ const IndependentHouse = () => {
                         value={"Spacious Interiors"}
                         onClick={handlePropertyFeature}
                     >
+
                         Spacious Interiors
                     </button>
                 </Box>
@@ -1720,6 +1732,17 @@ const IndependentHouse = () => {
                     Society/Building feature
                 </Heading>
                 <Box>
+                    <button
+                        className={
+                            buildingFeature.includes("Lift")
+                                ? style.setbtn
+                                : style.btn
+                        }
+                        onClick={HandleBuildingFeature}
+                        value={"Lift"}
+                    >
+                        Lift(s)
+                    </button>
                     <button
                         className={
                             buildingFeature.includes("Fitness Centre / GYM")
@@ -1799,18 +1822,6 @@ const IndependentHouse = () => {
                     >
 
                         No open drainage around
-                    </button>
-                    <button
-                        className={
-                            additinalft.includes("Rain Water Harvesting")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        value={"Rain Water Harvesting"}
-                        onClick={handleAdditionalFeature}
-                    >
-
-                        Rain Water Harvesting
                     </button>
                     <button
                         className={
@@ -2034,6 +2045,7 @@ const IndependentHouse = () => {
                         }}
                         value={"North"}
                     >
+
                         North
                     </button>
                     <button
@@ -2181,15 +2193,15 @@ const IndependentHouse = () => {
                 <Box>
                     <button
                         className={
-                            locationAdv.includes("Close to Metro Station")
+                            locationAdv.includes("Close to Station")
                                 ? style.setbtn
                                 : style.btn
                         }
-                        value={"Close to Metro Station"}
+                        value={"Close to Station"}
                         onClick={handlelocationadvantages}
                     >
 
-                        Close to Metro Station
+                        Close to Station
                     </button>
                     <button
                         className={
@@ -2294,5 +2306,6 @@ const IndependentHouse = () => {
     );
 };
 
-export default IndependentHouse;
+export default Independentbuilder;
+
 

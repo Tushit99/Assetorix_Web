@@ -251,7 +251,7 @@ const Navebar = () => {
                     </PopoverContent>
                 </Popover>
                 {/* ghbnjkl */}
-                <Link>Sell</Link>
+                <Link to={"/post"}>Sell</Link>
                 <Link>Home Loans</Link>
                 <Link>Rent</Link>
                 <Link>Advertise</Link>

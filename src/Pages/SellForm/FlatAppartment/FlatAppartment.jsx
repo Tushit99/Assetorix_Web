@@ -229,7 +229,7 @@ const FlatAppartment = () => {
                 obj["furnished"] = furnished;
             }  
             if (availability == "Ready to move" && fromyear != "") {
-                obj["PropertyStatus"] = fromyear;
+                obj["propertyStatus"] = fromyear;
                 obj["availabilityStatus"]= availability; 
             }
             if (availability == "Under construction" && expectedyear != "") {
@@ -238,16 +238,15 @@ const FlatAppartment = () => {
 
             }
             // else {
-            try {
-                // console.log("mydata",JSON.stringify(obj)); 
-                // let response = await fetch("https://assetorix.onrender.com/property/", {
+            try { 
+                // let response = await fetch("http://localhost:4500/property/", {
                 //     method: "POST",
                 //     headers: head,
                 //     body: JSON.stringify(obj)
                 // });
                 // let data = await response.json();  
                 // console.log("data",data); 
-                await axios.post("https://assetorix.onrender.com/property/", obj, { headers: head })
+                await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
                     .then((e) => {
                         toast({
                             title: e.data.msg,
@@ -255,7 +254,7 @@ const FlatAppartment = () => {
                             status: 'success',
                             duration: 2000,
                         })
-                    });
+                    }); 
             } catch (error) {
                 toast({
                     title: error.response.data.msg,
@@ -278,11 +277,11 @@ const FlatAppartment = () => {
         }
     };
 
-    const handlepinfetch = (e) => {
+    const handlepinfetch = (e) => { 
         setPincode(e.target.value);
         if (e.target.value.length == 6) {
             pinfetch(e.target.value);
-        }
+        } 
         else {
             console.log(e.target.value);
         }
@@ -722,14 +721,14 @@ const FlatAppartment = () => {
                             Study Room
                         </button>
                         <button
-                            value={"Servent Room"}
+                            value={"Servant Room"}
                             className={
-                                extraroom.includes("Servent Room") ? style.setbtn : style.btn
+                                extraroom.includes("Servant Room") ? style.setbtn : style.btn
                             }
                             onClick={handlerooms}
                         >
 
-                            Servent Room
+                            Servant Room
                         </button>
                         <button
                             value={"Store Room"}

@@ -15,7 +15,7 @@ export const loginuser = (param) => async (dispatch) => {
   try {
     dispatch({ type: USER_lOGIN_LOADING });
     await axios
-      .post(`${process.env.backendUrl}/user/login`, param)
+      .post(`${process.env.REACT_APP_URL}/user/login`, param)
       .then((e) => {
         console.log(e);
         dispatch({ type: USER_lOGIN_SUCCESS, payload: e.data }); 
@@ -27,9 +27,9 @@ export const loginuser = (param) => async (dispatch) => {
           return e.status;
         } 
         else{
-            dispatch({ type: USER_lOGIN_ERROR, payload: "something went wrong" }); 
+            dispatch({ type: USER_lOGIN_ERROR, payload: "Somthing went wrong" }); 
         }
-      });
+      }); 
   } catch (err) { 
     console.log("som wrg", err);
     dispatch({ type: USER_lOGIN_ERROR, payload: err.response.data.msg });
@@ -40,7 +40,7 @@ export const signinuser = (param) => async (dispatch) => {
   try { 
     dispatch({ type: USER_SIGNIN_LOADING });
     let res = await axios
-      .post(`${process.env.backendUrl}/user/register`, param)
+      .post(`${process.env.REACT_APP_URL}/user/register`, param)
       .then((e) => {
         dispatch({ type: USER_SIGNIN_SUCCESS, payload: e.data }); 
         if (e.status > 200 && e.status < 300) {
@@ -63,9 +63,9 @@ export const signinuser = (param) => async (dispatch) => {
 
 export const userPreLog = (param) => async (dispatch) => {  
   
-  console.log(param);  
+  console.log(process.env.REACT_APP_URL);  
   try {
-    await axios.get(`${process.env.backendUrl}/user/`, {headers: param}).then((e) => {
+    await axios.get(`${process.env.REACT_APP_URL}/user/`, {headers: param}).then((e) => {
         console.log(e.data);
         let token = localStorage.getItem("AstToken"); 
         localStorage.setItem("AstUser",e.data.name); 
@@ -79,7 +79,7 @@ export const userPreLog = (param) => async (dispatch) => {
 export const handleChanges = (headers,body) => async (dispatch) => {
   try {
     await axios
-      .patch(`${process.env.backendUrl}/user/update`, body, {headers}).then((e) => {
+      .patch(`${process.env.REACT_APP_URL}/user/update`, body, {headers}).then((e) => {
         console.log(e); 
         let token = localStorage.getItem("AstToken"); 
         localStorage.setItem("AstUser",e.data.name); 

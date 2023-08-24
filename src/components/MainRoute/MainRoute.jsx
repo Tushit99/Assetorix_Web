@@ -28,6 +28,7 @@ import Privacy from '../../Pages/Footer/HelpCenter/Privacy/Privacy'
 import Disclaimer from '../../Pages/Footer/HelpCenter/Disclaimer/Disclaimer'
 import UserDetail from '../../Pages/UserDetail/UserDetail'
 import SellForm from '../../Pages/SellForm/SellForm'
+import PrivateRoute from '../PrivateRoute/PrivateRoute'
 // import ConsultingPage from '../../Pages/CoporateServices/Consulting/consulting'
 
 const MainRoute = () => {
@@ -81,10 +82,14 @@ const MainRoute = () => {
         <Route path='/disclaimer' element={<Disclaimer />} />
 
         {/* after login Details Route */}
-        <Route path='/profile' element={<UserDetail />} /> 
-        <Route path='/post' element={<SellForm />} />   
+        <Route path='/profile' element={<UserDetail />} />
+        <Route path='/post' element={
+          <PrivateRoute >
+            <SellForm />
+          </PrivateRoute>
+        } />
 
-        <Route path='*' element={<Error />} /> 
+        <Route path='*' element={<Error />} />
 
       </Routes>
     </div>
