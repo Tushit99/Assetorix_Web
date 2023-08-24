@@ -524,10 +524,8 @@ const SellForm = () => {
                 
                 {/* 1 RK/ Studio Apartment */} 
                 {type=="sell" && look=="1 RK/ Studio Apartment" && <RKStudio /> } 
-
                  {/* Serviced Apartment */}  
                  {type=="sell" && look=="Farmhouse" && <FarmHouse />} 
-
                  {/* Plot/Land */} 
                  {type=="sell" && look=="Plot/Land" && <PlotLand /> }
 
