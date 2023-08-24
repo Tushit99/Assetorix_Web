@@ -121,11 +121,11 @@ const RKStudio = () => {
             totalFloors: +totalfloors,
             floorOn,
             plotArea,
+            plotAreaUnit: areaPer,
             parking: {
                 openParking: openparking.toString(),
                 closeParking: parking.toString(),
             },
-            areaUnit: areaPer,
             otherRoom: extraroom,
             description: desc,
             countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
