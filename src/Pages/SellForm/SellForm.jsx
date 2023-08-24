@@ -510,6 +510,7 @@ const SellForm = () => {
                         </TabPanels>
                     </Tabs>
                 </Box> 
+                
                 {/* Flat/Apartment */} 
                 { type=="sell" && look=="Flat/Apartment" && <FlatAppartment />} 
                 
@@ -517,7 +518,8 @@ const SellForm = () => {
                 { type=="sell" && look=="Independent House/villa" && <IndependentHouse />}  
                 
                 {/* Independent/builder Floor */}  
-                {type=="sell" && look=="Independent/builder Floor" && <Independentbuilder />} 
+                {type=="sell" && look=="Independent/builder Floor" && <Independentbuilder />}  
+
 
                 {/* Serviced Apartment */} 
                 {type=="sell" && look=="Serviced Apartment" && <ServicedApartment />}  
@@ -527,7 +529,7 @@ const SellForm = () => {
 
                  {/* Serviced Apartment */}  
                  {type=="sell" && look=="Farmhouse" && <FarmHouse />} 
-                 
+
                  {/* Plot/Land */} 
                  {type=="sell" && look=="Plot/Land" && <PlotLand /> }
 
