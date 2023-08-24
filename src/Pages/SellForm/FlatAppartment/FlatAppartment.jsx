@@ -111,11 +111,11 @@ const FlatAppartment = () => {
             totalFloors: +totalfloors, 
             floorOn,  
             plotArea, 
+            plotAreaUnit: areaPer,
             parking:{
                 openParking: openparking, 
                 closedParking: parking, 
             }, 
-            areaUnit: areaPer,
             otherRoom: extraroom,
             description :desc ,
             countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`
