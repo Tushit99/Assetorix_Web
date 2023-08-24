@@ -529,7 +529,7 @@ const SellForm = () => {
                  {type=="sell" && look=="Farmhouse" && <FarmHouse />} 
 
                  {/* Plot/Land */} 
-                 {(type=="sell" && typeofplace==="Residential" && look=="Plot/Land") && <PlotLand /> }
+                 {type=="sell" && look=="Plot/Land" && <PlotLand /> }
 
             </Box>
             <Box backgroundColor={"rgb(232, 244, 255)"} borderRadius={10}></Box>
