@@ -212,7 +212,7 @@ const FlatAppartment = () => {
                 return
             }  
 
-            if (furnished == "Furnished" || furnished == "Semi-furnished") {
+            if (furnished == "Furnished" || furnished == "Semi-Furnished") {
                 obj.furnishedObj = {
                     light,
                     fans,
@@ -762,14 +762,14 @@ const FlatAppartment = () => {
                             Furnished
                         </button>
                         <button
-                            value={"Semi-furnished"}
+                            value={"Semi-Furnished"}
                             className={
-                                furnished === "Semi-furnished" ? style.setbtn : style.btn
+                                furnished === "Semi-Furnished" ? style.setbtn : style.btn
                             }
                             onClick={checkFurnished}
                         >
 
-                            Semi-furnished
+                            Semi-Furnished
                         </button>
                         <button
                             value={"Un-furnished"}
@@ -785,7 +785,7 @@ const FlatAppartment = () => {
                     {/* if furnished detail */}
                     <Box
                         display={
-                            furnished == "Furnished" || furnished == "Semi-furnished"
+                            furnished == "Furnished" || furnished == "Semi-Furnished"
                                 ? "grid"
                                 : "none"
                         }

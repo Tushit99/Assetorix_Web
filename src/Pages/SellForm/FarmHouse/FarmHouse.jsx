@@ -16,11 +16,11 @@ import {
 } from "@chakra-ui/react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { Checkbox } from "@chakra-ui/react";
-import style from "./FarmHouse.module.css"; 
-import axios from "axios"; 
+import style from "./FarmHouse.module.css";
+import axios from "axios";
 import { useSelector } from "react-redux";
 import { CleanInputText } from "../code";
-import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'; 
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
 
 const FarmHouse = () => {
@@ -70,7 +70,6 @@ const FarmHouse = () => {
     const [facing, setFacing] = useState("Meter");
     const [locationAdv, setLocationAdv] = useState([]);
     const [totalfloors, setTotalFloors] = useState("");
-    const [floorOn, setFloorOn] = useState("Ground");
     const [plotArea, setPlotArea] = useState("");
     const [desc, setDesc] = useState("");
     const [pincollection, setPinCollection] = useState([]);
@@ -80,7 +79,6 @@ const FarmHouse = () => {
     const [expectedRental, setExpectedRental] = useState("");
     const [bookingAmount, setBookingAmount] = useState("");
     const [annualDuesPayable, setAnnualDuesPayable] = useState("");
-    const [membershipCharge,setMembershipCharge] = useState(""); 
 
 
     const handleSubmitData = async (e) => {
@@ -88,7 +86,7 @@ const FarmHouse = () => {
         let obj = {
             lookingFor: "Sell",
             propertyGroup: "Residential",
-            propertyType: "",
+            propertyType: "Farmhouse",
             address: {
                 apartmentName: appartment,
                 houseNumber: houseNo,
@@ -120,24 +118,22 @@ const FarmHouse = () => {
             roadFacingWidth: facingwidth,
             roadFacingWidthType: facing,
             totalFloors: +totalfloors,
-            floorOn,
             plotArea,
             plotAreaUnit: areaPer,
             parking: {
                 openParking: openparking.toString(),
-                closeParking: parking.toString(),  
+                closeParking: parking.toString(),
             },
             otherRoom: extraroom,
             description: desc,
-            countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`, 
-            additionalPricingDetails :{
+            countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
+            additionalPricingDetails: {
                 maintenancePrice,
-                maintenanceTimePeriod, 
+                maintenanceTimePeriod,
                 expectedRental,
                 bookingAmount,
-                annualDuesPayable ,
-                membershipCharge
-            }, 
+                annualDuesPayable
+            },
         };
 
         const showToastError = (message) => {
@@ -145,7 +141,8 @@ const FarmHouse = () => {
                 title: message + ' un-filled',
                 status: 'error',
                 duration: 2000,
-                position: 'top-right'
+                position: 'top-right',
+                isClosable: true
             });
         }
 
@@ -182,8 +179,6 @@ const FarmHouse = () => {
             showToastError('Provide Facing');
         } else if (!totalfloors) {
             showToastError('Provide Total Floors');
-        } else if (!floorOn) {
-            showToastError('Provide Floor number');
         } else if (!facingwidth) {
             showToastError("Provide facing width")
         }
@@ -212,8 +207,7 @@ const FarmHouse = () => {
             propertyFacing &&
             flooring &&
             facing &&
-            totalfloors &&
-            floorOn
+            totalfloors
         ) {
             let id = localStorage.getItem("usrId") || undefined;
             let authorization = localStorage.getItem("AstToken") || undefined;
@@ -226,12 +220,16 @@ const FarmHouse = () => {
                     description: "Login required for posting property.",
                     status: 'error',
                     duration: 2000,
-                    position: 'top-right'
+                    position: 'top-right',
+                    isClosable: true
                 })
                 return
             }
+            if (furnished.length > 0) {
+                obj["furnished"] = furnished;
+            }
 
-            if (furnished == "Furnished" || furnished == "Semi-furnished") {
+            if (furnished == "Furnished" || furnished == "Semi-Furnished") {
                 obj.furnishedObj = {
                     light,
                     fans,
@@ -244,9 +242,7 @@ const FarmHouse = () => {
                 obj["furnishedList"] = furnishedarr;
             }
 
-            if (furnished.length > 0) {
-                obj["furnished"] = furnished;
-            }
+            
             if (availability == "Ready to move" && fromyear != "") {
                 obj["propertyStatus"] = fromyear;
                 obj["availabilityStatus"] = availability;
@@ -272,6 +268,7 @@ const FarmHouse = () => {
                             description: e.data.msg,
                             status: 'success',
                             duration: 2000,
+                            isClosable: true
                         })
                     });
             } catch (error) {
@@ -279,6 +276,7 @@ const FarmHouse = () => {
                     title: error.response.data.msg,
                     status: 'error',
                     duration: 2000,
+                    isClosable: true 
                 })
                 console.log(error);
             }
@@ -291,7 +289,8 @@ const FarmHouse = () => {
                 description: "Please fill all required fields.",
                 status: 'info',
                 duration: 2000,
-                position: 'top-right'
+                position: 'top-right', 
+                isClosable: true 
             })
         }
     };
@@ -781,14 +780,14 @@ const FarmHouse = () => {
                             Furnished
                         </button>
                         <button
-                            value={"Semi-furnished"}
+                            value={"Semi-Furnished"}
                             className={
-                                furnished === "Semi-furnished" ? style.setbtn : style.btn
+                                furnished === "Semi-Furnished" ? style.setbtn : style.btn
                             }
                             onClick={checkFurnished}
                         >
 
-                            Semi-furnished
+                            Semi-Furnished
                         </button>
                         <button
                             value={"Un-furnished"}
@@ -804,7 +803,7 @@ const FarmHouse = () => {
                     {/* if furnished detail */}
                     <Box
                         display={
-                            furnished == "Furnished" || furnished == "Semi-furnished"
+                            furnished == "Furnished" || furnished == "Semi-Furnished"
                                 ? "grid"
                                 : "none"
                         }
@@ -1148,7 +1147,7 @@ const FarmHouse = () => {
                         Floor Details
                     </Heading>
                     <Text textAlign={"left"} margin={"10px 0"}>
-                        Total no of floors and your floor details
+                        Total no of floors
                     </Text>
                     <Box display={"flex"} alignItems={"center"} gap={5}>
                         <NumberInput
@@ -1178,32 +1177,6 @@ const FarmHouse = () => {
                                 w={180}
                             />
                         </NumberInput>
-                        <Select
-                            id="floorSelectTag"
-                            variant="filled"
-                            onChange={(e) => setFloorOn(e.target.value)}
-                            value={floorOn}
-                            w={180}
-                            borderRadius={0}
-                            _hover={{
-                                backgroundColor: "rgb(255, 255, 255)",
-                                borderBottom: "1px solid blue",
-                                borderLeft: "0",
-                                borderRight: "0",
-                                borderTop: "0",
-                            }}
-                            borderTop={"0"}
-                            borderLeft={"0"}
-                            borderBottom={"1px solid blue"}
-                            backgroundColor={"rgb(255, 255, 255)"}
-                        >
-                            <option value="Ground">Ground</option>
-                            <option value="Basement">Basement</option>
-                            <option value="Lower Ground">Lower Ground</option>
-                            {Array.from(Array(Number(totalfloors)).keys()).map((e) => {
-                                return <option value={e + 1}>{e + 1}</option>
-                            })}
-                        </Select>
                     </Box>
                 </Box>
                 {/* Availability status */}
@@ -1482,8 +1455,7 @@ const FarmHouse = () => {
                     {additionalPrice && <>
                         <Input type="text" w={"300px"} value={expectedRental} onChange={(e) => setExpectedRental(e.target.value)} placeholder="Expected rental" margin={"0"} />
                         <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-                        <Input type="text" w={"300px"} value={annualDuesPayable} onChange={(e) => setAnnualDuesPayable(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} /> 
-                        <Input type="text" w={"300px"} value={membershipCharge} onChange={(e) => setMembershipCharge(e.target.value)} placeholder="Membership charge" margin={"10px 0 0 0"} /> 
+                        <Input type="text" w={"300px"} value={annualDuesPayable} onChange={(e) => setAnnualDuesPayable(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
                     </>
                     }
                     <Heading
@@ -1553,7 +1525,7 @@ const FarmHouse = () => {
                     >
                         Security / Fire Alarm
                     </button>
-                    <button 
+                    <button
                         className={
                             amenities.includes("Water Storage") ? style.setbtn : style.btn
                         }
@@ -1594,7 +1566,7 @@ const FarmHouse = () => {
                         onClick={handleAminities}
                         value={"Lift"}
                     >
-                        Lift(s) 
+                        Lift(s)
                     </button>
                 </Box>
             </Box>
@@ -1673,7 +1645,7 @@ const FarmHouse = () => {
                         onClick={handlePropertyFeature}
                     >
                         Intercom Facility
-                    </button> 
+                    </button>
                     <button
                         className={
                             propertyFeatures.includes("Centrally Air Renovated")
@@ -1835,7 +1807,7 @@ const FarmHouse = () => {
                     </button>
                     <button
                         className={
-                            additinalft.includes("Rain Water Harvesting") 
+                            additinalft.includes("Rain Water Harvesting")
                                 ? style.setbtn
                                 : style.btn
                         }
