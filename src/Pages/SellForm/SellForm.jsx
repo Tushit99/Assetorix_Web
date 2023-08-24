@@ -15,6 +15,7 @@ import Independentbuilder from "./Independentbuilder/Independentbuilder";
 import ServicedApartment from "./ServicedApartment/ServicedApartment";
 import RKStudio from "./RKStudio/RKStudio";
 import FarmHouse from "./FarmHouse/FarmHouse";
+import PlotLand from "./PlotLand/PlotLand";
 
 const SellForm = () => {
     const [look, setlook] = useState("");
@@ -523,7 +524,10 @@ const SellForm = () => {
                 {type=="sell" && look=="1 RK/ Studio Apartment" && <RKStudio /> } 
 
                  {/* Serviced Apartment */}  
-                 {type=="sell" && look=="Farmhouse" && <FarmHouse />}
+                 {type=="sell" && look=="Farmhouse" && <FarmHouse />} 
+
+                 {/* Plot/Land */} 
+                 {type=="sell" && look=="Plot/Land" && <PlotLand /> }
 
             </Box>
             <Box backgroundColor={"rgb(232, 244, 255)"} borderRadius={10}></Box>

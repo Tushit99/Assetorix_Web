@@ -23,6 +23,7 @@ import {
 import style from "./Page1.module.css";
 import video from "./Ametheus.mp4";
 import { Search2Icon } from "@chakra-ui/icons";
+import { Link } from "react-router-dom/dist";
 
 const Page1 = () => {
     return (
@@ -180,10 +181,10 @@ const Page1 = () => {
                                 boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}
                                 fontSize={{ base: "sm", lg: "lg" }}
                                 fontWeight={{ base: "500", lg: "bold" }}
-                                backgroundColor={"#d2ab67cb"}
+                                backgroundColor={"#d2ab67cb"}  
                             >
-                                Sell
-                            </Button>
+                                <Link to={"/post"} >Sell</Link>
+                            </Button> 
                             <Button
                                 borderradius={"4px"}
                                 color={"white"}
