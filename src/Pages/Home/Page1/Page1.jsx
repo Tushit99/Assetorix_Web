@@ -20,8 +20,8 @@ import {
     TabPanels,
     Checkbox,
 } from "@chakra-ui/react";
-import style from "./Page1.module.css"; 
-import video from "./Ametheus.mp4"; 
+import style from "./Page1.module.css";
+import video from "./Ametheus.mp4";
 import { Search2Icon } from "@chakra-ui/icons";
 
 const Page1 = () => {
@@ -40,35 +40,35 @@ const Page1 = () => {
             <video autoPlay loop muted className={style.video_panal} >
                 <source src={video} type="video/mp4" />
             </video>
-            <Box 
+            <Box
                 w={"full"}
                 className={style.topbox} >
                 <Text
                     color={"white"}
                     fontWeight={700}
                     lineHeight={1.2}
-                    textAlign={"left"} 
+                    textAlign={"left"}
                     marginTop={20}
-                    userSelect={"none"} 
+                    userSelect={"none"}
                     textShadow={"#000000 3px 4px 20px"}
                     fontSize={useBreakpointValue({ base: "4xl", md: "6xl" })}
                 >
                     “I Think” to “I Own”
                 </Text>
                 <Box w={"100%"}>
-                    <div className={style.fields}> 
+                    <div className={style.fields}>
                         <div>
                             <Select
                                 size="md"
                                 backgroundColor={"#d2ab67cb"}
                                 color={"white"}
-                                outline={0}
+                                outline={0} 
                                 fontSize={{ base: "sm", lg: "lg" }}
+                                fontWeight={{ base: "500", lg: "bold" }}
                                 boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}
                                 style={{ borderradius: "20px" }} 
-                                fontWeight={"500"}
                                 className={style.select_city}
-                                border={0} 
+                                border={0}
                             >
                                 <option value="delhi" >
                                     Delhi
@@ -93,8 +93,9 @@ const Page1 = () => {
                                 <PopoverTrigger>
                                     <Button
                                         backgroundColor={"#d2ab67cb"}
-                                        color={"white"} 
-                                        fontSize={"lg"}
+                                        color={"white"}
+                                        fontSize={{ base: "sm", lg: "lg" }}
+                                        fontWeight={{ base: "500", lg: "bold" }}
                                         _hover={{ color: "white" }}
                                     >Buy</Button>
                                 </PopoverTrigger>
@@ -178,8 +179,9 @@ const Page1 = () => {
                                 _hover={{ color: "white" }}
                                 boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}
                                 fontSize={{ base: "sm", lg: "lg" }}
+                                fontWeight={{ base: "500", lg: "bold" }}
                                 backgroundColor={"#d2ab67cb"}
-                            > 
+                            >
                                 Sell
                             </Button>
                             <Button
@@ -188,34 +190,33 @@ const Page1 = () => {
                                 _hover={{ color: "white" }}
                                 boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}
                                 fontSize={{ base: "sm", lg: "lg" }}
-                                backgroundColor={"#d2ab67cb"}
-                            // border={"1px solid black"}
+                                fontWeight={{ base: "500", lg: "bold" }}
+                                backgroundColor={"#d2ab67cb"} 
                             >
                                 Rent
                             </Button>
                         </div >
-                        <div> 
+                        <div>
                             <Input
                                 type="text"
-                                border={0} 
+                                border={0}
                                 height={"38px"}
-                                minWidth={{base:"85%",lg:"600px"}} 
-                                marginLeft={"2px"} 
+                                minWidth={{ base: "85%", lg: "600px" }}
+                                marginLeft={"2px"}
                                 placeholder={"Search locality, project or builder"}
                                 color={"black"}
                                 fontSize={{ base: "xs", lg: "lg" }}
                                 _active={{ border: "0px", outline: "0px" }}
-                                boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"} 
-                                fontWeight={400}  
+                                boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}
+                                fontWeight={400}
                                 backgroundColor={"rgba(255, 255, 255, 0.767)"}
-                                // borderRightRadius={"30%"}   
-                                clipPath={{base:"polygon(0 0, 100% 0, 97.4% 50%, 100% 100%, 0 100%)",md:"polygon(0 0, 100% 0, 98% 50%, 100% 100%, 0 100%)"}}
-                            /> 
+                                clipPath={{ base: "polygon(0 0, 100% 0, 97.4% 50%, 100% 100%, 0 100%)", md: "polygon(0 0, 100% 0, 98% 50%, 100% 100%, 0 100%)" }}
+                            />
                             <span id={style.btn_serch}></span>
-                            <Button _hover={{backgroundColor:"#d2ab67"}} backgroundColor={"#d2ab67b0"} > <Search2Icon size={"30px"} className={style.white} /> </Button>
+                            <Button _hover={{ backgroundColor: "#d2ab67" }} backgroundColor={"#d2ab67b0"} > <Search2Icon size={"30px"} className={style.white} /> </Button>
                         </div>
                     </div >
-                </Box > 
+                </Box >
             </Box >
             {/* </Box> */}
         </div >
