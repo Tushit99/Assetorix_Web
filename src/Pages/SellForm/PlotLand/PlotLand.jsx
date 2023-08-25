@@ -368,19 +368,6 @@ const PlotLand = () => {
         setboundaryWall(e.target.value);
     }
 
-    // const createtemplatefloors = () => {
-    //     let options = "";
-
-    //     let totalFloors = totalfloors;
-    //     for (let i = 1; i <= totalFloors; i++) {
-    //         let value = `<option value=${i}>${i}</option>`;
-    //         options += value;
-    //     }
-    //     let adding = document.getElementById("floorSelectTag");
-    //     adding.innerHTML = options;
-
-    // }
-
 
     return (
         <form onSubmit={handleSubmitData}>
