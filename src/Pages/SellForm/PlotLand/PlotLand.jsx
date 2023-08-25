@@ -1052,7 +1052,6 @@ const PlotLand = () => {
                         }}
                         value={"South-East"}
                     >
-
                         South-East
                     </button>
                     <button

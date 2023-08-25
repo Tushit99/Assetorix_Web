@@ -17,7 +17,7 @@ export const loginuser = (param) => async (dispatch) => {
     await axios
       .post(`${process.env.REACT_APP_URL}/user/login`, param)
       .then((e) => {
-        console.log(e);
+        // console.log(e);
         dispatch({ type: USER_lOGIN_SUCCESS, payload: e.data }); 
         if (e.data.msg=="Login Successful") { 
           localStorage.setItem("AstToken", e.data.token);
@@ -53,7 +53,7 @@ export const signinuser = (param) => async (dispatch) => {
           dispatch({ type: USER_SIGNIN_ERROR });
         }
       });
-    console.log(res);
+    // console.log(res);
     return res;
   } catch (err) {
     // console.log(err.response.data.msg);
@@ -61,12 +61,10 @@ export const signinuser = (param) => async (dispatch) => {
   }
 };
 
-export const userPreLog = (param) => async (dispatch) => {  
-  
-  console.log(process.env.REACT_APP_URL);  
+export const userPreLog = (param) => async (dispatch) => {    
   try {
     await axios.get(`${process.env.REACT_APP_URL}/user/`, {headers: param}).then((e) => {
-        console.log(e.data);
+        // console.log(e.data);
         let token = localStorage.getItem("AstToken"); 
         localStorage.setItem("AstUser",e.data.name); 
         dispatch({ type: USER_PREE_LOGIN, payload: { ...e.data, token } });
@@ -80,7 +78,7 @@ export const handleChanges = (headers,body) => async (dispatch) => {
   try {
     await axios
       .patch(`${process.env.REACT_APP_URL}/user/update`, body, {headers}).then((e) => {
-        console.log(e); 
+        // console.log(e); 
         let token = localStorage.getItem("AstToken"); 
         localStorage.setItem("AstUser",e.data.name); 
         dispatch({type:USER_DATA_UPDATE , payload: {...e.data,token}}); 

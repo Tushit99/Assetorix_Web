@@ -16,6 +16,7 @@ import ServicedApartment from "./ServicedApartment/ServicedApartment";
 import RKStudio from "./RKStudio/RKStudio";
 import FarmHouse from "./FarmHouse/FarmHouse";
 import PlotLand from "./PlotLand/PlotLand";
+import OfficeSetup from "./OfficeSetup/OfficeSetup";
 
 const SellForm = () => {
     const [look, setlook] = useState("");
@@ -531,7 +532,10 @@ const SellForm = () => {
                  {type=="sell" && look=="Farmhouse" && <FarmHouse />} 
 
                  {/* Plot/Land */} 
-                 {type=="sell" && look=="Plot/Land" && <PlotLand /> }
+                 {type=="sell" && look=="Plot/Land" && <PlotLand /> } 
+
+                 {/* OfficeSetup */} 
+                 {type=="sell" && look=="Office" && <OfficeSetup />}
 
             </Box>
             <Box backgroundColor={"rgb(232, 244, 255)"} borderRadius={10}></Box>
