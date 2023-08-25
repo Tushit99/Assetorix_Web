@@ -53,8 +53,7 @@ const PlotLand = () => {
     const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
     const [expectedRental, setExpectedRental] = useState("");
     const [bookingAmount, setBookingAmount] = useState("");
-    const [annualDuesPayable, setAnnualDuesPayable] = useState("");
-    const [membershipCharge, setMembershipCharge] = useState("");
+    const [annualDuesPayable, setAnnualDuesPayable] = useState(""); 
     const [plotLength, setplotLength] = useState("");
     const [plotBreadth, setPlotBreadth] = useState("");
     const [totalFloorAllowed, setTotalFloorAllowed] = useState("");
@@ -96,27 +95,32 @@ const PlotLand = () => {
             plotLength,
             plotBreadth,
             openSides,
-            ConstructionOnProperty,
+            constructionOnProperty :ConstructionOnProperty,
+            constructionOnPropertyList :constructionType, 
             ownership,
             price: +pricedetail,
             priceUnit: +priceSqr,
             inclusivePrices,
             amenities, 
+            expectedByYear,
+            otherFeatures: otherFeature,
             propertyFacing,
-            
+            boundaryWall, 
             roadFacingWidth: facingwidth,
             roadFacingWidthType: facing,
+            totalFloorsAllowed:totalFloorAllowed, 
             plotArea,
-            plotAreaUnit: areaPer,
+            plotAreaUnit: areaPer, 
+            propertyApprovalAuthorityList: authorisedBy, 
             description: desc,
+            overLookings: overLook,
             countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
             additionalPricingDetails: {
                 maintenancePrice,
                 maintenanceTimePeriod,
                 expectedRental,
                 bookingAmount,
-                annualDuesPayable,
-                membershipCharge
+                annualDuesPayable
             },
         };
 
@@ -179,7 +183,6 @@ const PlotLand = () => {
                 return
             }
 
-
             // else {
             try {
                 // let response = await fetch("http://localhost:4500/property/", {
@@ -187,11 +190,11 @@ const PlotLand = () => {
                 //     headers: head,
                 //     body: JSON.stringify(obj)
                 // });
-                // let data = await response.json();  
-                // console.log("data",data); 
-                await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
+                // let data = await response.json();   
+                console.log(obj); 
+                await axios.post(`http://localhost:4500/property/`, obj, { headers: head })
                     .then((e) => {
-                        toast({
+                        toast({ 
                             title: e.data.msg,
                             description: e.data.msg,
                             status: 'success',
@@ -202,7 +205,7 @@ const PlotLand = () => {
                 toast({
                     title: error.response.data.msg,
                     status: 'error',
-                    duration: 2000,
+                    duration: 2000, 
                 })
                 console.log(error);
             }
@@ -211,7 +214,7 @@ const PlotLand = () => {
         }
         else {
             toast({
-                title: 'Form un-filled',
+                title: 'Form un-filled', 
                 description: "Please fill all required fields.",
                 status: 'info',
                 duration: 2000,
@@ -277,6 +280,7 @@ const PlotLand = () => {
         } else {
             newarr.push(value);
         }
+        console.log(newarr); 
         setAuthorisedBy(newarr);
     }
 
@@ -814,7 +818,6 @@ const PlotLand = () => {
                         <Input type="text" w={"300px"} value={expectedRental} onChange={(e) => setExpectedRental(e.target.value)} placeholder="Expected rental" margin={"0"} />
                         <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
                         <Input type="text" w={"300px"} value={annualDuesPayable} onChange={(e) => setAnnualDuesPayable(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
-                        <Input type="text" w={"300px"} value={membershipCharge} onChange={(e) => setMembershipCharge(e.target.value)} placeholder="Membership charge" margin={"10px 0 0 0"} />
                     </>
                     }
                     <Heading
