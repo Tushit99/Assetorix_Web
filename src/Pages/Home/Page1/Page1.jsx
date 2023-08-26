@@ -48,7 +48,7 @@ const Page1 = () => {
                     color={"white"}
                     fontWeight={700}
                     lineHeight={1.2}
-                    textAlign={"left"}
+                    textAlign={"left"} 
                     marginTop={20}
                     userSelect={"none"}
                     textShadow={"#000000 3px 4px 20px"}

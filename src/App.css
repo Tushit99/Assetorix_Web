@@ -28,7 +28,7 @@ input[type=text]{
   padding: 6px;
   background-color: var(--blue-light);
   color: black;
-  border-radius: 50px;
+  border-radius: 50px; 
   position: relative;
 }
 
