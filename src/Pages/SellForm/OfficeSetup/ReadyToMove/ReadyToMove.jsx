@@ -81,9 +81,7 @@ const ReadyToMove = () => {
     const [pricedetail, setPricedetail] = useState("");
     const [priceSqr, setPriceSqr] = useState("");
     const [inclusivePrices, setInclusivePrice] = useState([]);
-    const [amenities, setAminity] = useState([]); 
-    const [facing, setFacing] = useState("Meter");
-    const [floorOn, setFloorOn] = useState("Ground");
+    const [amenities, setAminity] = useState([]);  
     const [locationAdv, setLocationAdv] = useState([]);
     const [totalfloors, setTotalFloors] = useState("");
     const [plotArea, setPlotArea] = useState("");
@@ -119,10 +117,8 @@ const ReadyToMove = () => {
             priceUnit: +priceSqr,
             inclusivePrices,
             amenities,  
-            roadFacingWidth: facingwidth,
-            roadFacingWidthType: facing,
-            totalFloors: +totalfloors,
-            floorOn,
+            roadFacingWidth: facingwidth, 
+            totalFloors: +totalfloors, 
             plotArea,
             plotAreaUnit: areaPer,
             description: desc,
@@ -154,12 +150,8 @@ const ReadyToMove = () => {
             showToastError("Provide PriceDetail");
         } else if (!priceSqr) {
             showToastError("Provide Price Per sq.ft");
-        }else if (!facing) {
-            showToastError("Provide Facing");
         } else if (!totalfloors) {
             showToastError("Provide Total Floors");
-        } else if (!floorOn) {
-            showToastError("Provide Floor number");
         } else if (!facingwidth) {
             showToastError("Provide facing width");
         }
@@ -177,9 +169,7 @@ const ReadyToMove = () => {
             pricedetail &&
             priceSqr &&
             inclusivePrices && 
-            facing &&
-            totalfloors &&
-            floorOn
+            totalfloors
         ) {
             let id = localStorage.getItem("usrId") || undefined;
             let authorization = localStorage.getItem("AstToken") || undefined;
@@ -1278,7 +1268,7 @@ const ReadyToMove = () => {
                         }} className={occupancyCertificate == "No" ? style.setbtn : style.btn} > No </button>
                     </Box>
                 </Box>
-                {/* office fire NOC Certified */}
+                {/* office previously used for */}
                 <Box className={style.optional_box}>
                     <Box>
                         <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
@@ -1331,99 +1321,7 @@ const ReadyToMove = () => {
                         }}
                     ></Textarea>
                 </Box>
-            </Box>
-            {/* Add amenities/unique features */}
-            <Box>
-                <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
-                    Add amenities/unique features
-                </Heading>
-                <Heading
-                    as={"h5"}
-                    size={"xs"}
-                    fontWeight={400}
-                    margin={"10px 0"}
-                    textAlign={"left"}
-                >
-                    All fields on this page are optional
-                </Heading>
-            </Box>
-            {/* Price Details */}
-            <Box>
-                <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
-                    Price Details
-                </Heading>
-                <Box display={"flex"} alignItems={"center"} gap={5}>
-                    <Box display={"grid"} gap={0}>
-                        <Heading
-                            as={"h3"}
-                            size={"xs"}
-                            fontWeight={400}
-                            textAlign={"left"}
-                        >
-                            {isCountry.country == "india" ? "₹" : "$"} Price Details
-                        </Heading>
-                        <NumberInput>
-                            <NumberInputField
-                                value={pricedetail}
-                                required
-                                onChange={(e) => {
-                                    setPricedetail(e.target.value);
-                                    areaCalucation();
-                                }}
-                            />
-                        </NumberInput>
-                    </Box>
-                    <Box display={"grid"} gap={0}>
-                        <Heading
-                            as={"h3"}
-                            size={"xs"}
-                            fontWeight={400}
-                            textAlign={"left"}
-                        >
-                            {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per
-                            {areaPer}
-                        </Heading>
-                        <NumberInput value={priceSqr}>
-                            <NumberInputField required readOnly />
-                        </NumberInput>
-                    </Box>
-                </Box>
-            </Box>
-            {/* inclusive Price */}
-            <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
-                <Checkbox
-                    isChecked={inclusivePrices.includes("All inclusive price")}
-                    onChange={(e) => {
-                        e.preventDefault();
-                        handleinclusiveandtax(e.target.value);
-                    }}
-                    value={"All inclusive price"}
-                >
-                    All inclusive price
-                </Checkbox>
-                <Checkbox
-                    isChecked={inclusivePrices.includes(
-                        "Tax and Govt. charges excluded"
-                    )}
-                    onChange={(e) => {
-                        e.preventDefault();
-                        handleinclusiveandtax(e.target.value);
-                    }}
-                    value={"Tax and Govt. charges excluded"}
-                >
-                    Tax and Govt. charges excluded
-                </Checkbox>
-                <Checkbox
-                    isChecked={inclusivePrices.includes("Price Negotiable")}
-                    onChange={(e) => {
-                        e.preventDefault();
-                        handleinclusiveandtax(e.target.value);
-                    }}
-                    value={"Price Negotiable"}
-                >
-                    Price Negotiable
-                </Checkbox>
-            </Box>
+            </Box>  
             {/* Additional Pricing Detail (Optional) */}
             <Box display={"grid"}>
                 <Heading
