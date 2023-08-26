@@ -1199,7 +1199,7 @@ const Independentbuilder = () => {
                             <option value="Lower Ground">Lower Ground</option>
                             {Array.from(Array(Number(totalfloors)).keys()).map((e) => {
                                 return <option value={e + 1}>{e + 1}</option>
-                            })}
+                            })} 
                         </Select>
                     </Box>
                 </Box>

@@ -39,11 +39,9 @@ const ReadyToMove = () => {
     const [country, setCountry] = useState("");
     const [facingwidth, setFacingWidth] = useState("");
     const [city, setCity] = useState("");
-    const [appartment, setApartment] = useState("");
     const [pincode, setPincode] = useState(0);
     const [state, setState] = useState("");
     const [locality, setLocality] = useState("");
-    const [houseNo, setHouseNo] = useState("");
     const [minseat, setMinseat] = useState("");
     const [maxseat, setMaxseat] = useState("");
     const [cabins, setCabins] = useState("");
@@ -53,7 +51,6 @@ const ReadyToMove = () => {
     const [sharedWashroom, setSharedWashroom] = useState(0);
     const [conferenceRoom, setConferenceRoom] = useState("");
     const [receptionArea, setReceptionArea] = useState("");
-    const [pantryType, setPantryType] = useState("");
     const [furnishing, setFurnishing] = useState("");
     const [centralAirConditioning, setcentralAirConditioning] = useState("");
     const [oxygenDuct, setOxygenDuct] = useState("");
@@ -63,13 +60,18 @@ const ReadyToMove = () => {
     const [liftStatus, setLiftStatus] = useState("");
     const [liftPassenger, setLiftPassenger] = useState(0);
     const [liftService, setLiftService] = useState(0);
-    const [modernLifts, setModernLifts] = useState(true);
+    const [modernLifts, setModernLifts] = useState(false);
     const [parkingStatus, setParkingStatus] = useState("");
     const [parkingArr, setParkingArr] = useState([]);
     const [parkingTotalNumber, setParkingTotalNumber] = useState("");
     const [preLeased, setPreLeased] = useState("");
     const [fireNOC, setFireNOC] = useState("");
     const [occupancyCertificate, setOccupancyCertificate] = useState("");
+    const [locatedInside, setLocatedInside] = useState("");
+    const [pantrySize, setPantrySize] = useState("");
+    const [pantryType, setPantryType] = useState("");
+    const [floorNumber, setFloorNumber] = useState([]);
+    const [pricedetail, setPricedetail] = useState("");
 
 
 
@@ -78,10 +80,9 @@ const ReadyToMove = () => {
     const [fromyear, setFromyear] = useState("");
     const [expectedyear, setExpectedYear] = useState("");
     const [ownership, setOwnerShip] = useState("");
-    const [pricedetail, setPricedetail] = useState("");
     const [priceSqr, setPriceSqr] = useState("");
     const [inclusivePrices, setInclusivePrice] = useState([]);
-    const [amenities, setAminity] = useState([]);  
+    const [amenities, setAminity] = useState([]);
     const [locationAdv, setLocationAdv] = useState([]);
     const [totalfloors, setTotalFloors] = useState("");
     const [plotArea, setPlotArea] = useState("");
@@ -102,23 +103,22 @@ const ReadyToMove = () => {
         let obj = {
             lookingFor: "Sell",
             propertyGroup: "Residential",
-            propertyType: "Office setup",
+            propertyType: "Office",
+            officeType: "Ready to move office space",
             address: {
-                apartmentName: appartment,
-                houseNumber: houseNo,
                 locality,
                 pincode,
                 city,
                 state,
                 country,
+                zoneType,
+                locatedInside
             },
             ownership,
-            price: +pricedetail,
             priceUnit: +priceSqr,
             inclusivePrices,
-            amenities,  
-            roadFacingWidth: facingwidth, 
-            totalFloors: +totalfloors, 
+            amenities,
+            roadFacingWidth: facingwidth,
             plotArea,
             plotAreaUnit: areaPer,
             description: desc,
@@ -130,6 +130,31 @@ const ReadyToMove = () => {
                 bookingAmount,
                 annualDuesPayable: annualDuesPayble,
             },
+            officeSetup: {
+                minSeats: minseat,
+                maxSeats: maxseat,
+                cabins: cabins,
+                meetingRooms: meetingRoom,
+            },
+            washrooms: washroomType,
+            conferenceRoom,
+            receptionArea,
+            pantryType,
+            facilityAvailable: {
+                furnishing,
+                centralAirConditioning,
+                oxygenDuct,
+                ups
+            },
+            totalFloors: +totalfloors,
+            floorOn: floorNumber,
+            fireSafety: fireSafty,
+            staircases: stairCase,
+            lift :liftStatus,
+            parking :parkingStatus,
+            preLeased,
+            fireNOC,
+            occupancyCertificate
         };
 
         const showToastError = (message) => {
@@ -146,8 +171,6 @@ const ReadyToMove = () => {
             showToastError("Provide locality");
         } else if (!ownership) {
             showToastError("Provide OwnerShip");
-        } else if (!pricedetail) {
-            showToastError("Provide PriceDetail");
         } else if (!priceSqr) {
             showToastError("Provide Price Per sq.ft");
         } else if (!totalfloors) {
@@ -162,13 +185,10 @@ const ReadyToMove = () => {
 
         if (
             city &&
-            appartment &&
             locality &&
-            houseNo &&
             ownership &&
-            pricedetail &&
             priceSqr &&
-            inclusivePrices && 
+            inclusivePrices &&
             totalfloors
         ) {
             let id = localStorage.getItem("usrId") || undefined;
@@ -184,6 +204,32 @@ const ReadyToMove = () => {
                 obj["expectedByYear"] = expectedyear;
                 obj["availabilityStatus"] = availability;
             }
+
+            if (washroomType == "Available") {
+                let washroomDetails = {
+                    privateWashrooms: privateWashroom,
+                    sharedWashrooms: sharedWashroom,
+                }
+                obj["washroomDetails"] = washroomDetails;
+            }
+
+            if (pantryType == "Private" || pantryType == "Shared") {
+                obj["pantrySize"] = pantrySize;
+                obj["pantrySizeUnit"] = pantryType;
+            }
+            if (liftStatus == "Available") {
+                obj["liftDetails"] = {
+                    passenger :liftPassenger,
+                    service :liftService, 
+                    modern :modernLifts 
+                }
+            }
+
+            if(parkingStatus=="Available"){
+                obj["parkingDetailsList"] = parkingArr; 
+                obj["parkingCount"]= parkingTotalNumber ;
+            }
+
             // else {
             try {
                 // let response = await fetch("http://localhost:4500/property/", {
@@ -247,7 +293,7 @@ const ReadyToMove = () => {
         } catch (err) {
             console.log(err);
         }
-    };  
+    };
 
     const handleAvailable = (e) => {
         e.preventDefault();
@@ -280,7 +326,7 @@ const ReadyToMove = () => {
     const handleownership = (e) => {
         e.preventDefault();
         setOwnerShip(e.target.value);
-    }; 
+    };
 
     const handleAminities = (e) => {
         e.preventDefault();
@@ -294,7 +340,7 @@ const ReadyToMove = () => {
         }
         setAminity(newarr);
     };
- 
+
 
     const handlelocationadvantages = (e) => {
         e.preventDefault();
@@ -309,25 +355,29 @@ const ReadyToMove = () => {
         setLocationAdv(newarr);
     };
 
-    const handleinclusiveandtax = (e) => {
-        let newarr = [...inclusivePrices];
-        let value = e;
+    const handleFloorNumber = (e) => {
+        e.preventDefault();
+        let newarr = [...floorNumber];
+        let value = e.target.value;
 
         if (newarr.includes(value)) {
             newarr.splice(newarr.indexOf(value), 1);
         } else {
             newarr.push(value);
         }
-        setInclusivePrice(newarr);
-    }; 
+        if (newarr.includes("")) {
+            newarr.splice(newarr.indexOf(""), 1);
+        }
+        setFloorNumber(newarr);
+    }
 
     const areaCalucation = () => {
         if (pricedetail && plotArea) {
             let max = Math.max(Number(pricedetail), Number(plotArea));
             let min = Math.min(Number(pricedetail), Number(plotArea));
-            let ans = Math.round(max / min);
-            setPriceSqr(ans);
-        }
+            let ans = Math.round(max / min);  
+            setPriceSqr(ans); 
+        } 
     };
 
     const handlefireSafty = (e) => {
@@ -355,30 +405,25 @@ const ReadyToMove = () => {
                     An accurate location helps you connect with right buyers.
                 </Heading>
 
-                <Input
-                    type="text"
-                    padding={"0 10px"}
-                    required
-                    placeholder="House No. (optional)"
-                    value={houseNo}
-                    onChange={(e) => setHouseNo(e.target.value)}
-                    fontSize={"md"}
-                    variant="flushed"
-                />
-                <Input
-                    type="text"
-                    padding={"0 10px"}
-                    required
-                    placeholder="Apartment / Society"
-                    fontSize={"md"}
-                    value={appartment}
-                    onChange={(e) => setApartment(e.target.value)}
-                    variant="flushed"
-                />
                 <Select
                     fontSize={"md"}
                     padding={"0 10px"}
                     variant="flushed"
+                    as={"select"}
+                    onChange={(e) => setLocatedInside(e.target.value)}
+                    value={locatedInside}
+                >
+                    <option value="">Located in side</option>
+                    <option value="IT Park">IT Park</option>
+                    <option value="Business Park"> Business Park </option>
+                    <option value="Other"> Other </option>
+                </Select>
+
+                <Select
+                    fontSize={"md"}
+                    padding={"0 10px"}
+                    variant="flushed"
+                    as={"select"}
                     onChange={(e) => setZoneType(e.target.value)}
                     value={zoneType}
                 >
@@ -768,16 +813,18 @@ const ReadyToMove = () => {
                     <Box display={(pantryType == "Private" || pantryType == "Shared") ? "flex" : "none"}>
                         <InputGroup w={340} >
                             <Input type="text" border={"1px solid rgb(222, 222, 255)"}
+                                value={pantrySize}
+                                onChange={setPantrySize}
                                 _hover={{ backgroundColor: "#fffff" }}
                                 backgroundColor={"white"} variant={"filled"} flex={4} placeholder="Pantry Size (optional)" />
                             <Select variant={"filled"}
                                 flex={2}
-                                value={areaPer}
+                                value={pantryType}
                                 border={"1px solid rgb(222, 222, 255)"}
                                 backgroundColor={"white"}
                                 _hover={{ backgroundColor: "#fffff" }}
                                 onChange={(e) => {
-                                    setAreaPer(e.target.value);
+                                    setpantryType(e.target.value);
                                 }}
                                 className={style.select}
                                 required
@@ -907,22 +954,25 @@ const ReadyToMove = () => {
                                     borderLeft={0}
                                     borderTop={0}
                                     _focus={{ boxShadow: 'outline' }} as={Button} rightIcon={<ChevronDownIcon />}>
-                                    Actions
+                                    Your Floor No. (optional)
                                 </MenuButton>
                                 <MenuList
-
                                     display={"flex"}
                                     maxHeight={200}
                                     overflow={"scroll"}
                                     overflowX={"hidden"}
                                     flexDirection={"column"}
-                                    padding={"8px 10px"}  >
-                                    <Checkbox> Basement </Checkbox>
-                                    <Checkbox> Lower Ground </Checkbox>
-                                    <Checkbox> Ground </Checkbox>
-                                    {Array.from(Array(Number(totalfloors)).keys()).map((e) => {
-                                        return <Checkbox value={e + 1}>{e + 1}</Checkbox>
+                                    padding={"8px 10px"} >
+
+
+                                    <Checkbox checked={floorNumber == "Basement"} onChange={handleFloorNumber} value={"Basement"} > Basement </Checkbox>
+                                    <Checkbox checked={floorNumber == "Lower Ground"} onChange={handleFloorNumber} value={"Lower Ground"} > Lower Ground </Checkbox>
+                                    <Checkbox checked={floorNumber == "Ground"} onChange={handleFloorNumber} value={"Ground"} > Ground </Checkbox>
+                                    {Array.from(Array(Number(totalfloors)).keys()).map((e, i) => {
+                                        return <Checkbox checked={floorNumber == (e + 1)} key={i} onChange={handleFloorNumber} value={e + 1} > {e + 1} </Checkbox>
                                     })}
+
+
                                 </MenuList>
                             </Menu>
                         </Box>
@@ -1025,7 +1075,7 @@ const ReadyToMove = () => {
                         <Checkbox onChange={handleNumberOfParking} value={"Private Parking in Basement"} checked={parkingArr.includes("Private Parking in Basement")} >Private Parking in Basement</Checkbox>
                         <Checkbox onChange={handleNumberOfParking} value={"Private Parking Outside"} checked={parkingArr.includes("Private Parking Outside")} >Private Parking Outside</Checkbox>
                         <Checkbox onChange={handleNumberOfParking} value={"Private Parking Outside"} checked={parkingArr.includes("Private Parking Outside")} >Public Parking</Checkbox>
-                        <Input type="text" value={parkingTotalNumber} onChange={(e) => {
+                        <Input type="text" placeholder="Enter no. of Parkings" value={parkingTotalNumber} onChange={(e) => {
                             e.preventDefault();
                             setParkingTotalNumber(e.target.value);
                         }} />
@@ -1147,7 +1197,7 @@ const ReadyToMove = () => {
                             <option value="10 year">10 year</option>
                         </Select>
                     </Box>
-                )}
+                )} 
                 {/* Add pricing and details (ownerShip) */}
                 <Box>
                     <Heading
@@ -1213,6 +1263,50 @@ const ReadyToMove = () => {
                         </button>
                     </Box>
                 </Box>
+                {/* Priceing Detail  */}
+                <Box>
+                    <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+                        Price Details
+                    </Heading>
+                    <Box display={"flex"} alignItems={"center"} gap={5}>
+                        <Box display={"grid"} gap={0}>
+                            <Heading
+                                as={"h3"}
+                                size={"xs"}
+                                fontWeight={400}
+                                textAlign={"left"}
+                            >
+                                {isCountry.country == "india" ? "₹" : "$"} Price Details
+                            </Heading>
+                            <NumberInput >
+                                <NumberInputField
+                                    value={pricedetail}
+                                    required
+                                    onChange={(e) => {
+                                        setPricedetail(e.target.value);
+                                        areaCalucation();
+                                    }}
+                                />
+                            </NumberInput>
+                        </Box>
+                        <Box display={"grid"} gap={0}>
+                            <Heading
+                                as={"h3"}
+                                size={"xs"}
+                                fontWeight={400}
+                                textAlign={"left"}
+                            >
+                                {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
+                            </Heading>
+                            <NumberInput value={priceSqr}>
+                                <NumberInputField
+                                    required
+                                    readOnly
+                                />
+                            </NumberInput>
+                        </Box>
+                    </Box>
+                </Box>
                 {/* Pre-leased / Pre-Ented */}
                 <Box className={style.optional_box}>
                     <Box>
@@ -1249,7 +1343,7 @@ const ReadyToMove = () => {
                             setFireNOC(e.target.value);
                         }} className={fireNOC == "No" ? style.setbtn : style.btn} > No </button>
                     </Box>
-                </Box>
+                </Box> 
                 {/* Occupancy Certificate */}
                 <Box className={style.optional_box}>
                     <Box>
@@ -1321,7 +1415,7 @@ const ReadyToMove = () => {
                         }}
                     ></Textarea>
                 </Box>
-            </Box>  
+            </Box>
             {/* Additional Pricing Detail (Optional) */}
             <Box display={"grid"}>
                 <Heading
@@ -1503,7 +1597,7 @@ const ReadyToMove = () => {
                         value={"Grocery Shop"}
                     >
                         Grocery Shop
-                    </button> 
+                    </button>
                     <button
                         className={
                             amenities.includes("Power Back-up") ? style.setbtn : style.btn
@@ -1547,10 +1641,10 @@ const ReadyToMove = () => {
                         onClick={handleAminities}
                         value={"LIF"}
                     >
-                        LIF(s) 
+                        LIF(s)
                     </button>
                 </Box>
-            </Box>  
+            </Box>
             {/* location advantage (near to which place) */}
             <Box className={style.optional_box}>
                 <Heading size={"md"} margin={"10px 0 4px 0"} textAlign={"left"}>

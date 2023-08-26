@@ -16,6 +16,11 @@ input[type=text]{
   margin: auto;
 }
 
+option{
+  color: black; 
+  padding: 0 20px; 
+}
+
 .scrole_button {
   position: fixed;
   top: 78%;
