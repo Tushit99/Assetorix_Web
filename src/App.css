@@ -2,9 +2,6 @@
   text-align: center;
 }
 
-.App select{
-  border-radius: 0;
-} 
 
 input[type=text]{
   border-radius: 0; 
@@ -15,10 +12,10 @@ input[type=text]{
   max-width: 1500px;
   margin: auto;
 }
-
+ 
 option{
   color: black; 
-  padding: 0 20px; 
+  padding: 0 20px;  
 }
 
 .scrole_button {

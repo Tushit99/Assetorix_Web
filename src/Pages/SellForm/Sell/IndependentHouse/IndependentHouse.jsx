@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState } from "react";
+import React, { useState } from "react";
 import {
     Box,
     Button,
@@ -16,14 +15,13 @@ import {
 } from "@chakra-ui/react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { Checkbox } from "@chakra-ui/react";
-import style from "./RKStudio.module.css";
+import style from "./IndependentHouse.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { CleanInputText } from "../code";
-import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
+import { CleanInputText } from "../../code";
 
-
-const RKStudio = () => {
+const IndependentHouse = () => {
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
@@ -34,8 +32,8 @@ const RKStudio = () => {
     const [state, setState] = useState("");
     const [locality, setLocality] = useState("");
     const [houseNo, setHouseNo] = useState("");
-    const [bedroom, setBedRoom] = useState(1);
-    const [bathroom, setBathroom] = useState(1);
+    const [bedroom, setBedRoom] = useState(0);
+    const [bathroom, setBathroom] = useState(0);
     const [balconey, setBalcony] = useState(0);
     const [parking, setParking] = useState(0);
     const [openparking, setOpenparking] = useState(0);
@@ -60,7 +58,7 @@ const RKStudio = () => {
     const [amenities, setAminity] = useState([]);
     const [propertyFeatures, setPropertyFeature] = useState("");
     const [buildingFeature, setBuildingFeature] = useState([]);
-    const [additinalft, setAdditinalFeature] = useState("");
+    const [additinalft, setAdditinalFeature] = useState([]);
     const [watersource, setWaterSource] = useState([]);
     const [overLook, setoverlook] = useState([]);
     const [otherFeature, setOtherFeature] = useState([]);
@@ -70,24 +68,22 @@ const RKStudio = () => {
     const [facing, setFacing] = useState("Meter");
     const [locationAdv, setLocationAdv] = useState([]);
     const [totalfloors, setTotalFloors] = useState("");
-    const [floorOn, setFloorOn] = useState("Ground");
     const [plotArea, setPlotArea] = useState("");
     const [desc, setDesc] = useState("");
     const [pincollection, setPinCollection] = useState([]);
     const [additionalPrice, setAdditionalPrice] = useState(false);
     const [maintenancePrice, setMaintenancePrice] = useState("");
     const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
+    const [expectedRentel, setExpectedRentel] = useState("");
     const [bookingAmount, setBookingAmount] = useState("");
-    const [annualDuesPayable, setAnnualDuesPayable] = useState("");
-    const [membershipCharge, setMembershipCharge] = useState("");
-
+    const [annualDuesPayble, setAnnualDuesPayble] = useState("");
 
     const handleSubmitData = async (e) => {
         e.preventDefault();
         let obj = {
             lookingFor: "Sell",
             propertyGroup: "Residential",
-            propertyType: "1RK / Studio Apartment",
+            propertyType: "Independent House / Villa",
             address: {
                 apartmentName: appartment,
                 houseNumber: houseNo,
@@ -109,7 +105,7 @@ const RKStudio = () => {
             amenities,
             propertyFeatures,
             society_buildingFeatures: buildingFeature,
-            additionalFeatures: additinalft,
+            additionalFeatures: additinalft, 
             waterSources: watersource,
             otherFeatures: otherFeature,
             powerBackup: powerbackup,
@@ -119,7 +115,6 @@ const RKStudio = () => {
             roadFacingWidth: facingwidth,
             roadFacingWidthType: facing,
             totalFloors: +totalfloors,
-            floorOn,
             plotArea,
             plotAreaUnit: areaPer,
             parking: {
@@ -131,10 +126,10 @@ const RKStudio = () => {
             countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
             additionalPricingDetails: {
                 maintenancePrice,
-                maintenanceTimePeriod, 
+                maintenanceTimePeriod,
+                expectedRental: expectedRentel,
                 bookingAmount,
-                annualDuesPayable,
-                membershipCharge
+                annualDuesPayable: annualDuesPayble
             },
         };
 
@@ -180,8 +175,6 @@ const RKStudio = () => {
             showToastError('Provide Facing');
         } else if (!totalfloors) {
             showToastError('Provide Total Floors');
-        } else if (!floorOn) {
-            showToastError('Provide Floor number');
         } else if (!facingwidth) {
             showToastError("Provide facing width")
         }
@@ -210,8 +203,7 @@ const RKStudio = () => {
             propertyFacing &&
             flooring &&
             facing &&
-            totalfloors &&
-            floorOn
+            totalfloors
         ) {
             let id = localStorage.getItem("usrId") || undefined;
             let authorization = localStorage.getItem("AstToken") || undefined;
@@ -384,7 +376,7 @@ const RKStudio = () => {
             newarr.push(value);
         }
         setAdditinalFeature(newarr);
-    };
+    };  
 
     const handleAminities = (e) => {
         e.preventDefault();
@@ -519,8 +511,7 @@ const RKStudio = () => {
                 <Heading size={"lg"}>Where is your property located?</Heading>
                 <Heading size={"sm"}>
                     An accurate location helps you connect with right buyers.
-                </Heading>
-
+                </Heading>  
                 <Input
                     type="text"
                     padding={"0 10px"}
@@ -623,44 +614,24 @@ const RKStudio = () => {
                 <Box as={"div"} className={style.inp_form_numbers}>
                     <Box textAlign={"left"} >
                         <Text> No. of Bedrooms </Text>
-                        <NumberInput value={bedroom}>
+                        <NumberInput>
                             <NumberInputField
                                 variant="flushed"
                                 padding={"0 2px"}
-                                readOnly 
-                                border={0}
-                                onClick={() => {
-                                    toast({
-                                        title: 'Pre-defined',
-                                        description: "value modification not allowed",
-                                        status: 'info',
-                                        duration: 2000, 
-                                        position: 'top-right',  
-                                        isClosable: true,
-                                    })
-                                }}
-                            // value={bedroom}
+                                onChange={(e) => setBedRoom(e.target.value)}
+                                value={bedroom}
+                                required
                             />
                         </NumberInput>
                     </Box>
                     <Box textAlign={"left"}>
                         <Text> No. of Bathrooms </Text>
-                        <NumberInput value={bathroom}>
+                        <NumberInput>
                             <NumberInputField
                                 variant="flushed"
-                                readOnly 
-                                border={0}
-                                onClick={() => {
-                                    toast({
-                                        title: 'Pre-defined',
-                                        description: "value modification not allowed",
-                                        status: 'info',
-                                        duration: 2000,
-                                        position: 'top-right', 
-                                        isClosable: true 
-                                    })
-                                }}
+                                onChange={(e) => setBathroom(e.target.value)}
                                 value={bathroom}
+                                required
                                 padding={"0 2px"}
                             />
                         </NumberInput>
@@ -1166,7 +1137,7 @@ const RKStudio = () => {
                         Floor Details
                     </Heading>
                     <Text textAlign={"left"} margin={"10px 0"}>
-                        Total no of floors and your floor details
+                        Total no of floors
                     </Text>
                     <Box display={"flex"} alignItems={"center"} gap={5}>
                         <NumberInput
@@ -1196,32 +1167,6 @@ const RKStudio = () => {
                                 w={180}
                             />
                         </NumberInput>
-                        <Select
-                            id="floorSelectTag"
-                            variant="filled"
-                            onChange={(e) => setFloorOn(e.target.value)}
-                            value={floorOn}
-                            w={180}
-                            borderRadius={0}
-                            _hover={{
-                                backgroundColor: "rgb(255, 255, 255)",
-                                borderBottom: "1px solid blue",
-                                borderLeft: "0",
-                                borderRight: "0",
-                                borderTop: "0",
-                            }}
-                            borderTop={"0"}
-                            borderLeft={"0"}
-                            borderBottom={"1px solid blue"}
-                            backgroundColor={"rgb(255, 255, 255)"}
-                        >
-                            <option value="Ground">Ground</option>
-                            <option value="Basement">Basement</option>
-                            <option value="Lower Ground">Lower Ground</option>
-                            {Array.from(Array(Number(totalfloors)).keys()).map((e) => {
-                                return <option value={e + 1}>{e + 1}</option>
-                            })}
-                        </Select>
                     </Box>
                 </Box>
                 {/* Availability status */}
@@ -1498,9 +1443,9 @@ const RKStudio = () => {
                         </Select>
                     </InputGroup>
                     {additionalPrice && <>
+                        <Input type="text" w={"300px"} value={expectedRentel} onChange={(e) => setExpectedRentel(e.target.value)} placeholder="Expected rental" margin={"0"} />
                         <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-                        <Input type="text" w={"300px"} value={annualDuesPayable} onChange={(e) => setAnnualDuesPayable(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
-                        <Input type="text" w={"300px"} value={membershipCharge} onChange={(e) => setMembershipCharge(e.target.value)} placeholder="Membership charge" margin={"10px 0 0 0"} />
+                        <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
                     </>
                     }
                     <Heading
@@ -1516,10 +1461,10 @@ const RKStudio = () => {
                     </Heading>
                 </Box>
                 <Box>
-                    <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                    <Heading as={"h3"} size={"md"} fontWeight={600} margin={"10px 0"} textAlign={"left"}>
                         What makes your property unique
                     </Heading>
-                    <Heading as={"h3"} size={"xs"} margin={"10px 0"} textAlign={"left"}>
+                    <Heading as={"h3"} size={"xs"} fontWeight={400} color={"#777777"} margin={"10px 0"} textAlign={"left"}>
                         Adding description will increase your listing visibility
                     </Heading>
                     <Textarea height={140} value={desc} onChange={(e) => {
@@ -1554,30 +1499,35 @@ const RKStudio = () => {
                     </button>
                     <button
                         className={
+                            amenities.includes("Rain Water Harvesting") ? style.setbtn : style.btn
+                        }
+                        onClick={handleAminities}
+                        value={"Rain Water Harvesting"}
+                    >
+                        Rain Water Harvesting
+                    </button>
+
+                    <button
+                        className={
                             amenities.includes("Water Storage") ? style.setbtn : style.btn
                         }
                         onClick={handleAminities}
                         value={"Water Storage"}
                     >
+
                         Water Storage
                     </button>
                     <button
                         className={
-                            amenities.includes("Security / Fire Alarm") ? style.setbtn : style.btn
+                            amenities.includes("Security / Fire Alarm")
+                                ? style.setbtn
+                                : style.btn
                         }
                         onClick={handleAminities}
                         value={"Security / Fire Alarm"}
                     >
-                        Security / Fire Alarm
-                    </button>
-                    <button
-                        className={
-                            amenities.includes("Security Personnel") ? style.setbtn : style.btn
-                        }
-                        onClick={handleAminities}
-                        value={"Security Personnel"}
-                    >
-                        Security Personnel
+
+                        Security/ Fire Alarm
                     </button>
                     <button
                         className={
@@ -1586,6 +1536,7 @@ const RKStudio = () => {
                         onClick={handleAminities}
                         value={"Visitor Parking"}
                     >
+
                         Visitor Parking
                     </button>
                     <button
@@ -1593,7 +1544,18 @@ const RKStudio = () => {
                         onClick={handleAminities}
                         value={"Park"}
                     >
+
                         Park
+                    </button>
+                    <button
+                        className={
+                            amenities.includes("Intercom Facility") ? style.setbtn : style.btn
+                        }
+                        onClick={handleAminities}
+                        value={"Intercom Facility"}
+                    >
+
+                        Intercom Facility
                     </button>
                     <button
                         className={
@@ -1604,13 +1566,24 @@ const RKStudio = () => {
                         onClick={handleAminities}
                         value={"Feng Shui / Vaastu Compliant"}
                     >
+
                         Feng Shui / Vaastu Compliant
+                    </button>
+                    <button
+                        className={
+                            amenities.includes("Pivate Garden / Terrace") ? style.setbtn : style.btn
+                        }
+                        onClick={handleAminities}
+                        value={"Pivate Garden / Terrace"}
+                    >
+                        Pivate Garden / Terrace
                     </button>
                     <button
                         className={amenities.includes("Lift") ? style.setbtn : style.btn}
                         onClick={handleAminities}
                         value={"Lift"}
                     >
+
                         Lift(s)
                     </button>
                 </Box>
@@ -1630,7 +1603,6 @@ const RKStudio = () => {
                         value={"High Ceiling Height"}
                         onClick={handlePropertyFeature}
                     >
-
                         High Ceiling Height
                     </button>
                     <button
@@ -1642,31 +1614,16 @@ const RKStudio = () => {
                         value={"False Ceiling Lighting"}
                         onClick={handlePropertyFeature}
                     >
-
                         False Ceiling Lighting
                     </button>
                     <button
                         className={
-                            propertyFeatures.includes("Piped-gas")
-                                ? style.setbtn
-                                : style.btn
+                            propertyFeatures.includes("Piped-gas") ? style.setbtn : style.btn
                         }
                         value={"Piped-gas"}
                         onClick={handlePropertyFeature}
                     >
-
                         Piped-gas
-                    </button>
-                    <button
-                        className={
-                            propertyFeatures.includes("Water purifier")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        value={"Water purifier"}
-                        onClick={handlePropertyFeature}
-                    >
-                        Water purifier
                     </button>
                     <button
                         className={
@@ -1677,19 +1634,7 @@ const RKStudio = () => {
                         value={"Internet / wi-fi connectivity"}
                         onClick={handlePropertyFeature}
                     >
-
                         Internet/wi-fi connectivity
-                    </button>
-                    <button
-                        className={
-                            propertyFeatures.includes("Intercom Facility")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        value={"Intercom Facility"}
-                        onClick={handlePropertyFeature}
-                    >
-                        Intercom Facility
                     </button>
                     <button
                         className={
@@ -1700,7 +1645,18 @@ const RKStudio = () => {
                         value={"Centrally Air Renovated"}
                         onClick={handlePropertyFeature}
                     >
-                        Centrally Air Conditioned
+                        Centrally Air Renovated
+                    </button>
+                    <button
+                        className={
+                            propertyFeatures.includes("Water Purifier")
+                                ? style.setbtn
+                                : style.btn
+                        }
+                        value={"Water Purifier"}
+                        onClick={handlePropertyFeature}
+                    >
+                        Water Purifier
                     </button>
                     <button
                         className={
@@ -1715,14 +1671,14 @@ const RKStudio = () => {
                     </button>
                     <button
                         className={
-                            propertyFeatures.includes("Private Garden / Terrace")
+                            propertyFeatures.includes("Security / Fire Alarm")
                                 ? style.setbtn
                                 : style.btn
                         }
-                        value={"Private Garden / Terrace"}
+                        value={"Security / Fire Alarm"}
                         onClick={handlePropertyFeature}
                     >
-                        Private Garden / Terrace
+                        Security / Fire Alarm
                     </button>
                     <button
                         className={
@@ -1742,7 +1698,6 @@ const RKStudio = () => {
                         value={"Airy Roooms"}
                         onClick={handlePropertyFeature}
                     >
-
                         Airy Roooms
                     </button>
                     <button
@@ -1754,7 +1709,6 @@ const RKStudio = () => {
                         value={"Spacious Interiors"}
                         onClick={handlePropertyFeature}
                     >
-
                         Spacious Interiors
                     </button>
                 </Box>
@@ -1767,17 +1721,6 @@ const RKStudio = () => {
                 <Box>
                     <button
                         className={
-                            buildingFeature.includes("water softening plant")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        onClick={HandleBuildingFeature}
-                        value={"water softening plant"}
-                    >
-                        water softening plant
-                    </button>
-                    <button
-                        className={
                             buildingFeature.includes("Fitness Centre / GYM")
                                 ? style.setbtn
                                 : style.btn
@@ -1785,6 +1728,7 @@ const RKStudio = () => {
                         onClick={HandleBuildingFeature}
                         value={"Fitness Centre / GYM"}
                     >
+
                         Fitness Centre / GYM
                     </button>
                     <button
@@ -1796,6 +1740,7 @@ const RKStudio = () => {
                         onClick={HandleBuildingFeature}
                         value={"Swimming Pool"}
                     >
+
                         Swimming Pool
                     </button>
                     <button
@@ -1807,18 +1752,20 @@ const RKStudio = () => {
                         onClick={HandleBuildingFeature}
                         value={"Club house / Community Center"}
                     >
+
                         Club house / Community Center
                     </button>
                     <button
                         className={
-                            buildingFeature.includes("Shopping Centre")
+                            buildingFeature.includes("Security Personnel")
                                 ? style.setbtn
                                 : style.btn
                         }
                         onClick={HandleBuildingFeature}
-                        value={"Shopping Centre"}
+                        value={"Security Personnel"}
                     >
-                        Shopping Centre
+
+                        Security Personnel
                     </button>
                 </Box>
             </Box>
@@ -1827,29 +1774,7 @@ const RKStudio = () => {
                 <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
                     Additional Features
                 </Heading>
-                <Box>
-                    <button
-                        className={
-                            additinalft.includes("Separate entry for servant room")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        value={"Separate entry for servant room"}
-                        onClick={handleAdditionalFeature}
-                    >
-                        Separate entry for servant room
-                    </button>
-                    <button
-                        className={
-                            additinalft.includes("Waste Disposal")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        value={"Waste Disposal"}
-                        onClick={handleAdditionalFeature}
-                    >
-                        Waste Disposal
-                    </button>
+                <Box> 
                     <button
                         className={
                             additinalft.includes("Rain Water Harvesting")
@@ -1858,20 +1783,8 @@ const RKStudio = () => {
                         }
                         value={"Rain Water Harvesting"}
                         onClick={handleAdditionalFeature}
-                    >
+                    > 
                         Rain Water Harvesting
-                    </button>
-                    <button
-                        className={
-                            additinalft.includes("No open drainage around")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        value={"No open drainage around"}
-                        onClick={handleAdditionalFeature}
-                    >
-
-                        No open drainage around
                     </button>
                     <button
                         className={
@@ -1882,21 +1795,8 @@ const RKStudio = () => {
                         value={"Bank Attached Property"}
                         onClick={handleAdditionalFeature}
                     >
-
                         Bank Attached Property
-                    </button>
-                    <button
-                        className={
-                            additinalft.includes("Low Density Society")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        value={"Low Density Society"}
-                        onClick={handleAdditionalFeature}
-                    >
-
-                        Low Density Society
-                    </button>
+                    </button> 
                 </Box>
             </Box>
             {/* Water Source */}
@@ -2095,7 +1995,6 @@ const RKStudio = () => {
                         }}
                         value={"North"}
                     >
-
                         North
                     </button>
                     <button
@@ -2106,7 +2005,6 @@ const RKStudio = () => {
                         }}
                         value={"South"}
                     >
-
                         South
                     </button>
                     <button
@@ -2117,7 +2015,6 @@ const RKStudio = () => {
                         }}
                         value={"East"}
                     >
-
                         East
                     </button>
                     <button
@@ -2128,7 +2025,6 @@ const RKStudio = () => {
                         }}
                         value={"West"}
                     >
-
                         West
                     </button>
                     <button
@@ -2141,7 +2037,6 @@ const RKStudio = () => {
                         }}
                         value={"North-East"}
                     >
-
                         North-East
                     </button>
                     <button
@@ -2154,7 +2049,6 @@ const RKStudio = () => {
                         }}
                         value={"North-West"}
                     >
-
                         North-West
                     </button>
                     <button
@@ -2167,7 +2061,6 @@ const RKStudio = () => {
                         }}
                         value={"South-East"}
                     >
-
                         South-East
                     </button>
                     <button
@@ -2180,12 +2073,11 @@ const RKStudio = () => {
                         }}
                         value={"South-West"}
                     >
-
                         South-West
                     </button>
                 </Box>
             </Box>
-
+            {/* Type of flooring */}
             <Box className={style.optional_box}>
                 <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
                     Type of flooring
@@ -2213,6 +2105,7 @@ const RKStudio = () => {
                     </Select>
                 </Box>
             </Box>
+            {/* Width of facing road */}
             <Box className={style.optional_box}>
                 <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
                     Width of facing road
@@ -2228,6 +2121,7 @@ const RKStudio = () => {
                     </Select>
                 </Box>
             </Box>
+            {/* location advantage */}
             <Box className={style.optional_box}>
                 <Heading size={"md"} margin={"10px 0 4px 0"} textAlign={"left"}>
                     Location Advantages
@@ -2356,5 +2250,5 @@ const RKStudio = () => {
     );
 };
 
-export default RKStudio;
+export default IndependentHouse;
 

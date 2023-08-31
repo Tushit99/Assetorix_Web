@@ -1,37 +1,39 @@
-import {useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import style from "./SellForm.module.css";
 import {
-    Box, 
-    Heading, 
+    Box,
+    Heading,
     Tab,
     TabList,
     TabPanel,
     TabPanels,
-    Tabs, 
-} from "@chakra-ui/react"; 
-import FlatAppartment from "./FlatAppartment/FlatAppartment";
-import IndependentHouse from "./IndependentHouse/IndependentHouse";
-import Independentbuilder from "./Independentbuilder/Independentbuilder";
-import ServicedApartment from "./ServicedApartment/ServicedApartment";
-import RKStudio from "./RKStudio/RKStudio";
-import FarmHouse from "./FarmHouse/FarmHouse";
-import PlotLand from "./PlotLand/PlotLand";
-import OfficeSetup from "./OfficeSetup/OfficeSetup";
+    Tabs,
+} from "@chakra-ui/react";
+import FlatAppartment from "./Sell/FlatAppartment/FlatAppartment";
+import IndependentHouse from "./Sell/IndependentHouse/IndependentHouse";
+import Independentbuilder from "./Sell/Independentbuilder/Independentbuilder";
+import PlotLand from "./Sell/PlotLand/PlotLand";
+import ServicedApartment from "./Sell/ServicedApartment/ServicedApartment";
+import RKStudio from "./Sell/RKStudio/RKStudio";
+import FarmHouse from "./Sell/FarmHouse/FarmHouse";
+import OfficeSetup from "./RentLease/OfficeSetup/OfficeSetup"; 
+import Rent from "./RentLease/Rent";
+
 
 const SellForm = () => {
     const [look, setlook] = useState("");
-    const [type, settype] = useState(""); 
-    const [typeofplace, setTypeOf] = useState(""); 
+    const [type, settype] = useState("");
+    const [typeofplace, setTypeOf] = useState("");
 
     const handlechange = (type, look) => {
         settype(type);
         setlook(look);
-    };   
+    };
 
-    useEffect(()=>{
-        settype("sell"); 
-        setlook("Flat/Apartment"); 
-    },[])
+    useEffect(() => {
+        settype("sell");
+        setlook("Flat/Apartment");
+    }, [])
 
 
     return (
@@ -53,7 +55,7 @@ const SellForm = () => {
                                     bg: "blue.50",
                                     border: "1px solid rgba(85, 91, 255, 0.236)",
                                     borderRadius: "18px",
-                                }} 
+                                }}
                             >
                                 Sell
                             </Tab>
@@ -98,8 +100,8 @@ const SellForm = () => {
                                                 bg: "blue.50",
                                                 border: "1px solid rgba(85, 91, 255, 0.236)",
                                                 borderRadius: "18px",
-                                            }} 
-                                            onClick={()=>setTypeOf("Commercial")}
+                                            }}
+                                            onClick={() => setTypeOf("Commercial")}
                                         >
                                             Commercial
                                         </Tab>
@@ -510,32 +512,35 @@ const SellForm = () => {
                             </TabPanel>
                         </TabPanels>
                     </Tabs>
-                </Box> 
-                
-                {/* Flat/Apartment */} 
-                { type=="sell" && look=="Flat/Apartment" && <FlatAppartment />} 
-                
+                </Box>
+
+                {/* Flat/Apartment */}
+                {type == "sell" && look == "Flat/Apartment" && <FlatAppartment />}
+
                 {/* Independent House/villa */}
-                { type=="sell" && look=="Independent House/villa" && <IndependentHouse />}  
-                
-                {/* Independent/builder Floor */}  
-                {type=="sell" && look=="Independent/builder Floor" && <Independentbuilder />}  
+                {type == "sell" && look == "Independent House/villa" && <IndependentHouse />}
+
+                {/* Independent/builder Floor */}
+                {type == "sell" && look == "Independent/builder Floor" && <Independentbuilder />}
 
 
-                {/* Serviced Apartment */} 
-                {type=="sell" && look=="Serviced Apartment" && <ServicedApartment />}  
-                
-                {/* 1 RK/ Studio Apartment */} 
-                {type=="sell" && look=="1 RK/ Studio Apartment" && <RKStudio /> } 
+                {/* Serviced Apartment */}
+                {type == "sell" && look == "Serviced Apartment" && <ServicedApartment />}
 
-                 {/* Serviced Apartment */}  
-                 {type=="sell" && look=="Farmhouse" && <FarmHouse />} 
+                {/* 1 RK/ Studio Apartment */}
+                {type == "sell" && look == "1 RK/ Studio Apartment" && <RKStudio />}
 
-                 {/* Plot/Land */} 
-                 {type=="sell" && look=="Plot/Land" && <PlotLand /> } 
+                {/* Serviced Apartment */}
+                {type == "sell" && look == "Farmhouse" && <FarmHouse />}
 
-                 {/* OfficeSetup */} 
-                 {type=="sell" && look=="Office" && <OfficeSetup />}
+                {/* Plot/Land */}
+                {type == "sell" && look == "Plot/Land" && <PlotLand />}
+
+                {/* OfficeSetup */}
+                {type == "sell" && look == "Office" && <OfficeSetup />}
+
+                {/* Retail */}  
+                {type === "sell" && look === "Retail" && <Rent />} 
 
             </Box>
             <Box backgroundColor={"rgb(232, 244, 255)"} borderRadius={10}></Box>

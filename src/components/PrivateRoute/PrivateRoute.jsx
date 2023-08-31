@@ -17,16 +17,16 @@ const PrivateRoute = ({ children }) => {
 
     if (isAuth) {
         return children
-    } else {
+    } else {   
         toast({ 
             title: 'Login Please',
             description: "Login is required to post a property",
             status: 'info',
-            duration: 3000, 
-            position: 'top-left',
+            duration: 1500, 
+            position: 'top-left', 
           })
         return <Navigate to="/login" onpage={page} /> 
-    }
+    } 
   
   }
 

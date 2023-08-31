@@ -19,7 +19,7 @@ import { Checkbox } from "@chakra-ui/react";
 import style from "./PlotLand.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { CleanInputText } from "../code";
+import { CleanInputText } from "../../code";
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
 

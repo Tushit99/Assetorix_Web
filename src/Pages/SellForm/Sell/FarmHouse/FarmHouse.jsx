@@ -18,9 +18,9 @@ import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { Checkbox } from "@chakra-ui/react";
 import style from "./FarmHouse.module.css";
 import axios from "axios";
-import { useSelector } from "react-redux";
-import { CleanInputText } from "../code";
+import { useSelector } from "react-redux"; 
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+import { CleanInputText } from '../../code'; 
 
 
 const FarmHouse = () => {
@@ -1441,6 +1441,7 @@ const FarmHouse = () => {
                         Price Negotiable
                     </Checkbox>
                 </Box>
+                {/* Additional Pricing Detail (Optional) */}
                 <Box display={"grid"}>
                     <Heading as={"h4"} size={"sm"} margin={"10px 0"} fontWeight={700} textAlign={"left"}>
                         Additional Pricing Detail (Optional)
@@ -1468,7 +1469,7 @@ const FarmHouse = () => {
                         onClick={() => setAdditionalPrice(!additionalPrice)}
                         textAlign={"left"}>
                         {additionalPrice ? <IoIosArrowUp style={{ display: "inline" }} /> : <IoIosArrowDown style={{ display: "inline" }} />} Add more pricing details
-                    </Heading>
+                    </Heading> 
                 </Box>
                 <Box>
                     <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
@@ -1499,7 +1500,7 @@ const FarmHouse = () => {
                 </Heading>
                 <Box>
                     <button
-                        className={
+                        className={  
                             amenities.includes("Maintenance Staff") ? style.setbtn : style.btn
                         }
                         onClick={handleAminities}
@@ -1510,7 +1511,7 @@ const FarmHouse = () => {
                     <button
                         className={
                             amenities.includes("Water Storage") ? style.setbtn : style.btn
-                        }
+                        } 
                         onClick={handleAminities}
                         value={"Water Storage"}
                     >

@@ -16,13 +16,14 @@ import {
 } from "@chakra-ui/react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { Checkbox } from "@chakra-ui/react";
-import style from "./Independentbuilder.module.css";
+import style from "./RKStudio.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { CleanInputText } from "../code";
+import { CleanInputText } from "../../code";
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
-const Independentbuilder = () => {
+
+const RKStudio = () => {
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
@@ -33,8 +34,8 @@ const Independentbuilder = () => {
     const [state, setState] = useState("");
     const [locality, setLocality] = useState("");
     const [houseNo, setHouseNo] = useState("");
-    const [bedroom, setBedRoom] = useState(0);
-    const [bathroom, setBathroom] = useState(0);
+    const [bedroom, setBedRoom] = useState(1);
+    const [bathroom, setBathroom] = useState(1);
     const [balconey, setBalcony] = useState(0);
     const [parking, setParking] = useState(0);
     const [openparking, setOpenparking] = useState(0);
@@ -76,9 +77,9 @@ const Independentbuilder = () => {
     const [additionalPrice, setAdditionalPrice] = useState(false);
     const [maintenancePrice, setMaintenancePrice] = useState("");
     const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
-    const [expectedRentel, setExpectedRentel] = useState("");
     const [bookingAmount, setBookingAmount] = useState("");
-    const [annualDuesPayble, setAnnualDuesPayble] = useState("");
+    const [annualDuesPayable, setAnnualDuesPayable] = useState("");
+    const [membershipCharge, setMembershipCharge] = useState("");
 
 
     const handleSubmitData = async (e) => {
@@ -86,7 +87,7 @@ const Independentbuilder = () => {
         let obj = {
             lookingFor: "Sell",
             propertyGroup: "Residential",
-            propertyType: "Independent / Builder Floor",
+            propertyType: "1RK / Studio Apartment",
             address: {
                 apartmentName: appartment,
                 houseNumber: houseNo,
@@ -123,18 +124,18 @@ const Independentbuilder = () => {
             plotAreaUnit: areaPer,
             parking: {
                 openParking: openparking.toString(),
-                closeParking: parking.toString(),  
-            }, 
+                closeParking: parking.toString(),
+            },
             otherRoom: extraroom,
             description: desc,
-            countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`, 
-            additionalPricingDetails :{
+            countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
+            additionalPricingDetails: {
                 maintenancePrice,
-                maintenanceTimePeriod,
-                expectedRental:expectedRentel,
+                maintenanceTimePeriod, 
                 bookingAmount,
-                annualDuesPayable:annualDuesPayble 
-            }, 
+                annualDuesPayable,
+                membershipCharge
+            },
         };
 
         const showToastError = (message) => {
@@ -622,24 +623,44 @@ const Independentbuilder = () => {
                 <Box as={"div"} className={style.inp_form_numbers}>
                     <Box textAlign={"left"} >
                         <Text> No. of Bedrooms </Text>
-                        <NumberInput>
+                        <NumberInput value={bedroom}>
                             <NumberInputField
                                 variant="flushed"
                                 padding={"0 2px"}
-                                onChange={(e) => setBedRoom(e.target.value)}
-                                value={bedroom}
-                                required
+                                readOnly 
+                                border={0}
+                                onClick={() => {
+                                    toast({
+                                        title: 'Pre-defined',
+                                        description: "value modification not allowed",
+                                        status: 'info',
+                                        duration: 2000, 
+                                        position: 'top-right',  
+                                        isClosable: true,
+                                    })
+                                }}
+                            // value={bedroom}
                             />
                         </NumberInput>
                     </Box>
                     <Box textAlign={"left"}>
                         <Text> No. of Bathrooms </Text>
-                        <NumberInput>
+                        <NumberInput value={bathroom}>
                             <NumberInputField
                                 variant="flushed"
-                                onChange={(e) => setBathroom(e.target.value)}
+                                readOnly 
+                                border={0}
+                                onClick={() => {
+                                    toast({
+                                        title: 'Pre-defined',
+                                        description: "value modification not allowed",
+                                        status: 'info',
+                                        duration: 2000,
+                                        position: 'top-right', 
+                                        isClosable: true 
+                                    })
+                                }}
                                 value={bathroom}
-                                required
                                 padding={"0 2px"}
                             />
                         </NumberInput>
@@ -1199,7 +1220,7 @@ const Independentbuilder = () => {
                             <option value="Lower Ground">Lower Ground</option>
                             {Array.from(Array(Number(totalfloors)).keys()).map((e) => {
                                 return <option value={e + 1}>{e + 1}</option>
-                            })} 
+                            })}
                         </Select>
                     </Box>
                 </Box>
@@ -1477,9 +1498,9 @@ const Independentbuilder = () => {
                         </Select>
                     </InputGroup>
                     {additionalPrice && <>
-                        <Input type="text" w={"300px"} value={expectedRentel} onChange={(e) => setExpectedRentel(e.target.value)} placeholder="Expected rental" margin={"0"} />
                         <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-                        <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
+                        <Input type="text" w={"300px"} value={annualDuesPayable} onChange={(e) => setAnnualDuesPayable(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
+                        <Input type="text" w={"300px"} value={membershipCharge} onChange={(e) => setMembershipCharge(e.target.value)} placeholder="Membership charge" margin={"10px 0 0 0"} />
                     </>
                     }
                     <Heading
@@ -1542,21 +1563,21 @@ const Independentbuilder = () => {
                     </button>
                     <button
                         className={
-                            amenities.includes("Waste Disposal") ? style.setbtn : style.btn
+                            amenities.includes("Security / Fire Alarm") ? style.setbtn : style.btn
                         }
                         onClick={handleAminities}
-                        value={"Waste Disposal"}
+                        value={"Security / Fire Alarm"}
                     >
-                        Waste Disposal
+                        Security / Fire Alarm
                     </button>
                     <button
                         className={
-                            amenities.includes("Rain Water Harvesting") ? style.setbtn : style.btn
+                            amenities.includes("Security Personnel") ? style.setbtn : style.btn
                         }
                         onClick={handleAminities}
-                        value={"Rain Water Harvesting"}
+                        value={"Security Personnel"}
                     >
-                        Rain Water Harvesting
+                        Security Personnel
                     </button>
                     <button
                         className={
@@ -1586,11 +1607,11 @@ const Independentbuilder = () => {
                         Feng Shui / Vaastu Compliant
                     </button>
                     <button
-                        className={amenities.includes("Piped-gas") ? style.setbtn : style.btn}
+                        className={amenities.includes("Lift") ? style.setbtn : style.btn}
                         onClick={handleAminities}
-                        value={"Piped-gas"}
+                        value={"Lift"}
                     >
-                        Piped-gas
+                        Lift(s)
                     </button>
                 </Box>
             </Box>
@@ -1626,6 +1647,29 @@ const Independentbuilder = () => {
                     </button>
                     <button
                         className={
+                            propertyFeatures.includes("Piped-gas")
+                                ? style.setbtn
+                                : style.btn
+                        }
+                        value={"Piped-gas"}
+                        onClick={handlePropertyFeature}
+                    >
+
+                        Piped-gas
+                    </button>
+                    <button
+                        className={
+                            propertyFeatures.includes("Water purifier")
+                                ? style.setbtn
+                                : style.btn
+                        }
+                        value={"Water purifier"}
+                        onClick={handlePropertyFeature}
+                    >
+                        Water purifier
+                    </button>
+                    <button
+                        className={
                             propertyFeatures.includes("Internet / wi-fi connectivity")
                                 ? style.setbtn
                                 : style.btn
@@ -1646,17 +1690,6 @@ const Independentbuilder = () => {
                         onClick={handlePropertyFeature}
                     >
                         Intercom Facility
-                    </button>
-                    <button
-                        className={
-                            propertyFeatures.includes("Security/ Fire Alarm")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        value={"Security/ Fire Alarm"}
-                        onClick={handlePropertyFeature}
-                    >
-                        Security/ Fire Alarm
                     </button>
                     <button
                         className={
@@ -1734,14 +1767,14 @@ const Independentbuilder = () => {
                 <Box>
                     <button
                         className={
-                            buildingFeature.includes("Lift")
+                            buildingFeature.includes("water softening plant")
                                 ? style.setbtn
                                 : style.btn
                         }
                         onClick={HandleBuildingFeature}
-                        value={"Lift"}
+                        value={"water softening plant"}
                     >
-                        Lift(s)
+                        water softening plant
                     </button>
                     <button
                         className={
@@ -1752,7 +1785,6 @@ const Independentbuilder = () => {
                         onClick={HandleBuildingFeature}
                         value={"Fitness Centre / GYM"}
                     >
-
                         Fitness Centre / GYM
                     </button>
                     <button
@@ -1764,7 +1796,6 @@ const Independentbuilder = () => {
                         onClick={HandleBuildingFeature}
                         value={"Swimming Pool"}
                     >
-
                         Swimming Pool
                     </button>
                     <button
@@ -1776,20 +1807,18 @@ const Independentbuilder = () => {
                         onClick={HandleBuildingFeature}
                         value={"Club house / Community Center"}
                     >
-
                         Club house / Community Center
                     </button>
                     <button
                         className={
-                            buildingFeature.includes("Security Personnel")
+                            buildingFeature.includes("Shopping Centre")
                                 ? style.setbtn
                                 : style.btn
                         }
                         onClick={HandleBuildingFeature}
-                        value={"Security Personnel"}
+                        value={"Shopping Centre"}
                     >
-
-                        Security Personnel
+                        Shopping Centre
                     </button>
                 </Box>
             </Box>
@@ -1801,15 +1830,36 @@ const Independentbuilder = () => {
                 <Box>
                     <button
                         className={
-                            additinalft.includes("Separate entry for sevant room")
+                            additinalft.includes("Separate entry for servant room")
                                 ? style.setbtn
                                 : style.btn
                         }
-                        value={"Separate entry for sevant room"}
+                        value={"Separate entry for servant room"}
                         onClick={handleAdditionalFeature}
                     >
-
-                        Separate entry for sevant room
+                        Separate entry for servant room
+                    </button>
+                    <button
+                        className={
+                            additinalft.includes("Waste Disposal")
+                                ? style.setbtn
+                                : style.btn
+                        }
+                        value={"Waste Disposal"}
+                        onClick={handleAdditionalFeature}
+                    >
+                        Waste Disposal
+                    </button>
+                    <button
+                        className={
+                            additinalft.includes("Rain Water Harvesting")
+                                ? style.setbtn
+                                : style.btn
+                        }
+                        value={"Rain Water Harvesting"}
+                        onClick={handleAdditionalFeature}
+                    >
+                        Rain Water Harvesting
                     </button>
                     <button
                         className={
@@ -2306,6 +2356,5 @@ const Independentbuilder = () => {
     );
 };
 
-export default Independentbuilder;
-
+export default RKStudio;
 
