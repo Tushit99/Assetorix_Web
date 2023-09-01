@@ -713,7 +713,7 @@ const ReadyToMove = () => {
                                     onClick={(e) => {
                                         e.preventDefault();
                                         setSharedWashroom((prev) => prev - 1);
-                                    }}
+                                    }} 
                                     className={sharedWashroom == 0 ? style.washroom_hide : style.washroom_dec}
                                     disabled={sharedWashroom == 0}
                                 >

@@ -26,18 +26,17 @@ import { CleanInputText } from "../../../code";
 import axios from "axios";
 
 
-const CommercialShowroom = () => {
+const CommercialShop = () => {
     const isCountry = useSelector((state) => state.gloalval);
     const [located, setLocated] = useState("");
     const toast = useToast();
     const [country, setCountry] = useState("");
     const [facingwidth, setFacingWidth] = useState("");
     const [city, setCity] = useState("");
-    const [appartment, setApartment] = useState("");
     const [pincode, setPincode] = useState(0);
     const [state, setState] = useState("");
     const [locality, setLocality] = useState("");
-    const [houseNo, setHouseNo] = useState("");
+    const [type, setType] = useState("");
     const [locatedNear, setlocatedNear] = useState([]);
     const [areaPer, setAreaPer] = useState("sq.ft");
     const [entranceWidth, setentranceWidth] = useState("");
@@ -52,8 +51,6 @@ const CommercialShowroom = () => {
     const [propertyFeatures, setPropertyFeature] = useState("");
     const [buildingFeature, setBuildingFeature] = useState([]);
     const [additinalft, setAdditinalFeature] = useState([]);
-    const [watersource, setWaterSource] = useState([]);
-    const [overLook, setoverlook] = useState([]);
     const [otherFeature, setOtherFeature] = useState([]);
     const [propertyFacing, setPropertyFacing] = useState("");
     const [facing, setFacing] = useState("Meter");
@@ -63,13 +60,34 @@ const CommercialShowroom = () => {
     const [desc, setDesc] = useState("");
     const [pincollection, setPinCollection] = useState([]);
     const [ceilingHeight, setceilingHeight] = useState("");
-    const [parkingType, setParkingType] = useState(["no"]);
+    const [parking, setParking] = useState("");
+    const [parkingType, setParkingType] = useState([]);
     const [preLeased, setPreLeased] = useState("");
     const [fireSafty, setFireSafty] = useState([]);
-
-
+    const [entranceWidthUnit, setentranceWidthUnit] = useState("");
+    const [ceilingHeightUnit, setceilingHeightUnit] = useState("");
+    const [floorOn, setFloorOn] = useState("Ground");
+    const [suitableFor, setsuitableFor] = useState([]);
+    const [maintenancePrice, setMaintenancePrice] = useState("");
+    const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
+    const [bookingAmount, setBookingAmount] = useState("");
+    const [additionalPrice, setAdditionalPrice] = useState(false);
+    const [currentRentPerMonth, setCurrentRentPerMonth] = useState("");
+    const [leaseTenureInYear, setLeaseTenureInYear] = useState("");
+    const [annualRentIncrease, setAnnualRentIncrease] = useState("");
+    const [businessType, setBusinessType] = useState("");
+    const [washroomType, setWashroomType] = useState("");
+    const [privateWashroom, setPrivateWashroom] = useState(0);
+    const [sharedWashroom, setSharedWashroom] = useState(0);
+    const [investorsTendGuarantee, setinvestorsTendGuarantee] = useState("");
+    const [investorsTendReturn, setinvestorsTendReturn] = useState("");
+    const [assuredReturns, setAssuredReturns] = useState("");
+    const [leaseGuarantee, setLeaseGuarantee] = useState("");
 
     // please don'nt change any function without any prior knowledge 
+
+    // submit function
+
 
     const handleSubmitData = async (e) => {
         e.preventDefault();
@@ -77,36 +95,52 @@ const CommercialShowroom = () => {
             lookingFor: "Sell",
             propertyGroup: "Commercial",
             propertyType: "Retail",
-            retailSpaceType: "Commercial Showrooms",
-            locatedInside: located,  
+            retailSpaceType: "Commercial Shops",
             address: {
-                apartmentName: appartment,
-                houseNumber: houseNo,
+                type: type,
                 locality,
                 pincode,
                 city,
                 state,
                 country,
-            },
+            }, 
             ownership,
             price: +pricedetail,
             priceUnit: +priceSqr,
+            floorOn,
+            totalFloors: +totalfloors,
+            locatedNear,
             inclusivePrices,
             amenities,
+            locatedInside: located,
             propertyFeatures,
             society_buildingFeatures: buildingFeature,
             additionalFeatures: additinalft,
-            waterSources: watersource,
             otherFeatures: otherFeature,
-            overLookings: overLook,
+            fireSafety: fireSafty,
             propertyFacing,
+            washrooms: washroomType,
+            parking: parking,
+            preLeased_Rented: preLeased,
             roadFacingWidth: facingwidth,
+            suitableFor: suitableFor,
             roadFacingWidthType: facing,
-            totalFloors: +totalfloors,
-            plotArea,
-            plotAreaUnit: areaPer,
+            shopFacedSize: {
+                entranceWidth: entranceWidth,
+                entranceWidthUnit,
+                ceilingHeight,
+                ceilingHeightUnit: ceilingHeightUnit
+            },
+            carpetArea: plotArea,
+            carpetAreaUnit: areaPer,
             description: desc,
-            countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`
+            countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
+            additionalPricingDetails: {
+                maintenancePrice,
+                maintenanceTimePeriod,
+                bookingAmount,
+            },
+            locationAdv: locationAdv
         };
 
         const showToastError = (message) => {
@@ -129,10 +163,6 @@ const CommercialShowroom = () => {
             showToastError('Provide Price Per sq.ft');
         } else if (!additinalft) {
             showToastError('Provide Property description');
-        } else if (!watersource) {
-            showToastError('Provide Water Source');
-        } else if (!overLook) {
-            showToastError('Provide Overlooking');
         } else if (!propertyFacing) {
             showToastError('Provide Property Facing');
         } else if (!facing) {
@@ -141,24 +171,17 @@ const CommercialShowroom = () => {
             showToastError('Provide Total Floors');
         } else if (!facingwidth) {
             showToastError("Provide facing width")
-        }
-
-        if (locationAdv) {
-            obj["locationAdv"] = locationAdv
-        }
+        } 
 
         if (
             city &&
-            appartment &&
             locality &&
-            houseNo &&
+            type &&
             ownership &&
             pricedetail &&
             priceSqr &&
             inclusivePrices &&
             additinalft &&
-            watersource &&
-            overLook &&
             propertyFacing &&
             facing &&
             totalfloors
@@ -179,16 +202,46 @@ const CommercialShowroom = () => {
                 return
             }
 
+            if (investorsTendGuarantee || investorsTendReturn) {
+                let investorLookFor = {
+                    assuredReturns,
+                    leaseGuarantee
+                }
+                obj["investorLookFor"] = investorLookFor;
+            }
+
+            if (preLeased == "Yes") {
+                let preLeased_RentedDetails = {
+                    currentRentPerMonth,
+                    leaseTenureInYear,
+                    annualRentIncrease,
+                    businessType
+                }
+                obj["preLeased_RentedDetails"] = preLeased_RentedDetails
+            }
+
+            if (washroomType == "Available") {
+                let washroomDetails = {
+                    privateWashrooms: privateWashroom,
+                    sharedWashrooms: sharedWashroom,
+                }
+                obj["washroomDetails"] = washroomDetails;
+            }
 
             if (availability == "Ready to move" && fromyear != "") {
                 obj["propertyStatus"] = fromyear;
                 obj["availabilityStatus"] = availability;
             }
+
             if (availability == "Under construction" && expectedyear != "") {
                 obj["expectedByYear"] = expectedyear;
                 obj["availabilityStatus"] = availability;
-
             }
+
+            if (parking == "Available") {
+                obj["parkingType"] = parkingType;
+            }
+
             // else {
             try {
                 // let response = await fetch("http://localhost:4500/property/", {
@@ -197,7 +250,7 @@ const CommercialShowroom = () => {
                 //     body: JSON.stringify(obj)
                 // });
                 // let data = await response.json();  
-                // console.log("data",data); 
+                console.log("data", obj); 
                 await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
                     .then((e) => {
                         toast({
@@ -229,6 +282,7 @@ const CommercialShowroom = () => {
         }
     };
 
+    // pincode of 3 letter
     const handlepinfetch = (e) => {
         setPincode(e.target.value);
         if (e.target.value.length == 6) {
@@ -239,7 +293,7 @@ const CommercialShowroom = () => {
         }
     }
 
-
+    // pincode to fetch data  
     const pinfetch = async (pin) => {
         try {
             console.log(pin);
@@ -396,6 +450,7 @@ const CommercialShowroom = () => {
         setlocatedNear(newarr);
 
     }
+
     const handlefireSafty = (e) => {
         e.preventDefault();
         let newarr = [...fireSafty];
@@ -412,21 +467,32 @@ const CommercialShowroom = () => {
 
     const handleparkingType = (e) => {
         e.preventDefault();
-        if (e.target.value == "Not Available") {
-            setParkingType([]);
-        }
-        else {
-            let newarr = [...parkingType];
-            let value = e.target.value;
 
-            if (newarr.includes(value)) {
-                newarr.splice(newarr.indexOf(value), 1);
-            } else {
-                newarr.push(value);
-            }
-            console.log(newarr);
-            setParkingType(newarr);
+        let newarr = [...parkingType];
+        let value = e.target.value;
+
+        if (newarr.includes(value)) {
+            newarr.splice(newarr.indexOf(value), 1);
+        } else {
+            newarr.push(value);
         }
+        console.log(newarr);
+        setParkingType(newarr);
+
+    }
+
+
+    const handlebusinessType = (e) => {
+        e.preventDefault();
+        let newarr = [...suitableFor];
+        let value = e.target.value;
+
+        if (newarr.includes(value)) {
+            newarr.splice(newarr.indexOf(value), 1);
+        } else {
+            newarr.push(value);
+        }
+        setsuitableFor(newarr);
     }
 
 
@@ -443,7 +509,7 @@ const CommercialShowroom = () => {
                     <button value={"Other"} className={located == "Other" ? style.setbtn : style.btn} onClick={(e) => setLocated(e.target.value)} > Other </button>
                 </Box>
             </Box>
-            <Box>
+            <Box display={located == "" ? "none" : "block"}>
                 <form onSubmit={handleSubmitData}>
                     {/* property location */}
                     <Box className={style.location_form}>
@@ -455,20 +521,10 @@ const CommercialShowroom = () => {
                             type="text"
                             padding={"0 10px"}
                             required
-                            placeholder="House No. (optional)"
-                            value={houseNo}
-                            onChange={(e) => setHouseNo(e.target.value)}
+                            placeholder={`${located} (optional)`}
+                            value={type}
+                            onChange={(e) => setType(e.target.value)}
                             fontSize={"md"}
-                            variant="flushed"
-                        />
-                        <Input
-                            type="text"
-                            padding={"0 10px"}
-                            required
-                            placeholder="Apartment / Society"
-                            fontSize={"md"}
-                            value={appartment}
-                            onChange={(e) => setApartment(e.target.value)}
                             variant="flushed"
                         />
                         <NumberInput>
@@ -548,12 +604,12 @@ const CommercialShowroom = () => {
                             Tell us about your property
                         </Heading>
                         {/* ====================================== */}
-                        {/* add area details */}
+                        {/* ============================ add area details ============================ */}
                         <Box textAlign={"left"} padding={"10px 0"}>
                             <Heading as={"h3"} margin={"5px 0"} size={"md"}>
                                 Add Area Details
                             </Heading>
-                            <Text margin={"5px 0"}> Atleast one area type is mandatory </Text>
+                            <Text margin={"5px 0"}> Carpet area is mandatory </Text>
                             <ButtonGroup
                                 className={style.select_land}
                                 size="sm"
@@ -600,21 +656,109 @@ const CommercialShowroom = () => {
                             <Heading as={"h3"} size={"sm"} > Shop facade size (Optional) </Heading>
                             <Box display={"flex"} w={"300px"} margin={"10px 0"}>
                                 <Input type="text" placeholder={"Entrance width"} flex={5} borderRadius={0} value={entranceWidth} onChange={handleEntranceWidth} />
-                                <Select borderRadius={0} borderLeft={0} flex={3} >
+                                <Select borderRadius={0} borderLeft={0} flex={3} value={entranceWidthUnit} onChange={(e) => setentranceWidthUnit(e.target.value)} >
                                     <option value="ft">ft.</option>
                                     <option value="mt">mt.</option>
                                 </Select>
                             </Box>
                             <Box display={"flex"} w={"300px"} margin={"10px 0"}>
                                 <Input type="text" placeholder={"Ceiling Height"} flex={5} borderRadius={0} value={ceilingHeight} onChange={handleCeilingHeight} />
-                                <Select borderRadius={0} borderLeft={0} flex={3} >
+                                <Select borderRadius={0} borderLeft={0} flex={3} value={ceilingHeightUnit} onChange={(e) => setceilingHeightUnit(e.target.value)}  >
                                     <option value="ft">ft.</option>
                                     <option value="mt">mt.</option>
                                 </Select>
                             </Box>
                         </Box>
 
-                        {/* floor details */}
+                        {/* washrooms */}
+                        <Box padding={"10px 0 8px 0"} display={"grid"} >
+                            <Heading textAlign={"left"} as={"h3"} size={"md"}>
+                                Washrooms
+                            </Heading>
+                            <Box display={"grid"} padding={"10px 0 8px 0"} gridTemplateColumns={"repeat(1,1fr)"} gap={2}>
+                                <Box display={"flex"} gap={10}>
+                                    <button
+                                        value={"Available"}
+                                        margin="auto"
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            setWashroomType(e.target.value);
+                                        }}
+                                        className={
+                                            washroomType === "Available" ? style.setbtn : style.btn
+                                        }
+                                    >
+                                        Available
+                                    </button>
+                                    <button
+                                        value={"Not-Available"}
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            setWashroomType(e.target.value);
+                                        }}
+                                        className={
+                                            washroomType === "Not-Available" ? style.setbtn : style.btn
+                                        }
+                                    >
+                                        Not-Available
+                                    </button>
+                                </Box>
+                                <Box display={washroomType == "Available" ? "block" : "none"} >
+                                    <Box display={"flex"} w={340} alignItems={"center"} margin={"10px"}>
+                                        <Text flex={8} textAlign={"left"}>
+                                            No. of Private Washrooms
+                                        </Text>
+                                        <button
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                setPrivateWashroom((prev) => prev - 1);
+                                            }}
+                                            className={privateWashroom == 0 ? style.washroom_hide : style.washroom_dec}
+                                            disabled={privateWashroom == 0}
+                                        >
+                                            <MinusIcon fontSize={"12px"} />
+                                        </button>
+                                        <Text flex={1}>{privateWashroom}</Text>
+                                        <button
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                setPrivateWashroom((prev) => prev + 1);
+                                            }}
+                                            className={style.washroom_dec}
+                                        >
+                                            <AddIcon fontSize={"12px"} />
+                                        </button>
+                                    </Box>
+                                    <Box display={"flex"} w={340} alignItems={"center"} margin={"10px"}>
+                                        <Text flex={8} textAlign={"left"}>
+                                            No. of Shared Washrooms
+                                        </Text>
+                                        <button
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                setSharedWashroom((prev) => prev - 1);
+                                            }}
+                                            className={sharedWashroom == 0 ? style.washroom_hide : style.washroom_dec}
+                                            disabled={sharedWashroom == 0}
+                                        >
+                                            <MinusIcon fontSize={"12px"} />
+                                        </button>
+                                        <Text flex={1}>{sharedWashroom}</Text>
+                                        <button
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                setSharedWashroom((prev) => prev + 1);
+                                            }}
+                                            className={style.washroom_dec}
+                                        >
+                                            <AddIcon fontSize={"12px"} />
+                                        </button>
+                                    </Box>
+                                </Box>
+                            </Box>
+                        </Box>
+
+                        {/* ============================ floor details ============================ */}
                         <Box textAlign={"left"}>
                             <Heading
                                 as={"h3"}
@@ -655,10 +799,36 @@ const CommercialShowroom = () => {
                                         w={180}
                                     />
                                 </NumberInput>
+                                <Select
+                                    id="floorSelectTag"
+                                    variant="filled"
+                                    onChange={(e) => setFloorOn(e.target.value)}
+                                    value={floorOn}
+                                    w={180}
+                                    borderRadius={0}
+                                    _hover={{
+                                        backgroundColor: "rgb(255, 255, 255)",
+                                        borderBottom: "1px solid blue",
+                                        borderLeft: "0",
+                                        borderRight: "0",
+                                        borderTop: "0",
+                                    }}
+                                    borderTop={"0"}
+                                    borderLeft={"0"}
+                                    borderBottom={"1px solid blue"}
+                                    backgroundColor={"rgb(255, 255, 255)"}
+                                >
+                                    <option value="Ground">Ground</option>
+                                    <option value="Basement">Basement</option>
+                                    <option value="Lower Ground">Lower Ground</option>
+                                    {Array.from(Array(Number(totalfloors)).keys()).map((e) => {
+                                        return <option value={e + 1}>{e + 1}</option>
+                                    })}
+                                </Select>
                             </Box>
                         </Box>
 
-                        {/* Located Near (optional) */}
+                        {/* ============================ Located Near (optional) ============================ */}
                         <Box className={style.optional_box}>
                             <Heading as={"h3"} size={"md"} > Located Near (Optional) </Heading>
                             <Box>
@@ -668,18 +838,27 @@ const CommercialShowroom = () => {
                             </Box>
                         </Box>
 
-                        {/* Parking Type */}
+                        {/* ============================ Parking Type ============================ */}
                         <Box className={style.optional_box}>
                             <Heading as={"h3"} size={"md"} > Parking Type </Heading>
                             <Box>
+                                <button value={"Available"} className={parking == "Available" ? style.setbtn : style.btn} onClick={(e) => {
+                                    e.preventDefault();
+                                    setParking(e.target.value)
+                                }}>Available</button>
+                                <button value={"Not-Available"} className={parking == "Not-Available" ? style.setbtn : style.btn} onClick={(e) => {
+                                    e.preventDefault();
+                                    setParking(e.target.value)
+                                }}>Not-Available</button>
+                            </Box>
+                            <Box display={parking == "Available" ? "flex" : "none"} flexWrap={"wrap"} gap={4}>
                                 <button value={"Private Parking"} onClick={handleparkingType} className={parkingType.includes("Private Parking") ? style.setbtn : style.btn} > Private Parking </button>
                                 <button value={"Public Parking"} onClick={handleparkingType} className={parkingType.includes("Public Parking") ? style.setbtn : style.btn} > Public Parking </button>
                                 <button value={"Multilevel Parking"} onClick={handleparkingType} className={parkingType.includes("Multilevel Parking") ? style.setbtn : style.btn} > Multilevel Parking </button>
-                                <button value={"Not Available"} onClick={handleparkingType} className={parkingType.length == 0 ? style.setbtn : style.btn} > Not Available </button>
                             </Box>
                         </Box>
 
-                        {/* Availability status */}
+                        {/* ================= Availability status ============================ */}
                         <Box textAlign={"left"} className={style.optional_box}>
                             <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
                                 Availability Status
@@ -713,7 +892,7 @@ const CommercialShowroom = () => {
                                 </button>
                             </Box>
                         </Box>
-                        {/* Age of Property */}
+                        {/* ================= Age of Property ============================ */}
                         {availability == "Ready to move" && (
                             <Box textAlign={"left"} className={style.optional_box}>
                                 <Heading
@@ -797,7 +976,7 @@ const CommercialShowroom = () => {
                             </Box>
                         )}
 
-                        {/* Suitable for business types */}
+                        {/* ============================ Suitable for business types ============================ */}
                         <Box textAlign={"left"}>
                             <Heading as={"h2"} margin={"10px 0"} size={"md"} > Suitable for business types </Heading>
                             <Box>
@@ -805,37 +984,37 @@ const CommercialShowroom = () => {
                                     <MenuButton as={Button} borderRadius={0} rightIcon={<ChevronDownIcon />}>
                                         Select business type
                                     </MenuButton>
-                                    <MenuList display={"grid"} borderRadius={0} marginTop={"-8px"} overflowY={"scroll"} h={"200px"} padding={"4px 10px"}>
-                                        <Checkbox value={"ATM"} className={style.select} > ATM </Checkbox>
-                                        <Checkbox value={"Bakery"} className={style.select} > Bakery </Checkbox>
-                                        <Checkbox value={"Boutique"} className={style.select} > Boutique </Checkbox>
-                                        <Checkbox value={"Clinic"} className={style.select} > Clinic </Checkbox>
-                                        <Checkbox value={"Clothes"} className={style.select} > Clothes </Checkbox>
-                                        <Checkbox value={"Cloud Kitchen"} className={style.select} > Cloud Kitchen </Checkbox>
-                                        <Checkbox value={"Coffee"} className={style.select} > Coffee </Checkbox>
-                                        <Checkbox value={"Dental Clinic"} className={style.select} > Dental Clinic </Checkbox>
-                                        <Checkbox value={"Fast Food"} className={style.select} > Fast Food </Checkbox>
-                                        <Checkbox value={"Footwear"} className={style.select} > Footwear </Checkbox>
-                                        <Checkbox value={"Gym"} className={style.select} > Gym </Checkbox>
-                                        <Checkbox value={"Jewellery"} className={style.select} > Jewellery </Checkbox>
-                                        <Checkbox value={"Juice"} className={style.select} > Juice </Checkbox>
-                                        <Checkbox value={"Meat"} className={style.select} > Meat </Checkbox>
-                                        <Checkbox value={"Medical"} className={style.select} > Medical </Checkbox>
-                                        <Checkbox value={"Mobile"} className={style.select} > Mobile </Checkbox>
-                                        <Checkbox value={"Pub/Bar"} className={style.select} > Pub/Bar </Checkbox>
-                                        <Checkbox value={"Restaurants"} className={style.select} > Restaurants </Checkbox>
-                                        <Checkbox value={"Salon/Spa"} className={style.select} > Salon/Spa </Checkbox>
-                                        <Checkbox value={"Mobile"} className={style.select} > Mobile </Checkbox>
-                                        <Checkbox value={"Stationery"} className={style.select} > Stationery </Checkbox>
-                                        <Checkbox value={"Sweet"} className={style.select} > Sweet </Checkbox>
-                                        <Checkbox value={"Tea Stall"} className={style.select} > Tea Stall </Checkbox>
-                                        <Checkbox value={"Other business type"} className={style.select} > Other business type </Checkbox>
+                                    <MenuList display={"grid"} borderRadius={0} marginTop={"-8px"} marginBottom={"-8px"} overflowY={"scroll"} h={"200px"} padding={"4px 10px"}>
+                                        <Checkbox value={"ATM"} className={style.select} onChange={handlebusinessType} > ATM </Checkbox>
+                                        <Checkbox value={"Bakery"} className={style.select} onChange={handlebusinessType} > Bakery </Checkbox>
+                                        <Checkbox value={"Boutique"} className={style.select} onChange={handlebusinessType} > Boutique </Checkbox>
+                                        <Checkbox value={"Clinic"} className={style.select} onChange={handlebusinessType} > Clinic </Checkbox>
+                                        <Checkbox value={"Clothes"} className={style.select} onChange={handlebusinessType} > Clothes </Checkbox>
+                                        <Checkbox value={"Cloud Kitchen"} className={style.select} onChange={handlebusinessType} > Cloud Kitchen </Checkbox>
+                                        <Checkbox value={"Coffee"} className={style.select} onChange={handlebusinessType} > Coffee </Checkbox>
+                                        <Checkbox value={"Dental Clinic"} className={style.select} onChange={handlebusinessType} > Dental Clinic </Checkbox>
+                                        <Checkbox value={"Fast Food"} className={style.select} onChange={handlebusinessType} > Fast Food </Checkbox>
+                                        <Checkbox value={"Footwear"} className={style.select} onChange={handlebusinessType} > Footwear </Checkbox>
+                                        <Checkbox value={"Gym"} className={style.select} onChange={handlebusinessType} > Gym </Checkbox>
+                                        <Checkbox value={"Jewellery"} className={style.select} onChange={handlebusinessType} > Jewellery </Checkbox>
+                                        <Checkbox value={"Juice"} className={style.select} onChange={handlebusinessType} > Juice </Checkbox>
+                                        <Checkbox value={"Meat"} className={style.select} onChange={handlebusinessType} > Meat </Checkbox>
+                                        <Checkbox value={"Medical"} className={style.select} onChange={handlebusinessType} > Medical </Checkbox>
+                                        <Checkbox value={"Mobile"} className={style.select} onChange={handlebusinessType} > Mobile </Checkbox>
+                                        <Checkbox value={"Pub/Bar"} className={style.select} onChange={handlebusinessType} > Pub/Bar </Checkbox>
+                                        <Checkbox value={"Restaurants"} className={style.select} onChange={handlebusinessType} > Restaurants </Checkbox>
+                                        <Checkbox value={"Salon/Spa"} className={style.select} onChange={handlebusinessType} > Salon/Spa </Checkbox>
+                                        <Checkbox value={"Mobile"} className={style.select} onChange={handlebusinessType} > Mobile </Checkbox>
+                                        <Checkbox value={"Stationery"} className={style.select} onChange={handlebusinessType} > Stationery </Checkbox>
+                                        <Checkbox value={"Sweet"} className={style.select} onChange={handlebusinessType} > Sweet </Checkbox>
+                                        <Checkbox value={"Tea Stall"} className={style.select} onChange={handlebusinessType} > Tea Stall </Checkbox>
+                                        <Checkbox value={"Other business type"} className={style.select} onChange={handlebusinessType} > Other business type </Checkbox>
                                     </MenuList>
                                 </Menu>
                             </Box>
                         </Box>
 
-                        {/* Add pricing and details */}
+                        {/* ============================ Add pricing and details ============================ */}
                         <Box>
                             <Heading
                                 as={"h3"}
@@ -901,7 +1080,7 @@ const CommercialShowroom = () => {
                             </Box>
                         </Box>
 
-                        {/* Price Details */}
+                        {/* ============================ Price Details ============================ */}
                         <Box>
                             <Box>
                                 <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
@@ -981,9 +1160,33 @@ const CommercialShowroom = () => {
                                     Price Negotiable
                                 </Checkbox>
                             </Box>
+                            <Box>
+                                {additionalPrice && <>
+                                    <InputGroup w={"300px"} margin={"10px 0"}>
+                                        <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
+                                        <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
+                                            <option value="Monthly">Monthly</option>
+                                            <option value="Yearly">Yearly</option>
+                                        </Select>
+                                    </InputGroup>
+                                    <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
+                                </>
+                                }
+                                <Heading
+                                    as={"h3"}
+                                    size={"sm"}
+                                    margin={"10px 0"}
+                                    color={"#002aff"}
+                                    fontWeight={500}
+                                    cursor={"pointer"}
+                                    onClick={() => setAdditionalPrice(!additionalPrice)}
+                                    textAlign={"left"}>
+                                    {additionalPrice ? <IoIosArrowUp style={{ display: "inline" }} /> : <IoIosArrowDown style={{ display: "inline" }} />} Add more pricing details
+                                </Heading>
+                            </Box>
                         </Box>
 
-                        {/* Is it Pre-leased / Pre-Rented? */}
+                        {/* ============================ Is it Pre-leased / Pre-Rented ? ============================ */}
                         <Box textAlign={"left"}>
                             <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
                                 Is it Pre-leased / Pre-Rented ?
@@ -1001,8 +1204,42 @@ const CommercialShowroom = () => {
                                     setPreLeased(e.target.value);
                                 }} className={preLeased == "No" ? style.setbtn : style.btn} > No </button>
                             </Box>
+                            <Box display={preLeased == "Yes" ? "block" : "none"}>
+                                <Input type="text" value={currentRentPerMonth} onChange={(e) => {
+                                    e.preventDefault();
+                                    setCurrentRentPerMonth(e.target.value);
+                                }} placeholder={"₹ Current rent per month"} />
+                                <Input type="text" value={leaseTenureInYear} onChange={(e) => {
+                                    e.preventDefault();
+                                    setLeaseTenureInYear((e.target.value));
+                                }} placeholder={"Lease tenure in years"} />
+                                <Box>
+                                    <Input type="text" value={annualRentIncrease} onChange={(e) => {
+                                        e.preventDefault();
+                                        setAnnualRentIncrease((e.target.value));
+                                    }} placeholder="Annual rent increase in % (Optional)" />
+                                    <Input type="text" value={businessType} onChange={(e) => {
+                                        e.preventDefault();
+                                        setBusinessType((e.target.value));
+                                    }} placeholder="Leased to - Business Type (Optional)" />
+                                </Box>
+                            </Box>
                         </Box>
 
+                        {/* ============================ Investors tend to look for ============================ */}
+                        <Box>
+                            <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                                Investors tend to look for (Optional)
+                            </Heading>
+                            <Box display={"grid"} width={260} gap={2} >
+                                {investorsTendReturn == "" ? <button className={style.tend_btn} onClick={() => setinvestorsTendReturn("Yes")}>+ Add Assured Returns</button> :
+                                    <Input type="text" placeholder={"Assured Returns"} value={assuredReturns} onChange={(e) => setAssuredReturns(e.target.value)} />}
+                                {investorsTendGuarantee == "" ? <button className={style.tend_btn} onClick={() => setinvestorsTendGuarantee("Yes")}>+ Add Lease Guarantee</button> :
+                                    <Input type="text" placeholder={"Lease guarantee in years"} value={leaseGuarantee} onChange={(e) => setLeaseGuarantee(e.target.value)} />}
+                            </Box>
+                        </Box>
+
+                        {/* ============================ Property unique discription ============================ */}
                         <Box>
                             <Heading as={"h3"} size={"md"} fontWeight={600} margin={"10px 0"} textAlign={"left"}>
                                 What makes your property unique
@@ -1016,7 +1253,7 @@ const CommercialShowroom = () => {
                             }} ></Textarea>
                         </Box>
                     </Box>
-                    {/* Add amenities/unique features */}
+                    {/* ============================ Add amenities/unique features ============================ */}
                     <Box>
                         <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
                             Add amenities/unique features
@@ -1025,7 +1262,7 @@ const CommercialShowroom = () => {
                             All fields on this page are optional
                         </Heading>
                     </Box>
-                    {/* Amenities */}
+                    {/* ============================ Amenities ============================ */}
                     <Box className={style.optional_box}>
                         <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
                             Amenities
@@ -1133,7 +1370,7 @@ const CommercialShowroom = () => {
                             </button>
                         </Box>
                     </Box>
-                    {/* Property Features */}
+                    {/* ============================ Property Features ============================ */}
                     <Box className={style.optional_box}>
                         <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
                             Property Features
@@ -1159,7 +1396,7 @@ const CommercialShowroom = () => {
                                 value={"+ power Back-up"}
                                 onClick={handlePropertyFeature}
                             >
-                                + power Back-up
+                                power Back-up
                             </button>
                             <button
                                 className={
@@ -1194,7 +1431,7 @@ const CommercialShowroom = () => {
                             </button>
                         </Box>
                     </Box>
-                    {/* Society/Building feature */}
+                    {/* ============================ Society/Building feature ============================ */}
                     <Box className={style.optional_box}>
                         <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
                             Society/Building feature
@@ -1302,7 +1539,7 @@ const CommercialShowroom = () => {
                             </button>
                         </Box>
                     </Box>
-                    {/* Additional Features */}
+                    {/* ============================ Additional Features ============================ */}
                     <Box className={style.optional_box}>
                         <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
                             Additional Features
@@ -1322,7 +1559,7 @@ const CommercialShowroom = () => {
                         </Box>
                     </Box>
 
-                    {/* Other Features */}
+                    {/* ============================ Other Features ============================ */}
                     <Box>
                         <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
                             Other Features
@@ -1347,7 +1584,7 @@ const CommercialShowroom = () => {
                             </Checkbox>
                         </Box>
                     </Box>
-                    {/* Fire safety mesures */}
+                    {/* ============================ Fire safety mesures ============================ */}
                     <Box textAlign={"left"} className={style.optional_box}>
                         <Heading as={"h3"} size={"md"} margin={"10px 0"}>
                             Fire safety measures include
@@ -1360,7 +1597,7 @@ const CommercialShowroom = () => {
                         </Box>
                     </Box>
 
-                    {/* Property facing */}
+                    {/* ============================ Property facing ============================ */}
                     <Box className={style.optional_box}>
                         <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
                             Property facing
@@ -1457,7 +1694,7 @@ const CommercialShowroom = () => {
                         </Box>
                     </Box>
 
-                    {/* Width of facing road */}
+                    {/* ============================ Width of facing road ============================ */}
                     <Box className={style.optional_box}>
                         <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
                             Width of facing road
@@ -1473,7 +1710,7 @@ const CommercialShowroom = () => {
                             </Select>
                         </Box>
                     </Box>
-                    {/* location advantage */}
+                    {/* ============================ location advantage ============================ */}
                     <Box className={style.optional_box}>
                         <Heading size={"md"} margin={"10px 0 4px 0"} textAlign={"left"}>
                             Location Advantages
@@ -1604,4 +1841,4 @@ const CommercialShowroom = () => {
     );
 };
 
-export default CommercialShowroom
+export default CommercialShop;

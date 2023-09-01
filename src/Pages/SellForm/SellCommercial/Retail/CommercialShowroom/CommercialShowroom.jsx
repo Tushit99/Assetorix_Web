@@ -26,18 +26,18 @@ import { CleanInputText } from "../../../code";
 import axios from "axios";
 
 
-const CommercialShop = () => {
+
+const CommercialShowroom = () =>  {
     const isCountry = useSelector((state) => state.gloalval);
     const [located, setLocated] = useState("");
     const toast = useToast();
     const [country, setCountry] = useState("");
     const [facingwidth, setFacingWidth] = useState("");
     const [city, setCity] = useState("");
-    const [appartment, setApartment] = useState("");
     const [pincode, setPincode] = useState(0);
     const [state, setState] = useState("");
     const [locality, setLocality] = useState("");
-    const [houseNo, setHouseNo] = useState("");
+    const [type, setType] = useState("");
     const [locatedNear, setlocatedNear] = useState([]);
     const [areaPer, setAreaPer] = useState("sq.ft");
     const [entranceWidth, setentranceWidth] = useState("");
@@ -61,49 +61,55 @@ const CommercialShop = () => {
     const [desc, setDesc] = useState("");
     const [pincollection, setPinCollection] = useState([]);
     const [ceilingHeight, setceilingHeight] = useState("");
-    const [parkingType, setParkingType] = useState(["no"]);
+    const [parking, setParking] = useState("");
+    const [parkingType, setParkingType] = useState([]);
     const [preLeased, setPreLeased] = useState("");
     const [fireSafty, setFireSafty] = useState([]);
-    const [washroom, setWashroom] = useState([]);
     const [entranceWidthUnit, setentranceWidthUnit] = useState("");
     const [ceilingHeightUnit, setceilingHeightUnit] = useState("");
     const [floorOn, setFloorOn] = useState("Ground");
-    const [suitableFor, setsuitableFor] = useState([]); 
+    const [suitableFor, setsuitableFor] = useState([]);
     const [maintenancePrice, setMaintenancePrice] = useState("");
     const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
     const [bookingAmount, setBookingAmount] = useState("");
     const [additionalPrice, setAdditionalPrice] = useState(false);
     const [currentRentPerMonth, setCurrentRentPerMonth] = useState("");
     const [leaseTenureInYear, setLeaseTenureInYear] = useState("");
-    const [annualRentIncrease, setAnnualRentIncrease] = useState(""); 
-    const [businessType, setBusinessType] = useState(""); 
-
+    const [annualRentIncrease, setAnnualRentIncrease] = useState("");
+    const [businessType, setBusinessType] = useState("");
+    const [washroomType, setWashroomType] = useState("");
+    const [privateWashroom, setPrivateWashroom] = useState(0);
+    const [sharedWashroom, setSharedWashroom] = useState(0);
+    const [investorsTendGuarantee, setinvestorsTendGuarantee] = useState("");
+    const [investorsTendReturn, setinvestorsTendReturn] = useState("");
+    const [assuredReturns, setAssuredReturns] = useState("");
+    const [leaseGuarantee, setLeaseGuarantee] = useState("");
 
     // please don'nt change any function without any prior knowledge 
 
     // submit function
+
 
     const handleSubmitData = async (e) => {
         e.preventDefault();
         let obj = {
             lookingFor: "Sell",
             propertyGroup: "Commercial",
-            propertyType: "Retail",
-            retailSpaceType: "Commercial Shops",
+            propertyType: "Retail", 
+            retailSpaceType: "Commercial Showrooms", 
             address: {
-                apartmentName: appartment,
-                houseNumber: houseNo,
+                type: type,
                 locality,
                 pincode,
                 city,
                 state,
                 country,
-            },
+            }, 
             ownership,
             price: +pricedetail,
             priceUnit: +priceSqr,
             floorOn,
-            totalFloors: totalfloors,
+            totalFloors: +totalfloors,
             locatedNear,
             inclusivePrices,
             amenities,
@@ -112,22 +118,22 @@ const CommercialShop = () => {
             society_buildingFeatures: buildingFeature,
             additionalFeatures: additinalft,
             otherFeatures: otherFeature,
+            fireSafety: fireSafty,
             propertyFacing,
-            parking: parkingType,
+            washrooms: washroomType,
+            parking: parking,
             preLeased_Rented: preLeased,
-            washroomDetails: washroom,
             roadFacingWidth: facingwidth,
-            suitableFor: businessType,
+            suitableFor: suitableFor,
             roadFacingWidthType: facing,
             shopFacedSize: {
                 entranceWidth: entranceWidth,
                 entranceWidthUnit,
                 ceilingHeight,
-                ceilingHeightUnit
+                ceilingHeightUnit: ceilingHeightUnit
             },
-            totalFloors: +totalfloors,
-            carpetAreaUnit: plotArea,
-            plotAreaUnit: areaPer,
+            carpetArea: plotArea,
+            carpetAreaUnit: areaPer,
             description: desc,
             countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
             additionalPricingDetails: {
@@ -135,6 +141,7 @@ const CommercialShop = () => {
                 maintenanceTimePeriod,
                 bookingAmount,
             },
+            locationAdv: locationAdv
         };
 
         const showToastError = (message) => {
@@ -165,17 +172,12 @@ const CommercialShop = () => {
             showToastError('Provide Total Floors');
         } else if (!facingwidth) {
             showToastError("Provide facing width")
-        }
-
-        if (locationAdv) {
-            obj["locationAdv"] = locationAdv
-        }
+        } 
 
         if (
             city &&
-            appartment &&
             locality &&
-            houseNo &&
+            type &&
             ownership &&
             pricedetail &&
             priceSqr &&
@@ -201,16 +203,46 @@ const CommercialShop = () => {
                 return
             }
 
+            if (investorsTendGuarantee || investorsTendReturn) {
+                let investorLookFor = {
+                    assuredReturns,
+                    leaseGuarantee
+                }
+                obj["investorLookFor"] = investorLookFor;
+            }
+
+            if (preLeased == "Yes") {
+                let preLeased_RentedDetails = {
+                    currentRentPerMonth,
+                    leaseTenureInYear,
+                    annualRentIncrease,
+                    businessType
+                }
+                obj["preLeased_RentedDetails"] = preLeased_RentedDetails
+            }
+
+            if (washroomType == "Available") {
+                let washroomDetails = {
+                    privateWashrooms: privateWashroom,
+                    sharedWashrooms: sharedWashroom,
+                }
+                obj["washroomDetails"] = washroomDetails;
+            }
 
             if (availability == "Ready to move" && fromyear != "") {
                 obj["propertyStatus"] = fromyear;
                 obj["availabilityStatus"] = availability;
             }
+
             if (availability == "Under construction" && expectedyear != "") {
                 obj["expectedByYear"] = expectedyear;
                 obj["availabilityStatus"] = availability;
-
             }
+
+            if (parking == "Available") {
+                obj["parkingType"] = parkingType;
+            }
+
             // else {
             try {
                 // let response = await fetch("http://localhost:4500/property/", {
@@ -219,7 +251,7 @@ const CommercialShop = () => {
                 //     body: JSON.stringify(obj)
                 // });
                 // let data = await response.json();  
-                // console.log("data",data); 
+                console.log("data", obj); 
                 await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
                     .then((e) => {
                         toast({
@@ -436,41 +468,20 @@ const CommercialShop = () => {
 
     const handleparkingType = (e) => {
         e.preventDefault();
-        if (e.target.value == "Not Available") {
-            setParkingType([]);
-        }
-        else {
-            let newarr = [...parkingType];
-            let value = e.target.value;
 
-            if (newarr.includes(value)) {
-                newarr.splice(newarr.indexOf(value), 1);
-            } else {
-                newarr.push(value);
-            }
-            console.log(newarr);
-            setParkingType(newarr);
+        let newarr = [...parkingType];
+        let value = e.target.value;
+
+        if (newarr.includes(value)) {
+            newarr.splice(newarr.indexOf(value), 1);
+        } else {
+            newarr.push(value);
         }
+        console.log(newarr);
+        setParkingType(newarr);
+
     }
 
-    const handlewashroom = (e) => {
-        e.preventDefault();
-        const value = e.target.value;
-        if (value == "Not Available") {
-            setWashroom([]);
-        }
-        else {
-            let newarr = [...washroom];
-            let value = e.target.value;
-
-            if (newarr.includes(value)) {
-                newarr.splice(newarr.indexOf(value), 1);
-            } else {
-                newarr.push(value);
-            }
-            setWashroom(newarr);
-        }
-    }
 
     const handlebusinessType = (e) => {
         e.preventDefault();
@@ -499,7 +510,7 @@ const CommercialShop = () => {
                     <button value={"Other"} className={located == "Other" ? style.setbtn : style.btn} onClick={(e) => setLocated(e.target.value)} > Other </button>
                 </Box>
             </Box>
-            <Box>
+            <Box display={located == "" ? "none" : "block"}>
                 <form onSubmit={handleSubmitData}>
                     {/* property location */}
                     <Box className={style.location_form}>
@@ -511,20 +522,10 @@ const CommercialShop = () => {
                             type="text"
                             padding={"0 10px"}
                             required
-                            placeholder="House No. (optional)"
-                            value={houseNo}
-                            onChange={(e) => setHouseNo(e.target.value)}
+                            placeholder={`${located} (optional)`}
+                            value={type}
+                            onChange={(e) => setType(e.target.value)}
                             fontSize={"md"}
-                            variant="flushed"
-                        />
-                        <Input
-                            type="text"
-                            padding={"0 10px"}
-                            required
-                            placeholder="Apartment / Society"
-                            fontSize={"md"}
-                            value={appartment}
-                            onChange={(e) => setApartment(e.target.value)}
                             variant="flushed"
                         />
                         <NumberInput>
@@ -671,14 +672,90 @@ const CommercialShop = () => {
                         </Box>
 
                         {/* washrooms */}
-                        <Box className={style.optional_box}>
-                            <Heading as={"h3"} margin={"5px 0"} size={"md"}>
+                        <Box padding={"10px 0 8px 0"} display={"grid"} >
+                            <Heading textAlign={"left"} as={"h3"} size={"md"}>
                                 Washrooms
                             </Heading>
-                            <Box>
-                                <button value={"Private washrooms"} className={washroom.includes("Private washrooms") ? style.setbtn : style.btn} onClick={handlewashroom}> Private washrooms </button>
-                                <button value={"Public washrooms"} className={washroom.includes("Public washrooms") ? style.setbtn : style.btn} onClick={handlewashroom}> Public washrooms </button>
-                                <button value={"Not Available"} className={washroom.length == 0 ? style.setbtn : style.btn} onClick={handlewashroom}> Not Available </button>
+                            <Box display={"grid"} padding={"10px 0 8px 0"} gridTemplateColumns={"repeat(1,1fr)"} gap={2}>
+                                <Box display={"flex"} gap={10}>
+                                    <button
+                                        value={"Available"}
+                                        margin="auto"
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            setWashroomType(e.target.value);
+                                        }}
+                                        className={
+                                            washroomType === "Available" ? style.setbtn : style.btn
+                                        }
+                                    >
+                                        Available
+                                    </button>
+                                    <button
+                                        value={"Not-Available"}
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            setWashroomType(e.target.value);
+                                        }}
+                                        className={
+                                            washroomType === "Not-Available" ? style.setbtn : style.btn
+                                        }
+                                    >
+                                        Not-Available
+                                    </button>
+                                </Box>
+                                <Box display={washroomType == "Available" ? "block" : "none"} >
+                                    <Box display={"flex"} w={340} alignItems={"center"} margin={"10px"}>
+                                        <Text flex={8} textAlign={"left"}>
+                                            No. of Private Washrooms
+                                        </Text>
+                                        <button
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                setPrivateWashroom((prev) => prev - 1);
+                                            }}
+                                            className={privateWashroom == 0 ? style.washroom_hide : style.washroom_dec}
+                                            disabled={privateWashroom == 0}
+                                        >
+                                            <MinusIcon fontSize={"12px"} />
+                                        </button>
+                                        <Text flex={1}>{privateWashroom}</Text>
+                                        <button
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                setPrivateWashroom((prev) => prev + 1);
+                                            }}
+                                            className={style.washroom_dec}
+                                        >
+                                            <AddIcon fontSize={"12px"} />
+                                        </button>
+                                    </Box>
+                                    <Box display={"flex"} w={340} alignItems={"center"} margin={"10px"}>
+                                        <Text flex={8} textAlign={"left"}>
+                                            No. of Shared Washrooms
+                                        </Text>
+                                        <button
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                setSharedWashroom((prev) => prev - 1);
+                                            }}
+                                            className={sharedWashroom == 0 ? style.washroom_hide : style.washroom_dec}
+                                            disabled={sharedWashroom == 0}
+                                        >
+                                            <MinusIcon fontSize={"12px"} />
+                                        </button>
+                                        <Text flex={1}>{sharedWashroom}</Text>
+                                        <button
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                setSharedWashroom((prev) => prev + 1);
+                                            }}
+                                            className={style.washroom_dec}
+                                        >
+                                            <AddIcon fontSize={"12px"} />
+                                        </button>
+                                    </Box>
+                                </Box>
                             </Box>
                         </Box>
 
@@ -766,10 +843,19 @@ const CommercialShop = () => {
                         <Box className={style.optional_box}>
                             <Heading as={"h3"} size={"md"} > Parking Type </Heading>
                             <Box>
+                                <button value={"Available"} className={parking == "Available" ? style.setbtn : style.btn} onClick={(e) => {
+                                    e.preventDefault();
+                                    setParking(e.target.value)
+                                }}>Available</button>
+                                <button value={"Not-Available"} className={parking == "Not-Available" ? style.setbtn : style.btn} onClick={(e) => {
+                                    e.preventDefault();
+                                    setParking(e.target.value)
+                                }}>Not-Available</button>
+                            </Box>
+                            <Box display={parking == "Available" ? "flex" : "none"} flexWrap={"wrap"} gap={4}>
                                 <button value={"Private Parking"} onClick={handleparkingType} className={parkingType.includes("Private Parking") ? style.setbtn : style.btn} > Private Parking </button>
                                 <button value={"Public Parking"} onClick={handleparkingType} className={parkingType.includes("Public Parking") ? style.setbtn : style.btn} > Public Parking </button>
                                 <button value={"Multilevel Parking"} onClick={handleparkingType} className={parkingType.includes("Multilevel Parking") ? style.setbtn : style.btn} > Multilevel Parking </button>
-                                <button value={"Not Available"} onClick={handleparkingType} className={parkingType.length == 0 ? style.setbtn : style.btn} > Not Available </button>
                             </Box>
                         </Box>
 
@@ -1119,7 +1205,7 @@ const CommercialShop = () => {
                                     setPreLeased(e.target.value);
                                 }} className={preLeased == "No" ? style.setbtn : style.btn} > No </button>
                             </Box>
-                            <Box>
+                            <Box display={preLeased == "Yes" ? "block" : "none"}>
                                 <Input type="text" value={currentRentPerMonth} onChange={(e) => {
                                     e.preventDefault();
                                     setCurrentRentPerMonth(e.target.value);
@@ -1127,7 +1213,7 @@ const CommercialShop = () => {
                                 <Input type="text" value={leaseTenureInYear} onChange={(e) => {
                                     e.preventDefault();
                                     setLeaseTenureInYear((e.target.value));
-                                }} placeholder={"₹ Current rent per month"} />
+                                }} placeholder={"Lease tenure in years"} />
                                 <Box>
                                     <Input type="text" value={annualRentIncrease} onChange={(e) => {
                                         e.preventDefault();
@@ -1135,11 +1221,25 @@ const CommercialShop = () => {
                                     }} placeholder="Annual rent increase in % (Optional)" />
                                     <Input type="text" value={businessType} onChange={(e) => {
                                         e.preventDefault();
-                                        setBusinessType((e.target.value)); 
+                                        setBusinessType((e.target.value));
                                     }} placeholder="Leased to - Business Type (Optional)" />
                                 </Box>
                             </Box>
                         </Box>
+
+                        {/* ============================ Investors tend to look for ============================ */}
+                        <Box>
+                            <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                                Investors tend to look for (Optional)
+                            </Heading>
+                            <Box display={"grid"} width={260} gap={2} >
+                                {investorsTendReturn == "" ? <button className={style.tend_btn} onClick={() => setinvestorsTendReturn("Yes")}>+ Add Assured Returns</button> :
+                                    <Input type="text" placeholder={"Assured Returns"} value={assuredReturns} onChange={(e) => setAssuredReturns(e.target.value)} />}
+                                {investorsTendGuarantee == "" ? <button className={style.tend_btn} onClick={() => setinvestorsTendGuarantee("Yes")}>+ Add Lease Guarantee</button> :
+                                    <Input type="text" placeholder={"Lease guarantee in years"} value={leaseGuarantee} onChange={(e) => setLeaseGuarantee(e.target.value)} />}
+                            </Box>
+                        </Box>
+
                         {/* ============================ Property unique discription ============================ */}
                         <Box>
                             <Heading as={"h3"} size={"md"} fontWeight={600} margin={"10px 0"} textAlign={"left"}>
@@ -1297,7 +1397,7 @@ const CommercialShop = () => {
                                 value={"+ power Back-up"}
                                 onClick={handlePropertyFeature}
                             >
-                                + power Back-up
+                                power Back-up
                             </button>
                             <button
                                 className={
@@ -1740,6 +1840,6 @@ const CommercialShop = () => {
             </Box>
         </div>
     );
-};
+}; 
 
-export default CommercialShop;
+export default CommercialShowroom

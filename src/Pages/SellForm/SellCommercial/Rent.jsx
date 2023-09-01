@@ -17,7 +17,6 @@ const Rent = () => {
 
         {retailSpaceAvailable == "Commercial Showrooms" && <CommercialShowroom />} 
 
-
     </Box>
   )
 }  

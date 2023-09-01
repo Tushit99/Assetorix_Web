@@ -113,5 +113,13 @@
     align-items: center;
     gap: 20px;
   }
+
+  .tend_btn{
+    margin: 0 ;  
+    padding: 0 10px; 
+    width: 220px; 
+    border-radius: 10px;  
+    border: 1px solid #d0e6ff;
+  }
   
   

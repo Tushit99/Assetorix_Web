@@ -16,14 +16,15 @@ import PlotLand from "./Sell/PlotLand/PlotLand";
 import ServicedApartment from "./Sell/ServicedApartment/ServicedApartment";
 import RKStudio from "./Sell/RKStudio/RKStudio";
 import FarmHouse from "./Sell/FarmHouse/FarmHouse";
-import OfficeSetup from "./RentLease/OfficeSetup/OfficeSetup"; 
-import Rent from "./RentLease/Rent";
+import OfficeSetup from "./SellCommercial/OfficeSetup/OfficeSetup"; 
+import Rent from "./SellCommercial/Rent"; 
+import Storage from "./SellCommercial/Storage/Storage";
 
 
 const SellForm = () => {
     const [look, setlook] = useState("");
     const [type, settype] = useState("");
-    const [typeofplace, setTypeOf] = useState("");
+    const [typeofplace, setTypeOf] = useState("");  
 
     const handlechange = (type, look) => {
         settype(type);
@@ -540,7 +541,10 @@ const SellForm = () => {
                 {type == "sell" && look == "Office" && <OfficeSetup />}
 
                 {/* Retail */}  
-                {type === "sell" && look === "Retail" && <Rent />} 
+                {type === "sell" && look === "Retail" && <Rent />}  
+
+                {/* Storage */} 
+                {type=="sell" && look=="Storage" && <Storage />}  
 
             </Box>
             <Box backgroundColor={"rgb(232, 244, 255)"} borderRadius={10}></Box>
