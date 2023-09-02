@@ -19,7 +19,7 @@ import style from "../Hospitality.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
-import { CleanInputText, NumericString } from "../../../code";
+import { AlphabetString, CleanInputText, NumericString } from "../../../code";
 
 
 
@@ -33,8 +33,8 @@ const HotelResort = () => {
     const [state, setState] = useState("");
     const [locality, setLocality] = useState("");
     const [address, setaddress] = useState("");
-    const [bedroom, setBedRoom] = useState("");
-    const [bathroom, setBathroom] = useState("");
+    const [room, setRoom] = useState("");
+    const [washrooms, setwashrooms] = useState("");
     const [balconey, setBalcony] = useState("");
     const [light, setLight] = useState(0);
     const [fans, setFans] = useState(0);
@@ -93,10 +93,10 @@ const HotelResort = () => {
                 state,
                 country,
             },
+            washrooms,
             roomDetails: {
-                bedroom,
-                bathroom,
-                balcony: balconey
+                rooms: +room,
+                balcony: balconey,
             },
             ownership,
             price: +pricedetail,
@@ -117,6 +117,7 @@ const HotelResort = () => {
             roadFacingWidthType: facing,
             // totalFloors: +totalfloors,
             plotArea,
+            qualityRating,
             plotAreaUnit: areaPer,
             otherRoom: extraroom,
             description: desc,
@@ -135,10 +136,10 @@ const HotelResort = () => {
 
         if (!locality) {
             showToastError('Provide locality');
-        } else if (!bedroom) {
-            showToastError('Provide bedroom');
-        } else if (!bathroom) {
-            showToastError('Provide bathroom');
+        } else if (!room) {
+            showToastError('Provide room');
+        } else if (!washrooms) {
+            showToastError('Provide washrooms');
         } else if (!balconey) {
             showToastError('Provide balconey');
         } else if (!furnishedarr) {
@@ -175,8 +176,8 @@ const HotelResort = () => {
             city &&
             locality &&
             address &&
-            bedroom &&
-            bathroom &&
+            room &&
+            washrooms &&
             balconey &&
             furnishedarr &&
             ownership &&
@@ -601,24 +602,24 @@ const HotelResort = () => {
                 </Heading>
                 <Box as={"div"} className={style.inp_form_numbers}>
                     <Box textAlign={"left"} >
-                        <Text> No. of Bedrooms </Text>
+                        <Text> No. of rooms </Text>
                         <Input type="text"
                             variant="flushed"
                             padding={"0 2px"}
                             onChange={(e) => {
-                                setBedRoom(NumericString(e.target.value));
+                                setRoom(NumericString(e.target.value));
                             }}
-                            value={bedroom}
+                            value={room}
                             required />
                     </Box>
                     <Box textAlign={"left"}>
-                        <Text> No. of Bathrooms </Text>
+                        <Text> No. of washroomss </Text>
                         <Input type="text"
                             variant="flushed"
                             onChange={(e) => {
-                                setBathroom(NumericString(e.target.value));
+                                setwashrooms(NumericString(e.target.value));
                             }}
-                            value={bathroom}
+                            value={washrooms}
                             required
                             padding={"0 2px"} />
                     </Box>
@@ -647,17 +648,12 @@ const HotelResort = () => {
                         isAttached
                         variant="outline"
                     >
-                        <NumberInput>
-                            <NumberInputField
-                                padding={"0 2px"}
-                                value={plotArea}
-                                onChange={(e) => {
-                                    areaCalucation();
-                                    setPlotArea(e.target.value);
-                                }}
-                                required
-                            />
-                        </NumberInput>
+                        <input type="text" placeholder="Enter Plot Area" value={plotArea}
+                            onChange={(e) => {
+                                areaCalucation();
+                                setPlotArea(e.target.value);
+                            }}
+                            required />
                         <select value={areaPer} onChange={(e) => {
                             setAreaPer(e.target.value);
                         }} className={style.select} required>
@@ -1409,19 +1405,25 @@ const HotelResort = () => {
                     }} placeholder={"₹ Current rent per month"} />
                     <Input type="text" value={leaseTenureInYear} onChange={(e) => {
                         e.preventDefault();
-                        setLeaseTenureInYear(NumericString(e.target.value));
+                        let a = NumericString(e.target.value);
+                        if (a < 100) {
+                            setLeaseTenureInYear(a);
+                        }
                     }} placeholder={"Lease tenure in years"} />
                     <Box>
                         <Input type="text" value={annualRentIncrease} onChange={(e) => {
                             e.preventDefault();
-                            setAnnualRentIncrease(NumericString(e.target.value));
+                            let a = NumericString(e.target.value);
+                            if (a < 100) { 
+                                setAnnualRentIncrease(a);
+                            }
                         }} placeholder="Annual rent increase in % (Optional)" />
                         <Input type="text" value={businessType} onChange={(e) => {
                             e.preventDefault();
-                            setBusinessType(NumericString(e.target.value));
+                            setBusinessType(AlphabetString(e.target.value));
                         }} placeholder="Leased to - Business Type (Optional)" />
                     </Box>
-                </Box>
+                </Box> 
             </Box>
 
             {/* ============================ Property unique discription ============================ */}
@@ -1449,7 +1451,7 @@ const HotelResort = () => {
                         className={
                             amenities.includes("Access to High Speed Internet") ? style.setbtn : style.btn
                         }
-                        onClick={handleAminities} 
+                        onClick={handleAminities}
                         value={"Access to High Speed Internet"}
                     >
                         Access to High Speed Internet
@@ -1604,7 +1606,7 @@ const HotelResort = () => {
                         onClick={handlePropertyFeature}
                     >
                         Feng Shui / Vaastu Compliant
-                    </button>  
+                    </button>
                 </Box>
             </Box>
             {/* =============================== Society/Building feature =============================== */}
@@ -1657,7 +1659,7 @@ const HotelResort = () => {
                         }
                         onClick={HandleBuildingFeature}
                         value={"WheelChair Accessibilitiy"}
-                    > 
+                    >
                         WheelChair Accessibilitiy
                     </button>
                     <button
@@ -1741,7 +1743,7 @@ const HotelResort = () => {
                     >
 
                         ecurity Personnel
-                    </button>  
+                    </button>
                 </Box>
             </Box>
             {/* Additional Features */}
@@ -1782,33 +1784,6 @@ const HotelResort = () => {
                 <Box display={"grid"} textAlign={"left"} gap={2}>
                     <Checkbox
                         size={"lg"}
-                        isChecked={otherFeature.includes("In a gated society")}
-                        value={"In a gated society"}
-                        onChange={handleotherfeature}
-                    >
-
-                        In a gated society
-                    </Checkbox>
-                    <Checkbox
-                        size={"lg"}
-                        isChecked={otherFeature.includes("Corner Property")}
-                        value={"Corner Property"}
-                        onChange={handleotherfeature}
-                    >
-
-                        Corner Property
-                    </Checkbox>
-                    <Checkbox
-                        size={"lg"}
-                        isChecked={otherFeature.includes("Pet Friendly")}
-                        value={"Pet Friendly"}
-                        onChange={handleotherfeature}
-                    >
-
-                        Pet Friendly
-                    </Checkbox>
-                    <Checkbox
-                        size={"lg"}
                         isChecked={otherFeature.includes("Wheelchair friendly")}
                         value={"Wheelchair friendly"}
                         onChange={handleotherfeature}
@@ -1818,7 +1793,7 @@ const HotelResort = () => {
                     </Checkbox>
                 </Box>
             </Box>
-             
+
             {/* Overlooking */}
             <Box className={style.optional_box}>
                 <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
@@ -1871,7 +1846,7 @@ const HotelResort = () => {
                     </button>
                 </Box>
             </Box>
-            
+
             {/* Power Back up */}
             <Box className={style.optional_box}>
                 <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
@@ -2009,34 +1984,7 @@ const HotelResort = () => {
                     </button>
                 </Box>
             </Box>
-            {/* Type of flooring */}
-            <Box className={style.optional_box}>
-                <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
-                    Type of flooring
-                </Heading>
-                <Box>
-                    <Select
-                        onChange={(e) => setFlooring(e.target.value)}
-                        value={flooring}
-                    >
-                        <option value=""> Select </option>
-                        <option value="Marble"> Marble </option>
-                        <option value="Concrete"> Concrete </option>
-                        <option value="Poloshed concrete"> Poloshed concrete </option>
-                        <option value="Granite"> Granite </option>
-                        <option value="Ceramic"> Ceramic </option>
-                        <option value="Mosaic"> Mosaic </option>
-                        <option value="Cement"> Cement </option>
-                        <option value="Stone"> Stone </option>
-                        <option value="Vinyl"> Vinyl </option>
-                        <option value="Wood"> Wood </option>
-                        <option value="Vitified"> Vitified </option>
-                        <option value="Spartex"> Spartex </option>
-                        <option value="IPSFinish"> IPSFinish </option>
-                        <option value="Other"> Other </option>
-                    </Select>
-                </Box>
-            </Box>
+
             {/* Width of facing road */}
             <Box className={style.optional_box}>
                 <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>

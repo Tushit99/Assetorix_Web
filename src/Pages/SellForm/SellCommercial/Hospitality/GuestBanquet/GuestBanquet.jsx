@@ -19,7 +19,7 @@ import style from "../Hospitality.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
-import { CleanInputText, NumericString } from "../../../code";
+import { AlphabetString, CleanInputText, NumericString } from "../../../code";
 
 
 
@@ -81,13 +81,13 @@ const GuestBanquet = () => {
 
   const handleSubmitData = async (e) => {
     e.preventDefault();
-    let obj = {  
+    let obj = {
       lookingFor: "Sell",
       propertyGroup: "Commercial",
       propertyType: "Hospitality",
-      hospitalityType: "Guest-House / Banquet-Hall", 
-      address: {   
-        address: address, 
+      hospitalityType: "Guest-House / Banquet-Hall",
+      address: {
+        address: address,
         locality,
         pincode,
         city,
@@ -1386,16 +1386,22 @@ const GuestBanquet = () => {
           }} placeholder={"₹ Current rent per month"} />
           <Input type="text" value={leaseTenureInYear} onChange={(e) => {
             e.preventDefault();
-            setLeaseTenureInYear(NumericString(e.target.value));
+            let a = NumericString(e.target.value);
+            if (a < 100) {
+              setLeaseTenureInYear(a);
+            }
           }} placeholder={"Lease tenure in years"} />
           <Box>
             <Input type="text" value={annualRentIncrease} onChange={(e) => {
               e.preventDefault();
-              setAnnualRentIncrease(NumericString(e.target.value));
+              let a = NumericString(e.target.value);
+              if (a < 100) {
+                setAnnualRentIncrease(a);
+              }
             }} placeholder="Annual rent increase in % (Optional)" />
             <Input type="text" value={businessType} onChange={(e) => {
               e.preventDefault();
-              setBusinessType(NumericString(e.target.value));
+              setBusinessType(AlphabetString(e.target.value));
             }} placeholder="Leased to - Business Type (Optional)" />
           </Box>
         </Box>
