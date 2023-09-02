@@ -8,18 +8,18 @@ import {
     InputGroup,
     NumberInput,
     NumberInputField,
-    Select, 
+    Select,
     Text,
     Textarea,
     useToast,
-} from "@chakra-ui/react"; 
-import { Checkbox } from "@chakra-ui/react"; 
-import style from "../Industry.module.css"; 
-import axios from "axios";  
+} from "@chakra-ui/react";
+import { Checkbox } from "@chakra-ui/react";
+import style from "../Industry.module.css";
+import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
-import { CleanInputText } from "../../../code";
-  
+import { CleanInputText, NumericString } from "../../../code";
+
 
 
 const Factory = () => {
@@ -92,9 +92,9 @@ const Factory = () => {
         let obj = {
             lookingFor: "Sell",
             propertyGroup: "Commercial",
-            propertyType: "Industry", 
+            propertyType: "Industry",
             industryType: "Factory",
-            address: {  
+            address: {
                 address,
                 locality,
                 pincode,
@@ -102,7 +102,7 @@ const Factory = () => {
                 state,
                 country,
             },
-            washrooms,  
+            washrooms,
             ownership,
             price: +pricedetail,
             priceUnit: +priceSqr,
@@ -171,14 +171,14 @@ const Factory = () => {
             obj["locationAdv"] = locationAdv
         }
 
-        if ( 
+        if (
             ownership &&
             pricedetail &&
             priceSqr &&
             inclusivePrices &&
             amenities &&
             propertyFeatures &&
-            preLeased &&  
+            preLeased &&
             desc
         ) {
             let id = localStorage.getItem("usrId") || undefined;
@@ -435,7 +435,7 @@ const Factory = () => {
                         onChange={(e) => setAddress(e.target.value)}
                         fontSize={"md"}
                         variant="flushed"
-                    /> 
+                    />
                     <NumberInput>
                         <NumberInputField
                             placeholder={"Enter pincode"}
@@ -515,7 +515,7 @@ const Factory = () => {
                     <Heading as={"h4"} size={"sm"} margin={"0 0 30px 0 "}>
                         Add Room Details
                     </Heading>
-                </Box> 
+                </Box>
 
                 {/* ============================== No. of Washrooms ====================================== */}
                 <Box>
@@ -531,31 +531,29 @@ const Factory = () => {
                             />
                         </NumberInput>
                     </Box>
-                </Box> 
+                </Box>
 
                 {/* ============================ add area details =============================== */}
                 <Box textAlign={"left"} padding={"10px 0"}>
                     <Heading as={"h3"} margin={"5px 0"} size={"md"}>
                         Add Area Details
                     </Heading>
-                    <Text margin={"5px 0"}> Plot area is mandatory </Text>
+                    <Text margin={"5px 0"}> Atleast one area type is mandatory </Text>
                     <ButtonGroup
                         className={style.select_land}
                         size="sm"
                         isAttached
                         variant="outline"
                     >
-                        <NumberInput>
-                            <NumberInputField
-                                padding={"0 2px"}
-                                value={plotArea}
-                                onChange={(e) => {
-                                    areaCalucation();
-                                    setPlotArea(e.target.value);
-                                }}
-                                required
-                            />
-                        </NumberInput>
+                        <Input
+                            type="text"
+                            padding={"0 2px"}
+                            value={plotArea}
+                            onChange={(e) => {
+                                areaCalucation();
+                                setPlotArea(NumericString(e.target.value));
+                            }}
+                            required /> 
                         <select value={areaPer} onChange={(e) => {
                             setAreaPer(e.target.value);
                         }} className={style.select} required>
@@ -579,7 +577,7 @@ const Factory = () => {
                             <option value="perch">perch</option>
                         </select>
                     </ButtonGroup>
-                </Box> 
+                </Box>
 
                 {/* ========================== Availability status =============================== */}
                 <Box textAlign={"left"} className={style.optional_box}>
@@ -614,7 +612,7 @@ const Factory = () => {
                             Under construction
                         </button>
                     </Box>
-                </Box> 
+                </Box>
 
                 {/* ========================== Age of Property ================================= */}
                 {availability == "Ready to move" && (
@@ -636,7 +634,7 @@ const Factory = () => {
                                 border={"1px solid rgba(113, 210, 255, 0.897)"}
                                 margin={"8px 6px 0 0"}
                                 backgroundColor={"blue.50"}
-                            > 
+                            >
                                 0-1 years
                             </button>
                             <button
@@ -1509,5 +1507,5 @@ const Factory = () => {
     )
 }
 
-export default Factory;  
+export default Factory;
 

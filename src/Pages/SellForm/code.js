@@ -1,7 +1,13 @@
 export const CleanInputText = (e) => {
   let inputValue = e;
   let cleanedValue = inputValue.replace(/\s+/g, " ");
-  return cleanedValue;
+  return cleanedValue; 
 }; 
+
+export const NumericString = (e)=>{
+  let val = e; 
+  let clear = val.replace(/[^0-9]/g, '');  
+  return clear; 
+}
  
 

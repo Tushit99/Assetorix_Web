@@ -1528,10 +1528,10 @@ const FarmHouse = () => {
                     </button>
                     <button
                         className={
-                            amenities.includes("Water Storage") ? style.setbtn : style.btn
+                            amenities.includes("Rain Water Harvesting") ? style.setbtn : style.btn
                         }
                         onClick={handleAminities}
-                        value={"Water Storage"}
+                        value={"Rain Water Harvesting"}
                     >
                         Rain Water Harvesting
                     </button>
