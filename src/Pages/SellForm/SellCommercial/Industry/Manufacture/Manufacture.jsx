@@ -74,15 +74,15 @@ const Manufacture = () => {
       lookingFor: "Sell",
       propertyGroup: "Commercial",
       propertyType: "Industry",
-      industryType: "Factory",
-      address: {
+      industryType: "Manufacturing", 
+      address: { 
         address,
         locality,
         pincode,
         city,
         state,
         country,
-      },
+      }, 
       washrooms,
       ownership,
       price: +pricedetail,
