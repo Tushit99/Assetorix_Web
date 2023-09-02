@@ -528,12 +528,12 @@ const PlotLand = () => {
                         let val = e.target.value;
                         let numval = val.replace(/[^0-9]/g, '');
                         setplotLength(numval);
-                    }} placeholder='Length of plot (in Ft.)' />
+                    }} placeholder={`Length of plot (in ${areaPer})`} />
                     <Input type={"text"} variant='flushed' padding={"0 6px"} margin={"4px 0"} value={plotBreadth} onChange={(e) => {
                         let val = e.target.value;
                         let numval = val.replace(/[^0-9]/g, '');
                         setPlotBreadth(numval);
-                    }} placeholder='Breadth of plot (in Ft.)' />
+                    }} placeholder={`Breadth of plot (in ${areaPer})`} /> 
                 </Box>
                 {/* Floors Allowed For Construction */}
                 <Box textAlign={"left"} padding={"10px 0"}>
