@@ -454,31 +454,7 @@ const HotelResort = () => {
         }
         setLocationAdv(newarr);
     };
-
-    const handleinclusiveandtax = (e) => {
-        let newarr = [...inclusivePrices];
-        let value = e;
-
-        if (newarr.includes(value)) {
-            newarr.splice(newarr.indexOf(value), 1);
-        } else {
-            newarr.push(value);
-        }
-        setInclusivePrice(newarr);
-    }
-
-    const handleWaterSource = (e) => {
-        let newarr = [...watersource];
-        let value = e;
-
-        if (newarr.includes(value)) {
-            newarr.splice(newarr.indexOf(value), 1);
-        } else {
-            newarr.push(value);
-        }
-        console.log(newarr);
-        setWaterSource(newarr);
-    }
+ 
 
     const areaCalucation = () => {
         if (pricedetail && plotArea) {
@@ -1724,15 +1700,14 @@ const HotelResort = () => {
                     </button>
                     <button
                         className={
-                            buildingFeature.includes("ecurity Personnel")
+                            buildingFeature.includes("Security Personnel")
                                 ? style.setbtn
                                 : style.btn
                         }
                         onClick={HandleBuildingFeature}
-                        value={"ecurity Personnel"}
+                        value={"Security Personnel"}
                     >
-
-                        ecurity Personnel
+                        Security Personnel
                     </button>
                 </Box>
             </Box>
