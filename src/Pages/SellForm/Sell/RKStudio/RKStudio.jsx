@@ -235,7 +235,7 @@ const RKStudio = () => {
                     fans,
                     ac,
                     tv,
-                    Beds,
+                    beds: Beds,
                     wardrobe,
                     geyser,
                 }

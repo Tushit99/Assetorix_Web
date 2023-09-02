@@ -237,7 +237,7 @@ const ServicedApartment = () => {
                     fans,
                     ac,
                     tv,
-                    Beds,
+                    beds: Beds,
                     wardrobe,
                     geyser,
                 }

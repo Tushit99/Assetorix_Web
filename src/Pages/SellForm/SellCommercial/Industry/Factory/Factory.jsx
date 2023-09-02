@@ -12,16 +12,14 @@ import {
     Text,
     Textarea,
     useToast,
-} from "@chakra-ui/react";
-import { AddIcon, MinusIcon } from "@chakra-ui/icons";
+} from "@chakra-ui/react"; 
 import { Checkbox } from "@chakra-ui/react"; 
 import style from "../Industry.module.css"; 
-import axios from "axios";
+import axios from "axios";  
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
-import { CleanInputText } from "../../../code"; 
-
-
+import { CleanInputText } from "../../../code";
+  
 
 
 const Factory = () => {
@@ -35,8 +33,22 @@ const Factory = () => {
     const [state, setState] = useState("");
     const [locality, setLocality] = useState("");
     const [address, setAddress] = useState("");
-    const [washrooms, setwashrooms] = useState(0);  
-    const [areaPer, setAreaPer] = useState("sq.ft"); 
+    const [washrooms, setwashrooms] = useState(0);
+    const [bathroom, setBathroom] = useState(0);
+    const [balconey, setBalcony] = useState(0);
+    const [parking, setParking] = useState(0);
+    const [openparking, setOpenparking] = useState(0);
+    const [light, setLight] = useState(0);
+    const [fans, setFans] = useState(0);
+    const [ac, setAc] = useState(0);
+    const [tv, setTv] = useState(0);
+    const [Beds, setBeds] = useState(0);
+    const [wardrobe, setWardrobe] = useState(0);
+    const [geyser, setGeyser] = useState(0);
+    const [areaPer, setAreaPer] = useState("sq.ft");
+    const [furnishedarr, setfurnishedarr] = useState([]);
+    const [extraroom, setExtraRoom] = useState([]);
+    const [furnished, setFurnished] = useState("");
     const [availability, setAvailability] = useState("");
     const [fromyear, setFromyear] = useState("");
     const [expectedyear, setExpectedYear] = useState("");
@@ -80,8 +92,8 @@ const Factory = () => {
         let obj = {
             lookingFor: "Sell",
             propertyGroup: "Commercial",
-            propertyType: "Storage",
-            storageType: "Ware House",
+            propertyType: "Industry", 
+            industryType: "Factory",
             address: {  
                 address,
                 locality,
@@ -624,7 +636,7 @@ const Factory = () => {
                                 border={"1px solid rgba(113, 210, 255, 0.897)"}
                                 margin={"8px 6px 0 0"}
                                 backgroundColor={"blue.50"}
-                            >
+                            > 
                                 0-1 years
                             </button>
                             <button

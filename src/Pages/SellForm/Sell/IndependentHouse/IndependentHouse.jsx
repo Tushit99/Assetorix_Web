@@ -227,7 +227,7 @@ const IndependentHouse = () => {
                     fans,
                     ac,
                     tv,
-                    Beds,
+                    beds: Beds,
                     wardrobe,
                     geyser,
                 }

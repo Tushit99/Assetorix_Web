@@ -114,7 +114,7 @@ const FlatAppartment = () => {
             plotAreaUnit: areaPer,
             parking: {
                 openParking: openparking,
-                closedParking: parking,
+                closeParking: parking,
             },
             otherRoom: extraroom,
             description: desc,
@@ -218,7 +218,7 @@ const FlatAppartment = () => {
                     fans,
                     ac,
                     tv,
-                    Beds,
+                    beds: Beds,
                     wardrobe,
                     geyser,
                 }

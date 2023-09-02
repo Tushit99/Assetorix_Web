@@ -19,6 +19,7 @@ import FarmHouse from "./Sell/FarmHouse/FarmHouse";
 import OfficeSetup from "./SellCommercial/OfficeSetup/OfficeSetup"; 
 import Rent from "./SellCommercial/Rent"; 
 import Storage from "./SellCommercial/Storage/Storage";
+import Industry from "./SellCommercial/Industry/Industry";
 
 
 const SellForm = () => {
@@ -544,7 +545,10 @@ const SellForm = () => {
                 {type === "sell" && look === "Retail" && <Rent />}  
 
                 {/* Storage */} 
-                {type=="sell" && look=="Storage" && <Storage />}  
+                {type=="sell" && look=="Storage" && <Storage />}   
+
+                {/* Industry */}  
+                {type=="sell" && look=="Industry" && <Industry />} 
 
             </Box>
             <Box backgroundColor={"rgb(232, 244, 255)"} borderRadius={10}></Box>
