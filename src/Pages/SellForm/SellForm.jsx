@@ -21,6 +21,7 @@ import Rent from "./SellCommercial/Rent";
 import Storage from "./SellCommercial/Storage/Storage";
 import Industry from "./SellCommercial/Industry/Industry";
 import Hospitality from "./SellCommercial/Hospitality/Hospitality";
+import PlotLandCommercial from "./SellCommercial/PlotLandCommercial/PlotLandCommercial";
 
 
 const SellForm = () => {
@@ -161,9 +162,9 @@ const SellForm = () => {
                                                     Serviced Apartment
                                                 </button>
                                                 <button
-                                                    onClick={() => handlechange("sell", "Plot/Land")}
+                                                    onClick={() => handlechange("sell", "Plot / Land")}
                                                     className={
-                                                        look === "Plot/Land" && type === "sell"
+                                                        look === "Plot / Land" && type === "sell"
                                                             ? style.setbtn
                                                             : style.btn
                                                     }
@@ -346,10 +347,10 @@ const SellForm = () => {
                                                 </button>
                                                 <button
                                                     onClick={() =>
-                                                        handlechange("Rent/Lease", "Plot/Land")
+                                                        handlechange("Rent/Lease", "Plot / Land")
                                                     }
                                                     className={
-                                                        look === "Plot/Land" && type === "Rent/Lease"
+                                                        look === "Plot / Land" && type === "Rent/Lease"
                                                             ? style.setbtn
                                                             : style.btn
                                                     }
@@ -537,7 +538,7 @@ const SellForm = () => {
                 {type == "sell" && look == "Farmhouse" && <FarmHouse />}
 
                 {/* Plot/Land */}
-                {type == "sell" && look == "Plot/Land" && <PlotLand />}
+                {type == "sell" && look == "Plot / Land" && <PlotLand />}
 
                 {/* OfficeSetup */}
                 {type == "sell" && look == "Office" && <OfficeSetup />}
@@ -552,7 +553,11 @@ const SellForm = () => {
                 {type=="sell" && look=="Industry" && <Industry />}  
 
                 {/* Hospitality */} 
-                {type=="sell" && look=="Hospitality" && <Hospitality />}  
+                {type=="sell" && look=="Hospitality" && <Hospitality />}   
+
+                {/* Plot / Land */} 
+                {type=="sell" && look=="Plot/Land" && <PlotLandCommercial /> } 
+
 
             </Box>
             <Box backgroundColor={"rgb(232, 244, 255)"} borderRadius={10}></Box>

@@ -79,204 +79,212 @@ const GuestBanquet = () => {
 
 
 
-  const handleSubmitData = async (e) => {
-    e.preventDefault();
-    let obj = {
-      lookingFor: "Sell",
-      propertyGroup: "Commercial",
-      propertyType: "Hospitality",
-      hospitalityType: "Guest-House / Banquet-Hall",
-      address: {
-        address: address,
-        locality,
-        pincode,
-        city,
-        state,
-        country,
-      },
-      washrooms,
-      roomDetails: {
-        rooms: +room,
-        balcony: balconey,
-      },
-      ownership,
-      price: +pricedetail,
-      priceUnit: +priceSqr,
-      inclusivePrices,
-      amenities,
-      propertyFeatures,
-      society_buildingFeatures: buildingFeature,
-      additionalFeatures: additinalft,
-      waterSources: watersource,
-      otherFeatures: otherFeature,
-      powerBackup: powerbackup,
-      overLookings: overLook,
-      propertyFacing,
-      flooring,
-      roadFacingWidth: facingwidth,
-      preLeased_Rented: preLeased,
-      roadFacingWidthType: facing,
-      // totalFloors: +totalfloors,
-      plotArea,
-      plotAreaUnit: areaPer,
-      otherRoom: extraroom,
-      description: desc,
-      countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
-    };
+    const handleSubmitData = async (e) => {
+      e.preventDefault();
+      let obj = {
+          lookingFor: "Sell",
+          propertyGroup: "Commercial",
+          propertyType: "Hospitality",
+          hospitalityType: "Guest-House / Banquet-Hall",
+          address: {
+              address: address,
+              locality,
+              pincode,
+              city,
+              state,
+              country,
+          },
+          washrooms,
+          roomDetails: {
+              rooms: +room,
+              balcony: balconey,
+          },
+          ownership,
+          price: +pricedetail,
+          priceUnit: +priceSqr,
+          inclusivePrices,
+          amenities,
+          propertyFeatures,
+          society_buildingFeatures: buildingFeature,
+          additionalFeatures: additinalft,
+          waterSources: watersource,
+          otherFeatures: otherFeature,
+          powerBackup: powerbackup,
+          overLookings: overLook,
+          propertyFacing,
+          flooring,
+          roadFacingWidth: facingwidth,
+          preLeased_Rented: preLeased,
+          roadFacingWidthType: facing,
+          // totalFloors: +totalfloors,
+          plotArea,
+          qualityRating,
+          plotAreaUnit: areaPer,
+          otherRoom: extraroom,
+          description: desc,
+          countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
+      };
 
-    const showToastError = (message) => {
-      toast({
-        title: message + ' un-filled',
-        status: 'error',
-        duration: 2000,
-        position: 'top-right'
-      });
-    }
-
-
-    if (!locality) {
-      showToastError('Provide locality');
-    }  else if (!balconey) {
-      showToastError('Provide balconey');
-    } else if (!furnishedarr) {
-      showToastError('Provide Furnished Field');
-    } else if (!ownership) {
-      showToastError('Provide OwnerShip');
-    } else if (!pricedetail) {
-      showToastError('Provide PriceDetail');
-    } else if (!priceSqr) {
-      showToastError('Provide Price Per sq.ft');
-    } else if (!additinalft) {
-      showToastError('Provide Property description');
-    } else if (!watersource) {
-      showToastError('Provide Water Source');
-    } else if (!overLook) {
-      showToastError('Provide Overlooking');
-    } else if (!powerbackup) {
-      showToastError('Provide Power Backup');
-    } else if (!propertyFacing) {
-      showToastError('Provide Property Facing');
-    } else if (!flooring) {
-      showToastError('Provide Flooring');
-    } else if (!facing) {
-      showToastError('Provide Facing');
-    } else if (!facingwidth) {
-      showToastError("Provide facing width")
-    }
-
-    if (locationAdv) {
-      obj["locationAdv"] = locationAdv
-    }
-
-    if (
-      city &&
-      locality &&
-      address && 
-      balconey &&
-      furnishedarr &&
-      ownership &&
-      pricedetail &&
-      priceSqr &&
-      inclusivePrices &&
-      additinalft &&
-      watersource &&
-      overLook &&
-      powerbackup &&
-      propertyFacing &&
-      flooring &&
-      facing
-    ) {
-      let id = localStorage.getItem("usrId") || undefined;
-      let authorization = localStorage.getItem("AstToken") || undefined;
-
-      let head = { id, authorization, 'Content-type': 'application/json' };
-
-      if (!id || !authorization) {
-        toast({
-          title: 'Kindly log in to access property posting.',
-          description: "Login required for posting property.",
-          status: 'error',
-          duration: 2000,
-          position: 'top-right'
-        })
-        return
-      }
-
-      if (furnished == "Furnished" || furnished == "Semi-Furnished") {
-        obj.furnishedObj = {
-          light,
-          fans,
-          ac,
-          tv,
-          beds: Beds,
-          wardrobe,
-          geyser,
-        }
-        obj["furnishedList"] = furnishedarr;
-      }
-
-      if (preLeased == "Yes") {
-        let preLeased_RentedDetails = {
-          currentRentPerMonth,
-          leaseTenureInYear,
-          annualRentIncrease,
-          businessType
-        }
-        obj["preLeased_RentedDetails"] = preLeased_RentedDetails
-      }
-
-
-      if (furnished.length > 0) {
-        obj["furnished"] = furnished;
-      }
-      if (availability == "Ready to move" && fromyear != "") {
-        obj["propertyStatus"] = fromyear;
-        obj["availabilityStatus"] = availability;
-      }
-      if (availability == "Under construction" && expectedyear != "") {
-        obj["expectedByYear"] = expectedyear;
-        obj["availabilityStatus"] = availability;
-
-      }
-      // else {
-      try {
-        // let response = await fetch("http://localhost:4500/property/", {
-        //     method: "POST",
-        //     headers: head,
-        //     body: JSON.stringify(obj)
-        // });
-        // let data = await response.json();  
-        // console.log("data",data); 
-        await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
-          .then((e) => {
-            toast({
-              title: e.data.msg,
-              description: e.data.msg,
-              status: 'success',
+      const showToastError = (message) => {
+          toast({
+              title: message + ' un-filled',
+              status: 'error',
               duration: 2000,
-            })
+              position: 'top-right'
           });
-      } catch (error) {
-        toast({
-          title: error.response.data.msg,
-          status: 'error',
-          duration: 2000,
-        })
-        console.log(error);
       }
-      // }
 
-    }
-    else {
-      toast({
-        title: 'Form un-filled',
-        description: "Please fill all required fields.",
-        status: 'info',
-        duration: 2000,
-        position: 'top-right'
-      })
-    }
+
+      if (!locality) {
+          showToastError('Provide locality');
+      } else if (!room) {
+          showToastError('Provide room');
+      } else if (!washrooms) {
+          showToastError('Provide washrooms');
+      } else if (!balconey) {
+          showToastError('Provide balconey');
+      } else if (!furnishedarr) {
+          showToastError('Provide Furnished Field');
+      } else if (!ownership) {
+          showToastError('Provide OwnerShip');
+      } else if (!pricedetail) {
+          showToastError('Provide PriceDetail');
+      } else if (!priceSqr) {
+          showToastError('Provide Price Per sq.ft');
+      } else if (!additinalft) {
+          showToastError('Provide Property description');
+      } else if (!watersource) {
+          showToastError('Provide Water Source');
+      } else if (!overLook) {
+          showToastError('Provide Overlooking');
+      } else if (!powerbackup) {
+          showToastError('Provide Power Backup');
+      } else if (!propertyFacing) {
+          showToastError('Provide Property Facing');
+      } else if (!flooring) {
+          showToastError('Provide Flooring');
+      } else if (!facing) {
+          showToastError('Provide Facing');
+      } else if (!facingwidth) {
+          showToastError("Provide facing width")
+      }
+
+      if (locationAdv) {
+          obj["locationAdv"] = locationAdv
+      }
+
+      if (
+          city &&
+          locality &&
+          address &&
+          room &&
+          washrooms &&
+          balconey &&
+          furnishedarr &&
+          ownership &&
+          pricedetail &&
+          priceSqr &&
+          inclusivePrices &&
+          additinalft &&
+          watersource &&
+          overLook &&
+          powerbackup &&
+          propertyFacing &&
+          flooring &&
+          facing
+      ) {
+          let id = localStorage.getItem("usrId") || undefined;
+          let authorization = localStorage.getItem("AstToken") || undefined;
+
+          let head = { id, authorization, 'Content-type': 'application/json' };
+
+          if (!id || !authorization) {
+              toast({
+                  title: 'Kindly log in to access property posting.',
+                  description: "Login required for posting property.",
+                  status: 'error',
+                  duration: 2000,
+                  position: 'top-right'
+              })
+              return
+          }
+
+          if (furnished == "Furnished" || furnished == "Semi-Furnished") {
+              obj.furnishedObj = {
+                  light,
+                  fans,
+                  ac,
+                  tv,
+                  beds: Beds,
+                  wardrobe,
+                  geyser,
+              }
+              obj["furnishedList"] = furnishedarr;
+          }
+
+          if (preLeased == "Yes") {
+              let preLeased_RentedDetails = {
+                  currentRentPerMonth,
+                  leaseTenureInYear,
+                  annualRentIncrease,
+                  businessType
+              }
+              obj["preLeased_RentedDetails"] = preLeased_RentedDetails
+          }
+
+
+          if (furnished.length > 0) {
+              obj["furnished"] = furnished;
+          }
+          if (availability == "Ready to move" && fromyear != "") {
+              obj["propertyStatus"] = fromyear;
+              obj["availabilityStatus"] = availability;
+          }
+          if (availability == "Under construction" && expectedyear != "") {
+              obj["expectedByYear"] = expectedyear;
+              obj["availabilityStatus"] = availability;
+
+          }
+          // else {
+          try {
+              // let response = await fetch("http://localhost:4500/property/", {
+              //     method: "POST",
+              //     headers: head,
+              //     body: JSON.stringify(obj)
+              // });
+              // let data = await response.json();  
+              // console.log("data",data); 
+              await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
+                  .then((e) => {
+                      toast({
+                          title: e.data.msg,
+                          description: e.data.msg,
+                          status: 'success',
+                          duration: 2000,
+                      })
+                  });
+          } catch (error) {
+              toast({
+                  title: error.response.data.msg,
+                  status: 'error',
+                  duration: 2000,
+              })
+              console.log(error);
+          }
+          // }
+
+      }
+      else {
+          toast({
+              title: 'Form un-filled',
+              description: "Please fill all required fields.",
+              status: 'info',
+              duration: 2000,
+              position: 'top-right'
+          })
+      }
   };
+
 
   const handlepinfetch = (e) => {
     setPincode(e.target.value);
