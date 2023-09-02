@@ -73,6 +73,21 @@
     padding: 8px;
     border-radius: 50%;
   }
+
+  .furnished_detail {
+    display: grid; 
+    padding: 10px; 
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; 
+    border-radius: 0; 
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .furnished_detail > * {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px;
+  }
   
   .number_btn {
     border: 1px solid rgb(122, 193, 255);

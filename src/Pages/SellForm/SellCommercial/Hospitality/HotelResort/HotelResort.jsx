@@ -1504,17 +1504,7 @@ const HotelResort = () => {
                         value={"Conference room"}
                     >
                         Conference room
-                    </button>
-                    <button
-                        className={
-                            amenities.includes("Intercom Facility") ? style.setbtn : style.btn
-                        }
-                        onClick={handleAminities}
-                        value={"Intercom Facility"}
-                    >
-
-                        Intercom Facility
-                    </button>
+                    </button> 
                     <button
                         className={
                             amenities.includes("Club house / Community Center")
