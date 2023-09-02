@@ -192,8 +192,8 @@ const PlotLand = () => {
                 // });
                 // let data = await response.json();   
                 console.log(obj); 
-                await axios.post(`http://localhost:4500/property/`, obj, { headers: head })
-                    .then((e) => {
+                await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
+                    .then((e) => { 
                         toast({ 
                             title: e.data.msg,
                             description: e.data.msg,
