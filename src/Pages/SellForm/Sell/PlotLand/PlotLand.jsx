@@ -19,7 +19,7 @@ import { Checkbox } from "@chakra-ui/react";
 import style from "./PlotLand.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { CleanInputText } from "../../code";
+import { CleanInputText, NumericString } from "../../code";
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
 
@@ -39,10 +39,10 @@ const PlotLand = () => {
     const [pricedetail, setPricedetail] = useState("");
     const [priceSqr, setPriceSqr] = useState("");
     const [inclusivePrices, setInclusivePrice] = useState([]);
-    const [amenities, setAminity] = useState([]);   
+    const [amenities, setAminity] = useState([]);
     const [overLook, setoverlook] = useState([]);
-    const [otherFeature, setOtherFeature] = useState([]); 
-    const [propertyFacing, setPropertyFacing] = useState(""); 
+    const [otherFeature, setOtherFeature] = useState([]);
+    const [propertyFacing, setPropertyFacing] = useState("");
     const [facing, setFacing] = useState("Meter");
     const [locationAdv, setLocationAdv] = useState([]);
     const [plotArea, setPlotArea] = useState("");
@@ -53,7 +53,7 @@ const PlotLand = () => {
     const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
     const [expectedRental, setExpectedRental] = useState("");
     const [bookingAmount, setBookingAmount] = useState("");
-    const [annualDuesPayable, setAnnualDuesPayable] = useState(""); 
+    const [annualDuesPayable, setAnnualDuesPayable] = useState("");
     const [plotLength, setplotLength] = useState("");
     const [plotBreadth, setPlotBreadth] = useState("");
     const [totalFloorAllowed, setTotalFloorAllowed] = useState("");
@@ -63,7 +63,7 @@ const PlotLand = () => {
     const [constructionType, setConstructionType] = useState([]);
     const [expectedBy, setexpectedBy] = useState([]);
     const [expectedByYear, setExpectedByYear] = useState("");
-    const [authorisedBy, setAuthorisedBy] = useState([]); 
+    const [authorisedBy, setAuthorisedBy] = useState([]);
 
 
     // please don'nt change any function without any prior knowledge  
@@ -95,23 +95,23 @@ const PlotLand = () => {
             plotLength,
             plotBreadth,
             openSides,
-            constructionOnProperty :ConstructionOnProperty,
-            constructionOnPropertyList :constructionType, 
+            constructionOnProperty: ConstructionOnProperty,
+            constructionOnPropertyList: constructionType,
             ownership,
             price: +pricedetail,
             priceUnit: +priceSqr,
             inclusivePrices,
-            amenities, 
+            amenities,
             expectedByYear,
             otherFeatures: otherFeature,
             propertyFacing,
-            boundaryWall, 
+            boundaryWall,
             roadFacingWidth: facingwidth,
             roadFacingWidthType: facing,
-            totalFloorsAllowed:totalFloorAllowed, 
+            totalFloorsAllowed: totalFloorAllowed,
             plotArea,
-            plotAreaUnit: areaPer, 
-            propertyApprovalAuthorityList: authorisedBy, 
+            plotAreaUnit: areaPer,
+            propertyApprovalAuthorityList: authorisedBy,
             description: desc,
             overLookings: overLook,
             countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
@@ -144,9 +144,9 @@ const PlotLand = () => {
             showToastError('Provide Price Per sq.ft');
         } else if (!overLook) {
             showToastError('Provide Overlooking');
-        }   else if (!propertyFacing) {
+        } else if (!propertyFacing) {
             showToastError('Provide Property Facing');
-        }   else if (!facing) {
+        } else if (!facing) {
             showToastError('Provide Facing');
         } else if (!facingwidth) {
             showToastError("Provide facing width")
@@ -162,8 +162,8 @@ const PlotLand = () => {
             ownership &&
             pricedetail &&
             priceSqr &&
-            inclusivePrices && 
-            overLook && 
+            inclusivePrices &&
+            overLook &&
             propertyFacing &&
             facing
         ) {
@@ -191,10 +191,10 @@ const PlotLand = () => {
                 //     body: JSON.stringify(obj)
                 // });
                 // let data = await response.json();   
-                console.log(obj); 
+                console.log(obj);
                 await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
-                    .then((e) => { 
-                        toast({ 
+                    .then((e) => {
+                        toast({
                             title: e.data.msg,
                             description: e.data.msg,
                             status: 'success',
@@ -205,7 +205,7 @@ const PlotLand = () => {
                 toast({
                     title: error.response.data.msg,
                     status: 'error',
-                    duration: 2000, 
+                    duration: 2000,
                 })
                 console.log(error);
             }
@@ -214,7 +214,7 @@ const PlotLand = () => {
         }
         else {
             toast({
-                title: 'Form un-filled', 
+                title: 'Form un-filled',
                 description: "Please fill all required fields.",
                 status: 'info',
                 duration: 2000,
@@ -270,8 +270,8 @@ const PlotLand = () => {
         }
     }
 
-    const handleAuthorityBy =(e)=>{
-        e.preventDefault(); 
+    const handleAuthorityBy = (e) => {
+        e.preventDefault();
         let newarr = [...authorisedBy];
         let value = e.target.value;
 
@@ -280,14 +280,14 @@ const PlotLand = () => {
         } else {
             newarr.push(value);
         }
-        console.log(newarr); 
+        console.log(newarr);
         setAuthorisedBy(newarr);
     }
 
     const handleownership = (e) => {
         e.preventDefault();
         setOwnerShip(e.target.value);
-    }; 
+    };
 
     const handleAminities = (e) => {
         e.preventDefault();
@@ -300,7 +300,7 @@ const PlotLand = () => {
             newarr.push(value);
         }
         setAminity(newarr);
-    }; 
+    };
 
     const handleoverlooking = (e) => {
         e.preventDefault();
@@ -352,7 +352,7 @@ const PlotLand = () => {
         }
         setInclusivePrice(newarr);
     }
- 
+
 
     const areaCalucation = () => {
         if (pricedetail && plotArea) {
@@ -525,24 +525,18 @@ const PlotLand = () => {
                 <Box as={"div"} textAlign={"left"} padding={"10px 0"} >
                     <Heading as={"h3"} size={"md"} > Property Dimensions (Optional) </Heading>
                     <Input type={"text"} variant='flushed' padding={"0 6px"} margin={"4px 0"} value={plotLength} onChange={(e) => {
-                        let val = e.target.value;
-                        let numval = val.replace(/[^0-9]/g, '');
-                        setplotLength(numval);
+                        setplotLength(NumericString(e.target.value));
                     }} placeholder={`Length of plot (in ${areaPer})`} />
                     <Input type={"text"} variant='flushed' padding={"0 6px"} margin={"4px 0"} value={plotBreadth} onChange={(e) => {
-                        let val = e.target.value;
-                        let numval = val.replace(/[^0-9]/g, '');
-                        setPlotBreadth(numval);
-                    }} placeholder={`Breadth of plot (in ${areaPer})`} /> 
-                </Box>
+                        setPlotBreadth(NumericString(e.target.value));
+                    }} placeholder={`Breadth of plot (in ${areaPer})`} />
+                </Box> 
                 {/* Floors Allowed For Construction */}
                 <Box textAlign={"left"} padding={"10px 0"}>
                     <Heading as={"h3"} size={"md"} > Floors Allowed For Construction </Heading>
                     <Input type={"text"} variant='flushed' padding={"0 6px"} margin={"4px 0"} value={totalFloorAllowed} onChange={(e) => {
-                        let val = e.target.value;
-                        let numval = val.replace(/[^0-9]/g, '');
-                        setTotalFloorAllowed(numval);
-                    }} placeholder='No. of floors' />
+                        setTotalFloorAllowed(NumericString(e.target.value));
+                    }} placeholder='No. of floors' /> 
                 </Box>
                 {/* is there a boundary wall around the property */}
                 <Box textAlign={"left"} className={style.optional_box} >
@@ -669,16 +663,16 @@ const PlotLand = () => {
                         margin={"30px 0 10px 0"}
                         textAlign={"left"}
                     >
-                       Which authority the property is approved by ?
-                    </Heading> 
+                        Which authority the property is approved by ?
+                    </Heading>
                     <Box className={style.grid} gap={4}>
                         <button
                             className={authorisedBy.includes("DDA") ? style.setbtn : style.btn}
-                            borderRadius={"100px"} 
+                            borderRadius={"100px"}
                             border={"1px solid rgba(113, 210, 255, 0.897)"}
-                            margin={"8px 6px 0 0"} 
+                            margin={"8px 6px 0 0"}
                             onClick={handleAuthorityBy}
-                            value={"DDA"} 
+                            value={"DDA"}
                             backgroundColor={"blue.50"}
                         >
                             DDA
@@ -687,7 +681,7 @@ const PlotLand = () => {
                             className={authorisedBy.includes("MCD") ? style.setbtn : style.btn}
                             borderRadius={"100px"}
                             border={"1px solid rgba(113, 210, 255, 0.897)"}
-                            margin={"8px 6px 0 0"} 
+                            margin={"8px 6px 0 0"}
                             onClick={handleAuthorityBy}
                             value={"MCD"}
                             backgroundColor={"blue.50"}
@@ -700,13 +694,13 @@ const PlotLand = () => {
                             }
                             borderRadius={"100px"}
                             border={"1px solid rgba(113, 210, 255, 0.897)"}
-                            margin={"8px 6px 0 0"} 
-                            onClick={handleAuthorityBy} 
+                            margin={"8px 6px 0 0"}
+                            onClick={handleAuthorityBy}
                             value={"NDMC"}
                             backgroundColor={"blue.50"}
                         >
                             NDMC
-                        </button> 
+                        </button>
                     </Box>
                 </Box>
                 {/* Price Details */}
@@ -752,7 +746,7 @@ const PlotLand = () => {
                             </NumberInput>
                         </Box>
                     </Box>
-                </Box> 
+                </Box>
                 {/* inclusive Prices */}
                 <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
                     <Checkbox
@@ -788,7 +782,7 @@ const PlotLand = () => {
 
                         Price Negotiable
                     </Checkbox>
-                </Box> 
+                </Box>
                 {/* additional Price */}
                 <Box display={"grid"}>
                     <Heading as={"h4"} size={"sm"} margin={"10px 0"} fontWeight={700} textAlign={"left"}>
@@ -818,7 +812,7 @@ const PlotLand = () => {
                         textAlign={"left"}>
                         {additionalPrice ? <IoIosArrowUp style={{ display: "inline" }} /> : <IoIosArrowDown style={{ display: "inline" }} />} Add more pricing details
                     </Heading>
-                </Box> 
+                </Box>
                 {/* what makes property unique */}
                 <Box>
                     <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
@@ -865,7 +859,7 @@ const PlotLand = () => {
                         value={"Water Storage"}
                     >
                         Water Storage
-                    </button> 
+                    </button>
                     <button
                         className={
                             amenities.includes("Rain Water Harvesting") ? style.setbtn : style.btn
@@ -874,7 +868,7 @@ const PlotLand = () => {
                         value={"Rain Water Harvesting"}
                     >
                         Rain Water Harvesting
-                    </button> 
+                    </button>
                     <button
                         className={
                             amenities.includes("Feng Shui / Vaastu Compliant")
@@ -885,7 +879,7 @@ const PlotLand = () => {
                         value={"Feng Shui / Vaastu Compliant"}
                     >
                         Feng Shui / Vaastu Compliant
-                    </button> 
+                    </button>
                 </Box>
             </Box>
             {/* Overlooking */}
@@ -963,9 +957,9 @@ const PlotLand = () => {
                     >
 
                         Corner Property
-                    </Checkbox> 
+                    </Checkbox>
                 </Box>
-            </Box> 
+            </Box>
             {/* Property facing */}
             <Box className={style.optional_box}>
                 <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
