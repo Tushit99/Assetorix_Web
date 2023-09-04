@@ -417,7 +417,7 @@ const Factory = () => {
     }
 
 
-    return (
+    return ( 
         <div>
             <form onSubmit={handleSubmitData}>
                 <Box className={style.location_form}>

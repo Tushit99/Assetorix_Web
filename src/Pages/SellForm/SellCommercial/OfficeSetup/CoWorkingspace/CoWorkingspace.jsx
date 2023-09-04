@@ -24,7 +24,7 @@ import style from "./CoWorkingspace.module.css";
 import { useSelector } from "react-redux";
 import { AddIcon, ChevronDownIcon, MinusIcon } from "@chakra-ui/icons";
 import axios from "axios";
-import { CleanInputText } from "../../../code";
+import { CleanInputText, NumericString } from "../../../code";
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
 
@@ -57,9 +57,9 @@ const CoWorkingspace = () => {
     const [annualDuesPayble, setAnnualDuesPayble] = useState("");
     const [propertyFeatures, setPropertyFeature] = useState("");
     const [buildingFeature, setBuildingFeature] = useState([]);
-    const [additinalft, setAdditinalFeature] = useState([]); 
-    const [otherFeatures, setOtherFeatures] = useState("");  
-
+    const [additinalft, setAdditinalFeature] = useState([]);
+    const [otherFeatures, setOtherFeatures] = useState("");
+    const [expectedAnnual, setExpectedAnnual] = useState("");
 
 
     const [areaPer, setAreaPer] = useState("sq.ft");
@@ -95,7 +95,7 @@ const CoWorkingspace = () => {
                 country,
                 zoneType,
                 locatedInside
-            }, 
+            },
             ownership,
             price: +pricedetail,
             priceUnit: +priceSqr,
@@ -124,6 +124,7 @@ const CoWorkingspace = () => {
             // staircases: stairCase,
             // lift: liftStatus, 
             preLeased,
+            expectedAnnual
         };
 
         const showToastError = (message) => {
@@ -373,9 +374,9 @@ const CoWorkingspace = () => {
             newarr.push(value);
         }
         setPropertyFeature(newarr);
-    }; 
+    };
 
-    const handleOtherFeatures = (e)=>{
+    const handleOtherFeatures = (e) => {
         e.preventDefault();
         let newarr = [...otherFeatures];
         let value = e.target.value;
@@ -877,6 +878,7 @@ const CoWorkingspace = () => {
                         </Box>
                     </Box>
                 </Box>
+                {/* ============================ All inclusive price =========================  */}
                 <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
                     <Checkbox
                         isChecked={inclusivePrices.includes("All inclusive price")}
@@ -888,7 +890,7 @@ const CoWorkingspace = () => {
                     >
                         All inclusive price
                     </Checkbox>
-                    <Checkbox
+                    <Checkbox 
                         isChecked={inclusivePrices.includes("Tax and Govt. charges excluded")}
                         onChange={(e) => {
                             e.preventDefault();
@@ -1021,6 +1023,7 @@ const CoWorkingspace = () => {
                     <Heading as={"h3"} size={"sm"} margin={0} textAlign={"left"}>
                         Based on cost of the property & current monthly rent
                     </Heading>
+                    <Input type="text" w={"300px"} value={expectedAnnual} onChange={(e) => setExpectedAnnual(NumericString(e.target.value))} />
                 </Box>
                 {/* office previously used for */}
                 <Box className={style.optional_box}>
