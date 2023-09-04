@@ -1,5 +1,5 @@
 import {
-  Box, 
+  Box,
   Text,
   Flex,
   useColorModeValue,
@@ -7,7 +7,7 @@ import {
 import React from "react";
 import Logo from "../../components/Logo/Logo";
 import style from "./Footer.module.css";
-import { 
+import {
   BsFacebook,
   BsInstagram,
   BsTwitter,
@@ -17,9 +17,12 @@ import { IoIosArrowForward } from "react-icons/io";
 import insta from "./insta.png";
 import { Link } from "react-router-dom";
 
-const Footer = () => {   
+const Footer = () => {
 
-   
+  const handleScroltop = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  }
+
   return (
     <div className={style.ft}>
       <Box className={style.footer}>
@@ -27,27 +30,27 @@ const Footer = () => {
         <Box className={style.footer_description} >
           <Box>
             <h2>Business Line</h2>
-            <Link to={"#"}>Buy</Link>
-            <Link to={"#"}>Rent </Link>
-            <Link to={"#"}>Sale</Link>
-            <Link to={"#"}>Home Loan </Link>
-            <Link to={"#"}>Advertise </Link>
-            <Link to={"#"}>Agent Finder </Link>
-            <Link to={"#"}>Corporate Service</Link>
+            <Link onClick={handleScroltop} to={"/"}>Buy</Link>
+            <Link onClick={handleScroltop} to={"/post"}>Rent </Link>
+            <Link onClick={handleScroltop} to={"/post"}>Sell</Link>
+            <Link onClick={handleScroltop} to={"#"}>Home Loan </Link>
+            <Link onClick={handleScroltop} to={"#"}>Advertise </Link>
+            <Link onClick={handleScroltop} to={"#"}>Agent Finder </Link>
+            <Link onClick={handleScroltop} to={"#"}>Corporate Service</Link>
           </Box>
           <Box >
             <h2>Company</h2>
-            <Link to={"#"}>Home</Link>
-            <Link to={"#"}>About Assetorix</Link>
-            <Link to={"#"}> Developer Partners </Link>
-            <Link to={"/contact"}> Contact </Link>
+            <Link onClick={handleScroltop} to={"/"}>Home</Link>
+            <Link onClick={handleScroltop} to={"#"}>About Assetorix</Link>
+            <Link onClick={handleScroltop} to={"#"}> Developer Partners </Link>
+            <Link onClick={handleScroltop} to={"/contact"}> Contact </Link>
           </Box>
           <Box >
             <h2>Help Center</h2>
-            <Link to={"/user_term_condition"}>User Terms & Condition </Link> 
-            <Link to={"/Purchase_term_Condition"}>Payment Term & Condition</Link>
-            <Link to={"/privacy"}>Privacy</Link>
-            <Link to={"/disclaimer"}>Disclaimer</Link>
+            <Link onClick={handleScroltop} to={"/user_term_condition"}>User Terms & Condition </Link>
+            <Link onClick={handleScroltop} to={"/Purchase_term_Condition"}>Payment Term & Condition</Link>
+            <Link onClick={handleScroltop} to={"/privacy"}>Privacy</Link>
+            <Link onClick={handleScroltop} to={"/disclaimer"}>Disclaimer</Link>
 
           </Box>
           <Box>
@@ -99,7 +102,7 @@ const Footer = () => {
 
         {/* line with logo */}
         <Box className={style.contact}>
-          <Link  to="#"> 
+          <Link to="#">
             <BiLogoLinkedin size={"24px"} />
           </Link>
           <Link target="_blank" to="https://twitter.com/assetorix">
@@ -117,20 +120,20 @@ const Footer = () => {
       <div className={style.location_detail}>
         <Box>
           <h3 > <span className={style.blue}>assetorix.com </span>
-            <span style={{fontSize:"16px"}}>
+            <span style={{ fontSize: "16px" }}>
               by Ametheus Holdings Pvt Ltd <br />
             </span>
           </h3>
-          <h3> 
-            <span style={{ display: "flex", alignItems: "center",fontSize:"14px" }}> Marketing partner: </span> 
+          <h3>
+            <span style={{ display: "flex", alignItems: "center", fontSize: "14px" }}> Marketing partner: </span>
             <span className={style.red}>Unifie Entertainment technology LLP </span>
           </h3>
         </Box>
         <Box >
           Email: info@assetorix.com <span className={style.line}> | </span> <br className={style.brs} /> Call Us at: +91-9999099538
         </Box>
-        
-      </div> 
+
+      </div>
     </div>
   );
 };
