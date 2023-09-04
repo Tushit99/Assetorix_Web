@@ -500,7 +500,7 @@ const CommercialShowroom = () =>  {
     return (
         <div>
             <Box>
-                <Heading as={"h2"} margin={"10px 0"} size={"md"} > Your shop is located inside </Heading>
+                <Heading  margin={"10px 0"} size={"md"} > Your shop is located inside </Heading>
                 <Box display={"flex"} flexWrap={"wrap"} gap={4} >
                     <button value={"Mall"} className={located == "Mall" ? style.setbtn : style.btn} onClick={(e) => setLocated(e.target.value)} > Mall </button>
                     <button value={"Commercial Project"} className={located == "Commercial Project" ? style.setbtn : style.btn} onClick={(e) => setLocated(e.target.value)} > Commercial Project </button>
@@ -979,7 +979,7 @@ const CommercialShowroom = () =>  {
 
                         {/* ============================ Suitable for business types ============================ */}
                         <Box textAlign={"left"}>
-                            <Heading as={"h2"} margin={"10px 0"} size={"md"} > Suitable for business types </Heading>
+                            <Heading  margin={"10px 0"} size={"md"} > Suitable for business types </Heading>
                             <Box>
                                 <Menu>
                                     <MenuButton as={Button} borderRadius={0} rightIcon={<ChevronDownIcon />}>

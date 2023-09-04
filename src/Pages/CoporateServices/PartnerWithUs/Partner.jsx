@@ -342,7 +342,7 @@ const Partner = () => {
       </Box>
       <Box flex={4} textAlign={"justify"} padding={"20px"}>
         <img src={img} alt="" />
-        <Heading as={"h2"} marginTop={"8px"} size={"md"}>
+        <Heading  marginTop={"8px"} size={"md"}>
           PARTNER WITH US
         </Heading>
         <Divider

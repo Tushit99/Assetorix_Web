@@ -20,7 +20,7 @@ const UserDetail = () => {
                     Profile
                 </Heading>
                 <Box className={style.container}>
-                    <Heading as={"h2"} size={"md"}>
+                    <Heading  size={"md"}>
                         Personal Info
                     </Heading>
                     <Box

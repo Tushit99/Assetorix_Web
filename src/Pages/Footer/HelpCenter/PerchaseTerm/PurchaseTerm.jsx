@@ -24,7 +24,7 @@ const PurchaseTerm = () => {
             <Text fontSize={"sm"}>
                 If you have any questions about these terms, please contact legal@assetorix.com
             </Text>
-            <Heading as={"h2"} size={"sm"} >INTRODUCTION </Heading>
+            <Heading  size={"sm"} >INTRODUCTION </Heading>
             <Text fontSize={"sm"}>
                 This website assetorix.com, including any subdomains thereof, and any other websites through which its services are made available, our mobile, tablet and other smart device applications, and application program interfaces etc, , (hereinafter collectively referred to as " assetorix.com ") is owned, hosted and operated by Ametheus Holdings Pvt Ltd (hereinafter referred to as AHPL), a company incorporated in India under the Companies Act, 1956 and having its registered office at 27, 2nd Floor, Hauz Khas Village, New Delhi - 110016. These payment terms and conditions guidelines regulating use of these Services constitute a legally binding agreement between assetorix.com and the User (the “Agreement”).
                 assetorix.com and/or any other website(s) linked to this website is an online information and communications service provided to you, subject to your compliance with the terms and conditions set forth below.
@@ -35,7 +35,7 @@ const PurchaseTerm = () => {
             <Text fontSize={"sm"}>
                 If you utilize assetorix.com in a manner inconsistent with these terms and conditions, AHPL may terminate your access, block your future access and/or seek such additional relief as the circumstances of your misuse may be deemed to be fit and proper.
             </Text>
-            <Heading as={"h2"} size={"md"} >CHARGES</Heading>
+            <Heading  size={"md"} >CHARGES</Heading>
             <Text fontSize={"sm"}>
                 The use of this Website by the User, such as browsing the Website is free of cost. The User is only required to pay for the Services availed by the User of the Website. Payments for the Services offered by assetorix.com shall be on a 100% advance basis. The payment for Service once subscribed to by the subscriber is not refundable and any amount paid shall stand appropriated. Refund if any will be at the sole discretion of Ametheus Holdings Pvt Ltd (AHPL). AHPL offers no guarantees whatsoever for the accuracy or timeliness of the refunds reaching the Users card/bank accounts. User acknowledges and agrees that AHPL/ assetorix.com, at its sole discretion and without prejudice to other rights and remedies that it may have under the applicable laws, shall be entitled to set off the amount paid or payable by a subscriber/user against any amount(s) payable by User to AHPL under any other agreement or commercial relationship towards other products/services. Ametheus Holdings Pvt Ltd gives no guarantees of server uptime or applications working properly. All is on a best effort basis and liability is limited to refund of amount only.
             </Text>
@@ -54,7 +54,7 @@ const PurchaseTerm = () => {
             <Text fontSize={"sm"}>
                 Ametheus Holdings Pvt Ltd shall not be liable for any loss or damage sustained by reason of any disclosure (inadvertent or otherwise) of any information concerning the user's account and / or information relating to or regarding online transactions using credit cards / debit cards and / or their verification process and particulars nor for any error, omission or inaccuracy with respect to any information so disclosed and used whether or not in pursuance of a legal process or otherwise.
             </Text>
-            <Heading as={"h2"} size={"md"}>
+            <Heading  size={"md"}>
                 REFUND IN FAILED TRANSACTIONS
             </Heading>
             <Text fontSize={"sm"}>
@@ -63,11 +63,11 @@ const PurchaseTerm = () => {
             <Text fontSize={"sm"}>
                 If you utilize assetorix.com in a manner inconsistent with these terms and conditions, AHPL may terminate your access, block your future access and/or seek such additional relief as the circumstances of your misuse may be deemed to be fit and proper.
             </Text>
-            <Heading as={"h2"} size={"md"}> Rental property services terms </Heading>
+            <Heading  size={"md"}> Rental property services terms </Heading>
             <Text fontSize={"sm"}>
                 The Rental Property Services shall not be used for any purpose other than payment of or charging rent or for preparing and registering rental agreement and User not transmit any information received through the Rental Property Services to third parties. All responsibility for information furnished and its accuracy shall reside upon the User, and the User shall be liable for any liability incurred and shall hold assetorix.com or its affiliates and employees harmless against any claim or action by any person/financial institution/regulatory bodies. By utilizing this service User agrees that assetorix.com may share the information provided to third parties for processing on the User’s behalf, as may be required from time to time. User shall not submit any false or fraudulent information through any of the Services offered.
             </Text>
-            <Heading as={"h2"} size={"md"}>
+            <Heading  size={"md"}>
                 Rental payment
             </Heading>
             <Text fontSize={"sm"}>
@@ -79,7 +79,7 @@ const PurchaseTerm = () => {
             <Text fontSize={"sm"}>
                 The amount of a transaction may be charged back (hereinafter referred as “Chargeback”) if the transaction is disputed, reversed or not authorized, is unlawful or not in accordance with these terms (e.g. the holder of the payment instrument used for initiating the transaction raises a dispute). In case of a Chargeback, User shall immediately pay any amount owed, including additional fines or penalties levied in this regard by the payment gateway or issuer. User agrees to provide complete assistance in the event of any investigation in this regard.
             </Text>
-            <Heading as={"h2"} size={"md"}>MODE OF PAYMENT</Heading>
+            <Heading  size={"md"}>MODE OF PAYMENT</Heading>
             <Text fontSize={"sm"}>
                 This section pertains to the payments made by the User for the Services rendered by the Company.
             </Text>
@@ -87,7 +87,7 @@ const PurchaseTerm = () => {
             <Text fontSize={"sm"}>
                 Domestic and international credit cards issued by banks and financial institutions that are part of the Gpay, PayTM, Paypal, Stripe, Rupay, Visa, Mastercard & Amex Card networks.
             </Text>
-            <Heading as={"h2"} size={"md"} >
+            <Heading  size={"md"} >
                 Visa & Mastercard Debit cards.
             </Heading>
             <Text fontSize={"sm"}>
@@ -112,7 +112,7 @@ const PurchaseTerm = () => {
                 <br />
                 It is clarified that, any payment of the token amount to be credited into the Escrow Account as per section 7 above, shall be made through a payment gateway service provider and the payment options provided by such payment gateway service provider.
             </Text>
-            <Heading as={"h2"} size={"sm"} >VOUCHER & GIFT CARD</Heading>
+            <Heading  size={"sm"} >VOUCHER & GIFT CARD</Heading>
             <Text fontSize={"sm"}>
                 Any voucher issued from any company is valid only upon registration of the property in assetorix.com.
                 <br />
@@ -138,7 +138,7 @@ const PurchaseTerm = () => {
                 Any unused balance in the Gift Card at the end of the one (1) year period will be forfeited.
                 The difference in price of products purchased with the Gift Card and the total balance on the Gift Card will remain as unused balance. Subject to these terms and conditions, the customer may use the Gift Card multiple times until the balance amount has been spent.
             </Text>
-            <Heading as={"h2"} size={"sm"} >SEVERABILITY OF PROVISIONS </Heading>
+            <Heading  size={"sm"} >SEVERABILITY OF PROVISIONS </Heading>
             <Text fontSize={"sm"}>
                 THIS AGREEMENT between you and AHPL governs your use of assetorix.com. If any provision of these assetorix.com terms and conditions or part thereof is inconsistent with or is held to be invalid/void by or under any law, rule, order or regulation of any Government or by the final adjudication of any court, such inconsistency or invalidity shall not affect the enforceability of any other provision of the terms and conditions.
             </Text>

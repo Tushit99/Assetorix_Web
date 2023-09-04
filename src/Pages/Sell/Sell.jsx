@@ -29,14 +29,14 @@ const Sell = () => {
   return (
     <div className={style.sell}>
       <Box display={{ base: "none", md: "block" }}>
-        <Heading as={"h2"} size={"lg"}>
+        <Heading  size={"lg"}>
           Sell or rent your property faster on Assetorix.com
         </Heading>
         <img src={img} alt="img" />
       </Box>
 
       <div>
-        <Heading as={"h2"} size={"lg"}>
+        <Heading  size={"lg"}>
           Start posting your property , it's free
         </Heading>
         <Heading

@@ -18,7 +18,7 @@ const Privacy = () => {
                     download
                 </Button>
             </div>
-            <Heading as={"h2"} size={"md"}>
+            <Heading  size={"md"}>
                 GENERAL INFORMATION
             </Heading>
             <Text>
@@ -30,7 +30,7 @@ const Privacy = () => {
             <Text>
                 This Policy specifies the manner in which personal data of Users is collected, received, stored, processed, disclosed, transferred, dealt with and handled by the Company. Please note that the Website may contain links to other third-party websites/mobile applications that may collect personal data and sensitive personal data of the Users. The User agrees to comply with all third-party privacy policies, if any, applicable upon access of such third-party websites and/or mobile applications. This Policy does not apply to information that Users provide to, or that is collected by, any third-party through the Website and the Company is not responsible for the User’s access to or use of any third-party website, mobile applications, product and/or service.
             </Text>
-            <Heading as={"h2"} size={"md"}>Collection of information </Heading>
+            <Heading  size={"md"}>Collection of information </Heading>
             <Text>
                 1.1 When you use our website, we collect and store your personal information about you as may be provided by you, from time to time. Personal Information (“PI”) collected by us may include, but is not limited to, your name, gender, business name, address, email address, date of birth, date of incorporation, any identity proof number, and phone number.
             </Text>
@@ -70,7 +70,7 @@ const Privacy = () => {
             <Text>
                 1.9 We also provide certain data to our business partners, such as payment gateways, legal and administrative consultants, financial institutions/banks that offer financial aid to Users of our Website, etc., to interact with you and/or send you relevant or required information, as well as to complete certain transactions and fulfill commitments. After your data is made accessible to the business partners mentioned above, such business partners may use your data to send you information relevant to you. We are not, in any manner whatsoever, responsible for your use or access of any internet pages, websites or platforms owned and/or operated by our business partners, whether or not the link to such pages, websites or platforms is provided on the Website.
             </Text>
-            <Heading as={"h2"} size={"md"}>
+            <Heading  size={"md"}>
                 2 Use of Demographic, Profile Data and Your Information
             </Heading>
             <Text>
@@ -85,7 +85,7 @@ const Privacy = () => {
             <Text>
                 2.4 In our efforts to continually improve Services offerings, we collect and analyze demographic and user data about our Users' activity on our Website. We identify and use your IP address to help diagnose problems with our server, and to administer our Website. Your IP address is also used to help identify you and to gather broad demographic information related to you. In this regard, it is clarified that we reserve the right to use the data collected from your use of the Website for any analysis and development, and to improve the Website, our Services as well as to diversify the real estate portfolio provided on our Website.
             </Text>
-            <Heading as={"h2"} size={"md"}>
+            <Heading  size={"md"}>
                 3 Sharing your personal information
             </Heading>
             <Text>
@@ -115,7 +115,7 @@ const Privacy = () => {
             <Text>
                 3.9 Save as expressly stated in this Policy (including any and all amendments hereto), we will never share, sell or rent any of your PI or SPDI to a third party without notifying you, and where necessary, obtaining your consent. If you have permitted us to use your PI or SPDI in a certain way, but later change your mind, you can contact our Grievance Officer for necessary clarifications and for restricting our use of your PI or SPDI.
             </Text>
-            <Heading as={"h2"} size={"md"} >
+            <Heading  size={"md"} >
                 4 Retaining your information
             </Heading>
             <Text>
@@ -130,7 +130,7 @@ const Privacy = () => {
             <Text>
                 4.4 You may delete your account information at any time by logging into the dashboard and navigating to the Settings page. Please note that if you choose to delete your account, we may continue to retain certain information about you as required by law or for our legitimate business purposes. You can also request deletion of your account by sending email to care@assetorix.xyz and we will delete your account.
             </Text>
-            <Heading as={"h2"} size={"md"} >
+            <Heading  size={"md"} >
                 5 Links to Other Sites
             </Heading>
             <Text>
@@ -145,7 +145,7 @@ const Privacy = () => {
             <Text>
                 5.4 The Company is not responsible for the privacy practices or the content of those linked websites and does not endorse or accept responsibility or liability for the content of such third-party websites or third-party terms and conditions.
             </Text>
-            <Heading as={"h2"} size={"md"} >
+            <Heading  size={"md"} >
                 6 Security Precautions/ Security Breach
             </Heading>
             <Text>
@@ -166,7 +166,7 @@ const Privacy = () => {
             <Text>
                 6.5 We endeavor to protect the privacy of your information (including PI and SPDI) we hold in our records by adhering to the maximum standards prescribed under law. However, we cannot, unfortunately, guarantee complete security. Unauthorized entry or use, hardware or software failure, and other factors, may compromise the security of User information at any time.
             </Text>
-            <Heading as={"h2"} size={"md"} >
+            <Heading  size={"md"} >
                 7 Your Consent
             </Heading>
             <Text>
@@ -181,7 +181,7 @@ const Privacy = () => {
             <Text>
                 7.4 In spite of such notifications, the User should return to this Policy periodically to ensure familiarity with the most current version of the policy. The date on which this Policy is last updated is provided at the top of this page.
             </Text>
-            <Heading as={"h2"} size={"md"} >
+            <Heading  size={"md"} >
                 8 Cookie Policy
             </Heading>
             <Text>
@@ -193,7 +193,7 @@ const Privacy = () => {
             <Text>
                 8.3 We do not control the use of cookies by third parties.
             </Text>
-            <Heading as={"h2"} size={"md"} >
+            <Heading  size={"md"} >
                 9 Representations and Warranties, and Limitation of Liability
             </Heading>
             <Text>
@@ -220,7 +220,7 @@ const Privacy = () => {
             <Text>
                 9.8 In no event shall the Company or its affiliates or its employees, directors or authorized representatives be held liable for any direct, indirect, special, consequential, punitive or exemplary damages of any nature whatsoever, as a result of any shortcoming of or defect in or inaccuracy of the Website or otherwise using the information available on the Website in any manner including, but not limited to, any decision made or action taken in reliance upon the information available on the Website or the Services provided on the Website.
             </Text>
-            <Heading as={"h2"} size={"md"} >
+            <Heading  size={"md"} >
                 10. Grievance Officer
             </Heading>
             <Text>
@@ -232,7 +232,7 @@ const Privacy = () => {
                 E-mail:	care@assetorix.com <br />
                 Time:	16:00 – 17:00 hrs Tuesday <br />
             </Text>
-            <Heading as={"h2"} size={"md"} >
+            <Heading  size={"md"} >
                 11. Governing Law and Jurisdiction
             </Heading>
             <Text>

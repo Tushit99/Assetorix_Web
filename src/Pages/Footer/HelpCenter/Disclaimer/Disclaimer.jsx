@@ -21,7 +21,7 @@ const Disclaimer = () => {
             <Text fontSize={"sm"}>
                 This website assetorix.com, including any subdomains thereof, and any other websites through which its services are made available, our mobile, tablet and other smart device applications, and application program interfaces etc, , (hereinafter collectively referred to as " assetorix.com ") is owned, hosted and operated by Ametheus Holdings Pvt Ltd (hereinafter referred to as AHPL), a company incorporated in India under the Companies Act, 1956 and having its registered office at 27, 2nd Floor, Hauz Khas Village, New Delhi - 110016. These DISCLAIMER OF WARRANTIES AND LIABILITIES guidelines regulating use of these Services constitute a legally binding agreement between assetorix.com and the User (the “Agreement”).
             </Text>
-            <Heading as={"h2"} size={"md"} textAlign={"left"}>
+            <Heading  size={"md"} textAlign={"left"}>
                 DISCLAIMER OF WARRANTIES AND LIABILITIES
             </Heading>
             <Text fontSize={"sm"}>

@@ -16,8 +16,8 @@ import PlotLand from "./Sell/PlotLand/PlotLand";
 import ServicedApartment from "./Sell/ServicedApartment/ServicedApartment";
 import RKStudio from "./Sell/RKStudio/RKStudio";
 import FarmHouse from "./Sell/FarmHouse/FarmHouse";
-import OfficeSetup from "./SellCommercial/OfficeSetup/OfficeSetup"; 
-import Rent from "./SellCommercial/Rent"; 
+import OfficeSetup from "./SellCommercial/OfficeSetup/OfficeSetup";
+import Rent from "./SellCommercial/Rent";
 import Storage from "./SellCommercial/Storage/Storage";
 import Industry from "./SellCommercial/Industry/Industry";
 import Hospitality from "./SellCommercial/Hospitality/Hospitality";
@@ -27,11 +27,26 @@ import PlotLandCommercial from "./SellCommercial/PlotLandCommercial/PlotLandComm
 const SellForm = () => {
     const [look, setlook] = useState("");
     const [type, settype] = useState("");
-    const [typeofplace, setTypeOf] = useState("");  
+    const [typeofplace, setTypeOf] = useState("");
+    const [selectedTab, setSelectedTab] = useState(0);
 
     const handlechange = (type, look) => {
         settype(type);
         setlook(look);
+        console.log(type);
+    };
+
+    const handleTabChange = (index) => {
+        if (index == 0) {
+            setlook("sell");
+        }
+        else if (index == 1) {
+            setlook("Rent/Lease");
+        }
+        else if (index == 2) {
+            setlook("PG"); 
+        }
+        setSelectedTab(index);
     };
 
     useEffect(() => {
@@ -52,7 +67,7 @@ const SellForm = () => {
                     <Heading textAlign={"left"} margin={"20px 0"} as={"h4"} size={"sm"}>
                         I am looking to
                     </Heading>
-                    <Tabs variant="unstyled">
+                    <Tabs variant="unstyled" onChange={handleTabChange} defaultIndex={0} >
                         <TabList gap={3} margin={"0 20px"}>
                             <Tab
                                 _selected={{
@@ -519,44 +534,44 @@ const SellForm = () => {
                 </Box>
 
                 {/* Flat/Apartment */}
-                {type == "sell" && look == "Flat/Apartment" && <FlatAppartment />}
+                {(type == "sell" && look == "Flat/Apartment") ? <FlatAppartment /> : ""}
 
                 {/* Independent House/villa */}
-                {type == "sell" && look == "Independent House/villa" && <IndependentHouse />}
+                {(type == "sell" && look == "Independent House/villa") ? <IndependentHouse /> : ""}
 
                 {/* Independent/builder Floor */}
-                {type == "sell" && look == "Independent/builder Floor" && <Independentbuilder />}
+                {(type == "sell" && look == "Independent/builder Floor") ? <Independentbuilder /> : ""}
 
 
                 {/* Serviced Apartment */}
-                {type == "sell" && look == "Serviced Apartment" && <ServicedApartment />}
+                {(type == "sell" && look == "Serviced Apartment") ? <ServicedApartment /> : ""}
 
                 {/* 1 RK/ Studio Apartment */}
-                {type == "sell" && look == "1 RK/ Studio Apartment" && <RKStudio />}
+                {(type == "sell" && look == "1 RK/ Studio Apartment") ? <RKStudio /> : ""}
 
                 {/* Serviced Apartment */}
-                {type == "sell" && look == "Farmhouse" && <FarmHouse />}
+                {(type == "sell" && look == "Farmhouse") ? <FarmHouse /> : ""}
 
                 {/* Plot/Land */}
-                {type == "sell" && look == "Plot / Land" && <PlotLand />}
+                {(type == "sell" && look == "Plot / Land") ? <PlotLand /> : ""}
 
                 {/* OfficeSetup */}
-                {type == "sell" && look == "Office" && <OfficeSetup />}
+                {(type == "sell" && look == "Office") ? <OfficeSetup /> : ""}
 
-                {/* Retail */}  
-                {type === "sell" && look === "Retail" && <Rent />}  
+                {/* Retail */}
+                {(type === "sell" && look === "Retail") ? <Rent /> : ""}
 
-                {/* Storage */} 
-                {type=="sell" && look=="Storage" && <Storage />}   
+                {/* Storage */}
+                {(type == "sell" && look == "Storage") ? <Storage /> : ""}
 
-                {/* Industry */}  
-                {type=="sell" && look=="Industry" && <Industry />}  
+                {/* Industry */}
+                {(type == "sell" && look == "Industry") ? <Industry /> : ""}
 
-                {/* Hospitality */} 
-                {type=="sell" && look=="Hospitality" && <Hospitality />}   
+                {/* Hospitality */}
+                {(type == "sell" && look == "Hospitality") ? <Hospitality /> : ""}
 
-                {/* Plot / Land */} 
-                {type=="sell" && look=="Plot/Land" && <PlotLandCommercial /> } 
+                {/* Plot / Land */}
+                {(type == "sell" && look == "Plot/Land") ? <PlotLandCommercial /> : ""}
 
 
             </Box>

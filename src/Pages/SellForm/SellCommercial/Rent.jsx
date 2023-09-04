@@ -9,7 +9,7 @@ const Rent = () => {
 
   return (
     <Box textAlign={"left"}>
-        <Heading as={"h2"} size={"md"} > What type of retail space do you have ? </Heading>  
+        <Heading  size={"md"} > What type of retail space do you have ? </Heading>  
         <button value={"Commercial Shops"} style={{margin:"10px"}} className={retailSpaceAvailable=="Commercial Shops" ? style.setbtn : style.btn} onClick={(e)=>setretailSpaceAvailable(e.target.value)} > Commercial Shops</button> 
         <button value={"Commercial Showrooms"} style={{margin:"10px"}} className={retailSpaceAvailable=="Commercial Showrooms" ? style.setbtn : style.btn} onClick={(e)=>setretailSpaceAvailable(e.target.value)} > Commercial Showrooms</button> 
 
