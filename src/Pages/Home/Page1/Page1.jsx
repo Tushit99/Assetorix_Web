@@ -24,13 +24,21 @@ import style from "./Page1.module.css";
 import video from "./Ametheus.mp4";
 import { Search2Icon } from "@chakra-ui/icons";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { changeLookingFor } from "../../../Redux/globalval/action";
 
 const Page1 = () => {
   const { country } = useSelector((state) => state.gloalval); 
   const navigate = useNavigate(); 
+  const dispatch = useDispatch(); 
 
   const handlePageRent = ()=>{
+    dispatch(changeLookingFor("Rent/Lease")); 
+    navigate("/post"); 
+  }
+
+  const handlePageSell = ()=>{
+    dispatch(changeLookingFor("sell")); 
     navigate("/post"); 
   }
 
@@ -184,6 +192,7 @@ const Page1 = () => {
                 fontSize={{ base: "sm", lg: "lg" }}
                 fontWeight={{ base: "500", lg: "bold" }}
                 backgroundColor={"#d2ab67cb"}
+                onClick={handlePageSell}
               >
                 <Link to={"/post"}>Sell</Link>
               </Button>

@@ -16,11 +16,22 @@ import { BiLogoLinkedin } from "react-icons/bi";
 import { IoIosArrowForward } from "react-icons/io";
 import insta from "./insta.png";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { changeLookingFor } from "../../Redux/globalval/action";
 
-const Footer = () => {
+const Footer = () => { 
+  const dispatch = useDispatch();  
 
   const handleScroltop = () => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  }
+
+  const handlePageRent = () => {
+    dispatch(changeLookingFor("Rent/Lease"));
+  }
+
+  const handlePageSell = () => {
+    dispatch(changeLookingFor("sell")); 
   }
 
   return (
@@ -31,8 +42,8 @@ const Footer = () => {
           <Box>
             <h2>Business Line</h2>
             <Link onClick={handleScroltop} to={"/"}>Buy</Link>
-            <Link onClick={handleScroltop} to={"/post"}>Rent </Link>
-            <Link onClick={handleScroltop} to={"/post"}>Sell</Link>
+            <Link onClick={handlePageRent} to={"/post"}>Rent </Link>
+            <Link onClick={handlePageSell} to={"/post"}>Sell</Link>
             <Link onClick={handleScroltop} to={"#"}>Home Loan </Link>
             <Link onClick={handleScroltop} to={"#"}>Advertise </Link>
             <Link onClick={handleScroltop} to={"#"}>Agent Finder </Link>
@@ -44,7 +55,7 @@ const Footer = () => {
             <Link onClick={handleScroltop} to={"#"}>About Assetorix</Link>
             <Link onClick={handleScroltop} to={"#"}> Developer Partners </Link>
             <Link onClick={handleScroltop} to={"/contact"}> Contact </Link>
-          </Box>
+          </Box> 
           <Box >
             <h2>Help Center</h2>
             <Link onClick={handleScroltop} to={"/user_term_condition"}>User Terms & Condition </Link>

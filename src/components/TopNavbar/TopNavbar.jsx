@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Logo from "../Logo/Logo";
 import style from "./TopNavbar.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Hamburger from "../Hamburger/Hamburger";
 import {
     Popover,
@@ -24,13 +24,13 @@ import { BiSolidUserDetail } from "react-icons/bi";
 import { IoIosArrowDown } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { userPreLog, userlogout } from "../../Redux/userauth/action";
-import { changecountry } from "../../Redux/globalval/action";
+import { changeLookingFor, changecountry } from "../../Redux/globalval/action";
 
 const TopNavbar = () => {
     const data = useSelector((state) => state.userreducer);
     const [scroll, setScroll] = useState(0);
     const [country, setCountry] = useState("india");
-    const dispatch = useDispatch();
+    const dispatch = useDispatch();  
 
     useEffect(() => {
         window.addEventListener("scroll", () => {
@@ -58,6 +58,14 @@ const TopNavbar = () => {
             setCountry(storedVal);
         }
     }, []);
+
+    const handlePageRent = () => {
+        dispatch(changeLookingFor("Rent/Lease")); 
+    }
+
+    const handlePageSell = () => {
+        dispatch(changeLookingFor("sell")); 
+    }
 
     const handlecountry = (val) => {
         setCountry(val);
@@ -232,9 +240,9 @@ const TopNavbar = () => {
                     </PopoverContent>
                 </Popover>
                 {/* ghbnjkl */}
-                <Link to={"/post"}>Sell</Link>
-                <Link>Home Loans</Link>
-                <Link>Rent</Link>
+                <Link onClick={handlePageSell} to={"/post"}>Sell</Link>
+                <Link>Home Loans</Link> 
+                <Link onClick={handlePageRent} to={"/post"}>Rent</Link>
                 <Link>Advertise</Link>
                 <Link>Agent Finder</Link>
                 <Popover>

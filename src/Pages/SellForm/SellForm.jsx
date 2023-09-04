@@ -8,7 +8,7 @@ import {
     TabPanel,
     TabPanels,
     Tabs,
-} from "@chakra-ui/react";
+} from "@chakra-ui/react";  
 import FlatAppartment from "./Sell/FlatAppartment/FlatAppartment";
 import IndependentHouse from "./Sell/IndependentHouse/IndependentHouse";
 import Independentbuilder from "./Sell/Independentbuilder/Independentbuilder";
@@ -22,9 +22,11 @@ import Storage from "./SellCommercial/Storage/Storage";
 import Industry from "./SellCommercial/Industry/Industry";
 import Hospitality from "./SellCommercial/Hospitality/Hospitality";
 import PlotLandCommercial from "./SellCommercial/PlotLandCommercial/PlotLandCommercial";
+import { useSelector } from "react-redux";
 
 
-const SellForm = () => {
+const SellForm = () => { 
+    const looking = useSelector((state)=>state.gloalval.lookingFor);  
     const [look, setlook] = useState("");
     const [type, settype] = useState("");
     const [typeofplace, setTypeOf] = useState(""); 
@@ -50,8 +52,23 @@ const SellForm = () => {
     };
 
     useEffect(() => {
-        settype("sell");
-        setlook("Flat/Apartment"); 
+
+        if(looking=='Rent/Lease'){
+            settype("Rent/Lease");  
+            setSelectedTab(1);
+        } 
+        else if(looking=="sell"){
+            settype("sell");   
+            setSelectedTab(0);
+        } 
+        else if(looking=="PG"){
+            settype("look");
+            setSelectedTab(2); 
+        }
+        else{
+            settype(""); 
+        }
+        console.log(looking); 
 
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }); 
 
@@ -70,8 +87,8 @@ const SellForm = () => {
                     <Heading textAlign={"left"} margin={"20px 0"} as={"h4"} size={"sm"}>
                         I am looking to
                     </Heading>
-                    <Tabs variant="unstyled" onChange={handleTabChange} defaultIndex={0} >
-                        <TabList gap={3} margin={"0 20px"}>
+                    <Tabs variant="unstyled" index={selectedTab} onChange={handleTabChange} defaultIndex={0} >
+                        <TabList gap={3} margin={"0 20px"} >
                             <Tab
                                 _selected={{
                                     bg: "blue.50",

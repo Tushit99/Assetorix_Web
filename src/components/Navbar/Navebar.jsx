@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Logo from "../Logo/Logo";
 import style from "./Navbar.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Hamburger from "../Hamburger/Hamburger";
 import {
     Popover,
@@ -23,7 +23,7 @@ import {
 import { BiSolidUserDetail } from "react-icons/bi";
 import { IoIosArrowDown } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
-import { changecountry } from "../../Redux/globalval/action";
+import { changeLookingFor, changecountry } from "../../Redux/globalval/action";
 import { userPreLog, userlogout } from "../../Redux/userauth/action";
 
 const Navebar = () => {
@@ -31,6 +31,7 @@ const Navebar = () => {
     const [scroll, setScroll] = useState(0);
     const [country, setCountry] = useState("india");
     const dispatch = useDispatch();
+    const navigate = useNavigate(); 
 
     useEffect(() => {
         window.addEventListener("scroll", () => {
@@ -38,9 +39,9 @@ const Navebar = () => {
         });
 
         let userid = localStorage.getItem("usrId") || undefined;
-        let authorization = localStorage.getItem("AstToken") || undefined; 
+        let authorization = localStorage.getItem("AstToken") || undefined;
 
-        if (userid && authorization) {  
+        if (userid && authorization) {
             let body = {
                 id: userid,
                 authorization,
@@ -59,14 +60,22 @@ const Navebar = () => {
         }
     }, []);
 
+    const handlePageRent = () => {
+        dispatch(changeLookingFor("Rent/Lease")); 
+    }
+
+    const handlePageSell = () => {
+        dispatch(changeLookingFor("sell")); 
+    }
+
     const handlecountry = (val) => {
         setCountry(val);
         localStorage.setItem("astcountry", val);
         dispatch(changecountry(val));
-    }; 
+    };
 
-    const handlelogout =()=>{
-        dispatch(userlogout()); 
+    const handlelogout = () => {
+        dispatch(userlogout());
     }
 
     console.log(data);
@@ -127,14 +136,14 @@ const Navebar = () => {
                                     <Text margin={"0 0 8px 0"}>
                                         Hello {(data.user.name).toUpperCase()}
                                     </Text>
-                                    <Box className={style.log_links}> 
-                                        <Link to={"/profile"}> Profile </Link> 
-                                        <Link> Wishlist </Link>  
+                                    <Box className={style.log_links}>
+                                        <Link to={"/profile"}> Profile </Link>
+                                        <Link> Wishlist </Link>
                                         <Link> recently visited </Link>
-                                        <Link> Listings </Link>  
-                                        <Link> Purchased </Link>  
+                                        <Link> Listings </Link>
+                                        <Link> Purchased </Link>
                                     </Box>
-                                    <Button onClick={handlelogout} className={style.logout_btn} > Logout </Button>  
+                                    <Button onClick={handlelogout} className={style.logout_btn} > Logout </Button>
                                 </PopoverBody>
                             </PopoverContent>
                         ) : (
@@ -174,7 +183,7 @@ const Navebar = () => {
                             color={"auto"}
                             fontWeight={400}
                             _hover={{ color: "unset" }}
-                            _active={{ color: "unset" }}
+                            _active={{ color: "unset" }} 
                         >
                             Buy
                         </Button>
@@ -251,12 +260,12 @@ const Navebar = () => {
                     </PopoverContent>
                 </Popover>
                 {/* ghbnjkl */}
-                <Link to={"/post"}>Sell</Link>
+                <Link onClick={handlePageSell} to={"/post"}>Sell</Link>
                 <Link>Home Loans</Link>
-                <Link>Rent</Link>
+                <Link onClick={handlePageRent} to={"/post"}>Rent</Link>
                 <Link>Advertise</Link>
                 <Link>Agent Finder</Link>
-                <Popover>
+                <Popover> 
                     <PopoverTrigger>
                         <button>Corporate Services</button>
                     </PopoverTrigger>
