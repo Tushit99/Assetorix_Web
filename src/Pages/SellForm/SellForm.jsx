@@ -27,12 +27,12 @@ import PlotLandCommercial from "./SellCommercial/PlotLandCommercial/PlotLandComm
 const SellForm = () => {
     const [look, setlook] = useState("");
     const [type, settype] = useState("");
-    const [typeofplace, setTypeOf] = useState("");
+    const [typeofplace, setTypeOf] = useState(""); 
     const [selectedTab, setSelectedTab] = useState(0);
 
     const handlechange = (type, look) => {
         settype(type);
-        setlook(look);
+        setlook(look); 
         console.log(type);
     };
 
@@ -51,7 +51,10 @@ const SellForm = () => {
 
     useEffect(() => {
         settype("sell");
-        setlook("Flat/Apartment");
+        setlook("Flat/Apartment"); 
+
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }); 
+
     }, [])
 
 

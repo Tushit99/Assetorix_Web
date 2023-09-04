@@ -1,10 +1,13 @@
 import { Box, Divider, Heading, Text } from '@chakra-ui/react';
-import Reactw from 'react';
+import Reactw, { useEffect } from 'react';
 import style from "./Contact.module.css";
 
 const Contact = () => {
     // const [iframeWidth, setIframeWidth] = useState(600);
     // const [iframeHeight, setIframeHeight] = useState(500);
+    useEffect(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });  
+      }, [])
 
     return (
         <Box display={{base:"grid",lg:"flex"}} className={style.top_head}>

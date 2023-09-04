@@ -23,11 +23,16 @@ import {
 import style from "./Page1.module.css";
 import video from "./Ametheus.mp4";
 import { Search2Icon } from "@chakra-ui/icons";
-import { Link } from "react-router-dom/dist";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Page1 = () => {
-  const { country } = useSelector((state) => state.gloalval);
+  const { country } = useSelector((state) => state.gloalval); 
+  const navigate = useNavigate(); 
+
+  const handlePageRent = ()=>{
+    navigate("/post"); 
+  }
 
   return (
     <div className={style.pagetop}>
@@ -189,7 +194,8 @@ const Page1 = () => {
                 boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}
                 fontSize={{ base: "sm", lg: "lg" }}
                 fontWeight={{ base: "500", lg: "bold" }}
-                backgroundColor={"#d2ab67cb"}
+                backgroundColor={"#d2ab67cb"}    
+                onClick={handlePageRent}
               >
                 Rent
               </Button>

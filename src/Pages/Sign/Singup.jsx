@@ -143,7 +143,8 @@ const Singup = () => {
       })
       navigate("/");
     }
-  }, [data]);
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }); 
+  }, [data]); 
 
   console.log(data);
 
