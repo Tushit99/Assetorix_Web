@@ -19,6 +19,7 @@ import axios from "axios";
 import style from "../RentForm.module.css";
 import { NumericString } from "../../code";
 import { InputGroup } from "@chakra-ui/react";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 
 const FlatApartment = () => {
@@ -47,20 +48,16 @@ const FlatApartment = () => {
   const [areaPer, setAreaPer] = useState("sq.ft");
   const [furnishedarr, setfurnishedarr] = useState([]);
   const [extraroom, setExtraRoom] = useState([]);
-  const [furnished, setFurnished] = useState("");
-  const [availability, setAvailability] = useState("");
+  const [furnished, setFurnished] = useState(""); 
   const [fromyear, setFromyear] = useState("");
   const [propertyAge, setpropertyAge] = useState("");
   const [ownership, setOwnerShip] = useState("");
   const [pricedetail, setPricedetail] = useState("");
-  const [priceSqr, setPriceSqr] = useState("");
-  const [inclusivePrices, setInclusivePrice] = useState([]);
+  const [priceSqr, setPriceSqr] = useState(""); 
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
   const [buildingFeature, setBuildingFeature] = useState([]);
-  const [additinalft, setAdditinalFeature] = useState("");
-  const [watersource, setWaterSource] = useState([]);
-  const [overLook, setoverlook] = useState([]);
+  const [additinalft, setAdditinalFeature] = useState(""); 
   const [otherFeature, setOtherFeature] = useState([]);
   const [powerbackup, setPowerbackup] = useState("");
   const [propertyFacing, setPropertyFacing] = useState("");
@@ -75,13 +72,16 @@ const FlatApartment = () => {
   const [willingTo, setWillingTo] = useState([]);
   const [preferredAgreement, setpreferredAgreement] = useState("");
   const [brokersContact, setbrokersContact] = useState("No");
-  const [rentdetail, setRentDetail] = useState("");
-  const [additionalCharge, setAdditionalCharge] = useState([]); 
+  const [additionalPrice, setAdditionalPrice] = useState(false);
+  const [additionalCharge, setAdditionalCharge] = useState([]);
   const [maintenancePrice, setMaintenancePrice] = useState("");
   const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
   const [membershipCharge, setMembershipCharge] = useState("");
   const [bookingAmount, setBookingAmount] = useState("");
-
+  const [securityDeposit, setSecurityDeposit] = useState("");
+  const [depositAmount, setDepositAmount] = useState("");
+  const [agreementDuration, setagreementDuration] = useState(""); 
+  const [noticePeriod, setNoticePeriod] = useState("");   
 
 
   const handleSubmitData = async (e) => {
@@ -106,16 +106,14 @@ const FlatApartment = () => {
       },
       ownership,
       price: +pricedetail,
-      priceUnit: +priceSqr,
-      inclusivePrices,
+      priceUnit: +priceSqr, 
       amenities,
       propertyFeatures,
       society_buildingFeatures: buildingFeature,
       additionalFeatures: additinalft,
-      waterSources: watersource,
+      // waterSources: watersource,
       otherFeatures: otherFeature,
-      powerBackup: powerbackup,
-      overLookings: overLook,
+      powerBackup: powerbackup, 
       propertyFacing,
       flooring,
       propertyAge: propertyAge,
@@ -162,11 +160,7 @@ const FlatApartment = () => {
       showToastError("Provide Price Per sq.ft");
     } else if (!additinalft) {
       showToastError("Provide Property description");
-    } else if (!watersource) {
-      showToastError("Provide Water Source");
-    } else if (!overLook) {
-      showToastError("Provide Overlooking");
-    } else if (!powerbackup) {
+    }    else if (!powerbackup) {
       showToastError("Provide Power Backup");
     } else if (!propertyFacing) {
       showToastError("Provide Property Facing");
@@ -197,11 +191,8 @@ const FlatApartment = () => {
       furnishedarr &&
       ownership &&
       pricedetail &&
-      priceSqr &&
-      inclusivePrices &&
-      additinalft &&
-      watersource &&
-      overLook &&
+      priceSqr && 
+      additinalft &&  
       powerbackup &&
       propertyFacing &&
       flooring &&
@@ -355,17 +346,7 @@ const FlatApartment = () => {
     });
     console.log(willingTo);
   }
-
-  const handleAvailable = (e) => {
-    e.preventDefault();
-    setAvailability(e.target.value);
-  };
  
-
-  // const handlepropertyAge = (e) => {
-  //   e.preventDefault();
-  //   setFromyear(e.target.value);
-  // };
 
   const handlepropertyAge = (e) => {
     e.preventDefault();
@@ -427,20 +408,7 @@ const FlatApartment = () => {
       newarr.push(value);
     }
     setBuildingFeature(newarr);
-  };
-
-  const handleoverlooking = (e) => {
-    e.preventDefault();
-    let newarr = [...overLook];
-    let value = e.target.value;
-
-    if (newarr.includes(value)) {
-      newarr.splice(newarr.indexOf(value), 1);
-    } else {
-      newarr.push(value);
-    }
-    setoverlook(newarr);
-  };
+  }; 
 
   const handleotherfeature = (e) => {
     e.preventDefault();
@@ -466,32 +434,7 @@ const FlatApartment = () => {
       newarr.push(value);
     }
     setLocationAdv(newarr);
-  };
-
-  const handleinclusiveandtax = (e) => {
-    let newarr = [...inclusivePrices];
-    let value = e;
-
-    if (newarr.includes(value)) {
-      newarr.splice(newarr.indexOf(value), 1);
-    } else {
-      newarr.push(value);
-    }
-    setInclusivePrice(newarr);
-  };
-
-  const handleWaterSource = (e) => {
-    let newarr = [...watersource];
-    let value = e;
-
-    if (newarr.includes(value)) {
-      newarr.splice(newarr.indexOf(value), 1);
-    } else {
-      newarr.push(value);
-    }
-    console.log(newarr);
-    setWaterSource(newarr);
-  };
+  }; 
 
   const areaCalucation = () => {
     if (pricedetail && plotArea) {
@@ -501,6 +444,11 @@ const FlatApartment = () => {
       setPriceSqr(ans);
     }
   };
+
+  const handleMonthNotice = (e) => {
+    e.preventDefault(); 
+    setNoticePeriod(e.target.value); 
+  }
 
   const handleAdditionalCharge = (e) => {
     e.preventDefault();
@@ -512,8 +460,16 @@ const FlatApartment = () => {
     } else {
       newarr.push(value);
     }
-    console.log(newarr); 
-    setAdditionalCharge(newarr); 
+    setAdditionalCharge(newarr);
+  }
+
+  const handleSecurityDeposit = (e) => {
+    e.preventDefault();
+    setSecurityDeposit(e.target.value);
+  }
+
+  const handleDepositAmount = (e) => {
+    setDepositAmount(e.target.value);
   }
 
   return (
@@ -1309,7 +1265,7 @@ const FlatApartment = () => {
         {/* ===================================== Are you 0k with brokers contacting you? ============================== */}
         <Box className={style.optional_box}>
           <Heading as={"h3"} size={"sm"} textAlign={"left"}>
-            Are you 0k with brokers contacting you?
+            Are you 0k with Agents contacting you?
           </Heading>
           <Box >
             <button
@@ -1335,31 +1291,6 @@ const FlatApartment = () => {
           </Box>
         </Box>
 
-        {/* ==============================  Rent Detail  ==================================== */}
-        <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
-            Preferred agreement type
-          </Heading>
-          <Box>
-            <Input type="text" placeholder={"₹ Expected Rent"} />
-          </Box>
-          <Box>
-            <Checkbox isChecked={additionalCharge.includes("Electricity & Water charges excluded")} value={"Electricity & Water charges excluded"} onChange={handleAdditionalCharge} >Electricity & Water charges excluded</Checkbox>
-            <Checkbox isChecked={additionalCharge.includes("price Negotiable")} value={"price Negotiable"} onChange={handleAdditionalCharge} >price Negotiable</Checkbox>
-          </Box>
-          <Box>  
-            <InputGroup w={"300px"} margin={"10px 0"}>
-              <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(NumericString(e.target.value))} value={maintenancePrice} placeholder={"Maintenance Price"} />
-              <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
-                <option value="Monthly">Monthly</option>
-                <option value="Yearly">Yearly</option>
-              </Select>
-            </InputGroup>
-            <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(NumericString(e.target.value))} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-            <Input type="text" w={"300px"} value={membershipCharge} onChange={(e) => setMembershipCharge(NumericString(e.target.value))} placeholder="Membership Charge" margin={"10px 0 0 0"} />
-          </Box>
-        </Box>
-
         {/* ====================== Preferred agreement type =============================== */}
         <Box className={style.optional_box}>
           <Heading as={"h3"} size={"sm"} margin={"14px 0"} textAlign={"left"}>
@@ -1369,6 +1300,45 @@ const FlatApartment = () => {
             <button onClick={handlePreferredAgreement} value={"Company lease agreement"} className={preferredAgreement == "Company lease agreement" ? style.setbtn : style.btn}  >Company lease agreement</button>
             <button onClick={handlePreferredAgreement} value={"Any"} className={preferredAgreement == "Any" ? style.setbtn : style.btn}  >Any</button>
           </Box>
+        </Box>
+
+        {/* ==============================  Rent Detail  ==================================== */}
+        <Box className={style.optional_box}>
+          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
+            Preferred agreement type
+          </Heading>
+          <Box>
+            <Input type="text" w={"40%"} borderRadius={0} value={priceSqr} onChange={(e) => {
+              e.preventDefault();
+              setPriceSqr(NumericString(e.target.value));
+            }} placeholder={"₹ Expected Rent"} />
+          </Box>
+          <Box display={"flex"} flexWrap={"wrap"} gap={5}>
+            <Checkbox isChecked={additionalCharge.includes("Electricity & Water charges excluded")} value={"Electricity & Water charges excluded"} onChange={handleAdditionalCharge} >Electricity & Water charges excluded</Checkbox>
+            <Checkbox isChecked={additionalCharge.includes("price Negotiable")} value={"price Negotiable"} onChange={handleAdditionalCharge} >price Negotiable</Checkbox>
+          </Box>
+          <Box display={additionalPrice ? "grid" : "none"}>
+            <InputGroup w={"300px"} margin={"10px 0"} >
+              <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(NumericString(e.target.value))} value={maintenancePrice} placeholder={"Maintenance Price"} />
+              <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
+                <option value="Monthly">Monthly</option>
+                <option value="Yearly">Yearly</option>
+              </Select>
+            </InputGroup>
+            <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(NumericString(e.target.value))} placeholder="Booking Amount" margin={"10px 0 0 0"} />
+            <Input type="text" w={"300px"} value={membershipCharge} onChange={(e) => setMembershipCharge(NumericString(e.target.value))} placeholder="Membership Charge" margin={"10px 0 0 0"} />
+          </Box>
+          <Heading
+            as={"h3"}
+            size={"sm"}
+            margin={"10px 0"}
+            color={"#002aff"}
+            fontWeight={500}
+            cursor={"pointer"}
+            onClick={() => setAdditionalPrice(!additionalPrice)}
+            textAlign={"left"}>
+            {additionalPrice ? <IoIosArrowUp style={{ display: "inline" }} /> : <IoIosArrowDown style={{ display: "inline" }} />} Add more pricing details
+          </Heading>
         </Box>
 
         {/* ========================= Add pricing and details ========================= */}
@@ -1480,12 +1450,24 @@ const FlatApartment = () => {
           </Box>
         </Box>
 
+      </Box>
 
+      <Box className={style.optional_box}>
+        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          Security deposit
+        </Heading>
+        <Box>
+          <button value={"Fixed"} className={securityDeposit == "Fixed" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> Fixed </button>
+          <button value={"Multiple of Rent"} className={securityDeposit == "Multiple of Rent" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> Multiple of Rent </button>
+          <button value={"None"} className={securityDeposit == "None" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> None </button>
+        </Box>
+        <Input type="text" w={300} value={depositAmount} onChange={handleDepositAmount} placeholder={`${securityDeposit == "fixed" ? "Deposit Value" : "No. of months (Max 30)"}`} />
+      </Box>
 
-        {/* ============================== inclusive price / tax / Price negotiable=========================== */}
-        <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
+      {/* ============================== inclusive price / tax / Price negotiable=========================== */}
+      {/* <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
           <Checkbox
-            isChecked={inclusivePrices.includes("All inclusive price")}
+            isChecked={ .includes("All inclusive price")}
             onChange={(e) => {
               e.preventDefault();
               handleinclusiveandtax(e.target.value);
@@ -1495,7 +1477,7 @@ const FlatApartment = () => {
             All inclusive price
           </Checkbox>
           <Checkbox
-            isChecked={inclusivePrices.includes(
+            isChecked={ .includes(
               "Tax and Govt. charges excluded"
             )}
             onChange={(e) => {
@@ -1507,7 +1489,7 @@ const FlatApartment = () => {
             Tax and Govt. charges excluded
           </Checkbox>
           <Checkbox
-            isChecked={inclusivePrices.includes("Price Negotiable")}
+            isChecked={ .includes("Price Negotiable")}
             onChange={(e) => {
               e.preventDefault();
               handleinclusiveandtax(e.target.value);
@@ -1516,28 +1498,60 @@ const FlatApartment = () => {
           >
             Price Negotiable
           </Checkbox>
-        </Box>
-        {/* ========================== What makes your property unique================================  */}
+        </Box> */}
+
+      {/* Duration of agriment */}
+      <Box>
+        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          Duration of agreement
+        </Heading>
+        <Select onChange={(e) => setagreementDuration(e.target.value)} value={agreementDuration} >
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </Select>
+      </Box>
+
+      {/* Months of Notice */}
+      <Box className={style.optional_box}>
+        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          Months of Notice (Optional)
+        </Heading>
         <Box>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
-            What makes your property unique
-          </Heading>
-          <Heading as={"h3"} size={"xs"} margin={"10px 0"} textAlign={"left"}>
-            Adding description will increase your listing visibility
-          </Heading>
-          <Textarea
-            height={140}
-            value={desc}
-            onChange={(e) => {
-              let my_cleantext = CleanInputText(e.target.value);
-              setDesc(my_cleantext);
-            }}
-          ></Textarea>
+          <button onClick={handleMonthNotice} className={noticePeriod=="None" ? style.setbtn : style.btn}  value={"None"}> None </button>
+          <button onClick={handleMonthNotice} className={noticePeriod=="1 month" ? style.setbtn : style.btn}  value={"1 month"}> 1 month </button>
+          <button onClick={handleMonthNotice} className={noticePeriod=="2 months" ? style.setbtn : style.btn}  value={"2 months"}> 2 month </button>
+          <button onClick={handleMonthNotice} className={noticePeriod=="3 months" ? style.setbtn : style.btn}  value={"3 months"}> 3 month </button>
+          <button onClick={handleMonthNotice} className={noticePeriod=="4 months" ? style.setbtn : style.btn}  value={"4 months"}> 4 month </button>
+          <button onClick={handleMonthNotice} className={noticePeriod=="5 months" ? style.setbtn : style.btn}  value={"5 months"}> 5 month </button>
+          <button onClick={handleMonthNotice} className={noticePeriod=="6 months" ? style.setbtn : style.btn}  value={"6 months"}> 6 month </button>
         </Box>
       </Box>
 
+      {/* ========================== What makes your property unique================================  */}
+      <Box>
+        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          What makes your property unique
+        </Heading>
+        <Heading as={"h3"} size={"xs"} margin={"10px 0"} textAlign={"left"}>
+          Adding description will increase your listing visibility
+        </Heading>
+        <Textarea
+          height={140}
+          value={desc}
+          onChange={(e) => {
+            let my_cleantext = CleanInputText(e.target.value);
+            setDesc(my_cleantext);
+          }}
+        ></Textarea>
+      </Box>
 
-      {/* Add amenities/unique features */}
+
+
+      {/* ========================= Add amenities/unique features ================================== */}
       <Box>
         <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
           Add amenities/unique features
@@ -1552,7 +1566,7 @@ const FlatApartment = () => {
           All fields on this page are optional
         </Heading>
       </Box>
-      {/* Amenities */}
+      {/* ========================= Amenities ================================== */}
       <Box className={style.optional_box}>
         <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
           Amenities
@@ -1632,7 +1646,7 @@ const FlatApartment = () => {
           </button>
         </Box>
       </Box>
-      {/* Property Features */}
+      {/* ========================= Property Features ================================== */}
       <Box className={style.optional_box}>
         <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
           Property Features
@@ -1759,7 +1773,7 @@ const FlatApartment = () => {
           </button>
         </Box>
       </Box>
-      {/* Society/Building feature */}
+      {/* ========================= Society/Building feature ================================== */}
       <Box className={style.optional_box}>
         <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
           Society/Building feature
@@ -1833,7 +1847,7 @@ const FlatApartment = () => {
           </button>
         </Box>
       </Box>
-      {/* Additional Features */}
+      {/* ========================= Additional Features ================================== */}
       <Box className={style.optional_box}>
         <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
           Additional Features
@@ -1905,100 +1919,8 @@ const FlatApartment = () => {
           </button>
         </Box>
       </Box>
-      {/* Water Source */}
-      <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
-          Water Source
-        </Heading>
-        <Box>
-          <button
-            className={
-              watersource.includes("Municipal corporation")
-                ? style.setbtn
-                : style.btn
-            }
-            onClick={(e) => {
-              e.preventDefault();
-              handleWaterSource(e.target.value);
-            }}
-            value={"Municipal corporation"}
-          >
-            Municipal corporation
-          </button>
-          <button
-            className={
-              watersource.includes("Borewell / Tank") ? style.setbtn : style.btn
-            }
-            onClick={(e) => {
-              e.preventDefault();
-              handleWaterSource(e.target.value);
-            }}
-            value={"Borewell / Tank"}
-          >
-            Borewell/Tank
-          </button>
-          <button
-            className={
-              watersource.includes("24*7 Water") ? style.setbtn : style.btn
-            }
-            onClick={(e) => {
-              e.preventDefault();
-              handleWaterSource(e.target.value);
-            }}
-            value={"24*7 Water"}
-          >
-            24*7 Water
-          </button>
-        </Box>
-      </Box>
-      {/* Overlooking */}
-      <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
-          Overlooking
-        </Heading>
-        <Box>
-          <button
-            className={overLook.includes("Pool") ? style.setbtn : style.btn}
-            onClick={handleoverlooking}
-            value={"Pool"}
-          >
-            Pool
-          </button>
-          <button
-            className={
-              overLook.includes("Park / Garden") ? style.setbtn : style.btn
-            }
-            onClick={handleoverlooking}
-            value={"Park / Garden"}
-          >
-            Park/Garden
-          </button>
-          <button
-            className={overLook.includes("Club") ? style.setbtn : style.btn}
-            onClick={handleoverlooking}
-            value={"Club"}
-          >
-            Club
-          </button>
-          <button
-            className={
-              overLook.includes("Main Road") ? style.setbtn : style.btn
-            }
-            onClick={handleoverlooking}
-            value={"Main Road"}
-          >
-            Main Road
-          </button>
-          <button
-            className={overLook.includes("Other") ? style.setbtn : style.btn}
-            onClick={handleoverlooking}
-            value={"Other"}
-          >
-            Other
-          </button>
-        </Box>
-      </Box>
-      {/* Other Features */}
+    
+      {/* ============================ Other Features ==================================== */}
       <Box>
         <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
           Other Features
@@ -2038,7 +1960,7 @@ const FlatApartment = () => {
           </Checkbox>
         </Box>
       </Box>
-      {/* Power Back up */}
+      {/* ============================ Power Back up ==================================== */}
       <Box className={style.optional_box}>
         <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
           Power Back up
@@ -2076,7 +1998,7 @@ const FlatApartment = () => {
           </button>
         </Box>
       </Box>
-      {/* Property facing */}
+      {/* ============================ Property facing ==================================== */}
       <Box className={style.optional_box}>
         <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
           Property facing
@@ -2172,7 +2094,7 @@ const FlatApartment = () => {
           </button>
         </Box>
       </Box>
-      {/* Type of flooring */}
+      {/* ============================ Type of flooring ==================================== */}
       <Box className={style.optional_box}>
         <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
           Type of flooring
@@ -2200,7 +2122,7 @@ const FlatApartment = () => {
           </Select>
         </Box>
       </Box>
-      {/* Width of facing road */}
+      {/* ============================ Width of facing road ==================================== */}
       <Box className={style.optional_box}>
         <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
           Width of facing road
@@ -2227,6 +2149,7 @@ const FlatApartment = () => {
           </Select>
         </Box>
       </Box>
+      {/* ============================ Location Advantages ==================================== */}
       <Box className={style.optional_box}>
         <Heading size={"md"} margin={"10px 0 4px 0"} textAlign={"left"}>
           Location Advantages

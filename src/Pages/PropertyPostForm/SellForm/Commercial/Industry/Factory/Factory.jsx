@@ -866,7 +866,7 @@ const Factory = () => {
                             onClick={() => setAdditionalPrice(!additionalPrice)}
                             textAlign={"left"}>
                             {additionalPrice ? <IoIosArrowUp style={{ display: "inline" }} /> : <IoIosArrowDown style={{ display: "inline" }} />} Add more pricing details
-                        </Heading>
+                        </Heading> 
                     </Box>
                 </Box>
 
