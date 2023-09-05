@@ -26,9 +26,9 @@ import PurchaseTerm from '../../Pages/Footer/HelpCenter/PerchaseTerm/PurchaseTer
 import UserTerm from '../../Pages/Footer/HelpCenter/UserTerm/UserTerm'
 import Privacy from '../../Pages/Footer/HelpCenter/Privacy/Privacy'
 import Disclaimer from '../../Pages/Footer/HelpCenter/Disclaimer/Disclaimer'
-import UserDetail from '../../Pages/UserDetail/UserDetail'
-import SellForm from '../../Pages/SellForm/SellForm'
+import UserDetail from '../../Pages/UserDetail/UserDetail' 
 import PrivateRoute from '../PrivateRoute/PrivateRoute'
+import SellForm from '../../Pages/PropertyPostForm/SellForm'
 // import ConsultingPage from '../../Pages/CoporateServices/Consulting/consulting'
 
 const MainRoute = () => {
