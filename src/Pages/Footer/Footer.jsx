@@ -19,8 +19,8 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { changeLookingFor } from "../../Redux/globalval/action";
 
-const Footer = () => { 
-  const dispatch = useDispatch();  
+const Footer = () => {
+  const dispatch = useDispatch();
 
   const handleScroltop = () => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
@@ -28,10 +28,14 @@ const Footer = () => {
 
   const handlePageRent = () => {
     dispatch(changeLookingFor("Rent/Lease"));
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+
   }
 
   const handlePageSell = () => {
-    dispatch(changeLookingFor("sell")); 
+    dispatch(changeLookingFor("sell"));
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+
   }
 
   return (
@@ -55,7 +59,7 @@ const Footer = () => {
             <Link onClick={handleScroltop} to={"#"}>About Assetorix</Link>
             <Link onClick={handleScroltop} to={"#"}> Developer Partners </Link>
             <Link onClick={handleScroltop} to={"/contact"}> Contact </Link>
-          </Box> 
+          </Box>
           <Box >
             <h2>Help Center</h2>
             <Link onClick={handleScroltop} to={"/user_term_condition"}>User Terms & Condition </Link>
