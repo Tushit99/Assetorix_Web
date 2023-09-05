@@ -1028,28 +1028,28 @@ const CommercialLand = () => {
               Select Industry Type
             </MenuButton>
             <MenuList display={"grid"} padding={"4px 20px"} marginTop={"-6px"} >
-              <Checkbox checked={industryType.includes("Automobiles")} onChange={handleIndustryType} value={"Automobiles"} >Automobiles</Checkbox>
-              <Checkbox checked={industryType.includes("Biotechnology")} onChange={handleIndustryType} value={"Biotechnology"} >Biotechnology</Checkbox>
-              <Checkbox checked={industryType.includes("Capital Goods")} onChange={handleIndustryType} value={"Capital Goods"} >Capital Goods</Checkbox>
-              <Checkbox checked={industryType.includes("Chemicals")} onChange={handleIndustryType} value={"Chemicals"} >Chemicals</Checkbox>
-              <Checkbox checked={industryType.includes("Construction")} onChange={handleIndustryType} value={"Construction"} >Construction</Checkbox>
-              <Checkbox checked={industryType.includes("Defence and Aerospace Manufacturing")} onChange={handleIndustryType} value={"Defence and Aerospace Manufacturing"} >Defence and Aerospace Manufacturing</Checkbox>
-              <Checkbox checked={industryType.includes("Electronics Hardware")} onChange={handleIndustryType} value={"Electronics Hardware"} >Electronics Hardware</Checkbox>
-              <Checkbox checked={industryType.includes("Engineering")} onChange={handleIndustryType} value={"Engineering"} >Engineering</Checkbox>
-              <Checkbox checked={industryType.includes("Food processing")} onChange={handleIndustryType} value={"Food processing"} >Food processing</Checkbox>
-              <Checkbox checked={industryType.includes("Gems and Jewellery")} onChange={handleIndustryType} value={"Gems and Jewellery"} >Gems and Jewellery</Checkbox>
-              <Checkbox checked={industryType.includes("Handicrafts")} onChange={handleIndustryType} value={"Handicrafts"} >Handicrafts</Checkbox>
-              <Checkbox checked={industryType.includes("IT and ITes")} onChange={handleIndustryType} value={"IT and ITes"} >IT and ITes</Checkbox>
-              <Checkbox checked={industryType.includes("Leather")} onChange={handleIndustryType} value={"Leather"} >Leather</Checkbox>
-              <Checkbox checked={industryType.includes("Manufacturing")} onChange={handleIndustryType} value={"Manufacturing"} >Manufacturing</Checkbox>
-              <Checkbox checked={industryType.includes("Medical devices")} onChange={handleIndustryType} value={"Medical devices"} >Medical devices</Checkbox>
-              <Checkbox checked={industryType.includes("Metals")} onChange={handleIndustryType} value={"Metals"} >Metals</Checkbox>
-              <Checkbox checked={industryType.includes("Mixed")} onChange={handleIndustryType} value={"Mixed"} >Mixed</Checkbox>
-              <Checkbox checked={industryType.includes("Petroleum")} onChange={handleIndustryType} value={"Petroleum"} >Petroleum</Checkbox>
-              <Checkbox checked={industryType.includes("Pharmaceuticals")} onChange={handleIndustryType} value={"Pharmaceuticals"} >Pharmaceuticals</Checkbox>
-              <Checkbox checked={industryType.includes("Renewable Energy")} onChange={handleIndustryType} value={"Renewable Energy"} >Renewable Energy</Checkbox>
-              <Checkbox checked={industryType.includes("Software")} onChange={handleIndustryType} value={"Software"} >Software</Checkbox>
-              <Checkbox checked={industryType.includes("Textiles")} onChange={handleIndustryType} value={"Textiles"} >Textiles</Checkbox>
+              <Checkbox isChecked={industryType.includes("Automobiles")} onChange={handleIndustryType} value={"Automobiles"} >Automobiles</Checkbox>
+              <Checkbox isChecked={industryType.includes("Biotechnology")} onChange={handleIndustryType} value={"Biotechnology"} >Biotechnology</Checkbox>
+              <Checkbox isChecked={industryType.includes("Capital Goods")} onChange={handleIndustryType} value={"Capital Goods"} >Capital Goods</Checkbox>
+              <Checkbox isChecked={industryType.includes("Chemicals")} onChange={handleIndustryType} value={"Chemicals"} >Chemicals</Checkbox>
+              <Checkbox isChecked={industryType.includes("Construction")} onChange={handleIndustryType} value={"Construction"} >Construction</Checkbox>
+              <Checkbox isChecked={industryType.includes("Defence and Aerospace Manufacturing")} onChange={handleIndustryType} value={"Defence and Aerospace Manufacturing"} >Defence and Aerospace Manufacturing</Checkbox>
+              <Checkbox isChecked={industryType.includes("Electronics Hardware")} onChange={handleIndustryType} value={"Electronics Hardware"} >Electronics Hardware</Checkbox>
+              <Checkbox isChecked={industryType.includes("Engineering")} onChange={handleIndustryType} value={"Engineering"} >Engineering</Checkbox>
+              <Checkbox isChecked={industryType.includes("Food processing")} onChange={handleIndustryType} value={"Food processing"} >Food processing</Checkbox>
+              <Checkbox isChecked={industryType.includes("Gems and Jewellery")} onChange={handleIndustryType} value={"Gems and Jewellery"} >Gems and Jewellery</Checkbox>
+              <Checkbox isChecked={industryType.includes("Handicrafts")} onChange={handleIndustryType} value={"Handicrafts"} >Handicrafts</Checkbox>
+              <Checkbox isChecked={industryType.includes("IT and ITes")} onChange={handleIndustryType} value={"IT and ITes"} >IT and ITes</Checkbox>
+              <Checkbox isChecked={industryType.includes("Leather")} onChange={handleIndustryType} value={"Leather"} >Leather</Checkbox>
+              <Checkbox isChecked={industryType.includes("Manufacturing")} onChange={handleIndustryType} value={"Manufacturing"} >Manufacturing</Checkbox>
+              <Checkbox isChecked={industryType.includes("Medical devices")} onChange={handleIndustryType} value={"Medical devices"} >Medical devices</Checkbox>
+              <Checkbox isChecked={industryType.includes("Metals")} onChange={handleIndustryType} value={"Metals"} >Metals</Checkbox>
+              <Checkbox isChecked={industryType.includes("Mixed")} onChange={handleIndustryType} value={"Mixed"} >Mixed</Checkbox>
+              <Checkbox isChecked={industryType.includes("Petroleum")} onChange={handleIndustryType} value={"Petroleum"} >Petroleum</Checkbox>
+              <Checkbox isChecked={industryType.includes("Pharmaceuticals")} onChange={handleIndustryType} value={"Pharmaceuticals"} >Pharmaceuticals</Checkbox>
+              <Checkbox isChecked={industryType.includes("Renewable Energy")} onChange={handleIndustryType} value={"Renewable Energy"} >Renewable Energy</Checkbox>
+              <Checkbox isChecked={industryType.includes("Software")} onChange={handleIndustryType} value={"Software"} >Software</Checkbox>
+              <Checkbox isChecked={industryType.includes("Textiles")} onChange={handleIndustryType} value={"Textiles"} >Textiles</Checkbox>
             </MenuList>
           </Menu>
         </Box>
