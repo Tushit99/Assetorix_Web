@@ -17,6 +17,9 @@ import { Checkbox } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import style from "../RentForm.module.css";
+import { NumericString } from "../../code";
+import { InputGroup } from "@chakra-ui/react";
+
 
 const FlatApartment = () => {
   const isCountry = useSelector((state) => state.gloalval);
@@ -70,8 +73,16 @@ const FlatApartment = () => {
   const [desc, setDesc] = useState("");
   const [pincollection, setPinCollection] = useState([]);
   const [willingTo, setWillingTo] = useState([]);
-  const [brokerContact, setbrokerContact] = useState("");
-  const [preferredAgreement, setpreferredAgreement] = useState(""); 
+  const [preferredAgreement, setpreferredAgreement] = useState("");
+  const [brokersContact, setbrokersContact] = useState("No");
+  const [rentdetail, setRentDetail] = useState("");
+  const [additionalCharge, setAdditionalCharge] = useState([]); 
+  const [maintenancePrice, setMaintenancePrice] = useState("");
+  const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
+  const [membershipCharge, setMembershipCharge] = useState("");
+  const [bookingAmount, setBookingAmount] = useState("");
+
+
 
   const handleSubmitData = async (e) => {
     e.preventDefault();
@@ -292,6 +303,11 @@ const FlatApartment = () => {
     }
   };
 
+  const handlePreferredAgreement = (e) => {
+    e.preventDefault();
+    setpreferredAgreement(e.target.value);
+  }
+
   // please don'nt change any function without any prior knowledge
   const furnisheddetails = (e) => {
     e.preventDefault();
@@ -344,6 +360,7 @@ const FlatApartment = () => {
     e.preventDefault();
     setAvailability(e.target.value);
   };
+ 
 
   // const handlepropertyAge = (e) => {
   //   e.preventDefault();
@@ -485,18 +502,19 @@ const FlatApartment = () => {
     }
   };
 
-  // const createtemplatefloors = () => {
-  //     let options = "";
+  const handleAdditionalCharge = (e) => {
+    e.preventDefault();
+    let newarr = [...additionalCharge];
+    let value = e.target.value;
 
-  //     let totalFloors = totalfloors;
-  //     for (let i = 1; i <= totalFloors; i++) {
-  //         let value = `<option value=${i}>${i}</option>`;
-  //         options += value;
-  //     }
-  //     let adding = document.getElementById("floorSelectTag");
-  //     adding.innerHTML = options;
-
-  // }
+    if (newarr.includes(value)) {
+      newarr.splice(newarr.indexOf(value), 1);
+    } else {
+      newarr.push(value);
+    }
+    console.log(newarr); 
+    setAdditionalCharge(newarr); 
+  }
 
   return (
     <form onSubmit={handleSubmitData}>
@@ -747,7 +765,7 @@ const FlatApartment = () => {
             </button>
           </Box>
         </Box>
-        {/* furnish */}
+        {/* =========================  furnish ==========================  */}
         <Box
           padding={"10px 0"}
           display={"grid"}
@@ -1072,7 +1090,7 @@ const FlatApartment = () => {
             </Box>
           </Box>
         </Box>
-        {/* reserved */}
+        {/* ========================= reserved ========================= */}
         <Box className={style.optional_box}>
           <Heading as={"h3"} size={"md"}>
             Reserved Parking (optional)
@@ -1126,7 +1144,7 @@ const FlatApartment = () => {
             </Box>
           </div>
         </Box>
-        {/* floor details */}
+        {/* ========================= floor details ========================= */}
         <Box textAlign={"left"}>
           <Heading
             as={"h3"}
@@ -1192,7 +1210,7 @@ const FlatApartment = () => {
             </Select>
           </Box>
         </Box>
-
+        {/* ========================= Age of Property ========================= */}
         <Box textAlign={"left"} className={style.optional_box}>
           <Heading
             as={"h3"}
@@ -1250,7 +1268,7 @@ const FlatApartment = () => {
           </Box>
         </Box>
 
-        {/* =========================== Date ============================= */}
+        {/* ============================= Available form (date) ============================= */}
         <Box textAlign={"left"} display={"grid"}>
           <Heading as={"h3"} size={"md"} margin={"4px 0"} textAlign={"left"}>
             Available from
@@ -1258,7 +1276,102 @@ const FlatApartment = () => {
           <Input type={"date"} w={300} />
         </Box>
 
-        {/* Add pricing and details */}
+        {/* ========================= Willing to rent out to ========================= */}
+        <Box>
+          <Heading as={"h3"} size={"sm"} margin={"14px 0"} textAlign={"left"}>
+            Willing to rent out to
+          </Heading>
+          <Box textAlign={"left"} display={"flex"} flexWrap={"wrap"} gap={5} >
+            <button
+              value={"Family"}
+              onClick={handleWillingto}
+              className={willingTo.includes("Family") ? style.setbtn : style.btn}
+            >
+              Family
+            </button>
+            <button
+              value={"Single men"}
+              onClick={handleWillingto}
+              className={willingTo.includes("Single men") ? style.setbtn : style.btn}
+            >
+              Single men
+            </button>
+            <button
+              value={"Single women"}
+              onClick={handleWillingto}
+              className={willingTo.includes("Single women") ? style.setbtn : style.btn}
+            >
+              Single women
+            </button>
+          </Box>
+        </Box>
+
+        {/* ===================================== Are you 0k with brokers contacting you? ============================== */}
+        <Box className={style.optional_box}>
+          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
+            Are you 0k with brokers contacting you?
+          </Heading>
+          <Box >
+            <button
+              value={"Yes"}
+              onClick={(e) => {
+                e.preventDefault();
+                setbrokersContact(e.target.value);
+              }}
+              className={brokersContact == "Yes" ? style.setbtn : style.btn}
+            >
+              Yes
+            </button>
+            <button
+              value={"No"}
+              onClick={(e) => {
+                e.preventDefault();
+                setbrokersContact(e.target.value);
+              }}
+              className={brokersContact == "No" ? style.setbtn : style.btn}
+            >
+              No
+            </button>
+          </Box>
+        </Box>
+
+        {/* ==============================  Rent Detail  ==================================== */}
+        <Box className={style.optional_box}>
+          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
+            Preferred agreement type
+          </Heading>
+          <Box>
+            <Input type="text" placeholder={"₹ Expected Rent"} />
+          </Box>
+          <Box>
+            <Checkbox isChecked={additionalCharge.includes("Electricity & Water charges excluded")} value={"Electricity & Water charges excluded"} onChange={handleAdditionalCharge} >Electricity & Water charges excluded</Checkbox>
+            <Checkbox isChecked={additionalCharge.includes("price Negotiable")} value={"price Negotiable"} onChange={handleAdditionalCharge} >price Negotiable</Checkbox>
+          </Box>
+          <Box>  
+            <InputGroup w={"300px"} margin={"10px 0"}>
+              <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(NumericString(e.target.value))} value={maintenancePrice} placeholder={"Maintenance Price"} />
+              <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
+                <option value="Monthly">Monthly</option>
+                <option value="Yearly">Yearly</option>
+              </Select>
+            </InputGroup>
+            <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(NumericString(e.target.value))} placeholder="Booking Amount" margin={"10px 0 0 0"} />
+            <Input type="text" w={"300px"} value={membershipCharge} onChange={(e) => setMembershipCharge(NumericString(e.target.value))} placeholder="Membership Charge" margin={"10px 0 0 0"} />
+          </Box>
+        </Box>
+
+        {/* ====================== Preferred agreement type =============================== */}
+        <Box className={style.optional_box}>
+          <Heading as={"h3"} size={"sm"} margin={"14px 0"} textAlign={"left"}>
+            Preferred agreement type
+          </Heading>
+          <Box>
+            <button onClick={handlePreferredAgreement} value={"Company lease agreement"} className={preferredAgreement == "Company lease agreement" ? style.setbtn : style.btn}  >Company lease agreement</button>
+            <button onClick={handlePreferredAgreement} value={"Any"} className={preferredAgreement == "Any" ? style.setbtn : style.btn}  >Any</button>
+          </Box>
+        </Box>
+
+        {/* ========================= Add pricing and details ========================= */}
         <Box>
           <Heading
             as={"h3"}
@@ -1324,7 +1437,7 @@ const FlatApartment = () => {
           </Box>
         </Box>
 
-        {/* Price Details */}
+        {/* ========================= Price Details ========================= */}
         <Box>
           <Heading as={"h3"} size={"sm"} margin={"14px 0"} textAlign={"left"}>
             Price Details
@@ -1367,58 +1480,7 @@ const FlatApartment = () => {
           </Box>
         </Box>
 
-        {/* Willing to rent out to */}
-        <Box>
-          <Heading as={"h3"} size={"sm"} margin={"14px 0"} textAlign={"left"}>
-            Willing to rent out to
-          </Heading>
-          <Box textAlign={"left"} display={"flex"} flexWrap={"wrap"} gap={5} >
-            <button
-              value={"Family"}
-              onClick={handleWillingto}
-              className={willingTo.includes("Family") ? style.setbtn : style.btn}
-            >
-              Family
-            </button>
-            <button
-              value={"Single men"}
-              onClick={handleWillingto}
-              className={willingTo.includes("Single men") ? style.setbtn : style.btn}
-            >
-              Single men
-            </button>
-            <button
-              value={"Single women"}
-              onClick={handleWillingto}
-              className={willingTo.includes("Single women") ? style.setbtn : style.btn}
-            >
-              Single women
-            </button>
-          </Box>
-        </Box>
 
-        {/* ===================================== Are you 0k with brokers contacting you? ============================== */}
-        <Box>
-          <Heading as={"h3"} size={"sm"} margin={"14px 0"} textAlign={"left"}>
-            Are you 0k with brokers contacting you?
-          </Heading>
-          <Box textAlign={"left"} display={"flex"} flexWrap={"wrap"} gap={5} >
-            <button
-              value={"Yes"}
-              onClick={setbrokerContact}
-              className={brokerContact = "Yes" ? style.setbtn : style.btn}
-            >
-              Yes
-            </button>
-            <button
-              value={"No"}
-              onClick={setb}
-              className={brokerContact = "No" ? style.setbtn : style.btn}
-            >
-              No
-            </button>
-          </Box>
-        </Box>
 
         {/* ============================== inclusive price / tax / Price negotiable=========================== */}
         <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
@@ -1474,13 +1536,6 @@ const FlatApartment = () => {
         </Box>
       </Box>
 
-      <Box>
-        <Heading as={"h3"} size={"sm"} margin={"14px 0"} textAlign={"left"}>
-          Preferred agreement type
-        </Heading> 
-        <button onClick={handlePreferredAgreement} value={"Company lease agreement"} className={preferredAgreement == "Company lease agreement"  ? style.setbtn : style.btn }  >Company lease agreement</button>
-        <button onClick={handlePreferredAgreement} value={"Any"} className={preferredAgreement == "Any" ? style.setbtn : style.btn }  >Any</button>
-      </Box>
 
       {/* Add amenities/unique features */}
       <Box>

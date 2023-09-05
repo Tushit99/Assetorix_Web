@@ -991,11 +991,11 @@ const ReadyToMove = () => {
                                     flexDirection={"column"}
                                     padding={"8px 10px"} > 
                                     
-                                    <Checkbox checked={floorNumber == "Basement"} onChange={handleFloorNumber} value={"Basement"} > Basement </Checkbox>
-                                    <Checkbox checked={floorNumber == "Lower Ground"} onChange={handleFloorNumber} value={"Lower Ground"} > Lower Ground </Checkbox>
-                                    <Checkbox checked={floorNumber == "Ground"} onChange={handleFloorNumber} value={"Ground"} > Ground </Checkbox>
+                                    <Checkbox isChecked={floorNumber == "Basement"} onChange={handleFloorNumber} value={"Basement"} > Basement </Checkbox>
+                                    <Checkbox isChecked={floorNumber == "Lower Ground"} onChange={handleFloorNumber} value={"Lower Ground"} > Lower Ground </Checkbox>
+                                    <Checkbox isChecked={floorNumber == "Ground"} onChange={handleFloorNumber} value={"Ground"} > Ground </Checkbox>
                                     {Array.from(Array(Number(totalfloors)).keys()).map((e, i) => {
-                                        return <Checkbox checked={floorNumber == (e + 1)} key={i} onChange={handleFloorNumber} value={e + 1} > {e + 1} </Checkbox>
+                                        return <Checkbox isChecked={floorNumber == (e + 1)} key={i} onChange={handleFloorNumber} value={e + 1} > {e + 1} </Checkbox>
                                     })}
 
 
@@ -1098,9 +1098,9 @@ const ReadyToMove = () => {
                         }} className={parkingStatus == "Not-Available" ? style.setbtn : style.btn} >Not-Available</button>
                     </Box>
                     <Box>
-                        <Checkbox onChange={handleNumberOfParking} value={"Private Parking in Basement"} checked={parkingArr.includes("Private Parking in Basement")} >Private Parking in Basement</Checkbox>
-                        <Checkbox onChange={handleNumberOfParking} value={"Private Parking Outside"} checked={parkingArr.includes("Private Parking Outside")} >Private Parking Outside</Checkbox>
-                        <Checkbox onChange={handleNumberOfParking} value={"Private Parking Outside"} checked={parkingArr.includes("Private Parking Outside")} >Public Parking</Checkbox>
+                        <Checkbox onChange={handleNumberOfParking} value={"Private Parking in Basement"} isChecked={parkingArr.includes("Private Parking in Basement")} >Private Parking in Basement</Checkbox>
+                        <Checkbox onChange={handleNumberOfParking} value={"Private Parking Outside"} isChecked={parkingArr.includes("Private Parking Outside")} >Private Parking Outside</Checkbox>
+                        <Checkbox onChange={handleNumberOfParking} value={"Private Parking Outside"} isChecked={parkingArr.includes("Private Parking Outside")} >Public Parking</Checkbox>
                         <Input type="text" placeholder="Enter no. of Parkings" value={parkingTotalNumber} onChange={(e) => {
                             e.preventDefault();
                             setParkingTotalNumber(e.target.value);
