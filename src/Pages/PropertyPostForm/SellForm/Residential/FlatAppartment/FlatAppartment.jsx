@@ -18,6 +18,8 @@ import { useSelector } from "react-redux";
 import { CleanInputText } from "../../../code";
 import axios from "axios";
 import style from "./FlatAppartment.module.css";
+import { InputGroup } from "@chakra-ui/react";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 const FlatAppartment = () => {
     const isCountry = useSelector((state) => state.gloalval);
@@ -70,6 +72,14 @@ const FlatAppartment = () => {
     const [plotArea, setPlotArea] = useState("");
     const [desc, setDesc] = useState("");
     const [pincollection, setPinCollection] = useState([]);
+    const [additionalPrice, setAdditionalPrice] = useState(false);
+    const [maintenancePrice, setMaintenancePrice] = useState("");
+    const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
+    const [expectedRentel, setExpectedRentel] = useState("");
+    const [annualDuesPayble, setAnnualDuesPayble] = useState("");
+    const [bookingAmount, setBookingAmount] = useState("");
+    const [membershipCharge, setMembershipCharge] = useState("");
+
 
 
     const handleSubmitData = async (e) => {
@@ -118,7 +128,14 @@ const FlatAppartment = () => {
             },
             otherRoom: extraroom,
             description: desc,
-            countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`
+            countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
+            additionalPricingDetails: {
+                maintenancePrice,
+                maintenanceTimePeriod,
+                expectedRental: expectedRentel,
+                bookingAmount,
+                annualDuesPayable: annualDuesPayble
+            },
         };
 
         const showToastError = (message) => {
@@ -501,7 +518,7 @@ const FlatAppartment = () => {
             <Box className={style.location_form}>
                 <Heading size={"lg"}>Where is your property located?</Heading>
                 <Heading size={"sm"}>
-                    An accurate location helps you connect with right buyers.
+                    An accurate location helps you connect with the right buyers.
                 </Heading>
 
                 <Input
@@ -1414,6 +1431,8 @@ const FlatAppartment = () => {
                         </Box>
                     </Box>
                 </Box>
+
+                {/* ============================== inclusive charges (checkbox) ==============================  */}
                 <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
                     <Checkbox
                         isChecked={inclusivePrices.includes("All inclusive price")}
@@ -1449,13 +1468,46 @@ const FlatAppartment = () => {
                         Price Negotiable
                     </Checkbox>
                 </Box>
+
+                {/* Additional Pricing Detail (Optional) */}
+                <Box display={"grid"}>
+                    {additionalPrice && <>
+                        <Heading as={"h4"} size={"sm"} margin={"10px 0"} fontWeight={700} textAlign={"left"}>
+                            Additional Pricing Detail (Optional)
+                        </Heading>
+                        <InputGroup w={"300px"} margin={"10px 0"}>
+                            <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
+                            <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
+                                <option value="Monthly">Monthly</option>
+                                <option value="Yearly">Yearly</option>
+                            </Select>
+                        </InputGroup>
+                        <Input type="text" w={"300px"} value={expectedRentel} onChange={(e) => setExpectedRentel(e.target.value)} placeholder="Expected rental" margin={"0"} />
+                        <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
+                        <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
+                        <Input type="text" w={"300px"} value={membershipCharge} onChange={(e) => setMembershipCharge(e.target.value)} placeholder="Membership charges" margin={"10px 0 0 0"} />
+                    </>
+                    }
+                    <Heading
+                        as={"h3"}
+                        size={"sm"}
+                        margin={"10px 0"}
+                        color={"#002aff"}
+                        fontWeight={500}
+                        cursor={"pointer"}
+                        onClick={() => setAdditionalPrice(!additionalPrice)}
+                        textAlign={"left"}>
+                        {additionalPrice ? <IoIosArrowUp style={{ display: "inline" }} /> : <IoIosArrowDown style={{ display: "inline" }} />} Add more pricing details
+                    </Heading>
+                </Box>
+
                 <Box>
                     <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
                         What makes your property unique
                     </Heading>
                     <Heading as={"h3"} size={"xs"} margin={"10px 0"} textAlign={"left"}>
                         Adding description will increase your listing visibility
-                    </Heading>
+                    </Heading> 
                     <Textarea height={140} value={desc} onChange={(e) => {
                         let my_cleantext = CleanInputText(e.target.value);
                         setDesc(my_cleantext);
@@ -2165,7 +2217,7 @@ const FlatAppartment = () => {
                         <option value="Other"> Other </option>
                     </Select>
                 </Box>
-            </Box>  
+            </Box>
             {/* Width of facing road */}
             <Box className={style.optional_box}>
                 <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>

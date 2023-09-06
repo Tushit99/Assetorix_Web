@@ -24,6 +24,8 @@ import Hospitality from "./SellForm/Commercial/Hospitality/Hospitality";
 import PlotLandCommercial from "./SellForm/Commercial/PlotLandCommercial/PlotLandCommercial";
 import Rent from "./SellForm/Commercial/Rent";
 import FlatApartment from "./RentForm/Residential/FlatApartment";
+import Independent from "./RentForm/Residential/Independent";
+import IndependentBuilder from "./RentForm/Residential/IndependentBuilder";
 
 
 const SellForm = () => { 
@@ -596,6 +598,13 @@ const SellForm = () => {
 
                 {/*  Rent / Flat or Apartment */} 
                 {(type == "Rent/Lease" && look == "Flat/Apartment") ? <FlatApartment /> : "" } 
+
+                {/* Independent House / Villa */}  
+                {(type == "Rent/Lease" && look == "Independent House/villa") ? <Independent /> : ""} 
+                 
+
+                {/* Independent/builder Floor */}  
+                {(type == "Rent/Lease" && look == "Independent/builder Floor") ? <IndependentBuilder /> : ""}
 
             </Box>
             <Box backgroundColor={"rgb(232, 244, 255)"} borderRadius={10}></Box>

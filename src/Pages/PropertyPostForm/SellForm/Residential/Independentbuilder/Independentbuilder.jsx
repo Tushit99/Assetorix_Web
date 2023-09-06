@@ -517,7 +517,7 @@ const Independentbuilder = () => {
             <Box className={style.location_form}>
                 <Heading size={"lg"}>Where is your property located?</Heading>
                 <Heading size={"sm"}>
-                    An accurate location helps you connect with right buyers.
+                    An accurate location helps you connect with the right buyers.
                 </Heading>
 
                 <Input
@@ -1465,6 +1465,7 @@ const Independentbuilder = () => {
                         Price Negotiable
                     </Checkbox>
                 </Box>
+                {/* Additional Pricing Detail */}
                 <Box display={"grid"}>
                     <Heading as={"h4"} size={"sm"} margin={"10px 0"} fontWeight={700} textAlign={"left"}>
                         Additional Pricing Detail (Optional)

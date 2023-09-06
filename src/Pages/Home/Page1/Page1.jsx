@@ -43,19 +43,10 @@ const Page1 = () => {
   }
 
   return (
-    <div className={style.pagetop}>
-      {/* <Box
-                w={"full"}
-                h={"95vh"}
-                backgroundImage={video}
-                backgroundSize={"cover"}
-                display={{ base: "grid", lg: "flex" }}
-                alignItems={"center"}
-                backgroundPosition={"center"}
-            > */}
+    <div className={style.pagetop}> 
 
-      <video autoPlay loop muted className={style.video_panal}>
-        <source src={video} type="video/mp4" />
+      <video autoPlay loop muted className={style.video_panal}> 
+        <source src={video} type="video/mp4" /> 
       </video>
       <Box w={"full"} className={style.topbox}>
         <Text
@@ -239,8 +230,7 @@ const Page1 = () => {
             </div>
           </div>
         </Box>
-      </Box>
-      {/* </Box> */}
+      </Box> 
     </div>
   );
 };

@@ -429,7 +429,7 @@ const ReadyToMove = () => {
                     Where is your property located?
                 </Heading>
                 <Heading size={"sm"} color={"black"}>
-                    An accurate location helps you connect with right buyers.
+                    An accurate location helps you connect with the right buyers.
                 </Heading>
 
                 <Select

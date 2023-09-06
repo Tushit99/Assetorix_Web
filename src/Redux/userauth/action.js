@@ -61,6 +61,8 @@ export const signinuser = (param) => async (dispatch) => {
   }
 };
 
+// is user pre-loged in 
+
 export const userPreLog = (param) => async (dispatch) => {    
   try {
     await axios.get(`${process.env.REACT_APP_URL}/user/`, {headers: param}).then((e) => {
@@ -73,6 +75,9 @@ export const userPreLog = (param) => async (dispatch) => {
     console.log(err);
   } 
 }; 
+
+
+
 
 export const handleChanges = (headers,body) => async (dispatch) => {
   try {

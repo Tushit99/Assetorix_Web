@@ -64,7 +64,7 @@ const Navebar = () => {
         dispatch(changeLookingFor("Rent/Lease")); 
     }
 
-    const handlePageSell = () => {
+    const handlePageSell = () => { 
         dispatch(changeLookingFor("sell")); 
     }
 

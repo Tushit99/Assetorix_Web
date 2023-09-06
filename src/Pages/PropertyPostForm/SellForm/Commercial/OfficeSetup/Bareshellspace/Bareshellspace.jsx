@@ -419,7 +419,7 @@ const Bareshellspace = () => {
                     Where is your property located?
                 </Heading>
                 <Heading size={"sm"} color={"black"}>
-                    An accurate location helps you connect with right buyers.
+                    An accurate location helps you connect with the right buyers.
                 </Heading>
 
                 <Select
@@ -1363,36 +1363,38 @@ const Bareshellspace = () => {
                     </Checkbox>
                 </Box>
 
-                {/* Additional Pricing Detail (Optional) */}
-                <Box display={"grid"}>
-                    <Heading
-                        as={"h4"}
-                        size={"sm"}
-                        margin={"10px 0"}
-                        fontWeight={700}
-                        textAlign={"left"}
-                    >
+               {/* Additional Pricing Detail (Optional) */}
+               <Box display={"grid"}>
+                    <Heading as={"h4"} size={"sm"} margin={"10px 0"} fontWeight={700} textAlign={"left"}>
                         Additional Pricing Detail (Optional)
                     </Heading>
                     <InputGroup w={"300px"} margin={"10px 0"}>
-                        <Input
-                            w={"60%"}
-                            type="text"
-                            onChange={(e) => setMaintenancePrice(e.target.value)}
-                            value={maintenancePrice}
-                            placeholder={"Maintenance Price"}
-                        />
-                        <Select
-                            w={"40%"}
-                            borderRadius={0}
-                            value={maintenanceTimePeriod}
-                            onChange={(e) => setMaintenanceTimePeriod(e.target.value)}
-                        >
+                        <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
+                        <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
                             <option value="Monthly">Monthly</option>
                             <option value="Yearly">Yearly</option>
                         </Select>
                     </InputGroup>
+                    {additionalPrice && <>
+                        <Input type="text" w={"300px"} value={expectedRental} onChange={(e) => setExpectedRental(e.target.value)} placeholder="Expected rental" margin={"0"} />
+                        <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
+                        <Input type="text" w={"300px"} value={annualDuesPayable} onChange={(e) => setAnnualDuesPayable(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} /> 
+                    </>
+                    }
+                    <Heading
+                        as={"h3"}
+                        size={"sm"}
+                        margin={"10px 0"}
+                        color={"#002aff"}
+                        fontWeight={500}
+                        cursor={"pointer"}
+                        onClick={() => setAdditionalPrice(!additionalPrice)}
+                        textAlign={"left"}>
+                        {additionalPrice ? <IoIosArrowUp style={{ display: "inline" }} /> : <IoIosArrowDown style={{ display: "inline" }} />} Add more pricing details
+                    </Heading> 
                 </Box>
+
+
                 {/* Pre-leased / Pre-Ented */}
                 <Box className={style.optional_box}>
                     <Box>

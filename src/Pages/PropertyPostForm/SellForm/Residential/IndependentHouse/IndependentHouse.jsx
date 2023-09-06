@@ -105,7 +105,7 @@ const IndependentHouse = () => {
             amenities,
             propertyFeatures,
             society_buildingFeatures: buildingFeature,
-            additionalFeatures: additinalft, 
+            additionalFeatures: additinalft,
             waterSources: watersource,
             otherFeatures: otherFeature,
             powerBackup: powerbackup,
@@ -376,7 +376,7 @@ const IndependentHouse = () => {
             newarr.push(value);
         }
         setAdditinalFeature(newarr);
-    };  
+    };
 
     const handleAminities = (e) => {
         e.preventDefault();
@@ -481,28 +481,6 @@ const IndependentHouse = () => {
         setWaterSource(newarr);
     }
 
-    const areaCalucation = () => {
-        if (pricedetail && plotArea) {
-            let max = Math.max(Number(pricedetail), Number(plotArea));
-            let min = Math.min(Number(pricedetail), Number(plotArea));
-            let ans = Math.round(max / min);
-            setPriceSqr(ans);
-        }
-    }
-
-    // const createtemplatefloors = () => {
-    //     let options = "";
-
-    //     let totalFloors = totalfloors;
-    //     for (let i = 1; i <= totalFloors; i++) {
-    //         let value = `<option value=${i}>${i}</option>`;
-    //         options += value;
-    //     }
-    //     let adding = document.getElementById("floorSelectTag");
-    //     adding.innerHTML = options;
-
-    // }
-
 
     return (
         <form onSubmit={handleSubmitData}>
@@ -510,8 +488,8 @@ const IndependentHouse = () => {
             <Box className={style.location_form}>
                 <Heading size={"lg"}>Where is your property located?</Heading>
                 <Heading size={"sm"}>
-                    An accurate location helps you connect with right buyers.
-                </Heading>  
+                    An accurate location helps you connect with the right buyers.
+                </Heading>
                 <Input
                     type="text"
                     padding={"0 10px"}
@@ -667,7 +645,6 @@ const IndependentHouse = () => {
                                 padding={"0 2px"}
                                 value={plotArea}
                                 onChange={(e) => {
-                                    areaCalucation();
                                     setPlotArea(e.target.value);
                                 }}
                                 required
@@ -1373,7 +1350,6 @@ const IndependentHouse = () => {
                                     required
                                     onChange={(e) => {
                                         setPricedetail(e.target.value);
-                                        areaCalucation();
                                     }}
                                 />
                             </NumberInput>
@@ -1396,6 +1372,7 @@ const IndependentHouse = () => {
                         </Box>
                     </Box>
                 </Box>
+                {/* Additional (Checkbox) */}
                 <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
                     <Checkbox
                         isChecked={inclusivePrices.includes("All inclusive price")}
@@ -1431,6 +1408,8 @@ const IndependentHouse = () => {
                         Price Negotiable
                     </Checkbox>
                 </Box>
+
+                {/* Additonal Pricing Detail */}
                 <Box display={"grid"}>
                     <Heading as={"h4"} size={"sm"} margin={"10px 0"} fontWeight={700} textAlign={"left"}>
                         Additional Pricing Detail (Optional)
@@ -1774,7 +1753,7 @@ const IndependentHouse = () => {
                 <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
                     Additional Features
                 </Heading>
-                <Box> 
+                <Box>
                     <button
                         className={
                             additinalft.includes("Rain Water Harvesting")
@@ -1783,7 +1762,7 @@ const IndependentHouse = () => {
                         }
                         value={"Rain Water Harvesting"}
                         onClick={handleAdditionalFeature}
-                    > 
+                    >
                         Rain Water Harvesting
                     </button>
                     <button
@@ -1796,7 +1775,7 @@ const IndependentHouse = () => {
                         onClick={handleAdditionalFeature}
                     >
                         Bank Attached Property
-                    </button> 
+                    </button>
                 </Box>
             </Box>
             {/* Water Source */}
