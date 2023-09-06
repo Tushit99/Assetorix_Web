@@ -8,6 +8,6 @@ export const changecountry = (param)=>(dispatch)=>{
 
 export const changeLookingFor = (param)=>(dispatch)=>{
     dispatch({type: LOOKINGFOR, payload: param}); 
-}
+} 
 
 

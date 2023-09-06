@@ -9,7 +9,7 @@ import {
     TabPanels,
     Tabs,
 } from "@chakra-ui/react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import FlatAppartment from "./SellForm/Residential/FlatAppartment/FlatAppartment";
 import IndependentHouse from "./SellForm/Residential/IndependentHouse/IndependentHouse";
 import Independentbuilder from "./SellForm/Residential/Independentbuilder/Independentbuilder";
@@ -27,7 +27,9 @@ import FlatApartment from "./RentForm/Residential/FlatApartment";
 import Independent from "./RentForm/Residential/Independent";
 import IndependentBuilderRent from "./RentForm/Residential/IndependentBuilder";
 import ServicedApartmentRent from "./RentForm/Residential/ServicedApartmentRent";
+import FarmhouseRent from "./RentForm/Residential/FarmhouseRent";
 import StudioApartmentRent from "./RentForm/Residential/StudioApartmentRent";
+import { changeLookingFor } from "../../Redux/globalval/action";
 
 
 const SellForm = () => {
@@ -35,13 +37,15 @@ const SellForm = () => {
     const [look, setlook] = useState("");
     const [type, settype] = useState("");
     const [typeofplace, setTypeOf] = useState("");
+    const dispatch = useDispatch(); 
     const [selectedTab, setSelectedTab] = useState(0);
 
     const handlechange = (type, look) => {
         settype(type);
-        setlook(look);
+        setlook(look); 
+        dispatch(changeLookingFor(type));  
         // console.log(type);
-    };
+    }; 
 
     const handleTabChange = (index) => {
         if (index == 0) {
@@ -69,11 +73,10 @@ const SellForm = () => {
         else if (looking == "PG") {
             settype("look");
             setSelectedTab(2);
-        }
+        }  
         else {
             settype("");
-        }
-        // console.log(looking); 
+        } 
 
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 
@@ -384,7 +387,7 @@ const SellForm = () => {
                                                     }
                                                 >
                                                     Serviced Apartment
-                                                </button> 
+                                                </button>
                                                 <button
                                                     onClick={() =>
                                                         handlechange("Rent/Lease", "1 RK/ Studio Apartment")
@@ -586,12 +589,12 @@ const SellForm = () => {
                 {/* Plot / Land */}
                 {(type == "sell" && look == "Plot/Land") ? <PlotLandCommercial /> : ""}
 
-                {/* ================================== Rent/Lease ============================== */}  
+                {/* ================================== Rent/Lease ============================== */}
 
                 {/*  Rent / Flat or Apartment */}
                 {(type == "Rent/Lease" && look == "Flat/Apartment") ? <FlatApartment /> : ""}
 
-                {/* Independent House / Villa */} 
+                {/* Independent House / Villa */}
                 {(type == "Rent/Lease" && look == "Independent House/villa") ? <Independent /> : ""}
 
 
@@ -599,12 +602,13 @@ const SellForm = () => {
                 {(type == "Rent/Lease" && look == "Independent/builder Floor") ? <IndependentBuilderRent /> : ""}
 
                 {/* Serviced Apartment */}
-                {(type == "Rent/Lease" && look == "Serviced Apartment") ? <ServicedApartmentRent /> : "" } 
+                {(type == "Rent/Lease" && look == "Serviced Apartment") ? <ServicedApartmentRent /> : ""}
 
-                {/* 1RK / Studio Apartment */} 
-                {(type == "Rent/Lease" && look == "1RK / Studio Apartment") ? <StudioApartmentRent /> : "" }  
+                {/* 1RK / Studio Apartment  */}
+                {(type == "Rent/Lease" && look == "1 RK/ Studio Apartment") ? <StudioApartmentRent /> : ""}
 
-                
+                {/* Farmhouse */}
+                {(type == "Rent/Lease" && look == "Farmhouse") ? <FarmhouseRent /> : ""}
 
             </Box>
             <Box backgroundColor={"rgb(232, 244, 255)"} borderRadius={10}></Box>
@@ -613,3 +617,5 @@ const SellForm = () => {
 };
 
 export default SellForm;
+
+
