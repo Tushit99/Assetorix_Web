@@ -30,6 +30,7 @@ import ServicedApartmentRent from "./RentForm/Residential/ServicedApartmentRent"
 import FarmhouseRent from "./RentForm/Residential/FarmhouseRent";
 import StudioApartmentRent from "./RentForm/Residential/StudioApartmentRent";
 import { changeLookingFor } from "../../Redux/globalval/action";
+import OfficeRent from "./RentForm/Commercial/OfficeRent/OfficeRent";
 
 
 const SellForm = () => {
@@ -608,7 +609,12 @@ const SellForm = () => {
                 {(type == "Rent/Lease" && look == "1 RK/ Studio Apartment") ? <StudioApartmentRent /> : ""}
 
                 {/* Farmhouse */}
-                {(type == "Rent/Lease" && look == "Farmhouse") ? <FarmhouseRent /> : ""}
+                {(type == "Rent/Lease" && look == "Farmhouse") ? <FarmhouseRent /> : ""} 
+
+                {/* =================================== Rent/Lease (Commercial) ================================ */}  
+
+                {/* Office */} 
+                {(type == "Rent/Lease" && look == "Office") ? <OfficeRent /> : "" }
 
             </Box>
             <Box backgroundColor={"rgb(232, 244, 255)"} borderRadius={10}></Box>
