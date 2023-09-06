@@ -19,11 +19,11 @@ import axios from "axios";
 import style from "../RentForm.module.css";
 import { CleanInputText, IndianDateConverter, NumericString } from "../../code";
 import { InputGroup } from "@chakra-ui/react";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"; 
 
 
 
-const ServicedApartmentRent = () => {
+const StudioApartmentRent = () => {
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
@@ -635,7 +635,7 @@ const ServicedApartmentRent = () => {
                     </Box>
                 </Box>
                 {/* ====================================== */}
-                {/* add area details */}
+                {/* ============================ add area details ============================ */}
                 <Box textAlign={"left"} padding={"10px 0"}>
                     <Heading as={"h3"} margin={"5px 0"} size={"md"}>
                         Add Area Details
@@ -687,7 +687,7 @@ const ServicedApartmentRent = () => {
                         </select>
                     </ButtonGroup>
                 </Box>
-                {/* other Room  */}
+                {/* ============================ other Room ============================ */}
                 <Box
                     padding={"10px 0"}
                     display={"grid"}
@@ -1562,12 +1562,12 @@ const ServicedApartmentRent = () => {
                     </button>
                     <button
                         className={
-                            amenities.includes("Piped-gas") ? style.setbtn : style.btn
+                            amenities.includes("Security / Fire Alarm") ? style.setbtn : style.btn
                         }
                         onClick={handleAminities}
-                        value={"Piped-gas"}
+                        value={"Security / Fire Alarm"}
                     >
-                        Piped-gas
+                        Security / Fire Alarm
                     </button>
                     <button
                         className={
@@ -1744,7 +1744,7 @@ const ServicedApartmentRent = () => {
                             buildingFeature.includes("Fitness Centre / GYM")
                                 ? style.setbtn
                                 : style.btn
-                        }
+                        } 
                         onClick={HandleBuildingFeature}
                         value={"Fitness Centre / GYM"}
                     >
@@ -2232,5 +2232,4 @@ const ServicedApartmentRent = () => {
     );
 };
 
-export default ServicedApartmentRent;
-
+export default StudioApartmentRent

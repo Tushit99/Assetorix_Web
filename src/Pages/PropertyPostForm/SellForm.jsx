@@ -383,19 +383,7 @@ const SellForm = () => {
                                                     }
                                                 >
                                                     Serviced Apartment
-                                                </button>
-                                                <button
-                                                    onClick={() =>
-                                                        handlechange("Rent/Lease", "Plot / Land")
-                                                    }
-                                                    className={
-                                                        look === "Plot / Land" && type === "Rent/Lease"
-                                                            ? style.setbtn
-                                                            : style.btn
-                                                    }
-                                                >
-                                                    Plot/Land
-                                                </button>
+                                                </button> 
                                                 <button
                                                     onClick={() =>
                                                         handlechange("Rent/Lease", "1 RK/ Studio Apartment")
