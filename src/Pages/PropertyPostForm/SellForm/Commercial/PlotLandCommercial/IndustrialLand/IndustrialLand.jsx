@@ -71,7 +71,7 @@ const IndustrialLand = () => {
   const [ConstructionOnProperty, setConstructionOnProperty] = useState("");
   const [expectedByYear, setExpectedByYear] = useState("");
   const [authorisedBy, setAuthorisedBy] = useState([]);
-  const [industryType, setIndustryType] = useState([]);
+  const [industryType, setIndustryType] = useState([]); 
 
 
   // please don'nt change any function without any prior knowledge
@@ -268,10 +268,6 @@ const IndustrialLand = () => {
     }
   }
 
-  const handleAvailable = (e) => {
-    e.preventDefault();
-    setAvailability(e.target.value);
-  };
 
   const handleConstructionType = (e) => {
     e.preventDefault();
@@ -287,10 +283,7 @@ const IndustrialLand = () => {
   }
 
 
-  const handleyear = (e) => {
-    e.preventDefault();
-    setFromyear(e.target.value);
-  };
+
 
 
   const handleAuthorityBy = (e) => {

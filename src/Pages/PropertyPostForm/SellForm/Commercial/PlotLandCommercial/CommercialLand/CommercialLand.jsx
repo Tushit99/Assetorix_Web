@@ -44,13 +44,11 @@ const CommercialLand = () => {
   const [constructionType, setConstructionType] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
-  const [buildingFeature, setBuildingFeature] = useState([]);
-  const [additinalft, setAdditinalFeature] = useState([]);
+  const [buildingFeature, setBuildingFeature] = useState([]); 
   const [otherFeature, setOtherFeature] = useState([]);
   const [propertyFacing, setPropertyFacing] = useState("");
   const [facing, setFacing] = useState("Meter");
-  const [locationAdv, setLocationAdv] = useState([]);
-  const [totalfloors, setTotalFloors] = useState("");
+  const [locationAdv, setLocationAdv] = useState([]); 
   const [plotArea, setPlotArea] = useState("");
   const [desc, setDesc] = useState("");
   const [pincollection, setPinCollection] = useState([]);
@@ -71,7 +69,8 @@ const CommercialLand = () => {
   const [ConstructionOnProperty, setConstructionOnProperty] = useState("");
   const [expectedByYear, setExpectedByYear] = useState("");
   const [authorisedBy, setAuthorisedBy] = useState([]); 
-  const [industryType, setIndustryType] = useState([]);
+  const [industryType, setIndustryType] = useState([]); 
+ 
 
 
   // please don'nt change any function without any prior knowledge
@@ -111,19 +110,16 @@ const CommercialLand = () => {
       openSides, 
       amenities,
       propertyFeatures,
-      preLeased_Rented: preLeased,
-      additionalFeatures: additinalft,
+      preLeased_Rented: preLeased, 
       otherFeatures: otherFeature,
       propertyFacing,
       roadFacingWidth: facingwidth,
-      roadFacingWidthType: facing,
-      totalFloors: +totalfloors,
+      roadFacingWidthType: facing, 
       plotArea,
       approvedIndustryTypeList: industryType ,
       plotAreaUnit: areaPer,
       propertyApprovalAuthorityList : authorisedBy,  
-      expectedByYear, 
-      // otherRoom: extraroom,
+      expectedByYear,  
       description: desc,
       constructionOnProperty: ConstructionOnProperty,
       constructionOnPropertyList: constructionType,
@@ -157,9 +153,7 @@ const CommercialLand = () => {
       showToastError('Provide PriceDetail');
     } else if (!priceSqr) {
       showToastError('Provide Price Per sq.ft');
-    } else if (!additinalft) {
-      showToastError('Provide Property description');
-    }
+    }  
 
     if (locationAdv) {
       obj["locationAdv"] = locationAdv
@@ -269,10 +263,7 @@ const CommercialLand = () => {
     }
   }
 
-  const handleAvailable = (e) => {
-    e.preventDefault();
-    setAvailability(e.target.value);
-  };
+
 
   const handleConstructionType = (e) => {
     e.preventDefault();
@@ -287,11 +278,6 @@ const CommercialLand = () => {
     setConstructionType(newarr);
   }
 
-
-  const handleyear = (e) => {
-    e.preventDefault();
-    setFromyear(e.target.value);
-  };
 
 
   const handleAuthorityBy = (e) => {
@@ -318,18 +304,18 @@ const CommercialLand = () => {
     setOwnerShip(e.target.value);
   };
 
-  const handleAdditionalFeature = (e) => {
-    e.preventDefault();
-    let newarr = [...additinalft];
-    let value = e.target.value;
+  // const handleAdditionalFeature = (e) => {
+  //   e.preventDefault();
+  //   let newarr = [...additinalft];
+  //   let value = e.target.value;
 
-    if (newarr.includes(value)) {
-      newarr.splice(newarr.indexOf(value), 1);
-    } else {
-      newarr.push(value);
-    }
-    setAdditinalFeature(newarr);
-  };
+  //   if (newarr.includes(value)) {
+  //     newarr.splice(newarr.indexOf(value), 1);
+  //   } else {
+  //     newarr.push(value);
+  //   }
+  //   setAdditinalFeature(newarr);
+  // };
 
   const handleAminities = (e) => {
     e.preventDefault();

@@ -66,6 +66,10 @@ const AgricalturalFarm = () => {
   const [annualRentIncrease, setAnnualRentIncrease] = useState("");
   const [businessType, setBusinessType] = useState("");
   const [plotBreadth, setPlotBreadth] = useState("");
+  const [availability, setAvailability] = useState(""); 
+  const [fromyear, setFromyear] = useState("");
+  const [industryType, setIndustryType] = useState([]); 
+
   const [plotLength, setplotLength] = useState("");
   const [expectedBy, setexpectedBy] = useState([]);
   const [ConstructionOnProperty, setConstructionOnProperty] = useState("");

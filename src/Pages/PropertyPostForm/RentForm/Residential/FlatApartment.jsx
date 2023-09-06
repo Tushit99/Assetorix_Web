@@ -317,14 +317,14 @@ const FlatApartment = () =>  {
     }
   };
 
-  const areaCalucation = () => {
-    if (pricedetail && plotArea) {
-      let max = Math.max(Number(pricedetail), Number(plotArea));
-      let min = Math.min(Number(pricedetail), Number(plotArea));
-      let ans = Math.round(max / min);
-      setPriceSqr(ans);
-    }
-  }
+  // const areaCalucation = () => {
+  //   if (pricedetail && plotArea) {
+  //     let max = Math.max(Number(pricedetail), Number(plotArea));
+  //     let min = Math.min(Number(pricedetail), Number(plotArea));
+  //     let ans = Math.round(max / min);
+  //     setPriceSqr(ans);
+  //   }
+  // }
 
   const handlePreferredAgreement = (e) => {
     e.preventDefault();

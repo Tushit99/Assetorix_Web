@@ -48,18 +48,16 @@ const GuestBanquet = () => {
     const [furnishedarr, setfurnishedarr] = useState([]);
     const [extraroom, setExtraRoom] = useState([]);
     const [furnished, setFurnished] = useState("");
-    const [availability, setAvailability] = useState("");
+    const [availability, setAvailability] = useState(""); 
     const [fromyear, setFromyear] = useState("");
     const [expectedyear, setExpectedYear] = useState("");
     const [ownership, setOwnerShip] = useState("");
     const [pricedetail, setPricedetail] = useState("");
-    const [priceSqr, setPriceSqr] = useState("");
-    const [inclusivePrices, setInclusivePrice] = useState([]);
+    const [priceSqr, setPriceSqr] = useState(""); 
     const [amenities, setAminity] = useState([]);
     const [propertyFeatures, setPropertyFeature] = useState("");
     const [buildingFeature, setBuildingFeature] = useState([]);
-    const [additinalft, setAdditinalFeature] = useState([]);
-    const [watersource, setWaterSource] = useState([]);
+    const [additinalft, setAdditinalFeature] = useState([]); 
     const [overLook, setoverlook] = useState([]);
     const [otherFeature, setOtherFeature] = useState([]);
     const [powerbackup, setPowerbackup] = useState("");
@@ -102,12 +100,12 @@ const GuestBanquet = () => {
             ownership,
             price: +pricedetail,
             priceUnit: +priceSqr,
-            inclusivePrices,
+            // inclusivePrices,
             amenities,
             propertyFeatures,
             society_buildingFeatures: buildingFeature,
             additionalFeatures: additinalft,
-            waterSources: watersource,
+            // waterSources: watersource, 
             otherFeatures: otherFeature,
             powerBackup: powerbackup,
             overLookings: overLook,
@@ -153,9 +151,7 @@ const GuestBanquet = () => {
             showToastError('Provide Price Per sq.ft');
         } else if (!additinalft) {
             showToastError('Provide Property description');
-        } else if (!watersource) {
-            showToastError('Provide Water Source');
-        } else if (!overLook) {
+        }  else if (!overLook) {
             showToastError('Provide Overlooking');
         } else if (!powerbackup) {
             showToastError('Provide Power Backup');
@@ -184,9 +180,9 @@ const GuestBanquet = () => {
             ownership &&
             pricedetail &&
             priceSqr &&
-            inclusivePrices &&
+            // inclusivePrices &&
             additinalft &&
-            watersource &&
+            // watersource &&
             overLook &&
             powerbackup &&
             propertyFacing &&

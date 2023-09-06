@@ -26,6 +26,7 @@ import { AddIcon, ChevronDownIcon, MinusIcon } from "@chakra-ui/icons";
 import axios from "axios";
 import { CleanInputText } from "../../../../code";
 // import { CleanInputText } from "../../../code";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io" 
 
 
 
@@ -57,6 +58,15 @@ const Bareshellspace = () => {
     const [pantryType, setPantryType] = useState("");
     const [floorNumber, setFloorNumber] = useState([]);
     const [pricedetail, setPricedetail] = useState("");
+
+
+    const [additionalPrice, setAdditionalPrice] = useState(false);
+    const [expectedRental, setExpectedRental] = useState("");
+  const [bookingAmount, setBookingAmount] = useState("");
+  const [annualDuesPayable, setAnnualDuesPayable] = useState("");
+
+
+
     const [previouslyUsedList, setpreviouslyUsedList] = useState([]);
     const [currentRentPerMonth, setCurrentRentPerMonth] = useState("");
     const [leaseTenureInYear, setLeaseTenureInYear] = useState("");
@@ -193,7 +203,7 @@ const Bareshellspace = () => {
                 obj["washroomDetails"] = washroomDetails;
             }
 
-            if (pantryType == "Shared Pantry") { 
+            if (pantryType == "Shared Pantry") {
                 obj["pantrySize"] = pantrySize;
                 obj["pantrySizeUnit"] = pantryTypeUnit;
             }
@@ -818,7 +828,7 @@ const Bareshellspace = () => {
                                 <option value="perch">perch</option>
                             </Select>
                         </InputGroup>
-                    </Box>  
+                    </Box>
                 </Box>
                 {/* Type of flooring */}
                 <Box className={style.optional_box}>
@@ -1335,7 +1345,6 @@ const Bareshellspace = () => {
                             handleinclusiveandtax(e.target.value)
                         }}
                         value={"All inclusive price"}
-
                     >
                         All inclusive price
                     </Checkbox>
@@ -1363,8 +1372,8 @@ const Bareshellspace = () => {
                     </Checkbox>
                 </Box>
 
-               {/* Additional Pricing Detail (Optional) */}
-               <Box display={"grid"}>
+                {/* Additional Pricing Detail (Optional) */}
+                <Box display={"grid"}>
                     <Heading as={"h4"} size={"sm"} margin={"10px 0"} fontWeight={700} textAlign={"left"}>
                         Additional Pricing Detail (Optional)
                     </Heading>
@@ -1378,7 +1387,7 @@ const Bareshellspace = () => {
                     {additionalPrice && <>
                         <Input type="text" w={"300px"} value={expectedRental} onChange={(e) => setExpectedRental(e.target.value)} placeholder="Expected rental" margin={"0"} />
                         <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-                        <Input type="text" w={"300px"} value={annualDuesPayable} onChange={(e) => setAnnualDuesPayable(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} /> 
+                        <Input type="text" w={"300px"} value={annualDuesPayable} onChange={(e) => setAnnualDuesPayable(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
                     </>
                     }
                     <Heading
@@ -1391,7 +1400,7 @@ const Bareshellspace = () => {
                         onClick={() => setAdditionalPrice(!additionalPrice)}
                         textAlign={"left"}>
                         {additionalPrice ? <IoIosArrowUp style={{ display: "inline" }} /> : <IoIosArrowDown style={{ display: "inline" }} />} Add more pricing details
-                    </Heading> 
+                    </Heading>
                 </Box>
 
 
