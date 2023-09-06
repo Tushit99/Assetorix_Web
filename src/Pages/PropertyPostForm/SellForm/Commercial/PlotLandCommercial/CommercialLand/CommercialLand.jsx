@@ -81,7 +81,7 @@ const CommercialLand = () => {
     let yearbox = [];
     for (let i = num + 1; i < num + 10; i++) {
       yearbox.push(i);
-    }
+    } 
     setexpectedBy(yearbox);
   }, []);
 
@@ -251,7 +251,7 @@ const CommercialLand = () => {
 
   const pinfetch = async (pin) => {
     try {
-      console.log(pin);
+      
       let res = await axios.get(`https://assetorix.onrender.com/pincode/?pincode=${pin}`);
       setState(res.data[0].state);
       setCity(res.data[0].city);

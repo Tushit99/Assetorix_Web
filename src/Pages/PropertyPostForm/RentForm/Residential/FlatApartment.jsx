@@ -265,7 +265,7 @@ const FlatApartment = () =>  {
             headers: head,
           })
           .then((e) => {
-            console.log(e, obj);
+            // console.log(e, obj);
             toast({
               title: e.data.msg,
               description: e.data.msg,
@@ -279,7 +279,7 @@ const FlatApartment = () =>  {
           status: "error",
           duration: 2000,
         });
-        console.log(error);
+        // console.log(error);
       }
       // }
     } else {
@@ -298,13 +298,13 @@ const FlatApartment = () =>  {
     if (e.target.value.length == 6) {
       pinfetch(e.target.value);
     } else {
-      console.log(e.target.value);
+      // console.log(e.target.value);
     }
   };
 
   const pinfetch = async (pin) => {
     try {
-      console.log(pin);
+      
       let res = await axios.get(
         `${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`
       );
@@ -313,7 +313,7 @@ const FlatApartment = () =>  {
       setCountry(res.data[0].country);
       setPinCollection(res.data);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 
@@ -337,7 +337,7 @@ const FlatApartment = () =>  {
     let newCat = [...furnishedarr];
     let value = e.target.value;
 
-    console.log(e.target.value);
+    // console.log(e.target.value);
 
     if (newCat.includes(value)) {
       newCat.splice(newCat.indexOf(value), 1);
@@ -376,7 +376,7 @@ const FlatApartment = () =>  {
         return [...prev, value];
       }
     });
-    console.log(willingTo);
+    // console.log(willingTo);
   }
 
 

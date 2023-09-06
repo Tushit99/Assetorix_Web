@@ -24,7 +24,7 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 
 
-const IndependentBuilder = () => {
+const IndependentBuilderRent = () => {
   const isCountry = useSelector((state) => state.gloalval);
   const toast = useToast();
   const [country, setCountry] = useState("");
@@ -92,7 +92,7 @@ const IndependentBuilder = () => {
     let obj = {
       lookingFor: "Rent",
       propertyGroup: "Residential",
-      propertyType: "Independent House / Villa",
+      propertyType: "Independent / Builder Floor", 
       address: {
         apartmentName: appartment,
         houseNumber: houseNo,
@@ -129,8 +129,8 @@ const IndependentBuilder = () => {
       securityDeposit,
       totalFloors: +totalfloors,
       floorOn,
-      plotArea,
-      plotAreaUnit: areaPer,
+      carpetArea :plotArea,
+      carpetAreaUnit: areaPer,
       parking: {
         openParking: openparking,
         closeParking: parking,
@@ -145,8 +145,7 @@ const IndependentBuilder = () => {
         expectedRental: expectedRentel,
         bookingAmount,
         annualDuesPayable: annualDuesPayble
-      },
-      // brokerContact : brokerContact 
+      }, 
     };
 
     const showToastError = (message) => {
@@ -267,7 +266,7 @@ const IndependentBuilder = () => {
             headers: head,
           })
           .then((e) => {
-            console.log(e, obj);
+            // console.log(e, obj);
             toast({
               title: e.data.msg,
               description: e.data.msg,
@@ -305,8 +304,7 @@ const IndependentBuilder = () => {
   };
 
   const pinfetch = async (pin) => {
-    try {
-      console.log(pin);
+    try {  
       let res = await axios.get(
         `${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`
       );
@@ -315,7 +313,7 @@ const IndependentBuilder = () => {
       setCountry(res.data[0].country);
       setPinCollection(res.data);
     } catch (err) {
-      console.log(err);
+      console.log(err); 
     }
   };
 
@@ -605,7 +603,8 @@ const IndependentBuilder = () => {
         </Heading>
         <Heading as={"h4"} size={"sm"} margin={"0 0 30px 0 "}>
           Add Room Details
-        </Heading>
+        </Heading> 
+        {/* Room Detail */}
         <Box as={"div"} className={style.inp_form_numbers}>
           <Box textAlign={"left"}>
             <Text> No. of Bedrooms </Text>
@@ -1071,6 +1070,7 @@ const IndependentBuilder = () => {
             </Box>
           </Box>
         </Box>
+        
         {/* ========================= reserved ========================= */}
         <Box className={style.optional_box}>
           <Heading as={"h3"} size={"md"}>
@@ -1124,7 +1124,8 @@ const IndependentBuilder = () => {
               </button>
             </Box>
           </div>
-        </Box>
+        </Box> 
+
         {/* ========================= floor details ========================= */}
         <Box textAlign={"left"}>
           <Heading
@@ -1185,6 +1186,7 @@ const IndependentBuilder = () => {
             </Select>
           </Box>
         </Box>
+        
         {/* ========================= Age of Property ========================= */}
         <Box textAlign={"left"} className={style.optional_box}>
           <Heading
@@ -1242,7 +1244,7 @@ const IndependentBuilder = () => {
           </Box>
         </Box>
 
-        {/* ============================= Available form (date) ============================= */}
+        {/* ============================= Available from (date) ============================= */}
         <Box textAlign={"left"} display={"grid"}>
           <Heading as={"h3"} size={"md"} margin={"4px 0"} textAlign={"left"}>
             Available from
@@ -1311,7 +1313,7 @@ const IndependentBuilder = () => {
 
         {/* ====================== Preferred agreement type =============================== */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"} margin={"14px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"14px 0"} textAlign={"left"}> 
             Preferred agreement type
           </Heading>
           <Box>
@@ -1413,7 +1415,7 @@ const IndependentBuilder = () => {
             <button onClick={handleMonthNotice} className={noticePeriod == "5 months" ? style.setbtn : style.btn} value={"5 months"}> 5 month </button>
             <button onClick={handleMonthNotice} className={noticePeriod == "6 months" ? style.setbtn : style.btn} value={"6 months"}> 6 month </button>
           </Box>
-        </Box>
+        </Box> 
 
         {/* ========================= Add pricing and details ========================= */}
         <Box>
@@ -2201,5 +2203,5 @@ const IndependentBuilder = () => {
   );
 };
 
-export default IndependentBuilder;
+export default IndependentBuilderRent;
 

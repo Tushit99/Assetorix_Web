@@ -267,7 +267,7 @@ const Independent = () => {
             headers: head,
           })
           .then((e) => {
-            console.log(e, obj);
+            // console.log(e, obj);
             toast({
               title: e.data.msg,
               description: e.data.msg,
@@ -306,7 +306,7 @@ const Independent = () => {
 
   const pinfetch = async (pin) => {
     try {
-      console.log(pin);
+      
       let res = await axios.get(
         `${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`
       );

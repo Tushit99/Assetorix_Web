@@ -302,14 +302,14 @@ const ServicedApartment = () => {
             pinfetch(e.target.value);
         }
         else {
-            console.log(e.target.value);
+            // console.log(e.target.value);
         }
     }
 
 
     const pinfetch = async (pin) => {
         try {
-            console.log(pin);
+            
             let res = await axios.get(`https://assetorix.onrender.com/pincode/?pincode=${pin}`);
             setState(res.data[0].state);
             setCity(res.data[0].city);
@@ -327,7 +327,7 @@ const ServicedApartment = () => {
         let newCat = [...furnishedarr];
         let value = e.target.value;
 
-        console.log(e.target.value);
+        // console.log(e.target.value);
 
         if (newCat.includes(value)) {
             newCat.splice(newCat.indexOf(value), 1);
@@ -487,7 +487,7 @@ const ServicedApartment = () => {
         } else {
             newarr.push(value);
         }
-        console.log(newarr);
+        // console.log(newarr);
         setWaterSource(newarr);
     }
 

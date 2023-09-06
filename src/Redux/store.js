@@ -7,7 +7,7 @@ import { reducer as gloalval} from "./globalval/reducer";
 const rootReducer = combineReducers({
   adminreducer, 
   gloalval, 
-  userreducer,
+  userreducer, 
 });
 
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunk));

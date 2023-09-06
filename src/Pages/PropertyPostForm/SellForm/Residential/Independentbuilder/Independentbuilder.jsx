@@ -306,7 +306,7 @@ const Independentbuilder = () => {
 
     const pinfetch = async (pin) => {
         try {
-            console.log(pin);
+            
             let res = await axios.get(`https://assetorix.onrender.com/pincode/?pincode=${pin}`);
             setState(res.data[0].state);
             setCity(res.data[0].city);

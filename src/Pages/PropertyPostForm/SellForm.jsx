@@ -8,7 +8,7 @@ import {
     TabPanel,
     TabPanels,
     Tabs,
-} from "@chakra-ui/react";   
+} from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import FlatAppartment from "./SellForm/Residential/FlatAppartment/FlatAppartment";
 import IndependentHouse from "./SellForm/Residential/IndependentHouse/IndependentHouse";
@@ -25,20 +25,21 @@ import PlotLandCommercial from "./SellForm/Commercial/PlotLandCommercial/PlotLan
 import Rent from "./SellForm/Commercial/Rent";
 import FlatApartment from "./RentForm/Residential/FlatApartment";
 import Independent from "./RentForm/Residential/Independent";
-import IndependentBuilder from "./RentForm/Residential/IndependentBuilder";
+import IndependentBuilderRent from "./RentForm/Residential/IndependentBuilder";
+import ServicedApartmentRent from "./RentForm/Residential/ServicedApartmentRent";
 
 
-const SellForm = () => { 
-    const looking = useSelector((state)=>state.gloalval.lookingFor);  
+const SellForm = () => {
+    const looking = useSelector((state) => state.gloalval.lookingFor);
     const [look, setlook] = useState("");
     const [type, settype] = useState("");
-    const [typeofplace, setTypeOf] = useState(""); 
+    const [typeofplace, setTypeOf] = useState("");
     const [selectedTab, setSelectedTab] = useState(0);
 
     const handlechange = (type, look) => {
         settype(type);
-        setlook(look); 
-        console.log(type);
+        setlook(look);
+        // console.log(type);
     };
 
     const handleTabChange = (index) => {
@@ -49,31 +50,31 @@ const SellForm = () => {
             setlook("Rent/Lease");
         }
         else if (index == 2) {
-            setlook("PG"); 
+            setlook("PG");
         }
         setSelectedTab(index);
     };
 
     useEffect(() => {
 
-        if(looking=='Rent/Lease'){
-            settype("Rent/Lease");  
+        if (looking == 'Rent/Lease') {
+            settype("Rent/Lease");
             setSelectedTab(1);
-        } 
-        else if(looking=="sell"){
-            settype("sell");   
+        }
+        else if (looking == "sell") {
+            settype("sell");
             setSelectedTab(0);
-        } 
-        else if(looking=="PG"){
+        }
+        else if (looking == "PG") {
             settype("look");
-            setSelectedTab(2); 
+            setSelectedTab(2);
         }
-        else{
-            settype(""); 
+        else {
+            settype("");
         }
-        console.log(looking); 
+        // console.log(looking); 
 
-        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }); 
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 
     }, [])
 
@@ -156,7 +157,7 @@ const SellForm = () => {
                                                     className={
                                                         look === "Flat/Apartment" && type === "sell"
                                                             ? style.setbtn
-                                                            : style.btn 
+                                                            : style.btn
                                                     }
                                                 >
                                                     Flat/Apartment
@@ -553,10 +554,10 @@ const SellForm = () => {
                                 </Box>
                             </TabPanel>
                         </TabPanels>
-                    </Tabs> 
+                    </Tabs>
                 </Box>
 
-                {/* Flat/Apartment */} 
+                {/* Flat/Apartment */}
                 {(type == "sell" && look == "Flat/Apartment") ? <FlatAppartment /> : ""}
 
                 {/* Independent House/villa */}
@@ -573,7 +574,7 @@ const SellForm = () => {
                 {(type == "sell" && look == "1 RK/ Studio Apartment") ? <RKStudio /> : ""}
 
                 {/* Serviced Apartment */}
-                {(type == "sell" && look == "Farmhouse") ? <FarmHouse /> : ""} 
+                {(type == "sell" && look == "Farmhouse") ? <FarmHouse /> : ""}
 
                 {/* Plot/Land */}
                 {(type == "sell" && look == "Plot / Land") ? <PlotLand /> : ""}
@@ -596,15 +597,20 @@ const SellForm = () => {
                 {/* Plot / Land */}
                 {(type == "sell" && look == "Plot/Land") ? <PlotLandCommercial /> : ""}
 
-                {/*  Rent / Flat or Apartment */} 
-                {(type == "Rent/Lease" && look == "Flat/Apartment") ? <FlatApartment /> : "" } 
+                {/* ================================== Rent/Lease ============================== */}  
 
-                {/* Independent House / Villa */}  
-                {(type == "Rent/Lease" && look == "Independent House/villa") ? <Independent /> : ""} 
-                 
+                {/*  Rent / Flat or Apartment */}
+                {(type == "Rent/Lease" && look == "Flat/Apartment") ? <FlatApartment /> : ""}
 
-                {/* Independent/builder Floor */}  
-                {(type == "Rent/Lease" && look == "Independent/builder Floor") ? <IndependentBuilder /> : ""}
+                {/* Independent House / Villa */} 
+                {(type == "Rent/Lease" && look == "Independent House/villa") ? <Independent /> : ""}
+
+
+                {/* Independent/builder Floor */}
+                {(type == "Rent/Lease" && look == "Independent/builder Floor") ? <IndependentBuilderRent /> : ""}
+
+                {/* Serviced Apartment */}
+                {(type == "Rent/Lease" && look == "Serviced Apartment") ? <ServicedApartmentRent /> : "" }
 
             </Box>
             <Box backgroundColor={"rgb(232, 244, 255)"} borderRadius={10}></Box>

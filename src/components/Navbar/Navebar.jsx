@@ -78,7 +78,7 @@ const Navebar = () => {
         dispatch(userlogout());
     }
 
-    console.log(data);
+    // console.log(data);
 
     return (
         <div className={style.head_nav}>
