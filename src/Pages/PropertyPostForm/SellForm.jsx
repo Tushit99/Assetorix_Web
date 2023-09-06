@@ -27,6 +27,7 @@ import FlatApartment from "./RentForm/Residential/FlatApartment";
 import Independent from "./RentForm/Residential/Independent";
 import IndependentBuilderRent from "./RentForm/Residential/IndependentBuilder";
 import ServicedApartmentRent from "./RentForm/Residential/ServicedApartmentRent";
+import StudioApartmentRent from "./RentForm/Residential/StudioApartmentRent";
 
 
 const SellForm = () => {
@@ -598,7 +599,12 @@ const SellForm = () => {
                 {(type == "Rent/Lease" && look == "Independent/builder Floor") ? <IndependentBuilderRent /> : ""}
 
                 {/* Serviced Apartment */}
-                {(type == "Rent/Lease" && look == "Serviced Apartment") ? <ServicedApartmentRent /> : "" }
+                {(type == "Rent/Lease" && look == "Serviced Apartment") ? <ServicedApartmentRent /> : "" } 
+
+                {/* 1RK / Studio Apartment */} 
+                {(type == "Rent/Lease" && look == "1RK / Studio Apartment") ? <StudioApartmentRent /> : "" }  
+
+                
 
             </Box>
             <Box backgroundColor={"rgb(232, 244, 255)"} borderRadius={10}></Box>

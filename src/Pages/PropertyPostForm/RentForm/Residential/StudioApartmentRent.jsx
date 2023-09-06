@@ -91,7 +91,7 @@ const StudioApartmentRent = () => {
         let obj = {
             lookingFor: "Rent",
             propertyGroup: "Residential",
-            propertyType: "Serviced Apartment",
+            propertyType: "1RK / Studio Apartment",
             address: {
                 apartmentName: appartment,
                 houseNumber: houseNo,
@@ -1748,7 +1748,7 @@ const StudioApartmentRent = () => {
                         onClick={HandleBuildingFeature}
                         value={"Fitness Centre / GYM"}
                     >
-                        Fitness Centre / GYM
+                        Fitness Centre / GYM 
                     </button>
                     <button
                         className={
@@ -2232,4 +2232,6 @@ const StudioApartmentRent = () => {
     );
 };
 
-export default StudioApartmentRent
+export default StudioApartmentRent;  
+
+
