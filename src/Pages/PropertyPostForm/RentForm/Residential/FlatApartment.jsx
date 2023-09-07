@@ -312,15 +312,7 @@ const FlatApartment = () =>  {
       // console.log(err);
     }
   };
-
-  // const areaCalucation = () => {
-  //   if (pricedetail && plotArea) {
-  //     let max = Math.max(Number(pricedetail), Number(plotArea));
-  //     let min = Math.min(Number(pricedetail), Number(plotArea));
-  //     let ans = Math.round(max / min);
-  //     setPriceSqr(ans);
-  //   }
-  // }
+ 
 
   const handlePreferredAgreement = (e) => {
     e.preventDefault();
@@ -604,7 +596,7 @@ const FlatApartment = () =>  {
           <Box textAlign={"left"}>
             <Text> No. of Bedrooms </Text>
             <NumberInput>
-              <NumberInputField
+              <NumberInputField 
                 variant="flushed"
                 padding={"0 2px"}
                 onChange={(e) => setBedRoom(e.target.value)}
@@ -1376,9 +1368,9 @@ const FlatApartment = () =>  {
           <Box>
             <button value={"Fixed"} className={securityDeposit == "Fixed" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> Fixed </button>
             <button value={"Multiple of Rent"} className={securityDeposit == "Multiple of Rent" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> Multiple of Rent </button>
-            <button value={""} className={securityDeposit == "" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> None </button>
+            <button value={"none"} className={securityDeposit == "none" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> None </button>
           </Box>
-          <Box display={securityDeposit == "" ? "none" : "block" }>
+          <Box display={securityDeposit == "none" ? "none" : "block" }>
             <Input type="text" w={300} value={depositAmount} onChange={handleDepositAmount} placeholder={`${securityDeposit == "Fixed" ? "Deposit Value" : ""} ${securityDeposit == "Multiple of Rent" ? "No. of months (Max 30)" : ""}`} />
           </Box>
         </Box>
