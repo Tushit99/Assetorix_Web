@@ -126,6 +126,7 @@ const StudioApartmentRent = () => {
             roadFacingWidth: facingwidth,
             roadFacingWidthType: facing,
             securityDeposit,
+            furnished, 
             totalFloors: +totalfloors,
             floorOn,
             carpetArea: plotArea,
@@ -1370,9 +1371,9 @@ const StudioApartmentRent = () => {
                     <Box>
                         <button value={"Fixed"} className={securityDeposit == "Fixed" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> Fixed </button>
                         <button value={"Multiple of Rent"} className={securityDeposit == "Multiple of Rent" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> Multiple of Rent </button>
-                        <button value={""} className={securityDeposit == "" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> None </button>
+                        <button value={"None"} className={securityDeposit == "None" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> None </button>
                     </Box>
-                    <Box display={securityDeposit == "" ? "none" : "block"}>
+                    <Box display={securityDeposit == "None" ? "none" : "block"}>
                         <Input type="text" w={300} value={depositAmount} onChange={handleDepositAmount} placeholder={`${securityDeposit == "Fixed" ? "Deposit Value" : ""} ${securityDeposit == "Multiple of Rent" ? "No. of months (Max 30)" : ""}`} />
                     </Box>
                 </Box>
