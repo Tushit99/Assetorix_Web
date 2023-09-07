@@ -131,6 +131,13 @@
     align-items: center;
     gap: 20px;  
   }
+
+  .menu{
+    display: flex; 
+    flex-direction: column; 
+    width: 300px;
+    padding: 20px; 
+}
   
 
   .washroom_dec{

@@ -58,8 +58,7 @@ const ReadyMove = () => {
     const [parkingStatus, setParkingStatus] = useState("");
     const [parkingArr, setParkingArr] = useState([]);
     const [parkingTotalNumber, setParkingTotalNumber] = useState("");
-    const [preLeased, setPreLeased] = useState("");
-    const [fireNOC, setFireNOC] = useState("");
+    const [preLeased, setPreLeased] = useState(""); 
     const [occupancyCertificate, setOccupancyCertificate] = useState("");
     const [locatedInside, setLocatedInside] = useState("");
     const [pantrySize, setPantrySize] = useState("");
@@ -77,7 +76,7 @@ const ReadyMove = () => {
     const [lockPeriod, setlockPeriod] = useState("");
     const [securityDeposit, setSecurityDeposit] = useState("");
     const [additionalPrice, setAdditionalPrice] = useState(false);
-
+    const [address, setAddress] = useState(""); 
 
     const [areaPer, setAreaPer] = useState("sq.ft");
     const [fromyear, setFromyear] = useState("");
@@ -106,6 +105,7 @@ const ReadyMove = () => {
             propertyType: "Office",
             officeType: "Ready to move office space",
             address: {
+                address, 
                 locality,
                 pincode,
                 city,
@@ -115,7 +115,7 @@ const ReadyMove = () => {
                 locatedInside
             },
             ownership,
-            rentIncreasePercent,
+            expectedYearlyRent: rentIncreasePercent,
             price: +pricedetail,
             priceUnit: +priceSqr,
             inclusivePrices,
@@ -138,7 +138,7 @@ const ReadyMove = () => {
             },
             washrooms: washroomType,
             conferenceRoom,
-            ageOfProperty: fromyear,
+            propertyStatus: fromyear, 
             receptionArea,
             availableFrom,
             pantryType,
@@ -150,14 +150,14 @@ const ReadyMove = () => {
             },
             totalFloors: +totalfloors,
             floorOn: floorNumber,
-            lockPeriod,
+            lockInPeriod :lockPeriod, 
             fireSafety: fireSafty,
             previouslyUsedList,
             staircases: stairCase,
             lift: liftStatus,
             parking: parkingStatus,
-            noc: fireNOC,
-            occupancy: occupancyCertificate
+            noc: fireNocCertificate,
+            occupancy: occupancyCertificate 
         };
 
         const showToastError = (message) => {
@@ -288,14 +288,12 @@ const ReadyMove = () => {
         setPincode(e.target.value);
         if (e.target.value.length == 6) {
             pinfetch(e.target.value);
-        } else {
-            console.log(e.target.value);
-        }
+        }  
     };
 
     const pinfetch = async (pin) => {
         try {
-
+            console.log(pin); 
             let res = await axios.get(
                 `https://assetorix.onrender.com/pincode/?pincode=${pin}`
             );
@@ -392,7 +390,8 @@ const ReadyMove = () => {
         }
         if (newarr.includes("")) {
             newarr.splice(newarr.indexOf(""), 1);
-        }
+        } 
+        console.log(newarr); 
         setFloorNumber(newarr);
     }
 
@@ -442,6 +441,8 @@ const ReadyMove = () => {
                 <Heading size={"sm"} color={"black"}>
                     An accurate location helps you connect with the right buyers.
                 </Heading>
+
+                <Input type="text" value={address} onChange={(e)=>setAddress(e.target.value)} />
 
                 <Select
                     fontSize={"md"}
@@ -509,8 +510,8 @@ const ReadyMove = () => {
                 />
                 {pincollection.length ? (
                     <datalist id="browsers">
-                        {pincollection.map((e) => (
-                            <option value={e.locality} />
+                        {pincollection.map((e,i) => (
+                            <option key={i} value={e.locality} />
                         ))}
                     </datalist>
                 ) : (
@@ -855,7 +856,7 @@ const ReadyMove = () => {
                         <InputGroup w={340} >
                             <Input type="text" border={"1px solid rgb(222, 222, 255)"}
                                 value={pantrySize}
-                                onChange={(e) => setPantrySize(e.target.value)}
+                                onChange={(e) => setPantrySize(NumericString(e.target.value))} 
                                 _hover={{ backgroundColor: "#fffff" }}
                                 backgroundColor={"white"} variant={"filled"} flex={4} placeholder="Pantry Size (optional)" />
                             <Select variant={"filled"}
@@ -991,16 +992,16 @@ const ReadyMove = () => {
                                 <MenuList
                                     display={"flex"}
                                     maxHeight={200}
-                                    overflow={"scroll"}
+                                    overflow={"scroll"} 
                                     overflowX={"hidden"}
                                     flexDirection={"column"}
                                     padding={"8px 10px"} >
 
-                                    <Checkbox isChecked={floorNumber == "Basement"} onChange={handleFloorNumber} value={"Basement"} > Basement </Checkbox>
-                                    <Checkbox isChecked={floorNumber == "Lower Ground"} onChange={handleFloorNumber} value={"Lower Ground"} > Lower Ground </Checkbox>
-                                    <Checkbox isChecked={floorNumber == "Ground"} onChange={handleFloorNumber} value={"Ground"} > Ground </Checkbox>
+                                    <Checkbox isChecked={floorNumber.includes("Basement")} onChange={handleFloorNumber} value={"Basement"} > Basement </Checkbox>
+                                    <Checkbox isChecked={floorNumber.includes("Lower Ground")} onChange={handleFloorNumber} value={"Lower Ground"} > Lower Ground </Checkbox>
+                                    <Checkbox isChecked={floorNumber.includes("Ground")} onChange={handleFloorNumber} value={"Ground"} > Ground </Checkbox>
                                     {Array.from(Array(Number(totalfloors)).keys()).map((e, i) => {
-                                        return <Checkbox isChecked={floorNumber == (e + 1)} key={i} onChange={handleFloorNumber} value={e + 1} > {e + 1} </Checkbox>
+                                        return <Checkbox isChecked={floorNumber.includes(`${e + 1}`)} key={i+3} onChange={handleFloorNumber} value={e + 1} > {e + 1} </Checkbox>
                                     })}
                                 </MenuList>
                             </Menu>
@@ -1009,10 +1010,10 @@ const ReadyMove = () => {
                 </Box>
                 {/* Staicases */}
                 <Box className={style.optional_box}>
-                    <Heading as={"h3"} size={"md"}>
+                    <Heading as={"h3"} size={"md"}> 
                         No. of Staircases (Optional)
                     </Heading>
-                    <Input width={300} type="text" placeholder="No. of Staircases" variant={"flushed"} onChange={(e) => setStairCase(e.target.value)} value={stairCase} />
+                    <Input width={300} type="text" placeholder="No. of Staircases" variant={"flushed"} onChange={(e) => setStairCase(NumericString(e.target.value))} value={stairCase} />
                 </Box>
 
                 {/* Lift */}
@@ -1085,7 +1086,7 @@ const ReadyMove = () => {
                         </button>
                         <Text margin={"0 10px"} flex={4}> Service Lifts </Text>
                     </Box>
-                </Box>
+                </Box> 
 
                 {/* Parking */}
                 <Box className={style.optional_box}>
@@ -1106,16 +1107,16 @@ const ReadyMove = () => {
                         <Box display={"flex"} flexWrap={"wrap"} gap={8} margin={"4px 0 10px 0"} alignItems={"center"} >
                             <Checkbox onChange={handleNumberOfParking} value={"Private Parking in Basement"} isChecked={parkingArr.includes("Private Parking in Basement")} >Private Parking in Basement</Checkbox>
                             <Checkbox onChange={handleNumberOfParking} value={"Private Parking Outside"} isChecked={parkingArr.includes("Private Parking Outside")} >Private Parking Outside</Checkbox>
-                            <Checkbox onChange={handleNumberOfParking} value={"Private Parking Outside"} isChecked={parkingArr.includes("Private Parking Outside")} >Public Parking</Checkbox>
+                            <Checkbox onChange={handleNumberOfParking} value={"Public Parking"} isChecked={parkingArr.includes("Public Parking")} >Public Parking</Checkbox>
                         </Box>
                         <Input type="text" w={300} placeholder="Enter no. of Parkings" value={parkingTotalNumber} onChange={(e) => {
                             e.preventDefault();
-                            setParkingTotalNumber(e.target.value); 
+                            setParkingTotalNumber(NumericString(e.target.value)); 
                         }} />
                     </Box>
                 </Box>
 
-                {/* Age of Property */}
+                {/* Age of Property */} 
                 <Box textAlign={"left"} className={style.optional_box}>
                     <Heading
                         as={"h3"}
@@ -1126,7 +1127,7 @@ const ReadyMove = () => {
                         Age of Property
                     </Heading>
                     <Box className={style.grid}>
-                        <button
+                        <button 
                             className={fromyear == "0-1 year" ? style.setbtn : style.btn}
                             borderRadius={"100px"}
                             onClick={handleyear}
@@ -1295,11 +1296,11 @@ const ReadyMove = () => {
                             >
                                 {isCountry.country == "india" ? "₹" : "$"} Expected Rent
                             </Heading>
-                            <Input type="text"
+                            <Input type="text" 
                                 value={pricedetail}
                                 required
                                 onChange={(e) => {
-                                    setPricedetail(e.target.value);
+                                    setPricedetail(NumericString(e.target.value)); 
                                     areaCalucation();
                                 }}
                             />
@@ -1385,17 +1386,21 @@ const ReadyMove = () => {
                     <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
                         Yearly rent is expected to increase by
                     </Heading>
-                    <Input type="text" onClick={(e) => setRentIncreasePercent(e.target.value)} value={rentIncreasePercent} />
+                    <Input type="text" placeholder="Percentage (%) of increase in rent" onChange={(e) => setRentIncreasePercent(e.target.value)} value={rentIncreasePercent} />
                 </Box>
 
                 {/* Is your office fire NOC Certified */}
-                <Box>
+                <Box className={style.optional_box}> 
                     <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
                         Is your office fire NOC Certified
                     </Heading>
                     <Box>
-                        <button value={"Yes"} onClick={(e) => setFireNocCertificate(e.target.value)} className={fireNocCertificate == "Yes" ? style.setbtn : style.btn} >Yes</button>
-                        <button value={"No"} onClick={(e) => setFireNocCertificate(e.target.value)} className={fireNocCertificate == "No" ? style.setbtn : style.btn} >No</button>
+                        <button value={"Yes"} onClick={(e) =>{
+                            e.preventDefault(); 
+                            setFireNocCertificate(e.target.value)}} className={fireNocCertificate == "Yes" ? style.setbtn : style.btn} >Yes</button>
+                        <button value={"No"} onClick={(e) =>{
+                            e.preventDefault(); 
+                            setFireNocCertificate(e.target.value)}} className={fireNocCertificate == "No" ? style.setbtn : style.btn} >No</button>
                     </Box>
                 </Box>
 
