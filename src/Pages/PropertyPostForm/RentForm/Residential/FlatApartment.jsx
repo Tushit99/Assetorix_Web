@@ -17,7 +17,7 @@ import { Checkbox } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import style from "../RentForm.module.css";
-import { CleanInputText, IndianDateConverter, NumericString } from "../../code";
+import { CleanInputText, IndianDateConverter, NumericString } from "../../code"; 
 import { InputGroup } from "@chakra-ui/react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
@@ -80,9 +80,7 @@ const FlatApartment = () =>  {
   const [depositAmount, setDepositAmount] = useState("");
   const [agreementDuration, setagreementDuration] = useState("");
   const [noticePeriod, setNoticePeriod] = useState("");
-  const [availableFrom, setavailableFrom] = useState("");
-  const [expectedRentel, setExpectedRentel] = useState("");
-  const [annualDuesPayble, setAnnualDuesPayble] = useState("");
+  const [availableFrom, setavailableFrom] = useState(""); 
 
 
   const handleSubmitData = async (e) => {
@@ -139,10 +137,9 @@ const FlatApartment = () =>  {
       countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
       additionalPricingDetails: {
         maintenancePrice,
-        maintenanceTimePeriod,
-        expectedRental: expectedRentel,
-        bookingAmount,
-        annualDuesPayable: annualDuesPayble
+        maintenanceTimePeriod, 
+        bookingAmount, 
+        membershipCharge 
       },
       // brokerContact : brokerContact 
     };
@@ -1347,20 +1344,18 @@ const FlatApartment = () =>  {
                 Additional Pricing Detail (Optional)
               </Heading>
               <InputGroup w={"300px"} margin={"10px 0"}>
-                <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
+                <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(NumericString(e.target.value))} value={maintenancePrice} placeholder={"Maintenance Price"} />
                 <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
                   <option value="Monthly">Monthly</option>
                   <option value="Yearly">Yearly</option>
                 </Select>
               </InputGroup>
-              <Input type="text" w={"300px"} value={expectedRentel} onChange={(e) => setExpectedRentel(e.target.value)} placeholder="Expected rental" margin={"0"} />
-              <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-              <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
-              <Input type="text" w={"300px"} value={membershipCharge} onChange={(e) => setMembershipCharge(e.target.value)} placeholder="Membership charges" margin={"10px 0 0 0"} />
+              <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(NumericString(e.target.value))} placeholder="Booking Amount" margin={"10px 0 0 0"} />
+              <Input type="text" w={"300px"} value={membershipCharge} onChange={(e) => setMembershipCharge(NumericString(e.target.value))} placeholder="Membership charges" margin={"10px 0 0 0"} />
             </>
             }
             <Heading
-              as={"h3"}
+              as={"h3"}  
               size={"sm"}
               margin={"10px 0"}
               color={"#002aff"}
@@ -1394,12 +1389,12 @@ const FlatApartment = () =>  {
           <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
             Duration of agreement
           </Heading>
-          <Select onChange={(e) => setagreementDuration(e.target.value)} value={agreementDuration} >
+          <Select w={300} onChange={(e) => setagreementDuration(e.target.value)} value={agreementDuration} >
             <option value="0">0</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
-            <option value="4">4</option>
+            <option value="4">4</option> 
             <option value="5">5</option>
           </Select>
         </Box>

@@ -74,8 +74,7 @@ const BareShell = () => {
     const [flooring, setFlooring] = useState("");
     const [airCondition, setAirCondition] = useState("");
     const [locality, setLocality] = useState("");
-
-    const [availableFrom, setavailableFrom] = useState(""); 
+    const [availableFrom, setavailableFrom] = useState("");
     const [areaPer, setAreaPer] = useState("sq.ft");
     const [availability, setAvailability] = useState("");
     const [fromyear, setFromyear] = useState("");
@@ -118,10 +117,12 @@ const BareShell = () => {
             price: +pricedetail,
             priceUnit: +priceSqr,
             inclusivePrices,
+            propertyStatus: fromyear,
             amenities,
             locationAdv,
             carpetArea: plotArea,
             carpetAreaUnit: areaPer,
+            availableFrom,
             description: desc,
             countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
             additionalPricingDetails: {
@@ -181,15 +182,6 @@ const BareShell = () => {
             let authorization = localStorage.getItem("AstToken") || undefined;
 
             let head = { id, authorization, "Content-type": "application/json" };
-
-            if (availability == "Ready to move" && fromyear != "") {
-                obj["propertyStatus"] = fromyear;
-                obj["availabilityStatus"] = availability;
-            }
-            if (availability == "Under construction" && expectedyear != "") {
-                obj["expectedByYear"] = expectedyear;
-                obj["availabilityStatus"] = availability;
-            }
 
             if (washroomType == "Available") {
                 let washroomDetails = {
@@ -547,21 +539,23 @@ const BareShell = () => {
                         Add Area Details
                     </Heading>
                     <Text margin={"5px 0"}> Atleast one area type is mandatory </Text>
-                    <ButtonGroup
-                        className={style.select_land}
+                    <ButtonGroup 
                         size="sm"
-                        isAttached
-                        variant="outline"
+                        w={300} 
+                        display={"flex"} 
+                        isAttached 
                     >
                         <Input type="text" padding={"0 2px"}
                             value={plotArea}
-                            required
+                            required 
+                            flex={3}
                             onChange={(e) => {
                                 areaCalucation();
                                 setPlotArea(e.target.value);
                             }} />
                         <Select
-                            value={areaPer}
+                            value={areaPer} 
+                            
                             onChange={(e) => {
                                 setAreaPer(e.target.value);
                             }}
@@ -590,12 +584,12 @@ const BareShell = () => {
                         </Select>
                     </ButtonGroup>
 
-                    <InputGroup>
+                    <InputGroup w={300} >
                         <Input
                             type="text"
                             placeholder={"Minimum leasable super built up area"}
                             value={minimumLeasable}
-                            onClick={(e) => setminimumLeasable(e.target.value)} />
+                            onChange={(e) => setminimumLeasable(NumericString(e.target.value))} />
                         <Select
                             value={areaPer}
                             onChange={(e) => {
@@ -1090,18 +1084,21 @@ const BareShell = () => {
                             setParkingStatus(e.target.value);
                         }} className={parkingStatus == "Not-Available" ? style.setbtn : style.btn} >Not-Available</button>
                     </Box>
-                    <Box>
-                        <Checkbox onChange={handleNumberOfParking} value={"Private Parking in Basement"} isChecked={parkingArr.includes("Private Parking in Basement")} >Private Parking in Basement</Checkbox>
-                        <Checkbox onChange={handleNumberOfParking} value={"Private Parking Outside"} isChecked={parkingArr.includes("Private Parking Outside")} >Private Parking Outside</Checkbox>
-                        <Checkbox onChange={handleNumberOfParking} value={"Private Parking Outside"} isChecked={parkingArr.includes("Private Parking Outside")} >Public Parking</Checkbox>
-                        <Input type="text" placeholder="Enter no. of Parkings" value={parkingTotalNumber} onChange={(e) => {
+                    <Box display={parkingStatus == "Available" ? "block" : "none"}>
+                        <Box display={"flex"} flexWrap={"wrap"} gap={8} margin={"4px 0 10px 0"} alignItems={"center"} >
+                            <Checkbox onChange={handleNumberOfParking} value={"Private Parking in Basement"} isChecked={parkingArr.includes("Private Parking in Basement")} >Private Parking in Basement</Checkbox>
+                            <Checkbox onChange={handleNumberOfParking} value={"Private Parking Outside"} isChecked={parkingArr.includes("Private Parking Outside")} >Private Parking Outside</Checkbox>
+                            <Checkbox onChange={handleNumberOfParking} value={"Public Parking"} isChecked={parkingArr.includes("Public Parking")} >Public Parking</Checkbox>
+                        </Box>
+                        <Input type="text" w={300} placeholder="Enter no. of Parkings" value={parkingTotalNumber} onChange={(e) => {
                             e.preventDefault();
-                            setParkingTotalNumber(e.target.value);
+                            setParkingTotalNumber(NumericString(e.target.value));
                         }} />
                     </Box>
                 </Box>
 
-                {/* Available from */}
+
+                {/* Age of PRoperty */}
                 <Box textAlign={"left"} className={style.optional_box}>
                     <Heading
                         as={"h3"}
@@ -1157,6 +1154,14 @@ const BareShell = () => {
                             10+ years
                         </button>
                     </Box>
+                </Box>
+
+                {/* ============================= Available form (date) ============================= */}
+                <Box textAlign={"left"} display={"grid"}>
+                    <Heading as={"h3"} size={"md"} margin={"4px 0"} textAlign={"left"}>
+                        Available from
+                    </Heading>
+                    <Input value={availableFrom} onChange={(e) => setavailableFrom(e.target.value)} color='blue' type={"date"} w={300} />
                 </Box>
 
                 {/* Add pricing and details (ownerShip) */}
@@ -1224,72 +1229,17 @@ const BareShell = () => {
                         </button>
                     </Box>
                 </Box>
-                {/* Priceing Detail  */}
-                <Box>
-                    <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
-                        Price Details
-                    </Heading>
-                    <Box display={"flex"} alignItems={"center"} gap={5}>
-                        <Box display={"grid"} gap={0}>
-                            <Heading
-                                as={"h3"}
-                                size={"xs"}
-                                fontWeight={400}
-                                textAlign={"left"}
-                            >
-                                {isCountry.country == "india" ? "₹" : "$"} Price Details
-                            </Heading>
-                            <NumberInput >
-                                <NumberInputField
-                                    value={pricedetail}
-                                    required
-                                    onChange={(e) => {
-                                        setPricedetail(e.target.value);
-                                        areaCalucation();
-                                    }}
-                                />
-                            </NumberInput>
-                        </Box>
-                        <Box display={"grid"} gap={0}>
-                            <Heading
-                                as={"h3"}
-                                size={"xs"}
-                                fontWeight={400}
-                                textAlign={"left"}
-                            >
-                                {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
-                            </Heading>
-                            <NumberInput value={priceSqr}>
-                                <NumberInputField
-                                    required
-                                    readOnly
-                                />
-                            </NumberInput>
-                        </Box>
-                    </Box>
-                </Box>
-                {/* checkbox */}
-                <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
-                    <Checkbox
-                        isChecked={inclusivePrices.includes("All inclusive price")}
-                        onChange={(e) => {
-                            e.preventDefault();
-                            handleinclusiveandtax(e.target.value)
-                        }}
-                        value={"All inclusive price"}
-                    >
-                        All inclusive price
-                    </Checkbox>
-                    <Checkbox
-                        isChecked={inclusivePrices.includes("Tax and Govt. charges excluded")}
-                        onChange={(e) => {
-                            e.preventDefault();
-                            handleinclusiveandtax(e.target.value)
-                        }}
-                        value={"Tax and Govt. charges excluded"}
-                    >
 
-                        Tax and Govt. charges excluded
+                <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}> 
+                    <Checkbox
+                        isChecked={inclusivePrices.includes("Electricity & Water charges excluded")}
+                        onChange={(e) => {
+                            e.preventDefault();
+                            handleinclusiveandtax(e.target.value)
+                        }}
+                        value={"Electricity & Water charges excluded"}
+                    >
+                        Electricity & Water charges excluded
                     </Checkbox>
                     <Checkbox
                         isChecked={inclusivePrices.includes("Price Negotiable")}
@@ -1299,9 +1249,78 @@ const BareShell = () => {
                         }}
                         value={"Price Negotiable"}
                     >
-
                         Price Negotiable
                     </Checkbox>
+                </Box>
+
+                {/* Rent Detail  */}
+                <Box>
+                    <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+                        Rent Details
+                    </Heading>
+                    <Box display={"flex"} alignItems={"center"} gap={5}>
+                        <Box display={"grid"} gap={0}>
+                            <Heading
+                                as={"h3"}
+                                size={"xs"}
+                                fontWeight={400}
+                                textAlign={"left"}
+                            >
+                                {isCountry.country == "india" ? "₹" : "$"} Expected Rent
+                            </Heading>
+                            <Input type="text"
+                                value={pricedetail}
+                                required
+                                onChange={(e) => {
+                                    setPricedetail(NumericString(e.target.value));
+                                    areaCalucation();
+                                }}
+                            />
+                        </Box>
+                        <Box display={"grid"} gap={0}>
+                            <Heading
+                                as={"h3"}
+                                size={"xs"}
+                                fontWeight={400}
+                                textAlign={"left"}
+                            >
+                                {isCountry.country == "india" ? "₹" : "$"} Price : Per {areaPer}
+                            </Heading>
+                            <NumberInput value={priceSqr}>
+                                <NumberInputField
+                                    readOnly
+                                />
+                            </NumberInput>
+                        </Box>
+                    </Box>
+                </Box>
+
+                {/* Additional Pricing Detail (Optional) */}
+                <Box display={"grid"}>
+                    {additionalPrice && <>
+                        <Heading as={"h4"} size={"sm"} margin={"10px 0"} fontWeight={700} textAlign={"left"}>
+                            Additional Rent Detail (Optional)
+                        </Heading>
+                        <InputGroup w={"300px"} margin={"10px 0"}>
+                            <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
+                            <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
+                                <option value="Monthly">Monthly</option>
+                                <option value="Yearly">Yearly</option>
+                            </Select>
+                        </InputGroup>
+                    </>
+                    }
+                    <Heading
+                        as={"h3"}
+                        size={"sm"}
+                        margin={"10px 0"}
+                        color={"#002aff"}
+                        fontWeight={500}
+                        cursor={"pointer"}
+                        onClick={() => setAdditionalPrice(!additionalPrice)}
+                        textAlign={"left"}>
+                        {additionalPrice ? <IoIosArrowUp style={{ display: "inline" }} /> : <IoIosArrowDown style={{ display: "inline" }} />} Add more pricing details
+                    </Heading>
                 </Box>
 
                 {/* Additional Pricing Detail (Optional) */}
@@ -1321,9 +1340,9 @@ const BareShell = () => {
                         <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
                         <Input type="text" w={"300px"} value={annualDuesPayable} onChange={(e) => setAnnualDuesPayable(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
                     </>
-                    }
+                    } 
                     <Heading
-                        as={"h3"}
+                        as={"h3"} 
                         size={"sm"}
                         margin={"10px 0"}
                         color={"#002aff"}

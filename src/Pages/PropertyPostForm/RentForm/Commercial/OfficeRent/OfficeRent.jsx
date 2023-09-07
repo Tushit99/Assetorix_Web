@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import style from "../RentComercial.module.css";
 import { Box, Heading } from '@chakra-ui/react';
 import ReadyMove from './ReadyMove/ReadyMove';
+import BareShell from './BareShellOffice/BareShell';
 
 
 
@@ -22,14 +23,12 @@ const OfficeRent = () => {
       <Box>
 
         {officeOpt == "Ready to move office space" && <ReadyMove />}
-        {/* 
 
-      {officeOpt == "Bare shell office space" && <Bareshellspace />}
+        {officeOpt == "Bare shell office space" && <BareShell />}  
 
-      {officeOpt == "Co-working office space" && <CoWorkingspace />} */}
+        {/*  {officeOpt == "Co-working office space" && <CoWorkingspace />} */}
+
       </Box>
-
-
     </Box>
   )
 }
