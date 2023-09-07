@@ -539,23 +539,23 @@ const BareShell = () => {
                         Add Area Details
                     </Heading>
                     <Text margin={"5px 0"}> Atleast one area type is mandatory </Text>
-                    <ButtonGroup 
+                    <ButtonGroup
                         size="sm"
-                        w={300} 
-                        display={"flex"} 
-                        isAttached 
+                        w={300}
+                        display={"flex"}
+                        isAttached
                     >
                         <Input type="text" padding={"0 2px"}
                             value={plotArea}
-                            required 
+                            required
                             flex={3}
                             onChange={(e) => {
                                 areaCalucation();
                                 setPlotArea(e.target.value);
                             }} />
                         <Select
-                            value={areaPer} 
-                            
+                            value={areaPer}
+
                             onChange={(e) => {
                                 setAreaPer(e.target.value);
                             }}
@@ -1230,28 +1230,7 @@ const BareShell = () => {
                     </Box>
                 </Box>
 
-                <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}> 
-                    <Checkbox
-                        isChecked={inclusivePrices.includes("Electricity & Water charges excluded")}
-                        onChange={(e) => {
-                            e.preventDefault();
-                            handleinclusiveandtax(e.target.value)
-                        }}
-                        value={"Electricity & Water charges excluded"}
-                    >
-                        Electricity & Water charges excluded
-                    </Checkbox>
-                    <Checkbox
-                        isChecked={inclusivePrices.includes("Price Negotiable")}
-                        onChange={(e) => {
-                            e.preventDefault();
-                            handleinclusiveandtax(e.target.value)
-                        }}
-                        value={"Price Negotiable"}
-                    >
-                        Price Negotiable
-                    </Checkbox>
-                </Box>
+
 
                 {/* Rent Detail  */}
                 <Box>
@@ -1294,6 +1273,29 @@ const BareShell = () => {
                         </Box>
                     </Box>
                 </Box>
+                {/* rent price detail */}
+                <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
+                    <Checkbox
+                        isChecked={inclusivePrices.includes("Electricity & Water charges excluded")}
+                        onChange={(e) => {
+                            e.preventDefault();
+                            handleinclusiveandtax(e.target.value)
+                        }}
+                        value={"Electricity & Water charges excluded"}
+                    >
+                        Electricity & Water charges excluded
+                    </Checkbox>
+                    <Checkbox
+                        isChecked={inclusivePrices.includes("Price Negotiable")}
+                        onChange={(e) => {
+                            e.preventDefault();
+                            handleinclusiveandtax(e.target.value)
+                        }}
+                        value={"Price Negotiable"}
+                    >
+                        Price Negotiable
+                    </Checkbox>
+                </Box>
 
                 {/* Additional Pricing Detail (Optional) */}
                 <Box display={"grid"}>
@@ -1322,58 +1324,24 @@ const BareShell = () => {
                         {additionalPrice ? <IoIosArrowUp style={{ display: "inline" }} /> : <IoIosArrowDown style={{ display: "inline" }} />} Add more pricing details
                     </Heading>
                 </Box>
+ 
+ 
 
-                {/* Additional Pricing Detail (Optional) */}
-                <Box display={"grid"}>
-                    <Heading as={"h4"} size={"sm"} margin={"10px 0"} fontWeight={700} textAlign={"left"}>
-                        Additional Pricing Detail (Optional)
-                    </Heading>
-                    <InputGroup w={"300px"} margin={"10px 0"}>
-                        <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
-                        <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
-                            <option value="Monthly">Monthly</option>
-                            <option value="Yearly">Yearly</option>
-                        </Select>
-                    </InputGroup>
-                    {additionalPrice && <>
-                        <Input type="text" w={"300px"} value={expectedRental} onChange={(e) => setExpectedRental(e.target.value)} placeholder="Expected rental" margin={"0"} />
-                        <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-                        <Input type="text" w={"300px"} value={annualDuesPayable} onChange={(e) => setAnnualDuesPayable(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
-                    </>
-                    } 
-                    <Heading
-                        as={"h3"} 
-                        size={"sm"}
-                        margin={"10px 0"}
-                        color={"#002aff"}
-                        fontWeight={500}
-                        cursor={"pointer"}
-                        onClick={() => setAdditionalPrice(!additionalPrice)}
-                        textAlign={"left"}>
-                        {additionalPrice ? <IoIosArrowUp style={{ display: "inline" }} /> : <IoIosArrowDown style={{ display: "inline" }} />} Add more pricing details
-                    </Heading>
-                </Box>
-
-
-                {/* Pre-leased / Pre-Ented */}
+                {/* ============================ Security deposit ============================ */}
                 <Box className={style.optional_box}>
+                    <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                        Security deposit
+                    </Heading>
                     <Box>
-                        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
-                            Is it Pre-leased / Pre-Rented ?
-                        </Heading>
-                        <Text> for properties that are already rented out </Text>
+                        <button value={"Fixed"} className={securityDeposit == "Fixed" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> Fixed </button>
+                        <button value={"Multiple of Rent"} className={securityDeposit == "Multiple of Rent" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> Multiple of Rent </button>
+                        <button value={""} className={securityDeposit == "" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> None </button>
                     </Box>
-                    <Box>
-                        <button value={"Yes"} onClick={(e) => {
-                            e.preventDefault();
-                            setPreLeased(e.target.value)
-                        }} className={preLeased == "Yes" ? style.setbtn : style.btn} > Yes </button>
-                        <button value={"No"} onClick={(e) => {
-                            e.preventDefault();
-                            setPreLeased(e.target.value)
-                        }} className={preLeased == "No" ? style.setbtn : style.btn} > No </button>
+                    <Box display={securityDeposit == "" ? "none" : "block"}>
+                        <Input type="text" w={300} value={depositAmount} onChange={handleDepositAmount} placeholder={`${securityDeposit == "Fixed" ? "Deposit Value" : ""} ${securityDeposit == "Multiple of Rent" ? "No. of months (Max 30)" : ""}`} />
                     </Box>
-                </Box>
+                </Box>  
+
                 {/* pre-leased / pre-Rented */}
                 <Box display={preLeased == "Yes" ? "grid" : "none"}>
                     <Heading

@@ -127,6 +127,7 @@ const FlatApartment = () =>  {
       floorOn,
       carpetArea: plotArea,
       carpetAreaUnit: areaPer,
+      furnished, 
       parking: {
         openParking: openparking,
         closeParking: parking,
@@ -233,11 +234,11 @@ const FlatApartment = () =>  {
       }
 
       if (furnished == "Furnished" || furnished == "Semi-Furnished") {
-        obj.furnishedObj = {
+        obj["furnishedObj"] = {
           light,
           fans,
           ac,
-          tv,
+          tv, 
           beds: Beds,
           wardrobe,
           geyser,
@@ -1368,9 +1369,9 @@ const FlatApartment = () =>  {
           <Box>
             <button value={"Fixed"} className={securityDeposit == "Fixed" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> Fixed </button>
             <button value={"Multiple of Rent"} className={securityDeposit == "Multiple of Rent" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> Multiple of Rent </button>
-            <button value={"none"} className={securityDeposit == "none" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> None </button>
-          </Box>
-          <Box display={securityDeposit == "none" ? "none" : "block" }>
+            <button value={"None"} className={securityDeposit == "None" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> None </button>
+          </Box>  
+          <Box display={securityDeposit == "None" ? "none" : "block" }> 
             <Input type="text" w={300} value={depositAmount} onChange={handleDepositAmount} placeholder={`${securityDeposit == "Fixed" ? "Deposit Value" : ""} ${securityDeposit == "Multiple of Rent" ? "No. of months (Max 30)" : ""}`} />
           </Box>
         </Box>
