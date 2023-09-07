@@ -318,16 +318,15 @@ const ReadyMove = () => {
         setInclusivePrice(newarr);
     }
 
-    const handleSecurityDeposit = (e) => {
-        e.preventDefault();
-        setSecurityDeposit(e.target.value);
-    }
-
     const handleyear = (e) => {
         e.preventDefault();
         setFromyear(e.target.value);
     };
 
+    const handleSecurityDeposit = (e) => {
+        e.preventDefault();
+        setSecurityDeposit(e.target.value);
+    } 
 
     const handleDepositAmount = (e) => {
         setDepositAmount(e.target.value);

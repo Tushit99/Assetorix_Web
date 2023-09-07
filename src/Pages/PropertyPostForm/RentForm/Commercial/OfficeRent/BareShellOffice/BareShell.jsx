@@ -59,9 +59,9 @@ const BareShell = () => {
     const [pricedetail, setPricedetail] = useState("");
     const [minimumLeasable, setminimumLeasable] = useState("");
     const [additionalPrice, setAdditionalPrice] = useState(false);
-    const [expectedRental, setExpectedRental] = useState("");
-    const [bookingAmount, setBookingAmount] = useState("");
-    const [annualDuesPayable, setAnnualDuesPayable] = useState("");
+    const [securityDeposit, setSecurityDeposit] = useState("");
+    const [depositAmount, setDepositAmount] = useState("");
+    
 
     const [previouslyUsedList, setpreviouslyUsedList] = useState([]);
     const [currentRentPerMonth, setCurrentRentPerMonth] = useState("");
@@ -295,6 +295,15 @@ const BareShell = () => {
             newarr.push(value);
         }
         setInclusivePrice(newarr);
+    }
+
+    const handleSecurityDeposit = (e) => {
+        e.preventDefault();
+        setSecurityDeposit(e.target.value);
+    } 
+
+    const handleDepositAmount = (e) => {
+        setDepositAmount(e.target.value);
     }
 
     const handleAvailable = (e) => {
@@ -1325,7 +1334,7 @@ const BareShell = () => {
                     </Heading>
                 </Box>
  
- 
+
 
                 {/* ============================ Security deposit ============================ */}
                 <Box className={style.optional_box}>
@@ -1335,9 +1344,9 @@ const BareShell = () => {
                     <Box>
                         <button value={"Fixed"} className={securityDeposit == "Fixed" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> Fixed </button>
                         <button value={"Multiple of Rent"} className={securityDeposit == "Multiple of Rent" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> Multiple of Rent </button>
-                        <button value={""} className={securityDeposit == "" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> None </button>
+                        <button value={"None"} className={securityDeposit == "None" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> None </button>
                     </Box>
-                    <Box display={securityDeposit == "" ? "none" : "block"}>
+                    <Box display={securityDeposit == "None" ? "none" : "block"}> 
                         <Input type="text" w={300} value={depositAmount} onChange={handleDepositAmount} placeholder={`${securityDeposit == "Fixed" ? "Deposit Value" : ""} ${securityDeposit == "Multiple of Rent" ? "No. of months (Max 30)" : ""}`} />
                     </Box>
                 </Box>  
