@@ -192,7 +192,6 @@ const FlatApartment = () =>  {
       obj["depositValue"] = depositAmount;
     }
 
-
     if (securityDeposit == "Multiple of Rent") {
       obj["multipleOfRent"] = depositAmount;
     }
