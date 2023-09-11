@@ -12,16 +12,17 @@ import {
   Text,
   Textarea,
   useToast,
-} from "@chakra-ui/react"; 
+} from "@chakra-ui/react";
+import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { Checkbox } from "@chakra-ui/react";
-import style from "../../RentComercial.module.css";
+import style from "../../RentComercial.module.css"; 
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { CleanInputText, NumericString } from "../../../../code";
 
 
-const ColdStorageRent = () => {
+const ManufactureRent = () => {
   const isCountry = useSelector((state) => state.gloalval);
   const toast = useToast();
   const [country, setCountry] = useState("");
@@ -63,8 +64,8 @@ const ColdStorageRent = () => {
     let obj = {
       lookingFor: "Rent",
       propertyGroup: "Commercial",
-      propertyType: "Storage",
-      storageType: "Cold Storage",
+      propertyType: "Industry",
+      industryType: "Manufacturing",
       address: {
         address,
         locality,
@@ -93,7 +94,7 @@ const ColdStorageRent = () => {
       additionalFeatures: additinalft,
       otherFeatures: otherFeature,
       propertyFacing,
-      flooring,
+      flooring
     };
 
     const showToastError = (message) => {
@@ -421,12 +422,9 @@ const ColdStorageRent = () => {
 
         </Box>
         {/* =============================== Tell us about your property ============================ */}
-        <Box>
+        <Box marginTop={"20"}>
           <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"}>
             Tell us about your property
-          </Heading>
-          <Heading as={"h4"} size={"sm"} margin={"0 0 30px 0 "}>
-            Add Room Details
           </Heading>
         </Box>
 
@@ -741,7 +739,7 @@ const ColdStorageRent = () => {
             Add amenities/unique features
           </Heading>
           <Heading as={"h5"} size={"xs"} fontWeight={400} margin={"10px 0"} textAlign={"left"}>
-            All fields on this page are optional
+            All fields after this are optional
           </Heading>
         </Box>
 
@@ -762,12 +760,66 @@ const ColdStorageRent = () => {
             </button>
             <button
               className={
+                amenities.includes("Waste Disposal") ? style.setbtn : style.btn
+              }
+              onClick={handleAminities}
+              value={"Waste Disposal"}
+            >
+              Waste Disposal
+            </button>
+            <button
+              className={
+                amenities.includes("Access to High Speed Internet") ? style.setbtn : style.btn
+              }
+              onClick={handleAminities}
+              value={"Access to High Speed Internet"}
+            >
+              Access to High Speed Internet
+            </button>
+            <button
+              className={
+                amenities.includes("Bank Attached Property") ? style.setbtn : style.btn
+              }
+              onClick={handleAminities}
+              value={"Bank Attached Property"}
+            >
+              Bank Attached Property
+            </button>
+            <button
+              className={
                 amenities.includes("Centrally Air Conditioned") ? style.setbtn : style.btn
               }
               onClick={handleAminities}
               value={"Centrally Air Conditioned"}
             >
               Centrally Air Conditioned
+            </button>
+            <button
+              className={
+                amenities.includes("ATM") ? style.setbtn : style.btn
+              }
+              onClick={handleAminities}
+              value={"ATM"}
+            >
+              ATM
+            </button>
+            <button
+              className={
+                amenities.includes("Cafeteria / Food Court") ? style.setbtn : style.btn
+              }
+              onClick={handleAminities}
+              value={"Cafeteria / Food Court"}
+            >
+              Cafeteria / Food Court
+            </button>
+            <button
+              className={
+                amenities.includes("Conference room") ? style.setbtn : style.btn
+              }
+              onClick={handleAminities}
+              value={"Conference room"}
+            >
+              Conference room
             </button>
             <button
               className={
@@ -781,20 +833,11 @@ const ColdStorageRent = () => {
               Security/ Fire Alarm
             </button>
             <button
-              className={
-                amenities.includes("Visitor Parking") ? style.setbtn : style.btn
-              }
+              className={amenities.includes("Intercom Facility") ? style.setbtn : style.btn}
               onClick={handleAminities}
-              value={"Visitor Parking"}
+              value={"Intercom Facility"}
             >
-              Visitor Parking
-            </button>
-            <button
-              className={amenities.includes("Feng Shui / Vaastu Compliant") ? style.setbtn : style.btn}
-              onClick={handleAminities}
-              value={"Feng Shui / Vaastu Compliant"}
-            >
-              Feng Shui / Vaastu Compliant
+              Intercom Facility
             </button>
           </Box>
         </Box>
@@ -844,14 +887,14 @@ const ColdStorageRent = () => {
 
             <button
               className={
-                propertyFeatures.includes("Intercom Facility")
+                propertyFeatures.includes("Feng Shui / Vaastu Compliant")
                   ? style.setbtn
                   : style.btn
               }
-              value={"Intercom Facility"}
+              value={"Feng Shui / Vaastu Compliant"}
               onClick={handlePropertyFeature}
             >
-              Intercom Facility
+              Feng Shui / Vaastu Compliant
             </button>
           </Box>
         </Box>
@@ -953,7 +996,17 @@ const ColdStorageRent = () => {
             >
               Grocery Shop
             </button>
-
+            <button
+              className={
+                buildingFeature.includes("Visitor Parking")
+                  ? style.setbtn
+                  : style.btn
+              }
+              onClick={HandleBuildingFeature}
+              value={"Visitor Parking"}
+            >
+              Visitor Parking
+            </button>
             <button
               className={
                 buildingFeature.includes("Swimming Pool")
@@ -965,6 +1018,8 @@ const ColdStorageRent = () => {
             >
               Swimming Pool
             </button>
+
+
             <button
               className={
                 buildingFeature.includes("Club house / Community Center")
@@ -1012,17 +1067,6 @@ const ColdStorageRent = () => {
           <Box>
             <button
               className={
-                additinalft.includes("Waste Disposal")
-                  ? style.setbtn
-                  : style.btn
-              }
-              value={"Waste Disposal"}
-              onClick={handleAdditionalFeature}
-            >
-              Waste Disposal
-            </button>
-            <button
-              className={
                 additinalft.includes("Rain Water Harvesting")
                   ? style.setbtn
                   : style.btn
@@ -1032,19 +1076,12 @@ const ColdStorageRent = () => {
             >
               Rain Water Harvesting
             </button>
-            <button
-              className={
-                additinalft.includes("Bank Attached Property")
-                  ? style.setbtn
-                  : style.btn
-              }
-              value={"Bank Attached Property"}
-              onClick={handleAdditionalFeature}
-            >
-              Bank Attached Property
-            </button>
           </Box>
         </Box>
+
+
+
+
 
         {/* ============================ Other Features ============================ */}
         <Box>
@@ -1063,6 +1100,9 @@ const ColdStorageRent = () => {
             </Checkbox>
           </Box>
         </Box>
+
+
+
 
         {/* ============================ Property facing ============================ */}
         <Box className={style.optional_box}>
@@ -1161,6 +1201,8 @@ const ColdStorageRent = () => {
           </Box>
         </Box>
 
+
+
         {/* ============================ Type of flooring ============================ */}
         <Box className={style.optional_box}>
           <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
@@ -1189,6 +1231,9 @@ const ColdStorageRent = () => {
             </Select>
           </Box>
         </Box>
+
+
+
 
         {/* ============================ location advantage ============================ */}
         <Box className={style.optional_box}>
@@ -1321,4 +1366,4 @@ const ColdStorageRent = () => {
   )
 }
 
-export default ColdStorageRent;
+export default ManufactureRent;
