@@ -31,7 +31,11 @@ import FarmhouseRent from "./RentForm/Residential/FarmhouseRent";
 import StudioApartmentRent from "./RentForm/Residential/StudioApartmentRent";
 import { changeLookingFor } from "../../Redux/globalval/action";
 import OfficeRent from "./RentForm/Commercial/OfficeRent/OfficeRent";
+import StorageRent from "./RentForm/Commercial/StorageRent/StorageRent";
+import PlotLandRent from "./RentForm/Commercial/PlotLand/PlotLandRent";
+ 
 
+// this is a page of sell and sell routes (please don't change anything without any prior knowledge).  
 
 const SellForm = () => {
     const looking = useSelector((state) => state.gloalval.lookingFor);
@@ -42,11 +46,11 @@ const SellForm = () => {
     const [selectedTab, setSelectedTab] = useState(0);
 
     const handlechange = (type, look) => {
-        settype(type);
+        settype(type); 
         setlook(look); 
         dispatch(changeLookingFor(type));  
-        // console.log(type);
     }; 
+    console.log(look);
 
     const handleTabChange = (index) => {
         if (index == 0) {
@@ -548,7 +552,7 @@ const SellForm = () => {
                             </TabPanel>
                         </TabPanels>
                     </Tabs>
-                </Box>
+                </Box> 
 
                 {/* Flat/Apartment */}
                 {(type == "sell" && look == "Flat/Apartment") ? <FlatAppartment /> : ""}
@@ -614,9 +618,17 @@ const SellForm = () => {
                 {/* =================================== Rent/Lease (Commercial) ================================ */}  
 
                 {/* Office */} 
-                {(type == "Rent/Lease" && look == "Office") ? <OfficeRent /> : "" }
+                {(type == "Rent/Lease" && look == "Office") ? <OfficeRent /> : "" } 
 
-            </Box>
+                {/* storage */}   
+                {(type == "Rent/Lease") && look == "Storage" ? <StorageRent /> : "" } 
+
+                {/* Plot / Land (Rent)  */} 
+                {(type == "Rent/Lease" && look == "Plot/Land" ? <PlotLandRent /> : "" )}  
+  
+
+
+            </Box> 
             <Box backgroundColor={"rgb(232, 244, 255)"} borderRadius={10}></Box>
         </div>
     );
@@ -625,3 +637,4 @@ const SellForm = () => {
 export default SellForm;
 
 
+ 

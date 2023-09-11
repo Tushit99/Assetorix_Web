@@ -3,6 +3,7 @@ import style from "../RentComercial.module.css";
 import { Box, Heading } from '@chakra-ui/react';
 import ReadyMove from './ReadyMove/ReadyMove';
 import BareShell from './BareShellOffice/BareShell';
+import Coworkingspace from './Coworkingspace/Coworkingspace';
 
 
 
@@ -26,7 +27,9 @@ const OfficeRent = () => {
 
         {officeOpt == "Bare shell office space" && <BareShell />}  
 
-        {/*  {officeOpt == "Co-working office space" && <CoWorkingspace />} */}
+      
+
+         {/* {officeOpt == "Co-working office space" && <Coworkingspace /> } */}
 
       </Box>
     </Box>

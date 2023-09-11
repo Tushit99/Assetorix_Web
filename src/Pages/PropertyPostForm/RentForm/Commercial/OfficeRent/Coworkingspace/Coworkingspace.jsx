@@ -17,7 +17,7 @@ import {
     Stack,
     Radio,
     Menu,
-    MenuButton,
+    MenuButton, 
     MenuList,
 } from "@chakra-ui/react";
 import style from "../../RentComercial.module.css";
@@ -25,11 +25,11 @@ import { useSelector } from "react-redux";
 import { AddIcon, ChevronDownIcon, MinusIcon } from "@chakra-ui/icons";
 import axios from "axios";
 import { CleanInputText, NumericString } from "../../../../code";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"; 
 
 
 
-const BareShell = () => {
+const Coworkingspace = () => {
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
@@ -103,13 +103,13 @@ const BareShell = () => {
             lookingFor: "Rent",
             propertyGroup: "Commercial",
             propertyType: "Office",
-            officeType: "Bare shell office space",
+            officeType: "Co-working office space", 
             address: {
                 pincode,
                 locality,
                 city,
                 state,
-                country,
+                country, 
                 zoneType,
                 locatedInside
             },
@@ -123,8 +123,8 @@ const BareShell = () => {
             locationAdv,
             minLeasableSuperBuiltupArea: minimumLeasable,
             minLeasableSuperBuiltupAreaUnit: areaPer ,  
-            superBuiltupArea: plotArea,
-            superBuiltupAreaUnit: areaPer,
+            plotArea: plotArea,
+            plotAreaUnit: areaPer,
             availableFrom,
             description: desc,
             countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
@@ -245,6 +245,7 @@ const BareShell = () => {
                         headers: head,
                     })
                     .then((e) => {
+                        console.log(e)
                         toast({
                             title: e.data.msg,
                             description: e.data.msg,
@@ -253,12 +254,13 @@ const BareShell = () => {
                         });
                     });
             } catch (error) {
+                // console.log(error.response.data.msg);
+                console.log(error); 
                 toast({
                     title: error.response.data.msg,
                     status: "error",
-                    duration: 2000,
+                    duration: 2000, 
                 });
-                console.log(error);
             }
             // }
         } else {
@@ -1814,6 +1816,5 @@ const BareShell = () => {
     );
 };
 
-export default BareShell;
-
+export default Coworkingspace; 
 
