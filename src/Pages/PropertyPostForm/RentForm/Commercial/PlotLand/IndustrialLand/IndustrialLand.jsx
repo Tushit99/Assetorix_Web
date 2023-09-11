@@ -1066,7 +1066,7 @@ const IndustrialLand = () => {
                         >
                             Rain Water Harvesting
                         </button>
-                        <button
+                        <button 
                             className={
                                 amenities.includes("Visitor Parking") ? style.setbtn : style.btn
                             }
