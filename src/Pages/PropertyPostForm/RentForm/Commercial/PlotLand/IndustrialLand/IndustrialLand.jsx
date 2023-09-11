@@ -32,7 +32,7 @@ const IndustrialLand = () => {
     const [country, setCountry] = useState("");
     const [facingwidth, setFacingWidth] = useState("");
     const [city, setCity] = useState("");
-    const [pincode, setPincode] = useState(0);
+    const [pincode, setPincode] = useState("");
     const [state, setState] = useState("");
     const [locality, setLocality] = useState("");
     const [Plotnumber, setPlotnumber] = useState("");
@@ -219,14 +219,14 @@ const IndustrialLand = () => {
                 position: 'top-right'
             })
         }
-    };
+    };  
 
     const handlepinfetch = (e) => {
         if (e.target.value.length == 6 && Number(e.target.value) < 999999) {
             setPincode(NumericString(e.target.value));
             pinfetch(e.target.value);
         }
-        else if (Number(e.target.value) < 999999) {
+        else if (Number(e.target.value) < 999999) { 
             setPincode(NumericString(e.target.value));
             console.log(e.target.value);
         }
