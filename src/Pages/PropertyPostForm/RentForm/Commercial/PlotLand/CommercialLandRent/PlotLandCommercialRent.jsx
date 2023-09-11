@@ -17,7 +17,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { Checkbox } from "@chakra-ui/react";
-import style from "../../RentComercial.module.css"; 
+import style from "../../RentComercial.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
@@ -882,7 +882,7 @@ const CommercialLandRent = () => {
               <Checkbox isChecked={industryType.includes("Textiles")} onChange={handleIndustryType} value={"Textiles"} >Textiles</Checkbox>
             </MenuList>
           </Menu>
-        </Box> 
+        </Box>
 
         {/* ============================== Price Details ============================ */}
         <Box>
@@ -989,7 +989,7 @@ const CommercialLandRent = () => {
               {additionalPrice ? <IoIosArrowUp style={{ display: "inline" }} /> : <IoIosArrowDown style={{ display: "inline" }} />} Add more pricing details
             </Heading>
           </Box>
-        </Box>  
+        </Box>
 
 
         {/* ============================ Property unique discription ============================ */}
@@ -1305,14 +1305,14 @@ const CommercialLandRent = () => {
             </button>
             <button
               className={
-                locationAdv.includes("Close to highway")
+                locationAdv.includes("Close to Highway")
                   ? style.setbtn
                   : style.btn
               }
-              value={"Close to highway"}
+              value={"Close to Highway"}
               onClick={handlelocationadvantages}
             >
-              Close to highway
+              Close to Highway
             </button>
           </Box>
         </Box>
@@ -1346,4 +1346,4 @@ const CommercialLandRent = () => {
 
 }
 
-export default CommercialLandRent ;
+export default CommercialLandRent;

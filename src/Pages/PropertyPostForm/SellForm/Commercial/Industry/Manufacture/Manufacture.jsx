@@ -74,15 +74,15 @@ const Manufacture = () => {
       lookingFor: "Sell",
       propertyGroup: "Commercial",
       propertyType: "Industry",
-      industryType: "Manufacturing", 
-      address: { 
+      industryType: "Manufacturing",
+      address: {
         address,
         locality,
         pincode,
         city,
         state,
         country,
-      }, 
+      },
       washrooms,
       ownership,
       price: +pricedetail,
@@ -254,7 +254,7 @@ const Manufacture = () => {
 
   const pinfetch = async (pin) => {
     try {
-      
+
       let res = await axios.get(`https://assetorix.onrender.com/pincode/?pincode=${pin}`);
       setState(res.data[0].state);
       setCity(res.data[0].city);
@@ -669,7 +669,7 @@ const Manufacture = () => {
         )}
         {/* ============================== property Age-end ============================== */}
 
-        {/* ============================ Add pricing and details (Ownership) ============================ */} 
+        {/* ============================ Add pricing and details (Ownership) ============================ */}
         <Box>
           <Heading
             as={"h3"}
@@ -1022,14 +1022,14 @@ const Manufacture = () => {
             </button>
             <button
               className={
-                propertyFeatures.includes("+ power Back-up")
+                propertyFeatures.includes("Power Back-up")
                   ? style.setbtn
                   : style.btn
               }
-              value={"+ power Back-up"}
+              value={"Power Back-up"}
               onClick={handlePropertyFeature}
             >
-              power Back-up
+              Power Back-up
             </button>
             <button
               className={
@@ -1440,14 +1440,14 @@ const Manufacture = () => {
             </button>
             <button
               className={
-                locationAdv.includes("Close to highway")
+                locationAdv.includes("Close to Highway")
                   ? style.setbtn
                   : style.btn
               }
-              value={"Close to highway"}
+              value={"Close to Highway"}
               onClick={handlelocationadvantages}
             >
-              Close to highway
+              Close to Highway
             </button>
           </Box>
         </Box>

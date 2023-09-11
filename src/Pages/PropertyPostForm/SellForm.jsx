@@ -33,7 +33,8 @@ import { changeLookingFor } from "../../Redux/globalval/action";
 import OfficeRent from "./RentForm/Commercial/OfficeRent/OfficeRent";
 import StorageRent from "./RentForm/Commercial/StorageRent/StorageRent";
 import PlotLandRent from "./RentForm/Commercial/PlotLand/PlotLandRent";
- 
+import IndustryRent from "./RentForm/Commercial/Industry/Industry";
+
 
 // this is a page of sell and sell routes (please don't change anything without any prior knowledge).  
 
@@ -42,14 +43,14 @@ const SellForm = () => {
     const [look, setlook] = useState("");
     const [type, settype] = useState("");
     const [typeofplace, setTypeOf] = useState("");
-    const dispatch = useDispatch(); 
+    const dispatch = useDispatch();
     const [selectedTab, setSelectedTab] = useState(0);
 
     const handlechange = (type, look) => {
-        settype(type); 
-        setlook(look); 
-        dispatch(changeLookingFor(type));  
-    }; 
+        settype(type);
+        setlook(look);
+        dispatch(changeLookingFor(type));
+    };
     console.log(look);
 
     const handleTabChange = (index) => {
@@ -78,10 +79,10 @@ const SellForm = () => {
         else if (looking == "PG") {
             settype("look");
             setSelectedTab(2);
-        }  
+        }
         else {
             settype("");
-        } 
+        }
 
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 
@@ -552,7 +553,7 @@ const SellForm = () => {
                             </TabPanel>
                         </TabPanels>
                     </Tabs>
-                </Box> 
+                </Box>
 
                 {/* Flat/Apartment */}
                 {(type == "sell" && look == "Flat/Apartment") ? <FlatAppartment /> : ""}
@@ -613,22 +614,23 @@ const SellForm = () => {
                 {(type == "Rent/Lease" && look == "1 RK/ Studio Apartment") ? <StudioApartmentRent /> : ""}
 
                 {/* Farmhouse */}
-                {(type == "Rent/Lease" && look == "Farmhouse") ? <FarmhouseRent /> : ""} 
+                {(type == "Rent/Lease" && look == "Farmhouse") ? <FarmhouseRent /> : ""}
 
-                {/* =================================== Rent/Lease (Commercial) ================================ */}  
+                {/* =================================== Rent/Lease (Commercial) ================================ */}
 
-                {/* Office */} 
-                {(type == "Rent/Lease" && look == "Office") ? <OfficeRent /> : "" } 
+                {/* Office */}
+                {(type == "Rent/Lease" && look == "Office") ? <OfficeRent /> : ""}
 
-                {/* storage */}   
-                {(type == "Rent/Lease") && look == "Storage" ? <StorageRent /> : "" } 
+                {/* storage */}
+                {(type == "Rent/Lease") && look == "Storage" ? <StorageRent /> : ""}
 
-                {/* Plot / Land (Rent)  */} 
-                {(type == "Rent/Lease" && look == "Plot/Land" ? <PlotLandRent /> : "" )}  
-  
+                {/* Plot / Land (Rent)  */}
+                {(type == "Rent/Lease" && look == "Plot/Land" ? <PlotLandRent /> : "")}
 
+                {/* Industry */}
+                {(type == "Rent/Lease" && look == "Industry" ? <IndustryRent /> : "")}
 
-            </Box> 
+            </Box>
             <Box backgroundColor={"rgb(232, 244, 255)"} borderRadius={10}></Box>
         </div>
     );
@@ -637,4 +639,3 @@ const SellForm = () => {
 export default SellForm;
 
 
- 

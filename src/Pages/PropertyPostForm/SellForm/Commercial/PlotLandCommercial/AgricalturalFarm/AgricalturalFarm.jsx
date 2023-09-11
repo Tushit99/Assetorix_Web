@@ -66,15 +66,15 @@ const AgricalturalFarm = () => {
   const [annualRentIncrease, setAnnualRentIncrease] = useState("");
   const [businessType, setBusinessType] = useState("");
   const [plotBreadth, setPlotBreadth] = useState("");
-  const [availability, setAvailability] = useState(""); 
+  const [availability, setAvailability] = useState("");
   const [fromyear, setFromyear] = useState("");
-  const [industryType, setIndustryType] = useState([]); 
+  const [industryType, setIndustryType] = useState([]);
 
   const [plotLength, setplotLength] = useState("");
   const [expectedBy, setexpectedBy] = useState([]);
   const [ConstructionOnProperty, setConstructionOnProperty] = useState("");
   const [expectedByYear, setExpectedByYear] = useState("");
-  const [authorisedBy, setAuthorisedBy] = useState([]); 
+  const [authorisedBy, setAuthorisedBy] = useState([]);
 
 
   // please don'nt change any function without any prior knowledge
@@ -111,7 +111,7 @@ const AgricalturalFarm = () => {
       price: +pricedetail,
       priceUnit: +priceSqr,
       inclusivePrices,
-      openSides, 
+      openSides,
       amenities,
       propertyFeatures,
       preLeased_Rented: preLeased,
@@ -121,12 +121,12 @@ const AgricalturalFarm = () => {
       roadFacingWidth: facingwidth,
       roadFacingWidthType: facing,
       totalFloors: +totalfloors,
-      plotArea, 
+      plotArea,
       plotAreaUnit: areaPer,
-      propertyApprovalAuthorityList : authorisedBy, 
-      carpetArea: plotArea, 
+      propertyApprovalAuthorityList: authorisedBy,
+      carpetArea: plotArea,
       expectedByYear,
-      carpetAreaUnit: areaPer, 
+      carpetAreaUnit: areaPer,
       // otherRoom: extraroom,
       description: desc,
       constructionOnProperty: ConstructionOnProperty,
@@ -137,8 +137,8 @@ const AgricalturalFarm = () => {
         maintenanceTimePeriod,
         bookingAmount,
         annualDuesPayable: annualDuesPayble
-      }, 
-      society_buildingFeatures: buildingFeature 
+      },
+      society_buildingFeatures: buildingFeature
     };
 
 
@@ -261,7 +261,7 @@ const AgricalturalFarm = () => {
 
   const pinfetch = async (pin) => {
     try {
-      
+
       let res = await axios.get(`https://assetorix.onrender.com/pincode/?pincode=${pin}`);
       setState(res.data[0].state);
       setCity(res.data[0].city);
@@ -321,7 +321,7 @@ const AgricalturalFarm = () => {
     e.preventDefault();
     setOwnerShip(e.target.value);
   };
- 
+
 
   const handleAminities = (e) => {
     e.preventDefault();
@@ -1010,7 +1010,7 @@ const AgricalturalFarm = () => {
           </Box>
         </Box>
 
-        
+
 
 
 
@@ -1325,14 +1325,14 @@ const AgricalturalFarm = () => {
             </button>
             <button
               className={
-                locationAdv.includes("Close to highway")
+                locationAdv.includes("Close to Highway")
                   ? style.setbtn
                   : style.btn
               }
-              value={"Close to highway"}
+              value={"Close to Highway"}
               onClick={handlelocationadvantages}
             >
-              Close to highway
+              Close to Highway
             </button>
           </Box>
         </Box>

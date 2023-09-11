@@ -15,23 +15,22 @@ import {
 } from "@chakra-ui/react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { Checkbox } from "@chakra-ui/react";
-import style from "../../RentComercial.module.css";
+import style from "../Industry.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { CleanInputText, NumericString } from "../../../../code";
 
 
-
-const WareHouse = () => {
+const FactoryRent = () => {
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
     const [city, setCity] = useState("");
-    const [pincode, setPincode] = useState("");
+    const [pincode, setPincode] = useState(0);
     const [state, setState] = useState("");
     const [locality, setLocality] = useState("");
-    const [address, setAddress] = useState("");
+    const [address, setaddress] = useState("");
     const [washrooms, setwashrooms] = useState(0);
     const [areaPer, setAreaPer] = useState("sq.ft");
     const [availability, setAvailability] = useState("");
@@ -46,6 +45,7 @@ const WareHouse = () => {
     const [additinalft, setAdditinalFeature] = useState([]);
     const [otherFeature, setOtherFeature] = useState([]);
     const [propertyFacing, setPropertyFacing] = useState("");
+    const [flooring, setFlooring] = useState("");
     const [locationAdv, setLocationAdv] = useState([]);
     const [plotArea, setPlotArea] = useState("");
     const [desc, setDesc] = useState("");
@@ -55,7 +55,6 @@ const WareHouse = () => {
     const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
     const [bookingAmount, setBookingAmount] = useState("");
     const [annualDuesPayble, setAnnualDuesPayble] = useState("");
-    const [flooring, setFlooring] = useState("");
 
     // please don'nt change any function without any prior knowledge
 
@@ -65,8 +64,8 @@ const WareHouse = () => {
         let obj = {
             lookingFor: "Rent",
             propertyGroup: "Commercial",
-            propertyType: "Storage",
-            storageType: "Ware House",
+            propertyType: "Industry",
+            industryType: "Factory",
             address: {
                 address,
                 locality,
@@ -76,29 +75,26 @@ const WareHouse = () => {
                 country,
             },
             washrooms,
+            plotArea,
+            plotAreaUnit: areaPer,
             price: +pricedetail,
             priceUnit: +priceSqr,
             inclusivePrices,
-            amenities,
-            flooring,
-            propertyFeatures,
-            society_buildingFeatures: buildingFeature,
-            additionalFeatures: additinalft,
-            otherFeatures: otherFeature,
-            plotArea,
-            plotAreaUnit: areaPer,
-            propertyFacing,
-            carpetArea: plotArea,
-            carpetAreaUnit: areaPer,
-            // otherRoom: extraroom,
-            description: desc,
-            countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
             additionalPricingDetails: {
                 maintenancePrice,
                 maintenanceTimePeriod,
                 bookingAmount,
                 annualDuesPayable: annualDuesPayble
             },
+            description: desc,
+            countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
+            amenities,
+            propertyFeatures,
+            society_buildingFeatures: buildingFeature,
+            additionalFeatures: additinalft,
+            otherFeatures: otherFeature,
+            propertyFacing,
+            flooring,
         };
 
         const showToastError = (message) => {
@@ -116,15 +112,22 @@ const WareHouse = () => {
         } else if (!washrooms) {
             showToastError('Provide washrooms');
         } else if (!pricedetail) {
-            showToastError('Provide PriceDetail');
+            showToastError('Provide Expected Rent');
         } else if (!priceSqr) {
             showToastError('Provide Price Per sq.ft');
-        } else if (!additinalft) {
-            showToastError('Provide Property description');
         }
 
         if (locationAdv) {
-            obj["locationAdv"] = locationAdv
+            obj["locationAdv"] = locationAdv;
+        }
+
+        if (availability == "Ready to move" && fromyear != "") {
+            obj["propertyStatus"] = fromyear;
+            obj["availabilityStatus"] = availability;
+        }
+        if (availability == "Under construction" && expectedyear != "") {
+            obj["expectedByYear"] = expectedyear;
+            obj["availabilityStatus"] = availability;
         }
 
         if (
@@ -133,7 +136,6 @@ const WareHouse = () => {
             inclusivePrices &&
             amenities &&
             propertyFeatures &&
-            // preLeased &&
             desc
         ) {
             let id = localStorage.getItem("usrId") || undefined;
@@ -150,16 +152,6 @@ const WareHouse = () => {
                     position: 'top-right'
                 })
                 return
-            }
-
-
-            if (availability == "Ready to move" && fromyear != "") {
-                obj["propertyStatus"] = fromyear;
-                obj["availabilityStatus"] = availability;
-            }
-            if (availability == "Under construction" && expectedyear != "") {
-                obj["expectedByYear"] = expectedyear;
-                obj["availabilityStatus"] = availability;
             }
             // else {
             try {
@@ -354,28 +346,30 @@ const WareHouse = () => {
                         required
                         placeholder="Address (optional)"
                         value={address}
-                        onChange={(e) => setAddress(e.target.value)}
+                        onChange={(e) => setaddress(e.target.value)}
                         fontSize={"md"}
                         variant="flushed"
                     />
-                    <Input type="text"
-                        placeholder={"Enter pincode"}
-                        padding={"0 10px"}
-                        borderRight={0}
-                        borderLeft={0}
-                        borderTop={0}
-                        borderRadius={0}
-                        _active={{
-                            borderRight: "0",
-                            borderLeft: "0",
-                            borderTop: "0",
-                            borderRadius: "0",
-                        }}
-                        required
-                        fontSize={"md"}
-                        value={pincode}
-                        onChange={handlepinfetch}
-                    />
+                    <NumberInput>
+                        <NumberInputField
+                            placeholder={"Enter pincode"}
+                            padding={"0 10px"}
+                            borderRight={0}
+                            borderLeft={0}
+                            borderTop={0}
+                            borderRadius={0}
+                            _active={{
+                                borderRight: "0",
+                                borderLeft: "0",
+                                borderTop: "0",
+                                borderRadius: "0",
+                            }}
+                            required
+                            fontSize={"md"}
+                            value={pincode}
+                            onChange={handlepinfetch}
+                        />
+                    </NumberInput>
                     <Input
                         type="text"
                         padding={"0 10px"}
@@ -389,8 +383,8 @@ const WareHouse = () => {
                     />
                     {pincollection.length ? (
                         <datalist id="browsers">
-                            {pincollection.map((e, i) => (
-                                <option key={i} value={e.locality} />
+                            {pincollection.map((e) => (
+                                <option value={e.locality} />
                             ))}
                         </datalist>
                     ) : ""}
@@ -441,11 +435,15 @@ const WareHouse = () => {
                 <Box>
                     <Box textAlign={"left"} >
                         <Text> No. of Washrooms </Text>
-                        <Input type="text"
-                            onChange={(e) => setwashrooms(NumericString(e.target.value))}
-                            value={washrooms}
-                            required
-                        />
+                        <NumberInput>
+                            <NumberInputField
+                                variant="flushed"
+                                padding={"0 2px"}
+                                onChange={(e) => setwashrooms(e.target.value)}
+                                value={washrooms}
+                                required
+                            />
+                        </NumberInput>
                     </Box>
                 </Box>
 
@@ -472,7 +470,7 @@ const WareHouse = () => {
                                 required
                             />
                         </NumberInput>
-                        <Select value={areaPer} onChange={(e) => {
+                        <select value={areaPer} onChange={(e) => {
                             setAreaPer(e.target.value);
                         }} className={style.select} required>
                             <option value="sq.ft">sq.ft</option>
@@ -493,7 +491,7 @@ const WareHouse = () => {
                             <option value="rood">rood</option>
                             <option value="chataks">chataks</option>
                             <option value="perch">perch</option>
-                        </Select>
+                        </select>
                     </ButtonGroup>
                 </Box>
 
@@ -615,24 +613,16 @@ const WareHouse = () => {
                     </Box>
                 )}
                 {/* ============================== property Age-end ============================== */}
-
-
-                {/* ============================ Add pricing and details ============================ */}
-                <Box>
-                    <Heading
-                        as={"h3"}
-                        size={"md"}
-                        margin={"30px 0 10px 0"}
-                        textAlign={"left"}
-                    >
-                        Add pricing and details...
-                    </Heading>
-                </Box>
-
                 {/* ============================== Price Details ============================ */}
                 <Box>
                     <Box>
-                        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+                        <Heading
+                            as={"h2"}
+                            marginTop={"10"}
+                            size={"md"}
+                            fontWeight={700}
+                            textAlign={"left"}
+                        >
                             What price you are expecting for this property?
                         </Heading>
                         <Box display={"flex"} alignItems={"center"} gap={5}>
@@ -645,12 +635,16 @@ const WareHouse = () => {
                                 >
                                     {isCountry.country == "india" ? "₹" : "$"} Expected Rent
                                 </Heading>
-                                <Input type="text" value={pricedetail}
-                                    required
-                                    onChange={(e) => {
-                                        setPricedetail(NumericString(e.target.value));
-                                        areaCalucation();
-                                    }} />
+                                <NumberInput >
+                                    <NumberInputField
+                                        value={pricedetail}
+                                        required
+                                        onChange={(e) => {
+                                            setPricedetail(e.target.value);
+                                            areaCalucation();
+                                        }}
+                                    />
+                                </NumberInput>
                             </Box>
                             <Box display={"grid"} gap={0}>
                                 <Heading
@@ -661,7 +655,12 @@ const WareHouse = () => {
                                 >
                                     {isCountry.country == "india" ? "₹" : "$"} Price Per {areaPer}
                                 </Heading>
-                                <Input type="text" readOnly value={priceSqr} />
+                                <NumberInput value={priceSqr}>
+                                    <NumberInputField
+                                        required
+                                        readOnly
+                                    />
+                                </NumberInput>
                             </Box>
                         </Box>
                     </Box>
@@ -673,6 +672,7 @@ const WareHouse = () => {
                                 handleinclusiveandtax(e.target.value)
                             }}
                             value={"Electricity & Water charges excluded"}
+
                         >
                             Electricity & Water charges excluded
                         </Checkbox>
@@ -690,17 +690,18 @@ const WareHouse = () => {
                     </Box>
                     <Box>
                         {additionalPrice && <>
-                            <InputGroup w={"300px"} margin={"10px 0"}>
-                                <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(NumericString(e.target.value))} value={maintenancePrice} placeholder={"Maintenance Price"} />
+                            <InputGroup w={"300px"} margin={"10 0 0 0"}>
+                                <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
                                 <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
                                     <option value="Monthly">Monthly</option>
                                     <option value="Yearly">Yearly</option>
                                 </Select>
                             </InputGroup>
                             <Box display={"grid"}>
-                                <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(NumericString(e.target.value))} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-                                <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(NumericString(e.target.value))} placeholder="Annual Dues Payble" margin={"10px 0 0 0"} />
+                                <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
+                                <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
                             </Box>
+
                         </>
                         }
                         <Heading
@@ -732,8 +733,11 @@ const WareHouse = () => {
                     }} ></Textarea>
                 </Box>
 
+
+
+
                 {/* ============================ Add amenities/unique features ============================ */}
-                <Box>
+                <Box marginTop={"50"}>
                     <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
                         Add amenities/unique features
                     </Heading>
@@ -750,40 +754,21 @@ const WareHouse = () => {
                     <Box>
                         <button
                             className={
-                                amenities.includes("Maintenance Staff") ? style.setbtn : style.btn
-                            }
-                            onClick={handleAminities}
-                            value={"Maintenance Staff"}
-                        >
-                            Maintenance Staff
-                        </button>
-                        <button
-                            className={
-                                amenities.includes("Rain Water Harvesting") ? style.setbtn : style.btn
-                            }
-                            onClick={handleAminities}
-                            value={"Rain Water Harvesting"}
-                        >
-                            Rain Water Harvesting
-                        </button>
-                        <button
-                            className={
-                                amenities.includes("Waste Disposal") ? style.setbtn : style.btn
-                            }
-                            onClick={handleAminities}
-                            value={"Waste Disposal"}
-                        >
-                            Waste Disposal
-                        </button>
-
-                        <button
-                            className={
                                 amenities.includes("Water Storage") ? style.setbtn : style.btn
                             }
                             onClick={handleAminities}
                             value={"Water Storage"}
                         >
                             Water Storage
+                        </button>
+                        <button
+                            className={
+                                amenities.includes("Centrally Air Conditioned") ? style.setbtn : style.btn
+                            }
+                            onClick={handleAminities}
+                            value={"Centrally Air Conditioned"}
+                        >
+                            Centrally Air Conditioned
                         </button>
                         <button
                             className={
@@ -806,33 +791,6 @@ const WareHouse = () => {
                             Visitor Parking
                         </button>
                         <button
-                            className={amenities.includes("ATM") ? style.setbtn : style.btn}
-                            onClick={handleAminities}
-                            value={"ATM"}
-                        >
-                            ATM
-                        </button>
-                        <button
-                            className={
-                                amenities.includes("Access to High Speed Internet") ? style.setbtn : style.btn
-                            }
-                            onClick={handleAminities}
-                            value={"Access to High Speed Internet"}
-                        >
-                            Access to High Speed Internet
-                        </button>
-                        <button
-                            className={
-                                amenities.includes("Security Personnel")
-                                    ? style.setbtn
-                                    : style.btn
-                            }
-                            onClick={handleAminities}
-                            value={"Security Personnel"}
-                        >
-                            Security Personnel
-                        </button>
-                        <button
                             className={amenities.includes("Feng Shui / Vaastu Compliant") ? style.setbtn : style.btn}
                             onClick={handleAminities}
                             value={"Feng Shui / Vaastu Compliant"}
@@ -842,43 +800,16 @@ const WareHouse = () => {
                     </Box>
                 </Box>
 
+
+
+
+
                 {/* ============================ Property Features ============================ */}
                 <Box className={style.optional_box}>
                     <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
                         Property Features
                     </Heading>
                     <Box>
-                        <button
-                            className={
-                                propertyFeatures.includes("Centrally Air Conditioned")
-                                    ? style.setbtn
-                                    : style.btn
-                            }
-                            value={"Centrally Air Conditioned"}
-                            onClick={handlePropertyFeature}
-                        >
-                            Centrally Air Conditioned
-                        </button>
-                        <button
-                            className={
-                                propertyFeatures.includes("power Back-up")
-                                    ? style.setbtn
-                                    : style.btn
-                            }
-                            value={"power Back-up"}
-                            onClick={handlePropertyFeature}
-                        >
-                            power Back-up
-                        </button>
-                        <button
-                            className={
-                                propertyFeatures.includes("Reserved Parking") ? style.setbtn : style.btn
-                            }
-                            value={"Reserved Parking"}
-                            onClick={handlePropertyFeature}
-                        >
-                            Reserved Parking
-                        </button>
                         <button
                             className={
                                 propertyFeatures.includes("Near Bank")
@@ -890,6 +821,28 @@ const WareHouse = () => {
                         >
                             Near Bank
                         </button>
+
+                        <button
+                            className={
+                                propertyFeatures.includes("Power Back-up")
+                                    ? style.setbtn
+                                    : style.btn
+                            }
+                            value={"Power Back-up"}
+                            onClick={handlePropertyFeature}
+                        >
+                            Power Back-up
+                        </button>
+                        <button
+                            className={
+                                propertyFeatures.includes("Reserved Parking") ? style.setbtn : style.btn
+                            }
+                            value={"Reserved Parking"}
+                            onClick={handlePropertyFeature}
+                        >
+                            Reserved Parking
+                        </button>
+
                         <button
                             className={
                                 propertyFeatures.includes("Intercom Facility")
@@ -904,12 +857,26 @@ const WareHouse = () => {
                     </Box>
                 </Box>
 
+
+
+
                 {/* ============================ Society/Building feature ============================ */}
                 <Box className={style.optional_box}>
                     <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
                         Society/Building feature
                     </Heading>
                     <Box>
+                        <button
+                            className={
+                                buildingFeature.includes("Maintenance Staff")
+                                    ? style.setbtn
+                                    : style.btn
+                            }
+                            onClick={HandleBuildingFeature}
+                            value={"Maintenance Staff"}
+                        >
+                            Maintenance Staff
+                        </button>
                         <button
                             className={
                                 buildingFeature.includes("Shopping Centre")
@@ -1012,6 +979,17 @@ const WareHouse = () => {
                         </button>
                         <button
                             className={
+                                buildingFeature.includes("Security Personnel")
+                                    ? style.setbtn
+                                    : style.btn
+                            }
+                            onClick={HandleBuildingFeature}
+                            value={"Security Personnel"}
+                        >
+                            Security Personnel
+                        </button>
+                        <button
+                            className={
                                 buildingFeature.includes("Lift")
                                     ? style.setbtn
                                     : style.btn
@@ -1024,12 +1002,37 @@ const WareHouse = () => {
                     </Box>
                 </Box>
 
+
+
+
                 {/* ============================ Additional Features ============================ */}
                 <Box className={style.optional_box}>
                     <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
                         Additional Features
                     </Heading>
                     <Box>
+                        <button
+                            className={
+                                additinalft.includes("Waste Disposal")
+                                    ? style.setbtn
+                                    : style.btn
+                            }
+                            value={"Waste Disposal"}
+                            onClick={handleAdditionalFeature}
+                        >
+                            Waste Disposal
+                        </button>
+                        <button
+                            className={
+                                additinalft.includes("Rain Water Harvesting")
+                                    ? style.setbtn
+                                    : style.btn
+                            }
+                            value={"Rain Water Harvesting"}
+                            onClick={handleAdditionalFeature}
+                        >
+                            Rain Water Harvesting
+                        </button>
                         <button
                             className={
                                 additinalft.includes("Bank Attached Property")
@@ -1281,14 +1284,14 @@ const WareHouse = () => {
                         </button>
                         <button
                             className={
-                                locationAdv.includes("Close to highway")
+                                locationAdv.includes("Close to Highway")
                                     ? style.setbtn
                                     : style.btn
                             }
-                            value={"Close to highway"}
+                            value={"Close to Highway"}
                             onClick={handlelocationadvantages}
                         >
-                            Close to highway
+                            Close to Highway
                         </button>
                     </Box>
                 </Box>
@@ -1319,6 +1322,5 @@ const WareHouse = () => {
     )
 }
 
-export default WareHouse;
-
+export default FactoryRent;
 

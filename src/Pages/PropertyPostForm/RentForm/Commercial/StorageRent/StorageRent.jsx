@@ -1,7 +1,8 @@
 import { Box, Heading } from '@chakra-ui/react';
-import React, { useState } from 'react' ;
-import style from "../RentComercial.module.css";  
-import WareHouse from './WareHouseRent/WareHouse'; 
+import React, { useState } from 'react';
+import style from "../RentComercial.module.css";
+import WareHouse from './WareHouseRent/WareHouse';
+import ColdStorageRent from './ColdStorageRent/ColdStorageRent';
 
 
 
@@ -20,13 +21,13 @@ const StorageRent = () => {
                 </Box>
             </Box>
 
-            {storageName == "Ware House" && <WareHouse />} 
+            {storageName == "Ware House" && <WareHouse />}
 
-            {/* {storageName == "Cold Storage" && <ColdStorage />} */}
+            {storageName == "Cold Storage" && <ColdStorageRent />}
 
         </Box>
     )
 }
 
-export default StorageRent; 
+export default StorageRent;
 

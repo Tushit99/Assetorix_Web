@@ -45,7 +45,7 @@ const IndustrialLand = () => {
   const [constructionType, setConstructionType] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
-  const [buildingFeature, setBuildingFeature] = useState([]); 
+  const [buildingFeature, setBuildingFeature] = useState([]);
   const [otherFeature, setOtherFeature] = useState([]);
   const [propertyFacing, setPropertyFacing] = useState("");
   const [facing, setFacing] = useState("Meter");
@@ -71,7 +71,7 @@ const IndustrialLand = () => {
   const [ConstructionOnProperty, setConstructionOnProperty] = useState("");
   const [expectedByYear, setExpectedByYear] = useState("");
   const [authorisedBy, setAuthorisedBy] = useState([]);
-  const [industryType, setIndustryType] = useState([]); 
+  const [industryType, setIndustryType] = useState([]);
 
 
   // please don'nt change any function without any prior knowledge
@@ -158,7 +158,7 @@ const IndustrialLand = () => {
       showToastError('Provide PriceDetail');
     } else if (!priceSqr) {
       showToastError('Provide Price Per sq.ft');
-    }  
+    }
 
     if (locationAdv) {
       obj["locationAdv"] = locationAdv
@@ -256,7 +256,7 @@ const IndustrialLand = () => {
 
   const pinfetch = async (pin) => {
     try {
-      
+
       let res = await axios.get(`https://assetorix.onrender.com/pincode/?pincode=${pin}`);
       setState(res.data[0].state);
       setCity(res.data[0].city);
@@ -310,7 +310,7 @@ const IndustrialLand = () => {
     setOwnerShip(e.target.value);
   };
 
- 
+
 
   const handleAminities = (e) => {
     e.preventDefault();
@@ -1362,14 +1362,14 @@ const IndustrialLand = () => {
             </button>
             <button
               className={
-                locationAdv.includes("Close to highway")
+                locationAdv.includes("Close to Highway")
                   ? style.setbtn
                   : style.btn
               }
-              value={"Close to highway"}
+              value={"Close to Highway"}
               onClick={handlelocationadvantages}
             >
-              Close to highway
+              Close to Highway
             </button>
           </Box>
         </Box>
