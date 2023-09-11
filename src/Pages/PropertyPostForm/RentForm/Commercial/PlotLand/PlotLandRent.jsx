@@ -1,6 +1,9 @@
 import { Box, Heading } from '@chakra-ui/react';
 import style from "../RentComercial.module.css"; 
 import React, { useState } from 'react' 
+import CommercialLandRent from './CommercialLandRent/CommercialLandRent';
+import AgriculturalLandRent from './AgriculturalLand/AgriculturalLandRent';
+import IndustrialLand from './IndustrialLand/IndustrialLand';
 
 
 const PlotLandRent = () => {
@@ -24,11 +27,11 @@ const PlotLandRent = () => {
                     </button>
                 </Box> 
 
-                {/*  {plotType == "Commercial Land / lnst. Land" && <CommercialLand />}  */}
+                 {plotType == "Commercial Land / lnst. Land" && <CommercialLandRent />} 
  
-                {/*  {plotType == "Agricultural / Farm Land" && <AgricalturalFarm />}   */}
+                 {plotType == "Agricultural / Farm Land" && <AgriculturalLandRent />}  
                  
-                {/*  {plotType == "Industrial Lands / Plots" && <IndustrialLand />}   */}
+                 {plotType == "Industrial Lands / Plots" && <IndustrialLand />}  
 
             </Box>
         </div>

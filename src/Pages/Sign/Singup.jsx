@@ -200,7 +200,7 @@ const Singup = () => {
           <FormControl id="mobile">
             <FormLabel>Mobile no.</FormLabel>
             <Input
-              type="number"
+              type="text"
               onChange={(e) => setnumber(e.target.value)}
               border={"2px solid rgb(193, 206, 250)"}
               _hover={{ border: "2px solid rgb(171, 81, 255)" }}

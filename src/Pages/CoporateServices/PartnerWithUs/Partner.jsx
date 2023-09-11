@@ -26,9 +26,9 @@ const Partner = () => {
         {/* Email */}
         <input type="email" placeholder={"Email"} />
         {/* mobile no.  */}
-        <input type="number" placeholder={"Mobile No."} />
+        <input type="text" placeholder={"Mobile No."} />
         {/* tlephone no.  */}
-        <input type="number" placeholder={"Telephone no."} />
+        <input type="text" placeholder={"Telephone no."} />
         {/* Property Title */}
         <select>
           <option value="Property Title">Property Title</option>

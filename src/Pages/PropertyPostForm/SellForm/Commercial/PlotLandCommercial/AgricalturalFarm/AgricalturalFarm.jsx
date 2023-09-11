@@ -20,9 +20,9 @@ import { Checkbox } from "@chakra-ui/react";
 import style from "../PlotLandCommercial.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io" 
+// import { ChevronDownIcon } from "@chakra-ui/icons";
 import { CleanInputText, NumericString } from "../../../../code";
-import { ChevronDownIcon } from "@chakra-ui/icons";
 
 
 
@@ -262,7 +262,7 @@ const AgricalturalFarm = () => {
   const pinfetch = async (pin) => {
     try {
       
-      let res = await axios.get(`https://assetorix.onrender.com/pincode/?pincode=${pin}`);
+      let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
       setState(res.data[0].state);
       setCity(res.data[0].city);
       setCountry(res.data[0].country);
@@ -436,7 +436,7 @@ const AgricalturalFarm = () => {
             type="text"
             padding={"0 10px"}
             required
-            placeholder="Plotnumber (optional)"
+            placeholder="Plot number (optional)"
             value={Plotnumber}
             onChange={(e) => setPlotnumber(e.target.value)}
             fontSize={"md"}
@@ -584,7 +584,7 @@ const AgricalturalFarm = () => {
             Width of facing road
           </Heading>
           <Box display={"flex"} gap={"20px"} w={"300px"} >
-            <Input type="number" variant='flushed' flex={1} required value={facingwidth} onChange={(e) => {
+            <Input type="text" variant='flushed' flex={1} required value={facingwidth} onChange={(e) => {
               e.preventDefault();
               setFacingWidth(e.target.value);
             }} />
@@ -946,14 +946,14 @@ const AgricalturalFarm = () => {
           <Box display={"grid"}>
             {additionalPrice && <>
               <InputGroup w={"300px"} margin={"10px 0"}>
-                <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
+                <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(NumericString(e.target.value))} value={maintenancePrice} placeholder={"Maintenance Price"} />
                 <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
                   <option value="Monthly">Monthly</option>
                   <option value="Yearly">Yearly</option>
-                </Select>
+                </Select>  
               </InputGroup>
-              <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-              <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
+              <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(NumericString(e.target.value))} placeholder="Booking Amount" margin={"10px 0 0 0"} />
+              <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(NumericString(e.target.value))} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
             </>
             }
             <Heading
@@ -1191,14 +1191,14 @@ const AgricalturalFarm = () => {
             </button>
             <button
               className={
-                buildingFeature.includes("rade A Building")
+                buildingFeature.includes("Grade A Building")
                   ? style.setbtn
                   : style.btn
               }
               onClick={HandleBuildingFeature}
-              value={"rade A Building"}
+              value={"Grade A Building"}
             >
-              rade A Building
+              Grade A Building
             </button>
             <button
               className={

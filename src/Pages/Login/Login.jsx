@@ -135,7 +135,7 @@ const Login = ({onpage}) => {
                             <Heading fontSize={{ base: '2xl', md: '4xl', lg: '2xl' }}>Login to your account</Heading>
                             <FormControl id="number">
                                 <FormLabel fontSize={{ base: 'md', lg: 'xl' }}>Mobile no.</FormLabel>
-                                <Input type="number" onChange={(e) => setMobile(e.target.value)} value={mobile} required />
+                                <Input type="text" onChange={(e) => setMobile(e.target.value)} value={mobile} required />
                             </FormControl>
                             <FormControl id="password">
                                 <FormLabel fontSize={{ base: 'md', lg: 'xl' }}>Password</FormLabel>

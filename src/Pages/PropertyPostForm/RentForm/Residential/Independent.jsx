@@ -2020,7 +2020,7 @@ const Independent = () => {
         </Heading>
         <Box display={"flex"} gap={"20px"} w={"300px"}>
           <Input
-            type="number"
+            type="text"
             variant="flushed"
             flex={1}
             required

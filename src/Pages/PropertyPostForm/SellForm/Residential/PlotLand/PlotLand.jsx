@@ -259,7 +259,7 @@ const PlotLand = () => {
     const pinfetch = async (pin) => {
         try {
             
-            let res = await axios.get(`https://assetorix.onrender.com/pincode/?pincode=${pin}`);
+            let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
             setState(res.data[0].state);
             setCity(res.data[0].city);
             setCountry(res.data[0].country);
@@ -1069,7 +1069,7 @@ const PlotLand = () => {
                     Width of facing road
                 </Heading>
                 <Box display={"flex"} gap={"20px"} w={"300px"} >
-                    <Input type="number" variant='flushed' flex={1} required value={facingwidth} onChange={(e) => {
+                    <Input type="text" variant='flushed' flex={1} required value={facingwidth} onChange={(e) => {
                         e.preventDefault();
                         setFacingWidth(e.target.value);
                     }} />

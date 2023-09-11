@@ -621,7 +621,7 @@ const Sell = () => {
         >
           Your contact detail for the tenants to reach you
         </Heading>
-        <Input type="number" placeholder={"Phone Number"} maxLength={"12"} />
+        <Input type="text" placeholder={"Phone Number"} maxLength={"12"} />
         {/* Start button */}
         <Button
           onClick={() => handlechange("")}

@@ -252,7 +252,7 @@ const CommercialLandRent = () => {
   const pinfetch = async (pin) => {
     try {
 
-      let res = await axios.get(`https://assetorix.onrender.com/pincode/?pincode=${pin}`);
+      let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
       setState(res.data[0].state);
       setCity(res.data[0].city);
       setCountry(res.data[0].country);
@@ -569,7 +569,7 @@ const CommercialLandRent = () => {
             Width of facing road
           </Heading>
           <Box display={"flex"} gap={"20px"} w={"300px"} >
-            <Input type="number" variant='flushed' flex={1} required value={facingwidth} onChange={(e) => {
+            <Input type="text" variant='flushed' flex={1} required value={facingwidth} onChange={(e) => {
               e.preventDefault();
               setFacingWidth(e.target.value);
             }} />
@@ -1171,14 +1171,14 @@ const CommercialLandRent = () => {
             </button>
             <button
               className={
-                buildingFeature.includes("rade A Building")
+                buildingFeature.includes("Grade A Building")
                   ? style.setbtn
                   : style.btn
               }
               onClick={HandleBuildingFeature}
-              value={"rade A Building"}
+              value={"Grade A Building"}
             >
-              rade A Building
+              Grade A Building
             </button>
             <button
               className={
