@@ -63,7 +63,7 @@ const AgriculturalLandRent = () => {
   const [expectedBy, setexpectedBy] = useState([]);
   const [ConstructionOnProperty, setConstructionOnProperty] = useState("");
   const [expectedByYear, setExpectedByYear] = useState("");
-  const [authorisedBy, setAuthorisedBy] = useState([]);
+  const [authorisedBy, setAuthorisedBy] = useState([]); 
 
 
   // please don'nt change any function without any prior knowledge
@@ -245,11 +245,7 @@ const AgriculturalLandRent = () => {
       console.log(err);
     }
   }
-
-  const handleAvailable = (e) => {
-    e.preventDefault();
-    setAvailability(e.target.value);
-  };
+ 
 
   const handleConstructionType = (e) => {
     e.preventDefault();
@@ -264,11 +260,7 @@ const AgriculturalLandRent = () => {
     setConstructionType(newarr);
   }
 
-
-  const handleyear = (e) => {
-    e.preventDefault();
-    setFromyear(e.target.value);
-  };
+ 
 
 
   const handleAuthorityBy = (e) => {
@@ -381,19 +373,7 @@ const AgriculturalLandRent = () => {
       setPriceSqr(ans);
     }
   }
-
-  const handleIndustryType = (e) => {
-    e.preventDefault();
-    const value = e.target.value;
-
-    setIndustryType((prevIndustryType) => {
-      if (prevIndustryType.includes(value)) {
-        return prevIndustryType.filter((item) => item !== value);
-      } else {
-        return [...prevIndustryType, value];
-      }
-    });
-  }
+ 
 
 
   return (

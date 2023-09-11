@@ -253,10 +253,7 @@ const IndustrialLand = () => {
         }
     }
 
-    const handleAvailable = (e) => {
-        e.preventDefault();
-        setAvailability(e.target.value);
-    };
+ 
 
     const handleConstructionType = (e) => {
         e.preventDefault();
@@ -269,13 +266,7 @@ const IndustrialLand = () => {
             newarr.push(value);
         }
         setConstructionType(newarr);
-    }
-
-
-    const handleyear = (e) => {
-        e.preventDefault();
-        setFromyear(e.target.value);
-    };
+    } 
 
 
     const handleAuthorityBy = (e) => {

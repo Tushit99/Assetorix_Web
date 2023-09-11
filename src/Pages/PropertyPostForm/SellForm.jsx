@@ -33,6 +33,7 @@ import { changeLookingFor } from "../../Redux/globalval/action";
 import OfficeRent from "./RentForm/Commercial/OfficeRent/OfficeRent";
 import StorageRent from "./RentForm/Commercial/StorageRent/StorageRent";
 import PlotLandRent from "./RentForm/Commercial/PlotLand/PlotLandRent";
+import RetailRent from "./RentForm/Commercial/RetailRent/RetailRent";
  
 
 // this is a page of sell and sell routes (please don't change anything without any prior knowledge).  
@@ -50,7 +51,7 @@ const SellForm = () => {
         setlook(look); 
         dispatch(changeLookingFor(type));  
     }; 
-    console.log(look);
+    console.log(look); 
 
     const handleTabChange = (index) => {
         if (index == 0) {
@@ -626,7 +627,8 @@ const SellForm = () => {
                 {/* Plot / Land (Rent)  */} 
                 {(type == "Rent/Lease" && look == "Plot/Land" ? <PlotLandRent /> : "" )}  
   
-
+                {/* Retail */} 
+                {(type == "Rent/Lease" && look == "Retail" ? <RetailRent /> : "" )}   
 
             </Box> 
             <Box backgroundColor={"rgb(232, 244, 255)"} borderRadius={10}></Box>
@@ -634,7 +636,7 @@ const SellForm = () => {
     );
 };
 
-export default SellForm;
+export default SellForm;  
 
 
  
