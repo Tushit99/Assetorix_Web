@@ -422,12 +422,9 @@ const FactoryRent = () => {
 
                 </Box>
                 {/* =============================== Tell us about your property ============================ */}
-                <Box>
+                <Box marginTop={"20"}>
                     <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"}>
                         Tell us about your property
-                    </Heading>
-                    <Heading as={"h4"} size={"sm"} margin={"0 0 30px 0 "}>
-                        Add Room Details
                     </Heading>
                 </Box>
 
@@ -742,7 +739,7 @@ const FactoryRent = () => {
                         Add amenities/unique features
                     </Heading>
                     <Heading as={"h5"} size={"xs"} fontWeight={400} margin={"10px 0"} textAlign={"left"}>
-                        All fields on this page are optional
+                        All fields after this are optional
                     </Heading>
                 </Box>
 
@@ -754,6 +751,24 @@ const FactoryRent = () => {
                     <Box>
                         <button
                             className={
+                                amenities.includes("Service / Goods Lift") ? style.setbtn : style.btn
+                            }
+                            onClick={handleAminities}
+                            value={"Service / Goods Lift"}
+                        >
+                            Service / Goods Lift
+                        </button>
+                        <button
+                            className={
+                                amenities.includes("Maintenance Staff") ? style.setbtn : style.btn
+                            }
+                            onClick={handleAminities}
+                            value={"Maintenance Staff"}
+                        >
+                            Maintenance Staff
+                        </button>
+                        <button
+                            className={
                                 amenities.includes("Water Storage") ? style.setbtn : style.btn
                             }
                             onClick={handleAminities}
@@ -763,13 +778,32 @@ const FactoryRent = () => {
                         </button>
                         <button
                             className={
-                                amenities.includes("Centrally Air Conditioned") ? style.setbtn : style.btn
+                                amenities.includes("Waste Disposal") ? style.setbtn : style.btn
                             }
                             onClick={handleAminities}
-                            value={"Centrally Air Conditioned"}
+                            value={"Waste Disposal"}
                         >
-                            Centrally Air Conditioned
+                            Waste Disposal
                         </button>
+                        <button
+                            className={
+                                amenities.includes("Rain Water Harvesting") ? style.setbtn : style.btn
+                            }
+                            onClick={handleAminities}
+                            value={"Rain Water Harvesting"}
+                        >
+                            Rain Water Harvesting
+                        </button>
+                        <button
+                            className={
+                                amenities.includes("ATM") ? style.setbtn : style.btn
+                            }
+                            onClick={handleAminities}
+                            value={"ATM"}
+                        >
+                            ATM
+                        </button>
+
                         <button
                             className={
                                 amenities.includes("Security / Fire Alarm")
@@ -797,6 +831,13 @@ const FactoryRent = () => {
                         >
                             Feng Shui / Vaastu Compliant
                         </button>
+                        <button
+                            className={amenities.includes("Security Personnel") ? style.setbtn : style.btn}
+                            onClick={handleAminities}
+                            value={"Security Personnel"}
+                        >
+                            Security Personnel
+                        </button>
                     </Box>
                 </Box>
 
@@ -810,6 +851,17 @@ const FactoryRent = () => {
                         Property Features
                     </Heading>
                     <Box>
+                        <button
+                            className={
+                                propertyFeatures.includes("Centrally Air Conditioned")
+                                    ? style.setbtn
+                                    : style.btn
+                            }
+                            value={"Centrally Air Conditioned"}
+                            onClick={handlePropertyFeature}
+                        >
+                            Centrally Air Conditioned
+                        </button>
                         <button
                             className={
                                 propertyFeatures.includes("Near Bank")
@@ -866,17 +918,6 @@ const FactoryRent = () => {
                         Society/Building feature
                     </Heading>
                     <Box>
-                        <button
-                            className={
-                                buildingFeature.includes("Maintenance Staff")
-                                    ? style.setbtn
-                                    : style.btn
-                            }
-                            onClick={HandleBuildingFeature}
-                            value={"Maintenance Staff"}
-                        >
-                            Maintenance Staff
-                        </button>
                         <button
                             className={
                                 buildingFeature.includes("Shopping Centre")
@@ -954,7 +995,6 @@ const FactoryRent = () => {
                         >
                             Grocery Shop
                         </button>
-
                         <button
                             className={
                                 buildingFeature.includes("Swimming Pool")
@@ -976,17 +1016,6 @@ const FactoryRent = () => {
                             value={"Club house / Community Center"}
                         >
                             Club house / Community Center
-                        </button>
-                        <button
-                            className={
-                                buildingFeature.includes("Security Personnel")
-                                    ? style.setbtn
-                                    : style.btn
-                            }
-                            onClick={HandleBuildingFeature}
-                            value={"Security Personnel"}
-                        >
-                            Security Personnel
                         </button>
                         <button
                             className={
@@ -1013,28 +1042,6 @@ const FactoryRent = () => {
                     <Box>
                         <button
                             className={
-                                additinalft.includes("Waste Disposal")
-                                    ? style.setbtn
-                                    : style.btn
-                            }
-                            value={"Waste Disposal"}
-                            onClick={handleAdditionalFeature}
-                        >
-                            Waste Disposal
-                        </button>
-                        <button
-                            className={
-                                additinalft.includes("Rain Water Harvesting")
-                                    ? style.setbtn
-                                    : style.btn
-                            }
-                            value={"Rain Water Harvesting"}
-                            onClick={handleAdditionalFeature}
-                        >
-                            Rain Water Harvesting
-                        </button>
-                        <button
-                            className={
                                 additinalft.includes("Bank Attached Property")
                                     ? style.setbtn
                                     : style.btn
@@ -1046,6 +1053,10 @@ const FactoryRent = () => {
                         </button>
                     </Box>
                 </Box>
+
+
+
+
 
                 {/* ============================ Other Features ============================ */}
                 <Box>
@@ -1064,6 +1075,9 @@ const FactoryRent = () => {
                         </Checkbox>
                     </Box>
                 </Box>
+
+
+
 
                 {/* ============================ Property facing ============================ */}
                 <Box className={style.optional_box}>
@@ -1162,6 +1176,8 @@ const FactoryRent = () => {
                     </Box>
                 </Box>
 
+
+
                 {/* ============================ Type of flooring ============================ */}
                 <Box className={style.optional_box}>
                     <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
@@ -1190,6 +1206,9 @@ const FactoryRent = () => {
                         </Select>
                     </Box>
                 </Box>
+
+
+
 
                 {/* ============================ location advantage ============================ */}
                 <Box className={style.optional_box}>

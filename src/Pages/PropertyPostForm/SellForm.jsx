@@ -34,6 +34,7 @@ import OfficeRent from "./RentForm/Commercial/OfficeRent/OfficeRent";
 import StorageRent from "./RentForm/Commercial/StorageRent/StorageRent";
 import PlotLandRent from "./RentForm/Commercial/PlotLand/PlotLandRent";
 import IndustryRent from "./RentForm/Commercial/Industry/Industry";
+import HospitalityRent from "./RentForm/Commercial/Hospitality/Hospitality";
 
 
 // this is a page of sell and sell routes (please don't change anything without any prior knowledge).  
@@ -629,6 +630,9 @@ const SellForm = () => {
 
                 {/* Industry */}
                 {(type == "Rent/Lease" && look == "Industry" ? <IndustryRent /> : "")}
+
+                {/* Hospitality */}
+                {(type == "Rent/Lease" && look == "Hospitality" ? <HospitalityRent /> : "")}
 
             </Box>
             <Box backgroundColor={"rgb(232, 244, 255)"} borderRadius={10}></Box>

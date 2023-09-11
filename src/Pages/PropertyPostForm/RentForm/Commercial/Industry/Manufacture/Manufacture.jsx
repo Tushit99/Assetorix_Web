@@ -13,32 +13,29 @@ import {
   Textarea,
   useToast,
 } from "@chakra-ui/react";
+import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { Checkbox } from "@chakra-ui/react";
 import style from "../Industry.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
-import { CleanInputText } from "../../../../code";
-
-
+import { CleanInputText, NumericString } from "../../../../code";
 
 
 const ManufactureRent = () => {
   const isCountry = useSelector((state) => state.gloalval);
   const toast = useToast();
   const [country, setCountry] = useState("");
-  const [facingwidth, setFacingWidth] = useState("");
   const [city, setCity] = useState("");
   const [pincode, setPincode] = useState(0);
   const [state, setState] = useState("");
   const [locality, setLocality] = useState("");
-  const [address, setAddress] = useState("");
+  const [address, setaddress] = useState("");
   const [washrooms, setwashrooms] = useState(0);
   const [areaPer, setAreaPer] = useState("sq.ft");
   const [availability, setAvailability] = useState("");
   const [fromyear, setFromyear] = useState("");
   const [expectedyear, setExpectedYear] = useState("");
-  const [ownership, setOwnerShip] = useState("");
   const [pricedetail, setPricedetail] = useState("");
   const [priceSqr, setPriceSqr] = useState("");
   const [inclusivePrices, setInclusivePrice] = useState([]);
@@ -49,9 +46,7 @@ const ManufactureRent = () => {
   const [otherFeature, setOtherFeature] = useState([]);
   const [propertyFacing, setPropertyFacing] = useState("");
   const [flooring, setFlooring] = useState("");
-  const [facing, setFacing] = useState("Meter");
   const [locationAdv, setLocationAdv] = useState([]);
-  const [totalfloors, setTotalFloors] = useState("");
   const [plotArea, setPlotArea] = useState("");
   const [desc, setDesc] = useState("");
   const [pincollection, setPinCollection] = useState([]);
@@ -59,11 +54,7 @@ const ManufactureRent = () => {
   const [maintenancePrice, setMaintenancePrice] = useState("");
   const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
   const [bookingAmount, setBookingAmount] = useState("");
-  const [preLeased, setPreLeased] = useState("");
-  const [currentRentPerMonth, setCurrentRentPerMonth] = useState("");
-  const [leaseTenureInYear, setLeaseTenureInYear] = useState("");
-  const [annualRentIncrease, setAnnualRentIncrease] = useState("");
-  const [businessType, setBusinessType] = useState("");
+  const [annualDuesPayble, setAnnualDuesPayble] = useState("");
 
   // please don'nt change any function without any prior knowledge
 
@@ -84,32 +75,26 @@ const ManufactureRent = () => {
         country,
       },
       washrooms,
-      ownership,
+      plotArea,
+      plotAreaUnit: areaPer,
       price: +pricedetail,
       priceUnit: +priceSqr,
       inclusivePrices,
-      amenities,
-      propertyFeatures,
-      preLeased_Rented: preLeased,
-      society_buildingFeatures: buildingFeature,
-      additionalFeatures: additinalft,
-      otherFeatures: otherFeature,
-      propertyFacing,
-      flooring,
-      roadFacingWidth: facingwidth,
-      roadFacingWidthType: facing,
-      totalFloors: +totalfloors,
-      plotArea,
-      plotAreaUnit: areaPer,
-      carpetArea: plotArea,
-      carpetAreaUnit: areaPer,
-      description: desc,
-      countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
       additionalPricingDetails: {
         maintenancePrice,
         maintenanceTimePeriod,
         bookingAmount,
+        annualDuesPayable: annualDuesPayble
       },
+      description: desc,
+      countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
+      amenities,
+      propertyFeatures,
+      society_buildingFeatures: buildingFeature,
+      additionalFeatures: additinalft,
+      otherFeatures: otherFeature,
+      propertyFacing,
+      flooring
     };
 
     const showToastError = (message) => {
@@ -126,28 +111,31 @@ const ManufactureRent = () => {
       showToastError('Provide locality');
     } else if (!washrooms) {
       showToastError('Provide washrooms');
-    } else if (!ownership) {
-      showToastError('Provide OwnerShip');
     } else if (!pricedetail) {
-      showToastError('Provide PriceDetail');
+      showToastError('Provide Expected Rent');
     } else if (!priceSqr) {
       showToastError('Provide Price Per sq.ft');
-    } else if (!additinalft) {
-      showToastError('Provide Property description');
     }
 
     if (locationAdv) {
-      obj["locationAdv"] = locationAdv
+      obj["locationAdv"] = locationAdv;
+    }
+
+    if (availability == "Ready to move" && fromyear != "") {
+      obj["propertyStatus"] = fromyear;
+      obj["availabilityStatus"] = availability;
+    }
+    if (availability == "Under construction" && expectedyear != "") {
+      obj["expectedByYear"] = expectedyear;
+      obj["availabilityStatus"] = availability;
     }
 
     if (
-      ownership &&
       pricedetail &&
       priceSqr &&
       inclusivePrices &&
       amenities &&
       propertyFeatures &&
-      preLeased &&
       desc
     ) {
       let id = localStorage.getItem("usrId") || undefined;
@@ -164,42 +152,6 @@ const ManufactureRent = () => {
           position: 'top-right'
         })
         return
-      }
-
-      if (preLeased == "Yes") {
-        let preLeased_RentedDetails = {
-          currentRentPerMonth,
-          leaseTenureInYear,
-          annualRentIncrease,
-          businessType
-        }
-        obj["preLeased_RentedDetails"] = preLeased_RentedDetails
-      }
-
-      // if (furnished == "Furnished" || furnished == "Semi-Furnished") {
-      //     obj.furnishedObj = {
-      //         light,
-      //         fans,
-      //         ac,
-      //         tv,
-      //         Beds,
-      //         wardrobe,
-      //         geyser,
-      //     }
-      //     obj["furnishedList"] = furnishedarr;
-      // }
-
-      // if (furnished.length > 0) {
-      //     obj["furnished"] = furnished;
-      // }
-      if (availability == "Ready to move" && fromyear != "") {
-        obj["propertyStatus"] = fromyear;
-        obj["availabilityStatus"] = availability;
-      }
-      if (availability == "Under construction" && expectedyear != "") {
-        obj["expectedByYear"] = expectedyear;
-        obj["availabilityStatus"] = availability;
-
       }
       // else {
       try {
@@ -242,12 +194,9 @@ const ManufactureRent = () => {
   };
 
   const handlepinfetch = (e) => {
-    setPincode(e.target.value);
+    setPincode(NumericString(e.target.value));
     if (e.target.value.length == 6) {
-      pinfetch(e.target.value);
-    }
-    else {
-      console.log(e.target.value);
+      pinfetch(NumericString(e.target.value));
     }
   }
 
@@ -255,7 +204,7 @@ const ManufactureRent = () => {
   const pinfetch = async (pin) => {
     try {
 
-      let res = await axios.get(`https://assetorix.onrender.com/pincode/?pincode=${pin}`);
+      let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
       setState(res.data[0].state);
       setCity(res.data[0].city);
       setCountry(res.data[0].country);
@@ -281,10 +230,6 @@ const ManufactureRent = () => {
     setExpectedYear(e.target.value);
   };
 
-  const handleownership = (e) => {
-    e.preventDefault();
-    setOwnerShip(e.target.value);
-  };
 
   const handleAdditionalFeature = (e) => {
     e.preventDefault();
@@ -401,7 +346,7 @@ const ManufactureRent = () => {
             required
             placeholder="Address (optional)"
             value={address}
-            onChange={(e) => setAddress(e.target.value)}
+            onChange={(e) => setaddress(e.target.value)}
             fontSize={"md"}
             variant="flushed"
           />
@@ -477,12 +422,9 @@ const ManufactureRent = () => {
 
         </Box>
         {/* =============================== Tell us about your property ============================ */}
-        <Box>
+        <Box marginTop={"20"}>
           <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"}>
             Tell us about your property
-          </Heading>
-          <Heading as={"h4"} size={"sm"} margin={"0 0 30px 0 "}>
-            Add Room Details
           </Heading>
         </Box>
 
@@ -668,78 +610,17 @@ const ManufactureRent = () => {
           </Box>
         )}
         {/* ============================== property Age-end ============================== */}
-
-        {/* ============================ Add pricing and details (Ownership) ============================ */}
-        <Box>
-          <Heading
-            as={"h3"}
-            size={"md"}
-            margin={"30px 0 10px 0"}
-            textAlign={"left"}
-          >
-            Add pricing and details...
-          </Heading>
-          {/* OwnerShip detail */}
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
-            Ownership
-          </Heading>
-          <Box className={style.grid} gap={4}>
-            <button
-              className={ownership == "Freehold" ? style.setbtn : style.btn}
-              borderRadius={"100px"}
-              border={"1px solid rgba(113, 210, 255, 0.897)"}
-              margin={"8px 6px 0 0"}
-              onClick={handleownership}
-              value={"Freehold"}
-              backgroundColor={"blue.50"}
-            >
-              Freehold
-            </button>
-            <button
-              className={ownership == "Leasehold" ? style.setbtn : style.btn}
-              borderRadius={"100px"}
-              border={"1px solid rgba(113, 210, 255, 0.897)"}
-              margin={"8px 6px 0 0"}
-              onClick={handleownership}
-              value={"Leasehold"}
-              backgroundColor={"blue.50"}
-            >
-              Leasehold
-            </button>
-            <button
-              className={
-                ownership == "Co-operative society" ? style.setbtn : style.btn
-              }
-              borderRadius={"100px"}
-              border={"1px solid rgba(113, 210, 255, 0.897)"}
-              margin={"8px 6px 0 0"}
-              onClick={handleownership}
-              value={"Co-operative society"}
-              backgroundColor={"blue.50"}
-            >
-              Co-operative society
-            </button>
-            <button
-              className={
-                ownership == "Power of Attorney" ? style.setbtn : style.btn
-              }
-              borderRadius={"100px"}
-              border={"1px solid rgba(113, 210, 255, 0.897)"}
-              margin={"8px 6px 0 0"}
-              onClick={handleownership}
-              value={"Power of Attorney"}
-              backgroundColor={"blue.50"}
-            >
-              Power of Attorney
-            </button>
-          </Box>
-        </Box>
-
         {/* ============================== Price Details ============================ */}
         <Box>
           <Box>
-            <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
-              Price Details
+            <Heading
+              as={"h2"}
+              marginTop={"10"}
+              size={"md"}
+              fontWeight={700}
+              textAlign={"left"}
+            >
+              What price you are expecting for this property?
             </Heading>
             <Box display={"flex"} alignItems={"center"} gap={5}>
               <Box display={"grid"} gap={0}>
@@ -749,7 +630,7 @@ const ManufactureRent = () => {
                   fontWeight={400}
                   textAlign={"left"}
                 >
-                  {isCountry.country == "india" ? "₹" : "$"} Price Details
+                  {isCountry.country == "india" ? "₹" : "$"} Expected Rent
                 </Heading>
                 <NumberInput >
                   <NumberInputField
@@ -769,7 +650,7 @@ const ManufactureRent = () => {
                   fontWeight={400}
                   textAlign={"left"}
                 >
-                  {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
+                  {isCountry.country == "india" ? "₹" : "$"} Price Per {areaPer}
                 </Heading>
                 <NumberInput value={priceSqr}>
                   <NumberInputField
@@ -782,26 +663,15 @@ const ManufactureRent = () => {
           </Box>
           <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
             <Checkbox
-              isChecked={inclusivePrices.includes("All inclusive price")}
+              isChecked={inclusivePrices.includes("Electricity & Water charges excluded")}
               onChange={(e) => {
                 e.preventDefault();
                 handleinclusiveandtax(e.target.value)
               }}
-              value={"All inclusive price"}
+              value={"Electricity & Water charges excluded"}
 
             >
-              All inclusive price
-            </Checkbox>
-            <Checkbox
-              isChecked={inclusivePrices.includes("Tax and Govt. charges excluded")}
-              onChange={(e) => {
-                e.preventDefault();
-                handleinclusiveandtax(e.target.value)
-              }}
-              value={"Tax and Govt. charges excluded"}
-            >
-
-              Tax and Govt. charges excluded
+              Electricity & Water charges excluded
             </Checkbox>
             <Checkbox
               isChecked={inclusivePrices.includes("Price Negotiable")}
@@ -817,14 +687,18 @@ const ManufactureRent = () => {
           </Box>
           <Box>
             {additionalPrice && <>
-              <InputGroup w={"300px"} margin={"10px 0"}>
+              <InputGroup w={"300px"} margin={"10 0 0 0"}>
                 <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
                 <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
                   <option value="Monthly">Monthly</option>
                   <option value="Yearly">Yearly</option>
                 </Select>
               </InputGroup>
-              <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
+              <Box display={"grid"}>
+                <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
+                <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
+              </Box>
+
             </>
             }
             <Heading
@@ -841,45 +715,6 @@ const ManufactureRent = () => {
           </Box>
         </Box>
 
-        {/* ============================ Is it Pre-leased / Pre-Rented ? ============================ */}
-        <Box textAlign={"left"}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
-            Is it Pre-leased / Pre-Rented ?
-          </Heading>
-          <Heading as={"h5"} size={"xs"} fontWeight={500} margin={"10px 0"} textAlign={"left"}>
-            for properties that are already rented out
-          </Heading>
-          <Box display={"flex"} gap={5}>
-            <button value={"Yes"} onClick={(e) => {
-              e.preventDefault();
-              setPreLeased(e.target.value);
-            }} className={preLeased == "Yes" ? style.setbtn : style.btn} > Yes </button>
-            <button value={"No"} onClick={(e) => {
-              e.preventDefault();
-              setPreLeased(e.target.value);
-            }} className={preLeased == "No" ? style.setbtn : style.btn} > No </button>
-          </Box>
-          <Box display={preLeased == "Yes" ? "block" : "none"}>
-            <Input type="text" value={currentRentPerMonth} onChange={(e) => {
-              e.preventDefault();
-              setCurrentRentPerMonth(e.target.value);
-            }} placeholder={"₹ Current rent per month"} />
-            <Input type="text" value={leaseTenureInYear} onChange={(e) => {
-              e.preventDefault();
-              setLeaseTenureInYear((e.target.value));
-            }} placeholder={"Lease tenure in years"} />
-            <Box>
-              <Input type="text" value={annualRentIncrease} onChange={(e) => {
-                e.preventDefault();
-                setAnnualRentIncrease((e.target.value));
-              }} placeholder="Annual rent increase in % (Optional)" />
-              <Input type="text" value={businessType} onChange={(e) => {
-                e.preventDefault();
-                setBusinessType((e.target.value));
-              }} placeholder="Leased to - Business Type (Optional)" />
-            </Box>
-          </Box>
-        </Box>
 
         {/* ============================ Property unique discription ============================ */}
         <Box>
@@ -894,13 +729,17 @@ const ManufactureRent = () => {
             setDesc(my_cleantext);
           }} ></Textarea>
         </Box>
+
+
+
+
         {/* ============================ Add amenities/unique features ============================ */}
-        <Box>
+        <Box marginTop={"50"}>
           <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
             Add amenities/unique features
           </Heading>
           <Heading as={"h5"} size={"xs"} fontWeight={400} margin={"10px 0"} textAlign={"left"}>
-            All fields on this page are optional
+            All fields after this are optional
           </Heading>
         </Box>
 
@@ -912,21 +751,12 @@ const ManufactureRent = () => {
           <Box>
             <button
               className={
-                amenities.includes("Maintenance Staff") ? style.setbtn : style.btn
+                amenities.includes("Water Storage") ? style.setbtn : style.btn
               }
               onClick={handleAminities}
-              value={"Maintenance Staff"}
+              value={"Water Storage"}
             >
-              Maintenance Staff
-            </button>
-            <button
-              className={
-                amenities.includes("Rain Water Harvesting") ? style.setbtn : style.btn
-              }
-              onClick={handleAminities}
-              value={"Rain Water Harvesting"}
-            >
-              Rain Water Harvesting
+              Water Storage
             </button>
             <button
               className={
@@ -937,15 +767,59 @@ const ManufactureRent = () => {
             >
               Waste Disposal
             </button>
-
             <button
               className={
-                amenities.includes("Water Storage") ? style.setbtn : style.btn
+                amenities.includes("Access to High Speed Internet") ? style.setbtn : style.btn
               }
               onClick={handleAminities}
-              value={"Water Storage"}
+              value={"Access to High Speed Internet"}
             >
-              Water Storage
+              Access to High Speed Internet
+            </button>
+            <button
+              className={
+                amenities.includes("Bank Attached Property") ? style.setbtn : style.btn
+              }
+              onClick={handleAminities}
+              value={"Bank Attached Property"}
+            >
+              Bank Attached Property
+            </button>
+            <button
+              className={
+                amenities.includes("Centrally Air Conditioned") ? style.setbtn : style.btn
+              }
+              onClick={handleAminities}
+              value={"Centrally Air Conditioned"}
+            >
+              Centrally Air Conditioned
+            </button>
+            <button
+              className={
+                amenities.includes("ATM") ? style.setbtn : style.btn
+              }
+              onClick={handleAminities}
+              value={"ATM"}
+            >
+              ATM
+            </button>
+            <button
+              className={
+                amenities.includes("Cafeteria / Food Court") ? style.setbtn : style.btn
+              }
+              onClick={handleAminities}
+              value={"Cafeteria / Food Court"}
+            >
+              Cafeteria / Food Court
+            </button>
+            <button
+              className={
+                amenities.includes("Conference room") ? style.setbtn : style.btn
+              }
+              onClick={handleAminities}
+              value={"Conference room"}
+            >
+              Conference room
             </button>
             <button
               className={
@@ -959,50 +833,19 @@ const ManufactureRent = () => {
               Security/ Fire Alarm
             </button>
             <button
-              className={
-                amenities.includes("Visitor Parking") ? style.setbtn : style.btn
-              }
+              className={amenities.includes("Intercom Facility") ? style.setbtn : style.btn}
               onClick={handleAminities}
-              value={"Visitor Parking"}
+              value={"Intercom Facility"}
             >
-              Visitor Parking
-            </button>
-            <button
-              className={amenities.includes("ATM") ? style.setbtn : style.btn}
-              onClick={handleAminities}
-              value={"ATM"}
-            >
-              ATM
-            </button>
-            <button
-              className={
-                amenities.includes("Access to High Speed Internet") ? style.setbtn : style.btn
-              }
-              onClick={handleAminities}
-              value={"Access to High Speed Internet"}
-            >
-              Access to High Speed Internet
-            </button>
-            <button
-              className={
-                amenities.includes("Security Personnel")
-                  ? style.setbtn
-                  : style.btn
-              }
-              onClick={handleAminities}
-              value={"Security Personnel"}
-            >
-              Security Personnel
-            </button>
-            <button
-              className={amenities.includes("Feng Shui / Vaastu Compliant") ? style.setbtn : style.btn}
-              onClick={handleAminities}
-              value={"Feng Shui / Vaastu Compliant"}
-            >
-              Feng Shui / Vaastu Compliant
+              Intercom Facility
             </button>
           </Box>
         </Box>
+
+
+
+
+
         {/* ============================ Property Features ============================ */}
         <Box className={style.optional_box}>
           <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
@@ -1011,15 +854,16 @@ const ManufactureRent = () => {
           <Box>
             <button
               className={
-                propertyFeatures.includes("Centrally Air Conditioned")
+                propertyFeatures.includes("Near Bank")
                   ? style.setbtn
                   : style.btn
               }
-              value={"Centrally Air Conditioned"}
+              value={"Near Bank"}
               onClick={handlePropertyFeature}
             >
-              Centrally Air Conditioned
+              Near Bank
             </button>
+
             <button
               className={
                 propertyFeatures.includes("Power Back-up")
@@ -1040,36 +884,41 @@ const ManufactureRent = () => {
             >
               Reserved Parking
             </button>
+
             <button
               className={
-                propertyFeatures.includes("Near Bank")
+                propertyFeatures.includes("Feng Shui / Vaastu Compliant")
                   ? style.setbtn
                   : style.btn
               }
-              value={"Near Bank"}
+              value={"Feng Shui / Vaastu Compliant"}
               onClick={handlePropertyFeature}
             >
-              Near Bank
-            </button>
-            <button
-              className={
-                propertyFeatures.includes("Intercom Facility")
-                  ? style.setbtn
-                  : style.btn
-              }
-              value={"Intercom Facility"}
-              onClick={handlePropertyFeature}
-            >
-              Intercom Facility
+              Feng Shui / Vaastu Compliant
             </button>
           </Box>
         </Box>
+
+
+
+
         {/* ============================ Society/Building feature ============================ */}
         <Box className={style.optional_box}>
           <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
             Society/Building feature
           </Heading>
           <Box>
+            <button
+              className={
+                buildingFeature.includes("Maintenance Staff")
+                  ? style.setbtn
+                  : style.btn
+              }
+              onClick={HandleBuildingFeature}
+              value={"Maintenance Staff"}
+            >
+              Maintenance Staff
+            </button>
             <button
               className={
                 buildingFeature.includes("Shopping Centre")
@@ -1147,7 +996,17 @@ const ManufactureRent = () => {
             >
               Grocery Shop
             </button>
-
+            <button
+              className={
+                buildingFeature.includes("Visitor Parking")
+                  ? style.setbtn
+                  : style.btn
+              }
+              onClick={HandleBuildingFeature}
+              value={"Visitor Parking"}
+            >
+              Visitor Parking
+            </button>
             <button
               className={
                 buildingFeature.includes("Swimming Pool")
@@ -1159,6 +1018,8 @@ const ManufactureRent = () => {
             >
               Swimming Pool
             </button>
+
+
             <button
               className={
                 buildingFeature.includes("Club house / Community Center")
@@ -1169,6 +1030,17 @@ const ManufactureRent = () => {
               value={"Club house / Community Center"}
             >
               Club house / Community Center
+            </button>
+            <button
+              className={
+                buildingFeature.includes("Security Personnel")
+                  ? style.setbtn
+                  : style.btn
+              }
+              onClick={HandleBuildingFeature}
+              value={"Security Personnel"}
+            >
+              Security Personnel
             </button>
             <button
               className={
@@ -1183,6 +1055,10 @@ const ManufactureRent = () => {
             </button>
           </Box>
         </Box>
+
+
+
+
         {/* ============================ Additional Features ============================ */}
         <Box className={style.optional_box}>
           <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
@@ -1191,17 +1067,21 @@ const ManufactureRent = () => {
           <Box>
             <button
               className={
-                additinalft.includes("Bank Attached Property")
+                additinalft.includes("Rain Water Harvesting")
                   ? style.setbtn
                   : style.btn
               }
-              value={"Bank Attached Property"}
+              value={"Rain Water Harvesting"}
               onClick={handleAdditionalFeature}
             >
-              Bank Attached Property
+              Rain Water Harvesting
             </button>
           </Box>
         </Box>
+
+
+
+
 
         {/* ============================ Other Features ============================ */}
         <Box>
@@ -1220,6 +1100,9 @@ const ManufactureRent = () => {
             </Checkbox>
           </Box>
         </Box>
+
+
+
 
         {/* ============================ Property facing ============================ */}
         <Box className={style.optional_box}>
@@ -1318,6 +1201,8 @@ const ManufactureRent = () => {
           </Box>
         </Box>
 
+
+
         {/* ============================ Type of flooring ============================ */}
         <Box className={style.optional_box}>
           <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
@@ -1346,6 +1231,9 @@ const ManufactureRent = () => {
             </Select>
           </Box>
         </Box>
+
+
+
 
         {/* ============================ location advantage ============================ */}
         <Box className={style.optional_box}>
@@ -1478,4 +1366,5 @@ const ManufactureRent = () => {
   )
 }
 
-export default ManufactureRent;  
+export default ManufactureRent;
+
