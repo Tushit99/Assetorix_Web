@@ -1029,7 +1029,15 @@ const IndustrialLand = () => {
                         >
                             Waste Disposal
                         </button>
-
+                        <button
+                            className={
+                                amenities.includes("Visitor Parking") ? style.setbtn : style.btn
+                            }
+                            onClick={handleAminities}
+                            value={"Visitor Parking"}
+                        >
+                            Visitor Parking
+                        </button> 
                         <button
                             className={
                                 amenities.includes("Water Storage") ? style.setbtn : style.btn
@@ -1066,15 +1074,7 @@ const IndustrialLand = () => {
                         >
                             Rain Water Harvesting
                         </button>
-                        <button  
-                            className={
-                                amenities.includes("Visitor Parking") ? style.setbtn : style.btn
-                            }
-                            onClick={handleAminities}
-                            value={"Visitor Parking"}
-                        >
-                            Visitor Parking
-                        </button>
+
                     </Box>
                 </Box>
 
