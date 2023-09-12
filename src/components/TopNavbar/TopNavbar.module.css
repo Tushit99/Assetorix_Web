@@ -1,373 +1,371 @@
 .head_nav {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 100%;
-    display: grid;
-    z-index: 100;
-    /* border: 2px solid black;  */
-  }
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  display: grid;
+  z-index: 100; 
+  /* display: none;  */
+  /* border: 2px solid black;  */
+}
 
-  .hamburger2{
-    display: none;  
-  }
-  
-  .top_navbar3{
-    display: flex;
-    height: 60px;
-    align-items: center; 
-    background-color: rgb(255, 255, 255);
-    left: 0;
-    color: white; 
-  }
-  
-  /* .top_navbar>div{
+#nav_back_space {
+  height: 100px; 
+  position: relative;       
+}
+
+.hamburger2 {
+  display: none;
+}
+
+.top_navbar3 {
+  display: flex;
+  height: 60px;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+  left: 0;
+  color: white;
+}
+
+/* .top_navbar>div{
     border: 2px solid black; 
-  } */ 
+  } */
 
-  .logbtn {
-    border: 1px solid rgb(163, 163, 255);
-    padding: 4px 30px;
-    cursor: pointer;
-    border-radius: 10px;
-    box-shadow: rgba(163, 163, 255, 0.566) 2px 3px 0 1px;
-    transition: all 0.4s ease-in-out;
-  }
-  
-  .logbtn:hover {
-    background-color: rgb(46, 49, 146);
-    color: white;
-    box-shadow: rgba(163, 163, 255, 0.566) 0px 0px 3px;
-  }
-  
-  .buy{
-    display: flex;  
-    flex-wrap: wrap; 
-    gap: 10px; 
-    justify-content: flex-start; 
-    align-items: center; 
-  }nav_bottom2
-  
-  .start_btn{
-    width: 100%; 
-    margin: 10px auto;  
-  }
-   
-  .hamburger {
-    display: none;
-    grid-area: ham; 
-    width: 40px;
-  }
-  
-  .logo {
-    flex: 4;
-    display: flex;
-    align-items: center;
-    position: relative;
-    justify-content: left;
-    padding-left: 50px;
-    grid-area: logo;
-  }
+.logbtn {
+  border: 1px solid rgb(163, 163, 255);
+  padding: 4px 30px;
+  cursor: pointer;
+  border-radius: 10px;
+  box-shadow: rgba(163, 163, 255, 0.566) 2px 3px 0 1px;
+  transition: all 0.4s ease-in-out;
+}
 
-  
+.logbtn:hover {
+  background-color: rgb(46, 49, 146);
+  color: white;
+  box-shadow: rgba(163, 163, 255, 0.566) 0px 0px 3px;
+}
+
+.buy {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start;
+  align-items: center;
+}
+nav_bottom2 .start_btn {
+  width: 100%;
+  margin: 10px auto;
+}
+
+.hamburger {
+  display: none;
+  grid-area: ham;
+  width: 40px;
+}
+
+.logo {
+  flex: 4;
+  display: flex;
+  align-items: center;
+  position: relative;
+  justify-content: left;
+  padding-left: 50px;
+  grid-area: logo;
+}
+
 /* after login log_links */
 
-.log_links{
-  display: grid; 
+.log_links {
+  display: grid;
   text-align: left;
   gap: 2px;
 }
 
-.log_links *{
-  background-color: rgb(255, 255, 255); 
-  padding: 0 10px; 
+.log_links * {
+  background-color: rgb(255, 255, 255);
+  padding: 0 10px;
   /* border-radius: 10px;   */
 }
 
-.log_links *:hover{
+.log_links *:hover {
   background-color: rgb(226, 226, 226);
-  color: black; 
+  color: black;
 }
 
 .logout_btn {
   border: 1px solid rgb(163, 163, 255);
   padding: 4px 30px;
-  width: 100%; 
+  width: 100%;
   margin: 10px 0;
   cursor: pointer;
   border-radius: 10px;
   box-shadow: rgba(163, 163, 255, 0.566) 2px 3px 0 1px;
-  transition: all 0.4s ease-in-out; 
+  transition: all 0.4s ease-in-out;
 }
 
 .logout_btn:hover {
   /* background-color: rgb(46, 49, 146);
   color: white; */
   box-shadow: rgba(163, 163, 255, 0.566) 0px 0px 3px;
-} 
-  
-  .logo img {
-    top: 20%;
-  }
-  
-  
-  .country{
-    flex: 3; 
-    display: flex;
-    align-items: center;
-    justify-content: end;
-    grid-area: country;   
-  }
-  
-  .country>*{
-    padding: 2px 10px 2px 10px;
-    background-color: rgba(244, 244, 244, 0);
-    color: rgb(0, 0, 0);  
-    border-radius: 20px;
-  }
-  
-  .country>*>*{ 
-    background-color: rgba(244, 244, 244, 0.384);
-    color: rgb(0, 0, 0);  
-  }  
-  
-  .login_data2 > *{
-    padding: 2px 10px 2px 10px;
-    background-color: rgba(244, 244, 244, 0);
-    color: rgb(255, 255, 255); 
-    border-radius: 20px; 
-  } 
-  
-  .login_data2 > *{
-    color: black;
-    padding: 2px 10px 2px 10px;
-    background-color: rgba(244, 244, 244, 0);
-    border-radius: 20px; 
-  }
-  
-  .login_box{ 
-    flex: 1; 
-    display: flex; 
-    align-items: center; 
-    grid-area: login ; 
-    justify-content: center; 
-  }
-  
-  .login_box>*{
-    padding: 2px 10px 2px 10px;
-    background-color: rgba(244, 244, 244, 0);
-    color: rgb(105, 101, 101);
-    border-radius: 20px; 
-  }
-  
-  .login_box button:hover{ 
-    background-color: rgba(255, 255, 255, 0.447); 
-  }
-  
-  .login_box button{ 
-    background-color: unset; 
-  }
-  
-  .top_navbar > div:nth-child(4) {
-    flex: 1;
-  }
-  
-  .login_data2 {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 50px;
-  }   
-  
-  .login_data2 {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 50px;
-  }
-  
-  .option{
-    display: flex;  
-    flex-direction: column;  
-    align-items: left ; 
-    text-align: left;  
-    justify-content: left;  
-  }
-  
-  .option>*{
-    padding: 0 10px; 
-  }
-  
-  .option>*:hover{
-    background-color: rgb(128, 128, 255);  
-    color: white; 
-  }
-  
-  /* Nav bar Bottom Part */
-  
-  .nav_bottom {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    padding: 3px 0;
-    background-color: rgba(0, 0, 0, 0.37);
-    color: rgb(255, 255, 255);
-  }
-  
-  .nav_bottom2{
-    width: 100%;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    padding: 3px 0;
-    background-color: rgb(255, 255, 255);
-    color: rgb(0, 0, 0);
-  }
-  
-  
-  /* .nav_bottom *{
+}
+
+.logo img {
+  top: 20%;
+}
+
+.country {
+  flex: 3;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  grid-area: country;
+}
+
+.country > * {
+  padding: 2px 10px 2px 10px;
+  background-color: rgba(244, 244, 244, 0);
+  color: rgb(0, 0, 0);
+  border-radius: 20px;
+}
+
+.country > * > * {
+  background-color: rgba(244, 244, 244, 0.384);
+  color: rgb(0, 0, 0);
+}
+
+.login_data2 > * {
+  padding: 2px 10px 2px 10px;
+  background-color: rgba(244, 244, 244, 0);
+  color: rgb(255, 255, 255);
+  border-radius: 20px;
+}
+
+.login_data2 > * {
+  color: black;
+  padding: 2px 10px 2px 10px;
+  background-color: rgba(244, 244, 244, 0);
+  border-radius: 20px;
+}
+
+.login_box {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  grid-area: login;
+  justify-content: center;
+}
+
+.login_box > * {
+  padding: 2px 10px 2px 10px;
+  background-color: rgba(244, 244, 244, 0);
+  color: rgb(105, 101, 101);
+  border-radius: 20px;
+}
+
+.login_box button:hover {
+  background-color: rgba(255, 255, 255, 0.447);
+}
+
+.login_box button {
+  background-color: unset;
+}
+
+.top_navbar > div:nth-child(4) {
+  flex: 1;
+}
+
+.login_data2 {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 50px;
+}
+
+.login_data2 {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 50px;
+}
+
+.option {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  text-align: left;
+  justify-content: left;
+}
+
+.option > * {
+  padding: 0 10px;
+}
+
+.option > *:hover {
+  background-color: rgb(128, 128, 255);
+  color: white;
+}
+
+/* Nav bar Bottom Part */
+
+.nav_bottom {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 3px 0;
+  background-color: rgba(0, 0, 0, 0.37);
+  color: rgb(255, 255, 255);
+}
+
+.nav_bottom2 {
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 3px 0;
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+}
+
+/* .nav_bottom *{
     border: 2px solid black; 
   } */
-  
-  @media screen and (min-width: 550px) and (max-width: 980px) {
-    .top_navbar > * {
-      flex: 1; 
-    }
-  
-    .top_navbar > div:nth-child(1) {
-      display: flex;
-    }
-  
-    .login_data2>*:nth-child(2){
-      display: none; 
-    }
-    .login_data2>*:nth-child(3){
-      display: none;
-    }
-    .login_data2>*:nth-child(4){
-      display: none;
-    }
-  
-    .logo {
-      padding: 0;
-      display: flex; 
-      align-items: center;  
-      text-align: left; 
-      justify-content: center;      
-      /* border: 2px solid black;  */
-    } 
-  
-    .top_navbar{
-      display: grid; 
-      grid-template-areas: "ham logo country login";
-      height: fit-content;   
-      height: 50px; 
-    }
-  
-    .hamburger2{
-      display: flex; 
-      align-items:  center; 
-      justify-content: center;  
 
-    }
-  
-    .logo img {
-      width: 120px;     
-    } 
-  
-    .country *{
-      width: 90px;  
-    } 
-  
-    .country2 *{
-      width: 90px;   
-    }
-  
-    .country{
-      width: 90px; 
-      padding: 0; 
-      border: 0; 
-      outline: 0; 
-    } 
-  
-    .country2{
-      width: 90px; 
-      padding: 0; 
-      border: 0; 
-      outline: 0; 
-    }
+@media screen and (min-width: 550px) and (max-width: 980px) {
+  .top_navbar > * {
+    flex: 1;
   }
-  
-  @media screen and (min-width: 100px) and (max-width: 550px) {
-    .top_navbar3 > * {
-      flex: 1; 
-    }
-  
-    .top_navbar3 > div:nth-child(1) {
-      display: flex;
-    }
-  
-    .login_data2>*:nth-child(2){
-      display: none;
-    }
-    .login_data2>*:nth-child(3){
-      display: none;
-    }
-    .login_data2>*:nth-child(4){
-      display: none;
-    }
-  
-    .logo {
-      padding: 0;
-      display: flex; 
-      align-items: center; 
-      justify-content: start;   
-      /* border: 2px solid black;  */
-    }
-  
-    .nav_bottom2 {
-      display: none;
-    }
-  
-    .top_navbar3{
-      display: grid; 
-      grid-template-areas: "ham logo country login";
-      height: fit-content;   
-      height: 50px; 
-    }
-  
-    .hamburger2{
-      display: flex; 
-      align-items:  center;  
-    }
-  
-    .logo img {
-      width: 120px;    
-    } 
-  
-    .country *{
-      width: 90px;
-      border: 2px solid blue; 
-    }
-  
-    .country{
-      width: 90px; 
-      padding: 0; 
-    }
-  
-    .country2 *{
-      width: 90px;
-      border: 2px solid blue; 
-    }
-  
-    .country2{
-      width: 90px; 
-      padding: 0; 
-    }
-  
+
+  .top_navbar > div:nth-child(1) {
+    display: flex;
   }
-   
-    
-    
+
+  .login_data2 > *:nth-child(2) {
+    display: none;
+  }
+  .login_data2 > *:nth-child(3) {
+    display: none;
+  }
+  .login_data2 > *:nth-child(4) {
+    display: none;
+  }
+
+  .logo {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    justify-content: center;
+    /* border: 2px solid black;  */
+  }
+
+  .top_navbar {
+    display: grid;
+    grid-template-areas: "ham logo country login";
+    height: fit-content;
+    height: 50px;
+  }
+
+  .hamburger2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo img {
+    width: 120px;
+  }
+
+  .country * {
+    width: 90px;
+  }
+
+  .country2 * {
+    width: 90px;
+  }
+
+  .country {
+    width: 90px;
+    padding: 0;
+    border: 0;
+    outline: 0;
+  }
+
+  .country2 {
+    width: 90px;
+    padding: 0;
+    border: 0;
+    outline: 0;
+  }
+}
+
+@media screen and (min-width: 100px) and (max-width: 550px) {
+  .top_navbar3 > * {
+    flex: 1;
+  }
+
+  .top_navbar3 > div:nth-child(1) {
+    display: flex;
+  }
+
+  .login_data2 > *:nth-child(2) {
+    display: none;
+  }
+  .login_data2 > *:nth-child(3) {
+    display: none;
+  }
+  .login_data2 > *:nth-child(4) {
+    display: none;
+  }
+
+  .logo {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    /* border: 2px solid black;  */
+  }
+
+  .nav_bottom2 {
+    display: none;
+  }
+
+  .top_navbar3 {
+    display: grid;
+    grid-template-areas: "ham logo country login";
+    height: fit-content;
+    height: 50px;
+  }
+
+  .hamburger2 {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo img {
+    width: 120px;
+  }
+
+  .country * {
+    width: 90px;
+    border: 2px solid blue;
+  }
+
+  .country {
+    width: 90px;
+    padding: 0;
+  }
+
+  .country2 * {
+    width: 90px;
+    border: 2px solid blue;
+  }
+
+  .country2 {
+    width: 90px;
+    padding: 0;
+  }
+}

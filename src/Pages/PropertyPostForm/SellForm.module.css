@@ -1,8 +1,7 @@
-.post_property {
-  padding-top: 140px;
+.post_property { 
   display: flex;
   width: 90%;
-  margin: auto;
+  margin: 40px auto;
   gap: 20px;
 }
 

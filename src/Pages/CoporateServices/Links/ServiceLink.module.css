@@ -3,10 +3,8 @@
     flex-direction: column;  
     text-align: left;  
     /* border: 2px solid black;  */
-    position: absolute; 
-    top: 0; 
-    left: 0;  
-    right: 0;  
+    position:sticky; 
+    top: 126px;  
     gap: 6px; 
 }
 

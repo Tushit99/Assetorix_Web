@@ -8,8 +8,7 @@ const UsaRealState = () => {
     return (
         <Box
             w={"90%"}
-            margin={"60px auto 30px auto"}
-            paddingTop={"70px"}
+            margin={"20px auto 30px auto"} 
             display={"flex"}
             gap={10}
         >

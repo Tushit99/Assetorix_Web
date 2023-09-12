@@ -18,7 +18,7 @@ const Construction = () => {
     <Box
       display={{ base: "grid", lg: "flex" }}
       w={"90%"}
-      margin={"130px auto 40px auto"}
+      margin={"30px auto 40px auto"}
       gap={{ base: "20px", lg: "50px" }}
     >
       <Box

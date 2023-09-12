@@ -11,7 +11,7 @@ import ServiceLink from '../Links/ServiceLink';
 
 const PropertyMarketing = () => {
   return (
-    <Box w={"90%"} margin={"60px auto 30px auto"} paddingTop={"70px"} display={"flex"} gap={10}>
+    <Box w={"90%"} margin={"30px auto 30px auto"} display={"flex"} gap={10}>
       <Box textAlign={"justify"} w={"70%"} flex={7} padding={"0px auto"}>
         <img src={img1} alt="property_img" />
         <Heading m={"20px 0"} as='h3' size='lg'> PROPERTY MARKETING </Heading>

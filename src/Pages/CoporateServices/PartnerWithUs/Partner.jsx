@@ -8,7 +8,7 @@ const Partner = () => {
     <Box
       width={{ base: "90%", lg: "80%" }}
       textAlign={"left"}
-      margin={{ base: "40px auto", md: "100px auto" }}
+      margin={{ base: "20px auto", md: "20px auto" }}
       display={{ base: "grid", lg: "flex" }}
       alignItems={"flex-start"}
       justifyContent={"space-around"}

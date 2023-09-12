@@ -96,8 +96,7 @@ const SellForm = () => {
             <Box>
                 {/* Property Type (what type of property) */}
                 <Box>
-                    <Heading as={"h1"} size={"xl"} fontWeight={400}>
-
+                    <Heading as={"h1"} size={"xl"} fontWeight={400}> 
                         Fill out basic details
                     </Heading>
                     <Heading textAlign={"left"} margin={"20px 0"} as={"h4"} size={"sm"}>
@@ -109,7 +108,7 @@ const SellForm = () => {
                                 _selected={{
                                     bg: "blue.50",
                                     border: "1px solid rgba(85, 91, 255, 0.236)",
-                                    borderRadius: "18px",
+                                    borderRadius: "0px",
                                 }}
                             >
                                 Sell
@@ -118,7 +117,7 @@ const SellForm = () => {
                                 _selected={{
                                     bg: "blue.50",
                                     border: "1px solid rgba(85, 90, 255, 0.236)",
-                                    borderRadius: "18px",
+                                    borderRadius: "0px",
                                 }}
                             >
                                 Rent/Lease
@@ -127,7 +126,7 @@ const SellForm = () => {
                                 _selected={{
                                     bg: "blue.50",
                                     border: "1px solid rgba(85, 90, 255, 0.236)",
-                                    borderRadius: "18px",
+                                    borderRadius: "0px",
                                 }}
                             >
                                 PG
@@ -145,7 +144,7 @@ const SellForm = () => {
                                             _selected={{
                                                 bg: "blue.50",
                                                 border: "1px solid rgba(85, 91, 255, 0.236)",
-                                                borderRadius: "18px",
+                                                borderRadius: "0px",
                                             }}
                                         >
                                             Residential
@@ -154,7 +153,7 @@ const SellForm = () => {
                                             _selected={{
                                                 bg: "blue.50",
                                                 border: "1px solid rgba(85, 91, 255, 0.236)",
-                                                borderRadius: "18px",
+                                                borderRadius: "0px",
                                             }}
                                             onClick={() => setTypeOf("Commercial")}
                                         >
@@ -321,7 +320,7 @@ const SellForm = () => {
                                             _selected={{
                                                 bg: "blue.50",
                                                 border: "1px solid rgba(85, 91, 255, 0.236)",
-                                                borderRadius: "18px",
+                                                borderRadius: "0px",
                                             }}
                                         >
                                             Residential
@@ -330,7 +329,7 @@ const SellForm = () => {
                                             _selected={{
                                                 bg: "blue.50",
                                                 border: "1px solid rgba(85, 91, 255, 0.236)",
-                                                borderRadius: "18px",
+                                                borderRadius: "0px",
                                             }}
                                         >
                                             Commercial

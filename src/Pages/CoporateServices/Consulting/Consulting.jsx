@@ -5,9 +5,9 @@ import ServiceLink from '../Links/ServiceLink';
 
 const ConsultingPage = () => {
     return (
-        <Box w={"90%"} margin={"auto"} paddingTop={"70px"} display={"flex"} gap={10}>
+        <Box w={"90%"} margin={"20px auto"} display={"flex"} gap={10}>
             <Box textAlign={"justify"} w={"70%"} flex={7} padding={"0px auto"}>
-                <img src={img} alt="property_img" />
+                <img src={img} alt="property_img" /> 
                 <Heading m={"10px 0"} as='h3' size='lg'> CONSULTING </Heading>
                 <Heading as='h4' m={"10px 0"} size='md' fontWeight={"400"} > MARKETING OF PROPERTIES BY AMETHEUS HOLDINGS PVT LTD </Heading>
                 <Text fontSize={"sm"} m={"10px 0"} >
