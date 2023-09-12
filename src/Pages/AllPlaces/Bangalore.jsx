@@ -31,7 +31,7 @@ const data = [
     location: "Greater Noida West,Noida",
     price: "62 Lakh to 2.41 Cr",
   },
-]
+] 
 
 const Bangalore = () => {
   return (

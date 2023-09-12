@@ -9,7 +9,6 @@ import Noida from '../../Pages/AllPlaces/Noida'
 import Pune from '../../Pages/AllPlaces/Pune'
 import Bangalore from '../../Pages/AllPlaces/Bangalore'
 import Gurugram from '../../Pages/AllPlaces/Gurugram'
-import ProductDetail from '../../Pages/ProductDetailPage/ProductDetail'
 import Error from '../../Pages/ErrorPage/Error'
 import Login from '../../Pages/Login/Login'
 import Construction from '../../Pages/CoporateServices/ConstructionManagement/Construction'
@@ -26,7 +25,7 @@ import PurchaseTerm from '../../Pages/Footer/HelpCenter/PerchaseTerm/PurchaseTer
 import UserTerm from '../../Pages/Footer/HelpCenter/UserTerm/UserTerm'
 import Privacy from '../../Pages/Footer/HelpCenter/Privacy/Privacy'
 import Disclaimer from '../../Pages/Footer/HelpCenter/Disclaimer/Disclaimer'
-import UserDetail from '../../Pages/UserDetail/UserDetail' 
+import UserDetail from '../../Pages/UserDetail/UserDetail'
 import PrivateRoute from '../PrivateRoute/PrivateRoute'
 import SellForm from '../../Pages/PropertyPostForm/SellForm'
 // import ConsultingPage from '../../Pages/CoporateServices/Consulting/consulting'
@@ -56,20 +55,21 @@ const MainRoute = () => {
         <Route path='/pune' element={<Pune />} />
 
         {/* Product detail page */}
-        <Route path='/delhi/:id' element={<ProductDetail />} />
+        {/* <Route path='/delhi/:id' element={<ProductDetail />} />
         <Route path='/bangalore/:id' element={<ProductDetail />} />
         <Route path='/gurugram/:id' element={<ProductDetail />} />
         <Route path='/mumbai/:id' element={<ProductDetail />} />
         <Route path='/noida/:id' element={<ProductDetail />} />
-        <Route path='/pune/:id' element={<ProductDetail />} />
+        <Route path='/pune/:id' element={<ProductDetail />} /> */}
 
         {/* buy rent sale */}
         <Route path='/buy' element={<Buy />} />
 
+        {/* Website detail Pages */}
         <Route path='/Construction_Management' element={<Construction />} />
         <Route path='/Property_Marketing' element={<PropertyMarketing />} />
         <Route path='/partner' element={<Partner />} />
-        <Route path='/acquisitions_and_dispositions' element={<Acquisition />} />
+        <Route path='/acquisitions_and_dispositions' element={<Acquisition />} />  
         {/* <Route path='/consulting' element={<ConsultingPage />} />  */}
         <Route path='/market_research' element={<MarketResearch />} />
         <Route path='/portfolio_planning' element={<PortfolioPlaning />} />
