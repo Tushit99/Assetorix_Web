@@ -1,6 +1,6 @@
 import { Box, Heading, ListItem, Text, UnorderedList } from "@chakra-ui/react";
 import React from "react"; 
-import style from "./UsaRealState.module.css";
+// import style from "./UsaRealState.module.css";
 import img from "./American-Housing-Market.webp";
 import ServiceLink from "../Links/ServiceLink";
 

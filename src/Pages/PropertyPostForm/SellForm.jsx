@@ -103,7 +103,7 @@ const SellForm = () => {
                         I am looking to
                     </Heading>
                     <Tabs variant="unstyled" index={selectedTab} onChange={handleTabChange} defaultIndex={0} >
-                        <TabList gap={3} margin={"0 20px"} >
+                        <TabList gap={3} margin={"0 20px"}> 
                             <Tab
                                 _selected={{
                                     bg: "blue.50",

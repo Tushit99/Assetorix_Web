@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Logo from "../Logo/Logo";
 import style from "./TopNavbar.module.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Hamburger from "../Hamburger/Hamburger";
 import {
     Popover,

@@ -1,8 +1,8 @@
 import React from 'react';
 import img from "./Market-1024x342.jpg";
-import style from "./MarketResearch.module.css";
+// import style from "./MarketResearch.module.css";
 import { Box, Heading, Text } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import ServiceLink from '../Links/ServiceLink';
 
 const MarketResearch = () => {
