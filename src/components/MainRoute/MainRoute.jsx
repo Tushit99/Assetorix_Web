@@ -2,13 +2,7 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Home from '../../Pages/Home/Home'
 import About from '../../Pages/About/About'
-import Singup from '../../Pages/Sign/Singup'
-import Delhi from '../../Pages/AllPlaces/Delhi'
-import Mumbai from '../../Pages/AllPlaces/Mumbai'
-import Noida from '../../Pages/AllPlaces/Noida'
-import Pune from '../../Pages/AllPlaces/Pune'
-import Bangalore from '../../Pages/AllPlaces/Bangalore'
-import Gurugram from '../../Pages/AllPlaces/Gurugram'
+import Singup from '../../Pages/Sign/Singup' 
 import Error from '../../Pages/ErrorPage/Error'
 import Login from '../../Pages/Login/Login'
 import Construction from '../../Pages/CoporateServices/ConstructionManagement/Construction'
@@ -46,13 +40,7 @@ const MainRoute = () => {
         <Route path='/signup' element={<Singup />} />
         {/* Login Page */}
         <Route path='/login' element={<Login />} />
-        {/* Product Page */}
-        <Route path='/delhi' element={<Delhi />} />
-        <Route path='/bangalore' element={<Bangalore />} />
-        <Route path='/gurugram' element={<Gurugram />} />
-        <Route path='/mumbai' element={<Mumbai />} />
-        <Route path='/noida' element={<Noida />} />
-        <Route path='/pune' element={<Pune />} />
+        {/* Product Page */} 
 
         {/* Product detail page */}
         {/* <Route path='/delhi/:id' element={<ProductDetail />} />
