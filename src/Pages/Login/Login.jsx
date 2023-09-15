@@ -163,7 +163,7 @@ const Login = ({ onpage }) => {
                                 </Button>
                             </Stack>
                         </Box>
-                    </Flex>
+                    </Flex> 
                 </div>
             </Box>
         </div>

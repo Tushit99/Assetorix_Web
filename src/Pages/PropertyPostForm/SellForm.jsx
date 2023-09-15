@@ -40,7 +40,7 @@ import HospitalityRent from "./RentForm/Commercial/Hospitality/Hospitality";
 
 // this is a page of sell and sell routes (please don't change anything without any prior knowledge).  
 
-const SellForm = () => {
+const SellForm = () => { 
     const looking = useSelector((state) => state.gloalval.lookingFor);
     const [look, setlook] = useState("");
     const [type, settype] = useState("");
@@ -52,11 +52,10 @@ const SellForm = () => {
         settype(type); 
         setlook(look); 
         dispatch(changeLookingFor(type));  
-    }; 
-    console.log(look); 
+    };  
 
     const handleTabChange = (index) => {
-        if (index == 0) {
+        if (index == 0) { 
             setlook("sell");
         }
         else if (index == 1) {

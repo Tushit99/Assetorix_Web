@@ -77,7 +77,7 @@ const MainRoute = () => {
         {/* after login Details Route */}
         <Route path='/profile' element={<UserDetail />} />
         <Route path='/post' element={
-          <PrivateRoute >
+          <PrivateRoute > 
             <SellForm />
           </PrivateRoute>
         } />

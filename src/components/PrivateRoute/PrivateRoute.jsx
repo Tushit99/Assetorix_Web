@@ -5,18 +5,17 @@ import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";  
 
 const PrivateRoute = ({ children }) => {
-    let isAuth = useSelector((state) => state.userreducer.name); 
+    let isAuth = useSelector((state) => state.userreducer.user); 
     let location = useLocation(); 
     const [page ,setpage] = useState(""); 
     const toast = useToast(); 
     
     useEffect(()=>{  
         setpage(location); 
-    },[])
-  
+    },[]);  
 
-    if (isAuth) {
-        return children
+    if (isAuth.length>0) { 
+        return children; 
     } else {   
         toast({ 
             title: 'Login Please',
