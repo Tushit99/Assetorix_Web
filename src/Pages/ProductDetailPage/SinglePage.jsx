@@ -49,7 +49,7 @@ import mallImg from "./furnishedImages/mall.png";
 import higwayImg from "./furnishedImages/highway-sign.png";
 import airport from "./furnishedImages/airport.png";
 import railwayImg from "./furnishedImages/train-station.png";
-
+import { ImLocation2 } from "react-icons/im"
 
 
 
@@ -114,88 +114,28 @@ const SingleProductDetailPage = () => {
     }, []);
 
     return (
-        <Box margin={"25px 20px"}>
-            <Heading
-                color={"rgb(13, 20, 66)"}
-                margin={"20px 0"}
-                textAlign={"left"}
-                fontSize={"4xl"}
-                display={"flex"}
-            >
-                {houseno || <Skeleton width={"200px"} />}, {apartment || <Skeleton width={"200px"} />}, {placelocality || <Skeleton width={"200px"} />}
-            </Heading>
-            <Box display={{ base: "grid", md: "flex" }} flexWrap={"wrap"} gap={"20px"}>
-                <Box flex={16}>
-                    <Image
-                        w={"100%"}
-                        src={"https://mediacdn.99acres.com/media1/21619/19/432399374M-1688810188988.jpg"}
-                        alt="property-img"
-                    />
-                </Box>
-                <Box
-                    flex={18}
-                    padding={"10px"}
-                    backgroundColor={"rgba(244, 244, 255, 0.895)"}
+        <Box display={{ base: "grid", md: "flex" }} flexWrap={"wrap"} gap={"20px"} >
+            <Box margin={"25px 20px"} flex={16}>
+                <Heading
+                    color={"rgb(13, 20, 66)"}
+                    margin={"20px 0"}
                     textAlign={"left"}
+                    fontSize={"2xl"}
+                    display={"flex"}
+                    alignItems={"center"}
                 >
-                    <Box
-                        display={"grid"}
-                        w={"100%"}
-                        alignItems={"center"}
-                        justifyContent={"right"}
-                    >
-                        <Text fontSize={"lg"}> Pincode: {pin || <Skeleton width={"100px"} />} </Text>
+                    <ImLocation2 /> {houseno || <Skeleton width={"200px"} />}, {apartment || <Skeleton width={"200px"} />}, {placelocality || <Skeleton width={"200px"} />}
+                </Heading>
+                <Box>
+                    <Box >
+                        <Image
+                            w={"100%"}
+                            src={"https://mediacdn.99acres.com/media1/21619/19/432399374M-1688810188988.jpg"}
+                            alt="property-img"
+                        />
                     </Box>
-                    {/* price  */}
-                    <Box margin={"20px 0"}>
-                        <Heading display={"flex"} fontSize={"2xl"}>
-                            Price: {data.countryCurrency || <Skeleton width={"100px"} />}
-                            {price || <Skeleton width={"40px"} />}
-                        </Heading>
-                        <Heading display={"flex"} margin={"6px 0"} fontSize={"lg"}>
-                            Price per unit: {data.countryCurrency || <Skeleton width={"100px"} />}
-                            {price || <Skeleton width={"100px"} />}
-                        </Heading>
-                    </Box>
-                    {/* Property Facing / flooring */}
-                    <Box margin={"10px auto"} display={"flex"} alignItems={"center"} flexWrap={"wrap"} gap={8} >
-                        <Text fontSize={"md"} alignItems={"center"} gap={1} display={data.propertyFacing == "undefined" ? "none" : "flex"}>  <span style={{ fontWeight: "600" }}> Property Facing :</span>  {data.propertyFacing || <Skeleton width={"100px"} />} </Text>
-                        <Text fontSize={"md"} alignItems={"center"} gap={1} display={data.flooring == "undefined" ? "none" : "flex"}>  <span style={{ fontWeight: "600" }}> Property flooring :</span>  {data.flooring || <Skeleton width={"100px"} />} </Text>
-                    </Box>
-                    {/* Plot Area */}
-                    <Text display={data.plotArea == "undefined" ? "none" : "flex"} gap={1} alignItems={"center"}>
-                        <Text fontWeight={600} fontSize={"lg"}>
-                            Plot Area :
-                        </Text>
-                        {data.plotArea || <Skeleton width={"100px"} />} {data.plotAreaUnit || <Skeleton width={"100px"} />}
-                    </Text>
-                    {/* Total Floor / on Floor */}
-                    <Text>
-                        <Text textAlign={"left"} display={"flex"} alignItems={"center"} gap={1} fontSize={"lg"} fontWeight={600}>
-                            Total Floors : <Text fontWeight={300}> {data.totalFloors || <Skeleton width={"100px"} />}</Text>
-                        </Text>
-                        <Text textAlign={"left"} display={"flex"} alignItems={"center"} gap={1} fontSize={"lg"} fontWeight={600}>
-                            Floor no. : <Text fontWeight={300}> {data.floorOn || <Skeleton width={"100px"} />}</Text>
-                        </Text>
-                    </Text>
-                    {/* Power Backup */}
-                    <Text display={data.plotArea == "undefined" ? "none" : "flex"} gap={1} alignItems={"center"}>
-                        <Text fontWeight={600} fontSize={"lg"}>
-                            Power Backup :
-                        </Text>
-                        {data.powerBackup || <Skeleton width={"100px"} />}
-                    </Text>
-                    {/* Property Creation */}
-                    <Text textAlign={"left"} fontSize={"sm"} color={"rgb(1, 9, 46)"} fontWeight={600}>
-                        Posted on : <Text fontWeight={300} fontSize={"xs"} as={"i"}>{created || <Skeleton width={"100px"} />}</Text>
-                    </Text>
-                    <Text textAlign={"left"} fontSize={"sm"} color={"rgb(1, 9, 46)"} fontWeight={600}>
-                        Updated on : <Text fontWeight={300} fontSize={"xs"} as={"i"}>{updated || <Skeleton width={"100px"} />}</Text>
-                    </Text>
                 </Box>
-            </Box>
-            {/* box 2 */}
-            <Box display={"flex"} gap={"20px"}>
+                {/* box 2 */}
                 <Box flex={8} padding={"20px"} textAlign={"left"}>
                     {/* discription */}
                     <Heading fontSize={"2x"} margin={"10px 0"} textAlign={"left"}>
@@ -761,85 +701,68 @@ const SingleProductDetailPage = () => {
                         </Box>
                     </Box>
                 </Box>
-                <Box flex={4} padding={"20px"} textAlign={"left"}>
-                    {/* side box 1 */}
-                    <Box
-                        w={"100%"}
-                        border={"2px solid rgb(232, 232, 232)"}
-                        backgroundColor={"rgb(237, 249, 249)"}
-                        h={350}
-                        padding={"14px"}
-                    >
-                        {/* side box 1 top (img and name) */}
-                        <Box display={"flex"} padding={"10px 0"}>
-                            <Image
-                                src={profileimg}
-                                borderRadius={"2px"}
-                                border={"1px solid rgb(212, 212, 212)"}
-                                w={"100px"}
-                                alt=""
-                            />
-                            <Box marginLeft={"10px"}>
-                                <Heading size={"md"}>Full Name</Heading>
-                                <Heading fontWeight={"medium"} fontSize={"md"}>
-                                    Dealer short info or short discription
-                                </Heading>
-                            </Box>
-                        </Box>
-                        <Box
-                            padding={"14px 0"}
-                            display={"flex"}
-                            alignItems={"center"} 
-                            justifyContent={"space-between"}
-                            flexWrap={"wrap"}
-                        >
-                            <Heading fontSize={"md"} color={"rgb(72, 53, 53)"}>
-                                Mobile no.
-                            </Heading>
-                            <Heading fontSize={"md"} color={"rgb(72, 53, 53)"}>
-                                99099099099
-                            </Heading>
-                        </Box>
-                        <Divider
-                            orientation="horizontal"
-                            padding={"1px"}
-                            backgroundColor={"rgb(134, 134, 134)"}
-                        />
-                        <Box
-                            padding={"14px 0"}
-                            display={"flex"}
-                            alignItems={"center"}
-                            justifyContent={"space-between"}
-                            flexWrap={"wrap"}
-                        >
-                            <Heading fontSize={"md"} color={"rgb(72, 53, 53)"}>
-                                Whatsapp no:
-                            </Heading>
-                            <Heading fontSize={"md"} color={"rgb(72, 53, 53)"}>
-                                11011011011
-                            </Heading>
-                        </Box>
-                        <Divider
-                            orientation="horizontal"
-                            padding={"1px"}
-                            backgroundColor={"rgb(134, 134, 134)"}
-                        />
-                        <Box
-                            padding={"14px 0"}
-                            display={"flex"}
-                            alignItems={"center"}
-                            justifyContent={"space-between"}
-                            flexWrap={"wrap"}
-                        >
-                            <Heading fontSize={"md"} color={"rgb(72, 53, 53)"}>
-                                Email id:
-                            </Heading>
-                            <Heading fontSize={"md"} color={"rgb(72, 53, 53)"}>
-                                name@gmail.com
-                            </Heading>
-                        </Box>
-                    </Box>
+            </Box>
+            <Box
+                flex={8}  
+                margin={"25px 0px"} 
+                padding={"10px"}
+                backgroundColor={"rgba(244, 244, 255, 0.895)"}
+                textAlign={"left"}
+            >
+                <Box
+                    display={"grid"}
+                    w={"100%"}
+                    alignItems={"center"}
+                    justifyContent={"right"} 
+                > 
+                    <Text fontSize={"lg"}> Pincode: {pin || <Skeleton width={"100px"} />} </Text>
                 </Box>
+                {/* price  */}
+                <Box margin={"20px 0"}>
+                    <Heading display={"flex"} fontSize={"2xl"}>
+                        Price: {data.countryCurrency || <Skeleton width={"100px"} />}
+                        {price || <Skeleton width={"40px"} />}
+                    </Heading>
+                    <Heading display={"flex"} margin={"6px 0"} fontSize={"lg"}>
+                        Price per unit: {data.countryCurrency || <Skeleton width={"100px"} />}
+                        {price || <Skeleton width={"100px"} />}
+                    </Heading>
+                </Box>
+                {/* Property Facing / flooring */}
+                <Box margin={"10px auto"} display={"flex"} alignItems={"center"} flexWrap={"wrap"} gap={8} >
+                    <Text fontSize={"md"} alignItems={"center"} gap={1} display={data.propertyFacing == "undefined" ? "none" : "flex"}>  <span style={{ fontWeight: "600" }}> Property Facing :</span>  {data.propertyFacing || <Skeleton width={"100px"} />} </Text>
+                    <Text fontSize={"md"} alignItems={"center"} gap={1} display={data.flooring == "undefined" ? "none" : "flex"}>  <span style={{ fontWeight: "600" }}> Property flooring :</span>  {data.flooring || <Skeleton width={"100px"} />} </Text>
+                </Box>
+                {/* Plot Area */}
+                <Text display={data.plotArea == "undefined" ? "none" : "flex"} gap={1} alignItems={"center"}>
+                    <Text fontWeight={600} fontSize={"lg"}>
+                        Plot Area :
+                    </Text>
+                    {data.plotArea || <Skeleton width={"100px"} />} {data.plotAreaUnit || <Skeleton width={"100px"} />}
+                </Text>
+                {/* Total Floor / on Floor */}
+                <Text>
+                    <Text textAlign={"left"} display={"flex"} alignItems={"center"} gap={1} fontSize={"lg"} fontWeight={600}>
+                        Total Floors : <Text fontWeight={300}> {data.totalFloors || <Skeleton width={"100px"} />}</Text>
+                    </Text>
+                    <Text textAlign={"left"} display={"flex"} alignItems={"center"} gap={1} fontSize={"lg"} fontWeight={600}>
+                        Floor no. : <Text fontWeight={300}> {data.floorOn || <Skeleton width={"100px"} />}</Text>
+                    </Text>
+                </Text>
+                {/* Power Backup */}
+                <Text display={data.plotArea == "undefined" ? "none" : "flex"} gap={1} alignItems={"center"}>
+                    <Text fontWeight={600} fontSize={"lg"}>
+                        Power Backup :
+                    </Text>
+                    {data.powerBackup || <Skeleton width={"100px"} />}
+                </Text>
+                {/* Property Creation */}
+                <Text textAlign={"left"} fontSize={"sm"} color={"rgb(1, 9, 46)"} fontWeight={600}>
+                    Posted on : <Text fontWeight={300} fontSize={"xs"} as={"i"}>{created || <Skeleton width={"100px"} />}</Text>
+                </Text>
+                <Text textAlign={"left"} fontSize={"sm"} color={"rgb(1, 9, 46)"} fontWeight={600}>
+                    Updated on : <Text fontWeight={300} fontSize={"xs"} as={"i"}>{updated || <Skeleton width={"100px"} />}</Text>
+                </Text>
             </Box>
         </Box>
     );
