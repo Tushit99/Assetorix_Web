@@ -41,14 +41,14 @@ const Navebar = () => {
         let userid = localStorage.getItem("usrId") || undefined;
         let authorization = localStorage.getItem("AstToken") || undefined;
 
-        if (userid && authorization) {
+        if (userid && authorization && data.user.name.length==0){
             let body = {
                 id: userid,
                 authorization,
             };
-            // console.log(body) 
             dispatch(userPreLog(body));
         }
+        // console.log(data.user.name) 
 
         let storedVal = localStorage.getItem("astcountry");
         if (!storedVal) {
