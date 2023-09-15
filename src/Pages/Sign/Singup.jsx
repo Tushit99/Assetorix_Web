@@ -8,23 +8,24 @@ import {
   Stack,
   Image,
   useToast,
-  Box, 
-} from "@chakra-ui/react";  
-import sideimg from "./backimg.png";  
-import { useEffect, useState } from "react";  
-import { useNavigate } from "react-router-dom";  
-import { useDispatch, useSelector } from "react-redux";  
-import { signinuser } from "../../Redux/userauth/action";   
+  Box,
+  // useDisclosure,
+} from "@chakra-ui/react";
+import sideimg from "./backimg.png";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { signinuser } from "../../Redux/userauth/action";
 
 const Singup = () => {
-  const data = useSelector((store) => store.userreducer); 
-  const toast = useToast(); 
-  const [name, setname] = useState(""); 
-  const [email, setemail] = useState(""); 
-  const [password, setpassword] = useState(""); 
-  const [number, setnumber] = useState(""); 
-  const navigate = useNavigate(); 
-  const dispatch = useDispatch(); 
+  const data = useSelector((store) => store.userreducer);
+  const toast = useToast();
+  const [name, setname] = useState("");
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+  const [number, setnumber] = useState("");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   // const [val, setVal] = "";
   // const { isOpen, onOpen, onClose } = useDisclosure(); 
 
@@ -152,12 +153,10 @@ const Singup = () => {
   return (
     <Stack
       minH={"60vh"}
-      direction={{ base: "column", md: "row" }}
-      padding={"20px 0"}
+      direction={{ base: "column", md: "row" }} 
     >
       <Flex
-        p={{ base: "4", lg: "8" }}
-        marginTop={"30px"}
+        p={{ base: "4", lg: "8" }} 
         flex={1}
         align={"baseline"}
         justify={"center"}

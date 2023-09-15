@@ -20,7 +20,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginuser } from '../../Redux/userauth/action';
 // import axios from 'axios';
 
-const Login = ({onpage}) => {
+const Login = ({ onpage }) => {
     const data = useSelector((store) => store.userreducer);
     const toast = useToast();
     const [mobile, setMobile] = useState("");
@@ -37,12 +37,12 @@ const Login = ({onpage}) => {
                     <Box color='white' p={3} bg='blue.500'>
                         Mobile number is invalide!
                     </Box>
-                ), 
+                ),
             })
         }
         var lowerCase = /[a-z]/g;
-        var upperCase = /[A-Z]/g; 
-        var numbers = /[0-9]/g;  
+        var upperCase = /[A-Z]/g;
+        var numbers = /[0-9]/g;
         if (password.length == "") {
             toast({
                 position: "top-right",
@@ -66,11 +66,11 @@ const Login = ({onpage}) => {
             toast({
                 position: "top-right",
                 render: () => (
-                    <Box color="white" p={3} bg="blue.500"> 
+                    <Box color="white" p={3} bg="blue.500">
                         Password should contain uppercase letters!
                     </Box>
                 ),
-            }); 
+            });
         } else if (!password.match(numbers)) {
             toast({
                 position: "top-right",
@@ -93,10 +93,10 @@ const Login = ({onpage}) => {
         else {
             // console.log(obj);  
             let body = {
-                mobile, 
+                mobile,
                 password
             }
-            dispatch(loginuser(body)); 
+            dispatch(loginuser(body));
         }
     }
 
@@ -106,7 +106,7 @@ const Login = ({onpage}) => {
                 title: `  ${data.error}`,
                 status: 'warning',
                 duration: 4000,
-                isClosable:true 
+                isClosable: true
             });
         }
         if (data.success == 0) {
@@ -119,17 +119,26 @@ const Login = ({onpage}) => {
             //     console.log()
             //     navigate(`${onpage}`); 
             // }else{
-                navigate("/");
+            navigate("/");
             // }
         }
     }, [data]);
 
-    console.log(data);
+    // console.log(data);
 
     return (
         <div className={style.signin_topbox}>
-            <Box position={"relative"} w={"full"} marginTop={{ base: "0px", md: "120px" }} maxH={'100vh'} direction={{ base: 'column', md: 'row' }}>
+            <Box position={"relative"} w={"full"} marginTop={{ base: "10px", md: "10px" }} maxH={'100vh'} direction={{ base: 'column', md: 'row' }}>
                 <div className={style.detail}>
+                    {/* sigin image */}
+                    <Flex className={style.login_img} >
+                        <Image
+                            alt={'Login Image'}
+                            objectFit={'cover'}
+                            src={img}
+                        />
+                    </Flex>
+                    {/* Login Form  */}
                     <Flex >
                         <Box spacing={4} gap={{ base: "10px", md: "20px" }} className={style.log_info} >
                             <Heading fontSize={{ base: '2xl', md: '4xl', lg: '2xl' }}>Login to your account</Heading>
@@ -141,7 +150,7 @@ const Login = ({onpage}) => {
                                 <FormLabel fontSize={{ base: 'md', lg: 'xl' }}>Password</FormLabel>
                                 <Input type="password" onChange={(e) => setPassword(e.target.value)} value={password} required />
                             </FormControl>
-                            <Stack spacing={6} width={"100%"}> 
+                            <Stack spacing={6} width={"100%"}>
                                 {/* <Stack
                                     direction={{ base: 'column', sm: 'row' }}
                                     align={'start'}
@@ -150,17 +159,10 @@ const Login = ({onpage}) => {
                                     <Link color={'blue'}>Forgot password?</Link>
                                 </Stack>  */}
                                 <Button variant={'solid'} w={"full"} onClick={handlelogin} fontSize={{ base: '2xl', lg: 'xl' }} >
-                                    Login  
+                                    Login
                                 </Button>
                             </Stack>
                         </Box>
-                    </Flex>
-                    <Flex className={style.login_img} >
-                        <Image
-                            alt={'Login Image'}
-                            objectFit={'cover'}
-                            src={img}
-                        />
                     </Flex>
                 </div>
             </Box>
