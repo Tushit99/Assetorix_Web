@@ -35,6 +35,18 @@ import propertFeatureImg from "./furnishedImages/town.png";
 import societyImg from "./furnishedImages/society.png"
 import additonalImg from "./furnishedImages/settings.png";
 import { InfoIcon } from "@chakra-ui/icons";
+import watersourceImg from "./furnishedImages/water.png";
+import otherImg from "./furnishedImages/layers.png";
+import RoomImg from "./furnishedImages/living-room.png";
+import schoolImg from "./furnishedImages/school.png";
+import metroImg from "./furnishedImages/metro.png";
+import hospitalImg from "./furnishedImages/hospital.png";
+import marketImg from "./furnishedImages/market.png";
+import mallImg from "./furnishedImages/mall.png";
+import higwayImg from "./furnishedImages/highway-sign.png";
+import airport from "./furnishedImages/airport.png";
+import railwayImg from "./furnishedImages/train-station.png";
+
 
 
 
@@ -56,6 +68,8 @@ const SingleProductDetailPage = () => {
     const [bed, setBed] = useState("");
     const [wardrobe, setwardrobe] = useState("");
     const [geyser, setGeyser] = useState("");
+    const [overlooking, setOverLooking] = useState([]);
+    const [location, setLocation] = useState([]);
     const [furnishedAdditionalList, setFurnishedAdditionalList] = useState([]);
 
 
@@ -88,6 +102,8 @@ const SingleProductDetailPage = () => {
             setGeyser(list.furnishedObj.geyser);
             setFurnishedAdditionalList(list.furnishedList);
         }
+        setOverLooking(list.overLookings);
+        setLocation(list.locationAdv);
     };
 
     useEffect(() => {
@@ -104,8 +120,8 @@ const SingleProductDetailPage = () => {
             >
                 {houseno}, {apartment}, {placelocality}
             </Heading>
-            <Box display={"flex"} flexWrap={"wrap"} gap={"20px"}>
-                <Box flex={16}>
+            <Box display={{base:"grid",md:"flex"}} flexWrap={"wrap"} gap={"20px"}>
+                <Box flex={16}> 
                     <Image
                         w={"100%"}
                         src="https://mediacdn.99acres.com/media1/21619/19/432399374M-1688810188988.jpg"
@@ -114,9 +130,9 @@ const SingleProductDetailPage = () => {
                 </Box>
                 <Box
                     flex={18}
-                    padding={"20px"}
+                    padding={"10px"}
                     backgroundColor={"rgba(244, 244, 255, 0.895)"}
-                    textAlign={"left"}
+                    textAlign={"left"} 
                 >
                     <Box
                         display={"grid"}
@@ -126,12 +142,7 @@ const SingleProductDetailPage = () => {
                     >
                         <Text fontSize={"lg"}> Pincode: {pin} </Text>
                     </Box>
-                    <Text textAlign={"left"} fontSize={"sm"} color={"rgb(1, 9, 46)"}>
-                        Posted on: <Text fontSize={"xs"} as={"i"}>{created}</Text>
-                    </Text>
-                    <Text textAlign={"left"} fontSize={"sm"} color={"rgb(1, 9, 46)"}>
-                        Updated on: <Text fontSize={"xs"} as={"i"}>{updated}</Text>
-                    </Text>
+                    {/* price  */}
                     <Box margin={"20px 0"}>
                         <Heading fontSize={"3xl"}>
                             Price: {data.countryCurrency}
@@ -142,6 +153,41 @@ const SingleProductDetailPage = () => {
                             {price}
                         </Heading>
                     </Box>
+                    {/* Property Facing / flooring */}
+                    <Box margin={"10px auto"} display={"flex"} alignItems={"center"} flexWrap={"wrap"} gap={8} >
+                        <Text fontSize={"md"} alignItems={"center"} gap={1} display={data.propertyFacing == "undefined" ? "none" : "flex"}>  <span style={{ fontWeight: "600" }}> Property Facing :</span>  {data.propertyFacing} </Text>
+                        <Text fontSize={"md"} alignItems={"center"} gap={1} display={data.flooring == "undefined" ? "none" : "flex"}>  <span style={{ fontWeight: "600" }}> Property flooring :</span>  {data.flooring} </Text>
+                    </Box>
+                    {/* Plot Area */}
+                    <Text display={data.plotArea == "undefined" ? "none" : "flex"} gap={1} alignItems={"center"}>
+                        <Text fontWeight={600} fontSize={"lg"}>
+                            Plot Area :
+                        </Text>
+                        {data.plotArea} {data.plotAreaUnit}
+                    </Text>
+                    {/* Total Floor / on Floor */}
+                    <Text>
+                        <Text textAlign={"left"} display={"flex"} alignItems={"center"} gap={1} fontSize={"lg"} fontWeight={600}>
+                            Total Floors : <Text fontWeight={300}> {data.totalFloors}</Text>
+                        </Text>
+                        <Text textAlign={"left"} display={"flex"} alignItems={"center"} gap={1} fontSize={"lg"} fontWeight={600}>
+                            Floor no. : <Text fontWeight={300}> {data.floorOn}</Text>
+                        </Text>
+                    </Text>
+                    {/* Power Backup */}
+                    <Text display={data.plotArea == "undefined" ? "none" : "flex"} gap={1} alignItems={"center"}>
+                        <Text fontWeight={600} fontSize={"lg"}>
+                            Power Backup :
+                        </Text>
+                        {data.powerBackup}
+                    </Text>
+                    {/* Property Creation */}
+                    <Text textAlign={"left"} fontSize={"sm"} color={"rgb(1, 9, 46)"} fontWeight={600}>
+                        Posted on : <Text fontWeight={300} fontSize={"xs"} as={"i"}>{created}</Text>
+                    </Text>
+                    <Text textAlign={"left"} fontSize={"sm"} color={"rgb(1, 9, 46)"} fontWeight={600}>
+                        Updated on : <Text fontWeight={300} fontSize={"xs"} as={"i"}>{updated}</Text>
+                    </Text>
                 </Box>
             </Box>
             {/* box 2 */}
@@ -552,6 +598,23 @@ const SingleProductDetailPage = () => {
                             <Text fontSize={"xs"} color={"blue"} margin={0}> For more details click on <InfoIcon color={"blue.400"} /> icon </Text>
                             <Divider margin={0} />
                             <Box
+                                display={data.otherRoom ? "flex" : "none"}
+                                alignItems={"center"}
+                                gap={"6px"}
+                            >
+                                <Image
+                                    src={RoomImg}
+                                    height={"26px"}
+                                    objectFit={"contain"}
+                                    w={"24px"}
+                                    alt="light_images"
+                                />
+                                <Text> Room Details </Text>
+                                <Tooltip hasArrow display={"flex"} label={<Hoverbox data={data.otherRoom} />} fontSize='md'>
+                                    <InfoIcon color={"blue.400"} />
+                                </Tooltip>
+                            </Box>
+                            <Box
                                 display={data.propertyFeatures ? "flex" : "none"}
                                 alignItems={"center"}
                                 gap={"6px"}
@@ -608,7 +671,7 @@ const SingleProductDetailPage = () => {
                                 gap={"6px"}
                             >
                                 <Image
-                                    src={additonalImg}
+                                    src={watersourceImg}
                                     height={"26px"}
                                     objectFit={"contain"}
                                     w={"24px"}
@@ -625,7 +688,7 @@ const SingleProductDetailPage = () => {
                                 gap={"6px"}
                             >
                                 <Image
-                                    src={additonalImg}
+                                    src={otherImg}
                                     height={"26px"}
                                     objectFit={"contain"}
                                     w={"24px"}
@@ -633,10 +696,65 @@ const SingleProductDetailPage = () => {
                                 />
                                 <Text> Other Features </Text>
                                 <Tooltip hasArrow display={"flex"} label={<Hoverbox data={data.otherFeatures} />} fontSize='md'>
-                                    <InfoIcon color={"blue.400"} /> 
+                                    <InfoIcon color={"blue.400"} />
                                 </Tooltip>
                             </Box>
-                        </Box> 
+                        </Box>
+                    </Box>
+                    <Box
+                        display={overlooking.length > 0 ? "grid" : "none"}
+                    >
+                        <Heading margin={"16px 0 10px 0"} fontSize={"2xl"} w={"100%"}> Over Lookings </Heading>
+                        <Divider />
+                        <Box
+                            display={"flex"}
+                            gap={"20px"}
+                            border={0}
+                            alignItems={"center"}
+                            className={style.overlooklist}
+                        >
+                            {overlooking.map((e, index) => (
+                                <Text key={index}>{e}</Text>
+                            ))}
+                        </Box>
+                    </Box>
+                    <Box display={location.length > 0 ? "grid" : "none"}>
+                        <Heading fontSize={"xl"} margin={"16px 0 10px 0"}> Location Advantage </Heading>
+                        <Divider />
+                        <Box className={style.location_adv}>
+                            <Box display={location.includes("Close to Metro Station") ? "flex" : "none"} gap={2} >
+                                &#8226;
+                                <Text> Close to Metro Station </Text>
+                            </Box>
+                            <Box display={location.includes("Close to School") ? "flex" : "none"} gap={2} >
+                                &#8226;
+                                <Text> Close to School </Text>
+                            </Box>
+                            <Box display={location.includes("Close to Hospital") ? "flex" : "none"} gap={2} >
+                                &#8226;
+                                <Text> Close to Hospital </Text>
+                            </Box>
+                            <Box display={location.includes("Close to Market") ? "flex" : "none"} gap={2} >
+                                &#8226;
+                                <Text> Close to Market </Text>
+                            </Box>
+                            <Box display={location.includes("Close to highway") ? "flex" : "none"} gap={2} >
+                                &#8226;
+                                <Text> Close to highway </Text>
+                            </Box>
+                            <Box display={location.includes("Close to Mall") ? "flex" : "none"} gap={2} >
+                                &#8226;
+                                <Text> Close to Mall </Text>
+                            </Box>
+                            <Box display={location.includes("Close to Airport") ? "flex" : "none"} gap={2} >
+                                &#8226;
+                                <Text> Close to Airport </Text>
+                            </Box>
+                            <Box display={location.includes("Close to Railway Station") ? "flex" : "none"} gap={2} >
+                                &#8226;
+                                <Text> Close to Railway Station </Text>
+                            </Box>
+                        </Box>
                     </Box>
                 </Box>
                 <Box flex={4} padding={"20px"} textAlign={"left"}>
@@ -718,7 +836,6 @@ const SingleProductDetailPage = () => {
                         </Box>
                     </Box>
                 </Box>
-
             </Box>
         </Box>
     );

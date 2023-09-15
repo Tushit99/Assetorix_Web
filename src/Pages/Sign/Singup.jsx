@@ -14,7 +14,7 @@ import sideimg from "./backimg.png";
 import { useEffect, useState } from "react";  
 import { useNavigate } from "react-router-dom";  
 import { useDispatch, useSelector } from "react-redux";  
-import { signinuser } from "../../Redux/userauth/action";  
+import { signinuser } from "../../Redux/userauth/action";   
 
 const Singup = () => {
   const data = useSelector((store) => store.userreducer); 

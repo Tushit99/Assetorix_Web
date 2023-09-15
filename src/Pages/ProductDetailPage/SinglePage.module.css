@@ -15,5 +15,24 @@
     padding: 10px;  
 }
 
+.overlooklist{
+    margin: 6px 0;
+}
+
+.overlooklist>*{  
+    padding: 4px 10px ; 
+    border-radius: 4px;  
+    background-color: rgb(219,224,224);
+}
+
+.location_adv{
+    display: grid;  
+    grid-template-columns: repeat(3,1fr);     
+}
+
+.location_adv>*{
+    margin: 6px 0; 
+}
+
 
 
