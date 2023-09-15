@@ -2,9 +2,8 @@ import { Box, Divider, Heading, Text } from '@chakra-ui/react';
 import Reactw, { useEffect } from 'react';
 import style from "./Contact.module.css";
 
-const Contact = () => {
-    // const [iframeWidth, setIframeWidth] = useState(600);
-    // const [iframeHeight, setIframeHeight] = useState(500);
+const Contact = () => { 
+    
     useEffect(() => {
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });  
       }, [])
@@ -13,8 +12,7 @@ const Contact = () => {
         <Box display={{base:"grid",lg:"flex"}} className={style.top_head}>
             <Box>
                 <Heading color={"rgb(233,110,114)"} textAlign={"left"} as='h4' size='md'>CONTACT US</Heading>
-                <Divider marginBottom={"30px"} />
-
+                <Divider marginBottom={"30px"} /> 
                 <Heading color={"black"} as='h4' size='md'> Ametheus Holdings Pvt Ltd </Heading>
                 <Text>
                     If you ever feel like you can’t find the right product for you on our site or you need a little more information or assistance please get in touch with the sales team.
