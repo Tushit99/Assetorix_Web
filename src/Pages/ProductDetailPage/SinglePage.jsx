@@ -2,6 +2,9 @@ import { Box, Divider, Heading, Image, Text, Tooltip } from "@chakra-ui/react";
 import axios from "axios";
 import style from "./SinglePage.module.css";
 import React, { useEffect, useState } from "react";
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+
 import profileimg from "./avatar.jpg";
 import lightImg from "./furnishedImages/light.png";
 import fanImg from "./furnishedImages/fan.png";
@@ -117,14 +120,15 @@ const SingleProductDetailPage = () => {
                 margin={"20px 0"}
                 textAlign={"left"}
                 fontSize={"4xl"}
+                display={"flex"}
             >
-                {houseno}, {apartment}, {placelocality}
+                {houseno || <Skeleton width={"200px"} />}, {apartment || <Skeleton width={"200px"} />}, {placelocality || <Skeleton width={"200px"} />}
             </Heading>
-            <Box display={{base:"grid",md:"flex"}} flexWrap={"wrap"} gap={"20px"}>
-                <Box flex={16}> 
+            <Box display={{ base: "grid", md: "flex" }} flexWrap={"wrap"} gap={"20px"}>
+                <Box flex={16}>
                     <Image
                         w={"100%"}
-                        src="https://mediacdn.99acres.com/media1/21619/19/432399374M-1688810188988.jpg"
+                        src={"https://mediacdn.99acres.com/media1/21619/19/432399374M-1688810188988.jpg"}
                         alt="property-img"
                     />
                 </Box>
@@ -132,7 +136,7 @@ const SingleProductDetailPage = () => {
                     flex={18}
                     padding={"10px"}
                     backgroundColor={"rgba(244, 244, 255, 0.895)"}
-                    textAlign={"left"} 
+                    textAlign={"left"}
                 >
                     <Box
                         display={"grid"}
@@ -140,38 +144,38 @@ const SingleProductDetailPage = () => {
                         alignItems={"center"}
                         justifyContent={"right"}
                     >
-                        <Text fontSize={"lg"}> Pincode: {pin} </Text>
+                        <Text fontSize={"lg"}> Pincode: {pin || <Skeleton width={"100px"} />} </Text>
                     </Box>
                     {/* price  */}
                     <Box margin={"20px 0"}>
-                        <Heading fontSize={"3xl"}>
-                            Price: {data.countryCurrency}
-                            {price}
+                        <Heading display={"flex"} fontSize={"2xl"}>
+                            Price: {data.countryCurrency || <Skeleton width={"100px"} />}
+                            {price || <Skeleton width={"40px"} />}
                         </Heading>
-                        <Heading fontSize={"xl"}>
-                            Price per unit: {data.countryCurrency}
-                            {price}
+                        <Heading display={"flex"} margin={"6px 0"} fontSize={"lg"}>
+                            Price per unit: {data.countryCurrency || <Skeleton width={"100px"} />}
+                            {price || <Skeleton width={"100px"} />}
                         </Heading>
                     </Box>
                     {/* Property Facing / flooring */}
                     <Box margin={"10px auto"} display={"flex"} alignItems={"center"} flexWrap={"wrap"} gap={8} >
-                        <Text fontSize={"md"} alignItems={"center"} gap={1} display={data.propertyFacing == "undefined" ? "none" : "flex"}>  <span style={{ fontWeight: "600" }}> Property Facing :</span>  {data.propertyFacing} </Text>
-                        <Text fontSize={"md"} alignItems={"center"} gap={1} display={data.flooring == "undefined" ? "none" : "flex"}>  <span style={{ fontWeight: "600" }}> Property flooring :</span>  {data.flooring} </Text>
+                        <Text fontSize={"md"} alignItems={"center"} gap={1} display={data.propertyFacing == "undefined" ? "none" : "flex"}>  <span style={{ fontWeight: "600" }}> Property Facing :</span>  {data.propertyFacing || <Skeleton width={"100px"} />} </Text>
+                        <Text fontSize={"md"} alignItems={"center"} gap={1} display={data.flooring == "undefined" ? "none" : "flex"}>  <span style={{ fontWeight: "600" }}> Property flooring :</span>  {data.flooring || <Skeleton width={"100px"} />} </Text>
                     </Box>
                     {/* Plot Area */}
                     <Text display={data.plotArea == "undefined" ? "none" : "flex"} gap={1} alignItems={"center"}>
                         <Text fontWeight={600} fontSize={"lg"}>
                             Plot Area :
                         </Text>
-                        {data.plotArea} {data.plotAreaUnit}
+                        {data.plotArea || <Skeleton width={"100px"} />} {data.plotAreaUnit || <Skeleton width={"100px"} />}
                     </Text>
                     {/* Total Floor / on Floor */}
                     <Text>
                         <Text textAlign={"left"} display={"flex"} alignItems={"center"} gap={1} fontSize={"lg"} fontWeight={600}>
-                            Total Floors : <Text fontWeight={300}> {data.totalFloors}</Text>
+                            Total Floors : <Text fontWeight={300}> {data.totalFloors || <Skeleton width={"100px"} />}</Text>
                         </Text>
                         <Text textAlign={"left"} display={"flex"} alignItems={"center"} gap={1} fontSize={"lg"} fontWeight={600}>
-                            Floor no. : <Text fontWeight={300}> {data.floorOn}</Text>
+                            Floor no. : <Text fontWeight={300}> {data.floorOn || <Skeleton width={"100px"} />}</Text>
                         </Text>
                     </Text>
                     {/* Power Backup */}
@@ -179,14 +183,14 @@ const SingleProductDetailPage = () => {
                         <Text fontWeight={600} fontSize={"lg"}>
                             Power Backup :
                         </Text>
-                        {data.powerBackup}
+                        {data.powerBackup || <Skeleton width={"100px"} />}
                     </Text>
                     {/* Property Creation */}
                     <Text textAlign={"left"} fontSize={"sm"} color={"rgb(1, 9, 46)"} fontWeight={600}>
-                        Posted on : <Text fontWeight={300} fontSize={"xs"} as={"i"}>{created}</Text>
+                        Posted on : <Text fontWeight={300} fontSize={"xs"} as={"i"}>{created || <Skeleton width={"100px"} />}</Text>
                     </Text>
                     <Text textAlign={"left"} fontSize={"sm"} color={"rgb(1, 9, 46)"} fontWeight={600}>
-                        Updated on : <Text fontWeight={300} fontSize={"xs"} as={"i"}>{updated}</Text>
+                        Updated on : <Text fontWeight={300} fontSize={"xs"} as={"i"}>{updated || <Skeleton width={"100px"} />}</Text>
                     </Text>
                 </Box>
             </Box>
@@ -198,7 +202,7 @@ const SingleProductDetailPage = () => {
                         Description
                     </Heading>
                     <Divider margin={"0 0 4px 0"} />
-                    <Text textAlign={"justify"}>{data.description !== undefined && data.description}</Text>
+                    <Text textAlign={"justify"}>{data.description !== undefined && data.description || <Skeleton count={2} />}</Text>
                     <Heading fontSize={"xl"} margin={"8px 0"} > Property details </Heading>
                     <Divider />
                     {/* furnished detail */}
@@ -227,7 +231,7 @@ const SingleProductDetailPage = () => {
                                         w={"20px"}
                                         alt="light_images"
                                     />
-                                    <Text> {light} Light{Number(light) > 1 && "s"} </Text>
+                                    <Text> {light || <Skeleton width={"60px"} />} Light{Number(light) > 1 && "s"} </Text>
                                 </Box>
                                 <Box
                                     display={"flex"}
@@ -242,7 +246,7 @@ const SingleProductDetailPage = () => {
                                         w={"20px"}
                                         alt="fan_images"
                                     />
-                                    <Text> {fan} Fan{Number(fan) > 1 && "s"} </Text>
+                                    <Text> {fan || <Skeleton width={"60px"} />} Fan{Number(fan) > 1 && "s"} </Text>
                                 </Box>
                                 <Box
                                     display={"flex"}
@@ -257,7 +261,7 @@ const SingleProductDetailPage = () => {
                                         w={"20px"}
                                         alt=""
                                     />
-                                    <Text> {aircondition} AC{Number(aircondition) > 1 && "'s"} </Text>
+                                    <Text> {aircondition || <Skeleton width={"60px"} />} AC{Number(aircondition) > 1 && "'s"} </Text>
                                 </Box>
                                 <Box
                                     display={"flex"}
@@ -272,7 +276,7 @@ const SingleProductDetailPage = () => {
                                         w={"20px"}
                                         alt=""
                                     />
-                                    <Text> {tv} Television{Number(tv) > 1 && "s"} </Text>
+                                    <Text> {tv || <Skeleton width={"60px"} />} Television{Number(tv) > 1 && "s"} </Text>
                                 </Box>
                                 <Box
                                     display={"flex"}
@@ -287,7 +291,7 @@ const SingleProductDetailPage = () => {
                                         w={"20px"}
                                         alt=""
                                     />
-                                    <Text> {bed} Beds{Number(bed) > 1 && "s"} </Text>
+                                    <Text> {bed || <Skeleton width={"60px"} />} Beds{Number(bed) > 1 && "s"} </Text>
                                 </Box>
                                 <Box
                                     display={"flex"}
@@ -302,7 +306,7 @@ const SingleProductDetailPage = () => {
                                         w={"20px"}
                                         alt=""
                                     />
-                                    <Text> {wardrobe} wardrobe{Number(wardrobe) > 1 && "s"} </Text>
+                                    <Text> {wardrobe || <Skeleton width={"60px"} />} wardrobe{Number(wardrobe) > 1 && "s"} </Text>
                                 </Box>
                                 <Box
                                     display={"flex"}
@@ -317,7 +321,7 @@ const SingleProductDetailPage = () => {
                                         w={"20px"}
                                         alt=""
                                     />
-                                    <Text> {geyser} geyser{Number(geyser) > 1 && "s"} </Text>
+                                    <Text> {geyser || <Skeleton width={"60px"} />} geyser{Number(geyser) > 1 && "s"} </Text>
                                 </Box>
                                 {/* furnished part 2 */}
                                 <Box
@@ -785,7 +789,7 @@ const SingleProductDetailPage = () => {
                         <Box
                             padding={"14px 0"}
                             display={"flex"}
-                            alignItems={"center"}
+                            alignItems={"center"} 
                             justifyContent={"space-between"}
                             flexWrap={"wrap"}
                         >
