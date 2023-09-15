@@ -1,0 +1,19 @@
+
+.furnished_product{
+    display: grid; 
+    grid-template-columns: repeat(3,1fr);  
+    margin: 10px 0; 
+}
+
+.amenities{
+    display: flex; 
+    flex-wrap: wrap;  
+    gap: 10px;  
+}
+
+.amenities>*{
+    padding: 10px;  
+}
+
+
+

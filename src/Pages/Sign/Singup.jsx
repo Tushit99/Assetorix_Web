@@ -8,24 +8,23 @@ import {
   Stack,
   Image,
   useToast,
-  Box,
-  useDisclosure,
-} from "@chakra-ui/react";
-import sideimg from "./backimg.png";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { signinuser } from "../../Redux/userauth/action";
+  Box, 
+} from "@chakra-ui/react";  
+import sideimg from "./backimg.png";  
+import { useEffect, useState } from "react";  
+import { useNavigate } from "react-router-dom";  
+import { useDispatch, useSelector } from "react-redux";  
+import { signinuser } from "../../Redux/userauth/action";  
 
 const Singup = () => {
-  const data = useSelector((store) => store.userreducer);
-  const toast = useToast();
-  const [name, setname] = useState("");
-  const [email, setemail] = useState("");
-  const [password, setpassword] = useState("");
-  const [number, setnumber] = useState("");
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const data = useSelector((store) => store.userreducer); 
+  const toast = useToast(); 
+  const [name, setname] = useState(""); 
+  const [email, setemail] = useState(""); 
+  const [password, setpassword] = useState(""); 
+  const [number, setnumber] = useState(""); 
+  const navigate = useNavigate(); 
+  const dispatch = useDispatch(); 
   // const [val, setVal] = "";
   // const { isOpen, onOpen, onClose } = useDisclosure(); 
 

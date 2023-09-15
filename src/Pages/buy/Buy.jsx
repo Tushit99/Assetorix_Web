@@ -1,6 +1,5 @@
 import React from 'react'
 import style from "./Buy.module.css";
-import Product from '../AllPlaces/ProductPage/Product'; 
 
 const data = [
     {
@@ -49,11 +48,7 @@ const Buy = () => {
                 
 
             </div>
-            <div className={style.contain}>
-                {data.map((e) => (
-                    <Product {...e} bangalore={"bangalore"} key={e.id} />
-                ))}
-            </div>
+             
         </div>
     )
 }

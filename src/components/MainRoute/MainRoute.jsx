@@ -22,6 +22,7 @@ import Disclaimer from '../../Pages/Footer/HelpCenter/Disclaimer/Disclaimer'
 import UserDetail from '../../Pages/UserDetail/UserDetail'
 import PrivateRoute from '../PrivateRoute/PrivateRoute'
 import SellForm from '../../Pages/PropertyPostForm/SellForm'
+import SingleProductDetailPage from '../../Pages/ProductDetailPage/SinglePage'
 // import ConsultingPage from '../../Pages/CoporateServices/Consulting/consulting'
 
 const MainRoute = () => {
@@ -61,13 +62,17 @@ const MainRoute = () => {
         {/* <Route path='/consulting' element={<ConsultingPage />} />  */}
         <Route path='/market_research' element={<MarketResearch />} />
         <Route path='/portfolio_planning' element={<PortfolioPlaning />} />
-        <Route path='/usa_real_state' element={<UsaRealState />} />
+        <Route path='/usa_real_state' element={<UsaRealState />} /> 
+
+
+        {/* Property DEtail Page */} 
+        <Route path='/product_detail' element={<SingleProductDetailPage />} />
 
         {/* footer ==> Help Center  */}
         <Route path='/Purchase_term_Condition' element={<PurchaseTerm />} />
         <Route path='/user_term_condition' element={<UserTerm />} />
         <Route path='/privacy' element={<Privacy />} />
-        <Route path='/disclaimer' element={<Disclaimer />} />
+        <Route path='/disclaimer' element={<Disclaimer />} />  
 
         {/* after login Details Route */}
         <Route path='/profile' element={<UserDetail />} />
