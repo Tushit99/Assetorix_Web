@@ -1,7 +1,8 @@
 import axios from "axios"; 
-import {
-  USER_DATA_UPDATE,
+import { 
+  USER_EMAIL_DATA_UPDATE,
   USER_LOGOUT,
+  USER_NAME_DATA_UPDATE,
   USER_PREE_LOGIN,
   USER_SIGNIN_ERROR,
   USER_SIGNIN_LOADING,
@@ -63,10 +64,10 @@ export const signinuser = (param) => async (dispatch) => {
 
 // is user pre-loged in 
 
-export const userPreLog = (param) => async (dispatch) => {    
+export const userPreLog = (param) => async (dispatch) => {   
   try {
     await axios.get(`${process.env.REACT_APP_URL}/user/`, {headers: param}).then((e) => {
-        // console.log(e.data);
+        // console.log(e.data); 
         let token = localStorage.getItem("AstToken"); 
         localStorage.setItem("AstUser",e.data.name); 
         dispatch({ type: USER_PREE_LOGIN, payload: { ...e.data, token } });
@@ -74,24 +75,28 @@ export const userPreLog = (param) => async (dispatch) => {
   } catch (err) {
     console.log(err);
   } 
-}; 
+};  
 
-
-
-
-export const handleChanges = (headers,body) => async (dispatch) => {
+export const handleChanges = (headers, body) => async (dispatch) => {
+  // console.log(headers,body);
   try {
-    await axios
-      .patch(`${process.env.REACT_APP_URL}/user/update`, body, {headers}).then((e) => {
-        // console.log(e); 
-        let token = localStorage.getItem("AstToken"); 
-        localStorage.setItem("AstUser",e.data.name); 
-        dispatch({type:USER_DATA_UPDATE , payload: {...e.data,token}}); 
-      });
+    await axios.patch(`${process.env.REACT_APP_URL}/user/update`, body, { headers }).then((e)=>{  
+      localStorage.setItem("AstUser", body.name);  
+      console.log(e.data); 
+      if(e.data.msg=="Updated Successfully"){
+        dispatch({ type: USER_NAME_DATA_UPDATE, payload: body.name });  
+      } 
+    })
+
   } catch (err) {
-    console.log(err); 
+    console.error(err);
   }
-}; 
+};
+
+export const handleEmailChange = (email) => async (dispatch) => {
+  dispatch({type: USER_EMAIL_DATA_UPDATE, payload: email}); 
+};
+
  
 
 

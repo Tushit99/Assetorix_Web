@@ -13,7 +13,7 @@ const Name = () => {
     const handleupdate = () => {
         let id = data.user._id;
         let authorization = data.user.token;
-
+        // console.log(data.user, name); 
         let headers = {
             'Content-Type': 'application/json',
                 id,

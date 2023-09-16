@@ -30,12 +30,12 @@ const MobileChanger = () => {
     useEffect(()=>{
         if(data.user.mobile){
             setmobile(data.user.mobile); 
-        } 
+        }  
     },[data]) 
 
     return (
         <>
-            <button onClick={onOpen} className={style.edit_btn}>Edit</button>
+            <button disabled className={style.edit_btn}>Edit</button>
 
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />

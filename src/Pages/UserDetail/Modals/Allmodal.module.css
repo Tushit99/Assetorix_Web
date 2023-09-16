@@ -1,11 +1,40 @@
-.edit_btn{
-    font-weight: 500; 
-    color: rgb(0, 87, 226); 
-} 
+.edit_btn {
+  font-weight: 500;
+  color: rgb(0, 87, 226);
+}
 
-.edit_btn:hover{
-    text-decoration: underline;
+.edit_btn:hover {
+  text-decoration: underline;
 }
 
 
- 
+.crosebutton button {
+  box-shadow: rgba(0, 0, 0, 0.25) 2px 1px 10px;
+  transform: translateY(-2px);
+} 
+
+.crosebutton button { 
+  background-color: rgb(236, 236, 236);
+  padding: 5px 10px;
+  border-radius: 10px;
+  position: absolute;
+  top: 10px; 
+  right: 10px;
+  appearance: none;   
+  box-sizing: border-box; 
+  cursor: pointer;
+  display: inline-block; 
+  outline: none; 
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  will-change: transform;
+}
+
+.crosebutton button:active {
+  box-shadow: none;
+  transform: translateY(0);
+}

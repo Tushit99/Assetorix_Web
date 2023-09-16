@@ -11,10 +11,10 @@ import EmailChanger from "./Modals/EmailChanger";
 import MobileChanger from "./Modals/MobileChanger";
 
 const UserDetail = () => {
-    const data = useSelector((store) => store.userreducer);
+    const data = useSelector((store) => store.userreducer);  
 
     return (
-        <div className={style.user_profile}>
+        <Box marginTop={8}>
             <Box className={style.mainbox}>
                 <Heading as={"h1"} size={"lg"} textAlign={"left"} >
                     Profile
@@ -42,7 +42,7 @@ const UserDetail = () => {
                             <Text> {data.user.name} </Text> 
                             <Name />
                         </Box>  
-                    </Box>
+                    </Box> 
                     <Box
                         display={"flex"}
                         alignItems={"center"}
@@ -60,7 +60,7 @@ const UserDetail = () => {
                         </Heading>
                         <Box display={"flex"} alignItems={"center"} gap={6}>
                             <Text> {data.user.email ? data.user.email : ""} </Text>
-                            <EmailChanger />
+                            <EmailChanger />  
                         </Box>
                     </Box>
                     <Box
@@ -84,7 +84,7 @@ const UserDetail = () => {
                     </Box>
                 </Box>
             </Box> 
-        </div>
+        </Box>
     );
 };
 
