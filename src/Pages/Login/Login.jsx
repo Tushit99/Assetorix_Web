@@ -10,7 +10,9 @@ import {
     Stack,
     Image,
     Box,
-    useToast
+    useToast,
+    InputGroup,
+    InputRightElement
 } from '@chakra-ui/react';
 import style from "./Login.module.css";
 import img from "./sideimg.png";
@@ -27,6 +29,7 @@ const Login = ({ onpage }) => {
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [show, setshow] = useState(true);
 
 
     const handlelogin = async () => {
@@ -124,6 +127,10 @@ const Login = ({ onpage }) => {
         }
     }, [data]);
 
+    const handleShow = ()=>{
+        setshow(!show); 
+    }
+
     // console.log(data);
 
     return (
@@ -144,13 +151,21 @@ const Login = ({ onpage }) => {
                             <Heading fontSize={{ base: '2xl', md: '4xl', lg: '2xl' }}>Login to your account</Heading>
                             <FormControl id="number">
                                 <FormLabel fontSize={{ base: 'md', lg: 'xl' }}>Mobile no.</FormLabel>
-                                <Input type="text" onChange={(e) => setMobile(e.target.value)} value={mobile} required />
+                                <Input type="text" placeholder='Enter mobile no.' onChange={(e) => setMobile(e.target.value)} value={mobile} required />
                             </FormControl>
                             <FormControl id="password">
                                 <FormLabel fontSize={{ base: 'md', lg: 'xl' }}>Password</FormLabel>
-                                <Input type="password" onChange={(e) => setPassword(e.target.value)} value={password} required />
+                                <InputGroup>
+                                    <Input type={show ? "text":"password"} onChange={(e) => setPassword(e.target.value)} value={password} required />
+
+                                    <InputRightElement width='4.5rem' > 
+                                        <Button h='1.75rem' marginRight={2} letterSpacing={"1px"} fontWeight={"light"}  onClick={handleShow} size='md' backgroundColor={"blue.300"} > 
+                                            {show ? 'Hide' : 'Show'}
+                                        </Button>
+                                    </InputRightElement>
+                                </InputGroup>
                             </FormControl>
-                            <Stack spacing={6} width={"100%"}>
+                            <Stack spacing={6} width={"100%"} >
                                 {/* <Stack
                                     direction={{ base: 'column', sm: 'row' }}
                                     align={'start'}
@@ -163,7 +178,7 @@ const Login = ({ onpage }) => {
                                 </Button>
                             </Stack>
                         </Box>
-                    </Flex> 
+                    </Flex>
                 </div>
             </Box>
         </div>
