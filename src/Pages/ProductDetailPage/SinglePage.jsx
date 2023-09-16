@@ -91,7 +91,7 @@ const SingleProductDetailPage = () => {
         let updation = list.lastUpdated.split("at")[0];
         setUpdated(updation);
         setHouseno(list.address.houseNumber);
-        setApartment(list.address.apartmentName);
+        setApartment(list.address.apartmentName);  
         setlocality(list.address.locality);
         setPin(list.address.pincode);
         setisFurnished(list.furnished);
