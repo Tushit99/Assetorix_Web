@@ -2,8 +2,7 @@
   background-color: var(--main-one);
   color: var(--dark-text-color);
   /* color: black;   */
-  padding-top: 80px;
-  margin-top: 80px;
+  padding-top: 80px; 
   position: relative;
 }
 

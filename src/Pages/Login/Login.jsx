@@ -135,7 +135,7 @@ const Login = ({ onpage }) => {
 
     return (
         <div className={style.signin_topbox}>
-            <Box position={"relative"} w={"full"} marginTop={{ base: "10px", md: "10px" }} maxH={'100vh'} direction={{ base: 'column', md: 'row' }}>
+            <Box position={"relative"} w={"full"} marginTop={"10px"} maxH={'100vh'} direction={{ base: 'column', md: 'row' }}>
                 <div className={style.detail}>
                     {/* sigin image */}
                     <Flex className={style.login_img} >
@@ -156,12 +156,12 @@ const Login = ({ onpage }) => {
                             <FormControl id="password">
                                 <FormLabel fontSize={{ base: 'md', lg: 'xl' }}>Password</FormLabel>
                                 <InputGroup>
-                                    <Input type={show ? "text":"password"} onChange={(e) => setPassword(e.target.value)} value={password} required />
+                                    <Input type={show ? "text":"password"} placeholder={"Enter Password"} onChange={(e) => setPassword(e.target.value)} value={password} required />
 
-                                    <InputRightElement width='4.5rem' > 
-                                        <Button h='1.75rem' marginRight={2} letterSpacing={"1px"} fontWeight={"light"}  onClick={handleShow} size='md' backgroundColor={"blue.300"} > 
-                                            {show ? 'Hide' : 'Show'}
-                                        </Button>
+                                    <InputRightElement width='4.5rem'  > 
+                                        <Button h='1.75rem' marginRight={2} letterSpacing={"1px"} fontWeight={"light"} color={"black"} onClick={handleShow} size='md' border={"1px solid rgb(172, 172, 172)"} backgroundColor={"unset"}  > 
+                                            {show ? 'Hide' : 'Show'} 
+                                        </Button> 
                                     </InputRightElement>
                                 </InputGroup>
                             </FormControl>
@@ -173,7 +173,7 @@ const Login = ({ onpage }) => {
                                     <Checkbox size={{ base: "md", md: 'lg' }}>Remember me</Checkbox>
                                     <Link color={'blue'}>Forgot password?</Link>
                                 </Stack>  */}
-                                <Button variant={'solid'} w={"full"} onClick={handlelogin} fontSize={{ base: '2xl', lg: 'xl' }} >
+                                <Button className={style.logbtn} variant={'solid'} w={"full"} onClick={handlelogin} fontSize={{ base: '2xl', lg: 'xl' }} >
                                     Login
                                 </Button>
                             </Stack>

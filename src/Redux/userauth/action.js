@@ -93,7 +93,8 @@ export const handleChanges = (headers, body) => async (dispatch) => {
   }
 };
 
-export const handleEmailChange = (email) => async (dispatch) => {
+export const handleEmailDataChange = (email) => async (dispatch) => { 
+  console.log(email); 
   dispatch({type: USER_EMAIL_DATA_UPDATE, payload: email}); 
 };
 

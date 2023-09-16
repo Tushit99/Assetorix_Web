@@ -3,7 +3,8 @@ import { Box, Button, Input, useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import style from "./Allmodal.module.css";
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { handleEmailDataChange } from '../../../Redux/userauth/action';
 
 const EmailChanger = () => {
     const [showbox, setShowBox] = useState(false);
@@ -19,6 +20,7 @@ const EmailChanger = () => {
     // pin 
     const [pin, setPin] = useState("");
     const [timer, settimer] = useState("");
+    const dispatch = useDispatch(); 
 
     const handleEmailChange = (event) => {
         setNewEmail(event.target.value);
@@ -132,13 +134,13 @@ const EmailChanger = () => {
                 // console.log(e);
                 setPhase(false);
                 setShowBox(false);
+                dispatch(handleEmailDataChange(newemail)); 
                 toast({
                     title: "Email Saved Successfully",
                     status: 'success',
                     duration: 2000, 
                     isClosable: true, 
                 })
-                handleEmailChange(newemail); 
                 return ; 
             }).catch((err) => {
                 if (err && err.response && err.response.data && err.response.data.msg ) {
