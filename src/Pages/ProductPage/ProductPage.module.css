@@ -1,0 +1,36 @@
+
+.head_line{
+    -webkit-line-clamp: 1; 
+    -webkit-box-orient: vertical; 
+    overflow: hidden; 
+    display: -webkit-box; 
+}
+
+.property_box{ 
+    padding: 10px; 
+    border-radius: 3px;  
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+.bhkbtn{
+    border: 1px solid rgb(235, 235, 235); 
+    padding: 2px 8px ;  
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 10px;    
+    border-radius: 6px; 
+    font-size: small;  
+    align-items: center; 
+    display: flex; 
+    background-color: rgb(164, 212, 255);  
+}
+
+.selectedbtn{
+    border: 1px solid rgb(255, 255, 255); 
+    padding: 2px 8px ; 
+    display: flex;  
+    align-items: center;
+    border-radius: 8px;  
+    font-size: small; 
+    background-color: rgb(227, 242, 255);  
+} 
+
+

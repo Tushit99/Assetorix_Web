@@ -3,7 +3,7 @@
     display: grid; 
     grid-template-columns: repeat(3,1fr);  
     margin: 10px 0; 
-}
+} 
 
 .amenities{
     display: flex; 
@@ -28,11 +28,30 @@
 .location_adv{
     display: grid;  
     grid-template-columns: repeat(3,1fr);     
-}
+} 
 
 .location_adv>*{
     margin: 6px 0; 
 }
+
+.schedule_bottom{
+    display: none; 
+    position: relative; 
+}
+
+
+@media screen and (min-width: 100px) and (max-width:900px) {
+    .location_adv{  
+        grid-template-columns: repeat(2,1fr);     
+    }   
+
+    .schedule_bottom{  
+        display: block;  
+    } 
+
+} 
+
+
 
 
 

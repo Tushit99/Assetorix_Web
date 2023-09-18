@@ -23,6 +23,7 @@ import UserDetail from '../../Pages/UserDetail/UserDetail'
 import PrivateRoute from '../PrivateRoute/PrivateRoute'
 import SellForm from '../../Pages/PropertyPostForm/SellForm'
 import SingleProductDetailPage from '../../Pages/ProductDetailPage/SinglePage'
+import ProductPage from '../../Pages/ProductPage/ProductPage'
 // import ConsultingPage from '../../Pages/CoporateServices/Consulting/consulting'
 
 const MainRoute = () => {
@@ -40,16 +41,10 @@ const MainRoute = () => {
         {/* signin Page */}
         <Route path='/signup' element={<Singup />} />
         {/* Login Page */}
-        <Route path='/login' element={<Login />} />
-        {/* Product Page */} 
+        <Route path='/login' element={<Login />} />   
 
-        {/* Product detail page */}
-        {/* <Route path='/delhi/:id' element={<ProductDetail />} />
-        <Route path='/bangalore/:id' element={<ProductDetail />} />
-        <Route path='/gurugram/:id' element={<ProductDetail />} />
-        <Route path='/mumbai/:id' element={<ProductDetail />} />
-        <Route path='/noida/:id' element={<ProductDetail />} />
-        <Route path='/pune/:id' element={<ProductDetail />} /> */}
+        {/* Product Page */} 
+        <Route path='/products' element={<ProductPage />} />  
 
         {/* buy rent sale */}
         <Route path='/buy' element={<Buy />} />
@@ -65,7 +60,7 @@ const MainRoute = () => {
         <Route path='/usa_real_state' element={<UsaRealState />} /> 
 
 
-        {/* Property DEtail Page */} 
+        {/* Property Detail Page */}  
         <Route path='/product_detail' element={<SingleProductDetailPage />} />
 
         {/* footer ==> Help Center  */}

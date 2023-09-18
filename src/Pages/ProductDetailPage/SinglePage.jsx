@@ -1,10 +1,9 @@
-import { Box, Button, Divider, Heading, Image, Input, Text, Textarea, Tooltip } from "@chakra-ui/react";
+import { Box, Button, Divider, Heading, Image, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, Textarea, Tooltip, useDisclosure } from "@chakra-ui/react";
 import axios from "axios";
 import style from "./SinglePage.module.css";
 import React, { useEffect, useState } from "react";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
-
 import profileimg from "./avatar.jpg";
 import lightImg from "./furnishedImages/light.png";
 import fanImg from "./furnishedImages/fan.png";
@@ -41,18 +40,16 @@ import { InfoIcon } from "@chakra-ui/icons";
 import watersourceImg from "./furnishedImages/water.png";
 import otherImg from "./furnishedImages/layers.png";
 import RoomImg from "./furnishedImages/living-room.png";
-import schoolImg from "./furnishedImages/school.png";
-import metroImg from "./furnishedImages/metro.png";
-import hospitalImg from "./furnishedImages/hospital.png";
-import marketImg from "./furnishedImages/market.png";
-import mallImg from "./furnishedImages/mall.png";
-import higwayImg from "./furnishedImages/highway-sign.png";
-import airport from "./furnishedImages/airport.png";
-import railwayImg from "./furnishedImages/train-station.png";
+// import schoolImg from "./furnishedImages/school.png";
+// import metroImg from "./furnishedImages/metro.png";
+// import hospitalImg from "./furnishedImages/hospital.png";
+// import marketImg from "./furnishedImages/market.png";
+// import mallImg from "./furnishedImages/mall.png";
+// import higwayImg from "./furnishedImages/highway-sign.png";
+// import airport from "./furnishedImages/airport.png";
+// import railwayImg from "./furnishedImages/train-station.png";  
 import { ImLocation2 } from "react-icons/im"
 import { NumericString } from "../PropertyPostForm/code";
-
-
 
 
 const SingleProductDetailPage = () => {
@@ -79,7 +76,7 @@ const SingleProductDetailPage = () => {
     const [nametosend, setNametosend] = useState("");
     const [emailtosend, setEmailtosend] = useState("");
     const [phonetosend, setPhonetosend] = useState("");
-
+    const { isOpen, onOpen, onClose } = useDisclosure();
 
 
     const dataById = async () => {
@@ -120,645 +117,31 @@ const SingleProductDetailPage = () => {
     }, []);
 
     return (
-        <Box display={{ base: "grid", md: "flex" }} alignItems={"flex-start"} flexWrap={"wrap"} gap={"20px"} marginTop={4} padding={"8px 30px"} >
-            <Box flex={16} >
-                <Heading
-                    color={"rgb(13, 20, 66)"}
-                    margin={"0 0 20px 0"}
-                    textAlign={"left"}
-                    fontSize={"2xl"}
-                    display={"flex"}
-                    alignItems={"center"}
-                >
-                    <ImLocation2 /> {houseno || <Skeleton width={"200px"} />}, {apartment || <Skeleton width={"200px"} />}, {placelocality || <Skeleton width={"200px"} />}
-                </Heading>
-                <Box>
-                    <Box >
-                        <Image
-                            w={"100%"}
-                            src={"https://mediacdn.99acres.com/media1/21619/19/432399374M-1688810188988.jpg"}
-                            alt="property-img"
-                        />
-                    </Box>
-                </Box>
-                {/* box 2 */}
-                <Box flex={8} padding={"20px 0"} textAlign={"left"}>
-                    {/* discription */}
-                    <Heading fontSize={"2x"} margin={"10px 0"} textAlign={"left"}>
-                        Description
+        <Box>
+            <Box className={style.singleProduct} display={{ base: "grid", md: "flex" }} alignItems={"flex-start"} flexWrap={"wrap"} gap={"20px"} margin={{ base: "0px auto", md: "20px auto" }} w={"94%"} >
+                <Box flex={16} >
+                    <Heading
+                        color={"rgb(13, 20, 66)"}
+                        margin={"0 0 20px 0"}
+                        textAlign={"left"}
+                        fontSize={{ base: "lg", md: "2xl" }}
+                        display={"flex"}
+                        alignItems={"center"}
+                    >
+                        <ImLocation2 /> {houseno || <Skeleton width={"200px"} />}, {apartment || <Skeleton width={"200px"} />}, {placelocality || <Skeleton width={"200px"} />}
                     </Heading>
-                    <Divider margin={"0 0 4px 0"} />
-                    <Text textAlign={"justify"}>{data.description !== undefined && data.description || <Skeleton count={2} />}</Text>
-
-                    {/* ======================================== under construction ==================================== */}
-                    {/* Plot Area */}
-                    <Text display={data.plotArea == "undefined" ? "none" : "flex"} gap={1} alignItems={"center"}>
-                        <Text fontWeight={600} fontSize={"lg"}>
-                            Plot Area :
-                        </Text>
-                        {data.plotArea || <Skeleton width={"100px"} />} {data.plotAreaUnit || <Skeleton width={"100px"} />}
-                    </Text>
-                    {/* Total Floor / on Floor */}
-                    <Text>
-                        <Text textAlign={"left"} display={"flex"} alignItems={"center"} gap={1} fontSize={"lg"} fontWeight={600}>
-                            Total Floors : <Text fontWeight={300}> {data.totalFloors || <Skeleton width={"100px"} />}</Text>
-                        </Text>
-                        <Text textAlign={"left"} display={"flex"} alignItems={"center"} gap={1} fontSize={"lg"} fontWeight={600}>
-                            Floor no. : <Text fontWeight={300}> {data.floorOn || <Skeleton width={"100px"} />}</Text>
-                        </Text>
-                    </Text>
-                    {/* Power Backup */}
-                    <Text display={data.plotArea == "undefined" ? "none" : "flex"} gap={1} alignItems={"center"}>
-                        <Text fontWeight={600} fontSize={"lg"}>
-                            Power Backup :
-                        </Text>
-                        {data.powerBackup || <Skeleton width={"100px"} />}
-                    </Text>
-                    {/* Property Creation */}
-                    <Text textAlign={"left"} fontSize={"sm"} color={"rgb(1, 9, 46)"} fontWeight={600}>
-                        Posted on : <Text fontWeight={300} fontSize={"xs"} as={"i"}>{created || <Skeleton width={"100px"} />}</Text>
-                    </Text>
-                    <Text textAlign={"left"} fontSize={"sm"} color={"rgb(1, 9, 46)"} fontWeight={600}>
-                        Updated on : <Text fontWeight={300} fontSize={"xs"} as={"i"}>{updated || <Skeleton width={"100px"} />}</Text>
-                    </Text>
-                    {/* Property Facing / flooring */}
-                    <Box margin={"10px auto"} display={"flex"} alignItems={"center"} flexWrap={"wrap"} gap={8} >
-                        <Text fontSize={"md"} alignItems={"center"} gap={1} display={data.propertyFacing == "undefined" ? "none" : "flex"}>  <span style={{ fontWeight: "600" }}> Property Facing :</span>  {data.propertyFacing || <Skeleton width={"100px"} />} </Text>
-                        <Text fontSize={"md"} alignItems={"center"} gap={1} display={data.flooring == "undefined" ? "none" : "flex"}>  <span style={{ fontWeight: "600" }}> Property flooring :</span>  {data.flooring || <Skeleton width={"100px"} />} </Text>
-                    </Box>
-
-
-                    {/* ========================================================================= */}
-
-                    <Heading fontSize={"xl"} margin={"8px 0"} > Property details </Heading>
-                    <Divider />
-                    {/* furnished detail */}
-                    <Box
-                        backgroundColor={"rgb(218, 218, 218)"}
-                        padding={"10px"}
-                        margin={"10px 0"}
-                        borderRadius={5}
-                        display={`${isFurnished == "Un-furnished" ? " " : "block"}`}
-                    >
-                        <Box backgroundColor={"rgb(255, 255, 255)"} padding={"10px"} borderRadius={5}>
-                            {/* Property Detail */}
-                            <Heading fontSize={"lg"}> Furnishing details </Heading>
-                            <Divider padding={2} margin={0} />
-                            <Box className={style.furnished_product}>
-                                <Box
-                                    display={"flex"}
-                                    alignItems={"center"}
-                                    gap={"6px"}
-                                    margin={"6px 16px"}
-                                >
-                                    <Image
-                                        src={lightImg}
-                                        height={"26px"}
-                                        objectFit={"contain"}
-                                        w={"20px"}
-                                        alt="light_images"
-                                    />
-                                    <Text> {light || <Skeleton width={"60px"} />} Light{Number(light) > 1 && "s"} </Text>
-                                </Box>
-                                <Box
-                                    display={"flex"}
-                                    alignItems={"center"}
-                                    gap={"6px"}
-                                    margin={"6px 16px"}
-                                >
-                                    <Image
-                                        src={fanImg}
-                                        height={"26px"}
-                                        objectFit={"contain"}
-                                        w={"20px"}
-                                        alt="fan_images"
-                                    />
-                                    <Text> {fan || <Skeleton width={"60px"} />} Fan{Number(fan) > 1 && "s"} </Text>
-                                </Box>
-                                <Box
-                                    display={"flex"}
-                                    alignItems={"center"}
-                                    gap={"6px"}
-                                    margin={"6px 16px"}
-                                >
-                                    <Image
-                                        src={acImg}
-                                        height={"26px"}
-                                        objectFit={"contain"}
-                                        w={"20px"}
-                                        alt=""
-                                    />
-                                    <Text> {aircondition || <Skeleton width={"60px"} />} AC{Number(aircondition) > 1 && "'s"} </Text>
-                                </Box>
-                                <Box
-                                    display={"flex"}
-                                    alignItems={"center"}
-                                    gap={"6px"}
-                                    margin={"6px 16px"}
-                                >
-                                    <Image
-                                        src={tvImg}
-                                        height={"26px"}
-                                        objectFit={"contain"}
-                                        w={"20px"}
-                                        alt=""
-                                    />
-                                    <Text> {tv || <Skeleton width={"60px"} />} Television{Number(tv) > 1 && "s"} </Text>
-                                </Box>
-                                <Box
-                                    display={"flex"}
-                                    alignItems={"center"}
-                                    gap={"6px"}
-                                    margin={"6px 16px"}
-                                >
-                                    <Image
-                                        src={bedImg}
-                                        height={"26px"}
-                                        objectFit={"contain"}
-                                        w={"20px"}
-                                        alt=""
-                                    />
-                                    <Text> {bed || <Skeleton width={"60px"} />} Beds{Number(bed) > 1 && "s"} </Text>
-                                </Box>
-                                <Box
-                                    display={"flex"}
-                                    alignItems={"center"}
-                                    gap={"6px"}
-                                    margin={"6px 16px"}
-                                >
-                                    <Image
-                                        src={wardrobeImg}
-                                        height={"26px"}
-                                        objectFit={"contain"}
-                                        w={"20px"}
-                                        alt=""
-                                    />
-                                    <Text> {wardrobe || <Skeleton width={"60px"} />} wardrobe{Number(wardrobe) > 1 && "s"} </Text>
-                                </Box>
-                                <Box
-                                    display={"flex"}
-                                    alignItems={"center"}
-                                    gap={"6px"}
-                                    margin={"6px 16px"}
-                                >
-                                    <Image
-                                        src={geyserImg}
-                                        height={"26px"}
-                                        objectFit={"contain"}
-                                        w={"20px"}
-                                        alt=""
-                                    />
-                                    <Text> {geyser || <Skeleton width={"60px"} />} geyser{Number(geyser) > 1 && "s"} </Text>
-                                </Box>
-                                {/* furnished part 2 */}
-                                <Box
-                                    display={furnishedAdditionalList.includes("Washing Machine") ? "flex" : "none"}
-                                    alignItems={"center"}
-                                    gap={"6px"}
-                                    margin={"6px 16px"}
-                                >
-                                    <Image
-                                        src={washingImg}
-                                        height={"26px"}
-                                        objectFit={"contain"}
-                                        w={"20px"}
-                                        alt=""
-                                    />
-                                    <Text> Washing Machine </Text>
-                                </Box>
-                                <Box
-                                    display={furnishedAdditionalList.includes("Water Purifier") ? "flex" : "none"}
-                                    alignItems={"center"}
-                                    gap={"6px"}
-                                    margin={"6px 16px"}
-                                >
-                                    <Image
-                                        src={purifierImg}
-                                        height={"26px"}
-                                        objectFit={"contain"}
-                                        w={"20px"}
-                                        alt=""
-                                    />
-                                    <Text> Water Purifier </Text>
-                                </Box>
-                                <Box
-                                    display={furnishedAdditionalList.includes("Chimney") ? "flex" : "none"}
-                                    alignItems={"center"}
-                                    gap={"6px"}
-                                    margin={"6px 16px"}
-                                >
-                                    <Image
-                                        src={chimneyImg}
-                                        height={"26px"}
-                                        objectFit={"contain"}
-                                        w={"20px"}
-                                        alt=""
-                                    />
-                                    <Text> Chimney </Text>
-                                </Box>
-                                <Box
-                                    display={furnishedAdditionalList.includes("Exhaust Fan") ? "flex" : "none"}
-                                    alignItems={"center"}
-                                    gap={"6px"}
-                                    margin={"6px 16px"}
-                                >
-                                    <Image
-                                        src={exhaustImg}
-                                        height={"26px"}
-                                        objectFit={"contain"}
-                                        w={"20px"}
-                                        alt=""
-                                    />
-                                    <Text> Exhaust Fan </Text>
-                                </Box>
-                                <Box
-                                    display={furnishedAdditionalList.includes("Curtains") ? "flex" : "none"}
-                                    alignItems={"center"}
-                                    gap={"6px"}
-                                    margin={"6px 16px"}
-                                >
-                                    <Image
-                                        src={curtainImg}
-                                        height={"26px"}
-                                        objectFit={"contain"}
-                                        w={"20px"}
-                                        alt=""
-                                    />
-                                    <Text> Curtains </Text>
-                                </Box>
-                                <Box
-                                    display={furnishedAdditionalList.includes("Modular Kitchen") ? "flex" : "none"}
-                                    alignItems={"center"}
-                                    gap={"6px"}
-                                    margin={"6px 16px"}
-                                >
-                                    <Image
-                                        src={kitchenImg}
-                                        height={"26px"}
-                                        objectFit={"contain"}
-                                        w={"20px"}
-                                        alt=""
-                                    />
-                                    <Text> Modular Kitchen </Text>
-                                </Box>
-                                <Box
-                                    display={furnishedAdditionalList.includes("Fridge") ? "flex" : "none"}
-                                    alignItems={"center"}
-                                    gap={"6px"}
-                                    margin={"6px 16px"}
-                                >
-                                    <Image
-                                        src={frigeImg}
-                                        height={"26px"}
-                                        objectFit={"contain"}
-                                        w={"20px"}
-                                        alt=""
-                                    />
-                                    <Text> Fridge </Text>
-                                </Box>
-                                <Box
-                                    display={furnishedAdditionalList.includes("Sofa") ? "flex" : "none"}
-                                    alignItems={"center"}
-                                    gap={"6px"}
-                                    margin={"6px 16px"}
-                                >
-                                    <Image
-                                        src={sofaImg}
-                                        height={"26px"}
-                                        objectFit={"contain"}
-                                        w={"20px"}
-                                        alt=""
-                                    />
-                                    <Text> Sofa </Text>
-                                </Box>
-                                <Box
-                                    display={furnishedAdditionalList.includes("Stove") ? "flex" : "none"}
-                                    alignItems={"center"}
-                                    gap={"6px"}
-                                    margin={"6px 16px"}
-                                >
-                                    <Image
-                                        src={stoveImg}
-                                        height={"26px"}
-                                        objectFit={"contain"}
-                                        w={"20px"}
-                                        alt=""
-                                    />
-                                    <Text> Stove </Text>
-                                </Box>
-                                <Box
-                                    display={furnishedAdditionalList.includes("Microwave") ? "flex" : "none"}
-                                    alignItems={"center"}
-                                    gap={"6px"}
-                                    margin={"6px 16px"}
-                                >
-                                    <Image
-                                        src={microwaveImg}
-                                        height={"26px"}
-                                        objectFit={"contain"}
-                                        w={"20px"}
-                                        alt=""
-                                    />
-                                    <Text> Microwave </Text>
-                                </Box>
-                                <Box
-                                    display={furnishedAdditionalList.includes("Dining Table") ? "flex" : "none"}
-                                    alignItems={"center"}
-                                    gap={"6px"}
-                                    margin={"6px 16px"}
-                                >
-                                    <Image
-                                        src={tableImg}
-                                        height={"26px"}
-                                        objectFit={"contain"}
-                                        w={"20px"}
-                                        alt=""
-                                    />
-                                    <Text> Dining Table </Text>
-                                </Box>
-                            </Box>
+                    <Box>
+                        <Box >
+                            <Image
+                                w={"100%"}
+                                src={"https://mediacdn.99acres.com/media1/21619/19/432399374M-1688810188988.jpg"}
+                                alt="property-img"
+                            />
                         </Box>
                     </Box>
 
-                    {/* aminities 3 */}
-                    <Box padding={"10px auto"} textAlign={"left"} >
-                        <Heading fontSize={"2xl"}> Amenities </Heading>
-                        <Divider margin={"5px 0"} />
-                        <Box className={style.amenities}>
-                            <Box
-                                display={data.amenities?.includes("Maintenance Staff") ? "flex" : "none"}
-                                alignItems={"center"}
-                                gap={"6px"}
-                            >
-                                <Image
-                                    src={MaintenanceImg}
-                                    height={"26px"}
-                                    objectFit={"contain"}
-                                    w={"20px"}
-                                    alt="light_images"
-                                />
-                                <Text> Maintenance Staff </Text>
-                            </Box>
-                            <Box
-                                display={data.amenities?.includes("Water Storage") ? "flex" : "none"}
-                                alignItems={"center"}
-                                gap={"6px"}
-                            >
-                                <Image
-                                    src={waterImg}
-                                    height={"26px"}
-                                    objectFit={"contain"}
-                                    w={"20px"}
-                                    alt="light_images"
-                                />
-                                <Text> Water Storage </Text>
-                            </Box>
-                            <Box
-                                display={data.amenities?.includes("Security / Fire Alarm") ? "flex" : "none"}
-                                alignItems={"center"}
-                                gap={"6px"}
-                            >
-                                <Image
-                                    src={securityImg}
-                                    height={"26px"}
-                                    objectFit={"contain"}
-                                    w={"20px"}
-                                    alt="light_images"
-                                />
-                                <Text> Security / Fire Alarm </Text>
-                            </Box>
-                            <Box
-                                display={data.amenities?.includes("Visitor Parking") ? "flex" : "none"}
-                                alignItems={"center"}
-                                gap={"6px"}
-                            >
-                                <Image
-                                    src={visiterImg}
-                                    height={"26px"}
-                                    objectFit={"contain"}
-                                    w={"20px"}
-                                    alt="light_images"
-                                />
-                                <Text> Visitor Parking </Text>
-                            </Box>
-                            <Box
-                                display={data.amenities?.includes("Park") ? "flex" : "none"}
-                                alignItems={"center"}
-                                gap={"6px"}
-                            >
-                                <Image
-                                    src={parkImg}
-                                    height={"26px"}
-                                    objectFit={"contain"}
-                                    w={"20px"}
-                                    alt="light_images"
-                                />
-                                <Text> Park </Text>
-                            </Box>
-                            <Box
-                                display={data.amenities?.includes("Feng Shui / Vaastu Compliant") ? "flex" : "none"}
-                                alignItems={"center"}
-                                gap={"6px"}
-                            >
-                                <Image
-                                    src={vastuImg}
-                                    height={"26px"}
-                                    objectFit={"contain"}
-                                    w={"20px"}
-                                    alt="light_images"
-                                />
-                                <Text> Feng Shui / Vaastu Compliant </Text>
-                            </Box>
-                            <Box
-                                display={data.amenities?.includes("Lift") ? "flex" : "none"}
-                                alignItems={"center"}
-                                gap={"6px"}
-                            >
-                                <Image
-                                    src={liftImg}
-                                    height={"26px"}
-                                    objectFit={"contain"}
-                                    w={"20px"}
-                                    alt="light_images"
-                                />
-                                <Text> Lift </Text>
-                            </Box>
-                        </Box>
-                        <Box display={"grid"} gap={3} margin={"20px 0"} >
-                            <Heading fontSize={"2xl"} padding={0}> Features </Heading>
-                            <Text fontSize={"xs"} color={"blue"} margin={0}> For more details click on <InfoIcon color={"blue.400"} /> icon </Text>
-                            <Divider margin={0} />
-                            <Box
-                                display={data.otherRoom ? "flex" : "none"}
-                                alignItems={"center"}
-                                gap={"6px"}
-                            >
-                                <Image
-                                    src={RoomImg}
-                                    height={"26px"}
-                                    objectFit={"contain"}
-                                    w={"24px"}
-                                    alt="light_images"
-                                />
-                                <Text> Room Details </Text>
-                                <Tooltip hasArrow display={"flex"} label={<Hoverbox data={data.otherRoom} />} fontSize='md'>
-                                    <InfoIcon color={"blue.400"} />
-                                </Tooltip>
-                            </Box>
-                            <Box
-                                display={data.propertyFeatures ? "flex" : "none"}
-                                alignItems={"center"}
-                                gap={"6px"}
-                            >
-                                <Image
-                                    src={propertFeatureImg}
-                                    height={"26px"}
-                                    objectFit={"contain"}
-                                    w={"24px"}
-                                    alt="light_images"
-                                />
-                                <Text> Property Features</Text>
-                                <Tooltip hasArrow display={"flex"} label={<Hoverbox data={data.propertyFeatures} />} fontSize='md'>
-                                    <InfoIcon color={"blue.400"} />
-                                </Tooltip>
-                            </Box>
-                            <Box
-                                display={data.propertyFeatures ? "flex" : "none"}
-                                alignItems={"center"}
-                                gap={"6px"}
-                            >
-                                <Image
-                                    src={societyImg}
-                                    height={"26px"}
-                                    objectFit={"contain"}
-                                    w={"24px"}
-                                    alt="light_images"
-                                />
-                                <Text>Society Building Features</Text>
-                                <Tooltip hasArrow display={"flex"} label={<Hoverbox data={data.society_buildingFeatures} />} fontSize='md'>
-                                    <InfoIcon color={"blue.400"} />
-                                </Tooltip>
-                            </Box>
-                            <Box
-                                display={data.propertyFeatures ? "flex" : "none"}
-                                alignItems={"center"}
-                                gap={"6px"}
-                            >
-                                <Image
-                                    src={additonalImg}
-                                    height={"26px"}
-                                    objectFit={"contain"}
-                                    w={"24px"}
-                                    alt="light_images"
-                                />
-                                <Text> Additional Features</Text>
-                                <Tooltip hasArrow display={"flex"} label={<Hoverbox data={data.additionalFeatures} />} fontSize='md'>
-                                    <InfoIcon color={"blue.400"} />
-                                </Tooltip>
-                            </Box>
-                            <Box
-                                display={data.waterSources ? "flex" : "none"}
-                                alignItems={"center"}
-                                gap={"6px"}
-                            >
-                                <Image
-                                    src={watersourceImg}
-                                    height={"26px"}
-                                    objectFit={"contain"}
-                                    w={"24px"}
-                                    alt="light_images"
-                                />
-                                <Text> Water Sources</Text>
-                                <Tooltip hasArrow display={"flex"} label={<Hoverbox data={data.waterSources} />} fontSize='md'>
-                                    <InfoIcon color={"blue.400"} />
-                                </Tooltip>
-                            </Box>
-                            <Box
-                                display={data.otherFeatures ? "flex" : "none"}
-                                alignItems={"center"}
-                                gap={"6px"}
-                            >
-                                <Image
-                                    src={otherImg}
-                                    height={"26px"}
-                                    objectFit={"contain"}
-                                    w={"24px"}
-                                    alt="light_images"
-                                />
-                                <Text> Other Features </Text>
-                                <Tooltip hasArrow display={"flex"} label={<Hoverbox data={data.otherFeatures} />} fontSize='md'>
-                                    <InfoIcon color={"blue.400"} />
-                                </Tooltip>
-                            </Box>
-                        </Box>
-                    </Box>
-
-                    <Box
-                        display={overlooking.length > 0 ? "grid" : "none"}
-                    >
-                        <Heading margin={"16px 0 10px 0"} fontSize={"2xl"} w={"100%"}> Over Lookings </Heading>
-                        <Divider />
-                        <Box
-                            display={"flex"}
-                            gap={"20px"}
-                            border={0}
-                            alignItems={"center"}
-                            className={style.overlooklist}
-                        >
-                            {overlooking.map((e, index) => (
-                                <Text key={index}>{e}</Text>
-                            ))}
-                        </Box>
-                    </Box>
-                    <Box display={location.length > 0 ? "grid" : "none"}>
-                        <Heading fontSize={"xl"} margin={"16px 0 10px 0"}> Location Advantage </Heading>
-                        <Divider />
-                        <Box className={style.location_adv}>
-                            <Box display={location.includes("Close to Metro Station") ? "flex" : "none"} gap={2} >
-                                &#8226;
-                                <Text> Close to Metro Station </Text>
-                            </Box>
-                            <Box display={location.includes("Close to School") ? "flex" : "none"} gap={2} >
-                                &#8226;
-                                <Text> Close to School </Text>
-                            </Box>
-                            <Box display={location.includes("Close to Hospital") ? "flex" : "none"} gap={2} >
-                                &#8226;
-                                <Text> Close to Hospital </Text>
-                            </Box>
-                            <Box display={location.includes("Close to Market") ? "flex" : "none"} gap={2} >
-                                &#8226;
-                                <Text> Close to Market </Text>
-                            </Box>
-                            <Box display={location.includes("Close to highway") ? "flex" : "none"} gap={2} >
-                                &#8226;
-                                <Text> Close to highway </Text>
-                            </Box>
-                            <Box display={location.includes("Close to Mall") ? "flex" : "none"} gap={2} >
-                                &#8226;
-                                <Text> Close to Mall </Text>
-                            </Box>
-                            <Box display={location.includes("Close to Airport") ? "flex" : "none"} gap={2} >
-                                &#8226;
-                                <Text> Close to Airport </Text>
-                            </Box>
-                            <Box display={location.includes("Close to Railway Station") ? "flex" : "none"} gap={2} >
-                                &#8226;
-                                <Text> Close to Railway Station </Text>
-                            </Box>
-                        </Box>
-                    </Box>
-                </Box>
-
-            </Box>
-            <Box flex={8} >
-                <Box
-                    textAlign={"left"}
-                    marginTop={"8px"}
-                    padding={"10px"}
-                >
-                    {/* price  */}
-                    <Box margin={0}>
+                    {/* ===================== mobile Pricing (Price only for mobile) =================================== */}
+                    <Box display={{ base: "grid", md: "none" }} >
                         <Heading display={"flex"} fontSize={"xl"}>
                             Price: {data.countryCurrency || <Skeleton width={"100px"} />}
                             {price || <Skeleton width={"40px"} />}
@@ -768,20 +151,674 @@ const SingleProductDetailPage = () => {
                             {price || <Skeleton width={"100px"} />}
                         </Heading>
                     </Box>
-                    {/* contact detail */}
-                    <Box borderRadius={0} boxShadow={"rgba(0, 0, 0, 0.24) 0px 3px 8px"} padding={"20px 10px"}>
-                        <Heading fontSize={"2xl"} margin={"0 0 6px 0"}> Schedule tour </Heading>
-                        <Box fontFamily={"arial"} boxShadow={"rgba(149, 157, 165, 0.2) 0px 8px 24px;"} border={"1px solid rgb(213, 213, 213)"} borderRadius={"4px"} padding={"20px 10px"} >
-                            <Input type="text" margin={"6px 0"} placeholder={"Your name"} value={nametosend} onChange={(e) => setNametosend(e.target.value)} />
-                            <Input type="text" margin={"6px 0"} placeholder={"Your email"} value={emailtosend} onChange={(e) => setEmailtosend(e.target.value)} />
-                            <Input type="text" margin={"6px 0"} placeholder={"Your phonenumber"} value={phonetosend} onChange={(e) => setPhonetosend(NumericString(e.target.value))} />
-                            <Textarea type="text" borderRadius={0} margin={"6px 0"} placeholder="Message" ></Textarea>
-                            <Button w={"100%"} borderRadius={0} margin={"6px 0"} colorScheme="whatsapp"> Schedule a Tour</Button>
+
+                    {/* box 2 */}
+                    <Box flex={8} padding={"20px 0"} textAlign={"left"} w={"100%"}>
+                        {/* ======================= discription =========================== */}
+                        <Heading fontSize={"2x"} margin={"10px 0"} textAlign={"left"}>
+                            Description
+                        </Heading>
+                        <Divider margin={"0 0 4px 0"} />
+                        <Text w={"100%"} textAlign={"left"}>{data.description !== undefined && data.description || <Skeleton count={2} />}</Text>
+
+                        {/* ======================================== under construction ==================================== */}
+                        {/* Plot Detail */}
+                        <Box marginTop={2} display={"flex"} flexWrap={"wrap"} alignItems={"inherit"} backgroundColor={"rgb(225, 247, 249)"} justifyContent={"space-around"} >
+                            <Box display={data.plotArea ? "flex" : "none"}  flexDirection={"column"} padding={"4px 8px"} border={"2px solid rgb(178, 255, 246)"} flex={1} >
+                                <Heading size={"md"}>Plot Area </Heading>
+                                <Text>{data.plotArea || <Skeleton width={"100px"} />} {data.plotAreaUnit || <Skeleton width={"100px"} />}</Text> 
+                            </Box>
+                            <Box display={data.totalFloors ? "flex" : "none"}  flexDirection={"column"} padding={"4px 8px"} border={"2px solid rgb(178, 255, 246)"} flex={1} >
+                                <Heading size={"md"}> Floor </Heading> 
+                                <Text> Total floor: {data.totalFloors || <Skeleton width={"100px"} />}</Text>
+                                <Text display={data.floorOn ? "flex" : "none"}> Floor on: {data.floorOn || <Skeleton width={"100px"} />} </Text>
+                            </Box>
+                            <Box display={data.powerBackup ? "flex" : "none"}  flexDirection={"column"} padding={"4px 8px"} border={"2px solid rgb(178, 255, 246)"} flex={1} >
+                                <Heading size={"md"}> Power Backup </Heading>
+                                <Text>{data.powerBackup || <Skeleton width={"100px"} />}</Text>
+                            </Box> 
+                        </Box>
+
+                        {/* ================================= Property details =========================== */} 
+                        <Heading fontSize={"xl"} margin={"8px 0"} > Property details </Heading>
+                        <Divider />
+                        {/* furnished detail */}
+                        <Box
+                            backgroundColor={"rgb(218, 218, 218)"}
+                            padding={"10px"}
+                            margin={"10px 0"}
+                            borderRadius={5}
+                            display={`${isFurnished == "Un-furnished" ? " " : "block"}`}
+                        >
+                            <Box backgroundColor={"rgb(255, 255, 255)"} padding={"10px"} borderRadius={5}>
+                                {/* Property Detail */}
+                                <Heading fontSize={"lg"}> Furnishing details </Heading>
+                                <Divider padding={2} margin={0} />
+                                <Box margin={"10px 0"} display={"grid"} gridTemplateColumns={{ base: "repeat(2,1fr)", md: "repeat(3,1fr)" }} >
+                                    <Box
+                                        display={"flex"}
+                                        alignItems={"center"}
+                                        gap={"6px"}
+                                        margin={"6px 16px"}
+                                    >
+                                        <Image
+                                            src={lightImg}
+                                            height={"26px"}
+                                            objectFit={"contain"}
+                                            w={"20px"}
+                                            alt="light_images"
+                                        />
+                                        <Text> {light || <Skeleton width={"60px"} />} Light{Number(light) > 1 && "s"} </Text>
+                                    </Box>
+                                    <Box
+                                        display={"flex"}
+                                        alignItems={"center"}
+                                        gap={"6px"}
+                                        margin={"6px 16px"}
+                                    >
+                                        <Image
+                                            src={fanImg}
+                                            height={"26px"}
+                                            objectFit={"contain"}
+                                            w={"20px"}
+                                            alt="fan_images"
+                                        />
+                                        <Text> {fan || <Skeleton width={"60px"} />} Fan{Number(fan) > 1 && "s"} </Text>
+                                    </Box>
+                                    <Box
+                                        display={"flex"}
+                                        alignItems={"center"}
+                                        gap={"6px"}
+                                        margin={"6px 16px"}
+                                    >
+                                        <Image
+                                            src={acImg}
+                                            height={"26px"}
+                                            objectFit={"contain"}
+                                            w={"20px"}
+                                            alt=""
+                                        />
+                                        <Text> {aircondition || <Skeleton width={"60px"} />} AC{Number(aircondition) > 1 && "'s"} </Text>
+                                    </Box>
+                                    <Box
+                                        display={"flex"}
+                                        alignItems={"center"}
+                                        gap={"6px"}
+                                        margin={"6px 16px"}
+                                    >
+                                        <Image
+                                            src={tvImg}
+                                            height={"26px"}
+                                            objectFit={"contain"}
+                                            w={"20px"}
+                                            alt=""
+                                        />
+                                        <Text> {tv || <Skeleton width={"60px"} />} Television{Number(tv) > 1 && "s"} </Text>
+                                    </Box>
+                                    <Box
+                                        display={"flex"}
+                                        alignItems={"center"}
+                                        gap={"6px"}
+                                        margin={"6px 16px"}
+                                    >
+                                        <Image
+                                            src={bedImg}
+                                            height={"26px"}
+                                            objectFit={"contain"}
+                                            w={"20px"}
+                                            alt=""
+                                        />
+                                        <Text> {bed || <Skeleton width={"60px"} />} Beds{Number(bed) > 1 && "s"} </Text>
+                                    </Box>
+                                    <Box
+                                        display={"flex"}
+                                        alignItems={"center"}
+                                        gap={"6px"}
+                                        margin={"6px 16px"}
+                                    >
+                                        <Image
+                                            src={wardrobeImg}
+                                            height={"26px"}
+                                            objectFit={"contain"}
+                                            w={"20px"}
+                                            alt=""
+                                        />
+                                        <Text> {wardrobe || <Skeleton width={"60px"} />} wardrobe{Number(wardrobe) > 1 && "s"} </Text>
+                                    </Box>
+                                    <Box
+                                        display={"flex"}
+                                        alignItems={"center"}
+                                        gap={"6px"}
+                                        margin={"6px 16px"}
+                                    >
+                                        <Image
+                                            src={geyserImg}
+                                            height={"26px"}
+                                            objectFit={"contain"}
+                                            w={"20px"}
+                                            alt=""
+                                        />
+                                        <Text> {geyser || <Skeleton width={"60px"} />} geyser{Number(geyser) > 1 && "s"} </Text>
+                                    </Box>
+                                    {/* furnished part 2 */}
+                                    <Box
+                                        display={furnishedAdditionalList.includes("Washing Machine") ? "flex" : "none"}
+                                        alignItems={"center"}
+                                        gap={"6px"}
+                                        margin={"6px 16px"}
+                                    >
+                                        <Image
+                                            src={washingImg}
+                                            height={"26px"}
+                                            objectFit={"contain"}
+                                            w={"20px"}
+                                            alt=""
+                                        />
+                                        <Text> Washing Machine </Text>
+                                    </Box>
+                                    <Box
+                                        display={furnishedAdditionalList.includes("Water Purifier") ? "flex" : "none"}
+                                        alignItems={"center"}
+                                        gap={"6px"}
+                                        margin={"6px 16px"}
+                                    >
+                                        <Image
+                                            src={purifierImg}
+                                            height={"26px"}
+                                            objectFit={"contain"}
+                                            w={"20px"}
+                                            alt=""
+                                        />
+                                        <Text> Water Purifier </Text>
+                                    </Box>
+                                    <Box
+                                        display={furnishedAdditionalList.includes("Chimney") ? "flex" : "none"}
+                                        alignItems={"center"}
+                                        gap={"6px"}
+                                        margin={"6px 16px"}
+                                    >
+                                        <Image
+                                            src={chimneyImg}
+                                            height={"26px"}
+                                            objectFit={"contain"}
+                                            w={"20px"}
+                                            alt=""
+                                        />
+                                        <Text> Chimney </Text>
+                                    </Box>
+                                    <Box
+                                        display={furnishedAdditionalList.includes("Exhaust Fan") ? "flex" : "none"}
+                                        alignItems={"center"}
+                                        gap={"6px"}
+                                        margin={"6px 16px"}
+                                    >
+                                        <Image
+                                            src={exhaustImg}
+                                            height={"26px"}
+                                            objectFit={"contain"}
+                                            w={"20px"}
+                                            alt=""
+                                        />
+                                        <Text> Exhaust Fan </Text>
+                                    </Box>
+                                    <Box
+                                        display={furnishedAdditionalList.includes("Curtains") ? "flex" : "none"}
+                                        alignItems={"center"}
+                                        gap={"6px"}
+                                        margin={"6px 16px"}
+                                    >
+                                        <Image
+                                            src={curtainImg}
+                                            height={"26px"}
+                                            objectFit={"contain"}
+                                            w={"20px"}
+                                            alt=""
+                                        />
+                                        <Text> Curtains </Text>
+                                    </Box>
+                                    <Box
+                                        display={furnishedAdditionalList.includes("Modular Kitchen") ? "flex" : "none"}
+                                        alignItems={"center"}
+                                        gap={"6px"}
+                                        margin={"6px 16px"}
+                                    >
+                                        <Image
+                                            src={kitchenImg}
+                                            height={"26px"}
+                                            objectFit={"contain"}
+                                            w={"20px"}
+                                            alt=""
+                                        />
+                                        <Text> Modular Kitchen </Text>
+                                    </Box>
+                                    <Box
+                                        display={furnishedAdditionalList.includes("Fridge") ? "flex" : "none"}
+                                        alignItems={"center"}
+                                        gap={"6px"}
+                                        margin={"6px 16px"}
+                                    >
+                                        <Image
+                                            src={frigeImg}
+                                            height={"26px"}
+                                            objectFit={"contain"}
+                                            w={"20px"}
+                                            alt=""
+                                        />
+                                        <Text> Fridge </Text>
+                                    </Box>
+                                    <Box
+                                        display={furnishedAdditionalList.includes("Sofa") ? "flex" : "none"}
+                                        alignItems={"center"}
+                                        gap={"6px"}
+                                        margin={"6px 16px"}
+                                    >
+                                        <Image
+                                            src={sofaImg}
+                                            height={"26px"}
+                                            objectFit={"contain"}
+                                            w={"20px"}
+                                            alt=""
+                                        />
+                                        <Text> Sofa </Text>
+                                    </Box>
+                                    <Box
+                                        display={furnishedAdditionalList.includes("Stove") ? "flex" : "none"}
+                                        alignItems={"center"}
+                                        gap={"6px"}
+                                        margin={"6px 16px"}
+                                    >
+                                        <Image
+                                            src={stoveImg}
+                                            height={"26px"}
+                                            objectFit={"contain"}
+                                            w={"20px"}
+                                            alt=""
+                                        />
+                                        <Text> Stove </Text>
+                                    </Box>
+                                    <Box
+                                        display={furnishedAdditionalList.includes("Microwave") ? "flex" : "none"}
+                                        alignItems={"center"}
+                                        gap={"6px"}
+                                        margin={"6px 16px"}
+                                    >
+                                        <Image
+                                            src={microwaveImg}
+                                            height={"26px"}
+                                            objectFit={"contain"}
+                                            w={"20px"}
+                                            alt=""
+                                        />
+                                        <Text> Microwave </Text>
+                                    </Box>
+                                    <Box
+                                        display={furnishedAdditionalList.includes("Dining Table") ? "flex" : "none"}
+                                        alignItems={"center"}
+                                        gap={"6px"}
+                                        margin={"6px 16px"}
+                                    >
+                                        <Image
+                                            src={tableImg}
+                                            height={"26px"}
+                                            objectFit={"contain"}
+                                            w={"20px"}
+                                            alt=""
+                                        />
+                                        <Text> Dining Table </Text>
+                                    </Box>
+                                </Box>
+                            </Box>
+                        </Box>
+                        {/* ----------------------------------------- */}
+                        {/* Property Facing / flooring */}
+                        <Box margin={"10px auto"} display={"flex"} alignItems={"center"} flexWrap={"wrap"} gap={8} >
+                            <Text fontSize={"lg"} alignItems={"center"} gap={1} display={data.propertyFacing == "undefined" ? "none" : "flex"}>  <span style={{ fontWeight: "600" }}> Property Facing :</span>  {data.propertyFacing || <Skeleton width={"100px"} />} </Text>
+                            <Text fontSize={"lg"} alignItems={"center"} gap={1} display={data.flooring == "undefined" ? "none" : "flex"}>  <span style={{ fontWeight: "600" }}> Property flooring :</span>  {data.flooring || <Skeleton width={"100px"} />} </Text>
+                        </Box>
+                        {/* ---------------------------------------- */}
+
+                        {/* ==================== aminities 3 ======================== */}
+                        <Box padding={"10px auto"} textAlign={"left"} >
+                            <Heading fontSize={"2xl"}> Amenities </Heading>
+                            <Divider margin={"5px 0"} />
+                            <Box className={style.amenities}>
+                                <Box
+                                    display={data.amenities?.includes("Maintenance Staff") ? "flex" : "none"}
+                                    alignItems={"center"}
+                                    gap={"6px"}
+                                >
+                                    <Image
+                                        src={MaintenanceImg}
+                                        height={"26px"}
+                                        objectFit={"contain"}
+                                        w={"20px"}
+                                        alt="light_images"
+                                    />
+                                    <Text> Maintenance Staff </Text>
+                                </Box>
+                                <Box
+                                    display={data.amenities?.includes("Water Storage") ? "flex" : "none"}
+                                    alignItems={"center"}
+                                    gap={"6px"}
+                                >
+                                    <Image
+                                        src={waterImg}
+                                        height={"26px"}
+                                        objectFit={"contain"}
+                                        w={"20px"}
+                                        alt="light_images"
+                                    />
+                                    <Text> Water Storage </Text>
+                                </Box>
+                                <Box
+                                    display={data.amenities?.includes("Security / Fire Alarm") ? "flex" : "none"}
+                                    alignItems={"center"}
+                                    gap={"6px"}
+                                >
+                                    <Image
+                                        src={securityImg}
+                                        height={"26px"}
+                                        objectFit={"contain"}
+                                        w={"20px"}
+                                        alt="light_images"
+                                    />
+                                    <Text> Security / Fire Alarm </Text>
+                                </Box>
+                                <Box
+                                    display={data.amenities?.includes("Visitor Parking") ? "flex" : "none"}
+                                    alignItems={"center"}
+                                    gap={"6px"}
+                                >
+                                    <Image
+                                        src={visiterImg}
+                                        height={"26px"}
+                                        objectFit={"contain"}
+                                        w={"20px"}
+                                        alt="light_images"
+                                    />
+                                    <Text> Visitor Parking </Text>
+                                </Box>
+                                <Box
+                                    display={data.amenities?.includes("Park") ? "flex" : "none"}
+                                    alignItems={"center"}
+                                    gap={"6px"}
+                                >
+                                    <Image
+                                        src={parkImg}
+                                        height={"26px"}
+                                        objectFit={"contain"}
+                                        w={"20px"}
+                                        alt="light_images"
+                                    />
+                                    <Text> Park </Text>
+                                </Box>
+                                <Box
+                                    display={data.amenities?.includes("Feng Shui / Vaastu Compliant") ? "flex" : "none"}
+                                    alignItems={"center"}
+                                    gap={"6px"}
+                                >
+                                    <Image
+                                        src={vastuImg}
+                                        height={"26px"}
+                                        objectFit={"contain"}
+                                        w={"20px"}
+                                        alt="light_images"
+                                    />
+                                    <Text> Feng Shui / Vaastu Compliant </Text>
+                                </Box>
+                                <Box
+                                    display={data.amenities?.includes("Lift") ? "flex" : "none"}
+                                    alignItems={"center"}
+                                    gap={"6px"}
+                                >
+                                    <Image
+                                        src={liftImg}
+                                        height={"26px"}
+                                        objectFit={"contain"}
+                                        w={"20px"}
+                                        alt="light_images"
+                                    />
+                                    <Text> Lift </Text>
+                                </Box>
+                            </Box>
+                            <Box display={"grid"} gap={3} margin={"20px 0"} >
+                                <Heading fontSize={"2xl"} padding={0}> Features </Heading>
+                                <Text textAlign={"inherit"} fontSize={"xs"} color={"blue"} margin={0}> For more details click on <InfoIcon w={7} color={"blue.400"} /> icon </Text>
+                                <Divider margin={0} />
+                                <Box
+                                    display={data.otherRoom ? "flex" : "none"}
+                                    alignItems={"center"}
+                                    gap={"6px"}
+                                >
+                                    <Image
+                                        src={RoomImg}
+                                        height={"26px"}
+                                        objectFit={"contain"}
+                                        w={"24px"}
+                                        alt="light_images"
+                                    />
+                                    <Text> Room Details </Text>
+                                    <Tooltip hasArrow display={"flex"} w={"150px"} label={<Hoverbox data={data.otherRoom} />} fontSize='md'>
+                                        <InfoIcon w={7} color={"blue.400"} />
+                                    </Tooltip>
+                                </Box>
+                                <Box
+                                    display={data.propertyFeatures ? "flex" : "none"}
+                                    alignItems={"center"}
+                                    gap={"6px"}
+                                >
+                                    <Image
+                                        src={propertFeatureImg}
+                                        height={"26px"}
+                                        objectFit={"contain"}
+                                        w={"24px"}
+                                        alt="light_images"
+                                    />
+                                    <Text> Property Features</Text>
+                                    <Tooltip hasArrow display={"flex"} w={"180px"} label={<Hoverbox data={data.propertyFeatures} />} fontSize='md'>
+                                        <InfoIcon w={7} color={"blue.400"} />
+                                    </Tooltip>
+                                </Box>
+                                <Box
+                                    display={data.propertyFeatures ? "flex" : "none"}
+                                    alignItems={"center"}
+                                    gap={"6px"}
+                                >
+                                    <Image
+                                        src={societyImg}
+                                        height={"26px"}
+                                        objectFit={"contain"}
+                                        w={"24px"}
+                                        alt="light_images"
+                                    />
+                                    <Text>Society Building Features</Text>
+                                    <Tooltip hasArrow display={"flex"} w={"150px"} label={<Hoverbox data={data.society_buildingFeatures} />} fontSize='md'>
+                                        <InfoIcon w={7} color={"blue.400"} />
+                                    </Tooltip>
+                                </Box>
+                                <Box
+                                    display={data.propertyFeatures ? "flex" : "none"}
+                                    alignItems={"center"}
+                                    gap={"6px"}
+                                >
+                                    <Image
+                                        src={additonalImg}
+                                        height={"26px"}
+                                        objectFit={"contain"}
+                                        w={"24px"}
+                                        alt="light_images"
+                                    />
+                                    <Text> Additional Features</Text>
+                                    <Tooltip hasArrow display={"flex"} w={"210px"} label={<Hoverbox data={data.additionalFeatures} />} fontSize='md'>
+                                        <InfoIcon w={7} color={"blue.400"} />
+                                    </Tooltip>
+                                </Box>
+                                <Box
+                                    display={data.waterSources ? "flex" : "none"}
+                                    alignItems={"center"}
+                                    gap={"6px"}
+                                >
+                                    <Image
+                                        src={watersourceImg}
+                                        height={"26px"}
+                                        objectFit={"contain"}
+                                        w={"24px"}
+                                        alt="light_images"
+                                    />
+                                    <Text> Water Sources</Text>
+                                    <Tooltip hasArrow display={"flex"} w={"150px"} label={<Hoverbox data={data.waterSources} />} fontSize='md'>
+                                        <InfoIcon w={7} color={"blue.400"} />
+                                    </Tooltip>
+                                </Box>
+                                <Box
+                                    display={data.otherFeatures ? "flex" : "none"}
+                                    alignItems={"center"}
+                                    gap={"6px"}
+                                >
+                                    <Image
+                                        src={otherImg}
+                                        height={"26px"}
+                                        objectFit={"contain"}
+                                        w={"24px"}
+                                        alt="light_images"
+                                    />
+                                    <Text> Other Features </Text>
+                                    <Tooltip hasArrow display={"flex"} w={"150px"} label={<Hoverbox data={data.otherFeatures} />} fontSize='md'>
+                                        <InfoIcon w={7} color={"blue.400"} />
+                                    </Tooltip>
+                                </Box>
+                            </Box>
+                        </Box>
+
+                        <Box
+                            display={overlooking.length > 0 ? "grid" : "none"}
+                        >
+                            <Heading margin={"16px 0 10px 0"} fontSize={"2xl"} w={"100%"}> Over Lookings </Heading>
+                            <Divider />
+                            <Box
+                                display={"flex"}
+                                gap={"20px"}
+                                border={0}
+                                flexWrap={"wrap"}
+                                alignItems={"center"}
+                                className={style.overlooklist}
+                            >
+                                {overlooking.map((e, index) => (
+                                    <Text key={index}>{e}</Text>
+                                ))}
+                            </Box>
+                        </Box>
+                        <Box display={location.length > 0 ? "grid" : "none"}>
+                            <Heading fontSize={"xl"} margin={"16px 0 10px 0"}> Location Advantage </Heading>
+                            <Divider />
+                            <Box className={style.location_adv} >
+                                <Box display={location.includes("Close to Metro Station") ? "flex" : "none"} gap={2} >
+                                    &#8226;
+                                    <Text> Close to Metro Station </Text>
+                                </Box>
+                                <Box display={location.includes("Close to School") ? "flex" : "none"} gap={2} >
+                                    &#8226;
+                                    <Text> Close to School </Text>
+                                </Box>
+                                <Box display={location.includes("Close to Hospital") ? "flex" : "none"} gap={2} >
+                                    &#8226;
+                                    <Text> Close to Hospital </Text>
+                                </Box>
+                                <Box display={location.includes("Close to Market") ? "flex" : "none"} gap={2} >
+                                    &#8226;
+                                    <Text> Close to Market </Text>
+                                </Box>
+                                <Box display={location.includes("Close to highway") ? "flex" : "none"} gap={2} >
+                                    &#8226;
+                                    <Text> Close to highway </Text>
+                                </Box>
+                                <Box display={location.includes("Close to Mall") ? "flex" : "none"} gap={2} >
+                                    &#8226;
+                                    <Text> Close to Mall </Text>
+                                </Box>
+                                <Box display={location.includes("Close to Airport") ? "flex" : "none"} gap={2} >
+                                    &#8226;
+                                    <Text> Close to Airport </Text>
+                                </Box>
+                                <Box display={location.includes("Close to Railway Station") ? "flex" : "none"} gap={2} >
+                                    &#8226;
+                                    <Text> Close to Railway Station </Text>
+                                </Box>
+                            </Box>
+                        </Box>
+                    </Box>
+
+                </Box>
+                <Box flex={8} >
+                    <Box
+                        textAlign={"left"}
+                        marginTop={"8px"}
+                        padding={"10px"}
+                        display={{ base: "none", md: "block" }}
+                    >
+                        {/* price  */}
+                        <Box margin={0}>
+                            <Heading display={"flex"} fontSize={"xl"}>
+                                Price: {data.countryCurrency || <Skeleton width={"100px"} />}
+                                {price || <Skeleton width={"40px"} />}
+                            </Heading>
+                            <Heading display={"flex"} margin={"6px 0"} fontSize={"md"}>
+                                Price per unit: {data.countryCurrency || <Skeleton width={"100px"} />}
+                                {price || <Skeleton width={"100px"} />}
+                            </Heading>
+                        </Box>
+                        {/* contact detail */}
+                        <Box borderRadius={0} boxShadow={"rgba(0, 0, 0, 0.24) 0px 3px 8px"} padding={"20px 10px"}>
+                            <Heading fontSize={"2xl"} margin={"0 0 6px 0"}> Schedule tour </Heading>
+                            <Box fontFamily={"arial"} boxShadow={"rgba(149, 157, 165, 0.2) 0px 8px 24px;"} border={"1px solid rgb(213, 213, 213)"} borderRadius={"4px"} padding={"20px 10px"} >
+                                <Input type="text" margin={"6px 0"} placeholder={"Your name"} value={nametosend} onChange={(e) => setNametosend(e.target.value)} />
+                                <Input type="text" margin={"6px 0"} placeholder={"Your email"} value={emailtosend} onChange={(e) => setEmailtosend(e.target.value)} />
+                                <Input type="text" margin={"6px 0"} placeholder={"Your phone number"} value={phonetosend} onChange={(e) => setPhonetosend(NumericString(e.target.value))} />
+                                <Textarea type="text" borderRadius={0} margin={"6px 0"} placeholder="Message" ></Textarea>
+                                <Button w={"100%"} borderRadius={0} margin={"6px 0"} colorScheme="whatsapp"> Schedule a Tour</Button>
+                            </Box>
                         </Box>
                     </Box>
                 </Box>
+            </Box >
+            {/* mobile booking part */}
+            <Box className={style.schedule_bottom}>
+                <Button 
+                    fontSize={"2xl"} 
+                    position={"fixed"} 
+                    color={"white"}
+                    bottom={"-2px"} 
+                    zIndex={"20"}
+                    left={"-2px"}  
+                    borderRadius={0}  
+                    right={"-2px"} 
+                    backgroundColor="rgb(23, 152, 72)"
+                    _hover={{ backgroundColor: "rgb(23, 152, 72)", color: "white" }}
+                    onClick={onOpen}> Schedule Tour
+                </Button>
+
+                <Modal isOpen={isOpen} onClose={onClose}>
+                    <ModalOverlay />
+                    <ModalContent>
+                        <ModalHeader>
+                        </ModalHeader>
+                        <ModalCloseButton />
+                        <ModalBody>
+                            <Box borderRadius={0} boxShadow={"rgba(0, 0, 0, 0.24) 0px 3px 8px"} padding={"20px 10px"}>
+                                <Heading fontSize={"2xl"} margin={"0 0 6px 0"}> Schedule tour </Heading>
+                                <Box fontFamily={"arial"} boxShadow={"rgba(149, 157, 165, 0.2) 0px 8px 24px;"} border={"1px solid rgb(213, 213, 213)"} borderRadius={"4px"} padding={"20px 10px"} >
+                                    <Input type="text" margin={"6px 0"} placeholder={"Your name"} value={nametosend} onChange={(e) => setNametosend(e.target.value)} />
+                                    <Input type="text" margin={"6px 0"} placeholder={"Your email"} value={emailtosend} onChange={(e) => setEmailtosend(e.target.value)} />
+                                    <Input type="text" margin={"6px 0"} placeholder={"Your phone number"} value={phonetosend} onChange={(e) => setPhonetosend(NumericString(e.target.value))} />
+                                    <Textarea type="text" borderRadius={0} margin={"6px 0"} placeholder="Message" ></Textarea>
+                                    <Button w={"100%"} borderRadius={0} margin={"6px 0"} colorScheme="whatsapp"> Schedule a Tour</Button>
+                                </Box>
+                            </Box>
+                        </ModalBody>
+                    </ModalContent>
+                </Modal>
             </Box>
-        </Box >
+        </Box>
     );
 };
 
