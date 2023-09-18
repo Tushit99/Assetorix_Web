@@ -786,3 +786,4 @@ const SingleProductDetailPage = () => {
 };
 
 export default SingleProductDetailPage;
+
