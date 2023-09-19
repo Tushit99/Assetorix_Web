@@ -1,9 +1,11 @@
 import { Box, Button, Checkbox, Divider, Flex, Heading, Image, Text } from '@chakra-ui/react';
 import axios from 'axios';
-import style from "./ProductPage.module.css";
+import style from "../ProductPage.module.css";
 import React, { useEffect, useState } from 'react'
 import { BsCheckLg } from "react-icons/bs";
-import { BiPlus } from "react-icons/bi";
+import { BiPlus } from "react-icons/bi"; 
+import { BsFillBookmarkHeartFill } from 'react-icons/bs';
+
 
 
 const ResidentialBuy = () => {
@@ -11,19 +13,69 @@ const ResidentialBuy = () => {
     const [bhk, setBhk] = useState([]);
     const [propertyType, setPropertyType] = useState([]);
     const [furnished, setfurnish] = useState([]);
+    const [wishlist, setWishlist] = useState([]);
+
+    const handleLike = () => {
+        let id = localStorage.getItem("usrId") || undefined;
+        let authorization = localStorage.getItem("AstToken") || undefined; 
+
+        let head = { id, authorization, "Content-type": "application/json" };
+        if (!id || !authorization) {
+            return; 
+        } 
+        axios.get(`${process.env.REACT_APP_URL}/user/wishlistIDs`, {
+            headers: head,
+        }).then((e) => { 
+            setWishlist(e.data);
+            console.log(e.data); 
+        }).catch((err) => console.log(err));
+    }
+
+
+    const handleAddToWishlist = (myid) => {
+        let id = localStorage.getItem("usrId") || undefined;
+        let authorization = localStorage.getItem("AstToken") || undefined;
+
+        let head = { id, authorization, "Content-type": "application/json" };
+        if (!id || !authorization) {
+            return;
+        }
+        const axiosConfig = {
+            method: "patch",
+            url: `${process.env.REACT_APP_URL}/user/wishlist/${myid}`,
+            headers: {
+                id: head.id,
+                authorization: head.authorization,
+                "Content-type": head["Content-type"],
+            },
+            data: {}, 
+        };
+
+        axios(axiosConfig)
+            .then((e) => {
+                setWishlist(e.data);
+                handleLike();
+                console.log(e.data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
 
     const ProductDetail = async () => {
+
         await axios.get(`${process.env.REACT_APP_URL}/property`).then((e) => {
-            setData(e.data.data);
-            console.log(e.data.data);
-            setData(e.data.data);
+            setData(e.data.data); 
+            // console.log(e.data.data); 
         }).catch((e) => {
             console.log(e);
         });
     };
 
+
+
     const handleBedroom = (value) => {
-        console.log(value);
         setBhk((prev) => {
             if (prev.includes(value)) {
                 return prev.filter((item) => item !== value);
@@ -54,11 +106,12 @@ const ResidentialBuy = () => {
                 return [...prev, value];
             }
         });
-    }
+    } 
 
 
-    useEffect(() => {
+    useEffect(() => { 
         ProductDetail();
+        handleLike();
     }, []);
 
 
@@ -104,14 +157,17 @@ const ResidentialBuy = () => {
                 </Box>
                 {/* =========================== product List ====================== */}
                 <Box flex={6} w={"100%"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"} textAlign={"left"} display={"grid"} gridTemplateRows={"auto"} padding={3} gridTemplateColumns={"repeat(3,1fr)"} gap={4}  >
-                    {data.map((e) => (
-                        <Box className={style.property_box} key={e._id}>
-                            <Image src="https://mediacdn.99acres.com/582/0/11640476F-1383637447-Amrit_House_-_Sant_Nagr_Delhi.jpeg" w={"100%"} alt="property image" />
+                    {data.map((e, index) => (
+                        <Box className={style.property_box} key={index}> 
+                            <Box position={"relative"}>
+                                <Text cursor={"pointer"} onClick={() => handleAddToWishlist(e._id)} position={"absolute"} top={1} right={2} color={wishlist?.includes(`${e._id}`) ? "green.500" : "red.500"} > <BsFillBookmarkHeartFill size={"20px"} /> </Text>
+                                <Image src="https://mediacdn.99acres.com/582/0/11640476F-1383637447-Amrit_House_-_Sant_Nagr_Delhi.jpeg" w={"100%"} alt="property image" />
+                            </Box> 
+                            <p> {e._id} </p>
                             <Heading className={style.head_line} size={"sm"} textAlign={"left"} color={"rgb(37, 37, 37)"} >  {e.address.houseNumber && e.address.houseNumber} {e.address.apartmentName && e.address.apartmentName} {e.address.locality && e.address.locality} </Heading>
-                            <Text> {e.roomDetails.bedroom} BHK </Text>
-                            <Text> Price: {e.countryCurrency}{e.price?.toLocaleString("en-IN")} </Text>
-                        </Box>
-                    ))}
+                            <Text> Price: {e.countryCurrency}{e.price?.toLocaleString("en-IN")} </Text>   
+                        </Box> 
+                    ))}  
                 </Box>
             </Flex>
         </Box>
@@ -119,3 +175,4 @@ const ResidentialBuy = () => {
 }
 
 export default ResidentialBuy; 
+

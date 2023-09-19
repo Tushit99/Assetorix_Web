@@ -1,6 +1,6 @@
 import { Box, Button, Checkbox, Divider, Flex, Heading, Image, Text } from '@chakra-ui/react';
 import axios from 'axios';
-import style from "./ProductPage.module.css";
+import style from "../ProductPage.module.css"; 
 import React, { useEffect, useState } from 'react'
 import { BsCheckLg } from "react-icons/bs";
 import { BiPlus } from "react-icons/bi"; 
@@ -8,7 +8,7 @@ import { BiPlus } from "react-icons/bi";
 
 const ResidentialRent = () => {     
     const [data, setData] = useState([]);
-    const [bhk, setBhk] = useState([]); 
+    const [bhk, setBhk] = useState([]);  
     const [propertyType, setPropertyType] = useState([]); 
     const [furnished, setfurnish] = useState([]); 
     const [availableFor, setAvailableFor] = useState([]); 
@@ -16,10 +16,9 @@ const ResidentialRent = () => {
     const ProductDetail = async () => {
         await axios.get(`${process.env.REACT_APP_URL}/property`).then((e) => {
             setData(e.data.data);
-            console.log(e.data.data);
-            setData(e.data.data);
-        }).catch((e)=>{
-            console.log(e); 
+            console.log(e.data.data); 
+        }).catch((e)=>{ 
+            console.log(e);  
         });
     };
 
@@ -127,7 +126,7 @@ const ResidentialRent = () => {
                         <Box className={style.property_box} key={e._id}>
                             <Image src="https://mediacdn.99acres.com/582/0/11640476F-1383637447-Amrit_House_-_Sant_Nagr_Delhi.jpeg" w={"100%"} alt="property image" />
                             <Heading className={style.head_line} size={"sm"} textAlign={"left"} color={"rgb(37, 37, 37)"} >  {e.address.houseNumber && e.address.houseNumber} {e.address.apartmentName && e.address.apartmentName} {e.address.locality && e.address.locality} </Heading>
-                            <Text> {e.roomDetails.bedroom} BHK </Text>
+                            {/* <Text> {e.roomDetails.bedroom} BHK </Text> */} 
                             <Text> Price: {e.countryCurrency}{e.price?.toLocaleString("en-IN")} </Text>
                         </Box>
                     ))}

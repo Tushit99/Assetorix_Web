@@ -22,8 +22,9 @@ import Disclaimer from '../../Pages/Footer/HelpCenter/Disclaimer/Disclaimer'
 import UserDetail from '../../Pages/UserDetail/UserDetail'
 import PrivateRoute from '../PrivateRoute/PrivateRoute'
 import SellForm from '../../Pages/PropertyPostForm/SellForm'
-import SingleProductDetailPage from '../../Pages/ProductDetailPage/SinglePage'
-import ProductPage from '../../Pages/ProductPage/ProductPage'
+import SingleProductDetailPage from '../../Pages/ProductDetailPage/SinglePage' 
+import ResidentialRent from '../../Pages/ProductPage/Residential/ResidentialRent'
+import ResidentialBuy from '../../Pages/ProductPage/Residential/ResidentialBuy'
 // import ConsultingPage from '../../Pages/CoporateServices/Consulting/consulting'
 
 const MainRoute = () => {
@@ -37,14 +38,15 @@ const MainRoute = () => {
         {/* about */}
         <Route path='/about' element={<About />} />
         {/* contact Page */}
-        <Route path='/contact' element={<Contact />} />
+        <Route path='/contact' element={<Contact />} /> 
         {/* signin Page */}
         <Route path='/signup' element={<Singup />} />
         {/* Login Page */}
         <Route path='/login' element={<Login />} />   
 
         {/* Product Page */} 
-        <Route path='/products' element={<ProductPage />} />  
+        <Route path='/residential_rent' element={<ResidentialRent />} />
+        <Route path='/residential_buy' element={<ResidentialBuy />} /> 
 
         {/* buy rent sale */}
         <Route path='/buy' element={<Buy />} />
