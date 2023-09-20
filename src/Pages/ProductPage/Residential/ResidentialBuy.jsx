@@ -6,19 +6,23 @@ import { BsCheckLg } from "react-icons/bs";
 import { BiPlus } from "react-icons/bi";
 import { BsFillBookmarkHeartFill } from 'react-icons/bs';
 import { useLocation, useSearchParams } from 'react-router-dom';
+import LoadingBox from '../LoadingBox/LoadingBox';
+import { useDispatch, useSelector } from 'react-redux';
+import { residentialBuy } from '../../../Redux/Propertysearch/action';
 
 
 const ResidentialBuy = () => {
     const [serchParam, setSearchParam] = useSearchParams();
     const paramBhk = serchParam.getAll("bhk");
     const paramProperty = serchParam.getAll("propertyType");
-    const paramFurnish = serchParam.getAll("furnished"); 
-    const [data, setData] = useState([]);
+    const paramFurnish = serchParam.getAll("furnished");
+    const { ResedentialBuydata, isLoading, isError } = useSelector((state) => state.property);
     const [bhk, setBhk] = useState(paramBhk || []);
     const [propertyType, setPropertyType] = useState(paramProperty || []);
     const [furnished, setfurnish] = useState(paramFurnish || []);
     const [wishlist, setWishlist] = useState([]);
-    const location = useLocation(); 
+    const location = useLocation();
+    const dispatch = useDispatch();
 
     const handleLike = () => {
         let id = localStorage.getItem("usrId") || undefined;
@@ -34,7 +38,7 @@ const ResidentialBuy = () => {
             setWishlist(e.data);
             // console.log(e.data);
         }).catch((err) => console.log(err));
-    } 
+    }
 
     const handleAddToWishlist = (myid) => {
         let id = localStorage.getItem("usrId") || undefined;
@@ -67,20 +71,13 @@ const ResidentialBuy = () => {
             });
     }
 
-    const ProductDetail = async () => {   
-        let obj = {
-            lookingFor: "Rent"
-        }
-        bhk.length && (obj.bedroom = bhk)
-        propertyType.length && (obj.propertyType = propertyType)
-        furnished.length && (obj.furnished = furnished) 
-
-        await axios.get(`${process.env.REACT_APP_URL}/property/buy/residential`, { params: obj }).then((e) => {
-            setData(e.data);
-        }).catch((e) => {
-            console.log(e);
-        });
-    };  
+    // const ProductDetail = async () => {
+    //     await axios.get(`${process.env.REACT_APP_URL}/property/buy/residential${location.search}`).then((e) => {
+    //         setData(e.data);
+    //     }).catch((e) => {
+    //         console.log(e);
+    //     });
+    // };
 
 
     const handleBedroom = (value) => {
@@ -102,7 +99,7 @@ const ResidentialBuy = () => {
                 return [...prev, value];
             }
         });
-    } 
+    }
 
     const handleFurnished = (value) => {
         console.log(value);
@@ -113,12 +110,12 @@ const ResidentialBuy = () => {
                 return [...prev, value];
             }
         });
-    } 
+    }
 
     useEffect(() => {
-        ProductDetail(); // fetching the data
+        dispatch(residentialBuy(location)); // fetching the data
         handleLike(); // wishlist 
-    }, []); 
+    }, []);
 
     useEffect(() => {
         let param = {}
@@ -127,11 +124,23 @@ const ResidentialBuy = () => {
         propertyType && (param.propertyType = propertyType);
         furnished && (param.furnished = furnished);
         setSearchParam(param);
-    }, [bhk, propertyType, furnished]); 
+    }, [bhk, propertyType, furnished]);
 
     useEffect(() => {
-        ProductDetail();
-    }, [location.search]); 
+        dispatch(residentialBuy(location));
+    }, [location.search]);
+
+    if(isError){
+        return <Error /> 
+    }
+
+    if (isLoading == false && isError == false && ResedentialBuydata.length == 0) { 
+        return (
+            <Box display={"flex"} minH={"70vh"} marginTop={6} w={"100%"} alignItems={"center"} justifyContent={"center"}>
+                <Heading> Sorry, Data Does'nt Exist </Heading>
+            </Box>
+        )
+    }
 
     return (
         <Box margin={"40px auto 60px auto"} w={"96%"} >
@@ -177,7 +186,7 @@ const ResidentialBuy = () => {
 
                 {/* =========================== product List ====================== */}
                 <Box flex={6} w={"100%"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"} textAlign={"left"} display={"grid"} gridTemplateRows={"auto"} padding={3} gridTemplateColumns={"repeat(3,1fr)"} gap={4}  >
-                    {data?.map((e, index) => {
+                    {ResedentialBuydata && (ResedentialBuydata?.map((e, index) => {
                         const colorstate = wishlist && Array.isArray(wishlist) && wishlist.includes(`${e._id}`);
                         return (
                             <Box className={style.property_box} key={index}>
@@ -189,7 +198,13 @@ const ResidentialBuy = () => {
                                 <Text> Price: {e.countryCurrency}{e.price?.toLocaleString("en-IN")} </Text>
                             </Box>
                         )
-                    })}
+                    }))
+                    }
+                    {isLoading && (
+                        [1, 2, 3, 4, 5, 6, 7, 8, 9].map((e) => (
+                            <LoadingBox key={e} />
+                        ))
+                    )}
                 </Box>
             </Flex>
         </Box>

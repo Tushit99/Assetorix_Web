@@ -6,6 +6,11 @@ import { BsCheckLg } from "react-icons/bs";
 import { BiPlus } from "react-icons/bi";
 import { BsFillBookmarkHeartFill } from 'react-icons/bs';
 import { useLocation, useSearchParams } from 'react-router-dom';
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+import LoadingBox from '../LoadingBox/LoadingBox';
+import { useDispatch, useSelector } from 'react-redux';
+import Error from '../../ErrorPage/Error';
 
 
 const ResidentialRent = () => {
@@ -13,12 +18,13 @@ const ResidentialRent = () => {
     const paramBhk = serchParam.getAll("bhk");
     const paramProperty = serchParam.getAll("propertyType");
     const paramFurnish = serchParam.getAll("furnished");
-    const [data, setData] = useState([]);
+    const { Resedentialrentdata, isLoading, isError } = useSelector((state) => state.property);
     const [bhk, setBhk] = useState(paramBhk || []);
     const [propertyType, setPropertyType] = useState(paramProperty || []);
     const [furnished, setfurnish] = useState(paramFurnish || []);
     const [wishlist, setWishlist] = useState([]);
-    const location = useLocation(); 
+    const location = useLocation();
+    const dispatch = useDispatch();
 
     const handleLike = () => {
         let id = localStorage.getItem("usrId") || undefined;
@@ -34,7 +40,7 @@ const ResidentialRent = () => {
             setWishlist(e.data);
             // console.log(e.data);
         }).catch((err) => console.log(err));
-    } 
+    }
 
     const handleAddToWishlist = (myid) => {
         let id = localStorage.getItem("usrId") || undefined;
@@ -67,20 +73,18 @@ const ResidentialRent = () => {
             });
     }
 
-    const ProductDetail = async () => {   
-        let obj = {
-            lookingFor: "Rent"
-        }
+    const ProductDetail = async () => {
+        let obj = {}
         bhk.length && (obj.bedroom = bhk)
         propertyType.length && (obj.propertyType = propertyType)
-        furnished.length && (obj.furnished = furnished) 
+        furnished.length && (obj.furnished = furnished)
 
         await axios.get(`${process.env.REACT_APP_URL}/property/rent/residential`, { params: obj }).then((e) => {
             setData(e.data);
         }).catch((e) => {
             console.log(e);
         });
-    };  
+    };
 
 
     const handleBedroom = (value) => {
@@ -102,7 +106,7 @@ const ResidentialRent = () => {
                 return [...prev, value];
             }
         });
-    } 
+    }
 
     const handleFurnished = (value) => {
         console.log(value);
@@ -113,12 +117,12 @@ const ResidentialRent = () => {
                 return [...prev, value];
             }
         });
-    } 
+    }
 
     useEffect(() => {
         ProductDetail(); // fetching the data
         handleLike(); // wishlist 
-    }, []); 
+    }, []);
 
     useEffect(() => {
         let param = {}
@@ -127,11 +131,23 @@ const ResidentialRent = () => {
         propertyType && (param.propertyType = propertyType);
         furnished && (param.furnished = furnished);
         setSearchParam(param);
-    }, [bhk, propertyType, furnished]); 
+    }, [bhk, propertyType, furnished]);
 
     useEffect(() => {
         ProductDetail();
     }, [location.search]); 
+    
+    if (isError) {
+        return <Error />
+    }
+ 
+    if (isLoading == false && isError == false && Resedentialrentdata.length == 0) { 
+        return (
+            <Box display={"flex"} minH={"70vh"} marginTop={6} w={"100%"} alignItems={"center"} justifyContent={"center"}>
+                <Heading> Sorry, Data Does'nt Exist </Heading>
+            </Box>
+        )
+    }
 
     return (
         <Box margin={"40px auto 60px auto"} w={"96%"} >
@@ -177,7 +193,7 @@ const ResidentialRent = () => {
 
                 {/* =========================== product List ====================== */}
                 <Box flex={6} w={"100%"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"} textAlign={"left"} display={"grid"} gridTemplateRows={"auto"} padding={3} gridTemplateColumns={"repeat(3,1fr)"} gap={4}  >
-                    {data?.map((e, index) => {
+                    {Resedentialrentdata.length && (Resedentialrentdata?.map((e, index) => {
                         const colorstate = wishlist && Array.isArray(wishlist) && wishlist.includes(`${e._id}`);
                         return (
                             <Box className={style.property_box} key={index}>
@@ -189,7 +205,13 @@ const ResidentialRent = () => {
                                 <Text> Price: {e.countryCurrency}{e.price?.toLocaleString("en-IN")} </Text>
                             </Box>
                         )
-                    })}
+                    }))}
+
+                    {isLoading && (
+                        [1, 2, 3, 4, 5, 6, 7, 8, 9].map((e) => (
+                            <LoadingBox key={e} />
+                        ))
+                    )}
                 </Box>
             </Flex>
         </Box>

@@ -5,20 +5,27 @@ import React, { useEffect, useState } from 'react'
 import { BsCheckLg } from "react-icons/bs";
 import { BiPlus } from "react-icons/bi";
 import { BsFillBookmarkHeartFill } from 'react-icons/bs';
-import { useLocation, useSearchParams } from 'react-router-dom';  
+import { useLocation, useSearchParams } from 'react-router-dom';
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+import LoadingBox from '../LoadingBox/LoadingBox';
+import { commercialRent } from '../../../Redux/Propertysearch/action';
+import { useDispatch, useSelector } from 'react-redux';
+import Error from '../../ErrorPage/Error';
 
 
-const CommercialLease = () => {  
+const CommercialLease = () => {
     const [serchParam, setSearchParam] = useSearchParams();
     const paramBhk = serchParam.getAll("bhk");
     const paramProperty = serchParam.getAll("propertyType");
     const paramFurnish = serchParam.getAll("furnished");
-    const [data, setData] = useState([]);
+    const { Commercialrentdata, isLoading, isError } = useSelector((state) => state.property);
     const [bhk, setBhk] = useState(paramBhk || []);
     const [propertyType, setPropertyType] = useState(paramProperty || []);
     const [furnished, setfurnish] = useState(paramFurnish || []);
     const [wishlist, setWishlist] = useState([]);
     const location = useLocation();
+    const dispatch = useDispatch();
 
     const handleLike = () => {
         let id = localStorage.getItem("usrId") || undefined;
@@ -68,9 +75,7 @@ const CommercialLease = () => {
     }
 
     const ProductDetail = async () => {
-        let obj = {
-            lookingFor: "Rent"
-        }
+        let obj = {}
         bhk.length && (obj.bedroom = bhk)
         propertyType.length && (obj.propertyType = propertyType)
         furnished.length && (obj.furnished = furnished)
@@ -116,7 +121,7 @@ const CommercialLease = () => {
     }
 
     useEffect(() => {
-        ProductDetail(); // fetching the data
+        dispatch(commercialRent(location)); // fetching the data
         handleLike(); // wishlist 
     }, []);
 
@@ -130,8 +135,20 @@ const CommercialLease = () => {
     }, [bhk, propertyType, furnished]);
 
     useEffect(() => {
-        ProductDetail();
+        dispatch(commercialRent(location));
     }, [location.search]);
+
+    if(isError){
+        return <Error /> 
+    }
+
+    if (isLoading == false && isError == false && Commercialrentdata.length == 0) { 
+        return (
+            <Box display={"flex"} minH={"70vh"} marginTop={6} w={"100%"} alignItems={"center"} justifyContent={"center"}>
+                <Heading> Sorry, Data Does'nt Exist </Heading>
+            </Box>
+        )
+    }
 
     return (
         <Box margin={"40px auto 60px auto"} w={"96%"} >
@@ -177,7 +194,7 @@ const CommercialLease = () => {
 
                 {/* =========================== product List ====================== */}
                 <Box flex={6} w={"100%"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"} textAlign={"left"} display={"grid"} gridTemplateRows={"auto"} padding={3} gridTemplateColumns={"repeat(3,1fr)"} gap={4}  >
-                    {data?.map((e, index) => {
+                    {Commercialrentdata && (Commercialrentdata?.map((e, index) => {
                         const colorstate = wishlist && Array.isArray(wishlist) && wishlist.includes(`${e._id}`);
                         return (
                             <Box className={style.property_box} key={index}>
@@ -189,13 +206,19 @@ const CommercialLease = () => {
                                 <Text> Price: {e.countryCurrency}{e.price?.toLocaleString("en-IN")} </Text>
                             </Box>
                         )
-                    })}
+                    }))} 
+
+                    {isLoading && (
+                        [1, 2, 3, 4, 5, 6, 7, 8, 9].map((e) => (
+                            <LoadingBox key={e} />
+                        ))
+                    )}
                 </Box>
             </Flex>
         </Box>
     )
-}  
+}
 
-export default CommercialLease;  
+export default CommercialLease;
 
 

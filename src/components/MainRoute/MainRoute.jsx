@@ -25,6 +25,8 @@ import SellForm from '../../Pages/PropertyPostForm/SellForm'
 import SingleProductDetailPage from '../../Pages/ProductDetailPage/SinglePage' 
 import ResidentialRent from '../../Pages/ProductPage/Residential/ResidentialRent'
 import ResidentialBuy from '../../Pages/ProductPage/Residential/ResidentialBuy'
+import CommercialBuy from '../../Pages/ProductPage/Commercial/CommercialBuy'
+import CommercialLease from '../../Pages/ProductPage/Commercial/CommercialLease'
 // import ConsultingPage from '../../Pages/CoporateServices/Consulting/consulting'
 
 const MainRoute = () => {
@@ -47,6 +49,8 @@ const MainRoute = () => {
         {/* Product Page */} 
         <Route path='/residential_rent' element={<ResidentialRent />} />
         <Route path='/residential_buy' element={<ResidentialBuy />} /> 
+        <Route path='/commercial_rent' element={<CommercialLease />} />  
+        <Route path='/commercial_buy' element={<CommercialBuy />} /> 
 
         {/* buy rent sale */}
         <Route path='/buy' element={<Buy />} />

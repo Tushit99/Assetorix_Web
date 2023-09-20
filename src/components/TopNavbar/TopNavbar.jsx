@@ -61,11 +61,11 @@ const TopNavbar = () => {
 
     const handlePageRent = () => {
         dispatch(changeLookingFor("Rent/Lease"));
-    }
+    };
 
     const handlePageSell = () => {
         dispatch(changeLookingFor("sell"));
-    }
+    };
 
     const handlecountry = (val) => {
         setCountry(val);
@@ -75,7 +75,7 @@ const TopNavbar = () => {
 
     const handlelogout = () => {
         dispatch(userlogout());
-    }
+    };
 
     return (
         <div id={style.nav_back_space}>
@@ -89,8 +89,11 @@ const TopNavbar = () => {
                     </div>
                     <div className={style.login_data2}>
                         <div className={style.country}>
-                            <select onChange={(e) => handlecountry(e.target.value)}
-                                value={country} style={{ border: "0px", outline: "0px" }}>
+                            <select
+                                onChange={(e) => handlecountry(e.target.value)}
+                                value={country}
+                                style={{ border: "0px", outline: "0px" }}
+                            >
                                 <option value="india">India</option>
                                 <option value="usa">USA</option>
                             </select>
@@ -123,12 +126,12 @@ const TopNavbar = () => {
                                 </Button>
                             </PopoverTrigger>
                             {data.user.name ? (
-                                <PopoverContent >
+                                <PopoverContent>
                                     <PopoverArrow />
                                     <PopoverHeader>Welcome to Assetorix</PopoverHeader>
-                                    <PopoverBody >
+                                    <PopoverBody>
                                         <Text margin={"0 0 8px 0"}>
-                                            Hello {(data.user.name).toUpperCase()}
+                                            Hello {data.user.name.toUpperCase()}
                                         </Text>
                                         <Box className={style.log_links}>
                                             <Link to={"/profile"}> Profile </Link>
@@ -137,7 +140,10 @@ const TopNavbar = () => {
                                             <Link> Listings </Link>
                                             <Link> Purchased </Link>
                                         </Box>
-                                        <Button onClick={handlelogout} className={style.logout_btn} > Logout </Button>
+                                        <Button onClick={handlelogout} className={style.logout_btn}>
+                                            {" "}
+                                            Logout{" "}
+                                        </Button>
                                     </PopoverBody>
                                 </PopoverContent>
                             ) : (
@@ -167,6 +173,7 @@ const TopNavbar = () => {
                         </Popover>
                     </div>
                 </div>
+                {/*  Navbar Bottom  */}
                 <div className={style.nav_bottom2}>
                     {/* Buy button  */}
                     <Popover>
@@ -181,7 +188,11 @@ const TopNavbar = () => {
                                 Buy
                             </Button>
                         </PopoverTrigger>
-                        <PopoverContent w={{ base: "320px", md: "400px" }}>
+                        <PopoverContent
+                            w={{ base: "320px", md: "400px" }}
+                            marginTop={"-5px"}
+                            color={"black"}
+                        >
                             <PopoverArrow />
                             <PopoverHeader>Buy Property</PopoverHeader>
                             <PopoverBody>
@@ -219,7 +230,15 @@ const TopNavbar = () => {
                                                     other
                                                 </Checkbox>
                                             </Box>
-                                            <Button backgroundColor={"rgb(46,49,146)"} color={"white"} className={style.start_btn}>Start Now</Button>
+                                            <Link to="/residential_buy">
+                                                <Button
+                                                    backgroundColor={"rgb(46,49,146)"}
+                                                    color={"white"}
+                                                    className={style.start_btn}
+                                                >
+                                                    Start Now
+                                                </Button>
+                                            </Link>
                                         </TabPanel>
                                         <TabPanel>
                                             <Box className={style.buy}>
@@ -233,17 +252,118 @@ const TopNavbar = () => {
                                                 <Checkbox>Hospitality</Checkbox>
                                                 <Checkbox>Other</Checkbox>
                                             </Box>
-                                            <Button backgroundColor={"rgb(46,49,146)"} color={"white"} className={style.start_btn}>Start Now</Button>
+                                            <Link to={"/commercial_buy"}>
+                                                <Button
+                                                    backgroundColor={"rgb(46,49,146)"}
+                                                    color={"white"}
+                                                    className={style.start_btn}
+                                                >
+                                                    Start Now
+                                                </Button>
+                                            </Link>
                                         </TabPanel>
                                     </TabPanels>
                                 </Tabs>
                             </PopoverBody>
                         </PopoverContent>
                     </Popover>
-                    {/* ghbnjkl */}
-                    <Link onClick={handlePageSell} to={"/post"}>Sell</Link>
+                    {/* Sell */}
+                    <Link onClick={handlePageSell} to={"/post"}>
+                        Sell
+                    </Link>
                     <Link>Home Loans</Link>
-                    <Link onClick={handlePageRent} to={"/post"}>Rent</Link>
+                    {/* Rent button */}
+                    <Popover>
+                        <PopoverTrigger>
+                            <Button
+                                backgroundColor={"unset"}
+                                color={"auto"}
+                                fontWeight={400}
+                                _hover={{ color: "unset" }}
+                                _active={{ color: "unset" }}
+                            >
+                                Rent
+                            </Button>
+                        </PopoverTrigger>
+                        <PopoverContent
+                            w={{ base: "320px", md: "400px" }}
+                            marginTop={"-5px"}
+                            color={"black"}
+                        >
+                            <PopoverArrow />
+                            <PopoverHeader>Buy Property</PopoverHeader>
+                            <PopoverBody>
+                                {/* one */}
+                                <Tabs variant="enclosed">
+                                    <TabList>
+                                        <Tab>Residential</Tab>
+                                        <Tab>Commercial</Tab>
+                                    </TabList>
+                                    <TabPanels>
+                                        <TabPanel>
+                                            <Box className={style.buy}>
+                                                <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                                    Flat/Apartment
+                                                </Checkbox>
+                                                <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                                    Independent House/villa
+                                                </Checkbox>
+                                                <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                                    Independent/builder Floor
+                                                </Checkbox>
+                                                <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                                    Serviced Apartment
+                                                </Checkbox>
+                                                <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                                    Plot/Land
+                                                </Checkbox>
+                                                <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                                    1 RK/ Studio Apartment
+                                                </Checkbox>
+                                                <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                                    Farmhouse
+                                                </Checkbox>
+                                                <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                                    other
+                                                </Checkbox>
+                                            </Box>
+                                            <Link to="/residential_rent">
+                                                <Button
+                                                    backgroundColor={"rgb(46,49,146)"}
+                                                    color={"white"}
+                                                    className={style.start_btn}
+                                                >
+                                                    Start Now
+                                                </Button>
+                                            </Link>
+                                        </TabPanel>
+                                        <TabPanel>
+                                            <Box className={style.buy}>
+                                                <Checkbox size={"md"} color={"black"}>
+                                                    Office
+                                                </Checkbox>
+                                                <Checkbox>Retail</Checkbox>
+                                                <Checkbox>Plot/Land</Checkbox>
+                                                <Checkbox>Storage</Checkbox>
+                                                <Checkbox>Industry</Checkbox>
+                                                <Checkbox>Hospitality</Checkbox>
+                                                <Checkbox>Other</Checkbox>
+                                            </Box>
+                                            <Link to={"/commercial_rent"}>
+                                                <Button
+                                                    backgroundColor={"rgb(46,49,146)"}
+                                                    color={"white"}
+                                                    className={style.start_btn}
+                                                >
+                                                    Start Now
+                                                </Button>
+                                            </Link>
+                                        </TabPanel>
+                                    </TabPanels>
+                                </Tabs>
+                            </PopoverBody>
+                        </PopoverContent>
+                    </Popover>
                     <Link>Advertise</Link>
                     <Link>Agent Finder</Link>
                     <Popover>
@@ -263,7 +383,9 @@ const TopNavbar = () => {
                                 </Link>
                                 {/* <Link to={"/consulting"}>Consulting</Link> */}
                                 <Link to={"/market_research"}>Market Research</Link>
-                                <Link to={"/portfolio_planning"}>Property & Portfolio Sales</Link>
+                                <Link to={"/portfolio_planning"}>
+                                    Property & Portfolio Sales
+                                </Link>
                                 <Link to={"/usa_real_state"}> USA Real State</Link>
                             </PopoverBody>
                         </PopoverContent>

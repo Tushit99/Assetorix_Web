@@ -31,7 +31,7 @@ const Navebar = () => {
     const [scroll, setScroll] = useState(0);
     const [country, setCountry] = useState("india");
     const dispatch = useDispatch();
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
     useEffect(() => {
         window.addEventListener("scroll", () => {
@@ -41,7 +41,7 @@ const Navebar = () => {
         let userid = localStorage.getItem("usrId") || undefined;
         let authorization = localStorage.getItem("AstToken") || undefined;
 
-        if (userid && authorization && data.user.length==0){
+        if (userid && authorization && data.user.length == 0) {
             let body = {
                 id: userid,
                 authorization,
@@ -61,11 +61,11 @@ const Navebar = () => {
     }, []);
 
     const handlePageRent = () => {
-        dispatch(changeLookingFor("Rent/Lease")); 
+        dispatch(changeLookingFor("Rent/Lease"));
     }
 
-    const handlePageSell = () => { 
-        dispatch(changeLookingFor("sell")); 
+    const handlePageSell = () => {
+        dispatch(changeLookingFor("sell"));
     }
 
     const handlecountry = (val) => {
@@ -183,12 +183,12 @@ const Navebar = () => {
                             color={"auto"}
                             fontWeight={400}
                             _hover={{ color: "unset" }}
-                            _active={{ color: "unset" }} 
+                            _active={{ color: "unset" }}
                         >
                             Buy
                         </Button>
                     </PopoverTrigger>
-                    <PopoverContent w={{ base: "320px", md: "400px" }} color={"black"}>
+                    <PopoverContent w={{ base: "320px", md: "400px" }} marginTop={"-5px"} color={"black"}>
                         <PopoverArrow />
                         <PopoverHeader>Buy Property</PopoverHeader>
                         <PopoverBody>
@@ -226,13 +226,15 @@ const Navebar = () => {
                                                 other
                                             </Checkbox>
                                         </Box>
-                                        <Button
-                                            backgroundColor={"rgb(46,49,146)"}
-                                            color={"white"}
-                                            className={style.start_btn}
-                                        >
-                                            Start Now
-                                        </Button>
+                                        <Link to="/residential_buy">
+                                            <Button
+                                                backgroundColor={"rgb(46,49,146)"}
+                                                color={"white"}
+                                                className={style.start_btn}
+                                            >
+                                                Start Now
+                                            </Button>
+                                        </Link>
                                     </TabPanel>
                                     <TabPanel>
                                         <Box className={style.buy}>
@@ -246,26 +248,115 @@ const Navebar = () => {
                                             <Checkbox>Hospitality</Checkbox>
                                             <Checkbox>Other</Checkbox>
                                         </Box>
-                                        <Button
-                                            backgroundColor={"rgb(46,49,146)"}
-                                            color={"white"}
-                                            className={style.start_btn}
-                                        >
-                                            Start Now
-                                        </Button>
+                                        <Link to={"/commercial_buy"}> 
+                                            <Button
+                                                backgroundColor={"rgb(46,49,146)"}
+                                                color={"white"}
+                                                className={style.start_btn}
+                                            >
+                                                Start Now
+                                            </Button>
+                                        </Link>
+                                    </TabPanel>
+                                </TabPanels> 
+                            </Tabs>
+                        </PopoverBody>
+                    </PopoverContent>
+                </Popover>
+                {/* Sell */}
+                <Link onClick={handlePageSell} to={"/post"}>Sell</Link>
+                <Link>Home Loans</Link>
+                {/* Rent button */}
+                <Popover>
+                    <PopoverTrigger>
+                        <Button
+                            backgroundColor={"unset"}
+                            color={"auto"}
+                            fontWeight={400}
+                            _hover={{ color: "unset" }} 
+                            _active={{ color: "unset" }}
+                        >
+                            Rent  
+                        </Button>
+                    </PopoverTrigger>
+                    <PopoverContent w={{ base: "320px", md: "400px" }} marginTop={"-5px"} color={"black"}>
+                        <PopoverArrow />
+                        <PopoverHeader>Buy Property</PopoverHeader>
+                        <PopoverBody>
+                            {/* one */}
+                            <Tabs variant="enclosed">
+                                <TabList>
+                                    <Tab>Residential</Tab>
+                                    <Tab>Commercial</Tab>
+                                </TabList>
+                                <TabPanels>
+                                    <TabPanel>
+                                        <Box className={style.buy}>
+                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                                Flat/Apartment
+                                            </Checkbox>
+                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                                Independent House/villa
+                                            </Checkbox>
+                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                                Independent/builder Floor
+                                            </Checkbox>
+                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                                Serviced Apartment
+                                            </Checkbox>
+                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                                Plot/Land
+                                            </Checkbox>
+                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                                1 RK/ Studio Apartment
+                                            </Checkbox>
+                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                                Farmhouse
+                                            </Checkbox>
+                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                                other
+                                            </Checkbox>
+                                        </Box>
+                                        <Link to="/residential_rent">
+                                            <Button
+                                                backgroundColor={"rgb(46,49,146)"}
+                                                color={"white"}
+                                                className={style.start_btn}
+                                            >
+                                                Start Now
+                                            </Button>
+                                        </Link>
+                                    </TabPanel>
+                                    <TabPanel>
+                                        <Box className={style.buy}>
+                                            <Checkbox size={"md"} color={"black"}>
+                                                Office
+                                            </Checkbox>
+                                            <Checkbox>Retail</Checkbox>
+                                            <Checkbox>Plot/Land</Checkbox>
+                                            <Checkbox>Storage</Checkbox>
+                                            <Checkbox>Industry</Checkbox>
+                                            <Checkbox>Hospitality</Checkbox>
+                                            <Checkbox>Other</Checkbox>
+                                        </Box>
+                                        <Link to={"/commercial_rent"}> 
+                                            <Button
+                                                backgroundColor={"rgb(46,49,146)"}
+                                                color={"white"}
+                                                className={style.start_btn}
+                                            >
+                                                Start Now
+                                            </Button>
+                                        </Link>
                                     </TabPanel>
                                 </TabPanels>
                             </Tabs>
                         </PopoverBody>
                     </PopoverContent>
                 </Popover>
-                {/* ghbnjkl */}
-                <Link onClick={handlePageSell} to={"/post"}>Sell</Link>
-                <Link>Home Loans</Link>
-                <Link onClick={handlePageRent} to={"/post"}>Rent</Link>
                 <Link>Advertise</Link>
                 <Link>Agent Finder</Link>
-                <Popover> 
+                <Popover>
                     <PopoverTrigger>
                         <button>Corporate Services</button>
                     </PopoverTrigger>
