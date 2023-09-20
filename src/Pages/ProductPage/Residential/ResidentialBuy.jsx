@@ -1,9 +1,9 @@
-import { Box, Button, Checkbox, Divider, Flex, Heading, Image, Text } from '@chakra-ui/react';
+import { Box, Divider, Flex, Heading, Image, Text } from '@chakra-ui/react';
 import axios from 'axios';
 import style from "../ProductPage.module.css";
 import React, { useEffect, useState } from 'react'
 import { BsCheckLg } from "react-icons/bs";
-import { BiPlus } from "react-icons/bi"; 
+import { BiPlus } from "react-icons/bi";
 import { BsFillBookmarkHeartFill } from 'react-icons/bs';
 
 
@@ -17,17 +17,17 @@ const ResidentialBuy = () => {
 
     const handleLike = () => {
         let id = localStorage.getItem("usrId") || undefined;
-        let authorization = localStorage.getItem("AstToken") || undefined; 
+        let authorization = localStorage.getItem("AstToken") || undefined;
 
         let head = { id, authorization, "Content-type": "application/json" };
         if (!id || !authorization) {
-            return; 
-        } 
+            return;
+        }
         axios.get(`${process.env.REACT_APP_URL}/user/wishlistIDs`, {
             headers: head,
-        }).then((e) => { 
+        }).then((e) => {
             setWishlist(e.data);
-            console.log(e.data); 
+            console.log(e.data);
         }).catch((err) => console.log(err));
     }
 
@@ -39,22 +39,23 @@ const ResidentialBuy = () => {
         let head = { id, authorization, "Content-type": "application/json" };
         if (!id || !authorization) {
             return;
-        }
+        } 
+        
         const axiosConfig = {
-            method: "patch",
+            method: `${wishlist.includes(myid) ? "delete" : "patch"}`,
             url: `${process.env.REACT_APP_URL}/user/wishlist/${myid}`,
             headers: {
                 id: head.id,
                 authorization: head.authorization,
                 "Content-type": head["Content-type"],
             },
-            data: {}, 
+            data: {},
         };
 
         axios(axiosConfig)
             .then((e) => {
-                setWishlist(e.data);
-                handleLike();
+                setWishlist(e.data); 
+                setWishlist(e.data.wishlistIDs);  
                 console.log(e.data);
             })
             .catch((error) => {
@@ -63,11 +64,10 @@ const ResidentialBuy = () => {
     }
 
 
-    const ProductDetail = async () => {
-
-        await axios.get(`${process.env.REACT_APP_URL}/property`).then((e) => {
-            setData(e.data.data); 
-            // console.log(e.data.data); 
+    const ProductDetail = async () => {  
+        await axios.get(`${process.env.REACT_APP_URL}/property?lookingFor=Sell`).then((e) => {
+            setData(e.data.data);
+            console.log(e.data); 
         }).catch((e) => {
             console.log(e);
         });
@@ -96,7 +96,7 @@ const ResidentialBuy = () => {
         });
     }
 
-
+  
     const handleFurnished = (value) => {
         console.log(value);
         setfurnish((prev) => {
@@ -108,10 +108,9 @@ const ResidentialBuy = () => {
         });
     } 
 
-
-    useEffect(() => { 
-        ProductDetail();
-        handleLike();
+    useEffect(() => {
+        ProductDetail(); // fetching the data
+        handleLike(); // wishlist 
     }, []);
 
 
@@ -157,22 +156,24 @@ const ResidentialBuy = () => {
                 </Box>
                 {/* =========================== product List ====================== */}
                 <Box flex={6} w={"100%"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"} textAlign={"left"} display={"grid"} gridTemplateRows={"auto"} padding={3} gridTemplateColumns={"repeat(3,1fr)"} gap={4}  >
-                    {data.map((e, index) => (
-                        <Box className={style.property_box} key={index}> 
-                            <Box position={"relative"}>
-                                <Text cursor={"pointer"} onClick={() => handleAddToWishlist(e._id)} position={"absolute"} top={1} right={2} color={wishlist?.includes(`${e._id}`) ? "green.500" : "red.500"} > <BsFillBookmarkHeartFill size={"20px"} /> </Text>
-                                <Image src="https://mediacdn.99acres.com/582/0/11640476F-1383637447-Amrit_House_-_Sant_Nagr_Delhi.jpeg" w={"100%"} alt="property image" />
-                            </Box> 
-                            <p> {e._id} </p>
-                            <Heading className={style.head_line} size={"sm"} textAlign={"left"} color={"rgb(37, 37, 37)"} >  {e.address.houseNumber && e.address.houseNumber} {e.address.apartmentName && e.address.apartmentName} {e.address.locality && e.address.locality} </Heading>
-                            <Text> Price: {e.countryCurrency}{e.price?.toLocaleString("en-IN")} </Text>   
-                        </Box> 
-                    ))}  
+                    {data.map((e, index) => { 
+                        const colorstate = wishlist && Array.isArray(wishlist) && wishlist.includes(`${e._id}`);   
+                        return ( 
+                            <Box className={style.property_box} key={index}> 
+                                <Box position={"relative"}>
+                                    <Text cursor={"pointer"} onClick={() => handleAddToWishlist(e._id)} position={"absolute"} top={1} right={2} color={colorstate ? "green.500" : "red.500"} > <BsFillBookmarkHeartFill size={"20px"} /> </Text>
+                                    <Image src="https://mediacdn.99acres.com/582/0/11640476F-1383637447-Amrit_House_-_Sant_Nagr_Delhi.jpeg" w={"100%"} alt="property image" />
+                                </Box> 
+                                <Heading className={style.head_line} size={"sm"} textAlign={"left"} color={"rgb(37, 37, 37)"} >  {e.address.houseNumber && e.address.houseNumber} {e.address.apartmentName && e.address.apartmentName} {e.address.locality && e.address.locality} </Heading>
+                                <Text> Price: {e.countryCurrency}{e.price?.toLocaleString("en-IN")} </Text>
+                            </Box>
+                        )
+                    })}
                 </Box>
             </Flex>
         </Box>
     )
 }
 
-export default ResidentialBuy; 
+export default ResidentialBuy;
 

@@ -21,7 +21,7 @@ import {
   Checkbox,
 } from "@chakra-ui/react";
 import style from "./Page1.module.css";
-import video from "./Ametheus.mp4";
+import video from "./assetorix.mp4";
 import { Search2Icon } from "@chakra-ui/icons";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -54,7 +54,8 @@ const Page1 = () => {
           fontWeight={700}
           lineHeight={1.2}
           textAlign={"left"}
-          marginTop={20}
+          marginTop={20} 
+          className={style.word}
           userSelect={"none"}
           textShadow={"#000000 3px 4px 20px"}
           fontSize={useBreakpointValue({ base: "4xl", md: "6xl" })}
@@ -73,7 +74,7 @@ const Page1 = () => {
                   fontSize={{ base: "sm", lg: "lg" }}
                   fontWeight={{ base: "500", lg: "bold" }}
                   boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}
-                  style={{ borderradius: "20px" }}
+                  style={{ borderradius: "20px" }} 
                   className={style.select_city}
                   border={0}
                 >

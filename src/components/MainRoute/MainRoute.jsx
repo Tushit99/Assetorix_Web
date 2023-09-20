@@ -68,7 +68,7 @@ const MainRoute = () => {
         {/* footer ==> Help Center  */}
         <Route path='/Purchase_term_Condition' element={<PurchaseTerm />} />
         <Route path='/user_term_condition' element={<UserTerm />} />
-        <Route path='/privacy' element={<Privacy />} />
+        <Route path='/privacy' element={<Privacy />} /> 
         <Route path='/disclaimer' element={<Disclaimer />} />  
 
         {/* after login Details Route */}
