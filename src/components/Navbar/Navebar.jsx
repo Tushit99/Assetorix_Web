@@ -119,7 +119,7 @@ const Navebar = () => {
                                     />
                                 }
                             >
-                                {data.user.name ? (
+                                {data.user.name ? (  
                                     <span className={style.alpha}>
                                         {data.user.name[0].toUpperCase()}
                                     </span>
@@ -221,10 +221,7 @@ const Navebar = () => {
                                             </Checkbox>
                                             <Checkbox iconSize={"0px"} colorScheme={"blue"}>
                                                 Farmhouse
-                                            </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
-                                                other
-                                            </Checkbox>
+                                            </Checkbox> 
                                         </Box>
                                         <Link to="/residential_buy">
                                             <Button
@@ -246,8 +243,7 @@ const Navebar = () => {
                                             <Checkbox>Plot/Land</Checkbox>
                                             <Checkbox>Storage</Checkbox>
                                             <Checkbox>Industry</Checkbox>
-                                            <Checkbox>Hospitality</Checkbox>
-                                            <Checkbox>Other</Checkbox>
+                                            <Checkbox>Hospitality</Checkbox> 
                                         </Box>
                                         <Link to={"/commercial_buy"}> 
                                             <Button
@@ -314,10 +310,7 @@ const Navebar = () => {
                                             </Checkbox>
                                             <Checkbox iconSize={"0px"} colorScheme={"blue"}>
                                                 Farmhouse
-                                            </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
-                                                other
-                                            </Checkbox>
+                                            </Checkbox> 
                                         </Box>
                                         <Link to="/residential_rent">
                                             <Button
@@ -339,8 +332,7 @@ const Navebar = () => {
                                             <Checkbox>Plot/Land</Checkbox>
                                             <Checkbox>Storage</Checkbox>
                                             <Checkbox>Industry</Checkbox>
-                                            <Checkbox>Hospitality</Checkbox>
-                                            <Checkbox>Other</Checkbox>
+                                            <Checkbox>Hospitality</Checkbox> 
                                         </Box>
                                         <Link to={"/commercial_rent"}> 
                                             <Button

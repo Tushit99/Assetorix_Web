@@ -225,10 +225,7 @@ const TopNavbar = () => {
                                                 </Checkbox>
                                                 <Checkbox iconSize={"0px"} colorScheme={"blue"}>
                                                     Farmhouse
-                                                </Checkbox>
-                                                <Checkbox iconSize={"0px"} colorScheme={"blue"}>
-                                                    other
-                                                </Checkbox>
+                                                </Checkbox> 
                                             </Box>
                                             <Link to="/residential_buy">
                                                 <Button
@@ -250,8 +247,7 @@ const TopNavbar = () => {
                                                 <Checkbox>Plot/Land</Checkbox>
                                                 <Checkbox>Storage</Checkbox>
                                                 <Checkbox>Industry</Checkbox>
-                                                <Checkbox>Hospitality</Checkbox>
-                                                <Checkbox>Other</Checkbox>
+                                                <Checkbox>Hospitality</Checkbox> 
                                             </Box>
                                             <Link to={"/commercial_buy"}>
                                                 <Button
@@ -324,10 +320,7 @@ const TopNavbar = () => {
                                                 </Checkbox>
                                                 <Checkbox iconSize={"0px"} colorScheme={"blue"}>
                                                     Farmhouse
-                                                </Checkbox>
-                                                <Checkbox iconSize={"0px"} colorScheme={"blue"}>
-                                                    other
-                                                </Checkbox>
+                                                </Checkbox> 
                                             </Box>
                                             <Link to="/residential_rent">
                                                 <Button
@@ -349,8 +342,7 @@ const TopNavbar = () => {
                                                 <Checkbox>Plot/Land</Checkbox>
                                                 <Checkbox>Storage</Checkbox>
                                                 <Checkbox>Industry</Checkbox>
-                                                <Checkbox>Hospitality</Checkbox>
-                                                <Checkbox>Other</Checkbox>
+                                                <Checkbox>Hospitality</Checkbox> 
                                             </Box>
                                             <Link to={"/commercial_rent"}>
                                                 <Button
