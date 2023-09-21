@@ -136,7 +136,7 @@ const ResidentialRent = () => {
     useEffect(() => {
         ProductDetail();
     }, [location.search]); 
-    
+
     if (isError) {
         return <Error />
     }
@@ -146,7 +146,7 @@ const ResidentialRent = () => {
             <Box display={"flex"} minH={"70vh"} marginTop={6} w={"100%"} alignItems={"center"} justifyContent={"center"}>
                 <Heading> Sorry, Data Does'nt Exist </Heading>
             </Box>
-        )
+        ) 
     }
 
     return (

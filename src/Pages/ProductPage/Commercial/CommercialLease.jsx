@@ -140,7 +140,7 @@ const CommercialLease = () => {
 
     if(isError){
         return <Error /> 
-    }
+    } 
 
     if (isLoading == false && isError == false && Commercialrentdata.length == 0) { 
         return (
