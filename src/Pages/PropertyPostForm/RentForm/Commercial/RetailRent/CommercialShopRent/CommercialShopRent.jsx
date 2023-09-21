@@ -153,8 +153,6 @@ const CommercialShopRent = () => {
             showToastError('Provide locality');
         } else if (!pricedetail) {
             showToastError('Provide PriceDetail');
-        } else if (!priceSqr) {
-            showToastError('Provide Price Per sq.ft');
         } else if (!additinalft) {
             showToastError('Provide Property description');
         } else if (!propertyFacing) {
@@ -172,7 +170,7 @@ const CommercialShopRent = () => {
             locality &&
             type &&
             pricedetail &&
-            priceSqr &&
+            
             inclusivePrices &&
             additinalft &&
             propertyFacing &&
@@ -1081,7 +1079,7 @@ const CommercialShopRent = () => {
                                         <Input type="text"
                                             value={priceSqr}
                                             required
-                                            readOnly
+                                            
                                         />
                                     </Box>
                                 </Box>

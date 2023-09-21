@@ -177,7 +177,7 @@ const Bareshellspace = () => {
         if (
             city &&
             ownership &&
-            priceSqr &&
+            
             inclusivePrices &&
             totalfloors
         ) {
@@ -1329,8 +1329,7 @@ const Bareshellspace = () => {
                             </Heading>
                             <NumberInput value={priceSqr}>
                                 <NumberInputField
-                                    required
-                                    readOnly
+                                    
                                 />
                             </NumberInput>
                         </Box>

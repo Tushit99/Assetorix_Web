@@ -167,7 +167,7 @@ const IndustrialLand = () => {
     if (
       ownership &&
       pricedetail &&
-      priceSqr &&
+      
       inclusivePrices &&
       amenities &&
       propertyFeatures &&
@@ -890,8 +890,8 @@ const IndustrialLand = () => {
                 </Heading>
                 <NumberInput value={priceSqr}>
                   <NumberInputField
-                    required
-                    readOnly
+                    
+                    
                   />
                 </NumberInput>
               </Box>

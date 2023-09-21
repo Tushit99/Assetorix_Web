@@ -171,7 +171,7 @@ const CommercialShowRoomRent = () => {
       locality &&
       type &&
       pricedetail &&
-      priceSqr &&
+      
       inclusivePrices &&
       additinalft &&
       propertyFacing &&
@@ -1038,9 +1038,8 @@ const CommercialShowRoomRent = () => {
                       {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
                     </Heading>
                     <Input type="text"
-                      value={priceSqr}
-                      required
-                      readOnly
+                      value={priceSqr} 
+                      
                     />
                   </Box>
                 </Box>

@@ -120,8 +120,6 @@ const GuestBanquetRent = () => {
             showToastError('Provide washrooms');
         } else if (!pricedetail) {
             showToastError('Provide PriceDetail');
-        } else if (!priceSqr) {
-            showToastError('Provide Price Per sq.ft');
         } else if (!additinalft) {
             showToastError('Provide Property description');
         } else if (!flooring) {
@@ -148,7 +146,7 @@ const GuestBanquetRent = () => {
             room &&
             washrooms &&
             pricedetail &&
-            priceSqr &&
+            
             inclusivePrices &&
             additinalft &&
             flooring
@@ -798,7 +796,7 @@ const GuestBanquetRent = () => {
                         </Heading>
                         <NumberInput value={priceSqr}>
                             <NumberInputField
-                                readOnly
+                                
                             />
                         </NumberInput>
                     </Box>

@@ -140,8 +140,6 @@ const PlotLand = () => {
             showToastError('Provide OwnerShip');
         } else if (!pricedetail) {
             showToastError('Provide PriceDetail');
-        } else if (!priceSqr) {
-            showToastError('Provide Price Per sq.ft');
         } else if (!overLook) {
             showToastError('Provide Overlooking');
         } else if (!propertyFacing) {
@@ -161,7 +159,7 @@ const PlotLand = () => {
             locality &&
             ownership &&
             pricedetail &&
-            priceSqr &&
+            
             inclusivePrices &&
             overLook &&
             propertyFacing &&
@@ -740,8 +738,8 @@ const PlotLand = () => {
                             </Heading>
                             <NumberInput value={priceSqr}>
                                 <NumberInputField
-                                    required
-                                    readOnly
+                                    
+                                    
                                 />
                             </NumberInput>
                         </Box>
@@ -1071,7 +1069,7 @@ const PlotLand = () => {
                 <Box display={"flex"} gap={"20px"} w={"300px"} >
                     <Input type="text" variant='flushed' flex={1} required value={facingwidth} onChange={(e) => {
                         e.preventDefault();
-                        setFacingWidth(e.target.value);
+                        setFacingWidth(NumericString(e.target.value));
                     }} />
                     <Select flex={1} onChange={(e) => setFacing(e.target.value)} value={facing}>
                         <option value="Meter"> Meter </option>

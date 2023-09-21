@@ -161,8 +161,6 @@ const ColdStorage = () =>{
             showToastError('Provide OwnerShip');
         } else if (!pricedetail) {
             showToastError('Provide PriceDetail');
-        } else if (!priceSqr) {
-            showToastError('Provide Price Per sq.ft');
         } else if (!additinalft) {
             showToastError('Provide Property description');
         }
@@ -174,7 +172,7 @@ const ColdStorage = () =>{
         if ( 
             ownership &&
             pricedetail &&
-            priceSqr &&
+            
             inclusivePrices &&
             amenities &&
             propertyFeatures &&
@@ -804,8 +802,8 @@ const ColdStorage = () =>{
                                 </Heading>
                                 <NumberInput value={priceSqr}>
                                     <NumberInputField
-                                        required
-                                        readOnly
+                                        
+                                        
                                     />
                                 </NumberInput>
                             </Box>

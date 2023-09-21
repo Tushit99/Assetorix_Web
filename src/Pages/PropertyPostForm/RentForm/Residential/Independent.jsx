@@ -214,7 +214,7 @@ const Independent = () => {
       balconey &&
       furnishedarr &&
       ownership &&
-      priceSqr &&
+      
       additinalft &&
       powerbackup &&
       propertyFacing &&

@@ -153,7 +153,7 @@ const CoWorkingspace = () => {
             city &&
             locality &&
             ownership &&
-            priceSqr &&
+            
             inclusivePrices
         ) {
             let id = localStorage.getItem("usrId") || undefined;
@@ -871,8 +871,7 @@ const CoWorkingspace = () => {
                             </Heading>
                             <NumberInput value={priceSqr}>
                                 <NumberInputField
-                                    required
-                                    readOnly
+                                    
                                 />
                             </NumberInput>
                         </Box>

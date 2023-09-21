@@ -172,7 +172,7 @@ const AgricalturalFarm = () => {
     if (
       ownership &&
       pricedetail &&
-      priceSqr &&
+      
       inclusivePrices &&
       amenities &&
       propertyFeatures &&
@@ -901,8 +901,8 @@ const AgricalturalFarm = () => {
                 </Heading>
                 <NumberInput value={priceSqr}>
                   <NumberInputField
-                    required
-                    readOnly
+                    
+                    
                   />
                 </NumberInput>
               </Box>

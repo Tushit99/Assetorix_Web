@@ -15,7 +15,7 @@ import {
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { Checkbox } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
-import { CleanInputText } from "../../../code";
+import { CleanInputText, NumericString } from "../../../code";
 import axios from "axios";
 import style from "./FlatAppartment.module.css";
 import { InputGroup } from "@chakra-ui/react";
@@ -162,8 +162,6 @@ const FlatAppartment = () => {
             showToastError('Provide OwnerShip');
         } else if (!pricedetail) {
             showToastError('Provide PriceDetail');
-        } else if (!priceSqr) {
-            showToastError('Provide Price Per sq.ft');
         } else if (!additinalft) {
             showToastError('Provide Property description');
         } else if (!watersource) {
@@ -201,7 +199,6 @@ const FlatAppartment = () => {
             furnishedarr &&
             ownership &&
             pricedetail &&
-            priceSqr &&
             inclusivePrices &&
             additinalft &&
             watersource &&
@@ -307,7 +304,7 @@ const FlatAppartment = () => {
 
     const pinfetch = async (pin) => {
         try {
-            
+
             let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
             setState(res.data[0].state);
             setCity(res.data[0].city);
@@ -647,15 +644,13 @@ const FlatAppartment = () => {
                     </Box>
                     <Box textAlign={"left"}>
                         <Text> No. of Balconies </Text>
-                        <NumberInput>
-                            <NumberInputField
-                                variant="flushed"
-                                onChange={(e) => setBalcony(e.target.value)}
-                                value={balconey}
-                                required
-                                padding={"0 2px"}
-                            />
-                        </NumberInput>
+                        <Input
+                            variant="flushed"
+                            type="text"
+                            onChange={(e) => setBalcony(NumericString(e.target.value))}
+                            value={balconey}
+                            required
+                        />  
                     </Box>
                 </Box>
                 {/* ====================================== */}
@@ -671,17 +666,14 @@ const FlatAppartment = () => {
                         isAttached
                         variant="outline"
                     >
-                        <NumberInput>
-                            <NumberInputField
-                                padding={"0 2px"}
-                                value={plotArea}
-                                onChange={(e) => {
-                                    areaCalucation();
-                                    setPlotArea(e.target.value);
-                                }}
-                                required
-                            />
-                        </NumberInput>
+                        <Input
+                            type="text"
+                            value={plotArea}
+                            onChange={(e) => {
+                                areaCalucation();
+                                setPlotArea(NumericString(e.target.value));
+                            }}
+                            required />
                         <select value={areaPer} onChange={(e) => {
                             setAreaPer(e.target.value);
                         }} className={style.select} required>
@@ -1420,14 +1412,9 @@ const FlatAppartment = () => {
                                 fontWeight={400}
                                 textAlign={"left"}
                             >
-                                {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
+                                {isCountry.country == "india" ? "₹" : "$"} Price : Per {areaPer}
                             </Heading>
-                            <NumberInput value={priceSqr}>
-                                <NumberInputField
-                                    required
-                                    readOnly
-                                />
-                            </NumberInput>
+                            <Input type="text" value={priceSqr} readOnly />
                         </Box>
                     </Box>
                 </Box>
@@ -1507,7 +1494,7 @@ const FlatAppartment = () => {
                     </Heading>
                     <Heading as={"h3"} size={"xs"} margin={"10px 0"} textAlign={"left"}>
                         Adding description will increase your listing visibility
-                    </Heading> 
+                    </Heading>
                     <Textarea height={140} value={desc} onChange={(e) => {
                         let my_cleantext = CleanInputText(e.target.value);
                         setDesc(my_cleantext);
@@ -2226,7 +2213,7 @@ const FlatAppartment = () => {
                 <Box display={"flex"} gap={"20px"} w={"300px"} >
                     <Input type="text" variant='flushed' flex={1} required value={facingwidth} onChange={(e) => {
                         e.preventDefault();
-                        setFacingWidth(e.target.value);
+                        setFacingWidth(NumericString(e.target.value));
                     }} />
                     <Select flex={1} onChange={(e) => setFacing(e.target.value)} value={facing}>
                         <option value="Meter"> Meter </option>

@@ -160,8 +160,6 @@ const CommercialShowroom = () =>  {
             showToastError('Provide OwnerShip');
         } else if (!pricedetail) {
             showToastError('Provide PriceDetail');
-        } else if (!priceSqr) {
-            showToastError('Provide Price Per sq.ft');
         } else if (!additinalft) {
             showToastError('Provide Property description');
         } else if (!propertyFacing) {
@@ -180,7 +178,7 @@ const CommercialShowroom = () =>  {
             type &&
             ownership &&
             pricedetail &&
-            priceSqr &&
+            
             inclusivePrices &&
             additinalft &&
             propertyFacing &&
@@ -1119,8 +1117,8 @@ const CommercialShowroom = () =>  {
                                         </Heading>
                                         <NumberInput value={priceSqr}>
                                             <NumberInputField
-                                                required
-                                                readOnly
+                                                
+                                                
                                             />
                                         </NumberInput>
                                     </Box>

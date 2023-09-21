@@ -197,7 +197,7 @@ const ReadyMove = () => {
             city &&
             locality &&
             ownership &&
-            priceSqr &&
+            
             inclusivePrices &&
             totalfloors
         ) {
@@ -1315,7 +1315,7 @@ const ReadyMove = () => {
                             </Heading>
                             <NumberInput value={priceSqr}>
                                 <NumberInputField
-                                    readOnly
+                                    
                                 />
                             </NumberInput>
                         </Box>

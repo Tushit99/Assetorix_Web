@@ -140,7 +140,7 @@ const ResidentialRent = () => {
 
  
 
-    return (
+    return ( 
         <Box margin={"40px auto 60px auto"} w={"96%"} >
             {/* Property box */}
             <Flex display={"flex"} margin={"20px auto"} alignItems={"flex-start"} gap={4} >

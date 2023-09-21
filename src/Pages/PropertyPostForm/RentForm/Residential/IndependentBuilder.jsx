@@ -213,7 +213,7 @@ const IndependentBuilderRent = () => {
       balconey &&
       furnishedarr &&
       ownership &&
-      priceSqr &&
+      
       additinalft &&
       powerbackup &&
       propertyFacing &&

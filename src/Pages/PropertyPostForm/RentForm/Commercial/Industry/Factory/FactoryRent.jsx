@@ -113,8 +113,6 @@ const FactoryRent = () => {
             showToastError('Provide washrooms');
         } else if (!pricedetail) {
             showToastError('Provide Expected Rent');
-        } else if (!priceSqr) {
-            showToastError('Provide Price Per sq.ft');
         }
 
         if (locationAdv) {
@@ -132,7 +130,7 @@ const FactoryRent = () => {
 
         if (
             pricedetail &&
-            priceSqr &&
+            
             inclusivePrices &&
             amenities &&
             propertyFeatures &&
@@ -655,7 +653,7 @@ const FactoryRent = () => {
                                 <NumberInput value={priceSqr}>
                                     <NumberInputField
                                         required
-                                        readOnly
+                                        
                                     />
                                 </NumberInput>
                             </Box>

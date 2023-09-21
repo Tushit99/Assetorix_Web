@@ -147,8 +147,6 @@ const GuestBanquet = () => {
             showToastError('Provide OwnerShip');
         } else if (!pricedetail) {
             showToastError('Provide PriceDetail');
-        } else if (!priceSqr) {
-            showToastError('Provide Price Per sq.ft');
         } else if (!additinalft) {
             showToastError('Provide Property description');
         }  else if (!overLook) {
@@ -179,7 +177,7 @@ const GuestBanquet = () => {
             furnishedarr &&
             ownership &&
             pricedetail &&
-            priceSqr &&
+            
             // inclusivePrices &&
             additinalft &&
             // watersource &&
@@ -1347,7 +1345,7 @@ const GuestBanquet = () => {
                         </Heading>
                         <NumberInput value={priceSqr}>
                             <NumberInputField
-                                readOnly
+                                
                             />
                         </NumberInput>
                     </Box>

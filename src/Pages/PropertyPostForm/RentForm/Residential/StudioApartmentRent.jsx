@@ -212,7 +212,7 @@ const StudioApartmentRent = () => {
             balconey &&
             furnishedarr &&
             ownership &&
-            priceSqr &&
+            
             additinalft &&
             powerbackup &&
             propertyFacing &&

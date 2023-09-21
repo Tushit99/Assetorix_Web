@@ -179,7 +179,7 @@ const Coworkingspace = () => {
         if (
             city &&
             ownership &&
-            priceSqr &&
+            
             inclusivePrices &&
             totalfloors
         ) {
@@ -1289,7 +1289,7 @@ const Coworkingspace = () => {
                             </Heading>
                             <NumberInput value={priceSqr}>
                                 <NumberInputField
-                                    readOnly
+                                    
                                 />
                             </NumberInput>
                         </Box>

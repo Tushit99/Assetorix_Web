@@ -211,7 +211,7 @@ const FarmhouseRent = () => {
             balconey &&
             furnishedarr &&
             ownership &&
-            priceSqr &&
+            
             additinalft &&
             powerbackup &&
             propertyFacing &&

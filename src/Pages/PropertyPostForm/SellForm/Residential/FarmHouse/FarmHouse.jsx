@@ -20,7 +20,7 @@ import style from "./FarmHouse.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux"; 
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
-import { CleanInputText } from '../../../code'; 
+import { CleanInputText, NumericString } from '../../../code'; 
 
 
 const FarmHouse = () => {
@@ -161,8 +161,6 @@ const FarmHouse = () => {
             showToastError('Provide OwnerShip');
         } else if (!pricedetail) {
             showToastError('Provide PriceDetail');
-        } else if (!priceSqr) {
-            showToastError('Provide Price Per sq.ft');
         } else if (!additinalft) {
             showToastError('Provide Property description');
         } else if (!watersource) {
@@ -198,7 +196,7 @@ const FarmHouse = () => {
             furnishedarr &&
             ownership &&
             pricedetail &&
-            priceSqr &&
+            
             inclusivePrices &&
             additinalft &&
             watersource &&
@@ -1399,8 +1397,8 @@ const FarmHouse = () => {
                             </Heading>
                             <NumberInput value={priceSqr}>
                                 <NumberInputField
-                                    required
-                                    readOnly
+                                    
+                                    
                                 />
                             </NumberInput>
                         </Box>
@@ -2176,7 +2174,7 @@ const FarmHouse = () => {
                 <Box display={"flex"} gap={"20px"} w={"300px"} >
                     <Input type="text" variant='flushed' flex={1} required value={facingwidth} onChange={(e) => {
                         e.preventDefault();
-                        setFacingWidth(e.target.value);
+                        setFacingWidth(NumericString(e.target.value));
                     }} />
                     <Select flex={1} onChange={(e) => setFacing(e.target.value)} value={facing}>
                         <option value="Meter"> Meter </option>

@@ -19,7 +19,7 @@ import { Checkbox } from "@chakra-ui/react";
 import style from "./Independentbuilder.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { CleanInputText } from "../../../code";
+import { CleanInputText, NumericString } from "../../../code";
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
 const Independentbuilder = () => {
@@ -123,18 +123,18 @@ const Independentbuilder = () => {
             plotAreaUnit: areaPer,
             parking: {
                 openParking: openparking.toString(),
-                closeParking: parking.toString(),  
-            }, 
+                closeParking: parking.toString(),
+            },
             otherRoom: extraroom,
             description: desc,
-            countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`, 
-            additionalPricingDetails :{
+            countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
+            additionalPricingDetails: {
                 maintenancePrice,
                 maintenanceTimePeriod,
-                expectedRental:expectedRentel,
+                expectedRental: expectedRentel,
                 bookingAmount,
-                annualDuesPayable:annualDuesPayble 
-            }, 
+                annualDuesPayable: annualDuesPayble
+            },
         };
 
         const showToastError = (message) => {
@@ -161,8 +161,6 @@ const Independentbuilder = () => {
             showToastError('Provide OwnerShip');
         } else if (!pricedetail) {
             showToastError('Provide PriceDetail');
-        } else if (!priceSqr) {
-            showToastError('Provide Price Per sq.ft');
         } else if (!additinalft) {
             showToastError('Provide Property description');
         } else if (!watersource) {
@@ -200,7 +198,7 @@ const Independentbuilder = () => {
             furnishedarr &&
             ownership &&
             pricedetail &&
-            priceSqr &&
+
             inclusivePrices &&
             additinalft &&
             watersource &&
@@ -306,7 +304,7 @@ const Independentbuilder = () => {
 
     const pinfetch = async (pin) => {
         try {
-            
+
             let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
             setState(res.data[0].state);
             setCity(res.data[0].city);
@@ -1199,7 +1197,7 @@ const Independentbuilder = () => {
                             <option value="Lower Ground">Lower Ground</option>
                             {Array.from(Array(Number(totalfloors)).keys()).map((e) => {
                                 return <option value={e + 1}>{e + 1}</option>
-                            })} 
+                            })}
                         </Select>
                     </Box>
                 </Box>
@@ -1401,16 +1399,15 @@ const Independentbuilder = () => {
                             >
                                 {isCountry.country == "india" ? "₹" : "$"} Price Details
                             </Heading>
-                            <NumberInput >
-                                <NumberInputField
-                                    value={pricedetail}
-                                    required
-                                    onChange={(e) => {
-                                        setPricedetail(e.target.value);
-                                        areaCalucation();
-                                    }}
-                                />
-                            </NumberInput>
+                            <Input
+                                type="text"
+                                value={pricedetail}
+                                required
+                                onChange={(e) => {
+                                    setPricedetail(NumericString(e.target.value));
+                                    areaCalucation();
+                                }}
+                            /> 
                         </Box>
                         <Box display={"grid"} gap={0}>
                             <Heading
@@ -1421,12 +1418,9 @@ const Independentbuilder = () => {
                             >
                                 {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
                             </Heading>
-                            <NumberInput value={priceSqr}>
-                                <NumberInputField
-                                    required
-                                    readOnly
-                                />
-                            </NumberInput>
+                            <Input
+                                value={priceSqr}
+                                type="text" />
                         </Box>
                     </Box>
                 </Box>

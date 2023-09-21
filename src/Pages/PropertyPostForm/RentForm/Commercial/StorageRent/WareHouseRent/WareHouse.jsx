@@ -117,8 +117,6 @@ const WareHouse = () => {
             showToastError('Provide washrooms');
         } else if (!pricedetail) {
             showToastError('Provide PriceDetail');
-        } else if (!priceSqr) {
-            showToastError('Provide Price Per sq.ft');
         } else if (!additinalft) {
             showToastError('Provide Property description');
         }
@@ -129,7 +127,7 @@ const WareHouse = () => {
 
         if (
             pricedetail &&
-            priceSqr &&
+            
             inclusivePrices &&
             amenities &&
             propertyFeatures &&

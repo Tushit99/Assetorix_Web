@@ -179,7 +179,7 @@ const BareShell = () => {
         if (
             city &&
             ownership &&
-            priceSqr &&
+            
             inclusivePrices &&
             totalfloors
         ) {
@@ -1287,7 +1287,7 @@ const BareShell = () => {
                             </Heading>
                             <NumberInput value={priceSqr}>
                                 <NumberInputField
-                                    readOnly
+                                    
                                 />
                             </NumberInput>
                         </Box>

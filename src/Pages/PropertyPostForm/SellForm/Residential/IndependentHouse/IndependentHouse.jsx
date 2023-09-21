@@ -19,7 +19,7 @@ import style from "./IndependentHouse.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
-import { CleanInputText } from "../../../code";
+import { CleanInputText, NumericString } from "../../../code";
 
 const IndependentHouse = () => {
     const isCountry = useSelector((state) => state.gloalval);
@@ -157,8 +157,6 @@ const IndependentHouse = () => {
             showToastError('Provide OwnerShip');
         } else if (!pricedetail) {
             showToastError('Provide PriceDetail');
-        } else if (!priceSqr) {
-            showToastError('Provide Price Per sq.ft');
         } else if (!additinalft) {
             showToastError('Provide Property description');
         } else if (!watersource) {
@@ -194,7 +192,7 @@ const IndependentHouse = () => {
             furnishedarr &&
             ownership &&
             pricedetail &&
-            priceSqr &&
+
             inclusivePrices &&
             additinalft &&
             watersource &&
@@ -299,7 +297,7 @@ const IndependentHouse = () => {
 
     const pinfetch = async (pin) => {
         try {
-            
+
             let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
             setState(res.data[0].state);
             setCity(res.data[0].city);
@@ -481,6 +479,15 @@ const IndependentHouse = () => {
         setWaterSource(newarr);
     }
 
+    const areaCalucation = () => {
+        if (pricedetail && plotArea) {
+            let max = Math.max(Number(pricedetail), Number(plotArea));
+            let min = Math.min(Number(pricedetail), Number(plotArea));
+            let ans = Math.round(max / min);
+            setPriceSqr(ans);
+        }
+    }
+
 
     return (
         <form onSubmit={handleSubmitData}>
@@ -640,16 +647,13 @@ const IndependentHouse = () => {
                         isAttached
                         variant="outline"
                     >
-                        <NumberInput>
-                            <NumberInputField
-                                padding={"0 2px"}
-                                value={plotArea}
-                                onChange={(e) => {
-                                    setPlotArea(e.target.value);
-                                }}
-                                required
-                            />
-                        </NumberInput>
+                        <Input
+                            value={plotArea}
+                            onChange={(e) => {
+                                setPlotArea(NumericString(e.target.value));
+                            }}
+                            required
+                            type="text" />
                         <select value={areaPer} onChange={(e) => {
                             setAreaPer(e.target.value);
                         }} className={style.select} required>
@@ -1344,15 +1348,15 @@ const IndependentHouse = () => {
                             >
                                 {isCountry.country == "india" ? "₹" : "$"} Price Details
                             </Heading>
-                            <NumberInput >
-                                <NumberInputField
-                                    value={pricedetail}
-                                    required
-                                    onChange={(e) => {
-                                        setPricedetail(e.target.value);
-                                    }}
-                                />
-                            </NumberInput>
+                            <Input
+                                type="text"
+                                value={pricedetail}
+                                required
+                                onChange={(e) => {
+                                    areaCalucation();
+                                    setPricedetail(NumericString(e.target.value));
+                                }}
+                            /> 
                         </Box>
                         <Box display={"grid"} gap={0}>
                             <Heading
@@ -1361,14 +1365,16 @@ const IndependentHouse = () => {
                                 fontWeight={400}
                                 textAlign={"left"}
                             >
-                                {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
+                                {isCountry.country == "india" ? "₹" : "$"} Price Per {areaPer}
                             </Heading>
-                            <NumberInput value={priceSqr}>
-                                <NumberInputField
-                                    required
-                                    readOnly
-                                />
-                            </NumberInput>
+                            <Input
+                                type="text"
+                                value={priceSqr} 
+                                readOnly
+                                onChange={(e) => {
+                                    setPlotArea(NumericString(e.target.value));
+                                }}
+                                required />
                         </Box>
                     </Box>
                 </Box>
@@ -2092,7 +2098,7 @@ const IndependentHouse = () => {
                 <Box display={"flex"} gap={"20px"} w={"300px"} >
                     <Input type="text" variant='flushed' flex={1} required value={facingwidth} onChange={(e) => {
                         e.preventDefault();
-                        setFacingWidth(e.target.value);
+                        setFacingWidth(NumericString(e.target.value));
                     }} />
                     <Select flex={1} onChange={(e) => setFacing(e.target.value)} value={facing}>
                         <option value="Meter"> Meter </option>

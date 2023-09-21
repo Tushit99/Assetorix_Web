@@ -19,7 +19,7 @@ import { Checkbox } from "@chakra-ui/react";
 import style from "./RKStudio.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { CleanInputText } from "../../../code";
+import { CleanInputText, NumericString } from "../../../code";
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
 
@@ -162,8 +162,6 @@ const RKStudio = () => {
             showToastError('Provide OwnerShip');
         } else if (!pricedetail) {
             showToastError('Provide PriceDetail');
-        } else if (!priceSqr) {
-            showToastError('Provide Price Per sq.ft');
         } else if (!additinalft) {
             showToastError('Provide Property description');
         } else if (!watersource) {
@@ -201,7 +199,7 @@ const RKStudio = () => {
             furnishedarr &&
             ownership &&
             pricedetail &&
-            priceSqr &&
+            
             inclusivePrices &&
             additinalft &&
             watersource &&
@@ -1444,7 +1442,7 @@ const RKStudio = () => {
                             </Heading>
                             <NumberInput value={priceSqr}>
                                 <NumberInputField
-                                    required
+                                    
                                     readOnly
                                 />
                             </NumberInput>
@@ -1491,7 +1489,7 @@ const RKStudio = () => {
                         Additional Pricing Detail (Optional)
                     </Heading>
                     <InputGroup w={"300px"} margin={"10px 0"}>
-                        <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
+                        <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(NumericString(e.target.value))} value={maintenancePrice} placeholder={"Maintenance Price"} />
                         <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
                             <option value="Monthly">Monthly</option>
                             <option value="Yearly">Yearly</option>
@@ -2220,7 +2218,7 @@ const RKStudio = () => {
                 <Box display={"flex"} gap={"20px"} w={"300px"} >
                     <Input type="text" variant='flushed' flex={1} required value={facingwidth} onChange={(e) => {
                         e.preventDefault();
-                        setFacingWidth(e.target.value);
+                        setFacingWidth(NumericString(e.target.value));
                     }} />
                     <Select flex={1} onChange={(e) => setFacing(e.target.value)} value={facing}>
                         <option value="Meter"> Meter </option>

@@ -131,7 +131,7 @@ const ColdStorageRent = () => {
 
     if (
       pricedetail &&
-      priceSqr &&
+      
       inclusivePrices &&
       amenities &&
       propertyFeatures &&
@@ -657,7 +657,7 @@ const ColdStorageRent = () => {
                 <NumberInput value={priceSqr}>
                   <NumberInputField
                     required
-                    readOnly
+                    
                   />
                 </NumberInput>
               </Box>

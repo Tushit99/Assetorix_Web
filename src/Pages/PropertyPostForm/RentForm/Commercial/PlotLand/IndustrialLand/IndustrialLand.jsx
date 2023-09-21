@@ -150,8 +150,6 @@ const IndustrialLand = () => {
             showToastError('Provide OwnerShip');
         } else if (!pricedetail) {
             showToastError('Provide PriceDetail');
-        } else if (!priceSqr) {
-            showToastError('Provide Price Per sq.ft');
         }
 
         if (locationAdv) {
@@ -161,7 +159,7 @@ const IndustrialLand = () => {
         if (
             ownership &&
             pricedetail &&
-            priceSqr &&
+            
             inclusivePrices &&
             amenities &&
             propertyFeatures &&
@@ -856,9 +854,8 @@ const IndustrialLand = () => {
                                     {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
                                 </Heading>
                                 <NumberInput value={priceSqr}>
-                                    <NumberInputField
-                                        required
-                                        readOnly
+                                    <NumberInputField 
+                                        
                                     />
                                 </NumberInput>
                             </Box>

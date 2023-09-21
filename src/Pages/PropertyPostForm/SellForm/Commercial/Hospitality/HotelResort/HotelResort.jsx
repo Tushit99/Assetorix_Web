@@ -148,8 +148,6 @@ const HotelResort = () => {
             showToastError('Provide OwnerShip');
         } else if (!pricedetail) {
             showToastError('Provide PriceDetail');
-        } else if (!priceSqr) {
-            showToastError('Provide Price Per sq.ft');
         } else if (!additinalft) {
             showToastError('Provide Property description');
         } else if (!watersource) {
@@ -182,7 +180,7 @@ const HotelResort = () => {
             furnishedarr &&
             ownership &&
             pricedetail &&
-            priceSqr &&
+            
             inclusivePrices &&
             additinalft &&
             watersource &&
@@ -1349,7 +1347,7 @@ const HotelResort = () => {
                         </Heading>
                         <NumberInput value={priceSqr}>
                             <NumberInputField
-                                readOnly
+                                
                             />
                         </NumberInput>
                     </Box>

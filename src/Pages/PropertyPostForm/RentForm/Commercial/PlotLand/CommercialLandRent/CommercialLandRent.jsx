@@ -162,7 +162,7 @@ const CommercialLandRent = () => {
     if (
       ownership &&
       pricedetail &&
-      priceSqr &&
+      
       inclusivePrices &&
       amenities &&
       propertyFeatures &&
@@ -921,9 +921,8 @@ const CommercialLandRent = () => {
                   {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
                 </Heading>
                 <NumberInput value={priceSqr}>
-                  <NumberInputField
-                    required
-                    readOnly
+                  <NumberInputField 
+                    
                   />
                 </NumberInput>
               </Box>

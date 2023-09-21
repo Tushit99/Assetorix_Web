@@ -132,7 +132,7 @@ const ManufactureRent = () => {
 
     if (
       pricedetail &&
-      priceSqr &&
+      
       inclusivePrices &&
       amenities &&
       propertyFeatures &&
@@ -655,7 +655,7 @@ const ManufactureRent = () => {
                 <NumberInput value={priceSqr}>
                   <NumberInputField
                     required
-                    readOnly
+                    
                   />
                 </NumberInput>
               </Box>
