@@ -50,9 +50,11 @@ import RoomImg from "./furnishedImages/living-room.png";
 // import railwayImg from "./furnishedImages/train-station.png";  
 import { ImLocation2 } from "react-icons/im"
 import { NumericString } from "../PropertyPostForm/code";
+import { useParams } from "react-router-dom";
 
 
 const SingleProductDetailPage = () => {
+    const { id } = useParams();
     const [data, setData] = useState([]);
     const [price, setPrice] = useState(0);
     const [created, setCreated] = useState("");
@@ -78,12 +80,13 @@ const SingleProductDetailPage = () => {
     const [phonetosend, setPhonetosend] = useState("");
     const { isOpen, onOpen, onClose } = useDisclosure();
 
+    // console.log("prod Id", param); 
 
     const dataById = async () => {
-        await axios.get(`${process.env.REACT_APP_URL}/property`).then((e) => {
-            setData(e.data.data[0]);
-            console.log(e.data.data[0]);
-            addDatatoList(e.data.data[0]);
+        await axios.get(`${process.env.REACT_APP_URL}/property/single/${id}`).then((e) => {
+            setData(e.data.data);
+            console.log(e.data.data);
+            addDatatoList(e.data.data);
         });
     };
 
@@ -99,14 +102,14 @@ const SingleProductDetailPage = () => {
         setPin(list.address.pincode);
         setisFurnished(list.furnished);
         if (list.furnished == "Furnished" || list.furnished == "Semi-Furnished") {
-            setLight(list.furnishedObj.light);
-            setFan(list.furnishedObj.fans);
-            setAirCondition(list.furnishedObj.ac);
-            setTv(list.furnishedObj.tv);
-            setBed(list.furnishedObj.beds);
-            setwardrobe(list.furnishedObj.wardrobe);
-            setGeyser(list.furnishedObj.geyser);
-            setFurnishedAdditionalList(list.furnishedList);
+            setLight(`${list.furnishedObj.light}`);
+            setFan(`${list.furnishedObj.fans}`);
+            setAirCondition(`${list.furnishedObj.ac}`);
+            setTv(`${list.furnishedObj.tv}`);
+            setBed(`${list.furnishedObj.beds}`);
+            setwardrobe(`${list.furnishedObj.wardrobe}`);
+            setGeyser(`${list.furnishedObj.geyser}`);
+            setFurnishedAdditionalList(`${list.furnishedList}`); 
         }
         setOverLooking(list.overLookings);
         setLocation(list.locationAdv);
@@ -164,22 +167,22 @@ const SingleProductDetailPage = () => {
                         {/* ======================================== under construction ==================================== */}
                         {/* Plot Detail */}
                         <Box marginTop={2} display={"flex"} flexWrap={"wrap"} alignItems={"inherit"} backgroundColor={"rgb(225, 247, 249)"} justifyContent={"space-around"} >
-                            <Box display={data.plotArea ? "flex" : "none"}  flexDirection={"column"} padding={"4px 8px"} border={"2px solid rgb(178, 255, 246)"} flex={1} >
+                            <Box display={data.plotArea ? "flex" : "none"} flexDirection={"column"} padding={"4px 8px"} border={"2px solid rgb(178, 255, 246)"} flex={1} >
                                 <Heading size={"md"}>Plot Area </Heading>
-                                <Text>{data.plotArea || <Skeleton width={"100px"} />} {data.plotAreaUnit || <Skeleton width={"100px"} />}</Text> 
+                                <Text>{data.plotArea || <Skeleton width={"100px"} />} {data.plotAreaUnit || <Skeleton width={"100px"} />}</Text>
                             </Box>
-                            <Box display={data.totalFloors ? "flex" : "none"}  flexDirection={"column"} padding={"4px 8px"} border={"2px solid rgb(178, 255, 246)"} flex={1} >
-                                <Heading size={"md"}> Floor </Heading> 
+                            <Box display={data.totalFloors ? "flex" : "none"} flexDirection={"column"} padding={"4px 8px"} border={"2px solid rgb(178, 255, 246)"} flex={1} >
+                                <Heading size={"md"}> Floor </Heading>
                                 <Text> Total floor: {data.totalFloors || <Skeleton width={"100px"} />}</Text>
                                 <Text display={data.floorOn ? "flex" : "none"}> Floor on: {data.floorOn || <Skeleton width={"100px"} />} </Text>
                             </Box>
-                            <Box display={data.powerBackup ? "flex" : "none"}  flexDirection={"column"} padding={"4px 8px"} border={"2px solid rgb(178, 255, 246)"} flex={1} >
+                            <Box display={data.powerBackup ? "flex" : "none"} flexDirection={"column"} padding={"4px 8px"} border={"2px solid rgb(178, 255, 246)"} flex={1} >
                                 <Heading size={"md"}> Power Backup </Heading>
                                 <Text>{data.powerBackup || <Skeleton width={"100px"} />}</Text>
-                            </Box> 
+                            </Box>
                         </Box>
 
-                        {/* ================================= Property details =========================== */} 
+                        {/* ================================= Property details =========================== */}
                         <Heading fontSize={"xl"} margin={"8px 0"} > Property details </Heading>
                         <Divider />
                         {/* furnished detail */}
@@ -783,15 +786,15 @@ const SingleProductDetailPage = () => {
             </Box >
             {/* mobile booking part */}
             <Box className={style.schedule_bottom}>
-                <Button 
-                    fontSize={"2xl"} 
-                    position={"fixed"} 
+                <Button
+                    fontSize={"2xl"}
+                    position={"fixed"}
                     color={"white"}
-                    bottom={"-2px"} 
+                    bottom={"-2px"}
                     zIndex={"20"}
-                    left={"-2px"}  
-                    borderRadius={0}  
-                    right={"-2px"} 
+                    left={"-2px"}
+                    borderRadius={0}
+                    right={"-2px"}
                     backgroundColor="rgb(23, 152, 72)"
                     _hover={{ backgroundColor: "rgb(23, 152, 72)", color: "white" }}
                     onClick={onOpen}> Schedule Tour

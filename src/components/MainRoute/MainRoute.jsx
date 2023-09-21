@@ -52,9 +52,15 @@ const MainRoute = () => {
         <Route path='/commercial_rent' element={<CommercialLease />} />  
         <Route path='/commercial_buy' element={<CommercialBuy />} /> 
 
+        {/* Product Page */} 
+        <Route path='/residential_rent/:id' element={<SingleProductDetailPage  />} />
+        <Route path='/residential_buy/:id' element={<SingleProductDetailPage />} /> 
+        <Route path='/commercial_rent/:id' element={<SingleProductDetailPage />} />  
+        <Route path='/commercial_buy/:id' element={<SingleProductDetailPage />} /> 
+
         {/* buy rent sale */}
         <Route path='/buy' element={<Buy />} />
-
+ 
         {/* Website detail Pages */}
         <Route path='/Construction_Management' element={<Construction />} />
         <Route path='/Property_Marketing' element={<PropertyMarketing />} />
