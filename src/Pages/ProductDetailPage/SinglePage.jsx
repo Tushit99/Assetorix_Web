@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Heading, Image, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, Textarea, Tooltip, useDisclosure } from "@chakra-ui/react";
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Button, Divider, Heading, Image, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, Textarea, Tooltip, useDisclosure } from "@chakra-ui/react";
 import axios from "axios";
 import style from "./SinglePage.module.css";
 import React, { useEffect, useState } from "react";
@@ -85,7 +85,7 @@ const SingleProductDetailPage = () => {
     const dataById = async () => {
         await axios.get(`${process.env.REACT_APP_URL}/property/single/${id}`).then((e) => {
             setData(e.data.data);
-            console.log(e.data.data);
+            // console.log(e.data.data);
             addDatatoList(e.data.data);
         });
     };
@@ -101,6 +101,7 @@ const SingleProductDetailPage = () => {
         setlocality(list.address.locality);
         setPin(list.address.pincode);
         setisFurnished(list.furnished);
+        console.log(list.furnished);
         if (list.furnished == "Furnished" || list.furnished == "Semi-Furnished") {
             setLight(`${list.furnishedObj.light}`);
             setFan(`${list.furnishedObj.fans}`);
@@ -109,15 +110,24 @@ const SingleProductDetailPage = () => {
             setBed(`${list.furnishedObj.beds}`);
             setwardrobe(`${list.furnishedObj.wardrobe}`);
             setGeyser(`${list.furnishedObj.geyser}`);
-            setFurnishedAdditionalList(`${list.furnishedList}`); 
+            setFurnishedAdditionalList(`${list.furnishedList}`);
+            console.log(
+                list.furnishedObj.light,
+                list.furnishedObj.fans,
+                list.furnishedObj.ac,
+                list.furnishedObj.tv,
+                list.furnishedObj.beds,
+                list.furnishedObj.wardrobe,
+                list.furnishedObj.geyser,
+            )
         }
         setOverLooking(list.overLookings);
         setLocation(list.locationAdv);
     };
 
     useEffect(() => {
-        dataById(); 
-        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });  
+        dataById();
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     }, []);
 
     return (
@@ -192,7 +202,7 @@ const SingleProductDetailPage = () => {
                             padding={"10px"}
                             margin={"10px 0"}
                             borderRadius={5}
-                            display={`${isFurnished == "Un-furnished" ? " " : "block"}`}
+                            display={`${isFurnished == "Un-furnished" ? "none" : "block"}`}
                         >
                             <Box backgroundColor={"rgb(255, 255, 255)"} padding={"10px"} borderRadius={5}>
                                 {/* Property Detail */}
@@ -588,109 +598,173 @@ const SingleProductDetailPage = () => {
                             <Box display={"grid"} gap={3} margin={"20px 0"} >
                                 <Heading fontSize={"2xl"} padding={0}> Features </Heading>
                                 <Text textAlign={"inherit"} fontSize={"xs"} color={"blue"} margin={0}> For more details click on <InfoIcon w={7} color={"blue.400"} /> icon </Text>
-                                <Divider margin={0} />
-                                <Box
-                                    display={data.otherRoom ? "flex" : "none"}
-                                    alignItems={"center"}
-                                    gap={"6px"}
-                                >
-                                    <Image
-                                        src={RoomImg}
-                                        height={"26px"}
-                                        objectFit={"contain"}
-                                        w={"24px"}
-                                        alt="light_images"
-                                    />
-                                    <Text> Room Details </Text>
-                                    <Tooltip hasArrow display={"flex"} w={"150px"} label={<Hoverbox data={data.otherRoom} />} fontSize='md'>
-                                        <InfoIcon w={7} color={"blue.400"} />
-                                    </Tooltip>
-                                </Box>
-                                <Box
-                                    display={data.propertyFeatures ? "flex" : "none"}
-                                    alignItems={"center"}
-                                    gap={"6px"}
-                                >
-                                    <Image
-                                        src={propertFeatureImg}
-                                        height={"26px"}
-                                        objectFit={"contain"}
-                                        w={"24px"}
-                                        alt="light_images"
-                                    />
-                                    <Text> Property Features</Text>
-                                    <Tooltip hasArrow display={"flex"} w={"180px"} label={<Hoverbox data={data.propertyFeatures} />} fontSize='md'>
-                                        <InfoIcon w={7} color={"blue.400"} />
-                                    </Tooltip>
-                                </Box>
-                                <Box
-                                    display={data.propertyFeatures ? "flex" : "none"}
-                                    alignItems={"center"}
-                                    gap={"6px"}
-                                >
-                                    <Image
-                                        src={societyImg}
-                                        height={"26px"}
-                                        objectFit={"contain"}
-                                        w={"24px"}
-                                        alt="light_images"
-                                    />
-                                    <Text>Society Building Features</Text>
-                                    <Tooltip hasArrow display={"flex"} w={"150px"} label={<Hoverbox data={data.society_buildingFeatures} />} fontSize='md'>
-                                        <InfoIcon w={7} color={"blue.400"} />
-                                    </Tooltip>
-                                </Box>
-                                <Box
-                                    display={data.propertyFeatures ? "flex" : "none"}
-                                    alignItems={"center"}
-                                    gap={"6px"}
-                                >
-                                    <Image
-                                        src={additonalImg}
-                                        height={"26px"}
-                                        objectFit={"contain"}
-                                        w={"24px"}
-                                        alt="light_images"
-                                    />
-                                    <Text> Additional Features</Text>
-                                    <Tooltip hasArrow display={"flex"} w={"210px"} label={<Hoverbox data={data.additionalFeatures} />} fontSize='md'>
-                                        <InfoIcon w={7} color={"blue.400"} />
-                                    </Tooltip>
-                                </Box>
-                                <Box
-                                    display={data.waterSources ? "flex" : "none"}
-                                    alignItems={"center"}
-                                    gap={"6px"}
-                                >
-                                    <Image
-                                        src={watersourceImg}
-                                        height={"26px"}
-                                        objectFit={"contain"}
-                                        w={"24px"}
-                                        alt="light_images"
-                                    />
-                                    <Text> Water Sources</Text>
-                                    <Tooltip hasArrow display={"flex"} w={"150px"} label={<Hoverbox data={data.waterSources} />} fontSize='md'>
-                                        <InfoIcon w={7} color={"blue.400"} />
-                                    </Tooltip>
-                                </Box>
-                                <Box
-                                    display={data.otherFeatures ? "flex" : "none"}
-                                    alignItems={"center"}
-                                    gap={"6px"}
-                                >
-                                    <Image
-                                        src={otherImg}
-                                        height={"26px"}
-                                        objectFit={"contain"}
-                                        w={"24px"}
-                                        alt="light_images"
-                                    />
-                                    <Text> Other Features </Text>
-                                    <Tooltip hasArrow display={"flex"} w={"150px"} label={<Hoverbox data={data.otherFeatures} />} fontSize='md'>
-                                        <InfoIcon w={7} color={"blue.400"} />
-                                    </Tooltip>
-                                </Box>
+                                
+                            </Box>
+                            <Box>
+                                <Accordion defaultIndex={[0]} allowMultiple>
+                                    {/*part 1  */}
+                                    <AccordionItem>
+                                        <h2>
+                                            <AccordionButton>
+                                                <Box as="span" flex='1' textAlign='left' display={"flex"} alignItems={"center"} gap={2} >
+                                                    <Image
+                                                        src={RoomImg}
+                                                        height={"26px"}
+                                                        objectFit={"contain"}
+                                                        w={"24px"}
+                                                        alt="light_images"
+                                                    /> Room Details
+                                                </Box>
+                                                <AccordionIcon />
+                                            </AccordionButton>
+                                        </h2>
+                                        <AccordionPanel pb={4}>
+                                            <Box display={"flex"} margin={"0 30px"} flexWrap={"wrap"} alignItems={"center"}>
+                                                {data?.otherRoom?.map((e, i) => (
+                                                    <Box key={i + 1} marginRight={"20px"} display={"flex"} >
+                                                        &#8226; {e}
+                                                    </Box>
+                                                ))}
+                                            </Box>
+                                        </AccordionPanel>
+                                    </AccordionItem> 
+
+                                    {/* part 2 */}
+                                    <AccordionItem>
+                                        <h2>
+                                            <AccordionButton>
+                                                <Box as="span" flex='1' textAlign='left' display={"flex"} alignItems={"center"} gap={2}>
+                                                    <Image
+                                                        src={propertFeatureImg}
+                                                        height={"26px"}
+                                                        objectFit={"contain"}
+                                                        w={"24px"}
+                                                        alt="light_images"
+                                                    /> Property Features
+                                                </Box>
+                                                <AccordionIcon />
+                                            </AccordionButton>
+                                        </h2>
+                                        <AccordionPanel pb={4}>
+                                            <Box display={"flex"} margin={"0 30px"} flexWrap={"wrap"} alignItems={"center"}>
+                                                {data?.propertyFeatures?.map((e, i) => (
+                                                    <Box marginRight={"20px"} key={i + 1} display={"flex"} >
+                                                        &#8226; {e}
+                                                    </Box>
+                                                ))}
+                                            </Box>
+                                        </AccordionPanel>
+                                    </AccordionItem>
+
+                                    {/* part3 */}
+                                    <AccordionItem>
+                                        <h2>
+                                            <AccordionButton>
+                                                <Box as="span" flex='1' textAlign='left' display={"flex"} alignItems={"center"} gap={2}>
+                                                    <Image
+                                                        src={societyImg}
+                                                        height={"26px"}
+                                                        objectFit={"contain"}
+                                                        w={"24px"}
+                                                        alt="light_images"
+                                                    /> Society Building Features
+                                                </Box>
+                                                <AccordionIcon />
+                                            </AccordionButton>
+                                        </h2>
+                                        <AccordionPanel pb={4}>
+                                            <Box display={"flex"} margin={"0 30px"} flexWrap={"wrap"} alignItems={"center"}>
+                                                {data?.society_buildingFeatures?.map((e, i) => (
+                                                    <Box marginRight={"20px"} key={i + 1} display={"flex"} >
+                                                        &#8226; {e}
+                                                    </Box>
+                                                ))}
+                                            </Box>
+                                        </AccordionPanel>
+                                    </AccordionItem>
+
+                                    {/* part 4 */}
+                                    <AccordionItem>
+                                        <h2>
+                                            <AccordionButton>
+                                                <Box as="span" flex='1' textAlign='left' display={"flex"} alignItems={"center"} gap={2}>
+                                                    <Image
+                                                        src={additonalImg}
+                                                        height={"26px"}
+                                                        objectFit={"contain"}
+                                                        w={"24px"}
+                                                        alt="light_images"
+                                                    /> Additional Features
+                                                </Box>
+                                                <AccordionIcon />
+                                            </AccordionButton>
+                                        </h2>
+                                        <AccordionPanel pb={4}>
+                                            <Box display={"flex"} margin={"0 30px"} flexWrap={"wrap"} alignItems={"center"}>
+                                                {data?.additionalFeatures?.map((e, i) => (
+                                                    <Box marginRight={"20px"} key={i + 1} display={"flex"} >
+                                                        &#8226; {e}
+                                                    </Box>
+                                                ))}
+                                            </Box>
+                                        </AccordionPanel>
+                                    </AccordionItem>
+
+                                    {/* part 5 */}
+                                    <AccordionItem>
+                                        <h2>
+                                            <AccordionButton>
+                                                <Box as="span" flex='1' textAlign='left' display={"flex"} alignItems={"center"} gap={2}>
+                                                    <Image
+                                                        src={watersourceImg}
+                                                        height={"26px"}
+                                                        objectFit={"contain"}
+                                                        w={"24px"}
+                                                        alt="light_images"
+                                                    /> Water Sources
+                                                </Box>
+                                                <AccordionIcon />
+                                            </AccordionButton>
+                                        </h2>
+                                        <AccordionPanel pb={4}>
+                                            <Box display={"flex"} margin={"0 30px"} flexWrap={"wrap"} alignItems={"center"}>
+                                                {data?.waterSources?.map((e, i) => (
+                                                    <Box marginRight={"20px"} key={i + 1} display={"flex"} >
+                                                        &#8226; {e}
+                                                    </Box>
+                                                ))}
+                                            </Box>
+                                        </AccordionPanel>
+                                    </AccordionItem>
+
+                                    {/* part 6 */}
+                                    <AccordionItem>
+                                        <h2>
+                                            <AccordionButton>
+                                                <Box as="span" flex='1' textAlign='left' display={"flex"} alignItems={"center"} gap={2}>
+                                                    <Image
+                                                        src={otherImg}
+                                                        height={"26px"}
+                                                        objectFit={"contain"}
+                                                        w={"24px"}
+                                                        alt="light_images"
+                                                    />
+                                                    Other Features
+                                                </Box>
+                                                <AccordionIcon />
+                                            </AccordionButton>
+                                        </h2>
+                                        <AccordionPanel pb={4}>
+                                            <Box display={"flex"} margin={"0 30px"} flexWrap={"wrap"} alignItems={"center"}>
+                                                {data.otherFeatures.map((e, i) => (
+                                                    <Box marginRight={"20px"} key={i + 1} display={"flex"} >
+                                                        &#8226; {e}
+                                                    </Box>
+                                                ))}
+                                            </Box>
+                                        </AccordionPanel>
+                                    </AccordionItem>
+                                </Accordion>
                             </Box>
                         </Box>
 
