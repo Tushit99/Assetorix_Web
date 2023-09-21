@@ -1049,7 +1049,7 @@ const CoWorkingspace = () => {
                             >
                                 Select
                             </MenuButton>
-                            <MenuList className={style.menu} >
+                            <MenuList className={style.menu} display={"flex"} flexDirection={"column"} padding={2} >
                                 <Checkbox value={"Backend Office"} onChange={(e) => {
                                     e.preventDefault();
                                     FileSystemHandle(e.target.value)
@@ -1487,7 +1487,7 @@ const CoWorkingspace = () => {
                 <Heading size={"md"} margin={"10px 0 4px 0"} textAlign={"left"}>
                     Other Features
                 </Heading>
-                <Box>
+                <Box display={"flex"} alignItems={"center"} justifyContent={"left"} >
                     <Checkbox value={"Wheelchair friendly"} onChange={handleOtherFeatures}>Wheelchair friendly</Checkbox>
                 </Box>
             </Box>
