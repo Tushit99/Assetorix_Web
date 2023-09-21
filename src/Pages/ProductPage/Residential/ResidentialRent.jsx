@@ -75,18 +75,18 @@ const ResidentialRent = () => {
             });
     }
 
-    const ProductDetail = async () => {
-        let obj = {}
-        bhk.length && (obj.bedroom = bhk)
-        propertyType.length && (obj.propertyType = propertyType)
-        furnished.length && (obj.furnished = furnished)
+    // const ProductDetail = async () => {
+    //     let obj = {}
+    //     bhk.length && (obj.bedroom = bhk)
+    //     propertyType.length && (obj.propertyType = propertyType)
+    //     furnished.length && (obj.furnished = furnished)
 
-        await axios.get(`${process.env.REACT_APP_URL}/property/rent/residential`, { params: obj }).then((e) => {
-            setData(e.data);
-        }).catch((e) => {
-            console.log(e);
-        });
-    };
+    //     await axios.get(`${process.env.REACT_APP_URL}/property/rent/residential`, { params: obj }).then((e) => {
+    //         setData(e.data);
+    //     }).catch((e) => {
+    //         console.log(e);
+    //     });
+    // };
 
 
     const handleBedroom = (value) => {
@@ -122,7 +122,7 @@ const ResidentialRent = () => {
     }
 
     useEffect(() => {
-        dispatch(residentialRent()) // fetching the data
+        dispatch(residentialRent(location)) // fetching the data
         handleLike(); // wishlist 
     }, []);
 
@@ -136,7 +136,7 @@ const ResidentialRent = () => {
     }, [bhk, propertyType, furnished]);
 
     useEffect(() => {
-        ProductDetail();
+        dispatch(residentialRent(location)) // fetching the data
     }, [location.search]);
 
 
