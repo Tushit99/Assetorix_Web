@@ -89,7 +89,7 @@ const ResidentialBuy = () => {
     const handleBedroom = (value) => {
         setBhk((prev) => {
             if (prev.includes(value)) {
-                return prev.filter((item) => item !== value);
+                return prev.filter((item) => item !== value); 
             } else {
                 return [...prev, value]; 
             }
@@ -135,10 +135,7 @@ const ResidentialBuy = () => {
     useEffect(() => {
         dispatch(residentialBuy(location));
     }, [location.search]);
-
-    if (isError) {
-        return <Error />
-    }
+ 
 
 
     return (
@@ -190,8 +187,8 @@ const ResidentialBuy = () => {
                             const colorstate = wishlist && Array.isArray(wishlist) && wishlist.includes(`${e._id}`);
                             return (
                                 <Box className={style.property_box} key={index}>
-                                    <Box position={"relative"}>
-                                        <Tooltip label={"Wishlist"}>
+                                    <Box position={"relative"}> 
+                                        <Tooltip hasArrow label={"Wishlist"}>
                                             <Text cursor={"pointer"} onClick={() => handleAddToWishlist(e._id)} position={"absolute"} top={1} right={2} color={colorstate ? "green.500" : "red.500"} > <BsFillBookmarkHeartFill size={"20px"} /> </Text>
                                         </Tooltip>
                                         <Image src="https://mediacdn.99acres.com/582/0/11640476F-1383637447-Amrit_House_-_Sant_Nagr_Delhi.jpeg" w={"100%"} alt="property image" />

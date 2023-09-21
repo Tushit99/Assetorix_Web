@@ -15,7 +15,7 @@ import {
     Text,
     Tabs,
     Tab,
-    TabPanel,
+    TabPanel, 
     TabList,
     TabPanels,
     Checkbox,
@@ -233,7 +233,8 @@ const TopNavbar = () => {
                                             <Link to="/residential_buy">
                                                 <Button
                                                     backgroundColor={"rgb(46,49,146)"}
-                                                    color={"white"}
+                                                    color={"white"} 
+                                                    w={"100%"}  
                                                     className={style.start_btn}
                                                 >
                                                     Start Now
@@ -255,7 +256,8 @@ const TopNavbar = () => {
                                             <Link to={"/commercial_buy"}>
                                                 <Button
                                                     backgroundColor={"rgb(46,49,146)"}
-                                                    color={"white"}
+                                                    color={"white"} 
+                                                    w={"100%"}  
                                                     className={style.start_btn}
                                                 >
                                                     Start Now
@@ -330,7 +332,8 @@ const TopNavbar = () => {
                                             <Link to="/residential_rent">
                                                 <Button
                                                     backgroundColor={"rgb(46,49,146)"}
-                                                    color={"white"}
+                                                    color={"white"}  
+                                                    w={"100%"}  
                                                     className={style.start_btn}
                                                 >
                                                     Start Now
@@ -352,7 +355,8 @@ const TopNavbar = () => {
                                             <Link to={"/commercial_rent"}>
                                                 <Button
                                                     backgroundColor={"rgb(46,49,146)"}
-                                                    color={"white"}
+                                                    color={"white"} 
+                                                    w={"100%"}  
                                                     className={style.start_btn}
                                                 >
                                                     Start Now

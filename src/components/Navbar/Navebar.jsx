@@ -180,8 +180,8 @@ const Navebar = () => {
                     <PopoverTrigger>
                         <Button
                             backgroundColor={"unset"}
-                            color={"auto"}
-                            fontWeight={400}
+                            color={"auto"}  
+                            fontWeight={400} 
                             _hover={{ color: "unset" }}
                             _active={{ color: "unset" }}
                         >
@@ -229,7 +229,8 @@ const Navebar = () => {
                                         <Link to="/residential_buy">
                                             <Button
                                                 backgroundColor={"rgb(46,49,146)"}
-                                                color={"white"}
+                                                color={"white"} 
+                                                w={"100%"} 
                                                 className={style.start_btn}
                                             >
                                                 Start Now
@@ -252,6 +253,7 @@ const Navebar = () => {
                                             <Button
                                                 backgroundColor={"rgb(46,49,146)"}
                                                 color={"white"}
+                                                w={"100%"}  
                                                 className={style.start_btn}
                                             >
                                                 Start Now
@@ -320,7 +322,8 @@ const Navebar = () => {
                                         <Link to="/residential_rent">
                                             <Button
                                                 backgroundColor={"rgb(46,49,146)"}
-                                                color={"white"}
+                                                color={"white"} 
+                                                w={"100%"}  
                                                 className={style.start_btn}
                                             >
                                                 Start Now
@@ -342,7 +345,8 @@ const Navebar = () => {
                                         <Link to={"/commercial_rent"}> 
                                             <Button
                                                 backgroundColor={"rgb(46,49,146)"}
-                                                color={"white"}
+                                                color={"white"} 
+                                                w={"100%"}  
                                                 className={style.start_btn}
                                             >
                                                 Start Now
