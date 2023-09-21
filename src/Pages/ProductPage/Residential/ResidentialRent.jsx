@@ -5,13 +5,14 @@ import React, { useEffect, useState } from 'react'
 import { BsCheckLg } from "react-icons/bs";
 import { BiPlus } from "react-icons/bi";
 import { BsFillBookmarkHeartFill } from 'react-icons/bs';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import LoadingBox from '../LoadingBox/LoadingBox';
 import { useDispatch, useSelector } from 'react-redux';
 import Error from '../../ErrorPage/Error';
 import noResult from "../Nodata.png";
+import { residentialRent } from '../../../Redux/Propertysearch/action';
 
 
 const ResidentialRent = () => {
@@ -121,7 +122,7 @@ const ResidentialRent = () => {
     }
 
     useEffect(() => {
-        ProductDetail(); // fetching the data
+        dispatch(residentialRent()) // fetching the data
         handleLike(); // wishlist 
     }, []);
 

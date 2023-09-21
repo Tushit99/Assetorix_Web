@@ -5,13 +5,11 @@ import React, { useEffect, useState } from 'react'
 import { BsCheckLg } from "react-icons/bs";
 import { BiPlus } from "react-icons/bi";
 import { BsFillBookmarkHeartFill } from 'react-icons/bs';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import 'react-loading-skeleton/dist/skeleton.css'
 import LoadingBox from '../LoadingBox/LoadingBox';
 import { commercialBuy } from '../../../Redux/Propertysearch/action';
-import { useDispatch, useSelector } from 'react-redux';
-import Error from '../../ErrorPage/Error';
-import noResult from "../Nodata.png";
+import { useDispatch, useSelector } from 'react-redux'; 
 
 
 const CommercialBuy = () => {
@@ -74,18 +72,18 @@ const CommercialBuy = () => {
             });
     }
 
-    const ProductDetail = async () => {
-        let obj = {}
-        bhk.length && (obj.bedroom = bhk)
-        propertyType.length && (obj.propertyType = propertyType)
-        furnished.length && (obj.furnished = furnished)
+    // const ProductDetail = async () => {
+    //     let obj = {}
+    //     bhk.length && (obj.bedroom = bhk)
+    //     propertyType.length && (obj.propertyType = propertyType)
+    //     furnished.length && (obj.furnished = furnished)
 
-        await axios.get(`${process.env.REACT_APP_URL}/property/buy/commercial`, { params: obj }).then((e) => {
-            setData(e.data);
-        }).catch((e) => {
-            console.log(e);
-        });
-    };
+    //     await axios.get(`${process.env.REACT_APP_URL}/property/buy/commercial`, { params: obj }).then((e) => {
+    //         setData(e.data);
+    //     }).catch((e) => {
+    //         console.log(e);
+    //     });
+    // };
 
 
     const handleBedroom = (value) => {

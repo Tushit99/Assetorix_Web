@@ -75,18 +75,18 @@ const CommercialLease = () => {
             });
     }
 
-    const ProductDetail = async () => {
-        let obj = {}
-        bhk.length && (obj.bedroom = bhk)
-        propertyType.length && (obj.propertyType = propertyType)
-        furnished.length && (obj.furnished = furnished)
+    // const ProductDetail = async () => {
+    //     let obj = {}
+    //     bhk.length && (obj.bedroom = bhk)
+    //     propertyType.length && (obj.propertyType = propertyType)
+    //     furnished.length && (obj.furnished = furnished)
 
-        await axios.get(`${process.env.REACT_APP_URL}/property/sell/commercial`, { params: obj }).then((e) => {
-            setData(e.data);
-        }).catch((e) => {
-            console.log(e);
-        });
-    };
+    //     await axios.get(`${process.env.REACT_APP_URL}/property/sell/commercial`, { params: obj }).then((e) => {
+    //         setData(e.data);
+    //     }).catch((e) => {
+    //         console.log(e);
+    //     });
+    // };
 
 
     const handleBedroom = (value) => {
