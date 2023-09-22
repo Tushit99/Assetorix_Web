@@ -3,6 +3,7 @@ import {
   DATA_COMMERCIAL_RENT_DATA,
   DATA_FETCH_ERROR,
   DATA_FETCH_LOADING,
+  DATA_FETCH_WISHLIST,
   DATA_RESIDENTIAL_BUY_DATA,
   DATA_RESIDENTIAL_RENT_DATA,
 } from "./actionType";
@@ -15,6 +16,7 @@ const initialState = {
   ResedentialBuydata: [],
   Commercialrentdata: [],
   Resedentialrentdata: [],
+  Wishlist: [],
 };
 
 export const reducer = (state = initialState, { type, payload }) => {
@@ -48,7 +50,14 @@ export const reducer = (state = initialState, { type, payload }) => {
         isLoading: false,
         isError: false,
         ResedentialBuydata: payload,
-      }; 
+      };
+    case DATA_FETCH_WISHLIST:
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        Wishlist: payload 
+      };
     case DATA_FETCH_ERROR:
       return { ...state, isLoading: false, isError: true };
     default:

@@ -9,10 +9,10 @@ const LoadingBox = () => {
     return (
         <Box>
             <Box position={"relative"}>
-                <Text cursor={"pointer"} position={"absolute"} top={1} right={2} > <BsFillBookmarkHeartFill size={"20px"} /> </Text>
+                <Text cursor={"pointer"} position={"absolute"} top={3} right={3} > <BsFillBookmarkHeartFill size={"20px"} /> </Text>
                 <Skeleton height={"150px"} /> 
             </Box>
-            <Skeleton />
+            <Skeleton /> 
             <Skeleton />
         </Box>
     )

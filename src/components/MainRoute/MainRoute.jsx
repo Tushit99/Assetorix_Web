@@ -27,6 +27,7 @@ import ResidentialRent from '../../Pages/ProductPage/Residential/ResidentialRent
 import ResidentialBuy from '../../Pages/ProductPage/Residential/ResidentialBuy'
 import CommercialBuy from '../../Pages/ProductPage/Commercial/CommercialBuy'
 import CommercialLease from '../../Pages/ProductPage/Commercial/CommercialLease'
+import Wishlist from '../../Pages/Wishlist/Wishlist'
 // import ConsultingPage from '../../Pages/CoporateServices/Consulting/consulting'
 
 const MainRoute = () => {
@@ -57,6 +58,10 @@ const MainRoute = () => {
         <Route path='/residential_buy/:id' element={<SingleProductDetailPage />} /> 
         <Route path='/commercial_rent/:id' element={<SingleProductDetailPage />} />  
         <Route path='/commercial_buy/:id' element={<SingleProductDetailPage />} /> 
+
+        {/* wishlist */} 
+        <Route path='/wishlist' element={<Wishlist />} /> 
+        <Route path='/wishlist/:id' element={<SingleProductDetailPage />} /> 
 
         {/* buy rent sale */}
         <Route path='/buy' element={<Buy />} />

@@ -26,9 +26,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { userPreLog, userlogout } from "../../Redux/userauth/action";
 import { changeLookingFor, changecountry } from "../../Redux/globalval/action";
 
-const TopNavbar = () => {
-    const data = useSelector((state) => state.userreducer);
-    const [scroll, setScroll] = useState(0);
+const TopNavbar = () => { 
+    const data = useSelector((state) => state.userreducer); 
+    const [scroll, setScroll] = useState(0); 
     const [country, setCountry] = useState("india");
     const dispatch = useDispatch();
 
@@ -40,12 +40,11 @@ const TopNavbar = () => {
         let userid = localStorage.getItem("usrId") || undefined;
         let usertoken = localStorage.getItem("AstToken") || undefined;
 
-        if (userid && usertoken) {
+        if (userid && usertoken) { 
             let body = {
                 id: userid,
                 authorization: usertoken,
-            };
-            // console.log(body)
+            };  
             dispatch(userPreLog(body));
         }
 
@@ -54,9 +53,9 @@ const TopNavbar = () => {
             dispatch(changecountry("india"));
             setCountry("india");
         } else {
-            dispatch(changecountry(storedVal));
-            setCountry(storedVal);
-        }
+            dispatch(changecountry(storedVal)); 
+            setCountry(storedVal); 
+        } 
     }, []);
 
     const handlePageRent = () => {
@@ -89,10 +88,10 @@ const TopNavbar = () => {
                     </div>
                     <div className={style.login_data2}>
                         <div className={style.country}>
-                            <select
+                            <select 
                                 onChange={(e) => handlecountry(e.target.value)}
                                 value={country}
-                                style={{ border: "0px", outline: "0px" }}
+                                style={{ border: "0px", outline: "0px",borderRadius:"0px" }}
                             >
                                 <option value="india">India</option>
                                 <option value="usa">USA</option>
@@ -135,7 +134,7 @@ const TopNavbar = () => {
                                         </Text>
                                         <Box className={style.log_links}>
                                             <Link to={"/profile"}> Profile </Link>
-                                            <Link> Wishlist </Link>
+                                            <Link to={"/wishlist"}> Wishlist </Link>
                                             <Link> recently visited </Link>
                                             <Link> Listings </Link>
                                             <Link> Purchased </Link>
@@ -387,7 +386,7 @@ const TopNavbar = () => {
                         </PopoverContent>
                     </Popover>
                 </div>
-            </div>
+            </div> 
         </div>
     );
 };

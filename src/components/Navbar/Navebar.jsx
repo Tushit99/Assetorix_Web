@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Logo from "../Logo/Logo";
 import style from "./Navbar.module.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Hamburger from "../Hamburger/Hamburger";
 import {
     Popover,
@@ -31,7 +31,7 @@ const Navebar = () => {
     const [scroll, setScroll] = useState(0);
     const [country, setCountry] = useState("india");
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     useEffect(() => {
         window.addEventListener("scroll", () => {
@@ -60,9 +60,9 @@ const Navebar = () => {
         }
     }, []);
 
-    const handlePageRent = () => {
-        dispatch(changeLookingFor("Rent/Lease"));
-    }
+    // const handlePageRent = () => {
+    //     dispatch(changeLookingFor("Rent/Lease"));
+    // }
 
     const handlePageSell = () => {
         dispatch(changeLookingFor("sell"));
@@ -138,7 +138,7 @@ const Navebar = () => {
                                     </Text>
                                     <Box className={style.log_links}>
                                         <Link to={"/profile"}> Profile </Link>
-                                        <Link> Wishlist </Link>
+                                        <Link to={"/wishlist"}> Wishlist </Link>
                                         <Link> recently visited </Link>
                                         <Link> Listings </Link>
                                         <Link> Purchased </Link>

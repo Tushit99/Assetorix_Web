@@ -5,14 +5,13 @@
   left: 0;
   width: 100%;
   display: grid;
-  z-index: 50; 
-  /* display: none;  */
-  /* border: 2px solid black;  */
+  z-index: 50;   
+  box-shadow: 0;
 }
 
 #nav_back_space {
-  height: 100px; 
-  position: relative;       
+  height: 100px;  
+  position: relative;        
 }
 
 .hamburger2 {
@@ -54,7 +53,7 @@
   justify-content: flex-start;
   align-items: center;
 }
-nav_bottom2 .start_btn {
+.nav_bottom2 .start_btn {
   width: 100%;
   margin: 10px auto;
 }

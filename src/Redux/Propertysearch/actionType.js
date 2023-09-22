@@ -2,7 +2,9 @@
 
 export const DATA_FETCH_LOADING = "data/fetch/loading";
 
-export const DATA_FETCH_ERROR = "data/fetch/error";
+export const DATA_FETCH_ERROR = "data/fetch/error"; 
+
+export const DATA_FETCH_WISHLIST = "data/wishlist/successfull"; 
  
 // data fetch successfull :  
 export const DATA_COMMERCIAL_RENT_DATA = "data/commercial/rent"; 

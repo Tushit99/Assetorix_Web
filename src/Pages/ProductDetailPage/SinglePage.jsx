@@ -51,6 +51,8 @@ import RoomImg from "./furnishedImages/living-room.png";
 import { ImLocation2 } from "react-icons/im"
 import { NumericString } from "../PropertyPostForm/code";
 import { useParams } from "react-router-dom";
+import { IoIosArrowForward } from "react-icons/io"
+
 
 
 const SingleProductDetailPage = () => {
@@ -85,7 +87,7 @@ const SingleProductDetailPage = () => {
     const dataById = async () => {
         await axios.get(`${process.env.REACT_APP_URL}/property/single/${id}`).then((e) => {
             setData(e.data.data);
-            // console.log(e.data.data);
+            console.log(e.data.data);
             addDatatoList(e.data.data);
         });
     };
@@ -101,7 +103,6 @@ const SingleProductDetailPage = () => {
         setlocality(list.address.locality);
         setPin(list.address.pincode);
         setisFurnished(list.furnished);
-        console.log(list.furnished);
         if (list.furnished == "Furnished" || list.furnished == "Semi-Furnished") {
             setLight(`${list.furnishedObj.light}`);
             setFan(`${list.furnishedObj.fans}`);
@@ -111,15 +112,6 @@ const SingleProductDetailPage = () => {
             setwardrobe(`${list.furnishedObj.wardrobe}`);
             setGeyser(`${list.furnishedObj.geyser}`);
             setFurnishedAdditionalList(`${list.furnishedList}`);
-            console.log(
-                list.furnishedObj.light,
-                list.furnishedObj.fans,
-                list.furnishedObj.ac,
-                list.furnishedObj.tv,
-                list.furnishedObj.beds,
-                list.furnishedObj.wardrobe,
-                list.furnishedObj.geyser,
-            )
         }
         setOverLooking(list.overLookings);
         setLocation(list.locationAdv);
@@ -131,23 +123,27 @@ const SingleProductDetailPage = () => {
     }, []);
 
     return (
-        <Box>
+        <Box >
             <Box className={style.singleProduct} display={{ base: "grid", md: "flex" }} alignItems={"flex-start"} flexWrap={"wrap"} gap={"20px"} margin={{ base: "0px auto", md: "20px auto" }} w={"94%"} >
                 <Box flex={16} >
                     <Heading
                         color={"rgb(13, 20, 66)"}
-                        margin={"0 0 20px 0"}
+                        margin={"0 0 20px 20px"}
                         textAlign={"left"}
                         fontSize={{ base: "lg", md: "2xl" }}
                         display={"flex"}
+                        textTransform={"uppercase"}
                         alignItems={"center"}
                     >
-                        <ImLocation2 /> {houseno || <Skeleton width={"200px"} />}, {apartment || <Skeleton width={"200px"} />}, {placelocality || <Skeleton width={"200px"} />}
+                        <ImLocation2 color={"rgb(46, 49, 146)"} /> {houseno || <Skeleton width={"200px"} />}, {apartment || <Skeleton width={"200px"} />}, {placelocality || <Skeleton width={"200px"} />}
                     </Heading>
                     <Box>
                         <Box >
                             <Image
-                                w={"100%"}
+                                w={"98%"}
+                                objectFit={"contain"}
+                                h={"500px"}
+                                margin={"auto"}
                                 src={"https://mediacdn.99acres.com/media1/21619/19/432399374M-1688810188988.jpg"}
                                 alt="property-img"
                             />
@@ -483,6 +479,10 @@ const SingleProductDetailPage = () => {
                                 </Box>
                             </Box>
                         </Box>
+                        {/* ==============================  Data unfurnished ================================= */}
+                        <Box display={`${isFurnished == "Un-furnished" ? "flex" : "none"}`}>
+                            <Text fontSize={"lg"} alignItems={"center"} gap={1} display={data.propertyFacing == "undefined" ? "none" : "flex"}>  <span style={{ fontWeight: "600" }}> Furnished Detail :</span>  {isFurnished || <Skeleton width={"100px"} />} </Text>
+                        </Box>
                         {/* ----------------------------------------- */}
                         {/* Property Facing / flooring */}
                         <Box margin={"10px auto"} display={"flex"} alignItems={"center"} flexWrap={"wrap"} gap={8} >
@@ -598,7 +598,7 @@ const SingleProductDetailPage = () => {
                             <Box display={"grid"} gap={3} margin={"20px 0"} >
                                 <Heading fontSize={"2xl"} padding={0}> Features </Heading>
                                 <Text textAlign={"inherit"} fontSize={"xs"} color={"blue"} margin={0}> For more details click on <InfoIcon w={7} color={"blue.400"} /> icon </Text>
-                                
+
                             </Box>
                             <Box>
                                 <Accordion defaultIndex={[0]} allowMultiple>
@@ -627,7 +627,7 @@ const SingleProductDetailPage = () => {
                                                 ))}
                                             </Box>
                                         </AccordionPanel>
-                                    </AccordionItem> 
+                                    </AccordionItem>
 
                                     {/* part 2 */}
                                     <AccordionItem>
@@ -756,7 +756,7 @@ const SingleProductDetailPage = () => {
                                         </h2>
                                         <AccordionPanel pb={4}>
                                             <Box display={"flex"} margin={"0 30px"} flexWrap={"wrap"} alignItems={"center"}>
-                                                {data.otherFeatures.map((e, i) => (
+                                                {data?.otherFeatures?.map((e, i) => (
                                                     <Box marginRight={"20px"} key={i + 1} display={"flex"} >
                                                         &#8226; {e}
                                                     </Box>
@@ -790,36 +790,36 @@ const SingleProductDetailPage = () => {
                             <Heading fontSize={"xl"} margin={"16px 0 10px 0"}> Location Advantage </Heading>
                             <Divider />
                             <Box className={style.location_adv} >
-                                <Box display={location.includes("Close to Metro Station") ? "flex" : "none"} gap={2} >
-                                    &#8226;
+                                <Box display={location.includes("Close to Metro Station") ? "flex" : "none"} alignItems={"center"} >
+                                    <IoIosArrowForward />
                                     <Text> Close to Metro Station </Text>
                                 </Box>
-                                <Box display={location.includes("Close to School") ? "flex" : "none"} gap={2} >
-                                    &#8226;
+                                <Box display={location.includes("Close to School") ? "flex" : "none"} alignItems={"center"} >
+                                    <IoIosArrowForward />
                                     <Text> Close to School </Text>
-                                </Box>
-                                <Box display={location.includes("Close to Hospital") ? "flex" : "none"} gap={2} >
-                                    &#8226;
+                                </Box> 
+                                <Box display={location.includes("Close to Hospital") ? "flex" : "none"} alignItems={"center"} >
+                                    <IoIosArrowForward />
                                     <Text> Close to Hospital </Text>
                                 </Box>
-                                <Box display={location.includes("Close to Market") ? "flex" : "none"} gap={2} >
-                                    &#8226;
+                                <Box display={location.includes("Close to Market") ? "flex" : "none"} alignItems={"center"} >
+                                    <IoIosArrowForward />
                                     <Text> Close to Market </Text>
                                 </Box>
-                                <Box display={location.includes("Close to highway") ? "flex" : "none"} gap={2} >
-                                    &#8226;
+                                <Box display={location.includes("Close to highway") ? "flex" : "none"} alignItems={"center"} >
+                                    <IoIosArrowForward />
                                     <Text> Close to highway </Text>
                                 </Box>
-                                <Box display={location.includes("Close to Mall") ? "flex" : "none"} gap={2} >
-                                    &#8226;
+                                <Box display={location.includes("Close to Mall") ? "flex" : "none"}  >
+                                    <IoIosArrowForward />
                                     <Text> Close to Mall </Text>
                                 </Box>
-                                <Box display={location.includes("Close to Airport") ? "flex" : "none"} gap={2} >
-                                    &#8226;
+                                <Box display={location.includes("Close to Airport") ? "flex" : "none"}  >
+                                    <IoIosArrowForward />
                                     <Text> Close to Airport </Text>
                                 </Box>
-                                <Box display={location.includes("Close to Railway Station") ? "flex" : "none"} gap={2} >
-                                    &#8226;
+                                <Box display={location.includes("Close to Railway Station") ? "flex" : "none"}  >
+                                    <IoIosArrowForward />
                                     <Text> Close to Railway Station </Text>
                                 </Box>
                             </Box>
@@ -835,7 +835,7 @@ const SingleProductDetailPage = () => {
                         display={{ base: "none", md: "block" }}
                     >
                         {/* price  */}
-                        <Box margin={0}>
+                        <Box margin={0} padding={"0 10px"}>
                             <Heading display={"flex"} fontSize={"xl"}>
                                 Price: {data.countryCurrency || <Skeleton width={"100px"} />}
                                 {price || <Skeleton width={"40px"} />}

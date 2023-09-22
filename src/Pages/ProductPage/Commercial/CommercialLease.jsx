@@ -75,6 +75,8 @@ const CommercialLease = () => {
             });
     }
 
+    console.log(Commercialrentdata);
+
     // const ProductDetail = async () => {
     //     let obj = {}
     //     bhk.length && (obj.bedroom = bhk)
@@ -187,46 +189,50 @@ const CommercialLease = () => {
                         {Commercialrentdata.length > 0 && (Commercialrentdata?.map((e, index) => {
                             const colorstate = wishlist && Array.isArray(wishlist) && wishlist.includes(`${e._id}`);
                             return (
-                                <Link to={`/commercial_rent/${e._id}`}>
-                                    <Box className={style.property_box} key={index}>
-                                        <Box position={"relative"}>
-                                            <Tooltip hasArrow label={"Wishlist"}>
-                                                <Text cursor={"pointer"} onClick={() => handleAddToWishlist(e._id)} position={"absolute"} top={1} right={2} color={colorstate ? "green.500" : "red.500"} > <BsFillBookmarkHeartFill size={"20px"} /> </Text>
-                                            </Tooltip>
-                                            <Image src="https://mediacdn.99acres.com/582/0/11640476F-1383637447-Amrit_House_-_Sant_Nagr_Delhi.jpeg" w={"100%"} alt="property image" />
+                                <Box position={"relative"} key={index} >
+                                    <Tooltip hasArrow label={"Wishlist"}>
+                                        <Text cursor={"pointer"} zIndex={5} onClick={() => handleAddToWishlist(e._id)} position={"absolute"} top={3} right={3} color={colorstate ? "green.500" : "red.500"} > <BsFillBookmarkHeartFill size={"20px"} /> </Text>
+                                    </Tooltip>
+                                    <Link to={`/commercial_rent/${e._id}`} >
+                                        <Box className={style.property_box}>
+                                            <Box position={"relative"}>
+                                                <Image src="https://mediacdn.99acres.com/582/0/11640476F-1383637447-Amrit_House_-_Sant_Nagr_Delhi.jpeg" w={"100%"} alt="property image" />
+                                            </Box>
+                                            <Heading className={style.head_line} size={"sm"} textAlign={"left"} color={"rgb(37, 37, 37)"} >  {e.address.houseNumber && e.address.houseNumber} {e.address.apartmentName && e.address.apartmentName} {e.address.locality && e.address.locality} </Heading>
+                                            <Text> Price: {e.countryCurrency}{e.price?.toLocaleString("en-IN")} </Text>
                                         </Box>
-                                        <Heading className={style.head_line} size={"sm"} textAlign={"left"} color={"rgb(37, 37, 37)"} >  {e.address.houseNumber && e.address.houseNumber} {e.address.apartmentName && e.address.apartmentName} {e.address.locality && e.address.locality} </Heading>
-                                        <Text> Price: {e.countryCurrency}{e.price?.toLocaleString("en-IN")} </Text>
-                                    </Box>
-                                </Link>
+                                    </Link>
+                                </Box>
                             )
                         }))}
                         {isLoading && (
                             [1, 2, 3, 4, 5, 6, 7, 8, 9].map((e) => (
                                 <LoadingBox key={e} />
                             ))
-                        )}  
+                        )}
                     </Box>
 
-                    {(Commercialrentdata.msg && isLoading == false) && ( 
+                    {(Commercialrentdata.msg && isLoading == false) && (
                         <Box boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 10px"} top={0} backgroundColor={"white"} display={"grid"} minH={"70vh"} w={"100%"} >
-                            <Heading size={"md"} w={"100%"} padding={"10px 0 20px 0"} >{Commercialrentdata.msg}</Heading>
+                            <Heading size={"xs"} w={"100%"} padding={"10px 0 20px 0"} >{Commercialrentdata.msg}</Heading>
                             <Box w={"100%"} textAlign={"left"} display={"grid"} gridTemplateRows={"auto"} gridTemplateColumns={"repeat(3,1fr)"} gap={4} >
                                 {(Commercialrentdata.relatedData?.map((e, index) => {
                                     const colorstate = wishlist && Array.isArray(wishlist) && wishlist.includes(`${e._id}`);
                                     return (
-                                        <Link to={`/commercial_rent/${e._id}`}>
-                                            <Box className={style.property_box} key={index}>
-                                                <Box position={"relative"}>
-                                                    <Tooltip hasArrow label={"Wishlist"}>
-                                                        <Text cursor={"pointer"} onClick={() => handleAddToWishlist(e._id)} position={"absolute"} top={1} right={2} color={colorstate ? "green.500" : "red.500"} > <BsFillBookmarkHeartFill size={"20px"} /> </Text>
-                                                    </Tooltip>
-                                                    <Image src="https://mediacdn.99acres.com/582/0/11640476F-1383637447-Amrit_House_-_Sant_Nagr_Delhi.jpeg" w={"100%"} alt="property image" />
+                                        <Box position={"relative"} key={index} >
+                                            <Tooltip hasArrow label={"Wishlist"}>
+                                                <Text cursor={"pointer"} zIndex={5} onClick={() => handleAddToWishlist(e._id)} position={"absolute"} top={3} right={3} color={colorstate ? "green.500" : "red.500"} > <BsFillBookmarkHeartFill size={"20px"} /> </Text>
+                                            </Tooltip>
+                                            <Link to={`/commercial_rent/${e._id}`} >
+                                                <Box className={style.property_box}>
+                                                    <Box position={"relative"}>
+                                                        <Image src="https://mediacdn.99acres.com/582/0/11640476F-1383637447-Amrit_House_-_Sant_Nagr_Delhi.jpeg" w={"100%"} alt="property image" />
+                                                    </Box>
+                                                    <Heading className={style.head_line} size={"sm"} textAlign={"left"} color={"rgb(37, 37, 37)"} >  {e.address.houseNumber && e.address.houseNumber} {e.address.apartmentName && e.address.apartmentName} {e.address.locality && e.address.locality} </Heading>
+                                                    <Text> Price: {e.countryCurrency}{e.price?.toLocaleString("en-IN")} </Text>
                                                 </Box>
-                                                <Heading className={style.head_line} size={"sm"} textAlign={"left"} color={"rgb(37, 37, 37)"} >  {e.address.houseNumber && e.address.houseNumber} {e.address.apartmentName && e.address.apartmentName} {e.address.locality && e.address.locality} </Heading>
-                                                <Text> Price: {e.countryCurrency}{e.price?.toLocaleString("en-IN")} </Text>
-                                            </Box>
-                                        </Link>
+                                            </Link>
+                                        </Box>
                                     )
                                 }))}
                             </Box>
