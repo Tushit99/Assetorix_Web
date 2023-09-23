@@ -134,7 +134,7 @@ const CommercialLease = () => {
     }, [location.search]);
 
     return (
-        <Box margin={{ base: "0px auto 60px auto", lg: "30px auto 60px auto" }} >
+        <Box margin={{ base: "0px auto 60px auto", md: "30px auto 60px auto" }} >
             {/* mobile bar */}
             <Box width={"100%"} display={{ base: "flex", md: "none" }} position={"sticky"} top={50} zIndex={10} backgroundColor={"white"} left={0} right={0} >
                 <Box flex={1} border={"1px solid rgb(199, 199, 199)"} >
