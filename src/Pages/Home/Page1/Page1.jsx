@@ -111,7 +111,7 @@ const Page1 = () => {
                     color={"white"}
                     fontSize={{ base: "sm", lg: "lg" }}
                     fontWeight={{ base: "500", lg: "bold" }}
-                    _hover={{ color: "white" }}
+                    _hover={{ color: "white" }}  
                   >
                     Buy
                   </Button>
@@ -155,21 +155,19 @@ const Page1 = () => {
                               other
                             </Checkbox>
                           </Box>
-                          <Button className={style.start_btn}>Start Now</Button>
+                          <Button backgroundColor={"rgb(46,49,146)"} color={"white"} width={"100%"}>Start Now</Button>
                         </TabPanel>
                         <TabPanel>
                           <Box className={style.buy}>
-                            <Checkbox size={"md"} color={"black"}>
-                              Office
-                            </Checkbox>
+                            <Checkbox size={"md"} color={"black"}> Office </Checkbox>
                             <Checkbox>Retail</Checkbox>
-                            <Checkbox>Plot/Land</Checkbox>
+                            <Checkbox>Plot/Land</Checkbox> 
                             <Checkbox>Storage</Checkbox>
                             <Checkbox>Industry</Checkbox>
                             <Checkbox>Hospitality</Checkbox>
                             <Checkbox>Other</Checkbox>
                           </Box>
-                          <Button className={style.start_btn}>Start Now</Button>
+                          <Button backgroundColor={"rgb(46,49,146)"} color={"white"} width={"100%"} >Start Now</Button>
                         </TabPanel>
                       </TabPanels>
                     </Tabs>

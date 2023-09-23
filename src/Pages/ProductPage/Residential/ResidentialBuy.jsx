@@ -10,6 +10,8 @@ import LoadingBox from '../LoadingBox/LoadingBox';
 import { useDispatch, useSelector } from 'react-redux';
 import { residentialBuy } from '../../../Redux/Propertysearch/action';
 import noResult from "../Nodata.png";
+import errorimg from "../eror.png";
+
 
 const ResidentialBuy = () => {
     const [serchParam, setSearchParam] = useSearchParams();
@@ -24,7 +26,7 @@ const ResidentialBuy = () => {
     const location = useLocation();
     const dispatch = useDispatch();
     const toast = useToast();
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    const { isOpen, onOpen, onClose } = useDisclosure();
     const btnRef = useRef();
 
     const handleLike = () => {
@@ -159,8 +161,8 @@ const ResidentialBuy = () => {
                         <DrawerOverlay />
                         <DrawerContent>
                             <DrawerCloseButton />
-                            <DrawerHeader> ASSETORIX </DrawerHeader> 
-                            <DrawerBody>   
+                            <DrawerHeader> ASSETORIX </DrawerHeader>
+                            <DrawerBody>
                                 <Box flex={2} padding={5} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"} >
                                     <Heading size={{ base: "sm", lg: "md" }}> Sorting Property </Heading>
                                     <Divider backgroundColor={"rgb(227, 226, 226)"} marginTop={"2px"} padding={"1px"} borderRadius={"4px"} />
@@ -198,15 +200,15 @@ const ResidentialBuy = () => {
                                     </Box>
                                 </Box>
                             </DrawerBody>
- 
+
                         </DrawerContent>
                     </Drawer>
                 </Box>
                 <Box flex={1} borderY={"1px solid rgb(199, 199, 199)"} >
                     <Select backgroundColor={"unset"} borderRadius={0} border={0}  >
-                        <option value="desc"> High to Low </option>  
-                        <option value="inc"> Low to High </option>    
-                    </Select> 
+                        <option value="desc"> High to Low </option>
+                        <option value="inc"> Low to High </option>
+                    </Select>
                 </Box>
             </Box>
 
@@ -252,8 +254,9 @@ const ResidentialBuy = () => {
 
                 {/* =========================== product List ====================== */}
                 <Box flex={6} >
+
                     <Box w={"100%"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"} textAlign={"left"} paddingX={3} paddingY={2} display={"grid"} gridTemplateRows={"auto"} gridTemplateColumns={{ base: "repeat(2,1fr)", md: "repeat(2,1fr)", lg: "repeat(3,1fr)" }} gap={4} >
-                        {ResedentialBuydata?.data?.map((e, index) => {
+                        {!ResedentialBuydata.msg && ResedentialBuydata?.data?.map((e, index) => {
                             const colorstate = wishlist && Array.isArray(wishlist) && wishlist.includes(`${e._id}`);
                             return (
                                 <Box position={"relative"} key={index} >
@@ -265,8 +268,8 @@ const ResidentialBuy = () => {
                                             <Box position={"relative"}>
                                                 <Image src="https://mediacdn.99acres.com/582/0/11640476F-1383637447-Amrit_House_-_Sant_Nagr_Delhi.jpeg" w={"100%"} alt="property image" />
                                             </Box>
-                                            <Heading className={style.head_line} size={{base:"xs",md:"sm"}} textAlign={"left"} color={"rgb(37, 37, 37)"} >  {e.address.houseNumber && e.address.houseNumber} {e.address.apartmentName && e.address.apartmentName} {e.address.locality && e.address.locality} </Heading>
-                                            <Text fontSize={{base:"xs",md:"sm"}} > Price: {e.countryCurrency}{e.price?.toLocaleString("en-IN")} </Text>
+                                            <Heading className={style.head_line} size={{ base: "xs", md: "sm" }} textAlign={"left"} color={"rgb(37, 37, 37)"} >  {e.address.houseNumber && e.address.houseNumber} {e.address.apartmentName && e.address.apartmentName} {e.address.locality && e.address.locality} </Heading>
+                                            <Text fontSize={{ base: "xs", md: "sm" }} > Price: {e.countryCurrency}{e.price?.toLocaleString("en-IN")} </Text>
                                         </Box>
                                     </Link>
                                 </Box>
@@ -280,9 +283,18 @@ const ResidentialBuy = () => {
                             ))
                         )}
                     </Box>
-                    {(ResedentialBuydata.msg && isLoading == false) && (
+
+                    {/* =================================== Error Line ===================================  */}
+                    {isError == true && (
+                        <Box display={"flex"} alignItems={"center"} justifyContent={"center"} flexDirection={"column"}>
+                            <Image src={errorimg} w={"80%"} height={"400px"} objectFit={"contain"} alt="Error-img" />
+                        </Box>
+                    )}
+
+                    {/* =================================== Related Data =================================== */}
+                    {(ResedentialBuydata.msg && isLoading == false && isError == false) && (
                         <Box boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 10px"} top={0} backgroundColor={"white"} display={"grid"} minH={"70vh"} w={"100%"} >
-                            <Heading size={"sm"} w={"100%"} padding={"10px 0 20px 0"} >{ResedentialBuydata.msg}</Heading>
+                            <Heading size={"sm"} w={"100%"} padding={"10px 0 20px 0"} > {ResedentialBuydata.msg}</Heading>
                             <Box w={"100%"} textAlign={"left"} display={"grid"} gridTemplateRows={"auto"} gridTemplateColumns={"repeat(3,1fr)"} gap={4} >
                                 {(ResedentialBuydata?.data?.map((e, index) => {
                                     const colorstate = wishlist && Array.isArray(wishlist) && wishlist.includes(`${e._id}`);
@@ -306,7 +318,6 @@ const ResidentialBuy = () => {
                             </Box>
                         </Box>
                     )}
-
                 </Box>
             </Flex>
 

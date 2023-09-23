@@ -31,11 +31,15 @@ const Navebar = () => {
     const [scroll, setScroll] = useState(0);
     const [country, setCountry] = useState("india");
     const dispatch = useDispatch();
-    // const navigate = useNavigate();
+    // const navigate = useNavigate(); 
+
+    const homeback = ()=>{
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }); 
+    }
 
     useEffect(() => {
         window.addEventListener("scroll", () => {
-            setScroll(window.pageYOffset);
+            setScroll(window.pageYOffset); 
         });
 
         let userid = localStorage.getItem("usrId") || undefined;
@@ -101,13 +105,13 @@ const Navebar = () => {
                             <option value="usa">USA</option>
                         </select>
                     </div>
-                    <Link to={"/"}>home</Link>
+                    <Link to={"/"} onClick={homeback}>home</Link>
                     <Link to={"/about"}>About us</Link>
                     <Link to={"/contact"}>Contact</Link>
                 </div>
                 {/* login signin button */}
                 <div className={style.login_box}>
-                    <Popover>
+                    <Popover> 
                         <PopoverTrigger>
                             <Button
                                 borderRadius={"30px"}

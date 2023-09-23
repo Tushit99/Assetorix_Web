@@ -32,6 +32,11 @@ const TopNavbar = () => {
     const [country, setCountry] = useState("india");
     const dispatch = useDispatch();
 
+
+    const homeback = ()=>{
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }); 
+    }
+
     useEffect(() => {
         window.addEventListener("scroll", () => {
             setScroll(window.pageYOffset);
@@ -97,7 +102,7 @@ const TopNavbar = () => {
                                 <option value="usa">USA</option>
                             </select>
                         </div>
-                        <Link to={"/"}>home</Link>
+                        <Link to={"/"}  onClick={homeback}>home</Link>
                         <Link to={"/about"}>About us</Link>
                         <Link to={"/contact"}>Contact</Link>
                     </div>

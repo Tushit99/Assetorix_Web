@@ -43,7 +43,7 @@
 
 .start_btn{
     width: 100%; 
-    background-color: var(--main-one); 
+    background-color: rgb(46,49,146) ; 
     color: white; 
 }
 
