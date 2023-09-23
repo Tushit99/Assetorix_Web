@@ -66,7 +66,7 @@ const ResidentialBuy = () => {
                 setWishlist(e.data);
                 setWishlist(e.data.wishlistIDs);
                 toast({
-                    title: `${wishlist.includes(myid) ? "Removed Successfully" : "Added Successfully"}`,
+                    title: `${wishlist.includes(myid) ? "Removed from Wishlist" : "Added to Wishlist"}`,
                     status: 'success',
                     duration: 2000,
                 })

@@ -46,7 +46,7 @@ const Navebar = () => {
                 id: userid,
                 authorization,
             };
-            dispatch(userPreLog(body));
+            dispatch(userPreLog(body)); 
         }
         // console.log(data.user.name) 
 

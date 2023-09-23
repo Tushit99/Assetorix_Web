@@ -64,10 +64,11 @@ export const signinuser = (param) => async (dispatch) => {
 
 // is user pre-loged in 
 
-export const userPreLog = (param) => async (dispatch) => {   
+export const userPreLog = (param) => async (dispatch) => {    
+  // console.log("gone")
   try {
     await axios.get(`${process.env.REACT_APP_URL}/user/`, {headers: param}).then((e) => {
-        // console.log(e.data); 
+        // console.log("power23",e.data); 
         let token = localStorage.getItem("AstToken"); 
         localStorage.setItem("AstUser",e.data.name); 
         dispatch({ type: USER_PREE_LOGIN, payload: { ...e.data, token } });

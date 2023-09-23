@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, Divider, Flex, Heading, Image, Text, Tooltip } from '@chakra-ui/react';
+import { Box, Button, Checkbox, Divider, Flex, Heading, Image, Text, Tooltip, useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import style from "../ProductPage.module.css";
 import React, { useEffect, useState } from 'react'
@@ -27,6 +27,7 @@ const ResidentialRent = () => {
     const [wishlist, setWishlist] = useState([]);
     const location = useLocation();
     const dispatch = useDispatch();
+    const toast = useToast();
 
     const handleLike = () => {
         let id = localStorage.getItem("usrId") || undefined;
@@ -67,7 +68,12 @@ const ResidentialRent = () => {
         axios(axiosConfig)
             .then((e) => {
                 setWishlist(e.data);
-                setWishlist(e.data.wishlistIDs);
+                setWishlist(e.data.wishlistIDs); 
+                toast({
+                    title: `${wishlist.includes(myid) ? "Removed from Wishlist" : "Added to Wishlist"}`,
+                    status: 'success',
+                    duration: 2000,
+                })
                 console.log(e.data);
             })
             .catch((error) => {

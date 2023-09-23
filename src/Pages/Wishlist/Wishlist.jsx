@@ -42,7 +42,8 @@ const Wishlist = () => {
                     description: `${e.data.msg}`,
                     status: 'success',
                     duration: 2000,
-                }) 
+                })  
+                console.log(e.data); 
             })
             .catch((error) => {
                 console.error(error);
@@ -72,7 +73,7 @@ const Wishlist = () => {
                                 <Box flex={4}>
                                     <Text fontSize={"lg"}> Property Status: {e.availabilityStatus} </Text>
                                 </Box>
-                            </Box>
+                            </Box> 
                         </Link>
                         <Box flex={1} display={"flex"} alignItems={"center"} >
                             <Button onClick={() => handledeleteToWishlist(e._id)}> Remove from wishlist </Button>
