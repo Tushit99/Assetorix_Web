@@ -10,6 +10,7 @@ import {
     MenuButton,
     MenuItem,
     MenuList, 
+    Text, 
     useDisclosure,
 } from "@chakra-ui/react";
 import { useRef } from "react";
@@ -40,7 +41,7 @@ const Hamburger = () => {
                 isOpen={isOpen}
                 placement="left"
                 onClose={onClose}
-                finalFocusRef={btnRef}
+                finalFocusRef={btnRef} 
             >
                 <DrawerOverlay />
                 <DrawerContent className={style.drawer}>
@@ -59,17 +60,17 @@ const Hamburger = () => {
                         gap={3}
                     > 
                         <Link to={"/about"} onClick={onClose}> 
-                            About
+                            About 
                         </Link>
-                        <Link to={"/buy"} onClick={onClose}>
+                        <Text to={"#"} onClick={onClose}>
                             Buy
-                        </Link>
+                        </Text>
                         <Link to={"#"} onClick={onClose}> 
                             Rent
                         </Link>
-                        <Link to={"/post"} onClick={onClose}> 
+                        <Text onClick={onClose}> 
                             Sell
-                        </Link>
+                        </Text>
                         <Link to={"#"} onClick={onClose}>
                             Home Loans
                         </Link>
