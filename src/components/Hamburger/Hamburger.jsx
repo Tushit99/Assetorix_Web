@@ -1,4 +1,4 @@
-import {  
+import {
     Button,
     Drawer,
     DrawerBody,
@@ -9,20 +9,43 @@ import {
     Menu,
     MenuButton,
     MenuItem,
-    MenuList, 
-    Text, 
+    MenuList,
+    Select,
+    Text,
     useDisclosure,
 } from "@chakra-ui/react";
 import { useRef } from "react";
 import { HiMenu } from "react-icons/hi";
 import Logo from "../Logo/Logo";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import style from "./Hamburger.module.css";
-import { ChevronUpIcon } from "@chakra-ui/icons";
+import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 
 const Hamburger = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const btnRef = useRef();
+    const btnRef = useRef(); 
+    const navigate = useNavigate(); 
+
+    const handlePage = (e)=>{
+        let value = e.target.value;  
+        if(value == "Residential"){
+            navigate("/residential_buy"); 
+        }else if(value == "Commercial") {
+            navigate("/commercial_buy"); 
+        } 
+        onClose(); 
+    }
+
+    const handlePageSell =(e)=>{
+        let value = e.target.value;   
+        if(value == "Residential"){
+            navigate("/residential_rent"); 
+        }else if(value == "Commercial") {
+            navigate("/commercial_rent"); 
+        } 
+        onClose(); 
+
+    }
 
     return (
         <>
@@ -41,7 +64,7 @@ const Hamburger = () => {
                 isOpen={isOpen}
                 placement="left"
                 onClose={onClose}
-                finalFocusRef={btnRef} 
+                finalFocusRef={btnRef}
             >
                 <DrawerOverlay />
                 <DrawerContent className={style.drawer}>
@@ -58,19 +81,21 @@ const Hamburger = () => {
                         flexDirection={"column"}
                         color={"black"}
                         gap={3}
-                    > 
-                        <Link to={"/about"} onClick={onClose}> 
-                            About 
+                    >
+                        <Link to={"/about"} onClick={onClose}>
+                            About
                         </Link>
-                        <Text to={"#"} onClick={onClose}>
-                            Buy
-                        </Text>
-                        <Link to={"#"} onClick={onClose}> 
+                        <Select variant={"unstyled"} onChange={handlePage} placeholder="Buy" >  
+                            <option value="Commercial"> Commercial </option>  
+                            <option value="Residential"> Residential </option>  
+                        </Select> 
+                        <Link to={"#"} onClick={onClose}>
                             Rent
                         </Link>
-                        <Text onClick={onClose}> 
-                            Sell
-                        </Text>
+                        <Select variant={"unstyled"} onChange={handlePageSell} placeholder="Sell" >  
+                            <option value="Commercial"> Commercial </option>  
+                            <option value="Residential"> Residential </option>  
+                        </Select> 
                         <Link to={"#"} onClick={onClose}>
                             Home Loans
                         </Link>
@@ -85,7 +110,7 @@ const Hamburger = () => {
                             <MenuButton as={Button} textAlign={"left"} backgroundColor={"white"} rightIcon={<ChevronUpIcon />}>
                                 Actions
                             </MenuButton>
-                            <MenuList > 
+                            <MenuList >
                                 <MenuItem onClick={onClose}>
                                     <Link to={"/Construction_Management"}>
                                         Construction Management
@@ -115,11 +140,11 @@ const Hamburger = () => {
                                 </MenuItem>
                                 <MenuItem onClick={onClose}>
                                     <Link to={"/usa_real_state"}> USA Real State</Link>
-                                </MenuItem> 
+                                </MenuItem>
                             </MenuList>
                         </Menu>
-                        {/* ======= Contact =======  */}  
-                        <Link to={"/contact"} onClick={onClose}> 
+                        {/* ======= Contact =======  */}
+                        <Link to={"/contact"} onClick={onClose}>
                             Contact
                         </Link>
                     </DrawerBody>
@@ -129,5 +154,5 @@ const Hamburger = () => {
     );
 };
 
-export default Hamburger; 
+export default Hamburger;
 
