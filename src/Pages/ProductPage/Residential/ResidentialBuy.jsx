@@ -79,15 +79,7 @@ const ResidentialBuy = () => {
             .catch((error) => {
                 console.error(error);
             });
-    }
-
-    // const ProductDetail = async () => {
-    //     await axios.get(`${process.env.REACT_APP_URL}/property/buy/residential${location.search}`).then((e) => {
-    //         setData(e.data);
-    //     }).catch((e) => {
-    //         console.log(e);
-    //     });
-    // }; 
+    } 
 
     console.log(ResedentialBuydata);
 
@@ -140,8 +132,7 @@ const ResidentialBuy = () => {
 
     useEffect(() => {
         dispatch(residentialBuy(location));
-    }, [location.search]);
-
+    }, [location.search]);  
 
 
     return (
