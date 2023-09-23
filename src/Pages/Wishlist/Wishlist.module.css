@@ -1,7 +1,23 @@
-
-.box *{ 
-    /* border: 2px solid black; */
-    text-align: left; 
+.box * {
+  /* border: 2px solid rgb(0, 0, 0);  */
+  text-align: left;
 }
+
+.textoverflow {
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  display: -webkit-box;
+}
+
+.align_middle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+ 
+
+
 
 

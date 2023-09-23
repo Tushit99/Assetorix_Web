@@ -81,7 +81,7 @@ const Navebar = () => {
     // console.log(data);
 
     return (
-        <div className={style.head_nav}>
+        <div className={style.head_nav}> 
             {/*  Top Navbar Section (logo home about contact) */}
             <div className={scroll > 20 ? style.top_navbar3 : style.top_navbar}>
                 <div className={style.hamburger}>

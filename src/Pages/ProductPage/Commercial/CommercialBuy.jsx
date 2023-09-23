@@ -194,7 +194,7 @@ const CommercialBuy = () => {
                                             <Heading className={style.head_line} size={"sm"} textAlign={"left"} color={"rgb(37, 37, 37)"} >  {e.address.houseNumber && e.address.houseNumber} {e.address.apartmentName && e.address.apartmentName} {e.address.locality && e.address.locality} </Heading>
                                             <Text> Price: {e.countryCurrency}{e.price?.toLocaleString("en-IN")} </Text>
                                         </Box>
-                                    </Link>
+                                    </Link> 
                                 </Box>
                             )
                         }))}
