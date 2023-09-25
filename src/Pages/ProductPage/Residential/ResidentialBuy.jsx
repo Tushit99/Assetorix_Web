@@ -45,6 +45,7 @@ const ResidentialBuy = () => {
         }).catch((err) => console.log(err));
     }
 
+
     const handleAddToWishlist = (myid) => {
         let id = localStorage.getItem("usrId") || undefined;
         let authorization = localStorage.getItem("AstToken") || undefined;
@@ -250,7 +251,7 @@ const ResidentialBuy = () => {
                         {!ResedentialBuydata.msg && ResedentialBuydata?.data?.map((e, index) => {
                             const colorstate = wishlist && Array.isArray(wishlist) && wishlist.includes(`${e._id}`);
                             return (
-                                <Box position={"relative"} key={index} >
+                                <Box position={"relative"} key={index}  >
                                     <Tooltip hasArrow label={"Wishlist"}>
                                         <Text cursor={"pointer"} zIndex={5} onClick={() => handleAddToWishlist(e._id)} position={"absolute"} top={3} right={3} color={colorstate ? "green.500" : "red.500"} > <BsFillBookmarkHeartFill size={"20px"} /> </Text>
                                     </Tooltip>
@@ -284,7 +285,7 @@ const ResidentialBuy = () => {
 
                     {/* =================================== Related Data =================================== */}
                     {(ResedentialBuydata.msg && isLoading == false && isError == false) && (
-                        <Box boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 10px"} top={0} backgroundColor={"white"} display={"grid"} minH={"70vh"} w={"100%"} >
+                        <Box boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 10px"} top={0} backgroundColor={"white"} display={"grid"} minH={"70vh"} w={"100%"}  >
                             <Heading size={"sm"} w={"100%"} padding={"10px 0 20px 0"} > {ResedentialBuydata.msg}</Heading>
                             <Box w={"100%"} textAlign={"left"} display={"grid"} gridTemplateRows={"auto"} gridTemplateColumns={"repeat(3,1fr)"} gap={4} >
                                 {(ResedentialBuydata?.data?.map((e, index) => {

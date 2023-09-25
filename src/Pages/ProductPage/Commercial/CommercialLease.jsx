@@ -46,6 +46,8 @@ const CommercialLease = () => {
         }).catch((err) => console.log(err));
     }
 
+ 
+
     const handleAddToWishlist = (myid) => {
         let id = localStorage.getItem("usrId") || undefined;
         let authorization = localStorage.getItem("AstToken") || undefined;
@@ -223,7 +225,7 @@ const CommercialLease = () => {
                         {Commercialrentdata?.data?.map((e, index) => {
                             const colorstate = wishlist && Array.isArray(wishlist) && wishlist.includes(`${e._id}`);
                             return (
-                                <Box position={"relative"} key={index} >
+                                <Box position={"relative"} key={index}  >
                                     <Tooltip hasArrow label={"Wishlist"}>
                                         <Text cursor={"pointer"} zIndex={5} onClick={() => handleAddToWishlist(e._id)} position={"absolute"} top={3} right={3} color={colorstate ? "green.500" : "red.500"} > <BsFillBookmarkHeartFill size={"20px"} /> </Text>
                                     </Tooltip>

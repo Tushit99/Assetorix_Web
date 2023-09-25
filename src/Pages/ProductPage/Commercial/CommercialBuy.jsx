@@ -11,6 +11,7 @@ import LoadingBox from '../LoadingBox/LoadingBox';
 import { commercialBuy } from '../../../Redux/Propertysearch/action';
 import { useDispatch, useSelector } from 'react-redux'; 
 import errorimg from "../eror.png"; 
+import { addRecentlyVisited } from '../../../Redux/globalval/action';
 
 
 const CommercialBuy = () => {
@@ -93,7 +94,9 @@ const CommercialBuy = () => {
     //     }).catch((e) => {
     //         console.log(e);
     //     });
-    // }; 
+    // };  
+
+
 
     const handlePropertyType = (value) => {
         console.log(value);
@@ -226,7 +229,7 @@ const CommercialBuy = () => {
                         {CommercialBuydata?.data?.map((e, index) => {
                             const colorstate = wishlist && Array.isArray(wishlist) && wishlist.includes(`${e._id}`);
                             return (
-                                <Box position={"relative"} key={index} >
+                                <Box position={"relative"} key={index}  >
                                     <Tooltip hasArrow label={"Wishlist"}>
                                         <Text cursor={"pointer"} zIndex={5} onClick={() => handleAddToWishlist(e._id)} position={"absolute"} top={3} right={3} color={colorstate ? "green.500" : "red.500"} > <BsFillBookmarkHeartFill size={"20px"} /> </Text>
                                     </Tooltip>
