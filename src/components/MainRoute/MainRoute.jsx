@@ -28,6 +28,7 @@ import ResidentialBuy from '../../Pages/ProductPage/Residential/ResidentialBuy'
 import CommercialBuy from '../../Pages/ProductPage/Commercial/CommercialBuy'
 import CommercialLease from '../../Pages/ProductPage/Commercial/CommercialLease'
 import Wishlist from '../../Pages/Wishlist/Wishlist'
+import VisitedPage from '../../Pages/VisitedPage/VisitedPage'
 // import ConsultingPage from '../../Pages/CoporateServices/Consulting/consulting'
 
 const MainRoute = () => {
@@ -61,7 +62,12 @@ const MainRoute = () => {
 
         {/* wishlist */} 
         <Route path='/wishlist' element={<Wishlist />} /> 
-        <Route path='/wishlist/:id' element={<SingleProductDetailPage />} /> 
+        <Route path='/wishlist/:id' element={<SingleProductDetailPage />} />  
+
+        {/* Recently Visited */}  
+        <Route path='/recently_visited' element={<VisitedPage />} />
+        <Route path='/recently_visited/:id' element={<SingleProductDetailPage />} />
+
 
         {/* buy rent sale */}
         <Route path='/buy' element={<Buy />} />

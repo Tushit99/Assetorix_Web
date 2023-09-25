@@ -140,7 +140,7 @@ const TopNavbar = () => {
                                         <Box className={style.log_links}>
                                             <Link to={"/profile"}> Profile </Link>
                                             <Link to={"/wishlist"}> Wishlist </Link>
-                                            <Link> recently visited </Link>
+                                            <Link to={"/recently_visited"}> recently visited </Link>
                                             <Link> Listings </Link>
                                             <Link> Purchased </Link>
                                         </Box>

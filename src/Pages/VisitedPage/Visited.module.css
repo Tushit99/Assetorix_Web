@@ -1,0 +1,23 @@
+.box * {
+  /* border: 2px solid rgb(0, 0, 0);  */
+  text-align: left;
+}
+
+.textoverflow {
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  display: -webkit-box;
+}
+
+.align_middle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+ 
+.list_viewed{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px; 
+    padding: 10px 0 ; 
+}
+

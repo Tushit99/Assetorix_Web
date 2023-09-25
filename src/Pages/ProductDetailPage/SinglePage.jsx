@@ -82,7 +82,7 @@ const SingleProductDetailPage = () => {
     const [nametosend, setNametosend] = useState("");
     const [emailtosend, setEmailtosend] = useState("");
     const [phonetosend, setPhonetosend] = useState("");
-    const [message, setMessage] = useState("");
+    const [message, setMessage] = useState(""); 
     const { isOpen, onOpen, onClose } = useDisclosure();
     const dispatch = useDispatch();
 
@@ -127,42 +127,43 @@ const SingleProductDetailPage = () => {
 
     const handleTour = async (e) => {
         e.preventDefault();
-    
-        const body = {
-          propertyID: id, 
-          name: nametosend,
-          email: emailtosend,
-          mobile: phonetosend, 
-          message: message, 
-        };
-    
-        console.log(body);
-    
-        try {
-          const response = await axios.post(`${process.env.REACT_APP_URL}/property/inquiry`, body, {
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          });
-    
-          if (response.status === 200) {
-            console.log('Request successful');
-            const responseData = response.data;
-            console.log(responseData);
-          } else {
-            console.error('Request failed with status:', response.status);
-          }
-        } catch (error) {
-          console.error('Error sending the request:', error);
-        }
-      };
-      
 
+        const body = {
+            propertyID: id,
+            name: nametosend,
+            email: emailtosend,
+            mobile: phonetosend,
+            message: message,
+        };
+
+        console.log(body);
+
+        try {
+            const response = await axios.post(`${process.env.REACT_APP_URL}/property/inquiry`, body, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (response.status === 200) {
+                console.log('Request successful');
+                const responseData = response.data;
+                console.log(responseData);
+            } else {
+                console.error('Request failed with status:', response.status);
+            }
+        } catch (error) {
+            console.error('Error sending the request:', error);
+        }
+    };
+
+
+ 
     return (
         <Box >
             <Box className={style.singleProduct} display={{ base: "grid", md: "flex" }} alignItems={"flex-start"} flexWrap={"wrap"} gap={"20px"} margin={{ base: "0px auto", md: "20px auto" }} w={"94%"} >
                 <Box flex={16} >
-                    <Heading
+                    {(Skeleton && apartment && placelocality) ? <Heading
                         color={"rgb(13, 20, 66)"}
                         margin={"0 0 20px 20px"}
                         textAlign={"left"}
@@ -172,13 +173,13 @@ const SingleProductDetailPage = () => {
                         alignItems={"center"}
                     >
                         <ImLocation2 color={"rgb(46, 49, 146)"} /> {houseno || <Skeleton width={"200px"} />}, {apartment || <Skeleton width={"200px"} />}, {placelocality || <Skeleton width={"200px"} />}
-                    </Heading>
+                    </Heading> : <Skeleton height={"35px"} />}
                     <Box>
                         <Box >
                             <Image
                                 w={"98%"}
                                 objectFit={"contain"}
-                                maxH={"450px"} 
+                                maxH={"450px"}
                                 // border={"2px solid black"}
                                 src={"https://mediacdn.99acres.com/media1/21619/19/432399374M-1688810188988.jpg"}
                                 alt="property-img"
@@ -188,14 +189,14 @@ const SingleProductDetailPage = () => {
 
                     {/* ===================== mobile Pricing (Price only for mobile) =================================== */}
                     <Box display={{ base: "grid", md: "none" }} >
-                        <Heading display={"flex"} fontSize={"xl"}>
+                        {(data.countryCurrency && price) ? <Heading display={"flex"} fontSize={"xl"}>
                             Price: {data.countryCurrency || <Skeleton width={"100px"} />}
                             {price || <Skeleton width={"40px"} />}
-                        </Heading>
-                        <Heading display={"flex"} margin={"6px 0"} fontSize={"md"}>
+                        </Heading> : <Skeleton />}
+                        {(data.countryCurrency && price) ? <Heading display={"flex"} margin={"6px 0"} fontSize={"md"}>
                             Price per unit: {data.countryCurrency || <Skeleton width={"100px"} />}
                             {price || <Skeleton width={"100px"} />}
-                        </Heading>
+                        </Heading> : <Skeleton />}
                     </Box>
 
                     {/* box 2 */}
@@ -634,10 +635,10 @@ const SingleProductDetailPage = () => {
                             <Box display={"grid"} gap={3} margin={"20px 0"} >
                                 <Heading fontSize={"2xl"} padding={0}> Features </Heading>
                                 <Text textAlign={"inherit"} fontSize={"xs"} color={"blue"} margin={0}> For more details click on <InfoIcon w={7} color={"blue.400"} /> icon </Text>
-
                             </Box>
+
                             <Box>
-                                <Accordion defaultIndex={[0]} allowMultiple>
+                                <Accordion allowMultiple>
                                     {/*part 1  */}
                                     <AccordionItem>
                                         <h2>
@@ -654,7 +655,7 @@ const SingleProductDetailPage = () => {
                                                 <AccordionIcon />
                                             </AccordionButton>
                                         </h2>
-                                        <AccordionPanel pb={4}>
+                                        <AccordionPanel pb={4} >
                                             <Box display={"flex"} margin={"0 30px"} flexWrap={"wrap"} alignItems={"center"}>
                                                 {data?.otherRoom?.map((e, i) => (
                                                     <Box key={i + 1} marginRight={"20px"} display={"flex"} >
@@ -681,7 +682,7 @@ const SingleProductDetailPage = () => {
                                                 <AccordionIcon />
                                             </AccordionButton>
                                         </h2>
-                                        <AccordionPanel pb={4}>
+                                        <AccordionPanel pb={4} >
                                             <Box display={"flex"} margin={"0 30px"} flexWrap={"wrap"} alignItems={"center"}>
                                                 {data?.propertyFeatures?.map((e, i) => (
                                                     <Box marginRight={"20px"} key={i + 1} display={"flex"} >
@@ -691,7 +692,6 @@ const SingleProductDetailPage = () => {
                                             </Box>
                                         </AccordionPanel>
                                     </AccordionItem>
-
                                     {/* part3 */}
                                     <AccordionItem>
                                         <h2>
@@ -708,7 +708,7 @@ const SingleProductDetailPage = () => {
                                                 <AccordionIcon />
                                             </AccordionButton>
                                         </h2>
-                                        <AccordionPanel pb={4}>
+                                        <AccordionPanel pb={4} >
                                             <Box display={"flex"} margin={"0 30px"} flexWrap={"wrap"} alignItems={"center"}>
                                                 {data?.society_buildingFeatures?.map((e, i) => (
                                                     <Box marginRight={"20px"} key={i + 1} display={"flex"} >
@@ -735,7 +735,7 @@ const SingleProductDetailPage = () => {
                                                 <AccordionIcon />
                                             </AccordionButton>
                                         </h2>
-                                        <AccordionPanel pb={4}>
+                                        <AccordionPanel pb={4} >
                                             <Box display={"flex"} margin={"0 30px"} flexWrap={"wrap"} alignItems={"center"}>
                                                 {data?.additionalFeatures?.map((e, i) => (
                                                     <Box marginRight={"20px"} key={i + 1} display={"flex"} >
@@ -762,7 +762,7 @@ const SingleProductDetailPage = () => {
                                                 <AccordionIcon />
                                             </AccordionButton>
                                         </h2>
-                                        <AccordionPanel pb={4}>
+                                        <AccordionPanel pb={4} >
                                             <Box display={"flex"} margin={"0 30px"} flexWrap={"wrap"} alignItems={"center"}>
                                                 {data?.waterSources?.map((e, i) => (
                                                     <Box marginRight={"20px"} key={i + 1} display={"flex"} >
@@ -790,7 +790,7 @@ const SingleProductDetailPage = () => {
                                                 <AccordionIcon />
                                             </AccordionButton>
                                         </h2>
-                                        <AccordionPanel pb={4}>
+                                        <AccordionPanel pb={4} >
                                             <Box display={"flex"} margin={"0 30px"} flexWrap={"wrap"} alignItems={"center"}>
                                                 {data?.otherFeatures?.map((e, i) => (
                                                     <Box marginRight={"20px"} key={i + 1} display={"flex"} >
@@ -901,6 +901,7 @@ const SingleProductDetailPage = () => {
                     fontSize={"2xl"}
                     position={"fixed"}
                     color={"white"}
+                    display={{ base: "flex", md: "none", lg: "none" }}
                     bottom={"-2px"}
                     zIndex={"20"}
                     left={"-2px"}
