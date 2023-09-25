@@ -91,7 +91,7 @@ const SingleProductDetailPage = () => {
         await axios.get(`${process.env.REACT_APP_URL}/property/single/${id}`).then((e) => {
             setData(e.data.data);
             addDatatoList(e.data.data);
-            dispatch(addRecentlyVisited(e.data.data._id));
+            dispatch(addRecentlyVisited(e.data.data._id));  
         });
     };
 
