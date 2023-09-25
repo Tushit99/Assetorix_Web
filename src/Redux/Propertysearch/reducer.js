@@ -6,6 +6,7 @@ import {
   DATA_FETCH_WISHLIST,
   DATA_RESIDENTIAL_BUY_DATA,
   DATA_RESIDENTIAL_RENT_DATA,
+  DATA_UPDATED_WISHLIST,
 } from "./actionType";
 
 const initialState = {
@@ -56,8 +57,15 @@ export const reducer = (state = initialState, { type, payload }) => {
         ...state,
         isLoading: false,
         isError: false,
-        Wishlist: payload 
+        Wishlist: payload,
       };
+    case DATA_UPDATED_WISHLIST:
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        Wishlist: payload,
+      }; 
     case DATA_FETCH_ERROR:
       return { ...state, isLoading: false, isError: true };
     default:

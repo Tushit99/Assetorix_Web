@@ -7,6 +7,7 @@ import {
   DATA_FETCH_WISHLIST,
   DATA_RESIDENTIAL_BUY_DATA,
   DATA_RESIDENTIAL_RENT_DATA,
+  DATA_UPDATED_WISHLIST,
 } from "./actionType";
 
 export const residentialRent = (location) => async (dispatch) => {
@@ -81,22 +82,48 @@ export const wishlistData = () => async (dispatch) => {
       return;
     }
     let param = {
-        id,
-        authorization, 
+      id,
+      authorization,
     };
 
     await axios
-      .get(`${process.env.REACT_APP_URL}/user/wishlist`, {headers: param}) 
+      .get(`${process.env.REACT_APP_URL}/user/wishlist`, { headers: param })
       .then((e) => {
-        console.log("wishlist data: ",e.data);   
+        console.log("wishlist data: ", e.data);
         dispatch({ type: DATA_FETCH_WISHLIST, payload: e.data });
-      }); 
-
+      });
   } catch (error) {
     dispatch({ type: DATA_FETCH_ERROR });
   }
 };
 
+export const updatedWishlist = (myid) => (dispatch) => {
+  let id = localStorage.getItem("usrId") || undefined;
+  let authorization = localStorage.getItem("AstToken") || undefined;
 
+  let head = { id, authorization, "Content-type": "application/json" };
+  if (!id || !authorization) { 
+    return;
+  }
+  console.log(myid); 
 
+  try {
+    const axiosConfig = {
+      method: "delete",
+      url: `${process.env.REACT_APP_URL}/user/wishlist/${myid}`,
+      headers: {
+        id: head.id,
+        authorization: head.authorization,
+        "Content-type": head["Content-type"],
+      },
+      data: {},
+    }; 
 
+    axios(axiosConfig).then((e) => { 
+        dispatch({type: DATA_UPDATED_WISHLIST ,payload:e.data.wishlistIDs}); 
+        // console.log(e.data.wishlistIDs);  
+      }) 
+  } catch (err) {  
+    console.log(err); 
+  }
+};
