@@ -10,11 +10,9 @@ import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import LoadingBox from '../LoadingBox/LoadingBox';
 import { useDispatch, useSelector } from 'react-redux';
-import Error from '../../ErrorPage/Error';
-import noResult from "../Nodata.png";
 import { residentialRent } from '../../../Redux/Propertysearch/action';
-import errorimg from "../eror.png"; 
- 
+import errorimg from "../eror.png";
+
 
 
 const ResidentialRent = () => {
