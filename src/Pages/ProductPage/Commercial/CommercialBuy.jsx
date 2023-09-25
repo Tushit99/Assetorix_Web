@@ -93,18 +93,7 @@ const CommercialBuy = () => {
     //     }).catch((e) => {
     //         console.log(e);
     //     });
-    // };
-
-
-    const handleBedroom = (value) => {
-        setBhk((prev) => {
-            if (prev.includes(value)) {
-                return prev.filter((item) => item !== value);
-            } else {
-                return [...prev, value];
-            }
-        });
-    }
+    // }; 
 
     const handlePropertyType = (value) => {
         console.log(value);
