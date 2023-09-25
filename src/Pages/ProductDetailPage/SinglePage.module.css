@@ -38,6 +38,13 @@
 .schedule_bottom{
     display: none; 
     position: relative; 
+} 
+
+.schedule_div{
+     box-shadow: rgba(149, 157, 165, 0.301) 0px 8px 24px;  
+     border: 1px solid rgba(213, 213, 213, 0.721);  
+     border-radius: 4px; 
+     padding: 20px 10px;
 }
 
 
@@ -52,6 +59,16 @@
 
 } 
 
+@media screen and (min-width: 550px) and (max-width:770px) {
+    .location_adv{  
+        grid-template-columns: repeat(2,1fr);     
+    }   
+
+    .schedule_bottom{  
+        display: block;  
+    }  
+
+} 
 
 
 

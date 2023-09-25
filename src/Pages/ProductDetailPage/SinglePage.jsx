@@ -49,9 +49,11 @@ import RoomImg from "./furnishedImages/living-room.png";
 // import airport from "./furnishedImages/airport.png";
 // import railwayImg from "./furnishedImages/train-station.png";  
 import { ImLocation2 } from "react-icons/im"
-import { NumericString } from "../PropertyPostForm/code";
+import { CleanInputText, Emailhandle, NumericString } from "../PropertyPostForm/code";
 import { useParams } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io"
+import { useDispatch } from "react-redux";
+import { addRecentlyVisited } from "../../Redux/globalval/action";
 
 
 
@@ -80,15 +82,16 @@ const SingleProductDetailPage = () => {
     const [nametosend, setNametosend] = useState("");
     const [emailtosend, setEmailtosend] = useState("");
     const [phonetosend, setPhonetosend] = useState("");
+    const [message, setMessage] = useState("");
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const dispatch = useDispatch();
 
-    // console.log("prod Id", param); 
 
     const dataById = async () => {
         await axios.get(`${process.env.REACT_APP_URL}/property/single/${id}`).then((e) => {
             setData(e.data.data);
-            console.log(e.data.data);
             addDatatoList(e.data.data);
+            dispatch(addRecentlyVisited(e.data.data._id));
         });
     };
 
@@ -122,6 +125,39 @@ const SingleProductDetailPage = () => {
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     }, []);
 
+    const handleTour = async (e) => {
+        e.preventDefault();
+    
+        const body = {
+          propertyID: id, 
+          name: nametosend,
+          email: emailtosend,
+          mobile: phonetosend, 
+          message: message, 
+        };
+    
+        console.log(body);
+    
+        try {
+          const response = await axios.post(`${process.env.REACT_APP_URL}/property/inquiry`, body, {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+    
+          if (response.status === 200) {
+            console.log('Request successful');
+            const responseData = response.data;
+            console.log(responseData);
+          } else {
+            console.error('Request failed with status:', response.status);
+          }
+        } catch (error) {
+          console.error('Error sending the request:', error);
+        }
+      };
+      
+
     return (
         <Box >
             <Box className={style.singleProduct} display={{ base: "grid", md: "flex" }} alignItems={"flex-start"} flexWrap={"wrap"} gap={"20px"} margin={{ base: "0px auto", md: "20px auto" }} w={"94%"} >
@@ -142,8 +178,8 @@ const SingleProductDetailPage = () => {
                             <Image
                                 w={"98%"}
                                 objectFit={"contain"}
-                                h={"500px"}
-                                margin={"auto"}
+                                maxH={"450px"} 
+                                // border={"2px solid black"}
                                 src={"https://mediacdn.99acres.com/media1/21619/19/432399374M-1688810188988.jpg"}
                                 alt="property-img"
                             />
@@ -797,7 +833,7 @@ const SingleProductDetailPage = () => {
                                 <Box display={location.includes("Close to School") ? "flex" : "none"} alignItems={"center"} >
                                     <IoIosArrowForward />
                                     <Text> Close to School </Text>
-                                </Box> 
+                                </Box>
                                 <Box display={location.includes("Close to Hospital") ? "flex" : "none"} alignItems={"center"} >
                                     <IoIosArrowForward />
                                     <Text> Close to Hospital </Text>
@@ -848,13 +884,13 @@ const SingleProductDetailPage = () => {
                         {/* contact detail */}
                         <Box borderRadius={0} boxShadow={"rgba(0, 0, 0, 0.24) 0px 3px 8px"} padding={"20px 10px"}>
                             <Heading fontSize={"2xl"} margin={"0 0 6px 0"}> Schedule tour </Heading>
-                            <Box fontFamily={"arial"} boxShadow={"rgba(149, 157, 165, 0.2) 0px 8px 24px;"} border={"1px solid rgb(213, 213, 213)"} borderRadius={"4px"} padding={"20px 10px"} >
-                                <Input type="text" margin={"6px 0"} placeholder={"Your name"} value={nametosend} onChange={(e) => setNametosend(e.target.value)} />
-                                <Input type="text" margin={"6px 0"} placeholder={"Your email"} value={emailtosend} onChange={(e) => setEmailtosend(e.target.value)} />
-                                <Input type="text" margin={"6px 0"} placeholder={"Your phone number"} value={phonetosend} onChange={(e) => setPhonetosend(NumericString(e.target.value))} />
-                                <Textarea type="text" borderRadius={0} margin={"6px 0"} placeholder="Message" ></Textarea>
-                                <Button w={"100%"} borderRadius={0} margin={"6px 0"} colorScheme="whatsapp"> Schedule a Tour</Button>
-                            </Box>
+                            <form className={style.schedule_div} onSubmit={handleTour} >
+                                <Input type="text" required margin={"6px 0"} placeholder={"Your name"} value={nametosend} onChange={(e) => setNametosend(e.target.value)} />
+                                <Input type="email" required margin={"6px 0"} placeholder={"Your email"} value={emailtosend} onChange={(e) => setEmailtosend(e.target.value)} />
+                                <Input type="text" required margin={"6px 0"} placeholder={"Your phone number"} value={phonetosend} onChange={(e) => setPhonetosend(NumericString(e.target.value))} />
+                                <Textarea type="text" required borderRadius={0} value={message} onChange={(e) => setMessage(e.target.value)} margin={"6px 0"} placeholder="Message..." />
+                                <Button type={"submit"} w={"100%"} borderRadius={0} margin={"6px 0"} colorScheme="whatsapp"> Schedule a Tour</Button>
+                            </form>
                         </Box>
                     </Box>
                 </Box>
@@ -884,13 +920,13 @@ const SingleProductDetailPage = () => {
                         <ModalBody>
                             <Box borderRadius={0} boxShadow={"rgba(0, 0, 0, 0.24) 0px 3px 8px"} padding={"20px 10px"}>
                                 <Heading fontSize={"2xl"} margin={"0 0 6px 0"}> Schedule tour </Heading>
-                                <Box fontFamily={"arial"} boxShadow={"rgba(149, 157, 165, 0.2) 0px 8px 24px;"} border={"1px solid rgb(213, 213, 213)"} borderRadius={"4px"} padding={"20px 10px"} >
-                                    <Input type="text" margin={"6px 0"} placeholder={"Your name"} value={nametosend} onChange={(e) => setNametosend(e.target.value)} />
-                                    <Input type="text" margin={"6px 0"} placeholder={"Your email"} value={emailtosend} onChange={(e) => setEmailtosend(e.target.value)} />
-                                    <Input type="text" margin={"6px 0"} placeholder={"Your phone number"} value={phonetosend} onChange={(e) => setPhonetosend(NumericString(e.target.value))} />
-                                    <Textarea type="text" borderRadius={0} margin={"6px 0"} placeholder="Message" ></Textarea>
-                                    <Button w={"100%"} borderRadius={0} margin={"6px 0"} colorScheme="whatsapp"> Schedule a Tour</Button>
-                                </Box>
+                                <form className={style.schedule_div} onSubmit={handleTour} >
+                                    <Input type="text" required margin={"6px 0"} placeholder={"Your name"} value={nametosend} onChange={(e) => setNametosend(e.target.value)} />
+                                    <Input type="email" required margin={"6px 0"} placeholder={"Your email"} value={emailtosend} onChange={(e) => setEmailtosend(e.target.value)} />
+                                    <Input type="text" required margin={"6px 0"} placeholder={"Your phone number"} value={phonetosend} onChange={(e) => setPhonetosend(NumericString(e.target.value))} />
+                                    <Textarea type="text" required borderRadius={0} value={message} onChange={(e) => setMessage(e.target.value)} margin={"6px 0"} placeholder={"Message..."} />
+                                    <Button type={"submit"} w={"100%"} borderRadius={0} margin={"6px 0"} colorScheme="whatsapp"> Schedule a Tour</Button>
+                                </form>
                             </Box>
                         </ModalBody>
                     </ModalContent>
