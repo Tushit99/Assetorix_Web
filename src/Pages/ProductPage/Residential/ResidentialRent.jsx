@@ -13,6 +13,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import Error from '../../ErrorPage/Error';
 import noResult from "../Nodata.png";
 import { residentialRent } from '../../../Redux/Propertysearch/action';
+import errorimg from "../eror.png"; 
+ 
 
 
 const ResidentialRent = () => {

@@ -102,7 +102,7 @@ const Navebar = () => {
                             style={{ border: "0px", outline: "0px" }}
                         >
                             <option value="india">India</option>
-                            <option value="usa">USA</option>
+                            <option value="usa">USA</option>    
                         </select>
                     </div>
                     <Link to={"/"} onClick={homeback}>home</Link>
@@ -119,7 +119,7 @@ const Navebar = () => {
                                     <IoIosArrowDown
                                         size={"20px"}
                                         _hover={{ backgroundColor: "unset" }}
-                                        color="rgb(46,49,146)"
+                                        color="rgb(46,49,146)" 
                                     />
                                 }
                             >

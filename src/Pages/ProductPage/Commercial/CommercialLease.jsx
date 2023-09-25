@@ -10,6 +10,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import LoadingBox from '../LoadingBox/LoadingBox';
 import { commercialRent } from '../../../Redux/Propertysearch/action';
 import { useDispatch, useSelector } from 'react-redux';
+import errorimg from "../eror.png"; 
 
 
 const CommercialLease = () => {
