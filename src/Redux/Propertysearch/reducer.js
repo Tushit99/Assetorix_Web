@@ -18,9 +18,10 @@ const initialState = {
   Commercialrentdata: [],
   Resedentialrentdata: [],
   Wishlist: [],
-};
+};  
+  
 
-export const reducer = (state = initialState, { type, payload }) => {
+export const reducer = (state = initialState, { type, payload }) => {  
   switch (type) {
     case DATA_FETCH_LOADING:
       return { ...state, isLoading: true, isError: false };
