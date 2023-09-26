@@ -45,7 +45,8 @@ const Navebar = () => {
         let userid = localStorage.getItem("usrId") || undefined;
         let authorization = localStorage.getItem("AstToken") || undefined;
 
-        if (userid && authorization && data.user.length == 0) {
+        // console.log("presented  3987y",userid , authorization , Object.keys(data.user).length === 0);  
+        if (userid && authorization && Object.keys(data.user).length === 0) { 
             let body = {
                 id: userid,
                 authorization,

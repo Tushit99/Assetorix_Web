@@ -45,12 +45,12 @@ const TopNavbar = () => {
         let userid = localStorage.getItem("usrId") || undefined;
         let usertoken = localStorage.getItem("AstToken") || undefined;
 
-        if (userid && usertoken) { 
+        if (userid && usertoken && Object.keys(data.user).length === 0) {  
             let body = {
                 id: userid,
                 authorization: usertoken,
             };  
-            dispatch(userPreLog(body));
+            dispatch(userPreLog(body)); 
         }
 
         let storedVal = localStorage.getItem("astcountry");
