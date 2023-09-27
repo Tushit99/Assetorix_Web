@@ -20,32 +20,38 @@ import Logo from "../Logo/Logo";
 import { Link, useNavigate } from "react-router-dom";
 import style from "./Hamburger.module.css";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
+import { changeLookingFor } from "../../Redux/globalval/action";
+import { useDispatch } from "react-redux";
 
 const Hamburger = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const btnRef = useRef(); 
-    const navigate = useNavigate(); 
+    const btnRef = useRef();
+    const navigate = useNavigate();  
 
-    const handlePage = (e)=>{
-        let value = e.target.value;  
-        if(value == "Residential"){
-            navigate("/residential_buy"); 
-        }else if(value == "Commercial") {
-            navigate("/commercial_buy"); 
-        } 
-        onClose(); 
+    const handlePage = (e) => {
+        let value = e.target.value;
+        if (value == "Residential") {
+            navigate("/residential_buy");
+        } else if (value == "Commercial") {
+            navigate("/commercial_buy");
+        }
+        onClose();
     }
 
-    const handlePageSell =(e)=>{
-        let value = e.target.value;   
-        if(value == "Residential"){
-            navigate("/residential_rent"); 
-        }else if(value == "Commercial") {
-            navigate("/commercial_rent"); 
-        } 
-        onClose(); 
+    const handlePageSell = (e) => {
+        let value = e.target.value;
+        if (value == "Residential") {
+            navigate("/residential_rent");
+        } else if (value == "Commercial") {
+            navigate("/commercial_rent");
+        }
+        onClose();
 
-    }
+    } 
+
+
+ 
+
 
     return (
         <>
@@ -65,7 +71,7 @@ const Hamburger = () => {
                 placement="left"
                 onClose={onClose}
                 finalFocusRef={btnRef}
-            >
+            > 
                 <DrawerOverlay />
                 <DrawerContent className={style.drawer}>
                     <DrawerCloseButton />
@@ -85,17 +91,15 @@ const Hamburger = () => {
                         <Link to={"/about"} onClick={onClose}>
                             About
                         </Link>
-                        <Select variant={"unstyled"} onChange={handlePage} placeholder="Buy" >  
-                            <option value="Commercial"> Commercial </option>  
-                            <option value="Residential"> Residential </option>  
-                        </Select> 
-                        <Link to={"#"} onClick={onClose}>
-                            Rent
-                        </Link>
-                        <Select variant={"unstyled"} onChange={handlePageSell} placeholder="Sell" >  
-                            <option value="Commercial"> Commercial </option>  
-                            <option value="Residential"> Residential </option>  
-                        </Select> 
+                        <Select variant={"unstyled"} onChange={handlePage} placeholder="Buy" >
+                            <option value="Commercial"> Commercial </option>
+                            <option value="Residential"> Residential </option>
+                        </Select>
+                        <Link to="/post" onClick={onClose}> Sell </Link>
+                        <Select variant={"unstyled"} onChange={handlePageSell} placeholder="Rent" >
+                            <option value="Commercial"> Commercial </option>
+                            <option value="Residential"> Residential </option>
+                        </Select>
                         <Link to={"#"} onClick={onClose}>
                             Home Loans
                         </Link>

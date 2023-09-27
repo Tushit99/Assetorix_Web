@@ -38,10 +38,10 @@ import IndustryRent from "./RentForm/Commercial/Industry/IndustryRent";
 import HospitalityRent from "./RentForm/Commercial/Hospitality/Hospitality";
  
 
-// this is a page of sell and sell routes (please don't change anything without any prior knowledge).  
+// this is a page of Property sell and Property Rent routes (please don't change anything without any prior knowledge).  
 
 const SellForm = () => { 
-    const looking = useSelector((state) => state.gloalval.lookingFor);
+    const looking = useSelector((state) => state.gloalval.lookingFor); 
     const [look, setlook] = useState("");
     const [type, settype] = useState("");
     const [typeofplace, setTypeOf] = useState("");

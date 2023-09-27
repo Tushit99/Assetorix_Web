@@ -12,7 +12,7 @@ import {
 
 export const residentialRent = (location) => async (dispatch) => {
   dispatch({ type: DATA_FETCH_LOADING });
-  try {
+  try { 
     await axios
       .get(
         `${process.env.REACT_APP_URL}/property/rent/residential${location.search}`
@@ -105,7 +105,7 @@ export const updatedWishlist = (newarr, myid) => (dispatch) => {
   if (!id || !authorization) {
     return;
   }  
-  dispatch({ type: DATA_FETCH_WISHLIST, payload: newarr });
+  // dispatch({ type: DATA_FETCH_WISHLIST, payload: newarr });
 
   try {
     const axiosConfig = {
@@ -120,8 +120,7 @@ export const updatedWishlist = (newarr, myid) => (dispatch) => {
     };
 
     axios(axiosConfig).then((e) => {
-      dispatch({ type: DATA_UPDATED_WISHLIST, payload: e.data.wishlistIDs });
-      console.log(e.data.wishlistIDs);
+      dispatch({ type: DATA_UPDATED_WISHLIST, payload: e.data.wishlistIDs }); 
     });
   } catch (err) {
     console.log(err);

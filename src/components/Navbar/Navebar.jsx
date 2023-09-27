@@ -278,13 +278,13 @@ const Navebar = () => {
                             fontWeight={400}
                             _hover={{ color: "unset" }} 
                             _active={{ color: "unset" }}
-                        >
+                        > 
                             Rent  
                         </Button>
                     </PopoverTrigger>
                     <PopoverContent w={{ base: "320px", md: "400px" }} marginTop={"-5px"} color={"black"}>
                         <PopoverArrow />
-                        <PopoverHeader>Buy Property</PopoverHeader>
+                        <PopoverHeader>Rent Property</PopoverHeader>
                         <PopoverBody>
                             {/* one */}
                             <Tabs variant="enclosed">

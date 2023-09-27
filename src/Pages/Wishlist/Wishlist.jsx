@@ -16,10 +16,9 @@ const Wishlist = () => {
         dispatch(wishlistData());
     }
 
-    const handledeleteToWishlist = (myid) => { 
-        let newarr = Wishlist.filter((e)=>{return e._id != myid});      
+    const handledeleteToWishlist = (myid) => {        
 
-        dispatch(updatedWishlist(newarr,myid)); 
+        dispatch(updatedWishlist(myid)); 
         toast({
             title: "Removed Successfully", 
             status: 'success',
