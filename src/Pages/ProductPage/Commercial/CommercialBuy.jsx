@@ -15,11 +15,11 @@ import { addRecentlyVisited } from '../../../Redux/globalval/action';
 
 
 const CommercialBuy = () => {
+    const { CommercialBuydata, isLoading, isError } = useSelector((state) => state.property);
     const [serchParam, setSearchParam] = useSearchParams();
     const paramBhk = serchParam.getAll("bhk");
     const paramProperty = serchParam.getAll("propertyType");
     const paramFurnish = serchParam.getAll("furnished");
-    const { CommercialBuydata, isLoading, isError } = useSelector((state) => state.property);
     const [bhk, setBhk] = useState(paramBhk || []);
     const [propertyType, setPropertyType] = useState(paramProperty || []);
     const [furnished, setfurnish] = useState(paramFurnish || []);

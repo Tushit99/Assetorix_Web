@@ -17,7 +17,7 @@ const initialState = {
   ResedentialBuydata: [],
   Commercialrentdata: [],
   Resedentialrentdata: [],
-  Wishlist: [],
+  Wishlist: [], 
 };  
   
 

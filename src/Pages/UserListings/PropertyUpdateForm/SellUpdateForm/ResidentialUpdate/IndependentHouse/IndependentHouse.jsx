@@ -5,6 +5,7 @@ import {
     ButtonGroup,
     Heading,
     Input,
+    InputGroup,
     NumberInput,
     NumberInputField,
     Select,
@@ -14,18 +15,17 @@ import {
 } from "@chakra-ui/react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { Checkbox } from "@chakra-ui/react";
-import { useSelector } from "react-redux";
-import { CleanInputText, NumericString } from "../../../code";
+import style from "./IndependentHouse.module.css";
 import axios from "axios";
-import style from "./FlatAppartment.module.css";
-import { InputGroup } from "@chakra-ui/react";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { useSelector } from "react-redux";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
+import { CleanInputText, NumericString } from "../../../code";
 
-const FlatAppartment = () => {
+const IndependentHouseUpdate = () => {
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
-    const [country, setCountry] = useState(""); 
-    const [facingwidth, setFacingWidth] = useState(""); 
+    const [country, setCountry] = useState("");
+    const [facingwidth, setFacingWidth] = useState("");
     const [city, setCity] = useState("");
     const [appartment, setApartment] = useState("");
     const [pincode, setPincode] = useState(0);
@@ -58,7 +58,7 @@ const FlatAppartment = () => {
     const [amenities, setAminity] = useState([]);
     const [propertyFeatures, setPropertyFeature] = useState("");
     const [buildingFeature, setBuildingFeature] = useState([]);
-    const [additinalft, setAdditinalFeature] = useState("");
+    const [additinalft, setAdditinalFeature] = useState([]);
     const [watersource, setWaterSource] = useState([]);
     const [overLook, setoverlook] = useState([]);
     const [otherFeature, setOtherFeature] = useState([]);
@@ -68,7 +68,6 @@ const FlatAppartment = () => {
     const [facing, setFacing] = useState("Meter");
     const [locationAdv, setLocationAdv] = useState([]);
     const [totalfloors, setTotalFloors] = useState("");
-    const [floorOn, setFloorOn] = useState("Ground");
     const [plotArea, setPlotArea] = useState("");
     const [desc, setDesc] = useState("");
     const [pincollection, setPinCollection] = useState([]);
@@ -76,18 +75,15 @@ const FlatAppartment = () => {
     const [maintenancePrice, setMaintenancePrice] = useState("");
     const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
     const [expectedRentel, setExpectedRentel] = useState("");
-    const [annualDuesPayble, setAnnualDuesPayble] = useState("");
     const [bookingAmount, setBookingAmount] = useState("");
-    const [membershipCharge, setMembershipCharge] = useState("");
-
-
+    const [annualDuesPayble, setAnnualDuesPayble] = useState("");
 
     const handleSubmitData = async (e) => {
         e.preventDefault();
         let obj = {
             lookingFor: "Sell",
             propertyGroup: "Residential",
-            propertyType: "Flat / Apartment",
+            propertyType: "Independent House / Villa",
             address: {
                 apartmentName: appartment,
                 houseNumber: houseNo,
@@ -119,12 +115,11 @@ const FlatAppartment = () => {
             roadFacingWidth: facingwidth,
             roadFacingWidthType: facing,
             totalFloors: +totalfloors,
-            floorOn,
             plotArea,
             plotAreaUnit: areaPer,
             parking: {
-                openParking: openparking,
-                closeParking: parking,
+                openParking: openparking.toString(),
+                closeParking: parking.toString(),
             },
             otherRoom: extraroom,
             description: desc,
@@ -178,8 +173,6 @@ const FlatAppartment = () => {
             showToastError('Provide Facing');
         } else if (!totalfloors) {
             showToastError('Provide Total Floors');
-        } else if (!floorOn) {
-            showToastError('Provide Floor number');
         } else if (!facingwidth) {
             showToastError("Provide facing width")
         }
@@ -199,6 +192,7 @@ const FlatAppartment = () => {
             furnishedarr &&
             ownership &&
             pricedetail &&
+
             inclusivePrices &&
             additinalft &&
             watersource &&
@@ -207,8 +201,7 @@ const FlatAppartment = () => {
             propertyFacing &&
             flooring &&
             facing &&
-            totalfloors &&
-            floorOn
+            totalfloors
         ) {
             let id = localStorage.getItem("usrId") || undefined;
             let authorization = localStorage.getItem("AstToken") || undefined;
@@ -495,19 +488,6 @@ const FlatAppartment = () => {
         }
     }
 
-    // const createtemplatefloors = () => {
-    //     let options = "";
-
-    //     let totalFloors = totalfloors;
-    //     for (let i = 1; i <= totalFloors; i++) {
-    //         let value = `<option value=${i}>${i}</option>`;
-    //         options += value;
-    //     }
-    //     let adding = document.getElementById("floorSelectTag");
-    //     adding.innerHTML = options;
-
-    // }
-
 
     return (
         <form onSubmit={handleSubmitData}>
@@ -517,7 +497,6 @@ const FlatAppartment = () => {
                 <Heading size={"sm"}>
                     An accurate location helps you connect with the right buyers.
                 </Heading>
-
                 <Input
                     type="text"
                     padding={"0 10px"}
@@ -644,13 +623,15 @@ const FlatAppartment = () => {
                     </Box>
                     <Box textAlign={"left"}>
                         <Text> No. of Balconies </Text>
-                        <Input
-                            variant="flushed"
-                            type="text"
-                            onChange={(e) => setBalcony(NumericString(e.target.value))}
-                            value={balconey}
-                            required
-                        />  
+                        <NumberInput>
+                            <NumberInputField
+                                variant="flushed"
+                                onChange={(e) => setBalcony(e.target.value)}
+                                value={balconey}
+                                required
+                                padding={"0 2px"}
+                            />
+                        </NumberInput>
                     </Box>
                 </Box>
                 {/* ====================================== */}
@@ -667,13 +648,12 @@ const FlatAppartment = () => {
                         variant="outline"
                     >
                         <Input
-                            type="text"
                             value={plotArea}
                             onChange={(e) => {
-                                areaCalucation();
                                 setPlotArea(NumericString(e.target.value));
                             }}
-                            required />
+                            required
+                            type="text" />
                         <select value={areaPer} onChange={(e) => {
                             setAreaPer(e.target.value);
                         }} className={style.select} required>
@@ -716,6 +696,7 @@ const FlatAppartment = () => {
                             }
                             onClick={handlerooms}
                         >
+
                             Pooja Room
                         </button>
                         <button
@@ -725,6 +706,7 @@ const FlatAppartment = () => {
                             }
                             onClick={handlerooms}
                         >
+
                             Study Room
                         </button>
                         <button
@@ -734,6 +716,7 @@ const FlatAppartment = () => {
                             }
                             onClick={handlerooms}
                         >
+
                             Servant Room
                         </button>
                         <button
@@ -743,6 +726,7 @@ const FlatAppartment = () => {
                             }
                             onClick={handlerooms}
                         >
+
                             Store Room
                         </button>
                     </Box>
@@ -1134,7 +1118,7 @@ const FlatAppartment = () => {
                         Floor Details
                     </Heading>
                     <Text textAlign={"left"} margin={"10px 0"}>
-                        Total no of floors and your floor details
+                        Total no of floors
                     </Text>
                     <Box display={"flex"} alignItems={"center"} gap={5}>
                         <NumberInput
@@ -1164,32 +1148,6 @@ const FlatAppartment = () => {
                                 w={180}
                             />
                         </NumberInput>
-                        <Select
-                            id="floorSelectTag"
-                            variant="filled"
-                            onChange={(e) => setFloorOn(e.target.value)}
-                            value={floorOn}
-                            w={180}
-                            borderRadius={0}
-                            _hover={{
-                                backgroundColor: "rgb(255, 255, 255)",
-                                borderBottom: "1px solid blue",
-                                borderLeft: "0",
-                                borderRight: "0",
-                                borderTop: "0",
-                            }}
-                            borderTop={"0"}
-                            borderLeft={"0"}
-                            borderBottom={"1px solid blue"}
-                            backgroundColor={"rgb(255, 255, 255)"}
-                        >
-                            <option value="Ground">Ground</option>
-                            <option value="Basement">Basement</option>
-                            <option value="Lower Ground">Lower Ground</option>
-                            {Array.from(Array(Number(totalfloors)).keys()).map((e) => {
-                                return <option value={e + 1}>{e + 1}</option>
-                            })}
-                        </Select>
                     </Box>
                 </Box>
                 {/* Availability status */}
@@ -1390,16 +1348,15 @@ const FlatAppartment = () => {
                             >
                                 {isCountry.country == "india" ? "₹" : "$"} Price Details
                             </Heading>
-                            <NumberInput >
-                                <NumberInputField
-                                    value={pricedetail}
-                                    required
-                                    onChange={(e) => {
-                                        setPricedetail(e.target.value);
-                                        areaCalucation();
-                                    }}
-                                />
-                            </NumberInput>
+                            <Input
+                                type="text"
+                                value={pricedetail}
+                                required
+                                onChange={(e) => {
+                                    areaCalucation();
+                                    setPricedetail(NumericString(e.target.value));
+                                }}
+                            /> 
                         </Box>
                         <Box display={"grid"} gap={0}>
                             <Heading
@@ -1408,14 +1365,20 @@ const FlatAppartment = () => {
                                 fontWeight={400}
                                 textAlign={"left"}
                             >
-                                {isCountry.country == "india" ? "₹" : "$"} Price : Per {areaPer}
+                                {isCountry.country == "india" ? "₹" : "$"} Price Per {areaPer}
                             </Heading>
-                            <Input type="text" value={priceSqr} readOnly />
+                            <Input
+                                type="text"
+                                value={priceSqr} 
+                                readOnly
+                                onChange={(e) => {
+                                    setPlotArea(NumericString(e.target.value));
+                                }}
+                                required />
                         </Box>
                     </Box>
                 </Box>
-
-                {/* ============================== inclusive charges (checkbox) ==============================  */}
+                {/* Additional (Checkbox) */}
                 <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
                     <Checkbox
                         isChecked={inclusivePrices.includes("All inclusive price")}
@@ -1452,23 +1415,22 @@ const FlatAppartment = () => {
                     </Checkbox>
                 </Box>
 
-                {/* Additional Pricing Detail (Optional) */}
+                {/* Additonal Pricing Detail */}
                 <Box display={"grid"}>
+                    <Heading as={"h4"} size={"sm"} margin={"10px 0"} fontWeight={700} textAlign={"left"}>
+                        Additional Pricing Detail (Optional)
+                    </Heading>
+                    <InputGroup w={"300px"} margin={"10px 0"}>
+                        <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
+                        <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
+                            <option value="Monthly">Monthly</option>
+                            <option value="Yearly">Yearly</option>
+                        </Select>
+                    </InputGroup>
                     {additionalPrice && <>
-                        <Heading as={"h4"} size={"sm"} margin={"10px 0"} fontWeight={700} textAlign={"left"}>
-                            Additional Pricing Detail (Optional)
-                        </Heading>
-                        <InputGroup w={"300px"} margin={"10px 0"}>
-                            <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
-                            <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
-                                <option value="Monthly">Monthly</option>
-                                <option value="Yearly">Yearly</option>
-                            </Select>
-                        </InputGroup>
                         <Input type="text" w={"300px"} value={expectedRentel} onChange={(e) => setExpectedRentel(e.target.value)} placeholder="Expected rental" margin={"0"} />
                         <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
                         <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
-                        <Input type="text" w={"300px"} value={membershipCharge} onChange={(e) => setMembershipCharge(e.target.value)} placeholder="Membership charges" margin={"10px 0 0 0"} />
                     </>
                     }
                     <Heading
@@ -1483,12 +1445,11 @@ const FlatAppartment = () => {
                         {additionalPrice ? <IoIosArrowUp style={{ display: "inline" }} /> : <IoIosArrowDown style={{ display: "inline" }} />} Add more pricing details
                     </Heading>
                 </Box>
-
                 <Box>
-                    <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                    <Heading as={"h3"} size={"md"} fontWeight={600} margin={"10px 0"} textAlign={"left"}>
                         What makes your property unique
                     </Heading>
-                    <Heading as={"h3"} size={"xs"} margin={"10px 0"} textAlign={"left"}>
+                    <Heading as={"h3"} size={"xs"} fontWeight={400} color={"#777777"} margin={"10px 0"} textAlign={"left"}>
                         Adding description will increase your listing visibility
                     </Heading>
                     <Textarea height={140} value={desc} onChange={(e) => {
@@ -1521,6 +1482,16 @@ const FlatAppartment = () => {
                     >
                         Maintenance Staff
                     </button>
+                    <button
+                        className={
+                            amenities.includes("Rain Water Harvesting") ? style.setbtn : style.btn
+                        }
+                        onClick={handleAminities}
+                        value={"Rain Water Harvesting"}
+                    >
+                        Rain Water Harvesting
+                    </button>
+
                     <button
                         className={
                             amenities.includes("Water Storage") ? style.setbtn : style.btn
@@ -1584,6 +1555,15 @@ const FlatAppartment = () => {
                         Feng Shui / Vaastu Compliant
                     </button>
                     <button
+                        className={
+                            amenities.includes("Pivate Garden / Terrace") ? style.setbtn : style.btn
+                        }
+                        onClick={handleAminities}
+                        value={"Pivate Garden / Terrace"}
+                    >
+                        Pivate Garden / Terrace
+                    </button>
+                    <button
                         className={amenities.includes("Lift") ? style.setbtn : style.btn}
                         onClick={handleAminities}
                         value={"Lift"}
@@ -1608,7 +1588,6 @@ const FlatAppartment = () => {
                         value={"High Ceiling Height"}
                         onClick={handlePropertyFeature}
                     >
-
                         High Ceiling Height
                     </button>
                     <button
@@ -1620,7 +1599,6 @@ const FlatAppartment = () => {
                         value={"False Ceiling Lighting"}
                         onClick={handlePropertyFeature}
                     >
-
                         False Ceiling Lighting
                     </button>
                     <button
@@ -1630,7 +1608,6 @@ const FlatAppartment = () => {
                         value={"Piped-gas"}
                         onClick={handlePropertyFeature}
                     >
-
                         Piped-gas
                     </button>
                     <button
@@ -1642,7 +1619,6 @@ const FlatAppartment = () => {
                         value={"Internet / wi-fi connectivity"}
                         onClick={handlePropertyFeature}
                     >
-
                         Internet/wi-fi connectivity
                     </button>
                     <button
@@ -1654,7 +1630,6 @@ const FlatAppartment = () => {
                         value={"Centrally Air Renovated"}
                         onClick={handlePropertyFeature}
                     >
-
                         Centrally Air Renovated
                     </button>
                     <button
@@ -1666,7 +1641,6 @@ const FlatAppartment = () => {
                         value={"Water Purifier"}
                         onClick={handlePropertyFeature}
                     >
-
                         Water Purifier
                     </button>
                     <button
@@ -1678,20 +1652,18 @@ const FlatAppartment = () => {
                         value={"Recently Renovated"}
                         onClick={handlePropertyFeature}
                     >
-
                         Recently Renovated
                     </button>
                     <button
                         className={
-                            propertyFeatures.includes("Private Garden / Terrace")
+                            propertyFeatures.includes("Security / Fire Alarm")
                                 ? style.setbtn
                                 : style.btn
                         }
-                        value={"Private Garden / Terrace"}
+                        value={"Security / Fire Alarm"}
                         onClick={handlePropertyFeature}
                     >
-
-                        Private Garden / Terrace
+                        Security / Fire Alarm
                     </button>
                     <button
                         className={
@@ -1702,7 +1674,6 @@ const FlatAppartment = () => {
                         value={"Natural Light"}
                         onClick={handlePropertyFeature}
                     >
-
                         Natural Light
                     </button>
                     <button
@@ -1712,7 +1683,6 @@ const FlatAppartment = () => {
                         value={"Airy Roooms"}
                         onClick={handlePropertyFeature}
                     >
-
                         Airy Roooms
                     </button>
                     <button
@@ -1724,7 +1694,6 @@ const FlatAppartment = () => {
                         value={"Spacious Interiors"}
                         onClick={handlePropertyFeature}
                     >
-
                         Spacious Interiors
                     </button>
                 </Box>
@@ -1735,30 +1704,6 @@ const FlatAppartment = () => {
                     Society/Building feature
                 </Heading>
                 <Box>
-                    <button
-                        className={
-                            buildingFeature.includes("Water softening plant")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        onClick={HandleBuildingFeature}
-                        value={"Water softening plant"}
-                    >
-
-                        Water softening plant
-                    </button>
-                    <button
-                        className={
-                            buildingFeature.includes("Shopping Centre")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        onClick={HandleBuildingFeature}
-                        value={"Shopping Centre"}
-                    >
-
-                        Shopping Centre
-                    </button>
                     <button
                         className={
                             buildingFeature.includes("Fitness Centre / GYM")
@@ -1817,40 +1762,6 @@ const FlatAppartment = () => {
                 <Box>
                     <button
                         className={
-                            additinalft.includes("Separate entry for sevant room")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        value={"Separate entry for sevant room"}
-                        onClick={handleAdditionalFeature}
-                    >
-
-                        Separate entry for sevant room
-                    </button>
-                    <button
-                        className={
-                            additinalft.includes("Waste Disposal") ? style.setbtn : style.btn
-                        }
-                        value={"Waste Disposal"}
-                        onClick={handleAdditionalFeature}
-                    >
-
-                        Waste Disposal
-                    </button>
-                    <button
-                        className={
-                            additinalft.includes("No open drainage around")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        value={"No open drainage around"}
-                        onClick={handleAdditionalFeature}
-                    >
-
-                        No open drainage around
-                    </button>
-                    <button
-                        className={
                             additinalft.includes("Rain Water Harvesting")
                                 ? style.setbtn
                                 : style.btn
@@ -1858,7 +1769,6 @@ const FlatAppartment = () => {
                         value={"Rain Water Harvesting"}
                         onClick={handleAdditionalFeature}
                     >
-
                         Rain Water Harvesting
                     </button>
                     <button
@@ -1870,20 +1780,7 @@ const FlatAppartment = () => {
                         value={"Bank Attached Property"}
                         onClick={handleAdditionalFeature}
                     >
-
                         Bank Attached Property
-                    </button>
-                    <button
-                        className={
-                            additinalft.includes("Low Density Society")
-                                ? style.setbtn
-                                : style.btn
-                        }
-                        value={"Low Density Society"}
-                        onClick={handleAdditionalFeature}
-                    >
-
-                        Low Density Society
                     </button>
                 </Box>
             </Box>
@@ -2083,7 +1980,6 @@ const FlatAppartment = () => {
                         }}
                         value={"North"}
                     >
-
                         North
                     </button>
                     <button
@@ -2094,7 +1990,6 @@ const FlatAppartment = () => {
                         }}
                         value={"South"}
                     >
-
                         South
                     </button>
                     <button
@@ -2105,7 +2000,6 @@ const FlatAppartment = () => {
                         }}
                         value={"East"}
                     >
-
                         East
                     </button>
                     <button
@@ -2116,7 +2010,6 @@ const FlatAppartment = () => {
                         }}
                         value={"West"}
                     >
-
                         West
                     </button>
                     <button
@@ -2129,7 +2022,6 @@ const FlatAppartment = () => {
                         }}
                         value={"North-East"}
                     >
-
                         North-East
                     </button>
                     <button
@@ -2142,7 +2034,6 @@ const FlatAppartment = () => {
                         }}
                         value={"North-West"}
                     >
-
                         North-West
                     </button>
                     <button
@@ -2155,7 +2046,6 @@ const FlatAppartment = () => {
                         }}
                         value={"South-East"}
                     >
-
                         South-East
                     </button>
                     <button
@@ -2168,7 +2058,6 @@ const FlatAppartment = () => {
                         }}
                         value={"South-West"}
                     >
-
                         South-West
                     </button>
                 </Box>
@@ -2217,6 +2106,7 @@ const FlatAppartment = () => {
                     </Select>
                 </Box>
             </Box>
+            {/* location advantage */}
             <Box className={style.optional_box}>
                 <Heading size={"md"} margin={"10px 0 4px 0"} textAlign={"left"}>
                     Location Advantages
@@ -2345,4 +2235,5 @@ const FlatAppartment = () => {
     );
 };
 
-export default FlatAppartment;
+export default IndependentHouseUpdate;
+

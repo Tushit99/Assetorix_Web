@@ -29,6 +29,7 @@ import CommercialBuy from '../../Pages/ProductPage/Commercial/CommercialBuy'
 import CommercialLease from '../../Pages/ProductPage/Commercial/CommercialLease'
 import Wishlist from '../../Pages/Wishlist/Wishlist'
 import VisitedPage from '../../Pages/VisitedPage/VisitedPage'
+import Listings from '../../Pages/UserListings/Listings'
 // import ConsultingPage from '../../Pages/CoporateServices/Consulting/consulting'
 
 const MainRoute = () => {
@@ -82,6 +83,8 @@ const MainRoute = () => {
         <Route path='/portfolio_planning' element={<PortfolioPlaning />} />
         <Route path='/usa_real_state' element={<UsaRealState />} /> 
 
+
+        <Route path='/wishlist_edit' element={<Listings />} />
 
         {/* Property Detail Page */}  
         <Route path='/product_detail' element={<SingleProductDetailPage />} />

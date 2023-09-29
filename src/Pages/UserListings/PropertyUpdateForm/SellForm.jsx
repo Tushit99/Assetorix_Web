@@ -22,7 +22,7 @@ import Storage from "./SellForm/Commercial/Storage/Storage";
 import Industry from "./SellForm/Commercial/Industry/Industry";
 import Hospitality from "./SellForm/Commercial/Hospitality/Hospitality";
 import PlotLandCommercial from "./SellForm/Commercial/PlotLandCommercial/PlotLandCommercial";
-import FlatApartment from "./RentForm/Residential/FlatApartment";
+ import FlatApartment from "./RentForm/Residential/FlatApartment";
 import Independent from "./RentForm/Residential/Independent";
 import IndependentBuilderRent from "./RentForm/Residential/IndependentBuilder";
 import ServicedApartmentRent from "./RentForm/Residential/ServicedApartmentRent";
@@ -35,7 +35,7 @@ import PlotLandRent from "./RentForm/Commercial/PlotLand/PlotLandRent";
 import RetailRent from "./RentForm/Commercial/RetailRent/RetailRent";
 import IndustryRent from "./RentForm/Commercial/Industry/IndustryRent";
 import HospitalityRent from "./RentForm/Commercial/Hospitality/Hospitality";
-import Retail from "./SellForm/Commercial/Retail";
+import Retail from "../../PropertyPostForm/SellForm/Commercial/Retail";
  
 
 // this is a page of Property sell and Property Rent routes (please don't change anything without any prior knowledge).  

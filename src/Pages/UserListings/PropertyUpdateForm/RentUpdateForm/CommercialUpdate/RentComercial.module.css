@@ -1,0 +1,171 @@
+
+.setbtn {
+    border-radius: 10px;
+    background-color: rgb(149, 152, 241);
+    color: rgb(255, 255, 255); 
+    border-radius: 0;
+    padding: 4px 10px;
+    border: 1px solid rgb(222, 222, 255);
+  }
+  
+  .btn {
+    border-radius: 10px;
+    background-color: rgb(242, 249, 255);
+    color: rgb(15, 66, 137);
+    padding: 4px 10px;
+    border-radius: 0; 
+    border: 1px solid rgb(222, 222, 255);
+  }
+
+  
+  
+  .grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16 px; 
+    }
+  
+  .location_form { 
+    margin: 20px 0;
+    display: grid;
+    gap: 10px; 
+    color: rgb(113, 128, 150); 
+  }
+  
+  .furnished_detail {
+    display: grid; 
+    padding: 10px; 
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; 
+    border-radius: 0; 
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .furnished_detail > * {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px;
+  }
+  
+  
+  .select_opt {
+    padding: 0 10px;
+    outline: 0;
+  }
+  
+  .inp_form_numbers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 4%;
+    margin: 20px 0;
+  }
+  
+  .select_land {
+    display: flex;
+    margin: 12px 0;
+    width: 240px;
+  }
+  
+  .parking {
+    display: flex;
+    margin: 20px 0;
+    align-items: center;
+  }
+  
+  .inc_dec {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    flex: 1;
+    gap: 10px;
+  }
+  
+  .pls_btn {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(122, 193, 255);
+    padding: 8px;
+    border-radius: 50%;
+  }
+  
+  .number_btn {
+    border: 1px solid rgb(122, 193, 255);
+    padding: 4px 12px;
+    display: flex;
+    align-items: center;
+    border-radius: 50%;
+  }
+  
+  .mns_btn {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(122, 193, 255);
+    padding: 8px;
+    border-radius: 50%; 
+  }
+  
+  .select_land > *:nth-child(1) {
+    flex: 5;
+  }
+  
+  .select_land > *:nth-child(2) {
+    flex: 3;
+  }
+  
+  .optional_box {
+    text-align: left;
+    margin: 20px 0; 
+    gap: 8px;
+  }
+  
+  .optional_box > *:nth-child(2) {
+    display: flex; 
+    flex-wrap: wrap; 
+    align-items: center;
+    gap: 20px;  
+  }
+
+  .menu{
+    display: flex; 
+    flex-direction: column; 
+    width: 300px;
+    padding: 20px; 
+}
+  
+
+  .washroom_dec{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;  
+    object-fit: contain;  
+    border: 1px solid rgb(122, 193, 255);
+    padding: 8px; 
+    margin: auto; 
+    border-radius: 20px; 
+  } 
+
+  .washroom_hide{
+    display: flex; 
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;  
+    object-fit: contain;  
+    border: 1px solid rgb(222, 222, 222); 
+    background-color: rgb(222, 222, 222); 
+    color: rgb(180, 180, 180); 
+    padding: 8px; 
+    margin: auto; 
+    border-radius: 20px; 
+  }
+  
+
+
+
+  

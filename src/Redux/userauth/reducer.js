@@ -19,8 +19,9 @@ const initialState = {
   user: {},
   success: 4,
   token: "",
-  name: "",
-};
+  name: "", 
+  productedit: [] 
+}; 
 
 export const reducer = (state = initialState, { type, payload }) => {
   switch (type) {

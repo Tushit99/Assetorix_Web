@@ -32,7 +32,7 @@
   font-size: small;
   border: 1px solid rgb(182, 221, 255);
   /* background-color: rgb(227, 242, 255); */
-}
+} 
 
 @media all and (min-width: 100px) and (max-width: 560px) {
   .side_box_sort {
