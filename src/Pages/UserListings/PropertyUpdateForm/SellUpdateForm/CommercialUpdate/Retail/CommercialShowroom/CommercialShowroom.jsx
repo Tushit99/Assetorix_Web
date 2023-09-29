@@ -496,7 +496,7 @@ const CommercialShowroom = () =>  {
 
 
     return (
-        <div>
+        <Box w={"94%"} padding={"0 20px"} margin={"auto"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"} >
             <Box>
                 <Heading  margin={"10px 0"} size={"md"} > Your shop is located inside </Heading>
                 <Box display={"flex"} flexWrap={"wrap"} gap={4} >
@@ -1836,7 +1836,7 @@ const CommercialShowroom = () =>  {
                     </Button>
                 </form >
             </Box>
-        </div>
+        </Box>
     );
 }; 
 

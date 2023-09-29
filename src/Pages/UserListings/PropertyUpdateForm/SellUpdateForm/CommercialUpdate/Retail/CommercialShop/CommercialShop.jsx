@@ -495,7 +495,7 @@ const CommercialShop = () => {
 
 
     return (
-        <div>
+        <Box w={"94%"} padding={"0 20px"} margin={"auto"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"} >
             <Box>
                 <Heading  margin={"10px 0"} size={"md"} > Your shop is located inside </Heading>
                 <Box display={"flex"} flexWrap={"wrap"} gap={4} >
@@ -506,7 +506,7 @@ const CommercialShop = () => {
                     <button value={"Market / High Street"} className={located == "Market / High Street" ? style.setbtn : style.btn} onClick={(e) => setLocated(e.target.value)} > Market / High Street </button>
                     <button value={"Other"} className={located == "Other" ? style.setbtn : style.btn} onClick={(e) => setLocated(e.target.value)} > Other </button>
                 </Box>
-            </Box>
+            </Box> 
             <Box display={located == "" ? "none" : "block"}>
                 <form onSubmit={handleSubmitData}>
                     {/* property location */}
@@ -1835,7 +1835,7 @@ const CommercialShop = () => {
                     </Button>
                 </form >
             </Box>
-        </div>
+        </Box> 
     );
 };
 

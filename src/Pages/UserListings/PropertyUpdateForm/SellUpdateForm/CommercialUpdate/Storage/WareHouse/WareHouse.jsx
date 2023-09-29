@@ -417,7 +417,7 @@ const WareHouseUpdate = () => {
 
 
     return (
-        <div>
+        <Box w={"94%"} padding={"0 20px"} margin={"auto"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"} > 
             <form onSubmit={handleSubmitData}>
                 <Box className={style.location_form}>
                     <Heading size={"lg"}>Where is your property located?</Heading>
@@ -1504,7 +1504,7 @@ const WareHouseUpdate = () => {
                 </Button>
 
             </form>
-        </div>
+        </Box>
     )
 }
 

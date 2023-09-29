@@ -83,7 +83,7 @@ const Listings = () => {
 
   useEffect(()=>{
      editBox();  
-  },[]) 
+  },[]);  
 
 
   return (
