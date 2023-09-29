@@ -22,7 +22,7 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { CleanInputText, NumericString } from "../../../../code";
 
 
-const FactoryRent = () => {
+const FactoryRentUpdate = () => {
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
@@ -1339,4 +1339,4 @@ const FactoryRent = () => {
     )
 }
 
-export default FactoryRent;
+export default FactoryRentUpdate;

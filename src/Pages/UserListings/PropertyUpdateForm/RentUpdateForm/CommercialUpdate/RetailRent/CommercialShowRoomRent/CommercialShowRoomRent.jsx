@@ -24,7 +24,7 @@ import axios from "axios";
 
 
 
-const CommercialShowRoomRent = () => {
+const CommercialShowRoomRentUpdate = () => {
   const isCountry = useSelector((state) => state.gloalval);
   const [located, setLocated] = useState("");
   const toast = useToast();
@@ -1744,5 +1744,5 @@ const CommercialShowRoomRent = () => {
   );
 };
 
-export default CommercialShowRoomRent;
+export default CommercialShowRoomRentUpdate;
 

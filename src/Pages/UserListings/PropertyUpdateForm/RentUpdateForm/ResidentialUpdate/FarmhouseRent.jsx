@@ -23,7 +23,7 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 
 
-const FarmhouseRent = () => {
+const FarmhouseRentUpdate = () => {
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
@@ -91,7 +91,7 @@ const FarmhouseRent = () => {
         let obj = {
             lookingFor: "Rent",
             propertyGroup: "Residential",
-            propertyType: "1RK / Studio Apartment",
+            propertyType: "Farmhouse",
             address: {
                 apartmentName: appartment,
                 houseNumber: houseNo,
@@ -2207,6 +2207,6 @@ const FarmhouseRent = () => {
     );
 };
 
-export default FarmhouseRent;
+export default FarmhouseRentUpdate;
 
 

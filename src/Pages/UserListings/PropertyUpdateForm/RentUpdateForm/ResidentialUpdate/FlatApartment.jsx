@@ -22,7 +22,7 @@ import { InputGroup } from "@chakra-ui/react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 
-const FlatApartment = () =>  {
+const FlatApartmentUpdate = () =>  {
   const isCountry = useSelector((state) => state.gloalval);
   const toast = useToast();
   const [country, setCountry] = useState("");
@@ -2220,4 +2220,4 @@ const FlatApartment = () =>  {
   );
 };
 
-export default FlatApartment;
+export default FlatApartmentUpdate;

@@ -23,7 +23,7 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 
 
-const StudioApartmentRent = () => {
+const StudioApartmentRentUpdate = () => {
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
@@ -2233,6 +2233,6 @@ const StudioApartmentRent = () => {
     );
 };
 
-export default StudioApartmentRent;  
+export default StudioApartmentRentUpdate;  
 
 

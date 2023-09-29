@@ -26,7 +26,7 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 
 
 
-const IndustrialLand = () => {
+const IndustrialLandRentUpdate = () => {
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
@@ -1268,6 +1268,6 @@ const IndustrialLand = () => {
     )
 }
 
-export default IndustrialLand;
+export default IndustrialLandRentUpdate;
 
 

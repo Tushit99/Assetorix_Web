@@ -23,7 +23,7 @@ import { CleanInputText, NumericString } from "../../../../code";
 
 
 
-const WareHouse = () => {
+const WareHouseRentUpdate = () => {
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
@@ -1306,6 +1306,6 @@ const WareHouse = () => {
     )
 }
 
-export default WareHouse;
+export default WareHouseRentUpdate;
 
 

@@ -21,7 +21,7 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { CleanInputText, NumericString } from "../../../../code";
 
 
-const ColdStorageRent = () => {
+const ColdStorageRentUpdate = () => {
   const isCountry = useSelector((state) => state.gloalval);
   const toast = useToast();
   const [country, setCountry] = useState("");
@@ -1321,4 +1321,4 @@ const ColdStorageRent = () => {
   )
 }
 
-export default ColdStorageRent;
+export default ColdStorageRentUpdate;

@@ -25,7 +25,7 @@ import axios from "axios";
 
 
 
-const CommercialShopRent = () => {
+const CommercialShopRentUpdate = () => {
     const isCountry = useSelector((state) => state.gloalval);
     const [located, setLocated] = useState("");
     const toast = useToast();
@@ -1805,6 +1805,6 @@ const CommercialShopRent = () => {
     );
 };
 
-export default CommercialShopRent;
+export default CommercialShopRentUpdate;
 
 

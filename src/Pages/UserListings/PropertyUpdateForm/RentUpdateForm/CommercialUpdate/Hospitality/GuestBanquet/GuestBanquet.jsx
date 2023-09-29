@@ -23,7 +23,7 @@ import { AlphabetString, CleanInputText, NumericString } from "../../../../code"
 
 
 
-const GuestBanquetRent = () => {
+const GuestBanquetRentUpdate = () => {
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
@@ -1387,4 +1387,4 @@ const GuestBanquetRent = () => {
     );
 };
 
-export default GuestBanquetRent;
+export default GuestBanquetRentUpdate;

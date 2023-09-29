@@ -24,7 +24,7 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 
 
-const IndependentBuilderRent = () => {
+const IndependentBuilderRentUpdate = () => {
   const isCountry = useSelector((state) => state.gloalval);
   const toast = useToast();
   const [country, setCountry] = useState("");
@@ -2204,5 +2204,5 @@ const IndependentBuilderRent = () => {
   );
 };
 
-export default IndependentBuilderRent;
+export default IndependentBuilderRentUpdate;
 

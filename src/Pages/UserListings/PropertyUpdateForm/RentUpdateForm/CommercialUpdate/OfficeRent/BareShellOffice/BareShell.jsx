@@ -29,7 +29,7 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 
 
-const BareShell = () => {
+const BareShellUpdate = () => {
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
@@ -1814,6 +1814,6 @@ const BareShell = () => {
     );
 };
 
-export default BareShell;
+export default BareShellUpdate;
 
 

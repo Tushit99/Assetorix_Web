@@ -23,7 +23,7 @@ import { AlphabetString, CleanInputText, NumericString } from "../../../../code"
 
 
 
-const HotelResortRent = () => {
+const HotelResortRentUpdate = () => {
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
@@ -1371,4 +1371,4 @@ const HotelResortRent = () => {
     );
 };
 
-export default HotelResortRent;
+export default HotelResortRentUpdate;

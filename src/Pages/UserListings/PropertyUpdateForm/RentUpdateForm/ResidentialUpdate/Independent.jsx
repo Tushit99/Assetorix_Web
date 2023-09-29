@@ -24,7 +24,7 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 
 
-const Independent = () => {
+const IndependentUpdate = () => {
   const isCountry = useSelector((state) => state.gloalval);
   const toast = useToast();
   const [country, setCountry] = useState("");
@@ -2164,5 +2164,5 @@ const Independent = () => {
   );
 };
 
-export default Independent;
+export default IndependentUpdate;
 

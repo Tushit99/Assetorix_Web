@@ -22,7 +22,7 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { CleanInputText, NumericString } from "../../../../code";
 
 
-const ManufactureRent = () => {
+const ManufactureRentUpdate = () => {
   const isCountry = useSelector((state) => state.gloalval);
   const toast = useToast();
   const [country, setCountry] = useState("");
@@ -1366,4 +1366,4 @@ const ManufactureRent = () => {
   )
 }
 
-export default ManufactureRent;
+export default ManufactureRentUpdate;

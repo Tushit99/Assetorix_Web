@@ -28,7 +28,7 @@ import { CleanInputText, NumericString } from "../../../../code";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 
-const ReadyMove = () => {
+const ReadyMoveUpdate = () => {
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
@@ -1779,5 +1779,5 @@ const ReadyMove = () => {
     );
 };
 
-export default ReadyMove;
+export default ReadyMoveUpdate;
 
