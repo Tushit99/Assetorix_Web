@@ -117,7 +117,7 @@ const Listings = () => {
 
       {(looking == "Sell" && group == "Commercial" && type == "Retail" && other == "Commercial Showrooms") ? <CommercialShowroomUpdate /> : ""}
 
-      {/* ------------ Storage ----------- */}
+      {/* ------------ Storage ----------- */} 
       {(looking == "Sell" && group == "Commercial" && type == "Storage" && other == "Ware House") ? <WareHouseUpdate /> : ""}
 
       {(looking == "Sell" && group == "Commercial" && type == "Storage" && other == "Cold Storage") ? <ColdStorageUpdate /> : ""}
