@@ -65,12 +65,24 @@ const Listings = () => {
       else if(dt.propertyType=="Storage"){
         setOther(dt.storageType); 
       }
+      else if(dt.propertyType=="Hospitality"){
+        setOther(dt.hospitalityType); 
+      }
+      else if(dt.propertyType=="Industry"){
+        setOther(dt.industryType); 
+      }
+      else if(dt.propertyType=="Plot / Land"){
+        setOther(dt.plotLandType); 
+      }
+      else if(dt.propertyType=="Retail"){
+        setOther(dt.retailSpaceType); 
+      } 
 
     })
-  }
+  } 
 
   useEffect(()=>{
-     editBox(); 
+     editBox();  
   },[]) 
 
 
