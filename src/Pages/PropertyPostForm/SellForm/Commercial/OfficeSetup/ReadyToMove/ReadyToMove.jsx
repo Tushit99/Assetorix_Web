@@ -991,14 +991,12 @@ const ReadyToMove = () => {
                                     flexDirection={"column"}
                                     padding={"8px 10px"} > 
                                     
-                                    <Checkbox isChecked={floorNumber == "Basement"} onChange={handleFloorNumber} value={"Basement"} > Basement </Checkbox>
-                                    <Checkbox isChecked={floorNumber == "Lower Ground"} onChange={handleFloorNumber} value={"Lower Ground"} > Lower Ground </Checkbox>
-                                    <Checkbox isChecked={floorNumber == "Ground"} onChange={handleFloorNumber} value={"Ground"} > Ground </Checkbox>
-                                    {Array.from(Array(Number(totalfloors)).keys()).map((e, i) => {
-                                        return <Checkbox isChecked={floorNumber == (e + 1)} key={i} onChange={handleFloorNumber} value={e + 1} > {e + 1} </Checkbox>
-                                    })}
-
-
+                                    <Checkbox isChecked={floorNumber.includes("Basement")} onChange={handleFloorNumber} value={"Basement"} > Basement </Checkbox>
+                                    <Checkbox isChecked={floorNumber.includes("Lower Ground")} onChange={handleFloorNumber} value={"Lower Ground"} > Lower Ground </Checkbox>
+                                    <Checkbox isChecked={floorNumber.includes("Ground")} onChange={handleFloorNumber} value={"Ground"} > Ground </Checkbox>
+                                    {Array.from(Array(Number(totalfloors)).keys()).map((e, i) => { 
+                                        return <Checkbox isChecked={floorNumber.includes(`${e + 1}`)} key={i} onChange={handleFloorNumber} value={e+1} > {e+1} </Checkbox>
+                                    })} 
                                 </MenuList>
                             </Menu>
                         </Box>
