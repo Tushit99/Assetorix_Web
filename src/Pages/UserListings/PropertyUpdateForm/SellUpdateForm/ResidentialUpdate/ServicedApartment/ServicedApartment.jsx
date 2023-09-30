@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from "react";
 import {
     Box,
@@ -7,8 +7,6 @@ import {
     Heading,
     Input,
     InputGroup,
-    NumberInput,
-    NumberInputField,
     Select,
     Text,
     Textarea,
@@ -21,9 +19,11 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { CleanInputText, NumericString } from "../../../code";
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+import { useParams } from 'react-router-dom';
 
 
 const ServicedApartmentUpdate = () => {
+    const { productID } = useParams();
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
@@ -294,6 +294,74 @@ const ServicedApartmentUpdate = () => {
         }
     };
 
+
+    const handleDataFetch = async () => {
+        await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
+            let e = detail.data.data;
+            console.log(e);
+            setCountry(e?.address?.country);
+            setFacingWidth(e?.roadFacingWidth);
+            setCity(e?.address?.city);
+            setApartment(e?.address?.apartmentName);
+            setPincode(e?.address?.pincode);
+            setState(e.address.state);
+            setLocality(e.address.locality)
+            setHouseNo(e.address.houseNumber);
+            setBedRoom(e.roomDetails.bedroom);
+            setBathroom(e.roomDetails.bathroom);
+            setBalcony(e?.roomDetails.balcony);
+            setParking(e?.parking?.closeParking);
+            setOpenparking(e?.parking?.openParking);
+            setLight(e?.furnishedObj?.light);
+            setFans(e?.furnishedObj?.fans);
+            setAc(e?.furnishedObj?.ac);
+            setTv(e?.furnishedObj?.tv);
+            setBeds(e?.furnishedObj?.beds);
+            setWardrobe(e?.furnishedObj?.wardrobe);
+            setGeyser(e?.furnishedObj?.geyser);
+            setAreaPer(e?.plotAreaUnit);
+            setfurnishedarr(e?.furnishedList);
+            setExtraRoom(e?.otherRoom);
+            setFurnished(e?.furnished);
+            setAvailability(e?.availabilityStatus);
+            setFromyear(e?.propertyStatus);
+            setExpectedYear(e?.expectedByYear);
+            setOwnerShip(e?.ownership);
+            setPricedetail(e?.price);
+            setFloorOn(floorOn);
+            setPriceSqr(e?.priceUnit);
+            setInclusivePrice(e?.inclusivePrices)
+            setAminity(e?.amenities);
+            setPropertyFeature(e?.propertyFeatures);
+            setBuildingFeature(e?.society_buildingFeatures);
+            setAdditinalFeature(e?.additionalFeatures);
+            setWaterSource(e?.waterSources);
+            setoverlook(e?.overLookings);
+            setOtherFeature(e?.otherFeatures);
+            setPowerbackup(e?.powerBackup);
+            setPropertyFacing(e?.propertyFacing);
+            setFlooring(e?.flooring);
+            setFacing(e?.roadFacingWidthType);
+            setLocationAdv(e?.locationAdv);
+            setTotalFloors(e?.totalFloors);
+            setPlotArea(e?.plotArea);
+            setDesc(e?.description);
+            setAdditionalPrice(Object.keys(e?.additionalPricingDetails).length == 0 ? false : true);
+            setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice)
+            setMaintenanceTimePeriod(e?.additionalPricingDetails?.maintenanceTimePeriod)
+            setExpectedRental(e?.additionalPricingDetails?.expectedRental)
+            setBookingAmount(e?.additionalPricingDetails?.bookingAmount)
+            setAnnualDuesPayable(e?.additionalPricingDetails?.annualDuesPayable)
+            setMembershipCharge(e?.additionalPricingDetails?.membershipCharge);
+
+        })
+    }
+
+    useEffect(() => {
+        handleDataFetch();
+    }, []);
+
+
     const handlepinfetch = (e) => {
         setPincode(e.target.value);
         if (e.target.value.length == 6) {
@@ -517,9 +585,9 @@ const ServicedApartmentUpdate = () => {
             <form onSubmit={handleSubmitData}>
                 {/* property location */}
                 <Box className={style.location_form}>
-                    <Heading size={"lg"}>Where is your property located?</Heading>
+                    <Heading size={"lg"}> Serviced Appartment </Heading>
                     <Heading size={"sm"}>
-                        An accurate location helps you connect with the right buyers.
+                        Location Detail
                     </Heading>
 
                     <Input
@@ -542,26 +610,12 @@ const ServicedApartmentUpdate = () => {
                         onChange={(e) => setApartment(e.target.value)}
                         variant="flushed"
                     />
-                    <NumberInput>
-                        <NumberInputField
-                            placeholder={"Enter pincode"}
-                            padding={"0 10px"}
-                            borderRight={0}
-                            borderLeft={0}
-                            borderTop={0}
-                            borderRadius={0}
-                            _active={{
-                                borderRight: "0",
-                                borderLeft: "0",
-                                borderTop: "0",
-                                borderRadius: "0",
-                            }}
-                            required
-                            fontSize={"md"}
-                            value={pincode}
-                            onChange={handlepinfetch}
-                        />
-                    </NumberInput>
+                    <Input
+                        type="text"
+                        required
+                        value={pincode}
+                        onChange={handlepinfetch}
+                    />
                     <Input
                         type="text"
                         padding={"0 10px"}
@@ -624,39 +678,33 @@ const ServicedApartmentUpdate = () => {
                     <Box as={"div"} className={style.inp_form_numbers}>
                         <Box textAlign={"left"} >
                             <Text> No. of Bedrooms </Text>
-                            <NumberInput>
-                                <NumberInputField
-                                    variant="flushed"
-                                    padding={"0 2px"}
-                                    onChange={(e) => setBedRoom(e.target.value)}
-                                    value={bedroom}
-                                    required
-                                />
-                            </NumberInput>
+                            <Input
+                                type="text"
+                                variant="flushed"
+                                onChange={(e) => setBedRoom(e.target.value)}
+                                value={bedroom}
+                                required
+                            />
                         </Box>
                         <Box textAlign={"left"}>
                             <Text> No. of Bathrooms </Text>
-                            <NumberInput>
-                                <NumberInputField
-                                    variant="flushed"
-                                    onChange={(e) => setBathroom(e.target.value)}
-                                    value={bathroom}
-                                    required
-                                    padding={"0 2px"}
-                                />
-                            </NumberInput>
+                            <Input
+                                type="text"
+                                variant="flushed"
+                                onChange={(e) => setBathroom(e.target.value)}
+                                value={bathroom}
+                                required
+                            />
                         </Box>
                         <Box textAlign={"left"}>
                             <Text> No. of Balconies </Text>
-                            <NumberInput>
-                                <NumberInputField
-                                    variant="flushed"
-                                    onChange={(e) => setBalcony(e.target.value)}
-                                    value={balconey}
-                                    required
-                                    padding={"0 2px"}
-                                />
-                            </NumberInput>
+                            <Input
+                                type="text"
+                                variant="flushed"
+                                onChange={(e) => setBalcony(e.target.value)}
+                                value={balconey}
+                                required
+                            />
                         </Box>
                     </Box>
                     {/* ====================================== */}
@@ -672,17 +720,15 @@ const ServicedApartmentUpdate = () => {
                             isAttached
                             variant="outline"
                         >
-                            <NumberInput>
-                                <NumberInputField
-                                    padding={"0 2px"}
-                                    value={plotArea}
-                                    onChange={(e) => {
-                                        areaCalucation();
-                                        setPlotArea(e.target.value);
-                                    }}
-                                    required
-                                />
-                            </NumberInput>
+                            <Input
+                                value={plotArea}
+                                onChange={(e) => {
+                                    areaCalucation();
+                                    setPlotArea(e.target.value);
+                                }}
+                                required
+                                type="text"
+                            />
                             <select value={areaPer} onChange={(e) => {
                                 setAreaPer(e.target.value);
                             }} className={style.select} required>
@@ -1150,33 +1196,26 @@ const ServicedApartmentUpdate = () => {
                             Total no of floors and your floor details
                         </Text>
                         <Box display={"flex"} alignItems={"center"} gap={5}>
-                            <NumberInput
+                            <Input
+                                type="text"
+                                onChange={(e) => {
+                                    const nowval = e.target.value > 90;
+                                    if (nowval) {
+                                        toast({
+                                            title: 'Maximum floor count: 90',
+                                            status: 'error',
+                                            duration: 2000,
+                                            position: 'top-right',
+                                        });
+                                    }
+                                    else {
+                                        setTotalFloors(e.target.value);
+                                    }
+                                }}
+                                w={180}
+                                required
                                 value={totalfloors}
-                                className={style.input_borders}>
-                                <NumberInputField
-                                    borderLeft={0}
-                                    borderRight={0}
-                                    borderTop={0}
-                                    borderBottom={"1px solid #4f5bffcf"}
-                                    borderRadius={0}
-                                    onChange={(e) => {
-                                        const nowval = e.target.value > 90;
-                                        if (nowval) {
-                                            toast({
-                                                title: 'Maximum floor count: 90',
-                                                status: 'error',
-                                                duration: 2000,
-                                                position: 'top-right',
-                                            });
-                                        }
-                                        else {
-                                            setTotalFloors(e.target.value);
-                                        }
-                                    }}
-                                    required
-                                    w={180}
-                                />
-                            </NumberInput>
+                            />
                             <Select
                                 id="floorSelectTag"
                                 variant="filled"
@@ -1403,16 +1442,15 @@ const ServicedApartmentUpdate = () => {
                                 >
                                     {isCountry.country == "india" ? "₹" : "$"} Price Details
                                 </Heading>
-                                <NumberInput >
-                                    <NumberInputField
-                                        value={pricedetail}
-                                        required
-                                        onChange={(e) => {
-                                            setPricedetail(e.target.value);
-                                            areaCalucation();
-                                        }}
-                                    />
-                                </NumberInput>
+                                <Input
+                                    type="text"
+                                    value={pricedetail}
+                                    required
+                                    onChange={(e) => {
+                                        setPricedetail(e.target.value);
+                                        areaCalucation();
+                                    }}
+                                />
                             </Box>
                             <Box display={"grid"} gap={0}>
                                 <Heading
@@ -1423,11 +1461,11 @@ const ServicedApartmentUpdate = () => {
                                 >
                                     {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
                                 </Heading>
-                                <NumberInput value={priceSqr}>
-                                    <NumberInputField
-
-                                    />
-                                </NumberInput>
+                                <Input
+                                    value={priceSqr}
+                                    readOnly
+                                    type="text"
+                                />
                             </Box>
                         </Box>
                     </Box>

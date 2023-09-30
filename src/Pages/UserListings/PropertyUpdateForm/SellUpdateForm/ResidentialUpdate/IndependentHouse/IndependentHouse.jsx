@@ -22,8 +22,8 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { CleanInputText, NumericString } from "../../../code";
 import { useParams } from "react-router-dom";
 
-const IndependentHouseUpdate = () => {  
-    const {productID} = useParams();
+const IndependentHouseUpdate = () => {
+    const { productID } = useParams();
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
@@ -34,9 +34,9 @@ const IndependentHouseUpdate = () => {
     const [state, setState] = useState("");
     const [locality, setLocality] = useState("");
     const [houseNo, setHouseNo] = useState("");
-    const [bedroom, setBedRoom] = useState(0);
-    const [bathroom, setBathroom] = useState(0);
-    const [balconey, setBalcony] = useState(0);
+    const [bedroom, setBedRoom] = useState("");
+    const [bathroom, setBathroom] = useState("");
+    const [balconey, setBalcony] = useState("");
     const [parking, setParking] = useState(0);
     const [openparking, setOpenparking] = useState(0);
     const [light, setLight] = useState(0);
@@ -183,7 +183,7 @@ const IndependentHouseUpdate = () => {
             obj["locationAdv"] = locationAdv
         }
 
-        if ( city && appartment && locality && houseNo && bedroom && bathroom && balconey && furnishedarr && ownership && pricedetail &&  inclusivePrices && additinalft && watersource && overLook && powerbackup && propertyFacing && flooring && facing && totalfloors ) {
+        if (city && appartment && locality && houseNo && bedroom && bathroom && balconey && furnishedarr && ownership && pricedetail && inclusivePrices && additinalft && watersource && overLook && powerbackup && propertyFacing && flooring && facing && totalfloors) {
             let id = localStorage.getItem("usrId") || undefined;
             let authorization = localStorage.getItem("AstToken") || undefined;
 
@@ -266,68 +266,66 @@ const IndependentHouseUpdate = () => {
     };
 
     const handleDataFetch = async () => {
-        await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((e)=>{
-            console.log(e?.data.data); 
-            setCountry(e?.address.country); 
-            setFacingWidth(e?.roadFacingWidth); 
-            setCity(e?.address.city); 
-            setApartment(e?.address.apartmentName);  
-            setPincode(e?.address.pincode); 
-            setState(e?.address.state); 
-            setLocality(e?.address.locality)
-            setHouseNo(e?.address.houseNumber); 
-            setBedRoom(e?.roomDetails.bedroom); 
-            setBathroom(e?.roomDetails.bathroom); 
-            setBalcony(e?.roomDetails.balcony); 
-            setParking(e?.parking.closeParking); 
-            setOpenparking(e?.parking.openParking); 
-            setLight(e?.furnishedObj.light); 
-            setFans(e?.furnishedObj.fans); 
-            setAc(e?.furnishedObj.ac); 
-            setTv(e?.furnishedObj.tv); 
-            setBeds(e?.furnishedObj.beds); 
-            setWardrobe(e?.furnishedObj.wardrobe); 
-            setGeyser(e?.furnishedObj.geyser); 
-            setAreaPer(e?.plotAreaUnit); 
-            setfurnishedarr(e?.furnishedList); 
-            setExtraRoom(e?.otherRoom);  
-            setFurnished(e?.furnished); 
-            setAvailability(e?.availabilityStatus); 
-            setFromyear(e?.propertyStatus); 
-            setExpectedYear(e?.expectedByYear);  
-            setOwnerShip(e?.ownership); 
-            setPricedetail(e?.price); 
-            setPriceSqr(e?.priceUnit); 
+        await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
+            let e = detail.data.data;
+            setCountry(e?.address?.country);
+            setFacingWidth(e?.roadFacingWidth);
+            setCity(e?.address?.city);
+            setApartment(e?.address?.apartmentName);
+            setPincode(e?.address?.pincode);
+            setState(e.address.state);
+            setLocality(e.address.locality)
+            setHouseNo(e.address.houseNumber);
+            setBedRoom(e.roomDetails.bedroom);
+            setBathroom(e.roomDetails.bathroom);
+            setBalcony(e?.roomDetails.balcony);
+            setParking(e?.parking?.closeParking);
+            setOpenparking(e?.parking?.openParking);
+            setLight(e?.furnishedObj?.light);
+            setFans(e?.furnishedObj?.fans);
+            setAc(e?.furnishedObj?.ac);
+            setTv(e?.furnishedObj?.tv);
+            setBeds(e?.furnishedObj?.beds);
+            setWardrobe(e?.furnishedObj?.wardrobe);
+            setGeyser(e?.furnishedObj?.geyser);
+            setAreaPer(e?.plotAreaUnit);
+            setfurnishedarr(e?.furnishedList);
+            setExtraRoom(e?.otherRoom);
+            setFurnished(e?.furnished);
+            setAvailability(e?.availabilityStatus);
+            setFromyear(e?.propertyStatus);
+            setExpectedYear(e?.expectedByYear);
+            setOwnerShip(e?.ownership);
+            setPricedetail(e?.price);
+            setPriceSqr(e?.priceUnit);
             setInclusivePrice(e?.inclusivePrices)
-            setAminity(e?.amenities); 
-            setPropertyFeature(e?.propertyFeatures); 
-            setBuildingFeature(e?.society_buildingFeatures);  
-            setAdditinalFeature(e?.additionalFeatures); 
-            setWaterSource(e?.waterSources); 
-            setoverlook(e?.overLookings); 
-            setOtherFeature(e?.otherFeatures); 
-            setPowerbackup(e?.powerBackup); 
-            setPropertyFacing()
-            setFlooring()
-            setFacing()
-            setLocationAdv()
-            setTotalFloors()
-            setPlotArea()
-            setDesc()
-            setPinCollection()
-            setAdditionalPrice()
-            setMaintenancePrice()
-            setMaintenanceTimePeriod()
-            setExpectedRentel()
-            setBookingAmount()
-            setAnnualDuesPayble()
+            setAminity(e?.amenities);
+            setPropertyFeature(e?.propertyFeatures);
+            setBuildingFeature(e?.society_buildingFeatures);
+            setAdditinalFeature(e?.additionalFeatures);
+            setWaterSource(e?.waterSources);
+            setoverlook(e?.overLookings);
+            setOtherFeature(e?.otherFeatures);
+            setPowerbackup(e?.powerBackup);
+            setPropertyFacing(e?.propertyFacing);
+            setFlooring(e?.flooring);
+            setFacing(e?.roadFacingWidthType);
+            setLocationAdv(e?.locationAdv);
+            setTotalFloors(e?.totalFloors);
+            setPlotArea(e?.plotArea);
+            setDesc(e?.description);
+            setAdditionalPrice(e?.additionalPricingDetails ? true : false);
+            setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice)
+            setMaintenanceTimePeriod(e?.additionalPricingDetails?.maintenanceTimePeriod)
+            setExpectedRentel(e?.additionalPricingDetails?.expectedRental)
+            setBookingAmount(e?.additionalPricingDetails?.bookingAmount)
+            setAnnualDuesPayble(e?.additionalPricingDetails?.annualDuesPayable)
 
-
-        }) 
-    } 
+        })
+    }
 
     useEffect(() => {
-        handleDataFetch(); 
+        handleDataFetch();
     }, []);
 
     const handlepinfetch = (e) => {
@@ -564,26 +562,14 @@ const IndependentHouseUpdate = () => {
                         onChange={(e) => setApartment(e.target.value)}
                         variant="flushed"
                     />
-                    <NumberInput>
-                        <NumberInputField
-                            placeholder={"Enter pincode"}
-                            padding={"0 10px"}
-                            borderRight={0}
-                            borderLeft={0}
-                            borderTop={0}
-                            borderRadius={0}
-                            _active={{
-                                borderRight: "0",
-                                borderLeft: "0",
-                                borderTop: "0",
-                                borderRadius: "0",
-                            }}
-                            required
-                            fontSize={"md"}
-                            value={pincode}
-                            onChange={handlepinfetch}
-                        />
-                    </NumberInput>
+                    <Input
+                        type="text"
+                        placeholder={"Enter pincode"}
+                        value={pincode} 
+                        variant="flushed" 
+                        onChange={handlepinfetch}
+                        required
+                    />
                     <Input
                         type="text"
                         padding={"0 10px"}
@@ -646,39 +632,33 @@ const IndependentHouseUpdate = () => {
                     <Box as={"div"} className={style.inp_form_numbers}>
                         <Box textAlign={"left"} >
                             <Text> No. of Bedrooms </Text>
-                            <NumberInput>
-                                <NumberInputField
-                                    variant="flushed"
-                                    padding={"0 2px"}
-                                    onChange={(e) => setBedRoom(e.target.value)}
-                                    value={bedroom}
-                                    required
-                                />
-                            </NumberInput>
+                            <Input
+                                type="text"
+                                variant="flushed"
+                                onChange={(e) => setBedRoom(e.target.value)}
+                                value={bedroom}
+                                required
+                            />
                         </Box>
                         <Box textAlign={"left"}>
                             <Text> No. of Bathrooms </Text>
-                            <NumberInput>
-                                <NumberInputField
-                                    variant="flushed"
-                                    onChange={(e) => setBathroom(e.target.value)}
-                                    value={bathroom}
-                                    required
-                                    padding={"0 2px"}
-                                />
-                            </NumberInput>
+                            <Input
+                                type="text"
+                                variant="flushed"
+                                onChange={(e) => setBathroom(e.target.value)}
+                                value={bathroom}
+                                required
+                            />
                         </Box>
                         <Box textAlign={"left"}>
                             <Text> No. of Balconies </Text>
-                            <NumberInput>
-                                <NumberInputField
-                                    variant="flushed"
-                                    onChange={(e) => setBalcony(e.target.value)}
-                                    value={balconey}
-                                    required
-                                    padding={"0 2px"}
-                                />
-                            </NumberInput>
+                            <Input
+                                type="text"
+                                variant="flushed"
+                                onChange={(e) => setBalcony(e.target.value)}
+                                value={balconey}
+                                required
+                            /> 
                         </Box>
                     </Box>
                     {/* ====================================== */}

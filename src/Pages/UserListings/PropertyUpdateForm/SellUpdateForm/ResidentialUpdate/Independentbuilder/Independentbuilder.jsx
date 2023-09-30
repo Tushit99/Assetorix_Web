@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from "react";
 import {
     Box,
@@ -21,8 +21,10 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { CleanInputText, NumericString } from "../../../code";
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+import { useParams } from 'react-router-dom';
 
 const IndependentbuilderUpdate = () => {
+    const { productID } = useParams();
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
@@ -259,16 +261,16 @@ const IndependentbuilderUpdate = () => {
                 //     body: JSON.stringify(obj)
                 // });
                 // let data = await response.json();  
-                // console.log("data",data); 
-                await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
-                    .then((e) => {
-                        toast({
-                            title: e.data.msg,
-                            description: e.data.msg,
-                            status: 'success',
-                            duration: 2000,
-                        })
-                    });
+                console.log("data", obj);
+                // await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
+                //     .then((e) => {
+                //         toast({
+                //             title: e.data.msg,
+                //             description: e.data.msg,
+                //             status: 'success',
+                //             duration: 2000,
+                //         })
+                //     });
             } catch (error) {
                 toast({
                     title: error.response.data.msg,
@@ -290,6 +292,70 @@ const IndependentbuilderUpdate = () => {
             })
         }
     };
+
+    const handleDataFetch = async () => {
+        await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
+            let e = detail.data.data;
+            console.log(e);
+            setCountry(e?.address?.country);
+            setFacingWidth(e?.roadFacingWidth);
+            setCity(e?.address?.city);
+            setApartment(e?.address?.apartmentName);
+            setPincode(e?.address?.pincode);
+            setState(e.address.state);
+            setLocality(e.address.locality)
+            setHouseNo(e.address.houseNumber);
+            setBedRoom(e.roomDetails.bedroom);
+            setBathroom(e.roomDetails.bathroom);
+            setBalcony(e?.roomDetails.balcony);
+            setParking(e?.parking?.closeParking);
+            setOpenparking(e?.parking?.openParking);
+            setLight(e?.furnishedObj?.light);
+            setFans(e?.furnishedObj?.fans);
+            setAc(e?.furnishedObj?.ac);
+            setTv(e?.furnishedObj?.tv);
+            setBeds(e?.furnishedObj?.beds);
+            setWardrobe(e?.furnishedObj?.wardrobe);
+            setGeyser(e?.furnishedObj?.geyser);
+            setAreaPer(e?.plotAreaUnit);
+            setfurnishedarr(e?.furnishedList);
+            setExtraRoom(e?.otherRoom);
+            setFurnished(e?.furnished);
+            setAvailability(e?.availabilityStatus);
+            setFromyear(e?.propertyStatus);
+            setExpectedYear(e?.expectedByYear);
+            setOwnerShip(e?.ownership);
+            setPricedetail(e?.price);
+            setPriceSqr(e?.priceUnit);
+            setInclusivePrice(e?.inclusivePrices)
+            setAminity(e?.amenities);
+            setPropertyFeature(e?.propertyFeatures);
+            setBuildingFeature(e?.society_buildingFeatures);
+            setAdditinalFeature(e?.additionalFeatures);
+            setWaterSource(e?.waterSources);
+            setoverlook(e?.overLookings);
+            setOtherFeature(e?.otherFeatures);
+            setPowerbackup(e?.powerBackup);
+            setPropertyFacing(e?.propertyFacing);
+            setFlooring(e?.flooring);
+            setFacing(e?.roadFacingWidthType);
+            setLocationAdv(e?.locationAdv);
+            setTotalFloors(e?.totalFloors);
+            setPlotArea(e?.plotArea);
+            setDesc(e?.description);
+            setAdditionalPrice(Object.keys(e?.additionalPricingDetails).length == 0 ? false : true);
+            setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice)
+            setMaintenanceTimePeriod(e?.additionalPricingDetails?.maintenanceTimePeriod)
+            setExpectedRentel(e?.additionalPricingDetails?.expectedRental)
+            setBookingAmount(e?.additionalPricingDetails?.bookingAmount)
+            setAnnualDuesPayble(e?.additionalPricingDetails?.annualDuesPayable)
+
+        })
+    }
+
+    useEffect(() => {
+        handleDataFetch();
+    }, []);
 
     const handlepinfetch = (e) => {
         setPincode(e.target.value);
@@ -514,9 +580,9 @@ const IndependentbuilderUpdate = () => {
             <form onSubmit={handleSubmitData}>
                 {/* property location */}
                 <Box className={style.location_form}>
-                    <Heading size={"lg"}>Where is your property located?</Heading>
+                    <Heading size={"lg"}> Independent Builder </Heading>
                     <Heading size={"sm"}>
-                        An accurate location helps you connect with the right buyers.
+                        Location Detail
                     </Heading>
 
                     <Input
@@ -539,26 +605,13 @@ const IndependentbuilderUpdate = () => {
                         onChange={(e) => setApartment(e.target.value)}
                         variant="flushed"
                     />
-                    <NumberInput>
-                        <NumberInputField
-                            placeholder={"Enter pincode"}
-                            padding={"0 10px"}
-                            borderRight={0}
-                            borderLeft={0}
-                            borderTop={0}
-                            borderRadius={0}
-                            _active={{
-                                borderRight: "0",
-                                borderLeft: "0",
-                                borderTop: "0",
-                                borderRadius: "0",
-                            }}
-                            required
-                            fontSize={"md"}
-                            value={pincode}
-                            onChange={handlepinfetch}
-                        />
-                    </NumberInput>
+                    <Input
+                        type="text"
+                        required
+                        placeholder={"Enter pincode"}
+                        value={pincode}
+                        onChange={handlepinfetch}
+                    />
                     <Input
                         type="text"
                         padding={"0 10px"}
@@ -621,39 +674,33 @@ const IndependentbuilderUpdate = () => {
                     <Box as={"div"} className={style.inp_form_numbers}>
                         <Box textAlign={"left"} >
                             <Text> No. of Bedrooms </Text>
-                            <NumberInput>
-                                <NumberInputField
-                                    variant="flushed"
-                                    padding={"0 2px"}
-                                    onChange={(e) => setBedRoom(e.target.value)}
-                                    value={bedroom}
-                                    required
-                                />
-                            </NumberInput>
+                            <input
+                                type="text"
+                                variant="flushed"
+                                onChange={(e) => setBedRoom(e.target.value)}
+                                value={bedroom}
+                                required
+                            />
                         </Box>
                         <Box textAlign={"left"}>
                             <Text> No. of Bathrooms </Text>
-                            <NumberInput>
-                                <NumberInputField
-                                    variant="flushed"
-                                    onChange={(e) => setBathroom(e.target.value)}
-                                    value={bathroom}
-                                    required
-                                    padding={"0 2px"}
-                                />
-                            </NumberInput>
+                            <input
+                                type="text"
+                                variant="flushed"
+                                onChange={(e) => setBathroom(e.target.value)}
+                                value={bathroom}
+                                required
+                            />
                         </Box>
                         <Box textAlign={"left"}>
                             <Text> No. of Balconies </Text>
-                            <NumberInput>
-                                <NumberInputField
-                                    variant="flushed"
-                                    onChange={(e) => setBalcony(e.target.value)}
-                                    value={balconey}
-                                    required
-                                    padding={"0 2px"}
-                                />
-                            </NumberInput>
+                            <input
+                                type="text"
+                                variant="flushed"
+                                onChange={(e) => setBalcony(e.target.value)}
+                                value={balconey}
+                                required
+                            />
                         </Box>
                     </Box>
                     {/* ====================================== */}
@@ -669,17 +716,15 @@ const IndependentbuilderUpdate = () => {
                             isAttached
                             variant="outline"
                         >
-                            <NumberInput>
-                                <NumberInputField
-                                    padding={"0 2px"}
-                                    value={plotArea}
-                                    onChange={(e) => {
-                                        areaCalucation();
-                                        setPlotArea(e.target.value);
-                                    }}
-                                    required
-                                />
-                            </NumberInput>
+                            <Input
+                                type="text"
+                                value={plotArea}
+                                onChange={(e) => {
+                                    areaCalucation();
+                                    setPlotArea(e.target.value);
+                                }}
+                                required
+                            />
                             <select value={areaPer} onChange={(e) => {
                                 setAreaPer(e.target.value);
                             }} className={style.select} required>
@@ -1147,33 +1192,27 @@ const IndependentbuilderUpdate = () => {
                             Total no of floors and your floor details
                         </Text>
                         <Box display={"flex"} alignItems={"center"} gap={5}>
-                            <NumberInput
+                            <Input
                                 value={totalfloors}
-                                className={style.input_borders}>
-                                <NumberInputField
-                                    borderLeft={0}
-                                    borderRight={0}
-                                    borderTop={0}
-                                    borderBottom={"1px solid #4f5bffcf"}
-                                    borderRadius={0}
-                                    onChange={(e) => {
-                                        const nowval = e.target.value > 90;
-                                        if (nowval) {
-                                            toast({
-                                                title: 'Maximum floor count: 90',
-                                                status: 'error',
-                                                duration: 2000,
-                                                position: 'top-right',
-                                            });
-                                        }
-                                        else {
-                                            setTotalFloors(e.target.value);
-                                        }
-                                    }}
-                                    required
-                                    w={180}
-                                />
-                            </NumberInput>
+                                type="text"
+                                onChange={(e) => {
+                                    const nowval = e.target.value > 90;
+                                    if (nowval) {
+                                        toast({
+                                            title: 'Maximum floor count: 90',
+                                            status: 'error',
+                                            duration: 2000,
+                                            position: 'top-right',
+                                        });
+                                    }
+                                    else {
+                                        setTotalFloors(e.target.value);
+                                    }
+                                }}
+                                variant={"flushed"}
+                                w={180}
+                                required
+                            />
                             <Select
                                 id="floorSelectTag"
                                 variant="filled"
@@ -1473,9 +1512,9 @@ const IndependentbuilderUpdate = () => {
                             </Select>
                         </InputGroup>
                         {additionalPrice && <>
-                            <Input type="text" w={"300px"} value={expectedRentel} onChange={(e) => setExpectedRentel(e.target.value)} placeholder="Expected rental" margin={"0"} />
-                            <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-                            <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
+                            <Input type="text" w={"300px"} value={expectedRentel} onChange={(e) => setExpectedRentel(NumericString(e.target.value))} placeholder="Expected rental" margin={"0"} />
+                            <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(NumericString(e.target.value))} placeholder="Booking Amount" margin={"10px 0 0 0"} />
+                            <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(NumericString(e.target.value))} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
                         </>
                         }
                         <Heading
