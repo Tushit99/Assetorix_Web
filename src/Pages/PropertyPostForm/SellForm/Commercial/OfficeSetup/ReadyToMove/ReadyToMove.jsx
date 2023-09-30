@@ -179,7 +179,7 @@ const ReadyToMove = () => {
             city &&
             locality &&
             ownership &&
-            
+
             inclusivePrices &&
             totalfloors
         ) {
@@ -284,7 +284,7 @@ const ReadyToMove = () => {
 
     const pinfetch = async (pin) => {
         try {
-            
+
             let res = await axios.get(
                 `${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`
             );
@@ -713,7 +713,7 @@ const ReadyToMove = () => {
                                     onClick={(e) => {
                                         e.preventDefault();
                                         setSharedWashroom((prev) => prev - 1);
-                                    }} 
+                                    }}
                                     className={sharedWashroom == 0 ? style.washroom_hide : style.washroom_dec}
                                     disabled={sharedWashroom == 0}
                                 >
@@ -989,14 +989,14 @@ const ReadyToMove = () => {
                                     overflow={"scroll"}
                                     overflowX={"hidden"}
                                     flexDirection={"column"}
-                                    padding={"8px 10px"} > 
-                                    
+                                    padding={"8px 10px"} >
+
                                     <Checkbox isChecked={floorNumber.includes("Basement")} onChange={handleFloorNumber} value={"Basement"} > Basement </Checkbox>
                                     <Checkbox isChecked={floorNumber.includes("Lower Ground")} onChange={handleFloorNumber} value={"Lower Ground"} > Lower Ground </Checkbox>
                                     <Checkbox isChecked={floorNumber.includes("Ground")} onChange={handleFloorNumber} value={"Ground"} > Ground </Checkbox>
-                                    {Array.from(Array(Number(totalfloors)).keys()).map((e, i) => { 
-                                        return <Checkbox isChecked={floorNumber.includes(`${e + 1}`)} key={i} onChange={handleFloorNumber} value={e+1} > {e+1} </Checkbox>
-                                    })} 
+                                    {Array.from(Array(Number(totalfloors)).keys()).map((e, i) => {
+                                        return <Checkbox isChecked={floorNumber.includes(`${e + 1}`)} key={i} onChange={handleFloorNumber} value={e + 1} > {e + 1} </Checkbox>
+                                    })}
                                 </MenuList>
                             </Menu>
                         </Box>
@@ -1095,10 +1095,12 @@ const ReadyToMove = () => {
                             setParkingStatus(e.target.value);
                         }} className={parkingStatus == "Not-Available" ? style.setbtn : style.btn} >Not-Available</button>
                     </Box>
-                    <Box>
-                        <Checkbox onChange={handleNumberOfParking} value={"Private Parking in Basement"} isChecked={parkingArr.includes("Private Parking in Basement")} >Private Parking in Basement</Checkbox>
-                        <Checkbox onChange={handleNumberOfParking} value={"Private Parking Outside"} isChecked={parkingArr.includes("Private Parking Outside")} >Private Parking Outside</Checkbox>
-                        <Checkbox onChange={handleNumberOfParking} value={"Private Parking Outside"} isChecked={parkingArr.includes("Private Parking Outside")} >Public Parking</Checkbox>
+                    <Box display={parkingStatus == "Available" ? "grid":"none"} gap={2}>
+                        <Box display={"flex"} flexWrap={"wrap"} gap={4} alignItems={"center"} >
+                            <Checkbox onChange={handleNumberOfParking} value={"Private Parking in Basement"} isChecked={parkingArr.includes("Private Parking in Basement")} >Private Parking in Basement</Checkbox>
+                            <Checkbox onChange={handleNumberOfParking} value={"Private Parking Outside"} isChecked={parkingArr.includes("Private Parking Outside")} >Private Parking Outside</Checkbox>
+                            <Checkbox onChange={handleNumberOfParking} value={"Private Parking Outside"} isChecked={parkingArr.includes("Private Parking Outside")} >Public Parking</Checkbox>
+                        </Box>
                         <Input type="text" placeholder="Enter no. of Parkings" value={parkingTotalNumber} onChange={(e) => {
                             e.preventDefault();
                             setParkingTotalNumber(e.target.value);
@@ -1324,7 +1326,7 @@ const ReadyToMove = () => {
                             </Heading>
                             <NumberInput value={priceSqr}>
                                 <NumberInputField
-                                    
+
                                 />
                             </NumberInput>
                         </Box>

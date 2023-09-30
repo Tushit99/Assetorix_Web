@@ -141,7 +141,7 @@ const TopNavbar = () => {
                                             <Link to={"/profile"}> Profile </Link>
                                             <Link to={"/wishlist"}> Wishlist </Link>
                                             <Link to={"/recently_visited"}> recently visited </Link>
-                                            <Link> Listings </Link>
+                                            <Link to={"/listing"}> Listings </Link>
                                             <Link> Purchased </Link>
                                         </Box>
                                         <Button onClick={handlelogout} className={style.logout_btn}>

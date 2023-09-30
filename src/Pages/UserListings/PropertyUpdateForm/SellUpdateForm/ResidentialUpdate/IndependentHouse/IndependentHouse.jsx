@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Box,
     Button,
@@ -20,8 +20,10 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { CleanInputText, NumericString } from "../../../code";
+import { useParams } from "react-router-dom";
 
-const IndependentHouseUpdate = () => {
+const IndependentHouseUpdate = () => {  
+    const {productID} = useParams();
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
@@ -181,28 +183,7 @@ const IndependentHouseUpdate = () => {
             obj["locationAdv"] = locationAdv
         }
 
-        if (
-            city &&
-            appartment &&
-            locality &&
-            houseNo &&
-            bedroom &&
-            bathroom &&
-            balconey &&
-            furnishedarr &&
-            ownership &&
-            pricedetail &&
-
-            inclusivePrices &&
-            additinalft &&
-            watersource &&
-            overLook &&
-            powerbackup &&
-            propertyFacing &&
-            flooring &&
-            facing &&
-            totalfloors
-        ) {
+        if ( city && appartment && locality && houseNo && bedroom && bathroom && balconey && furnishedarr && ownership && pricedetail &&  inclusivePrices && additinalft && watersource && overLook && powerbackup && propertyFacing && flooring && facing && totalfloors ) {
             let id = localStorage.getItem("usrId") || undefined;
             let authorization = localStorage.getItem("AstToken") || undefined;
 
@@ -283,6 +264,71 @@ const IndependentHouseUpdate = () => {
             })
         }
     };
+
+    const handleDataFetch = async () => {
+        await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((e)=>{
+            console.log(e?.data.data); 
+            setCountry(e?.address.country); 
+            setFacingWidth(e?.roadFacingWidth); 
+            setCity(e?.address.city); 
+            setApartment(e?.address.apartmentName);  
+            setPincode(e?.address.pincode); 
+            setState(e?.address.state); 
+            setLocality(e?.address.locality)
+            setHouseNo(e?.address.houseNumber); 
+            setBedRoom(e?.roomDetails.bedroom); 
+            setBathroom(e?.roomDetails.bathroom); 
+            setBalcony(e?.roomDetails.balcony); 
+            setParking(e?.parking.closeParking); 
+            setOpenparking(e?.parking.openParking); 
+            setLight(e?.furnishedObj.light); 
+            setFans(e?.furnishedObj.fans); 
+            setAc(e?.furnishedObj.ac); 
+            setTv(e?.furnishedObj.tv); 
+            setBeds(e?.furnishedObj.beds); 
+            setWardrobe(e?.furnishedObj.wardrobe); 
+            setGeyser(e?.furnishedObj.geyser); 
+            setAreaPer(e?.plotAreaUnit); 
+            setfurnishedarr(e?.furnishedList); 
+            setExtraRoom(e?.otherRoom);  
+            setFurnished(e?.furnished); 
+            setAvailability(e?.availabilityStatus); 
+            setFromyear(e?.propertyStatus); 
+            setExpectedYear(e?.expectedByYear);  
+            setOwnerShip(e?.ownership); 
+            setPricedetail(e?.price); 
+            setPriceSqr(e?.priceUnit); 
+            setInclusivePrice(e?.inclusivePrices)
+            setAminity(e?.amenities); 
+            setPropertyFeature(e?.propertyFeatures); 
+            setBuildingFeature(e?.society_buildingFeatures);  
+            setAdditinalFeature(e?.additionalFeatures); 
+            setWaterSource(e?.waterSources); 
+            setoverlook(e?.overLookings); 
+            setOtherFeature(e?.otherFeatures); 
+            setPowerbackup(e?.powerBackup); 
+            setPropertyFacing()
+            setFlooring()
+            setFacing()
+            setLocationAdv()
+            setTotalFloors()
+            setPlotArea()
+            setDesc()
+            setPinCollection()
+            setAdditionalPrice()
+            setMaintenancePrice()
+            setMaintenanceTimePeriod()
+            setExpectedRentel()
+            setBookingAmount()
+            setAnnualDuesPayble()
+
+
+        }) 
+    } 
+
+    useEffect(() => {
+        handleDataFetch(); 
+    }, []);
 
     const handlepinfetch = (e) => {
         setPincode(e.target.value);
@@ -490,13 +536,13 @@ const IndependentHouseUpdate = () => {
 
 
     return (
-        <Box w={"94%"} padding={"0 20px"} margin={"auto"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"} > 
+        <Box w={"94%"} padding={"0 20px"} margin={"auto"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"} >
             <form onSubmit={handleSubmitData}>
                 {/* property location */}
                 <Box className={style.location_form}>
-                    <Heading size={"lg"}>Where is your property located?</Heading>
+                    <Heading size={"lg"}> Independent House </Heading>
                     <Heading size={"sm"}>
-                        An accurate location helps you connect with the right buyers.
+                        Location Detail
                     </Heading>
                     <Input
                         type="text"
