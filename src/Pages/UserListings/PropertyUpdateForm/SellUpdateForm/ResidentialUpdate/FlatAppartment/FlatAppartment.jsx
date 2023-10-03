@@ -23,7 +23,7 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useParams } from "react-router-dom";
 
 const FlatAppartmentUpdate = () => {
-    const { productID } = useParams(); 
+    const { productID } = useParams();
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
@@ -291,67 +291,11 @@ const FlatAppartmentUpdate = () => {
                 position: 'top-right'
             })
         }
-    }; 
+    };
 
     const handleDataFetch = async () => {
         await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
-            let e = detail.data.data;  
- 
-            setCountry
-setFacingWidth
-setCity
-setApartment
-setPincode
-setState
-setLocality
-setHouseNo
-setBedRoom
-setBathroom
-setBalcony
-setParking
-setOpenparking
-setLight
-setFans
-setAc
-setTv
-setBeds
-setWardrobe
-setGeyser
-setAreaPer
-setfurnishedarr
-setExtraRoom
-setFurnished
-setAvailability
-setFromyear
-setExpectedYear
-setOwnerShip
-setPricedetail
-setPriceSqr
-setInclusivePrice
-setAminity
-setPropertyFeature
-setBuildingFeature
-setAdditinalFeature
-setWaterSource
-setoverlook
-setOtherFeature
-setPowerbackup
-setPropertyFacing
-setFlooring
-setFacing
-setLocationAdv
-setTotalFloors
-setFloorOn
-setPlotArea
-setDesc
-setPinCollection
-setAdditionalPrice
-setMaintenancePrice
-setMaintenanceTimePeriod
-setExpectedRentel
-setAnnualDuesPayble
-setBookingAmount
-setMembershipCharge
+            let e = detail.data.data;
             // ===================
             setCountry(e?.address?.country);
             setFacingWidth(e?.roadFacingWidth);
@@ -366,17 +310,19 @@ setMembershipCharge
             setBalcony(e?.roomDetails.balcony);
             setParking(e?.parking?.closeParking);
             setOpenparking(e?.parking?.openParking);
-            setLight(e?.furnishedObj?.light);
-            setFans(e?.furnishedObj?.fans);
-            setAc(e?.furnishedObj?.ac);
-            setTv(e?.furnishedObj?.tv);
-            setBeds(e?.furnishedObj?.beds);
-            setWardrobe(e?.furnishedObj?.wardrobe);
-            setGeyser(e?.furnishedObj?.geyser);
-            setAreaPer(e?.plotAreaUnit);
-            setfurnishedarr(e?.furnishedList);
-            setExtraRoom(e?.otherRoom);
             setFurnished(e?.furnished);
+            if (furnished == "Furnished" || furnished == "Semi-Furnished") {
+                setLight(e?.furnishedObj?.light);
+                setFans(e?.furnishedObj?.fans);
+                setAc(e?.furnishedObj?.ac);
+                setTv(e?.furnishedObj?.tv);
+                setBeds(e?.furnishedObj?.beds);
+                setWardrobe(e?.furnishedObj?.wardrobe);
+                setGeyser(e?.furnishedObj?.geyser);
+                setfurnishedarr(e?.furnishedList);
+            } 
+            setAreaPer(e?.plotAreaUnit);
+            setExtraRoom(e?.otherRoom);
             setAvailability(e?.availabilityStatus);
             setFromyear(e?.propertyStatus);
             setExpectedYear(e?.expectedByYear);
@@ -399,7 +345,7 @@ setMembershipCharge
             setTotalFloors(e?.totalFloors);
             setPlotArea(e?.plotArea);
             setDesc(e?.description);
-// setFloorOn()
+            // setFloorOn()
             setAdditionalPrice(e?.additionalPricingDetails ? true : false);
             setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice)
             setMaintenanceTimePeriod(e?.additionalPricingDetails?.maintenanceTimePeriod)
@@ -632,7 +578,7 @@ setMembershipCharge
     // }
 
 
-    return ( 
+    return (
         <Box w={"94%"} padding={"0 20px"} margin={"auto"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"} >
             <form onSubmit={handleSubmitData} >
                 {/* property location */}

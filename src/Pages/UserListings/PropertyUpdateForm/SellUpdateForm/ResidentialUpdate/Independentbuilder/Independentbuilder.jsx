@@ -66,7 +66,7 @@ const IndependentbuilderUpdate = () => {
     const [overLook, setoverlook] = useState([]);
     const [otherFeature, setOtherFeature] = useState([]);
     const [powerbackup, setPowerbackup] = useState("");
-    const [propertyFacing, setPropertyFacing] = useState("");
+    const [propertyFacing, setPropertyFacing] = useState(""); 
     const [flooring, setFlooring] = useState("");
     const [facing, setFacing] = useState("Meter");
     const [locationAdv, setLocationAdv] = useState([]);
@@ -262,15 +262,15 @@ const IndependentbuilderUpdate = () => {
                 // });
                 // let data = await response.json();  
                 console.log("data", obj);
-                // await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
-                //     .then((e) => {
-                //         toast({
-                //             title: e.data.msg,
-                //             description: e.data.msg,
-                //             status: 'success',
-                //             duration: 2000,
-                //         })
-                //     });
+                await axios.patch(`${process.env.REACT_APP_URL}/property/${productID}`, obj, { headers: head })
+                    .then((e) => {
+                        toast({
+                            title: e.data.msg,
+                            description: e.data.msg,
+                            status: 'success',
+                            duration: 2000,
+                        })
+                    });
             } catch (error) {
                 toast({
                     title: error.response.data.msg,
@@ -296,7 +296,7 @@ const IndependentbuilderUpdate = () => {
     const handleDataFetch = async () => {
         await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
             let e = detail.data.data;
-            console.log(e);
+            // console.log(e); 
             setCountry(e?.address?.country);
             setFacingWidth(e?.roadFacingWidth);
             setCity(e?.address?.city);

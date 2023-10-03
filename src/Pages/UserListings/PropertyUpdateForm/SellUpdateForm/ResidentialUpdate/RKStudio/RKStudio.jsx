@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from "react";
 import {
     Box,
     Button,
     ButtonGroup,
+    Divider,
     Heading,
     Input,
     InputGroup,
@@ -21,9 +22,11 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { CleanInputText, NumericString } from "../../../code";
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+import { useParams } from 'react-router-dom';
 
 
 const RKStudioUpdate = () => {
+    const { productID } = useParams();
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
@@ -80,6 +83,73 @@ const RKStudioUpdate = () => {
     const [bookingAmount, setBookingAmount] = useState("");
     const [annualDuesPayable, setAnnualDuesPayable] = useState("");
     const [membershipCharge, setMembershipCharge] = useState("");
+
+
+    const handleDataFetch = async () => {
+        await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
+            let e = detail.data.data; 
+            console.log(e); 
+            setCountry(e?.address?.country);
+            setFacingWidth(e?.roadFacingWidth);
+            setCity(e?.address?.city);
+            setApartment(e?.address?.apartmentName);
+            setPincode(e?.address?.pincode);
+            setState(e.address.state);
+            setLocality(e.address.locality)
+            setHouseNo(e.address.houseNumber);
+            setBedRoom(e.roomDetails.bedroom);
+            setBathroom(e.roomDetails.bathroom);
+            setBalcony(e?.roomDetails.balcony);
+            setParking(e?.parking?.closeParking); 
+            setOpenparking(e?.parking?.openParking);
+            setFurnished(e?.furnished);
+            if (furnished == "Furnished" || furnished == "Semi-Furnished") {
+                setLight(e?.furnishedObj?.light);
+                setFans(e?.furnishedObj?.fans);
+                setAc(e?.furnishedObj?.ac);
+                setTv(e?.furnishedObj?.tv);
+                setBeds(e?.furnishedObj?.beds);
+                setWardrobe(e?.furnishedObj?.wardrobe);
+                setGeyser(e?.furnishedObj?.geyser);
+                setfurnishedarr(e?.furnishedList);
+            }
+            setAreaPer(e?.plotAreaUnit);
+            setExtraRoom(e?.otherRoom);
+            setAvailability(e?.availabilityStatus);
+            setFromyear(e?.propertyStatus);
+            setExpectedYear(e?.expectedByYear);
+            setOwnerShip(e?.ownership);
+            setPricedetail(e?.price);
+            setPriceSqr(e?.priceUnit);
+            setInclusivePrice(e?.inclusivePrices)
+            setAminity(e?.amenities);
+            setPropertyFeature(e?.propertyFeatures);
+            setBuildingFeature(e?.society_buildingFeatures);
+            setAdditinalFeature(e?.additionalFeatures);
+            setWaterSource(e?.waterSources);
+            setoverlook(e?.overLookings);
+            setOtherFeature(e?.otherFeatures);
+            setPowerbackup(e?.powerBackup);
+            setPropertyFacing(e?.propertyFacing);
+            setFlooring(e?.flooring);
+            setFacing(e?.roadFacingWidthType);
+            setLocationAdv(e?.locationAdv);
+            setTotalFloors(e?.totalFloors);
+            setFloorOn(e?.floorOn);
+            setPlotArea(e?.plotArea);
+            setDesc(e?.description);
+            setAdditionalPrice(e?.additionalPricingDetails ? true : false);
+            setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice)
+            setMaintenanceTimePeriod(e?.additionalPricingDetails?.maintenanceTimePeriod)
+            setBookingAmount(e?.additionalPricingDetails?.bookingAmount)
+            setAnnualDuesPayable(e?.additionalPricingDetails?.annualDuesPayable)
+
+        })
+    }
+
+    useEffect(() => {
+        handleDataFetch();
+    }, []);
 
 
     const handleSubmitData = async (e) => {
@@ -261,7 +331,7 @@ const RKStudioUpdate = () => {
                 // });
                 // let data = await response.json();  
                 // console.log("data",data); 
-                await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
+                await axios.patch(`${process.env.REACT_APP_URL}/property/${productID}`, obj, { headers: head })
                     .then((e) => {
                         toast({
                             title: e.data.msg,
@@ -515,18 +585,17 @@ const RKStudioUpdate = () => {
             <form onSubmit={handleSubmitData}>
                 {/* property location */}
                 <Box className={style.location_form}>
-                    <Heading size={"lg"}>Where is your property located?</Heading>
-                    <Heading size={"sm"}>
-                        An accurate location helps you connect with the right buyers.
-                    </Heading>
-
+                    <Heading size={"lg"} margin={"2px 0"}> RK Studio </Heading> 
+                    <Heading size={"sm"} >
+                        Location Detail
+                    </Heading>  
                     <Input
                         type="text"
                         padding={"0 10px"}
                         required
                         placeholder="House No. (optional)"
                         value={houseNo}
-                        onChange={(e) => setHouseNo(e.target.value)}
+                        onChange={(e) => setHouseNo(e.target.value)} 
                         fontSize={"md"}
                         variant="flushed"
                     />
@@ -540,26 +609,15 @@ const RKStudioUpdate = () => {
                         onChange={(e) => setApartment(e.target.value)}
                         variant="flushed"
                     />
-                    <NumberInput>
-                        <NumberInputField
-                            placeholder={"Enter pincode"}
-                            padding={"0 10px"}
-                            borderRight={0}
-                            borderLeft={0}
-                            borderTop={0}
-                            borderRadius={0}
-                            _active={{
-                                borderRight: "0",
-                                borderLeft: "0",
-                                borderTop: "0",
-                                borderRadius: "0",
-                            }}
-                            required
-                            fontSize={"md"}
-                            value={pincode}
-                            onChange={handlepinfetch}
-                        />
-                    </NumberInput>
+                    <Input
+                        type="text"
+                        placeholder={"Enter pincode"}
+                        padding={"0 10px"}
+                        required
+                        fontSize={"md"}
+                        value={pincode}
+                        onChange={handlepinfetch}
+                    /> 
                     <Input
                         type="text"
                         padding={"0 10px"}
@@ -665,16 +723,14 @@ const RKStudioUpdate = () => {
                             </NumberInput>
                         </Box>
                         <Box textAlign={"left"}>
-                            <Text> No. of Balconies </Text>
-                            <NumberInput>
-                                <NumberInputField
-                                    variant="flushed"
-                                    onChange={(e) => setBalcony(e.target.value)}
-                                    value={balconey}
-                                    required
-                                    padding={"0 2px"}
-                                />
-                            </NumberInput>
+                            <Text> No. of Balconies </Text> 
+                            <Input type="text" 
+                                variant="flushed"
+                                onChange={(e) => setBalcony(e.target.value)}
+                                value={balconey}
+                                required
+                                padding={"0 2px"}
+                             /> 
                         </Box>
                     </Box>
                     {/* ====================================== */}
@@ -690,10 +746,9 @@ const RKStudioUpdate = () => {
                             isAttached
                             variant="outline"
                         >
-                            <NumberInput>
+                            <NumberInput value={plotArea}>
                                 <NumberInputField
-                                    padding={"0 2px"}
-                                    value={plotArea}
+                                    padding={"0 2px"} 
                                     onChange={(e) => {
                                         areaCalucation();
                                         setPlotArea(e.target.value);
@@ -1421,9 +1476,8 @@ const RKStudioUpdate = () => {
                                 >
                                     {isCountry.country == "india" ? "₹" : "$"} Price Details
                                 </Heading>
-                                <NumberInput >
-                                    <NumberInputField
-                                        value={pricedetail}
+                                <NumberInput value={pricedetail} >
+                                    <NumberInputField        
                                         required
                                         onChange={(e) => {
                                             setPricedetail(e.target.value);
@@ -1442,8 +1496,7 @@ const RKStudioUpdate = () => {
                                     {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
                                 </Heading>
                                 <NumberInput value={priceSqr}>
-                                    <NumberInputField
-
+                                    <NumberInputField 
                                         readOnly
                                     />
                                 </NumberInput>

@@ -123,12 +123,12 @@ const FarmHouseUpdate = () => {
             parking: {
                 openParking: openparking.toString(),
                 closeParking: parking.toString(),
-            },
+            }, 
             otherRoom: extraroom,
             description: desc,
             countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
-            additionalPricingDetails: {
-                maintenancePrice,
+            additionalPricingDetails: { 
+                maintenancePrice, 
                 maintenanceTimePeriod,
                 expectedRental,
                 bookingAmount,
