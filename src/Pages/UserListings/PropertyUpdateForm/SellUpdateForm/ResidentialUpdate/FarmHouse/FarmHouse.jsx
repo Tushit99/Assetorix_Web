@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from "react";
 import {
     Box,
@@ -21,9 +21,11 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import { CleanInputText, NumericString } from '../../../code';
+import { useParams } from 'react-router-dom';
 
 
 const FarmHouseUpdate = () => {
+    const { productID } = useParams();
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
@@ -123,12 +125,12 @@ const FarmHouseUpdate = () => {
             parking: {
                 openParking: openparking.toString(),
                 closeParking: parking.toString(),
-            }, 
+            },
             otherRoom: extraroom,
             description: desc,
             countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
-            additionalPricingDetails: { 
-                maintenancePrice, 
+            additionalPricingDetails: {
+                maintenancePrice,
                 maintenanceTimePeriod,
                 expectedRental,
                 bookingAmount,
@@ -259,7 +261,7 @@ const FarmHouseUpdate = () => {
                 // });
                 // let data = await response.json();  
                 // console.log("data",data); 
-                await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
+                await axios.patch(`${process.env.REACT_APP_URL}/property/${productID}`, obj, { headers: head })
                     .then((e) => {
                         toast({
                             title: e.data.msg,
@@ -292,6 +294,74 @@ const FarmHouseUpdate = () => {
             })
         }
     };
+
+    const handleDataFetch = async () => {
+        console.log(productID);
+        await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
+            let e = detail.data.data;
+            console.log(e);
+            // ===================
+            setCountry(e?.address?.country);
+            setFacingWidth(e?.roadFacingWidth);
+            setCity(e?.address?.city);
+            setApartment(e?.address?.apartmentName);
+            setPincode(e?.address?.pincode);
+            setState(e.address.state);
+            setLocality(e.address.locality)
+            setHouseNo(e.address.houseNumber);
+            setBedRoom(e.roomDetails.bedroom);
+            setBathroom(e.roomDetails.bathroom);
+            setBalcony(e?.roomDetails.balcony);
+            setParking(e?.parking?.closeParking);
+            setOpenparking(e?.parking?.openParking);
+            setFurnished(e?.furnished);
+            if (furnished == "Furnished" || furnished == "Semi-Furnished") {
+                setLight(e?.furnishedObj?.light);
+                setFans(e?.furnishedObj?.fans);
+                setAc(e?.furnishedObj?.ac);
+                setTv(e?.furnishedObj?.tv);
+                setBeds(e?.furnishedObj?.beds);
+                setWardrobe(e?.furnishedObj?.wardrobe);
+                setGeyser(e?.furnishedObj?.geyser);
+                setfurnishedarr(e?.furnishedList);
+            }
+            setAreaPer(e?.plotAreaUnit);
+            setExtraRoom(e?.otherRoom);
+            setAvailability(e?.availabilityStatus);
+            setFromyear(e?.propertyStatus);
+            setExpectedYear(e?.expectedByYear);
+            setOwnerShip(e?.ownership);
+            setPricedetail(e?.price);
+            setPriceSqr(e?.priceUnit);
+            setInclusivePrice(e?.inclusivePrices)
+            setAminity(e?.amenities);
+            setPropertyFeature(e?.propertyFeatures);
+            setBuildingFeature(e?.society_buildingFeatures);
+            setAdditinalFeature(e?.additionalFeatures);
+            setWaterSource(e?.waterSources);
+            setoverlook(e?.overLookings);
+            setOtherFeature(e?.otherFeatures);
+            setPowerbackup(e?.powerBackup);
+            setPropertyFacing(e?.propertyFacing);
+            setFlooring(e?.flooring);
+            setFacing(e?.roadFacingWidthType);
+            setLocationAdv(e?.locationAdv);
+            setTotalFloors(e?.totalFloors);
+            setPlotArea(e?.plotArea);
+            setDesc(e?.description);
+            setAdditionalPrice(e?.additionalPricingDetails ? true : false);
+            setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice)
+            setMaintenanceTimePeriod(e?.additionalPricingDetails?.maintenanceTimePeriod)
+            setExpectedRental(e?.additionalPricingDetails?.expectedRental)
+            setBookingAmount(e?.additionalPricingDetails?.bookingAmount)
+            setAnnualDuesPayable(e?.additionalPricingDetails?.annualDuesPayable)
+
+        })
+    }
+
+    useEffect(() => {
+        handleDataFetch();
+    }, []);
 
     const handlepinfetch = (e) => {
         setPincode(e.target.value);
@@ -541,26 +611,15 @@ const FarmHouseUpdate = () => {
                         onChange={(e) => setApartment(e.target.value)}
                         variant="flushed"
                     />
-                    <NumberInput>
-                        <NumberInputField
-                            placeholder={"Enter pincode"}
-                            padding={"0 10px"}
-                            borderRight={0}
-                            borderLeft={0}
-                            borderTop={0}
-                            borderRadius={0}
-                            _active={{
-                                borderRight: "0",
-                                borderLeft: "0",
-                                borderTop: "0",
-                                borderRadius: "0",
-                            }}
-                            required
-                            fontSize={"md"}
-                            value={pincode}
-                            onChange={handlepinfetch}
-                        />
-                    </NumberInput>
+                    <Input
+                        type="text"
+                        placeholder={"Enter pincode"}
+                        padding={"0 10px"}
+                        required
+                        fontSize={"md"}
+                        value={pincode}
+                        onChange={handlepinfetch}
+                    />
                     <Input
                         type="text"
                         padding={"0 10px"}
@@ -623,39 +682,36 @@ const FarmHouseUpdate = () => {
                     <Box as={"div"} className={style.inp_form_numbers}>
                         <Box textAlign={"left"} >
                             <Text> No. of Bedrooms </Text>
-                            <NumberInput>
-                                <NumberInputField
-                                    variant="flushed"
-                                    padding={"0 2px"}
-                                    onChange={(e) => setBedRoom(e.target.value)}
-                                    value={bedroom}
-                                    required
-                                />
-                            </NumberInput>
+                            <Input
+                                type="text"
+                                variant="flushed"
+                                padding={"0 2px"}
+                                onChange={(e) => setBedRoom(e.target.value)}
+                                value={bedroom}
+                                required
+                            />
                         </Box>
                         <Box textAlign={"left"}>
                             <Text> No. of Bathrooms </Text>
-                            <NumberInput>
-                                <NumberInputField
-                                    variant="flushed"
-                                    onChange={(e) => setBathroom(e.target.value)}
-                                    value={bathroom}
-                                    required
-                                    padding={"0 2px"}
-                                />
-                            </NumberInput>
+                            <Input
+                                type="text"
+                                variant="flushed"
+                                onChange={(e) => setBathroom(e.target.value)}
+                                value={bathroom}
+                                required
+                                padding={"0 2px"}
+                            />
                         </Box>
                         <Box textAlign={"left"}>
                             <Text> No. of Balconies </Text>
-                            <NumberInput>
-                                <NumberInputField
-                                    variant="flushed"
-                                    onChange={(e) => setBalcony(e.target.value)}
-                                    value={balconey}
-                                    required
-                                    padding={"0 2px"}
-                                />
-                            </NumberInput>
+                            <Input
+                                type="text"
+                                variant="flushed"
+                                onChange={(e) => setBalcony(e.target.value)}
+                                value={balconey}
+                                required
+                                padding={"0 2px"}
+                            />
                         </Box>
                     </Box>
                     {/* ====================================== */}
@@ -671,17 +727,16 @@ const FarmHouseUpdate = () => {
                             isAttached
                             variant="outline"
                         >
-                            <NumberInput>
-                                <NumberInputField
-                                    padding={"0 2px"}
-                                    value={plotArea}
-                                    onChange={(e) => {
-                                        areaCalucation();
-                                        setPlotArea(e.target.value);
-                                    }}
-                                    required
-                                />
-                            </NumberInput>
+                            <Input
+                                type="text"
+                                padding={"0 2px"}
+                                value={plotArea}
+                                onChange={(e) => {
+                                    areaCalucation();
+                                    setPlotArea(e.target.value);
+                                }}
+                                required
+                            />   
                             <select value={areaPer} onChange={(e) => {
                                 setAreaPer(e.target.value);
                             }} className={style.select} required>
@@ -690,7 +745,7 @@ const FarmHouseUpdate = () => {
                                 <option value="sq.m">sq.m</option>
                                 <option value="acres">acres</option>
                                 <option value="marla">marla</option>
-                                <option value="cents">cents</option>
+                                <option value= "cents">cents</option>
                                 <option value="bigha">bigha</option>
                                 <option value="kottah">kottah</option>
                                 <option value="kanal">kanal</option>

@@ -100,8 +100,14 @@
   color: rgb(18, 107, 196);
 }
 
-.contact>*:nth-child(2):hover {
-  color: rgb(29, 161, 242);
+.contact>*:nth-child(2) .xicon1{
+  display: none; 
+  width: 24px; 
+}
+
+.contact>*:nth-child(2) .xicon2{
+  display: flex;  
+  width: 24px; 
 }
 
 .contact>*:nth-child(3):hover {
@@ -114,6 +120,16 @@
 
 .contact>*:nth-child(4):hover .insta_logo{
   display: flex;  
+}
+
+.contact>*:nth-child(2):hover .xicon1{
+  display: flex;  
+  width: 24px; 
+}
+
+.contact>*:nth-child(2):hover .xicon2{
+  display: none; 
+  width: 24px; 
 }
 
 

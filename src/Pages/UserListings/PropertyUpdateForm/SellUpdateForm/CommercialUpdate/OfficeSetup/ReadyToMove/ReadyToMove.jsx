@@ -25,9 +25,11 @@ import { useSelector } from "react-redux";
 import { AddIcon, ChevronDownIcon, MinusIcon } from "@chakra-ui/icons";
 import axios from "axios";
 import { CleanInputText } from "../../../../code";
+import { useParams } from "react-router-dom";
 
 
-const ReadyToMoveUpdate = () => {
+const ReadyToMoveUpdate = () => { 
+    const productID = useParams();  
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
@@ -242,7 +244,7 @@ const ReadyToMoveUpdate = () => {
                 // let data = await response.json();
                 console.log("data", obj);
                 await axios
-                    .post(`${process.env.REACT_APP_URL}/property/`, obj, {
+                    .patch(`${process.env.REACT_APP_URL}/property/${productID}`, obj, {
                         headers: head,
                     })
                     .then((e) => {
@@ -271,7 +273,10 @@ const ReadyToMoveUpdate = () => {
                 position: "top-right",
             });
         }
-    };
+    }; 
+
+    
+
 
     const handlepinfetch = (e) => {
         setPincode(e.target.value);

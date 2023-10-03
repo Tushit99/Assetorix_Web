@@ -1,4 +1,4 @@
-import { Box, Button, Heading, Image, Text } from '@chakra-ui/react';
+import { Box, Button, Divider, Heading, Image, Text } from '@chakra-ui/react';
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import style from "./Listing.module.css";
@@ -53,9 +53,10 @@ const Listings = () => {
   }, []);
 
   return (
-    <Box my={6} w={"90%"} marginX={"auto"} >
+    <Box my={6} padding={"10px 40px"} marginX={"auto"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"}  >
       <Box >
-        <Heading> My Posted Data </Heading>
+        <Heading> My Posted Data </Heading> 
+        <Divider margin={"6px 0"} />
         {loading ? <Loader /> :
           <Box className={style.displaygrid} >
             {data && data?.map((e, i) => (
@@ -64,7 +65,8 @@ const Listings = () => {
                 <Heading className={`${style.boldtext} ${style.oneline}`} size={"sm"} > {e?.address?.houseNumber} {e?.address?.apartmentName} {e?.address?.locality} {e?.locatedInside} </Heading>
                 <Text> <span className={`${style.boldtext}`}>Price:</span>  {e?.countryCurrency}{e?.price} </Text>
                 <Text className={style.oneline}> Property Group: {e.propertyGroup} </Text>
-                <Text className={style.oneline}> Property Type: {e.propertyType} </Text>
+                <Text className={style.oneline}> Property Type: {e.propertyType} </Text> 
+                <Text> officeType: {e?.officeType} </Text>
                 <Box className={style.flexequal}>
                   <Link to={`/listing/${e._id}`}> 
                     <Button w={"100%"} as={"button"} variant={'outline'} colorScheme={"blue"} > Edit </Button>

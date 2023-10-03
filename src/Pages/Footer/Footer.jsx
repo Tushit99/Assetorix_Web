@@ -13,7 +13,10 @@ import {
   BsTwitter,
 } from "react-icons/bs";
 import { BiLogoLinkedin } from "react-icons/bi";
-import { IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowForward } from "react-icons/io"; 
+// import {FaSquareXTwitter} from "react-icons/fa6";  
+import xwhiteicon from "./whitexicon.png"; 
+import xblackicon from "./blackxicon.png"; 
 import insta from "./insta.png";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -121,7 +124,8 @@ const Footer = () => {
             <BiLogoLinkedin size={"24px"} />
           </Link>
           <Link target="_blank" to="https://twitter.com/assetorix">
-            <BsTwitter size={"24px"} />
+            <img src={xwhiteicon} alt="whiteIcon" className={style.xicon2} /> 
+            <img src={xblackicon} alt="blackIcon" className={style.xicon1} />  
           </Link>
           <Link to="#">
             <BsFacebook size={"24px"} />
