@@ -304,13 +304,13 @@ const IndependentbuilderUpdate = () => {
             setPincode(e?.address?.pincode);
             setState(e.address.state);
             setLocality(e.address.locality); 
-            setFurnished(e?.furnished);
             setHouseNo(e.address.houseNumber);
             setBedRoom(e.roomDetails.bedroom);
             setBathroom(e.roomDetails.bathroom);
             setBalcony(e?.roomDetails.balcony);
             setParking(e?.parking?.closeParking);
             setOpenparking(e?.parking?.openParking);
+            setFurnished(e?.furnished);
             if (furnished == "Furnished" || furnished == "Semi-Furnished") {
                 setLight(e?.furnishedObj?.light);
                 setFans(e?.furnishedObj?.fans);
@@ -612,6 +612,7 @@ const IndependentbuilderUpdate = () => {
                         required
                         placeholder={"Enter pincode"}
                         value={pincode}
+                        variant="flushed" 
                         onChange={handlepinfetch}
                     />
                     <Input
@@ -676,9 +677,8 @@ const IndependentbuilderUpdate = () => {
                     <Box as={"div"} className={style.inp_form_numbers}>
                         <Box textAlign={"left"} >
                             <Text> No. of Bedrooms </Text>
-                            <input
-                                type="text"
-                                variant="flushed"
+                            <Input
+                                type="text" 
                                 onChange={(e) => setBedRoom(e.target.value)}
                                 value={bedroom}
                                 required
@@ -686,9 +686,8 @@ const IndependentbuilderUpdate = () => {
                         </Box>
                         <Box textAlign={"left"}>
                             <Text> No. of Bathrooms </Text>
-                            <input
-                                type="text"
-                                variant="flushed"
+                            <Input
+                                type="text" 
                                 onChange={(e) => setBathroom(e.target.value)}
                                 value={bathroom}
                                 required
@@ -696,9 +695,8 @@ const IndependentbuilderUpdate = () => {
                         </Box>
                         <Box textAlign={"left"}>
                             <Text> No. of Balconies </Text>
-                            <input
-                                type="text"
-                                variant="flushed"
+                            <Input 
+                                type="text" 
                                 onChange={(e) => setBalcony(e.target.value)}
                                 value={balconey}
                                 required
@@ -712,7 +710,7 @@ const IndependentbuilderUpdate = () => {
                             Add Area Details
                         </Heading>
                         <Text margin={"5px 0"}> Atleast one area type is mandatory </Text>
-                        <ButtonGroup
+                        <InputGroup
                             className={style.select_land}
                             size="sm"
                             isAttached
@@ -726,8 +724,8 @@ const IndependentbuilderUpdate = () => {
                                     setPlotArea(e.target.value);
                                 }}
                                 required
-                            />
-                            <select value={areaPer} onChange={(e) => {
+                            /> 
+                            <Select value={areaPer} onChange={(e) => {
                                 setAreaPer(e.target.value);
                             }} className={style.select} required>
                                 <option value="sq.ft">sq.ft</option>
@@ -748,8 +746,8 @@ const IndependentbuilderUpdate = () => {
                                 <option value="rood">rood</option>
                                 <option value="chataks">chataks</option>
                                 <option value="perch">perch</option>
-                            </select>
-                        </ButtonGroup>
+                            </Select>
+                        </InputGroup>
                     </Box>
                     {/* other Room  */}
                     <Box

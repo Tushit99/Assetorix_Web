@@ -279,19 +279,20 @@ const IndependentHouseUpdate = () => {
             setBedRoom(e.roomDetails.bedroom);
             setBathroom(e.roomDetails.bathroom);
             setBalcony(e?.roomDetails.balcony);
-            setParking(e?.parking?.closeParking);
-            setOpenparking(e?.parking?.openParking);
-            setLight(e?.furnishedObj?.light);
-            setFans(e?.furnishedObj?.fans);
-            setAc(e?.furnishedObj?.ac);
-            setTv(e?.furnishedObj?.tv);
-            setBeds(e?.furnishedObj?.beds);
-            setWardrobe(e?.furnishedObj?.wardrobe);
-            setGeyser(e?.furnishedObj?.geyser);
-            setAreaPer(e?.plotAreaUnit);
-            setfurnishedarr(e?.furnishedList);
-            setExtraRoom(e?.otherRoom);
+            setParking(e?.parking?.closeParking); 
+            setOpenparking(e?.parking?.openParking); 
             setFurnished(e?.furnished);
+            if (furnished == "Furnished" || furnished == "Semi-Furnished") {
+                setLight(e?.furnishedObj?.light);
+                setFans(e?.furnishedObj?.fans);
+                setAc(e?.furnishedObj?.ac);
+                setTv(e?.furnishedObj?.tv);
+                setBeds(e?.furnishedObj?.beds);
+                setWardrobe(e?.furnishedObj?.wardrobe);
+                setGeyser(e?.furnishedObj?.geyser);
+                setfurnishedarr(e?.furnishedList);
+            }  
+            setExtraRoom(e?.otherRoom); 
             setAvailability(e?.availabilityStatus);
             setFromyear(e?.propertyStatus);
             setExpectedYear(e?.expectedByYear);
