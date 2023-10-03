@@ -279,9 +279,9 @@ const IndependentHouseUpdate = () => {
             setBedRoom(e.roomDetails.bedroom);
             setBathroom(e.roomDetails.bathroom);
             setBalcony(e?.roomDetails.balcony);
-            setParking(e?.parking?.closeParking); 
-            setOpenparking(e?.parking?.openParking); 
-            setFurnished(e?.furnished);
+            setParking(e?.parking?.closeParking);  
+            setOpenparking(e?.parking?.openParking);  
+            setFurnished(e?.furnished);  
             if (furnished == "Furnished" || furnished == "Semi-Furnished") {
                 setLight(e?.furnishedObj?.light);
                 setFans(e?.furnishedObj?.fans);

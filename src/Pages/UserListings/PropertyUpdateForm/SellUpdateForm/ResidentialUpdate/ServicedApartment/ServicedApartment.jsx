@@ -615,6 +615,9 @@ const ServicedApartmentUpdate = () => {
                     <Input
                         type="text"
                         required
+                        padding={"0 10px"} 
+                        variant="flushed" 
+                        placeholder="Pincode" 
                         value={pincode}
                         onChange={handlepinfetch}
                     />
@@ -681,8 +684,7 @@ const ServicedApartmentUpdate = () => {
                         <Box textAlign={"left"} >
                             <Text> No. of Bedrooms </Text>
                             <Input
-                                type="text"
-                                variant="flushed"
+                                type="text"  
                                 onChange={(e) => setBedRoom(e.target.value)}
                                 value={bedroom}
                                 required
@@ -691,25 +693,23 @@ const ServicedApartmentUpdate = () => {
                         <Box textAlign={"left"}>
                             <Text> No. of Bathrooms </Text>
                             <Input
-                                type="text"
-                                variant="flushed"
+                                type="text"  
                                 onChange={(e) => setBathroom(e.target.value)}
                                 value={bathroom}
                                 required
                             />
                         </Box>
                         <Box textAlign={"left"}>
-                            <Text> No. of Balconies </Text>
+                            <Text> No. of Balconies </Text> 
                             <Input
-                                type="text"
-                                variant="flushed"
+                                type="text"  
                                 onChange={(e) => setBalcony(e.target.value)}
                                 value={balconey}
                                 required
-                            />
-                        </Box>
+                            />   
+                        </Box> 
                     </Box>
-                    {/* ====================================== */}
+                    {/* ======================================================= */}
                     {/* add area details */}
                     <Box textAlign={"left"} padding={"10px 0"}>
                         <Heading as={"h3"} margin={"5px 0"} size={"md"}>

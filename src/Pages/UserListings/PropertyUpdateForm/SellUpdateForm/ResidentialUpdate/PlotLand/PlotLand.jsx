@@ -21,9 +21,11 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { CleanInputText, NumericString } from "../../../code";
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+import { useParams } from 'react-router-dom';
 
 
 const PlotLandUpdate = () => {
+    const { productID } = useParams();
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
@@ -65,6 +67,52 @@ const PlotLandUpdate = () => {
     const [expectedByYear, setExpectedByYear] = useState("");
     const [authorisedBy, setAuthorisedBy] = useState([]);
 
+
+    const handleDataFetch = async () => {
+        await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
+            let e = detail.data.data;
+            console.log(e);
+            setCountry(e?.address?.country);
+            setFacingWidth(e?.roadFacingWidth);
+            setCity(e?.address?.city);
+            setApartment(e?.address?.apartmentName);
+            setPincode(e?.address?.pincode);
+            setState(e.address.state);
+            setLocality(e.address.locality);
+            setHouseNo(e.address.plotNumber);
+            setAreaPer(e?.plotAreaUnit);
+            setOwnerShip(e?.ownership);
+            setPricedetail(e?.price);
+            setPriceSqr(e?.priceUnit);
+            setInclusivePrice(e?.inclusivePrices)
+            setAminity(e?.amenities);
+            setoverlook(e?.overLookings);
+            setOtherFeature(e?.otherFeatures);
+            setPropertyFacing(e?.propertyFacing);
+            setFacing(e?.roadFacingWidthType);
+            setLocationAdv(e?.locationAdv);
+            setPlotArea(e?.plotArea);
+            setDesc(e?.description);
+            setAdditionalPrice(Object.keys(e?.additionalPricingDetails).length == 0 ? false : true);
+            setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice)
+            setMaintenanceTimePeriod(e?.additionalPricingDetails?.maintenanceTimePeriod)
+            setBookingAmount(e?.additionalPricingDetails?.bookingAmount)
+            setAnnualDuesPayable(e?.additionalPricingDetails?.annualDuesPayable)
+            setplotLength(e?.plotLength);
+            setPlotBreadth(e?.plotBreadth);
+            setTotalFloorAllowed(e?.totalFloorsAllowed);
+            setboundaryWall(e?.boundaryWall);
+            setConstructionOnProperty(e?.constructionOnProperty);
+            setConstructionType(e?.constructionOnPropertyList);
+            setOpenSides(e?.openSides);
+            setExpectedByYear(e?.expectedByYear);
+            setAuthorisedBy(e?.propertyApprovalAuthorityList);
+        })
+    }
+
+    useEffect(() => {
+        handleDataFetch();
+    }, []);
 
     // please don'nt change any function without any prior knowledge  
 
@@ -396,26 +444,14 @@ const PlotLandUpdate = () => {
                         onChange={(e) => setApartment(e.target.value)}
                         variant="flushed"
                     />
-                    <NumberInput>
-                        <NumberInputField
-                            placeholder={"Enter pincode"}
-                            padding={"0 10px"}
-                            borderRight={0}
-                            borderLeft={0}
-                            borderTop={0}
-                            borderRadius={0}
-                            _active={{
-                                borderRight: "0",
-                                borderLeft: "0",
-                                borderTop: "0",
-                                borderRadius: "0",
-                            }}
-                            required
-                            fontSize={"md"}
-                            value={pincode}
-                            onChange={handlepinfetch}
-                        />
-                    </NumberInput>
+                    <Input
+                        type="text"
+                        placeholder={"Enter pincode"}
+                        padding={"0 10px"}
+                        required
+                        value={pincode}
+                        onChange={handlepinfetch}
+                    /> 
                     <Input
                         type="text"
                         padding={"0 10px"}
@@ -496,7 +532,7 @@ const PlotLandUpdate = () => {
                                     required
                                 />
                             </NumberInput>
-                            <select value={areaPer} onChange={(e) => {
+                            <Select value={areaPer} onChange={(e) => {
                                 setAreaPer(e.target.value);
                             }} className={style.select} required>
                                 <option value="sq.ft">sq.ft</option>
@@ -517,7 +553,7 @@ const PlotLandUpdate = () => {
                                 <option value="rood">rood</option>
                                 <option value="chataks">chataks</option>
                                 <option value="perch">perch</option>
-                            </select>
+                            </Select>
                         </ButtonGroup>
                     </Box>
                     {/* Property Dimensions */}
@@ -579,7 +615,7 @@ const PlotLandUpdate = () => {
                             Possession By
                         </Heading>
                         <Box>
-                            <Select variant={"flushed"} padding={"0 10px"} value={expectedByYear} onChange={(e) => setExpectedByYear(e.target.value)}>
+                            <Select variant={"flushed"} w={"400px"} padding={"0 10px"} value={expectedByYear} onChange={(e) => setExpectedByYear(e.target.value)}>
                                 <option value="Immediate">Immediate</option>
                                 <option value="Within 3 Months">Within 3 Months</option>
                                 <option value="Within 6 Months">Within 6 Months</option>
