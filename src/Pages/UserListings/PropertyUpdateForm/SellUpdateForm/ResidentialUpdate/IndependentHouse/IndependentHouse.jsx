@@ -970,7 +970,7 @@ const IndependentHouseUpdate = () => {
                                 <Box>
                                     <Checkbox
                                         onChange={furnisheddetails}
-                                        isChecked={furnishedarr.includes("Sofa")}
+                                        isChecked={furnishedarr?.includes("Sofa")}
                                         value={"Sofa"}
                                         icon={<AddIcon />}
                                     >
@@ -980,7 +980,7 @@ const IndependentHouseUpdate = () => {
                                 <Box>
                                     <Checkbox
                                         onChange={furnisheddetails}
-                                        isChecked={furnishedarr.includes("Washing Machine")}
+                                        isChecked={furnishedarr?.includes("Washing Machine")}
                                         value={"Washing Machine"}
                                         icon={<AddIcon />}
                                     >
@@ -990,7 +990,7 @@ const IndependentHouseUpdate = () => {
                                 <Box>
                                     <Checkbox
                                         onChange={furnisheddetails}
-                                        isChecked={furnishedarr.includes("Stove")}
+                                        isChecked={furnishedarr?.includes("Stove")}
                                         value={"Stove"}
                                         icon={<AddIcon />}
                                     >
@@ -1000,7 +1000,7 @@ const IndependentHouseUpdate = () => {
                                 <Box>
                                     <Checkbox
                                         onChange={furnisheddetails}
-                                        isChecked={furnishedarr.includes("Fridge")}
+                                        isChecked={furnishedarr?.includes("Fridge")}
                                         value={"Fridge"}
                                         icon={<AddIcon />}
                                     >
@@ -1010,7 +1010,7 @@ const IndependentHouseUpdate = () => {
                                 <Box>
                                     <Checkbox
                                         onChange={furnisheddetails}
-                                        isChecked={furnishedarr.includes("Water Purifier")}
+                                        isChecked={furnishedarr?.includes("Water Purifier")}
                                         value={"Water Purifier"}
                                         icon={<AddIcon />}
                                     >
@@ -1020,7 +1020,7 @@ const IndependentHouseUpdate = () => {
                                 <Box>
                                     <Checkbox
                                         onChange={furnisheddetails}
-                                        isChecked={furnishedarr.includes("Microwave")}
+                                        isChecked={furnishedarr?.includes("Microwave")}
                                         value={"Microwave"}
                                         icon={<AddIcon />}
                                     >

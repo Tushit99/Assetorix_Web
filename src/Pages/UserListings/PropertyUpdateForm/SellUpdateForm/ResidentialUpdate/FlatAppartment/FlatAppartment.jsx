@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Box,
     Button,
@@ -20,8 +20,10 @@ import axios from "axios";
 import style from "./FlatAppartment.module.css";
 import { InputGroup } from "@chakra-ui/react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { useParams } from "react-router-dom";
 
 const FlatAppartmentUpdate = () => {
+    const { productID } = useParams(); 
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
@@ -289,7 +291,128 @@ const FlatAppartmentUpdate = () => {
                 position: 'top-right'
             })
         }
-    };
+    }; 
+
+    const handleDataFetch = async () => {
+        await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
+            let e = detail.data.data;  
+ 
+            setCountry
+setFacingWidth
+setCity
+setApartment
+setPincode
+setState
+setLocality
+setHouseNo
+setBedRoom
+setBathroom
+setBalcony
+setParking
+setOpenparking
+setLight
+setFans
+setAc
+setTv
+setBeds
+setWardrobe
+setGeyser
+setAreaPer
+setfurnishedarr
+setExtraRoom
+setFurnished
+setAvailability
+setFromyear
+setExpectedYear
+setOwnerShip
+setPricedetail
+setPriceSqr
+setInclusivePrice
+setAminity
+setPropertyFeature
+setBuildingFeature
+setAdditinalFeature
+setWaterSource
+setoverlook
+setOtherFeature
+setPowerbackup
+setPropertyFacing
+setFlooring
+setFacing
+setLocationAdv
+setTotalFloors
+setFloorOn
+setPlotArea
+setDesc
+setPinCollection
+setAdditionalPrice
+setMaintenancePrice
+setMaintenanceTimePeriod
+setExpectedRentel
+setAnnualDuesPayble
+setBookingAmount
+setMembershipCharge
+            // ===================
+            setCountry(e?.address?.country);
+            setFacingWidth(e?.roadFacingWidth);
+            setCity(e?.address?.city);
+            setApartment(e?.address?.apartmentName);
+            setPincode(e?.address?.pincode);
+            setState(e.address.state);
+            setLocality(e.address.locality)
+            setHouseNo(e.address.houseNumber);
+            setBedRoom(e.roomDetails.bedroom);
+            setBathroom(e.roomDetails.bathroom);
+            setBalcony(e?.roomDetails.balcony);
+            setParking(e?.parking?.closeParking);
+            setOpenparking(e?.parking?.openParking);
+            setLight(e?.furnishedObj?.light);
+            setFans(e?.furnishedObj?.fans);
+            setAc(e?.furnishedObj?.ac);
+            setTv(e?.furnishedObj?.tv);
+            setBeds(e?.furnishedObj?.beds);
+            setWardrobe(e?.furnishedObj?.wardrobe);
+            setGeyser(e?.furnishedObj?.geyser);
+            setAreaPer(e?.plotAreaUnit);
+            setfurnishedarr(e?.furnishedList);
+            setExtraRoom(e?.otherRoom);
+            setFurnished(e?.furnished);
+            setAvailability(e?.availabilityStatus);
+            setFromyear(e?.propertyStatus);
+            setExpectedYear(e?.expectedByYear);
+            setOwnerShip(e?.ownership);
+            setPricedetail(e?.price);
+            setPriceSqr(e?.priceUnit);
+            setInclusivePrice(e?.inclusivePrices)
+            setAminity(e?.amenities);
+            setPropertyFeature(e?.propertyFeatures);
+            setBuildingFeature(e?.society_buildingFeatures);
+            setAdditinalFeature(e?.additionalFeatures);
+            setWaterSource(e?.waterSources);
+            setoverlook(e?.overLookings);
+            setOtherFeature(e?.otherFeatures);
+            setPowerbackup(e?.powerBackup);
+            setPropertyFacing(e?.propertyFacing);
+            setFlooring(e?.flooring);
+            setFacing(e?.roadFacingWidthType);
+            setLocationAdv(e?.locationAdv);
+            setTotalFloors(e?.totalFloors);
+            setPlotArea(e?.plotArea);
+            setDesc(e?.description);
+// setFloorOn()
+            setAdditionalPrice(e?.additionalPricingDetails ? true : false);
+            setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice)
+            setMaintenanceTimePeriod(e?.additionalPricingDetails?.maintenanceTimePeriod)
+            setExpectedRentel(e?.additionalPricingDetails?.expectedRental)
+            setBookingAmount(e?.additionalPricingDetails?.bookingAmount)
+            setAnnualDuesPayble(e?.additionalPricingDetails?.annualDuesPayable)
+
+        })
+    }
+
+    useEffect(() => {
+        handleDataFetch();
+    }, []);
 
     const handlepinfetch = (e) => {
         setPincode(e.target.value);
