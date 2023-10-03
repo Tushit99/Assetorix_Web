@@ -303,24 +303,26 @@ const IndependentbuilderUpdate = () => {
             setApartment(e?.address?.apartmentName);
             setPincode(e?.address?.pincode);
             setState(e.address.state);
-            setLocality(e.address.locality)
+            setLocality(e.address.locality); 
+            setFurnished(e?.furnished);
             setHouseNo(e.address.houseNumber);
             setBedRoom(e.roomDetails.bedroom);
             setBathroom(e.roomDetails.bathroom);
             setBalcony(e?.roomDetails.balcony);
             setParking(e?.parking?.closeParking);
             setOpenparking(e?.parking?.openParking);
-            setLight(e?.furnishedObj?.light);
-            setFans(e?.furnishedObj?.fans);
-            setAc(e?.furnishedObj?.ac);
-            setTv(e?.furnishedObj?.tv);
-            setBeds(e?.furnishedObj?.beds);
-            setWardrobe(e?.furnishedObj?.wardrobe);
-            setGeyser(e?.furnishedObj?.geyser);
+            if (furnished == "Furnished" || furnished == "Semi-Furnished") {
+                setLight(e?.furnishedObj?.light);
+                setFans(e?.furnishedObj?.fans);
+                setAc(e?.furnishedObj?.ac);
+                setTv(e?.furnishedObj?.tv);
+                setBeds(e?.furnishedObj?.beds);
+                setWardrobe(e?.furnishedObj?.wardrobe);
+                setGeyser(e?.furnishedObj?.geyser);
+                setfurnishedarr(e?.furnishedList);
+            }
             setAreaPer(e?.plotAreaUnit);
-            setfurnishedarr(e?.furnishedList);
             setExtraRoom(e?.otherRoom);
-            setFurnished(e?.furnished);
             setAvailability(e?.availabilityStatus);
             setFromyear(e?.propertyStatus);
             setExpectedYear(e?.expectedByYear);
@@ -844,11 +846,7 @@ const IndependentbuilderUpdate = () => {
                         </Box>
                         {/* if furnished detail */}
                         <Box
-                            display={
-                                furnished == "Furnished" || furnished == "Semi-Furnished"
-                                    ? "grid"
-                                    : "none"
-                            }
+                            display={furnished == "Furnished" || furnished == "Semi-Furnished" ? "grid" : "none"}
                             padding={"10px 0"}
                             gap={6}
                         >
@@ -1012,114 +1010,118 @@ const IndependentbuilderUpdate = () => {
                                     <h3> Geyser </h3>
                                 </Box>
                                 <Box>
-                                    <Checkbox
-                                        onChange={furnisheddetails}
-                                        isChecked={furnishedarr.includes("Sofa")}
-                                        value={"Sofa"}
-                                        icon={<AddIcon />}
-                                    >
-                                        Sofa
-                                    </Checkbox>
-                                </Box>
-                                <Box>
-                                    <Checkbox
-                                        onChange={furnisheddetails}
-                                        isChecked={furnishedarr.includes("Washing Machine")}
-                                        value={"Washing Machine"}
-                                        icon={<AddIcon />}
-                                    >
-                                        Washing Machine
-                                    </Checkbox>
-                                </Box>
-                                <Box>
-                                    <Checkbox
-                                        onChange={furnisheddetails}
-                                        isChecked={furnishedarr.includes("Stove")}
-                                        value={"Stove"}
-                                        icon={<AddIcon />}
-                                    >
-                                        Stove
-                                    </Checkbox>
-                                </Box>
-                                <Box>
-                                    <Checkbox
-                                        onChange={furnisheddetails}
-                                        isChecked={furnishedarr.includes("Fridge")}
-                                        value={"Fridge"}
-                                        icon={<AddIcon />}
-                                    >
-                                        Fridge
-                                    </Checkbox>
-                                </Box>
-                                <Box>
-                                    <Checkbox
-                                        onChange={furnisheddetails}
-                                        isChecked={furnishedarr.includes("Water Purifier")}
-                                        value={"Water Purifier"}
-                                        icon={<AddIcon />}
-                                    >
-                                        Water Purifier
-                                    </Checkbox>
-                                </Box>
-                                <Box>
-                                    <Checkbox
-                                        onChange={furnisheddetails}
-                                        isChecked={furnishedarr.includes("Microwave")}
-                                        value={"Microwave"}
-                                        icon={<AddIcon />}
-                                    >
-                                        Microwave
-                                    </Checkbox>
-                                </Box>
-                                <Box>
-                                    <Checkbox
-                                        onChange={furnisheddetails}
-                                        isChecked={furnishedarr.includes("Modular Kitchen")}
-                                        value={"Modular Kitchen"}
-                                        icon={<AddIcon />}
-                                    >
-                                        Modular Kitchen
-                                    </Checkbox>
-                                </Box>
-                                <Box>
-                                    <Checkbox
-                                        onChange={furnisheddetails}
-                                        isChecked={furnishedarr.includes("Chimney")}
-                                        value={"Chimney"}
-                                        icon={<AddIcon />}
-                                    >
-                                        Chimney
-                                    </Checkbox>
-                                </Box>
-                                <Box>
-                                    <Checkbox
-                                        onChange={furnisheddetails}
-                                        isChecked={furnishedarr.includes("Dining Table")}
-                                        value={"Dining Table"}
-                                        icon={<AddIcon />}
-                                    >
-                                        Dining Table
-                                    </Checkbox>
-                                </Box>
-                                <Box>
-                                    <Checkbox
-                                        onChange={furnisheddetails}
-                                        isChecked={furnishedarr.includes("Curtains")}
-                                        value={"Curtains"}
-                                        icon={<AddIcon />}
-                                    >
-                                        Curtains
-                                    </Checkbox>
-                                </Box>
-                                <Box>
-                                    <Checkbox
-                                        onChange={furnisheddetails}
-                                        isChecked={furnishedarr.includes("Exhaust Fan")}
-                                        value={"Exhaust Fan"}
-                                        icon={<AddIcon />}
-                                    >
-                                        Exhaust Fan
-                                    </Checkbox>
+
+                                    <Box>
+                                        <Checkbox
+                                            onChange={furnisheddetails}
+                                            isChecked={furnishedarr.includes("Sofa")}
+                                            value={"Sofa"}
+                                            icon={<AddIcon />}
+                                        >
+                                            Sofa
+                                        </Checkbox>
+
+                                    </Box>
+                                    <Box>
+                                        <Checkbox
+                                            onChange={furnisheddetails}
+                                            isChecked={furnishedarr.includes("Washing Machine")}
+                                            value={"Washing Machine"}
+                                            icon={<AddIcon />}
+                                        >
+                                            Washing Machine
+                                        </Checkbox>
+                                    </Box>
+                                    <Box>
+                                        <Checkbox
+                                            onChange={furnisheddetails}
+                                            isChecked={furnishedarr.includes("Stove")}
+                                            value={"Stove"}
+                                            icon={<AddIcon />}
+                                        >
+                                            Stove
+                                        </Checkbox>
+                                    </Box>
+                                    <Box>
+                                        <Checkbox
+                                            onChange={furnisheddetails}
+                                            isChecked={furnishedarr.includes("Fridge")}
+                                            value={"Fridge"}
+                                            icon={<AddIcon />}
+                                        >
+                                            Fridge
+                                        </Checkbox>
+                                    </Box>
+                                    <Box>
+                                        <Checkbox
+                                            onChange={furnisheddetails}
+                                            isChecked={furnishedarr.includes("Water Purifier")}
+                                            value={"Water Purifier"}
+                                            icon={<AddIcon />}
+                                        >
+                                            Water Purifier
+                                        </Checkbox>
+                                    </Box>
+                                    <Box>
+                                        <Checkbox
+                                            onChange={furnisheddetails}
+                                            isChecked={furnishedarr.includes("Microwave")}
+                                            value={"Microwave"}
+                                            icon={<AddIcon />}
+                                        >
+                                            Microwave
+                                        </Checkbox>
+                                    </Box>
+                                    <Box>
+                                        <Checkbox
+                                            onChange={furnisheddetails}
+                                            isChecked={furnishedarr.includes("Modular Kitchen")}
+                                            value={"Modular Kitchen"}
+                                            icon={<AddIcon />}
+                                        >
+                                            Modular Kitchen
+                                        </Checkbox>
+                                    </Box>
+                                    <Box>
+                                        <Checkbox
+                                            onChange={furnisheddetails}
+                                            isChecked={furnishedarr.includes("Chimney")}
+                                            value={"Chimney"}
+                                            icon={<AddIcon />}
+                                        >
+                                            Chimney
+                                        </Checkbox>
+                                    </Box>
+                                    <Box>
+                                        <Checkbox
+                                            onChange={furnisheddetails}
+                                            isChecked={furnishedarr.includes("Dining Table")}
+                                            value={"Dining Table"}
+                                            icon={<AddIcon />}
+                                        >
+                                            Dining Table
+                                        </Checkbox>
+                                    </Box>
+                                    <Box>
+                                        <Checkbox
+                                            onChange={furnisheddetails}
+                                            isChecked={furnishedarr.includes("Curtains")}
+                                            value={"Curtains"}
+                                            icon={<AddIcon />}
+                                        >
+                                            Curtains
+                                        </Checkbox>
+                                    </Box>
+                                    <Box>
+                                        <Checkbox
+                                            onChange={furnisheddetails}
+                                            isChecked={furnishedarr.includes("Exhaust Fan")}
+                                            value={"Exhaust Fan"}
+                                            icon={<AddIcon />}
+                                        >
+                                            Exhaust Fan
+                                        </Checkbox>
+                                    </Box>
                                 </Box>
                             </Box>
                         </Box>
