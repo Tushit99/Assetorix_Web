@@ -107,7 +107,8 @@ const ReadyToMoveUpdate = () => {
             setPlotArea(e.carpetArea);
             setMinseat(e.officeSetup.minSeats);
             setMaxseat(e.officeSetup.maxSeats);
-            setMeetingRoom(e.officeSetup.cabins);
+            setCabins(e.officeSetup.cabins);
+            setPriceSqr(e.priceUnit); 
             setMeetingRoom(e.officeSetup.meetingRooms);
             if (e.washroomDetails.privateWashrooms > 0 || e.washroomDetails.sharedWashrooms > 0) {
                 setWashroomType("Available");
