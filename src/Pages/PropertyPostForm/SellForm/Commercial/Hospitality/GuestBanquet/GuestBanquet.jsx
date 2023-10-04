@@ -48,17 +48,16 @@ const GuestBanquet = () => {
     const [furnishedarr, setfurnishedarr] = useState([]);
     const [extraroom, setExtraRoom] = useState([]);
     const [furnished, setFurnished] = useState("");
-    const [availability, setAvailability] = useState(""); 
+    const [availability, setAvailability] = useState("");
     const [fromyear, setFromyear] = useState("");
     const [expectedyear, setExpectedYear] = useState("");
     const [ownership, setOwnerShip] = useState("");
     const [pricedetail, setPricedetail] = useState("");
-    const [priceSqr, setPriceSqr] = useState(""); 
+    const [priceSqr, setPriceSqr] = useState("");
     const [amenities, setAminity] = useState([]);
     const [propertyFeatures, setPropertyFeature] = useState("");
     const [buildingFeature, setBuildingFeature] = useState([]);
-    const [additinalft, setAdditinalFeature] = useState([]); 
-    const [overLook, setoverlook] = useState([]);
+    const [additinalft, setAdditinalFeature] = useState([]);
     const [otherFeature, setOtherFeature] = useState([]);
     const [powerbackup, setPowerbackup] = useState("");
     const [propertyFacing, setPropertyFacing] = useState("");
@@ -73,8 +72,8 @@ const GuestBanquet = () => {
     const [leaseTenureInYear, setLeaseTenureInYear] = useState("");
     const [annualRentIncrease, setAnnualRentIncrease] = useState("");
     const [businessType, setBusinessType] = useState("");
-    const [qualityRating, setqualityRating] = useState("");  
-    
+    const [qualityRating, setqualityRating] = useState("");
+
 
 
     const handleSubmitData = async (e) => {
@@ -107,8 +106,6 @@ const GuestBanquet = () => {
             additionalFeatures: additinalft,
             // waterSources: watersource, 
             otherFeatures: otherFeature,
-            powerBackup: powerbackup,
-            overLookings: overLook,
             propertyFacing,
             flooring,
             roadFacingWidth: facingwidth,
@@ -149,10 +146,6 @@ const GuestBanquet = () => {
             showToastError('Provide PriceDetail');
         } else if (!additinalft) {
             showToastError('Provide Property description');
-        }  else if (!overLook) {
-            showToastError('Provide Overlooking');
-        } else if (!powerbackup) {
-            showToastError('Provide Power Backup');
         } else if (!propertyFacing) {
             showToastError('Provide Property Facing');
         } else if (!flooring) {
@@ -177,12 +170,10 @@ const GuestBanquet = () => {
             furnishedarr &&
             ownership &&
             pricedetail &&
-            
+
             // inclusivePrices &&
             additinalft &&
             // watersource &&
-            overLook &&
-            powerbackup &&
             propertyFacing &&
             flooring &&
             facing
@@ -294,7 +285,7 @@ const GuestBanquet = () => {
 
     const pinfetch = async (pin) => {
         try {
-            
+
             let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
             setState(res.data[0].state);
             setCity(res.data[0].city);
@@ -412,18 +403,7 @@ const GuestBanquet = () => {
         setBuildingFeature(newarr);
     };
 
-    const handleoverlooking = (e) => {
-        e.preventDefault();
-        let newarr = [...overLook];
-        let value = e.target.value;
 
-        if (newarr.includes(value)) {
-            newarr.splice(newarr.indexOf(value), 1);
-        } else {
-            newarr.push(value);
-        }
-        setoverlook(newarr);
-    };
 
     const handleotherfeature = (e) => {
         e.preventDefault();
@@ -1345,7 +1325,7 @@ const GuestBanquet = () => {
                         </Heading>
                         <NumberInput value={priceSqr}>
                             <NumberInputField
-                                
+
                             />
                         </NumberInput>
                     </Box>
@@ -1755,100 +1735,7 @@ const GuestBanquet = () => {
                 </Box>
             </Box>
 
-            {/* Overlooking */}
-            <Box className={style.optional_box}>
-                <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
-                    Overlooking
-                </Heading>
-                <Box>
-                    <button
-                        className={overLook.includes("Pool") ? style.setbtn : style.btn}
-                        onClick={handleoverlooking}
-                        value={"Pool"}
-                    >
 
-                        Pool
-                    </button>
-                    <button
-                        className={
-                            overLook.includes("Park / Garden") ? style.setbtn : style.btn
-                        }
-                        onClick={handleoverlooking}
-                        value={"Park / Garden"}
-                    >
-
-                        Park/Garden
-                    </button>
-                    <button
-                        className={overLook.includes("Club") ? style.setbtn : style.btn}
-                        onClick={handleoverlooking}
-                        value={"Club"}
-                    >
-
-                        Club
-                    </button>
-                    <button
-                        className={
-                            overLook.includes("Main Road") ? style.setbtn : style.btn
-                        }
-                        onClick={handleoverlooking}
-                        value={"Main Road"}
-                    >
-
-                        Main Road
-                    </button>
-                    <button
-                        className={overLook.includes("Other") ? style.setbtn : style.btn}
-                        onClick={handleoverlooking}
-                        value={"Other"}
-                    >
-
-                        Other
-                    </button>
-                </Box>
-            </Box>
-
-            {/* Power Back up */}
-            <Box className={style.optional_box}>
-                <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
-                    Power Back up
-                </Heading>
-                <Box>
-                    <button
-                        className={powerbackup == "None" ? style.setbtn : style.btn}
-                        value={"None"}
-                        onClick={(e) => {
-                            e.preventDefault();
-                            setPowerbackup(e.target.value)
-                        }}
-                    >
-
-                        None
-                    </button>
-                    <button
-                        className={powerbackup == "Partial" ? style.setbtn : style.btn}
-                        value={"Partial"}
-                        onClick={(e) => {
-                            e.preventDefault();
-                            setPowerbackup(e.target.value)
-                        }}
-                    >
-
-                        Partial
-                    </button>
-                    <button
-                        className={powerbackup == "Full" ? style.setbtn : style.btn}
-                        value={"Full"}
-                        onClick={(e) => {
-                            e.preventDefault();
-                            setPowerbackup(e.target.value)
-                        }}
-                    >
-
-                        Full
-                    </button>
-                </Box>
-            </Box>
             {/* Property facing */}
             <Box className={style.optional_box}>
                 <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>

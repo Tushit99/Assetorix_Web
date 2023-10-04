@@ -783,9 +783,7 @@ const ServicedApartmentRent = () => {
                         padding={"10px 0"}
                         gap={6}
                     >
-                        <Heading as={"h4"} fontWeight={400} size={"sm"} color={"#656565"}>
-                            At least three furnishings are mandatory for furnished
-                        </Heading>
+                        
                         <Box className={style.furnished_detail}>
                             <Box>
                                 <button

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Box,
     Button,
@@ -26,10 +26,12 @@ import { AddIcon, ChevronDownIcon, MinusIcon } from "@chakra-ui/icons";
 import axios from "axios";
 import { CleanInputText, NumericString } from "../../../../code";
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+import { useParams } from "react-router-dom";
 
 
 
 const CoWorkingspaceUpdate = () => {
+    const { productID } = useParams();
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
@@ -37,9 +39,7 @@ const CoWorkingspaceUpdate = () => {
     const [pincode, setPincode] = useState(0);
     const [state, setState] = useState("");
     const [locality, setLocality] = useState("");
-    const [washroomType, setWashroomType] = useState("");
-    const [privateWashroom, setPrivateWashroom] = useState(0);
-    const [sharedWashroom, setSharedWashroom] = useState(0);
+    const [washroom, setWashroom] = useState("");
     const [fireSafty, setFireSafty] = useState([]);
     const [parkingArr, setParkingArr] = useState([]);
     const [preLeased, setPreLeased] = useState("");
@@ -58,8 +58,7 @@ const CoWorkingspaceUpdate = () => {
     const [propertyFeatures, setPropertyFeature] = useState("");
     const [buildingFeature, setBuildingFeature] = useState([]);
     const [additinalft, setAdditinalFeature] = useState([]);
-    const [otherFeatures, setOtherFeatures] = useState("");
-    const [expectedAnnual, setExpectedAnnual] = useState("");
+    const [otherFeatures, setOtherFeatures] = useState([]); 
 
 
     const [areaPer, setAreaPer] = useState("sq.ft");
@@ -79,6 +78,66 @@ const CoWorkingspaceUpdate = () => {
     const [zoneType, setZoneType] = useState("");
 
     // please don'nt change any function without any prior knowledge   
+
+    const handleDataFetch = async () => {
+        await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
+            let e = detail.data.data;
+            console.log(e);
+            setCountry(e?.address?.country);
+            setCity(e?.address?.city);
+            setPincode(e?.address?.pincode);
+            setState(e.address.state);
+            setLocality(e.address.locality);
+            setLocatedInside(e.address.locatedInside);
+            setZoneType(e.address.zoneType);
+            setPlotArea(e.plotArea);
+            setWashroom(e.washrooms); 
+            setPriceSqr(e.plotAreaUnit);
+            if (e.pantryType == "Private" || e.pantryType == "Shared") {
+                setPantrySize(e?.pantrySize);
+            }
+            setFireSafty(e?.fireSafety);
+            setFloorNumber(e?.floorOn);
+            if (e.lift == "Available") {
+                setLiftPassenger(e?.liftDetails?.passenger);
+                setLiftService(e?.liftDetails?.service);
+                setModernLifts(e?.liftDetails?.modern);
+            }
+            setParkingArr(e.parkingDetailsList);
+            setAvailability(e.availabilityStatus);
+            if (e.availabilityStatus == "Ready to move") {
+                setFromyear(e.propertyStatus);
+            }
+            else if (e.availabilityStatus == "Under construction") { 
+                setExpectedYear(e.expectedByYear);
+            }
+            setOwnerShip(e.ownership);
+            setPricedetail(e.price);
+            setInclusivePrice(e.inclusivePrices);
+            setMaintenancePrice(e.additionalPricingDetails.maintenancePrice);
+            setMaintenanceTimePeriod(e.additionalPricingDetails.maintenanceTimePeriod);
+            setPreLeased(e.preLeased_Rented);
+            setCurrentRentPerMonth(e.preLeased_RentedDetails.currentRentPerMonth);
+            setLeaseTenureInYear(e.preLeased_RentedDetails.leaseTenureInYear);
+            setAnnualRentIncrease(e.preLeased_RentedDetails.annualRentIncrease);
+            setBusinessType(e.preLeased_RentedDetails.businessType);
+            setpreviouslyUsedList(e.previouslyUsedList);
+            setDesc(e.description);
+            setAminity(e.amenities);
+            setLocationAdv(e.locationAdv);
+            setPropertyFeature(e.propertyFeatures); 
+            setBuildingFeature(e.society_buildingFeatures); 
+            setAdditinalFeature(e.additionalFeatures); 
+            setOtherFeatures(e.otherFeatures); 
+
+        })
+    }
+
+    useEffect(() => {
+        handleDataFetch();
+    }, []);
+
+
 
     const handleSubmitData = async (e) => {
         e.preventDefault();
@@ -115,7 +174,7 @@ const CoWorkingspaceUpdate = () => {
             },
             preLeased_Rented: preLeased,
             otherFeatures,
-            washrooms: washroomType,
+            washrooms: washroom,
             annualDuesPayble,
             // totalFloors: +totalfloors,
             floorOn: floorNumber,
@@ -123,8 +182,7 @@ const CoWorkingspaceUpdate = () => {
             previouslyUsedList,
             // staircases: stairCase,
             // lift: liftStatus, 
-            preLeased,
-            expectedAnnual
+            preLeased, 
         };
 
         const showToastError = (message) => {
@@ -168,15 +226,7 @@ const CoWorkingspaceUpdate = () => {
             if (availability == "Under construction" && expectedyear != "") {
                 obj["expectedByYear"] = expectedyear;
                 obj["availabilityStatus"] = availability;
-            }
-
-            if (washroomType == "Available") {
-                let washroomDetails = {
-                    privateWashrooms: privateWashroom,
-                    sharedWashrooms: sharedWashroom,
-                }
-                obj["washroomDetails"] = washroomDetails;
-            }
+            } 
 
             if (preLeased == "Yes") {
                 let preLeased_RentedDetails = {
@@ -198,7 +248,7 @@ const CoWorkingspaceUpdate = () => {
                 // let data = await response.json();
                 console.log("data", obj);
                 await axios
-                    .post(`${process.env.REACT_APP_URL}/property/`, obj, {
+                    .patch(`${process.env.REACT_APP_URL}/property/${productID}`, obj, {
                         headers: head,
                     })
                     .then((e) => {
@@ -434,26 +484,16 @@ const CoWorkingspaceUpdate = () => {
                             Public and Semi Public use
                         </option>
                     </Select>
-                    <NumberInput>
-                        <NumberInputField
-                            placeholder={"Enter pincode"}
-                            padding={"0 10px"}
-                            borderRight={0}
-                            borderLeft={0}
-                            borderTop={0}
-                            borderRadius={0}
-                            _active={{
-                                borderRight: "0",
-                                borderLeft: "0",
-                                borderTop: "0",
-                                borderRadius: "0",
-                            }}
-                            required
-                            fontSize={"md"}
-                            value={pincode}
-                            onChange={handlepinfetch}
-                        />
-                    </NumberInput>
+                    <Input
+                        type="text"
+                        placeholder={"Enter pincode"}
+                        required
+                        fontSize={"md"}
+                        variant="flushed"
+                        value={pincode}
+                        onChange={handlepinfetch}
+                        padding={"0 10px"}
+                    />
                     <Input
                         type="text"
                         padding={"0 10px"}
@@ -519,85 +559,7 @@ const CoWorkingspaceUpdate = () => {
                             Washrooms
                         </Heading>
                         <Box display={"grid"} padding={"10px 0 8px 0"} gridTemplateColumns={"repeat(1,1fr)"} gap={2}>
-                            <Box display={"flex"} gap={10}>
-                                <button
-                                    value={"Available"}
-                                    margin="auto"
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        setWashroomType(e.target.value);
-                                    }}
-                                    className={
-                                        washroomType === "Available" ? style.setbtn : style.btn
-                                    }
-                                >
-                                    Available
-                                </button>
-                                <button
-                                    value={"Not-Available"}
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        setWashroomType(e.target.value);
-                                    }}
-                                    className={
-                                        washroomType === "Not-Available" ? style.setbtn : style.btn
-                                    }
-                                >
-                                    Not-Available
-                                </button>
-                            </Box>
-                            <Box display={washroomType == "Available" ? "block" : "none"} >
-                                <Box display={"flex"} w={340} alignItems={"center"} margin={"10px"}>
-                                    <Text flex={8} textAlign={"left"}>
-                                        No. of Private Washrooms
-                                    </Text>
-                                    <button
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            setPrivateWashroom((prev) => prev - 1);
-                                        }}
-                                        className={privateWashroom == 0 ? style.washroom_hide : style.washroom_dec}
-                                        disabled={privateWashroom == 0}
-                                    >
-                                        <MinusIcon fontSize={"12px"} />
-                                    </button>
-                                    <Text flex={1}>{privateWashroom}</Text>
-                                    <button
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            setPrivateWashroom((prev) => prev + 1);
-                                        }}
-                                        className={style.washroom_dec}
-                                    >
-                                        <AddIcon fontSize={"12px"} />
-                                    </button>
-                                </Box>
-                                <Box display={"flex"} w={340} alignItems={"center"} margin={"10px"}>
-                                    <Text flex={8} textAlign={"left"}>
-                                        No. of Shared Washrooms
-                                    </Text>
-                                    <button
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            setSharedWashroom((prev) => prev - 1);
-                                        }}
-                                        className={sharedWashroom == 0 ? style.washroom_hide : style.washroom_dec}
-                                        disabled={sharedWashroom == 0}
-                                    >
-                                        <MinusIcon fontSize={"12px"} />
-                                    </button>
-                                    <Text flex={1}>{sharedWashroom}</Text>
-                                    <button
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            setSharedWashroom((prev) => prev + 1);
-                                        }}
-                                        className={style.washroom_dec}
-                                    >
-                                        <AddIcon fontSize={"12px"} />
-                                    </button>
-                                </Box>
-                            </Box>
+                            <Input type="text" placeholder="no. of washrooms" value={washroom} onChange={(e) => setWashroom(NumericString(e.target.value))} />
                         </Box>
                     </Box>
                     {/* add area details */}
@@ -612,17 +574,16 @@ const CoWorkingspaceUpdate = () => {
                             isAttached
                             variant="outline"
                         >
-                            <NumberInput>
-                                <NumberInputField
-                                    padding={"0 2px"}
-                                    value={plotArea}
-                                    onChange={(e) => {
-                                        areaCalucation();
-                                        setPlotArea(e.target.value);
-                                    }}
-                                    required
-                                />
-                            </NumberInput>
+                            <Input
+                                type="text"
+                                padding={"0 2px"}
+                                value={plotArea}
+                                onChange={(e) => {
+                                    areaCalucation();
+                                    setPlotArea(e.target.value);
+                                }}
+                                required
+                            /> 
                             <select
                                 value={areaPer}
                                 onChange={(e) => {
@@ -995,7 +956,7 @@ const CoWorkingspaceUpdate = () => {
                             textAlign={"left"}>
                             Lease / Rent related details Of your property
                         </Heading>
-                        <Box>
+                        <Box display={"grid"} w={"500px"} gap={3} >
                             <Input type="text" value={currentRentPerMonth} onChange={(e) => {
                                 e.preventDefault();
                                 setCurrentRentPerMonth(e.target.value);
@@ -1004,7 +965,7 @@ const CoWorkingspaceUpdate = () => {
                                 e.preventDefault();
                                 setLeaseTenureInYear((e.target.value));
                             }} placeholder={"₹ Current rent per month"} />
-                            <Box>
+                            <InputGroup gap={4} >
                                 <Input type="text" value={annualRentIncrease} onChange={(e) => {
                                     e.preventDefault();
                                     setAnnualRentIncrease((e.target.value));
@@ -1013,72 +974,11 @@ const CoWorkingspaceUpdate = () => {
                                     e.preventDefault();
                                     setBusinessType((e.target.value));
                                 }} placeholder="Leased to - Business Type (Optional)" />
-                            </Box>
+                            </InputGroup>
                         </Box>
                     </Box>
-                    <Box>
-                        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
-                            Expected Annual Returns
-                        </Heading>
-                        <Heading as={"h3"} size={"sm"} margin={0} textAlign={"left"}>
-                            Based on cost of the property & current monthly rent
-                        </Heading>
-                        <Input type="text" w={"300px"} value={expectedAnnual} onChange={(e) => setExpectedAnnual(NumericString(e.target.value))} />
-                    </Box>
-                    {/* office previously used for */}
-                    <Box className={style.optional_box}>
-                        <Box>
-                            <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
-                                Your office was previously used for (Optional)
-                            </Heading>
-                            <Text> * You can select upto 3 </Text>
-                        </Box>
-                        <Box>
-                            <Menu>
-                                <MenuButton
-                                    px={4}
-                                    as={Button}
-                                    py={2}
-                                    borderRadius='md'
-                                    borderWidth='1px'
-                                    textAlign={"left"}
-                                    width={300}
-                                    _hover={{ bg: 'white' }}
-                                    _expanded={{ bg: 'white' }}
-                                    _focus={{ bg: 'white' }}
-                                    rightIcon={<ChevronDownIcon />}
-                                >
-                                    Select
-                                </MenuButton>
-                                <MenuList className={style.menu} display={"flex"} flexDirection={"column"} padding={2} >
-                                    <Checkbox value={"Backend Office"} onChange={(e) => {
-                                        e.preventDefault();
-                                        FileSystemHandle(e.target.value)
-                                    }} > Backend Office </Checkbox>
-                                    <Checkbox value={"CA Office"} onChange={(e) => {
-                                        e.preventDefault();
-                                        FileSystemHandle(e.target.value)
-                                    }} > CA Office </Checkbox>
-                                    <Checkbox value={"Fronted Office"} onChange={(e) => {
-                                        e.preventDefault();
-                                        FileSystemHandle(e.target.value)
-                                    }} > Fronted Office </Checkbox>
-                                    <Checkbox value={"Small Office Purpose"} onChange={(e) => {
-                                        e.preventDefault();
-                                        FileSystemHandle(e.target.value)
-                                    }} > Small Office Purpose </Checkbox>
-                                    <Checkbox value={"Traders Office"} onChange={(e) => {
-                                        e.preventDefault();
-                                        FileSystemHandle(e.target.value)
-                                    }} > Traders Office </Checkbox>
-                                    <Checkbox value={"Advocate Office"} onChange={(e) => {
-                                        e.preventDefault();
-                                        FileSystemHandle(e.target.value)
-                                    }} > Advocate Office </Checkbox>
-                                </MenuList>
-                            </Menu>
-                        </Box>
-                    </Box>
+ 
+                 
                     {/* property Description */}
                     <Box>
                         <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
@@ -1489,7 +1389,7 @@ const CoWorkingspaceUpdate = () => {
                         Other Features
                     </Heading>
                     <Box display={"flex"} alignItems={"center"} justifyContent={"left"} >
-                        <Checkbox value={"Wheelchair friendly"} onChange={handleOtherFeatures}>Wheelchair friendly</Checkbox>
+                        <Checkbox isChecked={otherFeatures.includes("Wheelchair friendly")} value={"Wheelchair friendly"} onChange={handleOtherFeatures}>Wheelchair friendly</Checkbox>
                     </Box>
                 </Box>
                 {/* location advantage (near to which place) */}

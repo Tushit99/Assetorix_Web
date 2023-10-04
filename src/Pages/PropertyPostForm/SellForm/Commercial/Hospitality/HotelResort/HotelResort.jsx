@@ -15,7 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { Checkbox } from "@chakra-ui/react";
-import style from "../Hospitality.module.css";  
+import style from "../Hospitality.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
@@ -59,7 +59,6 @@ const HotelResort = () => {
     const [buildingFeature, setBuildingFeature] = useState([]);
     const [additinalft, setAdditinalFeature] = useState([]);
     const [watersource, setWaterSource] = useState([]);
-    const [overLook, setoverlook] = useState([]);
     const [otherFeature, setOtherFeature] = useState([]);
     const [powerbackup, setPowerbackup] = useState("");
     const [propertyFacing, setPropertyFacing] = useState("");
@@ -108,13 +107,9 @@ const HotelResort = () => {
             additionalFeatures: additinalft,
             waterSources: watersource,
             otherFeatures: otherFeature,
-            powerBackup: powerbackup,
-            overLookings: overLook,
             propertyFacing,
             flooring,
-            roadFacingWidth: facingwidth,
             preLeased_Rented: preLeased,
-            roadFacingWidthType: facing,
             // totalFloors: +totalfloors,
             plotArea,
             qualityRating,
@@ -152,10 +147,6 @@ const HotelResort = () => {
             showToastError('Provide Property description');
         } else if (!watersource) {
             showToastError('Provide Water Source');
-        } else if (!overLook) {
-            showToastError('Provide Overlooking');
-        } else if (!powerbackup) {
-            showToastError('Provide Power Backup');
         } else if (!propertyFacing) {
             showToastError('Provide Property Facing');
         } else if (!flooring) {
@@ -180,12 +171,10 @@ const HotelResort = () => {
             furnishedarr &&
             ownership &&
             pricedetail &&
-            
+
             inclusivePrices &&
             additinalft &&
             watersource &&
-            overLook &&
-            powerbackup &&
             propertyFacing &&
             flooring &&
             facing
@@ -296,7 +285,7 @@ const HotelResort = () => {
 
     const pinfetch = async (pin) => {
         try {
-            
+
             let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
             setState(res.data[0].state);
             setCity(res.data[0].city);
@@ -414,18 +403,7 @@ const HotelResort = () => {
         setBuildingFeature(newarr);
     };
 
-    const handleoverlooking = (e) => {
-        e.preventDefault();
-        let newarr = [...overLook];
-        let value = e.target.value;
 
-        if (newarr.includes(value)) {
-            newarr.splice(newarr.indexOf(value), 1);
-        } else {
-            newarr.push(value);
-        }
-        setoverlook(newarr);
-    };
 
     const handleotherfeature = (e) => {
         e.preventDefault();
@@ -452,7 +430,7 @@ const HotelResort = () => {
         }
         setLocationAdv(newarr);
     };
- 
+
 
     const areaCalucation = () => {
         if (pricedetail && plotArea) {
@@ -1347,7 +1325,7 @@ const HotelResort = () => {
                         </Heading>
                         <NumberInput value={priceSqr}>
                             <NumberInputField
-                                
+
                             />
                         </NumberInput>
                     </Box>
@@ -1388,7 +1366,7 @@ const HotelResort = () => {
                         <Input type="text" value={annualRentIncrease} onChange={(e) => {
                             e.preventDefault();
                             let a = NumericString(e.target.value);
-                            if (a < 100) { 
+                            if (a < 100) {
                                 setAnnualRentIncrease(a);
                             }
                         }} placeholder="Annual rent increase in % (Optional)" />
@@ -1397,7 +1375,7 @@ const HotelResort = () => {
                             setBusinessType(AlphabetString(e.target.value));
                         }} placeholder="Leased to - Business Type (Optional)" />
                     </Box>
-                </Box> 
+                </Box>
             </Box>
 
             {/* ============================ Property unique discription ============================ */}
@@ -1478,7 +1456,7 @@ const HotelResort = () => {
                         value={"Conference room"}
                     >
                         Conference room
-                    </button> 
+                    </button>
                     <button
                         className={
                             amenities.includes("Club house / Community Center")
@@ -1757,100 +1735,7 @@ const HotelResort = () => {
                 </Box>
             </Box>
 
-            {/* Overlooking */}
-            <Box className={style.optional_box}>
-                <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
-                    Overlooking
-                </Heading>
-                <Box>
-                    <button
-                        className={overLook.includes("Pool") ? style.setbtn : style.btn}
-                        onClick={handleoverlooking}
-                        value={"Pool"}
-                    >
 
-                        Pool
-                    </button>
-                    <button
-                        className={
-                            overLook.includes("Park / Garden") ? style.setbtn : style.btn
-                        }
-                        onClick={handleoverlooking}
-                        value={"Park / Garden"}
-                    >
-
-                        Park/Garden
-                    </button>
-                    <button
-                        className={overLook.includes("Club") ? style.setbtn : style.btn}
-                        onClick={handleoverlooking}
-                        value={"Club"}
-                    >
-
-                        Club
-                    </button>
-                    <button
-                        className={
-                            overLook.includes("Main Road") ? style.setbtn : style.btn
-                        }
-                        onClick={handleoverlooking}
-                        value={"Main Road"}
-                    >
-
-                        Main Road
-                    </button>
-                    <button
-                        className={overLook.includes("Other") ? style.setbtn : style.btn}
-                        onClick={handleoverlooking}
-                        value={"Other"}
-                    >
-
-                        Other
-                    </button>
-                </Box>
-            </Box>
-
-            {/* Power Back up */}
-            <Box className={style.optional_box}>
-                <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
-                    Power Back up
-                </Heading>
-                <Box>
-                    <button
-                        className={powerbackup == "None" ? style.setbtn : style.btn}
-                        value={"None"}
-                        onClick={(e) => {
-                            e.preventDefault();
-                            setPowerbackup(e.target.value)
-                        }}
-                    >
-
-                        None
-                    </button>
-                    <button
-                        className={powerbackup == "Partial" ? style.setbtn : style.btn}
-                        value={"Partial"}
-                        onClick={(e) => {
-                            e.preventDefault();
-                            setPowerbackup(e.target.value)
-                        }}
-                    >
-
-                        Partial
-                    </button>
-                    <button
-                        className={powerbackup == "Full" ? style.setbtn : style.btn}
-                        value={"Full"}
-                        onClick={(e) => {
-                            e.preventDefault();
-                            setPowerbackup(e.target.value)
-                        }}
-                    >
-
-                        Full
-                    </button>
-                </Box>
-            </Box>
             {/* Property facing */}
             <Box className={style.optional_box}>
                 <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
@@ -1945,23 +1830,6 @@ const HotelResort = () => {
                     >
                         South-West
                     </button>
-                </Box>
-            </Box>
-
-            {/* Width of facing road */}
-            <Box className={style.optional_box}>
-                <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
-                    Width of facing road
-                </Heading>
-                <Box display={"flex"} gap={"20px"} w={"300px"} >
-                    <Input type="text" variant='flushed' flex={1} required value={facingwidth} onChange={(e) => {
-                        e.preventDefault();
-                        setFacingWidth(e.target.value);
-                    }} />
-                    <Select flex={1} onChange={(e) => setFacing(e.target.value)} value={facing}>
-                        <option value="Meter"> Meter </option>
-                        <option value="Feet"> Feet </option>
-                    </Select>
                 </Box>
             </Box>
 

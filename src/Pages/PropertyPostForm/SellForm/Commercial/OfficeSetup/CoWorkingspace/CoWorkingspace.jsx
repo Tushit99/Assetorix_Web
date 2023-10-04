@@ -37,11 +37,7 @@ const CoWorkingspace = () => {
     const [pincode, setPincode] = useState(0);
     const [state, setState] = useState("");
     const [locality, setLocality] = useState("");
-    const [washroomType, setWashroomType] = useState("");
-    const [privateWashroom, setPrivateWashroom] = useState(0);
-    const [sharedWashroom, setSharedWashroom] = useState(0);
-    const [fireSafty, setFireSafty] = useState([]);
-    const [parkingArr, setParkingArr] = useState([]);
+    const [washroom, setWashroom] = useState("");   
     const [preLeased, setPreLeased] = useState("");
     const [locatedInside, setLocatedInside] = useState("");
     const [floorNumber, setFloorNumber] = useState([]);
@@ -115,14 +111,10 @@ const CoWorkingspace = () => {
             },
             preLeased_Rented: preLeased,
             otherFeatures,
-            washrooms: washroomType,
-            annualDuesPayble,
-            // totalFloors: +totalfloors,
-            floorOn: floorNumber,
-            fireSafety: fireSafty,
-            previouslyUsedList,
-            // staircases: stairCase,
-            // lift: liftStatus, 
+            washrooms: washroom,
+            annualDuesPayble, 
+            floorOn: floorNumber, 
+            previouslyUsedList, 
             preLeased,
             expectedAnnual
         };
@@ -153,7 +145,7 @@ const CoWorkingspace = () => {
             city &&
             locality &&
             ownership &&
-            
+
             inclusivePrices
         ) {
             let id = localStorage.getItem("usrId") || undefined;
@@ -168,14 +160,6 @@ const CoWorkingspace = () => {
             if (availability == "Under construction" && expectedyear != "") {
                 obj["expectedByYear"] = expectedyear;
                 obj["availabilityStatus"] = availability;
-            }
-
-            if (washroomType == "Available") {
-                let washroomDetails = {
-                    privateWashrooms: privateWashroom,
-                    sharedWashrooms: sharedWashroom,
-                }
-                obj["washroomDetails"] = washroomDetails;
             }
 
             if (preLeased == "Yes") {
@@ -240,7 +224,7 @@ const CoWorkingspace = () => {
 
     const pinfetch = async (pin) => {
         try {
-            
+
             let res = await axios.get(
                 `${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`
             );
@@ -507,7 +491,7 @@ const CoWorkingspace = () => {
                 />
             </Box>
             {/* Property Detail */}
-            <Box marginTop={12}>
+            <Box marginTop={10}>
                 <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"}>
                     Tell us about your property
                 </Heading>
@@ -517,94 +501,21 @@ const CoWorkingspace = () => {
                     <Heading textAlign={"left"} as={"h3"} size={"md"}>
                         Washrooms
                     </Heading>
-                    <Box display={"grid"} padding={"10px 0 8px 0"} gridTemplateColumns={"repeat(1,1fr)"} gap={2}>
-                        <Box display={"flex"} gap={10}>
-                            <button
-                                value={"Available"}
-                                margin="auto"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    setWashroomType(e.target.value);
-                                }}
-                                className={
-                                    washroomType === "Available" ? style.setbtn : style.btn
-                                }
-                            >
-                                Available
-                            </button>
-                            <button
-                                value={"Not-Available"}
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    setWashroomType(e.target.value);
-                                }}
-                                className={
-                                    washroomType === "Not-Available" ? style.setbtn : style.btn
-                                }
-                            >
-                                Not-Available
-                            </button>
-                        </Box>
-                        <Box display={washroomType == "Available" ? "block" : "none"} >
-                            <Box display={"flex"} w={340} alignItems={"center"} margin={"10px"}>
-                                <Text flex={8} textAlign={"left"}>
-                                    No. of Private Washrooms
-                                </Text>
-                                <button
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        setPrivateWashroom((prev) => prev - 1);
-                                    }}
-                                    className={privateWashroom == 0 ? style.washroom_hide : style.washroom_dec}
-                                    disabled={privateWashroom == 0}
-                                >
-                                    <MinusIcon fontSize={"12px"} />
-                                </button>
-                                <Text flex={1}>{privateWashroom}</Text>
-                                <button
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        setPrivateWashroom((prev) => prev + 1);
-                                    }}
-                                    className={style.washroom_dec}
-                                >
-                                    <AddIcon fontSize={"12px"} />
-                                </button>
-                            </Box>
-                            <Box display={"flex"} w={340} alignItems={"center"} margin={"10px"}>
-                                <Text flex={8} textAlign={"left"}>
-                                    No. of Shared Washrooms
-                                </Text>
-                                <button
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        setSharedWashroom((prev) => prev - 1);
-                                    }}
-                                    className={sharedWashroom == 0 ? style.washroom_hide : style.washroom_dec}
-                                    disabled={sharedWashroom == 0}
-                                >
-                                    <MinusIcon fontSize={"12px"} />
-                                </button>
-                                <Text flex={1}>{sharedWashroom}</Text>
-                                <button
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        setSharedWashroom((prev) => prev + 1);
-                                    }}
-                                    className={style.washroom_dec}
-                                >
-                                    <AddIcon fontSize={"12px"} />
-                                </button>
-                            </Box>
-                        </Box>
+                    <Box margin={"10px 0 0 0"}>
+                        <Input
+                            type="text"  
+                            value={washroom} 
+                            onChange={(e)=>setWashroom(NumericString(e.target.value))}  
+                            placeholder={"Enter No. of washroom"}
+                        />
                     </Box>
                 </Box>
                 {/* add area details */}
-                <Box textAlign={"left"} padding={"10px 0"}>
-                    <Heading as={"h3"} margin={"5px 0"} size={"md"}>
+                <Box textAlign={"left"} paddingTop={"10px"} >
+                    <Heading as={"h3"} marginTop={"5px"} size={"md"}>
                         Add Area Details
                     </Heading>
-                    <Text margin={"5px 0"}> Atleast one area type is mandatory </Text>
+                    <Text marginTop={"5px"}> Atleast one area type is mandatory </Text>
                     <ButtonGroup
                         className={style.select_land}
                         size="sm"
@@ -654,7 +565,7 @@ const CoWorkingspace = () => {
 
                 {/* Availability status */}
                 <Box textAlign={"left"} className={style.optional_box}>
-                    <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                    <Heading as={"h3"} size={"md"} marginTop={"10px"} textAlign={"left"}>
                         Availability Status
                     </Heading>
                     <Box className={style.grid}>
@@ -871,7 +782,7 @@ const CoWorkingspace = () => {
                             </Heading>
                             <NumberInput value={priceSqr}>
                                 <NumberInputField
-                                    
+
                                 />
                             </NumberInput>
                         </Box>
@@ -889,7 +800,7 @@ const CoWorkingspace = () => {
                     >
                         All inclusive price
                     </Checkbox>
-                    <Checkbox 
+                    <Checkbox
                         isChecked={inclusivePrices.includes("Tax and Govt. charges excluded")}
                         onChange={(e) => {
                             e.preventDefault();
@@ -1024,60 +935,7 @@ const CoWorkingspace = () => {
                     </Heading>
                     <Input type="text" w={"300px"} value={expectedAnnual} onChange={(e) => setExpectedAnnual(NumericString(e.target.value))} />
                 </Box>
-                {/* office previously used for */}
-                <Box className={style.optional_box}>
-                    <Box>
-                        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
-                            Your office was previously used for (Optional)
-                        </Heading>
-                        <Text> * You can select upto 3 </Text>
-                    </Box>
-                    <Box>
-                        <Menu>
-                            <MenuButton
-                                px={4}
-                                as={Button}
-                                py={2}
-                                borderRadius='md'
-                                borderWidth='1px'
-                                textAlign={"left"}
-                                width={300}
-                                _hover={{ bg: 'white' }}
-                                _expanded={{ bg: 'white' }}
-                                _focus={{ bg: 'white' }}
-                                rightIcon={<ChevronDownIcon />}
-                            >
-                                Select
-                            </MenuButton>
-                            <MenuList className={style.menu} display={"flex"} flexDirection={"column"} padding={2} >
-                                <Checkbox value={"Backend Office"} onChange={(e) => {
-                                    e.preventDefault();
-                                    FileSystemHandle(e.target.value)
-                                }} > Backend Office </Checkbox>
-                                <Checkbox value={"CA Office"} onChange={(e) => {
-                                    e.preventDefault();
-                                    FileSystemHandle(e.target.value)
-                                }} > CA Office </Checkbox>
-                                <Checkbox value={"Fronted Office"} onChange={(e) => {
-                                    e.preventDefault();
-                                    FileSystemHandle(e.target.value)
-                                }} > Fronted Office </Checkbox>
-                                <Checkbox value={"Small Office Purpose"} onChange={(e) => {
-                                    e.preventDefault();
-                                    FileSystemHandle(e.target.value)
-                                }} > Small Office Purpose </Checkbox>
-                                <Checkbox value={"Traders Office"} onChange={(e) => {
-                                    e.preventDefault();
-                                    FileSystemHandle(e.target.value)
-                                }} > Traders Office </Checkbox>
-                                <Checkbox value={"Advocate Office"} onChange={(e) => {
-                                    e.preventDefault();
-                                    FileSystemHandle(e.target.value)
-                                }} > Advocate Office </Checkbox>
-                            </MenuList>
-                        </Menu>
-                    </Box>
-                </Box>
+                
                 {/* property Description */}
                 <Box>
                     <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Box,
     Button,
@@ -7,7 +7,7 @@ import {
     Input,
     InputGroup,
     NumberInput,
-    NumberInputField,
+    NumberInputField, 
     Select,
     Text,
     Textarea,
@@ -20,22 +20,25 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { AlphabetString, CleanInputText, NumericString } from "../../../../code";
+import { useParams } from "react-router-dom";
 
 
 
 const HotelResortUpdate = () => {
+    const { productID } = useParams();
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
-    const [facingwidth, setFacingWidth] = useState("");
     const [city, setCity] = useState("");
     const [pincode, setPincode] = useState(0);
     const [state, setState] = useState("");
     const [locality, setLocality] = useState("");
     const [address, setaddress] = useState("");
+
     const [room, setRoom] = useState("");
     const [washrooms, setwashrooms] = useState("");
     const [balconey, setBalcony] = useState("");
+
     const [light, setLight] = useState(0);
     const [fans, setFans] = useState(0);
     const [ac, setAc] = useState(0);
@@ -43,6 +46,7 @@ const HotelResortUpdate = () => {
     const [Beds, setBeds] = useState(0);
     const [wardrobe, setWardrobe] = useState(0);
     const [geyser, setGeyser] = useState(0);
+
     const [areaPer, setAreaPer] = useState("sq.ft");
     const [furnishedarr, setfurnishedarr] = useState([]);
     const [extraroom, setExtraRoom] = useState([]);
@@ -61,7 +65,6 @@ const HotelResortUpdate = () => {
     const [watersource, setWaterSource] = useState([]);
     const [overLook, setoverlook] = useState([]);
     const [otherFeature, setOtherFeature] = useState([]);
-    const [powerbackup, setPowerbackup] = useState("");
     const [propertyFacing, setPropertyFacing] = useState("");
     const [flooring, setFlooring] = useState("");
     const [facing, setFacing] = useState("Meter");
@@ -76,6 +79,65 @@ const HotelResortUpdate = () => {
     const [businessType, setBusinessType] = useState("");
     const [qualityRating, setqualityRating] = useState("");
 
+
+    const handleDataFetch = async () => {
+        await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
+            let e = detail.data.data;
+            console.log(e);
+            setCountry(e?.address?.country);
+            setCity(e?.address?.city);
+            setPincode(e?.address?.pincode);
+            setState(e.address.state);
+            setLocality(e?.address.locality);
+            setaddress(e?.address.address);
+            setRoom(e?.roomDetails?.rooms);
+            setBalcony(e?.roomDetails?.balcony);
+            setwashrooms(e?.washrooms);
+            setPlotArea(e?.plotArea);
+            setAreaPer(e?.plotAreaUnit);
+            setExtraRoom(e?.otherRoom);
+            setAvailability(e?.availabilityStatus);
+            if (e.availabilityStatus == "Ready to move") {
+                setFromyear(e?.propertyStatus);
+            }
+            else if (e?.availabilityStatus == "Under construction") {
+                setExpectedYear(e?.expectedByYear);
+            }
+            setqualityRating(e?.qualityRating);
+            setOwnerShip(e?.ownership);
+            setPricedetail(e?.price);
+            setPriceSqr(e?.priceUnit);
+            setPreLeased(e.preLeased_Rented);
+            setCurrentRentPerMonth(e.preLeased_RentedDetails.currentRentPerMonth);
+            setLeaseTenureInYear(e.preLeased_RentedDetails.leaseTenureInYear);
+            setAnnualRentIncrease(e.preLeased_RentedDetails.annualRentIncrease);
+            setBusinessType(e.preLeased_RentedDetails.businessType);
+            setDesc(e.description);
+            setAminity(e.amenities);
+            setPropertyFeature(e?.propertyFeatures);
+            setLocationAdv(e.locationAdv);
+            setBuildingFeature(e?.society_buildingFeatures);
+            setAdditinalFeature(e?.additionalFeatures);
+            setOtherFeature(e?.otherFeatures);
+            setPropertyFacing(e?.propertyFacing);
+            setFlooring(e?.flooring);
+            setFurnished(e?.furnished);
+            if (e?.furnished == "Furnished" || e?.furnished == "Semi-Furnished") {
+                setfurnishedarr(e?.furnishedList);
+                setLight(e?.furnishedObj?.light);
+                setFans(e?.furnishedObj?.fans);
+                setAc(e?.furnishedObj?.ac);
+                setTv(e?.furnishedObj?.tv);
+                setBeds(e?.furnishedObj?.beds);
+                setWardrobe(e?.furnishedObj?.wardrobe);
+                setGeyser(e?.furnishedObj?.geyser);
+            }
+        })
+    }
+
+    useEffect(() => {
+        handleDataFetch();
+    }, []);
 
 
     const handleSubmitData = async (e) => {
@@ -108,13 +170,9 @@ const HotelResortUpdate = () => {
             additionalFeatures: additinalft,
             waterSources: watersource,
             otherFeatures: otherFeature,
-            powerBackup: powerbackup,
-            overLookings: overLook,
             propertyFacing,
             flooring,
-            roadFacingWidth: facingwidth,
             preLeased_Rented: preLeased,
-            roadFacingWidthType: facing,
             // totalFloors: +totalfloors,
             plotArea,
             qualityRating,
@@ -152,18 +210,10 @@ const HotelResortUpdate = () => {
             showToastError('Provide Property description');
         } else if (!watersource) {
             showToastError('Provide Water Source');
-        } else if (!overLook) {
-            showToastError('Provide Overlooking');
-        } else if (!powerbackup) {
-            showToastError('Provide Power Backup');
         } else if (!propertyFacing) {
             showToastError('Provide Property Facing');
         } else if (!flooring) {
             showToastError('Provide Flooring');
-        } else if (!facing) {
-            showToastError('Provide Facing');
-        } else if (!facingwidth) {
-            showToastError("Provide facing width")
         }
 
         if (locationAdv) {
@@ -184,8 +234,6 @@ const HotelResortUpdate = () => {
             inclusivePrices &&
             additinalft &&
             watersource &&
-            overLook &&
-            powerbackup &&
             propertyFacing &&
             flooring &&
             facing
@@ -251,7 +299,7 @@ const HotelResortUpdate = () => {
                 // });
                 // let data = await response.json();  
                 // console.log("data",data); 
-                await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
+                await axios.patch(`${process.env.REACT_APP_URL}/property/${productID}`, obj, { headers: head })
                     .then((e) => {
                         toast({
                             title: e.data.msg,
@@ -297,7 +345,7 @@ const HotelResortUpdate = () => {
     const pinfetch = async (pin) => {
         try {
 
-            let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
+            let res = await axios.get(`${process.env.REACT_APP_URL} / pincode /? pincode = ${pin}`);
             setState(res.data[0].state);
             setCity(res.data[0].city);
             setCountry(res.data[0].country);
@@ -468,7 +516,7 @@ const HotelResortUpdate = () => {
 
     //     let totalFloors = totalfloors;
     //     for (let i = 1; i <= totalFloors; i++) {
-    //         let value = `<option value=${i}>${i}</option>`;
+    //         let value = `< option value = ${ i } > ${ i }</option > `;
     //         options += value;
     //     }
     //     let adding = document.getElementById("floorSelectTag");
@@ -478,7 +526,7 @@ const HotelResortUpdate = () => {
 
 
     return (
-        <Box w={"94%"} padding={"0 20px"} margin={"auto"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"}> 
+        <Box w={"94%"} padding={"0 20px"} margin={"auto"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"}>
             <form onSubmit={handleSubmitData}>
                 {/* ============================= property location =========================== */}
                 <Box className={style.location_form}>
@@ -496,7 +544,7 @@ const HotelResortUpdate = () => {
                         fontSize={"md"}
                         variant="flushed"
                     />
-                    <NumberInput>
+                    <NumberInput value={pincode} >
                         <NumberInputField
                             placeholder={"Enter pincode"}
                             padding={"0 10px"}
@@ -512,7 +560,7 @@ const HotelResortUpdate = () => {
                             }}
                             required
                             fontSize={"md"}
-                            value={pincode}
+
                             onChange={handlepinfetch}
                         />
                     </NumberInput>
@@ -1326,7 +1374,7 @@ const HotelResortUpdate = () => {
                             >
                                 {isCountry.country == "india" ? "₹" : "$"} Price Details
                             </Heading>
-                            <NumberInput >
+                            <NumberInput value={pricedetail} >
                                 <NumberInputField
                                     value={pricedetail}
                                     required
@@ -1758,100 +1806,6 @@ const HotelResortUpdate = () => {
                     </Box>
                 </Box>
 
-                {/* Overlooking */}
-                <Box className={style.optional_box}>
-                    <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
-                        Overlooking
-                    </Heading>
-                    <Box>
-                        <button
-                            className={overLook.includes("Pool") ? style.setbtn : style.btn}
-                            onClick={handleoverlooking}
-                            value={"Pool"}
-                        >
-
-                            Pool
-                        </button>
-                        <button
-                            className={
-                                overLook.includes("Park / Garden") ? style.setbtn : style.btn
-                            }
-                            onClick={handleoverlooking}
-                            value={"Park / Garden"}
-                        >
-
-                            Park/Garden
-                        </button>
-                        <button
-                            className={overLook.includes("Club") ? style.setbtn : style.btn}
-                            onClick={handleoverlooking}
-                            value={"Club"}
-                        >
-
-                            Club
-                        </button>
-                        <button
-                            className={
-                                overLook.includes("Main Road") ? style.setbtn : style.btn
-                            }
-                            onClick={handleoverlooking}
-                            value={"Main Road"}
-                        >
-
-                            Main Road
-                        </button>
-                        <button
-                            className={overLook.includes("Other") ? style.setbtn : style.btn}
-                            onClick={handleoverlooking}
-                            value={"Other"}
-                        >
-
-                            Other
-                        </button>
-                    </Box>
-                </Box>
-
-                {/* Power Back up */}
-                <Box className={style.optional_box}>
-                    <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
-                        Power Back up
-                    </Heading>
-                    <Box>
-                        <button
-                            className={powerbackup == "None" ? style.setbtn : style.btn}
-                            value={"None"}
-                            onClick={(e) => {
-                                e.preventDefault();
-                                setPowerbackup(e.target.value)
-                            }}
-                        >
-
-                            None
-                        </button>
-                        <button
-                            className={powerbackup == "Partial" ? style.setbtn : style.btn}
-                            value={"Partial"}
-                            onClick={(e) => {
-                                e.preventDefault();
-                                setPowerbackup(e.target.value)
-                            }}
-                        >
-
-                            Partial
-                        </button>
-                        <button
-                            className={powerbackup == "Full" ? style.setbtn : style.btn}
-                            value={"Full"}
-                            onClick={(e) => {
-                                e.preventDefault();
-                                setPowerbackup(e.target.value)
-                            }}
-                        >
-
-                            Full
-                        </button>
-                    </Box>
-                </Box>
                 {/* Property facing */}
                 <Box className={style.optional_box}>
                     <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
@@ -1949,22 +1903,6 @@ const HotelResortUpdate = () => {
                     </Box>
                 </Box>
 
-                {/* Width of facing road */}
-                <Box className={style.optional_box}>
-                    <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
-                        Width of facing road
-                    </Heading>
-                    <Box display={"flex"} gap={"20px"} w={"300px"} >
-                        <Input type="text" variant='flushed' flex={1} required value={facingwidth} onChange={(e) => {
-                            e.preventDefault();
-                            setFacingWidth(e.target.value);
-                        }} />
-                        <Select flex={1} onChange={(e) => setFacing(e.target.value)} value={facing}>
-                            <option value="Meter"> Meter </option>
-                            <option value="Feet"> Feet </option>
-                        </Select>
-                    </Box>
-                </Box>
 
                 {/* type of flooring */}
                 <Box className={style.optional_box}>

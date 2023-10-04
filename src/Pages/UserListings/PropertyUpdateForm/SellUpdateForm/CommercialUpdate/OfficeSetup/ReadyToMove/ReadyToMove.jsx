@@ -42,7 +42,7 @@ const ReadyToMoveUpdate = () => {
     const [cabins, setCabins] = useState("");
     const [meetingRoom, setMeetingRoom] = useState("");
     const [washroomType, setWashroomType] = useState("");
-    const [privateWashroom, setPrivateWashroom] = useState(0);
+    const [privateWashroom, setPrivateWashroom] = useState(0); 
     const [sharedWashroom, setSharedWashroom] = useState(0);
     const [conferenceRoom, setConferenceRoom] = useState("");
     const [receptionArea, setReceptionArea] = useState("");
@@ -149,7 +149,7 @@ const ReadyToMoveUpdate = () => {
                 setExpectedYear(e.expectedByYear);
             }
             setOwnerShip(e.ownership);
-            setPricedetail(e.price);
+            setPricedetail(e.price); 
             setInclusivePrice(e.inclusivePrices);
             setMaintenancePrice(e.additionalPricingDetails.maintenancePrice);
             setMaintenanceTimePeriod(e.additionalPricingDetails.maintenanceTimePeriod);

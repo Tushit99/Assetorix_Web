@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Box,
     Button,
@@ -24,22 +24,22 @@ import style from "./Bareshellspace.module.css";
 import { useSelector } from "react-redux";
 import { AddIcon, ChevronDownIcon, MinusIcon } from "@chakra-ui/icons";
 import axios from "axios";
-import { CleanInputText } from "../../../../code";
+import { CleanInputText, NumericString } from "../../../../code";
 // import { CleanInputText } from "../../../code";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
+import { useParams } from "react-router-dom";
 
 
 
 const BareshellspaceUpdate = () => {
+    const { productID } = useParams();
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
     const [city, setCity] = useState("");
     const [pincode, setPincode] = useState(0);
     const [state, setState] = useState("");
-    const [washroomType, setWashroomType] = useState("");
-    const [privateWashroom, setPrivateWashroom] = useState(0);
-    const [sharedWashroom, setSharedWashroom] = useState(0);
+    const [washroom, setWashroom] = useState("");
     const [oxygenDuct, setOxygenDuct] = useState("");
     const [fireSafty, setFireSafty] = useState([]);
     const [stairCase, setStairCase] = useState("");
@@ -58,15 +58,10 @@ const BareshellspaceUpdate = () => {
     const [pantryType, setPantryType] = useState("");
     const [floorNumber, setFloorNumber] = useState([]);
     const [pricedetail, setPricedetail] = useState("");
-
-
     const [additionalPrice, setAdditionalPrice] = useState(false);
     const [expectedRental, setExpectedRental] = useState("");
     const [bookingAmount, setBookingAmount] = useState("");
     const [annualDuesPayable, setAnnualDuesPayable] = useState("");
-
-
-
     const [previouslyUsedList, setpreviouslyUsedList] = useState([]);
     const [currentRentPerMonth, setCurrentRentPerMonth] = useState("");
     const [leaseTenureInYear, setLeaseTenureInYear] = useState("");
@@ -99,7 +94,65 @@ const BareshellspaceUpdate = () => {
 
     // please don'nt change any function without any prior knowledge   
 
-    console.log(wallConstructionStatus);
+    const handleDataFetch = async () => {
+        await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
+            let e = detail.data.data;
+            console.log(e);
+            setCountry(e?.address?.country);
+            setCity(e?.address?.city);
+            setPincode(e?.address?.pincode);
+            setState(e.address.state);
+            setLocality(e.address.locality);
+            setLocatedInside(e.address.locatedInside);
+            setZoneType(e.address.zoneType);
+            setPlotArea(e.carpetArea);
+            setPriceSqr(e.carpetAreaUnit);
+            setWashroom(e.washrooms);
+            setwallConstructionStatus(e.wallStatus);
+            setdoorConstructed(e.doorStatus);
+            if (e.pantryType == "Private" || e.pantryType == "Shared") {
+                setPantrySize(e?.pantrySize);
+            }
+            setFireSafty(e?.fireSafety);
+            setFloorNumber(e?.floorOn);
+            setPantryType(e?.pantryType);
+            setPantrySize(e?.pantrySize);
+            setFlooring(e?.flooring);
+            setAirCondition(e.facilityAvailable.centralAirConditioning);
+            setOxygenDuct(e.facilityAvailable.oxygenDuct);
+            setTotalFloors(e.totalFloors); 
+            setStairCase(e.staircases); 
+            if (e.lift == "Available") {
+                setLiftPassenger(e?.liftDetails?.passenger);
+                setLiftService(e?.liftDetails?.service); 
+            }
+            setParkingArr(e.parkingDetailsList);
+            setAvailability(e.availabilityStatus);
+            if (e.availabilityStatus == "Ready to move") {
+                setFromyear(e.propertyStatus);
+            }
+            else if (e.availabilityStatus == "Under construction") {
+                setExpectedYear(e.expectedByYear);
+            }
+            setOwnerShip(e.ownership);
+            setPricedetail(e.price);
+            setInclusivePrice(e.inclusivePrices);
+            setMaintenancePrice(e.additionalPricingDetails.maintenancePrice);
+            setMaintenanceTimePeriod(e.additionalPricingDetails.maintenanceTimePeriod);
+            setPreLeased(e.preLeased_Rented);
+            setpreviouslyUsedList(e.previouslyUsedList);
+            setDesc(e.description);
+            setAminity(e.amenities);
+            setLocationAdv(e.locationAdv);
+            setFireNOC(e.noc);
+            setOccupancyCertificate(e.occupancy);
+
+        })
+    }
+
+    useEffect(() => {
+        handleDataFetch();
+    }, []);
 
 
     const handleSubmitData = async (e) => {
@@ -133,8 +186,9 @@ const BareshellspaceUpdate = () => {
                 maintenanceTimePeriod
             },
             preLeased_Rented: preLeased,
-            washrooms: washroomType,
+            washrooms: washroom,
             pantryType,
+            pantrySize,
             facilityAvailable: {
                 centralAirConditioning: airCondition,
                 oxygenDuct,
@@ -195,14 +249,6 @@ const BareshellspaceUpdate = () => {
                 obj["availabilityStatus"] = availability;
             }
 
-            if (washroomType == "Available") {
-                let washroomDetails = {
-                    privateWashrooms: privateWashroom,
-                    sharedWashrooms: sharedWashroom,
-                }
-                obj["washroomDetails"] = washroomDetails;
-            }
-
             if (pantryType == "Shared Pantry") {
                 obj["pantrySize"] = pantrySize;
                 obj["pantrySizeUnit"] = pantryTypeUnit;
@@ -213,7 +259,7 @@ const BareshellspaceUpdate = () => {
                     service: liftService,
                     modern: modernLifts
                 }
-            }
+            } 
 
             if (parkingStatus == "Available") {
                 obj["parkingDetailsList"] = parkingArr;
@@ -466,26 +512,15 @@ const BareshellspaceUpdate = () => {
                             Public and Semi Public use
                         </option>
                     </Select>
-                    <NumberInput>
-                        <NumberInputField
-                            placeholder={"Enter pincode"}
-                            padding={"0 10px"}
-                            borderRight={0}
-                            borderLeft={0}
-                            borderTop={0}
-                            borderRadius={0}
-                            _active={{
-                                borderRight: "0",
-                                borderLeft: "0",
-                                borderTop: "0",
-                                borderRadius: "0",
-                            }}
-                            required
-                            fontSize={"md"}
-                            value={pincode}
-                            onChange={handlepinfetch}
-                        />
-                    </NumberInput>
+                    <Input
+                        type="text"
+                        placeholder={"Enter pincode"}
+                        required
+                        fontSize={"md"}
+                        value={pincode}
+                        onChange={handlepinfetch}
+                        padding={"0 10px"}
+                    />
                     <Input
                         type="text"
                         padding={"0 10px"}
@@ -557,23 +592,23 @@ const BareshellspaceUpdate = () => {
                             isAttached
                             variant="outline"
                         >
-                            <NumberInput>
-                                <NumberInputField
-                                    padding={"0 2px"}
-                                    value={plotArea}
-                                    onChange={(e) => {
-                                        areaCalucation();
-                                        setPlotArea(e.target.value);
-                                    }}
-                                    required
-                                />
-                            </NumberInput>
-                            <select
+                            <Input
+                                type="text"
+                                padding={"0 2px"}
+                                value={plotArea}
+                                onChange={(e) => {
+                                    setPlotArea(NumericString(e.target.value));
+                                    areaCalucation();
+                                }}
+                                required
+                            />
+                            <Select
                                 value={areaPer}
                                 onChange={(e) => {
                                     setAreaPer(e.target.value);
                                 }}
                                 className={style.select}
+                                borderRadius={0}
                                 required
                             >
                                 <option value="sq.ft">sq.ft</option>
@@ -594,7 +629,7 @@ const BareshellspaceUpdate = () => {
                                 <option value="rood">rood</option>
                                 <option value="chataks">chataks</option>
                                 <option value="perch">perch</option>
-                            </select>
+                            </Select>
                         </ButtonGroup>
                     </Box>
                     {/* Construction status of walls */}
@@ -678,86 +713,8 @@ const BareshellspaceUpdate = () => {
                         <Heading textAlign={"left"} as={"h3"} size={"md"}>
                             Washrooms
                         </Heading>
-                        <Box display={"grid"} padding={"10px 0 8px 0"} gridTemplateColumns={"repeat(1,1fr)"} gap={2}>
-                            <Box display={"flex"} gap={10}>
-                                <button
-                                    value={"Available"}
-                                    margin="auto"
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        setWashroomType(e.target.value);
-                                    }}
-                                    className={
-                                        washroomType === "Available" ? style.setbtn : style.btn
-                                    }
-                                >
-                                    Available
-                                </button>
-                                <button
-                                    value={"Not-Available"}
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        setWashroomType(e.target.value);
-                                    }}
-                                    className={
-                                        washroomType === "Not-Available" ? style.setbtn : style.btn
-                                    }
-                                >
-                                    Not-Available
-                                </button>
-                            </Box>
-                            <Box display={washroomType == "Available" ? "block" : "none"} >
-                                <Box display={"flex"} w={340} alignItems={"center"} margin={"10px"}>
-                                    <Text flex={8} textAlign={"left"}>
-                                        No. of Private Washrooms
-                                    </Text>
-                                    <button
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            setPrivateWashroom((prev) => prev - 1);
-                                        }}
-                                        className={privateWashroom == 0 ? style.washroom_hide : style.washroom_dec}
-                                        disabled={privateWashroom == 0}
-                                    >
-                                        <MinusIcon fontSize={"12px"} />
-                                    </button>
-                                    <Text flex={1}>{privateWashroom}</Text>
-                                    <button
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            setPrivateWashroom((prev) => prev + 1);
-                                        }}
-                                        className={style.washroom_dec}
-                                    >
-                                        <AddIcon fontSize={"12px"} />
-                                    </button>
-                                </Box>
-                                <Box display={"flex"} w={340} alignItems={"center"} margin={"10px"}>
-                                    <Text flex={8} textAlign={"left"}>
-                                        No. of Shared Washrooms
-                                    </Text>
-                                    <button
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            setSharedWashroom((prev) => prev - 1);
-                                        }}
-                                        className={sharedWashroom == 0 ? style.washroom_hide : style.washroom_dec}
-                                        disabled={sharedWashroom == 0}
-                                    >
-                                        <MinusIcon fontSize={"12px"} />
-                                    </button>
-                                    <Text flex={1}>{sharedWashroom}</Text>
-                                    <button
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            setSharedWashroom((prev) => prev + 1);
-                                        }}
-                                        className={style.washroom_dec}
-                                    >
-                                        <AddIcon fontSize={"12px"} />
-                                    </button>
-                                </Box>
-                            </Box>
+                        <Box>
+                            <Input type="text" placeholder={"Enter no. Washroom"} value={washroom} onChange={(e) => setWashroom(NumericString(e.target.value))} />
                         </Box>
                     </Box>
                     {/* Pantry Type */}
@@ -950,30 +907,26 @@ const BareshellspaceUpdate = () => {
                             Total no of floors and your floor details
                         </Text>
                         <Box display={"flex"} alignItems={"center"} gap={5}>
-                            <NumberInput value={totalfloors} className={style.input_borders}>
-                                <NumberInputField
-                                    borderLeft={0}
-                                    borderRight={0}
-                                    borderTop={0}
-                                    borderBottom={"1px solid #4f5bffcf"}
-                                    borderRadius={0}
-                                    onChange={(e) => {
-                                        const nowval = e.target.value > 90;
-                                        if (nowval) {
-                                            toast({
-                                                title: "Maximum floor count: 90",
-                                                status: "error",
-                                                duration: 2000,
-                                                position: "top-right",
-                                            });
-                                        } else {
-                                            setTotalFloors(e.target.value);
-                                        }
-                                    }}
-                                    required
-                                    w={180}
-                                />
-                            </NumberInput>
+                            <Input
+                                type="text" 
+                                variant={"flushed"} 
+                                value={totalfloors}
+                                onChange={(e) => {
+                                    const nowval = e.target.value > 90;
+                                    if (nowval) {
+                                        toast({
+                                            title: "Maximum floor count: 90",
+                                            status: "error",
+                                            duration: 2000,
+                                            position: "top-right",
+                                        });
+                                    } else {
+                                        setTotalFloors(e.target.value);
+                                    }
+                                }}
+                                required
+                                w={180}
+                            /> 
                             <Box>
                                 <Menu>
                                     <MenuButton backgroundColor={"white"}
@@ -1051,16 +1004,10 @@ const BareshellspaceUpdate = () => {
                                     }}
                                     className={style.washroom_dec}
                                 >
-                                    <AddIcon fontSize={"12px"} />
+                                    <AddIcon fontSize={"12px"} /> 
                                 </button>
                                 <Text margin={"0 10px"} flex={4}> Passenger Lifts </Text>
-                            </Box>
-                            <Box padding={"0 40px"}>
-                                <Checkbox onChange={() => {
-                                    setModernLifts(!modernLifts);
-                                    console.log(modernLifts);
-                                }}> Modern lifts (Optional) </Checkbox>
-                            </Box>
+                            </Box> 
                         </Box>
                         <Box padding={"0 40px"} display={liftStatus == "Available" ? "flex" : "none"} alignItems={"center"} width={300} >
                             <button

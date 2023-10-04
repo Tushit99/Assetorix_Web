@@ -27,6 +27,7 @@ import axios from "axios";
 import { CleanInputText } from "../../../../code";
 // import { CleanInputText } from "../../../code";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io" 
+import { NumericString } from "../../../../../UserListings/PropertyUpdateForm/code";
 
 
 
@@ -135,6 +136,7 @@ const Bareshellspace = () => {
             preLeased_Rented: preLeased,
             washrooms: washroomType,
             pantryType,
+            pantrySize, 
             facilityAvailable: {
                 centralAirConditioning: airCondition,
                 oxygenDuct,
@@ -1106,7 +1108,7 @@ const Bareshellspace = () => {
                         <Checkbox onChange={handleNumberOfParking} value={"Private Parking Outside"} isChecked={parkingArr.includes("Private Parking Outside")} >Public Parking</Checkbox>
                         <Input type="text" placeholder="Enter no. of Parkings" value={parkingTotalNumber} onChange={(e) => {
                             e.preventDefault();
-                            setParkingTotalNumber(e.target.value);
+                            setParkingTotalNumber(NumericString(e.target.value));
                         }} />
                     </Box>
                 </Box>
