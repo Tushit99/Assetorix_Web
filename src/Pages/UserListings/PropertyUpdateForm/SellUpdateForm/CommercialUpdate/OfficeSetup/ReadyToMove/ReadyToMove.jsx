@@ -28,8 +28,8 @@ import { CleanInputText } from "../../../../code";
 import { useParams } from "react-router-dom";
 
 
-const ReadyToMoveUpdate = () => { 
-    const productID = useParams();  
+const ReadyToMoveUpdate = () => {
+    const { productID } = useParams();
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
@@ -74,7 +74,6 @@ const ReadyToMoveUpdate = () => {
     const [businessType, setBusinessType] = useState("");
     const [pantryTypeUnit, setPantryTypeUnit] = useState("sq.ft");
 
-
     const [areaPer, setAreaPer] = useState("sq.ft");
     const [availability, setAvailability] = useState("");
     const [fromyear, setFromyear] = useState("");
@@ -93,6 +92,26 @@ const ReadyToMoveUpdate = () => {
     const [zoneType, setZoneType] = useState("");
 
     // please don'nt change any function without any prior knowledge   
+
+    const handleDataFetch = async () => {
+        await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
+            let e = detail.data.data;
+            console.log(e);
+            setCountry(e?.address?.country);
+            setCity(e?.address?.city);
+            setPincode(e?.address?.pincode);
+            setState(e.address.state);
+            setLocality(e.address.locality);
+            setLocatedInside(e.address.locatedInside);
+            setZoneType(e.address.zoneType);
+            
+        })
+    }
+
+    useEffect(() => {
+        handleDataFetch();
+    }, []);
+
 
     const handleSubmitData = async (e) => {
         e.preventDefault();
@@ -273,9 +292,7 @@ const ReadyToMoveUpdate = () => {
                 position: "top-right",
             });
         }
-    }; 
-
-    
+    };
 
 
     const handlepinfetch = (e) => {
@@ -432,10 +449,10 @@ const ReadyToMoveUpdate = () => {
                 {/* property location */}
                 <Box className={style.location_form}>
                     <Heading size={"lg"} color={"black"}>
-                        Where is your property located?
+                        Office (Ready To Move)
                     </Heading>
                     <Heading size={"sm"} color={"black"}>
-                        An accurate location helps you connect with the right buyers.
+                        location Detail
                     </Heading>
 
                     <Select
@@ -471,26 +488,15 @@ const ReadyToMoveUpdate = () => {
                             Public and Semi Public use
                         </option>
                     </Select>
-                    <NumberInput>
-                        <NumberInputField
-                            placeholder={"Enter pincode"}
-                            padding={"0 10px"}
-                            borderRight={0}
-                            borderLeft={0}
-                            borderTop={0}
-                            borderRadius={0}
-                            _active={{
-                                borderRight: "0",
-                                borderLeft: "0",
-                                borderTop: "0",
-                                borderRadius: "0",
-                            }}
-                            required
-                            fontSize={"md"}
-                            value={pincode}
-                            onChange={handlepinfetch}
-                        />
-                    </NumberInput>
+                    <Input
+                        type="text"
+                        placeholder={"Enter pincode"}
+                        required
+                        fontSize={"md"}
+                        value={pincode}
+                        onChange={handlepinfetch}
+                        padding={"0 10px"}
+                    />
                     <Input
                         type="text"
                         padding={"0 10px"}
@@ -511,7 +517,6 @@ const ReadyToMoveUpdate = () => {
                     ) : (
                         ""
                     )}
-
                     <Input
                         type="text"
                         padding={"0 10px"}
@@ -555,25 +560,23 @@ const ReadyToMoveUpdate = () => {
                         <Heading as={"h3"} margin={"5px 0"} size={"md"}>
                             Add Area Details
                         </Heading>
-                        <Text margin={"5px 0"}> Atleast one area type is mandatory </Text>
-                        <ButtonGroup
+                        <InputGroup
                             className={style.select_land}
                             size="sm"
                             isAttached
                             variant="outline"
                         >
-                            <NumberInput>
-                                <NumberInputField
-                                    padding={"0 2px"}
-                                    value={plotArea}
-                                    onChange={(e) => {
-                                        areaCalucation();
-                                        setPlotArea(e.target.value);
-                                    }}
-                                    required
-                                />
-                            </NumberInput>
-                            <select
+                            <Input
+                                type="text"
+                                padding={"0 2px"}
+                                value={plotArea}
+                                onChange={(e) => {
+                                    areaCalucation();
+                                    setPlotArea(e.target.value);
+                                }}
+                                required 
+                            /> 
+                            <Select
                                 value={areaPer}
                                 onChange={(e) => {
                                     setAreaPer(e.target.value);
@@ -599,8 +602,8 @@ const ReadyToMoveUpdate = () => {
                                 <option value="rood">rood</option>
                                 <option value="chataks">chataks</option>
                                 <option value="perch">perch</option>
-                            </select>
-                        </ButtonGroup>
+                            </Select>
+                        </InputGroup>
                     </Box>
                     {/* Office Setup  */}
                     <Box

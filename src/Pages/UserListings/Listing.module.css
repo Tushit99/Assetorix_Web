@@ -1,13 +1,15 @@
 .displaygrid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px; 
   margin: 10px 0 40px 0;  
 }
 
+ 
+
 .displaygrid > * {
   text-align: left;
-  padding: 20px 10px;
+  padding: 20px 10px; 
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border: 2px solid rgb(255, 255, 255);
 }
@@ -54,3 +56,5 @@
     gap: 10px;
   }
 }
+
+
