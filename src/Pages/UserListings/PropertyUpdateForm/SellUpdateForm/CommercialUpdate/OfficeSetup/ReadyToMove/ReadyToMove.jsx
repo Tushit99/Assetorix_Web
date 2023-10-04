@@ -104,13 +104,72 @@ const ReadyToMoveUpdate = () => {
             setLocality(e.address.locality);
             setLocatedInside(e.address.locatedInside);
             setZoneType(e.address.zoneType);
-            
+            setPlotArea(e.carpetArea);
+            setMinseat(e.officeSetup.minSeats);
+            setMaxseat(e.officeSetup.maxSeats);
+            setMeetingRoom(e.officeSetup.cabins);
+            setMeetingRoom(e.officeSetup.meetingRooms);
+            if (e.washroomDetails.privateWashrooms > 0 || e.washroomDetails.sharedWashrooms > 0) {
+                setWashroomType("Available");
+                setPrivateWashroom(e.washroomDetails.privateWashrooms);
+                setSharedWashroom(e.washroomDetails.sharedWashrooms);
+            }
+            else {
+                setWashroomType("Not-Available");
+            }
+            setConferenceRoom(e.conferenceRoom);
+            setReceptionArea(e.receptionArea);
+            setPantryType(e.pantryType);
+            if (e.pantryType == "Private" || e.pantryType == "Shared") {
+                setPantrySize(e?.pantrySize);
+            }
+            setFurnishing(e?.facilityAvailable.furnishing);
+            setcentralAirConditioning(e?.facilityAvailable?.centralAirConditioning);
+            setOxygenDuct(e?.facilityAvailable.oxygenDuct);
+            setUps(e?.facilityAvailable.ups);
+            setFireSafty(e?.fireSafety);
+            setTotalFloors(e?.totalFloors);
+            setFloorNumber(e?.floorOn);
+            setStairCase(e?.staircases);
+            setLiftStatus(e.lift);
+            if (e.lift == "Available") {
+                setLiftPassenger(e?.liftDetails?.passenger);
+                setLiftService(e?.liftDetails?.service);
+                setModernLifts(e?.liftDetails?.modern);
+            }
+            setParkingStatus(e.parking);
+            setParkingArr(e.parkingDetailsList);
+            setParkingTotalNumber(e.parkingCount);
+            setAvailability(e.availabilityStatus);
+            if (e.availabilityStatus == "Ready to move") {
+                setFromyear(e.propertyStatus);
+            }
+            else if (e.availabilityStatus == "Under construction") {
+                setExpectedYear(e.expectedByYear);
+            }
+            setOwnerShip(e.ownership);
+            setPricedetail(e.price);
+            setInclusivePrice(e.inclusivePrices);
+            setMaintenancePrice(e.additionalPricingDetails.maintenancePrice);
+            setMaintenanceTimePeriod(e.additionalPricingDetails.maintenanceTimePeriod);
+            setPreLeased(e.preLeased_Rented);
+            setCurrentRentPerMonth(e.preLeased_RentedDetails.currentRentPerMonth); 
+            setLeaseTenureInYear(e.preLeased_RentedDetails.leaseTenureInYear); 
+            setAnnualRentIncrease(e.preLeased_RentedDetails.annualRentIncrease); 
+            setBusinessType(e.preLeased_RentedDetails.businessType);  
+            setFireNOC(e.noc); 
+            setOccupancyCertificate(e.occupancy); 
+            setpreviouslyUsedList(e.previouslyUsedList); 
+            setDesc(e.description); 
+            setAminity(e.amenities); 
+            setLocationAdv(e.locationAdv);  
+
         })
     }
 
     useEffect(() => {
         handleDataFetch();
-    }, []);
+    }, []); 
 
 
     const handleSubmitData = async (e) => {
@@ -574,8 +633,8 @@ const ReadyToMoveUpdate = () => {
                                     areaCalucation();
                                     setPlotArea(e.target.value);
                                 }}
-                                required 
-                            /> 
+                                required
+                            />
                             <Select
                                 value={areaPer}
                                 onChange={(e) => {
@@ -956,30 +1015,26 @@ const ReadyToMoveUpdate = () => {
                             Total no of floors and your floor details
                         </Text>
                         <Box display={"flex"} alignItems={"center"} gap={5}>
-                            <NumberInput value={totalfloors} className={style.input_borders}>
-                                <NumberInputField
-                                    borderLeft={0}
-                                    borderRight={0}
-                                    borderTop={0}
-                                    borderBottom={"1px solid #4f5bffcf"}
-                                    borderRadius={0}
-                                    onChange={(e) => {
-                                        const nowval = e.target.value > 90;
-                                        if (nowval) {
-                                            toast({
-                                                title: "Maximum floor count: 90",
-                                                status: "error",
-                                                duration: 2000,
-                                                position: "top-right",
-                                            });
-                                        } else {
-                                            setTotalFloors(e.target.value);
-                                        }
-                                    }}
-                                    required
-                                    w={180}
-                                />
-                            </NumberInput>
+                            <Input
+                                type="text"
+                                value={totalfloors}
+                                variant={"flushed"}
+                                onChange={(e) => {
+                                    const nowval = e.target.value > 90;
+                                    if (nowval) {
+                                        toast({
+                                            title: "Maximum floor count: 90",
+                                            status: "error",
+                                            duration: 2000,
+                                            position: "top-right",
+                                        });
+                                    } else {
+                                        setTotalFloors(e.target.value);
+                                    }
+                                }}
+                                required
+                                w={180}
+                            />
                             <Box>
                                 <Menu>
                                     <MenuButton backgroundColor={"white"}
@@ -1313,31 +1368,15 @@ const ReadyToMoveUpdate = () => {
                                 >
                                     {isCountry.country == "india" ? "₹" : "$"} Price Details
                                 </Heading>
-                                <NumberInput >
-                                    <NumberInputField
-                                        value={pricedetail}
-                                        required
-                                        onChange={(e) => {
-                                            setPricedetail(e.target.value);
-                                            areaCalucation();
-                                        }}
-                                    />
-                                </NumberInput>
-                            </Box>
-                            <Box display={"grid"} gap={0}>
-                                <Heading
-                                    as={"h3"}
-                                    size={"xs"}
-                                    fontWeight={400}
-                                    textAlign={"left"}
-                                >
-                                    {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
-                                </Heading>
-                                <NumberInput value={priceSqr}>
-                                    <NumberInputField
-
-                                    />
-                                </NumberInput>
+                                <Input
+                                    type="text"
+                                    value={pricedetail}
+                                    required
+                                    onChange={(e) => {
+                                        setPricedetail(e.target.value);
+                                        areaCalucation();
+                                    }}
+                                />
                             </Box>
                         </Box>
                     </Box>
@@ -1523,30 +1562,30 @@ const ReadyToMoveUpdate = () => {
                                     _focus={{ bg: 'white' }}
                                     rightIcon={<ChevronDownIcon />}
                                 >
-                                    Select
+                                    {previouslyUsedList.length==0 ? "Select" : `${previouslyUsedList.length} selected`}
                                 </MenuButton>
                                 <MenuList className={style.menu} >
-                                    <Checkbox value={"Backend Office"} onChange={(e) => {
+                                    <Checkbox value={"Backend Office"} isChecked={previouslyUsedList.includes("Backend Office")} onChange={(e) => {
                                         e.preventDefault();
                                         FileSystemHandle(e.target.value)
                                     }} > Backend Office </Checkbox>
-                                    <Checkbox value={"CA Office"} onChange={(e) => {
+                                    <Checkbox value={"CA Office"} isChecked={previouslyUsedList.includes("CA Office")} onChange={(e) => {
                                         e.preventDefault();
                                         FileSystemHandle(e.target.value)
-                                    }} > CA Office </Checkbox>
-                                    <Checkbox value={"Fronted Office"} onChange={(e) => {
+                                    }} > CA Office </Checkbox> 
+                                    <Checkbox value={"Fronted Office"} isChecked={previouslyUsedList.includes("Fronted Office")} onChange={(e) => {
                                         e.preventDefault();
                                         FileSystemHandle(e.target.value)
                                     }} > Fronted Office </Checkbox>
-                                    <Checkbox value={"Small Office Purpose"} onChange={(e) => {
+                                    <Checkbox value={"Small Office Purpose"} isChecked={previouslyUsedList.includes("Small Office Purpose")} onChange={(e) => {
                                         e.preventDefault();
                                         FileSystemHandle(e.target.value)
                                     }} > Small Office Purpose </Checkbox>
-                                    <Checkbox value={"Traders Office"} onChange={(e) => {
+                                    <Checkbox value={"Traders Office"} isChecked={previouslyUsedList.includes("Traders Office")} onChange={(e) => {
                                         e.preventDefault();
                                         FileSystemHandle(e.target.value)
                                     }} > Traders Office </Checkbox>
-                                    <Checkbox value={"Advocate Office"} onChange={(e) => {
+                                    <Checkbox value={"Advocate Office"} isChecked={previouslyUsedList.includes("Advocate Office")} onChange={(e) => {
                                         e.preventDefault();
                                         FileSystemHandle(e.target.value)
                                     }} > Advocate Office </Checkbox>

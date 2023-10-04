@@ -67,8 +67,8 @@ const Listings = () => {
                   <Image src="https://images.moneycontrol.com/static-mcnews/2017/05/real-estate-Luxury-home.jpg?impolicy=website&width=1600&height=900" alt="img-link" />
                   <Heading className={`${style.boldtext} ${style.oneline}`} size={"sm"} > {e?.address?.houseNumber} {e?.address?.apartmentName} {e?.address?.locality} {e?.locatedInside} </Heading>
                   <Text> <span className={`${style.boldtext}`}>Price:</span>  {e?.countryCurrency}{e?.price} </Text>
-                  <Text className={style.oneline}> Property Group: {e.propertyGroup} </Text>
-                  <Text className={style.oneline}> Property Type: {e.propertyType} </Text>
+                  <Text> Property Group: {e.propertyGroup} </Text>
+                  <Text> Property Type: {e.propertyType} </Text>
                   <Text> officeType: {e?.officeType} </Text>
                   <Box className={style.flexequal}>
                     <Link to={`/listing/${e._id}`}>
