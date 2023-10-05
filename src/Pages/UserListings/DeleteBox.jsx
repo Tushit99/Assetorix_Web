@@ -15,13 +15,11 @@ const DeleteBox = ({ e, myListedProperty }) => {
         let id = localStorage.getItem("usrId") || undefined;
         let authorization = localStorage.getItem("AstToken") || undefined;
 
-        console.log(propertyId);
-
+ 
         let head = { id, authorization, 'Content-type': 'application/json' };
         try {
             await axios.delete(`${process.env.REACT_APP_URL}/property/${propertyId}`, { headers: head }).then((e) => {
-                console.log(e.data.msg); 
-                toast({
+                 toast({
                     title: e.data.msg, 
                     status: 'success', 
                     duration: 2000,
@@ -57,7 +55,7 @@ const DeleteBox = ({ e, myListedProperty }) => {
                             <Button variant={"unstyled"} onClick={() => setshowBox(false)}> <CgClose size={"25px"} /> </Button>
                         </Box>
                         <Box>
-                            <Text>Are you sure? You can't undo this action afterwards. {e._id} </Text>
+                            <Text>Are you sure? You can't undo this action afterwards.</Text>
                         </Box>
                         <Box display={"flex"} alignItems={"center"} justifyContent={"right"}>
                             <Button variant={'outline'} onClick={() => handleDelete(e._id)} colorScheme={'blue'} >Delete</Button>

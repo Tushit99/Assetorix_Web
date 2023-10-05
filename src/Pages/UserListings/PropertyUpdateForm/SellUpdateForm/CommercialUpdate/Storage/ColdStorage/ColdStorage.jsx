@@ -75,9 +75,10 @@ const ColdStorageUpdate = () => {
             setCountry(e?.address?.country);
             setCity(e?.address?.city);
             setPincode(e?.address?.pincode);
-            setState(e.address.state);
+            setState(e.address.state); 
+            setFlooring(e.flooring); 
             setLocality(e.address.locality);
-            setaddress(e.address.address)
+            setaddress(e.address.address); 
             if (e.preLeased_Rented == "Yes") {
                 setCurrentRentPerMonth(e.preLeased_RentedDetails.currentRentPerMonth);
                 setLeaseTenureInYear(e.preLeased_RentedDetails.leaseTenureInYear);
@@ -248,7 +249,7 @@ const ColdStorageUpdate = () => {
                 // });
                 // let data = await response.json();  
                 // console.log("data",data); 
-                await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
+                await axios.patch(`${process.env.REACT_APP_URL}/property/${productID}`, obj, { headers: head })
                     .then((e) => {
                         toast({
                             title: e.data.msg,
