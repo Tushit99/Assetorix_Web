@@ -99,20 +99,9 @@ const CommercialShop = () => {
             setState(e.address.state);
             setLocality(e.address.locality);
             setPlotArea(e.carpetArea);
-            setPriceSqr(e.pantrySizeUnit);
-            if (e.lift == "Available") {
-                setLiftPassenger(e.liftDetails.passenger);
-                setLiftService(e.liftDetails.service);
-            }
-            if (e.pantryType == "Private" || e.pantryType == "Shared") {
-                setPantrySize(e?.pantrySize);
-            }
+            setPriceSqr(e.pantrySizeUnit); 
             setFireSafty(e?.fireSafety);
-            setTotalFloors(e.totalFloors);
-            if (e.lift == "Available") {
-                setLiftPassenger(e?.liftDetails?.passenger);
-                setLiftService(e?.liftDetails?.service);
-            }
+            setTotalFloors(e.totalFloors); 
             setAvailability(e.availabilityStatus);
             if (e.availabilityStatus == "Ready to move") {
                 setFromyear(e.propertyStatus);

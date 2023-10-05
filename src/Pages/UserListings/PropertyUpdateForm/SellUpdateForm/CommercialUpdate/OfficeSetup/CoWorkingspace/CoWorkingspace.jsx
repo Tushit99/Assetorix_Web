@@ -92,17 +92,9 @@ const CoWorkingspaceUpdate = () => {
             setZoneType(e.address.zoneType);
             setPlotArea(e.plotArea);
             setWashroom(e.washrooms); 
-            setPriceSqr(e.plotAreaUnit);
-            if (e.pantryType == "Private" || e.pantryType == "Shared") {
-                setPantrySize(e?.pantrySize);
-            }
+            setPriceSqr(e.plotAreaUnit); 
             setFireSafty(e?.fireSafety);
-            setFloorNumber(e?.floorOn);
-            if (e.lift == "Available") {
-                setLiftPassenger(e?.liftDetails?.passenger);
-                setLiftService(e?.liftDetails?.service);
-                setModernLifts(e?.liftDetails?.modern);
-            }
+            setFloorNumber(e?.floorOn); 
             setParkingArr(e.parkingDetailsList);
             setAvailability(e.availabilityStatus);
             if (e.availabilityStatus == "Ready to move") {
