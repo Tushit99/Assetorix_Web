@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -19,11 +19,12 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { CleanInputText } from "../../../../code";
-
+import { useParams } from "react-router-dom";
 
 
 
 const ManufactureUpdate = () => {
+  const { productID } = useParams();
   const isCountry = useSelector((state) => state.gloalval);
   const toast = useToast();
   const [country, setCountry] = useState("");
@@ -67,6 +68,57 @@ const ManufactureUpdate = () => {
 
   // please don'nt change any function without any prior knowledge
 
+  const handleDataFetch = async () => {
+    await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
+      let e = detail.data.data;
+      console.log(e);
+      setCountry(e?.address?.country);
+      setCity(e?.address?.city);
+      setPincode(e?.address?.pincode);
+      setState(e.address.state);
+      setLocality(e?.address.locality);
+      setAddress(e?.address.address);
+      setwashrooms(e?.washrooms);
+      setPlotArea(e?.plotArea);
+      setAreaPer(e?.plotAreaUnit);
+      setAvailability(e?.availabilityStatus);
+      if (e.availabilityStatus == "Ready to move") {
+        setFromyear(e?.propertyStatus);
+      }
+      else if (e?.availabilityStatus == "Under construction") {
+        setExpectedYear(e?.expectedByYear);
+      }
+      setOwnerShip(e?.ownership);
+      setPricedetail(e?.price);
+      setPriceSqr(e?.priceUnit);
+      setInclusivePrice(e?.inclusivePrices);
+      setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice);
+      setMaintenanceTimePeriod(e?.additionalPricingDetails?.maintenanceTimePeriod);
+      setBookingAmount(e?.additionalPricingDetails?.bookingAmount);
+      setPreLeased(e.preLeased_Rented);
+      if (e.preLeased_Rented == "Yes") {
+        setCurrentRentPerMonth(e.preLeased_RentedDetails.currentRentPerMonth);
+        setLeaseTenureInYear(e.preLeased_RentedDetails.leaseTenureInYear);
+        setAnnualRentIncrease(e.preLeased_RentedDetails.annualRentIncrease);
+        setBusinessType(e.preLeased_RentedDetails.businessType);
+      }
+      setDesc(e.description);
+      setAminity(e.amenities);
+      setPropertyFeature(e?.propertyFeatures);
+      setLocationAdv(e.locationAdv);
+      setBuildingFeature(e?.society_buildingFeatures);
+      setAdditinalFeature(e?.additionalFeatures);
+      setOtherFeature(e?.otherFeatures);
+      setPropertyFacing(e?.propertyFacing);
+      setFlooring(e?.flooring);
+
+
+    })
+  }
+
+  useEffect(() => {
+    handleDataFetch();
+  }, []);
 
   const handleSubmitData = async (e) => {
     e.preventDefault();
@@ -74,15 +126,15 @@ const ManufactureUpdate = () => {
       lookingFor: "Sell",
       propertyGroup: "Commercial",
       propertyType: "Industry",
-      industryType: "Manufacturing", 
-      address: { 
+      industryType: "Manufacturing",
+      address: {
         address,
         locality,
         pincode,
         city,
         state,
         country,
-      }, 
+      },
       washrooms,
       ownership,
       price: +pricedetail,
@@ -143,7 +195,7 @@ const ManufactureUpdate = () => {
     if (
       ownership &&
       pricedetail &&
-      
+
       inclusivePrices &&
       amenities &&
       propertyFeatures &&
@@ -210,7 +262,7 @@ const ManufactureUpdate = () => {
         // });
         // let data = await response.json();  
         // console.log("data",data); 
-        await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
+        await axios.patch(`${process.env.REACT_APP_URL}/property/${productID}`, obj, { headers: head })
           .then((e) => {
             toast({
               title: e.data.msg,
@@ -254,7 +306,7 @@ const ManufactureUpdate = () => {
 
   const pinfetch = async (pin) => {
     try {
-      
+
       let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
       setState(res.data[0].state);
       setCity(res.data[0].city);
@@ -405,7 +457,7 @@ const ManufactureUpdate = () => {
             fontSize={"md"}
             variant="flushed"
           />
-          <NumberInput>
+          <NumberInput value={pincode}>
             <NumberInputField
               placeholder={"Enter pincode"}
               padding={"0 10px"}
@@ -490,7 +542,7 @@ const ManufactureUpdate = () => {
         <Box>
           <Box textAlign={"left"} >
             <Text> No. of Washrooms </Text>
-            <NumberInput>
+            <NumberInput value={washrooms}>
               <NumberInputField
                 variant="flushed"
                 padding={"0 2px"}
@@ -514,7 +566,7 @@ const ManufactureUpdate = () => {
             isAttached
             variant="outline"
           >
-            <NumberInput>
+            <NumberInput value={plotArea}>
               <NumberInputField
                 padding={"0 2px"}
                 value={plotArea}
@@ -669,7 +721,7 @@ const ManufactureUpdate = () => {
         )}
         {/* ============================== property Age-end ============================== */}
 
-        {/* ============================ Add pricing and details (Ownership) ============================ */} 
+        {/* ============================ Add pricing and details (Ownership) ============================ */}
         <Box>
           <Heading
             as={"h3"}
@@ -751,7 +803,7 @@ const ManufactureUpdate = () => {
                 >
                   {isCountry.country == "india" ? "₹" : "$"} Price Details
                 </Heading>
-                <NumberInput >
+                <NumberInput value={pricedetail}>
                   <NumberInputField
                     value={pricedetail}
                     required
@@ -773,8 +825,8 @@ const ManufactureUpdate = () => {
                 </Heading>
                 <NumberInput value={priceSqr}>
                   <NumberInputField
-                    
-                    
+
+
                   />
                 </NumberInput>
               </Box>

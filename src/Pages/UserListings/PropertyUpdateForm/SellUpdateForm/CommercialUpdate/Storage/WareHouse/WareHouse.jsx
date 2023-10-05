@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Box,
     Button,
@@ -14,42 +14,29 @@ import {
     useToast,
 } from "@chakra-ui/react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
-import { Checkbox } from "@chakra-ui/react"; 
+import { Checkbox } from "@chakra-ui/react";
 import style from "../Storage.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
-import { CleanInputText } from "../../../../code"; 
+import { CleanInputText } from "../../../../code";
+import { useParams } from "react-router-dom";
 
 
 
 const WareHouseUpdate = () => {
+    const { productID } = useParams();
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
     const [facingwidth, setFacingWidth] = useState("");
     const [city, setCity] = useState("");
-    const [appartment, setApartment] = useState("");
     const [pincode, setPincode] = useState(0);
     const [state, setState] = useState("");
     const [locality, setLocality] = useState("");
     const [address, setAddress] = useState("");
     const [washrooms, setwashrooms] = useState(0);
-    const [bathroom, setBathroom] = useState(0);
-    const [balconey, setBalcony] = useState(0);
-    const [parking, setParking] = useState(0);
-    const [openparking, setOpenparking] = useState(0);
-    const [light, setLight] = useState(0);
-    const [fans, setFans] = useState(0);
-    const [ac, setAc] = useState(0);
-    const [tv, setTv] = useState(0);
-    const [Beds, setBeds] = useState(0);
-    const [wardrobe, setWardrobe] = useState(0);
-    const [geyser, setGeyser] = useState(0);
     const [areaPer, setAreaPer] = useState("sq.ft");
-    const [furnishedarr, setfurnishedarr] = useState([]);
-    const [extraroom, setExtraRoom] = useState([]);
-    const [furnished, setFurnished] = useState("");
     const [availability, setAvailability] = useState("");
     const [fromyear, setFromyear] = useState("");
     const [expectedyear, setExpectedYear] = useState("");
@@ -61,8 +48,6 @@ const WareHouseUpdate = () => {
     const [propertyFeatures, setPropertyFeature] = useState("");
     const [buildingFeature, setBuildingFeature] = useState([]);
     const [additinalft, setAdditinalFeature] = useState([]);
-    const [watersource, setWaterSource] = useState([]);
-    const [overLook, setoverlook] = useState([]);
     const [otherFeature, setOtherFeature] = useState([]);
     const [powerbackup, setPowerbackup] = useState("");
     const [propertyFacing, setPropertyFacing] = useState("");
@@ -87,6 +72,58 @@ const WareHouseUpdate = () => {
 
     // please don'nt change any function without any prior knowledge
 
+    const handleDataFetch = async () => {
+        await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
+            let e = detail.data.data;
+            console.log(e);
+            setCountry(e?.address?.country);
+            setCity(e?.address?.city);
+            setPincode(e?.address?.pincode);
+            setState(e.address.state);
+            setAddress(e.address.address);
+            setLocality(e.address.locality);
+            setwashrooms(e.washrooms);
+            if (e.preLeased_Rented == "Yes") {
+                setCurrentRentPerMonth(e.preLeased_RentedDetails.currentRentPerMonth);
+                setLeaseTenureInYear(e.preLeased_RentedDetails.leaseTenureInYear);
+                setAnnualRentIncrease(e.preLeased_RentedDetails.annualRentIncrease);
+                setBusinessType(e.preLeased_RentedDetails.businessType);
+            }
+            setOtherFeature(e.otherFeatures);
+            setBuildingFeature(e.society_buildingFeatures);
+            setAdditinalFeature(e.additionalFeatures);
+            setPropertyFacing(e.propertyFacing);
+            setFacingWidth(e.roadFacingWidth);
+            setFacing(e.roadFacingWidthType);
+            setFlooring(e.flooring); 
+
+            setPlotArea(e.carpetArea);
+            setPriceSqr(e.priceUnit);
+            setTotalFloors(e.totalFloors);
+            setAvailability(e.availabilityStatus);
+            if (e.availabilityStatus == "Ready to move") {
+                setFromyear(e.propertyStatus);
+            }
+            else if (e.availabilityStatus == "Under construction") {
+                setExpectedYear(e.expectedByYear);
+            }
+            setOwnerShip(e.ownership);
+            setPricedetail(e.price);
+            setPropertyFeature(e.propertyFeatures);
+            setInclusivePrice(e.inclusivePrices);
+            setMaintenancePrice(e.additionalPricingDetails.maintenancePrice);
+            setMaintenanceTimePeriod(e.additionalPricingDetails.maintenanceTimePeriod);
+            setBookingAmount(e.additionalPricingDetails.bookingAmount);
+            setPreLeased(e.preLeased_Rented);
+            setDesc(e.description);
+            setAminity(e.amenities);
+            setLocationAdv(e.locationAdv);
+        })
+    }
+
+    useEffect(() => {
+        handleDataFetch();
+    }, []);
 
     const handleSubmitData = async (e) => {
         e.preventDefault();
@@ -95,7 +132,7 @@ const WareHouseUpdate = () => {
             propertyGroup: "Commercial",
             propertyType: "Storage",
             storageType: "Ware House",
-            address: {  
+            address: {
                 address,
                 locality,
                 pincode,
@@ -103,7 +140,7 @@ const WareHouseUpdate = () => {
                 state,
                 country,
             },
-            washrooms,  
+            washrooms,
             ownership,
             price: +pricedetail,
             priceUnit: +priceSqr,
@@ -113,10 +150,8 @@ const WareHouseUpdate = () => {
             preLeased_Rented: preLeased,
             society_buildingFeatures: buildingFeature,
             additionalFeatures: additinalft,
-            waterSources: watersource,
             otherFeatures: otherFeature,
             powerBackup: powerbackup,
-            overLookings: overLook,
             propertyFacing,
             flooring,
             roadFacingWidth: facingwidth,
@@ -126,11 +161,6 @@ const WareHouseUpdate = () => {
             plotAreaUnit: areaPer,
             carpetArea: plotArea,
             carpetAreaUnit: areaPer,
-            parking: {
-                openParking: openparking.toString(),
-                closeParking: parking.toString(),
-            },
-            otherRoom: extraroom,
             description: desc,
             countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
             additionalPricingDetails: {
@@ -156,8 +186,6 @@ const WareHouseUpdate = () => {
             showToastError('Provide locality');
         } else if (!washrooms) {
             showToastError('Provide washrooms');
-        } else if (!furnishedarr) {
-            showToastError('Provide Furnished Field');
         } else if (!ownership) {
             showToastError('Provide OwnerShip');
         } else if (!pricedetail) {
@@ -170,14 +198,14 @@ const WareHouseUpdate = () => {
             obj["locationAdv"] = locationAdv
         }
 
-        if ( 
+        if (
             ownership &&
             pricedetail &&
-            
+
             inclusivePrices &&
             amenities &&
             propertyFeatures &&
-            preLeased &&  
+            preLeased &&
             desc
         ) {
             let id = localStorage.getItem("usrId") || undefined;
@@ -206,22 +234,7 @@ const WareHouseUpdate = () => {
                 obj["preLeased_RentedDetails"] = preLeased_RentedDetails
             }
 
-            if (furnished == "Furnished" || furnished == "Semi-Furnished") {
-                obj.furnishedObj = {
-                    light,
-                    fans,
-                    ac,
-                    tv,
-                    Beds,
-                    wardrobe,
-                    geyser,
-                }
-                obj["furnishedList"] = furnishedarr;
-            }
 
-            if (furnished.length > 0) {
-                obj["furnished"] = furnished;
-            }
             if (availability == "Ready to move" && fromyear != "") {
                 obj["propertyStatus"] = fromyear;
                 obj["availabilityStatus"] = availability;
@@ -284,7 +297,7 @@ const WareHouseUpdate = () => {
 
     const pinfetch = async (pin) => {
         try {
-            
+
             let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
             setState(res.data[0].state);
             setCity(res.data[0].city);
@@ -417,12 +430,12 @@ const WareHouseUpdate = () => {
 
 
     return (
-        <Box w={"94%"} padding={"0 20px"} margin={"auto"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"} > 
+        <Box w={"94%"} padding={"0 20px"} margin={"auto"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"} >
             <form onSubmit={handleSubmitData}>
                 <Box className={style.location_form}>
-                    <Heading size={"lg"}>Where is your property located?</Heading>
+                    <Heading size={"lg"}> Ware House </Heading>
                     <Heading size={"sm"}>
-                        An accurate location helps you connect with the right buyers.
+                        Location Detail
                     </Heading>
 
                     <Input
@@ -434,27 +447,16 @@ const WareHouseUpdate = () => {
                         onChange={(e) => setAddress(e.target.value)}
                         fontSize={"md"}
                         variant="flushed"
-                    /> 
-                    <NumberInput>
-                        <NumberInputField
-                            placeholder={"Enter pincode"}
-                            padding={"0 10px"}
-                            borderRight={0}
-                            borderLeft={0}
-                            borderTop={0}
-                            borderRadius={0}
-                            _active={{
-                                borderRight: "0",
-                                borderLeft: "0",
-                                borderTop: "0",
-                                borderRadius: "0",
-                            }}
-                            required
-                            fontSize={"md"}
-                            value={pincode}
-                            onChange={handlepinfetch}
-                        />
-                    </NumberInput>
+                    />
+                    <Input
+                        type="text"
+                        placeholder={"Enter pincode"}
+                        padding={"0 10px"}
+                        required
+                        fontSize={"md"}
+                        value={pincode}
+                        onChange={handlepinfetch}
+                    />
                     <Input
                         type="text"
                         padding={"0 10px"}
@@ -514,23 +516,22 @@ const WareHouseUpdate = () => {
                     <Heading as={"h4"} size={"sm"} margin={"0 0 30px 0 "}>
                         Add Room Details
                     </Heading>
-                </Box> 
+                </Box>
 
                 {/* ============================== No. of Washrooms ====================================== */}
                 <Box>
                     <Box textAlign={"left"} >
                         <Text> No. of Washrooms </Text>
-                        <NumberInput>
-                            <NumberInputField
-                                variant="flushed"
-                                padding={"0 2px"}
-                                onChange={(e) => setwashrooms(e.target.value)}
-                                value={washrooms}
-                                required
-                            />
-                        </NumberInput>
+                        <Input
+                            type="text"
+                            variant="flushed"
+                            padding={"0 2px"}
+                            onChange={(e) => setwashrooms(e.target.value)}
+                            value={washrooms}
+                            required
+                        /> 
                     </Box>
-                </Box> 
+                </Box>
 
                 {/* ============================ add area details =============================== */}
                 <Box textAlign={"left"} padding={"10px 0"}>
@@ -544,18 +545,17 @@ const WareHouseUpdate = () => {
                         isAttached
                         variant="outline"
                     >
-                        <NumberInput>
-                            <NumberInputField
-                                padding={"0 2px"}
-                                value={plotArea}
-                                onChange={(e) => {
-                                    areaCalucation();
-                                    setPlotArea(e.target.value);
-                                }}
-                                required
-                            />
-                        </NumberInput>
-                        <select value={areaPer} onChange={(e) => {
+                        <Input
+                            type="text"
+                            padding={"0 2px"}
+                            value={plotArea}
+                            onChange={(e) => {
+                                areaCalucation();
+                                setPlotArea(e.target.value);
+                            }}
+                            required
+                        />
+                        <Select value={areaPer} onChange={(e) => {
                             setAreaPer(e.target.value);
                         }} className={style.select} required>
                             <option value="sq.ft">sq.ft</option>
@@ -576,9 +576,9 @@ const WareHouseUpdate = () => {
                             <option value="rood">rood</option>
                             <option value="chataks">chataks</option>
                             <option value="perch">perch</option>
-                        </select>
+                        </Select>
                     </ButtonGroup>
-                </Box> 
+                </Box>
 
                 {/* ========================== Availability status =============================== */}
                 <Box textAlign={"left"} className={style.optional_box}>
@@ -613,7 +613,7 @@ const WareHouseUpdate = () => {
                             Under construction
                         </button>
                     </Box>
-                </Box> 
+                </Box>
 
                 {/* ========================== Age of Property ================================= */}
                 {availability == "Ready to move" && (
@@ -781,16 +781,15 @@ const WareHouseUpdate = () => {
                                 >
                                     {isCountry.country == "india" ? "₹" : "$"} Price Details
                                 </Heading>
-                                <NumberInput >
-                                    <NumberInputField
-                                        value={pricedetail}
-                                        required
-                                        onChange={(e) => {
-                                            setPricedetail(e.target.value);
-                                            areaCalucation();
-                                        }}
-                                    />
-                                </NumberInput>
+                                <Input
+                                    type="text"
+                                    value={pricedetail}
+                                    required
+                                    onChange={(e) => {
+                                        setPricedetail(e.target.value);
+                                        areaCalucation();
+                                    }}
+                                />
                             </Box>
                             <Box display={"grid"} gap={0}>
                                 <Heading
@@ -801,12 +800,11 @@ const WareHouseUpdate = () => {
                                 >
                                     {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
                                 </Heading>
-                                <NumberInput value={priceSqr}>
-                                    <NumberInputField
-                                        
-                                        
-                                    />
-                                </NumberInput>
+                                <Input
+                                    type="text"
+                                    value={priceSqr}
+                                    readOnly
+                                />
                             </Box>
                         </Box>
                     </Box>
@@ -1500,7 +1498,7 @@ const WareHouseUpdate = () => {
                     _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                     color={"#ffffff"}
                 >
-                    Post Property
+                    Update Property
                 </Button>
 
             </form>

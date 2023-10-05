@@ -57,7 +57,7 @@ const BareshellspaceUpdate = () => {
     const [pantrySize, setPantrySize] = useState("");
     const [pantryType, setPantryType] = useState("");
     const [floorNumber, setFloorNumber] = useState([]);
-    const [pricedetail, setPricedetail] = useState(""); 
+    const [pricedetail, setPricedetail] = useState("");
     const [additionalPrice, setAdditionalPrice] = useState(false);
     const [expectedRental, setExpectedRental] = useState("");
     const [bookingAmount, setBookingAmount] = useState("");
@@ -99,7 +99,7 @@ const BareshellspaceUpdate = () => {
             let e = detail.data.data;
             console.log(e);
             setCountry(e?.address?.country);
-            setCity(e?.address?.city); 
+            setCity(e?.address?.city);
             setPincode(e?.address?.pincode);
             setState(e.address.state);
             setLocality(e.address.locality);
@@ -109,12 +109,12 @@ const BareshellspaceUpdate = () => {
             setPriceSqr(e.pantrySizeUnit);
             setWashroom(e.washrooms);
             setwallConstructionStatus(e.wallStatus);
-            setdoorConstructed(e.doorStatus); 
+            setdoorConstructed(e.doorStatus);
             setLiftStatus(e.lift);
             if (e.lift == "Available") {
-                setLiftPassenger(e.liftDetails.passenger);   
-                setLiftService(e.liftDetails.service);   
-            }  
+                setLiftPassenger(e.liftDetails.passenger);
+                setLiftService(e.liftDetails.service);
+            }
             setParkingTotalNumber(e.parkingCount);
             if (e.pantryType == "Private" || e.pantryType == "Shared") {
                 setPantrySize(e?.pantrySize);
@@ -126,7 +126,7 @@ const BareshellspaceUpdate = () => {
             setFlooring(e?.flooring);
             setAirCondition(e.facilityAvailable.centralAirConditioning);
             setOxygenDuct(e.facilityAvailable.oxygenDuct);
-            setTotalFloors(e.totalFloors); 
+            setTotalFloors(e.totalFloors);
             setStairCase(e.staircases);
             if (e.lift == "Available") {
                 setLiftPassenger(e?.liftDetails?.passenger);
@@ -146,6 +146,12 @@ const BareshellspaceUpdate = () => {
             setMaintenancePrice(e.additionalPricingDetails.maintenancePrice);
             setMaintenanceTimePeriod(e.additionalPricingDetails.maintenanceTimePeriod);
             setPreLeased(e.preLeased_Rented);
+             if (e.preLeased_Rented == "Yes") {
+                setCurrentRentPerMonth(e.preLeased_RentedDetails.currentRentPerMonth);
+                setLeaseTenureInYear(e.preLeased_RentedDetails.leaseTenureInYear);
+                setAnnualRentIncrease(e.preLeased_RentedDetails.annualRentIncrease);
+                setBusinessType(e.preLeased_RentedDetails.businessType);
+            } 
             setpreviouslyUsedList(e.previouslyUsedList);
             setDesc(e.description);
             setAminity(e.amenities);
@@ -273,9 +279,9 @@ const BareshellspaceUpdate = () => {
             }
 
             if (preLeased == "Yes") {
-                let preLeased_RentedDetails = { 
+                let preLeased_RentedDetails = {
                     currentRentPerMonth,
-                    leaseTenureInYear, 
+                    leaseTenureInYear,
                     annualRentIncrease,
                     businessType
                 }

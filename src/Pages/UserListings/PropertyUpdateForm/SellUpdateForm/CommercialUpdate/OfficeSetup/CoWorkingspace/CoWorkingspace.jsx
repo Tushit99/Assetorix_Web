@@ -58,7 +58,7 @@ const CoWorkingspaceUpdate = () => {
     const [propertyFeatures, setPropertyFeature] = useState("");
     const [buildingFeature, setBuildingFeature] = useState([]);
     const [additinalft, setAdditinalFeature] = useState([]);
-    const [otherFeatures, setOtherFeatures] = useState([]); 
+    const [otherFeatures, setOtherFeatures] = useState([]);
 
 
     const [areaPer, setAreaPer] = useState("sq.ft");
@@ -91,16 +91,16 @@ const CoWorkingspaceUpdate = () => {
             setLocatedInside(e.address.locatedInside);
             setZoneType(e.address.zoneType);
             setPlotArea(e.plotArea);
-            setWashroom(e.washrooms); 
-            setPriceSqr(e.plotAreaUnit); 
+            setWashroom(e.washrooms);
+            setPriceSqr(e.plotAreaUnit);
             setFireSafty(e?.fireSafety);
-            setFloorNumber(e?.floorOn); 
+            setFloorNumber(e?.floorOn);
             setParkingArr(e.parkingDetailsList);
             setAvailability(e.availabilityStatus);
             if (e.availabilityStatus == "Ready to move") {
                 setFromyear(e.propertyStatus);
             }
-            else if (e.availabilityStatus == "Under construction") { 
+            else if (e.availabilityStatus == "Under construction") {
                 setExpectedYear(e.expectedByYear);
             }
             setOwnerShip(e.ownership);
@@ -109,18 +109,20 @@ const CoWorkingspaceUpdate = () => {
             setMaintenancePrice(e.additionalPricingDetails.maintenancePrice);
             setMaintenanceTimePeriod(e.additionalPricingDetails.maintenanceTimePeriod);
             setPreLeased(e.preLeased_Rented);
-            setCurrentRentPerMonth(e.preLeased_RentedDetails.currentRentPerMonth);
-            setLeaseTenureInYear(e.preLeased_RentedDetails.leaseTenureInYear);
-            setAnnualRentIncrease(e.preLeased_RentedDetails.annualRentIncrease);
-            setBusinessType(e.preLeased_RentedDetails.businessType);
+            if (e.preLeased_Rented == "Yes") {
+                setCurrentRentPerMonth(e.preLeased_RentedDetails.currentRentPerMonth);
+                setLeaseTenureInYear(e.preLeased_RentedDetails.leaseTenureInYear);
+                setAnnualRentIncrease(e.preLeased_RentedDetails.annualRentIncrease);
+                setBusinessType(e.preLeased_RentedDetails.businessType);
+            }
             setpreviouslyUsedList(e.previouslyUsedList);
             setDesc(e.description);
             setAminity(e.amenities);
             setLocationAdv(e.locationAdv);
-            setPropertyFeature(e.propertyFeatures); 
-            setBuildingFeature(e.society_buildingFeatures); 
-            setAdditinalFeature(e.additionalFeatures); 
-            setOtherFeatures(e.otherFeatures); 
+            setPropertyFeature(e.propertyFeatures);
+            setBuildingFeature(e.society_buildingFeatures);
+            setAdditinalFeature(e.additionalFeatures);
+            setOtherFeatures(e.otherFeatures);
 
         })
     }
@@ -174,7 +176,7 @@ const CoWorkingspaceUpdate = () => {
             previouslyUsedList,
             // staircases: stairCase,
             // lift: liftStatus, 
-            preLeased, 
+            preLeased,
         };
 
         const showToastError = (message) => {
@@ -218,7 +220,7 @@ const CoWorkingspaceUpdate = () => {
             if (availability == "Under construction" && expectedyear != "") {
                 obj["expectedByYear"] = expectedyear;
                 obj["availabilityStatus"] = availability;
-            } 
+            }
 
             if (preLeased == "Yes") {
                 let preLeased_RentedDetails = {
@@ -575,7 +577,7 @@ const CoWorkingspaceUpdate = () => {
                                     setPlotArea(e.target.value);
                                 }}
                                 required
-                            /> 
+                            />
                             <select
                                 value={areaPer}
                                 onChange={(e) => {
@@ -969,8 +971,8 @@ const CoWorkingspaceUpdate = () => {
                             </InputGroup>
                         </Box>
                     </Box>
- 
-                 
+
+
                     {/* property Description */}
                     <Box>
                         <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>

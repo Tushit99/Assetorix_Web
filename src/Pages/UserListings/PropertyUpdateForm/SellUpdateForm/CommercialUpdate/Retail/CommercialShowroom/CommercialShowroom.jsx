@@ -143,7 +143,7 @@ const CommercialShowroom = () => {
             setMaintenancePrice(e.additionalPricingDetails.maintenancePrice);
             setMaintenanceTimePeriod(e.additionalPricingDetails.maintenanceTimePeriod);
             setBookingAmount(e.additionalPricingDetails.bookingAmount);
-            setPreLeased(e.preLeased_Rented);
+            setPreLeased(e.preLeased_Rented); 
             setDesc(e.description);
             setAminity(e.amenities);
             setLocationAdv(e.locationAdv);
@@ -616,8 +616,8 @@ const CommercialShowroom = () => {
                         />
                         {pincollection.length ? (
                             <datalist id="browsers">
-                                {pincollection.map((e) => (
-                                    <option value={e.locality} />
+                                {pincollection.map((e,i) => (
+                                    <option key={i} value={e.locality} />
                                 ))}
                             </datalist>
                         ) : ""}
@@ -681,7 +681,7 @@ const CommercialShowroom = () => {
                                     }}
                                     required
                                 />
-                                <select value={areaPer} onChange={(e) => {
+                                <Select value={areaPer} onChange={(e) => {
                                     setAreaPer(e.target.value);
                                 }} className={style.select} required>
                                     <option value="sq.ft">sq.ft</option>
@@ -702,7 +702,7 @@ const CommercialShowroom = () => {
                                     <option value="rood">rood</option>
                                     <option value="chataks">chataks</option>
                                     <option value="perch">perch</option>
-                                </select>
+                                </Select>
                             </ButtonGroup>
                         </Box>
                         {/* Shop facade size (Optional) */}

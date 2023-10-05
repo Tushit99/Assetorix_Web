@@ -42,7 +42,7 @@ const ReadyToMoveUpdate = () => {
     const [cabins, setCabins] = useState("");
     const [meetingRoom, setMeetingRoom] = useState("");
     const [washroomType, setWashroomType] = useState("");
-    const [privateWashroom, setPrivateWashroom] = useState(0); 
+    const [privateWashroom, setPrivateWashroom] = useState(0);
     const [sharedWashroom, setSharedWashroom] = useState(0);
     const [conferenceRoom, setConferenceRoom] = useState("");
     const [receptionArea, setReceptionArea] = useState("");
@@ -108,7 +108,7 @@ const ReadyToMoveUpdate = () => {
             setMinseat(e.officeSetup.minSeats);
             setMaxseat(e.officeSetup.maxSeats);
             setCabins(e.officeSetup.cabins);
-            setPriceSqr(e.priceUnit); 
+            setPriceSqr(e.priceUnit);
             setMeetingRoom(e.officeSetup.meetingRooms);
             if (e.washroomDetails.privateWashrooms > 0 || e.washroomDetails.sharedWashrooms > 0) {
                 setWashroomType("Available");
@@ -149,28 +149,30 @@ const ReadyToMoveUpdate = () => {
                 setExpectedYear(e.expectedByYear);
             }
             setOwnerShip(e.ownership);
-            setPricedetail(e.price); 
+            setPricedetail(e.price);
             setInclusivePrice(e.inclusivePrices);
             setMaintenancePrice(e.additionalPricingDetails.maintenancePrice);
             setMaintenanceTimePeriod(e.additionalPricingDetails.maintenanceTimePeriod);
-            setPreLeased(e.preLeased_Rented);
-            setCurrentRentPerMonth(e.preLeased_RentedDetails.currentRentPerMonth); 
-            setLeaseTenureInYear(e.preLeased_RentedDetails.leaseTenureInYear); 
-            setAnnualRentIncrease(e.preLeased_RentedDetails.annualRentIncrease); 
-            setBusinessType(e.preLeased_RentedDetails.businessType);  
-            setFireNOC(e.noc); 
-            setOccupancyCertificate(e.occupancy); 
-            setpreviouslyUsedList(e.previouslyUsedList); 
-            setDesc(e.description); 
-            setAminity(e.amenities); 
-            setLocationAdv(e.locationAdv);  
+            setPreLeased(e.preLeased_Rented); 
+            if (e.preLeased_Rented == "Yes") {
+                setCurrentRentPerMonth(e.preLeased_RentedDetails.currentRentPerMonth);
+                setLeaseTenureInYear(e.preLeased_RentedDetails.leaseTenureInYear);
+                setAnnualRentIncrease(e.preLeased_RentedDetails.annualRentIncrease);
+                setBusinessType(e.preLeased_RentedDetails.businessType);
+            }
+            setFireNOC(e.noc);
+            setOccupancyCertificate(e.occupancy);
+            setpreviouslyUsedList(e.previouslyUsedList);
+            setDesc(e.description);
+            setAminity(e.amenities);
+            setLocationAdv(e.locationAdv);
 
         })
     }
 
     useEffect(() => {
         handleDataFetch();
-    }, []); 
+    }, []);
 
 
     const handleSubmitData = async (e) => {
@@ -1563,7 +1565,7 @@ const ReadyToMoveUpdate = () => {
                                     _focus={{ bg: 'white' }}
                                     rightIcon={<ChevronDownIcon />}
                                 >
-                                    {previouslyUsedList.length==0 ? "Select" : `${previouslyUsedList.length} selected`}
+                                    {previouslyUsedList.length == 0 ? "Select" : `${previouslyUsedList.length} selected`}
                                 </MenuButton>
                                 <MenuList className={style.menu} >
                                     <Checkbox value={"Backend Office"} isChecked={previouslyUsedList.includes("Backend Office")} onChange={(e) => {
@@ -1573,7 +1575,7 @@ const ReadyToMoveUpdate = () => {
                                     <Checkbox value={"CA Office"} isChecked={previouslyUsedList.includes("CA Office")} onChange={(e) => {
                                         e.preventDefault();
                                         FileSystemHandle(e.target.value)
-                                    }} > CA Office </Checkbox> 
+                                    }} > CA Office </Checkbox>
                                     <Checkbox value={"Fronted Office"} isChecked={previouslyUsedList.includes("Fronted Office")} onChange={(e) => {
                                         e.preventDefault();
                                         FileSystemHandle(e.target.value)

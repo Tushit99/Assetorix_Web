@@ -72,7 +72,7 @@ const CommercialShop = () => {
     const [suitableFor, setsuitableFor] = useState([]);
     const [maintenancePrice, setMaintenancePrice] = useState("");
     const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
-    const [bookingAmount, setBookingAmount] = useState(""); 
+    const [bookingAmount, setBookingAmount] = useState("");
     const [additionalPrice, setAdditionalPrice] = useState(false);
     const [currentRentPerMonth, setCurrentRentPerMonth] = useState("");
     const [leaseTenureInYear, setLeaseTenureInYear] = useState("");
@@ -108,18 +108,18 @@ const CommercialShop = () => {
             setentranceWidth(e.shopFacedSize.entranceWidth);
             setceilingHeight(e.shopFacedSize.ceilingHeight);
             setWashroomType(e.washrooms);
-            setlocatedNear(e.locatedNear); 
+            setlocatedNear(e.locatedNear);
             setParking(e.parking);
-            setParkingType(e.parkingType); 
-            setOtherFeature(e.otherFeatures); 
-            setBuildingFeature(e.society_buildingFeatures); 
-            setAdditinalFeature(e.additionalFeatures); 
-            setPropertyFacing(e.propertyFacing);  
-            setPrivateWashroom(e.washroomDetails.privateWashrooms); 
+            setParkingType(e.parkingType);
+            setOtherFeature(e.otherFeatures);
+            setBuildingFeature(e.society_buildingFeatures);
+            setAdditinalFeature(e.additionalFeatures);
+            setPropertyFacing(e.propertyFacing);
+            setPrivateWashroom(e.washroomDetails.privateWashrooms);
             setSharedWashroom(e.washroomDetails.sharedWashrooms);
-            setFacingWidth(e.roadFacingWidth); 
-            setFacing(e.roadFacingWidthType); 
-            setsuitableFor(e.suitableFor); 
+            setFacingWidth(e.roadFacingWidth);
+            setFacing(e.roadFacingWidthType);
+            setsuitableFor(e.suitableFor);
 
 
             setPlotArea(e.carpetArea);
@@ -130,21 +130,21 @@ const CommercialShop = () => {
             if (e.availabilityStatus == "Ready to move") {
                 setFromyear(e.propertyStatus);
             }
-            else if (e.availabilityStatus == "Under construction") { 
+            else if (e.availabilityStatus == "Under construction") {
                 setExpectedYear(e.expectedByYear);
-            } 
+            }
             setOwnerShip(e.ownership);
-            setPricedetail(e.price); 
-            setPropertyFeature(e.propertyFeatures); 
-            setInclusivePrice(e.inclusivePrices);  
+            setPricedetail(e.price);
+            setPropertyFeature(e.propertyFeatures);
+            setInclusivePrice(e.inclusivePrices);
             setMaintenancePrice(e.additionalPricingDetails.maintenancePrice);
-            setMaintenanceTimePeriod(e.additionalPricingDetails.maintenanceTimePeriod); 
-            setBookingAmount(e.additionalPricingDetails.bookingAmount); 
-            setPreLeased(e.preLeased_Rented);
+            setMaintenanceTimePeriod(e.additionalPricingDetails.maintenanceTimePeriod);
+            setBookingAmount(e.additionalPricingDetails.bookingAmount);
+            setPreLeased(e.preLeased_Rented); 
             setDesc(e.description);
             setAminity(e.amenities);
-            setLocationAdv(e.locationAdv); 
-        }) 
+            setLocationAdv(e.locationAdv);
+        })
     }
 
     useEffect(() => {
@@ -155,7 +155,7 @@ const CommercialShop = () => {
 
 
     const handleSubmitData = async (e) => {
-        e.preventDefault(); 
+        e.preventDefault();
         let obj = {
             lookingFor: "Sell",
             propertyGroup: "Commercial",
@@ -203,7 +203,7 @@ const CommercialShop = () => {
             additionalPricingDetails: {
                 maintenancePrice,
                 maintenanceTimePeriod,
-                bookingAmount, 
+                bookingAmount,
             },
             locationAdv: locationAdv
         };
@@ -1034,7 +1034,7 @@ const CommercialShop = () => {
                                         Select business type
                                     </MenuButton>
                                     <MenuList display={"grid"} borderRadius={0} marginTop={"-8px"} marginBottom={"-8px"} overflowY={"scroll"} h={"200px"} padding={"4px 10px"}>
-                                    <Checkbox isChecked={suitableFor.includes("ATM")} value={"ATM"} className={style.select} onChange={handlebusinessType} > ATM </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("ATM")} value={"ATM"} className={style.select} onChange={handlebusinessType} > ATM </Checkbox>
                                         <Checkbox isChecked={suitableFor.includes("Bakery")} value={"Bakery"} className={style.select} onChange={handlebusinessType} > Bakery </Checkbox>
                                         <Checkbox isChecked={suitableFor.includes("Boutique")} value={"Boutique"} className={style.select} onChange={handlebusinessType} > Boutique </Checkbox>
                                         <Checkbox isChecked={suitableFor.includes("Clinic")} value={"Clinic"} className={style.select} onChange={handlebusinessType} > Clinic </Checkbox>
@@ -1057,7 +1057,7 @@ const CommercialShop = () => {
                                         <Checkbox isChecked={suitableFor.includes("Stationery")} value={"Stationery"} className={style.select} onChange={handlebusinessType} > Stationery </Checkbox>
                                         <Checkbox isChecked={suitableFor.includes("Sweet")} value={"Sweet"} className={style.select} onChange={handlebusinessType} > Sweet </Checkbox>
                                         <Checkbox isChecked={suitableFor.includes("Tea Stall")} value={"Tea Stall"} className={style.select} onChange={handlebusinessType} > Tea Stall </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Other business type")} value={"Other business type"} className={style.select} onChange={handlebusinessType} > Other business type </Checkbox> 
+                                        <Checkbox isChecked={suitableFor.includes("Other business type")} value={"Other business type"} className={style.select} onChange={handlebusinessType} > Other business type </Checkbox>
                                     </MenuList>
                                 </Menu>
                             </Box>
@@ -1166,9 +1166,9 @@ const CommercialShop = () => {
                                         </Heading>
                                         <Input
                                             type="text"
-                                            value={priceSqr} 
+                                            value={priceSqr}
                                             readOnly
-                                        /> 
+                                        />
                                     </Box>
                                 </Box>
                             </Box>
