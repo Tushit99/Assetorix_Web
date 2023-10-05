@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Box,
     Button,
@@ -24,10 +24,12 @@ import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { CleanInputText } from "../../../../code";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 
 
-const CommercialShowroom = () =>  {
+const CommercialShowroom = () => {
+    const { productID } = useParams(); 
     const isCountry = useSelector((state) => state.gloalval);
     const [located, setLocated] = useState("");
     const toast = useToast();
@@ -87,6 +89,72 @@ const CommercialShowroom = () =>  {
 
     // please don'nt change any function without any prior knowledge 
 
+
+
+    const handleDataFetch = async () => {
+        await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
+            let e = detail.data.data;
+            console.log(e); 
+            setLocated(e.locatedInside); 
+            setCountry(e?.address?.country);  
+            setCity(e?.address?.city); 
+            setPincode(e?.address?.pincode); 
+            setState(e.address.state); 
+            setLocality(e.address.locality); 
+            setType(e.address.type); 
+            if (e.preLeased_Rented == "Yes") {
+                setCurrentRentPerMonth(e.preLeased_RentedDetails.currentRentPerMonth);
+                setLeaseTenureInYear(e.preLeased_RentedDetails.leaseTenureInYear);
+                setAnnualRentIncrease(e.preLeased_RentedDetails.annualRentIncrease);
+                setBusinessType(e.preLeased_RentedDetails.businessType);
+            }
+            setentranceWidth(e.shopFacedSize.entranceWidth);
+            setceilingHeight(e.shopFacedSize.ceilingHeight);
+            setWashroomType(e.washrooms);
+            setlocatedNear(e.locatedNear);
+            setParking(e.parking);
+            setParkingType(e.parkingType);
+            setOtherFeature(e.otherFeatures);
+            setBuildingFeature(e.society_buildingFeatures);
+            setAdditinalFeature(e.additionalFeatures);
+            setPropertyFacing(e.propertyFacing);
+            setPrivateWashroom(e.washroomDetails.privateWashrooms);
+            setSharedWashroom(e.washroomDetails.sharedWashrooms);
+            setFacingWidth(e.roadFacingWidth);
+            setFacing(e.roadFacingWidthType);
+            setsuitableFor(e.suitableFor);
+
+
+            setPlotArea(e.carpetArea);
+            setPriceSqr(e.priceUnit);
+            setFireSafty(e?.fireSafety);
+            setTotalFloors(e.totalFloors);
+            setAvailability(e.availabilityStatus);
+            if (e.availabilityStatus == "Ready to move") {
+                setFromyear(e.propertyStatus);
+            }
+            else if (e.availabilityStatus == "Under construction") {
+                setExpectedYear(e.expectedByYear);
+            }
+            setOwnerShip(e.ownership);
+            setPricedetail(e.price);
+            setPropertyFeature(e.propertyFeatures);
+            setInclusivePrice(e.inclusivePrices);
+            setMaintenancePrice(e.additionalPricingDetails.maintenancePrice);
+            setMaintenanceTimePeriod(e.additionalPricingDetails.maintenanceTimePeriod);
+            setBookingAmount(e.additionalPricingDetails.bookingAmount);
+            setPreLeased(e.preLeased_Rented);
+            setDesc(e.description);
+            setAminity(e.amenities);
+            setLocationAdv(e.locationAdv);
+        })
+    } 
+
+    
+    useEffect(() => {
+        handleDataFetch();
+    }, []);
+
     // submit function
 
 
@@ -95,8 +163,8 @@ const CommercialShowroom = () =>  {
         let obj = {
             lookingFor: "Sell",
             propertyGroup: "Commercial",
-            propertyType: "Retail", 
-            retailSpaceType: "Commercial Showrooms", 
+            propertyType: "Retail",
+            retailSpaceType: "Commercial Showrooms",
             address: {
                 type: type,
                 locality,
@@ -104,7 +172,7 @@ const CommercialShowroom = () =>  {
                 city,
                 state,
                 country,
-            }, 
+            },
             ownership,
             price: +pricedetail,
             priceUnit: +priceSqr,
@@ -170,7 +238,7 @@ const CommercialShowroom = () =>  {
             showToastError('Provide Total Floors');
         } else if (!facingwidth) {
             showToastError("Provide facing width")
-        } 
+        }
 
         if (
             city &&
@@ -178,7 +246,7 @@ const CommercialShowroom = () =>  {
             type &&
             ownership &&
             pricedetail &&
-            
+
             inclusivePrices &&
             additinalft &&
             propertyFacing &&
@@ -249,8 +317,8 @@ const CommercialShowroom = () =>  {
                 //     body: JSON.stringify(obj)
                 // });
                 // let data = await response.json();  
-                console.log("data", obj); 
-                await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
+                console.log("data", obj);
+                await axios.patch(`${process.env.REACT_APP_URL}/property/${productID}`, obj, { headers: head })
                     .then((e) => {
                         toast({
                             title: e.data.msg,
@@ -295,7 +363,7 @@ const CommercialShowroom = () =>  {
     // pincode to fetch data  
     const pinfetch = async (pin) => {
         try {
-            
+
             let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
             setState(res.data[0].state);
             setCity(res.data[0].city);
@@ -498,7 +566,7 @@ const CommercialShowroom = () =>  {
     return (
         <Box w={"94%"} padding={"0 20px"} margin={"auto"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"} >
             <Box>
-                <Heading  margin={"10px 0"} size={"md"} > Your shop is located inside </Heading>
+                <Heading margin={"10px 0"} size={"md"} > Your shop is located inside </Heading>
                 <Box display={"flex"} flexWrap={"wrap"} gap={4} >
                     <button value={"Mall"} className={located == "Mall" ? style.setbtn : style.btn} onClick={(e) => setLocated(e.target.value)} > Mall </button>
                     <button value={"Commercial Project"} className={located == "Commercial Project" ? style.setbtn : style.btn} onClick={(e) => setLocated(e.target.value)} > Commercial Project </button>
@@ -526,26 +594,15 @@ const CommercialShowroom = () =>  {
                             fontSize={"md"}
                             variant="flushed"
                         />
-                        <NumberInput>
-                            <NumberInputField
-                                placeholder={"Enter pincode"}
-                                padding={"0 10px"}
-                                borderRight={0}
-                                borderLeft={0}
-                                borderTop={0}
-                                borderRadius={0}
-                                _active={{
-                                    borderRight: "0",
-                                    borderLeft: "0",
-                                    borderTop: "0",
-                                    borderRadius: "0",
-                                }}
-                                required
-                                fontSize={"md"}
-                                value={pincode}
-                                onChange={handlepinfetch}
-                            />
-                        </NumberInput>
+                        <Input
+                            type="text"
+                            placeholder={"Enter pincode"}
+                            required
+                            padding={"0 10px"}
+                            fontSize={"md"}
+                            value={pincode}
+                            onChange={handlepinfetch}
+                        />
                         <Input
                             type="text"
                             padding={"0 10px"}
@@ -615,17 +672,15 @@ const CommercialShowroom = () =>  {
                                 isAttached
                                 variant="outline"
                             >
-                                <NumberInput>
-                                    <NumberInputField
-                                        padding={"0 2px"}
-                                        value={plotArea}
-                                        onChange={(e) => {
-                                            areaCalucation();
-                                            setPlotArea(e.target.value);
-                                        }}
-                                        required
-                                    />
-                                </NumberInput>
+                                <Input type="text"
+                                    padding={"0 2px"}
+                                    value={plotArea}
+                                    onChange={(e) => {
+                                        areaCalucation();
+                                        setPlotArea(e.target.value);
+                                    }}
+                                    required
+                                />
                                 <select value={areaPer} onChange={(e) => {
                                     setAreaPer(e.target.value);
                                 }} className={style.select} required>
@@ -977,37 +1032,37 @@ const CommercialShowroom = () =>  {
 
                         {/* ============================ Suitable for business types ============================ */}
                         <Box textAlign={"left"}>
-                            <Heading  margin={"10px 0"} size={"md"} > Suitable for business types </Heading>
+                            <Heading margin={"10px 0"} size={"md"} > Suitable for business types </Heading>
                             <Box>
                                 <Menu>
                                     <MenuButton as={Button} borderRadius={0} rightIcon={<ChevronDownIcon />}>
                                         Select business type
                                     </MenuButton>
                                     <MenuList display={"grid"} borderRadius={0} marginTop={"-8px"} marginBottom={"-8px"} overflowY={"scroll"} h={"200px"} padding={"4px 10px"}>
-                                        <Checkbox value={"ATM"} className={style.select} onChange={handlebusinessType} > ATM </Checkbox>
-                                        <Checkbox value={"Bakery"} className={style.select} onChange={handlebusinessType} > Bakery </Checkbox>
-                                        <Checkbox value={"Boutique"} className={style.select} onChange={handlebusinessType} > Boutique </Checkbox>
-                                        <Checkbox value={"Clinic"} className={style.select} onChange={handlebusinessType} > Clinic </Checkbox>
-                                        <Checkbox value={"Clothes"} className={style.select} onChange={handlebusinessType} > Clothes </Checkbox>
-                                        <Checkbox value={"Cloud Kitchen"} className={style.select} onChange={handlebusinessType} > Cloud Kitchen </Checkbox>
-                                        <Checkbox value={"Coffee"} className={style.select} onChange={handlebusinessType} > Coffee </Checkbox>
-                                        <Checkbox value={"Dental Clinic"} className={style.select} onChange={handlebusinessType} > Dental Clinic </Checkbox>
-                                        <Checkbox value={"Fast Food"} className={style.select} onChange={handlebusinessType} > Fast Food </Checkbox>
-                                        <Checkbox value={"Footwear"} className={style.select} onChange={handlebusinessType} > Footwear </Checkbox>
-                                        <Checkbox value={"Gym"} className={style.select} onChange={handlebusinessType} > Gym </Checkbox>
-                                        <Checkbox value={"Jewellery"} className={style.select} onChange={handlebusinessType} > Jewellery </Checkbox>
-                                        <Checkbox value={"Juice"} className={style.select} onChange={handlebusinessType} > Juice </Checkbox>
-                                        <Checkbox value={"Meat"} className={style.select} onChange={handlebusinessType} > Meat </Checkbox>
-                                        <Checkbox value={"Medical"} className={style.select} onChange={handlebusinessType} > Medical </Checkbox>
-                                        <Checkbox value={"Mobile"} className={style.select} onChange={handlebusinessType} > Mobile </Checkbox>
-                                        <Checkbox value={"Pub/Bar"} className={style.select} onChange={handlebusinessType} > Pub/Bar </Checkbox>
-                                        <Checkbox value={"Restaurants"} className={style.select} onChange={handlebusinessType} > Restaurants </Checkbox>
-                                        <Checkbox value={"Salon/Spa"} className={style.select} onChange={handlebusinessType} > Salon/Spa </Checkbox>
-                                        <Checkbox value={"Mobile"} className={style.select} onChange={handlebusinessType} > Mobile </Checkbox>
-                                        <Checkbox value={"Stationery"} className={style.select} onChange={handlebusinessType} > Stationery </Checkbox>
-                                        <Checkbox value={"Sweet"} className={style.select} onChange={handlebusinessType} > Sweet </Checkbox>
-                                        <Checkbox value={"Tea Stall"} className={style.select} onChange={handlebusinessType} > Tea Stall </Checkbox>
-                                        <Checkbox value={"Other business type"} className={style.select} onChange={handlebusinessType} > Other business type </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("ATM")} value={"ATM"} className={style.select} onChange={handlebusinessType} > ATM </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Bakery")} value={"Bakery"} className={style.select} onChange={handlebusinessType} > Bakery </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Boutique")} value={"Boutique"} className={style.select} onChange={handlebusinessType} > Boutique </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Clinic")} value={"Clinic"} className={style.select} onChange={handlebusinessType} > Clinic </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Clothes")} value={"Clothes"} className={style.select} onChange={handlebusinessType} > Clothes </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Cloud Kitchen")} value={"Cloud Kitchen"} className={style.select} onChange={handlebusinessType} > Cloud Kitchen </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Coffee")} value={"Coffee"} className={style.select} onChange={handlebusinessType} > Coffee </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Dental Clinic")} value={"Dental Clinic"} className={style.select} onChange={handlebusinessType} > Dental Clinic </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Fast Food")} value={"Fast Food"} className={style.select} onChange={handlebusinessType} > Fast Food </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Footwear")} value={"Footwear"} className={style.select} onChange={handlebusinessType} > Footwear </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Gym")} value={"Gym"} className={style.select} onChange={handlebusinessType} > Gym </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Jewellery")} value={"Jewellery"} className={style.select} onChange={handlebusinessType} > Jewellery </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Juice")} value={"Juice"} className={style.select} onChange={handlebusinessType} > Juice </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Meat")} value={"Meat"} className={style.select} onChange={handlebusinessType} > Meat </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Medical")} value={"Medical"} className={style.select} onChange={handlebusinessType} > Medical </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Mobile")} value={"Mobile"} className={style.select} onChange={handlebusinessType} > Mobile </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Pub")} value={"Pub/Bar"} className={style.select} onChange={handlebusinessType} > Pub/Bar </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Restaurants")} value={"Restaurants"} className={style.select} onChange={handlebusinessType} > Restaurants </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Salon/Spa")} value={"Salon/Spa"} className={style.select} onChange={handlebusinessType} > Salon/Spa </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Mobile")} value={"Mobile"} className={style.select} onChange={handlebusinessType} > Mobile </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Stationery")} value={"Stationery"} className={style.select} onChange={handlebusinessType} > Stationery </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Sweet")} value={"Sweet"} className={style.select} onChange={handlebusinessType} > Sweet </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Tea Stall")} value={"Tea Stall"} className={style.select} onChange={handlebusinessType} > Tea Stall </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Other business type")} value={"Other business type"} className={style.select} onChange={handlebusinessType} > Other business type </Checkbox>
                                     </MenuList>
                                 </Menu>
                             </Box>
@@ -1095,16 +1150,15 @@ const CommercialShowroom = () =>  {
                                         >
                                             {isCountry.country == "india" ? "₹" : "$"} Price Details
                                         </Heading>
-                                        <NumberInput >
-                                            <NumberInputField
-                                                value={pricedetail}
-                                                required
-                                                onChange={(e) => {
-                                                    setPricedetail(e.target.value);
-                                                    areaCalucation();
-                                                }}
-                                            />
-                                        </NumberInput>
+                                        <Input
+                                            type="text"
+                                            value={pricedetail}
+                                            required
+                                            onChange={(e) => {
+                                                setPricedetail(e.target.value);
+                                                areaCalucation();
+                                            }}
+                                        />
                                     </Box>
                                     <Box display={"grid"} gap={0}>
                                         <Heading
@@ -1115,12 +1169,10 @@ const CommercialShowroom = () =>  {
                                         >
                                             {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
                                         </Heading>
-                                        <NumberInput value={priceSqr}>
-                                            <NumberInputField
-                                                
-                                                
-                                            />
-                                        </NumberInput>
+                                        <Input
+                                            type="text" 
+                                            value={priceSqr}
+                                        /> 
                                     </Box>
                                 </Box>
                             </Box>
@@ -1540,6 +1592,7 @@ const CommercialShowroom = () =>  {
                     </Box>
                     {/* ============================ Additional Features ============================ */}
                     <Box className={style.optional_box}>
+                        {additinalft[0]}
                         <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
                             Additional Features
                         </Heading>
@@ -1824,7 +1877,7 @@ const CommercialShowroom = () =>  {
                         *Please provide correct information, otherwise your listing might get
                         blocked
                     </Heading>
-                    <Button
+                    <Button 
                         margin={"20px 0"}
                         type="submit"
                         w={"100%"}
@@ -1832,12 +1885,12 @@ const CommercialShowroom = () =>  {
                         _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                         color={"#ffffff"}
                     >
-                        Post Property
+                        Update Property
                     </Button>
                 </form >
             </Box>
         </Box>
     );
-}; 
+};
 
 export default CommercialShowroom

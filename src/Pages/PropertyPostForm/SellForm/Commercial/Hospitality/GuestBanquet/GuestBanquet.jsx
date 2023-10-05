@@ -108,14 +108,12 @@ const GuestBanquet = () => {
             propertyFeatures,
             society_buildingFeatures: buildingFeature,
             additionalFeatures: additinalft,
-            // waterSources: watersource, 
             otherFeatures: otherFeature,
             propertyFacing,
             flooring,
             roadFacingWidth: facingwidth,
             preLeased_Rented: preLeased,
             roadFacingWidthType: facing,
-            // totalFloors: +totalfloors,
             plotArea,
             qualityRating,
             plotAreaUnit: areaPer,
@@ -203,10 +201,10 @@ const GuestBanquet = () => {
                     maintenancePrice,
                     maintenanceTimePeriod,
                     bookingAmount,
-                    expectedRentel,
-                    annualDuesPayble,
-                } 
-                obj["additionalPricingDetails"]= box;   
+                    expectedRental: expectedRentel,
+                    annualDuesPayable: annualDuesPayble
+                }
+                obj["additionalPricingDetails"] = box;
             }
 
             if (furnished == "Furnished" || furnished == "Semi-Furnished") {
@@ -720,7 +718,7 @@ const GuestBanquet = () => {
                     className={style.optional_box}
                 >
                     <Heading as={"h3"} size={"md"}>
-                        Furnishing (optional)
+                        Furnishing
                     </Heading>
                     <Box>
                         <button
@@ -2085,4 +2083,5 @@ const GuestBanquet = () => {
     );
 };
 
-export default GuestBanquet  
+export default GuestBanquet; 
+

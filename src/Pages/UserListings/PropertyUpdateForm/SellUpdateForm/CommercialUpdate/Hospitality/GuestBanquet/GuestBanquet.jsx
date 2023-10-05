@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Box,
     Button,
@@ -20,15 +20,16 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { AlphabetString, CleanInputText, NumericString } from "../../../../code";
+import { useParams } from "react-router-dom";
 
 
 
 
 const GuestBanquetUpdate = () => {
+    const { productID } = useParams();
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
-    const [facingwidth, setFacingWidth] = useState("");
     const [city, setCity] = useState("");
     const [pincode, setPincode] = useState(0);
     const [state, setState] = useState("");
@@ -48,6 +49,7 @@ const GuestBanquetUpdate = () => {
     const [furnishedarr, setfurnishedarr] = useState([]);
     const [extraroom, setExtraRoom] = useState([]);
     const [furnished, setFurnished] = useState("");
+    const [inclusivePrices, setInclusivePrice] = useState([]);
     const [availability, setAvailability] = useState("");
     const [fromyear, setFromyear] = useState("");
     const [expectedyear, setExpectedYear] = useState("");
@@ -58,12 +60,10 @@ const GuestBanquetUpdate = () => {
     const [propertyFeatures, setPropertyFeature] = useState("");
     const [buildingFeature, setBuildingFeature] = useState([]);
     const [additinalft, setAdditinalFeature] = useState([]);
-    const [overLook, setoverlook] = useState([]);
     const [otherFeature, setOtherFeature] = useState([]);
-    const [powerbackup, setPowerbackup] = useState("");
     const [propertyFacing, setPropertyFacing] = useState("");
+    const [additionalPrice, setAdditionalPrice] = useState(false);
     const [flooring, setFlooring] = useState("");
-    const [facing, setFacing] = useState("Meter");
     const [locationAdv, setLocationAdv] = useState([]);
     const [plotArea, setPlotArea] = useState("");
     const [desc, setDesc] = useState("");
@@ -74,7 +74,77 @@ const GuestBanquetUpdate = () => {
     const [annualRentIncrease, setAnnualRentIncrease] = useState("");
     const [businessType, setBusinessType] = useState("");
     const [qualityRating, setqualityRating] = useState("");
+    const [maintenancePrice, setMaintenancePrice] = useState("");
+    const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
+    const [bookingAmount, setBookingAmount] = useState("");
+    const [expectedRentel, setExpectedRentel] = useState("");
+    const [annualDuesPayble, setAnnualDuesPayble] = useState("");
 
+    const handleDataFetch = async () => {
+        await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
+            let e = detail.data.data;
+            console.log(e);
+            setCountry(e?.address?.country);
+            setCity(e?.address?.city);
+            setPincode(e?.address?.pincode);
+            setState(e.address.state);
+            setLocality(e?.address.locality);
+            setaddress(e?.address.address);
+            setRoom(e?.roomDetails?.rooms);
+            setBalcony(e?.roomDetails?.balcony);
+            setwashrooms(e?.washrooms);
+            setPlotArea(e?.plotArea);
+            setAreaPer(e?.plotAreaUnit);
+            setExtraRoom(e?.otherRoom);
+            setAvailability(e?.availabilityStatus);
+            if (e.availabilityStatus == "Ready to move") {
+                setFromyear(e?.propertyStatus);
+            }
+            else if (e?.availabilityStatus == "Under construction") {
+                setExpectedYear(e?.expectedByYear);
+            }
+            setqualityRating(e?.qualityRating);
+            setOwnerShip(e?.ownership);
+            setPricedetail(e?.price);
+            setPriceSqr(e?.priceUnit);
+            setInclusivePrice(e?.inclusivePrices);
+            setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice);
+            setMaintenanceTimePeriod(e?.additionalPricingDetails?.maintenanceTimePeriod);
+            setExpectedRentel(e?.additionalPricingDetails?.expectedRental);
+            setBookingAmount(e?.additionalPricingDetails?.bookingAmount);
+            setAnnualDuesPayble(e?.additionalPricingDetails?.annualDuesPayable);
+            setPreLeased(e.preLeased_Rented);
+            setCurrentRentPerMonth(e.preLeased_RentedDetails.currentRentPerMonth);
+            setLeaseTenureInYear(e.preLeased_RentedDetails.leaseTenureInYear);
+            setAnnualRentIncrease(e.preLeased_RentedDetails.annualRentIncrease);
+            setBusinessType(e.preLeased_RentedDetails.businessType);
+            setDesc(e.description);
+            setAminity(e.amenities);
+            setPropertyFeature(e?.propertyFeatures);
+            setLocationAdv(e.locationAdv);
+            setBuildingFeature(e?.society_buildingFeatures);
+            setAdditinalFeature(e?.additionalFeatures);
+            setOtherFeature(e?.otherFeatures);
+            setPropertyFacing(e?.propertyFacing);
+            setFlooring(e?.flooring);
+            setFurnished(e?.furnished);
+            if (e?.furnished == "Furnished" || e?.furnished == "Semi-Furnished") {
+                setfurnishedarr(e?.furnishedList);
+                setLight(e?.furnishedObj?.light);
+                setFans(e?.furnishedObj?.fans);
+                setAc(e?.furnishedObj?.ac);
+                setTv(e?.furnishedObj?.tv);
+                setBeds(e?.furnishedObj?.beds);
+                setWardrobe(e?.furnishedObj?.wardrobe);
+                setGeyser(e?.furnishedObj?.geyser);
+            }
+
+        })
+    }
+
+    useEffect(() => {
+        handleDataFetch();
+    }, []);
 
 
     const handleSubmitData = async (e) => {
@@ -100,21 +170,22 @@ const GuestBanquetUpdate = () => {
             ownership,
             price: +pricedetail,
             priceUnit: +priceSqr,
-            // inclusivePrices,
+            inclusivePrices,
+            additionalPricingDetails: {
+                maintenancePrice,
+                maintenanceTimePeriod,
+                bookingAmount,
+                expectedRental: expectedRentel,
+                annualDuesPayable: annualDuesPayble
+            },
             amenities,
             propertyFeatures,
             society_buildingFeatures: buildingFeature,
             additionalFeatures: additinalft,
-            // waterSources: watersource, 
             otherFeatures: otherFeature,
-            powerBackup: powerbackup,
-            overLookings: overLook,
             propertyFacing,
             flooring,
-            roadFacingWidth: facingwidth,
             preLeased_Rented: preLeased,
-            roadFacingWidthType: facing,
-            // totalFloors: +totalfloors,
             plotArea,
             qualityRating,
             plotAreaUnit: areaPer,
@@ -149,18 +220,10 @@ const GuestBanquetUpdate = () => {
             showToastError('Provide PriceDetail');
         } else if (!additinalft) {
             showToastError('Provide Property description');
-        } else if (!overLook) {
-            showToastError('Provide Overlooking');
-        } else if (!powerbackup) {
-            showToastError('Provide Power Backup');
         } else if (!propertyFacing) {
             showToastError('Provide Property Facing');
         } else if (!flooring) {
             showToastError('Provide Flooring');
-        } else if (!facing) {
-            showToastError('Provide Facing');
-        } else if (!facingwidth) {
-            showToastError("Provide facing width")
         }
 
         if (locationAdv) {
@@ -174,18 +237,13 @@ const GuestBanquetUpdate = () => {
             room &&
             washrooms &&
             balconey &&
-            furnishedarr &&
             ownership &&
             pricedetail &&
 
             // inclusivePrices &&
             additinalft &&
-            // watersource &&
-            overLook &&
-            powerbackup &&
             propertyFacing &&
-            flooring &&
-            facing
+            flooring
         ) {
             let id = localStorage.getItem("usrId") || undefined;
             let authorization = localStorage.getItem("AstToken") || undefined;
@@ -247,16 +305,16 @@ const GuestBanquetUpdate = () => {
                 //     body: JSON.stringify(obj)
                 // });
                 // let data = await response.json();  
-                console.log("data",obj); 
-                // await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
-                //     .then((e) => {
-                //         toast({
-                //             title: e.data.msg,
-                //             description: e.data.msg,
-                //             status: 'success',
-                //             duration: 2000,
-                //         })
-                //     });
+                // console.log("data", obj);
+                await axios.patch(`${process.env.REACT_APP_URL}/property/${productID}`, obj, { headers: head })
+                    .then((e) => {
+                        toast({
+                            title: e.data.msg,
+                            description: e.data.msg,
+                            status: 'success',
+                            duration: 2000,
+                        })
+                    });
             } catch (error) {
                 toast({
                     title: error.response.data.msg,
@@ -288,6 +346,18 @@ const GuestBanquetUpdate = () => {
         else {
             console.log(e.target.value);
         }
+    }
+
+    const handleinclusiveandtax = (e) => {
+        let newarr = [...inclusivePrices];
+        let value = e;
+
+        if (newarr.includes(value)) {
+            newarr.splice(newarr.indexOf(value), 1);
+        } else {
+            newarr.push(value);
+        }
+        setInclusivePrice(newarr);
     }
 
 
@@ -412,18 +482,7 @@ const GuestBanquetUpdate = () => {
         setBuildingFeature(newarr);
     };
 
-    const handleoverlooking = (e) => {
-        e.preventDefault();
-        let newarr = [...overLook];
-        let value = e.target.value;
 
-        if (newarr.includes(value)) {
-            newarr.splice(newarr.indexOf(value), 1);
-        } else {
-            newarr.push(value);
-        }
-        setoverlook(newarr);
-    };
 
     const handleotherfeature = (e) => {
         e.preventDefault();
@@ -476,7 +535,7 @@ const GuestBanquetUpdate = () => {
 
 
     return (
-        <Box w={"94%"} padding={"0 20px"} margin={"auto"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"}>  
+        <Box w={"94%"} padding={"0 20px"} margin={"auto"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"}>
             <form onSubmit={handleSubmitData}>
                 {/* ============================= property location =========================== */}
                 <Box className={style.location_form}>
@@ -494,7 +553,7 @@ const GuestBanquetUpdate = () => {
                         fontSize={"md"}
                         variant="flushed"
                     />
-                    <NumberInput>
+                    <NumberInput value={pincode}>
                         <NumberInputField
                             placeholder={"Enter pincode"}
                             padding={"0 10px"}
@@ -1324,7 +1383,7 @@ const GuestBanquetUpdate = () => {
                             >
                                 {isCountry.country == "india" ? "₹" : "$"} Price Details
                             </Heading>
-                            <NumberInput >
+                            <NumberInput value={pricedetail} >
                                 <NumberInputField
                                     value={pricedetail}
                                     required
@@ -1350,6 +1409,54 @@ const GuestBanquetUpdate = () => {
                                 />
                             </NumberInput>
                         </Box>
+                    </Box>
+                    <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
+                        <Checkbox
+                            isChecked={inclusivePrices.includes("Price Negotiable")}
+                            onChange={(e) => {
+                                e.preventDefault();
+                                handleinclusiveandtax(e.target.value)
+                            }}
+                            value={"Price Negotiable"}
+                        >
+                            Price Negotiable
+                        </Checkbox>
+                        <Checkbox
+                            isChecked={inclusivePrices.includes("Tax and Govt. charges excluded")}
+                            onChange={(e) => {
+                                e.preventDefault();
+                                handleinclusiveandtax(e.target.value)
+                            }}
+                            value={"Tax and Govt. charges excluded"}
+                        >
+                            Tax and Govt. charges excluded
+                        </Checkbox>
+                    </Box>
+                    <Box textAlign={"left"} display={"grid"}>
+                        {additionalPrice && <>
+                            <InputGroup w={"300px"} margin={"5px 0"}>
+                                <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
+                                <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
+                                    <option value="Monthly">Monthly</option>
+                                    <option value="Yearly">Yearly</option>
+                                </Select>
+                            </InputGroup>
+                            <Input type="text" w={"300px"} value={expectedRentel} onChange={(e) => setExpectedRentel(e.target.value)} placeholder="Expected rental" margin={"0"} />
+                            <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
+                            <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
+                        </>
+                        }
+                        <Heading
+                            as={"h3"}
+                            size={"sm"}
+                            margin={"10px 0"}
+                            color={"#002aff"}
+                            fontWeight={500}
+                            cursor={"pointer"}
+                            onClick={() => setAdditionalPrice(!additionalPrice)}
+                            textAlign={"left"}>
+                            {additionalPrice ? <IoIosArrowUp style={{ display: "inline" }} /> : <IoIosArrowDown style={{ display: "inline" }} />} Add more pricing details
+                        </Heading>
                     </Box>
                 </Box>
 
@@ -1756,100 +1863,7 @@ const GuestBanquetUpdate = () => {
                     </Box>
                 </Box>
 
-                {/* Overlooking */}
-                <Box className={style.optional_box}>
-                    <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
-                        Overlooking
-                    </Heading>
-                    <Box>
-                        <button
-                            className={overLook.includes("Pool") ? style.setbtn : style.btn}
-                            onClick={handleoverlooking}
-                            value={"Pool"}
-                        >
 
-                            Pool
-                        </button>
-                        <button
-                            className={
-                                overLook.includes("Park / Garden") ? style.setbtn : style.btn
-                            }
-                            onClick={handleoverlooking}
-                            value={"Park / Garden"}
-                        >
-
-                            Park/Garden
-                        </button>
-                        <button
-                            className={overLook.includes("Club") ? style.setbtn : style.btn}
-                            onClick={handleoverlooking}
-                            value={"Club"}
-                        >
-
-                            Club
-                        </button>
-                        <button
-                            className={
-                                overLook.includes("Main Road") ? style.setbtn : style.btn
-                            }
-                            onClick={handleoverlooking}
-                            value={"Main Road"}
-                        >
-
-                            Main Road
-                        </button>
-                        <button
-                            className={overLook.includes("Other") ? style.setbtn : style.btn}
-                            onClick={handleoverlooking}
-                            value={"Other"}
-                        >
-
-                            Other
-                        </button>
-                    </Box>
-                </Box>
-
-                {/* Power Back up */}
-                <Box className={style.optional_box}>
-                    <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
-                        Power Back up
-                    </Heading>
-                    <Box>
-                        <button
-                            className={powerbackup == "None" ? style.setbtn : style.btn}
-                            value={"None"}
-                            onClick={(e) => {
-                                e.preventDefault();
-                                setPowerbackup(e.target.value)
-                            }}
-                        >
-
-                            None
-                        </button>
-                        <button
-                            className={powerbackup == "Partial" ? style.setbtn : style.btn}
-                            value={"Partial"}
-                            onClick={(e) => {
-                                e.preventDefault();
-                                setPowerbackup(e.target.value)
-                            }}
-                        >
-
-                            Partial
-                        </button>
-                        <button
-                            className={powerbackup == "Full" ? style.setbtn : style.btn}
-                            value={"Full"}
-                            onClick={(e) => {
-                                e.preventDefault();
-                                setPowerbackup(e.target.value)
-                            }}
-                        >
-
-                            Full
-                        </button>
-                    </Box>
-                </Box>
                 {/* Property facing */}
                 <Box className={style.optional_box}>
                     <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
@@ -1947,22 +1961,6 @@ const GuestBanquetUpdate = () => {
                     </Box>
                 </Box>
 
-                {/* Width of facing road */}
-                <Box className={style.optional_box}>
-                    <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
-                        Width of facing road
-                    </Heading>
-                    <Box display={"flex"} gap={"20px"} w={"300px"} >
-                        <Input type="text" variant='flushed' flex={1} required value={facingwidth} onChange={(e) => {
-                            e.preventDefault();
-                            setFacingWidth(e.target.value);
-                        }} />
-                        <Select flex={1} onChange={(e) => setFacing(e.target.value)} value={facing}>
-                            <option value="Meter"> Meter </option>
-                            <option value="Feet"> Feet </option>
-                        </Select>
-                    </Box>
-                </Box>
 
                 {/* type of flooring */}
                 <Box className={style.optional_box}>

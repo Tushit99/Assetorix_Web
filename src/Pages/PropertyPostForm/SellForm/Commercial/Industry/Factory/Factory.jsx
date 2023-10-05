@@ -14,12 +14,11 @@ import {
     useToast,
 } from "@chakra-ui/react";
 import { Checkbox } from "@chakra-ui/react";
-import style from "../Industry.module.css"; 
+import style from "../Industry.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { CleanInputText, NumericString } from "../../../../code";
-
 
 
 const Factory = () => {
@@ -172,7 +171,7 @@ const Factory = () => {
         if (
             ownership &&
             pricedetail &&
-            
+
             inclusivePrices &&
             amenities &&
             propertyFeatures &&
@@ -283,7 +282,7 @@ const Factory = () => {
 
     const pinfetch = async (pin) => {
         try {
-            
+
             let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
             setState(res.data[0].state);
             setCity(res.data[0].city);
@@ -415,7 +414,7 @@ const Factory = () => {
     }
 
 
-    return ( 
+    return (
         <div>
             <form onSubmit={handleSubmitData}>
                 <Box className={style.location_form}>
@@ -551,7 +550,7 @@ const Factory = () => {
                                 areaCalucation();
                                 setPlotArea(NumericString(e.target.value));
                             }}
-                            required /> 
+                            required />
                         <select value={areaPer} onChange={(e) => {
                             setAreaPer(e.target.value);
                         }} className={style.select} required>
@@ -800,8 +799,8 @@ const Factory = () => {
                                 </Heading>
                                 <NumberInput value={priceSqr}>
                                     <NumberInputField
-                                    
-                                        
+
+
                                     />
                                 </NumberInput>
                             </Box>
@@ -864,7 +863,7 @@ const Factory = () => {
                             onClick={() => setAdditionalPrice(!additionalPrice)}
                             textAlign={"left"}>
                             {additionalPrice ? <IoIosArrowUp style={{ display: "inline" }} /> : <IoIosArrowDown style={{ display: "inline" }} />} Add more pricing details
-                        </Heading> 
+                        </Heading>
                     </Box>
                 </Box>
 

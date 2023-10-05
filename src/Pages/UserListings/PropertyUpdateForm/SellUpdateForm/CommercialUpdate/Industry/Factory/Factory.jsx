@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Box,
     Button,
@@ -14,15 +14,16 @@ import {
     useToast,
 } from "@chakra-ui/react";
 import { Checkbox } from "@chakra-ui/react";
-import style from "../Industry.module.css"; 
+import style from "../Industry.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { CleanInputText, NumericString } from "../../../../code";
-
+import { useParams } from "react-router-dom";
 
 
 const FactoryUpdate = () => {
+    const { productID } = useParams();
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
@@ -46,9 +47,7 @@ const FactoryUpdate = () => {
     const [wardrobe, setWardrobe] = useState(0);
     const [geyser, setGeyser] = useState(0);
     const [areaPer, setAreaPer] = useState("sq.ft");
-    const [furnishedarr, setfurnishedarr] = useState([]);
     const [extraroom, setExtraRoom] = useState([]);
-    const [furnished, setFurnished] = useState("");
     const [availability, setAvailability] = useState("");
     const [fromyear, setFromyear] = useState("");
     const [expectedyear, setExpectedYear] = useState("");
@@ -85,6 +84,63 @@ const FactoryUpdate = () => {
     const [businessType, setBusinessType] = useState("");
 
     // please don'nt change any function without any prior knowledge
+
+
+    const handleDataFetch = async () => {
+        await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
+            let e = detail.data.data;
+            console.log(e);
+            setCountry(e?.address?.country);
+            setCity(e?.address?.city);
+            setPincode(e?.address?.pincode);
+            setState(e.address.state);
+            setLocality(e?.address.locality);
+            setAddress(e?.address.address);
+            setBalcony(e?.roomDetails?.balcony);
+            setwashrooms(e?.washrooms);
+            setPlotArea(e?.plotArea);
+            setAreaPer(e?.plotAreaUnit);
+            setExtraRoom(e?.otherRoom);
+            setAvailability(e?.availabilityStatus);
+            if (e.availabilityStatus == "Ready to move") {
+                setFromyear(e?.propertyStatus);
+            }
+            else if (e?.availabilityStatus == "Under construction") {
+                setExpectedYear(e?.expectedByYear);
+            }
+            setOwnerShip(e?.ownership);
+            setPricedetail(e?.price);
+            setPriceSqr(e?.priceUnit);
+            setInclusivePrice(e?.inclusivePrices);
+            setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice);
+            setMaintenanceTimePeriod(e?.additionalPricingDetails?.maintenanceTimePeriod);
+            setExpectedRentel(e?.additionalPricingDetails?.expectedRental);
+            setBookingAmount(e?.additionalPricingDetails?.bookingAmount);
+            setAnnualDuesPayble(e?.additionalPricingDetails?.annualDuesPayable);
+            setPreLeased(e.preLeased_Rented);
+            setCurrentRentPerMonth(e.preLeased_RentedDetails.currentRentPerMonth);
+            setLeaseTenureInYear(e.preLeased_RentedDetails.leaseTenureInYear);
+            setAnnualRentIncrease(e.preLeased_RentedDetails.annualRentIncrease);
+            setBusinessType(e.preLeased_RentedDetails.businessType);
+            setDesc(e.description);
+            setAminity(e.amenities);
+            setPropertyFeature(e?.propertyFeatures);
+            setLocationAdv(e.locationAdv);
+            setBuildingFeature(e?.society_buildingFeatures);
+            setAdditinalFeature(e?.additionalFeatures);
+            setOtherFeature(e?.otherFeatures);
+            setPropertyFacing(e?.propertyFacing);
+            setFlooring(e?.flooring);
+
+
+        })
+    }
+
+
+    useEffect(() => {
+        handleDataFetch();
+    }, []);
+
 
 
     const handleSubmitData = async (e) => {
@@ -155,8 +211,6 @@ const FactoryUpdate = () => {
             showToastError('Provide locality');
         } else if (!washrooms) {
             showToastError('Provide washrooms');
-        } else if (!furnishedarr) {
-            showToastError('Provide Furnished Field');
         } else if (!ownership) {
             showToastError('Provide OwnerShip');
         } else if (!pricedetail) {
@@ -172,7 +226,7 @@ const FactoryUpdate = () => {
         if (
             ownership &&
             pricedetail &&
-            
+
             inclusivePrices &&
             amenities &&
             propertyFeatures &&
@@ -205,22 +259,8 @@ const FactoryUpdate = () => {
                 obj["preLeased_RentedDetails"] = preLeased_RentedDetails
             }
 
-            if (furnished == "Furnished" || furnished == "Semi-Furnished") {
-                obj.furnishedObj = {
-                    light,
-                    fans,
-                    ac,
-                    tv,
-                    Beds,
-                    wardrobe,
-                    geyser,
-                }
-                obj["furnishedList"] = furnishedarr;
-            }
 
-            if (furnished.length > 0) {
-                obj["furnished"] = furnished;
-            }
+
             if (availability == "Ready to move" && fromyear != "") {
                 obj["propertyStatus"] = fromyear;
                 obj["availabilityStatus"] = availability;
@@ -238,9 +278,10 @@ const FactoryUpdate = () => {
                 //     body: JSON.stringify(obj)
                 // });
                 // let data = await response.json();  
-                // console.log("data",data); 
-                await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
+                // console.log("data", obj);
+                await axios.patch(`${process.env.REACT_APP_URL}/property/${productID}`, obj, { headers: head })
                     .then((e) => {
+                        console.log("YES", e)
                         toast({
                             title: e.data.msg,
                             description: e.data.msg,
@@ -283,7 +324,7 @@ const FactoryUpdate = () => {
 
     const pinfetch = async (pin) => {
         try {
-            
+
             let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
             setState(res.data[0].state);
             setCity(res.data[0].city);
@@ -415,7 +456,7 @@ const FactoryUpdate = () => {
     }
 
 
-    return ( 
+    return (
         <Box w={"94%"} padding={"0 20px"} margin={"auto"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"} >
             <form onSubmit={handleSubmitData}>
                 <Box className={style.location_form}>
@@ -434,7 +475,7 @@ const FactoryUpdate = () => {
                         fontSize={"md"}
                         variant="flushed"
                     />
-                    <NumberInput>
+                    <NumberInput value={pincode}>
                         <NumberInputField
                             placeholder={"Enter pincode"}
                             padding={"0 10px"}
@@ -519,7 +560,7 @@ const FactoryUpdate = () => {
                 <Box>
                     <Box textAlign={"left"} >
                         <Text> No. of Washrooms </Text>
-                        <NumberInput>
+                        <NumberInput value={washrooms}>
                             <NumberInputField
                                 variant="flushed"
                                 padding={"0 2px"}
@@ -551,7 +592,7 @@ const FactoryUpdate = () => {
                                 areaCalucation();
                                 setPlotArea(NumericString(e.target.value));
                             }}
-                            required /> 
+                            required />
                         <select value={areaPer} onChange={(e) => {
                             setAreaPer(e.target.value);
                         }} className={style.select} required>
@@ -778,7 +819,7 @@ const FactoryUpdate = () => {
                                 >
                                     {isCountry.country == "india" ? "₹" : "$"} Price Details
                                 </Heading>
-                                <NumberInput >
+                                <NumberInput value={pricedetail}>
                                     <NumberInputField
                                         value={pricedetail}
                                         required
@@ -800,8 +841,8 @@ const FactoryUpdate = () => {
                                 </Heading>
                                 <NumberInput value={priceSqr}>
                                     <NumberInputField
-                                    
-                                        
+
+
                                     />
                                 </NumberInput>
                             </Box>
@@ -864,7 +905,7 @@ const FactoryUpdate = () => {
                             onClick={() => setAdditionalPrice(!additionalPrice)}
                             textAlign={"left"}>
                             {additionalPrice ? <IoIosArrowUp style={{ display: "inline" }} /> : <IoIosArrowDown style={{ display: "inline" }} />} Add more pricing details
-                        </Heading> 
+                        </Heading>
                     </Box>
                 </Box>
 
@@ -1497,7 +1538,7 @@ const FactoryUpdate = () => {
                     _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                     color={"#ffffff"}
                 >
-                    Post Property
+                    Update Property
                 </Button>
 
             </form>
