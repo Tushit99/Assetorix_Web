@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Box,
     Button,
@@ -24,9 +24,11 @@ import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { CleanInputText } from "../../../../code";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 
 const CommercialShop = () => {
+    const { productID } = useParams();
     const isCountry = useSelector((state) => state.gloalval);
     const [located, setLocated] = useState("");
     const toast = useToast();
@@ -86,6 +88,54 @@ const CommercialShop = () => {
 
     // please don'nt change any function without any prior knowledge 
 
+    const handleDataFetch = async () => {
+        await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
+            let e = detail.data.data;
+            console.log(e);
+            setLocated(e.locatedInside);
+            setCountry(e?.address?.country);
+            setCity(e?.address?.city);
+            setPincode(e?.address?.pincode);
+            setState(e.address.state);
+            setLocality(e.address.locality);
+            setPlotArea(e.carpetArea);
+            setPriceSqr(e.pantrySizeUnit);
+            if (e.lift == "Available") {
+                setLiftPassenger(e.liftDetails.passenger);
+                setLiftService(e.liftDetails.service);
+            }
+            if (e.pantryType == "Private" || e.pantryType == "Shared") {
+                setPantrySize(e?.pantrySize);
+            }
+            setFireSafty(e?.fireSafety);
+            setTotalFloors(e.totalFloors);
+            if (e.lift == "Available") {
+                setLiftPassenger(e?.liftDetails?.passenger);
+                setLiftService(e?.liftDetails?.service);
+            }
+            setAvailability(e.availabilityStatus);
+            if (e.availabilityStatus == "Ready to move") {
+                setFromyear(e.propertyStatus);
+            }
+            else if (e.availabilityStatus == "Under construction") {
+                setExpectedYear(e.expectedByYear);
+            }
+            setOwnerShip(e.ownership);
+            setPricedetail(e.price);
+            setInclusivePrice(e.inclusivePrices);
+            setMaintenancePrice(e.additionalPricingDetails.maintenancePrice);
+            setMaintenanceTimePeriod(e.additionalPricingDetails.maintenanceTimePeriod);
+            setPreLeased(e.preLeased_Rented);
+            setDesc(e.description);
+            setAminity(e.amenities);
+            setLocationAdv(e.locationAdv);
+        })
+    }
+
+    useEffect(() => {
+        handleDataFetch();
+    }, []);
+
     // submit function
 
 
@@ -103,7 +153,7 @@ const CommercialShop = () => {
                 city,
                 state,
                 country,
-            }, 
+            },
             ownership,
             price: +pricedetail,
             priceUnit: +priceSqr,
@@ -169,7 +219,7 @@ const CommercialShop = () => {
             showToastError('Provide Total Floors');
         } else if (!facingwidth) {
             showToastError("Provide facing width")
-        } 
+        }
 
         if (
             city &&
@@ -177,7 +227,7 @@ const CommercialShop = () => {
             type &&
             ownership &&
             pricedetail &&
-            
+
             inclusivePrices &&
             additinalft &&
             propertyFacing &&
@@ -248,7 +298,7 @@ const CommercialShop = () => {
                 //     body: JSON.stringify(obj)
                 // });
                 // let data = await response.json();  
-                console.log("data", obj); 
+                console.log("data", obj);
                 await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
                     .then((e) => {
                         toast({
@@ -294,7 +344,7 @@ const CommercialShop = () => {
     // pincode to fetch data  
     const pinfetch = async (pin) => {
         try {
-            
+
             let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
             setState(res.data[0].state);
             setCity(res.data[0].city);
@@ -497,7 +547,7 @@ const CommercialShop = () => {
     return (
         <Box w={"94%"} padding={"0 20px"} margin={"auto"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"} >
             <Box>
-                <Heading  margin={"10px 0"} size={"md"} > Your shop is located inside </Heading>
+                <Heading margin={"10px 0"} size={"md"} > Your shop is located inside </Heading>
                 <Box display={"flex"} flexWrap={"wrap"} gap={4} >
                     <button value={"Mall"} className={located == "Mall" ? style.setbtn : style.btn} onClick={(e) => setLocated(e.target.value)} > Mall </button>
                     <button value={"Commercial Project"} className={located == "Commercial Project" ? style.setbtn : style.btn} onClick={(e) => setLocated(e.target.value)} > Commercial Project </button>
@@ -506,7 +556,7 @@ const CommercialShop = () => {
                     <button value={"Market / High Street"} className={located == "Market / High Street" ? style.setbtn : style.btn} onClick={(e) => setLocated(e.target.value)} > Market / High Street </button>
                     <button value={"Other"} className={located == "Other" ? style.setbtn : style.btn} onClick={(e) => setLocated(e.target.value)} > Other </button>
                 </Box>
-            </Box> 
+            </Box>
             <Box display={located == "" ? "none" : "block"}>
                 <form onSubmit={handleSubmitData}>
                     {/* property location */}
@@ -525,9 +575,12 @@ const CommercialShop = () => {
                             fontSize={"md"}
                             variant="flushed"
                         />
+                        <Input
+                            type="text"
+                            placeholder={"Enter pincode"}
+                        />
                         <NumberInput>
                             <NumberInputField
-                                placeholder={"Enter pincode"}
                                 padding={"0 10px"}
                                 borderRight={0}
                                 borderLeft={0}
@@ -976,7 +1029,7 @@ const CommercialShop = () => {
 
                         {/* ============================ Suitable for business types ============================ */}
                         <Box textAlign={"left"}>
-                            <Heading  margin={"10px 0"} size={"md"} > Suitable for business types </Heading>
+                            <Heading margin={"10px 0"} size={"md"} > Suitable for business types </Heading>
                             <Box>
                                 <Menu>
                                     <MenuButton as={Button} borderRadius={0} rightIcon={<ChevronDownIcon />}>
@@ -1116,8 +1169,8 @@ const CommercialShop = () => {
                                         </Heading>
                                         <NumberInput value={priceSqr}>
                                             <NumberInputField
-                                                
-                                                
+
+
                                             />
                                         </NumberInput>
                                     </Box>
@@ -1158,7 +1211,7 @@ const CommercialShop = () => {
                                     Price Negotiable
                                 </Checkbox>
                             </Box>
-                            <Box>
+                            <Box textAlign={"left"} display={"grid"} >
                                 {additionalPrice && <>
                                     <InputGroup w={"300px"} margin={"10px 0"}>
                                         <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
@@ -1835,7 +1888,7 @@ const CommercialShop = () => {
                     </Button>
                 </form >
             </Box>
-        </Box> 
+        </Box>
     );
 };
 

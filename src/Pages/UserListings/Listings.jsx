@@ -9,8 +9,7 @@ import DeleteBox from './DeleteBox';
 
 const Listings = () => {
   const [data, setdata] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [showbox, setshowBox] = useState(false);
+  const [loading, setLoading] = useState(false); 
 
 
   const myListedProperty = async () => {
@@ -48,7 +47,7 @@ const Listings = () => {
           {loading ? <Loader /> :
             <Box className={style.displaygrid} backgroundColor={"white"} padding={5} borderRadius={10} >
               {data && data?.map((e, i) => (
-                <DeleteBox key={i} e={e} />
+                <DeleteBox key={i} myListedProperty={myListedProperty} e={e} /> 
               ))}
             </Box>
           }

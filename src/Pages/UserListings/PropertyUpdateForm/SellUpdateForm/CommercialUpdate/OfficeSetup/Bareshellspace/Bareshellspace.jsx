@@ -57,7 +57,7 @@ const BareshellspaceUpdate = () => {
     const [pantrySize, setPantrySize] = useState("");
     const [pantryType, setPantryType] = useState("");
     const [floorNumber, setFloorNumber] = useState([]);
-    const [pricedetail, setPricedetail] = useState("");
+    const [pricedetail, setPricedetail] = useState(""); 
     const [additionalPrice, setAdditionalPrice] = useState(false);
     const [expectedRental, setExpectedRental] = useState("");
     const [bookingAmount, setBookingAmount] = useState("");
@@ -99,17 +99,23 @@ const BareshellspaceUpdate = () => {
             let e = detail.data.data;
             console.log(e);
             setCountry(e?.address?.country);
-            setCity(e?.address?.city);
+            setCity(e?.address?.city); 
             setPincode(e?.address?.pincode);
             setState(e.address.state);
             setLocality(e.address.locality);
             setLocatedInside(e.address.locatedInside);
             setZoneType(e.address.zoneType);
             setPlotArea(e.carpetArea);
-            setPriceSqr(e.carpetAreaUnit);
+            setPriceSqr(e.pantrySizeUnit);
             setWashroom(e.washrooms);
             setwallConstructionStatus(e.wallStatus);
-            setdoorConstructed(e.doorStatus);
+            setdoorConstructed(e.doorStatus); 
+            setLiftStatus(e.lift);
+            if (e.lift == "Available") {
+                setLiftPassenger(e.liftDetails.passenger);   
+                setLiftService(e.liftDetails.service);   
+            }  
+            setParkingTotalNumber(e.parkingCount);
             if (e.pantryType == "Private" || e.pantryType == "Shared") {
                 setPantrySize(e?.pantrySize);
             }
@@ -121,10 +127,10 @@ const BareshellspaceUpdate = () => {
             setAirCondition(e.facilityAvailable.centralAirConditioning);
             setOxygenDuct(e.facilityAvailable.oxygenDuct);
             setTotalFloors(e.totalFloors); 
-            setStairCase(e.staircases); 
+            setStairCase(e.staircases);
             if (e.lift == "Available") {
                 setLiftPassenger(e?.liftDetails?.passenger);
-                setLiftService(e?.liftDetails?.service); 
+                setLiftService(e?.liftDetails?.service);
             }
             setParkingArr(e.parkingDetailsList);
             setAvailability(e.availabilityStatus);
@@ -259,7 +265,7 @@ const BareshellspaceUpdate = () => {
                     service: liftService,
                     modern: modernLifts
                 }
-            } 
+            }
 
             if (parkingStatus == "Available") {
                 obj["parkingDetailsList"] = parkingArr;
@@ -267,9 +273,9 @@ const BareshellspaceUpdate = () => {
             }
 
             if (preLeased == "Yes") {
-                let preLeased_RentedDetails = {
+                let preLeased_RentedDetails = { 
                     currentRentPerMonth,
-                    leaseTenureInYear,
+                    leaseTenureInYear, 
                     annualRentIncrease,
                     businessType
                 }
@@ -908,8 +914,8 @@ const BareshellspaceUpdate = () => {
                         </Text>
                         <Box display={"flex"} alignItems={"center"} gap={5}>
                             <Input
-                                type="text" 
-                                variant={"flushed"} 
+                                type="text"
+                                variant={"flushed"}
                                 value={totalfloors}
                                 onChange={(e) => {
                                     const nowval = e.target.value > 90;
@@ -926,8 +932,9 @@ const BareshellspaceUpdate = () => {
                                 }}
                                 required
                                 w={180}
-                            /> 
+                            />
                             <Box>
+
                                 <Menu>
                                     <MenuButton backgroundColor={"white"}
                                         _hover={{ bg: 'white' }}
@@ -946,13 +953,11 @@ const BareshellspaceUpdate = () => {
                                         overflowX={"hidden"}
                                         flexDirection={"column"}
                                         padding={"8px 10px"} >
-
-
-                                        <Checkbox isChecked={floorNumber == "Basement"} onChange={handleFloorNumber} value={"Basement"} > Basement </Checkbox>
-                                        <Checkbox isChecked={floorNumber == "Lower Ground"} onChange={handleFloorNumber} value={"Lower Ground"} > Lower Ground </Checkbox>
-                                        <Checkbox isChecked={floorNumber == "Ground"} onChange={handleFloorNumber} value={"Ground"} > Ground </Checkbox>
+                                        <Checkbox isChecked={floorNumber.includes("Basement")} onChange={handleFloorNumber} value={"Basement"} > Basement </Checkbox>
+                                        <Checkbox isChecked={floorNumber.includes("Lower Ground")} onChange={handleFloorNumber} value={"Lower Ground"} > Lower Ground </Checkbox>
+                                        <Checkbox isChecked={floorNumber.includes("Ground")} onChange={handleFloorNumber} value={"Ground"} > Ground </Checkbox>
                                         {Array.from(Array(Number(totalfloors)).keys()).map((e, i) => {
-                                            return <Checkbox isChecked={floorNumber == (e + 1)} key={i} onChange={handleFloorNumber} value={e + 1} > {e + 1} </Checkbox>
+                                            return <Checkbox isChecked={floorNumber.includes(`${e + 1}`)} key={i} onChange={handleFloorNumber} value={e + 1} > {e + 1} </Checkbox>
                                         })}
 
 
@@ -1004,10 +1009,10 @@ const BareshellspaceUpdate = () => {
                                     }}
                                     className={style.washroom_dec}
                                 >
-                                    <AddIcon fontSize={"12px"} /> 
+                                    <AddIcon fontSize={"12px"} />
                                 </button>
                                 <Text margin={"0 10px"} flex={4}> Passenger Lifts </Text>
-                            </Box> 
+                            </Box>
                         </Box>
                         <Box padding={"0 40px"} display={liftStatus == "Available" ? "flex" : "none"} alignItems={"center"} width={300} >
                             <button
@@ -1255,16 +1260,16 @@ const BareshellspaceUpdate = () => {
                                 >
                                     {isCountry.country == "india" ? "₹" : "$"} Price Details
                                 </Heading>
-                                <NumberInput >
-                                    <NumberInputField
-                                        value={pricedetail}
-                                        required
-                                        onChange={(e) => {
-                                            setPricedetail(e.target.value);
-                                            areaCalucation();
-                                        }}
-                                    />
-                                </NumberInput>
+                                <Input
+                                    type="text"
+                                    value={pricedetail}
+                                    variant={"flushed"}
+                                    required
+                                    onChange={(e) => {
+                                        setPricedetail(e.target.value);
+                                        areaCalucation();
+                                    }}
+                                />
                             </Box>
                             <Box display={"grid"} gap={0}>
                                 <Heading
@@ -1275,11 +1280,11 @@ const BareshellspaceUpdate = () => {
                                 >
                                     {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
                                 </Heading>
-                                <NumberInput value={priceSqr}>
-                                    <NumberInputField
-
-                                    />
-                                </NumberInput>
+                                <Input
+                                    type="text"
+                                    value={priceSqr}
+                                    readOnly
+                                />
                             </Box>
                         </Box>
                     </Box>
@@ -1470,27 +1475,27 @@ const BareshellspaceUpdate = () => {
                                     Select
                                 </MenuButton>
                                 <MenuList className={style.menu} >
-                                    <Checkbox value={"Backend Office"} onChange={(e) => {
+                                    <Checkbox isChecked={previouslyUsedList.includes("Backend Office")} value={"Backend Office"} onChange={(e) => {
                                         e.preventDefault();
                                         FileSystemHandle(e.target.value)
                                     }} > Backend Office </Checkbox>
-                                    <Checkbox value={"CA Office"} onChange={(e) => {
+                                    <Checkbox isChecked={previouslyUsedList.includes("CA Office")} value={"CA Office"} onChange={(e) => {
                                         e.preventDefault();
                                         FileSystemHandle(e.target.value)
                                     }} > CA Office </Checkbox>
-                                    <Checkbox value={"Fronted Office"} onChange={(e) => {
+                                    <Checkbox isChecked={previouslyUsedList.includes("Fronted Office")} value={"Fronted Office"} onChange={(e) => {
                                         e.preventDefault();
                                         FileSystemHandle(e.target.value)
                                     }} > Fronted Office </Checkbox>
-                                    <Checkbox value={"Small Office Purpose"} onChange={(e) => {
+                                    <Checkbox isChecked={previouslyUsedList.includes("Small Office Purpose")} value={"Small Office Purpose"} onChange={(e) => {
                                         e.preventDefault();
                                         FileSystemHandle(e.target.value)
                                     }} > Small Office Purpose </Checkbox>
-                                    <Checkbox value={"Traders Office"} onChange={(e) => {
+                                    <Checkbox isChecked={previouslyUsedList.includes("Traders Office")} value={"Traders Office"} onChange={(e) => {
                                         e.preventDefault();
                                         FileSystemHandle(e.target.value)
                                     }} > Traders Office </Checkbox>
-                                    <Checkbox value={"Advocate Office"} onChange={(e) => {
+                                    <Checkbox isChecked={previouslyUsedList.includes("Advocate Office")} value={"Advocate Office"} onChange={(e) => {
                                         e.preventDefault();
                                         FileSystemHandle(e.target.value)
                                     }} > Advocate Office </Checkbox>

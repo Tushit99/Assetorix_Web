@@ -48,6 +48,7 @@ const GuestBanquet = () => {
     const [furnishedarr, setfurnishedarr] = useState([]);
     const [extraroom, setExtraRoom] = useState([]);
     const [furnished, setFurnished] = useState("");
+    const [inclusivePrices, setInclusivePrice] = useState([]);
     const [availability, setAvailability] = useState("");
     const [fromyear, setFromyear] = useState("");
     const [expectedyear, setExpectedYear] = useState("");
@@ -59,8 +60,8 @@ const GuestBanquet = () => {
     const [buildingFeature, setBuildingFeature] = useState([]);
     const [additinalft, setAdditinalFeature] = useState([]);
     const [otherFeature, setOtherFeature] = useState([]);
-    const [powerbackup, setPowerbackup] = useState("");
     const [propertyFacing, setPropertyFacing] = useState("");
+    const [additionalPrice, setAdditionalPrice] = useState(false);
     const [flooring, setFlooring] = useState("");
     const [facing, setFacing] = useState("Meter");
     const [locationAdv, setLocationAdv] = useState([]);
@@ -73,8 +74,11 @@ const GuestBanquet = () => {
     const [annualRentIncrease, setAnnualRentIncrease] = useState("");
     const [businessType, setBusinessType] = useState("");
     const [qualityRating, setqualityRating] = useState("");
-
-
+    const [maintenancePrice, setMaintenancePrice] = useState("");
+    const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
+    const [bookingAmount, setBookingAmount] = useState("");
+    const [expectedRentel, setExpectedRentel] = useState("");
+    const [annualDuesPayble, setAnnualDuesPayble] = useState("");
 
     const handleSubmitData = async (e) => {
         e.preventDefault();
@@ -99,7 +103,7 @@ const GuestBanquet = () => {
             ownership,
             price: +pricedetail,
             priceUnit: +priceSqr,
-            // inclusivePrices,
+            inclusivePrices,
             amenities,
             propertyFeatures,
             society_buildingFeatures: buildingFeature,
@@ -171,7 +175,7 @@ const GuestBanquet = () => {
             ownership &&
             pricedetail &&
 
-            // inclusivePrices &&
+            inclusivePrices &&
             additinalft &&
             // watersource &&
             propertyFacing &&
@@ -192,6 +196,17 @@ const GuestBanquet = () => {
                     position: 'top-right'
                 })
                 return
+            }
+
+            if (additionalPrice == true) {
+                let box = {
+                    maintenancePrice,
+                    maintenanceTimePeriod,
+                    bookingAmount,
+                    expectedRentel,
+                    annualDuesPayble,
+                } 
+                obj["additionalPricingDetails"]= box;   
             }
 
             if (furnished == "Furnished" || furnished == "Semi-Furnished") {
@@ -238,7 +253,7 @@ const GuestBanquet = () => {
                 //     body: JSON.stringify(obj)
                 // });
                 // let data = await response.json();  
-                // console.log("data",data); 
+                console.log("data", obj);
                 await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
                     .then((e) => {
                         toast({
@@ -247,7 +262,9 @@ const GuestBanquet = () => {
                             status: 'success',
                             duration: 2000,
                         })
-                    });
+                    }).catch((err) => {
+                        console.log(err);
+                    })
             } catch (error) {
                 toast({
                     title: error.response.data.msg,
@@ -330,6 +347,18 @@ const GuestBanquet = () => {
         }
         setExtraRoom(newarr);
     };
+
+    const handleinclusiveandtax = (e) => {
+        let newarr = [...inclusivePrices];
+        let value = e;
+
+        if (newarr.includes(value)) {
+            newarr.splice(newarr.indexOf(value), 1);
+        } else {
+            newarr.push(value);
+        }
+        setInclusivePrice(newarr);
+    }
 
     const handleAvailable = (e) => {
         e.preventDefault();
@@ -1323,12 +1352,60 @@ const GuestBanquet = () => {
                         >
                             {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
                         </Heading>
-                        <NumberInput value={priceSqr}>
-                            <NumberInputField
-
-                            />
-                        </NumberInput>
+                        <Input
+                            type="text"
+                            value={priceSqr}
+                            readOnly
+                        />
                     </Box>
+                </Box>
+                <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
+                    <Checkbox
+                        isChecked={inclusivePrices.includes("Price Negotiable")}
+                        onChange={(e) => {
+                            e.preventDefault();
+                            handleinclusiveandtax(e.target.value)
+                        }}
+                        value={"Price Negotiable"}
+                    >
+                        Price Negotiable
+                    </Checkbox>
+                    <Checkbox
+                        isChecked={inclusivePrices.includes("Tax and Govt. charges excluded")}
+                        onChange={(e) => {
+                            e.preventDefault();
+                            handleinclusiveandtax(e.target.value)
+                        }}
+                        value={"Tax and Govt. charges excluded"}
+                    >
+                        Tax and Govt. charges excluded
+                    </Checkbox>
+                </Box>
+                <Box textAlign={"left"} display={"grid"}>
+                    {additionalPrice && <>
+                        <InputGroup w={"300px"} margin={"5px 0"}>
+                            <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
+                            <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
+                                <option value="Monthly">Monthly</option>
+                                <option value="Yearly">Yearly</option>
+                            </Select>
+                        </InputGroup>
+                        <Input type="text" w={"300px"} value={expectedRentel} onChange={(e) => setExpectedRentel(e.target.value)} placeholder="Expected rental" margin={"0"} />
+                        <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
+                        <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
+                    </>
+                    }
+                    <Heading
+                        as={"h3"}
+                        size={"sm"}
+                        margin={"10px 0"}
+                        color={"#002aff"}
+                        fontWeight={500}
+                        cursor={"pointer"}
+                        onClick={() => setAdditionalPrice(!additionalPrice)}
+                        textAlign={"left"}>
+                        {additionalPrice ? <IoIosArrowUp style={{ display: "inline" }} /> : <IoIosArrowDown style={{ display: "inline" }} />} Add more pricing details
+                    </Heading>
                 </Box>
             </Box>
 
