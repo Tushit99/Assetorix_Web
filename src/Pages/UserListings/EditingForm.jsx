@@ -56,27 +56,27 @@ const EditingForm = () => {
     await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((e)=>{
       console.log(e.data.data);  
       let dt = e.data.data;  
-      setGroup(dt.propertyGroup);  
-      setType(dt.propertyType); 
-      setLooking(dt.lookingFor);  
+      setGroup(dt?.propertyGroup);  
+      setType(dt?.propertyType); 
+      setLooking(dt?.lookingFor);  
  
-      if(dt.propertyType=="Office"){
-        setOther(dt.officeType); 
+      if(dt?.propertyType=="Office"){
+        setOther(dt?.officeType); 
       } 
-      else if(dt.propertyType=="Storage"){
-        setOther(dt.storageType); 
+      else if(dt?.propertyType=="Storage"){
+        setOther(dt?.storageType); 
       }
-      else if(dt.propertyType=="Hospitality"){
-        setOther(dt.hospitalityType); 
+      else if(dt?.propertyType=="Hospitality"){
+        setOther(dt?.hospitalityType); 
       }
-      else if(dt.propertyType=="Industry"){
-        setOther(dt.industryType); 
+      else if(dt?.propertyType=="Industry"){
+        setOther(dt?.industryType); 
       }
-      else if(dt.propertyType=="Plot / Land"){
-        setOther(dt.plotLandType); 
+      else if(dt?.propertyType=="Plot / Land"){
+        setOther(dt?.plotLandType); 
       }
-      else if(dt.propertyType=="Retail"){
-        setOther(dt.retailSpaceType); 
+      else if(dt?.propertyType=="Retail"){
+        setOther(dt?.retailSpaceType); 
       } 
 
     })

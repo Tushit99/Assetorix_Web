@@ -5,9 +5,7 @@ import {
     ButtonGroup,
     Heading,
     Input,
-    InputGroup,
-    NumberInput,
-    NumberInputField,
+    InputGroup, 
     Select,
     Text,
     Textarea,
@@ -17,7 +15,7 @@ import {
     Stack,
     Radio,
     Menu,
-    MenuButton, 
+    MenuButton,
     MenuList,
 } from "@chakra-ui/react";
 import style from "../../RentComercial.module.css";
@@ -25,7 +23,7 @@ import { useSelector } from "react-redux";
 import { AddIcon, ChevronDownIcon, MinusIcon } from "@chakra-ui/icons";
 import axios from "axios";
 import { CleanInputText, NumericString } from "../../../../code";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"; 
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 
 
@@ -94,7 +92,7 @@ const Coworkingspace = () => {
     const [zoneType, setZoneType] = useState("");
 
     // please don'nt change any function without any prior knowledge   
- 
+
 
 
     const handleSubmitData = async (e) => {
@@ -103,13 +101,13 @@ const Coworkingspace = () => {
             lookingFor: "Rent",
             propertyGroup: "Commercial",
             propertyType: "Office",
-            officeType: "Co-working office space", 
+            officeType: "Co-working office space",
             address: {
                 pincode,
                 locality,
                 city,
                 state,
-                country, 
+                country,
                 zoneType,
                 locatedInside
             },
@@ -118,11 +116,11 @@ const Coworkingspace = () => {
             priceUnit: +priceSqr,
             inclusivePrices,
             propertyStatus: fromyear,
-            securityDeposit, 
+            securityDeposit,
             amenities,
             locationAdv,
             minLeasableSuperBuiltupArea: minimumLeasable,
-            minLeasableSuperBuiltupAreaUnit: areaPer ,  
+            minLeasableSuperBuiltupAreaUnit: areaPer,
             plotArea: plotArea,
             plotAreaUnit: areaPer,
             availableFrom,
@@ -144,7 +142,7 @@ const Coworkingspace = () => {
             fireSafety: fireSafty,
             expectedYearlyRent: rentIncreasePercent,
             previouslyUsedList,
-            lockInPeriod :lockPeriod, 
+            lockInPeriod: lockPeriod,
             staircases: stairCase,
             lift: liftStatus,
             parking: parkingStatus,
@@ -179,7 +177,7 @@ const Coworkingspace = () => {
         if (
             city &&
             ownership &&
-            
+
             inclusivePrices &&
             totalfloors
         ) {
@@ -214,7 +212,7 @@ const Coworkingspace = () => {
 
             if (securityDeposit == "Multiple of Rent") {
                 obj["multipleOfRent"] = depositAmount;
-            }     
+            }
 
             if (parkingStatus == "Available") {
                 obj["parkingDetailsList"] = parkingArr;
@@ -255,11 +253,11 @@ const Coworkingspace = () => {
                     });
             } catch (error) {
                 // console.log(error.response.data.msg);
-                console.log(error); 
+                console.log(error);
                 toast({
                     title: error.response.data.msg,
                     status: "error",
-                    duration: 2000, 
+                    duration: 2000,
                 });
             }
             // }
@@ -477,26 +475,15 @@ const Coworkingspace = () => {
                         Public and Semi Public use
                     </option>
                 </Select>
-                <NumberInput>
-                    <NumberInputField
-                        placeholder={"Enter pincode"}
-                        padding={"0 10px"}
-                        borderRight={0}
-                        borderLeft={0}
-                        borderTop={0}
-                        borderRadius={0}
-                        _active={{
-                            borderRight: "0",
-                            borderLeft: "0",
-                            borderTop: "0",
-                            borderRadius: "0",
-                        }}
-                        required
-                        fontSize={"md"}
-                        value={pincode}
-                        onChange={handlepinfetch}
-                    />
-                </NumberInput>
+                <Input
+                    type="text"
+                    placeholder={"Enter pincode"}
+                    padding={"0 10px"}
+                    required
+                    fontSize={"md"}
+                    value={pincode}
+                    onChange={handlepinfetch}
+                />
                 <Input
                     type="text"
                     padding={"0 10px"}
@@ -987,7 +974,7 @@ const Coworkingspace = () => {
                                     borderLeft={0}
                                     borderTop={0}
                                     _focus={{ boxShadow: 'outline' }} as={Button} rightIcon={<ChevronDownIcon />}>
-                                    { floorNumber.length>0 ? `${floorNumber.length} Floor Selected` : "Your Floor No. (optional)"}
+                                    {floorNumber.length > 0 ? `${floorNumber.length} Floor Selected` : "Your Floor No. (optional)"}
                                 </MenuButton>
                                 <MenuList
                                     display={"flex"}
@@ -995,14 +982,14 @@ const Coworkingspace = () => {
                                     overflow={"scroll"}
                                     overflowX={"hidden"}
                                     flexDirection={"column"}
-                                    padding={"8px 10px"} > 
+                                    padding={"8px 10px"} >
 
                                     <Checkbox isChecked={floorNumber.includes("Basement")} onChange={handleFloorNumber} value={"Basement"} > Basement </Checkbox>
                                     <Checkbox isChecked={floorNumber.includes("Lower Ground")} onChange={handleFloorNumber} value={"Lower Ground"} > Lower Ground </Checkbox>
                                     <Checkbox isChecked={floorNumber.includes("Ground")} onChange={handleFloorNumber} value={"Ground"} > Ground </Checkbox>
                                     {Array.from(Array(Number(totalfloors)).keys()).map((e, i) => {
                                         return <Checkbox isChecked={floorNumber.includes(`${e + 1}`)} key={i + 3} onChange={handleFloorNumber} value={e + 1} > {e + 1} </Checkbox>
-                                    })} 
+                                    })}
 
                                 </MenuList>
                             </Menu>
@@ -1287,11 +1274,10 @@ const Coworkingspace = () => {
                             >
                                 {isCountry.country == "india" ? "₹" : "$"}  Lease rental : Per {areaPer}
                             </Heading>
-                            <NumberInput value={priceSqr}>
-                                <NumberInputField
-                                    
-                                />
-                            </NumberInput>
+                            <Input
+                                type="text"
+                                value={priceSqr}
+                            /> 
                         </Box>
                     </Box>
                 </Box>
@@ -1359,7 +1345,7 @@ const Coworkingspace = () => {
                         <button value={"Multiple of Rent"} className={securityDeposit == "Multiple of Rent" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> Multiple of Rent </button>
                         <button value={"None"} className={securityDeposit == "None" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> None </button>
                     </Box>
-                    <Box display={securityDeposit == "None" ? "none" : "block"}> 
+                    <Box display={securityDeposit == "None" ? "none" : "block"}>
                         <Input type="text" w={300} value={depositAmount} onChange={handleDepositAmount} placeholder={`${securityDeposit == "Fixed" ? "Deposit Value" : ""} ${securityDeposit == "Multiple of Rent" ? "No. of months (Max 30)" : ""}`} />
                     </Box>
                 </Box>
@@ -1816,5 +1802,5 @@ const Coworkingspace = () => {
     );
 };
 
-export default Coworkingspace; 
+export default Coworkingspace;
 

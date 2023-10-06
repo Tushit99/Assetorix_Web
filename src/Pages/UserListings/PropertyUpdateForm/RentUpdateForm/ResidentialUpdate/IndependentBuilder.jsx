@@ -526,26 +526,15 @@ const IndependentBuilderRentUpdate = () => {
             onChange={(e) => setApartment(e.target.value)}
             variant="flushed"
           />
-          <NumberInput>
-            <NumberInputField
-              placeholder={"Enter pincode"}
-              padding={"0 10px"}
-              borderRight={0}
-              borderLeft={0}
-              borderTop={0}
-              borderRadius={0}
-              _active={{
-                borderRight: "0",
-                borderLeft: "0",
-                borderTop: "0",
-                borderRadius: "0",
-              }}
-              required
-              fontSize={"md"}
-              value={pincode}
-              onChange={handlepinfetch}
-            />
-          </NumberInput>
+          <Input
+            type="text"
+            placeholder={"Enter pincode"}
+            padding={"0 10px"}
+            required
+            fontSize={"md"}
+            value={pincode}
+            onChange={handlepinfetch}
+          />
           <Input
             type="text"
             padding={"0 10px"}

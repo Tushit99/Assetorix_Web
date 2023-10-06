@@ -8,9 +8,7 @@ import {
     InputGroup,
     Menu,
     MenuButton,
-    MenuList,
-    NumberInput,
-    NumberInputField,
+    MenuList, 
     Select,
     Text,
     Textarea,
@@ -159,7 +157,7 @@ const IndustrialLand = () => {
         if (
             ownership &&
             pricedetail &&
-            
+
             inclusivePrices &&
             amenities &&
             propertyFeatures &&
@@ -217,14 +215,14 @@ const IndustrialLand = () => {
                 position: 'top-right'
             })
         }
-    };  
+    };
 
     const handlepinfetch = (e) => {
         if (e.target.value.length == 6 && Number(e.target.value) < 999999) {
             setPincode(NumericString(e.target.value));
             pinfetch(e.target.value);
         }
-        else if (Number(e.target.value) < 999999) { 
+        else if (Number(e.target.value) < 999999) {
             setPincode(NumericString(e.target.value));
             console.log(e.target.value);
         }
@@ -251,7 +249,7 @@ const IndustrialLand = () => {
         }
     }
 
- 
+
 
     const handleConstructionType = (e) => {
         e.preventDefault();
@@ -264,7 +262,7 @@ const IndustrialLand = () => {
             newarr.push(value);
         }
         setConstructionType(newarr);
-    } 
+    }
 
 
     const handleAuthorityBy = (e) => {
@@ -853,11 +851,11 @@ const IndustrialLand = () => {
                                 >
                                     {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
                                 </Heading>
-                                <NumberInput value={priceSqr}>
-                                    <NumberInputField 
-                                        
-                                    />
-                                </NumberInput>
+                                <Input
+                                    type="text"
+                                    value={priceSqr}
+                                    readOnly
+                                /> 
                             </Box>
                         </Box>
                     </Box>
@@ -1025,7 +1023,7 @@ const IndustrialLand = () => {
                             value={"Visitor Parking"}
                         >
                             Visitor Parking
-                        </button> 
+                        </button>
                         <button
                             className={
                                 amenities.includes("Water Storage") ? style.setbtn : style.btn

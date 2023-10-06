@@ -8,16 +8,14 @@ import {
   InputGroup,
   Menu,
   MenuButton,
-  MenuList,
-  NumberInput,
-  NumberInputField,
+  MenuList, 
   Select,
   Text,
   Textarea,
   useToast,
 } from "@chakra-ui/react";
 import { Checkbox } from "@chakra-ui/react";
-import style from "../../RentComercial.module.css"; 
+import style from "../../RentComercial.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
@@ -162,7 +160,7 @@ const CommercialLandRent = () => {
     if (
       ownership &&
       pricedetail &&
-      
+
       inclusivePrices &&
       amenities &&
       propertyFeatures &&
@@ -436,26 +434,15 @@ const CommercialLandRent = () => {
             fontSize={"md"}
             variant="flushed"
           />
-          <NumberInput>
-            <NumberInputField
-              placeholder={"Enter pincode"}
-              padding={"0 10px"}
-              borderRight={0}
-              borderLeft={0}
-              borderTop={0}
-              borderRadius={0}
-              _active={{
-                borderRight: "0",
-                borderLeft: "0",
-                borderTop: "0",
-                borderRadius: "0",
-              }}
-              required
-              fontSize={"md"}
-              value={pincode}
-              onChange={handlepinfetch}
-            />
-          </NumberInput>
+          <Input
+            type="text"
+            placeholder={"Enter pincode"}
+            padding={"0 10px"}
+            required
+            fontSize={"md"}
+            value={pincode}
+            onChange={handlepinfetch}
+          />
           <Input
             type="text"
             padding={"0 10px"}
@@ -882,7 +869,7 @@ const CommercialLandRent = () => {
               <Checkbox isChecked={industryType.includes("Textiles")} onChange={handleIndustryType} value={"Textiles"} >Textiles</Checkbox>
             </MenuList>
           </Menu>
-        </Box> 
+        </Box>
 
         {/* ============================== Price Details ============================ */}
         <Box>
@@ -900,16 +887,15 @@ const CommercialLandRent = () => {
                 >
                   {isCountry.country == "india" ? "₹" : "$"} Price Details
                 </Heading>
-                <NumberInput >
-                  <NumberInputField
-                    value={pricedetail}
-                    required
-                    onChange={(e) => {
-                      setPricedetail(e.target.value);
-                      areaCalucation();
-                    }}
-                  />
-                </NumberInput>
+                <Input
+                  type="text"
+                  value={pricedetail}
+                  required
+                  onChange={(e) => {
+                    setPricedetail(e.target.value);
+                    areaCalucation();
+                  }}
+                />
               </Box>
               <Box display={"grid"} gap={0}>
                 <Heading
@@ -920,11 +906,11 @@ const CommercialLandRent = () => {
                 >
                   {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
                 </Heading>
-                <NumberInput value={priceSqr}>
-                  <NumberInputField 
-                    
-                  />
-                </NumberInput>
+                <Input
+                  type="text"
+                  value={priceSqr} 
+                  readOnly
+                /> 
               </Box>
             </Box>
           </Box>
@@ -988,7 +974,7 @@ const CommercialLandRent = () => {
               {additionalPrice ? <IoIosArrowUp style={{ display: "inline" }} /> : <IoIosArrowDown style={{ display: "inline" }} />} Add more pricing details
             </Heading>
           </Box>
-        </Box>  
+        </Box>
 
 
         {/* ============================ Property unique discription ============================ */}
@@ -1345,4 +1331,4 @@ const CommercialLandRent = () => {
 
 }
 
-export default CommercialLandRent ;
+export default CommercialLandRent;

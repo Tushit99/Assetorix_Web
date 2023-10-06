@@ -5,9 +5,7 @@ import {
   ButtonGroup,
   Heading,
   Input,
-  InputGroup,
-  NumberInput,
-  NumberInputField,
+  InputGroup, 
   Select,
   Text,
   Textarea,
@@ -56,14 +54,14 @@ const AgriculturalLandRent = () => {
   const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
   const [bookingAmount, setBookingAmount] = useState("");
   const [annualDuesPayble, setAnnualDuesPayble] = useState("");
-  const [openSides, setOpenSides] = useState(""); 
-  const [plotBreadth, setPlotBreadth] = useState(""); 
+  const [openSides, setOpenSides] = useState("");
+  const [plotBreadth, setPlotBreadth] = useState("");
 
   const [plotLength, setplotLength] = useState("");
   const [expectedBy, setexpectedBy] = useState([]);
   const [ConstructionOnProperty, setConstructionOnProperty] = useState("");
   const [expectedByYear, setExpectedByYear] = useState("");
-  const [authorisedBy, setAuthorisedBy] = useState([]); 
+  const [authorisedBy, setAuthorisedBy] = useState([]);
 
 
   // please don'nt change any function without any prior knowledge
@@ -102,7 +100,7 @@ const AgriculturalLandRent = () => {
       inclusivePrices,
       openSides,
       amenities,
-      propertyFeatures, 
+      propertyFeatures,
       additionalFeatures: additinalft,
       otherFeatures: otherFeature,
       propertyFacing,
@@ -114,7 +112,7 @@ const AgriculturalLandRent = () => {
       propertyApprovalAuthorityList: authorisedBy,
       carpetArea: plotArea,
       expectedByYear,
-      carpetAreaUnit: areaPer, 
+      carpetAreaUnit: areaPer,
       description: desc,
       constructionOnProperty: ConstructionOnProperty,
       constructionOnPropertyList: constructionType,
@@ -148,7 +146,7 @@ const AgriculturalLandRent = () => {
       showToastError('Provide PriceDetail');
     } else if (!priceSqr) {
       showToastError('Provide Price Per sq.ft');
-    }  
+    }
 
     if (locationAdv) {
       obj["locationAdv"] = locationAdv
@@ -157,10 +155,10 @@ const AgriculturalLandRent = () => {
     if (
       ownership &&
       pricedetail &&
-      
+
       inclusivePrices &&
       amenities &&
-      propertyFeatures && 
+      propertyFeatures &&
       desc
     ) {
       let id = localStorage.getItem("usrId") || undefined;
@@ -179,7 +177,7 @@ const AgriculturalLandRent = () => {
         return
       }
 
-       
+
       try {
         // let response = await fetch("http://localhost:4500/property/", {
         //     method: "POST",
@@ -245,7 +243,7 @@ const AgriculturalLandRent = () => {
       console.log(err);
     }
   }
- 
+
 
   const handleConstructionType = (e) => {
     e.preventDefault();
@@ -260,7 +258,7 @@ const AgriculturalLandRent = () => {
     setConstructionType(newarr);
   }
 
- 
+
 
 
   const handleAuthorityBy = (e) => {
@@ -373,7 +371,7 @@ const AgriculturalLandRent = () => {
       setPriceSqr(ans);
     }
   }
- 
+
 
 
   return (
@@ -395,26 +393,15 @@ const AgriculturalLandRent = () => {
             fontSize={"md"}
             variant="flushed"
           />
-          <NumberInput>
-            <NumberInputField
-              placeholder={"Enter pincode"}
-              padding={"0 10px"}
-              borderRight={0}
-              borderLeft={0}
-              borderTop={0}
-              borderRadius={0}
-              _active={{
-                borderRight: "0",
-                borderLeft: "0",
-                borderTop: "0",
-                borderRadius: "0",
-              }}
-              required
-              fontSize={"md"}
-              value={pincode}
-              onChange={handlepinfetch}
-            />
-          </NumberInput>
+          <Input
+            type="text"
+            placeholder={"Enter pincode"}
+            padding={"0 10px"}
+            required
+            fontSize={"md"}
+            value={pincode}
+            onChange={handlepinfetch}
+          />
           <Input
             type="text"
             padding={"0 10px"}
@@ -849,12 +836,12 @@ const AgriculturalLandRent = () => {
                   textAlign={"left"}
                 >
                   {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
-                </Heading>
-                <NumberInput value={priceSqr}>
-                  <NumberInputField 
-                    
-                  />
-                </NumberInput>
+                </Heading> 
+                <Input
+                  type="text"
+                  value={priceSqr} 
+                  readOnly
+                />
               </Box>
             </Box>
           </Box>

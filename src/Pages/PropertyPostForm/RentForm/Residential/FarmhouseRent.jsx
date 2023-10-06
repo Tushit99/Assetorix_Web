@@ -211,7 +211,7 @@ const FarmhouseRent = () => {
             balconey &&
             furnishedarr &&
             ownership &&
-            
+
             additinalft &&
             powerbackup &&
             propertyFacing &&
@@ -263,7 +263,7 @@ const FarmhouseRent = () => {
                 await axios
                     .post(`${process.env.REACT_APP_URL}/property/`, obj, {
                         headers: head,
-                    }) 
+                    })
                     .then((e) => {
                         // console.log(e, obj);
                         toast({
@@ -515,26 +515,15 @@ const FarmhouseRent = () => {
                     onChange={(e) => setApartment(e.target.value)}
                     variant="flushed"
                 />
-                <NumberInput>
-                    <NumberInputField
-                        placeholder={"Enter pincode"}
-                        padding={"0 10px"}
-                        borderRight={0}
-                        borderLeft={0}
-                        borderTop={0}
-                        borderRadius={0}
-                        _active={{
-                            borderRight: "0",
-                            borderLeft: "0",
-                            borderTop: "0",
-                            borderRadius: "0",
-                        }}
-                        required
-                        fontSize={"md"}
-                        value={pincode}
-                        onChange={handlepinfetch}
-                    />
-                </NumberInput>
+                <Input
+                    type="text"
+                    placeholder={"Enter pincode"}
+                    padding={"0 10px"}
+                    required
+                    fontSize={"md"}
+                    value={pincode}
+                    onChange={handlepinfetch}
+                />
                 <Input
                     type="text"
                     padding={"0 10px"}
@@ -599,39 +588,44 @@ const FarmhouseRent = () => {
                 <Box as={"div"} className={style.inp_form_numbers}>
                     <Box textAlign={"left"}>
                         <Text> No. of Bedrooms </Text>
-                        <NumberInput>
-                            <NumberInputField
-                                variant="flushed"
-                                padding={"0 2px"}
-                                onChange={(e) => setBedRoom(e.target.value)}
-                                value={bedroom}
-                                required
-                            />
-                        </NumberInput>
+                        <Input
+                            type="text"
+                            variant="flushed"
+                            padding={"0 2px"}
+                            onChange={(e) => setBedRoom(e.target.value)}
+                            value={bedroom}
+                            required
+                        />
                     </Box>
                     <Box textAlign={"left"}>
                         <Text> No. of Bathrooms </Text>
-                        <NumberInput>
-                            <NumberInputField
-                                variant="flushed"
-                                onChange={(e) => setBathroom(e.target.value)}
-                                value={bathroom}
-                                required
-                                padding={"0 2px"}
-                            />
-                        </NumberInput>
+                        <Input
+                            type="text"
+                            variant="flushed"
+                            onChange={(e) => setBathroom(e.target.value)}
+                            value={bathroom}
+                            required
+                            padding={"0 2px"}
+                        />
+                        <Input
+                            type="text"
+                            variant="flushed"
+                            onChange={(e) => setBathroom(e.target.value)}
+                            value={bathroom}
+                            required
+                            padding={"0 2px"}
+                        />
                     </Box>
                     <Box textAlign={"left"}>
                         <Text> No. of Balconies </Text>
-                        <NumberInput>
-                            <NumberInputField
-                                variant="flushed"
-                                onChange={(e) => setBalcony(e.target.value)}
-                                value={balconey}
-                                required
-                                padding={"0 2px"}
-                            />
-                        </NumberInput>
+                        <Input
+                            type="text"
+                            variant="flushed"
+                            onChange={(e) => setBalcony(e.target.value)}
+                            value={balconey}
+                            required
+                            padding={"0 2px"}
+                        />
                     </Box>
                 </Box>
                 {/* ====================================== */}
@@ -647,17 +641,16 @@ const FarmhouseRent = () => {
                         isAttached
                         variant="outline"
                     >
-                        <NumberInput>
-                            <NumberInputField
-                                padding={"0 2px"}
-                                value={plotArea}
-                                onChange={(e) => {
-                                    // areaCalucation();
-                                    setPlotArea(e.target.value);
-                                }}
-                                required
-                            />
-                        </NumberInput>
+                        <Input
+                            type="text"
+                            padding={"0 2px"}
+                            value={plotArea}
+                            onChange={(e) => {
+                                // areaCalucation();
+                                setPlotArea(e.target.value);
+                            }}
+                            required
+                        /> 
                         <select
                             value={areaPer}
                             onChange={(e) => {
@@ -783,7 +776,7 @@ const FarmhouseRent = () => {
                         padding={"10px 0"}
                         gap={6}
                     >
-                        
+
                         <Box className={style.furnished_detail}>
                             <Box>
                                 <button

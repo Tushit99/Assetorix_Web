@@ -5,9 +5,7 @@ import {
     ButtonGroup,
     Heading,
     Input,
-    InputGroup,
-    NumberInput,
-    NumberInputField,
+    InputGroup, 
     Select,
     Text,
     Textarea,
@@ -94,7 +92,7 @@ const BareShell = () => {
     const [zoneType, setZoneType] = useState("");
 
     // please don'nt change any function without any prior knowledge   
- 
+
 
 
     const handleSubmitData = async (e) => {
@@ -118,11 +116,11 @@ const BareShell = () => {
             priceUnit: +priceSqr,
             inclusivePrices,
             propertyStatus: fromyear,
-            securityDeposit, 
+            securityDeposit,
             amenities,
             locationAdv,
             minLeasableSuperBuiltupArea: minimumLeasable,
-            minLeasableSuperBuiltupAreaUnit: areaPer ,  
+            minLeasableSuperBuiltupAreaUnit: areaPer,
             superBuiltupArea: plotArea,
             superBuiltupAreaUnit: areaPer,
             availableFrom,
@@ -144,7 +142,7 @@ const BareShell = () => {
             fireSafety: fireSafty,
             expectedYearlyRent: rentIncreasePercent,
             previouslyUsedList,
-            lockInPeriod :lockPeriod, 
+            lockInPeriod: lockPeriod,
             staircases: stairCase,
             lift: liftStatus,
             parking: parkingStatus,
@@ -179,7 +177,7 @@ const BareShell = () => {
         if (
             city &&
             ownership &&
-            
+
             inclusivePrices &&
             totalfloors
         ) {
@@ -214,7 +212,7 @@ const BareShell = () => {
 
             if (securityDeposit == "Multiple of Rent") {
                 obj["multipleOfRent"] = depositAmount;
-            }     
+            }
 
             if (parkingStatus == "Available") {
                 obj["parkingDetailsList"] = parkingArr;
@@ -475,26 +473,15 @@ const BareShell = () => {
                         Public and Semi Public use
                     </option>
                 </Select>
-                <NumberInput>
-                    <NumberInputField
-                        placeholder={"Enter pincode"}
-                        padding={"0 10px"}
-                        borderRight={0}
-                        borderLeft={0}
-                        borderTop={0}
-                        borderRadius={0}
-                        _active={{
-                            borderRight: "0",
-                            borderLeft: "0",
-                            borderTop: "0",
-                            borderRadius: "0",
-                        }}
-                        required
-                        fontSize={"md"}
-                        value={pincode}
-                        onChange={handlepinfetch}
-                    />
-                </NumberInput>
+                <Input
+                    type="text"
+                    placeholder={"Enter pincode"}
+                    padding={"0 10px"}
+                    required
+                    fontSize={"md"}
+                    value={pincode}
+                    onChange={handlepinfetch}
+                />
                 <Input
                     type="text"
                     padding={"0 10px"}
@@ -985,7 +972,7 @@ const BareShell = () => {
                                     borderLeft={0}
                                     borderTop={0}
                                     _focus={{ boxShadow: 'outline' }} as={Button} rightIcon={<ChevronDownIcon />}>
-                                    { floorNumber.length>0 ? `${floorNumber.length} Floor Selected` : "Your Floor No. (optional)"}
+                                    {floorNumber.length > 0 ? `${floorNumber.length} Floor Selected` : "Your Floor No. (optional)"}
                                 </MenuButton>
                                 <MenuList
                                     display={"flex"}
@@ -993,14 +980,14 @@ const BareShell = () => {
                                     overflow={"scroll"}
                                     overflowX={"hidden"}
                                     flexDirection={"column"}
-                                    padding={"8px 10px"} > 
+                                    padding={"8px 10px"} >
 
                                     <Checkbox isChecked={floorNumber.includes("Basement")} onChange={handleFloorNumber} value={"Basement"} > Basement </Checkbox>
                                     <Checkbox isChecked={floorNumber.includes("Lower Ground")} onChange={handleFloorNumber} value={"Lower Ground"} > Lower Ground </Checkbox>
                                     <Checkbox isChecked={floorNumber.includes("Ground")} onChange={handleFloorNumber} value={"Ground"} > Ground </Checkbox>
                                     {Array.from(Array(Number(totalfloors)).keys()).map((e, i) => {
                                         return <Checkbox isChecked={floorNumber.includes(`${e + 1}`)} key={i + 3} onChange={handleFloorNumber} value={e + 1} > {e + 1} </Checkbox>
-                                    })} 
+                                    })}
 
                                 </MenuList>
                             </Menu>
@@ -1285,11 +1272,10 @@ const BareShell = () => {
                             >
                                 {isCountry.country == "india" ? "₹" : "$"}  Lease rental : Per {areaPer}
                             </Heading>
-                            <NumberInput value={priceSqr}>
-                                <NumberInputField
-                                    
-                                />
-                            </NumberInput>
+                            <Input
+                                type="text"
+                                value={priceSqr}
+                            /> 
                         </Box>
                     </Box>
                 </Box>
@@ -1357,7 +1343,7 @@ const BareShell = () => {
                         <button value={"Multiple of Rent"} className={securityDeposit == "Multiple of Rent" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> Multiple of Rent </button>
                         <button value={"None"} className={securityDeposit == "None" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> None </button>
                     </Box>
-                    <Box display={securityDeposit == "None" ? "none" : "block"}> 
+                    <Box display={securityDeposit == "None" ? "none" : "block"}>
                         <Input type="text" w={300} value={depositAmount} onChange={handleDepositAmount} placeholder={`${securityDeposit == "Fixed" ? "Deposit Value" : ""} ${securityDeposit == "Multiple of Rent" ? "No. of months (Max 30)" : ""}`} />
                     </Box>
                 </Box>

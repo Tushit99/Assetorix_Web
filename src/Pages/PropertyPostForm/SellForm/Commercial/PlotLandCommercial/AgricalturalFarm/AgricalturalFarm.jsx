@@ -429,26 +429,15 @@ const AgricalturalFarm = () => {
             fontSize={"md"}
             variant="flushed"
           />
-          <NumberInput>
-            <NumberInputField
-              placeholder={"Enter pincode"}
-              padding={"0 10px"}
-              borderRight={0}
-              borderLeft={0}
-              borderTop={0}
-              borderRadius={0}
-              _active={{
-                borderRight: "0",
-                borderLeft: "0",
-                borderTop: "0",
-                borderRadius: "0",
-              }}
-              required
-              fontSize={"md"}
-              value={pincode}
-              onChange={handlepinfetch}
-            />
-          </NumberInput>
+          <Input
+            type="text"
+            placeholder={"Enter pincode"}
+            padding={"0 10px"}
+            required
+            fontSize={"md"}
+            value={pincode}
+            onChange={handlepinfetch}
+          />
           <Input
             type="text"
             padding={"0 10px"}
@@ -866,16 +855,15 @@ const AgricalturalFarm = () => {
                 >
                   {isCountry.country == "india" ? "₹" : "$"} Price Details
                 </Heading>
-                <NumberInput >
-                  <NumberInputField
-                    value={pricedetail}
-                    required
-                    onChange={(e) => {
-                      setPricedetail(e.target.value);
-                      areaCalucation();
-                    }}
-                  />
-                </NumberInput>
+                <Input
+                  type="text"
+                  value={pricedetail}
+                  required
+                  onChange={(e) => {
+                    setPricedetail(e.target.value);
+                    areaCalucation();
+                  }}
+                />
               </Box>
               <Box display={"grid"} gap={0}>
                 <Heading
@@ -1143,7 +1131,7 @@ const AgricalturalFarm = () => {
               value={"Intercom Facility"}
               onClick={handlePropertyFeature}
             >
-              Intercom Facility
+              Intercom Facility 
             </button>
           </Box>
         </Box>

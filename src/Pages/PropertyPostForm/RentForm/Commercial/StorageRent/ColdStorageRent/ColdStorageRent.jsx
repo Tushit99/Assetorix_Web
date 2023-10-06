@@ -5,14 +5,12 @@ import {
   ButtonGroup,
   Heading,
   Input,
-  InputGroup,
-  NumberInput,
-  NumberInputField,
+  InputGroup, 
   Select,
   Text,
   Textarea,
   useToast,
-} from "@chakra-ui/react"; 
+} from "@chakra-ui/react";
 import { Checkbox } from "@chakra-ui/react";
 import style from "../../RentComercial.module.css";
 import axios from "axios";
@@ -131,7 +129,7 @@ const ColdStorageRent = () => {
 
     if (
       pricedetail &&
-      
+
       inclusivePrices &&
       amenities &&
       propertyFeatures &&
@@ -349,26 +347,15 @@ const ColdStorageRent = () => {
             fontSize={"md"}
             variant="flushed"
           />
-          <NumberInput>
-            <NumberInputField
-              placeholder={"Enter pincode"}
-              padding={"0 10px"}
-              borderRight={0}
-              borderLeft={0}
-              borderTop={0}
-              borderRadius={0}
-              _active={{
-                borderRight: "0",
-                borderLeft: "0",
-                borderTop: "0",
-                borderRadius: "0",
-              }}
-              required
-              fontSize={"md"}
-              value={pincode}
-              onChange={handlepinfetch}
-            />
-          </NumberInput>
+          <Input
+            type="text"
+            placeholder={"Enter pincode"}
+            padding={"0 10px"}
+            required
+            fontSize={"md"}
+            value={pincode}
+            onChange={handlepinfetch}
+          />
           <Input
             type="text"
             padding={"0 10px"}
@@ -434,15 +421,14 @@ const ColdStorageRent = () => {
         <Box>
           <Box textAlign={"left"} >
             <Text> No. of Washrooms </Text>
-            <NumberInput>
-              <NumberInputField
-                variant="flushed"
-                padding={"0 2px"}
-                onChange={(e) => setwashrooms(e.target.value)}
-                value={washrooms}
-                required
-              />
-            </NumberInput>
+            <Input
+              type="text"
+              variant="flushed"
+              padding={"0 2px"}
+              onChange={(e) => setwashrooms(e.target.value)}
+              value={washrooms}
+              required
+            />
           </Box>
         </Box>
 
@@ -458,17 +444,16 @@ const ColdStorageRent = () => {
             isAttached
             variant="outline"
           >
-            <NumberInput>
-              <NumberInputField
-                padding={"0 2px"}
-                value={plotArea}
-                onChange={(e) => {
-                  areaCalucation();
-                  setPlotArea(e.target.value);
-                }}
-                required
-              />
-            </NumberInput>
+            <Input
+              type="text"
+              padding={"0 2px"}
+              value={plotArea}
+              onChange={(e) => {
+                areaCalucation();
+                setPlotArea(e.target.value);
+              }}
+              required
+            />
             <select value={areaPer} onChange={(e) => {
               setAreaPer(e.target.value);
             }} className={style.select} required>
@@ -634,16 +619,15 @@ const ColdStorageRent = () => {
                 >
                   {isCountry.country == "india" ? "₹" : "$"} Expected Rent
                 </Heading>
-                <NumberInput >
-                  <NumberInputField
-                    value={pricedetail}
-                    required
-                    onChange={(e) => {
-                      setPricedetail(e.target.value);
-                      areaCalucation();
-                    }}
-                  />
-                </NumberInput>
+                <Input
+                  type="text"
+                  value={pricedetail}
+                  required
+                  onChange={(e) => {
+                    setPricedetail(e.target.value);
+                    areaCalucation();
+                  }}
+                />
               </Box>
               <Box display={"grid"} gap={0}>
                 <Heading
@@ -654,12 +638,10 @@ const ColdStorageRent = () => {
                 >
                   {isCountry.country == "india" ? "₹" : "$"} Price Per {areaPer}
                 </Heading>
-                <NumberInput value={priceSqr}>
-                  <NumberInputField
-                    required
-                    
-                  />
-                </NumberInput>
+                <Input
+                  type="text"
+                  value={priceSqr}
+                /> 
               </Box>
             </Box>
           </Box>

@@ -467,26 +467,24 @@ const Bareshellspace = () => {
                         Public and Semi Public use
                     </option>
                 </Select>
-                <NumberInput>
-                    <NumberInputField
-                        placeholder={"Enter pincode"}
-                        padding={"0 10px"}
-                        borderRight={0}
-                        borderLeft={0}
-                        borderTop={0}
-                        borderRadius={0}
-                        _active={{
-                            borderRight: "0",
-                            borderLeft: "0",
-                            borderTop: "0",
-                            borderRadius: "0",
-                        }}
-                        required
-                        fontSize={"md"}
-                        value={pincode}
-                        onChange={handlepinfetch}
-                    />
-                </NumberInput>
+                <Input
+                    type="text"
+                    placeholder={"Enter pincode"}
+                    padding={"0 10px"} 
+                    required
+                    fontSize={"md"}
+                    value={pincode}
+                    onChange={handlepinfetch}
+                />
+                <Input
+                    type="text"
+                    placeholder={"Enter pincode"}
+                    padding={"0 10px"} 
+                    required
+                    fontSize={"md"}
+                    value={pincode}
+                    onChange={handlepinfetch}
+                />
                 <Input
                     type="text"
                     padding={"0 10px"}
@@ -993,13 +991,13 @@ const Bareshellspace = () => {
                                     overflow={"scroll"}
                                     overflowX={"hidden"}
                                     flexDirection={"column"}
-                                    padding={"8px 10px"} > 
+                                    padding={"8px 10px"} >
                                     <Checkbox isChecked={floorNumber.includes("Basement")} onChange={handleFloorNumber} value={"Basement"} > Basement </Checkbox>
                                     <Checkbox isChecked={floorNumber.includes("Lower Ground")} onChange={handleFloorNumber} value={"Lower Ground"} > Lower Ground </Checkbox>
                                     <Checkbox isChecked={floorNumber.includes("Ground")} onChange={handleFloorNumber} value={"Ground"} > Ground </Checkbox>
                                     {Array.from(Array(Number(totalfloors)).keys()).map((e, i) => {
                                         return <Checkbox isChecked={floorNumber.includes(`${e + 1}`)} key={i} onChange={handleFloorNumber} value={e + 1} > {e + 1} </Checkbox>
-                                    })} 
+                                    })}
                                 </MenuList>
                             </Menu>
                         </Box>
