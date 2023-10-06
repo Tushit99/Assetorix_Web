@@ -8,7 +8,7 @@ import {
   InputGroup,
   Menu,
   MenuButton,
-  MenuList, 
+  MenuList,
   Select,
   Text,
   Textarea,
@@ -43,7 +43,7 @@ const CommercialLandUpdate = () => {
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [constructionType, setConstructionType] = useState([]);
   const [amenities, setAminity] = useState([]);
-  const [propertyFeatures, setPropertyFeature] = useState(""); 
+  const [propertyFeatures, setPropertyFeature] = useState("");
   const [otherFeature, setOtherFeature] = useState([]);
   const [propertyFacing, setPropertyFacing] = useState("");
   const [facing, setFacing] = useState("Meter");
@@ -76,8 +76,7 @@ const CommercialLandUpdate = () => {
 
   const handleDataFetch = async () => {
     await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
-      let e = detail.data.data; 
-      console.log("commercial Land Data",e); 
+      let e = detail.data.data;
       setCountry(e?.address?.country);
       setCity(e?.address?.city);
       setPincode(e?.address?.pincode);
@@ -392,7 +391,7 @@ const CommercialLandUpdate = () => {
     }
     setPropertyFeature(newarr);
   };
- 
+
   const handleotherfeature = (e) => {
     e.preventDefault();
     let newarr = [...otherFeature];
@@ -758,7 +757,7 @@ const CommercialLandUpdate = () => {
             Possession By
           </Heading>
           <Box>
-            <Select variant={"filled"} padding={"0 10px"} value={expectedByYear} onChange={(e) => setExpectedByYear(e.target.value)}>
+            <Select variant={"outline"} borderRadius={0} fontSize={"17px"} width={"300px"} value={expectedByYear} onChange={(e) => setExpectedByYear(e.target.value)}>
               <option value="Immediate">Immediate</option>
               <option value="Within 3 Months">Within 3 Months</option>
               <option value="Within 6 Months">Within 6 Months</option>
@@ -921,9 +920,9 @@ const CommercialLandUpdate = () => {
                 </Heading>
                 <Input
                   type="text"
-                  value={priceSqr} 
-                  readOnly  
-                /> 
+                  value={priceSqr}
+                  readOnly
+                />
               </Box>
             </Box>
           </Box>
@@ -1030,14 +1029,14 @@ const CommercialLandUpdate = () => {
         </Box>
 
         {/* Approved for Industry Type */}
-        <Box>
+        <Box display={"grid"} textAlign={"left"} >
           <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
             Approved for Industry Type
           </Heading>
-          <Menu display={"grid"} border={"2px solid black"}>
-            <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-              Select Industry Type 
-            </MenuButton> 
+          <Menu>
+            <MenuButton width={"300px"} as={Button} variant={"outline"} borderRadius={0} rightIcon={<ChevronDownIcon />}>
+              {industryType.length == 0 ? "Select Industry Type" : `Selected ${industryType.length} industry`}
+            </MenuButton>
             <MenuList display={"grid"} padding={"4px 20px"} marginTop={"-6px"} >
               <Checkbox isChecked={industryType.includes("Automobiles")} onChange={handleIndustryType} value={"Automobiles"} >Automobiles</Checkbox>
               <Checkbox isChecked={industryType.includes("Biotechnology")} onChange={handleIndustryType} value={"Biotechnology"} >Biotechnology</Checkbox>
@@ -1216,7 +1215,7 @@ const CommercialLandUpdate = () => {
           </Box>
         </Box>
 
-     
+
 
         {/* ============================ Other Features ============================ */}
         <Box>

@@ -8,7 +8,7 @@ import {
     InputGroup,
     Menu,
     MenuButton,
-    MenuList, 
+    MenuList,
     Select,
     Text,
     Textarea,
@@ -855,7 +855,7 @@ const IndustrialLand = () => {
                                     type="text"
                                     value={priceSqr}
                                     readOnly
-                                /> 
+                                />
                             </Box>
                         </Box>
                     </Box>
@@ -927,8 +927,8 @@ const IndustrialLand = () => {
                         Approved for Industry Type
                     </Heading>
                     <Menu>
-                        <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-                            {industryType.length == 0 ? "Select Industry Type" : `${industryType.length} Industry Type Selected `}
+                        <MenuButton width={"300px"} as={Button} variant={"outline"} borderRadius={0} rightIcon={<ChevronDownIcon />}>
+                            {industryType.length == 0 ? "Select Industry Type" : `Selected ${industryType.length} industry`}
                         </MenuButton>
                         <MenuList display={"grid"} padding={"4px 20px"} marginTop={"-6px"} >
                             <Checkbox isChecked={industryType.includes("Automobiles")} onChange={handleIndustryType} value={"Automobiles"} >Automobiles</Checkbox>

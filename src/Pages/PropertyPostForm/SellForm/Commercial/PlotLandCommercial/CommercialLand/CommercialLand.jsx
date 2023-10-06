@@ -21,7 +21,7 @@ import style from "../PlotLandCommercial.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
-import { CleanInputText, NumericString } from "../../../../code"; 
+import { CleanInputText, NumericString } from "../../../../code";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 
 
@@ -43,17 +43,17 @@ const CommercialLand = () => {
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [constructionType, setConstructionType] = useState([]);
   const [amenities, setAminity] = useState([]);
-  const [propertyFeatures, setPropertyFeature] = useState(""); 
+  const [propertyFeatures, setPropertyFeature] = useState("");
   const [otherFeature, setOtherFeature] = useState([]);
   const [propertyFacing, setPropertyFacing] = useState("");
   const [facing, setFacing] = useState("Meter");
-  const [locationAdv, setLocationAdv] = useState([]); 
+  const [locationAdv, setLocationAdv] = useState([]);
   const [plotArea, setPlotArea] = useState("");
   const [desc, setDesc] = useState("");
   const [pincollection, setPinCollection] = useState([]);
   const [additionalPrice, setAdditionalPrice] = useState(false);
   const [maintenancePrice, setMaintenancePrice] = useState("");
-  const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly"); 
+  const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
   const [bookingAmount, setBookingAmount] = useState("");
   const [annualDuesPayble, setAnnualDuesPayble] = useState("");
   const [openSides, setOpenSides] = useState("");
@@ -67,9 +67,9 @@ const CommercialLand = () => {
   const [expectedBy, setexpectedBy] = useState([]);
   const [ConstructionOnProperty, setConstructionOnProperty] = useState("");
   const [expectedByYear, setExpectedByYear] = useState("");
-  const [authorisedBy, setAuthorisedBy] = useState([]); 
-  const [industryType, setIndustryType] = useState([]); 
- 
+  const [authorisedBy, setAuthorisedBy] = useState([]);
+  const [industryType, setIndustryType] = useState([]);
+
 
 
   // please don'nt change any function without any prior knowledge
@@ -80,7 +80,7 @@ const CommercialLand = () => {
     let yearbox = [];
     for (let i = num + 1; i < num + 10; i++) {
       yearbox.push(i);
-    } 
+    }
     setexpectedBy(yearbox);
   }, []);
 
@@ -106,19 +106,19 @@ const CommercialLand = () => {
       price: +pricedetail,
       priceUnit: +priceSqr,
       inclusivePrices,
-      openSides, 
+      openSides,
       amenities,
       propertyFeatures,
-      preLeased_Rented: preLeased, 
+      preLeased_Rented: preLeased,
       otherFeatures: otherFeature,
       propertyFacing,
       roadFacingWidth: facingwidth,
-      roadFacingWidthType: facing, 
+      roadFacingWidthType: facing,
       plotArea,
-      approvedIndustryTypeList: industryType ,
+      approvedIndustryTypeList: industryType,
       plotAreaUnit: areaPer,
-      propertyApprovalAuthorityList : authorisedBy,  
-      expectedByYear,  
+      propertyApprovalAuthorityList: authorisedBy,
+      expectedByYear,
       description: desc,
       constructionOnProperty: ConstructionOnProperty,
       constructionOnPropertyList: constructionType,
@@ -128,8 +128,8 @@ const CommercialLand = () => {
         maintenanceTimePeriod,
         bookingAmount,
         annualDuesPayable: annualDuesPayble
-      }, 
-     };
+      },
+    };
 
 
 
@@ -151,7 +151,7 @@ const CommercialLand = () => {
       showToastError('Provide PriceDetail');
     } else if (!priceSqr) {
       showToastError('Provide Price Per sq.ft');
-    }  
+    }
 
     if (locationAdv) {
       obj["locationAdv"] = locationAdv
@@ -160,7 +160,7 @@ const CommercialLand = () => {
     if (
       ownership &&
       pricedetail &&
-      
+
       inclusivePrices &&
       amenities &&
       propertyFeatures &&
@@ -249,7 +249,7 @@ const CommercialLand = () => {
 
   const pinfetch = async (pin) => {
     try {
-      
+
       let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
       setState(res.data[0].state);
       setCity(res.data[0].city);
@@ -341,7 +341,7 @@ const CommercialLand = () => {
     setPropertyFeature(newarr);
   };
 
- 
+
   const handleotherfeature = (e) => {
     e.preventDefault();
     let newarr = [...otherFeature];
@@ -554,7 +554,7 @@ const CommercialLand = () => {
           </Heading>
           <Box display={"flex"} gap={"20px"} w={"300px"} >
             <Input type="text" variant='flushed' flex={1} required value={facingwidth} onChange={(e) => {
-              e.preventDefault(); 
+              e.preventDefault();
               setFacingWidth(e.target.value);
             }} />
             <Select flex={1} onChange={(e) => setFacing(e.target.value)} value={facing}>
@@ -869,8 +869,8 @@ const CommercialLand = () => {
                 </Heading>
                 <NumberInput value={priceSqr}>
                   <NumberInputField
-                    
-                    
+
+
                   />
                 </NumberInput>
               </Box>
@@ -984,8 +984,8 @@ const CommercialLand = () => {
             Approved for Industry Type
           </Heading>
           <Menu>
-            <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-              Select Industry Type
+            <MenuButton width={"300px"} as={Button} variant={"outline"} borderRadius={0} rightIcon={<ChevronDownIcon />}>
+              {industryType.length == 0 ? "Select Industry Type" : `Selected ${industryType.length} industry`}
             </MenuButton>
             <MenuList display={"grid"} padding={"4px 20px"} marginTop={"-6px"} >
               <Checkbox isChecked={industryType.includes("Automobiles")} onChange={handleIndustryType} value={"Automobiles"} >Automobiles</Checkbox>
@@ -1014,7 +1014,7 @@ const CommercialLand = () => {
           </Menu>
         </Box>
 
-        
+
 
         {/* ============================ Property unique discription ============================ */}
         <Box>
@@ -1165,7 +1165,7 @@ const CommercialLand = () => {
           </Box>
         </Box>
 
-        
+
         {/* ============================ Other Features ============================ */}
         <Box>
           <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>

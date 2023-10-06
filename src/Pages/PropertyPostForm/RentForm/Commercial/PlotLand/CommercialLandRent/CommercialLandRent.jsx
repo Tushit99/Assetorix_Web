@@ -841,8 +841,8 @@ const CommercialLandRent = () => {
             Approved for Industry Type
           </Heading>
           <Menu>
-            <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-              Select Industry Type
+          <MenuButton width={"300px"} as={Button} variant={"outline"} borderRadius={0} rightIcon={<ChevronDownIcon />}>
+              {industryType.length == 0 ? "Select Industry Type" : `Selected ${industryType.length} industry`}
             </MenuButton>
             <MenuList display={"grid"} padding={"4px 20px"} marginTop={"-6px"} >
               <Checkbox isChecked={industryType.includes("Automobiles")} onChange={handleIndustryType} value={"Automobiles"} >Automobiles</Checkbox>

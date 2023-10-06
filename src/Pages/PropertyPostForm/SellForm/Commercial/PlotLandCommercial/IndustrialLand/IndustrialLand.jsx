@@ -44,7 +44,7 @@ const IndustrialLand = () => {
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [constructionType, setConstructionType] = useState([]);
   const [amenities, setAminity] = useState([]);
-  const [propertyFeatures, setPropertyFeature] = useState(""); 
+  const [propertyFeatures, setPropertyFeature] = useState("");
   const [otherFeature, setOtherFeature] = useState([]);
   const [propertyFacing, setPropertyFacing] = useState("");
   const [facing, setFacing] = useState("Meter");
@@ -70,7 +70,7 @@ const IndustrialLand = () => {
   const [ConstructionOnProperty, setConstructionOnProperty] = useState("");
   const [expectedByYear, setExpectedByYear] = useState("");
   const [authorisedBy, setAuthorisedBy] = useState([]);
-  const [industryType, setIndustryType] = useState([]); 
+  const [industryType, setIndustryType] = useState([]);
 
 
   // please don'nt change any function without any prior knowledge
@@ -133,7 +133,7 @@ const IndustrialLand = () => {
         maintenanceTimePeriod,
         bookingAmount,
         annualDuesPayable: annualDuesPayble
-      }, 
+      },
     };
 
 
@@ -156,7 +156,7 @@ const IndustrialLand = () => {
       showToastError('Provide PriceDetail');
     } else if (!priceSqr) {
       showToastError('Provide Price Per sq.ft');
-    }  
+    }
 
     if (locationAdv) {
       obj["locationAdv"] = locationAdv
@@ -165,7 +165,7 @@ const IndustrialLand = () => {
     if (
       ownership &&
       pricedetail &&
-      
+
       inclusivePrices &&
       amenities &&
       propertyFeatures &&
@@ -254,7 +254,7 @@ const IndustrialLand = () => {
 
   const pinfetch = async (pin) => {
     try {
-      
+
       let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
       setState(res.data[0].state);
       setCity(res.data[0].city);
@@ -308,7 +308,7 @@ const IndustrialLand = () => {
     setOwnerShip(e.target.value);
   };
 
- 
+
 
   const handleAminities = (e) => {
     e.preventDefault();
@@ -336,7 +336,7 @@ const IndustrialLand = () => {
     setPropertyFeature(newarr);
   };
 
- 
+
 
   const handleotherfeature = (e) => {
     e.preventDefault();
@@ -434,7 +434,7 @@ const IndustrialLand = () => {
             placeholder="Locality"
             list="browsers"
             value={locality}
-            onChange={(e) => setLocality(e.target.value)} 
+            onChange={(e) => setLocality(e.target.value)}
             fontSize={"md"}
             variant="flushed"
           />
@@ -865,8 +865,8 @@ const IndustrialLand = () => {
                 </Heading>
                 <NumberInput value={priceSqr}>
                   <NumberInputField
-                    
-                    
+
+
                   />
                 </NumberInput>
               </Box>
@@ -980,8 +980,8 @@ const IndustrialLand = () => {
             Approved for Industry Type
           </Heading>
           <Menu>
-            <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-              Select Industry Type
+            <MenuButton width={"300px"} as={Button} variant={"outline"} borderRadius={0} rightIcon={<ChevronDownIcon />}>
+              {industryType.length == 0 ? "Select Industry Type" : `Selected ${industryType.length} industry`}
             </MenuButton>
             <MenuList display={"grid"} padding={"4px 20px"} marginTop={"-6px"} >
               <Checkbox isChecked={industryType.includes("Automobiles")} onChange={handleIndustryType} value={"Automobiles"} >Automobiles</Checkbox>
@@ -1162,7 +1162,7 @@ const IndustrialLand = () => {
           </Box>
         </Box>
 
-      
+
         {/* ============================ Other Features ============================ */}
         <Box>
           <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
