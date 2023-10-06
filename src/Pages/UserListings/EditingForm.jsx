@@ -124,7 +124,7 @@ const EditingForm = () => {
       {(looking == "Sell" && group == "Commercial" && type == "Storage" && other == "Cold Storage") ? <ColdStorageUpdate /> : ""}
 
       {/* ------------- Plot / Land ------------ */}
-      {(looking == "Sell" && group == "Commercial" && type == "Plot / Land" && other == "Commercial Land / lnst. Land") ? <CommercialLandUpdate /> : ""}
+      {(looking == "Sell" && group == "Commercial" && type == "Plot / Land" && other == "Commercial Land / Institutional Land") ? <CommercialLandUpdate /> : ""}
 
       {(looking == "Sell" && group == "Commercial" && type == "Plot / Land" && other == "Agricultural Land / Farm Land") ? <AgricalturalFarmUpdate /> : ""}
 

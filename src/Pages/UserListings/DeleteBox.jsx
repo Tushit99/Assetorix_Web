@@ -1,5 +1,5 @@
 import { Box, Button, Heading, Image, Text, useToast } from '@chakra-ui/react';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { CgClose } from "react-icons/cg";
 import { Link } from 'react-router-dom';
 import style from "./Listing.module.css";
@@ -8,14 +8,41 @@ import axios from 'axios';
 
 const DeleteBox = ({ e, myListedProperty }) => {
     const [showbox, setshowBox] = useState(false);
-    const toast = useToast(); 
+    const toast = useToast();   
+    const [other, setOther]= useState(""); 
+
+    console.log(e);
+
+    useEffect(()=>{
+
+        let dt = e; 
+
+        if(dt.propertyType=="Office"){
+            setOther(dt.officeType); 
+          } 
+          else if(dt.propertyType=="Storage"){
+            setOther(dt.storageType); 
+          }
+          else if(dt.propertyType=="Hospitality"){
+            setOther(dt.hospitalityType); 
+          }
+          else if(dt.propertyType=="Industry"){
+            setOther(dt.industryType); 
+          }
+          else if(dt.propertyType=="Plot / Land"){
+            setOther(dt.plotLandType); 
+          }
+          else if(dt.propertyType=="Retail"){
+            setOther(dt.retailSpaceType); 
+          } 
+    },[])
 
     const handleDelete = async (propertyId) => { 
 
         let id = localStorage.getItem("usrId") || undefined;
         let authorization = localStorage.getItem("AstToken") || undefined;
 
- 
+        
         let head = { id, authorization, 'Content-type': 'application/json' };
         try {
             await axios.delete(`${process.env.REACT_APP_URL}/property/${propertyId}`, { headers: head }).then((e) => {
@@ -40,7 +67,7 @@ const DeleteBox = ({ e, myListedProperty }) => {
                 <Text fontSize={"sm"}> <span className={`${style.boldtext}`}>Price:</span>  {e?.countryCurrency}{e?.price} </Text>
                 <Text fontSize={"sm"}> Property Group: {e.propertyGroup} </Text>
                 <Text fontSize={"sm"}> Property Type: {e.propertyType} </Text>
-                <Text fontSize={"sm"}> officeType: {e?.officeType} </Text>
+                <Text fontSize={"sm"}> Type: {other} </Text>
                 <Box className={style.flexequal}>
                     <Link to={`/listing/${e._id}`}>
                         <Button w={"100%"} as={"button"} variant={'outline'} colorScheme={"blue"} > Edit </Button>

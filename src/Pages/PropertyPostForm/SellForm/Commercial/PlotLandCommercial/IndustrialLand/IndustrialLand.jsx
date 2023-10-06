@@ -44,8 +44,7 @@ const IndustrialLand = () => {
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [constructionType, setConstructionType] = useState([]);
   const [amenities, setAminity] = useState([]);
-  const [propertyFeatures, setPropertyFeature] = useState("");
-  const [buildingFeature, setBuildingFeature] = useState([]); 
+  const [propertyFeatures, setPropertyFeature] = useState(""); 
   const [otherFeature, setOtherFeature] = useState([]);
   const [propertyFacing, setPropertyFacing] = useState("");
   const [facing, setFacing] = useState("Meter");
@@ -134,8 +133,7 @@ const IndustrialLand = () => {
         maintenanceTimePeriod,
         bookingAmount,
         annualDuesPayable: annualDuesPayble
-      },
-      society_buildingFeatures: buildingFeature
+      }, 
     };
 
 
@@ -338,18 +336,7 @@ const IndustrialLand = () => {
     setPropertyFeature(newarr);
   };
 
-  const HandleBuildingFeature = (e) => {
-    e.preventDefault();
-    let newarr = [...buildingFeature];
-    let value = e.target.value;
-
-    if (newarr.includes(value)) {
-      newarr.splice(newarr.indexOf(value), 1);
-    } else {
-      newarr.push(value);
-    }
-    setBuildingFeature(newarr);
-  };
+ 
 
   const handleotherfeature = (e) => {
     e.preventDefault();
@@ -1187,70 +1174,7 @@ const IndustrialLand = () => {
           </Box>
         </Box>
 
-        {/* ===================== Building feature============================ */}
-        <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
-            Building feature
-          </Heading>
-          <Box>
-            <button
-              className={
-                buildingFeature.includes("DG Availability")
-                  ? style.setbtn
-                  : style.btn
-              }
-              onClick={HandleBuildingFeature}
-              value={"DG Availability"}
-            >
-              DG Availability
-            </button>
-            <button
-              className={
-                buildingFeature.includes("CCTV Surveillance")
-                  ? style.setbtn
-                  : style.btn
-              }
-              onClick={HandleBuildingFeature}
-              value={"CCTV Surveillance"}
-            >
-              CCTV Surveillance
-            </button>
-            <button
-              className={
-                buildingFeature.includes("Maintenance Staff")
-                  ? style.setbtn
-                  : style.btn
-              }
-              onClick={HandleBuildingFeature}
-              value={"Maintenance Staff"}
-            >
-              Maintenance Staff
-            </button>
-            <button
-              className={
-                buildingFeature.includes("Grade A Building")
-                  ? style.setbtn
-                  : style.btn
-              }
-              onClick={HandleBuildingFeature}
-              value={"Grade A Building"}
-            >
-              Grade A Building
-            </button>
-            <button
-              className={
-                buildingFeature.includes("Rain Water Harvesting")
-                  ? style.setbtn
-                  : style.btn
-              }
-              onClick={HandleBuildingFeature}
-              value={"Rain Water Harvesting"}
-            >
-              Rain Water Harvesting
-            </button>
-          </Box>
-        </Box>
-
+      
         {/* ============================ Other Features ============================ */}
         <Box>
           <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>

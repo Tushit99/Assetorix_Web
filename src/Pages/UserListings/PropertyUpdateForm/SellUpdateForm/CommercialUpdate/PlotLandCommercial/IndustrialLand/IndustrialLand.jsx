@@ -23,11 +23,12 @@ import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { CleanInputText, NumericString } from "../../../../code";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-
+import { useParams } from "react-router-dom";
 
 
 
 const IndustrialLandUpdate = () => {
+  const { productID } = useParams();
   const isCountry = useSelector((state) => state.gloalval);
   const toast = useToast();
   const [country, setCountry] = useState("");
@@ -37,6 +38,7 @@ const IndustrialLandUpdate = () => {
   const [state, setState] = useState("");
   const [locality, setLocality] = useState("");
   const [Plotnumber, setPlotnumber] = useState("");
+
   const [areaPer, setAreaPer] = useState("sq.ft");
   const [ownership, setOwnerShip] = useState("");
   const [pricedetail, setPricedetail] = useState("");
@@ -45,7 +47,6 @@ const IndustrialLandUpdate = () => {
   const [constructionType, setConstructionType] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
-  const [buildingFeature, setBuildingFeature] = useState([]); 
   const [otherFeature, setOtherFeature] = useState([]);
   const [propertyFacing, setPropertyFacing] = useState("");
   const [facing, setFacing] = useState("Meter");
@@ -71,10 +72,60 @@ const IndustrialLandUpdate = () => {
   const [ConstructionOnProperty, setConstructionOnProperty] = useState("");
   const [expectedByYear, setExpectedByYear] = useState("");
   const [authorisedBy, setAuthorisedBy] = useState([]);
-  const [industryType, setIndustryType] = useState([]); 
+  const [industryType, setIndustryType] = useState([]);
 
 
   // please don'nt change any function without any prior knowledge
+
+  const handleDataFetch = async () => {
+    await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
+      let e = detail.data.data;
+      setCountry(e?.address?.country);
+      setCity(e?.address?.city);
+      setPincode(e?.address?.pincode);
+      setState(e.address?.state);
+      setLocality(e?.address?.locality);
+      setPlotnumber(e?.address?.plotNumber);
+      setPlotArea(e?.plotArea);
+      setAreaPer(e?.plotAreaUnit);
+      setplotLength(e?.plotLength);
+      setPlotBreadth(e?.plotBreadth);
+      setFacingWidth(e?.roadFacingWidth);
+      setFacing(e?.roadFacingWidthType);
+      setOpenSides(e?.openSides);
+      setPropertyFacing(e?.propertyFacing);
+      setConstructionOnProperty(e?.constructionOnProperty);
+      setConstructionType(e?.constructionOnPropertyList);
+      setExpectedByYear(e?.expectedByYear);
+      setOwnerShip(e?.ownership);
+      setAuthorisedBy(e?.propertyApprovalAuthorityList);
+      setPricedetail(e?.price);
+      setPriceSqr(e?.priceUnit);
+      setInclusivePrice(e?.inclusivePrices);
+      setInclusivePrice(e?.inclusivePrices);
+      setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice);
+      setMaintenanceTimePeriod(e?.additionalPricingDetails?.maintenanceTimePeriod);
+      setBookingAmount(e?.additionalPricingDetails?.bookingAmount);
+      setAnnualDuesPayble(e?.additionalPricingDetails?.annualDuesPayable);
+      setPreLeased(e?.preLeased_Rented);
+      if (e.preLeased_Rented == "Yes") {
+        setCurrentRentPerMonth(e.preLeased_RentedDetails.currentRentPerMonth);
+        setLeaseTenureInYear(e.preLeased_RentedDetails.leaseTenureInYear);
+        setAnnualRentIncrease(e.preLeased_RentedDetails.annualRentIncrease);
+        setBusinessType(e.preLeased_RentedDetails.businessType);
+      }
+      setIndustryType(e?.approvedIndustryTypeList);
+      setDesc(e.description);
+      setAminity(e.amenities);
+      setPropertyFeature(e?.propertyFeatures);
+      setOtherFeature(e?.otherFeatures);
+      setLocationAdv(e?.locationAdv);
+    })
+  };
+
+  useEffect(() => {
+    handleDataFetch();
+  }, []);
 
 
   useEffect(() => {
@@ -135,7 +186,6 @@ const IndustrialLandUpdate = () => {
         bookingAmount,
         annualDuesPayable: annualDuesPayble
       },
-      society_buildingFeatures: buildingFeature
     };
 
 
@@ -158,7 +208,7 @@ const IndustrialLandUpdate = () => {
       showToastError('Provide PriceDetail');
     } else if (!priceSqr) {
       showToastError('Provide Price Per sq.ft');
-    }  
+    }
 
     if (locationAdv) {
       obj["locationAdv"] = locationAdv
@@ -167,7 +217,7 @@ const IndustrialLandUpdate = () => {
     if (
       ownership &&
       pricedetail &&
-      
+
       inclusivePrices &&
       amenities &&
       propertyFeatures &&
@@ -208,7 +258,7 @@ const IndustrialLandUpdate = () => {
         // });
         // let data = await response.json();  
         // console.log("data",data); 
-        await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
+        await axios.patch(`${process.env.REACT_APP_URL}/property/${productID}`, obj, { headers: head })
           .then((e) => {
             toast({
               title: e.data.msg,
@@ -256,7 +306,7 @@ const IndustrialLandUpdate = () => {
 
   const pinfetch = async (pin) => {
     try {
-      
+
       let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
       setState(res.data[0].state);
       setCity(res.data[0].city);
@@ -310,7 +360,7 @@ const IndustrialLandUpdate = () => {
     setOwnerShip(e.target.value);
   };
 
- 
+
 
   const handleAminities = (e) => {
     e.preventDefault();
@@ -338,18 +388,6 @@ const IndustrialLandUpdate = () => {
     setPropertyFeature(newarr);
   };
 
-  const HandleBuildingFeature = (e) => {
-    e.preventDefault();
-    let newarr = [...buildingFeature];
-    let value = e.target.value;
-
-    if (newarr.includes(value)) {
-      newarr.splice(newarr.indexOf(value), 1);
-    } else {
-      newarr.push(value);
-    }
-    setBuildingFeature(newarr);
-  };
 
   const handleotherfeature = (e) => {
     e.preventDefault();
@@ -431,7 +469,7 @@ const IndustrialLandUpdate = () => {
             fontSize={"md"}
             variant="flushed"
           />
-          <NumberInput>
+          <NumberInput value={pincode}>
             <NumberInputField
               placeholder={"Enter pincode"}
               padding={"0 10px"}
@@ -458,7 +496,7 @@ const IndustrialLandUpdate = () => {
             placeholder="Locality"
             list="browsers"
             value={locality}
-            onChange={(e) => setLocality(e.target.value)} 
+            onChange={(e) => setLocality(e.target.value)}
             fontSize={"md"}
             variant="flushed"
           />
@@ -868,7 +906,7 @@ const IndustrialLandUpdate = () => {
                 >
                   {isCountry.country == "india" ? "₹" : "$"} Price Details
                 </Heading>
-                <NumberInput >
+                <NumberInput value={pricedetail}>
                   <NumberInputField
                     value={pricedetail}
                     required
@@ -890,8 +928,8 @@ const IndustrialLandUpdate = () => {
                 </Heading>
                 <NumberInput value={priceSqr}>
                   <NumberInputField
-                    
-                    
+
+
                   />
                 </NumberInput>
               </Box>
@@ -1187,69 +1225,6 @@ const IndustrialLandUpdate = () => {
           </Box>
         </Box>
 
-        {/* ===================== Building feature============================ */}
-        <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
-            Building feature
-          </Heading>
-          <Box>
-            <button
-              className={
-                buildingFeature.includes("DG Availability")
-                  ? style.setbtn
-                  : style.btn
-              }
-              onClick={HandleBuildingFeature}
-              value={"DG Availability"}
-            >
-              DG Availability
-            </button>
-            <button
-              className={
-                buildingFeature.includes("CCTV Surveillance")
-                  ? style.setbtn
-                  : style.btn
-              }
-              onClick={HandleBuildingFeature}
-              value={"CCTV Surveillance"}
-            >
-              CCTV Surveillance
-            </button>
-            <button
-              className={
-                buildingFeature.includes("Maintenance Staff")
-                  ? style.setbtn
-                  : style.btn
-              }
-              onClick={HandleBuildingFeature}
-              value={"Maintenance Staff"}
-            >
-              Maintenance Staff
-            </button>
-            <button
-              className={
-                buildingFeature.includes("Grade A Building")
-                  ? style.setbtn
-                  : style.btn
-              }
-              onClick={HandleBuildingFeature}
-              value={"Grade A Building"}
-            >
-              Grade A Building
-            </button>
-            <button
-              className={
-                buildingFeature.includes("Rain Water Harvesting")
-                  ? style.setbtn
-                  : style.btn
-              }
-              onClick={HandleBuildingFeature}
-              value={"Rain Water Harvesting"}
-            >
-              Rain Water Harvesting
-            </button>
-          </Box>
-        </Box>
 
         {/* ============================ Other Features ============================ */}
         <Box>
@@ -1394,7 +1369,7 @@ const IndustrialLandUpdate = () => {
           _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
           color={"#ffffff"}
         >
-          Post Property
+          Update Property
         </Button>
 
       </form>

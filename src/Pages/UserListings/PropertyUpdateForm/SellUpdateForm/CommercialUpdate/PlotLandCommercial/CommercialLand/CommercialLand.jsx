@@ -89,7 +89,7 @@ const CommercialLandUpdate = () => {
   const handleSubmitData = async (e) => {
     e.preventDefault();
     let obj = {
-      lookingFor: "Re",
+      lookingFor: "Sell",
       propertyGroup: "Commercial",
       propertyType: "Plot / Land",
       plotLandType: "Commercial Land / Institutional Land",
@@ -97,7 +97,7 @@ const CommercialLandUpdate = () => {
         plotNumber: Plotnumber,
         locality,
         pincode,
-        city,
+        city, 
         state,
         country,
       },

@@ -20,13 +20,15 @@ import { Checkbox } from "@chakra-ui/react";
 import style from "../PlotLandCommercial.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io" 
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 // import { ChevronDownIcon } from "@chakra-ui/icons";
 import { CleanInputText, NumericString } from "../../../../code";
+import { useParams } from "react-router-dom";
 
 
 
 const AgricalturalFarmUpdate = () => {
+  const { productID } = useParams();
   const isCountry = useSelector((state) => state.gloalval);
   const toast = useToast();
   const [country, setCountry] = useState("");
@@ -44,13 +46,11 @@ const AgricalturalFarmUpdate = () => {
   const [constructionType, setConstructionType] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
-  const [buildingFeature, setBuildingFeature] = useState([]);
-  const [additinalft, setAdditinalFeature] = useState([]);
+  const [buildingFeature, setBuildingFeature] = useState([]); 
   const [otherFeature, setOtherFeature] = useState([]);
   const [propertyFacing, setPropertyFacing] = useState("");
   const [facing, setFacing] = useState("Meter");
   const [locationAdv, setLocationAdv] = useState([]);
-  const [totalfloors, setTotalFloors] = useState("");
   const [plotArea, setPlotArea] = useState("");
   const [desc, setDesc] = useState("");
   const [pincollection, setPinCollection] = useState([]);
@@ -66,19 +66,75 @@ const AgricalturalFarmUpdate = () => {
   const [annualRentIncrease, setAnnualRentIncrease] = useState("");
   const [businessType, setBusinessType] = useState("");
   const [plotBreadth, setPlotBreadth] = useState("");
-  const [availability, setAvailability] = useState(""); 
+  const [availability, setAvailability] = useState("");
   const [fromyear, setFromyear] = useState("");
-  const [industryType, setIndustryType] = useState([]); 
+  const [industryType, setIndustryType] = useState([]);
 
   const [plotLength, setplotLength] = useState("");
   const [expectedBy, setexpectedBy] = useState([]);
   const [ConstructionOnProperty, setConstructionOnProperty] = useState("");
   const [expectedByYear, setExpectedByYear] = useState("");
-  const [authorisedBy, setAuthorisedBy] = useState([]); 
+  const [authorisedBy, setAuthorisedBy] = useState([]);
 
 
   // please don'nt change any function without any prior knowledge
 
+  const handleDataFetch = async () => {
+    await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
+      let e = detail.data.data;
+      console.log(e);
+      setCountry(e?.address?.country);
+      setCity(e?.address?.city);
+      setPincode(e?.address?.pincode);
+      setState(e.address.state);
+      setLocality(e.address.locality);
+      setPlotnumber(e.address.plotNumber);
+
+      setPlotArea(e.plotArea);
+      setAreaPer(e.plotAreaUnit); 
+
+      setplotLength(e.plotLength);
+      setPlotBreadth(e.plotBreadth);
+      
+      setFacingWidth(e.roadFacingWidth);
+      setFacing(e.roadFacingWidthType);
+      
+      setOpenSides(e.openSides);
+      setConstructionOnProperty(e.constructionOnProperty);
+      setConstructionType(e.constructionOnPropertyList);
+      
+      setPropertyFacing(e.propertyFacing);
+      setExpectedByYear(e.expectedByYear);
+      
+      setAuthorisedBy(e.propertyApprovalAuthorityList); 
+      
+      setPropertyFeature(e.propertyFeatures); 
+      setOtherFeature(e.otherFeatures); 
+      setOwnerShip(e.ownership);
+      setPricedetail(e.price);
+      setPriceSqr(e.priceUnit); 
+      setInclusivePrice(e.inclusivePrices);
+      setMaintenancePrice(e.additionalPricingDetails.maintenancePrice);
+      setMaintenanceTimePeriod(e.additionalPricingDetails.maintenanceTimePeriod);
+      setPreLeased(e.preLeased_Rented);
+      if (e.preLeased_Rented == "Yes") {
+        setCurrentRentPerMonth(e.preLeased_RentedDetails.currentRentPerMonth);
+        setLeaseTenureInYear(e.preLeased_RentedDetails.leaseTenureInYear);
+        setAnnualRentIncrease(e.preLeased_RentedDetails.annualRentIncrease);
+        setBusinessType(e.preLeased_RentedDetails.businessType);
+      }
+      setDesc(e.description);
+      setAminity(e.amenities);
+      setLocationAdv(e.locationAdv);
+
+    })
+  }
+
+  useEffect(() => {
+    handleDataFetch();
+  }, []);
+
+  // =================
 
   useEffect(() => {
     let num = Number(Date().split(" ")[3]);
@@ -111,22 +167,20 @@ const AgricalturalFarmUpdate = () => {
       price: +pricedetail,
       priceUnit: +priceSqr,
       inclusivePrices,
-      openSides, 
+      openSides,
       amenities,
       propertyFeatures,
       preLeased_Rented: preLeased,
-      additionalFeatures: additinalft,
-      otherFeatures: otherFeature,
+       otherFeatures: otherFeature,
       propertyFacing,
       roadFacingWidth: facingwidth,
       roadFacingWidthType: facing,
-      totalFloors: +totalfloors,
-      plotArea, 
+       plotArea,
       plotAreaUnit: areaPer,
-      propertyApprovalAuthorityList : authorisedBy, 
-      carpetArea: plotArea, 
+      propertyApprovalAuthorityList: authorisedBy,
+      carpetArea: plotArea,
       expectedByYear,
-      carpetAreaUnit: areaPer, 
+      carpetAreaUnit: areaPer,
       // otherRoom: extraroom,
       description: desc,
       constructionOnProperty: ConstructionOnProperty,
@@ -137,8 +191,8 @@ const AgricalturalFarmUpdate = () => {
         maintenanceTimePeriod,
         bookingAmount,
         annualDuesPayable: annualDuesPayble
-      }, 
-      society_buildingFeatures: buildingFeature 
+      },
+      society_buildingFeatures: buildingFeature
     };
 
 
@@ -161,9 +215,7 @@ const AgricalturalFarmUpdate = () => {
       showToastError('Provide PriceDetail');
     } else if (!priceSqr) {
       showToastError('Provide Price Per sq.ft');
-    } else if (!additinalft) {
-      showToastError('Provide Property description');
-    }
+    }  
 
     if (locationAdv) {
       obj["locationAdv"] = locationAdv
@@ -172,7 +224,7 @@ const AgricalturalFarmUpdate = () => {
     if (
       ownership &&
       pricedetail &&
-      
+
       inclusivePrices &&
       amenities &&
       propertyFeatures &&
@@ -213,7 +265,7 @@ const AgricalturalFarmUpdate = () => {
         // });
         // let data = await response.json();  
         // console.log("data",data); 
-        await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
+        await axios.patch(`${process.env.REACT_APP_URL}/property/${productID}`, obj, { headers: head })
           .then((e) => {
             toast({
               title: e.data.msg,
@@ -261,7 +313,7 @@ const AgricalturalFarmUpdate = () => {
 
   const pinfetch = async (pin) => {
     try {
-      
+
       let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
       setState(res.data[0].state);
       setCity(res.data[0].city);
@@ -321,7 +373,7 @@ const AgricalturalFarmUpdate = () => {
     e.preventDefault();
     setOwnerShip(e.target.value);
   };
- 
+
 
   const handleAminities = (e) => {
     e.preventDefault();
@@ -406,7 +458,7 @@ const AgricalturalFarmUpdate = () => {
       let min = Math.min(Number(pricedetail), Number(plotArea));
       let ans = Math.round(max / min);
       setPriceSqr(ans);
-    }
+    } 
   }
 
   const handleIndustryType = (e) => {
@@ -427,7 +479,7 @@ const AgricalturalFarmUpdate = () => {
     <Box w={"94%"} padding={"0 20px"} margin={"auto"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"} className="perfectwidth">
       <form onSubmit={handleSubmitData}>
         <Box className={style.location_form}>
-          <Heading size={"lg"}>Where is your property located?</Heading>
+          <Heading size={"lg"}> Plot Land (Agricultural land) </Heading>
           <Heading size={"sm"}>
             An accurate location helps you connect with the right buyers.
           </Heading>
@@ -442,26 +494,15 @@ const AgricalturalFarmUpdate = () => {
             fontSize={"md"}
             variant="flushed"
           />
-          <NumberInput>
-            <NumberInputField
-              placeholder={"Enter pincode"}
-              padding={"0 10px"}
-              borderRight={0}
-              borderLeft={0}
-              borderTop={0}
-              borderRadius={0}
-              _active={{
-                borderRight: "0",
-                borderLeft: "0",
-                borderTop: "0",
-                borderRadius: "0",
-              }}
-              required
-              fontSize={"md"}
-              value={pincode}
-              onChange={handlepinfetch}
-            />
-          </NumberInput>
+          <Input
+            placeholder={"Enter pincode"}
+            padding={"0 10px"}
+            type="text"
+            required
+            fontSize={"md"}
+            value={pincode}
+            onChange={handlepinfetch}
+          />
           <Input
             type="text"
             padding={"0 10px"}
@@ -542,8 +583,8 @@ const AgricalturalFarmUpdate = () => {
                 setPlotArea(NumericString(e.target.value));
               }}
               required />
-            <select value={areaPer} onChange={(e) => {
-              setAreaPer(e.target.value);
+            <Select value={areaPer} onChange={(e) => {
+              setAreaPer(e.target.value); 
             }} className={style.select} required>
               <option value="sq.ft">sq.ft</option>
               <option value="sq.yards">sq.yards</option>
@@ -563,7 +604,7 @@ const AgricalturalFarmUpdate = () => {
               <option value="rood">rood</option>
               <option value="chataks">chataks</option>
               <option value="perch">perch</option>
-            </select>
+            </Select>
           </ButtonGroup>
         </Box>
 
@@ -879,16 +920,15 @@ const AgricalturalFarmUpdate = () => {
                 >
                   {isCountry.country == "india" ? "₹" : "$"} Price Details
                 </Heading>
-                <NumberInput >
-                  <NumberInputField
-                    value={pricedetail}
-                    required
-                    onChange={(e) => {
-                      setPricedetail(e.target.value);
-                      areaCalucation();
-                    }}
-                  />
-                </NumberInput>
+                <Input
+                  type="text"
+                  value={pricedetail}
+                  required
+                  onChange={(e) => {
+                    setPricedetail(e.target.value);
+                    areaCalucation();
+                  }}
+                />
               </Box>
               <Box display={"grid"} gap={0}>
                 <Heading
@@ -899,12 +939,11 @@ const AgricalturalFarmUpdate = () => {
                 >
                   {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
                 </Heading>
-                <NumberInput value={priceSqr}>
-                  <NumberInputField
-                    
-                    
-                  />
-                </NumberInput>
+                <Input
+                  type="text" 
+                  readOnly 
+                  value={priceSqr} 
+                /> 
               </Box>
             </Box>
           </Box>
@@ -950,7 +989,7 @@ const AgricalturalFarmUpdate = () => {
                 <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
                   <option value="Monthly">Monthly</option>
                   <option value="Yearly">Yearly</option>
-                </Select>  
+                </Select>
               </InputGroup>
               <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(NumericString(e.target.value))} placeholder="Booking Amount" margin={"10px 0 0 0"} />
               <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(NumericString(e.target.value))} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
@@ -1010,7 +1049,7 @@ const AgricalturalFarmUpdate = () => {
           </Box>
         </Box>
 
-        
+
 
 
 
@@ -1157,62 +1196,21 @@ const AgricalturalFarmUpdate = () => {
               onClick={handlePropertyFeature}
             >
               Intercom Facility
-            </button>
-          </Box>
-        </Box>
-
-        {/* Society/Building feature */}
-        <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
-            Building feature
-          </Heading>
-          <Box>
+            </button> 
             <button
               className={
-                buildingFeature.includes("DG Availability")
+                propertyFeatures.includes("CCTV Surveillance")
                   ? style.setbtn
                   : style.btn
               }
-              onClick={HandleBuildingFeature}
-              value={"DG Availability"}
-            >
-              DG Availability
-            </button>
-            <button
-              className={
-                buildingFeature.includes("CCTV Surveillance")
-                  ? style.setbtn
-                  : style.btn
-              }
-              onClick={HandleBuildingFeature}
               value={"CCTV Surveillance"}
+              onClick={handlePropertyFeature}
             >
               CCTV Surveillance
             </button>
-            <button
-              className={
-                buildingFeature.includes("Grade A Building")
-                  ? style.setbtn
-                  : style.btn
-              }
-              onClick={HandleBuildingFeature}
-              value={"Grade A Building"}
-            >
-              Grade A Building
-            </button>
-            <button
-              className={
-                buildingFeature.includes("Lift(S)")
-                  ? style.setbtn
-                  : style.btn
-              }
-              onClick={HandleBuildingFeature}
-              value={"Lift(S)"}
-            >
-              Lift(S)
-            </button>
           </Box>
-        </Box>
+        </Box> 
+
 
         {/* ============================ Other Features ============================ */}
         <Box>
@@ -1357,7 +1355,7 @@ const AgricalturalFarmUpdate = () => {
           _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
           color={"#ffffff"}
         >
-          Post Property
+          Update Property
         </Button>
 
       </form>
