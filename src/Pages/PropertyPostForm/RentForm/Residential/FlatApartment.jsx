@@ -4,9 +4,7 @@ import {
   Button,
   ButtonGroup,
   Heading,
-  Input,
-  NumberInput,
-  NumberInputField,
+  Input, 
   Select,
   Text,
   Textarea,
@@ -17,12 +15,12 @@ import { Checkbox } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import style from "../RentForm.module.css";
-import { CleanInputText, IndianDateConverter, NumericString } from "../../code"; 
+import { CleanInputText, IndianDateConverter, NumericString } from "../../code";
 import { InputGroup } from "@chakra-ui/react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 
-const FlatApartment = () =>  {
+const FlatApartment = () => {
   const isCountry = useSelector((state) => state.gloalval);
   const toast = useToast();
   const [country, setCountry] = useState("");
@@ -80,7 +78,7 @@ const FlatApartment = () =>  {
   const [depositAmount, setDepositAmount] = useState("");
   const [agreementDuration, setagreementDuration] = useState("");
   const [noticePeriod, setNoticePeriod] = useState("");
-  const [availableFrom, setavailableFrom] = useState(""); 
+  const [availableFrom, setavailableFrom] = useState("");
 
 
   const handleSubmitData = async (e) => {
@@ -122,12 +120,12 @@ const FlatApartment = () =>  {
       propertyStatus: propertyAge,
       roadFacingWidth: facingwidth,
       roadFacingWidthType: facing,
-      furnished, 
+      furnished,
       securityDeposit,
       totalFloors: +totalfloors,
       floorOn,
       carpetArea: plotArea,
-      carpetAreaUnit: areaPer, 
+      carpetAreaUnit: areaPer,
       parking: {
         openParking: openparking,
         closeParking: parking,
@@ -138,9 +136,9 @@ const FlatApartment = () =>  {
       countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
       additionalPricingDetails: {
         maintenancePrice,
-        maintenanceTimePeriod, 
-        bookingAmount, 
-        membershipCharge 
+        maintenanceTimePeriod,
+        bookingAmount,
+        membershipCharge
       },
       // brokerContact : brokerContact 
     };
@@ -208,7 +206,7 @@ const FlatApartment = () =>  {
       balconey &&
       furnishedarr &&
       ownership &&
-      
+
       additinalft &&
       powerbackup &&
       propertyFacing &&
@@ -238,7 +236,7 @@ const FlatApartment = () =>  {
           light,
           fans,
           ac,
-          tv, 
+          tv,
           beds: Beds,
           wardrobe,
           geyser,
@@ -291,17 +289,18 @@ const FlatApartment = () =>  {
   };
 
   const handlepinfetch = (e) => {
-    setPincode(e.target.value);
-    if (e.target.value.length == 6) {
-      pinfetch(e.target.value);
-    } else {
-      // console.log(e.target.value);
+    let val = NumericString(e.target.value)
+    if (val.length == 6) {
+      pinfetch(val);
+    } else if (val.length > 7) {
+      return
     }
+    setPincode(val);
   };
 
   const pinfetch = async (pin) => {
     try {
-      
+
       let res = await axios.get(
         `${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`
       );
@@ -313,7 +312,7 @@ const FlatApartment = () =>  {
       // console.log(err);
     }
   };
- 
+
 
   const handlePreferredAgreement = (e) => {
     e.preventDefault();
@@ -496,6 +495,7 @@ const FlatApartment = () =>  {
         <Input
           type="text"
           padding={"0 10px"}
+          maxlength={"50"}
           required
           placeholder="House No. (optional)"
           value={houseNo}
@@ -506,6 +506,7 @@ const FlatApartment = () =>  {
         <Input
           type="text"
           padding={"0 10px"}
+          maxlength={"40"}
           required
           placeholder="Apartment / Society"
           fontSize={"md"}
@@ -513,30 +514,21 @@ const FlatApartment = () =>  {
           onChange={(e) => setApartment(e.target.value)}
           variant="flushed"
         />
-        <NumberInput>
-          <NumberInputField
-            placeholder={"Enter pincode"}
-            padding={"0 10px"}
-            borderRight={0}
-            borderLeft={0}
-            borderTop={0}
-            borderRadius={0}
-            _active={{
-              borderRight: "0",
-              borderLeft: "0",
-              borderTop: "0",
-              borderRadius: "0",
-            }}
-            required
-            fontSize={"md"}
-            value={pincode}
-            onChange={handlepinfetch}
-          />
-        </NumberInput>
+        <Input
+          type="text"
+          placeholder={"Enter pincode"}
+          padding={"0 10px"}
+          maxlength={"20"}
+          required
+          fontSize={"md"}
+          value={pincode}
+          onChange={handlepinfetch}
+        />
         <Input
           type="text"
           padding={"0 10px"}
           required
+          maxlength={"40"}
           placeholder="Locality"
           list="browsers"
           value={locality}
@@ -560,6 +552,7 @@ const FlatApartment = () =>  {
           required
           placeholder="Enter City"
           fontSize={"md"}
+          maxlength={"40"}
           value={city}
           onChange={(e) => setCity(e.target.value)}
           variant="flushed"
@@ -568,6 +561,7 @@ const FlatApartment = () =>  {
           type="text"
           padding={"0 10px"}
           required
+          maxlength={"40"}
           placeholder="Enter State"
           value={state}
           onChange={(e) => setState(e.target.value)}
@@ -578,6 +572,7 @@ const FlatApartment = () =>  {
           type="text"
           padding={"0 10px"}
           required
+          maxlength={"40"}
           placeholder="Enter Country"
           value={country}
           onChange={(e) => setCountry(e.target.value)}
@@ -596,39 +591,39 @@ const FlatApartment = () =>  {
         <Box as={"div"} className={style.inp_form_numbers}>
           <Box textAlign={"left"}>
             <Text> No. of Bedrooms </Text>
-            <NumberInput>
-              <NumberInputField 
-                variant="flushed"
-                padding={"0 2px"}
-                onChange={(e) => setBedRoom(e.target.value)}
-                value={bedroom}
-                required
-              />
-            </NumberInput>
+            <Input
+              type="text"
+              maxlength={"2"}
+              variant="flushed"
+              padding={"0 2px"}
+              onChange={(e) => setBedRoom(NumericString(e.target.value))}
+              value={bedroom}
+              required
+            />
           </Box>
           <Box textAlign={"left"}>
             <Text> No. of Bathrooms </Text>
-            <NumberInput>
-              <NumberInputField
-                variant="flushed"
-                onChange={(e) => setBathroom(e.target.value)}
-                value={bathroom}
-                required
-                padding={"0 2px"}
-              />
-            </NumberInput>
+            <Input
+              type="text"
+              variant="flushed"
+              maxlength={"2"}
+              onChange={(e) => setBathroom(NumericString(e.target.value))}
+              value={bathroom}
+              required
+              padding={"0 2px"}
+            />
           </Box>
           <Box textAlign={"left"}>
             <Text> No. of Balconies </Text>
-            <NumberInput>
-              <NumberInputField
-                variant="flushed"
-                onChange={(e) => setBalcony(e.target.value)}
-                value={balconey}
-                required
-                padding={"0 2px"}
-              />
-            </NumberInput>
+            <Input
+              type="text"
+              maxlength={"2"}
+              variant="flushed"
+              onChange={(e) => setBalcony(NumericString(e.target.value))}
+              value={balconey}
+              required
+              padding={"0 2px"}
+            />
           </Box>
         </Box>
         {/* ====================================== */}
@@ -644,18 +639,16 @@ const FlatApartment = () =>  {
             isAttached
             variant="outline"
           >
-            <NumberInput>
-              <NumberInputField
-                padding={"0 2px"}
-                value={plotArea}
-                onChange={(e) => {
-                  // areaCalucation();
-                  setPlotArea(e.target.value);
-                }}
-                required
-              />
-            </NumberInput>
-            <select
+            <Input
+              type="text"
+              padding={"0 2px"}
+              value={plotArea}
+              onChange={(e) => {
+                setPlotArea(NumericString(e.target.value));
+              }}
+              required
+            />
+            <Select
               value={areaPer}
               onChange={(e) => {
                 setAreaPer(e.target.value);
@@ -681,7 +674,7 @@ const FlatApartment = () =>  {
               <option value="rood">rood</option>
               <option value="chataks">chataks</option>
               <option value="perch">perch</option>
-            </select>
+            </Select>
           </ButtonGroup>
         </Box>
         {/* other Room  */}
@@ -780,7 +773,7 @@ const FlatApartment = () =>  {
             padding={"10px 0"}
             gap={6}
           >
-            
+
             <Box className={style.furnished_detail}>
               <Box>
                 <button
@@ -1124,30 +1117,25 @@ const FlatApartment = () =>  {
             Total no of floors and your floor details
           </Text>
           <Box display={"flex"} alignItems={"center"} gap={5}>
-            <NumberInput value={totalfloors} className={style.input_borders}>
-              <NumberInputField
-                borderLeft={0}
-                borderRight={0}
-                borderTop={0}
-                borderBottom={"1px solid #4f5bffcf"}
-                borderRadius={0}
-                onChange={(e) => {
-                  const nowval = e.target.value > 90;
-                  if (nowval) {
-                    toast({
-                      title: "Maximum floor count: 90",
-                      status: "error",
-                      duration: 2000,
-                      position: "top-right",
-                    });
-                  } else {
-                    setTotalFloors(e.target.value);
-                  }
-                }}
-                required
-                w={180}
-              />
-            </NumberInput>
+            <Input
+              type="text"
+              value={totalfloors}
+              onChange={(e) => {
+                const nowval = e.target.value > 90;
+                if (nowval) {
+                  toast({
+                    title: "Maximum floor count: 90",
+                    status: "error",
+                    duration: 2000,
+                    position: "top-right",
+                  });
+                } else {
+                  setTotalFloors(e.target.value);
+                }
+              }}
+              required
+              w={180}
+            />
             <Select
               id="floorSelectTag"
               variant="filled"
@@ -1335,7 +1323,12 @@ const FlatApartment = () =>  {
                 Additional Pricing Detail (Optional)
               </Heading>
               <InputGroup w={"300px"} margin={"10px 0"}>
-                <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(NumericString(e.target.value))} value={maintenancePrice} placeholder={"Maintenance Price"} />
+                <Input
+                  w={"60%"}
+                  type='text'
+                  onChange={(e) => setMaintenancePrice(NumericString(e.target.value))}
+                  value={maintenancePrice} placeholder={"Maintenance Price"}
+                />
                 <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
                   <option value="Monthly">Monthly</option>
                   <option value="Yearly">Yearly</option>
@@ -1346,12 +1339,12 @@ const FlatApartment = () =>  {
             </>
             }
             <Heading
-              as={"h3"}  
+              as={"h3"}
               size={"sm"}
               margin={"10px 0"}
-              color={"#002aff"}
+              color={"#002aff"} 
               fontWeight={500}
-              cursor={"pointer"}
+              cursor={"pointer"} 
               onClick={() => setAdditionalPrice(!additionalPrice)}
               textAlign={"left"}>
               {additionalPrice ? <IoIosArrowUp style={{ display: "inline" }} /> : <IoIosArrowDown style={{ display: "inline" }} />} Add more pricing details
@@ -1368,8 +1361,8 @@ const FlatApartment = () =>  {
             <button value={"Fixed"} className={securityDeposit == "Fixed" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> Fixed </button>
             <button value={"Multiple of Rent"} className={securityDeposit == "Multiple of Rent" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> Multiple of Rent </button>
             <button value={"None"} className={securityDeposit == "None" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> None </button>
-          </Box>  
-          <Box display={securityDeposit == "None" ? "none" : "block" }> 
+          </Box>
+          <Box display={securityDeposit == "None" ? "none" : "block"}>
             <Input type="text" w={300} value={depositAmount} onChange={handleDepositAmount} placeholder={`${securityDeposit == "Fixed" ? "Deposit Value" : ""} ${securityDeposit == "Multiple of Rent" ? "No. of months (Max 30)" : ""}`} />
           </Box>
         </Box>
@@ -1385,8 +1378,8 @@ const FlatApartment = () =>  {
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
-            <option value="4">4</option> 
-            <option value="5">5</option>
+            <option value="4">4</option>
+            <option value="5">5</option>  
           </Select>
         </Box>
 
@@ -1487,7 +1480,8 @@ const FlatApartment = () =>  {
         </Heading>
         <Textarea
           height={140}
-          value={desc}
+          value={desc} 
+          required 
           onChange={(e) => {
             let my_cleantext = CleanInputText(e.target.value);
             setDesc(my_cleantext);
@@ -1517,7 +1511,7 @@ const FlatApartment = () =>  {
         <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
           Amenities
         </Heading>
-        <Box>
+        <Box>   
           <button
             className={
               amenities.includes("Maintenance Staff") ? style.setbtn : style.btn
