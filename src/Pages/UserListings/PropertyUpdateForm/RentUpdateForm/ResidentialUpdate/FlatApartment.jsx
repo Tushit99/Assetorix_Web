@@ -17,7 +17,7 @@ import axios from "axios";
 import style from "../RentForm.module.css";
 import { CleanInputText, IndianDateConverter, NumericString } from "../../code";
 import { InputGroup } from "@chakra-ui/react";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"; 
 import { useParams } from "react-router-dom";
 
 
@@ -80,7 +80,7 @@ const FlatApartment = () => {
   const [depositAmount, setDepositAmount] = useState("");
   const [agreementDuration, setagreementDuration] = useState("");
   const [noticePeriod, setNoticePeriod] = useState("");
-  const [availableFrom, setavailableFrom] = useState("");
+  const [availableFrom, setavailableFrom] = useState("");   
 
 
   // ================================= 
@@ -126,7 +126,6 @@ const FlatApartment = () => {
         setGeyser(e?.furnishedObj?.geyser);
         setfurnishedarr(e?.furnishedList);
       }
-      setAreaPer(e?.plotAreaUnit);
       setExtraRoom(e?.otherRoom);
       setOwnerShip(e?.ownership);
       setPriceSqr(e?.price);
@@ -328,11 +327,10 @@ const FlatApartment = () => {
         // let data = await response.json();
         // console.log("data",obj,data); 
         await axios
-          .post(`${process.env.REACT_APP_URL}/property/`, obj, {
+          .patch(`${process.env.REACT_APP_URL}/property/${productID}`, obj, {
             headers: head,
           })
-          .then((e) => {
-            // console.log(e, obj);
+          .then((e) => { 
             toast({
               title: e.data.msg,
               description: e.data.msg,
@@ -345,10 +343,8 @@ const FlatApartment = () => {
           title: error.response.data.msg,
           status: "error",
           duration: 2000,
-        });
-        // console.log(error);
-      }
-      // }
+        }); 
+      } 
     } else {
       toast({
         title: "Form un-filled",
@@ -357,7 +353,10 @@ const FlatApartment = () => {
         duration: 2000,
         position: "top-right",
       });
-    }
+    } 
+
+
+
   };
 
   const handlepinfetch = (e) => {
@@ -2220,7 +2219,7 @@ const FlatApartment = () => {
           _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
           color={"#ffffff"}
         >
-          Post Property
+          Update Property 
         </Button>
       </form>
     </Box>

@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
   ButtonGroup,
   Heading,
   Input,
-  NumberInput,
-  NumberInputField,
   Select,
   Text,
   Textarea,
@@ -20,11 +18,12 @@ import style from "../RentForm.module.css";
 import { CleanInputText, IndianDateConverter, NumericString } from "../../code";
 import { InputGroup } from "@chakra-ui/react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-
+import { useParams } from "react-router-dom";
 
 
 
 const IndependentUpdate = () => {
+  const { productID } = useParams();
   const isCountry = useSelector((state) => state.gloalval);
   const toast = useToast();
   const [country, setCountry] = useState("");
@@ -52,7 +51,6 @@ const IndependentUpdate = () => {
   const [extraroom, setExtraRoom] = useState([]);
   const [furnished, setFurnished] = useState("");
   const [propertyAge, setpropertyAge] = useState("");
-  const [ownership, setOwnerShip] = useState("");
   const [priceSqr, setPriceSqr] = useState("");
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
@@ -76,15 +74,81 @@ const IndependentUpdate = () => {
   const [inclusivePrices, setinclusivePrices] = useState([]);
   const [maintenancePrice, setMaintenancePrice] = useState("");
   const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
-  const [membershipCharge, setMembershipCharge] = useState("");
   const [bookingAmount, setBookingAmount] = useState("");
   const [securityDeposit, setSecurityDeposit] = useState("");
   const [depositAmount, setDepositAmount] = useState("");
-  const [agreementDuration, setagreementDuration] = useState("");
+  const [agreementDuration, setagreementDuration] = useState("");  
   const [noticePeriod, setNoticePeriod] = useState("");
   const [availableFrom, setavailableFrom] = useState("");
-  const [expectedRentel, setExpectedRentel] = useState("");
-  const [annualDuesPayble, setAnnualDuesPayble] = useState("");
+  
+  // ================================= 
+
+  const handleDataFetch = async () => {
+    await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
+      let e = detail.data.data;
+      // ===================
+      setCountry(e?.address?.country);
+      setFacingWidth(e?.roadFacingWidth);
+      setCity(e?.address?.city);
+      setApartment(e?.address?.apartmentName);
+      setPincode(e?.address?.pincode);
+      setState(e.address.state);
+      setLocality(e.address.locality)
+      setHouseNo(e.address.houseNumber);
+      setBedRoom(e.roomDetails.bedroom);
+      setBathroom(e.roomDetails.bathroom);
+      setBalcony(e?.roomDetails.balcony);
+      setPlotArea(e?.plotArea);
+      setAreaPer(e?.plotAreaUnit);
+      setpropertyAge(e?.propertyStatus);
+      setWillingTo(e?.willingToRent);
+      setpreferredAgreement(e?.agreementType);
+      setinclusivePrices(e?.inclusivePrices);
+      setSecurityDeposit(e?.securityDeposit);
+      setDepositAmount(e?.depositValue);
+      setagreementDuration(e?.durationAgreement);
+      setNoticePeriod(e?.monthsOfNotice);
+      setavailableFrom(e?.availableFrom);
+      setParking(e?.parking?.closeParking || 0);
+      setOpenparking(e?.parking?.openParking || 0);
+      setFurnished(e?.furnished);
+      if (furnished == "Furnished" || furnished == "Semi-Furnished") {
+        setLight(e?.furnishedObj?.light);
+        setFans(e?.furnishedObj?.fans);
+        setAc(e?.furnishedObj?.ac);
+        setTv(e?.furnishedObj?.tv);
+        setBeds(e?.furnishedObj?.beds);
+        setWardrobe(e?.furnishedObj?.wardrobe);
+        setGeyser(e?.furnishedObj?.geyser);
+        setfurnishedarr(e?.furnishedList);
+      }
+      setExtraRoom(e?.otherRoom); 
+      setPriceSqr(e?.price);
+      setAminity(e?.amenities);
+      setPropertyFeature(e?.propertyFeatures);
+      setBuildingFeature(e?.society_buildingFeatures);
+      setAdditinalFeature(e?.additionalFeatures);
+      setOtherFeature(e?.otherFeatures);
+      setPowerbackup(e?.powerBackup);
+      setPropertyFacing(e?.propertyFacing);
+      setFlooring(e?.flooring);
+      setFacing(e?.roadFacingWidthType);
+      setLocationAdv(e?.locationAdv);
+      setTotalFloors(e?.totalFloors);
+      setDesc(e?.description);
+      setAdditionalPrice(e?.additionalPricingDetails ? true : false);
+      setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice)
+      setMaintenanceTimePeriod(e?.additionalPricingDetails?.maintenanceTimePeriod)
+      setBookingAmount(e?.additionalPricingDetails?.bookingAmount)
+ 
+    })
+  }
+
+  useEffect(() => {
+    handleDataFetch();
+  }, []);
+
+  // ================================
 
 
   const handleSubmitData = async (e) => {
@@ -107,8 +171,7 @@ const IndependentUpdate = () => {
         bathroom,
         balcony: balconey,
       },
-      ownership,
-      agreementType: preferredAgreement,
+       agreementType: preferredAgreement,
       price: +priceSqr,
       willingToRent: willingTo,
       amenities,
@@ -143,9 +206,7 @@ const IndependentUpdate = () => {
       additionalPricingDetails: {
         maintenancePrice,
         maintenanceTimePeriod,
-        expectedRental: expectedRentel,
         bookingAmount,
-        annualDuesPayable: annualDuesPayble
       },
       // brokerContact : brokerContact 
     };
@@ -169,8 +230,6 @@ const IndependentUpdate = () => {
       showToastError("Provide balconey");
     } else if (!furnishedarr) {
       showToastError("Provide Furnished Field");
-    } else if (!ownership) {
-      showToastError("Provide OwnerShip");
     } else if (!priceSqr) {
       showToastError("Provide Price Per sq.ft");
     } else if (!additinalft) {
@@ -212,9 +271,7 @@ const IndependentUpdate = () => {
       bedroom &&
       bathroom &&
       balconey &&
-      furnishedarr &&
-      ownership &&
-
+      furnishedarr &&  
       additinalft &&
       powerbackup &&
       propertyFacing &&
@@ -264,8 +321,8 @@ const IndependentUpdate = () => {
         // let data = await response.json();
         // console.log("data",obj,data); 
         await axios
-          .post(`${process.env.REACT_APP_URL}/property/`, obj, {
-            headers: head,
+          .patch(`${process.env.REACT_APP_URL}/property/${productID}`, obj, {
+            headers: head, 
           })
           .then((e) => {
             // console.log(e, obj);
@@ -387,11 +444,7 @@ const IndependentUpdate = () => {
     e.preventDefault();
     setpropertyAge(e.target.value);
   };
-
-  const handleownership = (e) => {
-    e.preventDefault();
-    setOwnerShip(e.target.value);
-  };
+ 
 
   const handleAdditionalFeature = (e) => {
     e.preventDefault();
@@ -600,39 +653,36 @@ const IndependentUpdate = () => {
           <Box as={"div"} className={style.inp_form_numbers}>
             <Box textAlign={"left"}>
               <Text> No. of Bedrooms </Text>
-              <NumberInput>
-                <NumberInputField
-                  variant="flushed"
-                  padding={"0 2px"}
-                  onChange={(e) => setBedRoom(e.target.value)}
-                  value={bedroom}
-                  required
-                />
-              </NumberInput>
+              <Input
+                type="text"
+                variant="flushed"
+                padding={"0 2px"}
+                onChange={(e) => setBedRoom(e.target.value)}
+                value={bedroom}
+                required
+              />
             </Box>
             <Box textAlign={"left"}>
               <Text> No. of Bathrooms </Text>
-              <NumberInput>
-                <NumberInputField
-                  variant="flushed"
-                  onChange={(e) => setBathroom(e.target.value)}
-                  value={bathroom}
-                  required
-                  padding={"0 2px"}
-                />
-              </NumberInput>
+              <Input
+                type="text"
+                variant="flushed"
+                onChange={(e) => setBathroom(e.target.value)}
+                value={bathroom}
+                required
+                padding={"0 2px"}
+              />
             </Box>
             <Box textAlign={"left"}>
               <Text> No. of Balconies </Text>
-              <NumberInput>
-                <NumberInputField
-                  variant="flushed"
-                  onChange={(e) => setBalcony(e.target.value)}
-                  value={balconey}
-                  required
-                  padding={"0 2px"}
-                />
-              </NumberInput>
+              <Input
+                type="text"
+                variant="flushed"
+                onChange={(e) => setBalcony(e.target.value)}
+                value={balconey}
+                required
+                padding={"0 2px"}
+              />
             </Box>
           </Box>
           {/* ====================================== */}
@@ -648,17 +698,16 @@ const IndependentUpdate = () => {
               isAttached
               variant="outline"
             >
-              <NumberInput>
-                <NumberInputField
-                  padding={"0 2px"}
-                  value={plotArea}
-                  onChange={(e) => {
-                    // areaCalucation();
-                    setPlotArea(e.target.value);
-                  }}
-                  required
-                />
-              </NumberInput>
+              <Input
+                type="text"
+                padding={"0 2px"}
+                value={plotArea}
+                onChange={(e) => {
+                  // areaCalucation();
+                  setPlotArea(e.target.value);
+                }}
+                required
+              />
               <select
                 value={areaPer}
                 onChange={(e) => {
@@ -785,7 +834,7 @@ const IndependentUpdate = () => {
               gap={6}
             >
               <Heading as={"h4"} fontWeight={400} size={"sm"} color={"#656565"}>
-                
+
               </Heading>
               <Box className={style.furnished_detail}>
                 <Box>
@@ -1312,10 +1361,7 @@ const IndependentUpdate = () => {
                     <option value="Yearly">Yearly</option>
                   </Select>
                 </InputGroup>
-                <Input type="text" w={"300px"} value={expectedRentel} onChange={(e) => setExpectedRentel(e.target.value)} placeholder="Expected rental" margin={"0"} />
                 <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-                <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
-                <Input type="text" w={"300px"} value={membershipCharge} onChange={(e) => setMembershipCharge(e.target.value)} placeholder="Membership charges" margin={"10px 0 0 0"} />
               </>
               }
               <Heading
@@ -1377,74 +1423,7 @@ const IndependentUpdate = () => {
               <button onClick={handleMonthNotice} className={noticePeriod == "5 months" ? style.setbtn : style.btn} value={"5 months"}> 5 month </button>
               <button onClick={handleMonthNotice} className={noticePeriod == "6 months" ? style.setbtn : style.btn} value={"6 months"}> 6 month </button>
             </Box>
-          </Box>
-
-          {/* ========================= Add pricing and details ========================= */}
-          <Box>
-            <Heading
-              as={"h3"}
-              size={"md"}
-              margin={"30px 0 10px 0"}
-              textAlign={"left"}
-            >
-              Add pricing and details...
-            </Heading>
-            {/* OwnerShip detail */}
-            <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
-              Ownership
-            </Heading>
-            <Box className={style.grid} gap={4}>
-              <button
-                className={ownership == "Freehold" ? style.setbtn : style.btn}
-                borderRadius={"100px"}
-                border={"1px solid rgba(113, 210, 255, 0.897)"}
-                margin={"8px 6px 0 0"}
-                onClick={handleownership}
-                value={"Freehold"}
-                backgroundColor={"blue.50"}
-              >
-                Freehold
-              </button>
-              <button
-                className={ownership == "Leasehold" ? style.setbtn : style.btn}
-                borderRadius={"100px"}
-                border={"1px solid rgba(113, 210, 255, 0.897)"}
-                margin={"8px 6px 0 0"}
-                onClick={handleownership}
-                value={"Leasehold"}
-                backgroundColor={"blue.50"}
-              >
-                Leasehold
-              </button>
-              <button
-                className={
-                  ownership == "Co-operative society" ? style.setbtn : style.btn
-                }
-                borderRadius={"100px"}
-                border={"1px solid rgba(113, 210, 255, 0.897)"}
-                margin={"8px 6px 0 0"}
-                onClick={handleownership}
-                value={"Co-operative society"}
-                backgroundColor={"blue.50"}
-              >
-                Co-operative society
-              </button>
-              <button
-                className={
-                  ownership == "Power of Attorney" ? style.setbtn : style.btn
-                }
-                borderRadius={"100px"}
-                border={"1px solid rgba(113, 210, 255, 0.897)"}
-                margin={"8px 6px 0 0"}
-                onClick={handleownership}
-                value={"Power of Attorney"}
-                backgroundColor={"blue.50"}
-              >
-                Power of Attorney
-              </button>
-            </Box>
-          </Box>
-
+          </Box>  
 
         </Box>
 

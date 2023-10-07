@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -20,11 +20,13 @@ import style from "../RentForm.module.css";
 import { CleanInputText, IndianDateConverter, NumericString } from "../../code";
 import { InputGroup } from "@chakra-ui/react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { useParams } from "react-router-dom";
 
 
 
 
 const IndependentBuilderRentUpdate = () => {
+  const { productID } = useParams();
   const isCountry = useSelector((state) => state.gloalval);
   const toast = useToast();
   const [country, setCountry] = useState("");
@@ -85,6 +87,77 @@ const IndependentBuilderRentUpdate = () => {
   const [availableFrom, setavailableFrom] = useState("");
   const [expectedRentel, setExpectedRentel] = useState("");
   const [annualDuesPayble, setAnnualDuesPayble] = useState("");
+
+
+  // ================================= 
+
+  const handleDataFetch = async () => {
+    await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
+      let e = detail.data.data;
+      console.log(e); 
+      // ==================================
+      setCountry(e?.address?.country);
+      setFacingWidth(e?.roadFacingWidth);
+      setCity(e?.address?.city);
+      setApartment(e?.address?.apartmentName);
+      setPincode(e?.address?.pincode);
+      setState(e.address.state);
+      setLocality(e.address.locality)
+      setHouseNo(e.address.houseNumber);
+      setBedRoom(e.roomDetails.bedroom);
+      setBathroom(e.roomDetails.bathroom);
+      setBalcony(e?.roomDetails.balcony);
+      setPlotArea(e?.plotArea);
+      setAreaPer(e?.plotAreaUnit);
+      setpropertyAge(e?.propertyStatus);
+      setWillingTo(e?.willingToRent);
+      setpreferredAgreement(e?.agreementType);
+      setinclusivePrices(e?.inclusivePrices);
+      setSecurityDeposit(e?.securityDeposit);
+      setDepositAmount(e?.depositValue);
+      setagreementDuration(e?.durationAgreement);
+      setNoticePeriod(e?.monthsOfNotice);
+      setavailableFrom(e?.availableFrom);
+      setParking(e?.parking?.closeParking || 0);
+      setOpenparking(e?.parking?.openParking || 0);
+      setFurnished(e?.furnished);
+      if (furnished == "Furnished" || furnished == "Semi-Furnished") {
+        setLight(e?.furnishedObj?.light);
+        setFans(e?.furnishedObj?.fans);
+        setAc(e?.furnishedObj?.ac);
+        setTv(e?.furnishedObj?.tv);
+        setBeds(e?.furnishedObj?.beds);
+        setWardrobe(e?.furnishedObj?.wardrobe);
+        setGeyser(e?.furnishedObj?.geyser);
+        setfurnishedarr(e?.furnishedList);
+      }
+      setExtraRoom(e?.otherRoom);
+      setPriceSqr(e?.price);
+      setAminity(e?.amenities);
+      setPropertyFeature(e?.propertyFeatures);
+      setBuildingFeature(e?.society_buildingFeatures);
+      setAdditinalFeature(e?.additionalFeatures);
+      setOtherFeature(e?.otherFeatures);
+      setPowerbackup(e?.powerBackup);
+      setPropertyFacing(e?.propertyFacing);
+      setFlooring(e?.flooring);
+      setFacing(e?.roadFacingWidthType);
+      setLocationAdv(e?.locationAdv);
+      setTotalFloors(e?.totalFloors);
+      setDesc(e?.description);
+      setAdditionalPrice(e?.additionalPricingDetails ? true : false);
+      setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice)
+      setMaintenanceTimePeriod(e?.additionalPricingDetails?.maintenanceTimePeriod)
+      setBookingAmount(e?.additionalPricingDetails?.bookingAmount)
+
+    })
+  }
+
+  useEffect(() => {
+    handleDataFetch();
+  }, []);
+
+  // ================================
 
 
   const handleSubmitData = async (e) => {
@@ -497,7 +570,7 @@ const IndependentBuilderRentUpdate = () => {
   }
 
   return (
-    <Box w={"94%"} padding={"0 20px"} margin={"auto"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"}> 
+    <Box w={"94%"} padding={"0 20px"} margin={"auto"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"}>
       <form onSubmit={handleSubmitData}>
         {/* property location */}
         <Box className={style.location_form}>
@@ -599,39 +672,36 @@ const IndependentBuilderRentUpdate = () => {
           <Box as={"div"} className={style.inp_form_numbers}>
             <Box textAlign={"left"}>
               <Text> No. of Bedrooms </Text>
-              <NumberInput>
-                <NumberInputField
-                  variant="flushed"
-                  padding={"0 2px"}
-                  onChange={(e) => setBedRoom(e.target.value)}
-                  value={bedroom}
-                  required
-                />
-              </NumberInput>
+              <Input
+                type="text"
+                variant="flushed"
+                padding={"0 2px"}
+                onChange={(e) => setBedRoom(e.target.value)}
+                value={bedroom}
+                required
+              /> 
             </Box>
             <Box textAlign={"left"}>
-              <Text> No. of Bathrooms </Text>
-              <NumberInput>
-                <NumberInputField
-                  variant="flushed"
-                  onChange={(e) => setBathroom(e.target.value)}
-                  value={bathroom}
-                  required
-                  padding={"0 2px"}
-                />
-              </NumberInput>
+              <Text> No. of Bathrooms </Text> 
+              <Input
+                type="text"
+                variant="flushed"
+                onChange={(e) => setBathroom(e.target.value)}
+                value={bathroom}
+                required
+                padding={"0 2px"}
+              /> 
             </Box>
             <Box textAlign={"left"}>
-              <Text> No. of Balconies </Text>
-              <NumberInput>
-                <NumberInputField
-                  variant="flushed"
-                  onChange={(e) => setBalcony(e.target.value)}
-                  value={balconey}
-                  required
-                  padding={"0 2px"}
-                />
-              </NumberInput>
+              <Text> No. of Balconies </Text> 
+              <Input
+                type="text"
+                variant="flushed"
+                onChange={(e) => setBalcony(e.target.value)}
+                value={balconey}
+                required
+                padding={"0 2px"}
+              /> 
             </Box>
           </Box>
           {/* ====================================== */}
@@ -647,18 +717,17 @@ const IndependentBuilderRentUpdate = () => {
               isAttached
               variant="outline"
             >
-              <NumberInput>
-                <NumberInputField
-                  padding={"0 2px"}
-                  value={plotArea}
-                  onChange={(e) => {
-                    // areaCalucation();
-                    setPlotArea(e.target.value);
-                  }}
-                  required
-                />
-              </NumberInput>
-              <select
+              <Input
+                type="text"
+                padding={"0 2px"}
+                value={plotArea}
+                onChange={(e) => {
+                  // areaCalucation();
+                  setPlotArea(e.target.value);
+                }}
+                required
+              /> 
+              <Select
                 value={areaPer}
                 onChange={(e) => {
                   setAreaPer(e.target.value);
@@ -684,7 +753,7 @@ const IndependentBuilderRentUpdate = () => {
                 <option value="rood">rood</option>
                 <option value="chataks">chataks</option>
                 <option value="perch">perch</option>
-              </select>
+              </Select>
             </ButtonGroup>
           </Box>
           {/* other Room  */}
@@ -784,7 +853,7 @@ const IndependentBuilderRentUpdate = () => {
               gap={6}
             >
               <Heading as={"h4"} fontWeight={400} size={"sm"} color={"#656565"}>
-                
+
               </Heading>
               <Box className={style.furnished_detail}>
                 <Box>
