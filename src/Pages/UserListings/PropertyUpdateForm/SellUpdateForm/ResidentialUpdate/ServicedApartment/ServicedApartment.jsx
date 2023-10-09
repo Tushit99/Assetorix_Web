@@ -298,7 +298,6 @@ const ServicedApartmentUpdate = () => {
     const handleDataFetch = async () => {
         await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
             let e = detail.data.data;
-            console.log(e);
             setCountry(e?.address?.country);
             setFacingWidth(e?.roadFacingWidth);
             setCity(e?.address?.city);
@@ -311,7 +310,7 @@ const ServicedApartmentUpdate = () => {
             setBathroom(e.roomDetails.bathroom);
             setBalcony(e?.roomDetails.balcony);
             setParking(e?.parking?.closeParking);
-            setOpenparking(e?.parking?.openParking); 
+            setOpenparking(e?.parking?.openParking);
             setAreaPer(e?.plotAreaUnit);
             setFurnished(e?.furnished);
             if (furnished == "Furnished" || furnished == "Semi-Furnished") {
@@ -323,8 +322,8 @@ const ServicedApartmentUpdate = () => {
                 setWardrobe(e?.furnishedObj?.wardrobe);
                 setGeyser(e?.furnishedObj?.geyser);
                 setfurnishedarr(e?.furnishedList);
-            } 
-            setExtraRoom(e?.otherRoom); 
+            }
+            setExtraRoom(e?.otherRoom);
             setAvailability(e?.availabilityStatus);
             setFromyear(e?.propertyStatus);
             setExpectedYear(e?.expectedByYear);
@@ -615,9 +614,9 @@ const ServicedApartmentUpdate = () => {
                     <Input
                         type="text"
                         required
-                        padding={"0 10px"} 
-                        variant="flushed" 
-                        placeholder="Pincode" 
+                        padding={"0 10px"}
+                        variant="flushed"
+                        placeholder="Pincode"
                         value={pincode}
                         onChange={handlepinfetch}
                     />
@@ -684,7 +683,7 @@ const ServicedApartmentUpdate = () => {
                         <Box textAlign={"left"} >
                             <Text> No. of Bedrooms </Text>
                             <Input
-                                type="text"  
+                                type="text"
                                 onChange={(e) => setBedRoom(e.target.value)}
                                 value={bedroom}
                                 required
@@ -693,21 +692,21 @@ const ServicedApartmentUpdate = () => {
                         <Box textAlign={"left"}>
                             <Text> No. of Bathrooms </Text>
                             <Input
-                                type="text"  
+                                type="text"
                                 onChange={(e) => setBathroom(e.target.value)}
                                 value={bathroom}
                                 required
                             />
                         </Box>
                         <Box textAlign={"left"}>
-                            <Text> No. of Balconies </Text> 
+                            <Text> No. of Balconies </Text>
                             <Input
-                                type="text"  
+                                type="text"
                                 onChange={(e) => setBalcony(e.target.value)}
                                 value={balconey}
                                 required
-                            />   
-                        </Box> 
+                            />
+                        </Box>
                     </Box>
                     {/* ======================================================= */}
                     {/* add area details */}
@@ -859,7 +858,7 @@ const ServicedApartmentUpdate = () => {
                             gap={6}
                         >
                             <Heading as={"h4"} fontWeight={400} size={"sm"} color={"#656565"}>
-                                
+
                             </Heading>
                             <Box className={style.furnished_detail}>
                                 <Box>

@@ -71,14 +71,13 @@ const ColdStorageUpdate = () => {
     const handleDataFetch = async () => {
         await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
             let e = detail.data.data;
-            console.log(e);
             setCountry(e?.address?.country);
             setCity(e?.address?.city);
             setPincode(e?.address?.pincode);
-            setState(e.address.state); 
-            setFlooring(e.flooring); 
+            setState(e.address.state);
+            setFlooring(e.flooring);
             setLocality(e.address.locality);
-            setaddress(e.address.address); 
+            setaddress(e.address.address);
             if (e.preLeased_Rented == "Yes") {
                 setCurrentRentPerMonth(e.preLeased_RentedDetails.currentRentPerMonth);
                 setLeaseTenureInYear(e.preLeased_RentedDetails.leaseTenureInYear);
@@ -156,7 +155,7 @@ const ColdStorageUpdate = () => {
             plotArea,
             plotAreaUnit: areaPer,
             carpetArea: plotArea,
-            carpetAreaUnit: areaPer, 
+            carpetAreaUnit: areaPer,
             description: desc,
             countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
             additionalPricingDetails: {
@@ -182,7 +181,7 @@ const ColdStorageUpdate = () => {
             showToastError('Provide locality');
         } else if (!washrooms) {
             showToastError('Provide washrooms');
-        }  else if (!ownership) {
+        } else if (!ownership) {
             showToastError('Provide OwnerShip');
         } else if (!pricedetail) {
             showToastError('Provide PriceDetail');
@@ -230,7 +229,7 @@ const ColdStorageUpdate = () => {
                 obj["preLeased_RentedDetails"] = preLeased_RentedDetails
             }
 
-       
+
             if (availability == "Ready to move" && fromyear != "") {
                 obj["propertyStatus"] = fromyear;
                 obj["availabilityStatus"] = availability;

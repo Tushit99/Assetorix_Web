@@ -71,7 +71,6 @@ const ManufactureUpdate = () => {
   const handleDataFetch = async () => {
     await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
       let e = detail.data.data;
-      console.log(e);
       setCountry(e?.address?.country);
       setCity(e?.address?.city);
       setPincode(e?.address?.pincode);

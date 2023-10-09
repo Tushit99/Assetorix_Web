@@ -71,7 +71,6 @@ const PlotLandUpdate = () => {
     const handleDataFetch = async () => {
         await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
             let e = detail.data.data;
-            console.log(e);
             setCountry(e?.address?.country);
             setFacingWidth(e?.roadFacingWidth);
             setCity(e?.address?.city);
@@ -451,7 +450,7 @@ const PlotLandUpdate = () => {
                         required
                         value={pincode}
                         onChange={handlepinfetch}
-                    /> 
+                    />
                     <Input
                         type="text"
                         padding={"0 10px"}

@@ -88,8 +88,7 @@ const FarmhouseRentUpdate = () => {
         console.log(productID);
         await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
             let e = detail.data.data;
-            console.log(e);
-            // ===================
+
             setCountry(e?.address?.country);
             setFacingWidth(e?.roadFacingWidth);
             setCity(e?.address?.city);
@@ -125,11 +124,7 @@ const FarmhouseRentUpdate = () => {
             setpropertyAge(e?.propertyStatus);
             setPriceSqr(e?.price);
             setinclusivePrices(e?.inclusivePrices);
-            setAminity(e?.amenities);
-            setPropertyFeature(e?.propertyFeatures);
-            setBuildingFeature(e?.society_buildingFeatures);
-            setAdditinalFeature(e?.additionalFeatures);
-            setOtherFeature(e?.otherFeatures);
+
             setAdditionalPrice(e?.additionalPricingDetails);
             if (e?.additionalPricingDetails) {
                 setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice)
@@ -145,9 +140,17 @@ const FarmhouseRentUpdate = () => {
             if (e?.securityDeposit == "Fixed") {
                 setDepositAmount(e?.depositValue)
             }
+
             setagreementDuration(e?.durationAgreement);
             setNoticePeriod(e?.monthsOfNotice);
             setDesc(e?.description);
+
+            setAminity(e?.amenities);
+            setPropertyFeature(e?.propertyFeatures);
+            setBuildingFeature(e?.society_buildingFeatures);
+            setAdditinalFeature(e?.additionalFeatures);
+            setOtherFeature(e?.otherFeatures);
+
             setPowerbackup(e?.powerBackup);
             setPropertyFacing(e?.propertyFacing);
             setFlooring(e?.flooring);

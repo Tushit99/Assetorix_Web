@@ -87,8 +87,7 @@ const RKStudioUpdate = () => {
 
     const handleDataFetch = async () => {
         await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
-            let e = detail.data.data; 
-            console.log(e); 
+            let e = detail.data.data;
             setCountry(e?.address?.country);
             setFacingWidth(e?.roadFacingWidth);
             setCity(e?.address?.city);
@@ -100,7 +99,7 @@ const RKStudioUpdate = () => {
             setBedRoom(e.roomDetails.bedroom);
             setBathroom(e.roomDetails.bathroom);
             setBalcony(e?.roomDetails.balcony);
-            setParking(e?.parking?.closeParking); 
+            setParking(e?.parking?.closeParking);
             setOpenparking(e?.parking?.openParking);
             setFurnished(e?.furnished);
             if (furnished == "Furnished" || furnished == "Semi-Furnished") {
@@ -585,17 +584,17 @@ const RKStudioUpdate = () => {
             <form onSubmit={handleSubmitData}>
                 {/* property location */}
                 <Box className={style.location_form}>
-                    <Heading size={"lg"} margin={"2px 0"}> RK Studio </Heading> 
+                    <Heading size={"lg"} margin={"2px 0"}> RK Studio </Heading>
                     <Heading size={"sm"} >
                         Location Detail
-                    </Heading>  
+                    </Heading>
                     <Input
                         type="text"
                         padding={"0 10px"}
                         required
                         placeholder="House No. (optional)"
                         value={houseNo}
-                        onChange={(e) => setHouseNo(e.target.value)} 
+                        onChange={(e) => setHouseNo(e.target.value)}
                         fontSize={"md"}
                         variant="flushed"
                     />
@@ -617,7 +616,7 @@ const RKStudioUpdate = () => {
                         fontSize={"md"}
                         value={pincode}
                         onChange={handlepinfetch}
-                    /> 
+                    />
                     <Input
                         type="text"
                         padding={"0 10px"}
@@ -723,14 +722,14 @@ const RKStudioUpdate = () => {
                             </NumberInput>
                         </Box>
                         <Box textAlign={"left"}>
-                            <Text> No. of Balconies </Text> 
-                            <Input type="text" 
+                            <Text> No. of Balconies </Text>
+                            <Input type="text"
                                 variant="flushed"
                                 onChange={(e) => setBalcony(e.target.value)}
                                 value={balconey}
                                 required
                                 padding={"0 2px"}
-                             /> 
+                            />
                         </Box>
                     </Box>
                     {/* ====================================== */}
@@ -748,7 +747,7 @@ const RKStudioUpdate = () => {
                         >
                             <NumberInput value={plotArea}>
                                 <NumberInputField
-                                    padding={"0 2px"} 
+                                    padding={"0 2px"}
                                     onChange={(e) => {
                                         areaCalucation();
                                         setPlotArea(e.target.value);
@@ -884,7 +883,7 @@ const RKStudioUpdate = () => {
                             gap={6}
                         >
                             <Heading as={"h4"} fontWeight={400} size={"sm"} color={"#656565"}>
-                                
+
                             </Heading>
                             <Box className={style.furnished_detail}>
                                 <Box>
@@ -1477,7 +1476,7 @@ const RKStudioUpdate = () => {
                                     {isCountry.country == "india" ? "₹" : "$"} Price Details
                                 </Heading>
                                 <NumberInput value={pricedetail} >
-                                    <NumberInputField        
+                                    <NumberInputField
                                         required
                                         onChange={(e) => {
                                             setPricedetail(e.target.value);
@@ -1496,7 +1495,7 @@ const RKStudioUpdate = () => {
                                     {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
                                 </Heading>
                                 <NumberInput value={priceSqr}>
-                                    <NumberInputField 
+                                    <NumberInputField
                                         readOnly
                                     />
                                 </NumberInput>

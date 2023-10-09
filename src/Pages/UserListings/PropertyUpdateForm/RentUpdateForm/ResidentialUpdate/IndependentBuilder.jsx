@@ -93,15 +93,14 @@ const IndependentBuilderRentUpdate = () => {
   const handleDataFetch = async () => {
     await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
       let e = detail.data.data;
-      console.log(e); 
-      // ==================================
+
       setCountry(e?.address?.country);
       setFacingWidth(e?.roadFacingWidth);
       setCity(e?.address?.city);
       setApartment(e?.address?.apartmentName);
       setPincode(e?.address?.pincode);
       setState(e.address.state);
-      setLocality(e.address.locality); 
+      setLocality(e.address.locality);
       setHouseNo(e.address.houseNumber);
       setBedRoom(e.roomDetails.bedroom);
       setBathroom(e.roomDetails.bathroom);
@@ -121,13 +120,13 @@ const IndependentBuilderRentUpdate = () => {
       setOpenparking(e?.parking?.openParking || 0);
       setFurnished(e?.furnished);
       if (furnished == "Furnished" || furnished == "Semi-Furnished") {
-        setLight(e?.furnishedObj?.light);  
-        setFans(e?.furnishedObj?.fans); 
-        setAc(e?.furnishedObj?.ac); 
-        setTv(e?.furnishedObj?.tv); 
-        setBeds(e?.furnishedObj?.beds); 
-        setWardrobe(e?.furnishedObj?.wardrobe); 
-        setGeyser(e?.furnishedObj?.geyser); 
+        setLight(e?.furnishedObj?.light);
+        setFans(e?.furnishedObj?.fans);
+        setAc(e?.furnishedObj?.ac);
+        setTv(e?.furnishedObj?.tv);
+        setBeds(e?.furnishedObj?.beds);
+        setWardrobe(e?.furnishedObj?.wardrobe);
+        setGeyser(e?.furnishedObj?.geyser);
         setfurnishedarr(e?.furnishedList);
       }
       setExtraRoom(e?.otherRoom);
@@ -281,7 +280,7 @@ const IndependentBuilderRentUpdate = () => {
       bathroom &&
       balconey &&
       furnishedarr &&
- 
+
       additinalft &&
       powerbackup &&
       propertyFacing &&
@@ -453,7 +452,7 @@ const IndependentBuilderRentUpdate = () => {
   const handlepropertyAge = (e) => {
     e.preventDefault();
     setpropertyAge(e.target.value);
-  }; 
+  };
 
   const handleAdditionalFeature = (e) => {
     e.preventDefault();
@@ -564,7 +563,7 @@ const IndependentBuilderRentUpdate = () => {
     <Box w={"94%"} padding={"0 20px"} margin={"auto"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"}>
       <form onSubmit={handleSubmitData}>
         {/* property location */}
-        <Box className={style.location_form}> 
+        <Box className={style.location_form}>
           <Heading size={"lg"}> Independent Builder </Heading>
           <Heading size={"sm"}>
             An accurate location helps you connect with the right buyers.
@@ -670,10 +669,10 @@ const IndependentBuilderRentUpdate = () => {
                 onChange={(e) => setBedRoom(e.target.value)}
                 value={bedroom}
                 required
-              /> 
+              />
             </Box>
             <Box textAlign={"left"}>
-              <Text> No. of Bathrooms </Text> 
+              <Text> No. of Bathrooms </Text>
               <Input
                 type="text"
                 variant="flushed"
@@ -681,10 +680,10 @@ const IndependentBuilderRentUpdate = () => {
                 value={bathroom}
                 required
                 padding={"0 2px"}
-              /> 
+              />
             </Box>
             <Box textAlign={"left"}>
-              <Text> No. of Balconies </Text> 
+              <Text> No. of Balconies </Text>
               <Input
                 type="text"
                 variant="flushed"
@@ -692,7 +691,7 @@ const IndependentBuilderRentUpdate = () => {
                 value={balconey}
                 required
                 padding={"0 2px"}
-              /> 
+              />
             </Box>
           </Box>
           {/* ====================================== */}
@@ -714,10 +713,10 @@ const IndependentBuilderRentUpdate = () => {
                 value={plotArea}
                 onChange={(e) => {
                   // areaCalucation();
-                  setPlotArea(e.target.value); 
+                  setPlotArea(e.target.value);
                 }}
                 required
-              /> 
+              />
               <Select
                 value={areaPer}
                 onChange={(e) => {
@@ -1402,8 +1401,8 @@ const IndependentBuilderRentUpdate = () => {
                     <option value="Yearly">Yearly</option>
                   </Select>
                 </InputGroup>
-                 <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-                </>
+                <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
+              </>
               }
               <Heading
                 as={"h3"}
@@ -1465,7 +1464,7 @@ const IndependentBuilderRentUpdate = () => {
             </Box>
           </Box>
 
-           
+
         </Box>
 
 

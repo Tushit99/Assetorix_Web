@@ -91,7 +91,6 @@ const CommercialShop = () => {
     const handleDataFetch = async () => {
         await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
             let e = detail.data.data;
-            console.log(e);
             setLocated(e.locatedInside);
             setCountry(e?.address?.country);
             setCity(e?.address?.city);
@@ -140,7 +139,7 @@ const CommercialShop = () => {
             setMaintenancePrice(e.additionalPricingDetails.maintenancePrice);
             setMaintenanceTimePeriod(e.additionalPricingDetails.maintenanceTimePeriod);
             setBookingAmount(e.additionalPricingDetails.bookingAmount);
-            setPreLeased(e.preLeased_Rented); 
+            setPreLeased(e.preLeased_Rented);
             setDesc(e.description);
             setAminity(e.amenities);
             setLocationAdv(e.locationAdv);

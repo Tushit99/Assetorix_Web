@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'; 
+import React, { useEffect } from 'react';
 import { useState } from "react";
 import {
     Box,
@@ -9,14 +9,14 @@ import {
     InputGroup,
     NumberInput,
     NumberInputField,
-    Select, 
+    Select,
     Text,
-    Textarea,  
-    useToast, 
+    Textarea,
+    useToast,
 } from "@chakra-ui/react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { Checkbox } from "@chakra-ui/react";
-import style from "./FarmHouse.module.css"; 
+import style from "./FarmHouse.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
@@ -299,8 +299,7 @@ const FarmHouseUpdate = () => {
         console.log(productID);
         await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
             let e = detail.data.data;
-            console.log(e);
-            // ===================
+
             setCountry(e?.address?.country);
             setFacingWidth(e?.roadFacingWidth);
             setCity(e?.address?.city);
@@ -736,7 +735,7 @@ const FarmHouseUpdate = () => {
                                     setPlotArea(e.target.value);
                                 }}
                                 required
-                            />   
+                            />
                             <select value={areaPer} onChange={(e) => {
                                 setAreaPer(e.target.value);
                             }} className={style.select} required>
@@ -745,7 +744,7 @@ const FarmHouseUpdate = () => {
                                 <option value="sq.m">sq.m</option>
                                 <option value="acres">acres</option>
                                 <option value="marla">marla</option>
-                                <option value= "cents">cents</option>
+                                <option value="cents">cents</option>
                                 <option value="bigha">bigha</option>
                                 <option value="kottah">kottah</option>
                                 <option value="kanal">kanal</option>
@@ -865,7 +864,7 @@ const FarmHouseUpdate = () => {
                             gap={6}
                         >
                             <Heading as={"h4"} fontWeight={400} size={"sm"} color={"#656565"}>
-                                
+
                             </Heading>
                             <Box className={style.furnished_detail}>
                                 <Box>

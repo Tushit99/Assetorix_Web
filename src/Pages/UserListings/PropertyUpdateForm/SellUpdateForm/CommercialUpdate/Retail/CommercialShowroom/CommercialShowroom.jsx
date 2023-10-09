@@ -29,7 +29,7 @@ import { useParams } from "react-router-dom";
 
 
 const CommercialShowroom = () => {
-    const { productID } = useParams(); 
+    const { productID } = useParams();
     const isCountry = useSelector((state) => state.gloalval);
     const [located, setLocated] = useState("");
     const toast = useToast();
@@ -94,14 +94,13 @@ const CommercialShowroom = () => {
     const handleDataFetch = async () => {
         await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
             let e = detail.data.data;
-            console.log(e); 
-            setLocated(e.locatedInside); 
-            setCountry(e?.address?.country);  
-            setCity(e?.address?.city); 
-            setPincode(e?.address?.pincode); 
-            setState(e.address.state); 
-            setLocality(e.address.locality); 
-            setType(e.address.type); 
+            setLocated(e.locatedInside);
+            setCountry(e?.address?.country);
+            setCity(e?.address?.city);
+            setPincode(e?.address?.pincode);
+            setState(e.address.state);
+            setLocality(e.address.locality);
+            setType(e.address.type);
             if (e.preLeased_Rented == "Yes") {
                 setCurrentRentPerMonth(e.preLeased_RentedDetails.currentRentPerMonth);
                 setLeaseTenureInYear(e.preLeased_RentedDetails.leaseTenureInYear);
@@ -143,14 +142,14 @@ const CommercialShowroom = () => {
             setMaintenancePrice(e.additionalPricingDetails.maintenancePrice);
             setMaintenanceTimePeriod(e.additionalPricingDetails.maintenanceTimePeriod);
             setBookingAmount(e.additionalPricingDetails.bookingAmount);
-            setPreLeased(e.preLeased_Rented); 
+            setPreLeased(e.preLeased_Rented);
             setDesc(e.description);
             setAminity(e.amenities);
             setLocationAdv(e.locationAdv);
         })
-    } 
+    }
 
-    
+
     useEffect(() => {
         handleDataFetch();
     }, []);
@@ -616,7 +615,7 @@ const CommercialShowroom = () => {
                         />
                         {pincollection.length ? (
                             <datalist id="browsers">
-                                {pincollection.map((e,i) => (
+                                {pincollection.map((e, i) => (
                                     <option key={i} value={e.locality} />
                                 ))}
                             </datalist>
@@ -1170,9 +1169,9 @@ const CommercialShowroom = () => {
                                             {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
                                         </Heading>
                                         <Input
-                                            type="text" 
+                                            type="text"
                                             value={priceSqr}
-                                        /> 
+                                        />
                                     </Box>
                                 </Box>
                             </Box>
@@ -1877,7 +1876,7 @@ const CommercialShowroom = () => {
                         *Please provide correct information, otherwise your listing might get
                         blocked
                     </Heading>
-                    <Button 
+                    <Button
                         margin={"20px 0"}
                         type="submit"
                         w={"100%"}

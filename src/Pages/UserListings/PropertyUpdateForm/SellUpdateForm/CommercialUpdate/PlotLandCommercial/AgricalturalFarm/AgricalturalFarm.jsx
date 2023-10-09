@@ -46,7 +46,7 @@ const AgricalturalFarmUpdate = () => {
   const [constructionType, setConstructionType] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
-  const [buildingFeature, setBuildingFeature] = useState([]); 
+  const [buildingFeature, setBuildingFeature] = useState([]);
   const [otherFeature, setOtherFeature] = useState([]);
   const [propertyFacing, setPropertyFacing] = useState("");
   const [facing, setFacing] = useState("Meter");
@@ -82,7 +82,6 @@ const AgricalturalFarmUpdate = () => {
   const handleDataFetch = async () => {
     await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
       let e = detail.data.data;
-      console.log(e);
       setCountry(e?.address?.country);
       setCity(e?.address?.city);
       setPincode(e?.address?.pincode);
@@ -91,28 +90,28 @@ const AgricalturalFarmUpdate = () => {
       setPlotnumber(e.address.plotNumber);
 
       setPlotArea(e.plotArea);
-      setAreaPer(e.plotAreaUnit); 
+      setAreaPer(e.plotAreaUnit);
 
       setplotLength(e.plotLength);
       setPlotBreadth(e.plotBreadth);
-      
+
       setFacingWidth(e.roadFacingWidth);
       setFacing(e.roadFacingWidthType);
-      
+
       setOpenSides(e.openSides);
       setConstructionOnProperty(e.constructionOnProperty);
       setConstructionType(e.constructionOnPropertyList);
-      
+
       setPropertyFacing(e.propertyFacing);
       setExpectedByYear(e.expectedByYear);
-      
-      setAuthorisedBy(e.propertyApprovalAuthorityList); 
-      
-      setPropertyFeature(e.propertyFeatures); 
-      setOtherFeature(e.otherFeatures); 
+
+      setAuthorisedBy(e.propertyApprovalAuthorityList);
+
+      setPropertyFeature(e.propertyFeatures);
+      setOtherFeature(e.otherFeatures);
       setOwnerShip(e.ownership);
       setPricedetail(e.price);
-      setPriceSqr(e.priceUnit); 
+      setPriceSqr(e.priceUnit);
       setInclusivePrice(e.inclusivePrices);
       setMaintenancePrice(e.additionalPricingDetails.maintenancePrice);
       setMaintenanceTimePeriod(e.additionalPricingDetails.maintenanceTimePeriod);
@@ -171,11 +170,11 @@ const AgricalturalFarmUpdate = () => {
       amenities,
       propertyFeatures,
       preLeased_Rented: preLeased,
-       otherFeatures: otherFeature,
+      otherFeatures: otherFeature,
       propertyFacing,
       roadFacingWidth: facingwidth,
       roadFacingWidthType: facing,
-       plotArea,
+      plotArea,
       plotAreaUnit: areaPer,
       propertyApprovalAuthorityList: authorisedBy,
       carpetArea: plotArea,
@@ -215,7 +214,7 @@ const AgricalturalFarmUpdate = () => {
       showToastError('Provide PriceDetail');
     } else if (!priceSqr) {
       showToastError('Provide Price Per sq.ft');
-    }  
+    }
 
     if (locationAdv) {
       obj["locationAdv"] = locationAdv
@@ -458,7 +457,7 @@ const AgricalturalFarmUpdate = () => {
       let min = Math.min(Number(pricedetail), Number(plotArea));
       let ans = Math.round(max / min);
       setPriceSqr(ans);
-    } 
+    }
   }
 
   const handleIndustryType = (e) => {
@@ -584,7 +583,7 @@ const AgricalturalFarmUpdate = () => {
               }}
               required />
             <Select value={areaPer} onChange={(e) => {
-              setAreaPer(e.target.value); 
+              setAreaPer(e.target.value);
             }} className={style.select} required>
               <option value="sq.ft">sq.ft</option>
               <option value="sq.yards">sq.yards</option>
@@ -940,10 +939,10 @@ const AgricalturalFarmUpdate = () => {
                   {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
                 </Heading>
                 <Input
-                  type="text" 
-                  readOnly 
-                  value={priceSqr} 
-                /> 
+                  type="text"
+                  readOnly
+                  value={priceSqr}
+                />
               </Box>
             </Box>
           </Box>
@@ -1196,7 +1195,7 @@ const AgricalturalFarmUpdate = () => {
               onClick={handlePropertyFeature}
             >
               Intercom Facility
-            </button> 
+            </button>
             <button
               className={
                 propertyFeatures.includes("CCTV Surveillance")
@@ -1209,7 +1208,7 @@ const AgricalturalFarmUpdate = () => {
               CCTV Surveillance
             </button>
           </Box>
-        </Box> 
+        </Box>
 
 
         {/* ============================ Other Features ============================ */}

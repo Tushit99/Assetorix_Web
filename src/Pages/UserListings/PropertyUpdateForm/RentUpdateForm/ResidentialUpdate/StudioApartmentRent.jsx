@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect } from 'react'
+import { useState } from "react";
 import {
     Box,
     Button,
@@ -20,10 +21,12 @@ import style from "../RentForm.module.css";
 import { CleanInputText, IndianDateConverter, NumericString } from "../../code";
 import { InputGroup } from "@chakra-ui/react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { useParams } from 'react-router-dom/dist';
 
 
 
 const StudioApartmentRentUpdate = () => {
+    const { productID } = useParams();
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
@@ -51,7 +54,6 @@ const StudioApartmentRentUpdate = () => {
     const [extraroom, setExtraRoom] = useState([]);
     const [furnished, setFurnished] = useState("");
     const [propertyAge, setpropertyAge] = useState("");
-    const [ownership, setOwnerShip] = useState("");
     const [priceSqr, setPriceSqr] = useState("");
     const [amenities, setAminity] = useState([]);
     const [propertyFeatures, setPropertyFeature] = useState("");
@@ -75,15 +77,97 @@ const StudioApartmentRentUpdate = () => {
     const [inclusivePrices, setinclusivePrices] = useState([]);
     const [maintenancePrice, setMaintenancePrice] = useState("");
     const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
-    const [membershipCharge, setMembershipCharge] = useState("");
     const [bookingAmount, setBookingAmount] = useState("");
     const [securityDeposit, setSecurityDeposit] = useState("");
     const [depositAmount, setDepositAmount] = useState("");
     const [agreementDuration, setagreementDuration] = useState("");
     const [noticePeriod, setNoticePeriod] = useState("");
     const [availableFrom, setavailableFrom] = useState("");
-    const [expectedRentel, setExpectedRentel] = useState("");
-    const [annualDuesPayble, setAnnualDuesPayble] = useState("");
+
+
+    const handleDataFetch = async () => {
+        await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
+            let e = detail.data.data;
+
+            setCountry(e?.address?.country);
+            setFacingWidth(e?.roadFacingWidth);
+            setCity(e?.address?.city);
+            setApartment(e?.address?.apartmentName);
+            setPincode(e?.address?.pincode);
+            setState(e.address.state);
+            setLocality(e.address.locality);
+            setHouseNo(e.address.houseNumber);
+
+            setBedRoom(e.roomDetails.bedroom);
+            setBathroom(e.roomDetails.bathroom);
+            setBalcony(e?.roomDetails.balcony);
+
+            setParking(e?.parking?.closeParking);
+            setOpenparking(e?.parking?.openParking);
+
+            setFurnished(e?.furnished);
+            if (e?.furnished == "Furnished" || e?.furnished == "Semi-Furnished") {
+                setLight(e?.furnishedObj?.light);
+                setFans(e?.furnishedObj?.fans);
+                setAc(e?.furnishedObj?.ac);
+                setTv(e?.furnishedObj?.tv);
+                setBeds(e?.furnishedObj?.beds);
+                setWardrobe(e?.furnishedObj?.wardrobe);
+                setGeyser(e?.furnishedObj?.geyser);
+                setfurnishedarr(e?.furnishedList);
+            }
+
+            setPlotArea(e?.carpetArea);
+            setAreaPer(e?.carpetAreaUnit);
+
+            setExtraRoom(e?.otherRoom);
+
+            setPriceSqr(e?.price);
+            setinclusivePrices(e?.inclusivePrices);
+            setAdditionalPrice(e?.additionalPricingDetails);
+            if (e?.additionalPricingDetails) {
+                setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice)
+                setMaintenanceTimePeriod(e?.additionalPricingDetails?.maintenanceTimePeriod)
+                setBookingAmount(e?.additionalPricingDetails?.bookingAmount)
+            }
+
+            setTotalFloors(e?.totalFloors);
+            setFloorOn(e?.floorOn);
+
+            setpropertyAge(e?.propertyStatus);
+            setavailableFrom(e?.availableFrom);
+            setWillingTo(e?.willingToRent);
+            setagentContact(e?.needAgentHelp);
+            setpreferredAgreement(e?.agreementType);
+            setWillingTo(e?.willingToRent);
+            setSecurityDeposit(e?.securityDeposit);
+            if (e?.securityDeposit == "Multiple of Rent") {
+                setDepositAmount(e?.multipleOfRent)
+            }
+            if (e?.securityDeposit == "Fixed") {
+                setDepositAmount(e?.depositValue)
+            }
+            setagreementDuration(e?.durationAgreement);
+            setNoticePeriod(e?.monthsOfNotice);
+            setDesc(e?.description);
+
+            setAminity(e?.amenities);
+            setPropertyFeature(e?.propertyFeatures);
+            setBuildingFeature(e?.society_buildingFeatures);
+            setAdditinalFeature(e?.additionalFeatures);
+            setOtherFeature(e?.otherFeatures);
+
+            setPowerbackup(e?.powerBackup);
+            setPropertyFacing(e?.propertyFacing);
+            setFlooring(e?.flooring);
+            setFacing(e?.roadFacingWidthType);
+            setLocationAdv(e?.locationAdv);
+        })
+    };
+
+    useEffect(() => {
+        handleDataFetch();
+    }, []);
 
 
     const handleSubmitData = async (e) => {
@@ -106,7 +190,6 @@ const StudioApartmentRentUpdate = () => {
                 bathroom,
                 balcony: balconey,
             },
-            ownership,
             agreementType: preferredAgreement,
             price: +priceSqr,
             willingToRent: willingTo,
@@ -142,9 +225,7 @@ const StudioApartmentRentUpdate = () => {
             additionalPricingDetails: {
                 maintenancePrice,
                 maintenanceTimePeriod,
-                expectedRental: expectedRentel,
                 bookingAmount,
-                annualDuesPayable: annualDuesPayble
             },
         };
 
@@ -167,8 +248,6 @@ const StudioApartmentRentUpdate = () => {
             showToastError("Provide balconey");
         } else if (!furnishedarr) {
             showToastError("Provide Furnished Field");
-        } else if (!ownership) {
-            showToastError("Provide OwnerShip");
         } else if (!priceSqr) {
             showToastError("Provide Price Per sq.ft");
         } else if (!additinalft) {
@@ -211,7 +290,6 @@ const StudioApartmentRentUpdate = () => {
             bathroom &&
             balconey &&
             furnishedarr &&
-            ownership &&
 
             additinalft &&
             powerbackup &&
@@ -262,7 +340,7 @@ const StudioApartmentRentUpdate = () => {
                 // let data = await response.json();
                 // console.log("data",obj,data); 
                 await axios
-                    .post(`${process.env.REACT_APP_URL}/property/`, obj, {
+                    .patch(`${process.env.REACT_APP_URL}/property/${productID}`, obj, {
                         headers: head,
                     })
                     .then((e) => {
@@ -296,13 +374,13 @@ const StudioApartmentRentUpdate = () => {
 
     const handlepinfetch = (e) => {
         let val = NumericString(e.target.value)
-        if (val.length == 6) { 
-          pinfetch(val);
+        if (val.length == 6) {
+            pinfetch(val);
         } else if (val.length > 7) {
-          return
+            return
         }
         setPincode(val);
-      };
+    };
 
     const pinfetch = async (pin) => {
         try {
@@ -378,10 +456,7 @@ const StudioApartmentRentUpdate = () => {
         setpropertyAge(e.target.value);
     };
 
-    const handleownership = (e) => {
-        e.preventDefault();
-        setOwnerShip(e.target.value);
-    };
+
 
     const handleAdditionalFeature = (e) => {
         e.preventDefault();
@@ -518,7 +593,7 @@ const StudioApartmentRentUpdate = () => {
                         onChange={(e) => setApartment(e.target.value)}
                         variant="flushed"
                     />
-                    <NumberInput>
+                    <NumberInput value={pincode}>
                         <NumberInputField
                             placeholder={"Enter pincode"}
                             padding={"0 10px"}
@@ -602,7 +677,7 @@ const StudioApartmentRentUpdate = () => {
                     <Box as={"div"} className={style.inp_form_numbers}>
                         <Box textAlign={"left"}>
                             <Text> No. of Bedrooms </Text>
-                            <NumberInput>
+                            <NumberInput value={bedroom}>
                                 <NumberInputField
                                     variant="flushed"
                                     padding={"0 2px"}
@@ -614,7 +689,7 @@ const StudioApartmentRentUpdate = () => {
                         </Box>
                         <Box textAlign={"left"}>
                             <Text> No. of Bathrooms </Text>
-                            <NumberInput>
+                            <NumberInput value={bathroom}>
                                 <NumberInputField
                                     variant="flushed"
                                     onChange={(e) => setBathroom(e.target.value)}
@@ -626,7 +701,7 @@ const StudioApartmentRentUpdate = () => {
                         </Box>
                         <Box textAlign={"left"}>
                             <Text> No. of Balconies </Text>
-                            <NumberInput>
+                            <NumberInput value={balconey}>
                                 <NumberInputField
                                     variant="flushed"
                                     onChange={(e) => setBalcony(e.target.value)}
@@ -650,7 +725,7 @@ const StudioApartmentRentUpdate = () => {
                             isAttached
                             variant="outline"
                         >
-                            <NumberInput>
+                            <NumberInput value={plotArea}>
                                 <NumberInputField
                                     padding={"0 2px"}
                                     value={plotArea}
@@ -787,7 +862,7 @@ const StudioApartmentRentUpdate = () => {
                             gap={6}
                         >
                             <Heading as={"h4"} fontWeight={400} size={"sm"} color={"#656565"}>
-                                
+
                             </Heading>
                             <Box className={style.furnished_detail}>
                                 <Box>
@@ -1345,10 +1420,7 @@ const StudioApartmentRentUpdate = () => {
                                         <option value="Yearly">Yearly</option>
                                     </Select>
                                 </InputGroup>
-                                <Input type="text" w={"300px"} value={expectedRentel} onChange={(e) => setExpectedRentel(e.target.value)} placeholder="Expected rental" margin={"0"} />
                                 <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-                                <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
-                                <Input type="text" w={"300px"} value={membershipCharge} onChange={(e) => setMembershipCharge(e.target.value)} placeholder="Membership charges" margin={"10px 0 0 0"} />
                             </>
                             }
                             <Heading
@@ -1411,71 +1483,7 @@ const StudioApartmentRentUpdate = () => {
                         </Box>
                     </Box>
 
-                    {/* ========================= Add pricing and details ========================= */}
-                    <Box>
-                        <Heading
-                            as={"h3"}
-                            size={"md"}
-                            margin={"30px 0 10px 0"}
-                            textAlign={"left"}
-                        >
-                            Add pricing and details...
-                        </Heading>
-                        {/* OwnerShip detail */}
-                        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
-                            Ownership
-                        </Heading>
-                        <Box className={style.grid} gap={4}>
-                            <button
-                                className={ownership == "Freehold" ? style.setbtn : style.btn}
-                                borderRadius={"100px"}
-                                border={"1px solid rgba(113, 210, 255, 0.897)"}
-                                margin={"8px 6px 0 0"}
-                                onClick={handleownership}
-                                value={"Freehold"}
-                                backgroundColor={"blue.50"}
-                            >
-                                Freehold
-                            </button>
-                            <button
-                                className={ownership == "Leasehold" ? style.setbtn : style.btn}
-                                borderRadius={"100px"}
-                                border={"1px solid rgba(113, 210, 255, 0.897)"}
-                                margin={"8px 6px 0 0"}
-                                onClick={handleownership}
-                                value={"Leasehold"}
-                                backgroundColor={"blue.50"}
-                            >
-                                Leasehold
-                            </button>
-                            <button
-                                className={
-                                    ownership == "Co-operative society" ? style.setbtn : style.btn
-                                }
-                                borderRadius={"100px"}
-                                border={"1px solid rgba(113, 210, 255, 0.897)"}
-                                margin={"8px 6px 0 0"}
-                                onClick={handleownership}
-                                value={"Co-operative society"}
-                                backgroundColor={"blue.50"}
-                            >
-                                Co-operative society
-                            </button>
-                            <button
-                                className={
-                                    ownership == "Power of Attorney" ? style.setbtn : style.btn
-                                }
-                                borderRadius={"100px"}
-                                border={"1px solid rgba(113, 210, 255, 0.897)"}
-                                margin={"8px 6px 0 0"}
-                                onClick={handleownership}
-                                value={"Power of Attorney"}
-                                backgroundColor={"blue.50"}
-                            >
-                                Power of Attorney
-                            </button>
-                        </Box>
-                    </Box>
+
                 </Box>
 
                 {/* ========================== What makes your property unique ================================  */}
@@ -2229,7 +2237,7 @@ const StudioApartmentRentUpdate = () => {
                     _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                     color={"#ffffff"}
                 >
-                    Post Property
+                    Update Property
                 </Button>
             </form>
         </Box>

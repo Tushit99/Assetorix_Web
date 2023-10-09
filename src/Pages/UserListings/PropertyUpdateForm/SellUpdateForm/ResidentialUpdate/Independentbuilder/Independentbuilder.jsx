@@ -66,7 +66,7 @@ const IndependentbuilderUpdate = () => {
     const [overLook, setoverlook] = useState([]);
     const [otherFeature, setOtherFeature] = useState([]);
     const [powerbackup, setPowerbackup] = useState("");
-    const [propertyFacing, setPropertyFacing] = useState(""); 
+    const [propertyFacing, setPropertyFacing] = useState("");
     const [flooring, setFlooring] = useState("");
     const [facing, setFacing] = useState("Meter");
     const [locationAdv, setLocationAdv] = useState([]);
@@ -296,14 +296,13 @@ const IndependentbuilderUpdate = () => {
     const handleDataFetch = async () => {
         await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
             let e = detail.data.data;
-            // console.log(e); 
             setCountry(e?.address?.country);
             setFacingWidth(e?.roadFacingWidth);
             setCity(e?.address?.city);
             setApartment(e?.address?.apartmentName);
             setPincode(e?.address?.pincode);
             setState(e.address.state);
-            setLocality(e.address.locality); 
+            setLocality(e.address.locality);
             setHouseNo(e.address.houseNumber);
             setBedRoom(e.roomDetails.bedroom);
             setBathroom(e.roomDetails.bathroom);
@@ -612,7 +611,7 @@ const IndependentbuilderUpdate = () => {
                         required
                         placeholder={"Enter pincode"}
                         value={pincode}
-                        variant="flushed" 
+                        variant="flushed"
                         onChange={handlepinfetch}
                     />
                     <Input
@@ -678,7 +677,7 @@ const IndependentbuilderUpdate = () => {
                         <Box textAlign={"left"} >
                             <Text> No. of Bedrooms </Text>
                             <Input
-                                type="text" 
+                                type="text"
                                 onChange={(e) => setBedRoom(e.target.value)}
                                 value={bedroom}
                                 required
@@ -687,7 +686,7 @@ const IndependentbuilderUpdate = () => {
                         <Box textAlign={"left"}>
                             <Text> No. of Bathrooms </Text>
                             <Input
-                                type="text" 
+                                type="text"
                                 onChange={(e) => setBathroom(e.target.value)}
                                 value={bathroom}
                                 required
@@ -695,8 +694,8 @@ const IndependentbuilderUpdate = () => {
                         </Box>
                         <Box textAlign={"left"}>
                             <Text> No. of Balconies </Text>
-                            <Input 
-                                type="text" 
+                            <Input
+                                type="text"
                                 onChange={(e) => setBalcony(e.target.value)}
                                 value={balconey}
                                 required
@@ -724,7 +723,7 @@ const IndependentbuilderUpdate = () => {
                                     setPlotArea(e.target.value);
                                 }}
                                 required
-                            /> 
+                            />
                             <Select value={areaPer} onChange={(e) => {
                                 setAreaPer(e.target.value);
                             }} className={style.select} required>
@@ -849,7 +848,7 @@ const IndependentbuilderUpdate = () => {
                             gap={6}
                         >
                             <Heading as={"h4"} fontWeight={400} size={"sm"} color={"#656565"}>
-                                
+
                             </Heading>
                             <Box className={style.furnished_detail}>
                                 <Box>

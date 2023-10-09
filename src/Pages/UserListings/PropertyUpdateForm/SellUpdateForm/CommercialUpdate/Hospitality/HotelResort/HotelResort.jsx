@@ -83,7 +83,6 @@ const HotelResortUpdate = () => {
     const handleDataFetch = async () => {
         await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
             let e = detail.data.data;
-            console.log(e);
             setCountry(e?.address?.country);
             setCity(e?.address?.city);
             setPincode(e?.address?.pincode);
@@ -108,12 +107,12 @@ const HotelResortUpdate = () => {
             setPricedetail(e?.price);
             setPriceSqr(e?.priceUnit);
             setPreLeased(e.preLeased_Rented);
-             if (e.preLeased_Rented == "Yes") {
+            if (e.preLeased_Rented == "Yes") {
                 setCurrentRentPerMonth(e.preLeased_RentedDetails.currentRentPerMonth);
                 setLeaseTenureInYear(e.preLeased_RentedDetails.leaseTenureInYear);
                 setAnnualRentIncrease(e.preLeased_RentedDetails.annualRentIncrease);
                 setBusinessType(e.preLeased_RentedDetails.businessType);
-            } 
+            }
             setDesc(e.description);
             setAminity(e.amenities);
             setPropertyFeature(e?.propertyFeatures);
