@@ -45,50 +45,50 @@ import { Box } from '@chakra-ui/react';
 
 
 
-const EditingForm = () => { 
-  const {productID} = useParams(); 
+const EditingForm = () => {
+  const { productID } = useParams();
   const [looking, setLooking] = useState("");
   const [group, setGroup] = useState("");
   const [type, setType] = useState("");
   const [other, setOther] = useState("");
 
-  const editBox = async () =>{
-    await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((e)=>{
-      console.log(e.data.data);  
-      let dt = e.data.data;  
-      setGroup(dt?.propertyGroup);  
-      setType(dt?.propertyType); 
-      setLooking(dt?.lookingFor);  
- 
-      if(dt?.propertyType=="Office"){
-        setOther(dt?.officeType); 
-      } 
-      else if(dt?.propertyType=="Storage"){
-        setOther(dt?.storageType); 
+  const editBox = async () => {
+    await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((e) => {
+      console.log(e.data.data);
+      let dt = e.data.data;
+      setGroup(dt?.propertyGroup);
+      setType(dt?.propertyType);
+      setLooking(dt?.lookingFor);
+
+      if (dt?.propertyType == "Office") {
+        setOther(dt?.officeType);
       }
-      else if(dt?.propertyType=="Hospitality"){
-        setOther(dt?.hospitalityType); 
+      else if (dt?.propertyType == "Storage") {
+        setOther(dt?.storageType);
       }
-      else if(dt?.propertyType=="Industry"){
-        setOther(dt?.industryType); 
+      else if (dt?.propertyType == "Hospitality") {
+        setOther(dt?.hospitalityType);
       }
-      else if(dt?.propertyType=="Plot / Land"){
-        setOther(dt?.plotLandType); 
+      else if (dt?.propertyType == "Industry") {
+        setOther(dt?.industryType);
       }
-      else if(dt?.propertyType=="Retail"){
-        setOther(dt?.retailSpaceType); 
-      } 
+      else if (dt?.propertyType == "Plot / Land") {
+        setOther(dt?.plotLandType);
+      }
+      else if (dt?.propertyType == "Retail") {
+        setOther(dt?.retailSpaceType);
+      }
 
     })
-  } 
+  }
 
-  useEffect(()=>{
-     editBox();  
-  },[]);  
+  useEffect(() => {
+    editBox();
+  }, []);
 
 
   return (
-    <Box marginTop={4}>  
+    <Box marginTop={4}>
       {/* ============================== sell -=- Residential ==============================  */}
 
       {(looking == "Sell" && group == "Residential" && type == "Flat / Apartment") ? <FlatAppartmentUpdate /> : ""}
@@ -107,7 +107,7 @@ const EditingForm = () => {
 
       {/* ============================== sell -=- commercial ==============================  */}
       {/* -------- office -------- */}
-      {(looking == "Sell" && group == "Commercial" && type == "Office" && other == "Ready to move office space") ? <ReadyToMoveUpdate /> : ""} 
+      {(looking == "Sell" && group == "Commercial" && type == "Office" && other == "Ready to move office space") ? <ReadyToMoveUpdate /> : ""}
 
       {(looking == "Sell" && group == "Commercial" && type == "Office" && other == "Co-working office space") ? <CoWorkingspaceUpdate /> : ""}
 
@@ -118,7 +118,7 @@ const EditingForm = () => {
 
       {(looking == "Sell" && group == "Commercial" && type == "Retail" && other == "Commercial Showrooms") ? <CommercialShowroomUpdate /> : ""}
 
-      {/* ------------ Storage ----------- */} 
+      {/* ------------ Storage ----------- */}
       {(looking == "Sell" && group == "Commercial" && type == "Storage" && other == "Ware House") ? <WareHouseUpdate /> : ""}
 
       {(looking == "Sell" && group == "Commercial" && type == "Storage" && other == "Cold Storage") ? <ColdStorageUpdate /> : ""}
@@ -128,63 +128,63 @@ const EditingForm = () => {
 
       {(looking == "Sell" && group == "Commercial" && type == "Plot / Land" && other == "Agricultural Land / Farm Land") ? <AgricalturalFarmUpdate /> : ""}
 
-      {(looking == "Sell" && group == "Commercial" && type == "Plot / Land" && other == "Industrial Lands / Plots") ? <IndustrialLandUpdate /> : ""}    
+      {(looking == "Sell" && group == "Commercial" && type == "Plot / Land" && other == "Industrial Lands / Plots") ? <IndustrialLandUpdate /> : ""}
 
-      {/* --------------- Industry---------------- */} 
+      {/* --------------- Industry---------------- */}
       {(looking == "Sell" && group == "Commercial" && type == "Industry" && other == "Factory") ? <FactoryUpdate /> : ""}
-      
+
       {(looking == "Sell" && group == "Commercial" && type == "Industry" && other == "Manufacturing") ? <ManufactureUpdate /> : ""}
-      
+
       {/* ---------------- Hospitality --------------- */}
       {(looking == "Sell" && group == "Commercial" && type == "Hospitality" && other == "Hotel / Resorts") ? <HotelResortUpdate /> : ""}
-      
+
       {(looking == "Sell" && group == "Commercial" && type == "Hospitality" && other == "Guest-House / Banquet-Hall") ? <GuestBanquetUpdate /> : ""}
-      
-      {/* ============================== Rent -=- Residential ==============================  */} 
+
+      {/* ============================== Rent -=- Residential ==============================  */}
 
       {(looking == "Rent" && group == "Residential" && type == "Flat / Apartment") ? <FlatApartmentUpdate /> : ""}
-      
+
       {(looking == "Rent" && group == "Residential" && type == "Independent House / Villa") ? <IndependentUpdate /> : ""}
-      
+
       {(looking == "Rent" && group == "Residential" && type == "Independent / Builder Floor") ? <IndependentBuilderRentUpdate /> : ""}
-      
+
       {(looking == "Rent" && group == "Residential" && type == "Serviced Apartment") ? <ServicedApartmentRentUpdate /> : ""}
-      
+
       {(looking == "Rent" && group == "Residential" && type == "1RK / Studio Apartment") ? <StudioApartmentRentUpdate /> : ""}
-      
+
       {(looking == "Rent" && group == "Residential" && type == "Farmhouse") ? <FarmhouseRentUpdate /> : ""}
-      
-      {(looking == "Rent" && group == "Residential" && type == "Hospitality" && other == "Hotel / Resorts" ) ? <HotelResortRentUpdate /> : ""}
-      
-      {(looking == "Rent" && group == "Residential" && type == "Hospitality" && other == "Guest-House / Banquet-Hall") ? <GuestBanquetRentUpdate /> : ""}
-      
+
+      {(looking == "Rent" && group == "Commercial" && type == "Hospitality" && other == "Hotel / Resorts") ? <HotelResortRentUpdate /> : ""}
+
+      {(looking == "Rent" && group == "Commercial" && type == "Hospitality" && other == "Guest-House / Banquet-Hall") ? <GuestBanquetRentUpdate /> : ""}
+
       {/* ---------------------------------------- */}
-      {(looking == "Rent" && group == "Commercial" && type == "Industry" && other == "Factory") ? <FactoryRentUpdate /> : ""} 
+      {(looking == "Rent" && group == "Commercial" && type == "Industry" && other == "Factory") ? <FactoryRentUpdate /> : ""}
 
-      {(looking == "Rent" && group == "Commercial" && type == "Industry" && other == "Manufacturing") ? <ManufactureRentUpdate /> : ""} 
+      {(looking == "Rent" && group == "Commercial" && type == "Industry" && other == "Manufacturing") ? <ManufactureRentUpdate /> : ""}
 
-      {(looking == "Rent" && group == "Commercial" && type == "Office" && other == "Ready to move office space") ? <ReadyMoveUpdate /> : ""} 
+      {(looking == "Rent" && group == "Commercial" && type == "Office" && other == "Ready to move office space") ? <ReadyMoveUpdate /> : ""}
 
-      {(looking == "Rent" && group == "Commercial" && type == "Office" && other == "Bare shell office space") ? <BareShellUpdate /> : ""} 
+      {(looking == "Rent" && group == "Commercial" && type == "Office" && other == "Bare shell office space") ? <BareShellUpdate /> : ""}
 
-      {(looking == "Rent" && group == "Commercial" && type == "Plot / Land" && other == "Commercial Land / Institutional Land") ? <CommercialLandRentUpdate /> : ""} 
+      {(looking == "Rent" && group == "Commercial" && type == "Plot / Land" && other == "Commercial Land / Institutional Land") ? <CommercialLandRentUpdate /> : ""}
 
-      {(looking == "Rent" && group == "Commercial" && type == "Plot / Land" && other == "Agricultural Land / Farm Land") ? <AgriculturalLandRentUpdate /> : ""} 
+      {(looking == "Rent" && group == "Commercial" && type == "Plot / Land" && other == "Agricultural Land / Farm Land") ? <AgriculturalLandRentUpdate /> : ""}
 
-      {(looking == "Rent" && group == "Commercial" && type == "Plot / Land" && other == "Industrial Lands / Plots") ? <IndustrialLandRentUpdate /> : ""} 
+      {(looking == "Rent" && group == "Commercial" && type == "Plot / Land" && other == "Industrial Lands / Plots") ? <IndustrialLandRentUpdate /> : ""}
 
-      {(looking == "Rent" && group == "Commercial" && type == "Retail" && other == "Commercial Shops") ? <CommercialShopRentUpdate /> : ""} 
+      {(looking == "Rent" && group == "Commercial" && type == "Retail" && other == "Commercial Shops") ? <CommercialShopRentUpdate /> : ""}
 
-      {(looking == "Rent" && group == "Commercial" && type == "Retail" && other == "Commercial Showrooms") ? <CommercialShowRoomRentUpdate /> : ""}  
-      
-      {(looking == "Rent" && group == "Commercial" && type == "Storage" && other == "Ware House") ? <WareHouseRentUpdate /> : ""}  
+      {(looking == "Rent" && group == "Commercial" && type == "Retail" && other == "Commercial Showrooms") ? <CommercialShowRoomRentUpdate /> : ""}
 
-      {(looking == "Rent" && group == "Commercial" && type == "Storage" && other == "Cold Storage") ? <ColdStorageRentUpdate /> : ""}  
+      {(looking == "Rent" && group == "Commercial" && type == "Storage" && other == "Ware House") ? <WareHouseRentUpdate /> : ""}
+
+      {(looking == "Rent" && group == "Commercial" && type == "Storage" && other == "Cold Storage") ? <ColdStorageRentUpdate /> : ""}
 
     </Box>
   )
-} 
- 
+}
+
 export default EditingForm;
 
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Box,
     Button,
@@ -20,10 +20,11 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { AlphabetString, CleanInputText, NumericString } from "../../../../code";
-
+import { useParams } from "react-router-dom";
 
 
 const GuestBanquetRentUpdate = () => {
+    const { productID } = useParams();
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
@@ -60,6 +61,66 @@ const GuestBanquetRentUpdate = () => {
     const [bookingAmount, setBookingAmount] = useState("");
     const [annualDuesPayble, setAnnualDuesPayble] = useState("");
 
+
+    const handleDataFetch = async () => {
+        await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
+            console.log(detail)
+            let e = detail.data.data;
+
+            setCountry(e?.address?.country);
+            setCity(e?.address?.city);
+            setPincode(e?.address?.pincode);
+            setState(e.address.state);
+            setLocality(e?.address.locality);
+            setaddress(e?.address.address);
+
+            setRoom(e?.rooms);
+            setwashrooms(e?.washrooms);
+
+            setPlotArea(e?.plotArea);
+            setAreaPer(e?.plotAreaUnit);
+
+            setAvailability(e?.availabilityStatus);
+            if (e.availabilityStatus == "Ready to move") {
+                setFromyear(e?.propertyStatus);
+            }
+            else if (e?.availabilityStatus == "Under construction") {
+                setExpectedYear(e?.expectedByYear);
+            }
+
+            setqualityRating(e?.qualityRating);
+            setPricedetail(e?.price);
+            setPriceSqr(e?.priceUnit);
+            setInclusivePrice(e?.inclusivePrices);
+            setAdditionalPrice(e?.additionalPricingDetails);
+            if (e?.additionalPricingDetails) {
+                setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice)
+                setMaintenanceTimePeriod(e?.additionalPricingDetails?.maintenanceTimePeriod)
+                setBookingAmount(e?.additionalPricingDetails?.bookingAmount)
+                setAnnualDuesPayble(e?.additionalPricingDetails?.annualDuesPayable);
+            }
+
+            if (e.preLeased_Rented == "Yes") {
+                setCurrentRentPerMonth(e.preLeased_RentedDetails.currentRentPerMonth);
+                setLeaseTenureInYear(e.preLeased_RentedDetails.leaseTenureInYear);
+                setAnnualRentIncrease(e.preLeased_RentedDetails.annualRentIncrease);
+                setBusinessType(e.preLeased_RentedDetails.businessType);
+            }
+            setDesc(e.description);
+            setAminity(e.amenities);
+            setPropertyFeature(e?.propertyFeatures);
+            setBuildingFeature(e?.society_buildingFeatures);
+            setAdditinalFeature(e?.additionalFeatures);
+            setOtherFeature(e?.otherFeatures);
+            setFlooring(e?.flooring);
+            setLocationAdv(e.locationAdv);
+
+        })
+    }
+
+    useEffect(() => {
+        handleDataFetch();
+    }, []);
 
 
     const handleSubmitData = async (e) => {
@@ -177,7 +238,7 @@ const GuestBanquetRentUpdate = () => {
                 // });
                 // let data = await response.json();  
                 // console.log("data",data); 
-                await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
+                await axios.patch(`${process.env.REACT_APP_URL}/property/${productID}`, obj, { headers: head })
                     .then((e) => {
                         toast({
                             title: e.data.msg,
@@ -382,7 +443,7 @@ const GuestBanquetRentUpdate = () => {
                         fontSize={"md"}
                         variant="flushed"
                     />
-                    <NumberInput>
+                    <NumberInput value={pincode}>
                         <NumberInputField
                             placeholder={"Enter pincode"}
                             padding={"0 10px"}
@@ -775,7 +836,7 @@ const GuestBanquetRentUpdate = () => {
                             >
                                 {isCountry.country == "india" ? "₹" : "$"} Expected Rent
                             </Heading>
-                            <NumberInput >
+                            <NumberInput value={pricedetail}>
                                 <NumberInputField
                                     value={pricedetail}
                                     required
@@ -1382,7 +1443,7 @@ const GuestBanquetRentUpdate = () => {
                     _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                     color={"#ffffff"}
                 >
-                    Post Property
+                    Update Property
                 </Button>
             </form >
         </Box>
