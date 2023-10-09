@@ -43,7 +43,7 @@ export const signinuser = (param) => async (dispatch) => {
     let res = await axios
       .post(`${process.env.REACT_APP_URL}/user/register`, param)
       .then((e) => {
-        dispatch({ type: USER_SIGNIN_SUCCESS, payload: e.data }); 
+        dispatch({ type: USER_SIGNIN_SUCCESS, payload: e.data });  
         if (e.status > 200 && e.status < 300) {
           localStorage.setItem("AstToken", e.data.token);
           localStorage.setItem("AstUser", e.data.name); 
@@ -71,7 +71,8 @@ export const userPreLog = (param) => async (dispatch) => {
         // console.log("power23",e.data); 
         let token = localStorage.getItem("AstToken"); 
         localStorage.setItem("AstUser",e.data.name); 
-        dispatch({ type: USER_PREE_LOGIN, payload: { ...e.data, token } });
+        let id = localStorage.getItem("usrId"); 
+        dispatch({ type: USER_PREE_LOGIN, payload: { ...e.data, token, id } });
       });
   } catch (err) {
     console.log(err);

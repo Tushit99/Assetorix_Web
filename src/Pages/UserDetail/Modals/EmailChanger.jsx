@@ -24,8 +24,7 @@ const EmailChanger = () => {
 
     const handleEmailChange = (event) => {
         setNewEmail(event.target.value);
-    };
-
+    }; 
 
     useEffect(() => {
         let interval;
@@ -40,7 +39,7 @@ const EmailChanger = () => {
             clearInterval(interval);
             setSeconds(10);
             setIsActive(false);
-            setPhase(true);
+            setPhase(true); 
         }
 
 
@@ -73,9 +72,9 @@ const EmailChanger = () => {
             return;
         }
         try {
-            let id = data.user._id;
-            let authorization = data.user.token;
-            // console.log(id,authorization); 
+            let id = data.user.id;
+            let authorization = data.user.token; 
+            console.log(id,authorization); 
             let headers = {
                 'Content-Type': 'application/json',
                 id,
@@ -121,9 +120,9 @@ const EmailChanger = () => {
 
     const handleSendOtp = () => {
         try {
-            let id = data.user._id;
+            let id = data.user.id;
             let authorization = data.user.token;
-            // console.log(id,authorization); 
+            console.log(id,authorization); 
             let headers = {
                 'Content-Type': 'application/json',
                 id,

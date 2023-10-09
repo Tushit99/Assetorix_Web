@@ -381,12 +381,12 @@ const ColdStorageRentUpdate = () => {
 
 
   return (
-    <Box w={"94%"} padding={"0 20px"} margin={"auto"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"}>
+    <Box w={"94%"} padding={"0 20px"} color={"black"} margin={"auto"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"}>
       <form onSubmit={handleSubmitData}>
-        <Box className={style.location_form}>
-          <Heading size={"lg"}>Where is your property located?</Heading>
+        <Box className={style.location_form}> 
+          <Heading size={"lg"}> Cold Storage (Update) </Heading>
           <Heading size={"sm"}>
-            An accurate location helps you connect with the right buyers.
+            Location Detail Update
           </Heading>
 
           <Input
@@ -1349,7 +1349,7 @@ const ColdStorageRentUpdate = () => {
           _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
           color={"#ffffff"}
         >
-          Post Property
+          Update Property 
         </Button>
 
       </form>

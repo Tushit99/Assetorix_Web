@@ -11,7 +11,7 @@ const Name = () => {
     const dispatch = useDispatch();
 
     const handleupdate = () => {
-        let id = data.user._id;
+        let id = data.user.id;
         let authorization = data.user.token;
         // console.log(data.user, name); 
         let headers = {

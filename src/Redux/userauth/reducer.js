@@ -81,7 +81,7 @@ export const reducer = (state = initialState, { type, payload }) => {
         isLoading: false,
         token: payload.token,
         user: payload,
-        isError: false,
+        isError: false, 
         success: 0,
         name: payload.name,
       };

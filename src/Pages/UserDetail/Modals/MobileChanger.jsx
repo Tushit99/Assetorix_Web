@@ -13,7 +13,7 @@ const MobileChanger = () => {
 
     // console.log(data); 
     const handleupdate = () => {
-        let id = data.user._id;
+        let id = data.user.id;
         let authorization = data.user.token;
 
         let headers = {

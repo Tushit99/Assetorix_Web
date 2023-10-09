@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Box,
     Button,
     ButtonGroup,
     Heading,
     Input,
-    InputGroup,
-    NumberInput,
-    NumberInputField,
+    InputGroup, 
     Select,
     Text,
     Textarea,
@@ -20,10 +18,12 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { CleanInputText, NumericString } from "../../../../code";
+import { useParams } from "react-router-dom";
 
 
 
 const WareHouseRentUpdate = () => {
+    const { productID } = useParams();
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
@@ -59,6 +59,53 @@ const WareHouseRentUpdate = () => {
 
     // please don'nt change any function without any prior knowledge
 
+    const handleDataFetch = async () => {
+        await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
+            let e = detail.data.data;
+            console.log(e);
+            setCountry(e?.address?.country);
+            setCity(e?.address?.city);
+            setPincode(e?.address?.pincode);
+            setState(e.address.state);
+            setAddress(e.address.address);
+            setLocality(e.address.locality);
+            setwashrooms(e.washrooms);
+            if (e.preLeased_Rented == "Yes") {
+                setCurrentRentPerMonth(e.preLeased_RentedDetails.currentRentPerMonth);
+                setLeaseTenureInYear(e.preLeased_RentedDetails.leaseTenureInYear);
+                setAnnualRentIncrease(e.preLeased_RentedDetails.annualRentIncrease);
+                setBusinessType(e.preLeased_RentedDetails.businessType);
+            }
+            setOtherFeature(e.otherFeatures);
+            setBuildingFeature(e.society_buildingFeatures);
+            setAdditinalFeature(e.additionalFeatures);
+            setPropertyFacing(e.propertyFacing);
+            setFlooring(e.flooring);
+
+            setPlotArea(e.plotArea);
+            setPriceSqr(e.plotAreaUnit);
+            setAvailability(e.availabilityStatus);
+            if (e.availabilityStatus == "Ready to move") {
+                setFromyear(e.propertyStatus);
+            }
+            else if (e.availabilityStatus == "Under construction") {
+                setExpectedYear(e.expectedByYear);
+            }
+            setPricedetail(e.price);
+            setPropertyFeature(e.propertyFeatures);
+            setInclusivePrice(e.inclusivePrices);
+            setMaintenancePrice(e.additionalPricingDetails.maintenancePrice);
+            setMaintenanceTimePeriod(e.additionalPricingDetails.maintenanceTimePeriod);
+            setBookingAmount(e.additionalPricingDetails.bookingAmount);
+            setDesc(e.description);
+            setAminity(e.amenities);
+            setLocationAdv(e.locationAdv);
+        })
+    }
+
+    useEffect(() => {
+        handleDataFetch();
+    }, []);
 
     const handleSubmitData = async (e) => {
         e.preventDefault();
@@ -127,7 +174,7 @@ const WareHouseRentUpdate = () => {
 
         if (
             pricedetail &&
-            
+
             inclusivePrices &&
             amenities &&
             propertyFeatures &&
@@ -168,12 +215,12 @@ const WareHouseRentUpdate = () => {
                 // });
                 // let data = await response.json();  
                 // console.log("data",data); 
-                await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
+                await axios.patch(`${process.env.REACT_APP_URL}/property/${productID}`, obj, { headers: head })
                     .then((e) => {
                         toast({
                             title: e.data.msg,
                             description: e.data.msg,
-                            status: 'success',
+                            status: 'success', 
                             duration: 2000,
                         })
                     });
@@ -183,7 +230,7 @@ const WareHouseRentUpdate = () => {
                     status: 'error',
                     duration: 2000,
                 })
-                console.log(error);
+                console.log(error); 
             }
             // }
 
@@ -448,18 +495,17 @@ const WareHouseRentUpdate = () => {
                         isAttached
                         variant="outline"
                     >
-                        <NumberInput>
-                            <NumberInputField
-                                padding={"0 2px"}
-                                value={plotArea}
-                                onChange={(e) => {
-                                    areaCalucation();
-                                    setPlotArea(e.target.value);
-                                }}
-                                required
-                            />
-                        </NumberInput>
-                        <Select value={areaPer} onChange={(e) => {
+                        <Input
+                            type="text"
+                            padding={"0 2px"}
+                            value={plotArea}
+                            onChange={(e) => {
+                                areaCalucation();
+                                setPlotArea(e.target.value);
+                            }} 
+                            required
+                        /> 
+                        <Select value={areaPer} borderRadius={0} onChange={(e) => {
                             setAreaPer(e.target.value);
                         }} className={style.select} required>
                             <option value="sq.ft">sq.ft</option>
@@ -478,7 +524,7 @@ const WareHouseRentUpdate = () => {
                             <option value="aankadam">aankadam</option>
                             <option value="hectares">hectares</option>
                             <option value="rood">rood</option>
-                            <option value="chataks">chataks</option>
+                            <option value="chataks">chataks</option> 
                             <option value="perch">perch</option>
                         </Select>
                     </ButtonGroup>
@@ -609,18 +655,18 @@ const WareHouseRentUpdate = () => {
                     <Heading
                         as={"h3"}
                         size={"md"}
-                        margin={"30px 0 10px 0"}
+                        margin={"30px 0 0 0"}
                         textAlign={"left"}
                     >
-                        Add pricing and details...
+                        Add pricing details
                     </Heading>
                 </Box>
 
                 {/* ============================== Price Details ============================ */}
                 <Box>
                     <Box>
-                        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
-                            What price you are expecting for this property?
+                        <Heading as={"h3"} fontSize={"12px"} fontWeight={300} marginBottom={3} textAlign={"left"}>
+                            What price you are expecting for this property? 
                         </Heading>
                         <Box display={"flex"} alignItems={"center"} gap={5}>
                             <Box display={"grid"} gap={0}>
@@ -652,7 +698,7 @@ const WareHouseRentUpdate = () => {
                             </Box>
                         </Box>
                     </Box>
-                    <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
+                    <Box display={"flex"} gap={10} margin={"10px 0"} flexWrap={"wrap"}>
                         <Checkbox
                             isChecked={inclusivePrices.includes("Electricity & Water charges excluded")}
                             onChange={(e) => {
@@ -682,9 +728,9 @@ const WareHouseRentUpdate = () => {
                                 <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
                                     <option value="Monthly">Monthly</option>
                                     <option value="Yearly">Yearly</option>
-                                </Select> 
+                                </Select>
                             </InputGroup>
-                            <Box display={"grid"}> 
+                            <Box display={"grid"}>
                                 <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(NumericString(e.target.value))} placeholder="Booking Amount" margin={"10px 0 0 0"} />
                                 <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(NumericString(e.target.value))} placeholder="Annual Dues Payble" margin={"10px 0 0 0"} />
                             </Box>
