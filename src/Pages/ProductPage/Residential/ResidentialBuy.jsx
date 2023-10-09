@@ -41,7 +41,7 @@ const ResidentialBuy = () => {
             headers: head,
         }).then((e) => {
             setWishlist(e.data);
-            // console.log(e.data);
+            console.log(e.data); 
         }).catch((err) => console.log(err));
     }
 
@@ -55,7 +55,7 @@ const ResidentialBuy = () => {
             return;
         }
 
-        const axiosConfig = {
+        const axiosConfig = { 
             method: `${wishlist.includes(myid) ? "delete" : "patch"}`,
             url: `${process.env.REACT_APP_URL}/user/wishlist/${myid}`,
             headers: {
@@ -82,7 +82,7 @@ const ResidentialBuy = () => {
             });
     } 
 
-    console.log(ResedentialBuydata);
+    // console.log(ResedentialBuydata);
 
 
     const handleBedroom = (value) => {
@@ -249,7 +249,10 @@ const ResidentialBuy = () => {
 
                     <Box w={"100%"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"} textAlign={"left"} paddingX={3} paddingY={2} display={"grid"} gridTemplateRows={"auto"} gridTemplateColumns={{ base: "repeat(2,1fr)", md: "repeat(2,1fr)", lg: "repeat(3,1fr)" }} gap={4} >
                         {!ResedentialBuydata.msg && ResedentialBuydata?.data?.map((e, index) => {
-                            const colorstate = wishlist && Array.isArray(wishlist) && wishlist.includes(`${e._id}`);
+                            const colorstate = wishlist && Array.isArray(wishlist) && wishlist.includes(`${e._id}`); 
+
+                            // console.log(colorstate);
+
                             return (
                                 <Box position={"relative"} key={index}  >
                                     <Tooltip hasArrow label={"Wishlist"}>

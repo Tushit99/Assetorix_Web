@@ -83,7 +83,6 @@ const WareHouseRentUpdate = () => {
             setFlooring(e.flooring);
 
             setPlotArea(e.plotArea);
-            setPriceSqr(e.plotAreaUnit);
             setAvailability(e.availabilityStatus);
             if (e.availabilityStatus == "Ready to move") {
                 setFromyear(e.propertyStatus);
@@ -92,6 +91,7 @@ const WareHouseRentUpdate = () => {
                 setExpectedYear(e.expectedByYear);
             }
             setPricedetail(e.price);
+            setPriceSqr(e.priceUnit);
             setPropertyFeature(e.propertyFeatures);
             setInclusivePrice(e.inclusivePrices);
             setMaintenancePrice(e.additionalPricingDetails.maintenancePrice);

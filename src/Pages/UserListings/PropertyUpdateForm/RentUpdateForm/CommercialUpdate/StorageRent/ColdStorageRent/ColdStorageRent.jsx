@@ -72,7 +72,6 @@ const ColdStorageRentUpdate = () => {
       setLocality(e.address.locality);
       setaddress(e.address.address);
       setPlotArea(e.plotArea);
-      setPriceSqr(e.plotAreaUnit);
       if (e.preLeased_Rented == "Yes") {
         setCurrentRentPerMonth(e.preLeased_RentedDetails.currentRentPerMonth);
         setLeaseTenureInYear(e.preLeased_RentedDetails.leaseTenureInYear);
@@ -84,7 +83,6 @@ const ColdStorageRentUpdate = () => {
       setAdditinalFeature(e.additionalFeatures);
       setPropertyFacing(e.propertyFacing);
       setwashrooms(e.washrooms); 
-      setPriceSqr(e.priceUnit);
       setAvailability(e.availabilityStatus);
       if (e.availabilityStatus == "Ready to move") {
         setFromyear(e.propertyStatus);
@@ -93,6 +91,7 @@ const ColdStorageRentUpdate = () => {
         setExpectedYear(e.expectedByYear);
       }
       setPricedetail(e.price);
+      setPriceSqr(e.priceUnit);
       setPropertyFeature(e.propertyFeatures);
       setInclusivePrice(e.inclusivePrices);
       setMaintenancePrice(e.additionalPricingDetails.maintenancePrice);
@@ -692,8 +691,7 @@ const ColdStorageRentUpdate = () => {
                 </Heading>
                 <NumberInput value={priceSqr}>
                   <NumberInputField
-                    required
-
+                    required 
                   />
                 </NumberInput>
               </Box>
