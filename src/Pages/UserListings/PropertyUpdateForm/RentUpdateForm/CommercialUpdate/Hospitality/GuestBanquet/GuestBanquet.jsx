@@ -100,12 +100,12 @@ const GuestBanquetRentUpdate = () => {
                 setAnnualDuesPayble(e?.additionalPricingDetails?.annualDuesPayable);
             }
 
-            if (e.preLeased_Rented == "Yes") {
-                setCurrentRentPerMonth(e.preLeased_RentedDetails.currentRentPerMonth);
-                setLeaseTenureInYear(e.preLeased_RentedDetails.leaseTenureInYear);
-                setAnnualRentIncrease(e.preLeased_RentedDetails.annualRentIncrease);
-                setBusinessType(e.preLeased_RentedDetails.businessType);
-            }
+            // if (e.preLeased_Rented == "Yes") {
+            //     setCurrentRentPerMonth(e.preLeased_RentedDetails.currentRentPerMonth);
+            //     setLeaseTenureInYear(e.preLeased_RentedDetails.leaseTenureInYear);
+            //     setAnnualRentIncrease(e.preLeased_RentedDetails.annualRentIncrease);
+            //     setBusinessType(e.preLeased_RentedDetails.businessType);
+            // }
             setDesc(e.description);
             setAminity(e.amenities);
             setPropertyFeature(e?.propertyFeatures);

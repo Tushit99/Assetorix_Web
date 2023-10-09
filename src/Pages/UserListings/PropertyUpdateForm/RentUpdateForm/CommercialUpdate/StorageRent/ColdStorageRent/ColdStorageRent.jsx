@@ -72,12 +72,12 @@ const ColdStorageRentUpdate = () => {
       setLocality(e.address.locality);
       setaddress(e.address.address);
       setPlotArea(e.plotArea);
-      if (e.preLeased_Rented == "Yes") {
-        setCurrentRentPerMonth(e.preLeased_RentedDetails.currentRentPerMonth);
-        setLeaseTenureInYear(e.preLeased_RentedDetails.leaseTenureInYear);
-        setAnnualRentIncrease(e.preLeased_RentedDetails.annualRentIncrease);
-        setBusinessType(e.preLeased_RentedDetails.businessType);
-      }
+      // if (e.preLeased_Rented == "Yes") {
+      //   setCurrentRentPerMonth(e.preLeased_RentedDetails.currentRentPerMonth);
+      //   setLeaseTenureInYear(e.preLeased_RentedDetails.leaseTenureInYear);
+      //   setAnnualRentIncrease(e.preLeased_RentedDetails.annualRentIncrease);
+      //   setBusinessType(e.preLeased_RentedDetails.businessType);
+      // }
       setOtherFeature(e.otherFeatures);
       setBuildingFeature(e.society_buildingFeatures);
       setAdditinalFeature(e.additionalFeatures);
