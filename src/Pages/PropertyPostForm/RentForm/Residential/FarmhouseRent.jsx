@@ -51,7 +51,6 @@ const FarmhouseRent = () => {
     const [extraroom, setExtraRoom] = useState([]);
     const [furnished, setFurnished] = useState("");
     const [propertyAge, setpropertyAge] = useState("");
-    const [ownership, setOwnerShip] = useState("");
     const [priceSqr, setPriceSqr] = useState("");
     const [amenities, setAminity] = useState([]);
     const [propertyFeatures, setPropertyFeature] = useState("");
@@ -75,15 +74,12 @@ const FarmhouseRent = () => {
     const [inclusivePrices, setinclusivePrices] = useState([]);
     const [maintenancePrice, setMaintenancePrice] = useState("");
     const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
-    const [membershipCharge, setMembershipCharge] = useState("");
     const [bookingAmount, setBookingAmount] = useState("");
     const [securityDeposit, setSecurityDeposit] = useState("");
     const [depositAmount, setDepositAmount] = useState("");
     const [agreementDuration, setagreementDuration] = useState("");
     const [noticePeriod, setNoticePeriod] = useState("");
     const [availableFrom, setavailableFrom] = useState("");
-    const [expectedRentel, setExpectedRentel] = useState("");
-    const [annualDuesPayble, setAnnualDuesPayble] = useState("");
 
 
     const handleSubmitData = async (e) => {
@@ -91,7 +87,7 @@ const FarmhouseRent = () => {
         let obj = {
             lookingFor: "Rent",
             propertyGroup: "Residential",
-            propertyType: "1RK / Studio Apartment",
+            propertyType: "Farmhouse",
             address: {
                 apartmentName: appartment,
                 houseNumber: houseNo,
@@ -106,7 +102,6 @@ const FarmhouseRent = () => {
                 bathroom,
                 balcony: balconey,
             },
-            ownership,
             agreementType: preferredAgreement,
             price: +priceSqr,
             willingToRent: willingTo,
@@ -122,14 +117,15 @@ const FarmhouseRent = () => {
             durationAgreement: agreementDuration,
             monthsOfNotice: noticePeriod,
             flooring,
+            furnished,
             propertyStatus: propertyAge,
             roadFacingWidth: facingwidth,
             roadFacingWidthType: facing,
             securityDeposit,
             totalFloors: +totalfloors,
             floorOn,
-            carpetArea: plotArea,
-            carpetAreaUnit: areaPer,
+            plotArea: plotArea,
+            plotAreaUnit: areaPer,
             parking: {
                 openParking: openparking,
                 closeParking: parking,
@@ -141,9 +137,7 @@ const FarmhouseRent = () => {
             additionalPricingDetails: {
                 maintenancePrice,
                 maintenanceTimePeriod,
-                expectedRental: expectedRentel,
                 bookingAmount,
-                annualDuesPayable: annualDuesPayble
             },
         };
 
@@ -166,8 +160,6 @@ const FarmhouseRent = () => {
             showToastError("Provide balconey");
         } else if (!furnishedarr) {
             showToastError("Provide Furnished Field");
-        } else if (!ownership) {
-            showToastError("Provide OwnerShip");
         } else if (!priceSqr) {
             showToastError("Provide Price Per sq.ft");
         } else if (!additinalft) {
@@ -210,7 +202,6 @@ const FarmhouseRent = () => {
             bathroom &&
             balconey &&
             furnishedarr &&
-            ownership &&
 
             additinalft &&
             powerbackup &&
@@ -376,10 +367,6 @@ const FarmhouseRent = () => {
         setpropertyAge(e.target.value);
     };
 
-    const handleownership = (e) => {
-        e.preventDefault();
-        setOwnerShip(e.target.value);
-    };
 
     const handleAdditionalFeature = (e) => {
         e.preventDefault();
@@ -607,14 +594,7 @@ const FarmhouseRent = () => {
                             required
                             padding={"0 2px"}
                         />
-                        <Input
-                            type="text"
-                            variant="flushed"
-                            onChange={(e) => setBathroom(e.target.value)}
-                            value={bathroom}
-                            required
-                            padding={"0 2px"}
-                        />
+
                     </Box>
                     <Box textAlign={"left"}>
                         <Text> No. of Balconies </Text>
@@ -650,7 +630,7 @@ const FarmhouseRent = () => {
                                 setPlotArea(e.target.value);
                             }}
                             required
-                        /> 
+                        />
                         <select
                             value={areaPer}
                             onChange={(e) => {
@@ -1308,10 +1288,7 @@ const FarmhouseRent = () => {
                                     <option value="Yearly">Yearly</option>
                                 </Select>
                             </InputGroup>
-                            <Input type="text" w={"300px"} value={expectedRentel} onChange={(e) => setExpectedRentel(e.target.value)} placeholder="Expected rental" margin={"0"} />
                             <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-                            <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
-                            <Input type="text" w={"300px"} value={membershipCharge} onChange={(e) => setMembershipCharge(e.target.value)} placeholder="Membership charges" margin={"10px 0 0 0"} />
                         </>
                         }
                         <Heading
@@ -1384,60 +1361,7 @@ const FarmhouseRent = () => {
                     >
                         Add pricing and details...
                     </Heading>
-                    {/* OwnerShip detail */}
-                    <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
-                        Ownership
-                    </Heading>
-                    <Box className={style.grid} gap={4}>
-                        <button
-                            className={ownership == "Freehold" ? style.setbtn : style.btn}
-                            borderRadius={"100px"}
-                            border={"1px solid rgba(113, 210, 255, 0.897)"}
-                            margin={"8px 6px 0 0"}
-                            onClick={handleownership}
-                            value={"Freehold"}
-                            backgroundColor={"blue.50"}
-                        >
-                            Freehold
-                        </button>
-                        <button
-                            className={ownership == "Leasehold" ? style.setbtn : style.btn}
-                            borderRadius={"100px"}
-                            border={"1px solid rgba(113, 210, 255, 0.897)"}
-                            margin={"8px 6px 0 0"}
-                            onClick={handleownership}
-                            value={"Leasehold"}
-                            backgroundColor={"blue.50"}
-                        >
-                            Leasehold
-                        </button>
-                        <button
-                            className={
-                                ownership == "Co-operative society" ? style.setbtn : style.btn
-                            }
-                            borderRadius={"100px"}
-                            border={"1px solid rgba(113, 210, 255, 0.897)"}
-                            margin={"8px 6px 0 0"}
-                            onClick={handleownership}
-                            value={"Co-operative society"}
-                            backgroundColor={"blue.50"}
-                        >
-                            Co-operative society
-                        </button>
-                        <button
-                            className={
-                                ownership == "Power of Attorney" ? style.setbtn : style.btn
-                            }
-                            borderRadius={"100px"}
-                            border={"1px solid rgba(113, 210, 255, 0.897)"}
-                            margin={"8px 6px 0 0"}
-                            onClick={handleownership}
-                            value={"Power of Attorney"}
-                            backgroundColor={"blue.50"}
-                        >
-                            Power of Attorney
-                        </button>
-                    </Box>
+
                 </Box>
             </Box>
 

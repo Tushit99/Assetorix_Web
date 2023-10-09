@@ -302,7 +302,7 @@ const ColdStorageRentUpdate = () => {
       newarr.splice(newarr.indexOf(value), 1);
     } else {
       newarr.push(value);
-    }
+    } 
     setAminity(newarr);
   };
 
