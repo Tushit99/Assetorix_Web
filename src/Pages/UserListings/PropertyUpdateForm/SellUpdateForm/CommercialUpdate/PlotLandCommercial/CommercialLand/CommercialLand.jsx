@@ -99,7 +99,6 @@ const CommercialLandUpdate = () => {
       setPricedetail(e?.price);
       setPriceSqr(e?.priceUnit);
       setInclusivePrice(e?.inclusivePrices);
-      setInclusivePrice(e?.inclusivePrices);
       setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice);
       setMaintenanceTimePeriod(e?.additionalPricingDetails?.maintenanceTimePeriod);
       setBookingAmount(e?.additionalPricingDetails?.bookingAmount);
@@ -255,7 +254,7 @@ const CommercialLandUpdate = () => {
 
         await axios.patch(`${process.env.REACT_APP_URL}/property/${productID}`, obj, { headers: head })
           .then((e) => {
-            toast({ 
+            toast({
               title: e.data.msg,
               description: e.data.msg,
               status: 'success',
@@ -269,7 +268,7 @@ const CommercialLandUpdate = () => {
           duration: 2000,
         })
         console.log(error);
-      } 
+      }
 
     }
     else {

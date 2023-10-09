@@ -20,10 +20,11 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import style from "../../RentComercial.module.css";
 import { CleanInputText, NumericString } from "../../../../code";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-
+import { useParams } from "react-router-dom";
 
 
 const AgriculturalLandRentUpdate = () => {
+  const { productID } = useParams();
   const isCountry = useSelector((state) => state.gloalval);
   const toast = useToast();
   const [country, setCountry] = useState("");
@@ -41,7 +42,6 @@ const AgriculturalLandRentUpdate = () => {
   const [constructionType, setConstructionType] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
-  const [buildingFeature, setBuildingFeature] = useState([]);
   const [additinalft, setAdditinalFeature] = useState([]);
   const [otherFeature, setOtherFeature] = useState([]);
   const [propertyFacing, setPropertyFacing] = useState("");
@@ -56,17 +56,73 @@ const AgriculturalLandRentUpdate = () => {
   const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
   const [bookingAmount, setBookingAmount] = useState("");
   const [annualDuesPayble, setAnnualDuesPayble] = useState("");
-  const [openSides, setOpenSides] = useState(""); 
-  const [plotBreadth, setPlotBreadth] = useState(""); 
+  const [openSides, setOpenSides] = useState("");
+  const [plotBreadth, setPlotBreadth] = useState("");
 
   const [plotLength, setplotLength] = useState("");
   const [expectedBy, setexpectedBy] = useState([]);
   const [ConstructionOnProperty, setConstructionOnProperty] = useState("");
   const [expectedByYear, setExpectedByYear] = useState("");
-  const [authorisedBy, setAuthorisedBy] = useState([]); 
+  const [authorisedBy, setAuthorisedBy] = useState([]);
 
 
   // please don'nt change any function without any prior knowledge
+
+
+  const handleDataFetch = async () => {
+    await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
+      let e = detail.data.data;
+      setCountry(e?.address?.country);
+      setCity(e?.address?.city);
+      setPincode(e?.address?.pincode);
+      setState(e.address.state);
+      setLocality(e.address.locality);
+      setPlotnumber(e.address.plotNumber);
+
+      setPlotArea(e.plotArea);
+      setAreaPer(e.plotAreaUnit);
+
+      setplotLength(e.plotLength);
+      setPlotBreadth(e.plotBreadth);
+
+      setFacingWidth(e.roadFacingWidth);
+      setFacing(e.roadFacingWidthType);
+
+      setOpenSides(e.openSides);
+      setConstructionOnProperty(e.constructionOnProperty);
+      setConstructionType(e.constructionOnPropertyList);
+
+      setPropertyFacing(e.propertyFacing);
+      setExpectedByYear(e.expectedByYear);
+
+      setAuthorisedBy(e.propertyApprovalAuthorityList);
+
+      setOwnerShip(e.ownership);
+
+      setPricedetail(e.price);
+      setPriceSqr(e.priceUnit);
+      setInclusivePrice(e.inclusivePrices);
+
+      setAdditionalPrice(e?.additionalPricingDetails);
+      if (e?.additionalPricingDetails) {
+        setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice)
+        setMaintenanceTimePeriod(e?.additionalPricingDetails?.maintenanceTimePeriod)
+        setBookingAmount(e?.additionalPricingDetails?.bookingAmount)
+        setAnnualDuesPayble(e?.additionalPricingDetails?.annualDuesPayable);
+      }
+
+      setDesc(e.description);
+      setAminity(e.amenities);
+      setPropertyFeature(e.propertyFeatures);
+      setOtherFeature(e.otherFeatures);
+      setLocationAdv(e.locationAdv);
+
+    })
+  }
+
+  useEffect(() => {
+    handleDataFetch();
+  }, []);
 
 
   useEffect(() => {
@@ -102,7 +158,7 @@ const AgriculturalLandRentUpdate = () => {
       inclusivePrices,
       openSides,
       amenities,
-      propertyFeatures, 
+      propertyFeatures,
       additionalFeatures: additinalft,
       otherFeatures: otherFeature,
       propertyFacing,
@@ -114,7 +170,7 @@ const AgriculturalLandRentUpdate = () => {
       propertyApprovalAuthorityList: authorisedBy,
       carpetArea: plotArea,
       expectedByYear,
-      carpetAreaUnit: areaPer, 
+      carpetAreaUnit: areaPer,
       description: desc,
       constructionOnProperty: ConstructionOnProperty,
       constructionOnPropertyList: constructionType,
@@ -124,8 +180,7 @@ const AgriculturalLandRentUpdate = () => {
         maintenanceTimePeriod,
         bookingAmount,
         annualDuesPayable: annualDuesPayble
-      },
-      society_buildingFeatures: buildingFeature
+      }
     };
 
 
@@ -148,7 +203,7 @@ const AgriculturalLandRentUpdate = () => {
       showToastError('Provide PriceDetail');
     } else if (!priceSqr) {
       showToastError('Provide Price Per sq.ft');
-    }  
+    }
 
     if (locationAdv) {
       obj["locationAdv"] = locationAdv
@@ -157,10 +212,10 @@ const AgriculturalLandRentUpdate = () => {
     if (
       ownership &&
       pricedetail &&
-      
+
       inclusivePrices &&
       amenities &&
-      propertyFeatures && 
+      propertyFeatures &&
       desc
     ) {
       let id = localStorage.getItem("usrId") || undefined;
@@ -179,7 +234,7 @@ const AgriculturalLandRentUpdate = () => {
         return
       }
 
-       
+
       try {
         // let response = await fetch("http://localhost:4500/property/", {
         //     method: "POST",
@@ -188,7 +243,7 @@ const AgriculturalLandRentUpdate = () => {
         // });
         // let data = await response.json();  
         // console.log("data",data); 
-        await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
+        await axios.patch(`${process.env.REACT_APP_URL}/property/${productID}`, obj, { headers: head })
           .then((e) => {
             toast({
               title: e.data.msg,
@@ -245,7 +300,7 @@ const AgriculturalLandRentUpdate = () => {
       console.log(err);
     }
   }
- 
+
 
   const handleConstructionType = (e) => {
     e.preventDefault();
@@ -260,7 +315,7 @@ const AgriculturalLandRentUpdate = () => {
     setConstructionType(newarr);
   }
 
- 
+
 
 
   const handleAuthorityBy = (e) => {
@@ -314,18 +369,6 @@ const AgriculturalLandRentUpdate = () => {
     setPropertyFeature(newarr);
   };
 
-  const HandleBuildingFeature = (e) => {
-    e.preventDefault();
-    let newarr = [...buildingFeature];
-    let value = e.target.value;
-
-    if (newarr.includes(value)) {
-      newarr.splice(newarr.indexOf(value), 1);
-    } else {
-      newarr.push(value);
-    }
-    setBuildingFeature(newarr);
-  };
 
   const handleotherfeature = (e) => {
     e.preventDefault();
@@ -373,7 +416,7 @@ const AgriculturalLandRentUpdate = () => {
       setPriceSqr(ans);
     }
   }
- 
+
 
 
   return (
@@ -840,8 +883,8 @@ const AgriculturalLandRentUpdate = () => {
                   {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
                 </Heading>
                 <NumberInput value={priceSqr}>
-                  <NumberInputField 
-                    
+                  <NumberInputField
+
                   />
                 </NumberInput>
               </Box>
@@ -1059,58 +1102,6 @@ const AgriculturalLandRentUpdate = () => {
           </Box>
         </Box>
 
-        {/* Society/Building feature */}
-        <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
-            Building feature
-          </Heading>
-          <Box>
-            <button
-              className={
-                buildingFeature.includes("DG Availability")
-                  ? style.setbtn
-                  : style.btn
-              }
-              onClick={HandleBuildingFeature}
-              value={"DG Availability"}
-            >
-              DG Availability
-            </button>
-            <button
-              className={
-                buildingFeature.includes("CCTV Surveillance")
-                  ? style.setbtn
-                  : style.btn
-              }
-              onClick={HandleBuildingFeature}
-              value={"CCTV Surveillance"}
-            >
-              CCTV Surveillance
-            </button>
-            <button
-              className={
-                buildingFeature.includes("Grade A Building")
-                  ? style.setbtn
-                  : style.btn
-              }
-              onClick={HandleBuildingFeature}
-              value={"Grade A Building"}
-            >
-              Grade A Building
-            </button>
-            <button
-              className={
-                buildingFeature.includes("Lift(S)")
-                  ? style.setbtn
-                  : style.btn
-              }
-              onClick={HandleBuildingFeature}
-              value={"Lift(S)"}
-            >
-              Lift(S)
-            </button>
-          </Box>
-        </Box>
 
         {/* ============================ Other Features ============================ */}
         <Box>
@@ -1255,7 +1246,7 @@ const AgriculturalLandRentUpdate = () => {
           _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
           color={"#ffffff"}
         >
-          Post Property
+          Update Property
         </Button>
 
       </form>

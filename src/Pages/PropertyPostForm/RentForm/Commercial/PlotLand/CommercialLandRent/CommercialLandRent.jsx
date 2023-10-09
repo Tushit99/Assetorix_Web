@@ -8,7 +8,7 @@ import {
   InputGroup,
   Menu,
   MenuButton,
-  MenuList, 
+  MenuList,
   Select,
   Text,
   Textarea,
@@ -42,7 +42,6 @@ const CommercialLandRent = () => {
   const [constructionType, setConstructionType] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
-  const [buildingFeature, setBuildingFeature] = useState([]);
   const [otherFeature, setOtherFeature] = useState([]);
   const [propertyFacing, setPropertyFacing] = useState("");
   const [facing, setFacing] = useState("Meter");
@@ -127,8 +126,7 @@ const CommercialLandRent = () => {
         maintenanceTimePeriod,
         bookingAmount,
         annualDuesPayable: annualDuesPayble
-      },
-      society_buildingFeatures: buildingFeature
+      }
     };
 
 
@@ -164,7 +162,6 @@ const CommercialLandRent = () => {
       inclusivePrices &&
       amenities &&
       propertyFeatures &&
-      preLeased &&
       desc
     ) {
       let id = localStorage.getItem("usrId") || undefined;
@@ -341,18 +338,6 @@ const CommercialLandRent = () => {
     setPropertyFeature(newarr);
   };
 
-  const HandleBuildingFeature = (e) => {
-    e.preventDefault();
-    let newarr = [...buildingFeature];
-    let value = e.target.value;
-
-    if (newarr.includes(value)) {
-      newarr.splice(newarr.indexOf(value), 1);
-    } else {
-      newarr.push(value);
-    }
-    setBuildingFeature(newarr);
-  };
 
   const handleotherfeature = (e) => {
     e.preventDefault();
@@ -841,7 +826,7 @@ const CommercialLandRent = () => {
             Approved for Industry Type
           </Heading>
           <Menu>
-          <MenuButton width={"300px"} as={Button} variant={"outline"} borderRadius={0} rightIcon={<ChevronDownIcon />}>
+            <MenuButton width={"300px"} as={Button} variant={"outline"} borderRadius={0} rightIcon={<ChevronDownIcon />}>
               {industryType.length == 0 ? "Select Industry Type" : `Selected ${industryType.length} industry`}
             </MenuButton>
             <MenuList display={"grid"} padding={"4px 20px"} marginTop={"-6px"} >
@@ -908,9 +893,9 @@ const CommercialLandRent = () => {
                 </Heading>
                 <Input
                   type="text"
-                  value={priceSqr} 
+                  value={priceSqr}
                   readOnly
-                /> 
+                />
               </Box>
             </Box>
           </Box>
@@ -1126,58 +1111,7 @@ const CommercialLandRent = () => {
           </Box>
         </Box>
 
-        {/* Society/Building feature */}
-        <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
-            Building feature
-          </Heading>
-          <Box>
-            <button
-              className={
-                buildingFeature.includes("DG Availability")
-                  ? style.setbtn
-                  : style.btn
-              }
-              onClick={HandleBuildingFeature}
-              value={"DG Availability"}
-            >
-              DG Availability
-            </button>
-            <button
-              className={
-                buildingFeature.includes("CCTV Surveillance")
-                  ? style.setbtn
-                  : style.btn
-              }
-              onClick={HandleBuildingFeature}
-              value={"CCTV Surveillance"}
-            >
-              CCTV Surveillance
-            </button>
-            <button
-              className={
-                buildingFeature.includes("Grade A Building")
-                  ? style.setbtn
-                  : style.btn
-              }
-              onClick={HandleBuildingFeature}
-              value={"Grade A Building"}
-            >
-              Grade A Building
-            </button>
-            <button
-              className={
-                buildingFeature.includes("Lift(S)")
-                  ? style.setbtn
-                  : style.btn
-              }
-              onClick={HandleBuildingFeature}
-              value={"Lift(S)"}
-            >
-              Lift(S)
-            </button>
-          </Box>
-        </Box>
+
 
         {/* ============================ Other Features ============================ */}
         <Box>

@@ -113,8 +113,8 @@ const AgricalturalFarmUpdate = () => {
       setPricedetail(e.price);
       setPriceSqr(e.priceUnit);
       setInclusivePrice(e.inclusivePrices);
-      setMaintenancePrice(e.additionalPricingDetails.maintenancePrice);
-      setMaintenanceTimePeriod(e.additionalPricingDetails.maintenanceTimePeriod);
+      setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice);
+      setMaintenanceTimePeriod(e?.additionalPricingDetails?.maintenanceTimePeriod);
       setPreLeased(e.preLeased_Rented);
       if (e.preLeased_Rented == "Yes") {
         setCurrentRentPerMonth(e.preLeased_RentedDetails.currentRentPerMonth);

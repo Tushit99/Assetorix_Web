@@ -17,16 +17,17 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { Checkbox } from "@chakra-ui/react";
-import style from "../../RentComercial.module.css"; 
+import style from "../../RentComercial.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { CleanInputText, NumericString } from "../../../../code";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-
+import { useParams } from "react-router-dom";
 
 
 const CommercialLandRentUpdate = () => {
+  const { productID } = useParams();
   const isCountry = useSelector((state) => state.gloalval);
   const toast = useToast();
   const [country, setCountry] = useState("");
@@ -44,7 +45,6 @@ const CommercialLandRentUpdate = () => {
   const [constructionType, setConstructionType] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
-  const [buildingFeature, setBuildingFeature] = useState([]);
   const [otherFeature, setOtherFeature] = useState([]);
   const [propertyFacing, setPropertyFacing] = useState("");
   const [facing, setFacing] = useState("Meter");
@@ -70,10 +70,66 @@ const CommercialLandRentUpdate = () => {
   const [expectedByYear, setExpectedByYear] = useState("");
   const [authorisedBy, setAuthorisedBy] = useState([]);
   const [industryType, setIndustryType] = useState([]);
-
-
-
   // please don'nt change any function without any prior knowledge
+
+
+  const handleDataFetch = async () => {
+    await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
+      let e = detail.data.data;
+
+      setCountry(e?.address?.country);
+      setCity(e?.address?.city);
+      setPincode(e?.address?.pincode);
+      setState(e.address.state);
+      setLocality(e.address.locality);
+      setPlotnumber(e.address.plotNumber);
+
+      setPlotArea(e?.plotArea);
+      setAreaPer(e?.plotAreaUnit);
+
+      // setplotLength(e.plotLength);
+      // setPlotBreadth(e.plotBreadth);
+
+      setFacingWidth(e?.roadFacingWidth);
+      setFacing(e?.roadFacingWidthType);
+
+      setOpenSides(e?.openSides);
+      setConstructionOnProperty(e?.constructionOnProperty);
+      setConstructionType(e?.constructionOnPropertyList);
+
+      setPropertyFacing(e?.propertyFacing);
+      setExpectedByYear(e?.expectedByYear);
+
+      setAuthorisedBy(e?.propertyApprovalAuthorityList);
+
+      setOwnerShip(e?.ownership);
+
+      setIndustryType(e?.approvedIndustryTypeList);
+
+      setPricedetail(e.price);
+      setPriceSqr(e.priceUnit);
+      setInclusivePrice(e.inclusivePrices);
+
+      setAdditionalPrice(e?.additionalPricingDetails);
+      if (e?.additionalPricingDetails) {
+        setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice)
+        setMaintenanceTimePeriod(e?.additionalPricingDetails?.maintenanceTimePeriod)
+        setBookingAmount(e?.additionalPricingDetails?.bookingAmount)
+        setAnnualDuesPayble(e?.additionalPricingDetails?.annualDuesPayable);
+      }
+
+      setDesc(e.description);
+      setAminity(e.amenities);
+      setPropertyFeature(e.propertyFeatures);
+      setOtherFeature(e.otherFeatures);
+      setLocationAdv(e.locationAdv);
+
+    })
+  }
+
+  useEffect(() => {
+    handleDataFetch();
+  }, []);
 
 
   useEffect(() => {
@@ -129,8 +185,7 @@ const CommercialLandRentUpdate = () => {
         maintenanceTimePeriod,
         bookingAmount,
         annualDuesPayable: annualDuesPayble
-      },
-      society_buildingFeatures: buildingFeature
+      }
     };
 
 
@@ -162,11 +217,10 @@ const CommercialLandRentUpdate = () => {
     if (
       ownership &&
       pricedetail &&
-      
+
       inclusivePrices &&
       amenities &&
       propertyFeatures &&
-      preLeased &&
       desc
     ) {
       let id = localStorage.getItem("usrId") || undefined;
@@ -203,7 +257,7 @@ const CommercialLandRentUpdate = () => {
         // });
         // let data = await response.json();  
         // console.log("data",data); 
-        await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
+        await axios.patch(`${process.env.REACT_APP_URL}/property/${productID}`, obj, { headers: head })
           .then((e) => {
             toast({
               title: e.data.msg,
@@ -343,18 +397,6 @@ const CommercialLandRentUpdate = () => {
     setPropertyFeature(newarr);
   };
 
-  const HandleBuildingFeature = (e) => {
-    e.preventDefault();
-    let newarr = [...buildingFeature];
-    let value = e.target.value;
-
-    if (newarr.includes(value)) {
-      newarr.splice(newarr.indexOf(value), 1);
-    } else {
-      newarr.push(value);
-    }
-    setBuildingFeature(newarr);
-  };
 
   const handleotherfeature = (e) => {
     e.preventDefault();
@@ -843,7 +885,7 @@ const CommercialLandRentUpdate = () => {
             Approved for Industry Type
           </Heading>
           <Menu>
-          <MenuButton width={"300px"} as={Button} variant={"outline"} borderRadius={0} rightIcon={<ChevronDownIcon />}>
+            <MenuButton width={"300px"} as={Button} variant={"outline"} borderRadius={0} rightIcon={<ChevronDownIcon />}>
               {industryType.length == 0 ? "Select Industry Type" : `Selected ${industryType.length} industry`}
             </MenuButton>
             <MenuList display={"grid"} padding={"4px 20px"} marginTop={"-6px"} >
@@ -871,7 +913,7 @@ const CommercialLandRentUpdate = () => {
               <Checkbox isChecked={industryType.includes("Textiles")} onChange={handleIndustryType} value={"Textiles"} >Textiles</Checkbox>
             </MenuList>
           </Menu>
-        </Box> 
+        </Box>
 
         {/* ============================== Price Details ============================ */}
         <Box>
@@ -909,8 +951,8 @@ const CommercialLandRentUpdate = () => {
                   {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
                 </Heading>
                 <NumberInput value={priceSqr}>
-                  <NumberInputField 
-                    
+                  <NumberInputField
+
                   />
                 </NumberInput>
               </Box>
@@ -976,7 +1018,7 @@ const CommercialLandRentUpdate = () => {
               {additionalPrice ? <IoIosArrowUp style={{ display: "inline" }} /> : <IoIosArrowDown style={{ display: "inline" }} />} Add more pricing details
             </Heading>
           </Box>
-        </Box>  
+        </Box>
 
 
         {/* ============================ Property unique discription ============================ */}
@@ -1128,59 +1170,6 @@ const CommercialLandRentUpdate = () => {
           </Box>
         </Box>
 
-        {/* Society/Building feature */}
-        <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
-            Building feature
-          </Heading>
-          <Box>
-            <button
-              className={
-                buildingFeature.includes("DG Availability")
-                  ? style.setbtn
-                  : style.btn
-              }
-              onClick={HandleBuildingFeature}
-              value={"DG Availability"}
-            >
-              DG Availability
-            </button>
-            <button
-              className={
-                buildingFeature.includes("CCTV Surveillance")
-                  ? style.setbtn
-                  : style.btn
-              }
-              onClick={HandleBuildingFeature}
-              value={"CCTV Surveillance"}
-            >
-              CCTV Surveillance
-            </button>
-            <button
-              className={
-                buildingFeature.includes("Grade A Building")
-                  ? style.setbtn
-                  : style.btn
-              }
-              onClick={HandleBuildingFeature}
-              value={"Grade A Building"}
-            >
-              Grade A Building
-            </button>
-            <button
-              className={
-                buildingFeature.includes("Lift(S)")
-                  ? style.setbtn
-                  : style.btn
-              }
-              onClick={HandleBuildingFeature}
-              value={"Lift(S)"}
-            >
-              Lift(S)
-            </button>
-          </Box>
-        </Box>
-
         {/* ============================ Other Features ============================ */}
         <Box>
           <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
@@ -1324,7 +1313,7 @@ const CommercialLandRentUpdate = () => {
           _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
           color={"#ffffff"}
         >
-          Post Property
+          Update Property
         </Button>
 
       </form>
@@ -1333,4 +1322,4 @@ const CommercialLandRentUpdate = () => {
 
 }
 
-export default CommercialLandRentUpdate ;
+export default CommercialLandRentUpdate;

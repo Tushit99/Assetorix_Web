@@ -23,10 +23,11 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import style from "../../RentComercial.module.css";
 import { CleanInputText, NumericString } from "../../../../code";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-
+import { useParams } from "react-router-dom";
 
 
 const IndustrialLandRentUpdate = () => {
+    const { productID } = useParams();
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
@@ -69,8 +70,65 @@ const IndustrialLandRentUpdate = () => {
     const [expectedByYear, setExpectedByYear] = useState("");
     const [authorisedBy, setAuthorisedBy] = useState([]);
 
-
     // please don'nt change any function without any prior knowledge
+
+
+    const handleDataFetch = async () => {
+        await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
+            let e = detail.data.data;
+            setCountry(e?.address?.country);
+            setCity(e?.address?.city);
+            setPincode(e?.address?.pincode);
+            setState(e.address.state);
+            setLocality(e.address.locality);
+            setPlotnumber(e.address.plotNumber);
+
+            setPlotArea(e.plotArea);
+            setAreaPer(e.plotAreaUnit);
+
+            setplotLength(e.plotLength);
+            setPlotBreadth(e.plotBreadth);
+
+            setFacingWidth(e.roadFacingWidth);
+            setFacing(e.roadFacingWidthType);
+
+            setOpenSides(e.openSides);
+            setConstructionOnProperty(e.constructionOnProperty);
+            setConstructionType(e.constructionOnPropertyList);
+
+            setPropertyFacing(e.propertyFacing);
+            setExpectedByYear(e.expectedByYear);
+
+            setAuthorisedBy(e.propertyApprovalAuthorityList);
+
+            setOwnerShip(e.ownership);
+
+            setPricedetail(e.price);
+            setPriceSqr(e.priceUnit);
+            setInclusivePrice(e.inclusivePrices);
+
+            setAdditionalPrice(e?.additionalPricingDetails);
+            if (e?.additionalPricingDetails) {
+                setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice)
+                setMaintenanceTimePeriod(e?.additionalPricingDetails?.maintenanceTimePeriod)
+                setBookingAmount(e?.additionalPricingDetails?.bookingAmount)
+                setAnnualDuesPayble(e?.additionalPricingDetails?.annualDuesPayable);
+            }
+
+            setIndustryType(e?.approvedIndustryTypeList);
+
+            setDesc(e.description);
+            setAminity(e.amenities);
+            setPropertyFeature(e.propertyFeatures);
+            setOtherFeature(e.otherFeatures);
+            setLocationAdv(e.locationAdv);
+
+        })
+    }
+
+    useEffect(() => {
+        handleDataFetch();
+    }, []);
 
 
     useEffect(() => {
@@ -116,6 +174,7 @@ const IndustrialLandRentUpdate = () => {
             plotArea,
             plotAreaUnit: areaPer,
             propertyApprovalAuthorityList: authorisedBy,
+            approvedIndustryTypeList: industryType,
             carpetArea: plotArea,
             expectedByYear,
             carpetAreaUnit: areaPer,
@@ -159,7 +218,7 @@ const IndustrialLandRentUpdate = () => {
         if (
             ownership &&
             pricedetail &&
-            
+
             inclusivePrices &&
             amenities &&
             propertyFeatures &&
@@ -190,7 +249,7 @@ const IndustrialLandRentUpdate = () => {
                 // });
                 // let data = await response.json();  
                 // console.log("data",data); 
-                await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
+                await axios.patch(`${process.env.REACT_APP_URL}/property/${productID}`, obj, { headers: head })
                     .then((e) => {
                         toast({
                             title: e.data.msg,
@@ -217,14 +276,14 @@ const IndustrialLandRentUpdate = () => {
                 position: 'top-right'
             })
         }
-    };  
+    };
 
     const handlepinfetch = (e) => {
         if (e.target.value.length == 6 && Number(e.target.value) < 999999) {
             setPincode(NumericString(e.target.value));
             pinfetch(e.target.value);
         }
-        else if (Number(e.target.value) < 999999) { 
+        else if (Number(e.target.value) < 999999) {
             setPincode(NumericString(e.target.value));
             console.log(e.target.value);
         }
@@ -251,7 +310,7 @@ const IndustrialLandRentUpdate = () => {
         }
     }
 
- 
+
 
     const handleConstructionType = (e) => {
         e.preventDefault();
@@ -264,7 +323,7 @@ const IndustrialLandRentUpdate = () => {
             newarr.push(value);
         }
         setConstructionType(newarr);
-    } 
+    }
 
 
     const handleAuthorityBy = (e) => {
@@ -854,8 +913,8 @@ const IndustrialLandRentUpdate = () => {
                                     {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
                                 </Heading>
                                 <NumberInput value={priceSqr}>
-                                    <NumberInputField 
-                                        
+                                    <NumberInputField
+
                                     />
                                 </NumberInput>
                             </Box>
@@ -1025,7 +1084,7 @@ const IndustrialLandRentUpdate = () => {
                             value={"Visitor Parking"}
                         >
                             Visitor Parking
-                        </button> 
+                        </button>
                         <button
                             className={
                                 amenities.includes("Water Storage") ? style.setbtn : style.btn
@@ -1260,7 +1319,7 @@ const IndustrialLandRentUpdate = () => {
                     _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                     color={"#ffffff"}
                 >
-                    Post Property
+                    Update Property
                 </Button>
 
             </form>

@@ -114,6 +114,7 @@ const IndustrialLand = () => {
             plotArea,
             plotAreaUnit: areaPer,
             propertyApprovalAuthorityList: authorisedBy,
+            approvedIndustryTypeList: industryType,
             carpetArea: plotArea,
             expectedByYear,
             carpetAreaUnit: areaPer,
