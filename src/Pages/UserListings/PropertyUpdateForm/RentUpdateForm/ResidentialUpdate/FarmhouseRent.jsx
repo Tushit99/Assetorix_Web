@@ -9,7 +9,7 @@ import {
     NumberInputField,
     Select,
     Text,
-    Textarea,
+    Textarea, 
     useToast,
 } from "@chakra-ui/react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
@@ -17,7 +17,7 @@ import { Checkbox } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import style from "../RentForm.module.css";
-import { CleanInputText, IndianDateConverter, NumericString } from "../../code";
+import { CleanInputText, IndianDateConverter, NumericString } from "../../code"; 
 import { InputGroup } from "@chakra-ui/react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
@@ -136,7 +136,7 @@ const FarmhouseRentUpdate = () => {
             },
             otherRoom: extraroom,
             description: desc,
-            availableFrom: IndianDateConverter(availableFrom),
+            availableFrom: availableFrom,
             countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
             additionalPricingDetails: {
                 maintenancePrice,

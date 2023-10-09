@@ -54,7 +54,6 @@ const IndependentBuilderRentUpdate = () => {
   const [extraroom, setExtraRoom] = useState([]);
   const [furnished, setFurnished] = useState("");
   const [propertyAge, setpropertyAge] = useState("");
-  const [ownership, setOwnerShip] = useState("");
   const [priceSqr, setPriceSqr] = useState("");
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
@@ -102,13 +101,13 @@ const IndependentBuilderRentUpdate = () => {
       setApartment(e?.address?.apartmentName);
       setPincode(e?.address?.pincode);
       setState(e.address.state);
-      setLocality(e.address.locality)
+      setLocality(e.address.locality); 
       setHouseNo(e.address.houseNumber);
       setBedRoom(e.roomDetails.bedroom);
       setBathroom(e.roomDetails.bathroom);
       setBalcony(e?.roomDetails.balcony);
-      setPlotArea(e?.plotArea);
-      setAreaPer(e?.plotAreaUnit);
+      setPlotArea(e?.carpetArea);
+      setAreaPer(e?.carpetAreaUnit);
       setpropertyAge(e?.propertyStatus);
       setWillingTo(e?.willingToRent);
       setpreferredAgreement(e?.agreementType);
@@ -122,13 +121,13 @@ const IndependentBuilderRentUpdate = () => {
       setOpenparking(e?.parking?.openParking || 0);
       setFurnished(e?.furnished);
       if (furnished == "Furnished" || furnished == "Semi-Furnished") {
-        setLight(e?.furnishedObj?.light);
-        setFans(e?.furnishedObj?.fans);
-        setAc(e?.furnishedObj?.ac);
-        setTv(e?.furnishedObj?.tv);
-        setBeds(e?.furnishedObj?.beds);
-        setWardrobe(e?.furnishedObj?.wardrobe);
-        setGeyser(e?.furnishedObj?.geyser);
+        setLight(e?.furnishedObj?.light);  
+        setFans(e?.furnishedObj?.fans); 
+        setAc(e?.furnishedObj?.ac); 
+        setTv(e?.furnishedObj?.tv); 
+        setBeds(e?.furnishedObj?.beds); 
+        setWardrobe(e?.furnishedObj?.wardrobe); 
+        setGeyser(e?.furnishedObj?.geyser); 
         setfurnishedarr(e?.furnishedList);
       }
       setExtraRoom(e?.otherRoom);
@@ -180,7 +179,6 @@ const IndependentBuilderRentUpdate = () => {
         bathroom,
         balcony: balconey,
       },
-      ownership,
       agreementType: preferredAgreement,
       price: +priceSqr,
       willingToRent: willingTo,
@@ -211,7 +209,7 @@ const IndependentBuilderRentUpdate = () => {
       },
       otherRoom: extraroom,
       description: desc,
-      availableFrom: IndianDateConverter(availableFrom),
+      availableFrom: availableFrom,
       countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
       additionalPricingDetails: {
         maintenancePrice,
@@ -241,8 +239,6 @@ const IndependentBuilderRentUpdate = () => {
       showToastError("Provide balconey");
     } else if (!furnishedarr) {
       showToastError("Provide Furnished Field");
-    } else if (!ownership) {
-      showToastError("Provide OwnerShip");
     } else if (!priceSqr) {
       showToastError("Provide Price Per sq.ft");
     } else if (!additinalft) {
@@ -285,8 +281,7 @@ const IndependentBuilderRentUpdate = () => {
       bathroom &&
       balconey &&
       furnishedarr &&
-      ownership &&
-
+ 
       additinalft &&
       powerbackup &&
       propertyFacing &&
@@ -336,7 +331,7 @@ const IndependentBuilderRentUpdate = () => {
         // let data = await response.json();
         // console.log("data",obj,data); 
         await axios
-          .post(`${process.env.REACT_APP_URL}/property/`, obj, {
+          .patch(`${process.env.REACT_APP_URL}/property/${productID}`, obj, {
             headers: head,
           })
           .then((e) => {
@@ -369,12 +364,13 @@ const IndependentBuilderRentUpdate = () => {
   };
 
   const handlepinfetch = (e) => {
-    setPincode(e.target.value);
-    if (e.target.value.length == 6) {
-      pinfetch(e.target.value);
-    } else {
-      console.log(e.target.value);
+    let val = NumericString(e.target.value)
+    if (val.length == 6) {
+      pinfetch(val);
+    } else if (val.length > 7) {
+      return
     }
+    setPincode(val);
   };
 
   const pinfetch = async (pin) => {
@@ -457,12 +453,7 @@ const IndependentBuilderRentUpdate = () => {
   const handlepropertyAge = (e) => {
     e.preventDefault();
     setpropertyAge(e.target.value);
-  };
-
-  const handleownership = (e) => {
-    e.preventDefault();
-    setOwnerShip(e.target.value);
-  };
+  }; 
 
   const handleAdditionalFeature = (e) => {
     e.preventDefault();
@@ -573,8 +564,8 @@ const IndependentBuilderRentUpdate = () => {
     <Box w={"94%"} padding={"0 20px"} margin={"auto"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"}>
       <form onSubmit={handleSubmitData}>
         {/* property location */}
-        <Box className={style.location_form}>
-          <Heading size={"lg"}>Where is your property located?</Heading>
+        <Box className={style.location_form}> 
+          <Heading size={"lg"}> Independent Builder </Heading>
           <Heading size={"sm"}>
             An accurate location helps you connect with the right buyers.
           </Heading>
@@ -723,7 +714,7 @@ const IndependentBuilderRentUpdate = () => {
                 value={plotArea}
                 onChange={(e) => {
                   // areaCalucation();
-                  setPlotArea(e.target.value);
+                  setPlotArea(e.target.value); 
                 }}
                 required
               /> 
@@ -1411,11 +1402,8 @@ const IndependentBuilderRentUpdate = () => {
                     <option value="Yearly">Yearly</option>
                   </Select>
                 </InputGroup>
-                <Input type="text" w={"300px"} value={expectedRentel} onChange={(e) => setExpectedRentel(e.target.value)} placeholder="Expected rental" margin={"0"} />
-                <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-                <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
-                <Input type="text" w={"300px"} value={membershipCharge} onChange={(e) => setMembershipCharge(e.target.value)} placeholder="Membership charges" margin={"10px 0 0 0"} />
-              </>
+                 <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
+                </>
               }
               <Heading
                 as={"h3"}
@@ -1477,71 +1465,7 @@ const IndependentBuilderRentUpdate = () => {
             </Box>
           </Box>
 
-          {/* ========================= Add pricing and details ========================= */}
-          <Box>
-            <Heading
-              as={"h3"}
-              size={"md"}
-              margin={"30px 0 10px 0"}
-              textAlign={"left"}
-            >
-              Add pricing and details...
-            </Heading>
-            {/* OwnerShip detail */}
-            <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
-              Ownership
-            </Heading>
-            <Box className={style.grid} gap={4}>
-              <button
-                className={ownership == "Freehold" ? style.setbtn : style.btn}
-                borderRadius={"100px"}
-                border={"1px solid rgba(113, 210, 255, 0.897)"}
-                margin={"8px 6px 0 0"}
-                onClick={handleownership}
-                value={"Freehold"}
-                backgroundColor={"blue.50"}
-              >
-                Freehold
-              </button>
-              <button
-                className={ownership == "Leasehold" ? style.setbtn : style.btn}
-                borderRadius={"100px"}
-                border={"1px solid rgba(113, 210, 255, 0.897)"}
-                margin={"8px 6px 0 0"}
-                onClick={handleownership}
-                value={"Leasehold"}
-                backgroundColor={"blue.50"}
-              >
-                Leasehold
-              </button>
-              <button
-                className={
-                  ownership == "Co-operative society" ? style.setbtn : style.btn
-                }
-                borderRadius={"100px"}
-                border={"1px solid rgba(113, 210, 255, 0.897)"}
-                margin={"8px 6px 0 0"}
-                onClick={handleownership}
-                value={"Co-operative society"}
-                backgroundColor={"blue.50"}
-              >
-                Co-operative society
-              </button>
-              <button
-                className={
-                  ownership == "Power of Attorney" ? style.setbtn : style.btn
-                }
-                borderRadius={"100px"}
-                border={"1px solid rgba(113, 210, 255, 0.897)"}
-                margin={"8px 6px 0 0"}
-                onClick={handleownership}
-                value={"Power of Attorney"}
-                backgroundColor={"blue.50"}
-              >
-                Power of Attorney
-              </button>
-            </Box>
-          </Box>
+           
         </Box>
 
 
@@ -2257,7 +2181,7 @@ const IndependentBuilderRentUpdate = () => {
           _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
           color={"#ffffff"}
         >
-          Post Property
+          Update Property
         </Button>
       </form>
     </Box>

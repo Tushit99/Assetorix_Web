@@ -24,11 +24,11 @@ const ColdStorageRent = () => {
   const toast = useToast();
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
-  const [pincode, setPincode] = useState(0);
+  const [pincode, setPincode] = useState("");
   const [state, setState] = useState("");
   const [locality, setLocality] = useState("");
   const [address, setaddress] = useState("");
-  const [washrooms, setwashrooms] = useState(0);
+  const [washrooms, setwashrooms] = useState("");
   const [areaPer, setAreaPer] = useState("sq.ft");
   const [availability, setAvailability] = useState("");
   const [fromyear, setFromyear] = useState("");
@@ -422,9 +422,8 @@ const ColdStorageRent = () => {
           <Box textAlign={"left"} >
             <Text> No. of Washrooms </Text>
             <Input
-              type="text"
-              variant="flushed"
-              padding={"0 2px"}
+              type="text" 
+              w={"200px"}  
               onChange={(e) => setwashrooms(e.target.value)}
               value={washrooms}
               required
@@ -445,16 +444,15 @@ const ColdStorageRent = () => {
             variant="outline"
           >
             <Input
-              type="text"
-              padding={"0 2px"}
+              type="text" 
               value={plotArea}
               onChange={(e) => {
                 areaCalucation();
-                setPlotArea(e.target.value);
+                setPlotArea(NumericString(e.target.value));
               }}
               required
             />
-            <select value={areaPer} onChange={(e) => {
+            <Select value={areaPer} onChange={(e) => {
               setAreaPer(e.target.value);
             }} className={style.select} required>
               <option value="sq.ft">sq.ft</option>
@@ -475,7 +473,7 @@ const ColdStorageRent = () => {
               <option value="rood">rood</option>
               <option value="chataks">chataks</option>
               <option value="perch">perch</option>
-            </select>
+            </Select>
           </ButtonGroup>
         </Box>
 

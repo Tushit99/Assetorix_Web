@@ -150,7 +150,6 @@ const IndependentUpdate = () => {
 
   // ================================
 
-
   const handleSubmitData = async (e) => {
     e.preventDefault();
     let obj = {
@@ -201,7 +200,7 @@ const IndependentUpdate = () => {
       },
       otherRoom: extraroom,
       description: desc,
-      availableFrom: IndianDateConverter(availableFrom),
+      availableFrom: availableFrom,
       countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
       additionalPricingDetails: {
         maintenancePrice,
@@ -354,13 +353,14 @@ const IndependentUpdate = () => {
   };
 
   const handlepinfetch = (e) => {
-    setPincode(e.target.value);
-    if (e.target.value.length == 6) {
-      pinfetch(e.target.value);
-    } else {
-      console.log(e.target.value);
+    let val = NumericString(e.target.value)
+    if (val.length == 6) {
+      pinfetch(val);
+    } else if (val.length > 7) {
+      return
     }
-  };
+    setPincode(val);
+  }; 
 
   const pinfetch = async (pin) => {
     try {

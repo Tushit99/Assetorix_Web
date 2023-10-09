@@ -128,6 +128,7 @@ const ServicedApartmentRent = () => {
             securityDeposit,
             totalFloors: +totalfloors,
             floorOn,
+            furnished, 
             carpetArea: plotArea,
             carpetAreaUnit: areaPer,
             parking: {
@@ -136,7 +137,7 @@ const ServicedApartmentRent = () => {
             },
             otherRoom: extraroom,
             description: desc,
-            availableFrom: IndianDateConverter(availableFrom),
+            availableFrom: availableFrom,
             countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
             additionalPricingDetails: {
                 maintenancePrice,

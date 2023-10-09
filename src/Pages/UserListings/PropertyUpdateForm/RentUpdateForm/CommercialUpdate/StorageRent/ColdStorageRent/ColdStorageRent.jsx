@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -12,16 +12,18 @@ import {
   Text,
   Textarea,
   useToast,
-} from "@chakra-ui/react"; 
+} from "@chakra-ui/react";
 import { Checkbox } from "@chakra-ui/react";
 import style from "../../RentComercial.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { CleanInputText, NumericString } from "../../../../code";
+import { useParams } from "react-router-dom";
 
 
 const ColdStorageRentUpdate = () => {
+  const { productID } = useParams();
   const isCountry = useSelector((state) => state.gloalval);
   const toast = useToast();
   const [country, setCountry] = useState("");
@@ -57,6 +59,54 @@ const ColdStorageRentUpdate = () => {
 
   // please don'nt change any function without any prior knowledge
 
+
+  const handleDataFetch = async () => {
+    await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
+      let e = detail.data.data;
+      console.log(e);
+      setCountry(e?.address?.country);
+      setCity(e?.address?.city);
+      setPincode(e?.address?.pincode);
+      setState(e.address.state);
+      setFlooring(e.flooring);
+      setLocality(e.address.locality);
+      setaddress(e.address.address);
+      setPlotArea(e.plotArea);
+      setPriceSqr(e.plotAreaUnit);
+      if (e.preLeased_Rented == "Yes") {
+        setCurrentRentPerMonth(e.preLeased_RentedDetails.currentRentPerMonth);
+        setLeaseTenureInYear(e.preLeased_RentedDetails.leaseTenureInYear);
+        setAnnualRentIncrease(e.preLeased_RentedDetails.annualRentIncrease);
+        setBusinessType(e.preLeased_RentedDetails.businessType);
+      }
+      setOtherFeature(e.otherFeatures);
+      setBuildingFeature(e.society_buildingFeatures);
+      setAdditinalFeature(e.additionalFeatures);
+      setPropertyFacing(e.propertyFacing);
+      setwashrooms(e.washrooms); 
+      setPriceSqr(e.priceUnit);
+      setAvailability(e.availabilityStatus);
+      if (e.availabilityStatus == "Ready to move") {
+        setFromyear(e.propertyStatus);
+      }
+      else if (e.availabilityStatus == "Under construction") {
+        setExpectedYear(e.expectedByYear);
+      }
+      setPricedetail(e.price);
+      setPropertyFeature(e.propertyFeatures);
+      setInclusivePrice(e.inclusivePrices);
+      setMaintenancePrice(e.additionalPricingDetails.maintenancePrice);
+      setMaintenanceTimePeriod(e.additionalPricingDetails.maintenanceTimePeriod);
+      setBookingAmount(e.additionalPricingDetails.bookingAmount);
+      setDesc(e.description);
+      setAminity(e.amenities);
+      setLocationAdv(e.locationAdv);
+    })
+  }
+
+  useEffect(() => {
+    handleDataFetch();
+  }, []);
 
   const handleSubmitData = async (e) => {
     e.preventDefault();
@@ -131,7 +181,7 @@ const ColdStorageRentUpdate = () => {
 
     if (
       pricedetail &&
-      
+
       inclusivePrices &&
       amenities &&
       propertyFeatures &&
@@ -161,7 +211,7 @@ const ColdStorageRentUpdate = () => {
         // });
         // let data = await response.json();  
         // console.log("data",data); 
-        await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
+        await axios.patch(`${process.env.REACT_APP_URL}/property/${productID}`, obj, { headers: head })
           .then((e) => {
             toast({
               title: e.data.msg,
@@ -423,15 +473,14 @@ const ColdStorageRentUpdate = () => {
         <Box>
           <Box textAlign={"left"} >
             <Text> No. of Washrooms </Text>
-            <NumberInput>
-              <NumberInputField
-                variant="flushed"
-                padding={"0 2px"}
-                onChange={(e) => setwashrooms(e.target.value)}
-                value={washrooms}
-                required
-              />
-            </NumberInput>
+            <Input
+              type="text"
+              variant="flushed"
+              padding={"0 2px"}
+              onChange={(e) => setwashrooms(e.target.value)}
+              value={washrooms}
+              required
+            />
           </Box>
         </Box>
 
@@ -447,21 +496,20 @@ const ColdStorageRentUpdate = () => {
             isAttached
             variant="outline"
           >
-            <NumberInput>
-              <NumberInputField
-                padding={"0 2px"}
-                value={plotArea}
-                onChange={(e) => {
-                  areaCalucation();
-                  setPlotArea(e.target.value);
-                }}
-                required
-              />
-            </NumberInput>
-            <select value={areaPer} onChange={(e) => {
+            <Input
+              type="text"
+              padding={"0 2px"}
+              value={plotArea}
+              onChange={(e) => {
+                areaCalucation();
+                setPlotArea(e.target.value);
+              }}
+              required
+            />  
+            <Select value={areaPer} borderRadius={0} onChange={(e) => {
               setAreaPer(e.target.value);
             }} className={style.select} required>
-              <option value="sq.ft">sq.ft</option>
+              <option value="sq.ft">sq.ft</option> 
               <option value="sq.yards">sq.yards</option>
               <option value="sq.m">sq.m</option>
               <option value="acres">acres</option>
@@ -479,7 +527,7 @@ const ColdStorageRentUpdate = () => {
               <option value="rood">rood</option>
               <option value="chataks">chataks</option>
               <option value="perch">perch</option>
-            </select>
+            </Select>
           </ButtonGroup>
         </Box>
 
@@ -645,7 +693,7 @@ const ColdStorageRentUpdate = () => {
                 <NumberInput value={priceSqr}>
                   <NumberInputField
                     required
-                    
+
                   />
                 </NumberInput>
               </Box>
