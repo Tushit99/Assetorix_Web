@@ -54,7 +54,7 @@ const EditingForm = () => {
 
   const editBox = async () => {
     await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((e) => {
-      console.log(e.data.data);
+      // console.log(e.data.data);
       let dt = e.data.data;
       setGroup(dt?.propertyGroup);
       setType(dt?.propertyType);

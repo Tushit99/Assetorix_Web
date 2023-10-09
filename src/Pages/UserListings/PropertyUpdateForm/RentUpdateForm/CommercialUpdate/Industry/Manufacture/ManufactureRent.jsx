@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -15,14 +15,16 @@ import {
 } from "@chakra-ui/react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { Checkbox } from "@chakra-ui/react";
-import style from "../../RentComercial.module.css"; 
+import style from "../../RentComercial.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { CleanInputText, NumericString } from "../../../../code";
+import { useParams } from "react-router-dom";
 
 
 const ManufactureRentUpdate = () => {
+  const { productID } = useParams();
   const isCountry = useSelector((state) => state.gloalval);
   const toast = useToast();
   const [country, setCountry] = useState("");
@@ -57,6 +59,54 @@ const ManufactureRentUpdate = () => {
   const [annualDuesPayble, setAnnualDuesPayble] = useState("");
 
   // please don'nt change any function without any prior knowledge
+
+  const handleDataFetch = async () => {
+    await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
+      let e = detail.data.data;
+      setCountry(e?.address?.country);
+      setCity(e?.address?.city);
+      setPincode(e?.address?.pincode);
+      setState(e.address.state);
+      setLocality(e?.address.locality);
+      setaddress(e?.address?.address);
+
+      setwashrooms(e?.washrooms);
+
+      setAreaPer(e?.plotAreaUnit);
+      setPlotArea(e?.plotArea);
+
+      setAvailability(e?.availabilityStatus);
+      if (e.availabilityStatus == "Ready to move") {
+        setFromyear(e?.propertyStatus);
+      }
+      else if (e?.availabilityStatus == "Under construction") {
+        setExpectedYear(e?.expectedByYear);
+      }
+
+      setPricedetail(e?.price);
+      setPriceSqr(e?.priceUnit);
+      setInclusivePrice(e?.inclusivePrices);
+      setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice);
+      setMaintenanceTimePeriod(e?.additionalPricingDetails?.maintenanceTimePeriod);
+      setBookingAmount(e?.additionalPricingDetails?.bookingAmount);
+      setAnnualDuesPayble(e?.additionalPricingDetails?.annualDuesPayable);
+
+      setDesc(e.description);
+      setAminity(e.amenities);
+      setPropertyFeature(e?.propertyFeatures);
+      setBuildingFeature(e?.society_buildingFeatures);
+      setAdditinalFeature(e?.additionalFeatures);
+      setOtherFeature(e?.otherFeatures);
+      setPropertyFacing(e?.propertyFacing);
+      setFlooring(e?.flooring);
+      setLocationAdv(e.locationAdv);
+    })
+  }
+
+
+  useEffect(() => {
+    handleDataFetch();
+  }, []);
 
 
   const handleSubmitData = async (e) => {
@@ -132,7 +182,7 @@ const ManufactureRentUpdate = () => {
 
     if (
       pricedetail &&
-      
+
       inclusivePrices &&
       amenities &&
       propertyFeatures &&
@@ -162,7 +212,7 @@ const ManufactureRentUpdate = () => {
         // });
         // let data = await response.json();  
         // console.log("data",data); 
-        await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
+        await axios.patch(`${process.env.REACT_APP_URL}/property/${productID}`, obj, { headers: head })
           .then((e) => {
             toast({
               title: e.data.msg,
@@ -421,7 +471,7 @@ const ManufactureRentUpdate = () => {
         <Box>
           <Box textAlign={"left"} >
             <Text> No. of Washrooms </Text>
-            <NumberInput>
+            <NumberInput value={washrooms}>
               <NumberInputField
                 variant="flushed"
                 padding={"0 2px"}
@@ -445,7 +495,7 @@ const ManufactureRentUpdate = () => {
             isAttached
             variant="outline"
           >
-            <NumberInput>
+            <NumberInput value={plotArea}>
               <NumberInputField
                 padding={"0 2px"}
                 value={plotArea}
@@ -643,7 +693,7 @@ const ManufactureRentUpdate = () => {
                 <NumberInput value={priceSqr}>
                   <NumberInputField
                     required
-                    
+
                   />
                 </NumberInput>
               </Box>
@@ -1346,7 +1396,7 @@ const ManufactureRentUpdate = () => {
           _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
           color={"#ffffff"}
         >
-          Post Property
+          Update Property
         </Button>
 
       </form>
