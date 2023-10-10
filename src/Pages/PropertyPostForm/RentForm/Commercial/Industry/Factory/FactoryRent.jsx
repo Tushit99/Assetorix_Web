@@ -422,7 +422,7 @@ const FactoryRent = () => {
                             type="text"
                             variant="flushed"
                             padding={"0 2px"}
-                            onChange={(e) => setwashrooms(e.target.value)}
+                            onChange={(e) => setwashrooms(NumericString(e.target.value))}
                             value={washrooms}
                             required
                         />
@@ -447,7 +447,7 @@ const FactoryRent = () => {
                             value={plotArea}
                             onChange={(e) => {
                                 areaCalucation();
-                                setPlotArea(e.target.value);
+                                setPlotArea(NumericString(e.target.value));
                             }}
                             required
                         />

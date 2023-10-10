@@ -13,7 +13,7 @@ import {
   Textarea,
   useToast,
 } from "@chakra-ui/react";
-import { AddIcon, MinusIcon } from "@chakra-ui/icons";
+// import { AddIcon, MinusIcon } from "@chakra-ui/icons"; 
 import { Checkbox } from "@chakra-ui/react";
 import style from "../../RentComercial.module.css";
 import axios from "axios";
@@ -33,7 +33,7 @@ const ManufactureRentUpdate = () => {
   const [state, setState] = useState("");
   const [locality, setLocality] = useState("");
   const [address, setaddress] = useState("");
-  const [washrooms, setwashrooms] = useState(0);
+  const [washrooms, setwashrooms] = useState("");
   const [areaPer, setAreaPer] = useState("sq.ft");
   const [availability, setAvailability] = useState("");
   const [fromyear, setFromyear] = useState("");
@@ -58,7 +58,9 @@ const ManufactureRentUpdate = () => {
   const [bookingAmount, setBookingAmount] = useState("");
   const [annualDuesPayble, setAnnualDuesPayble] = useState("");
 
-  // please don'nt change any function without any prior knowledge
+  // please don'nt change any function without any prior knowledge  
+
+  // ====================================================================
 
   const handleDataFetch = async () => {
     await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
@@ -471,15 +473,14 @@ const ManufactureRentUpdate = () => {
         <Box>
           <Box textAlign={"left"} >
             <Text> No. of Washrooms </Text>
-            <NumberInput value={washrooms}>
-              <NumberInputField
-                variant="flushed"
-                padding={"0 2px"}
-                onChange={(e) => setwashrooms(e.target.value)}
-                value={washrooms}
-                required
-              />
-            </NumberInput>
+            <Input
+              type="text"
+              variant="flushed"
+              padding={"0 2px"}
+              onChange={(e) => setwashrooms(e.target.value)}
+              value={washrooms}
+              required
+            />
           </Box>
         </Box>
 
@@ -495,18 +496,17 @@ const ManufactureRentUpdate = () => {
             isAttached
             variant="outline"
           >
-            <NumberInput value={plotArea}>
-              <NumberInputField
-                padding={"0 2px"}
-                value={plotArea}
-                onChange={(e) => {
-                  areaCalucation();
-                  setPlotArea(e.target.value);
-                }}
-                required
-              />
-            </NumberInput>
-            <select value={areaPer} onChange={(e) => {
+            <Input
+              type="text"
+              padding={"0 2px"}
+              value={plotArea}
+              onChange={(e) => {
+                areaCalucation();
+                setPlotArea(e.target.value);
+              }}
+              required
+            /> 
+            <Select value={areaPer} onChange={(e) => {
               setAreaPer(e.target.value);
             }} className={style.select} required>
               <option value="sq.ft">sq.ft</option>
@@ -526,8 +526,8 @@ const ManufactureRentUpdate = () => {
               <option value="hectares">hectares</option>
               <option value="rood">rood</option>
               <option value="chataks">chataks</option>
-              <option value="perch">perch</option>
-            </select>
+              <option value="perch">perch</option> 
+            </Select>
           </ButtonGroup>
         </Box>
 
@@ -537,7 +537,7 @@ const ManufactureRentUpdate = () => {
             Availability Status
           </Heading>
           <Box className={style.grid}>
-            <button
+            <button 
               className={
                 availability == "Ready to move" ? style.setbtn : style.btn
               }

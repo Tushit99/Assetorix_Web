@@ -58,9 +58,7 @@ const FactoryRentUpdate = () => {
     const [bookingAmount, setBookingAmount] = useState("");
     const [annualDuesPayble, setAnnualDuesPayble] = useState("");
 
-    // please don'nt change any function without any prior knowledge
-
-
+    // please don'nt change any function without any prior knowledge       
 
     const handleDataFetch = async () => {
         await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
@@ -105,11 +103,11 @@ const FactoryRentUpdate = () => {
         })
     }
 
-
     useEffect(() => {
         handleDataFetch();
     }, []);
 
+    // =====================================================
 
     const handleSubmitData = async (e) => {
         e.preventDefault();
@@ -400,26 +398,15 @@ const FactoryRentUpdate = () => {
                         fontSize={"md"}
                         variant="flushed"
                     />
-                    <NumberInput value={pincode}>
-                        <NumberInputField
-                            placeholder={"Enter pincode"}
-                            padding={"0 10px"}
-                            borderRight={0}
-                            borderLeft={0}
-                            borderTop={0}
-                            borderRadius={0}
-                            _active={{
-                                borderRight: "0",
-                                borderLeft: "0",
-                                borderTop: "0",
-                                borderRadius: "0",
-                            }}
-                            required
-                            fontSize={"md"}
-                            value={pincode}
-                            onChange={handlepinfetch}
-                        />
-                    </NumberInput>
+                    <Input
+                        type="text"
+                        required
+                        placeholder={"Enter pincode"}
+                        fontSize={"md"}
+                        variant="flushed"
+                        value={pincode}
+                        onChange={handlepinfetch}
+                    />
                     <Input
                         type="text"
                         padding={"0 10px"}
@@ -482,15 +469,14 @@ const FactoryRentUpdate = () => {
                 <Box>
                     <Box textAlign={"left"} >
                         <Text> No. of Washrooms </Text>
-                        <NumberInput value={washrooms}>
-                            <NumberInputField
-                                variant="flushed"
-                                padding={"0 2px"}
-                                onChange={(e) => setwashrooms(e.target.value)}
-                                value={washrooms}
-                                required
-                            />
-                        </NumberInput>
+                        <Input
+                            type="text"
+                            variant="flushed"
+                            padding={"0 2px"}
+                            onChange={(e) => setwashrooms(NumericString(e.target.value))}
+                            value={washrooms}
+                            required
+                        /> 
                     </Box>
                 </Box>
 
@@ -506,18 +492,17 @@ const FactoryRentUpdate = () => {
                         isAttached
                         variant="outline"
                     >
-                        <NumberInput value={plotArea}>
-                            <NumberInputField
-                                padding={"0 2px"}
-                                value={plotArea}
-                                onChange={(e) => {
-                                    areaCalucation();
-                                    setPlotArea(e.target.value);
-                                }}
-                                required
-                            />
-                        </NumberInput>
-                        <select value={areaPer} onChange={(e) => {
+                        <Input
+                            type="text"
+                            padding={"0 2px"}
+                            value={plotArea}
+                            onChange={(e) => {
+                                areaCalucation();
+                                setPlotArea(NumericString(e.target.value));
+                            }}
+                            required
+                        />
+                        <Select value={areaPer} borderRadius={0} onChange={(e) => {
                             setAreaPer(e.target.value);
                         }} className={style.select} required>
                             <option value="sq.ft">sq.ft</option>
@@ -538,7 +523,7 @@ const FactoryRentUpdate = () => {
                             <option value="rood">rood</option>
                             <option value="chataks">chataks</option>
                             <option value="perch">perch</option>
-                        </select>
+                        </Select>
                     </ButtonGroup>
                 </Box>
 
@@ -682,16 +667,15 @@ const FactoryRentUpdate = () => {
                                 >
                                     {isCountry.country == "india" ? "₹" : "$"} Expected Rent
                                 </Heading>
-                                <NumberInput value={pricedetail}>
-                                    <NumberInputField
-                                        value={pricedetail}
-                                        required
-                                        onChange={(e) => {
-                                            setPricedetail(e.target.value);
-                                            areaCalucation();
-                                        }}
-                                    />
-                                </NumberInput>
+                                <Input
+                                    type="text"
+                                    value={pricedetail}
+                                    required
+                                    onChange={(e) => {
+                                        setPricedetail(e.target.value);
+                                        areaCalucation();
+                                    }}
+                                />
                             </Box>
                             <Box display={"grid"} gap={0}>
                                 <Heading
@@ -702,12 +686,11 @@ const FactoryRentUpdate = () => {
                                 >
                                     {isCountry.country == "india" ? "₹" : "$"} Price Per {areaPer}
                                 </Heading>
-                                <NumberInput value={priceSqr}>
-                                    <NumberInputField
-                                        required
-
-                                    />
-                                </NumberInput>
+                                <Input
+                                    type="text"
+                                    value={priceSqr}
+                                    required
+                                /> 
                             </Box>
                         </Box>
                     </Box>
