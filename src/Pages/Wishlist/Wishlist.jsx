@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updatedWishlist, wishlistData } from '../../Redux/Propertysearch/action';
 import { Box, Divider, Heading, Image, Text, useToast } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import style from "./Wishlist.module.css"; 
+import style from "./Wishlist.module.css";
 import { BsTrash3 } from "react-icons/bs";
 
 const Wishlist = () => {
@@ -15,11 +15,11 @@ const Wishlist = () => {
         dispatch(wishlistData());
     }
 
-    const handledeleteToWishlist = (myid) => {        
+    const handledeleteToWishlist = (myid) => {
 
-        dispatch(updatedWishlist(myid)); 
+        dispatch(updatedWishlist(myid));
         toast({
-            title: "Removed Successfully", 
+            title: "Removed Successfully",
             status: 'success',
             duration: 2000,
         })
@@ -58,20 +58,19 @@ const Wishlist = () => {
                                         <Image src="https://mediacdn.99acres.com/582/0/11640476F-1383637447-Amrit_House_-_Sant_Nagr_Delhi.jpeg" objectFit={"contain"} w={"100%"} h={"90px"} alt="property image" />
                                     </Box>
                                     <Box flex={4} textAlign={"center"} fontFamily={"revert-layer"} >
-                                        <Heading className={style.textoverflow} size={"md"} textAlign={"left"} color={"rgb(37, 37, 37)"} >  {e.address.houseNumber && e.address.houseNumber} {e.address.apartmentName && e.address.apartmentName} {e.address.locality && e.address.locality} </Heading>
-                                        <Text fontSize={"lg"}> Price: {e.countryCurrency}{e.price?.toLocaleString("en-IN")} </Text>
-                                        <Text fontSize={"lg"}> Property: {e.propertyType} </Text>
+                                        <Heading className={style.textoverflow} size={"md"} textAlign={"left"} color={"rgb(37, 37, 37)"} >  {e?.address?.houseNumber && e?.address?.houseNumber} {e?.address?.apartmentName && e?.address?.apartmentName} {e?.address?.locality && e?.address?.locality} </Heading>
+                                        <Text fontSize={"lg"}> Price: {e?.countryCurrency}{e?.price?.toLocaleString("en-IN")} </Text>
+                                        <Text fontSize={"lg"}> Property: {e?.propertyType} </Text>
                                     </Box>
                                 </Box>
                             </Link>
                             <Box display={"flex"} flex={2} alignItems={"center"} justifyContent={"center"} >
-                                <button className={style.delete_btn} onClick={() => handledeleteToWishlist(e._id)}>
+                                <button className={style.delete_btn} onClick={() => handledeleteToWishlist(e?._id)}>
                                     <BsTrash3 size={"28px"} />
-                                </button>
+                                </button> 
                             </Box>
                         </Box>
-                        <Divider padding={"0.6px"} backgroundColor={"rgb(215, 215, 215)"} borderRadius={4} />
-                    </Box>
+                    </Box>  
                 ))}
             </Box>
         </Box>
