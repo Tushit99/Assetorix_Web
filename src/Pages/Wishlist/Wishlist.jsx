@@ -23,14 +23,14 @@ const Wishlist = () => {
             status: 'success',
             duration: 2000,
         })
-    }
+    } 
 
     useEffect(() => {
         func();
     }, [])
 
     return (
-        <Box padding={"20px 10px"} minHeight={"80vh"} >
+        <Box padding={"20px 10px"} minHeight={"80vh"} > 
             <Heading fontSize={"3xl"} margin={"0 0 10px 0"} > Wishlist </Heading>
             <Box display={"grid"} gap={2} width={"94%"} margin={"auto"} >
                 <Box position={"relative"} display={"flex"} className={style.box} >
@@ -57,7 +57,7 @@ const Wishlist = () => {
                                     <Box position={"relative"} flex={1} >
                                         <Image src="https://mediacdn.99acres.com/582/0/11640476F-1383637447-Amrit_House_-_Sant_Nagr_Delhi.jpeg" objectFit={"contain"} w={"100%"} h={"90px"} alt="property image" />
                                     </Box>
-                                    <Box flex={4} textAlign={"center"} fontFamily={"revert-layer"} >
+                                    <Box flex={4} textAlign={"center"} fontFamily={"revert-layer"} > 
                                         <Heading className={style.textoverflow} size={"md"} textAlign={"left"} color={"rgb(37, 37, 37)"} >  {e?.address?.houseNumber && e?.address?.houseNumber} {e?.address?.apartmentName && e?.address?.apartmentName} {e?.address?.locality && e?.address?.locality} </Heading>
                                         <Text fontSize={"lg"}> Price: {e?.countryCurrency}{e?.price?.toLocaleString("en-IN")} </Text>
                                         <Text fontSize={"lg"}> Property: {e?.propertyType} </Text>
