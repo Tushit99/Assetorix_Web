@@ -1314,7 +1314,7 @@ const Bareshellspace = () => {
                                 />
                             </NumberInput>
                         </Box>
-                        <Box display={"grid"} gap={0}>
+                        {/* <Box display={"grid"} gap={0}>
                             <Heading
                                 as={"h3"}
                                 size={"xs"}
@@ -1328,7 +1328,7 @@ const Bareshellspace = () => {
 
                                 />
                             </NumberInput>
-                        </Box>
+                        </Box> */}
                     </Box>
                 </Box>
                 {/* checkbox */}

@@ -3,12 +3,12 @@ import { useState } from "react";
 import {
     Box,
     Button,
-    ButtonGroup,
     Heading,
     Input,
     InputGroup,
+    InputLeftElement,
+    InputRightElement,
     NumberInput,
-    NumberInputField,
     Select,
     Text,
     Textarea,
@@ -16,11 +16,11 @@ import {
 } from "@chakra-ui/react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { Checkbox } from "@chakra-ui/react";
-import style from "./FarmHouse.module.css";
+import style from "../Residential.module.css";
 import axios from "axios";
-import { useSelector } from "react-redux"; 
+import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
-import { CleanInputText, NumericString } from '../../../code'; 
+import { CleanInputText, NumericString, WordandNumber } from '../../../code';
 
 
 const FarmHouse = () => {
@@ -30,13 +30,13 @@ const FarmHouse = () => {
     const [facingwidth, setFacingWidth] = useState("");
     const [city, setCity] = useState("");
     const [appartment, setApartment] = useState("");
-    const [pincode, setPincode] = useState(0);
+    const [pincode, setPincode] = useState("");
     const [state, setState] = useState("");
     const [locality, setLocality] = useState("");
     const [houseNo, setHouseNo] = useState("");
-    const [bedroom, setBedRoom] = useState(0);
-    const [bathroom, setBathroom] = useState(0);
-    const [balconey, setBalcony] = useState(0);
+    const [bedroom, setBedRoom] = useState("");
+    const [bathroom, setBathroom] = useState("");
+    const [balconey, setBalcony] = useState("");
     const [parking, setParking] = useState(0);
     const [openparking, setOpenparking] = useState(0);
     const [light, setLight] = useState(0);
@@ -196,7 +196,7 @@ const FarmHouse = () => {
             furnishedarr &&
             ownership &&
             pricedetail &&
-            
+
             inclusivePrices &&
             additinalft &&
             watersource &&
@@ -240,7 +240,7 @@ const FarmHouse = () => {
                 obj["furnishedList"] = furnishedarr;
             }
 
-            
+
             if (availability == "Ready to move" && fromyear != "") {
                 obj["propertyStatus"] = fromyear;
                 obj["availabilityStatus"] = availability;
@@ -274,7 +274,7 @@ const FarmHouse = () => {
                     title: error.response.data.msg,
                     status: 'error',
                     duration: 2000,
-                    isClosable: true 
+                    isClosable: true
                 })
                 console.log(error);
             }
@@ -287,8 +287,8 @@ const FarmHouse = () => {
                 description: "Please fill all required fields.",
                 status: 'info',
                 duration: 2000,
-                position: 'top-right', 
-                isClosable: true 
+                position: 'top-right',
+                isClosable: true
             })
         }
     };
@@ -306,7 +306,7 @@ const FarmHouse = () => {
 
     const pinfetch = async (pin) => {
         try {
-            
+
             let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
             setState(res.data[0].state);
             setCity(res.data[0].city);
@@ -321,18 +321,15 @@ const FarmHouse = () => {
     // please don'nt change any function without any prior knowledge
     const furnisheddetails = (e) => {
         e.preventDefault();
-        let newCat = [...furnishedarr];
-        let value = e.target.value;
 
-        console.log(e.target.value);
-
-        if (newCat.includes(value)) {
-            newCat.splice(newCat.indexOf(value), 1);
-        } else {
-            newCat.push(value);
-        }
-        setfurnishedarr(newCat);
+        setfurnishedarr((prevArr) => {
+            const newCat = prevArr.includes(e.target.value)
+                ? prevArr.filter((item) => item !== e.target.value)
+                : [...prevArr, e.target.value];
+            return newCat;
+        });
     };
+
 
     const checkFurnished = (e) => {
         e.preventDefault();
@@ -492,7 +489,7 @@ const FarmHouse = () => {
         if (pricedetail && plotArea) {
             let max = Math.max(Number(pricedetail), Number(plotArea));
             let min = Math.min(Number(pricedetail), Number(plotArea));
-            let ans = Math.round(max / min);
+            let ans = Math.round(max / min) || 0; 
             setPriceSqr(ans);
         }
     }
@@ -515,7 +512,7 @@ const FarmHouse = () => {
         <form onSubmit={handleSubmitData}>
             {/* property location */}
             <Box className={style.location_form}>
-                <Heading size={"lg"}>Where is your property located?</Heading>
+                <Heading size={"lg"}>Where is your Farm House located?</Heading>
                 <Heading size={"sm"}>
                     An accurate location helps you connect with the right buyers.
                 </Heading>
@@ -524,9 +521,9 @@ const FarmHouse = () => {
                     type="text"
                     padding={"0 10px"}
                     required
-                    placeholder="House No. (optional)"
+                    placeholder="Enter House No."
                     value={houseNo}
-                    onChange={(e) => setHouseNo(e.target.value)}
+                    onChange={(e) => setHouseNo(WordandNumber(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
                 />
@@ -534,17 +531,18 @@ const FarmHouse = () => {
                     type="text"
                     padding={"0 10px"}
                     required
-                    placeholder="Apartment / Society"
+                    placeholder="Enter Apartment / Society Name"
                     fontSize={"md"}
                     value={appartment}
-                    onChange={(e) => setApartment(e.target.value)}
+                    onChange={(e) => setApartment(WordandNumber(e.target.value))}
                     variant="flushed"
                 />
                 <Input
                     type="text"
-                    placeholder={"Enter pincode"}
-                    padding={"0 10px"} 
+                    placeholder={"Enter pincode No."}
+                    padding={"0 10px"}
                     required
+                    variant="flushed"
                     fontSize={"md"}
                     value={pincode}
                     onChange={handlepinfetch}
@@ -553,10 +551,10 @@ const FarmHouse = () => {
                     type="text"
                     padding={"0 10px"}
                     required
-                    placeholder="Locality"
+                    placeholder="Enter Locality Name"
                     list="browsers"
                     value={locality}
-                    onChange={(e) => setLocality(e.target.value)}
+                    onChange={(e) => setLocality(WordandNumber(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
                 />
@@ -572,19 +570,19 @@ const FarmHouse = () => {
                     type="text"
                     padding={"0 10px"}
                     required
-                    placeholder="Enter City"
+                    placeholder="Enter City Name"
                     fontSize={"md"}
                     value={city}
-                    onChange={(e) => setCity(e.target.value)}
+                    onChange={(e) => setCity(AlphabetString(e.target.value))}
                     variant="flushed"
                 />
                 <Input
                     type="text"
                     padding={"0 10px"}
                     required
-                    placeholder="Enter State"
+                    placeholder="Enter State Name"
                     value={state}
-                    onChange={(e) => setState(e.target.value)}
+                    onChange={(e) => setState(AlphabetString(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
                 />
@@ -592,114 +590,106 @@ const FarmHouse = () => {
                     type="text"
                     padding={"0 10px"}
                     required
-                    placeholder="Enter Country"
+                    placeholder="Enter Country Name"
                     value={country}
-                    onChange={(e) => setCountry(e.target.value)}
+                    onChange={(e) => setCountry(AlphabetString(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
                 />
 
             </Box>
             {/* Property Detail */}
-            <Box marginTop={12}>
-                <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"}>
-                    Tell us about your property
-                </Heading>
-                <Heading as={"h4"} size={"sm"} margin={"0 0 30px 0 "}>
+            <Box marginTop={2}>
+                <Heading as={"h4"} size={"sm"} textAlign={"left"} margin={"0"}>
                     Add Room Details
                 </Heading>
                 <Box as={"div"} className={style.inp_form_numbers}>
                     <Box textAlign={"left"} >
-                        <Text> No. of Bedrooms </Text>
                         <Input
                             type="text"
-                            variant="flushed"
-                            padding={"0 2px"}
-                            onChange={(e) => setBedRoom(e.target.value)}
+                            placeholder={"Enter No. of Bedrooms"}
+                            onChange={(e) => setBedRoom(NumberInput(e.target.value))}
                             value={bedroom}
                             required
                         />
                     </Box>
                     <Box textAlign={"left"}>
-                        <Text> No. of Bathrooms </Text>
                         <Input
                             type="text"
-                            variant="flushed"
-                            onChange={(e) => setBathroom(e.target.value)}
+                            placeholder={"Enter No. of Bathrooms"}
+                            onChange={(e) => setBathroom(NumberInput(e.target.value))}
                             value={bathroom}
                             required
-                            padding={"0 2px"}
+                        // padding={"0 2px"}
                         />
                     </Box>
                     <Box textAlign={"left"}>
-                        <Text> No. of Balconies </Text>
-                        <NumberInput>
-                            <NumberInputField
-                                variant="flushed"
-                                onChange={(e) => setBalcony(e.target.value)}
-                                value={balconey}
-                                required
-                                padding={"0 2px"}
-                            />
-                        </NumberInput>
+                        <Input
+                            type="text"
+                            placeholder={"Enter No. of Balconies"}
+                            onChange={(e) => setBalcony(NumberInput(e.target.value))}
+                            value={balconey}
+                            required
+                        // padding={"0 2px"}
+                        />
                     </Box>
                 </Box>
                 {/* ====================================== */}
                 {/* add area details */}
-                <Box textAlign={"left"} padding={"10px 0"}>
-                    <Heading as={"h3"} margin={"5px 0"} size={"md"}>
+                <Box textAlign={"left"} paddingTop={"10px"}>
+                    <Heading as={"h3"} marginTop={"5px"} size={"sm"}>
                         Add Area Details
                     </Heading>
-                    <Text margin={"5px 0"}> Atleast one area type is mandatory </Text>
-                    <ButtonGroup
-                        className={style.select_land}
-                        size="sm"
+                    <InputGroup
+                        w={300}
+                        size="md"
+                        marginTop={2}
                         isAttached
                         variant="outline"
                     >
-                        <NumberInput>
-                            <NumberInputField
-                                padding={"0 2px"}
-                                value={plotArea}
-                                onChange={(e) => {
-                                    areaCalucation();
-                                    setPlotArea(e.target.value);
-                                }}
-                                required
-                            />
-                        </NumberInput>
-                        <select value={areaPer} onChange={(e) => {
-                            setAreaPer(e.target.value);
-                        }} className={style.select} required>
-                            <option value="sq.ft">sq.ft</option>
-                            <option value="sq.yards">sq.yards</option>
-                            <option value="sq.m">sq.m</option>
-                            <option value="acres">acres</option>
-                            <option value="marla">marla</option>
-                            <option value="cents">cents</option>
-                            <option value="bigha">bigha</option>
-                            <option value="kottah">kottah</option>
-                            <option value="kanal">kanal</option>
-                            <option value="grounds">grounds</option>
-                            <option value="ares">ares</option>
-                            <option value="biswa">biswa</option>
-                            <option value="guntha">guntha</option>
-                            <option value="aankadam">aankadam</option>
-                            <option value="hectares">hectares</option>
-                            <option value="rood">rood</option>
-                            <option value="chataks">chataks</option>
-                            <option value="perch">perch</option>
-                        </select>
-                    </ButtonGroup>
+                        <Input
+                            type="text"
+                            value={plotArea}
+                            w={200}
+                            placeholder='Enter area detail'
+                            onChange={(e) => {
+                                setPlotArea(NumericString(e.target.value));
+                                areaCalucation();
+                            }}
+                            required
+                        />
+                        <InputRightElement width={100}>
+                            <Select value={areaPer} borderRadius={0} onChange={(e) => {
+                                setAreaPer(e.target.value);
+                            }} className={style.select} required>
+                                <option value="sq.ft">sq.ft</option>
+                                <option value="sq.yards">sq.yards</option>
+                                <option value="sq.m">sq.m</option>
+                                <option value="acres">acres</option>
+                                <option value="marla">marla</option>
+                                <option value="cents">cents</option>
+                                <option value="bigha">bigha</option>
+                                <option value="kottah">kottah</option>
+                                <option value="kanal">kanal</option>
+                                <option value="grounds">grounds</option>
+                                <option value="ares">ares</option>
+                                <option value="biswa">biswa</option>
+                                <option value="guntha">guntha</option>
+                                <option value="aankadam">aankadam</option>
+                                <option value="hectares">hectares</option>
+                                <option value="rood">rood</option>
+                                <option value="chataks">chataks</option>
+                                <option value="perch">perch</option>
+                            </Select>
+                        </InputRightElement>
+                    </InputGroup>
                 </Box>
                 {/* other Room  */}
                 <Box
-                    padding={"10px 0"}
                     display={"grid"}
-                    gap={6}
                     className={style.optional_box}
                 >
-                    <Heading as={"h3"} size={"md"}>
+                    <Heading as={"h3"} size={"sm"}>
                         Other rooms (optional)
                     </Heading>
                     <Box>
@@ -710,7 +700,6 @@ const FarmHouse = () => {
                             }
                             onClick={handlerooms}
                         >
-
                             Pooja Room
                         </button>
                         <button
@@ -720,7 +709,6 @@ const FarmHouse = () => {
                             }
                             onClick={handlerooms}
                         >
-
                             Study Room
                         </button>
                         <button
@@ -730,7 +718,6 @@ const FarmHouse = () => {
                             }
                             onClick={handlerooms}
                         >
-
                             Servant Room
                         </button>
                         <button
@@ -740,22 +727,20 @@ const FarmHouse = () => {
                             }
                             onClick={handlerooms}
                         >
-
                             Store Room
                         </button>
                     </Box>
                 </Box>
-                {/* furnish */}
+                {/* furnishing  */}
                 <Box
-                    padding={"10px 0"}
                     display={"grid"}
-                    gap={6}
                     className={style.optional_box}
+                    gap={2}
                 >
-                    <Heading as={"h3"} size={"md"}>
+                    <Heading as={"h3"} size={"sm"}>
                         Furnishing (optional)
                     </Heading>
-                    <Box>
+                    <Box margin={0}>
                         <button
                             value={"Furnished"}
                             className={furnished === "Furnished" ? style.setbtn : style.btn}
@@ -792,10 +777,8 @@ const FarmHouse = () => {
                                 ? "grid"
                                 : "none"
                         }
-                        padding={"10px 0"}
                         gap={6}
                     >
-                        
                         <Box className={style.furnished_detail}>
                             <Box>
                                 <button
@@ -1065,9 +1048,10 @@ const FarmHouse = () => {
                         </Box>
                     </Box>
                 </Box>
+
                 {/* reserved */}
-                <Box className={style.optional_box}>
-                    <Heading as={"h3"} size={"md"}>
+                <Box className={style.optional_box} gap={3}>
+                    <Heading as={"h3"} size={"sm"}>
                         Reserved Parking (optional)
                     </Heading>
                     <div className={style.parking}>
@@ -1119,52 +1103,49 @@ const FarmHouse = () => {
                         </Box>
                     </div>
                 </Box>
+
                 {/* floor details */}
-                <Box textAlign={"left"}>
+                <Box
+                    textAlign={"left"}
+                    display={"grid"}
+                    margin={"6px 0"}
+                    gap={2}>
                     <Heading
                         as={"h3"}
-                        size={"md"}
-                        margin={"30px 0 10px 0"}
+                        size={"sm"}
                         textAlign={"left"}
                     >
                         Floor Details
                     </Heading>
-                    <Text textAlign={"left"} margin={"10px 0"}>
-                        Total no of floors
-                    </Text>
                     <Box display={"flex"} alignItems={"center"} gap={5}>
-                        <NumberInput
+                        <Input
+                            type="text"
                             value={totalfloors}
-                            className={style.input_borders}>
-                            <NumberInputField
-                                borderLeft={0}
-                                borderRight={0}
-                                borderTop={0}
-                                borderBottom={"1px solid #4f5bffcf"}
-                                borderRadius={0}
-                                onChange={(e) => {
-                                    const nowval = e.target.value > 90;
-                                    if (nowval) {
-                                        toast({
-                                            title: 'Maximum floor count: 90',
-                                            status: 'error',
-                                            duration: 2000,
-                                            position: 'top-right',
-                                        });
-                                    }
-                                    else {
-                                        setTotalFloors(e.target.value);
-                                    }
-                                }}
-                                required
-                                w={180}
-                            />
-                        </NumberInput>
+                            placeholder={"Enter no. of floors"}
+                            onChange={(e) => {
+                                let val = NumericString(e.target.value)
+                                const nowval = val > 90;
+                                if (nowval) {
+                                    toast({
+                                        title: 'Maximum floor count: 90',
+                                        status: 'error',
+                                        duration: 2000,
+                                        position: 'top-right',
+                                    });
+                                }
+                                else {
+                                    setTotalFloors(val);
+                                }
+                            }}
+                            required
+                            w={250}
+                        />
                     </Box>
                 </Box>
+
                 {/* Availability status */}
-                <Box textAlign={"left"} className={style.optional_box}>
-                    <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                <Box textAlign={"left"} className={style.optional_box} display={"grid"} gap={2} >
+                    <Heading as={"h3"} size={"sm"} textAlign={"left"}>
                         Availability Status
                     </Heading>
                     <Box className={style.grid}>
@@ -1196,13 +1177,13 @@ const FarmHouse = () => {
                         </button>
                     </Box>
                 </Box>
+
                 {/* Age of Property */}
                 {availability == "Ready to move" && (
-                    <Box textAlign={"left"} className={style.optional_box}>
+                    <Box textAlign={"left"} className={style.optional_box} display={"grid"} gap={2}>
                         <Heading
                             as={"h3"}
-                            size={"md"}
-                            margin={"30px 0 10px 0"}
+                            size={"sm"}
                             textAlign={"left"}
                         >
                             Age of Property
@@ -1257,16 +1238,16 @@ const FarmHouse = () => {
                 )}
 
                 {availability == "Under construction" && (
-                    <Box>
+                    <Box display={"grid"} gap={2}>
                         <Heading
                             as={"h3"}
-                            size={"md"}
-                            margin={"30px 0 10px 0"}
+                            size={"sm"}
                             textAlign={"left"}
                         >
                             Possession By
                         </Heading>
                         <Select
+                            borderRadius={0}
                             placeholder="Expected by"
                             value={expectedyear}
                             onChange={handleExpectedYear}
@@ -1285,11 +1266,14 @@ const FarmHouse = () => {
                     <Heading
                         as={"h3"}
                         size={"md"}
-                        margin={"30px 0 10px 0"}
-                        textAlign={"left"}
+                        padding={"4px 0"}
+                        marginTop={4}
+                        borderY={"2px solid rgb(222,222,255)"}
+                        textAlign={"center"}
                     >
-                        Add pricing and details...
+                        Add pricing and details
                     </Heading>
+
                     {/* OwnerShip detail */}
                     <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                         Ownership
@@ -1360,18 +1344,22 @@ const FarmHouse = () => {
                             >
                                 {isCountry.country == "india" ? "₹" : "$"} Price Details
                             </Heading>
-                            <NumberInput >
-                                <NumberInputField
+                            <InputGroup >
+                                <InputLeftElement>  
+                                {isCountry.country == "india" ? "₹" : "$"}
+                                </InputLeftElement>
+                                <Input
+                                    type="text"
                                     value={pricedetail}
                                     required
-                                    onChange={(e) => {
-                                        setPricedetail(e.target.value);
+                                    onChange={(e) => { 
+                                        setPricedetail(NumericString(e.target.value));
                                         areaCalucation();
                                     }}
                                 />
-                            </NumberInput>
+                            </InputGroup>
                         </Box>
-                        <Box display={"grid"} gap={0}>
+                        {/* <Box display={"grid"} gap={0}>
                             <Heading
                                 as={"h3"}
                                 size={"xs"}
@@ -1380,16 +1368,11 @@ const FarmHouse = () => {
                             >
                                 {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
                             </Heading>
-                            <NumberInput value={priceSqr}>
-                                <NumberInputField
-                                    
-                                    
-                                />
-                            </NumberInput>
-                        </Box>
+                            <Input type="text" value={priceSqr}  />
+                        </Box> */}
                     </Box>
                 </Box>
-                <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
+                <Box display={"flex"} gap={10} marginTop={"10px"} flexWrap={"wrap"}>
                     <Checkbox
                         isChecked={inclusivePrices.includes("All inclusive price")}
                         onChange={(e) => {
@@ -1397,7 +1380,6 @@ const FarmHouse = () => {
                             handleinclusiveandtax(e.target.value)
                         }}
                         value={"All inclusive price"}
-
                     >
                         All inclusive price
                     </Checkbox>
@@ -1425,21 +1407,21 @@ const FarmHouse = () => {
                     </Checkbox>
                 </Box>
                 {/* Additional Pricing Detail (Optional) */}
-                <Box display={"grid"}>
-                    <Heading as={"h4"} size={"sm"} margin={"10px 0"} fontWeight={700} textAlign={"left"}>
+                <Box display={"grid"} gap={2}>
+                    <Heading as={"h4"} size={"sm"} marginTop={"10px"} fontWeight={700} textAlign={"left"}>
                         Additional Pricing Detail (Optional)
                     </Heading>
-                    <InputGroup w={"300px"} margin={"10px 0"}>
-                        <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
+                    <InputGroup w={"300px"}>
+                        <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(NumericString(e.target.value))} value={maintenancePrice} placeholder={"Maintenance Price"} />
                         <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
                             <option value="Monthly">Monthly</option>
                             <option value="Yearly">Yearly</option>
                         </Select>
                     </InputGroup>
                     {additionalPrice && <>
-                        <Input type="text" w={"300px"} value={expectedRental} onChange={(e) => setExpectedRental(e.target.value)} placeholder="Expected rental" margin={"0"} />
-                        <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-                        <Input type="text" w={"300px"} value={annualDuesPayable} onChange={(e) => setAnnualDuesPayable(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
+                        <Input type="text" w={"300px"} value={expectedRental} onChange={(e) => setExpectedRental(NumericString(e.target.value))} placeholder="Expected rental" margin={"0"} />
+                        <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(NumericString(e.target.value))} placeholder="Booking Amount" margin={"10px 0 0 0"} />
+                        <Input type="text" w={"300px"} value={annualDuesPayable} onChange={(e) => setAnnualDuesPayable(NumericString(e.target.value))} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
                     </>
                     }
                     <Heading
@@ -1452,16 +1434,16 @@ const FarmHouse = () => {
                         onClick={() => setAdditionalPrice(!additionalPrice)}
                         textAlign={"left"}>
                         {additionalPrice ? <IoIosArrowUp style={{ display: "inline" }} /> : <IoIosArrowDown style={{ display: "inline" }} />} Add more pricing details
-                    </Heading> 
+                    </Heading>
                 </Box>
-                <Box>
-                    <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                <Box display={"grid"} gap={2}>
+                    <Heading as={"h3"} size={"md"} marginTop={"10px"} textAlign={"left"}>
                         What makes your property unique
                     </Heading>
-                    <Heading as={"h3"} size={"xs"} margin={"10px 0"} textAlign={"left"}>
+                    <Heading as={"h3"} size={"xs"} textAlign={"left"}>
                         Adding description will increase your listing visibility
                     </Heading>
-                    <Textarea height={140} value={desc} onChange={(e) => {
+                    <Textarea height={140} borderRadius={0} value={desc} onChange={(e) => {
                         let my_cleantext = CleanInputText(e.target.value);
                         setDesc(my_cleantext);
                     }} ></Textarea>
@@ -1483,7 +1465,7 @@ const FarmHouse = () => {
                 </Heading>
                 <Box>
                     <button
-                        className={  
+                        className={
                             amenities.includes("Maintenance Staff") ? style.setbtn : style.btn
                         }
                         onClick={handleAminities}
@@ -1494,7 +1476,7 @@ const FarmHouse = () => {
                     <button
                         className={
                             amenities.includes("Water Storage") ? style.setbtn : style.btn
-                        } 
+                        }
                         onClick={handleAminities}
                         value={"Water Storage"}
                     >

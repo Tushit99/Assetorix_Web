@@ -750,7 +750,7 @@ const Manufacture = () => {
                   }}
                 />
               </Box>
-              <Box display={"grid"} gap={0}>
+              {/* <Box display={"grid"} gap={0}>
                 <Heading
                   as={"h3"}
                   size={"xs"}
@@ -765,7 +765,7 @@ const Manufacture = () => {
                     
                   />
                 </NumberInput>
-              </Box>
+              </Box> */}
             </Box>
           </Box>
           <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>

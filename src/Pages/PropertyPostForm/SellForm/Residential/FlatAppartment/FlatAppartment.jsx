@@ -17,7 +17,7 @@ import { Checkbox } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import { CleanInputText, NumericString } from "../../../code";
 import axios from "axios";
-import style from "./FlatAppartment.module.css";
+import style from "../Residential.module.css";
 import { InputGroup } from "@chakra-ui/react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 

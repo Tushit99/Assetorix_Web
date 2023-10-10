@@ -760,7 +760,7 @@ const CoWorkingspace = () => {
                                 />
                             </NumberInput>
                         </Box>
-                        <Box display={"grid"} gap={0}>
+                        {/* <Box display={"grid"} gap={0}>
                             <Heading
                                 as={"h3"}
                                 size={"xs"}
@@ -774,7 +774,7 @@ const CoWorkingspace = () => {
 
                                 />
                             </NumberInput>
-                        </Box>
+                        </Box> */}
                     </Box>
                 </Box>
                 {/* ============================ All inclusive price =========================  */}

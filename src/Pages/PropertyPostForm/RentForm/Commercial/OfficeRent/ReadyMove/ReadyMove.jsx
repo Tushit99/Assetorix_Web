@@ -1290,7 +1290,7 @@ const ReadyMove = () => {
                                 }}
                             />
                         </Box>
-                        <Box display={"grid"} gap={0}>
+                        {/* <Box display={"grid"} gap={0}>
                             <Heading
                                 as={"h3"}
                                 size={"xs"}
@@ -1303,7 +1303,7 @@ const ReadyMove = () => {
                                 type="text"
                                 value={priceSqr}
                             /> 
-                        </Box>
+                        </Box> */}
                     </Box>
                 </Box>
 

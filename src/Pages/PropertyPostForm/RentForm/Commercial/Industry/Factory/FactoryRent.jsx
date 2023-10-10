@@ -626,7 +626,7 @@ const FactoryRent = () => {
                                     }}
                                 />
                             </Box>
-                            <Box display={"grid"} gap={0}>
+                            {/* <Box display={"grid"} gap={0}>
                                 <Heading
                                     as={"h3"}
                                     size={"xs"}
@@ -640,7 +640,7 @@ const FactoryRent = () => {
                                     value={priceSqr} 
                                     readOnly 
                                 /> 
-                            </Box>
+                            </Box> */}
                         </Box>
                     </Box>
                     <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
