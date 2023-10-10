@@ -97,7 +97,7 @@ export const wishlistData = () => async (dispatch) => {
   }
 };
 
-export const updatedWishlist = (newarr, myid) => (dispatch) => {
+export const updatedWishlist = (myid) => (dispatch) => {
   const id = localStorage.getItem("usrId") || undefined;
   const authorization = localStorage.getItem("AstToken") || undefined;
 
@@ -111,11 +111,11 @@ export const updatedWishlist = (newarr, myid) => (dispatch) => {
       authorization,
       "Content-type": "application/json",
     },
-  };
+  }; 
 
   axios(axiosConfig)
-    .then((response) => {
-      dispatch({ type: DATA_UPDATED_WISHLIST, payload: response.data.wishlistIDs });
+    .then((e) => { 
+      dispatch({ type: DATA_UPDATED_WISHLIST, payload: e.data.wishlistIDs });
     })
     .catch((err) => console.log(err));
 };

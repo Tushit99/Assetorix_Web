@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { updatedWishlist, wishlistData } from '../../Redux/Propertysearch/action';
-import { Box, Button, Divider, Heading, Image, Text, useToast } from '@chakra-ui/react';
+import { Box, Divider, Heading, Image, Text, useToast } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import style from "./Wishlist.module.css";
-import axios from 'axios';
+import style from "./Wishlist.module.css"; 
 import { BsTrash3 } from "react-icons/bs";
 
 const Wishlist = () => {

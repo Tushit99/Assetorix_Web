@@ -11,7 +11,7 @@ import {
     Textarea,
     useToast,
 } from "@chakra-ui/react";
-import { AddIcon, MinusIcon } from "@chakra-ui/icons";
+// import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { Checkbox } from "@chakra-ui/react";
 import style from "../../RentComercial.module.css";
 import axios from "axios";
@@ -75,7 +75,7 @@ const WareHouseRentUpdate = () => {
             //     setLeaseTenureInYear(e.preLeased_RentedDetails.leaseTenureInYear);
             //     setAnnualRentIncrease(e.preLeased_RentedDetails.annualRentIncrease);
             //     setBusinessType(e.preLeased_RentedDetails.businessType);
-            // }
+            // } 
             setOtherFeature(e.otherFeatures);
             setBuildingFeature(e.society_buildingFeatures);
             setAdditinalFeature(e.additionalFeatures);

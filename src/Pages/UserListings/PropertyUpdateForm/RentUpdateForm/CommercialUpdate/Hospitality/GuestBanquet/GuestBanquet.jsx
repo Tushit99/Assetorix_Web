@@ -13,13 +13,13 @@ import {
     Textarea,
     useToast,
 } from "@chakra-ui/react";
-import { AddIcon, MinusIcon } from "@chakra-ui/icons";
+// import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { Checkbox } from "@chakra-ui/react";
 import style from "../../RentComercial.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
-import { AlphabetString, CleanInputText, NumericString } from "../../../../code";
+import { CleanInputText, NumericString } from "../../../../code";
 import { useParams } from "react-router-dom";
 
 
