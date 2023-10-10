@@ -72,8 +72,8 @@ const ResidentialBuy = () => {
                 setWishlist(e.data.wishlistIDs);
                 toast({
                     title: `${wishlist.includes(myid) ? "Removed from Wishlist" : "Added to Wishlist"}`,
-                    status: 'success',
-                    duration: 2000,
+                    status: 'success', 
+                    duration: 2000, 
                 })
                 console.log(e.data);
             })
@@ -85,12 +85,12 @@ const ResidentialBuy = () => {
     // console.log(ResedentialBuydata);
 
 
-    const handleBedroom = (value) => {
-        setBhk((prev) => {
-            if (prev.includes(value)) {
-                return prev.filter((item) => item !== value);
-            } else {
-                return [...prev, value];
+    const handleBedroom = (value) => { 
+        setBhk((prev) => { 
+            if (prev.includes(value)) { 
+                return prev.filter((item) => item !== value); 
+            } else { 
+                return [...prev, value]; 
             }
         });
     }

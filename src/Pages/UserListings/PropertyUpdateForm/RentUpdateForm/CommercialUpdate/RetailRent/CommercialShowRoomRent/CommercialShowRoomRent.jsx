@@ -214,7 +214,7 @@ const CommercialShowRoomRentUpdate = () => {
       if (availability == "Ready to move" && fromyear != "") {
         obj["propertyStatus"] = fromyear;
         obj["availabilityStatus"] = availability;
-        obj["availableFrom"] = IndianDateConverter(availableFrom); 
+        obj["availableFrom"] = availableFrom; 
       }
 
       if (availability == "Under construction" && expectedyear != "") {

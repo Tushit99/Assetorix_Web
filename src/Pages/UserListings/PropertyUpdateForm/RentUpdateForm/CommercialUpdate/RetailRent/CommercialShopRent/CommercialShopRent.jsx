@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Box,
     Button,
@@ -22,10 +22,12 @@ import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { CleanInputText, IndianDateConverter, NumericString } from "../../../../code";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 
 
 const CommercialShopRentUpdate = () => {
+    const { productID } = useParams();
     const isCountry = useSelector((state) => state.gloalval);
     const [located, setLocated] = useState("");
     const toast = useToast();
@@ -73,7 +75,8 @@ const CommercialShopRentUpdate = () => {
     const [privateWashroom, setPrivateWashroom] = useState(0);
     const [sharedWashroom, setSharedWashroom] = useState(0);
     const [buildupArea, setBuildupArea] = useState("");
-    const [availableFrom, setavailableFrom] = useState(""); 
+    const [buildupAreaUnit, setBuildupAreaUnit] = useState("sq.ft");
+    const [availableFrom, setavailableFrom] = useState("");
     const [rentIncreasePercent, setRentIncreasePercent] = useState("");
     const [lockPeriod, setlockPeriod] = useState("");
     const [depositAmount, setDepositAmount] = useState("");
@@ -81,7 +84,68 @@ const CommercialShopRentUpdate = () => {
 
 
 
-    // please don'nt change any function without any prior knowledge 
+    // please don'nt change any function without any prior knowledge  
+
+    const handleDataFetch = async () => {
+        await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
+            let e = detail.data.data;
+            console.log(e);
+            setLocated(e.locatedInside);
+            setCountry(e?.address?.country);
+            setCity(e?.address?.city);
+            setPincode(e?.address?.pincode);
+            setState(e?.address.state);
+            setLocality(e?.address.locality);
+            setType(e?.address.type);
+            setentranceWidth(e?.shopFacedSize?.entranceWidth);
+            setceilingHeight(e?.shopFacedSize?.ceilingHeight);
+            setWashroomType(e?.washrooms);
+            setlocatedNear(e?.locatedNear);
+            setParking(e?.parking);
+            setParkingType(e?.parkingType);
+            setOtherFeature(e?.otherFeatures);
+            setBuildingFeature(e?.society_buildingFeatures);
+            setAdditinalFeature(e?.additionalFeatures);
+            setPropertyFacing(e?.propertyFacing);
+            setPrivateWashroom(e?.washroomDetails.privateWashrooms);
+            setSharedWashroom(e?.washroomDetails.sharedWashrooms);
+            setFacingWidth(e?.roadFacingWidth);
+            setFacing(e?.roadFacingWidthType);
+            setsuitableFor(e?.suitableFor);
+            setBuildupArea(e?.builtupArea);
+            setBuildupAreaUnit(e?.builtupAreaUnit);
+            setlockPeriod(e?.lockInPeriod);
+            setRentIncreasePercent(e?.expectedYearlyRent);
+            setavailableFrom(e?.availableFrom);
+            setSecurityDeposit(e?.securityDeposit); 
+            setDepositAmount(e?.depositValue); 
+
+            setPlotArea(e?.carpetArea);
+            setPriceSqr(e?.priceUnit);
+            setFireSafty(e?.fireSafety);
+            setTotalFloors(e?.totalFloors);
+            setAvailability(e?.availabilityStatus);
+            if (e?.availabilityStatus == "Ready to move") {
+                setFromyear(e?.propertyStatus);
+            }
+            else if (e.availabilityStatus == "Under construction") {
+                setExpectedYear(e?.expectedByYear);
+            }
+            setPricedetail(e?.price);
+            setPropertyFeature(e?.propertyFeatures);
+            setInclusivePrice(e?.inclusivePrices);
+            setMaintenancePrice(e?.additionalPricingDetails.maintenancePrice);
+            setMaintenanceTimePeriod(e?.additionalPricingDetails.maintenanceTimePeriod);
+            setBookingAmount(e?.additionalPricingDetails.bookingAmount);
+            setDesc(e?.description);
+            setAminity(e?.amenities);
+            setLocationAdv(e?.locationAdv);
+        })
+    }
+
+    useEffect(() => {
+        handleDataFetch();
+    }, []);
 
     // submit Form  
     const handleSubmitData = async (e) => {
@@ -96,7 +160,7 @@ const CommercialShopRentUpdate = () => {
                 locality,
                 pincode,
                 city,
-                state, 
+                state,
                 country,
             },
             price: +pricedetail,
@@ -112,8 +176,8 @@ const CommercialShopRentUpdate = () => {
             additionalFeatures: additinalft,
             otherFeatures: otherFeature,
             fireSafety: fireSafty,
-            expectedYearlyRent :rentIncreasePercent,
-            lockInPeriod: lockPeriod, 
+            expectedYearlyRent: rentIncreasePercent,
+            lockInPeriod: lockPeriod,
             securityDeposit,
             propertyFacing,
             washrooms: washroomType,
@@ -129,6 +193,8 @@ const CommercialShopRentUpdate = () => {
             },
             carpetArea: plotArea,
             carpetAreaUnit: areaPer,
+            builtupArea: buildupArea,
+            builtupAreaUnit: buildupAreaUnit,
             description: desc,
             countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
             additionalPricingDetails: {
@@ -136,7 +202,7 @@ const CommercialShopRentUpdate = () => {
                 maintenanceTimePeriod,
                 bookingAmount,
             },
-            locationAdv: locationAdv 
+            locationAdv: locationAdv
         };
 
         const showToastError = (message) => {
@@ -170,7 +236,7 @@ const CommercialShopRentUpdate = () => {
             locality &&
             type &&
             pricedetail &&
-            
+
             inclusivePrices &&
             additinalft &&
             propertyFacing &&
@@ -205,9 +271,9 @@ const CommercialShopRentUpdate = () => {
 
             if (availability == "Ready to move" && fromyear != "") {
                 obj["propertyStatus"] = fromyear;
-                obj["availabilityStatus"] = availability; 
-                obj["availableFrom"] = IndianDateConverter(availableFrom); 
-            } 
+                obj["availabilityStatus"] = availability;
+                obj["availableFrom"] = availableFrom;
+            }
 
             if (securityDeposit == "Fixed") {
                 obj["depositValue"] = depositAmount;
@@ -215,7 +281,7 @@ const CommercialShopRentUpdate = () => {
 
             if (securityDeposit == "Multiple of Rent") {
                 obj["multipleOfRent"] = depositAmount;
-            }     
+            }
 
             if (availability == "Under construction" && expectedyear != "") {
                 obj["expectedByYear"] = expectedyear;
@@ -235,7 +301,7 @@ const CommercialShopRentUpdate = () => {
                 // });
                 // let data = await response.json();  
                 console.log("data", obj);
-                await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
+                await axios.patch(`${process.env.REACT_APP_URL}/property/${productID}`, obj, { headers: head })
                     .then((e) => {
                         toast({
                             title: e.data.msg,
@@ -640,8 +706,8 @@ const CommercialShopRentUpdate = () => {
                                         required
                                         placeholder={"Build-up Area"}
                                     />
-                                    <select value={areaPer} onChange={(e) => {
-                                        setAreaPer(e.target.value);
+                                    <select value={buildupAreaUnit} onChange={(e) => {
+                                        setBuildupAreaUnit(e.target.value);
                                     }} className={style.select} required>
                                         <option value="sq.ft">sq.ft</option>
                                         <option value="sq.yards">sq.yards</option>
@@ -859,9 +925,9 @@ const CommercialShopRentUpdate = () => {
                                 }}>Not-Available</button>
                             </Box>
                             <Box display={parking == "Available" ? "flex" : "none"} flexWrap={"wrap"} gap={4}>
-                                <button value={"Private Parking"} onClick={handleparkingType} className={parkingType.includes("Private Parking") ? style.setbtn : style.btn} > Private Parking </button>
-                                <button value={"Public Parking"} onClick={handleparkingType} className={parkingType.includes("Public Parking") ? style.setbtn : style.btn} > Public Parking </button>
-                                <button value={"Multilevel Parking"} onClick={handleparkingType} className={parkingType.includes("Multilevel Parking") ? style.setbtn : style.btn} > Multilevel Parking </button>
+                                <button value={"Private Parking"} onClick={handleparkingType} className={parkingType?.includes("Private Parking") ? style.setbtn : style.btn} > Private Parking </button>
+                                <button value={"Public Parking"} onClick={handleparkingType} className={parkingType?.includes("Public Parking") ? style.setbtn : style.btn} > Public Parking </button>
+                                <button value={"Multilevel Parking"} onClick={handleparkingType} className={parkingType?.includes("Multilevel Parking") ? style.setbtn : style.btn} > Multilevel Parking </button>
                             </Box>
                         </Box>
 
@@ -964,7 +1030,7 @@ const CommercialShopRentUpdate = () => {
                                     </Heading>
                                     <Input value={availableFrom} onChange={(e) => setavailableFrom(e.target.value)} color='blue' type={"date"} w={300} />
                                 </Box>
-                            </Box> 
+                            </Box>
                         )}
 
                         {availability == "Under construction" && (
@@ -1000,30 +1066,30 @@ const CommercialShopRentUpdate = () => {
                                         Select business type
                                     </MenuButton>
                                     <MenuList display={"grid"} borderRadius={0} marginTop={"-8px"} marginBottom={"-8px"} overflowY={"scroll"} h={"200px"} padding={"4px 10px"}>
-                                        <Checkbox value={"ATM"} className={style.select} onChange={handlebusinessType} > ATM </Checkbox>
-                                        <Checkbox value={"Bakery"} className={style.select} onChange={handlebusinessType} > Bakery </Checkbox>
-                                        <Checkbox value={"Boutique"} className={style.select} onChange={handlebusinessType} > Boutique </Checkbox>
-                                        <Checkbox value={"Clinic"} className={style.select} onChange={handlebusinessType} > Clinic </Checkbox>
-                                        <Checkbox value={"Clothes"} className={style.select} onChange={handlebusinessType} > Clothes </Checkbox>
-                                        <Checkbox value={"Cloud Kitchen"} className={style.select} onChange={handlebusinessType} > Cloud Kitchen </Checkbox>
-                                        <Checkbox value={"Coffee"} className={style.select} onChange={handlebusinessType} > Coffee </Checkbox>
-                                        <Checkbox value={"Dental Clinic"} className={style.select} onChange={handlebusinessType} > Dental Clinic </Checkbox>
-                                        <Checkbox value={"Fast Food"} className={style.select} onChange={handlebusinessType} > Fast Food </Checkbox>
-                                        <Checkbox value={"Footwear"} className={style.select} onChange={handlebusinessType} > Footwear </Checkbox>
-                                        <Checkbox value={"Gym"} className={style.select} onChange={handlebusinessType} > Gym </Checkbox>
-                                        <Checkbox value={"Jewellery"} className={style.select} onChange={handlebusinessType} > Jewellery </Checkbox>
-                                        <Checkbox value={"Juice"} className={style.select} onChange={handlebusinessType} > Juice </Checkbox>
-                                        <Checkbox value={"Meat"} className={style.select} onChange={handlebusinessType} > Meat </Checkbox>
-                                        <Checkbox value={"Medical"} className={style.select} onChange={handlebusinessType} > Medical </Checkbox>
-                                        <Checkbox value={"Mobile"} className={style.select} onChange={handlebusinessType} > Mobile </Checkbox>
-                                        <Checkbox value={"Pub/Bar"} className={style.select} onChange={handlebusinessType} > Pub/Bar </Checkbox>
-                                        <Checkbox value={"Restaurants"} className={style.select} onChange={handlebusinessType} > Restaurants </Checkbox>
-                                        <Checkbox value={"Salon/Spa"} className={style.select} onChange={handlebusinessType} > Salon/Spa </Checkbox>
-                                        <Checkbox value={"Mobile"} className={style.select} onChange={handlebusinessType} > Mobile </Checkbox>
-                                        <Checkbox value={"Stationery"} className={style.select} onChange={handlebusinessType} > Stationery </Checkbox>
-                                        <Checkbox value={"Sweet"} className={style.select} onChange={handlebusinessType} > Sweet </Checkbox>
-                                        <Checkbox value={"Tea Stall"} className={style.select} onChange={handlebusinessType} > Tea Stall </Checkbox>
-                                        <Checkbox value={"Other business type"} className={style.select} onChange={handlebusinessType} > Other business type </Checkbox>
+                                    <Checkbox isChecked={suitableFor.includes("ATM") ? true : false } value={"ATM"} className={style.select} onChange={handlebusinessType} > ATM </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Bakery") ? true : false } value={"Bakery"} className={style.select} onChange={handlebusinessType} > Bakery </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Boutique") ? true : false } value={"Boutique"} className={style.select} onChange={handlebusinessType} > Boutique </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Clinic") ? true : false } value={"Clinic"} className={style.select} onChange={handlebusinessType} > Clinic </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Clothes") ? true : false } value={"Clothes"} className={style.select} onChange={handlebusinessType} > Clothes </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Cloud Kitchen") ? true : false } value={"Cloud Kitchen"} className={style.select} onChange={handlebusinessType} > Cloud Kitchen </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Coffee") ? true : false } value={"Coffee"} className={style.select} onChange={handlebusinessType} > Coffee </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Dental Clinic") ? true : false } value={"Dental Clinic"} className={style.select} onChange={handlebusinessType} > Dental Clinic </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Fast Food") ? true : false } value={"Fast Food"} className={style.select} onChange={handlebusinessType} > Fast Food </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Footwear") ? true : false } value={"Footwear"} className={style.select} onChange={handlebusinessType} > Footwear </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Gym") ? true : false } value={"Gym"} className={style.select} onChange={handlebusinessType} > Gym </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Jewellery") ? true : false } value={"Jewellery"} className={style.select} onChange={handlebusinessType} > Jewellery </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Juice") ? true : false } value={"Juice"} className={style.select} onChange={handlebusinessType} > Juice </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Meat") ? true : false } value={"Meat"} className={style.select} onChange={handlebusinessType} > Meat </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Medical") ? true : false } value={"Medical"} className={style.select} onChange={handlebusinessType} > Medical </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Mobile") ? true : false } value={"Mobile"} className={style.select} onChange={handlebusinessType} > Mobile </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Pub/Bar") ? true : false } value={"Pub/Bar"} className={style.select} onChange={handlebusinessType} > Pub/Bar </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Restaurants") ? true : false } value={"Restaurants"} className={style.select} onChange={handlebusinessType} > Restaurants </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Salon/Spa") ? true : false } value={"Salon/Spa"} className={style.select} onChange={handlebusinessType} > Salon/Spa </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Mobile") ? true : false } value={"Mobile"} className={style.select} onChange={handlebusinessType} > Mobile </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Stationery") ? true : false } value={"Stationery"} className={style.select} onChange={handlebusinessType} > Stationery </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Sweet") ? true : false } value={"Sweet"} className={style.select} onChange={handlebusinessType} > Sweet </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Tea Stall") ? true : false } value={"Tea Stall"} className={style.select} onChange={handlebusinessType} > Tea Stall </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Other business type") ? true : false } value={"Other business type"} className={style.select} onChange={handlebusinessType} > Other business type </Checkbox>
                                     </MenuList>
                                 </Menu>
                             </Box>
@@ -1079,7 +1145,7 @@ const CommercialShopRentUpdate = () => {
                                         <Input type="text"
                                             value={priceSqr}
                                             required
-                                            
+
                                         />
                                     </Box>
                                 </Box>
