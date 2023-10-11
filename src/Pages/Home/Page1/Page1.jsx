@@ -47,7 +47,7 @@ const Page1 = () => {
 
       <video autoPlay loop muted className={style.video_panal}>
         <source src={video} type="video/mp4" />
-      </video>
+      </video> 
       <Box w={"full"} className={style.topbox}>
         <Text
           color={"white"}
