@@ -3,12 +3,10 @@ import {
     Box,
     Button,
     Heading,
-    Input,
-    InputLeftElement,
-    InputRightElement,
-    NumberInput,
-    NumberInputField,
+    Input, 
+    InputRightElement, 
     Select,
+    Text, 
     Textarea,
     useToast,
 } from "@chakra-ui/react";
@@ -20,8 +18,6 @@ import axios from "axios";
 import style from "../Residential.module.css";
 import { InputGroup } from "@chakra-ui/react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import CountryData from "../../../CountryData";
-
 
 
 const FlatAppartment = () => {
@@ -30,7 +26,7 @@ const FlatAppartment = () => {
     const [country, setCountry] = useState("");
     const [facingwidth, setFacingWidth] = useState("");
     const [city, setCity] = useState("");
-    const [appartment, setApartment] = useState("");
+    const [appartment, setApartment] = useState("");  
     const [pincode, setPincode] = useState(0);
     const [state, setState] = useState("");
     const [locality, setLocality] = useState("");
@@ -1352,12 +1348,10 @@ const FlatAppartment = () => {
                         Price Details
                     </Heading>
                     <Box display={"flex"} alignItems={"center"} gap={5}>
-                        <InputGroup >
-                            <InputLeftElement>
-                                <Select>
-                                    <option value=""> `` </option>
-                                </Select>
-                            </InputLeftElement>
+                        <InputGroup w={300}>
+                            <Select w={100} borderRadius={0}>
+                                <option value="">value</option> 
+                            </Select>
                             <Input
                                 type="text"
                                 value={pricedetail}
@@ -1374,7 +1368,7 @@ const FlatAppartment = () => {
                 </Box>
 
                 {/* ============================== inclusive charges (checkbox) ==============================  */}
-                <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
+                <Box display={"flex"} gap={10} marginTop={3} flexWrap={"wrap"}>
                     <Checkbox
                         isChecked={inclusivePrices.includes("All inclusive price")}
                         onChange={(e) => {
@@ -1413,10 +1407,10 @@ const FlatAppartment = () => {
                 {/* Additional Pricing Detail (Optional) */}
                 <Box display={"grid"}>
                     {additionalPrice && <>
-                        <Heading as={"h4"} size={"sm"} margin={"10px 0"} fontWeight={700} textAlign={"left"}>
+                        <Heading as={"h4"} size={"sm"} fontWeight={700} textAlign={"left"}>
                             Additional Pricing Detail (Optional)
                         </Heading>
-                        <InputGroup w={"300px"} margin={"10px 0"}>
+                        <InputGroup w={"300px"} >
                             <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
                             <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
                                 <option value="Monthly">Monthly</option>
@@ -1432,7 +1426,7 @@ const FlatAppartment = () => {
                     <Heading
                         as={"h3"}
                         size={"sm"}
-                        margin={"10px 0"}
+                        marginTop={2}
                         color={"#002aff"}
                         fontWeight={500}
                         cursor={"pointer"}
@@ -1443,18 +1437,18 @@ const FlatAppartment = () => {
                 </Box>
 
                 <Box>
-                    <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                    <Heading as={"h3"} size={"md"} marginTop={2} textAlign={"left"}>
                         What makes your property unique
                     </Heading>
-                    <Heading as={"h3"} size={"xs"} margin={"10px 0"} textAlign={"left"}>
-                        Adding description will increase your listing visibility
-                    </Heading>
-                    <Textarea height={140} value={desc} onChange={(e) => {
+                    <Text fontSize={"sm"} textAlign={"left"} > 
+                        Adding description will increase your listing visibility 
+                    </Text>
+                    <Textarea height={140} required value={desc} onChange={(e) => {
                         let my_cleantext = CleanInputText(e.target.value);
                         setDesc(my_cleantext);
                     }} ></Textarea>
-                </Box>
-            </Box>
+                </Box> 
+            </Box> 
             {/* Add amenities/unique features */}
             <Box>
                 <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>

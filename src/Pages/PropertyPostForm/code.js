@@ -53,7 +53,7 @@ export const IndianDateConverter = (inputElement) => {
     const indianFormattedDate = inputDate.toLocaleDateString("en-IN", options);
     return indianFormattedDate;
   } else {
-    return "Invalid date";
+    return "Invalid date"; 
   }
 };
 
