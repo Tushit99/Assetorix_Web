@@ -20,7 +20,7 @@ import style from "../Residential.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
-import { CleanInputText, NumericString, WordandNumber } from '../../../code';
+import { AlphabetString, CleanInputText, NumericString, WordandNumber } from '../../../code';
 
 
 const FarmHouse = () => {
