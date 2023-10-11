@@ -597,7 +597,7 @@ const FarmHouse = () => {
                     variant="flushed"
                 />
 
-            </Box>
+            </Box> 
             {/* Property Detail */}
             <Box marginTop={2}>
                 <Heading as={"h4"} size={"sm"} textAlign={"left"} margin={"0"}>
@@ -682,7 +682,7 @@ const FarmHouse = () => {
                                 <option value="perch">perch</option>
                             </Select>
                         </InputRightElement>
-                    </InputGroup>
+                    </InputGroup> 
                 </Box>
                 {/* other Room  */}
                 <Box
@@ -1121,6 +1121,7 @@ const FarmHouse = () => {
                         <Input
                             type="text"
                             value={totalfloors}
+                            borderRadius={0} 
                             placeholder={"Enter no. of floors"}
                             onChange={(e) => {
                                 let val = NumericString(e.target.value)

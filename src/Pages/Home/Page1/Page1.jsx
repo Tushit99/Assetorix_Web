@@ -52,7 +52,7 @@ const Page1 = () => {
         <Text
           color={"white"}
           fontWeight={700}
-          lineHeight={1.2}
+          lineHeight={1.2} 
           textAlign={"left"}
           marginTop={20}
           className={style.word}
