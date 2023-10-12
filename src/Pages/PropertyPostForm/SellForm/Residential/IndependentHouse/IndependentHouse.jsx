@@ -19,7 +19,7 @@ import style from "../Residential.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
-import { CleanInputText, NumericString } from "../../../code";
+import { CleanInputText, NumericString, WordandNumber } from "../../../code";
 
 const IndependentHouse = () => {
     const isCountry = useSelector((state) => state.gloalval);
@@ -284,13 +284,14 @@ const IndependentHouse = () => {
         }
     };
 
-    const handlepinfetch = (e) => {
-        setPincode(e.target.value);
-        if (e.target.value.length == 6) {
-            pinfetch(e.target.value);
+    const handlepinfetch = (e) => { 
+        let val = NumericString(e.target.value); 
+        setPincode(val);
+        if (val.length == 6) {
+            pinfetch(val);
         }
         else {
-            console.log(e.target.value);
+            console.log(val);
         }
     }
 
@@ -503,7 +504,7 @@ const IndependentHouse = () => {
                     required
                     placeholder="House No. (optional)"
                     value={houseNo}
-                    onChange={(e) => setHouseNo(e.target.value)}
+                    onChange={(e) => setHouseNo(WordandNumber(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
                 />
@@ -514,7 +515,7 @@ const IndependentHouse = () => {
                     placeholder="Apartment / Society"
                     fontSize={"md"}
                     value={appartment}
-                    onChange={(e) => setApartment(e.target.value)}
+                    onChange={(e) => setApartment(WordandNumber(e.target.value))}
                     variant="flushed"
                 />
                 <Input

@@ -31,7 +31,7 @@ export const NumberOnly = (e) => {
 
 export const AlphabetString = (e) => {
   let val = e;
-  let clear = val.replace(/[^a-zA-Z,\s]/g, "");
+  let clear = val.replace(/[^a-zA-Z, ]/g, "").replace(/ +/g, ' ');
   return clear;
 };
 

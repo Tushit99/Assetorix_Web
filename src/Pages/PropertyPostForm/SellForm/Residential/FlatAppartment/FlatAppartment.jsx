@@ -291,12 +291,13 @@ const FlatAppartment = () => {
     };
 
     const handlepinfetch = (e) => {
-        setPincode(e.target.value);
-        if (e.target.value.length == 6) {
-            pinfetch(e.target.value);
+        let val = NumericString(e.target.value)
+        setPincode(val);
+        if (val.length == 6) { 
+            pinfetch(val);
         }
         else {
-            console.log(e.target.value);
+            console.log(val);
         }
     }
 
@@ -553,7 +554,7 @@ const FlatAppartment = () => {
                     placeholder="Locality"
                     list="browsers"
                     value={locality}
-                    onChange={(e) => setLocality(e.target.value)}
+                    onChange={(e) => setLocality(WordandNumber(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
                 />
@@ -572,7 +573,7 @@ const FlatAppartment = () => {
                     placeholder="Enter City"
                     fontSize={"md"}
                     value={city}
-                    onChange={(e) => setCity(e.target.value)}
+                    onChange={(e) => setCity(AlphabetString(e.target.value))}
                     variant="flushed"
                 />
                 <Input
@@ -581,7 +582,7 @@ const FlatAppartment = () => {
                     required
                     placeholder="Enter State"
                     value={state}
-                    onChange={(e) => setState(e.target.value)}
+                    onChange={(e) => setState(AlphabetString(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
                 />
@@ -591,7 +592,7 @@ const FlatAppartment = () => {
                     required
                     placeholder="Enter Country"
                     value={country}
-                    onChange={(e) => setCountry(e.target.value)}
+                    onChange={(e) => setCountry(AlphabetString(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
                 />
@@ -1359,8 +1360,8 @@ const FlatAppartment = () => {
                                 required
                                 w={200}
                                 onChange={(e) => {
-                                    setPricedetail(e.target.value);
-                                    areaCalucation();
+                                    setPricedetail(NumericString(e.target.value));
+                                    areaCalucation(); 
                                 }}
                             />
                         </InputGroup>
@@ -1411,16 +1412,16 @@ const FlatAppartment = () => {
                             Additional Pricing Detail (Optional)
                         </Heading>
                         <InputGroup w={"300px"} >
-                            <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
+                            <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(NumericString(e.target.value))} value={maintenancePrice} placeholder={"Maintenance Price"} />
                             <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
                                 <option value="Monthly">Monthly</option>
                                 <option value="Yearly">Yearly</option>
                             </Select>
                         </InputGroup>
-                        <Input type="text" w={"300px"} value={expectedRentel} onChange={(e) => setExpectedRentel(e.target.value)} placeholder="Expected rental" margin={"0"} />
-                        <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-                        <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
-                        <Input type="text" w={"300px"} value={membershipCharge} onChange={(e) => setMembershipCharge(e.target.value)} placeholder="Membership charges" margin={"10px 0 0 0"} />
+                        <Input type="text" w={"300px"} value={expectedRentel} onChange={(e) => setExpectedRentel(NumericString(e.target.value))} placeholder="Expected rental" margin={"0"} />
+                        <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(NumericString(e.target.value))} placeholder="Booking Amount" margin={"10px 0 0 0"} />
+                        <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(NumericString(e.target.value))} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
+                        <Input type="text" w={"300px"} value={membershipCharge} onChange={(e) => setMembershipCharge(NumericString(e.target.value))} placeholder="Membership charges" margin={"10px 0 0 0"} />
                     </>
                     }
                     <Heading
