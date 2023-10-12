@@ -102,7 +102,7 @@ const TopNavbar = () => {
                                 <option value="usa">USA</option>
                             </select>
                         </div>
-                        <Link to={"/"}  onClick={homeback}>home</Link>
+                        <Link to={"/"}  onClick={homeback}>Home</Link>
                         <Link to={"/about"}>About us</Link>
                         <Link to={"/contact"}>Contact</Link>
                     </div>
