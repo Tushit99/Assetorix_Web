@@ -177,7 +177,7 @@ const SingleProductDetailPage = () => {
                     <Box>
                         <Box >
                             <Image
-                                w={"98%"}
+                                w={"100%"}
                                 objectFit={"contain"}
                                 maxH={"450px"}
                                 // border={"2px solid black"}
@@ -189,14 +189,14 @@ const SingleProductDetailPage = () => {
 
                     {/* ===================== mobile Pricing (Price only for mobile) =================================== */}
                     <Box display={{ base: "grid", md: "none" }} >
-                        {(data.countryCurrency && price) ? <Heading display={"flex"} fontSize={"xl"}>
+                        {(data.countryCurrency && price) ? <Heading display={"flex"} fontSize={"xl"} margin={"8px 0"}>
                             Price: {data.countryCurrency || <Skeleton width={"100px"} />}
                             {price || <Skeleton width={"40px"} />}
                         </Heading> : <Skeleton />}
-                        {(data.countryCurrency && price) ? <Heading display={"flex"} margin={"6px 0"} fontSize={"md"}>
+                        {/* {(data.countryCurrency && price) ? <Heading display={"flex"} margin={"8px 0"} fontSize={"md"}>
                             Price per unit: {data.countryCurrency || <Skeleton width={"100px"} />}
                             {price || <Skeleton width={"100px"} />}
-                        </Heading> : <Skeleton />}
+                        </Heading> : <Skeleton />} */}
                     </Box>
 
                     {/* box 2 */}
@@ -871,15 +871,15 @@ const SingleProductDetailPage = () => {
                         display={{ base: "none", md: "block" }}
                     >
                         {/* price  */}
-                        <Box margin={0} padding={"0 10px"}>
+                        <Box margin={0} padding={"10px 0"}>
                             <Heading display={"flex"} fontSize={"xl"}>
                                 Price: {data.countryCurrency || <Skeleton width={"100px"} />}
                                 {price || <Skeleton width={"40px"} />}
                             </Heading>
-                            <Heading display={"flex"} margin={"6px 0"} fontSize={"md"}>
+                            {/* <Heading display={"flex"} margin={"6px 0"} fontSize={"md"}>
                                 Price per unit: {data.countryCurrency || <Skeleton width={"100px"} />}
                                 {price || <Skeleton width={"100px"} />}
-                            </Heading>
+                            </Heading> */}
                         </Box>
                         {/* contact detail */}
                         <Box borderRadius={0} boxShadow={"rgba(0, 0, 0, 0.24) 0px 3px 8px"} padding={"20px 10px"}>

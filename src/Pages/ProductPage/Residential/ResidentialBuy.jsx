@@ -29,6 +29,7 @@ const ResidentialBuy = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const btnRef = useRef();
 
+ 
     const handleLike = () => {
         let id = localStorage.getItem("usrId") || undefined;
         let authorization = localStorage.getItem("AstToken") || undefined;
@@ -117,10 +118,13 @@ const ResidentialBuy = () => {
         });
     }
 
-    useEffect(() => {
+    useEffect(() => {   
+        let local = JSON.parse(localStorage.getItem("resBuy")); // fetching data from local storage 
+        local.length>0 && setPropertyType(local); // setting data to usestate  
+
         dispatch(residentialBuy(location)); // fetching the data
-        handleLike(); // wishlist 
-    }, []);
+        handleLike(); // wishlist   
+    }, []);  
 
     useEffect(() => {
         let param = {}

@@ -131,7 +131,10 @@ const ResidentialRent = () => {
         });
     }
 
-    useEffect(() => {
+    useEffect(() => { 
+        let local = JSON.parse(localStorage.getItem("resRent")); // fetching data from local storage 
+        local.length>0 && setPropertyType(local); // setting data to usestate  
+
         dispatch(residentialRent(location)) // fetching the data
         handleLike(); // wishlist 
     }, []);

@@ -24,7 +24,7 @@ export const WordandNumber = (e) => {
   return cleanedValue;
 };
 
-export const NumberOnly = (e) => {
+export const NumberOnly = (e) => {  
   const cleanedValue = e.replace(/[^0-9.]/g, "");
   return cleanedValue;
 };

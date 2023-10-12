@@ -31,27 +31,85 @@ const Navebar = () => {
     const [scroll, setScroll] = useState(0);
     const [country, setCountry] = useState("india");
     const dispatch = useDispatch();
+    const [resBuyArr, setresBuyArr] = useState([]);
+    const [resRentArr, setresRentArr] = useState([]);
+    const [comBuyArr, setcomBuyArr] = useState([]);
+    const [comRentArr, setcomRentArr] = useState([]);
     // const navigate = useNavigate(); 
 
-    const homeback = ()=>{
-        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }); 
+    const homeback = () => {
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     }
+
+    const handleresbuy = (value) => {
+        setresBuyArr((prev) => {
+            if (prev.includes(value)) {
+                let res = prev.filter((item) => item !== value) || [];
+                localStorage.setItem("resBuy", JSON.stringify(res));
+                return res
+            } else {
+                let res = [...prev, value];
+                localStorage.setItem("resBuy", JSON.stringify(res));
+                return res
+            }
+        });
+    }
+    const handleresrent = (value) => {
+        setresRentArr((prev) => {
+            if (prev.includes(value)) {
+                let res = prev.filter((item) => item !== value) || [];
+                localStorage.setItem("resRent", JSON.stringify(res));
+                return res
+            } else {
+                let res = [...prev, value];
+                localStorage.setItem("resRent", JSON.stringify(res));
+                return res
+            }
+        });
+    }
+    const handleCombuy = (value) => {
+        setcomBuyArr((prev) => {
+            if (prev.includes(value)) {
+                let res = prev.filter((item) => item !== value) || [];
+                localStorage.setItem("combuy", JSON.stringify(res));
+                return res
+            } else {
+                let res = [...prev, value];
+                localStorage.setItem("combuy", JSON.stringify(res));
+                return res
+            }
+        });
+    }
+    const handleComRent = (value) => {
+        setcomRentArr((prev) => {
+            if (prev.includes(value)) {
+                let res = prev.filter((item) => item !== value) || [];
+                localStorage.setItem("comRent", JSON.stringify(res));
+                return res
+            } else {
+                let res = [...prev, value];
+                localStorage.setItem("comRent", JSON.stringify(res));
+                return res
+            }
+        });
+    }
+
 
     useEffect(() => {
         window.addEventListener("scroll", () => {
-            setScroll(window.pageYOffset); 
-        });
+            setScroll(window.pageYOffset);
+        });  
 
         let userid = localStorage.getItem("usrId") || undefined;
         let authorization = localStorage.getItem("AstToken") || undefined;
 
         // console.log("presented  3987y",userid , authorization , Object.keys(data.user).length === 0);  
-        if (userid && authorization && Object.keys(data.user).length === 0) { 
+        if (userid && authorization && Object.keys(data.user).length === 0) {
             let body = {
                 id: userid,
                 authorization,
             };
-            dispatch(userPreLog(body)); 
+            dispatch(userPreLog(body));
         }
         // console.log(data.user.name) 
 
@@ -62,12 +120,18 @@ const Navebar = () => {
         } else {
             dispatch(changecountry(storedVal));
             setCountry(storedVal);
-        }
-    }, []);
+        } 
 
-    // const handlePageRent = () => {
-    //     dispatch(changeLookingFor("Rent/Lease"));
-    // }
+        localStorage.setItem("resBuy",JSON.stringify([]));  
+        localStorage.setItem("resBuy",JSON.stringify([])); 
+        localStorage.setItem("resRent",JSON.stringify([])); 
+        localStorage.setItem("resRent",JSON.stringify([])); 
+        localStorage.setItem("combuy",JSON.stringify([])); 
+        localStorage.setItem("combuy",JSON.stringify([])); 
+        localStorage.setItem("comRent",JSON.stringify([])); 
+        localStorage.setItem("comRent",JSON.stringify([])); 
+
+    }, []);
 
     const handlePageSell = () => {
         dispatch(changeLookingFor("sell"));
@@ -86,7 +150,7 @@ const Navebar = () => {
     // console.log(data);
 
     return (
-        <div className={style.head_nav}> 
+        <div className={style.head_nav}>
             {/*  Top Navbar Section (logo home about contact) */}
             <div className={scroll > 20 ? style.top_navbar3 : style.top_navbar}>
                 <div className={style.hamburger}>
@@ -103,7 +167,7 @@ const Navebar = () => {
                             style={{ border: "0px", outline: "0px" }}
                         >
                             <option value="india">India</option>
-                            <option value="usa">USA</option>    
+                            <option value="usa">USA</option>
                         </select>
                     </div>
                     <Link to={"/"} onClick={homeback}>Home</Link>
@@ -112,7 +176,7 @@ const Navebar = () => {
                 </div>
                 {/* login signin button */}
                 <div className={style.login_box}>
-                    <Popover> 
+                    <Popover>
                         <PopoverTrigger>
                             <Button
                                 borderRadius={"30px"}
@@ -120,11 +184,11 @@ const Navebar = () => {
                                     <IoIosArrowDown
                                         size={"20px"}
                                         _hover={{ backgroundColor: "unset" }}
-                                        color="rgb(46,49,146)" 
+                                        color="rgb(46,49,146)"
                                     />
                                 }
                             >
-                                {data.user.name ? (  
+                                {data.user.name ? (
                                     <span className={style.alpha}>
                                         {data.user.name[0].toUpperCase()}
                                     </span>
@@ -178,6 +242,7 @@ const Navebar = () => {
                     </Popover>
                 </div>
             </div>
+            {/* =====================================----=================================== */}
             {/* bottom section (buy, sell , home Loans , rent , advertise , agent finder , corporate services) */}
             <div className={scroll > 20 ? style.nav_bottom2 : style.nav_bottom}>
                 {/* Buy button  */}
@@ -185,8 +250,8 @@ const Navebar = () => {
                     <PopoverTrigger>
                         <Button
                             backgroundColor={"unset"}
-                            color={"auto"}  
-                            fontWeight={400} 
+                            color={"auto"}
+                            fontWeight={400}
                             _hover={{ color: "unset" }}
                             _active={{ color: "unset" }}
                         >
@@ -206,33 +271,33 @@ const Navebar = () => {
                                 <TabPanels>
                                     <TabPanel>
                                         <Box className={style.buy}>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            <Checkbox onChange={(e) => handleresbuy("Flat / Apartment")} isChecked={resBuyArr.includes("Flat / Apartment")} iconSize={"0px"} colorScheme={"blue"}>
                                                 Flat/Apartment
                                             </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            <Checkbox onChange={(e) => handleresbuy("Independent House / Villa")} isChecked={resBuyArr.includes("Independent House / Villa")} iconSize={"0px"} colorScheme={"blue"}>
                                                 Independent House/villa
                                             </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            <Checkbox onChange={(e) => handleresbuy("Independent / Builder Floor")} isChecked={resBuyArr.includes("Independent / Builder Floor")} iconSize={"0px"} colorScheme={"blue"}>
                                                 Independent/builder Floor
                                             </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            <Checkbox onChange={(e) => handleresbuy("Serviced Apartment")} isChecked={resBuyArr.includes("Serviced Apartment")} iconSize={"0px"} colorScheme={"blue"}>
                                                 Serviced Apartment
                                             </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            <Checkbox onChange={(e) => handleresbuy("Plot / Land")} isChecked={resBuyArr.includes("Plot / Land")} iconSize={"0px"} colorScheme={"blue"}>
                                                 Plot/Land
                                             </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            <Checkbox onChange={(e) => handleresbuy("1RK / Studio Apartment")} isChecked={resBuyArr.includes("1RK / Studio Apartment")} iconSize={"0px"} colorScheme={"blue"}>
                                                 1 RK/ Studio Apartment
                                             </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            <Checkbox onChange={(e) => handleresbuy("Farmhouse")} isChecked={resBuyArr.includes("Farmhouse")} iconSize={"0px"} colorScheme={"blue"}>
                                                 Farmhouse
-                                            </Checkbox> 
+                                            </Checkbox>
                                         </Box>
-                                        <Link to="/residential_buy">
+                                        <Link to="/residential_buy" state={{ arr: resBuyArr }} >
                                             <Button
                                                 backgroundColor={"rgb(46,49,146)"}
-                                                color={"white"} 
-                                                w={"100%"} 
+                                                color={"white"}
+                                                w={"100%"}
                                                 className={style.start_btn}
                                             >
                                                 Start Now
@@ -240,28 +305,28 @@ const Navebar = () => {
                                         </Link>
                                     </TabPanel>
                                     <TabPanel>
-                                        <Box className={style.buy}>
-                                            <Checkbox size={"md"} color={"black"}>
+                                        <Box className={style.buy}  >
+                                            <Checkbox onChange={(e) => handleCombuy(e.target.value)} value={"Office"} isChecked={comBuyArr.includes("Office")} size={"md"} color={"black"}>
                                                 Office
                                             </Checkbox>
-                                            <Checkbox>Retail</Checkbox>
-                                            <Checkbox>Plot/Land</Checkbox>
-                                            <Checkbox>Storage</Checkbox>
-                                            <Checkbox>Industry</Checkbox>
-                                            <Checkbox>Hospitality</Checkbox> 
+                                            <Checkbox onChange={() => handleCombuy("Retail")}  isChecked={comBuyArr.includes("Retail")} >Retail</Checkbox>
+                                            <Checkbox onChange={() => handleCombuy("Plot / Land")} isChecked={comBuyArr.includes("Plot / Land")} >Plot / Land</Checkbox>
+                                            <Checkbox onChange={() => handleCombuy("Storage")} isChecked={comBuyArr.includes("Storage")} >Storage</Checkbox>
+                                            <Checkbox onChange={() => handleCombuy("Industry")} isChecked={comBuyArr.includes("Industry")} >Industry</Checkbox>
+                                            <Checkbox onChange={() => handleCombuy("Hospitality")} isChecked={comBuyArr.includes("Hospitality")} >Hospitality</Checkbox>
                                         </Box>
-                                        <Link to={"/commercial_buy"}> 
+                                        <Link to={"/commercial_buy"} params={{ arr: comBuyArr }} >
                                             <Button
                                                 backgroundColor={"rgb(46,49,146)"}
                                                 color={"white"}
-                                                w={"100%"}  
+                                                w={"100%"}
                                                 className={style.start_btn}
                                             >
                                                 Start Now
                                             </Button>
                                         </Link>
                                     </TabPanel>
-                                </TabPanels> 
+                                </TabPanels>
                             </Tabs>
                         </PopoverBody>
                     </PopoverContent>
@@ -276,10 +341,10 @@ const Navebar = () => {
                             backgroundColor={"unset"}
                             color={"auto"}
                             fontWeight={400}
-                            _hover={{ color: "unset" }} 
+                            _hover={{ color: "unset" }}
                             _active={{ color: "unset" }}
-                        > 
-                            Rent  
+                        >
+                            Rent
                         </Button>
                     </PopoverTrigger>
                     <PopoverContent w={{ base: "320px", md: "400px" }} marginTop={"-5px"} color={"black"}>
@@ -295,55 +360,53 @@ const Navebar = () => {
                                 <TabPanels>
                                     <TabPanel>
                                         <Box className={style.buy}>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            <Checkbox onChange={()=>handleresrent("Flat / Apartment")} isChecked={resRentArr.includes("Flat / Apartment")} iconSize={"0px"} colorScheme={"blue"}>
                                                 Flat/Apartment
                                             </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            <Checkbox onChange={()=>handleresrent("Independent House / villa")} isChecked={resRentArr.includes("Independent House / villa")} iconSize={"0px"} colorScheme={"blue"}>
                                                 Independent House/villa
                                             </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            <Checkbox onChange={()=>handleresrent("Independent / builder Floor")} isChecked={resRentArr.includes("Independent / builder Floor")} iconSize={"0px"} colorScheme={"blue"}>
                                                 Independent/builder Floor
                                             </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            <Checkbox onChange={()=>handleresrent("Serviced Apartment")} isChecked={resRentArr.includes("Serviced Apartment")} iconSize={"0px"} colorScheme={"blue"}>
                                                 Serviced Apartment
                                             </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            <Checkbox onChange={()=>handleresrent("Plot / Land")} isChecked={resRentArr.includes("Plot / Land")} iconSize={"0px"} colorScheme={"blue"}>
                                                 Plot/Land
                                             </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            <Checkbox onChange={()=>handleresrent("1RK / Studio Apartment")} isChecked={resRentArr.includes("1RK / Studio Apartment")} iconSize={"0px"} colorScheme={"blue"}>
                                                 1 RK/ Studio Apartment
                                             </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                                            <Checkbox onChange={()=>handleresrent("Farmhouse")} isChecked={resRentArr.includes("Farmhouse")} iconSize={"0px"} colorScheme={"blue"}>
                                                 Farmhouse
                                             </Checkbox> 
                                         </Box>
                                         <Link to="/residential_rent">
                                             <Button
                                                 backgroundColor={"rgb(46,49,146)"}
-                                                color={"white"} 
-                                                w={"100%"}  
+                                                color={"white"}
+                                                w={"100%"}
                                                 className={style.start_btn}
                                             >
-                                                Start Now
+                                                Start Now 
                                             </Button>
                                         </Link>
                                     </TabPanel>
                                     <TabPanel>
                                         <Box className={style.buy}>
-                                            <Checkbox size={"md"} color={"black"}>
-                                                Office
-                                            </Checkbox>
-                                            <Checkbox>Retail</Checkbox>
-                                            <Checkbox>Plot/Land</Checkbox>
-                                            <Checkbox>Storage</Checkbox>
-                                            <Checkbox>Industry</Checkbox>
-                                            <Checkbox>Hospitality</Checkbox> 
+                                            <Checkbox onChange={()=>handleComRent("Office")} isChecked={comRentArr.includes("Office")}  size={"md"} color={"black"}> Office </Checkbox>
+                                            <Checkbox onChange={()=>handleComRent("Retail")} isChecked={comRentArr.includes("Retail")} >Retail</Checkbox>
+                                            <Checkbox onChange={()=>handleComRent("Plot / Land")} isChecked={comRentArr.includes("Plot / Land")} >Plot/Land</Checkbox>
+                                            <Checkbox onChange={()=>handleComRent("Storage")} isChecked={comRentArr.includes("Storage")} >Storage</Checkbox>
+                                            <Checkbox onChange={()=>handleComRent("Industry")} isChecked={comRentArr.includes("Industry")} >Industry</Checkbox>
+                                            <Checkbox onChange={()=>handleComRent("Hospitality")} isChecked={comRentArr.includes("Hospitality")} >Hospitality</Checkbox>
                                         </Box>
-                                        <Link to={"/commercial_rent"}> 
+                                        <Link to={"/commercial_rent"}>
                                             <Button
                                                 backgroundColor={"rgb(46,49,146)"}
-                                                color={"white"} 
-                                                w={"100%"}  
+                                                color={"white"}
+                                                w={"100%"}
                                                 className={style.start_btn}
                                             >
                                                 Start Now
