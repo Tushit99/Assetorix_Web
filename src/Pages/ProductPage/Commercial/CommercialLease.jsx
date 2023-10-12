@@ -10,7 +10,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import LoadingBox from '../LoadingBox/LoadingBox';
 import { commercialRent } from '../../../Redux/Propertysearch/action';
 import { useDispatch, useSelector } from 'react-redux';
-import errorimg from "../eror.png"; 
+import errorimg from "../eror.png";
 
 
 const CommercialLease = () => {
@@ -46,7 +46,7 @@ const CommercialLease = () => {
         }).catch((err) => console.log(err));
     }
 
- 
+
 
     const handleAddToWishlist = (myid) => {
         let id = localStorage.getItem("usrId") || undefined;
@@ -57,7 +57,7 @@ const CommercialLease = () => {
             return;
         }
 
-        const axiosConfig = { 
+        const axiosConfig = {
             method: `${wishlist.includes(myid) ? "delete" : "patch"}`,
             url: `${process.env.REACT_APP_URL}/user/wishlist/${myid}`,
             headers: {
@@ -84,7 +84,7 @@ const CommercialLease = () => {
             });
     }
 
-    console.log(Commercialrentdata); 
+    console.log(Commercialrentdata);
 
     const handleBedroom = (value) => {
         setBhk((prev) => {
@@ -118,9 +118,9 @@ const CommercialLease = () => {
         });
     }
 
-    useEffect(() => { 
+    useEffect(() => {
         let local = JSON.parse(localStorage.getItem("comRent")); // fetching data from local storage 
-        local.length>0 && setPropertyType(local); // setting data to usestate  
+        local.length > 0 && setPropertyType(local); // setting data to usestate  
 
 
         dispatch(commercialRent(location)); // fetching the data
@@ -171,7 +171,7 @@ const CommercialLease = () => {
                                             <button className={propertyType.includes("Storage") ? style.bhkbtn : style.selectedbtn} onClick={(e) => handlePropertyType(e.target.value)} value={"Storage"} > {propertyType.includes("Storage") ? <BsCheckLg /> : <BiPlus />} Storage </button>
                                             <button className={propertyType.includes("Industry") ? style.bhkbtn : style.selectedbtn} onClick={(e) => handlePropertyType(e.target.value)} value={"Industry"} > {propertyType.includes("Industry") ? <BsCheckLg /> : <BiPlus />} Industry </button>
                                             <button className={propertyType.includes("Hospitality") ? style.bhkbtn : style.selectedbtn} onClick={(e) => handlePropertyType(e.target.value)} value={"Hospitality"} > {propertyType.includes("Hospitality") ? <BsCheckLg /> : <BiPlus />} Hospitality </button>
-                                        </Box>  
+                                        </Box>
                                     </Box>
                                     <Box margin={"15px auto"}>
                                         <Heading textAlign={"left"} size={"sm"} > Furnishing Status </Heading>
@@ -182,7 +182,11 @@ const CommercialLease = () => {
                                         </Box>
                                     </Box>
                                 </Box>
-                            </DrawerBody>
+                            </DrawerBody> 
+
+                            <DrawerFooter>
+                                <Button colorScheme={"blue"} onClick={onClose} variant='outline'> Filter </Button>
+                            </DrawerFooter>
 
                         </DrawerContent>
                     </Drawer>
@@ -192,7 +196,7 @@ const CommercialLease = () => {
                         <option value="desc"> High to Low </option>
                         <option value="inc"> Low to High </option>
                     </Select>
-                </Box>
+                </Box> 
             </Box>
 
             {/* Property box */}
@@ -204,21 +208,20 @@ const CommercialLease = () => {
                     <Box margin={"15px auto"}>
                         <Heading textAlign={"left"} size={"sm"} > Property Type </Heading>
                         <Box display={"flex"} justifyContent={"left"} alignItems={"baseline"} flexWrap={"wrap"} gap={3} margin={"10px auto"} >
-                            <button className={propertyType.includes("Flat / Apartment") ? style.bhkbtn : style.selectedbtn} onClick={(e) => handlePropertyType(e.target.value)} value={"Flat / Apartment"} > {propertyType.includes("Flat / Apartment") ? <BsCheckLg /> : <BiPlus />} Flat Appartment </button>
-                            <button className={propertyType.includes("Independent House / Villa") ? style.bhkbtn : style.selectedbtn} onClick={(e) => handlePropertyType(e.target.value)} value={"Independent House / Villa"} > {propertyType.includes("Independent House / Villa") ? <BsCheckLg /> : <BiPlus />} Independent House/Villa </button>
-                            <button className={propertyType.includes("Residential Apartment") ? style.bhkbtn : style.selectedbtn} onClick={(e) => handlePropertyType(e.target.value)} value={"Residential Apartment"} > {propertyType.includes("Residential Apartment") ? <BsCheckLg /> : <BiPlus />} Residential Apartment </button>
-                            <button className={propertyType.includes("Independent / Builder Floor") ? style.bhkbtn : style.selectedbtn} onClick={(e) => handlePropertyType(e.target.value)} value={"Independent / Builder Floor"} > {propertyType.includes("Independent / Builder Floor") ? <BsCheckLg /> : <BiPlus />} Independent/Builder Floor </button>
-                            <button className={propertyType.includes("Farmhouse") ? style.bhkbtn : style.selectedbtn} onClick={(e) => handlePropertyType(e.target.value)} value={"Farmhouse"} > {propertyType.includes("Farmhouse") ? <BsCheckLg /> : <BiPlus />} Farm House </button>
-                            <button className={propertyType.includes("Serviced Apartment") ? style.bhkbtn : style.selectedbtn} onClick={(e) => handlePropertyType(e.target.value)} value={"Serviced Apartment"} > {propertyType.includes("Serviced Apartment") ? <BsCheckLg /> : <BiPlus />} Serviced Apartments </button>
-
+                            <button className={propertyType.includes("Office") ? style.bhkbtn : style.selectedbtn} onClick={(e) => handlePropertyType(e.target.value)} value={"Office"} > {propertyType.includes("Office") ? <BsCheckLg /> : <BiPlus />} Office </button>
+                            <button className={propertyType.includes("Retail") ? style.bhkbtn : style.selectedbtn} onClick={(e) => handlePropertyType(e.target.value)} value={"Retail"} > {propertyType.includes("Retail") ? <BsCheckLg /> : <BiPlus />} Retail </button>
+                            <button className={propertyType.includes("Plot / Land") ? style.bhkbtn : style.selectedbtn} onClick={(e) => handlePropertyType(e.target.value)} value={"Plot / Land"} > {propertyType.includes("Plot / Land") ? <BsCheckLg /> : <BiPlus />} Plot / Land </button>
+                            <button className={propertyType.includes("Storage") ? style.bhkbtn : style.selectedbtn} onClick={(e) => handlePropertyType(e.target.value)} value={"Storage"} > {propertyType.includes("Storage") ? <BsCheckLg /> : <BiPlus />} Storage </button>
+                            <button className={propertyType.includes("Industry") ? style.bhkbtn : style.selectedbtn} onClick={(e) => handlePropertyType(e.target.value)} value={"Industry"} > {propertyType.includes("Industry") ? <BsCheckLg /> : <BiPlus />} Industry </button>
+                            <button className={propertyType.includes("Hospitality") ? style.bhkbtn : style.selectedbtn} onClick={(e) => handlePropertyType(e.target.value)} value={"Hospitality"} > {propertyType.includes("Hospitality") ? <BsCheckLg /> : <BiPlus />} Hospitality </button>
                         </Box>
                     </Box>
                     <Box margin={"15px auto"}>
                         <Heading textAlign={"left"} size={"sm"} > Furnishing Status </Heading>
                         <Box display={"flex"} justifyContent={"left"} alignItems={"baseline"} flexWrap={"wrap"} gap={3} margin={"10px auto"} >
-                            <button className={furnished.includes("Semi-Furnished") ? style.bhkbtn : style.selectedbtn} onClick={(e) => handleFurnished(e.target.value)} value={"Semi-Furnished"} > {furnished.includes("Semi-Furnished") ? <BsCheckLg /> : <BiPlus />} Semi-Furnished </button>
-                            <button className={furnished.includes("Un-furnished") ? style.bhkbtn : style.selectedbtn} onClick={(e) => handleFurnished(e.target.value)} value={"Un-furnished"} > {furnished.includes("Un-furnished") ? <BsCheckLg /> : <BiPlus />} Un-Furnished </button>
-                            <button className={furnished.includes("Furnished") ? style.bhkbtn : style.selectedbtn} onClick={(e) => handleFurnished(e.target.value)} value={"Furnished"} > {furnished.includes("Furnished") ? <BsCheckLg /> : <BiPlus />} Furnished </button>
+                            <button className={furnished.includes("Semi-Furnished") ? style.bhkbtn : style.selectedbtn} onClick={(e) => handleFurnished("Semi-Furnished")} value={"Semi-Furnished"} > {furnished.includes("Semi-Furnished") ? <BsCheckLg /> : <BiPlus />} Semi-Furnished </button>
+                            <button className={furnished.includes("Un-furnished") ? style.bhkbtn : style.selectedbtn} onClick={(e) => handleFurnished("Un-furnished")} value={"Un-furnished"} > {furnished.includes("Un-furnished") ? <BsCheckLg /> : <BiPlus />} Un-Furnished </button>
+                            <button className={furnished.includes("Furnished") ? style.bhkbtn : style.selectedbtn} onClick={(e) => handleFurnished("Furnished")} value={"Furnished"} > {furnished.includes("Furnished") ? <BsCheckLg /> : <BiPlus />} Furnished </button>
                         </Box>
                     </Box>
                 </Box>
@@ -282,16 +285,16 @@ const CommercialLease = () => {
                                                     <Heading className={style.head_line} size={"sm"} textAlign={"left"} color={"rgb(37, 37, 37)"} >  {e.address.houseNumber && e.address.houseNumber} {e.address.apartmentName && e.address.apartmentName} {e.address.locality && e.address.locality} </Heading>
                                                     <Text> Price: {e.countryCurrency}{e.price?.toLocaleString("en-IN")} </Text>
                                                 </Box>
-                                            </Link> 
+                                            </Link>
                                         </Box>
-                                    ) 
+                                    )
                                 }))}
                             </Box>
                         </Box>
                     )}
                 </Box>
             </Flex>
-        </Box>  
+        </Box>
     )
 }
 

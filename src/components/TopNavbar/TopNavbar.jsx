@@ -271,10 +271,10 @@ const TopNavbar = () => {
                                                 <Checkbox onChange={(e) => handleresbuy("Flat / Apartment")} isChecked={resBuyArr.includes("Flat / Apartment")} iconSize={"0px"} colorScheme={"blue"}>
                                                     Flat/Apartment
                                                 </Checkbox>
-                                                <Checkbox onChange={(e) => handleresbuy("Independent")} isChecked={resBuyArr.includes("Independent")} iconSize={"0px"} colorScheme={"blue"}>
+                                                <Checkbox onChange={(e) => handleresbuy("Independent House / Villa")} isChecked={resBuyArr.includes("Independent House / Villa")} iconSize={"0px"} colorScheme={"blue"}>
                                                     Independent House/villa
                                                 </Checkbox>
-                                                <Checkbox onChange={(e) => handleresbuy("Independent / builder Floor")} isChecked={resBuyArr.includes("Independent / builder Floor")} iconSize={"0px"} colorScheme={"blue"}>
+                                                <Checkbox onChange={(e) => handleresbuy("Independent / Builder Floor")} isChecked={resBuyArr.includes("Independent / Builder Floor")} iconSize={"0px"} colorScheme={"blue"}>
                                                     Independent/builder Floor
                                                 </Checkbox>
                                                 <Checkbox onChange={(e) => handleresbuy("Serviced Apartment")} isChecked={resBuyArr.includes("Serviced Apartment")} iconSize={"0px"} colorScheme={"blue"}>
@@ -369,7 +369,7 @@ const TopNavbar = () => {
                                                 <Checkbox onChange={() => handleresrent("Independent House / villa")} isChecked={resRentArr.includes("Independent House / villa")} iconSize={"0px"} colorScheme={"blue"}>
                                                     Independent House/villa
                                                 </Checkbox>
-                                                <Checkbox onChange={() => handleresrent("Independent / builder Floor")} isChecked={resRentArr.includes("Independent / builder Floor")} iconSize={"0px"} colorScheme={"blue"}>
+                                                <Checkbox onChange={() => handleresrent("Independent / Builder Floor")} isChecked={resRentArr.includes("Independent / Builder Floor")} iconSize={"0px"} colorScheme={"blue"}>
                                                     Independent/builder Floor
                                                 </Checkbox>
                                                 <Checkbox onChange={() => handleresrent("Serviced Apartment")} isChecked={resRentArr.includes("Serviced Apartment")} iconSize={"0px"} colorScheme={"blue"}>
@@ -377,10 +377,10 @@ const TopNavbar = () => {
                                                 </Checkbox>
                                                 <Checkbox onChange={() => handleresrent("Plot / Land")} isChecked={resRentArr.includes("Plot / Land")} iconSize={"0px"} colorScheme={"blue"}>
                                                     Plot/Land
-                                                </Checkbox>
+                                                </Checkbox> 
                                                 <Checkbox onChange={() => handleresrent("1RK / Studio Apartment")} isChecked={resRentArr.includes("1RK / Studio Apartment")} iconSize={"0px"} colorScheme={"blue"}>
                                                     1 RK/ Studio Apartment
-                                                </Checkbox>
+                                                </Checkbox> 
                                                 <Checkbox onChange={() => handleresrent("Farmhouse")} isChecked={resRentArr.includes("Farmhouse")} iconSize={"0px"} colorScheme={"blue"}>
                                                     Farmhouse
                                                 </Checkbox>

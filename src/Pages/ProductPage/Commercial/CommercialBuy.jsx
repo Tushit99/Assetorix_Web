@@ -9,8 +9,8 @@ import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import 'react-loading-skeleton/dist/skeleton.css'
 import LoadingBox from '../LoadingBox/LoadingBox';
 import { commercialBuy } from '../../../Redux/Propertysearch/action';
-import { useDispatch, useSelector } from 'react-redux'; 
-import errorimg from "../eror.png"; 
+import { useDispatch, useSelector } from 'react-redux';
+import errorimg from "../eror.png";
 import { addRecentlyVisited } from '../../../Redux/globalval/action';
 
 
@@ -120,9 +120,9 @@ const CommercialBuy = () => {
         });
     }
 
-    useEffect(() => { 
+    useEffect(() => {
         let local = JSON.parse(localStorage.getItem("combuy")); // fetching data from local storage 
-        local.length>0 && setPropertyType(local); // setting data to usestate  
+        local.length > 0 && setPropertyType(local); // setting data to usestate  
 
 
         dispatch(commercialBuy(location)) // fetching the data
@@ -207,13 +207,12 @@ const CommercialBuy = () => {
                     <Box margin={"15px auto"}>
                         <Heading textAlign={"left"} size={"sm"} > Property Type </Heading>
                         <Box display={"flex"} justifyContent={"left"} alignItems={"baseline"} flexWrap={"wrap"} gap={3} margin={"10px auto"} >
-                            <button className={propertyType.includes("Flat / Apartment") ? style.bhkbtn : style.selectedbtn} onClick={(e) => handlePropertyType(e.target.value)} value={"Flat / Apartment"} > {propertyType.includes("Flat / Apartment") ? <BsCheckLg /> : <BiPlus />} Flat Appartment </button>
-                            <button className={propertyType.includes("Independent House / Villa") ? style.bhkbtn : style.selectedbtn} onClick={(e) => handlePropertyType(e.target.value)} value={"Independent House / Villa"} > {propertyType.includes("Independent House / Villa") ? <BsCheckLg /> : <BiPlus />} Independent House/Villa </button>
-                            <button className={propertyType.includes("Residential Apartment") ? style.bhkbtn : style.selectedbtn} onClick={(e) => handlePropertyType(e.target.value)} value={"Residential Apartment"} > {propertyType.includes("Residential Apartment") ? <BsCheckLg /> : <BiPlus />} Residential Apartment </button>
-                            <button className={propertyType.includes("Independent / Builder Floor") ? style.bhkbtn : style.selectedbtn} onClick={(e) => handlePropertyType(e.target.value)} value={"Independent / Builder Floor"} > {propertyType.includes("Independent / Builder Floor") ? <BsCheckLg /> : <BiPlus />} Independent/Builder Floor </button>
-                            <button className={propertyType.includes("Farmhouse") ? style.bhkbtn : style.selectedbtn} onClick={(e) => handlePropertyType(e.target.value)} value={"Farmhouse"} > {propertyType.includes("Farmhouse") ? <BsCheckLg /> : <BiPlus />} Farm House </button>
-                            <button className={propertyType.includes("Serviced Apartment") ? style.bhkbtn : style.selectedbtn} onClick={(e) => handlePropertyType(e.target.value)} value={"Serviced Apartment"} > {propertyType.includes("Serviced Apartment") ? <BsCheckLg /> : <BiPlus />} Serviced Apartments </button>
-
+                            <button className={propertyType.includes("Office") ? style.bhkbtn : style.selectedbtn} onClick={(e) => handlePropertyType(e.target.value)} value={"Office"} > {propertyType.includes("Office") ? <BsCheckLg /> : <BiPlus />} Office </button>
+                            <button className={propertyType.includes("Retail") ? style.bhkbtn : style.selectedbtn} onClick={(e) => handlePropertyType(e.target.value)} value={"Retail"} > {propertyType.includes("Retail") ? <BsCheckLg /> : <BiPlus />} Retail </button>
+                            <button className={propertyType.includes("Plot / Land") ? style.bhkbtn : style.selectedbtn} onClick={(e) => handlePropertyType(e.target.value)} value={"Plot / Land"} > {propertyType.includes("Plot / Land") ? <BsCheckLg /> : <BiPlus />} Plot / Land </button>
+                            <button className={propertyType.includes("Storage") ? style.bhkbtn : style.selectedbtn} onClick={(e) => handlePropertyType(e.target.value)} value={"Storage"} > {propertyType.includes("Storage") ? <BsCheckLg /> : <BiPlus />} Storage </button>
+                            <button className={propertyType.includes("Industry") ? style.bhkbtn : style.selectedbtn} onClick={(e) => handlePropertyType(e.target.value)} value={"Industry"} > {propertyType.includes("Industry") ? <BsCheckLg /> : <BiPlus />} Industry </button>
+                            <button className={propertyType.includes("Hospitality") ? style.bhkbtn : style.selectedbtn} onClick={(e) => handlePropertyType(e.target.value)} value={"Hospitality"} > {propertyType.includes("Hospitality") ? <BsCheckLg /> : <BiPlus />} Hospitality </button>
                         </Box>
                     </Box>
                     <Box margin={"15px auto"}>
@@ -288,7 +287,7 @@ const CommercialBuy = () => {
                                             </Link>
                                         </Box>
                                     )
-                                }))} 
+                                }))}
                             </Box>
                         </Box>
                     )}

@@ -98,7 +98,7 @@ const Navebar = () => {
     useEffect(() => {
         window.addEventListener("scroll", () => {
             setScroll(window.pageYOffset);
-        });  
+        });
 
         let userid = localStorage.getItem("usrId") || undefined;
         let authorization = localStorage.getItem("AstToken") || undefined;
@@ -120,16 +120,16 @@ const Navebar = () => {
         } else {
             dispatch(changecountry(storedVal));
             setCountry(storedVal);
-        } 
+        }
 
-        localStorage.setItem("resBuy",JSON.stringify([]));  
-        localStorage.setItem("resBuy",JSON.stringify([])); 
-        localStorage.setItem("resRent",JSON.stringify([])); 
-        localStorage.setItem("resRent",JSON.stringify([])); 
-        localStorage.setItem("combuy",JSON.stringify([])); 
-        localStorage.setItem("combuy",JSON.stringify([])); 
-        localStorage.setItem("comRent",JSON.stringify([])); 
-        localStorage.setItem("comRent",JSON.stringify([])); 
+        localStorage.setItem("resBuy", JSON.stringify([]));
+        localStorage.setItem("resBuy", JSON.stringify([]));
+        localStorage.setItem("resRent", JSON.stringify([]));
+        localStorage.setItem("resRent", JSON.stringify([]));
+        localStorage.setItem("combuy", JSON.stringify([]));
+        localStorage.setItem("combuy", JSON.stringify([]));
+        localStorage.setItem("comRent", JSON.stringify([]));
+        localStorage.setItem("comRent", JSON.stringify([]));
 
     }, []);
 
@@ -286,7 +286,7 @@ const Navebar = () => {
                                             <Checkbox onChange={(e) => handleresbuy("Plot / Land")} isChecked={resBuyArr.includes("Plot / Land")} iconSize={"0px"} colorScheme={"blue"}>
                                                 Plot/Land
                                             </Checkbox>
-                                            <Checkbox onChange={(e) => handleresbuy("1RK / Studio Apartment")} isChecked={resBuyArr.includes("1RK / Studio Apartment")} iconSize={"0px"} colorScheme={"blue"}>
+                                            <Checkbox onChange={(e) => handleresbuy("1 RK / Studio Apartment")} isChecked={resBuyArr.includes("1 RK / Studio Apartment")} iconSize={"0px"} colorScheme={"blue"}>
                                                 1 RK/ Studio Apartment
                                             </Checkbox>
                                             <Checkbox onChange={(e) => handleresbuy("Farmhouse")} isChecked={resBuyArr.includes("Farmhouse")} iconSize={"0px"} colorScheme={"blue"}>
@@ -309,7 +309,7 @@ const Navebar = () => {
                                             <Checkbox onChange={(e) => handleCombuy(e.target.value)} value={"Office"} isChecked={comBuyArr.includes("Office")} size={"md"} color={"black"}>
                                                 Office
                                             </Checkbox>
-                                            <Checkbox onChange={() => handleCombuy("Retail")}  isChecked={comBuyArr.includes("Retail")} >Retail</Checkbox>
+                                            <Checkbox onChange={() => handleCombuy("Retail")} isChecked={comBuyArr.includes("Retail")} >Retail</Checkbox>
                                             <Checkbox onChange={() => handleCombuy("Plot / Land")} isChecked={comBuyArr.includes("Plot / Land")} >Plot / Land</Checkbox>
                                             <Checkbox onChange={() => handleCombuy("Storage")} isChecked={comBuyArr.includes("Storage")} >Storage</Checkbox>
                                             <Checkbox onChange={() => handleCombuy("Industry")} isChecked={comBuyArr.includes("Industry")} >Industry</Checkbox>
@@ -360,27 +360,27 @@ const Navebar = () => {
                                 <TabPanels>
                                     <TabPanel>
                                         <Box className={style.buy}>
-                                            <Checkbox onChange={()=>handleresrent("Flat / Apartment")} isChecked={resRentArr.includes("Flat / Apartment")} iconSize={"0px"} colorScheme={"blue"}>
+                                            <Checkbox onChange={() => handleresrent("Flat / Apartment")} isChecked={resRentArr.includes("Flat / Apartment")} iconSize={"0px"} colorScheme={"blue"}>
                                                 Flat/Apartment
                                             </Checkbox>
-                                            <Checkbox onChange={()=>handleresrent("Independent House / villa")} isChecked={resRentArr.includes("Independent House / villa")} iconSize={"0px"} colorScheme={"blue"}>
+                                            <Checkbox onChange={() => handleresrent("Independent House / villa")} isChecked={resRentArr.includes("Independent House / villa")} iconSize={"0px"} colorScheme={"blue"}>
                                                 Independent House/villa
                                             </Checkbox>
-                                            <Checkbox onChange={()=>handleresrent("Independent / builder Floor")} isChecked={resRentArr.includes("Independent / builder Floor")} iconSize={"0px"} colorScheme={"blue"}>
+                                            <Checkbox onChange={() => handleresrent("Independent / Builder Floor")} isChecked={resRentArr.includes("Independent / Builder Floor")} iconSize={"0px"} colorScheme={"blue"}>
                                                 Independent/builder Floor
                                             </Checkbox>
-                                            <Checkbox onChange={()=>handleresrent("Serviced Apartment")} isChecked={resRentArr.includes("Serviced Apartment")} iconSize={"0px"} colorScheme={"blue"}>
+                                            <Checkbox onChange={() => handleresrent("Serviced Apartment")} isChecked={resRentArr.includes("Serviced Apartment")} iconSize={"0px"} colorScheme={"blue"}>
                                                 Serviced Apartment
                                             </Checkbox>
-                                            <Checkbox onChange={()=>handleresrent("Plot / Land")} isChecked={resRentArr.includes("Plot / Land")} iconSize={"0px"} colorScheme={"blue"}>
+                                            <Checkbox onChange={() => handleresrent("Plot / Land")} isChecked={resRentArr.includes("Plot / Land")} iconSize={"0px"} colorScheme={"blue"}>
                                                 Plot/Land
                                             </Checkbox>
-                                            <Checkbox onChange={()=>handleresrent("1RK / Studio Apartment")} isChecked={resRentArr.includes("1RK / Studio Apartment")} iconSize={"0px"} colorScheme={"blue"}>
+                                            <Checkbox onChange={() => handleresrent("1RK / Studio Apartment")} isChecked={resRentArr.includes("1RK / Studio Apartment")} iconSize={"0px"} colorScheme={"blue"}>
                                                 1 RK/ Studio Apartment
                                             </Checkbox>
-                                            <Checkbox onChange={()=>handleresrent("Farmhouse")} isChecked={resRentArr.includes("Farmhouse")} iconSize={"0px"} colorScheme={"blue"}>
+                                            <Checkbox onChange={() => handleresrent("Farmhouse")} isChecked={resRentArr.includes("Farmhouse")} iconSize={"0px"} colorScheme={"blue"}>
                                                 Farmhouse
-                                            </Checkbox> 
+                                            </Checkbox>
                                         </Box>
                                         <Link to="/residential_rent">
                                             <Button
@@ -389,18 +389,18 @@ const Navebar = () => {
                                                 w={"100%"}
                                                 className={style.start_btn}
                                             >
-                                                Start Now 
+                                                Start Now
                                             </Button>
                                         </Link>
                                     </TabPanel>
                                     <TabPanel>
                                         <Box className={style.buy}>
-                                            <Checkbox onChange={()=>handleComRent("Office")} isChecked={comRentArr.includes("Office")}  size={"md"} color={"black"}> Office </Checkbox>
-                                            <Checkbox onChange={()=>handleComRent("Retail")} isChecked={comRentArr.includes("Retail")} >Retail</Checkbox>
-                                            <Checkbox onChange={()=>handleComRent("Plot / Land")} isChecked={comRentArr.includes("Plot / Land")} >Plot/Land</Checkbox>
-                                            <Checkbox onChange={()=>handleComRent("Storage")} isChecked={comRentArr.includes("Storage")} >Storage</Checkbox>
-                                            <Checkbox onChange={()=>handleComRent("Industry")} isChecked={comRentArr.includes("Industry")} >Industry</Checkbox>
-                                            <Checkbox onChange={()=>handleComRent("Hospitality")} isChecked={comRentArr.includes("Hospitality")} >Hospitality</Checkbox>
+                                            <Checkbox onChange={() => handleComRent("Office")} isChecked={comRentArr.includes("Office")} size={"md"} color={"black"}> Office </Checkbox>
+                                            <Checkbox onChange={() => handleComRent("Retail")} isChecked={comRentArr.includes("Retail")} >Retail</Checkbox>
+                                            <Checkbox onChange={() => handleComRent("Plot / Land")} isChecked={comRentArr.includes("Plot / Land")} >Plot/Land</Checkbox>
+                                            <Checkbox onChange={() => handleComRent("Storage")} isChecked={comRentArr.includes("Storage")} >Storage</Checkbox>
+                                            <Checkbox onChange={() => handleComRent("Industry")} isChecked={comRentArr.includes("Industry")} >Industry</Checkbox>
+                                            <Checkbox onChange={() => handleComRent("Hospitality")} isChecked={comRentArr.includes("Hospitality")} >Hospitality</Checkbox>
                                         </Box>
                                         <Link to={"/commercial_rent"}>
                                             <Button
