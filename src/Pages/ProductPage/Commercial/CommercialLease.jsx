@@ -277,7 +277,7 @@ const CommercialLease = () => {
                                             <Tooltip hasArrow label={"Wishlist"}>
                                                 <Text cursor={"pointer"} zIndex={5} onClick={() => handleAddToWishlist(e._id)} position={"absolute"} top={3} right={3} color={colorstate ? "green.500" : "red.500"} > <BsFillBookmarkHeartFill size={"20px"} /> </Text>
                                             </Tooltip>
-                                            <Link to={`/residential_buy/${e._id}`} >
+                                            <Link to={`/residential_buy/${e._id}`} > 
                                                 <Box className={style.property_box}>
                                                     <Box position={"relative"}>
                                                         <Image src="https://mediacdn.99acres.com/582/0/11640476F-1383637447-Amrit_House_-_Sant_Nagr_Delhi.jpeg" w={"100%"} alt="property image" />
