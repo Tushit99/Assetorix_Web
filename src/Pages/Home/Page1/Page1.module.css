@@ -4,13 +4,27 @@
     min-height: 100vh;  
 }
 
+/* background 2 video */ 
+
+.video_picture{
+    max-height: 100vh ; 
+    height: 100vh;   
+    overflow: hidden;  
+    position: absolute;  
+    width: 100%;  
+    object-fit: cover; 
+    z-index: -10; 
+} 
+
+/* --===-- */
+
 .video_panal{
     max-height: 100vh ; 
     height: 100vh;   
     overflow: hidden;  
     position: absolute;  
     width: 100%;  
-    object-fit: cover;   
+    object-fit: cover;    
 }
 
 .white{

@@ -1380,7 +1380,7 @@ const FlatAppartment = () => {
                     >
                         All inclusive price
                     </Checkbox>
-                    <Checkbox
+                    <Checkbox 
                         isChecked={inclusivePrices.includes("Tax and Govt. charges excluded")}
                         onChange={(e) => {
                             e.preventDefault();

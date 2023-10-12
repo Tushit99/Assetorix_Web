@@ -26,6 +26,8 @@ import { Search2Icon } from "@chakra-ui/icons";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { changeLookingFor } from "../../../Redux/globalval/action";
+import backimg from "./Screenshot 10-12-2023 09.38.37.png"
+
 
 const Page1 = () => {
   const { country } = useSelector((state) => state.gloalval);
@@ -43,16 +45,18 @@ const Page1 = () => {
   }
 
   return (
-    <div className={style.pagetop}>
-
+    <div className={style.pagetop}> 
+    {/* img will be shown untill the video is not there */}
+      <img src={backimg} className={style.video_picture} alt="backimg" />
+      {/* video at backr */}
       <video autoPlay loop muted className={style.video_panal}>
         <source src={video} type="video/mp4" />
-      </video> 
+      </video>
       <Box w={"full"} className={style.topbox}>
         <Text
           color={"white"}
           fontWeight={700}
-          lineHeight={1.2} 
+          lineHeight={1.2}
           textAlign={"left"}
           marginTop={20}
           className={style.word}
@@ -185,97 +189,97 @@ const Page1 = () => {
                 onClick={handlePageSell}
               >
                 <Link to={"/post"}>Sell</Link>
-              </Button> 
+              </Button>
 
-              {/* ================================================ */}   
+              {/* ================================================ */}
               <Popover>
-                    <PopoverTrigger>
-                        <Button
-                            borderradius={"4px"}
-                            color={"white"}
-                            w={"100%"}
-                            _hover={{ color: "white" }}
-                            boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}
-                            fontSize={{ base: "sm", lg: "lg" }}
-                            fontWeight={{ base: "500", lg: "bold" }}
-                            backgroundColor={"#d2ab67cb"}
-                        >
-                            Rent  
-                        </Button>
-                    </PopoverTrigger>
-                    <PopoverContent w={{ base: "320px", md: "400px" }} marginTop={"-5px"} color={"black"}>
-                        <PopoverArrow />
-                        <PopoverHeader>Rent Property</PopoverHeader>
-                        <PopoverBody>
-                            {/* one */}
-                            <Tabs variant="enclosed">
-                                <TabList>
-                                    <Tab>Residential</Tab>
-                                    <Tab>Commercial</Tab>
-                                </TabList>
-                                <TabPanels>
-                                    <TabPanel>
-                                        <Box className={style.buy}>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
-                                                Flat/Apartment
-                                            </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
-                                                Independent House/villa
-                                            </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
-                                                Independent/builder Floor
-                                            </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
-                                                Serviced Apartment
-                                            </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
-                                                Plot/Land
-                                            </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
-                                                1 RK/ Studio Apartment
-                                            </Checkbox>
-                                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
-                                                Farmhouse
-                                            </Checkbox> 
-                                        </Box>
-                                        <Link to="/residential_rent">
-                                            <Button
-                                                backgroundColor={"rgb(46,49,146)"}
-                                                color={"white"} 
-                                                w={"100%"}  
-                                                className={style.start_btn}
-                                            >
-                                                Start Now
-                                            </Button>
-                                        </Link>
-                                    </TabPanel>
-                                    <TabPanel>
-                                        <Box className={style.buy}>
-                                            <Checkbox size={"md"} color={"black"}>
-                                                Office
-                                            </Checkbox>
-                                            <Checkbox>Retail</Checkbox>
-                                            <Checkbox>Plot/Land</Checkbox>
-                                            <Checkbox>Storage</Checkbox>
-                                            <Checkbox>Industry</Checkbox>
-                                            <Checkbox>Hospitality</Checkbox> 
-                                        </Box>
-                                        <Link to={"/commercial_rent"}> 
-                                            <Button
-                                                backgroundColor={"rgb(46,49,146)"}
-                                                color={"white"} 
-                                                w={"100%"}  
-                                                className={style.start_btn}
-                                            >
-                                                Start Now
-                                            </Button>
-                                        </Link>
-                                    </TabPanel>
-                                </TabPanels>
-                            </Tabs>
-                        </PopoverBody>
-                    </PopoverContent>
-                </Popover>
+                <PopoverTrigger>
+                  <Button
+                    borderradius={"4px"}
+                    color={"white"}
+                    w={"100%"}
+                    _hover={{ color: "white" }}
+                    boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}
+                    fontSize={{ base: "sm", lg: "lg" }}
+                    fontWeight={{ base: "500", lg: "bold" }}
+                    backgroundColor={"#d2ab67cb"}
+                  >
+                    Rent
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent w={{ base: "320px", md: "400px" }} marginTop={"-5px"} color={"black"}>
+                  <PopoverArrow />
+                  <PopoverHeader>Rent Property</PopoverHeader>
+                  <PopoverBody>
+                    {/* one */}
+                    <Tabs variant="enclosed">
+                      <TabList>
+                        <Tab>Residential</Tab>
+                        <Tab>Commercial</Tab>
+                      </TabList>
+                      <TabPanels>
+                        <TabPanel>
+                          <Box className={style.buy}>
+                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                              Flat/Apartment
+                            </Checkbox>
+                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                              Independent House/villa
+                            </Checkbox>
+                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                              Independent/builder Floor
+                            </Checkbox>
+                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                              Serviced Apartment
+                            </Checkbox>
+                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                              Plot/Land
+                            </Checkbox>
+                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                              1 RK/ Studio Apartment
+                            </Checkbox>
+                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                              Farmhouse
+                            </Checkbox>
+                          </Box>
+                          <Link to="/residential_rent">
+                            <Button
+                              backgroundColor={"rgb(46,49,146)"}
+                              color={"white"}
+                              w={"100%"}
+                              className={style.start_btn}
+                            >
+                              Start Now
+                            </Button>
+                          </Link>
+                        </TabPanel>
+                        <TabPanel>
+                          <Box className={style.buy}>
+                            <Checkbox size={"md"} color={"black"}>
+                              Office
+                            </Checkbox>
+                            <Checkbox>Retail</Checkbox>
+                            <Checkbox>Plot/Land</Checkbox>
+                            <Checkbox>Storage</Checkbox>
+                            <Checkbox>Industry</Checkbox>
+                            <Checkbox>Hospitality</Checkbox>
+                          </Box>
+                          <Link to={"/commercial_rent"}>
+                            <Button
+                              backgroundColor={"rgb(46,49,146)"}
+                              color={"white"}
+                              w={"100%"}
+                              className={style.start_btn}
+                            >
+                              Start Now
+                            </Button>
+                          </Link>
+                        </TabPanel>
+                      </TabPanels>
+                    </Tabs>
+                  </PopoverBody>
+                </PopoverContent>
+              </Popover>
 
 
 
@@ -293,7 +297,7 @@ const Page1 = () => {
                 onClick={handlePageRent}
               >
                 Rent
-              </Button> */} 
+              </Button> */}
             </div>
             <div>
               <Input
