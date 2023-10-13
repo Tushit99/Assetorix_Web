@@ -37,7 +37,7 @@ const CoWorkingspace = () => {
     const [pincode, setPincode] = useState(0);
     const [state, setState] = useState("");
     const [locality, setLocality] = useState("");
-    const [washroom, setWashroom] = useState("");   
+    const [washroom, setWashroom] = useState("");
     const [preLeased, setPreLeased] = useState("");
     const [locatedInside, setLocatedInside] = useState("");
     const [floorNumber, setFloorNumber] = useState([]);
@@ -112,9 +112,9 @@ const CoWorkingspace = () => {
             preLeased_Rented: preLeased,
             otherFeatures,
             washrooms: washroom,
-            annualDuesPayble, 
-            floorOn: floorNumber, 
-            previouslyUsedList, 
+            annualDuesPayble,
+            floorOn: floorNumber,
+            previouslyUsedList,
             preLeased,
             expectedAnnual
         };
@@ -214,11 +214,12 @@ const CoWorkingspace = () => {
     };
 
     const handlepinfetch = (e) => {
-        setPincode(e.target.value);
-        if (e.target.value.length == 6) {
-            pinfetch(e.target.value);
+        let val = e.target.value;
+        setPincode(val);
+        if (val.length == 6) {
+            pinfetch(val);
         } else {
-            console.log(e.target.value);
+            console.log(val);
         }
     };
 
@@ -420,7 +421,7 @@ const CoWorkingspace = () => {
                 <Input
                     type="text"
                     placeholder={"Enter pincode"}
-                    padding={"0 10px"} 
+                    maxLength={"6"}
                     required
                     fontSize={"md"}
                     value={pincode}
@@ -428,12 +429,12 @@ const CoWorkingspace = () => {
                 />
                 <Input
                     type="text"
-                    padding={"0 10px"}
+                    maxLength={"100"}
                     required
                     placeholder="Locality"
                     list="browsers"
                     value={locality}
-                    onChange={(e) => setLocality(e.target.value)}
+                    onChange={(e) => setLocality(NumericString(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
                 />
@@ -449,32 +450,32 @@ const CoWorkingspace = () => {
 
                 <Input
                     type="text"
-                    padding={"0 10px"}
+                    maxLength={"100"}
                     required
                     placeholder="Enter City"
                     fontSize={"md"}
                     value={city}
-                    onChange={(e) => setCity(e.target.value)}
+                    onChange={(e) => setCity(NumericString(e.target.value))}
                     variant="flushed"
                 />
                 <Input
                     type="text"
-                    padding={"0 10px"}
+                    maxLength={"100"}
                     required
                     placeholder="Enter State"
                     value={state}
-                    onChange={(e) => setState(e.target.value)}
+                    onChange={(e) => setState(NumericString(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
                 />
 
                 <Input
                     type="text"
-                    padding={"0 10px"}
+                    maxLength={"100"}
                     required
                     placeholder="Enter Country"
                     value={country}
-                    onChange={(e) => setCountry(e.target.value)}
+                    onChange={(e) => setCountry(NumericString(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
                 />
@@ -492,9 +493,10 @@ const CoWorkingspace = () => {
                     </Heading>
                     <Box margin={"10px 0 0 0"}>
                         <Input
-                            type="text"  
-                            value={washroom} 
-                            onChange={(e)=>setWashroom(NumericString(e.target.value))}  
+                            type="text"
+                            maxLength={"2"}
+                            value={washroom}
+                            onChange={(e) => setWashroom(NumericString(e.target.value))}
                             placeholder={"Enter No. of washroom"}
                         />
                     </Box>
@@ -511,18 +513,21 @@ const CoWorkingspace = () => {
                         isAttached
                         variant="outline"
                     >
+                        <Input
+                            type="text"
+                            maxLength={"10"}
+                            value={plotArea}
+                            onChange={(e) => {
+                                setPlotArea(NumericString(e.target.value));
+                                areaCalucation();
+                            }}
+                            required
+                        />
                         <NumberInput>
                             <NumberInputField
-                                padding={"0 2px"}
-                                value={plotArea}
-                                onChange={(e) => {
-                                    areaCalucation();
-                                    setPlotArea(e.target.value);
-                                }}
-                                required
                             />
                         </NumberInput>
-                        <select
+                        <Select
                             value={areaPer}
                             onChange={(e) => {
                                 setAreaPer(e.target.value);
@@ -548,7 +553,7 @@ const CoWorkingspace = () => {
                             <option value="rood">rood</option>
                             <option value="chataks">chataks</option>
                             <option value="perch">perch</option>
-                        </select>
+                        </Select>
                     </ButtonGroup>
                 </Box>
 
@@ -749,16 +754,15 @@ const CoWorkingspace = () => {
                             >
                                 {isCountry.country == "india" ? "₹" : "$"} Price Details
                             </Heading>
-                            <NumberInput >
-                                <NumberInputField
-                                    value={pricedetail}
-                                    required
-                                    onChange={(e) => {
-                                        setPricedetail(e.target.value);
-                                        areaCalucation();
-                                    }}
-                                />
-                            </NumberInput>
+                            <Input
+                                type="text"
+                                value={pricedetail}
+                                required
+                                onChange={(e) => {
+                                    areaCalucation();
+                                    setPricedetail(NumericString(e.target.value));
+                                }}
+                            /> 
                         </Box>
                         {/* <Box display={"grid"} gap={0}>
                             <Heading
@@ -924,7 +928,7 @@ const CoWorkingspace = () => {
                     </Heading>
                     <Input type="text" w={"300px"} value={expectedAnnual} onChange={(e) => setExpectedAnnual(NumericString(e.target.value))} />
                 </Box>
-                
+
                 {/* property Description */}
                 <Box>
                     <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>

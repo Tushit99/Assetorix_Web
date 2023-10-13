@@ -24,8 +24,7 @@ import style from "./Bareshellspace.module.css";
 import { useSelector } from "react-redux";
 import { AddIcon, ChevronDownIcon, MinusIcon } from "@chakra-ui/icons";
 import axios from "axios";
-import { CleanInputText } from "../../../../code";
-// import { CleanInputText } from "../../../code";
+import { CleanInputText, WordandNumber } from "../../../../code";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { NumericString } from "../../../../../UserListings/PropertyUpdateForm/code";
 
@@ -470,7 +469,7 @@ const Bareshellspace = () => {
                 <Input
                     type="text"
                     placeholder={"Enter pincode"}
-                    padding={"0 10px"} 
+                    maxLength={"12"}
                     required
                     fontSize={"md"}
                     value={pincode}
@@ -479,7 +478,7 @@ const Bareshellspace = () => {
                 <Input
                     type="text"
                     placeholder={"Enter pincode"}
-                    padding={"0 10px"} 
+                    maxLength={"6"}
                     required
                     fontSize={"md"}
                     value={pincode}
@@ -487,7 +486,7 @@ const Bareshellspace = () => {
                 />
                 <Input
                     type="text"
-                    padding={"0 10px"}
+                    maxLength={"12"}
                     required
                     placeholder="Locality"
                     list="browsers"
@@ -508,7 +507,7 @@ const Bareshellspace = () => {
 
                 <Input
                     type="text"
-                    padding={"0 10px"}
+                    maxLength={"100"}
                     required
                     placeholder="Enter City"
                     fontSize={"md"}
@@ -518,7 +517,7 @@ const Bareshellspace = () => {
                 />
                 <Input
                     type="text"
-                    padding={"0 10px"}
+                    maxLength={"100"}
                     required
                     placeholder="Enter State"
                     value={state}
@@ -529,7 +528,7 @@ const Bareshellspace = () => {
 
                 <Input
                     type="text"
-                    padding={"0 10px"}
+                    maxLength={"100"}
                     required
                     placeholder="Enter Country"
                     value={country}
@@ -556,18 +555,17 @@ const Bareshellspace = () => {
                         isAttached
                         variant="outline"
                     >
-                        <NumberInput>
-                            <NumberInputField
-                                padding={"0 2px"}
-                                value={plotArea}
-                                onChange={(e) => {
-                                    areaCalucation();
-                                    setPlotArea(e.target.value);
-                                }}
-                                required
-                            />
-                        </NumberInput>
-                        <select
+                        <Input
+                            type="text"
+                            maxLength={"12"}
+                            value={plotArea}
+                            onChange={(e) => {
+                                setPlotArea(NumericString(e.target.value));
+                                areaCalucation();
+                            }}
+                            required
+                        />
+                        <Select
                             value={areaPer}
                             onChange={(e) => {
                                 setAreaPer(e.target.value);
@@ -593,7 +591,7 @@ const Bareshellspace = () => {
                             <option value="rood">rood</option>
                             <option value="chataks">chataks</option>
                             <option value="perch">perch</option>
-                        </select>
+                        </Select>
                     </ButtonGroup>
                 </Box>
                 {/* Construction status of walls */}
@@ -791,9 +789,9 @@ const Bareshellspace = () => {
                     </Box>
                     <Box display={pantryType == "Shared Pantry" ? "flex" : "none"}>
                         <InputGroup w={340} >
-                            <Input type="text" border={"1px solid rgb(222, 222, 255)"}
+                            <Input type="text" maxLength={"12"} border={"1px solid rgb(222, 222, 255)"}
                                 value={pantrySize}
-                                onChange={(e) => setPantrySize(e.target.value)}
+                                onChange={(e) => setPantrySize(NumericString(e.target.value))}
                                 _hover={{ backgroundColor: "#fffff" }}
                                 backgroundColor={"white"} variant={"filled"} flex={4} placeholder="Pantry Size (optional)" />
                             <Select variant={"filled"}
@@ -803,7 +801,7 @@ const Bareshellspace = () => {
                                 backgroundColor={"white"}
                                 _hover={{ backgroundColor: "#fffff" }}
                                 onChange={(e) => {
-                                    setPantryTypeUnit(e.target.value);
+                                    setPantryTypeUnit(NumericString(e.target.value));
                                 }}
                                 className={style.select}
                                 required
@@ -949,30 +947,26 @@ const Bareshellspace = () => {
                         Total no of floors and your floor details
                     </Text>
                     <Box display={"flex"} alignItems={"center"} gap={5}>
-                        <NumberInput value={totalfloors} className={style.input_borders}>
-                            <NumberInputField
-                                borderLeft={0}
-                                borderRight={0}
-                                borderTop={0}
-                                borderBottom={"1px solid #4f5bffcf"}
-                                borderRadius={0}
-                                onChange={(e) => {
-                                    const nowval = e.target.value > 90;
-                                    if (nowval) {
-                                        toast({
-                                            title: "Maximum floor count: 90",
-                                            status: "error",
-                                            duration: 2000,
-                                            position: "top-right",
-                                        });
-                                    } else {
-                                        setTotalFloors(e.target.value);
-                                    }
-                                }}
-                                required
-                                w={180}
-                            />
-                        </NumberInput>
+                        <Input
+                            type="text"
+                            value={totalfloors}
+                            onChange={(e) => {
+                                const nowval = e.target.value > 90;
+                                if (nowval) {
+                                    toast({
+                                        title: "Maximum floor count: 90",
+                                        status: "error",
+                                        duration: 2000,
+                                        position: "top-right",
+                                    });
+                                } else {
+                                    setTotalFloors(e.target.value);
+                                }
+                            }}
+                            required
+                            w={250}
+
+                        />
                         <Box>
                             <Menu>
                                 <MenuButton backgroundColor={"white"}
@@ -1008,7 +1002,7 @@ const Bareshellspace = () => {
                     <Heading as={"h3"} size={"md"}>
                         No. of Staircases (Optional)
                     </Heading>
-                    <Input width={300} type="text" placeholder="No. of Staircases" variant={"flushed"} onChange={(e) => setStairCase(e.target.value)} value={stairCase} />
+                    <Input width={300} type="text" maxLength={"10"} placeholder="No. of Staircases" variant={"flushed"} onChange={(e) => setStairCase(e.target.value)} value={stairCase} />
                 </Box>
                 {/* Lift */}
                 <Box textAlign={"left"} className={style.optional_box}>
@@ -1100,7 +1094,7 @@ const Bareshellspace = () => {
                         <Checkbox onChange={handleNumberOfParking} value={"Private Parking in Basement"} isChecked={parkingArr.includes("Private Parking in Basement")} >Private Parking in Basement</Checkbox>
                         <Checkbox onChange={handleNumberOfParking} value={"Private Parking Outside"} isChecked={parkingArr.includes("Private Parking Outside")} >Private Parking Outside</Checkbox>
                         <Checkbox onChange={handleNumberOfParking} value={"Private Parking Outside"} isChecked={parkingArr.includes("Private Parking Outside")} >Public Parking</Checkbox>
-                        <Input type="text" placeholder="Enter no. of Parkings" value={parkingTotalNumber} onChange={(e) => {
+                        <Input type="text" placeholder="Enter no. of Parkings" maxLength={"3"} value={parkingTotalNumber} onChange={(e) => {
                             e.preventDefault();
                             setParkingTotalNumber(NumericString(e.target.value));
                         }} />
@@ -1303,32 +1297,16 @@ const Bareshellspace = () => {
                             >
                                 {isCountry.country == "india" ? "₹" : "$"} Price Details
                             </Heading>
-                            <NumberInput >
-                                <NumberInputField
-                                    value={pricedetail}
-                                    required
-                                    onChange={(e) => {
-                                        setPricedetail(e.target.value);
-                                        areaCalucation();
-                                    }}
-                                />
-                            </NumberInput>
-                        </Box>
-                        {/* <Box display={"grid"} gap={0}>
-                            <Heading
-                                as={"h3"}
-                                size={"xs"}
-                                fontWeight={400}
-                                textAlign={"left"}
-                            >
-                                {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
-                            </Heading>
-                            <NumberInput value={priceSqr}>
-                                <NumberInputField
-
-                                />
-                            </NumberInput>
-                        </Box> */}
+                            <Input
+                                type="text"
+                                value={pricedetail}
+                                required
+                                onChange={(e) => {
+                                    setPricedetail(NumericString(e.target.value));
+                                    areaCalucation();
+                                }}
+                            /> 
+                        </Box> 
                     </Box>
                 </Box>
                 {/* checkbox */}
@@ -1373,17 +1351,17 @@ const Bareshellspace = () => {
                         Additional Pricing Detail (Optional)
                     </Heading>
                     <InputGroup w={"300px"} margin={"10px 0"}>
-                        <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
+                        <Input w={"60%"} type='text' maxLength={"8"} onChange={(e) => setMaintenancePrice(NumericString(e.target.value))} value={maintenancePrice} placeholder={"Maintenance Price"} />
                         <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
                             <option value="Monthly">Monthly</option>
                             <option value="Yearly">Yearly</option>
                         </Select>
                     </InputGroup>
                     {additionalPrice && <>
-                        <Input type="text" w={"300px"} value={expectedRental} onChange={(e) => setExpectedRental(e.target.value)} placeholder="Expected rental" margin={"0"} />
-                        <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-                        <Input type="text" w={"300px"} value={annualDuesPayable} onChange={(e) => setAnnualDuesPayable(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
-                    </>
+                        <Input type="text" w={"300px"} maxLength={"8"} value={expectedRental} onChange={(e) => setExpectedRental(NumericString(e.target.value))} placeholder="Expected rental" margin={"0"} />
+                        <Input type="text" w={"300px"} maxLength={"8"} value={bookingAmount} onChange={(e) => setBookingAmount(NumericString(e.target.value))} placeholder="Booking Amount" margin={"10px 0 0 0"} />
+                        <Input type="text" w={"300px"} maxLength={"8"} value={annualDuesPayable} onChange={(e) => setAnnualDuesPayable(NumericString(e.target.value))} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
+                    </> 
                     }
                     <Heading
                         as={"h3"}
@@ -1436,22 +1414,22 @@ const Bareshellspace = () => {
                         Lease / Rent related details Of your property
                     </Heading>
                     <Box>
-                        <Input type="text" value={currentRentPerMonth} onChange={(e) => {
+                        <Input type="text" maxLength={"10"} value={currentRentPerMonth} onChange={(e) => {
                             e.preventDefault();
-                            setCurrentRentPerMonth(e.target.value);
+                            setCurrentRentPerMonth(NumericString(e.target.value));
                         }} placeholder={"₹ Current rent per month"} />
-                        <Input type="text" value={leaseTenureInYear} onChange={(e) => {
+                        <Input type="text" maxLength={"10"} value={leaseTenureInYear} onChange={(e) => {
                             e.preventDefault();
-                            setLeaseTenureInYear((e.target.value));
+                            setLeaseTenureInYear(NumericString(e.target.value));
                         }} placeholder={"₹ Current rent per month"} />
                         <Box>
-                            <Input type="text" value={annualRentIncrease} onChange={(e) => {
+                            <Input type="text" maxLength={"10"} value={annualRentIncrease} onChange={(e) => {
                                 e.preventDefault();
-                                setAnnualRentIncrease((e.target.value));
+                                setAnnualRentIncrease(NumericString(e.target.value));
                             }} placeholder="Annual rent increase in % (Optional)" />
-                            <Input type="text" value={businessType} onChange={(e) => {
+                            <Input type="text" maxLength={"100"} value={businessType} onChange={(e) => {
                                 e.preventDefault();
-                                setBusinessType((e.target.value));
+                                setBusinessType(WordandNumber(e.target.value));
                             }} placeholder="Leased to - Business Type (Optional)" />
                         </Box>
                     </Box>

@@ -294,12 +294,13 @@ const FarmHouse = () => {
     };
 
     const handlepinfetch = (e) => {
-        setPincode(e.target.value);
-        if (e.target.value.length == 6) {
-            pinfetch(e.target.value);
+        let val = e.target.value;
+        setPincode(val);
+        if (val.length == 6) {
+            pinfetch(val);
         }
         else {
-            console.log(e.target.value);
+            console.log(val);
         }
     }
 
@@ -489,7 +490,7 @@ const FarmHouse = () => {
         if (pricedetail && plotArea) {
             let max = Math.max(Number(pricedetail), Number(plotArea));
             let min = Math.min(Number(pricedetail), Number(plotArea));
-            let ans = Math.round(max / min) || 0; 
+            let ans = Math.round(max / min) || 0;
             setPriceSqr(ans);
         }
     }
@@ -519,7 +520,7 @@ const FarmHouse = () => {
 
                 <Input
                     type="text"
-                    padding={"0 10px"}
+                    maxLength={"100"}
                     required
                     placeholder="Enter House No."
                     value={houseNo}
@@ -533,6 +534,7 @@ const FarmHouse = () => {
                     required
                     placeholder="Enter Apartment / Society Name"
                     fontSize={"md"}
+                    maxLength={"100"}
                     value={appartment}
                     onChange={(e) => setApartment(WordandNumber(e.target.value))}
                     variant="flushed"
@@ -542,6 +544,7 @@ const FarmHouse = () => {
                     placeholder={"Enter pincode No."}
                     padding={"0 10px"}
                     required
+                    maxLength={"6"}
                     variant="flushed"
                     fontSize={"md"}
                     value={pincode}
@@ -552,6 +555,7 @@ const FarmHouse = () => {
                     padding={"0 10px"}
                     required
                     placeholder="Enter Locality Name"
+                    maxLength={"100"}
                     list="browsers"
                     value={locality}
                     onChange={(e) => setLocality(WordandNumber(e.target.value))}
@@ -568,7 +572,7 @@ const FarmHouse = () => {
 
                 <Input
                     type="text"
-                    padding={"0 10px"}
+                    maxLength={"100"}
                     required
                     placeholder="Enter City Name"
                     fontSize={"md"}
@@ -578,7 +582,7 @@ const FarmHouse = () => {
                 />
                 <Input
                     type="text"
-                    padding={"0 10px"}
+                    maxLength={"100"}
                     required
                     placeholder="Enter State Name"
                     value={state}
@@ -588,7 +592,7 @@ const FarmHouse = () => {
                 />
                 <Input
                     type="text"
-                    padding={"0 10px"}
+                    maxLength={"100"}
                     required
                     placeholder="Enter Country Name"
                     value={country}
@@ -597,7 +601,7 @@ const FarmHouse = () => {
                     variant="flushed"
                 />
 
-            </Box> 
+            </Box>
             {/* Property Detail */}
             <Box marginTop={2}>
                 <Heading as={"h4"} size={"sm"} textAlign={"left"} margin={"0"}>
@@ -608,6 +612,7 @@ const FarmHouse = () => {
                         <Input
                             type="text"
                             placeholder={"Enter No. of Bedrooms"}
+                            maxLength={"2"}
                             onChange={(e) => setBedRoom(NumberInput(e.target.value))}
                             value={bedroom}
                             required
@@ -619,6 +624,7 @@ const FarmHouse = () => {
                             placeholder={"Enter No. of Bathrooms"}
                             onChange={(e) => setBathroom(NumberInput(e.target.value))}
                             value={bathroom}
+                            maxLength={"2"} 
                             required
                         // padding={"0 2px"}
                         />
@@ -629,6 +635,7 @@ const FarmHouse = () => {
                             placeholder={"Enter No. of Balconies"}
                             onChange={(e) => setBalcony(NumberInput(e.target.value))}
                             value={balconey}
+                            maxLength={"2"} 
                             required
                         // padding={"0 2px"}
                         />
@@ -651,6 +658,7 @@ const FarmHouse = () => {
                             type="text"
                             value={plotArea}
                             w={200}
+                            maxLength={"12"}
                             placeholder='Enter area detail'
                             onChange={(e) => {
                                 setPlotArea(NumericString(e.target.value));
@@ -682,7 +690,7 @@ const FarmHouse = () => {
                                 <option value="perch">perch</option>
                             </Select>
                         </InputRightElement>
-                    </InputGroup> 
+                    </InputGroup>
                 </Box>
                 {/* other Room  */}
                 <Box
@@ -1121,7 +1129,7 @@ const FarmHouse = () => {
                         <Input
                             type="text"
                             value={totalfloors}
-                            borderRadius={0} 
+                            borderRadius={0}
                             placeholder={"Enter no. of floors"}
                             onChange={(e) => {
                                 let val = NumericString(e.target.value)
@@ -1346,31 +1354,21 @@ const FarmHouse = () => {
                                 {isCountry.country == "india" ? "₹" : "$"} Price Details
                             </Heading>
                             <InputGroup >
-                                <InputLeftElement>  
-                                {isCountry.country == "india" ? "₹" : "$"}
+                                <InputLeftElement>
+                                    {isCountry.country == "india" ? "₹" : "$"}
                                 </InputLeftElement>
                                 <Input
                                     type="text"
                                     value={pricedetail}
                                     required
-                                    onChange={(e) => { 
+                                    maxLength={"12"} 
+                                    onChange={(e) => {
                                         setPricedetail(NumericString(e.target.value));
                                         areaCalucation();
                                     }}
                                 />
                             </InputGroup>
-                        </Box>
-                        {/* <Box display={"grid"} gap={0}>
-                            <Heading
-                                as={"h3"}
-                                size={"xs"}
-                                fontWeight={400}
-                                textAlign={"left"}
-                            >
-                                {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
-                            </Heading>
-                            <Input type="text" value={priceSqr}  />
-                        </Box> */}
+                        </Box> 
                     </Box>
                 </Box>
                 <Box display={"flex"} gap={10} marginTop={"10px"} flexWrap={"wrap"}>
@@ -1413,16 +1411,16 @@ const FarmHouse = () => {
                         Additional Pricing Detail (Optional)
                     </Heading>
                     <InputGroup w={"300px"}>
-                        <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(NumericString(e.target.value))} value={maintenancePrice} placeholder={"Maintenance Price"} />
+                        <Input w={"60%"} type='text' maxLength={"10"} onChange={(e) => setMaintenancePrice(NumericString(e.target.value))} value={maintenancePrice} placeholder={"Maintenance Price"} />
                         <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
                             <option value="Monthly">Monthly</option>
                             <option value="Yearly">Yearly</option>
                         </Select>
                     </InputGroup>
                     {additionalPrice && <>
-                        <Input type="text" w={"300px"} value={expectedRental} onChange={(e) => setExpectedRental(NumericString(e.target.value))} placeholder="Expected rental" margin={"0"} />
-                        <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(NumericString(e.target.value))} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-                        <Input type="text" w={"300px"} value={annualDuesPayable} onChange={(e) => setAnnualDuesPayable(NumericString(e.target.value))} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
+                        <Input type="text" w={"300px"} maxLength={"10"} value={expectedRental} onChange={(e) => setExpectedRental(NumericString(e.target.value))} placeholder="Expected rental" margin={"0"} />
+                        <Input type="text" w={"300px"} maxLength={"10"} value={bookingAmount} onChange={(e) => setBookingAmount(NumericString(e.target.value))} placeholder="Booking Amount" margin={"10px 0 0 0"} />
+                        <Input type="text" w={"300px"} maxLength={"10"} value={annualDuesPayable} onChange={(e) => setAnnualDuesPayable(NumericString(e.target.value))} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
                     </>
                     }
                     <Heading
@@ -2140,7 +2138,7 @@ const FarmHouse = () => {
                     Width of facing road
                 </Heading>
                 <Box display={"flex"} gap={"20px"} w={"300px"} >
-                    <Input type="text" variant='flushed' flex={1} required value={facingwidth} onChange={(e) => {
+                    <Input type="text" variant='flushed' maxLength={"10"} flex={1} required value={facingwidth} onChange={(e) => {
                         e.preventDefault();
                         setFacingWidth(NumericString(e.target.value));
                     }} />

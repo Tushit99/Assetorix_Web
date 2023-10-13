@@ -5,9 +5,7 @@ import {
     ButtonGroup,
     Heading,
     Input,
-    InputGroup,
-    NumberInput,
-    NumberInputField,
+    InputGroup, 
     Select,
     Text,
     Textarea,
@@ -19,7 +17,7 @@ import style from "../Hospitality.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
-import { AlphabetString, CleanInputText, NumericString } from "../../../../code";
+import { AlphabetString, CleanInputText, NumericString, WordandNumber } from "../../../../code";
 
 
 
@@ -30,7 +28,7 @@ const GuestBanquet = () => {
     const [country, setCountry] = useState("");
     const [facingwidth, setFacingWidth] = useState("");
     const [city, setCity] = useState("");
-    const [pincode, setPincode] = useState(0);
+    const [pincode, setPincode] = useState("");
     const [state, setState] = useState("");
     const [locality, setLocality] = useState("");
     const [address, setaddress] = useState("");
@@ -287,12 +285,13 @@ const GuestBanquet = () => {
 
 
     const handlepinfetch = (e) => {
-        setPincode(e.target.value);
-        if (e.target.value.length == 6) {
-            pinfetch(e.target.value);
+        let val = e.target.value;
+        setPincode(val);
+        if (val.length == 6) {
+            pinfetch(val);
         }
         else {
-            console.log(e.target.value);
+            console.log(val);
         }
     }
 
@@ -492,31 +491,31 @@ const GuestBanquet = () => {
                 </Heading>
                 <Input
                     type="text"
-                    padding={"0 10px"}
+                    maxLength={"100"}
                     required
                     placeholder="Address (optional)"
                     value={address}
-                    onChange={(e) => setaddress(e.target.value)}
+                    onChange={(e) => setaddress(WordandNumber(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
                 />
                 <Input
                     type="text"
                     placeholder={"Enter pincode"}
-                    padding={"0 10px"} 
+                    maxLength={"6"}
                     required
                     fontSize={"md"}
-                    value={pincode}
-                    onChange={handlepinfetch}
+                    value={pincode} 
+                    onChange={handlepinfetch} 
                 />
-                <Input
+                <Input 
                     type="text"
-                    padding={"0 10px"}
+                    maxLength={"100"}
                     required
                     placeholder="Locality"
                     list="browsers"
                     value={locality}
-                    onChange={(e) => setLocality(e.target.value)}
+                    onChange={(e) => setLocality(WordandNumber(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
                 />
@@ -530,31 +529,31 @@ const GuestBanquet = () => {
 
                 <Input
                     type="text"
-                    padding={"0 10px"}
+                    maxLength={"100"}
                     required
                     placeholder="Enter City"
                     fontSize={"md"}
                     value={city}
-                    onChange={(e) => setCity(e.target.value)}
+                    onChange={(e) => setCity(WordandNumber(e.target.value))}
                     variant="flushed"
                 />
                 <Input
                     type="text"
-                    padding={"0 10px"}
+                    maxLength={"100"}
                     required
                     placeholder="Enter State"
                     value={state}
-                    onChange={(e) => setState(e.target.value)}
+                    onChange={(e) => setState(WordandNumber(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
                 />
                 <Input
                     type="text"
-                    padding={"0 10px"}
+                    maxLength={"100"}
                     required
                     placeholder="Enter Country"
                     value={country}
-                    onChange={(e) => setCountry(e.target.value)}
+                    onChange={(e) => setCountry(WordandNumber(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
                 />
@@ -572,8 +571,8 @@ const GuestBanquet = () => {
                     <Box textAlign={"left"} >
                         <Text> No. of rooms </Text>
                         <Input type="text"
+                            maxLength={"2"}
                             variant="flushed"
-                            padding={"0 2px"}
                             onChange={(e) => {
                                 setRoom(NumericString(e.target.value));
                             }}
@@ -584,6 +583,7 @@ const GuestBanquet = () => {
                         <Text> No. of washroomss </Text>
                         <Input type="text"
                             variant="flushed"
+                            maxLength={"2"}
                             onChange={(e) => {
                                 setwashrooms(NumericString(e.target.value));
                             }}
@@ -594,6 +594,7 @@ const GuestBanquet = () => {
                     <Box textAlign={"left"}>
                         <Text> No. of Balconies </Text>
                         <Input type="text"
+                            maxLength={"2"}
                             variant="flushed"
                             onChange={(e) => {
                                 setBalcony(NumericString(e.target.value));
@@ -616,13 +617,17 @@ const GuestBanquet = () => {
                         isAttached
                         variant="outline"
                     >
-                        <input type="text" placeholder="Enter Plot Area" value={plotArea}
+                        <Input
+                            type="text"
+                            maxLength={"10"}
+                            placeholder="Enter Plot Area"
+                            value={plotArea}
                             onChange={(e) => {
                                 areaCalucation();
-                                setPlotArea(e.target.value);
+                                setPlotArea(NumericString(e.target.value));
                             }}
                             required />
-                        <select value={areaPer} onChange={(e) => {
+                        <Select value={areaPer} onChange={(e) => {
                             setAreaPer(e.target.value);
                         }} className={style.select} required>
                             <option value="sq.ft">sq.ft</option>
@@ -643,7 +648,7 @@ const GuestBanquet = () => {
                             <option value="rood">rood</option>
                             <option value="chataks">chataks</option>
                             <option value="perch">perch</option>
-                        </select>
+                        </Select>
                     </ButtonGroup>
                 </Box>
                 {/* other Room  */}
@@ -1319,32 +1324,17 @@ const GuestBanquet = () => {
                         >
                             {isCountry.country == "india" ? "₹" : "$"} Price Details
                         </Heading>
-                        <NumberInput >
-                            <NumberInputField
-                                value={pricedetail}
-                                required
-                                onChange={(e) => {
-                                    setPricedetail(e.target.value);
-                                    areaCalucation();
-                                }}
-                            />
-                        </NumberInput>
-                    </Box>
-                    {/* <Box display={"grid"} gap={0}>
-                        <Heading
-                            as={"h3"}
-                            size={"xs"}
-                            fontWeight={400}
-                            textAlign={"left"}
-                        >
-                            {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
-                        </Heading>
                         <Input
                             type="text"
-                            value={priceSqr}
-                            readOnly
+                            maxLength={"10"}
+                            value={pricedetail}
+                            required
+                            onChange={(e) => {
+                                setPricedetail(NumericString(e.target.value));
+                                areaCalucation();
+                            }}
                         />
-                    </Box> */}
+                    </Box> 
                 </Box>
                 <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
                     <Checkbox
@@ -1371,15 +1361,15 @@ const GuestBanquet = () => {
                 <Box textAlign={"left"} display={"grid"}>
                     {additionalPrice && <>
                         <InputGroup w={"300px"} margin={"5px 0"}>
-                            <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
+                            <Input w={"60%"} type='text' maxLength={"12"} onChange={(e) => setMaintenancePrice(NumericString(e.target.value))} value={maintenancePrice} placeholder={"Maintenance Price"} />
                             <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
                                 <option value="Monthly">Monthly</option>
-                                <option value="Yearly">Yearly</option>
+                                <option value="Yearly">Yearly</option> 
                             </Select>
                         </InputGroup>
-                        <Input type="text" w={"300px"} value={expectedRentel} onChange={(e) => setExpectedRentel(e.target.value)} placeholder="Expected rental" margin={"0"} />
-                        <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-                        <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
+                        <Input type="text" w={"300px"} maxLength={"12"} value={expectedRentel} onChange={(e) => setExpectedRentel(NumericString(e.target.value))} placeholder="Expected rental" margin={"0"} />
+                        <Input type="text" w={"300px"} maxLength={"12"} value={bookingAmount} onChange={(e) => setBookingAmount(NumericString(e.target.value))} placeholder="Booking Amount" margin={"10px 0 0 0"} />
+                        <Input type="text" w={"300px"} maxLength={"12"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(NumericString(e.target.value))} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
                     </>
                     }
                     <Heading
@@ -1905,7 +1895,7 @@ const GuestBanquet = () => {
                 <Box display={"flex"} gap={"20px"} w={"300px"} >
                     <Input type="text" variant='flushed' flex={1} required value={facingwidth} onChange={(e) => {
                         e.preventDefault();
-                        setFacingWidth(e.target.value);
+                        setFacingWidth(NumericString(e.target.value));
                     }} />
                     <Select flex={1} onChange={(e) => setFacing(e.target.value)} value={facing}>
                         <option value="Meter"> Meter </option>
@@ -2072,5 +2062,5 @@ const GuestBanquet = () => {
     );
 };
 
-export default GuestBanquet; 
+export default GuestBanquet;
 

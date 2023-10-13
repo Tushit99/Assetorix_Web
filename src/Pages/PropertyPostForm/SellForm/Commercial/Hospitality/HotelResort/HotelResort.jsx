@@ -19,7 +19,7 @@ import style from "../Hospitality.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
-import { AlphabetString, CleanInputText, NumericString } from "../../../../code";
+import { AlphabetString, CleanInputText, NumericString, WordandNumber } from "../../../../code";
 
 
 
@@ -272,7 +272,8 @@ const HotelResort = () => {
     };
 
     const handlepinfetch = (e) => {
-        setPincode(e.target.value);
+        let val =
+            setPincode(e.target.value);
         if (e.target.value.length == 6) {
             pinfetch(e.target.value);
         }
@@ -465,18 +466,18 @@ const HotelResort = () => {
                 </Heading>
                 <Input
                     type="text"
-                    padding={"0 10px"}
+                    maxLength={100}
                     required
                     placeholder="Address (optional)"
                     value={address}
-                    onChange={(e) => setaddress(e.target.value)}
+                    onChange={(e) => setaddress(WordandNumber(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
                 />
                 <Input
                     type="text"
                     placeholder={"Enter pincode"}
-                    padding={"0 10px"} 
+                    maxLength={6}
                     required
                     fontSize={"md"}
                     value={pincode}
@@ -484,12 +485,12 @@ const HotelResort = () => {
                 />
                 <Input
                     type="text"
-                    padding={"0 10px"}
+                    maxLength={100}
                     required
                     placeholder="Locality"
                     list="browsers"
                     value={locality}
-                    onChange={(e) => setLocality(e.target.value)}
+                    onChange={(e) => setLocality(WordandNumber(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
                 />
@@ -503,31 +504,31 @@ const HotelResort = () => {
 
                 <Input
                     type="text"
-                    padding={"0 10px"}
+                    maxLength={100}
                     required
                     placeholder="Enter City"
                     fontSize={"md"}
                     value={city}
-                    onChange={(e) => setCity(e.target.value)}
+                    onChange={(e) => setCity(WordandNumber(e.target.value))}
                     variant="flushed"
                 />
                 <Input
                     type="text"
-                    padding={"0 10px"}
+                    maxLength={100}
                     required
                     placeholder="Enter State"
                     value={state}
-                    onChange={(e) => setState(e.target.value)}
+                    onChange={(e) => setState(WordandNumber(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
                 />
                 <Input
                     type="text"
-                    padding={"0 10px"}
+                    maxLength={100}
                     required
                     placeholder="Enter Country"
                     value={country}
-                    onChange={(e) => setCountry(e.target.value)}
+                    onChange={(e) => setCountry(WordandNumber(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
                 />
@@ -589,13 +590,17 @@ const HotelResort = () => {
                         isAttached
                         variant="outline"
                     >
-                        <input type="text" placeholder="Enter Plot Area" value={plotArea}
+                        <Input
+                            type="text"
+                            placeholder="Enter Plot Area"
+                            value={plotArea}
+                            maxLength={12}
                             onChange={(e) => {
-                                areaCalucation();
-                                setPlotArea(e.target.value);
+                                setPlotArea(()=>NumericString(e.target.value));
+                                areaCalucation(); 
                             }}
                             required />
-                        <select value={areaPer} onChange={(e) => {
+                        <Select value={areaPer} onChange={(e) => {
                             setAreaPer(e.target.value);
                         }} className={style.select} required>
                             <option value="sq.ft">sq.ft</option>
@@ -616,7 +621,7 @@ const HotelResort = () => {
                             <option value="rood">rood</option>
                             <option value="chataks">chataks</option>
                             <option value="perch">perch</option>
-                        </select>
+                        </Select>
                     </ButtonGroup>
                 </Box>
                 {/* other Room  */}
@@ -1292,32 +1297,17 @@ const HotelResort = () => {
                         >
                             {isCountry.country == "india" ? "₹" : "$"} Price Details
                         </Heading>
-                        <NumberInput >
-                            <NumberInputField
-                                value={pricedetail}
-                                required
-                                onChange={(e) => {
-                                    setPricedetail(e.target.value);
-                                    areaCalucation();
-                                }}
-                            />
-                        </NumberInput>
-                    </Box>
-                    {/* <Box display={"grid"} gap={0}>
-                        <Heading
-                            as={"h3"}
-                            size={"xs"}
-                            fontWeight={400}
-                            textAlign={"left"}
-                        >
-                            {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
-                        </Heading>
-                        <NumberInput value={priceSqr}>
-                            <NumberInputField
-
-                            />
-                        </NumberInput>
-                    </Box> */}
+                        <Input
+                            type="text"
+                            value={pricedetail} 
+                            maxLength={12}
+                            required
+                            onChange={(e) => {
+                                setPricedetail(NumericString(e.target.value));
+                                areaCalucation();
+                            }}
+                        /> 
+                    </Box> 
                 </Box>
             </Box>
 
@@ -1340,11 +1330,11 @@ const HotelResort = () => {
                     }} className={preLeased == "No" ? style.setbtn : style.btn} > No </button>
                 </Box>
                 <Box display={preLeased == "Yes" ? "block" : "none"}>
-                    <Input type="text" value={currentRentPerMonth} onChange={(e) => {
+                    <Input type="text" maxLength={"12"} value={currentRentPerMonth} onChange={(e) => {
                         e.preventDefault();
                         setCurrentRentPerMonth(NumericString(e.target.value));
                     }} placeholder={"₹ Current rent per month"} />
-                    <Input type="text" value={leaseTenureInYear} onChange={(e) => {
+                    <Input type="text" maxLength={"12"} value={leaseTenureInYear} onChange={(e) => {
                         e.preventDefault();
                         let a = NumericString(e.target.value);
                         if (a < 100) {
@@ -1352,14 +1342,14 @@ const HotelResort = () => {
                         }
                     }} placeholder={"Lease tenure in years"} />
                     <Box>
-                        <Input type="text" value={annualRentIncrease} onChange={(e) => {
+                        <Input maxLength={"12"} type="text" value={annualRentIncrease} onChange={(e) => {
                             e.preventDefault();
                             let a = NumericString(e.target.value);
                             if (a < 100) {
                                 setAnnualRentIncrease(a);
                             }
                         }} placeholder="Annual rent increase in % (Optional)" />
-                        <Input type="text" value={businessType} onChange={(e) => {
+                        <Input maxLength={"100"} type="text" value={businessType} onChange={(e) => {
                             e.preventDefault();
                             setBusinessType(AlphabetString(e.target.value));
                         }} placeholder="Leased to - Business Type (Optional)" />

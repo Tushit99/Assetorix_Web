@@ -18,7 +18,7 @@ import style from "../Industry.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
-import { CleanInputText } from "../../../../code";
+import { CleanInputText, NumericString, WordandNumber } from "../../../../code";
 
 
 
@@ -74,15 +74,15 @@ const Manufacture = () => {
       lookingFor: "Sell",
       propertyGroup: "Commercial",
       propertyType: "Industry",
-      industryType: "Manufacturing", 
-      address: { 
+      industryType: "Manufacturing",
+      address: {
         address,
         locality,
         pincode,
         city,
         state,
         country,
-      }, 
+      },
       washrooms,
       ownership,
       price: +pricedetail,
@@ -143,7 +143,7 @@ const Manufacture = () => {
     if (
       ownership &&
       pricedetail &&
-      
+
       inclusivePrices &&
       amenities &&
       propertyFeatures &&
@@ -242,19 +242,20 @@ const Manufacture = () => {
   };
 
   const handlepinfetch = (e) => {
-    setPincode(e.target.value);
-    if (e.target.value.length == 6) {
-      pinfetch(e.target.value);
+    let val = NumericString(e.target.value);
+    setPincode(val);
+    if (val.length == 6) {
+      pinfetch(val);
     }
     else {
-      console.log(e.target.value);
+      console.log(val);
     }
   }
 
 
   const pinfetch = async (pin) => {
     try {
-      
+
       let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
       setState(res.data[0].state);
       setCity(res.data[0].city);
@@ -397,7 +398,7 @@ const Manufacture = () => {
 
           <Input
             type="text"
-            padding={"0 10px"}
+            maxLength={100}
             required
             placeholder="Address (optional)"
             value={address}
@@ -408,7 +409,7 @@ const Manufacture = () => {
           <Input
             type="text"
             placeholder={"Enter pincode"}
-            padding={"0 10px"}
+            maxLength={6}
             required
             fontSize={"md"}
             value={pincode}
@@ -416,12 +417,12 @@ const Manufacture = () => {
           />
           <Input
             type="text"
-            padding={"0 10px"}
+            maxLength={100}
             required
             placeholder="Locality"
             list="browsers"
             value={locality}
-            onChange={(e) => setLocality(e.target.value)}
+            onChange={(e) => setLocality(WordandNumber(e.target.value))}
             fontSize={"md"}
             variant="flushed"
           />
@@ -435,31 +436,31 @@ const Manufacture = () => {
 
           <Input
             type="text"
-            padding={"0 10px"}
+            maxLength={"100"}
             required
             placeholder="Enter City"
             fontSize={"md"}
             value={city}
-            onChange={(e) => setCity(e.target.value)}
+            onChange={(e) => setCity(WordandNumber(e.target.value))}
             variant="flushed"
           />
           <Input
             type="text"
-            padding={"0 10px"}
+            maxLength={"100"}
             required
             placeholder="Enter State"
             value={state}
-            onChange={(e) => setState(e.target.value)}
+            onChange={(e) => setState(WordandNumber(e.target.value))}
             fontSize={"md"}
             variant="flushed"
           />
           <Input
             type="text"
-            padding={"0 10px"}
+            maxLength={"100"}
             required
             placeholder="Enter Country"
             value={country}
-            onChange={(e) => setCountry(e.target.value)}
+            onChange={(e) => setCountry(WordandNumber(e.target.value))}
             fontSize={"md"}
             variant="flushed"
           />
@@ -476,45 +477,38 @@ const Manufacture = () => {
         </Box>
 
         {/* ============================== No. of Washrooms ====================================== */}
-        <Box>
-          <Box textAlign={"left"} >
+        <Box> 
+          <Box textAlign={"left"} > 
             <Text> No. of Washrooms </Text>
-            <NumberInput>
-              <NumberInputField
-                variant="flushed"
-                padding={"0 2px"}
-                onChange={(e) => setwashrooms(e.target.value)}
-                value={washrooms}
-                required
-              />
-            </NumberInput>
+            <Input
+              type="text"
+              variant="flushed"
+              maxLength={2}
+              onChange={(e) => setwashrooms(NumericString(e.target.value))}
+              value={washrooms}
+              required
+            /> 
           </Box>
         </Box>
 
         {/* ============================ add area details =============================== */}
         <Box textAlign={"left"} padding={"10px 0"}>
-          <Heading as={"h3"} margin={"5px 0"} size={"md"}>
+          <Heading as={"h3"} margin={"5px 0"} size={"md"}> 
             Add Area Details
           </Heading>
           <Text margin={"5px 0"}> Plot area is mandatory </Text>
-          <ButtonGroup
-            className={style.select_land}
-            size="sm"
-            isAttached
-            variant="outline"
-          >
-            <NumberInput>
-              <NumberInputField
-                padding={"0 2px"}
-                value={plotArea}
-                onChange={(e) => {
-                  areaCalucation();
-                  setPlotArea(e.target.value);
-                }}
-                required
-              />
-            </NumberInput>
-            <select value={areaPer} onChange={(e) => {
+          <InputGroup >
+            <Input
+              type="text"
+              maxLength={10}
+              value={plotArea}
+              onChange={(e) => {
+                setPlotArea(NumericString(e.target.value));
+                areaCalucation();
+              }}
+              required
+            /> 
+            <Select value={areaPer} onChange={(e) => {
               setAreaPer(e.target.value);
             }} className={style.select} required>
               <option value="sq.ft">sq.ft</option>
@@ -535,8 +529,8 @@ const Manufacture = () => {
               <option value="rood">rood</option>
               <option value="chataks">chataks</option>
               <option value="perch">perch</option>
-            </select>
-          </ButtonGroup>
+            </Select>
+          </InputGroup>
         </Box>
 
         {/* ========================== Availability status =============================== */}
@@ -658,7 +652,7 @@ const Manufacture = () => {
         )}
         {/* ============================== property Age-end ============================== */}
 
-        {/* ============================ Add pricing and details (Ownership) ============================ */} 
+        {/* ============================ Add pricing and details (Ownership) ============================ */}
         <Box>
           <Heading
             as={"h3"}
@@ -743,29 +737,14 @@ const Manufacture = () => {
                 <Input
                   type="text"
                   value={pricedetail}
+                  maxLength={"10"}
                   required
                   onChange={(e) => {
-                    setPricedetail(e.target.value);
+                    setPricedetail(NumericString(e.target.value));
                     areaCalucation();
                   }}
                 />
-              </Box>
-              {/* <Box display={"grid"} gap={0}>
-                <Heading
-                  as={"h3"}
-                  size={"xs"}
-                  fontWeight={400}
-                  textAlign={"left"}
-                >
-                  {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
-                </Heading>
-                <NumberInput value={priceSqr}>
-                  <NumberInputField
-                    
-                    
-                  />
-                </NumberInput>
-              </Box> */}
+              </Box> 
             </Box>
           </Box>
           <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
@@ -806,13 +785,13 @@ const Manufacture = () => {
           <Box>
             {additionalPrice && <>
               <InputGroup w={"300px"} margin={"10px 0"}>
-                <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
+                <Input w={"60%"} type='text' maxLength={"12"} onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
                 <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
                   <option value="Monthly">Monthly</option>
                   <option value="Yearly">Yearly</option>
                 </Select>
               </InputGroup>
-              <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
+              <Input type="text" w={"300px"} maxLength={"12"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
             </>
             }
             <Heading
@@ -848,22 +827,22 @@ const Manufacture = () => {
             }} className={preLeased == "No" ? style.setbtn : style.btn} > No </button>
           </Box>
           <Box display={preLeased == "Yes" ? "block" : "none"}>
-            <Input type="text" value={currentRentPerMonth} onChange={(e) => {
+            <Input type="text" maxLength={10} value={currentRentPerMonth} onChange={(e) => {
               e.preventDefault();
-              setCurrentRentPerMonth(e.target.value);
+              setCurrentRentPerMonth(NumericString(e.target.value));
             }} placeholder={"₹ Current rent per month"} />
-            <Input type="text" value={leaseTenureInYear} onChange={(e) => {
+            <Input type="text" maxLength={10} value={leaseTenureInYear} onChange={(e) => {
               e.preventDefault();
-              setLeaseTenureInYear((e.target.value));
+              setLeaseTenureInYear(NumericString(e.target.value));
             }} placeholder={"Lease tenure in years"} />
             <Box>
-              <Input type="text" value={annualRentIncrease} onChange={(e) => {
+              <Input type="text" maxLength={10} value={annualRentIncrease} onChange={(e) => {
                 e.preventDefault();
-                setAnnualRentIncrease((e.target.value));
+                setAnnualRentIncrease(NumericString(e.target.value));
               }} placeholder="Annual rent increase in % (Optional)" />
-              <Input type="text" value={businessType} onChange={(e) => {
+              <Input type="text" maxLength={"55"} value={businessType} onChange={(e) => {
                 e.preventDefault();
-                setBusinessType((e.target.value));
+                setBusinessType(WordandNumber(e.target.value));
               }} placeholder="Leased to - Business Type (Optional)" />
             </Box>
           </Box>
@@ -1123,7 +1102,7 @@ const Manufacture = () => {
               value={"Grade A Building"}
             >
               Grade A Building
-            </button>
+            </button> 
             <button
               className={
                 buildingFeature.includes("Grocery Shop")
