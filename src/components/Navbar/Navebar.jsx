@@ -332,7 +332,7 @@ const Navebar = () => {
                     </PopoverContent>
                 </Popover>
                 {/* Sell */}
-                <Link onClick={handlePageSell} to={"/post"}>Sell</Link>
+                <Link onClick={handlePageSell} to={"/post"}> Post Property </Link>
                 <Link>Home Loans</Link>
                 {/* Rent button */}
                 <Popover>

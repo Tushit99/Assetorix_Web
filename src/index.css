@@ -1,7 +1,6 @@
 
 body {
-  margin: 0;
-  font-family: 'Open Sans', sans-serif; 
+  margin: 0;   
   --main-one: rgb(12,32,50); 
   --dark-text-color: #ffffff; 
   --blue-light: rgba(114, 154, 191, 0.432) ;
@@ -14,7 +13,7 @@ button{
 }
 
 select{
-  outline: 0; 
+  outline: 0;  
 }
 
 

@@ -19,7 +19,7 @@ import { Checkbox } from "@chakra-ui/react";
 import style from "../Residential.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { CleanInputText, NumericString } from "../../../code";
+import { CleanInputText, NumericString, WordandNumber } from "../../../code";
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
 
@@ -30,7 +30,7 @@ const RKStudio = () => {
     const [facingwidth, setFacingWidth] = useState("");
     const [city, setCity] = useState("");
     const [appartment, setApartment] = useState("");
-    const [pincode, setPincode] = useState(0);
+    const [pincode, setPincode] = useState("");
     const [state, setState] = useState("");
     const [locality, setLocality] = useState("");
     const [houseNo, setHouseNo] = useState("");
@@ -131,7 +131,7 @@ const RKStudio = () => {
             countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
             additionalPricingDetails: {
                 maintenancePrice,
-                maintenanceTimePeriod, 
+                maintenanceTimePeriod,
                 bookingAmount,
                 annualDuesPayable,
                 membershipCharge
@@ -199,7 +199,7 @@ const RKStudio = () => {
             furnishedarr &&
             ownership &&
             pricedetail &&
-            
+
             inclusivePrices &&
             additinalft &&
             watersource &&
@@ -293,19 +293,20 @@ const RKStudio = () => {
     };
 
     const handlepinfetch = (e) => {
-        setPincode(e.target.value);
-        if (e.target.value.length == 6) {
-            pinfetch(e.target.value);
+        let val = NumericString(e.target.value);
+        setPincode(val);
+        if (val.length == 6) {
+            pinfetch(val);
         }
         else {
-            console.log(e.target.value);
+            console.log(val);
         }
     }
 
 
     const pinfetch = async (pin) => {
         try {
-            
+
             let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
             setState(res.data[0].state);
             setCity(res.data[0].city);
@@ -522,27 +523,30 @@ const RKStudio = () => {
                 <Input
                     type="text"
                     padding={"0 10px"}
+                    maxLength={"100"}
                     required
                     placeholder="House No. (optional)"
                     value={houseNo}
-                    onChange={(e) => setHouseNo(e.target.value)}
+                    onChange={(e) => setHouseNo(WordandNumber(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
                 />
                 <Input
                     type="text"
                     padding={"0 10px"}
+                    maxLength={"100"}
                     required
                     placeholder="Apartment / Society"
                     fontSize={"md"}
                     value={appartment}
-                    onChange={(e) => setApartment(e.target.value)}
+                    onChange={(e) => setApartment(WordandNumber(e.target.value))}
                     variant="flushed"
                 />
                 <Input
                     type="text"
                     placeholder={"Enter pincode"}
-                    padding={"0 10px"} 
+                    maxLength={"6"}
+                    padding={"0 10px"}
                     required
                     fontSize={"md"}
                     value={pincode}
@@ -553,9 +557,10 @@ const RKStudio = () => {
                     padding={"0 10px"}
                     required
                     placeholder="Locality"
+                    maxLength={"100"}
                     list="browsers"
                     value={locality}
-                    onChange={(e) => setLocality(e.target.value)}
+                    onChange={(e) => setLocality(WordandNumber(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
                 />
@@ -571,19 +576,21 @@ const RKStudio = () => {
                     type="text"
                     padding={"0 10px"}
                     required
+                    maxLength={"100"}
                     placeholder="Enter City"
                     fontSize={"md"}
                     value={city}
-                    onChange={(e) => setCity(e.target.value)}
+                    onChange={(e) => setCity(WordandNumber(e.target.value))}
                     variant="flushed"
                 />
                 <Input
                     type="text"
                     padding={"0 10px"}
+                    maxLength={"100"}
                     required
                     placeholder="Enter State"
                     value={state}
-                    onChange={(e) => setState(e.target.value)}
+                    onChange={(e) => setState(WordandNumber(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
                 />
@@ -592,8 +599,9 @@ const RKStudio = () => {
                     padding={"0 10px"}
                     required
                     placeholder="Enter Country"
+                    maxLength={"100"}
                     value={country}
-                    onChange={(e) => setCountry(e.target.value)}
+                    onChange={(e) => setCountry(WordandNumber(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
                 />
@@ -610,59 +618,53 @@ const RKStudio = () => {
                 <Box as={"div"} className={style.inp_form_numbers}>
                     <Box textAlign={"left"} >
                         <Text> No. of Bedrooms </Text>
-                        <NumberInput value={bedroom}>
-                            <NumberInputField
-                                variant="flushed"
-                                padding={"0 2px"}
-                                readOnly 
-                                border={0}
-                                onClick={() => {
-                                    toast({
-                                        title: 'Pre-defined',
-                                        description: "value modification not allowed",
-                                        status: 'info',
-                                        duration: 2000, 
-                                        position: 'top-right',  
-                                        isClosable: true,
-                                    })
-                                }}
-                            // value={bedroom}
-                            />
-                        </NumberInput>
+                        <Input
+                            type="text"
+                            variant="flushed"
+                            readOnly
+                            border={0}
+                            onClick={() => {
+                                toast({
+                                    title: 'Pre-defined',
+                                    description: "value modification not allowed",
+                                    status: 'info',
+                                    duration: 2000,
+                                    position: 'top-right',
+                                    isClosable: true,
+                                })
+                            }}
+                            value={bedroom}
+                        />
                     </Box>
                     <Box textAlign={"left"}>
                         <Text> No. of Bathrooms </Text>
-                        <NumberInput value={bathroom}>
-                            <NumberInputField
-                                variant="flushed"
-                                readOnly 
-                                border={0}
-                                onClick={() => {
-                                    toast({
-                                        title: 'Pre-defined',
-                                        description: "value modification not allowed",
-                                        status: 'info',
-                                        duration: 2000,
-                                        position: 'top-right', 
-                                        isClosable: true 
-                                    })
-                                }}
-                                value={bathroom}
-                                padding={"0 2px"}
-                            />
-                        </NumberInput>
+                        <Input
+                            type="text"
+                            variant="flushed"
+                            readOnly
+                            border={0}
+                            onClick={() => {
+                                toast({
+                                    title: 'Pre-defined',
+                                    description: "value modification not allowed",
+                                    status: 'info',
+                                    duration: 2000,
+                                    position: 'top-right',
+                                    isClosable: true
+                                })
+                            }}
+                            value={bathroom}
+                        />
                     </Box>
                     <Box textAlign={"left"}>
                         <Text> No. of Balconies </Text>
-                        <NumberInput>
-                            <NumberInputField
-                                variant="flushed"
-                                onChange={(e) => setBalcony(e.target.value)}
-                                value={balconey}
-                                required
-                                padding={"0 2px"}
-                            />
-                        </NumberInput>
+                        <Input
+                            type="text"
+                            variant="flushed"
+                            onChange={(e) => setBalcony(e.target.value)}
+                            value={balconey}
+                            required
+                        />
                     </Box>
                 </Box>
                 {/* ====================================== */}
@@ -678,17 +680,15 @@ const RKStudio = () => {
                         isAttached
                         variant="outline"
                     >
-                        <NumberInput>
-                            <NumberInputField
-                                padding={"0 2px"}
-                                value={plotArea}
-                                onChange={(e) => {
-                                    areaCalucation();
-                                    setPlotArea(e.target.value);
-                                }}
-                                required
-                            />
-                        </NumberInput>
+                        <Input
+                            type="text"
+                            value={plotArea}
+                            onChange={(e) => {
+                                areaCalucation();
+                                setPlotArea(e.target.value);
+                            }}
+                            required
+                        />
                         <select value={areaPer} onChange={(e) => {
                             setAreaPer(e.target.value);
                         }} className={style.select} required>
@@ -816,7 +816,7 @@ const RKStudio = () => {
                         padding={"10px 0"}
                         gap={6}
                     >
-                        
+
                         <Box className={style.furnished_detail}>
                             <Box>
                                 <button
@@ -1154,33 +1154,26 @@ const RKStudio = () => {
                         Total no of floors and your floor details
                     </Text>
                     <Box display={"flex"} alignItems={"center"} gap={5}>
-                        <NumberInput
+                        <Input
+                            type="text"
+                            onChange={(e) => {
+                                const nowval = e.target.value > 90;
+                                if (nowval) {
+                                    toast({
+                                        title: 'Maximum floor count: 90',
+                                        status: 'error',
+                                        duration: 2000,
+                                        position: 'top-right',
+                                    });
+                                }
+                                else {
+                                    setTotalFloors(e.target.value);
+                                }
+                            }}
                             value={totalfloors}
-                            className={style.input_borders}>
-                            <NumberInputField
-                                borderLeft={0}
-                                borderRight={0}
-                                borderTop={0}
-                                borderBottom={"1px solid #4f5bffcf"}
-                                borderRadius={0}
-                                onChange={(e) => {
-                                    const nowval = e.target.value > 90;
-                                    if (nowval) {
-                                        toast({
-                                            title: 'Maximum floor count: 90',
-                                            status: 'error',
-                                            duration: 2000,
-                                            position: 'top-right',
-                                        });
-                                    }
-                                    else {
-                                        setTotalFloors(e.target.value);
-                                    }
-                                }}
-                                required
-                                w={180}
-                            />
-                        </NumberInput>
+                            required
+                            w={250}
+                        />
                         <Select
                             id="floorSelectTag"
                             variant="filled"
@@ -1407,33 +1400,16 @@ const RKStudio = () => {
                             >
                                 {isCountry.country == "india" ? "₹" : "$"} Price Details
                             </Heading>
-                            <NumberInput >
-                                <NumberInputField
-                                    value={pricedetail}
-                                    required
-                                    onChange={(e) => {
-                                        setPricedetail(e.target.value);
-                                        areaCalucation();
-                                    }}
-                                />
-                            </NumberInput>
-                        </Box>
-                        <Box display={"grid"} gap={0}>
-                            <Heading
-                                as={"h3"}
-                                size={"xs"}
-                                fontWeight={400}
-                                textAlign={"left"}
-                            >
-                                {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
-                            </Heading>
-                            <NumberInput value={priceSqr}>
-                                <NumberInputField
-                                    
-                                    readOnly
-                                />
-                            </NumberInput>
-                        </Box>
+                            <Input
+                                type="text"
+                                value={pricedetail}
+                                required
+                                onChange={(e) => {
+                                    setPricedetail(e.target.value);
+                                    areaCalucation();
+                                }}
+                            />
+                        </Box> 
                     </Box>
                 </Box>
                 <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
@@ -1476,16 +1452,16 @@ const RKStudio = () => {
                         Additional Pricing Detail (Optional)
                     </Heading>
                     <InputGroup w={"300px"} margin={"10px 0"}>
-                        <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(NumericString(e.target.value))} value={maintenancePrice} placeholder={"Maintenance Price"} />
+                        <Input w={"60%"} type='text' maxLength={"12"} onChange={(e) => setMaintenancePrice(NumericString(e.target.value))} value={maintenancePrice} placeholder={"Maintenance Price"} />
                         <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
                             <option value="Monthly">Monthly</option>
                             <option value="Yearly">Yearly</option>
                         </Select>
                     </InputGroup>
                     {additionalPrice && <>
-                        <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-                        <Input type="text" w={"300px"} value={annualDuesPayable} onChange={(e) => setAnnualDuesPayable(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
-                        <Input type="text" w={"300px"} value={membershipCharge} onChange={(e) => setMembershipCharge(e.target.value)} placeholder="Membership charge" margin={"10px 0 0 0"} />
+                        <Input type="text" w={"300px"} maxLength={"12"} value={bookingAmount} onChange={(e) => setBookingAmount(NumericString(e.target.value))} placeholder="Booking Amount" margin={"10px 0 0 0"} />
+                        <Input type="text" w={"300px"} maxLength={"12"} value={annualDuesPayable} onChange={(e) => setAnnualDuesPayable(NumericString(e.target.value))} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
+                        <Input type="text" w={"300px"} maxLength={"12"} value={membershipCharge} onChange={(e) => setMembershipCharge(NumericString(e.target.value))} placeholder="Membership charge" margin={"10px 0 0 0"} />
                     </>
                     }
                     <Heading
@@ -2203,7 +2179,7 @@ const RKStudio = () => {
                     Width of facing road
                 </Heading>
                 <Box display={"flex"} gap={"20px"} w={"300px"} >
-                    <Input type="text" variant='flushed' flex={1} required value={facingwidth} onChange={(e) => {
+                    <Input type="text" variant='flushed' maxLength={"12"} flex={1} required value={facingwidth} onChange={(e) => {
                         e.preventDefault();
                         setFacingWidth(NumericString(e.target.value));
                     }} />

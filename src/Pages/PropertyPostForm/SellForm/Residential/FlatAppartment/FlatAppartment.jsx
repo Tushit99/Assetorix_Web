@@ -3,17 +3,17 @@ import {
     Box,
     Button,
     Heading,
-    Input, 
-    InputRightElement, 
+    Input,
+    InputRightElement,
     Select,
-    Text, 
+    Text,
     Textarea,
     useToast,
 } from "@chakra-ui/react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { Checkbox } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
-import { CleanInputText, NumericString, WordandNumber } from "../../../code";
+import { AlphabetString, CleanInputText, NumericString, WordandNumber } from "../../../code";
 import axios from "axios";
 import style from "../Residential.module.css";
 import { InputGroup } from "@chakra-ui/react";
@@ -26,8 +26,8 @@ const FlatAppartment = () => {
     const [country, setCountry] = useState("");
     const [facingwidth, setFacingWidth] = useState("");
     const [city, setCity] = useState("");
-    const [appartment, setApartment] = useState("");  
-    const [pincode, setPincode] = useState(0);
+    const [appartment, setApartment] = useState("");
+    const [pincode, setPincode] = useState("");
     const [state, setState] = useState("");
     const [locality, setLocality] = useState("");
     const [houseNo, setHouseNo] = useState("");
@@ -293,7 +293,7 @@ const FlatAppartment = () => {
     const handlepinfetch = (e) => {
         let val = NumericString(e.target.value)
         setPincode(val);
-        if (val.length == 6) { 
+        if (val.length == 6) {
             pinfetch(val);
         }
         else {
@@ -524,6 +524,7 @@ const FlatAppartment = () => {
                     required
                     placeholder="House No. (optional)"
                     value={houseNo}
+                    maxLength={"100"}
                     onChange={(e) => setHouseNo(WordandNumber(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
@@ -534,6 +535,7 @@ const FlatAppartment = () => {
                     required
                     placeholder="Apartment / Society"
                     fontSize={"md"}
+                    maxLength={"100"}
                     value={appartment}
                     onChange={(e) => setApartment(WordandNumber(e.target.value))}
                     variant="flushed"
@@ -543,6 +545,7 @@ const FlatAppartment = () => {
                     placeholder={"Enter pincode"}
                     padding={"0 10px"}
                     required
+                    maxLength={"7"}
                     fontSize={"md"}
                     value={pincode}
                     onChange={handlepinfetch}
@@ -554,6 +557,7 @@ const FlatAppartment = () => {
                     placeholder="Locality"
                     list="browsers"
                     value={locality}
+                    maxLength={"100"}
                     onChange={(e) => setLocality(WordandNumber(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
@@ -590,6 +594,7 @@ const FlatAppartment = () => {
                     type="text"
                     padding={"0 10px"}
                     required
+                    maxLength={"100"}
                     placeholder="Enter Country"
                     value={country}
                     onChange={(e) => setCountry(AlphabetString(e.target.value))}
@@ -607,6 +612,7 @@ const FlatAppartment = () => {
                     <Box textAlign={"left"} >
                         <Input
                             type="text"
+                            maxLength={"2"}
                             placeholder={"Enter No. of Bedrooms"}
                             onChange={(e) => setBedRoom(NumericString(e.target.value))}
                             value={bedroom}
@@ -616,6 +622,7 @@ const FlatAppartment = () => {
                     <Box textAlign={"left"}>
                         <Input
                             type="text"
+                            maxLength={"2"}
                             placeholder={"Enter No. of Bathrooms"}
                             onChange={(e) => setBathroom(NumericString(e.target.value))}
                             value={bathroom}
@@ -625,6 +632,7 @@ const FlatAppartment = () => {
                     <Box textAlign={"left"}>
                         <Input
                             type="text"
+                            maxLength={"2"}
                             placeholder={"Enter No. of Balconies"}
                             onChange={(e) => setBalcony(NumericString(e.target.value))}
                             value={balconey}
@@ -650,6 +658,7 @@ const FlatAppartment = () => {
                             value={plotArea}
                             placeholder='Enter area detail'
                             w={200}
+                            maxLength={"6"}
                             onChange={(e) => {
                                 areaCalucation();
                                 setPlotArea(NumericString(e.target.value));
@@ -1123,6 +1132,7 @@ const FlatAppartment = () => {
                             <Input
                                 type="text"
                                 value={totalfloors}
+                                maxLength={"2"}
                                 placeholder={"Enter no. of floors"}
                                 onChange={(e) => {
                                     let val = NumericString(e.target.value)
@@ -1351,17 +1361,18 @@ const FlatAppartment = () => {
                     <Box display={"flex"} alignItems={"center"} gap={5}>
                         <InputGroup w={300}>
                             <Select w={100} borderRadius={0}>
-                                <option value="">value</option> 
+                                <option value="">value</option>
                             </Select>
                             <Input
                                 type="text"
                                 value={pricedetail}
+                                maxLength={"10"} 
                                 placeholder={`${isCountry.country == "india" ? "₹" : "$"} Price Details`}
                                 required
                                 w={200}
                                 onChange={(e) => {
                                     setPricedetail(NumericString(e.target.value));
-                                    areaCalucation(); 
+                                    areaCalucation();
                                 }}
                             />
                         </InputGroup>
@@ -1376,20 +1387,18 @@ const FlatAppartment = () => {
                             e.preventDefault();
                             handleinclusiveandtax(e.target.value)
                         }}
-                        value={"All inclusive price"}
-
+                        value={"All inclusive price"} 
                     >
                         All inclusive price
                     </Checkbox>
-                    <Checkbox 
+                    <Checkbox
                         isChecked={inclusivePrices.includes("Tax and Govt. charges excluded")}
                         onChange={(e) => {
                             e.preventDefault();
                             handleinclusiveandtax(e.target.value)
                         }}
                         value={"Tax and Govt. charges excluded"}
-                    >
-
+                    > 
                         Tax and Govt. charges excluded
                     </Checkbox>
                     <Checkbox
@@ -1441,15 +1450,15 @@ const FlatAppartment = () => {
                     <Heading as={"h3"} size={"md"} marginTop={2} textAlign={"left"}>
                         What makes your property unique
                     </Heading>
-                    <Text fontSize={"sm"} textAlign={"left"} > 
-                        Adding description will increase your listing visibility 
+                    <Text fontSize={"sm"} textAlign={"left"} >
+                        Adding description will increase your listing visibility
                     </Text>
                     <Textarea height={140} required value={desc} onChange={(e) => {
                         let my_cleantext = CleanInputText(e.target.value);
                         setDesc(my_cleantext);
                     }} ></Textarea>
-                </Box> 
-            </Box> 
+                </Box>
+            </Box>
             {/* Add amenities/unique features */}
             <Box>
                 <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>

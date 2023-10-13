@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Flex, Heading, Image, InputGroup, Select, Text, Tooltip, useDisclosure, useToast } from '@chakra-ui/react';
+import { Box, Button, Divider, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, Flex, Heading, Image, Select, Text, Tooltip, useDisclosure, useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import style from "../ProductPage.module.css";
 import React, { useEffect, useRef, useState } from 'react'

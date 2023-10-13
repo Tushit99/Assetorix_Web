@@ -19,7 +19,7 @@ export const Emailhandle = (e) => {
 
 export const WordandNumber = (e) => {
   let inputValue = e;
-  let cleanedValue = inputValue.replace(/[^a-zA-Z0-9,.\s]/g, "");
+  let cleanedValue = inputValue.replace(/[^a-zA-Z0-9,.\s]/g, ""); 
   cleanedValue = cleanedValue.replace(/\s+/g, " ");
   return cleanedValue;
 };

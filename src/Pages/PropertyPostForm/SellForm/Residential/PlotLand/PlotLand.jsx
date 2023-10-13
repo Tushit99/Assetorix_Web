@@ -6,9 +6,7 @@ import {
     ButtonGroup,
     Heading,
     Input,
-    InputGroup,
-    NumberInput,
-    NumberInputField,
+    InputGroup, 
     Select,
     Text,
     Textarea,
@@ -19,7 +17,7 @@ import { Checkbox } from "@chakra-ui/react";
 import style from "../Residential.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { CleanInputText, NumericString } from "../../../code";
+import { CleanInputText, NumericString, WordandNumber } from "../../../code";
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
 
@@ -30,7 +28,7 @@ const PlotLand = () => {
     const [facingwidth, setFacingWidth] = useState("");
     const [city, setCity] = useState("");
     const [appartment, setApartment] = useState("");
-    const [pincode, setPincode] = useState(0);
+    const [pincode, setPincode] = useState("");
     const [state, setState] = useState("");
     const [locality, setLocality] = useState("");
     const [houseNo, setHouseNo] = useState("");
@@ -40,7 +38,7 @@ const PlotLand = () => {
     const [priceSqr, setPriceSqr] = useState("");
     const [inclusivePrices, setInclusivePrice] = useState([]);
     const [amenities, setAminity] = useState([]);
-    const [overLook, setoverlook] = useState([]);
+    const [overLook, setoverlook] = useState([]); 
     const [otherFeature, setOtherFeature] = useState([]);
     const [propertyFacing, setPropertyFacing] = useState("");
     const [facing, setFacing] = useState("Meter");
@@ -64,14 +62,14 @@ const PlotLand = () => {
     const [expectedBy, setexpectedBy] = useState([]);
     const [expectedByYear, setExpectedByYear] = useState("");
     const [authorisedBy, setAuthorisedBy] = useState([]);
-    
-    
+
+
     // please don'nt change any function without any prior knowledge  
-    
+
     useEffect(() => {
         let num = Number(Date().split(" ")[3]);
         let yearbox = [];
-        for (let i = num+1; i < num + 10; i++) {
+        for (let i = num + 1; i < num + 10; i++) {
             yearbox.push(i);
         }
         setexpectedBy(yearbox);
@@ -159,7 +157,7 @@ const PlotLand = () => {
             locality &&
             ownership &&
             pricedetail &&
-            
+
             inclusivePrices &&
             overLook &&
             propertyFacing &&
@@ -221,13 +219,14 @@ const PlotLand = () => {
         }
     };
 
-    const handlepinfetch = (e) => {
-        setPincode(e.target.value);
-        if (e.target.value.length == 6) {
-            pinfetch(e.target.value);
+    const handlepinfetch = (e) => { 
+        let val = NumericString(e.target.value); 
+        setPincode(val);
+        if (val.length == 6) { 
+            pinfetch(val);
         }
         else {
-            console.log(e.target.value);
+            console.log(val);
         }
     }
 
@@ -256,7 +255,7 @@ const PlotLand = () => {
 
     const pinfetch = async (pin) => {
         try {
-            
+
             let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
             setState(res.data[0].state);
             setCity(res.data[0].city);
@@ -380,25 +379,28 @@ const PlotLand = () => {
                     type="text"
                     padding={"0 10px"}
                     required
+                    maxLength={"100"}
                     placeholder="Plot No. (optional)"
                     value={houseNo}
-                    onChange={(e) => setHouseNo(e.target.value)}
+                    onChange={(e) => setHouseNo(WordandNumber(e.target.value))}
                     fontSize={"md"}
-                    variant="flushed"
+                    variant="flushed" 
                 />
                 <Input
                     type="text"
                     padding={"0 10px"}
+                    maxLength={"100"}
                     placeholder="Apartment / Society (optional)"
                     fontSize={"md"}
                     value={appartment}
-                    onChange={(e) => setApartment(e.target.value)}
+                    onChange={(e) => setApartment(WordandNumber(e.target.value))}
                     variant="flushed"
                 />
                 <Input
                     type="text"
                     placeholder={"Enter pincode"}
-                    padding={"0 10px"} 
+                    padding={"0 10px"}
+                    maxLength={"6"}
                     required
                     fontSize={"md"}
                     value={pincode}
@@ -411,7 +413,7 @@ const PlotLand = () => {
                     placeholder="Locality"
                     list="browsers"
                     value={locality}
-                    onChange={(e) => setLocality(e.target.value)}
+                    onChange={(e) => setLocality(WordandNumber(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
                 />
@@ -426,20 +428,22 @@ const PlotLand = () => {
                 <Input
                     type="text"
                     padding={"0 10px"}
+                    maxLength={"100"}
                     required
                     placeholder="Enter City"
                     fontSize={"md"}
                     value={city}
-                    onChange={(e) => setCity(e.target.value)}
+                    onChange={(e) => setCity(WordandNumber(e.target.value))}
                     variant="flushed"
                 />
                 <Input
                     type="text"
                     padding={"0 10px"}
                     required
+                    maxLength={"100"}
                     placeholder="Enter State"
                     value={state}
-                    onChange={(e) => setState(e.target.value)}
+                    onChange={(e) => setState(WordandNumber(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
                 />
@@ -447,9 +451,10 @@ const PlotLand = () => {
                     type="text"
                     padding={"0 10px"}
                     required
+                    maxLength={"100"}
                     placeholder="Enter Country"
                     value={country}
-                    onChange={(e) => setCountry(e.target.value)}
+                    onChange={(e) => setCountry(WordandNumber(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
                 />
@@ -473,17 +478,17 @@ const PlotLand = () => {
                         isAttached
                         variant="outline"
                     >
-                        <NumberInput>
-                            <NumberInputField
-                                padding={"0 2px"}
-                                value={plotArea}
-                                onChange={(e) => {
-                                    areaCalucation();
-                                    setPlotArea(e.target.value);
-                                }}
-                                required
-                            />
-                        </NumberInput>
+                        <Input
+                            type="text"
+                            maxLength={"10"}
+                            placeholder={'Enter area detail'}
+                            value={plotArea}
+                            onChange={(e) => {
+                                setPlotArea(NumericString(e.target.value));
+                                areaCalucation();
+                            }}
+                            required
+                        />
                         <select value={areaPer} onChange={(e) => {
                             setAreaPer(e.target.value);
                         }} className={style.select} required>
@@ -511,19 +516,19 @@ const PlotLand = () => {
                 {/* Property Dimensions */}
                 <Box as={"div"} textAlign={"left"} padding={"10px 0"} >
                     <Heading as={"h3"} size={"md"} > Property Dimensions (Optional) </Heading>
-                    <Input type={"text"} variant='flushed' padding={"0 6px"} margin={"4px 0"} value={plotLength} onChange={(e) => {
+                    <Input type={"text"} variant='flushed' maxLength={"12"} padding={"0 6px"} margin={"4px 0"} value={plotLength} onChange={(e) => {
                         setplotLength(NumericString(e.target.value));
                     }} placeholder={`Length of plot (in ${areaPer})`} />
-                    <Input type={"text"} variant='flushed' padding={"0 6px"} margin={"4px 0"} value={plotBreadth} onChange={(e) => {
+                    <Input type={"text"} variant='flushed' padding={"0 6px"} maxLength={"12"} margin={"4px 0"} value={plotBreadth} onChange={(e) => {
                         setPlotBreadth(NumericString(e.target.value));
                     }} placeholder={`Breadth of plot (in ${areaPer})`} />
-                </Box> 
+                </Box>
                 {/* Floors Allowed For Construction */}
                 <Box textAlign={"left"} padding={"10px 0"}>
                     <Heading as={"h3"} size={"md"} > Floors Allowed For Construction </Heading>
-                    <Input type={"text"} variant='flushed' padding={"0 6px"} margin={"4px 0"} value={totalFloorAllowed} onChange={(e) => {
+                    <Input type={"text"} variant='flushed' padding={"0 6px"} maxLength={"12"} margin={"4px 0"} value={totalFloorAllowed} onChange={(e) => {
                         setTotalFloorAllowed(NumericString(e.target.value));
-                    }} placeholder='No. of floors' /> 
+                    }} placeholder='No. of floors' />
                 </Box>
                 {/* is there a boundary wall around the property */}
                 <Box textAlign={"left"} className={style.optional_box} >
@@ -705,33 +710,17 @@ const PlotLand = () => {
                             >
                                 {isCountry.country == "india" ? "₹" : "$"} Price Details
                             </Heading>
-                            <NumberInput >
-                                <NumberInputField
-                                    value={pricedetail}
-                                    required
-                                    onChange={(e) => {
-                                        setPricedetail(e.target.value);
-                                        areaCalucation();
-                                    }}
-                                />
-                            </NumberInput>
-                        </Box>
-                        <Box display={"grid"} gap={0}>
-                            <Heading
-                                as={"h3"}
-                                size={"xs"}
-                                fontWeight={400}
-                                textAlign={"left"}
-                            >
-                                {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
-                            </Heading>
-                            <NumberInput value={priceSqr}>
-                                <NumberInputField
-                                    
-                                    
-                                />
-                            </NumberInput>
-                        </Box>
+                            <Input
+                                type="text"
+                                value={pricedetail}
+                                maxLength={"10"}
+                                required
+                                onChange={(e) => {
+                                    setPricedetail(NumericString(e.target.value));
+                                    areaCalucation();
+                                }}
+                            /> 
+                        </Box> 
                     </Box>
                 </Box>
                 {/* inclusive Prices */}
@@ -776,16 +765,16 @@ const PlotLand = () => {
                         Additional Pricing Detail (Optional)
                     </Heading>
                     <InputGroup w={"300px"} margin={"10px 0"}>
-                        <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
+                        <Input w={"60%"} type='text' maxLength={"12"}  onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
                         <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
                             <option value="Monthly">Monthly</option>
                             <option value="Yearly">Yearly</option>
                         </Select>
                     </InputGroup>
                     {additionalPrice && <>
-                        <Input type="text" w={"300px"} value={expectedRental} onChange={(e) => setExpectedRental(e.target.value)} placeholder="Expected rental" margin={"0"} />
-                        <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-                        <Input type="text" w={"300px"} value={annualDuesPayable} onChange={(e) => setAnnualDuesPayable(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
+                        <Input type="text" w={"300px"} value={expectedRental} maxLength={"12"}  onChange={(e) => setExpectedRental(e.target.value)} placeholder="Expected rental" margin={"0"} />
+                        <Input type="text" w={"300px"} value={bookingAmount} maxLength={"12"}  onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
+                        <Input type="text" w={"300px"} value={annualDuesPayable} maxLength={"12"}  onChange={(e) => setAnnualDuesPayable(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
                     </>
                     }
                     <Heading
@@ -808,7 +797,7 @@ const PlotLand = () => {
                     <Heading as={"h3"} size={"xs"} margin={"10px 0"} textAlign={"left"}>
                         Adding description will increase your listing visibility
                     </Heading>
-                    <Textarea height={140} value={desc} onChange={(e) => {
+                    <Textarea height={140} maxLength={"12"}  value={desc} onChange={(e) => {
                         let my_cleantext = CleanInputText(e.target.value);
                         setDesc(my_cleantext);
                     }} ></Textarea>

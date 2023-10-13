@@ -6,20 +6,18 @@ import {
     ButtonGroup,
     Heading,
     Input,
-    InputGroup,
-    NumberInput,
-    NumberInputField,
+    InputGroup, 
     Select,
     Text,
     Textarea,
-    useToast,
+    useToast, 
 } from "@chakra-ui/react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { Checkbox } from "@chakra-ui/react";
 import style from "../Residential.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { CleanInputText, NumericString, WordandNumber } from "../../../code";
+import { AlphabetString, CleanInputText, NumericString, WordandNumber } from "../../../code";
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
 const Independentbuilder = () => {
@@ -33,9 +31,9 @@ const Independentbuilder = () => {
     const [state, setState] = useState("");
     const [locality, setLocality] = useState("");
     const [houseNo, setHouseNo] = useState("");
-    const [bedroom, setBedRoom] = useState(0);
-    const [bathroom, setBathroom] = useState(0);
-    const [balconey, setBalcony] = useState(0);
+    const [bedroom, setBedRoom] = useState("");
+    const [bathroom, setBathroom] = useState("");
+    const [balconey, setBalcony] = useState("");
     const [parking, setParking] = useState(0);
     const [openparking, setOpenparking] = useState(0);
     const [light, setLight] = useState(0);
@@ -522,7 +520,8 @@ const Independentbuilder = () => {
                 <Input
                     type="text"
                     padding={"0 10px"}
-                    required
+                    required 
+                    maxLength={100}
                     placeholder="House No. (optional)"
                     value={houseNo}
                     onChange={(e) => setHouseNo(WordandNumber(e.target.value))}
@@ -533,6 +532,7 @@ const Independentbuilder = () => {
                     type="text"
                     padding={"0 10px"}
                     required
+                    maxLength={100} 
                     placeholder="Apartment / Society"
                     fontSize={"md"}
                     value={appartment}
@@ -544,6 +544,7 @@ const Independentbuilder = () => {
                     placeholder={"Enter pincode"}
                     padding={"0 10px"}
                     required
+                    maxLength={6} 
                     fontSize={"md"}
                     value={pincode}
                     onChange={handlepinfetch}
@@ -554,7 +555,8 @@ const Independentbuilder = () => {
                     required
                     placeholder="Locality"
                     list="browsers"
-                    value={locality}
+                    value={locality} 
+                    maxLength={100}
                     onChange={(e) => setLocality(e.target.value)}
                     fontSize={"md"}
                     variant="flushed"
@@ -581,7 +583,8 @@ const Independentbuilder = () => {
                     type="text"
                     padding={"0 10px"}
                     required
-                    placeholder="Enter State"
+                    placeholder="Enter State" 
+                    maxLength={100} 
                     value={state}
                     onChange={(e) => setState(AlphabetString(e.target.value))}
                     fontSize={"md"}
@@ -591,7 +594,8 @@ const Independentbuilder = () => {
                     type="text"
                     padding={"0 10px"}
                     required
-                    placeholder="Enter Country"
+                    placeholder="Enter Country" 
+                    maxLength={100} 
                     value={country}
                     onChange={(e) => setCountry(AlphabetString(e.target.value))}
                     fontSize={"md"}
@@ -614,6 +618,7 @@ const Independentbuilder = () => {
                             type="text"
                             variant="flushed"
                             padding={"0 2px"}
+                            maxLength={"2"} 
                             onChange={(e) => setBedRoom(NumericString(e.target.value))}
                             value={bedroom}
                             required
@@ -624,6 +629,7 @@ const Independentbuilder = () => {
                         <Input
                             type="text"
                             variant="flushed"
+                            maxLength={"2"} 
                             onChange={(e) => setBathroom(NumericString(e.target.value))}
                             value={bathroom}
                             required
@@ -635,6 +641,7 @@ const Independentbuilder = () => {
                         <Input
                             type="text"
                             variant="flushed"
+                            maxLength={"2"} 
                             onChange={(e) => setBalcony(NumericString(e.target.value))}
                             value={balconey}
                             required
@@ -661,7 +668,7 @@ const Independentbuilder = () => {
                             value={plotArea}
                             onChange={(e) => {
                                 areaCalucation();
-                                setPlotArea(e.target.value);
+                                setPlotArea(NumericString(e.target.value));
                             }}
                             required
                         />
@@ -1133,6 +1140,7 @@ const Independentbuilder = () => {
                         <Input
                             type="text"
                             value={totalfloors}
+                            maxLength={"2"} 
                             onChange={(e) => {
                                 const nowval = e.target.value > 90;
                                 if (nowval) {
@@ -1144,7 +1152,7 @@ const Independentbuilder = () => {
                                     });
                                 }
                                 else {
-                                    setTotalFloors(e.target.value);
+                                    setTotalFloors(NumericString(e.target.value));
                                 }
                             }}
                             required
@@ -1375,10 +1383,11 @@ const Independentbuilder = () => {
                                 textAlign={"left"}
                             >
                                 {isCountry.country == "india" ? "₹" : "$"} Price Details
-                            </Heading>
+                            </Heading> 
                             <Input
                                 type="text"
                                 value={pricedetail}
+                                maxLength={"10"} 
                                 required
                                 onChange={(e) => {
                                     setPricedetail(NumericString(e.target.value));
@@ -1394,10 +1403,7 @@ const Independentbuilder = () => {
                                 textAlign={"left"}
                             >
                                 {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
-                            </Heading>
-                            <Input 
-                                value={priceSqr}  
-                                type="text" />
+                            </Heading> 
                         </Box>
                     </Box>
                 </Box>
@@ -1441,22 +1447,22 @@ const Independentbuilder = () => {
                     <Heading as={"h4"} size={"sm"} margin={"10px 0"} fontWeight={700} textAlign={"left"}>
                         Additional Pricing Detail (Optional)
                     </Heading>
-                    <InputGroup w={"300px"} margin={"10px 0"}>
-                        <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(NumericString(e.target.value))} value={maintenancePrice} placeholder={"Maintenance Price"} />
+                    <InputGroup w={"300px"}  margin={"10px 0"}>
+                        <Input w={"60%"} type='text' maxLength={"10"} onChange={(e) => setMaintenancePrice(NumericString(e.target.value))} value={maintenancePrice} placeholder={"Maintenance Price"} />
                         <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
                             <option value="Monthly">Monthly</option>
                             <option value="Yearly">Yearly</option> 
                         </Select>
                     </InputGroup>
                     {additionalPrice && <>
-                        <Input type="text" w={"300px"} value={expectedRentel} onChange={(e) => setExpectedRentel(NumericString(e.target.value))} placeholder="Expected rental" margin={"0"} />
-                        <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(NumericString(e.target.value))} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-                        <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(NumericString(e.target.value))} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
+                        <Input type="text" w={"300px"} maxLength={"10"} value={expectedRentel} onChange={(e) => setExpectedRentel(NumericString(e.target.value))} placeholder="Expected rental" margin={"0"} />
+                        <Input type="text" w={"300px"} maxLength={"10"} value={bookingAmount} onChange={(e) => setBookingAmount(NumericString(e.target.value))} placeholder="Booking Amount" margin={"10px 0 0 0"} />
+                        <Input type="text" w={"300px"} maxLength={"10"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(NumericString(e.target.value))} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
                     </>
                     }
                     <Heading
                         as={"h3"}
-                        size={"sm"}
+                        size={"sm"} 
                         margin={"10px 0"}
                         color={"#002aff"}
                         fontWeight={500}
@@ -2140,7 +2146,7 @@ const Independentbuilder = () => {
                     Width of facing road
                 </Heading>
                 <Box display={"flex"} gap={"20px"} w={"300px"} >
-                    <Input type="text" variant='flushed' flex={1} required value={facingwidth} onChange={(e) => {
+                    <Input type="text" variant='flushed' maxLength={"8"} flex={1} required value={facingwidth} onChange={(e) => {
                         e.preventDefault();
                         setFacingWidth(NumericString(e.target.value));
                     }} />

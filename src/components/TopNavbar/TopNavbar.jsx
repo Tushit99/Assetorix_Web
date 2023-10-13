@@ -330,7 +330,7 @@ const TopNavbar = () => {
                     </Popover>
                     {/* Sell */}
                     <Link onClick={handlePageSell} to={"/post"}>
-                        Sell
+                        Post Property
                     </Link>
                     <Link>Home Loans</Link>
                     {/* Rent button */}
@@ -377,10 +377,10 @@ const TopNavbar = () => {
                                                 </Checkbox>
                                                 <Checkbox onChange={() => handleresrent("Plot / Land")} isChecked={resRentArr.includes("Plot / Land")} iconSize={"0px"} colorScheme={"blue"}>
                                                     Plot/Land
-                                                </Checkbox> 
+                                                </Checkbox>
                                                 <Checkbox onChange={() => handleresrent("1RK / Studio Apartment")} isChecked={resRentArr.includes("1RK / Studio Apartment")} iconSize={"0px"} colorScheme={"blue"}>
                                                     1 RK/ Studio Apartment
-                                                </Checkbox> 
+                                                </Checkbox>
                                                 <Checkbox onChange={() => handleresrent("Farmhouse")} isChecked={resRentArr.includes("Farmhouse")} iconSize={"0px"} colorScheme={"blue"}>
                                                     Farmhouse
                                                 </Checkbox>

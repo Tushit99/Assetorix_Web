@@ -1,13 +1,11 @@
-import { Box, Button, Divider, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Flex, Heading, Image, InputGroup, Select, Text, Tooltip, useDisclosure, useToast } from '@chakra-ui/react';
+import { Box, Button, Divider, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, Flex, Heading, Image, Select, Text, Tooltip, useDisclosure, useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import style from "../ProductPage.module.css";
 import React, { useEffect, useRef, useState } from 'react'
 import { BsCheckLg } from "react-icons/bs";
 import { BiPlus } from "react-icons/bi";
 import { BsFillBookmarkHeartFill } from 'react-icons/bs';
-import { Link, useLocation, useSearchParams } from 'react-router-dom';
-import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
+import { Link, useLocation, useSearchParams } from 'react-router-dom'; 
 import LoadingBox from '../LoadingBox/LoadingBox';
 import { useDispatch, useSelector } from 'react-redux';
 import { residentialRent } from '../../../Redux/Propertysearch/action';
