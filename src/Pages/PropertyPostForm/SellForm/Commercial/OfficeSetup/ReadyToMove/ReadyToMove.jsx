@@ -5,9 +5,7 @@ import {
     ButtonGroup,
     Heading,
     Input,
-    InputGroup,
-    NumberInput,
-    NumberInputField,
+    InputGroup, 
     Select,
     Text,
     Textarea,
@@ -24,7 +22,7 @@ import style from "./ReadyToMove.module.css";
 import { useSelector } from "react-redux";
 import { AddIcon, ChevronDownIcon, MinusIcon } from "@chakra-ui/icons";
 import axios from "axios";
-import { CleanInputText } from "../../../../code";
+import { CleanInputText, NumericString, WordandNumber } from "../../../../code";
 
 
 const ReadyToMove = () => {
@@ -274,11 +272,12 @@ const ReadyToMove = () => {
     };
 
     const handlepinfetch = (e) => {
-        setPincode(e.target.value);
-        if (e.target.value.length == 6) {
-            pinfetch(e.target.value);
+        let val = NumericString(e.target.value);
+        setPincode(val);
+        if (val.length == 6) {
+            pinfetch(val);
         } else {
-            console.log(e.target.value);
+            console.log(val);
         }
     };
 
@@ -468,8 +467,9 @@ const ReadyToMove = () => {
                 <Input
                     type="text"
                     placeholder={"Enter pincode"}
-                    padding={"0 10px"} 
+                    padding={"0 10px"}
                     required
+                    maxLength={6}
                     fontSize={"md"}
                     value={pincode}
                     onChange={handlepinfetch}
@@ -480,8 +480,9 @@ const ReadyToMove = () => {
                     required
                     placeholder="Locality"
                     list="browsers"
+                    maxLength={"100"}
                     value={locality}
-                    onChange={(e) => setLocality(e.target.value)}
+                    onChange={(e) => setLocality(WordandNumber(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
                 />
@@ -501,8 +502,9 @@ const ReadyToMove = () => {
                     required
                     placeholder="Enter City"
                     fontSize={"md"}
+                    maxLength={"100"}
                     value={city}
-                    onChange={(e) => setCity(e.target.value)}
+                    onChange={(e) => setCity(WordandNumber(e.target.value))}
                     variant="flushed"
                 />
                 <Input
@@ -511,7 +513,8 @@ const ReadyToMove = () => {
                     required
                     placeholder="Enter State"
                     value={state}
-                    onChange={(e) => setState(e.target.value)}
+                    maxLength={"100"}
+                    onChange={(e) => setState(WordandNumber(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
                 />
@@ -522,7 +525,8 @@ const ReadyToMove = () => {
                     required
                     placeholder="Enter Country"
                     value={country}
-                    onChange={(e) => setCountry(e.target.value)}
+                    maxLength={"100"}
+                    onChange={(e) => setCountry(WordandNumber(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
                 />
@@ -545,17 +549,16 @@ const ReadyToMove = () => {
                         isAttached
                         variant="outline"
                     >
-                        <NumberInput>
-                            <NumberInputField
-                                padding={"0 2px"}
-                                value={plotArea}
-                                onChange={(e) => {
-                                    areaCalucation();
-                                    setPlotArea(e.target.value);
-                                }}
-                                required
-                            />
-                        </NumberInput>
+                        <Input
+                            type="text"
+                            maxLength={"10"}
+                            value={plotArea}
+                            onChange={(e) => {
+                                areaCalucation();
+                                setPlotArea(e.target.value);
+                            }}
+                            required
+                        />
                         <select
                             value={areaPer}
                             onChange={(e) => {
@@ -598,21 +601,24 @@ const ReadyToMove = () => {
                     <Box>
                         <Input
                             type="text"
+                            maxLength={"12"}
                             placeholder="Min no. of Seats"
                             value={minseat}
-                            onChange={(e) => setMinseat(e.target.value)}
+                            onChange={(e) => setMinseat(NumericString(e.target.value))}
                         />
                         <Input
                             type="text"
+                            maxLength={"12"}
                             placeholder="Max no. of Seats (optional)"
                             value={maxseat}
-                            onChange={(e) => setMaxseat(e.target.value)}
+                            onChange={(e) => setMaxseat(NumericString(e.target.value))}
                         />
                         <Input
                             type="text"
+                            maxLength={"12"}
                             placeholder="No. of Cabins"
                             value={cabins}
-                            onChange={(e) => setCabins(e.target.value)}
+                            onChange={(e) => setCabins(NumericString(e.target.value))}
                         />
                     </Box>
                 </Box>
@@ -631,7 +637,8 @@ const ReadyToMove = () => {
                             type="text"
                             placeholder="No. of Meeting Rooms"
                             value={meetingRoom}
-                            onChange={(e) => setMeetingRoom(e.target.value)}
+                            maxLength={"10"}
+                            onChange={(e) => setMeetingRoom(NumericString(e.target.value))}
                         />
                     </Box>
                 </Box>
@@ -828,9 +835,9 @@ const ReadyToMove = () => {
                     </Box>
                     <Box display={(pantryType == "Private" || pantryType == "Shared") ? "flex" : "none"}>
                         <InputGroup w={340} >
-                            <Input type="text" border={"1px solid rgb(222, 222, 255)"}
+                            <Input type="text" maxLength={"10"} border={"1px solid rgb(222, 222, 255)"}
                                 value={pantrySize}
-                                onChange={(e) => setPantrySize(e.target.value)}
+                                onChange={(e) => setPantrySize(NumericString(e.target.value))}
                                 _hover={{ backgroundColor: "#fffff" }}
                                 backgroundColor={"white"} variant={"filled"} flex={4} placeholder="Pantry Size (optional)" />
                             <Select variant={"filled"}
@@ -936,30 +943,25 @@ const ReadyToMove = () => {
                         Total no of floors and your floor details
                     </Text>
                     <Box display={"flex"} alignItems={"center"} gap={5}>
-                        <NumberInput value={totalfloors} className={style.input_borders}>
-                            <NumberInputField
-                                borderLeft={0}
-                                borderRight={0}
-                                borderTop={0}
-                                borderBottom={"1px solid #4f5bffcf"}
-                                borderRadius={0}
-                                onChange={(e) => {
-                                    const nowval = e.target.value > 90;
-                                    if (nowval) {
-                                        toast({
-                                            title: "Maximum floor count: 90",
-                                            status: "error",
-                                            duration: 2000,
-                                            position: "top-right",
-                                        });
-                                    } else {
-                                        setTotalFloors(e.target.value);
-                                    }
-                                }}
-                                required
-                                w={180}
-                            />
-                        </NumberInput>
+                        <Input
+                            type="text"
+                            value={totalfloors}
+                            onChange={(e) => {
+                                const nowval = e.target.value > 90;
+                                if (nowval) {
+                                    toast({
+                                        title: "Maximum floor count: 90",
+                                        status: "error",
+                                        duration: 2000,
+                                        position: "top-right",
+                                    });
+                                } else {
+                                    setTotalFloors(e.target.value);
+                                }
+                            }}
+                            required
+                            w={180}
+                        />
                         <Box>
                             <Menu>
                                 <MenuButton backgroundColor={"white"}
@@ -996,7 +998,14 @@ const ReadyToMove = () => {
                     <Heading as={"h3"} size={"md"}>
                         No. of Staircases (Optional)
                     </Heading>
-                    <Input width={300} type="text" placeholder="No. of Staircases" variant={"flushed"} onChange={(e) => setStairCase(e.target.value)} value={stairCase} />
+                    <Input
+                        width={300}
+                        type="text"
+                        placeholder="No. of Staircases"
+                        variant={"flushed"}
+                        maxLength={"12"}
+                        onChange={(e) => setStairCase(NumericString(e.target.value))}
+                        value={stairCase} />
                 </Box>
                 {/* Lift */}
                 <Box textAlign={"left"} className={style.optional_box}>
@@ -1084,16 +1093,21 @@ const ReadyToMove = () => {
                             setParkingStatus(e.target.value);
                         }} className={parkingStatus == "Not-Available" ? style.setbtn : style.btn} >Not-Available</button>
                     </Box>
-                    <Box display={parkingStatus == "Available" ? "grid":"none"} gap={2}>
+                    <Box display={parkingStatus == "Available" ? "grid" : "none"} gap={2}>
                         <Box display={"flex"} flexWrap={"wrap"} gap={4} alignItems={"center"} >
                             <Checkbox onChange={handleNumberOfParking} value={"Private Parking in Basement"} isChecked={parkingArr.includes("Private Parking in Basement")} >Private Parking in Basement</Checkbox>
                             <Checkbox onChange={handleNumberOfParking} value={"Private Parking Outside"} isChecked={parkingArr.includes("Private Parking Outside")} >Private Parking Outside</Checkbox>
                             <Checkbox onChange={handleNumberOfParking} value={"Private Parking Outside"} isChecked={parkingArr.includes("Private Parking Outside")} >Public Parking</Checkbox>
                         </Box>
-                        <Input type="text" placeholder="Enter no. of Parkings" value={parkingTotalNumber} onChange={(e) => {
-                            e.preventDefault();
-                            setParkingTotalNumber(e.target.value);
-                        }} />
+                        <Input
+                            type="text"
+                            placeholder="Enter no. of Parkings"
+                            value={parkingTotalNumber}
+                            maxLength={"4"}
+                            onChange={(e) => {
+                                e.preventDefault();
+                                setParkingTotalNumber(NumericString(e.target.value));
+                            }} />
                     </Box>
                 </Box>
                 {/* Availability status */}
@@ -1293,32 +1307,17 @@ const ReadyToMove = () => {
                             >
                                 {isCountry.country == "india" ? "₹" : "$"} Price Details
                             </Heading>
-                            <NumberInput >
-                                <NumberInputField
-                                    value={pricedetail}
-                                    required
-                                    onChange={(e) => {
-                                        setPricedetail(e.target.value);
-                                        areaCalucation();
-                                    }}
-                                />
-                            </NumberInput>
-                        </Box>
-                        {/* <Box display={"grid"} gap={0}>
-                            <Heading
-                                as={"h3"}
-                                size={"xs"}
-                                fontWeight={400}
-                                textAlign={"left"}
-                            >
-                                {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
-                            </Heading>
-                            <NumberInput value={priceSqr}>
-                                <NumberInputField
-
-                                />
-                            </NumberInput>
-                        </Box> */}
+                            <Input
+                                type="text"
+                                value={pricedetail} 
+                                maxLength={"10"}
+                                required
+                                onChange={(e) => {
+                                    setPricedetail(NumericString(e.target.value));
+                                    areaCalucation();
+                                }}
+                            /> 
+                        </Box> 
                     </Box>
                 </Box>
                 <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
@@ -1371,8 +1370,9 @@ const ReadyToMove = () => {
                     <InputGroup w={"300px"} margin={"10px 0"}>
                         <Input
                             w={"60%"}
-                            type="text"
-                            onChange={(e) => setMaintenancePrice(e.target.value)}
+                            type="text" 
+                            maxLength={"12"}
+                            onChange={(e) => setMaintenancePrice(NumericString(e.target.value))}
                             value={maintenancePrice}
                             placeholder={"Maintenance Price"}
                         />
@@ -1424,20 +1424,20 @@ const ReadyToMove = () => {
                         Lease / Rent related details Of your property
                     </Heading>
                     <Box>
-                        <Input type="text" value={currentRentPerMonth} onChange={(e) => {
+                        <Input type="text" maxLength={"12"} value={currentRentPerMonth} onChange={(e) => {
                             e.preventDefault();
                             setCurrentRentPerMonth(e.target.value);
                         }} placeholder={"₹ Current rent per month"} />
-                        <Input type="text" value={leaseTenureInYear} onChange={(e) => {
+                        <Input type="text" maxLength={"12"} value={leaseTenureInYear} onChange={(e) => {
                             e.preventDefault();
                             setLeaseTenureInYear((e.target.value));
                         }} placeholder={"₹ Current rent per month"} />
                         <Box>
-                            <Input type="text" value={annualRentIncrease} onChange={(e) => {
+                            <Input type="text" maxLength={"12"} value={annualRentIncrease} onChange={(e) => {
                                 e.preventDefault();
                                 setAnnualRentIncrease((e.target.value));
                             }} placeholder="Annual rent increase in % (Optional)" />
-                            <Input type="text" value={businessType} onChange={(e) => {
+                            <Input type="text" maxLength={"100"} value={businessType} onChange={(e) => {
                                 e.preventDefault();
                                 setBusinessType((e.target.value));
                             }} placeholder="Leased to - Business Type (Optional)" />

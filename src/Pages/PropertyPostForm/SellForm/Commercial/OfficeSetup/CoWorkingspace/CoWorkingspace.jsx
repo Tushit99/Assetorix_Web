@@ -522,11 +522,7 @@ const CoWorkingspace = () => {
                                 areaCalucation();
                             }}
                             required
-                        />
-                        <NumberInput>
-                            <NumberInputField
-                            />
-                        </NumberInput>
+                        /> 
                         <Select
                             value={areaPer}
                             onChange={(e) => {
@@ -756,7 +752,8 @@ const CoWorkingspace = () => {
                             </Heading>
                             <Input
                                 type="text"
-                                value={pricedetail}
+                                value={pricedetail} 
+                                maxLength={"12"}
                                 required
                                 onChange={(e) => {
                                     areaCalucation();
@@ -829,7 +826,8 @@ const CoWorkingspace = () => {
                     <InputGroup w={"300px"} margin={"10px 0"}>
                         <Input
                             w={"60%"}
-                            type="text"
+                            type="text" 
+                            maxLength={"12"}
                             onChange={(e) => setMaintenancePrice(e.target.value)}
                             value={maintenancePrice}
                             placeholder={"Maintenance Price"}
@@ -845,9 +843,9 @@ const CoWorkingspace = () => {
                         </Select>
                     </InputGroup>
                     {additionalPrice && <>
-                        <Input type="text" w={"300px"} value={expectedRentel} onChange={(e) => setExpectedRentel(e.target.value)} placeholder="Expected rental" margin={"0"} />
-                        <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-                        <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
+                        <Input type="text" w={"300px"} maxLength={"12"} value={expectedRentel} onChange={(e) => setExpectedRentel(e.target.value)} placeholder="Expected rental" margin={"0"} />
+                        <Input type="text" w={"300px"} maxLength={"12"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
+                        <Input type="text" w={"300px"} maxLength={"12"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
                     </>
                     }
                     <Heading
@@ -899,20 +897,20 @@ const CoWorkingspace = () => {
                         Lease / Rent related details Of your property
                     </Heading>
                     <Box>
-                        <Input type="text" value={currentRentPerMonth} onChange={(e) => {
+                        <Input type="text" maxLength={"12"} value={currentRentPerMonth} onChange={(e) => {
                             e.preventDefault();
                             setCurrentRentPerMonth(e.target.value);
                         }} placeholder={"₹ Current rent per month"} />
-                        <Input type="text" value={leaseTenureInYear} onChange={(e) => {
+                        <Input type="text" maxLength={"12"} value={leaseTenureInYear} onChange={(e) => {
                             e.preventDefault();
                             setLeaseTenureInYear((e.target.value));
                         }} placeholder={"₹ Current rent per month"} />
                         <Box>
-                            <Input type="text" value={annualRentIncrease} onChange={(e) => {
+                            <Input type="text" maxLength={"12"} value={annualRentIncrease} onChange={(e) => {
                                 e.preventDefault();
                                 setAnnualRentIncrease((e.target.value));
                             }} placeholder="Annual rent increase in % (Optional)" />
-                            <Input type="text" value={businessType} onChange={(e) => {
+                            <Input type="text" maxLength={"55"} value={businessType} onChange={(e) => {
                                 e.preventDefault();
                                 setBusinessType((e.target.value));
                             }} placeholder="Leased to - Business Type (Optional)" />

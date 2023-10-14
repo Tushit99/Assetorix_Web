@@ -413,7 +413,8 @@ const IndustrialLand = () => {
             padding={"0 10px"}
             required
             placeholder="Plot number (optional)"
-            value={Plotnumber}
+            value={Plotnumber} 
+            maxLength={"20"}
             onChange={(e) => setPlotnumber(e.target.value)}
             fontSize={"md"}
             variant="flushed"
@@ -424,6 +425,7 @@ const IndustrialLand = () => {
             padding={"0 10px"}
             required
             fontSize={"md"}
+            maxLength={12}
             value={pincode}
             onChange={handlepinfetch}
           />
@@ -433,8 +435,9 @@ const IndustrialLand = () => {
             required
             placeholder="Locality"
             list="browsers"
-            value={locality}
-            onChange={(e) => setLocality(e.target.value)}
+            value={locality} 
+            maxLength={"100"}
+            onChange={(e) => setLocality(NumericString(e.target.value))}
             fontSize={"md"}
             variant="flushed"
           />
@@ -447,32 +450,32 @@ const IndustrialLand = () => {
           ) : ""}
 
           <Input
-            type="text"
-            padding={"0 10px"}
+            type="text" 
             required
             placeholder="Enter City"
             fontSize={"md"}
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
+            value={city} 
+            maxLength={"100"}
+            onChange={(e) => setCity(NumericString(e.target.value))}
             variant="flushed"
           />
           <Input
-            type="text"
-            padding={"0 10px"}
+            type="text" 
             required
             placeholder="Enter State"
-            value={state}
-            onChange={(e) => setState(e.target.value)}
+            value={state} 
+            maxLength={"100"}
+            onChange={(e) => setState(NumericString(e.target.value))}
             fontSize={"md"}
             variant="flushed"
           />
           <Input
-            type="text"
-            padding={"0 10px"}
+            type="text" 
             required
             placeholder="Enter Country"
-            value={country}
-            onChange={(e) => setCountry(e.target.value)}
+            value={country} 
+            maxLength={"100"}
+            onChange={(e) => setCountry(NumericString(e.target.value))}
             fontSize={"md"}
             variant="flushed"
           />
@@ -500,7 +503,7 @@ const IndustrialLand = () => {
           >
             <Input
               type="text"
-              padding={"0 2px"}
+              maxLength={"14"}
               value={plotArea}
               onChange={(e) => {
                 areaCalucation();
@@ -535,10 +538,10 @@ const IndustrialLand = () => {
         {/* ========================== Property Dimensions ========================== */}
         <Box as={"div"} textAlign={"left"} padding={"10px 0"} >
           <Heading as={"h3"} size={"md"} > Property Dimensions (Optional) </Heading>
-          <Input type={"text"} variant='flushed' padding={"0 6px"} margin={"4px 0"} value={plotLength} onChange={(e) => {
+          <Input type={"text"} maxLength={"12"} variant='flushed' margin={"4px 0"} value={plotLength} onChange={(e) => {
             setplotLength(NumericString(e.target.value));
           }} placeholder={`Length of plot (in ${areaPer})`} />
-          <Input type={"text"} variant='flushed' padding={"0 6px"} margin={"4px 0"} value={plotBreadth} onChange={(e) => {
+          <Input type={"text"} maxLength={"12"} variant='flushed' margin={"4px 0"} value={plotBreadth} onChange={(e) => {
             setPlotBreadth(NumericString(e.target.value));
           }} placeholder={`Breadth of plot (in ${areaPer})`} />
         </Box>
@@ -549,9 +552,9 @@ const IndustrialLand = () => {
             Width of facing road
           </Heading>
           <Box display={"flex"} gap={"20px"} w={"300px"} >
-            <Input type="text" variant='flushed' flex={1} required value={facingwidth} onChange={(e) => {
+            <Input type="text" variant='flushed' maxLength={"12"} flex={1} required value={facingwidth} onChange={(e) => {
               e.preventDefault();
-              setFacingWidth(e.target.value);
+              setFacingWidth(NumericString(e.target.value));
             }} />
             <Select flex={1} onChange={(e) => setFacing(e.target.value)} value={facing}>
               <option value="Meter"> Meter </option>
@@ -847,29 +850,14 @@ const IndustrialLand = () => {
                 <Input
                   type="text"
                   value={pricedetail}
+                  maxLength={"12"}
                   required
                   onChange={(e) => {
-                    setPricedetail(e.target.value);
+                    setPricedetail(NumericString(e.target.value));
                     areaCalucation();
                   }}
                 />
-              </Box>
-              <Box display={"grid"} gap={0}>
-                <Heading
-                  as={"h3"}
-                  size={"xs"}
-                  fontWeight={400}
-                  textAlign={"left"}
-                >
-                  {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
-                </Heading>
-                <NumberInput value={priceSqr}>
-                  <NumberInputField
-
-
-                  />
-                </NumberInput>
-              </Box>
+              </Box> 
             </Box>
           </Box>
           <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
@@ -910,14 +898,14 @@ const IndustrialLand = () => {
           <Box display={"grid"}>
             {additionalPrice && <>
               <InputGroup w={"300px"} margin={"10px 0"}>
-                <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
+                <Input w={"60%"} type='text' maxLength={"12"} onChange={(e) => setMaintenancePrice((NumericString))} value={maintenancePrice} placeholder={"Maintenance Price"} />
                 <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
                   <option value="Monthly">Monthly</option>
                   <option value="Yearly">Yearly</option>
                 </Select>
               </InputGroup>
-              <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-              <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
+              <Input type="text" maxLength={"12"} w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(NumericString(e.target.value))} placeholder="Booking Amount" margin={"10px 0 0 0"} />
+              <Input type="text" maxLength={"12"} w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(NumericString(e.target.value))} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
             </>
             }
             <Heading
@@ -930,7 +918,7 @@ const IndustrialLand = () => {
               onClick={() => setAdditionalPrice(!additionalPrice)}
               textAlign={"left"}>
               {additionalPrice ? <IoIosArrowUp style={{ display: "inline" }} /> : <IoIosArrowDown style={{ display: "inline" }} />} Add more pricing details
-            </Heading>
+            </Heading> 
           </Box>
         </Box>
 
@@ -953,22 +941,22 @@ const IndustrialLand = () => {
             }} className={preLeased == "No" ? style.setbtn : style.btn} > No </button>
           </Box>
           <Box display={preLeased == "Yes" ? "block" : "none"}>
-            <Input type="text" value={currentRentPerMonth} onChange={(e) => {
+            <Input type="text" maxLength="12" maxLength={"12"} value={currentRentPerMonth} onChange={(e) => {
               e.preventDefault();
-              setCurrentRentPerMonth(e.target.value);
+              setCurrentRentPerMonth(NumericString(e.target.value));
             }} placeholder={"₹ Current rent per month"} />
-            <Input type="text" value={leaseTenureInYear} onChange={(e) => {
+            <Input type="text" maxLength="12" maxLength={"12"} value={leaseTenureInYear} onChange={(e) => {
               e.preventDefault();
-              setLeaseTenureInYear((e.target.value));
+              setLeaseTenureInYear(NumericString(e.target.value));
             }} placeholder={"Lease tenure in years"} />
             <Box>
-              <Input type="text" value={annualRentIncrease} onChange={(e) => {
+              <Input type="text" maxLength="12" maxLength={"12"} value={annualRentIncrease} onChange={(e) => {
                 e.preventDefault();
-                setAnnualRentIncrease((e.target.value));
+                setAnnualRentIncrease(NumericString(e.target.value));
               }} placeholder="Annual rent increase in % (Optional)" />
-              <Input type="text" value={businessType} onChange={(e) => {
+              <Input type="text" maxLength="100" maxLength={"100"} value={businessType} onChange={(e) => {
                 e.preventDefault();
-                setBusinessType((e.target.value));
+                setBusinessType(NumericString(e.target.value));
               }} placeholder="Leased to - Business Type (Optional)" />
             </Box>
           </Box>

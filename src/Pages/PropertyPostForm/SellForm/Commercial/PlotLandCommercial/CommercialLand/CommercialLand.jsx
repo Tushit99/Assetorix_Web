@@ -8,9 +8,7 @@ import {
   InputGroup,
   Menu,
   MenuButton,
-  MenuList,
-  NumberInput,
-  NumberInputField,
+  MenuList,  
   Select,
   Text,
   Textarea,
@@ -21,7 +19,7 @@ import style from "../PlotLandCommercial.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
-import { CleanInputText, NumericString } from "../../../../code";
+import { CleanInputText, NumericString, WordandNumber } from "../../../../code";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 
 
@@ -232,13 +230,14 @@ const CommercialLand = () => {
     }
   };
 
-  const handlepinfetch = (e) => {
-    setPincode(e.target.value);
-    if (e.target.value.length == 6) {
-      pinfetch(e.target.value);
+  const handlepinfetch = (e) => { 
+    let val = e.target.value; 
+    setPincode(val);
+    if (val.length == 6) {
+      pinfetch(val);
     }
     else {
-      console.log(e.target.value);
+      console.log(val);
     }
   }
 
@@ -413,9 +412,9 @@ const CommercialLand = () => {
           </Heading>
 
           <Input
-            type="text"
-            padding={"0 10px"}
-            required
+            type="text" 
+            required 
+            maxLength={"55"}
             placeholder="Plot number (optional)"
             value={Plotnumber}
             onChange={(e) => setPlotnumber(e.target.value)}
@@ -424,21 +423,21 @@ const CommercialLand = () => {
           />
           <Input
             type="text"
-            placeholder={"Enter pincode"}
-            padding={"0 10px"}
+            placeholder={"Enter pincode"} 
             required
             fontSize={"md"}
-            value={pincode}
+            value={pincode} 
+            maxLength={"6"}
             onChange={handlepinfetch}
           />
           <Input
-            type="text"
-            padding={"0 10px"}
+            type="text" 
             required
             placeholder="Locality"
             list="browsers"
+            maxLength={"10"}
             value={locality}
-            onChange={(e) => setLocality(e.target.value)}
+            onChange={(e) => setLocality(WordandNumber(e.target.value))}
             fontSize={"md"}
             variant="flushed"
           />
@@ -451,32 +450,32 @@ const CommercialLand = () => {
           ) : ""}
 
           <Input
-            type="text"
-            padding={"0 10px"}
+            type="text" 
             required
             placeholder="Enter City"
+            maxLength={"10"}
             fontSize={"md"}
             value={city}
-            onChange={(e) => setCity(e.target.value)}
+            onChange={(e) => setCity(WordandNumber(e.target.value))}
             variant="flushed"
           />
           <Input
-            type="text"
-            padding={"0 10px"}
+            type="text" 
+            maxLength={"10"}
             required
             placeholder="Enter State"
             value={state}
-            onChange={(e) => setState(e.target.value)}
+            onChange={(e) => setState(WordandNumber(e.target.value))}
             fontSize={"md"}
             variant="flushed"
           />
           <Input
             type="text"
-            padding={"0 10px"}
+            maxLength={"10"} 
             required
             placeholder="Enter Country"
             value={country}
-            onChange={(e) => setCountry(e.target.value)}
+            onChange={(e) => setCountry(WordandNumber(e.target.value))}
             fontSize={"md"}
             variant="flushed"
           />
@@ -503,8 +502,7 @@ const CommercialLand = () => {
             variant="outline"
           >
             <Input
-              type="text"
-              padding={"0 2px"}
+              type="text" 
               value={plotArea}
               onChange={(e) => {
                 areaCalucation();
@@ -539,10 +537,10 @@ const CommercialLand = () => {
         {/* ========================== Property Dimensions ========================== */}
         <Box as={"div"} textAlign={"left"} padding={"10px 0"} >
           <Heading as={"h3"} size={"md"} > Property Dimensions (Optional) </Heading>
-          <Input type={"text"} variant='flushed' padding={"0 6px"} margin={"4px 0"} value={plotLength} onChange={(e) => {
+          <Input type={"text"} variant='flushed' maxLength={"12"} padding={"0 6px"} margin={"4px 0"} value={plotLength} onChange={(e) => {
             setplotLength(NumericString(e.target.value));
           }} placeholder={`Length of plot (in ${areaPer})`} />
-          <Input type={"text"} variant='flushed' padding={"0 6px"} margin={"4px 0"} value={plotBreadth} onChange={(e) => {
+          <Input type={"text"} variant='flushed' maxLength={"12"} padding={"0 6px"} margin={"4px 0"} value={plotBreadth} onChange={(e) => {
             setPlotBreadth(NumericString(e.target.value));
           }} placeholder={`Breadth of plot (in ${areaPer})`} />
         </Box>
@@ -553,9 +551,9 @@ const CommercialLand = () => {
             Width of facing road
           </Heading>
           <Box display={"flex"} gap={"20px"} w={"300px"} >
-            <Input type="text" variant='flushed' flex={1} required value={facingwidth} onChange={(e) => {
+            <Input type="text" variant='flushed' maxLength={"12"} flex={1} required value={facingwidth} onChange={(e) => {
               e.preventDefault();
-              setFacingWidth(e.target.value);
+              setFacingWidth(NumericString(e.target.value));
             }} />
             <Select flex={1} onChange={(e) => setFacing(e.target.value)} value={facing}>
               <option value="Meter"> Meter </option>
@@ -852,28 +850,13 @@ const CommercialLand = () => {
                   type="text"
                   value={pricedetail}
                   required
+                  maxLength={"12"}
                   onChange={(e) => {
-                    setPricedetail(e.target.value);
+                    setPricedetail(NumericString(e.target.value));
                     areaCalucation();
                   }}
                 />
-              </Box>
-              <Box display={"grid"} gap={0}>
-                <Heading
-                  as={"h3"}
-                  size={"xs"}
-                  fontWeight={400}
-                  textAlign={"left"}
-                >
-                  {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
-                </Heading>
-                <NumberInput value={priceSqr}>
-                  <NumberInputField
-
-
-                  />
-                </NumberInput>
-              </Box>
+              </Box> 
             </Box>
           </Box>
           <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
@@ -914,14 +897,14 @@ const CommercialLand = () => {
           <Box display={"grid"}>
             {additionalPrice && <>
               <InputGroup w={"300px"} margin={"10px 0"}>
-                <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
+                <Input w={"60%"} type='text' maxLength={"12"} onChange={(e) => setMaintenancePrice(NumericString(e.target.value))} value={maintenancePrice} placeholder={"Maintenance Price"} />
                 <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
                   <option value="Monthly">Monthly</option>
                   <option value="Yearly">Yearly</option>
                 </Select>
               </InputGroup>
-              <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-              <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
+              <Input type="text" maxLength={"12"} w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(NumericString(e.target.value))} placeholder="Booking Amount" margin={"10px 0 0 0"} />
+              <Input type="text" maxLength={"12"} w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(NumericString(e.target.value))} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
             </>
             }
             <Heading
@@ -957,22 +940,22 @@ const CommercialLand = () => {
             }} className={preLeased == "No" ? style.setbtn : style.btn} > No </button>
           </Box>
           <Box display={preLeased == "Yes" ? "block" : "none"}>
-            <Input type="text" value={currentRentPerMonth} onChange={(e) => {
+            <Input type="text" maxLength={"12"} value={currentRentPerMonth} onChange={(e) => {
               e.preventDefault();
-              setCurrentRentPerMonth(e.target.value);
+              setCurrentRentPerMonth(NumericString(e.target.value));
             }} placeholder={"₹ Current rent per month"} />
-            <Input type="text" value={leaseTenureInYear} onChange={(e) => {
+            <Input type="text" maxLength={"12"} value={leaseTenureInYear} onChange={(e) => {
               e.preventDefault();
-              setLeaseTenureInYear((e.target.value));
+              setLeaseTenureInYear(NumericString(e.target.value));
             }} placeholder={"Lease tenure in years"} />
             <Box>
-              <Input type="text" value={annualRentIncrease} onChange={(e) => {
+              <Input type="text" maxLength={"12"} value={annualRentIncrease} onChange={(e) => {
                 e.preventDefault();
-                setAnnualRentIncrease((e.target.value));
+                setAnnualRentIncrease(NumericString(e.target.value));
               }} placeholder="Annual rent increase in % (Optional)" />
-              <Input type="text" value={businessType} onChange={(e) => {
+              <Input type="text" maxLength={"100"} value={businessType} onChange={(e) => {
                 e.preventDefault();
-                setBusinessType((e.target.value));
+                setBusinessType(NumericString(e.target.value));
               }} placeholder="Leased to - Business Type (Optional)" />
             </Box>
           </Box>
