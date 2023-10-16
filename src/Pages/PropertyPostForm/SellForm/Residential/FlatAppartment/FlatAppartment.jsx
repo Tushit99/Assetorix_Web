@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
     Box,
     Button,
@@ -79,10 +79,9 @@ const FlatAppartment = () => {
     const [bookingAmount, setBookingAmount] = useState("");
     const [membershipCharge, setMembershipCharge] = useState("");
     // state for drop box images
-    const [dragging, setDragging] = useState(false);
-    const [image, setImage] = useState(null);
-  
-
+    const [images, setImages] = useState([]);
+    const [isDraging, setIsDraging] = useState(false);
+    const fileInputRef = useRef(null);
 
 
     const handleSubmitData = async (e) => {
@@ -500,43 +499,68 @@ const FlatAppartment = () => {
     }
 
     // select image and save image  
-    const handleDragEnter = (e) => {
-        e.preventDefault();
-        setDragging(true);
-      };
-    
-      const handleDragLeave = (e) => {
-        e.preventDefault();
-        setDragging(false);
-      };
-    
-      const handleDrop = (e) => {
-        e.preventDefault();
-        setDragging(false);
-        const droppedImage = e.dataTransfer.files[0];
-        if (droppedImage) {
-          const reader = new FileReader();
-          reader.onload = (event) => {
-            setImage(event.target.result);
-          };
-          reader.readAsDataURL(droppedImage);
+
+    const selectFiles = () => {
+        fileInputRef.current.click();
+    }
+
+    const onFileSelect = (e) => {
+        let files = e.target.files;
+        if (files.length === 0) {
+            return
         }
-      };
-    
-      const handleImageUpload = (e) => {
-        const uploadedImage = e.target.files[0];
-        if (uploadedImage) {
-          const reader = new FileReader();
-          reader.onload = (event) => {
-            setImage(event.target.result);
-          };
-          reader.readAsDataURL(uploadedImage);
+        for (let i = 0; i < files.length; i++) {
+            if (files[i].type.split('/')[0] !== 'image') {
+                continue;
+            }
+            if (!images.some((e) => e.name === files[i].name)) {
+                setImages((prev) => [...prev, {
+                    name: files[i].name,
+                    url: URL.createObjectURL(files[i]),
+                },])
+            }
         }
-      };
-    
-      const handlecancle = () => {
-        setImage(null);
-      };
+    }
+
+    const handleDeleteImage = (index) => {
+        setImages((prev) =>
+            prev.filter((_, i) => i !== index)
+        )
+    }
+
+    const ondragleave = (event) => {
+        event.preventDefault();
+        setIsDraging(false);
+        console.log("leave")
+    }
+
+    const ondragover = (event) => {
+        event.preventDefault();
+        setIsDraging(true);
+        event.dataTransfer.dropEffect = "copy";
+        console.log("over the box");
+    }
+
+    const ondrop = (event) => {
+        event.preventDefault(); // Add this line
+        setIsDraging(false);
+        const files = event.dataTransfer.files;
+        if (files.length === 0) {
+            return;
+        }
+        for (let i = 0; i < files.length; i++) {
+            if (files[i].type.split('/')[0] !== 'image') {
+                continue;
+            }
+            if (!images.some((e) => e.name === files[i].name)) {
+                setImages((prev) => [...prev, {
+                    name: files[i].name,
+                    url: URL.createObjectURL(files[i]),
+                }]);
+            }
+        }
+        console.log("droped");
+    }
 
     // const createtemplatefloors = () => {
     //     let options = "";
@@ -556,9 +580,9 @@ const FlatAppartment = () => {
         <form onSubmit={handleSubmitData}>
             {/* property location */}
             <Box className={style.location_form}>
-                <Heading size={"lg"}>Where is your property located?</Heading>
+                <Heading size={"lg"}>Where is your Flat / Appartment located?</Heading>
                 <Heading size={"sm"}>
-                    An accurate location helps you connect with the right buyers.
+                    Location Detail
                 </Heading>
 
                 <Input
@@ -590,6 +614,7 @@ const FlatAppartment = () => {
                     required
                     maxLength={"7"}
                     fontSize={"md"}
+                    variant="flushed"
                     value={pincode}
                     onChange={handlepinfetch}
                 />
@@ -1457,6 +1482,32 @@ const FlatAppartment = () => {
                     </Checkbox>
                 </Box>
 
+                {/* image Drag and Drop area  */}
+                <Box className={style.top}>
+                    <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0 5px 0"} > Upload Your Property image </Heading>
+                </Box>
+                <Box className={style.card}>
+                    <Box className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+                        {isDraging ? (
+                            <Text className={style.select}>Drop image here</Text>
+                        ) : (
+                            <>
+                                Drag & Drop image here or
+                                <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
+                            </>
+                        )}
+                        <input type={"file"} name='file' className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+                    </Box>
+                    <Box className={style.container}>
+                        {images.map((image, index) => (
+                            <Box className={style.image} key={index}>
+                                <img src={image.url} alt={`images ${images.name}`} />
+                                <Text className={style.delete} onClick={() => handleDeleteImage(index)}> &times; </Text>
+                            </Box>
+                        ))}
+                    </Box>
+                </Box>
+
                 {/* Additional Pricing Detail (Optional) */}
                 <Box display={"grid"}>
                     {additionalPrice && <>
@@ -1490,7 +1541,7 @@ const FlatAppartment = () => {
                 </Box>
 
                 <Box>
-                    <Heading as={"h3"} size={"md"} marginTop={2} textAlign={"left"}>
+                    <Heading as={"h3"} size={"sm"} marginTop={2} textAlign={"left"}>
                         What makes your property unique
                     </Heading>
                     <Text fontSize={"sm"} textAlign={"left"} >
@@ -1501,12 +1552,12 @@ const FlatAppartment = () => {
                         setDesc(my_cleantext);
                     }} ></Textarea>
                 </Box>
-            </Box> 
+            </Box>
 
 
             {/* Add amenities/unique features */}
-            <Box> 
-                <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+            <Box>
+                <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                     Add amenities/unique features
                 </Heading>
                 <Heading as={"h5"} size={"xs"} fontWeight={400} margin={"10px 0"} textAlign={"left"}>
@@ -1515,7 +1566,7 @@ const FlatAppartment = () => {
             </Box>
             {/* Amenities */}
             <Box className={style.optional_box}>
-                <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                     Amenities
                 </Heading>
                 <Box>
@@ -1602,7 +1653,7 @@ const FlatAppartment = () => {
             </Box>
             {/* Property Features */}
             <Box className={style.optional_box}>
-                <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                     Property Features
                 </Heading>
                 <Box>
@@ -1738,7 +1789,7 @@ const FlatAppartment = () => {
             </Box>
             {/* Society/Building feature */}
             <Box className={style.optional_box}>
-                <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                     Society/Building feature
                 </Heading>
                 <Box>
@@ -1818,7 +1869,7 @@ const FlatAppartment = () => {
             </Box>
             {/* Additional Features */}
             <Box className={style.optional_box}>
-                <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                     Additional Features
                 </Heading>
                 <Box>
@@ -1896,7 +1947,7 @@ const FlatAppartment = () => {
             </Box>
             {/* Water Source */}
             <Box className={style.optional_box}>
-                <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                     Water Source
                 </Heading>
                 <Box>
@@ -1941,7 +1992,7 @@ const FlatAppartment = () => {
             </Box>
             {/* Overlooking */}
             <Box className={style.optional_box}>
-                <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                     Overlooking
                 </Heading>
                 <Box>
@@ -1993,12 +2044,12 @@ const FlatAppartment = () => {
             </Box>
             {/* Other Features */}
             <Box>
-                <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                     Other Features
                 </Heading>
                 <Box display={"grid"} textAlign={"left"} gap={2}>
                     <Checkbox
-                        size={"lg"}
+                        size={"md"}
                         isChecked={otherFeature.includes("In a gated society")}
                         value={"In a gated society"}
                         onChange={handleotherfeature}
@@ -2007,7 +2058,7 @@ const FlatAppartment = () => {
                         In a gated society
                     </Checkbox>
                     <Checkbox
-                        size={"lg"}
+                        size={"md"}
                         isChecked={otherFeature.includes("Corner Property")}
                         value={"Corner Property"}
                         onChange={handleotherfeature}
@@ -2016,7 +2067,7 @@ const FlatAppartment = () => {
                         Corner Property
                     </Checkbox>
                     <Checkbox
-                        size={"lg"}
+                        size={"md"}
                         isChecked={otherFeature.includes("Pet Friendly")}
                         value={"Pet Friendly"}
                         onChange={handleotherfeature}
@@ -2025,7 +2076,7 @@ const FlatAppartment = () => {
                         Pet Friendly
                     </Checkbox>
                     <Checkbox
-                        size={"lg"}
+                        size={"md"}
                         isChecked={otherFeature.includes("Wheelchair friendly")}
                         value={"Wheelchair friendly"}
                         onChange={handleotherfeature}
@@ -2037,7 +2088,7 @@ const FlatAppartment = () => {
             </Box>
             {/* Power Back up */}
             <Box className={style.optional_box}>
-                <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                     Power Back up
                 </Heading>
                 <Box>
@@ -2078,7 +2129,7 @@ const FlatAppartment = () => {
             </Box>
             {/* Property facing */}
             <Box className={style.optional_box}>
-                <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                     Property facing
                 </Heading>
                 <Box>
@@ -2182,7 +2233,7 @@ const FlatAppartment = () => {
             </Box>
             {/* Type of flooring */}
             <Box className={style.optional_box}>
-                <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                     Type of flooring
                 </Heading>
                 <Box>
@@ -2210,7 +2261,7 @@ const FlatAppartment = () => {
             </Box>
             {/* Width of facing road */}
             <Box className={style.optional_box}>
-                <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                     Width of facing road
                 </Heading>
                 <Box display={"flex"} gap={"20px"} w={"300px"} >
@@ -2225,7 +2276,7 @@ const FlatAppartment = () => {
                 </Box>
             </Box>
             <Box className={style.optional_box}>
-                <Heading size={"md"} margin={"10px 0 4px 0"} textAlign={"left"}>
+                <Heading size={"sm"} margin={"10px 0 4px 0"} textAlign={"left"}>
                     Location Advantages
                     <Heading
                         size={"xs"}
