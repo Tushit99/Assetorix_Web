@@ -78,6 +78,10 @@ const FlatAppartment = () => {
     const [annualDuesPayble, setAnnualDuesPayble] = useState("");
     const [bookingAmount, setBookingAmount] = useState("");
     const [membershipCharge, setMembershipCharge] = useState("");
+    // state for drop box images
+    const [dragging, setDragging] = useState(false);
+    const [image, setImage] = useState(null);
+  
 
 
 
@@ -494,6 +498,45 @@ const FlatAppartment = () => {
             setPriceSqr(ans);
         }
     }
+
+    // select image and save image  
+    const handleDragEnter = (e) => {
+        e.preventDefault();
+        setDragging(true);
+      };
+    
+      const handleDragLeave = (e) => {
+        e.preventDefault();
+        setDragging(false);
+      };
+    
+      const handleDrop = (e) => {
+        e.preventDefault();
+        setDragging(false);
+        const droppedImage = e.dataTransfer.files[0];
+        if (droppedImage) {
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            setImage(event.target.result);
+          };
+          reader.readAsDataURL(droppedImage);
+        }
+      };
+    
+      const handleImageUpload = (e) => {
+        const uploadedImage = e.target.files[0];
+        if (uploadedImage) {
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            setImage(event.target.result);
+          };
+          reader.readAsDataURL(uploadedImage);
+        }
+      };
+    
+      const handlecancle = () => {
+        setImage(null);
+      };
 
     // const createtemplatefloors = () => {
     //     let options = "";
@@ -1366,7 +1409,7 @@ const FlatAppartment = () => {
                             <Input
                                 type="text"
                                 value={pricedetail}
-                                maxLength={"10"} 
+                                maxLength={"10"}
                                 placeholder={`${isCountry.country == "india" ? "₹" : "$"} Price Details`}
                                 required
                                 w={200}
@@ -1387,7 +1430,7 @@ const FlatAppartment = () => {
                             e.preventDefault();
                             handleinclusiveandtax(e.target.value)
                         }}
-                        value={"All inclusive price"} 
+                        value={"All inclusive price"}
                     >
                         All inclusive price
                     </Checkbox>
@@ -1398,7 +1441,7 @@ const FlatAppartment = () => {
                             handleinclusiveandtax(e.target.value)
                         }}
                         value={"Tax and Govt. charges excluded"}
-                    > 
+                    >
                         Tax and Govt. charges excluded
                     </Checkbox>
                     <Checkbox
@@ -1458,9 +1501,11 @@ const FlatAppartment = () => {
                         setDesc(my_cleantext);
                     }} ></Textarea>
                 </Box>
-            </Box>
+            </Box> 
+
+
             {/* Add amenities/unique features */}
-            <Box>
+            <Box> 
                 <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
                     Add amenities/unique features
                 </Heading>

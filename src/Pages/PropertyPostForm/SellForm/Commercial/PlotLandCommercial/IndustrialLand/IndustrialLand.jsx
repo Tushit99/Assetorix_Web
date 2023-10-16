@@ -8,9 +8,7 @@ import {
   InputGroup,
   Menu,
   MenuButton,
-  MenuList,
-  NumberInput,
-  NumberInputField,
+  MenuList, 
   Select,
   Text,
   Textarea,
@@ -49,10 +47,10 @@ const IndustrialLand = () => {
   const [propertyFacing, setPropertyFacing] = useState("");
   const [facing, setFacing] = useState("Meter");
   const [locationAdv, setLocationAdv] = useState([]);
-  const [totalfloors, setTotalFloors] = useState("");
+  // const [totalfloors, setTotalFloors] = useState("");  
   const [plotArea, setPlotArea] = useState("");
-  const [desc, setDesc] = useState("");
-  const [pincollection, setPinCollection] = useState([]);
+  const [desc, setDesc] = useState(""); 
+  const [pincollection, setPinCollection] = useState([]); 
   const [additionalPrice, setAdditionalPrice] = useState(false);
   const [maintenancePrice, setMaintenancePrice] = useState("");
   const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
@@ -115,7 +113,7 @@ const IndustrialLand = () => {
       propertyFacing,
       roadFacingWidth: facingwidth,
       roadFacingWidthType: facing,
-      totalFloors: +totalfloors,
+      // totalFloors: +totalfloors,
       plotArea,
       approvedIndustryTypeList: industryType,
       plotAreaUnit: areaPer,
@@ -278,11 +276,7 @@ const IndustrialLand = () => {
       newarr.push(value);
     }
     setConstructionType(newarr);
-  }
-
-
-
-
+  } 
 
   const handleAuthorityBy = (e) => {
     e.preventDefault();
@@ -307,8 +301,6 @@ const IndustrialLand = () => {
     e.preventDefault();
     setOwnerShip(e.target.value);
   };
-
-
 
   const handleAminities = (e) => {
     e.preventDefault();
@@ -941,20 +933,20 @@ const IndustrialLand = () => {
             }} className={preLeased == "No" ? style.setbtn : style.btn} > No </button>
           </Box>
           <Box display={preLeased == "Yes" ? "block" : "none"}>
-            <Input type="text" maxLength="12" maxLength={"12"} value={currentRentPerMonth} onChange={(e) => {
+            <Input type="text" maxLength="12" value={currentRentPerMonth} onChange={(e) => {
               e.preventDefault();
               setCurrentRentPerMonth(NumericString(e.target.value));
             }} placeholder={"₹ Current rent per month"} />
-            <Input type="text" maxLength="12" maxLength={"12"} value={leaseTenureInYear} onChange={(e) => {
+            <Input type="text" maxLength="12" value={leaseTenureInYear} onChange={(e) => {
               e.preventDefault();
               setLeaseTenureInYear(NumericString(e.target.value));
             }} placeholder={"Lease tenure in years"} />
             <Box>
-              <Input type="text" maxLength="12" maxLength={"12"} value={annualRentIncrease} onChange={(e) => {
+              <Input type="text" maxLength="12" value={annualRentIncrease} onChange={(e) => {
                 e.preventDefault();
                 setAnnualRentIncrease(NumericString(e.target.value));
               }} placeholder="Annual rent increase in % (Optional)" />
-              <Input type="text" maxLength="100" maxLength={"100"} value={businessType} onChange={(e) => {
+              <Input type="text" maxLength="100" value={businessType} onChange={(e) => {
                 e.preventDefault();
                 setBusinessType(NumericString(e.target.value));
               }} placeholder="Leased to - Business Type (Optional)" />
