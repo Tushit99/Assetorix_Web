@@ -36,7 +36,7 @@
   grid-template-columns: repeat(3, 1fr);
 }
 
-.furnished_detail>* {
+.furnished_detail > * {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -87,8 +87,8 @@
   border-radius: 50%;
 }
 
-.imagercontain img{
-  object-fit: contain;  
+.imagercontain img {
+  object-fit: contain;
 }
 
 .number_btn {
@@ -109,11 +109,11 @@
   border-radius: 50%;
 }
 
-.select_land>*:nth-child(1) {
+.select_land > *:nth-child(1) {
   flex: 5;
 }
 
-.select_land>*:nth-child(2) {
+.select_land > *:nth-child(2) {
   flex: 3;
 }
 
@@ -124,19 +124,18 @@
   gap: 8px;
 }
 
-.optional_box>*:nth-child(2) {
+.optional_box > *:nth-child(2) {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 20px;
 }
 
-
 /* drag and drop box */
 .card {
-  padding: 10px; 
+  padding: 10px;
   box-shadow: 0 0 5px #ffdfdf;
-  border-radius: 5px; 
+  border-radius: 5px;
   overflow: hidden;
 }
 
@@ -168,14 +167,13 @@
 .card .dragArea {
   height: 150px;
   border-radius: 5px;
-  border: 2px dashed #000000;
-  color: #0086fe;
-  background: #f4f3f9;
-  display: flex;  
-  width: 100%; 
+  border: 2px dashed #9e9e9e;
+  background: #fcfcff;
+  display: flex;
+  width: 100%;
   margin: auto;
   justify-content: center;
-  align-items: anter;
+  align-items: center;
   user-select: none;
   -webkit-user-select: none;
   margin-top: l0px;
@@ -186,19 +184,18 @@
 }
 
 .card .select {
-  color: #000000;
+  color: rgb(0, 42, 255);
   margin-left: 5px;
   cursor: pointer;
-  height: 24px;  
-  width: 80px; 
-  text-align: left;  
+  height: 24px;
+  width: 80px;
+  text-align: left;
   transition: 0.4s;
 }
- 
 
 .select:hover {
-  opacity: 0.7; 
-  text-decoration: underline; 
+  opacity: 0.7;
+  text-decoration: underline;
 }
 
 .card .container {
@@ -215,30 +212,29 @@
 .card .container .image {
   width: 75px;
   margin-right: 5px;
-  height: 75px; 
-  border: 1px solid rgb(46,49,146);  
+  height: 75px;
+  border: 1px solid rgb(46, 49, 146);
   position: relative;
   margin-bottom: 8px;
 }
 
 .card .container .image img {
-  width: 100%; 
-  height: 100%; 
-  object-fit: contain;  
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .card .container .image .delete {
   position: absolute;
   top: -2px;
-  right: 9px; 
-  text-shadow: 0 0 3px rgba(31, 30, 30, 0.6); 
-  font-size: 20px; 
+  right: 9px;
+  text-shadow: 0 0 3px rgba(31, 30, 30, 0.6);
+  font-size: 20px;
   cursor: pointer;
 }
 
 .card input,
 .card .dragArea .on-drop,
-.card .dragArea.dragover .visible{
+.card .dragArea.dragover .visible {
   display: none;
 }
-

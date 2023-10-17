@@ -17,7 +17,7 @@ import { Checkbox } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import style from "../RentForm.module.css";
-import { CleanInputText, IndianDateConverter, NumericString } from "../../code";
+import { CleanInputText, IndianDateConverter, NumericString, WordandNumber } from "../../code";
 import { InputGroup } from "@chakra-ui/react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
@@ -487,8 +487,9 @@ const FarmhouseRent = () => {
                     padding={"0 10px"}
                     required
                     placeholder="House No. (optional)"
-                    value={houseNo}
-                    onChange={(e) => setHouseNo(e.target.value)}
+                    value={houseNo} 
+                    maxLength={"100"}
+                    onChange={(e) => setHouseNo(WordandNumber(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
                 />
@@ -498,14 +499,16 @@ const FarmhouseRent = () => {
                     required
                     placeholder="Apartment / Society"
                     fontSize={"md"}
+                    maxLength={"100"} 
                     value={appartment}
-                    onChange={(e) => setApartment(e.target.value)}
+                    onChange={(e) => setApartment(WordandNumber(e.target.value))}
                     variant="flushed"
                 />
                 <Input
                     type="text"
                     placeholder={"Enter pincode"}
                     padding={"0 10px"}
+                    maxLength={"8"}
                     required
                     fontSize={"md"}
                     value={pincode}
@@ -533,28 +536,28 @@ const FarmhouseRent = () => {
                 )}
 
                 <Input
-                    type="text"
-                    padding={"0 10px"}
+                    type="text" 
                     required
                     placeholder="Enter City"
+                    maxLength={"100"}
                     fontSize={"md"}
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
                     variant="flushed"
                 />
                 <Input
-                    type="text"
-                    padding={"0 10px"}
+                    type="text" 
                     required
                     placeholder="Enter State"
+                    maxLength={"100"}
                     value={state}
                     onChange={(e) => setState(e.target.value)}
                     fontSize={"md"}
                     variant="flushed"
                 />
                 <Input
-                    type="text"
-                    padding={"0 10px"}
+                    type="text" 
+                    maxLength={"100"}
                     required
                     placeholder="Enter Country"
                     value={country}
@@ -577,7 +580,7 @@ const FarmhouseRent = () => {
                         <Text> No. of Bedrooms </Text>
                         <Input
                             type="text"
-                            variant="flushed"
+                            variant="flushed" 
                             padding={"0 2px"}
                             onChange={(e) => setBedRoom(e.target.value)}
                             value={bedroom}

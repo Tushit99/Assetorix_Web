@@ -10,8 +10,7 @@ import {
     MenuButton,
     MenuItem,
     MenuList,
-    Select,
-    Text,
+    Select, 
     useDisclosure,
 } from "@chakra-ui/react";
 import { useRef } from "react";
@@ -19,9 +18,9 @@ import { HiMenu } from "react-icons/hi";
 import Logo from "../Logo/Logo";
 import { Link, useNavigate } from "react-router-dom";
 import style from "./Hamburger.module.css";
-import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
-import { changeLookingFor } from "../../Redux/globalval/action";
-import { useDispatch } from "react-redux";
+import { ChevronUpIcon } from "@chakra-ui/icons";
+// import { changeLookingFor } from "../../Redux/globalval/action";
+// import { useDispatch } from "react-redux";
 
 const Hamburger = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -48,9 +47,6 @@ const Hamburger = () => {
         onClose();
 
     } 
-
-
- 
 
 
     return (

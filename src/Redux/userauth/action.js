@@ -65,7 +65,7 @@ export const signinuser = (param) => async (dispatch) => {
 // is user pre-loged in 
 
 export const userPreLog = (param) => async (dispatch) => {    
-  // console.log("gone")
+  // console.log("param",param);
   try {
     await axios.get(`${process.env.REACT_APP_URL}/user/`, {headers: param}).then((e) => {
         // console.log("power23",e.data); 

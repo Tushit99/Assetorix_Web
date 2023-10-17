@@ -10,11 +10,10 @@ import {
     NumberInput,
     NumberInputField,
     Select,
-    Text,
+    Text, 
     Textarea,
     useToast,
 } from "@chakra-ui/react";
-import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { Checkbox } from "@chakra-ui/react";
 import style from "./PlotLand.module.css";
 import axios from "axios";
@@ -26,7 +25,7 @@ import { useParams } from 'react-router-dom';
 
 const PlotLandUpdate = () => {
     const { productID } = useParams();
-    const isCountry = useSelector((state) => state.gloalval);
+    const isCountry = useSelector((state) => state.gloalval); 
     const toast = useToast();
     const [country, setCountry] = useState("");
     const [facingwidth, setFacingWidth] = useState("");

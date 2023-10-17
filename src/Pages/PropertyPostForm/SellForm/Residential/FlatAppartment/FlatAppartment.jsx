@@ -83,7 +83,6 @@ const FlatAppartment = () => {
     const [isDraging, setIsDraging] = useState(false);
     const fileInputRef = useRef(null);
 
-
     const handleSubmitData = async (e) => {
         e.preventDefault();
         let obj = {
@@ -256,28 +255,30 @@ const FlatAppartment = () => {
             // else {
             try {
                 // let response = await fetch("http://localhost:4500/property/", {
-                //     method: "POST",
+                //     method: "POST",  
                 //     headers: head,
                 //     body: JSON.stringify(obj)
                 // });
-                // let data = await response.json();  
-                // console.log("data",data); 
+                // let data = await response.json(); 
+                console.log("data", obj);
                 await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
                     .then((e) => {
+                        console.log(e);
                         toast({
                             title: e.data.msg,
                             description: e.data.msg,
                             status: 'success',
                             duration: 2000,
                         })
-                    });
+                        submitImage(e.data.id, images);
+                    }).catch((err) => console.log(err));
             } catch (error) {
+                console.log(error);
                 toast({
                     title: error.response.data.msg,
                     status: 'error',
                     duration: 2000,
                 })
-                console.log(error);
             }
             // }
 
@@ -292,6 +293,34 @@ const FlatAppartment = () => {
             })
         }
     };
+
+
+    const submitImage = async (propertyID, images) => {
+        try {
+            const userId = localStorage.getItem("usrId") || undefined;
+            const authorization = localStorage.getItem("AstToken") || undefined;
+
+            const formData = new FormData();
+            console.log(images);
+
+            images.forEach((image, index) => {
+                formData.append(`image${index}`, image.image);
+            });
+
+            let headers = { id: userId, authorization, 'Content-type': 'multipart/form-data' };
+
+            // await axios.post(`${process.env.REACT_APP_URL}/upload/${propertyID}`, formData , { headers })
+            //     .then((response) => {
+            //         console.log(response.data);
+            //     })
+            //     .catch((error) => {
+            //         console.error(error);
+            //     });
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
 
     const handlepinfetch = (e) => {
         let val = NumericString(e.target.value)
@@ -516,7 +545,7 @@ const FlatAppartment = () => {
             if (!images.some((e) => e.name === files[i].name)) {
                 setImages((prev) => [...prev, {
                     name: files[i].name,
-                    url: URL.createObjectURL(files[i]),
+                    image: URL.createObjectURL(files[i]),
                 },])
             }
         }
@@ -548,6 +577,8 @@ const FlatAppartment = () => {
         if (files.length === 0) {
             return;
         }
+        // console.log(files); 
+ 
         for (let i = 0; i < files.length; i++) {
             if (files[i].type.split('/')[0] !== 'image') {
                 continue;
@@ -555,7 +586,7 @@ const FlatAppartment = () => {
             if (!images.some((e) => e.name === files[i].name)) {
                 setImages((prev) => [...prev, {
                     name: files[i].name,
-                    url: URL.createObjectURL(files[i]),
+                    image: URL.createObjectURL(files[i]),
                 }]);
             }
         }
@@ -1482,39 +1513,13 @@ const FlatAppartment = () => {
                     </Checkbox>
                 </Box>
 
-                {/* image Drag and Drop area  */}
-                <Box className={style.top}>
-                    <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0 5px 0"} > Upload Your Property image </Heading>
-                </Box>
-                <Box className={style.card}>
-                    <Box className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
-                        {isDraging ? (
-                            <Text className={style.select}>Drop image here</Text>
-                        ) : (
-                            <>
-                                Drag & Drop image here or
-                                <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
-                            </>
-                        )}
-                        <input type={"file"} name='file' className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
-                    </Box>
-                    <Box className={style.container}>
-                        {images.map((image, index) => (
-                            <Box className={style.image} key={index}>
-                                <img src={image.url} alt={`images ${images.name}`} />
-                                <Text className={style.delete} onClick={() => handleDeleteImage(index)}> &times; </Text>
-                            </Box>
-                        ))}
-                    </Box>
-                </Box>
-
                 {/* Additional Pricing Detail (Optional) */}
-                <Box display={"grid"}>
+                <Box display={"grid"} marginTop={"6px"}>
                     {additionalPrice && <>
                         <Heading as={"h4"} size={"sm"} fontWeight={700} textAlign={"left"}>
                             Additional Pricing Detail (Optional)
                         </Heading>
-                        <InputGroup w={"300px"} >
+                        <InputGroup w={"300px"} margin={"10px 0"}>
                             <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(NumericString(e.target.value))} value={maintenancePrice} placeholder={"Maintenance Price"} />
                             <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
                                 <option value="Monthly">Monthly</option>
@@ -1554,6 +1559,33 @@ const FlatAppartment = () => {
                 </Box>
             </Box>
 
+            {/* image Drag and Drop area  */}
+            <Box>
+                <Box className={style.top}>
+                    <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
+                </Box>
+                <Box className={style.card}>
+                    <Box className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+                        {isDraging ? (
+                            <Text className={style.select}>Drop image here</Text>
+                        ) : (
+                            <>
+                                Drag & Drop image here or
+                                <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
+                            </>
+                        )}
+                        <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+                    </Box>
+                    <Box className={style.container}>
+                        {images.map((image, index) => (
+                            <Box className={style.image} key={index}>
+                                <img src={image.image} alt={`images ${images.name}`} />
+                                <Text className={style.delete} onClick={() => handleDeleteImage(index)}> &times; </Text>
+                            </Box>
+                        ))}
+                    </Box>
+                </Box>
+            </Box>
 
             {/* Add amenities/unique features */}
             <Box>
@@ -2265,7 +2297,7 @@ const FlatAppartment = () => {
                     Width of facing road
                 </Heading>
                 <Box display={"flex"} gap={"20px"} w={"300px"} >
-                    <Input type="text" variant='flushed' flex={1} required value={facingwidth} onChange={(e) => {
+                    <Input type="text" variant='flushed' maxLength={3} flex={1} required value={facingwidth} onChange={(e) => {
                         e.preventDefault();
                         setFacingWidth(NumericString(e.target.value));
                     }} />

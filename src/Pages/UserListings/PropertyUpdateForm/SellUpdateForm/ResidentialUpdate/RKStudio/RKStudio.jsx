@@ -4,7 +4,6 @@ import {
     Box,
     Button,
     ButtonGroup,
-    Divider,
     Heading,
     Input,
     InputGroup,
