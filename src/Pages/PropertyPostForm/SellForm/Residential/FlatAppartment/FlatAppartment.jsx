@@ -84,6 +84,9 @@ const FlatAppartment = () => {
     const [isDraging, setIsDraging] = useState(false);
     const fileInputRef = useRef(null);
 
+
+    // please don'nt change any function without any prior knowledge  
+
     const handleSubmitData = async (e) => {
         e.preventDefault();
         let obj = {
@@ -263,26 +266,22 @@ const FlatAppartment = () => {
                 // let data = await response.json(); 
                 console.log("data", obj);
                 await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
-                    .then((e) => {
-                        console.log(e);
+                    .then((e) => { 
                         toast({
                             title: e.data.msg,
                             description: e.data.msg,
                             status: 'success',
                             duration: 2000,
                         })
-                        submitImage(productID);
+                        submitImage(e.data.id);
                     }).catch((err) => console.log(err));
-            } catch (error) {
-                console.log(error);
+            } catch (error) { 
                 toast({
                     title: error.response.data.msg,
                     status: 'error',
                     duration: 2000,
                 })
-            }
-            // }
-
+            } 
         }
         else {
             toast({
@@ -296,8 +295,8 @@ const FlatAppartment = () => {
     };
 
 
-    const submitImage = async () => {
-        try {
+    const submitImage = async (productID) => {  
+        try {    
             let id = localStorage.getItem("usrId") || undefined;
             let authorization = localStorage.getItem("AstToken") || undefined; 
 
@@ -308,8 +307,8 @@ const FlatAppartment = () => {
             }
 
             let formdata = new FormData();
-            images.forEach((image) => {
-                formdata.append("image", image.image);
+            images.forEach((image) => { 
+                formdata.append("image", image.image); 
             });
 
             let bodyContent = formdata;
@@ -319,7 +318,7 @@ const FlatAppartment = () => {
                 method: "POST",
                 headers: headersList,
                 data: bodyContent,
-            }
+            } 
 
             let response = await axios.request(reqOptions)
             console.log(response.data);
@@ -356,7 +355,6 @@ const FlatAppartment = () => {
         }
     }
 
-    // please don'nt change any function without any prior knowledge
     const furnisheddetails = (e) => {
         e.preventDefault();
         let newCat = [...furnishedarr];
