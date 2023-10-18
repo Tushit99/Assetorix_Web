@@ -82,11 +82,11 @@ const FlatAppartment = () => {
     // state for drop box images
     const [images, setImages] = useState([]);
     const [isDraging, setIsDraging] = useState(false);
-    const fileInputRef = useRef(null);
+    const fileInputRef = useRef(null); 
 
+    // please don'nt change any function without any prior knowledge; 
 
-    // please don'nt change any function without any prior knowledge  
-
+    // submit data 
     const handleSubmitData = async (e) => {
         e.preventDefault();
         let obj = {
@@ -292,9 +292,9 @@ const FlatAppartment = () => {
                 position: 'top-right'
             })
         }
-    };
+    }; 
 
-
+    // image uploading after uploading the data: 
     const submitImage = async (productID) => {  
         try {    
             let id = localStorage.getItem("usrId") || undefined;
