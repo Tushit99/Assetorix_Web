@@ -15,7 +15,7 @@ import { Checkbox } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import style from "../RentForm.module.css";
-import { CleanInputText, IndianDateConverter, NumericString } from "../../code";
+import { CleanInputText, IndianDateConverter, NumericString, WordandNumber } from "../../code";
 import { InputGroup } from "@chakra-ui/react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
@@ -24,9 +24,9 @@ const FlatApartment = () => {
   const isCountry = useSelector((state) => state.gloalval);
   const toast = useToast();
   const [country, setCountry] = useState("");
-  const [facingwidth, setFacingWidth] = useState("");
+  const [facingwidth, setFacingWidth] = useState(""); 
   const [city, setCity] = useState("");
-  const [appartment, setApartment] = useState("");
+  const [appartment, setApartment] = useState(""); 
   const [pincode, setPincode] = useState(0);
   const [state, setState] = useState("");
   const [locality, setLocality] = useState("");
@@ -476,11 +476,11 @@ const FlatApartment = () => {
 
   const handleSecurityDeposit = (e) => {
     e.preventDefault();
-    setSecurityDeposit(e.target.value);
+    setSecurityDeposit(NumericString(e.target.value));
   }
 
   const handleDepositAmount = (e) => {
-    setDepositAmount(e.target.value);
+    setDepositAmount(NumericString(e.target.value));
   }
 
   return (
@@ -494,45 +494,43 @@ const FlatApartment = () => {
 
         <Input
           type="text"
-          padding={"0 10px"}
-          maxlength={"50"}
+          
+          maxlength={"100"}
           required
           placeholder="House No. (optional)"
           value={houseNo}
-          onChange={(e) => setHouseNo(e.target.value)}
+          onChange={(e) => setHouseNo(WordandNumber(e.target.value))}
           fontSize={"md"}
           variant="flushed"
         />
         <Input
           type="text"
-          padding={"0 10px"}
-          maxlength={"40"}
+          
+          maxlength={"100"}
           required
           placeholder="Apartment / Society"
           fontSize={"md"}
           value={appartment}
-          onChange={(e) => setApartment(e.target.value)}
+          onChange={(e) => setApartment(WordandNumber(e.target.value))}
           variant="flushed"
         />
         <Input
           type="text"
           placeholder={"Enter pincode"}
-          padding={"0 10px"}
-          maxlength={"20"}
+          maxlength={"6"}
           required
           fontSize={"md"}
           value={pincode}
           onChange={handlepinfetch}
         />
         <Input
-          type="text"
-          padding={"0 10px"}
+          type="text" 
           required
-          maxlength={"40"}
+          maxlength={"100"} 
           placeholder="Locality"
           list="browsers"
           value={locality}
-          onChange={(e) => setLocality(e.target.value)}
+          onChange={(e) => setLocality(WordandNumber(e.target.value))} 
           fontSize={"md"}
           variant="flushed"
         />
@@ -547,35 +545,34 @@ const FlatApartment = () => {
         )}
 
         <Input
-          type="text"
-          padding={"0 10px"}
+          type="text" 
           required
           placeholder="Enter City"
           fontSize={"md"}
-          maxlength={"40"}
+          maxlength={"100"}
           value={city}
-          onChange={(e) => setCity(e.target.value)}
+          onChange={(e) => setCity(WordandNumber(e.target.value))}
           variant="flushed"
         />
         <Input
           type="text"
-          padding={"0 10px"}
+          
           required
-          maxlength={"40"}
+          maxlength={"100"}
           placeholder="Enter State"
           value={state}
-          onChange={(e) => setState(e.target.value)}
+          onChange={(e) => setState(WordandNumber(e.target.value))}
           fontSize={"md"}
           variant="flushed"
         />
         <Input
           type="text"
-          padding={"0 10px"}
+          
           required
-          maxlength={"40"}
+          maxlength={"100"}
           placeholder="Enter Country"
           value={country}
-          onChange={(e) => setCountry(e.target.value)}
+          onChange={(e) => setCountry(WordandNumber(e.target.value))}
           fontSize={"md"}
           variant="flushed"
         />
@@ -595,7 +592,7 @@ const FlatApartment = () => {
               type="text"
               maxlength={"2"}
               variant="flushed"
-              padding={"0 2px"}
+              
               onChange={(e) => setBedRoom(NumericString(e.target.value))}
               value={bedroom}
               required
@@ -610,7 +607,7 @@ const FlatApartment = () => {
               onChange={(e) => setBathroom(NumericString(e.target.value))}
               value={bathroom}
               required
-              padding={"0 2px"}
+              
             />
           </Box>
           <Box textAlign={"left"}>
@@ -622,7 +619,7 @@ const FlatApartment = () => {
               onChange={(e) => setBalcony(NumericString(e.target.value))}
               value={balconey}
               required
-              padding={"0 2px"}
+              
             />
           </Box>
         </Box>
@@ -639,10 +636,10 @@ const FlatApartment = () => {
             isAttached
             variant="outline"
           >
-            <Input
-              type="text"
-              padding={"0 2px"}
-              value={plotArea}
+            <Input 
+              type="text" 
+              value={plotArea} 
+              maxlength={"9"} 
               onChange={(e) => {
                 setPlotArea(NumericString(e.target.value));
               }}
@@ -1117,11 +1114,12 @@ const FlatApartment = () => {
             Total no of floors and your floor details
           </Text>
           <Box display={"flex"} alignItems={"center"} gap={5}>
-            <Input
+            <Input 
               type="text"
               value={totalfloors}
+              maxlength={"2"} 
               onChange={(e) => {
-                const nowval = e.target.value > 90;
+                const nowval = NumericString(e.target.value) > 90;
                 if (nowval) {
                   toast({
                     title: "Maximum floor count: 90",
@@ -1130,7 +1128,7 @@ const FlatApartment = () => {
                     position: "top-right",
                   });
                 } else {
-                  setTotalFloors(e.target.value);
+                  setTotalFloors(NumericString(e.target.value));
                 }
               }}
               required
@@ -1306,7 +1304,7 @@ const FlatApartment = () => {
             Rent Details
           </Heading>
           <Box>
-            <Input type="text" w={"40%"} borderRadius={0} value={priceSqr} onChange={(e) => {
+            <Input type="text" maxlength={"9"} w={"40%"} borderRadius={0} value={priceSqr} onChange={(e) => {
               e.preventDefault();
               setPriceSqr(NumericString(e.target.value));
             }} placeholder={"₹ Expected Rent"} />
@@ -1326,6 +1324,7 @@ const FlatApartment = () => {
                 <Input
                   w={"60%"}
                   type='text'
+                  maxlength={"9"} 
                   onChange={(e) => setMaintenancePrice(NumericString(e.target.value))}
                   value={maintenancePrice} placeholder={"Maintenance Price"}
                 />
@@ -1334,8 +1333,8 @@ const FlatApartment = () => {
                   <option value="Yearly">Yearly</option>
                 </Select>
               </InputGroup>
-              <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(NumericString(e.target.value))} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-              <Input type="text" w={"300px"} value={membershipCharge} onChange={(e) => setMembershipCharge(NumericString(e.target.value))} placeholder="Membership charges" margin={"10px 0 0 0"} />
+              <Input type="text" w={"300px"} value={bookingAmount} maxlength={"9"} onChange={(e) => setBookingAmount(NumericString(e.target.value))} placeholder="Booking Amount" margin={"10px 0 0 0"} />
+              <Input type="text" w={"300px"} value={membershipCharge} maxlength={"9"} onChange={(e) => setMembershipCharge(NumericString(e.target.value))} placeholder="Membership charges" margin={"10px 0 0 0"} />
             </>
             }
             <Heading
@@ -1363,7 +1362,7 @@ const FlatApartment = () => {
             <button value={"None"} className={securityDeposit == "None" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> None </button>
           </Box>
           <Box display={securityDeposit == "None" ? "none" : "block"}>
-            <Input type="text" w={300} value={depositAmount} onChange={handleDepositAmount} placeholder={`${securityDeposit == "Fixed" ? "Deposit Value" : ""} ${securityDeposit == "Multiple of Rent" ? "No. of months (Max 30)" : ""}`} />
+            <Input type="text" w={300} value={depositAmount} maxlength={"9"} onChange={handleDepositAmount} placeholder={`${securityDeposit == "Fixed" ? "Deposit Value" : ""} ${securityDeposit == "Multiple of Rent" ? "No. of months (Max 30)" : ""}`} />
           </Box>
         </Box>
 
@@ -2073,10 +2072,11 @@ const FlatApartment = () => {
             variant="flushed"
             flex={1}
             required
-            value={facingwidth}
+            value={facingwidth} 
+            maxLength={"9"}
             onChange={(e) => {
               e.preventDefault();
-              setFacingWidth(e.target.value);
+              setFacingWidth(NumericString(e.target.value));
             }}
           />
           <Select

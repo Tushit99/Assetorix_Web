@@ -17,7 +17,7 @@ import { Checkbox } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import style from "../RentForm.module.css";
-import { CleanInputText, IndianDateConverter, NumericString } from "../../code";
+import { CleanInputText, IndianDateConverter, NumericString, WordandNumber } from "../../code";
 import { InputGroup } from "@chakra-ui/react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
@@ -35,9 +35,9 @@ const Independent = () => {
   const [state, setState] = useState("");
   const [locality, setLocality] = useState("");
   const [houseNo, setHouseNo] = useState("");
-  const [bedroom, setBedRoom] = useState(0);
-  const [bathroom, setBathroom] = useState(0);
-  const [balconey, setBalcony] = useState(0);
+  const [bedroom, setBedRoom] = useState("");
+  const [bathroom, setBathroom] = useState("");
+  const [balconey, setBalcony] = useState("");
   const [parking, setParking] = useState(0);
   const [openparking, setOpenparking] = useState(0);
   const [light, setLight] = useState(0);
@@ -91,7 +91,7 @@ const Independent = () => {
     e.preventDefault();
     let obj = {
       lookingFor: "Rent",
-      propertyGroup: "Residential", 
+      propertyGroup: "Residential",
       propertyType: "Independent House / Villa",
       address: {
         apartmentName: appartment,
@@ -128,7 +128,7 @@ const Independent = () => {
       roadFacingWidthType: facing,
       securityDeposit,
       totalFloors: +totalfloors,
-      furnished, 
+      furnished,
       floorOn,
       plotArea,
       plotAreaUnit: areaPer,
@@ -214,7 +214,7 @@ const Independent = () => {
       balconey &&
       furnishedarr &&
       ownership &&
-      
+
       additinalft &&
       powerbackup &&
       propertyFacing &&
@@ -297,17 +297,18 @@ const Independent = () => {
   };
 
   const handlepinfetch = (e) => {
-    setPincode(e.target.value);
-    if (e.target.value.length == 6) {
-      pinfetch(e.target.value);
+    let val = NumericString(e.target.value);
+    setPincode(val);
+    if (val.length == 6) {
+      pinfetch(val);
     } else {
-      console.log(e.target.value);
+      console.log(val);
     }
   };
 
   const pinfetch = async (pin) => {
     try {
-      
+
       let res = await axios.get(
         `${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`
       );
@@ -509,52 +510,37 @@ const Independent = () => {
 
         <Input
           type="text"
-          padding={"0 10px"}
           required
           placeholder="House No. (optional)"
           value={houseNo}
-          onChange={(e) => setHouseNo(e.target.value)}
+          onChange={(e) => setHouseNo(WordandNumber(e.target.value))}
           fontSize={"md"}
           variant="flushed"
         />
         <Input
           type="text"
-          padding={"0 10px"}
           required
           placeholder="Apartment / Society"
           fontSize={"md"}
           value={appartment}
-          onChange={(e) => setApartment(e.target.value)}
+          onChange={(e) => setApartment(WordandNumber(e.target.value))}
           variant="flushed"
         />
-        <NumberInput>
-          <NumberInputField
-            placeholder={"Enter pincode"}
-            padding={"0 10px"}
-            borderRight={0}
-            borderLeft={0}
-            borderTop={0}
-            borderRadius={0}
-            _active={{
-              borderRight: "0",
-              borderLeft: "0",
-              borderTop: "0",
-              borderRadius: "0",
-            }}
-            required
-            fontSize={"md"}
-            value={pincode}
-            onChange={handlepinfetch}
-          />
-        </NumberInput>
         <Input
           type="text"
-          padding={"0 10px"}
+          placeholder={"Enter pincode"}
+          required
+          fontSize={"md"}
+          value={pincode}
+          onChange={handlepinfetch}
+        />
+        <Input
+          type="text"
           required
           placeholder="Locality"
           list="browsers"
           value={locality}
-          onChange={(e) => setLocality(e.target.value)}
+          onChange={(e) => setLocality(WordandNumber(e.target.value))}
           fontSize={"md"}
           variant="flushed"
         />
@@ -570,31 +556,28 @@ const Independent = () => {
 
         <Input
           type="text"
-          padding={"0 10px"}
           required
           placeholder="Enter City"
           fontSize={"md"}
           value={city}
-          onChange={(e) => setCity(e.target.value)}
+          onChange={(e) => setCity(WordandNumber(e.target.value))}
           variant="flushed"
         />
         <Input
           type="text"
-          padding={"0 10px"}
           required
           placeholder="Enter State"
           value={state}
-          onChange={(e) => setState(e.target.value)}
+          onChange={(e) => setState(WordandNumber(e.target.value))}
           fontSize={"md"}
           variant="flushed"
         />
         <Input
           type="text"
-          padding={"0 10px"}
           required
           placeholder="Enter Country"
           value={country}
-          onChange={(e) => setCountry(e.target.value)}
+          onChange={(e) => setCountry(WordandNumber(e.target.value))}
           fontSize={"md"}
           variant="flushed"
         />
@@ -610,39 +593,36 @@ const Independent = () => {
         <Box as={"div"} className={style.inp_form_numbers}>
           <Box textAlign={"left"}>
             <Text> No. of Bedrooms </Text>
-            <NumberInput>
-              <NumberInputField
-                variant="flushed"
-                padding={"0 2px"}
-                onChange={(e) => setBedRoom(e.target.value)}
-                value={bedroom}
-                required
-              />
-            </NumberInput>
+            <Input
+              type="text"
+              variant="flushed"
+              maxLength={"2"}
+              onChange={(e) => setBedRoom(NumericString(e.target.value))}
+              value={bedroom}
+              required
+            />
           </Box>
           <Box textAlign={"left"}>
             <Text> No. of Bathrooms </Text>
-            <NumberInput>
-              <NumberInputField
-                variant="flushed"
-                onChange={(e) => setBathroom(e.target.value)}
-                value={bathroom}
-                required
-                padding={"0 2px"}
-              />
-            </NumberInput>
+            <Input
+              type="text"
+              variant="flushed"
+              maxLength={"2"}
+              onChange={(e) => setBathroom(NumericString(e.target.value))}
+              value={bathroom}
+              required
+            />
           </Box>
           <Box textAlign={"left"}>
             <Text> No. of Balconies </Text>
-            <NumberInput>
-              <NumberInputField
-                variant="flushed"
-                onChange={(e) => setBalcony(e.target.value)}
-                value={balconey}
-                required
-                padding={"0 2px"}
-              />
-            </NumberInput>
+            <Input
+              type="text"
+              variant="flushed"
+              maxLength={"2"}
+              onChange={(e) => setBalcony(NumericString(e.target.value))}
+              value={balconey}
+              required
+            />
           </Box>
         </Box>
         {/* ====================================== */}
@@ -652,23 +632,22 @@ const Independent = () => {
             Add Area Details
           </Heading>
           <Text margin={"5px 0"}> Atleast one area type is mandatory </Text>
-          <ButtonGroup
+          <InputGroup
             className={style.select_land}
             size="sm"
             isAttached
             variant="outline"
           >
-            <NumberInput>
-              <NumberInputField
-                padding={"0 2px"}
-                value={plotArea}
-                onChange={(e) => {
-                  // areaCalucation();
-                  setPlotArea(e.target.value);
-                }}
-                required
-              />
-            </NumberInput>
+            <Input
+              type="text"
+              value={plotArea} 
+              maxLength={"8"} 
+              onChange={(e) => {
+                // areaCalucation();
+                setPlotArea(NumericString(e.target.value));
+              }}
+              required
+            /> 
             <select
               value={areaPer}
               onChange={(e) => {
@@ -696,7 +675,7 @@ const Independent = () => {
               <option value="chataks">chataks</option>
               <option value="perch">perch</option>
             </select>
-          </ButtonGroup>
+          </InputGroup>
         </Box>
         {/* other Room  */}
         <Box
@@ -794,7 +773,7 @@ const Independent = () => {
             padding={"10px 0"}
             gap={6}
           >
-            
+
             <Box className={style.furnished_detail}>
               <Box>
                 <button
@@ -1138,9 +1117,10 @@ const Independent = () => {
           </Text>
           <Box display={"flex"} alignItems={"center"} gap={5}>
             <Input type="text"
-              w={300}
+              w={300} 
+              maxLength={"2"}
               onChange={(e) => {
-                const nowval = e.target.value > 90;
+                const nowval = NumericString(e.target.value) > 90;
                 if (nowval) {
                   toast({
                     title: "Maximum floor count: 90",
@@ -1297,7 +1277,7 @@ const Independent = () => {
             Rent Details
           </Heading>
           <Box>
-            <Input type="text" w={"40%"} borderRadius={0} value={priceSqr} onChange={(e) => {
+            <Input type="text" w={"40%"} maxLength={"8"} borderRadius={0} value={priceSqr} onChange={(e) => {
               e.preventDefault();
               setPriceSqr(NumericString(e.target.value));
             }} placeholder={"₹ Expected Rent"} />
@@ -1314,16 +1294,16 @@ const Independent = () => {
                 Additional Pricing Detail (Optional)
               </Heading>
               <InputGroup w={"300px"} margin={"10px 0"}>
-                <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
+                <Input w={"60%"} type='text' maxLength={"10"} onChange={(e) => setMaintenancePrice(NumericString(e.target.value))} value={maintenancePrice} placeholder={"Maintenance Price"} />
                 <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
                   <option value="Monthly">Monthly</option>
                   <option value="Yearly">Yearly</option>
                 </Select>
               </InputGroup>
-              <Input type="text" w={"300px"} value={expectedRentel} onChange={(e) => setExpectedRentel(e.target.value)} placeholder="Expected rental" margin={"0"} />
-              <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-              <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
-              <Input type="text" w={"300px"} value={membershipCharge} onChange={(e) => setMembershipCharge(e.target.value)} placeholder="Membership charges" margin={"10px 0 0 0"} />
+              <Input type="text" w={"300px"} maxLength={"10"} value={expectedRentel} onChange={(e) => setExpectedRentel(NumericString(e.target.value))} placeholder="Expected rental" margin={"0"} />
+              <Input type="text" w={"300px"} maxLength={"10"} value={bookingAmount} onChange={(e) => setBookingAmount(NumericString(e.target.value))} placeholder="Booking Amount" margin={"10px 0 0 0"} />
+              <Input type="text" w={"300px"} maxLength={"10"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(NumericString(e.target.value))} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
+              <Input type="text" w={"300px"} maxLength={"10"} value={membershipCharge} onChange={(e) => setMembershipCharge(NumericString(e.target.value))} placeholder="Membership charges" margin={"10px 0 0 0"} />
             </>
             }
             <Heading
@@ -1350,7 +1330,7 @@ const Independent = () => {
             <button value={"Multiple of Rent"} className={securityDeposit == "Multiple of Rent" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> Multiple of Rent </button>
             <button value={"None"} className={securityDeposit == "None" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> None </button>
           </Box>
-          <Box display={securityDeposit == "None" ? "none" : "block" }>
+          <Box display={securityDeposit == "None" ? "none" : "block"}>
             <Input type="text" w={300} value={depositAmount} onChange={handleDepositAmount} placeholder={`${securityDeposit == "Fixed" ? "Deposit Value" : ""} ${securityDeposit == "Multiple of Rent" ? "No. of months (Max 30)" : ""}`} />
           </Box>
         </Box>
@@ -1716,7 +1696,7 @@ const Independent = () => {
             }
             onClick={HandleBuildingFeature}
             value={"Fitness Centre / GYM"}
-          > 
+          >
             Fitness Centre / GYM
           </button>
           <button
@@ -1779,7 +1759,7 @@ const Independent = () => {
             onClick={handleAdditionalFeature}
           >
             No open drainage around
-          </button> 
+          </button>
           <button
             className={
               additinalft.includes("Bank Attached Property")
@@ -1790,7 +1770,7 @@ const Independent = () => {
             onClick={handleAdditionalFeature}
           >
             Bank Attached Property
-          </button> 
+          </button>
           <button
             className={
               additinalft.includes("Low Density Society")
@@ -1980,7 +1960,7 @@ const Independent = () => {
             South-West
           </button>
         </Box>
-      </Box> 
+      </Box>
 
       {/* ============================ Type of flooring ==================================== */}
       <Box className={style.optional_box}>
@@ -2009,7 +1989,7 @@ const Independent = () => {
             <option value="Other"> Other </option>
           </Select>
         </Box>
-      </Box> 
+      </Box>
 
       {/* ============================ Width of facing road ==================================== */}
       <Box className={style.optional_box}>
@@ -2020,12 +2000,13 @@ const Independent = () => {
           <Input
             type="text"
             variant="flushed"
-            flex={1}
+            flex={1} 
+            maxLength={"9"}
             required
             value={facingwidth}
             onChange={(e) => {
               e.preventDefault();
-              setFacingWidth(e.target.value);
+              setFacingWidth(NumericString(e.target.value));
             }}
           />
           <Select
@@ -2037,7 +2018,7 @@ const Independent = () => {
             <option value="Feet"> Feet </option>
           </Select>
         </Box>
-      </Box> 
+      </Box>
 
       {/* ============================ Location Advantages ==================================== */}
       <Box className={style.optional_box}>

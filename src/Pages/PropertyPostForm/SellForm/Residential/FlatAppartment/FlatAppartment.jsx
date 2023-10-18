@@ -304,19 +304,19 @@ const FlatAppartment = () => {
             console.log(images);
 
             images.forEach((image, index) => {
-                formData.append(`image${index}`, image.image);
-            });
+                formData.append(`image${index}`, image);
+            }); 
 
             let headers = { id: userId, authorization, 'Content-type': 'multipart/form-data' };
 
             // await axios.post(`${process.env.REACT_APP_URL}/upload/${propertyID}`, formData , { headers })
             //     .then((response) => {
-            //         console.log(response.data);
+            //         console.log(response.data); 
             //     })
             //     .catch((error) => {
             //         console.error(error);
             //     });
-        } catch (error) {
+        } catch (error) { 
             console.error(error);
         }
     };
