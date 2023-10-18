@@ -371,7 +371,7 @@ const GuestBanquetRent = () => {
                 </Heading>
                 <Input
                     type="text"
-                    padding={"0 10px"}
+                    maxLength={"100"}
                     required
                     placeholder="Address (optional)"
                     value={address}
@@ -382,7 +382,7 @@ const GuestBanquetRent = () => {
                 <Input
                     type="text"
                     placeholder={"Enter pincode"}
-                    padding={"0 10px"}
+                    maxLength={"100"}
                     required
                     fontSize={"md"}
                     value={pincode}
@@ -391,7 +391,7 @@ const GuestBanquetRent = () => {
 
                 <Input
                     type="text"
-                    padding={"0 10px"}
+                    maxLength={"100"}
                     required
                     placeholder="Locality"
                     list="browsers"
@@ -410,7 +410,7 @@ const GuestBanquetRent = () => {
 
                 <Input
                     type="text"
-                    padding={"0 10px"}
+                    maxLength={"100"}
                     required
                     placeholder="Enter City"
                     fontSize={"md"}
@@ -420,7 +420,7 @@ const GuestBanquetRent = () => {
                 />
                 <Input
                     type="text"
-                    padding={"0 10px"}
+                    maxLength={"100"}
                     required
                     placeholder="Enter State"
                     value={state}
@@ -430,7 +430,7 @@ const GuestBanquetRent = () => {
                 />
                 <Input
                     type="text"
-                    padding={"0 10px"}
+                    maxLength={"100"}
                     required
                     placeholder="Enter Country"
                     value={country}
@@ -453,7 +453,7 @@ const GuestBanquetRent = () => {
                         <Text> No. of rooms </Text>
                         <Input type="text"
                             variant="flushed"
-                            padding={"0 2px"}
+                            maxLength={"2"}
                             onChange={(e) => {
                                 setRoom(NumericString(e.target.value));
                             }}
@@ -469,7 +469,7 @@ const GuestBanquetRent = () => {
                             }}
                             value={washrooms}
                             required
-                            padding={"0 2px"} />
+                            maxLength={"2"} />
                     </Box>
                 </Box>
 
@@ -482,19 +482,19 @@ const GuestBanquetRent = () => {
                         Add Area Details
                     </Heading>
                     <Text margin={"5px 0"}> Atleast one area type is mandatory </Text>
-                    <ButtonGroup
+                    <InputGroup 
                         className={style.select_land}
                         size="sm"
                         isAttached
-                        variant="outline"
+                        variant="outline" 
                     >
-                        <input type="text" placeholder="Enter Plot Area" value={plotArea}
+                        <Input type="text" maxLength={"9"} placeholder="Enter Plot Area" value={plotArea}
                             onChange={(e) => {
                                 areaCalucation();
                                 setPlotArea(e.target.value);
                             }}
                             required />
-                        <select value={areaPer} onChange={(e) => {
+                        <Select value={areaPer} onChange={(e) => {
                             setAreaPer(e.target.value);
                         }} className={style.select} required>
                             <option value="sq.ft">sq.ft</option>
@@ -515,8 +515,8 @@ const GuestBanquetRent = () => {
                             <option value="rood">rood</option>
                             <option value="chataks">chataks</option>
                             <option value="perch">perch</option>
-                        </select>
-                    </ButtonGroup>
+                        </Select>
+                    </InputGroup>
                 </Box>
             </Box>
 
@@ -537,7 +537,7 @@ const GuestBanquetRent = () => {
                         onClick={handleAvailable}
                         backgroundColor={"blue.50"}
                     >
-                        Ready to move
+                        Ready to move 
                     </button>
                     <button
                         className={
@@ -763,12 +763,13 @@ const GuestBanquetRent = () => {
                             {isCountry.country == "india" ? "₹" : "$"} Expected Rent
                         </Heading>
                         <Input
-                            type="text"
+                            type="text" 
+                            maxLength={"9"}
                             value={pricedetail}
                             required
                             onChange={(e) => {
-                                setPricedetail(e.target.value);
-                                areaCalucation();
+                                setPricedetail(NumericString(e.target.value));
+                                areaCalucation();  
                             }}
                         />
                     </Box>
@@ -811,19 +812,19 @@ const GuestBanquetRent = () => {
 
                         Price Negotiable
                     </Checkbox>
-                </Box>
+                </Box> 
                 <Box>
                     {additionalPrice && <>
                         <InputGroup w={"300px"} margin={"10 0 0 0"}>
-                            <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
+                            <Input w={"60%"} type='text' maxLength={"10"} onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
                             <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
                                 <option value="Monthly">Monthly</option>
                                 <option value="Yearly">Yearly</option>
                             </Select>
                         </InputGroup>
                         <Box display={"grid"}>
-                            <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-                            <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
+                            <Input type="text" w={"300px"}  maxLength={"10"}    value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
+                            <Input type="text" w={"300px"}  maxLength={"10"}    value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
                         </Box>
 
                     </>

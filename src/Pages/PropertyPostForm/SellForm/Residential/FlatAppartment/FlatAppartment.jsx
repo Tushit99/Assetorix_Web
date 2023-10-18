@@ -18,6 +18,7 @@ import axios from "axios";
 import style from "../Residential.module.css";
 import { InputGroup } from "@chakra-ui/react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import Dropzone from 'react-dropzone';
 
 
 const FlatAppartment = () => {
@@ -270,7 +271,7 @@ const FlatAppartment = () => {
                             status: 'success',
                             duration: 2000,
                         })
-                        submitImage(e.data.id, images);
+                        submitImage(productID);
                     }).catch((err) => console.log(err));
             } catch (error) {
                 console.log(error);
@@ -295,30 +296,37 @@ const FlatAppartment = () => {
     };
 
 
-    const submitImage = async (propertyID, images) => {
+    const submitImage = async () => {
         try {
-            const userId = localStorage.getItem("usrId") || undefined;
-            const authorization = localStorage.getItem("AstToken") || undefined;
+            let id = localStorage.getItem("usrId") || undefined;
+            let authorization = localStorage.getItem("AstToken") || undefined; 
 
-            const formData = new FormData();
-            console.log(images);
+            let headersList = { 
+                "Accept": "*/*",
+                "Authorization": authorization,
+                "id": id 
+            }
 
-            images.forEach((image, index) => {
-                formData.append(`image${index}`, image);
-            }); 
+            let formdata = new FormData();
+            images.forEach((image) => {
+                formdata.append("image", image.image);
+            });
 
-            let headers = { id: userId, authorization, 'Content-type': 'multipart/form-data' };
+            let bodyContent = formdata;
 
-            // await axios.post(`${process.env.REACT_APP_URL}/upload/${propertyID}`, formData , { headers })
-            //     .then((response) => {
-            //         console.log(response.data); 
-            //     })
-            //     .catch((error) => {
-            //         console.error(error);
-            //     });
-        } catch (error) { 
-            console.error(error);
+            let reqOptions = {
+                url: `${process.env.REACT_APP_URL}/upload/${productID}`,
+                method: "POST",
+                headers: headersList,
+                data: bodyContent,
+            }
+
+            let response = await axios.request(reqOptions)
+            console.log(response.data);
+        } catch (error) {
+
         }
+
     };
 
 
@@ -545,7 +553,7 @@ const FlatAppartment = () => {
             if (!images.some((e) => e.name === files[i].name)) {
                 setImages((prev) => [...prev, {
                     name: files[i].name,
-                    image: URL.createObjectURL(files[i]),
+                    image: files[i],
                 },])
             }
         }
@@ -574,11 +582,12 @@ const FlatAppartment = () => {
         event.preventDefault(); // Add this line
         setIsDraging(false);
         const files = event.dataTransfer.files;
+        console.log(event.dataTransfer.files);
+
         if (files.length === 0) {
             return;
         }
-        // console.log(files); 
- 
+
         for (let i = 0; i < files.length; i++) {
             if (files[i].type.split('/')[0] !== 'image') {
                 continue;
@@ -586,7 +595,7 @@ const FlatAppartment = () => {
             if (!images.some((e) => e.name === files[i].name)) {
                 setImages((prev) => [...prev, {
                     name: files[i].name,
-                    image: URL.createObjectURL(files[i]),
+                    image: files[i],
                 }]);
             }
         }
@@ -643,7 +652,7 @@ const FlatAppartment = () => {
                     placeholder={"Enter pincode"}
                     padding={"0 10px"}
                     required
-                    maxLength={"7"}
+                    maxLength={"6"}
                     fontSize={"md"}
                     variant="flushed"
                     value={pincode}
@@ -1577,12 +1586,13 @@ const FlatAppartment = () => {
                         <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
                     </Box>
                     <Box className={style.container}>
-                        {images.map((image, index) => (
+                        {/* {images.map((image, index) => (
                             <Box className={style.image} key={index}>
-                                <img src={image.image} alt={`images ${images.name}`} />
-                                <Text className={style.delete} onClick={() => handleDeleteImage(index)}> &times; </Text>
+                                {console.log(image)}  s
                             </Box>
-                        ))}
+                        ))} 
+                    */} 
+
                     </Box>
                 </Box>
             </Box>

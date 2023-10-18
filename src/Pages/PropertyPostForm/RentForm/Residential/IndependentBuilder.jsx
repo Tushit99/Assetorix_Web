@@ -17,7 +17,7 @@ import { Checkbox } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import style from "../RentForm.module.css";
-import { CleanInputText, IndianDateConverter, NumericString } from "../../code";
+import { CleanInputText, NumericString, WordandNumber } from "../../code";
 import { InputGroup } from "@chakra-ui/react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
@@ -31,13 +31,13 @@ const IndependentBuilderRent = () => {
   const [facingwidth, setFacingWidth] = useState("");
   const [city, setCity] = useState("");
   const [appartment, setApartment] = useState("");
-  const [pincode, setPincode] = useState(0);
+  const [pincode, setPincode] = useState("");
   const [state, setState] = useState("");
   const [locality, setLocality] = useState("");
   const [houseNo, setHouseNo] = useState("");
-  const [bedroom, setBedRoom] = useState(0);
-  const [bathroom, setBathroom] = useState(0);
-  const [balconey, setBalcony] = useState(0);
+  const [bedroom, setBedRoom] = useState("");
+  const [bathroom, setBathroom] = useState("");
+  const [balconey, setBalcony] = useState("");
   const [parking, setParking] = useState(0);
   const [openparking, setOpenparking] = useState(0);
   const [light, setLight] = useState(0);
@@ -78,7 +78,7 @@ const IndependentBuilderRent = () => {
   const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
   const [membershipCharge, setMembershipCharge] = useState("");
   const [bookingAmount, setBookingAmount] = useState("");
-  const [securityDeposit, setSecurityDeposit] = useState("");
+  const [securityDeposit, setSecurityDeposit] = useState("None");
   const [depositAmount, setDepositAmount] = useState("");
   const [agreementDuration, setagreementDuration] = useState("");
   const [noticePeriod, setNoticePeriod] = useState("");
@@ -92,7 +92,7 @@ const IndependentBuilderRent = () => {
     let obj = {
       lookingFor: "Rent",
       propertyGroup: "Residential",
-      propertyType: "Independent / Builder Floor", 
+      propertyType: "Independent / Builder Floor",
       address: {
         apartmentName: appartment,
         houseNumber: houseNo,
@@ -129,8 +129,8 @@ const IndependentBuilderRent = () => {
       securityDeposit,
       totalFloors: +totalfloors,
       floorOn,
-      carpetArea :plotArea,
-      furnished, 
+      carpetArea: plotArea,
+      furnished,
       carpetAreaUnit: areaPer,
       parking: {
         openParking: openparking,
@@ -146,7 +146,7 @@ const IndependentBuilderRent = () => {
         expectedRental: expectedRentel,
         bookingAmount,
         annualDuesPayable: annualDuesPayble
-      }, 
+      },
     };
 
     const showToastError = (message) => {
@@ -213,7 +213,7 @@ const IndependentBuilderRent = () => {
       balconey &&
       furnishedarr &&
       ownership &&
-      
+
       additinalft &&
       powerbackup &&
       propertyFacing &&
@@ -239,7 +239,7 @@ const IndependentBuilderRent = () => {
       }
 
       if (furnished == "Furnished" || furnished == "Semi-Furnished") {
-        obj.furnishedObj = {
+        obj['furnishedObj'] = {
           light,
           fans,
           ac,
@@ -296,16 +296,17 @@ const IndependentBuilderRent = () => {
   };
 
   const handlepinfetch = (e) => {
-    setPincode(e.target.value);
-    if (e.target.value.length == 6) {
-      pinfetch(e.target.value);
+    let val = NumericString(e.target.value);
+    setPincode(val);
+    if (val.length == 6) {
+      pinfetch(val);
     } else {
-      console.log(e.target.value);
+
     }
   };
 
   const pinfetch = async (pin) => {
-    try {  
+    try {
       let res = await axios.get(
         `${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`
       );
@@ -314,7 +315,7 @@ const IndependentBuilderRent = () => {
       setCountry(res.data[0].country);
       setPinCollection(res.data);
     } catch (err) {
-      console.log(err); 
+      console.log(err);
     }
   };
 
@@ -493,7 +494,7 @@ const IndependentBuilderRent = () => {
   }
 
   const handleDepositAmount = (e) => {
-    setDepositAmount(e.target.value);
+    setDepositAmount(NumericString(e.target.value));
   }
 
   return (
@@ -507,52 +508,42 @@ const IndependentBuilderRent = () => {
 
         <Input
           type="text"
-          padding={"0 10px"}
+          maxLength={"100"}
           required
           placeholder="House No. (optional)"
           value={houseNo}
-          onChange={(e) => setHouseNo(e.target.value)}
+          onChange={(e) => setHouseNo(WordandNumber(e.target.value))}
           fontSize={"md"}
           variant="flushed"
         />
         <Input
           type="text"
-          padding={"0 10px"}
+          maxLength={"100"}
           required
-          placeholder="Apartment / Society"
+          placeholder="Apartment / Society Name"
           fontSize={"md"}
           value={appartment}
-          onChange={(e) => setApartment(e.target.value)}
+          onChange={(e) => setApartment(WordandNumber(e.target.value))}
           variant="flushed"
         />
-        <NumberInput>
-          <NumberInputField
-            placeholder={"Enter pincode"}
-            padding={"0 10px"}
-            borderRight={0}
-            borderLeft={0}
-            borderTop={0}
-            borderRadius={0}
-            _active={{
-              borderRight: "0",
-              borderLeft: "0",
-              borderTop: "0",
-              borderRadius: "0",
-            }}
-            required
-            fontSize={"md"}
-            value={pincode}
-            onChange={handlepinfetch}
-          />
-        </NumberInput>
         <Input
           type="text"
-          padding={"0 10px"}
+          placeholder={"Enter pincode"}
+          maxLength={"6"}
           required
-          placeholder="Locality"
+          variant="flushed"
+          fontSize={"md"}
+          value={pincode}
+          onChange={handlepinfetch}
+        />
+        <Input
+          type="text"
+          maxLength={"100"}
+          required
+          placeholder="Locality Name"
           list="browsers"
           value={locality}
-          onChange={(e) => setLocality(e.target.value)}
+          onChange={(e) => setLocality(WordandNumber(e.target.value))}
           fontSize={"md"}
           variant="flushed"
         />
@@ -568,80 +559,73 @@ const IndependentBuilderRent = () => {
 
         <Input
           type="text"
-          padding={"0 10px"}
+          maxLength={"100"}
           required
-          placeholder="Enter City"
+          placeholder="City Name"
           fontSize={"md"}
           value={city}
-          onChange={(e) => setCity(e.target.value)}
+          onChange={(e) => setCity(WordandNumber(e.target.value))}
           variant="flushed"
         />
         <Input
           type="text"
-          padding={"0 10px"}
+          maxLength={"100"}
           required
-          placeholder="Enter State"
+          placeholder="State Name"
           value={state}
-          onChange={(e) => setState(e.target.value)}
+          onChange={(e) => setState(WordandNumber(e.target.value))}
           fontSize={"md"}
           variant="flushed"
         />
         <Input
           type="text"
-          padding={"0 10px"}
+          maxLength={"100"}
           required
-          placeholder="Enter Country"
+          placeholder="Country Name"
           value={country}
-          onChange={(e) => setCountry(e.target.value)}
+          onChange={(e) => setCountry(WordandNumber(e.target.value))}
           fontSize={"md"}
           variant="flushed"
         />
       </Box>
       {/* Property Detail */}
       <Box marginTop={12}>
-        <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"}>
-          Tell us about your property
-        </Heading>
-        <Heading as={"h4"} size={"sm"} margin={"0 0 30px 0 "}>
+        <Heading as={"h4"} size={"md"} textAlign={"left"} margin={"0 0 20px 0 "}>
           Add Room Details
-        </Heading> 
+        </Heading>
         {/* Room Detail */}
         <Box as={"div"} className={style.inp_form_numbers}>
           <Box textAlign={"left"}>
             <Text> No. of Bedrooms </Text>
-            <NumberInput>
-              <NumberInputField
-                variant="flushed"
-                padding={"0 2px"}
-                onChange={(e) => setBedRoom(e.target.value)}
-                value={bedroom}
-                required
-              />
-            </NumberInput>
+            <Input
+              type="text"
+              variant="flushed"
+              maxLength={"2"}
+              onChange={(e) => setBedRoom(NumericString(e.target.value))}
+              value={bedroom}
+              required
+            />
           </Box>
           <Box textAlign={"left"}>
             <Text> No. of Bathrooms </Text>
-            <NumberInput>
-              <NumberInputField
-                variant="flushed"
-                onChange={(e) => setBathroom(e.target.value)}
-                value={bathroom}
-                required
-                padding={"0 2px"}
-              />
-            </NumberInput>
+            <Input
+              type="text"
+              variant="flushed"
+              maxLength={"2"}
+              onChange={(e) => setBathroom(NumericString(e.target.value))}
+              value={bathroom}
+              required
+            />
           </Box>
           <Box textAlign={"left"}>
             <Text> No. of Balconies </Text>
-            <NumberInput>
-              <NumberInputField
-                variant="flushed"
-                onChange={(e) => setBalcony(e.target.value)}
-                value={balconey}
-                required
-                padding={"0 2px"}
-              />
-            </NumberInput>
+            <Input type="text"
+              variant="flushed"
+              maxLength={"2"}
+              onChange={(e) => setBalcony(NumericString(e.target.value))}
+              value={balconey}
+              required
+            />
           </Box>
         </Box>
         {/* ====================================== */}
@@ -657,17 +641,16 @@ const IndependentBuilderRent = () => {
             isAttached
             variant="outline"
           >
-            <NumberInput>
-              <NumberInputField
-                padding={"0 2px"}
-                value={plotArea}
-                onChange={(e) => {
-                  // areaCalucation();
-                  setPlotArea(e.target.value);
-                }}
-                required
-              />
-            </NumberInput>
+            <Input
+              type="text"
+              maxLength={"6"}
+              value={plotArea}
+              onChange={(e) => {
+                // areaCalucation();
+                setPlotArea(NumericString(e.target.value));
+              }}
+              required
+            />
             <select
               value={areaPer}
               onChange={(e) => {
@@ -793,7 +776,7 @@ const IndependentBuilderRent = () => {
             padding={"10px 0"}
             gap={6}
           >
-            
+
             <Box className={style.furnished_detail}>
               <Box>
                 <button
@@ -1069,7 +1052,7 @@ const IndependentBuilderRent = () => {
             </Box>
           </Box>
         </Box>
-        
+
         {/* ========================= reserved ========================= */}
         <Box className={style.optional_box}>
           <Heading as={"h3"} size={"md"}>
@@ -1123,7 +1106,7 @@ const IndependentBuilderRent = () => {
               </button>
             </Box>
           </div>
-        </Box> 
+        </Box>
 
         {/* ========================= floor details ========================= */}
         <Box textAlign={"left"}>
@@ -1140,6 +1123,7 @@ const IndependentBuilderRent = () => {
           <Box display={"flex"} alignItems={"center"} gap={5}>
             <Input type="text"
               placeholder="Total no of Floor"
+              maxLength={"2"}
               w={300}
               variant={"flushed"}
               onChange={(e) => {
@@ -1185,7 +1169,7 @@ const IndependentBuilderRent = () => {
             </Select>
           </Box>
         </Box>
-        
+
         {/* ========================= Age of Property ========================= */}
         <Box textAlign={"left"} className={style.optional_box}>
           <Heading
@@ -1312,7 +1296,7 @@ const IndependentBuilderRent = () => {
 
         {/* ====================== Preferred agreement type =============================== */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"} margin={"14px 0"} textAlign={"left"}> 
+          <Heading as={"h3"} size={"sm"} margin={"14px 0"} textAlign={"left"}>
             Preferred agreement type
           </Heading>
           <Box>
@@ -1327,7 +1311,7 @@ const IndependentBuilderRent = () => {
             Rent Details
           </Heading>
           <Box>
-            <Input type="text" w={"40%"} borderRadius={0} value={priceSqr} onChange={(e) => {
+            <Input maxLength={"10"} type="text" w={"40%"} borderRadius={0} value={priceSqr} onChange={(e) => {
               e.preventDefault();
               setPriceSqr(NumericString(e.target.value));
             }} placeholder={"₹ Expected Rent"} />
@@ -1344,16 +1328,16 @@ const IndependentBuilderRent = () => {
                 Additional Pricing Detail (Optional)
               </Heading>
               <InputGroup w={"300px"} margin={"10px 0"}>
-                <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
+                <Input maxLength={"9"} w={"60%"} type='text' onChange={(e) => setMaintenancePrice(NumericString(e.target.value))} value={maintenancePrice} placeholder={"Maintenance Price"} />
                 <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
                   <option value="Monthly">Monthly</option>
                   <option value="Yearly">Yearly</option>
                 </Select>
               </InputGroup>
-              <Input type="text" w={"300px"} value={expectedRentel} onChange={(e) => setExpectedRentel(e.target.value)} placeholder="Expected rental" margin={"0"} />
-              <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-              <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
-              <Input type="text" w={"300px"} value={membershipCharge} onChange={(e) => setMembershipCharge(e.target.value)} placeholder="Membership charges" margin={"10px 0 0 0"} />
+              <Input maxLength={"9"} type="text" w={"300px"} value={expectedRentel} onChange={(e) => setExpectedRentel(NumericString(e.target.value))} placeholder="Expected rental" margin={"0"} />
+              <Input maxLength={"9"} type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(NumericString(e.target.value))} placeholder="Booking Amount" margin={"10px 0 0 0"} />
+              <Input maxLength={"9"} type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(NumericString(e.target.value))} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
+              <Input maxLength={"9"} type="text" w={"300px"} value={membershipCharge} onChange={(e) => setMembershipCharge(NumericString(e.target.value))} placeholder="Membership charges" margin={"10px 0 0 0"} />
             </>
             }
             <Heading
@@ -1380,8 +1364,8 @@ const IndependentBuilderRent = () => {
             <button value={"Multiple of Rent"} className={securityDeposit == "Multiple of Rent" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> Multiple of Rent </button>
             <button value={"None"} className={securityDeposit == "None" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> None </button>
           </Box>
-          <Box display={securityDeposit == "None" ? "none" : "block"}> 
-            <Input type="text" w={300} value={depositAmount} onChange={handleDepositAmount} placeholder={`${securityDeposit == "Fixed" ? "Deposit Value" : ""} ${securityDeposit == "Multiple of Rent" ? "No. of months (Max 30)" : ""}`} />
+          <Box display={securityDeposit == "None" ? "none" : "block"}>
+            <Input maxLength={"9"} type="text" w={300} value={depositAmount} onChange={handleDepositAmount} placeholder={`${securityDeposit == "Fixed" ? "Deposit Value" : ""} ${securityDeposit == "Multiple of Rent" ? "No. of months (Max 30)" : ""}`} />
           </Box>
         </Box>
 
@@ -1414,18 +1398,10 @@ const IndependentBuilderRent = () => {
             <button onClick={handleMonthNotice} className={noticePeriod == "5 months" ? style.setbtn : style.btn} value={"5 months"}> 5 month </button>
             <button onClick={handleMonthNotice} className={noticePeriod == "6 months" ? style.setbtn : style.btn} value={"6 months"}> 6 month </button>
           </Box>
-        </Box> 
+        </Box>
 
         {/* ========================= Add pricing and details ========================= */}
         <Box>
-          <Heading
-            as={"h3"}
-            size={"md"}
-            margin={"30px 0 10px 0"}
-            textAlign={"left"}
-          >
-            Add pricing and details...
-          </Heading>
           {/* OwnerShip detail */}
           <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Ownership
@@ -2025,9 +2001,9 @@ const IndependentBuilderRent = () => {
           Type of flooring
         </Heading>
         <Box>
-          <Select 
-            w={300}  
-            variant={"flushed"} 
+          <Select
+            w={300}
+            variant={"flushed"}
             onChange={(e) => setFlooring(e.target.value)}
             value={flooring}
           >
@@ -2058,18 +2034,19 @@ const IndependentBuilderRent = () => {
         <Box display={"flex"} gap={"20px"} w={"300px"}>
           <Input
             type="text"
+            maxLength={"3"}
             variant="flushed"
             flex={1}
             required
             value={facingwidth}
             onChange={(e) => {
               e.preventDefault();
-              setFacingWidth(e.target.value);
+              setFacingWidth(NumericString(e.target.value));
             }}
           />
           <Select
-            flex={1} 
-            variant={"flushed"}  
+            flex={1}
+            variant={"flushed"}
             onChange={(e) => setFacing(e.target.value)}
             value={facing}
           >
