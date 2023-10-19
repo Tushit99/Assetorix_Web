@@ -466,11 +466,15 @@ const Coworkingspace = () => {
         }
         console.log(newarr);
         setpreviouslyUsedList(newarr);
-    } 
+    }
 
-     // ======--- image upload function  
+    // ======--- image upload function   
 
-     const ondragleave = (event) => {
+    const selectFiles = () => {
+        fileInputRef.current.click();
+    }
+
+    const ondragleave = (event) => {
         event.preventDefault();
         setIsDraging(false);
         console.log("leave")

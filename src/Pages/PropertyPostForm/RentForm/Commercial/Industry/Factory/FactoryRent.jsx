@@ -5,7 +5,7 @@ import {
     ButtonGroup,
     Heading,
     Input,
-    InputGroup, 
+    InputGroup,
     Select,
     Text,
     Textarea,
@@ -56,7 +56,7 @@ const FactoryRent = () => {
     // state for drop box images
     const [images, setImages] = useState([]);
     const [isDraging, setIsDraging] = useState(false);
-    const fileInputRef = useRef(null); 
+    const fileInputRef = useRef(null);
     // please don'nt change any function without any prior knowledge
 
 
@@ -168,8 +168,8 @@ const FactoryRent = () => {
                             description: e.data.msg,
                             status: 'success',
                             duration: 2000,
-                        }); 
-                        submitImage(e.data.id);  
+                        });
+                        submitImage(e.data.id);
                     });
             } catch (error) {
                 toast({
@@ -191,10 +191,10 @@ const FactoryRent = () => {
                 position: 'top-right'
             })
         }
-    }; 
+    };
 
-      // image uploading after uploading the data:  
-      const submitImage = async (productID) => {
+    // image uploading after uploading the data:  
+    const submitImage = async (productID) => {
         try {
             let id = localStorage.getItem("usrId") || undefined;
             let authorization = localStorage.getItem("AstToken") || undefined;
@@ -214,7 +214,7 @@ const FactoryRent = () => {
 
             let reqOptions = {
                 url: `${process.env.REACT_APP_URL}/upload/${productID}`,
-                method: "POST", 
+                method: "POST",
                 headers: headersList,
                 data: bodyContent,
             }
@@ -225,9 +225,9 @@ const FactoryRent = () => {
 
         }
 
-    }; 
+    };
 
-    const handlepinfetch = (e) => { 
+    const handlepinfetch = (e) => {
         let val = NumericString(e.target.value)
         setPincode(val);
         if (val == 6) {
@@ -365,9 +365,13 @@ const FactoryRent = () => {
         }
     }
 
-     // ======--- image upload function  
+    // ======--- image upload function    
 
-     const ondragleave = (event) => {
+    const selectFiles = () => {
+        fileInputRef.current.click();
+    }
+
+    const ondragleave = (event) => {
         event.preventDefault();
         setIsDraging(false);
         console.log("leave")
@@ -465,7 +469,7 @@ const FactoryRent = () => {
                     />
                     <Input
                         type="text"
-                        maxLength={"100"} 
+                        maxLength={"100"}
                         required
                         placeholder="Enter State"
                         value={state}
@@ -696,7 +700,7 @@ const FactoryRent = () => {
                                 </Heading>
                                 <Input
                                     type="text"
-                                    value={pricedetail} 
+                                    value={pricedetail}
                                     maxLength={"10"}
                                     required
                                     onChange={(e) => {
@@ -745,7 +749,7 @@ const FactoryRent = () => {
 
                             Price Negotiable
                         </Checkbox>
-                    </Box> 
+                    </Box>
                     <Box>
                         {additionalPrice && <>
                             <InputGroup w={"300px"} margin={"10 0 0 0"}>
@@ -776,34 +780,34 @@ const FactoryRent = () => {
                     </Box>
                 </Box>
 
- {/* image Drag and Drop area  */}
- <Box>
-                <Box className={style.top}>
-                    <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
-                </Box>
-                <Box className={style.card}>
-                    <Box className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
-                        {isDraging ? (
-                            <Text className={style.select}>Drop image here</Text>
-                        ) : (
-                            <>
-                                Drag & Drop image here or
-                                <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
-                            </>
-                        )}
-                        <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+                {/* image Drag and Drop area  */}
+                <Box>
+                    <Box className={style.top}>
+                        <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
                     </Box>
-                    <Box className={style.container}>
-                        {/* {images.map((image, index) => (
+                    <Box className={style.card}>
+                        <Box className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+                            {isDraging ? (
+                                <Text className={style.select}>Drop image here</Text>
+                            ) : (
+                                <>
+                                    Drag & Drop image here or
+                                    <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
+                                </>
+                            )}
+                            <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+                        </Box>
+                        <Box className={style.container}>
+                            {/* {images.map((image, index) => (
                             <Box className={style.image} key={index}>
                                 {console.log(image)}  s
                             </Box>
                         ))} 
-                    */} 
+                    */}
 
+                        </Box>
                     </Box>
                 </Box>
-            </Box>
 
                 {/* ============================ Property unique discription ============================ */}
                 <Box>
