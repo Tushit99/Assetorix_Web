@@ -103,7 +103,7 @@ const CommercialShop = () => {
                 city,
                 state,
                 country,
-            }, 
+            },
             ownership,
             price: +pricedetail,
             priceUnit: +priceSqr,
@@ -169,7 +169,7 @@ const CommercialShop = () => {
             showToastError('Provide Total Floors');
         } else if (!facingwidth) {
             showToastError("Provide facing width")
-        } 
+        }
 
         if (
             city &&
@@ -177,7 +177,7 @@ const CommercialShop = () => {
             type &&
             ownership &&
             pricedetail &&
-            
+
             inclusivePrices &&
             additinalft &&
             propertyFacing &&
@@ -248,7 +248,7 @@ const CommercialShop = () => {
                 //     body: JSON.stringify(obj)
                 // });
                 // let data = await response.json();  
-                console.log("data", obj); 
+                console.log("data", obj);
                 await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
                     .then((e) => {
                         toast({
@@ -257,7 +257,7 @@ const CommercialShop = () => {
                             status: 'success',
                             duration: 2000,
                         })
-                        submitImage(e.data.id); 
+                        submitImage(e.data.id);
                     });
             } catch (error) {
                 toast({
@@ -281,8 +281,8 @@ const CommercialShop = () => {
         }
     };
 
-      // image uploading after uploading the data:  
-      const submitImage = async (productID) => {
+    // image uploading after uploading the data:  
+    const submitImage = async (productID) => {
         try {
             let id = localStorage.getItem("usrId") || undefined;
             let authorization = localStorage.getItem("AstToken") || undefined;
@@ -302,7 +302,7 @@ const CommercialShop = () => {
 
             let reqOptions = {
                 url: `${process.env.REACT_APP_URL}/upload/${productID}`,
-                method: "POST", 
+                method: "POST",
                 headers: headersList,
                 data: bodyContent,
             }
@@ -329,7 +329,7 @@ const CommercialShop = () => {
     // pincode to fetch data  
     const pinfetch = async (pin) => {
         try {
-            
+
             let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
             setState(res.data[0].state);
             setCity(res.data[0].city);
@@ -532,7 +532,7 @@ const CommercialShop = () => {
     return (
         <div>
             <Box>
-                <Heading  margin={"10px 0"} size={"md"} > Your shop is located inside </Heading>
+                <Heading margin={"10px 0"} size={"md"} > Your shop is located inside </Heading>
                 <Box display={"flex"} flexWrap={"wrap"} gap={4} >
                     <button value={"Mall"} className={located == "Mall" ? style.setbtn : style.btn} onClick={(e) => setLocated(e.target.value)} > Mall </button>
                     <button value={"Commercial Project"} className={located == "Commercial Project" ? style.setbtn : style.btn} onClick={(e) => setLocated(e.target.value)} > Commercial Project </button>
@@ -1011,7 +1011,7 @@ const CommercialShop = () => {
 
                         {/* ============================ Suitable for business types ============================ */}
                         <Box textAlign={"left"}>
-                            <Heading  margin={"10px 0"} size={"md"} > Suitable for business types </Heading>
+                            <Heading margin={"10px 0"} size={"md"} > Suitable for business types </Heading>
                             <Box>
                                 <Menu>
                                     <MenuButton as={Button} borderRadius={0} rightIcon={<ChevronDownIcon />}>
@@ -1129,16 +1129,15 @@ const CommercialShop = () => {
                                         >
                                             {isCountry.country == "india" ? "₹" : "$"} Price Details
                                         </Heading>
-                                        <NumberInput >
-                                            <NumberInputField
-                                                value={pricedetail}
-                                                required
-                                                onChange={(e) => {
-                                                    setPricedetail(e.target.value);
-                                                    areaCalucation();
-                                                }}
-                                            />
-                                        </NumberInput>
+                                        <Input
+                                            type="text"
+                                            value={pricedetail}
+                                            required
+                                            onChange={(e) => {
+                                                setPricedetail(e.target.value);
+                                                areaCalucation();
+                                            }}
+                                        />
                                     </Box>
                                     <Box display={"grid"} gap={0}>
                                         <Heading
@@ -1149,12 +1148,10 @@ const CommercialShop = () => {
                                         >
                                             {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
                                         </Heading>
-                                        <NumberInput value={priceSqr}>
-                                            <NumberInputField
-                                                
-                                                
-                                            />
-                                        </NumberInput>
+                                        <Input
+                                            type="text"
+                                            value={priceSqr} 
+                                        /> 
                                     </Box>
                                 </Box>
                             </Box>

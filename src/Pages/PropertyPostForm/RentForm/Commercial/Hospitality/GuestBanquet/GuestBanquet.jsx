@@ -17,7 +17,7 @@ import style from "../../RentComercial.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
-import { AlphabetString, CleanInputText, NumericString } from "../../../../code";
+import { AlphabetString, CleanInputText, NumericString, WordandNumber } from "../../../../code";
 
 
 
@@ -26,7 +26,7 @@ const GuestBanquetRent = () => {
     const toast = useToast();
     const [country, setCountry] = useState("");
     const [city, setCity] = useState("");
-    const [pincode, setPincode] = useState(0);
+    const [pincode, setPincode] = useState("");
     const [state, setState] = useState("");
     const [locality, setLocality] = useState("");
     const [address, setaddress] = useState("");
@@ -241,12 +241,13 @@ const GuestBanquetRent = () => {
 
     };  
 
-    const handlepinfetch = (e) => {
-        setPincode(NumericString(e.target.value));
-        if (e.target.value.length == 6) {
-            pinfetch(NumericString(e.target.value));
+    const handlepinfetch = (e) => { 
+        let val = e.target.vlaue; 
+        setPincode(val);
+        if (val.length == 6) {
+            pinfetch(val);
         }
-    }
+    } 
 
 
     const pinfetch = async (pin) => {
@@ -410,14 +411,14 @@ const GuestBanquetRent = () => {
                     required
                     placeholder="Address (optional)"
                     value={address}
-                    onChange={(e) => setaddress(e.target.value)}
+                    onChange={(e) => setaddress(WordandNumber(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
                 />
                 <Input
                     type="text"
                     placeholder={"Enter pincode"}
-                    maxLength={"100"}
+                    maxLength={"6"}
                     required
                     fontSize={"md"}
                     value={pincode}
@@ -426,12 +427,12 @@ const GuestBanquetRent = () => {
 
                 <Input
                     type="text"
-                    maxLength={"100"}
+                    maxLength={"60"}
                     required
                     placeholder="Locality"
                     list="browsers"
                     value={locality}
-                    onChange={(e) => setLocality(e.target.value)}
+                    onChange={(e) => setLocality(WordandNumber(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
                 />
@@ -450,7 +451,7 @@ const GuestBanquetRent = () => {
                     placeholder="Enter City"
                     fontSize={"md"}
                     value={city}
-                    onChange={(e) => setCity(e.target.value)}
+                    onChange={(e) => setCity(WordandNumber(e.target.value))}
                     variant="flushed"
                 />
                 <Input
@@ -459,7 +460,7 @@ const GuestBanquetRent = () => {
                     required
                     placeholder="Enter State"
                     value={state}
-                    onChange={(e) => setState(e.target.value)}
+                    onChange={(e) => setState(WordandNumber(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
                 />
@@ -469,7 +470,7 @@ const GuestBanquetRent = () => {
                     required
                     placeholder="Enter Country"
                     value={country}
-                    onChange={(e) => setCountry(e.target.value)}
+                    onChange={(e) => setCountry(WordandNumber(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
                 />
@@ -525,8 +526,8 @@ const GuestBanquetRent = () => {
                     >
                         <Input type="text" maxLength={"9"} placeholder="Enter Plot Area" value={plotArea}
                             onChange={(e) => {
-                                areaCalucation();
                                 setPlotArea(e.target.value);
+                                areaCalucation();
                             }}
                             required />
                         <Select value={areaPer} onChange={(e) => {

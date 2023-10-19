@@ -1463,10 +1463,7 @@ const FlatAppartment = () => {
                         Price Details
                     </Heading>
                     <Box display={"flex"} alignItems={"center"} gap={5}>
-                        <InputGroup w={300}>
-                            <Select w={100} borderRadius={0}>
-                                <option value="">value</option>
-                            </Select>
+                        <InputGroup w={300}> 
                             <Input
                                 type="text"
                                 value={pricedetail}

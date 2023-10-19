@@ -14,12 +14,12 @@ import {
     useToast,
 } from "@chakra-ui/react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
-import { Checkbox } from "@chakra-ui/react"; 
+import { Checkbox } from "@chakra-ui/react";
 import style from "../Storage.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
-import { CleanInputText } from "../../../../code"; 
+import { CleanInputText } from "../../../../code";
 
 
 
@@ -95,7 +95,7 @@ const WareHouse = () => {
             propertyGroup: "Commercial",
             propertyType: "Storage",
             storageType: "Ware House",
-            address: {  
+            address: {
                 address,
                 locality,
                 pincode,
@@ -103,7 +103,7 @@ const WareHouse = () => {
                 state,
                 country,
             },
-            washrooms,  
+            washrooms,
             ownership,
             price: +pricedetail,
             priceUnit: +priceSqr,
@@ -170,14 +170,14 @@ const WareHouse = () => {
             obj["locationAdv"] = locationAdv
         }
 
-        if ( 
+        if (
             ownership &&
             pricedetail &&
-            
+
             inclusivePrices &&
             amenities &&
             propertyFeatures &&
-            preLeased &&  
+            preLeased &&
             desc
         ) {
             let id = localStorage.getItem("usrId") || undefined;
@@ -247,8 +247,8 @@ const WareHouse = () => {
                             description: e.data.msg,
                             status: 'success',
                             duration: 2000,
-                        }); 
-                        submitImage(e.data.id); 
+                        });
+                        submitImage(e.data.id);
                     });
             } catch (error) {
                 toast({
@@ -270,10 +270,10 @@ const WareHouse = () => {
                 position: 'top-right'
             })
         }
-    }; 
+    };
 
-      // image uploading after uploading the data:  
-      const submitImage = async (productID) => {
+    // image uploading after uploading the data:  
+    const submitImage = async (productID) => {
         try {
             let id = localStorage.getItem("usrId") || undefined;
             let authorization = localStorage.getItem("AstToken") || undefined;
@@ -293,7 +293,7 @@ const WareHouse = () => {
 
             let reqOptions = {
                 url: `${process.env.REACT_APP_URL}/upload/${productID}`,
-                method: "POST", 
+                method: "POST",
                 headers: headersList,
                 data: bodyContent,
             }
@@ -304,7 +304,7 @@ const WareHouse = () => {
 
         }
 
-    }; 
+    };
 
     const handlepinfetch = (e) => {
         setPincode(e.target.value);
@@ -319,7 +319,7 @@ const WareHouse = () => {
 
     const pinfetch = async (pin) => {
         try {
-            
+
             let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
             setState(res.data[0].state);
             setCity(res.data[0].city);
@@ -469,7 +469,7 @@ const WareHouse = () => {
                         onChange={(e) => setAddress(e.target.value)}
                         fontSize={"md"}
                         variant="flushed"
-                    /> 
+                    />
                     <NumberInput>
                         <NumberInputField
                             placeholder={"Enter pincode"}
@@ -549,7 +549,7 @@ const WareHouse = () => {
                     <Heading as={"h4"} size={"sm"} margin={"0 0 30px 0 "}>
                         Add Room Details
                     </Heading>
-                </Box> 
+                </Box>
 
                 {/* ============================== No. of Washrooms ====================================== */}
                 <Box>
@@ -565,7 +565,7 @@ const WareHouse = () => {
                             />
                         </NumberInput>
                     </Box>
-                </Box> 
+                </Box>
 
                 {/* ============================ add area details =============================== */}
                 <Box textAlign={"left"} padding={"10px 0"}>
@@ -613,7 +613,7 @@ const WareHouse = () => {
                             <option value="perch">perch</option>
                         </select>
                     </ButtonGroup>
-                </Box> 
+                </Box>
 
                 {/* ========================== Availability status =============================== */}
                 <Box textAlign={"left"} className={style.optional_box}>
@@ -648,7 +648,7 @@ const WareHouse = () => {
                             Under construction
                         </button>
                     </Box>
-                </Box> 
+                </Box>
 
                 {/* ========================== Age of Property ================================= */}
                 {availability == "Ready to move" && (
@@ -816,16 +816,15 @@ const WareHouse = () => {
                                 >
                                     {isCountry.country == "india" ? "₹" : "$"} Price Details
                                 </Heading>
-                                <NumberInput >
-                                    <NumberInputField
-                                        value={pricedetail}
-                                        required
-                                        onChange={(e) => {
-                                            setPricedetail(e.target.value);
-                                            areaCalucation();
-                                        }}
-                                    />
-                                </NumberInput>
+                                <Input
+                                    type="text"
+                                    value={pricedetail}
+                                    required
+                                    onChange={(e) => {
+                                        setPricedetail(e.target.value);
+                                        areaCalucation();
+                                    }}
+                                /> 
                             </Box>
                             <Box display={"grid"} gap={0}>
                                 <Heading
@@ -838,8 +837,8 @@ const WareHouse = () => {
                                 </Heading>
                                 <NumberInput value={priceSqr}>
                                     <NumberInputField
-                                        
-                                        
+
+
                                     />
                                 </NumberInput>
                             </Box>

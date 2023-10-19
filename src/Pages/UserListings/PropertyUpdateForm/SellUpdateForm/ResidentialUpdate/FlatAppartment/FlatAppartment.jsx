@@ -320,7 +320,7 @@ const FlatAppartmentUpdate = () => {
                 setWardrobe(e?.furnishedObj?.wardrobe);
                 setGeyser(e?.furnishedObj?.geyser);
                 setfurnishedarr(e?.furnishedList);
-            } 
+            }
             setAreaPer(e?.plotAreaUnit);
             setExtraRoom(e?.otherRoom);
             setAvailability(e?.availabilityStatus);
@@ -852,7 +852,7 @@ const FlatAppartmentUpdate = () => {
                             gap={6}
                         >
                             <Heading as={"h4"} fontWeight={400} size={"sm"} color={"#656565"}>
-                                
+
                             </Heading>
                             <Box className={style.furnished_detail}>
                                 <Box>
@@ -1444,16 +1444,15 @@ const FlatAppartmentUpdate = () => {
                                 >
                                     {isCountry.country == "india" ? "₹" : "$"} Price Details
                                 </Heading>
-                                <NumberInput >
-                                    <NumberInputField
-                                        value={pricedetail}
-                                        required
-                                        onChange={(e) => {
-                                            setPricedetail(e.target.value);
-                                            areaCalucation();
-                                        }}
-                                    />
-                                </NumberInput>
+                                <Input
+                                    type="text"
+                                    value={pricedetail}
+                                    required
+                                    onChange={(e) => {
+                                        setPricedetail(e.target.value);
+                                        areaCalucation();
+                                    }}
+                                /> 
                             </Box>
                             <Box display={"grid"} gap={0}>
                                 <Heading

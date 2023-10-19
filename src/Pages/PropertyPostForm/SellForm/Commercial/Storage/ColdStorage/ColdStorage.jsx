@@ -19,10 +19,10 @@ import style from "../Storage.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
-import { CleanInputText } from "../../../../code";  
+import { CleanInputText } from "../../../../code";
 
 
-const ColdStorage = () =>{
+const ColdStorage = () => {
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
@@ -94,7 +94,7 @@ const ColdStorage = () =>{
             propertyGroup: "Commercial",
             propertyType: "Storage",
             storageType: "Cold Storage",
-            address: { 
+            address: {
                 address,
                 locality,
                 pincode,
@@ -102,7 +102,7 @@ const ColdStorage = () =>{
                 state,
                 country,
             },
-            washrooms,  
+            washrooms,
             ownership,
             price: +pricedetail,
             priceUnit: +priceSqr,
@@ -169,14 +169,14 @@ const ColdStorage = () =>{
             obj["locationAdv"] = locationAdv
         }
 
-        if ( 
+        if (
             ownership &&
             pricedetail &&
-            
+
             inclusivePrices &&
             amenities &&
             propertyFeatures &&
-            preLeased &&  
+            preLeased &&
             desc
         ) {
             let id = localStorage.getItem("usrId") || undefined;
@@ -246,8 +246,8 @@ const ColdStorage = () =>{
                             description: e.data.msg,
                             status: 'success',
                             duration: 2000,
-                        }); 
-                        submitImage(e.data.id); 
+                        });
+                        submitImage(e.data.id);
                     });
             } catch (error) {
                 toast({
@@ -256,7 +256,7 @@ const ColdStorage = () =>{
                     duration: 2000,
                 })
                 console.log(error);
-            } 
+            }
         }
         else {
             toast({
@@ -264,13 +264,13 @@ const ColdStorage = () =>{
                 description: "Please fill all required fields.",
                 status: 'info',
                 duration: 2000,
-                position: 'top-right' 
+                position: 'top-right'
             })
         }
-    }; 
+    };
 
-      // image uploading after uploading the data:  
-      const submitImage = async (productID) => {
+    // image uploading after uploading the data:  
+    const submitImage = async (productID) => {
         try {
             let id = localStorage.getItem("usrId") || undefined;
             let authorization = localStorage.getItem("AstToken") || undefined;
@@ -290,7 +290,7 @@ const ColdStorage = () =>{
 
             let reqOptions = {
                 url: `${process.env.REACT_APP_URL}/upload/${productID}`,
-                method: "POST", 
+                method: "POST",
                 headers: headersList,
                 data: bodyContent,
             }
@@ -316,7 +316,7 @@ const ColdStorage = () =>{
 
     const pinfetch = async (pin) => {
         try {
-            
+
             let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
             setState(res.data[0].state);
             setCity(res.data[0].city);
@@ -466,7 +466,7 @@ const ColdStorage = () =>{
                         onChange={(e) => setaddress(e.target.value)}
                         fontSize={"md"}
                         variant="flushed"
-                    /> 
+                    />
                     <NumberInput>
                         <NumberInputField
                             placeholder={"Enter pincode"}
@@ -546,7 +546,7 @@ const ColdStorage = () =>{
                     <Heading as={"h4"} size={"sm"} margin={"0 0 30px 0 "}>
                         Add Room Details
                     </Heading>
-                </Box> 
+                </Box>
 
                 {/* ============================== No. of Washrooms ====================================== */}
                 <Box>
@@ -562,7 +562,7 @@ const ColdStorage = () =>{
                             />
                         </NumberInput>
                     </Box>
-                </Box> 
+                </Box>
 
                 {/* ============================ add area details =============================== */}
                 <Box textAlign={"left"} padding={"10px 0"}>
@@ -610,7 +610,7 @@ const ColdStorage = () =>{
                             <option value="perch">perch</option>
                         </select>
                     </ButtonGroup>
-                </Box> 
+                </Box>
 
                 {/* ========================== Availability status =============================== */}
                 <Box textAlign={"left"} className={style.optional_box}>
@@ -645,7 +645,7 @@ const ColdStorage = () =>{
                             Under construction
                         </button>
                     </Box>
-                </Box> 
+                </Box>
 
                 {/* ========================== Age of Property ================================= */}
                 {availability == "Ready to move" && (
@@ -813,16 +813,15 @@ const ColdStorage = () =>{
                                 >
                                     {isCountry.country == "india" ? "₹" : "$"} Price Details
                                 </Heading>
-                                <NumberInput >
-                                    <NumberInputField
-                                        value={pricedetail}
-                                        required
-                                        onChange={(e) => {
-                                            setPricedetail(e.target.value);
-                                            areaCalucation();
-                                        }}
-                                    />
-                                </NumberInput>
+                                <Input
+                                    type="text"
+                                    value={pricedetail}
+                                    required
+                                    onChange={(e) => {
+                                        setPricedetail(e.target.value);
+                                        areaCalucation();
+                                    }}
+                                /> 
                             </Box>
                             <Box display={"grid"} gap={0}>
                                 <Heading
@@ -835,8 +834,8 @@ const ColdStorage = () =>{
                                 </Heading>
                                 <NumberInput value={priceSqr}>
                                     <NumberInputField
-                                        
-                                        
+
+
                                     />
                                 </NumberInput>
                             </Box>
@@ -1540,5 +1539,5 @@ const ColdStorage = () =>{
     )
 }
 
-export default ColdStorage; 
+export default ColdStorage;
 

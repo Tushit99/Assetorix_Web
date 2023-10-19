@@ -10,7 +10,7 @@ import {
     NumberInput,
     NumberInputField,
     Select,
-    Text, 
+    Text,
     Textarea,
     useToast,
 } from "@chakra-ui/react";
@@ -25,7 +25,7 @@ import { useParams } from 'react-router-dom';
 
 const PlotLandUpdate = () => {
     const { productID } = useParams();
-    const isCountry = useSelector((state) => state.gloalval); 
+    const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
     const [facingwidth, setFacingWidth] = useState("");
@@ -751,16 +751,15 @@ const PlotLandUpdate = () => {
                                 >
                                     {isCountry.country == "india" ? "₹" : "$"} Price Details
                                 </Heading>
-                                <NumberInput >
-                                    <NumberInputField
-                                        value={pricedetail}
-                                        required
-                                        onChange={(e) => {
-                                            setPricedetail(e.target.value);
-                                            areaCalucation();
-                                        }}
-                                    />
-                                </NumberInput>
+                                <Input
+                                    type="text"
+                                    value={pricedetail}
+                                    required
+                                    onChange={(e) => {
+                                        setPricedetail(e.target.value);
+                                        areaCalucation();
+                                    }}
+                                /> 
                             </Box>
                             <Box display={"grid"} gap={0}>
                                 <Heading
