@@ -294,12 +294,12 @@ const FlatAppartment = () => {
         }
     }; 
 
-    // image uploading after uploading the data: 
+    // image uploading after uploading the data:  
     const submitImage = async (productID) => {  
-        try {    
-            let id = localStorage.getItem("usrId") || undefined;
+        try {   
+            let id = localStorage.getItem("usrId") || undefined; 
             let authorization = localStorage.getItem("AstToken") || undefined; 
-
+    
             let headersList = { 
                 "Accept": "*/*",
                 "Authorization": authorization,
@@ -327,8 +327,7 @@ const FlatAppartment = () => {
         }
 
     };
-
-
+    
     const handlepinfetch = (e) => {
         let val = NumericString(e.target.value)
         setPincode(val);
@@ -342,8 +341,7 @@ const FlatAppartment = () => {
 
 
     const pinfetch = async (pin) => {
-        try {
-
+        try {   
             let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
             setState(res.data[0].state);
             setCity(res.data[0].city);
