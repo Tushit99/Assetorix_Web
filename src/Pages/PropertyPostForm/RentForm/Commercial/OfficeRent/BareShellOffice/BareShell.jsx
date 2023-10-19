@@ -463,7 +463,47 @@ const BareShell = () => {
         }
         console.log(newarr);
         setpreviouslyUsedList(newarr);
+    } 
+
+ // ======--- image upload function  
+
+ const ondragleave = (event) => {
+    event.preventDefault();
+    setIsDraging(false);
+    console.log("leave")
+}
+
+const ondragover = (event) => {
+    event.preventDefault();
+    setIsDraging(true);
+    event.dataTransfer.dropEffect = "copy";
+    console.log("over the box");
+}
+
+const ondrop = (event) => {
+    event.preventDefault(); // Add this line
+    setIsDraging(false);
+    const files = event.dataTransfer.files;
+    console.log(event.dataTransfer.files);
+
+    if (files.length === 0) {
+        return;
     }
+
+    for (let i = 0; i < files.length; i++) {
+        if (files[i].type.split('/')[0] !== 'image') {
+            continue;
+        }
+        if (!images.some((e) => e.name === files[i].name)) {
+            setImages((prev) => [...prev, {
+                name: files[i].name,
+                image: files[i],
+            }]);
+        }
+    }
+    console.log("droped");
+}
+
 
     return (
         <form onSubmit={handleSubmitData}>

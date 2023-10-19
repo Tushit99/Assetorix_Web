@@ -551,7 +551,7 @@ const FlatAppartment = () => {
                     name: files[i].name,
                     image: files[i],
                 },])
-            }
+            } 
         }
     }
 

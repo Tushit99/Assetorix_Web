@@ -8,7 +8,7 @@ import {
   InputGroup,
   Menu,
   MenuButton,
-  MenuList,  
+  MenuList,
   Select,
   Text,
   Textarea,
@@ -67,10 +67,10 @@ const CommercialLand = () => {
   const [expectedByYear, setExpectedByYear] = useState("");
   const [authorisedBy, setAuthorisedBy] = useState([]);
   const [industryType, setIndustryType] = useState([]);
-    // state for drop box images
-    const [images, setImages] = useState([]);
-    const [isDraging, setIsDraging] = useState(false);
-    const fileInputRef = useRef(null); 
+  // state for drop box images
+  const [images, setImages] = useState([]);
+  const [isDraging, setIsDraging] = useState(false);
+  const fileInputRef = useRef(null);
 
 
   // please don'nt change any function without any prior knowledge
@@ -209,8 +209,8 @@ const CommercialLand = () => {
               description: e.data.msg,
               status: 'success',
               duration: 2000,
-            }); 
-            submitImage(e.data.id); 
+            });
+            submitImage(e.data.id);
           });
       } catch (error) {
         toast({
@@ -232,44 +232,44 @@ const CommercialLand = () => {
         position: 'top-right'
       })
     }
-  }; 
+  };
 
-    // image uploading after uploading the data:  
-    const submitImage = async (productID) => {
-      try {
-          let id = localStorage.getItem("usrId") || undefined;
-          let authorization = localStorage.getItem("AstToken") || undefined;
+  // image uploading after uploading the data:  
+  const submitImage = async (productID) => {
+    try {
+      let id = localStorage.getItem("usrId") || undefined;
+      let authorization = localStorage.getItem("AstToken") || undefined;
 
-          let headersList = {
-              "Accept": "*/*",
-              "Authorization": authorization,
-              "id": id
-          }
-
-          let formdata = new FormData();
-          images.forEach((image) => {
-              formdata.append("image", image.image);
-          });
-
-          let bodyContent = formdata;
-
-          let reqOptions = {
-              url: `${process.env.REACT_APP_URL}/upload/${productID}`,
-              method: "POST", 
-              headers: headersList,
-              data: bodyContent,
-          }
-
-          let response = await axios.request(reqOptions)
-          console.log(response.data);
-      } catch (error) {
-
+      let headersList = {
+        "Accept": "*/*",
+        "Authorization": authorization,
+        "id": id
       }
+
+      let formdata = new FormData();
+      images.forEach((image) => {
+        formdata.append("image", image.image);
+      });
+
+      let bodyContent = formdata;
+
+      let reqOptions = {
+        url: `${process.env.REACT_APP_URL}/upload/${productID}`,
+        method: "POST",
+        headers: headersList,
+        data: bodyContent,
+      }
+
+      let response = await axios.request(reqOptions)
+      console.log(response.data);
+    } catch (error) {
+
+    }
 
   };
 
-  const handlepinfetch = (e) => { 
-    let val = e.target.value; 
+  const handlepinfetch = (e) => {
+    let val = e.target.value;
     setPincode(val);
     if (val.length == 6) {
       pinfetch(val);
@@ -439,6 +439,45 @@ const CommercialLand = () => {
     });
   }
 
+  // ======--- image upload function  
+
+  const ondragleave = (event) => {
+    event.preventDefault();
+    setIsDraging(false);
+    console.log("leave")
+  }
+
+  const ondragover = (event) => {
+    event.preventDefault();
+    setIsDraging(true);
+    event.dataTransfer.dropEffect = "copy";
+    console.log("over the box");
+  }
+
+  const ondrop = (event) => {
+    event.preventDefault(); // Add this line
+    setIsDraging(false);
+    const files = event.dataTransfer.files;
+    console.log(event.dataTransfer.files);
+
+    if (files.length === 0) {
+      return;
+    }
+
+    for (let i = 0; i < files.length; i++) {
+      if (files[i].type.split('/')[0] !== 'image') {
+        continue;
+      }
+      if (!images.some((e) => e.name === files[i].name)) {
+        setImages((prev) => [...prev, {
+          name: files[i].name,
+          image: files[i],
+        }]);
+      }
+    }
+    console.log("droped");
+  }
+
 
   return (
     <Box className="perfectwidth">
@@ -450,8 +489,8 @@ const CommercialLand = () => {
           </Heading>
 
           <Input
-            type="text" 
-            required 
+            type="text"
+            required
             maxLength={"55"}
             placeholder="Plot number (optional)"
             value={Plotnumber}
@@ -461,15 +500,15 @@ const CommercialLand = () => {
           />
           <Input
             type="text"
-            placeholder={"Enter pincode"} 
+            placeholder={"Enter pincode"}
             required
             fontSize={"md"}
-            value={pincode} 
+            value={pincode}
             maxLength={"6"}
             onChange={handlepinfetch}
           />
           <Input
-            type="text" 
+            type="text"
             required
             placeholder="Locality"
             list="browsers"
@@ -488,7 +527,7 @@ const CommercialLand = () => {
           ) : ""}
 
           <Input
-            type="text" 
+            type="text"
             required
             placeholder="Enter City"
             maxLength={"10"}
@@ -498,7 +537,7 @@ const CommercialLand = () => {
             variant="flushed"
           />
           <Input
-            type="text" 
+            type="text"
             maxLength={"10"}
             required
             placeholder="Enter State"
@@ -509,7 +548,7 @@ const CommercialLand = () => {
           />
           <Input
             type="text"
-            maxLength={"10"} 
+            maxLength={"10"}
             required
             placeholder="Enter Country"
             value={country}
@@ -540,7 +579,7 @@ const CommercialLand = () => {
             variant="outline"
           >
             <Input
-              type="text" 
+              type="text"
               value={plotArea}
               onChange={(e) => {
                 areaCalucation();
@@ -894,7 +933,7 @@ const CommercialLand = () => {
                     areaCalucation();
                   }}
                 />
-              </Box> 
+              </Box>
             </Box>
           </Box>
           <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
@@ -1035,34 +1074,34 @@ const CommercialLand = () => {
           </Menu>
         </Box>
 
- {/* image Drag and Drop area  */}
- <Box>
-                <Box className={style.top}>
-                    <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
-                </Box>
-                <Box className={style.card}>
-                    <Box className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
-                        {isDraging ? (
-                            <Text className={style.select}>Drop image here</Text>
-                        ) : (
-                            <>
-                                Drag & Drop image here or
-                                <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
-                            </>
-                        )}
-                        <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
-                    </Box>
-                    <Box className={style.container}>
-                        {/* {images.map((image, index) => (
+        {/* image Drag and Drop area  */}
+        <Box>
+          <Box className={style.top}>
+            <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
+          </Box>
+          <Box className={style.card}>
+            <Box className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+              {isDraging ? (
+                <Text className={style.select}>Drop image here</Text>
+              ) : (
+                <>
+                  Drag & Drop image here or
+                  <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
+                </>
+              )}
+              <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+            </Box>
+            <Box className={style.container}>
+              {/* {images.map((image, index) => (
                             <Box className={style.image} key={index}>
                                 {console.log(image)}  s
                             </Box>
                         ))} 
-                    */} 
+                    */}
 
-                    </Box>
-                </Box>
             </Box>
+          </Box>
+        </Box>
 
         {/* ============================ Property unique discription ============================ */}
         <Box>
