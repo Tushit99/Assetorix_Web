@@ -83,7 +83,7 @@ const FarmhouseRent = () => {
     // state for drop box images
     const [images, setImages] = useState([]);
     const [isDraging, setIsDraging] = useState(false);
-    const fileInputRef = useRef(null); 
+    const fileInputRef = useRef(null);
 
     const handleSubmitData = async (e) => {
         e.preventDefault();
@@ -265,8 +265,8 @@ const FarmhouseRent = () => {
                             description: e.data.msg,
                             status: "success",
                             duration: 2000,
-                        }); 
-                        submitImage(e.data.id); 
+                        });
+                        submitImage(e.data.id);
                     });
             } catch (error) {
                 toast({
@@ -286,10 +286,10 @@ const FarmhouseRent = () => {
                 position: "top-right",
             });
         }
-    }; 
+    };
 
-      // image uploading after uploading the data:  
-      const submitImage = async (productID) => {
+    // image uploading after uploading the data:  
+    const submitImage = async (productID) => {
         try {
             let id = localStorage.getItem("usrId") || undefined;
             let authorization = localStorage.getItem("AstToken") || undefined;
@@ -309,7 +309,7 @@ const FarmhouseRent = () => {
 
             let reqOptions = {
                 url: `${process.env.REACT_APP_URL}/upload/${productID}`,
-                method: "POST", 
+                method: "POST",
                 headers: headersList,
                 data: bodyContent,
             }
@@ -320,7 +320,7 @@ const FarmhouseRent = () => {
 
         }
 
-    }; 
+    };
 
     const handlepinfetch = (e) => {
         let val = NumericString(e.target.value);
@@ -510,11 +510,15 @@ const FarmhouseRent = () => {
 
     const handleDepositAmount = (e) => {
         setDepositAmount(NumericString(e.target.value));
-    }  
+    }
 
-     // ======--- image upload function  
+    // ======--- image upload function  
 
-     const ondragleave = (event) => {
+    const selectFiles = () => {
+        fileInputRef.current.click();
+    }
+
+    const ondragleave = (event) => {
         event.preventDefault();
         setIsDraging(false);
         console.log("leave")
@@ -1349,9 +1353,9 @@ const FarmhouseRent = () => {
                         <Input
                             type="text"
                             w={"40%"}
-                            borderRadius={0} 
+                            borderRadius={0}
                             value={priceSqr}
-                            onChange={(e) => { 
+                            onChange={(e) => {
                                 e.preventDefault();
                                 setPriceSqr(NumericString(e.target.value));
                             }} placeholder={"₹ Expected Rent"}
@@ -1405,7 +1409,7 @@ const FarmhouseRent = () => {
                     <Box display={securityDeposit == "None" ? "none" : "block"}>
                         <Input type="text" w={300} maxLength={"9"} value={depositAmount} onChange={handleDepositAmount} placeholder={`${securityDeposit == "Fixed" ? "Deposit Value" : ""} ${securityDeposit == "Multiple of Rent" ? "No. of months (Max 30)" : ""}`} />
                     </Box>
-                </Box> 
+                </Box>
 
                 {/* ============================ Duration of agriment ============================ */}
                 <Box>
@@ -2065,7 +2069,7 @@ const FarmhouseRent = () => {
                         type="text"
                         variant="flushed"
                         flex={1}
-                        required 
+                        required
                         maxLength={"10"}
                         value={facingwidth}
                         onChange={(e) => {

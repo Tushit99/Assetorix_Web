@@ -372,11 +372,15 @@ const WareHouse = () => {
             let ans = Math.round(max / min);
             setPriceSqr(ans);
         }
-    } 
+    }
 
-     // ======--- image upload function  
+    // ======--- image upload function   
 
-     const ondragleave = (event) => {
+    const selectFiles = () => {
+        fileInputRef.current.click();
+    }
+
+    const ondragleave = (event) => {
         event.preventDefault();
         setIsDraging(false);
         console.log("leave")

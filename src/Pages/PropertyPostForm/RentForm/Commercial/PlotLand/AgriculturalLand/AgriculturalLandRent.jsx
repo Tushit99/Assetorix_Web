@@ -397,7 +397,11 @@ const AgriculturalLandRent = () => {
     }
   }
 
-  // ======--- image upload function  
+  // ======--- image upload function   
+
+  const selectFiles = () => {
+    fileInputRef.current.click();
+  }
 
   const ondragleave = (event) => {
     event.preventDefault();
