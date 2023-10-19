@@ -332,7 +332,7 @@ const RKStudio = () => {
         setPincode(val);
         if (val.length == 6) {
             pinfetch(val);
-        }
+        }  
         else {
             console.log(val);
         }

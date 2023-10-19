@@ -268,7 +268,7 @@ const FarmHouse = () => {
                             duration: 2000,
                             isClosable: true
                         })
-                        submitImage(e.data.id); 
+                        submitImage(e.data.id);
                     });
             } catch (error) {
                 toast({
@@ -294,42 +294,42 @@ const FarmHouse = () => {
         }
     };
 
-        // image uploading after uploading the data:  
-        const submitImage = async (productID) => {  
-            try {   
-                let id = localStorage.getItem("usrId") || undefined; 
-                let authorization = localStorage.getItem("AstToken") || undefined; 
-        
-                let headersList = { 
-                    "Accept": "*/*",
-                    "Authorization": authorization,
-                    "id": id 
-                }
-    
-                let formdata = new FormData();
-                images.forEach((image) => { 
-                    formdata.append("image", image.image); 
-                });
-    
-                let bodyContent = formdata;
-    
-                let reqOptions = {
-                    url: `${process.env.REACT_APP_URL}/upload/${productID}`,
-                    method: "POST",
-                    headers: headersList,
-                    data: bodyContent,
-                } 
-    
-                let response = await axios.request(reqOptions)
-                console.log(response.data);
-            } catch (error) {
-    
+    // image uploading after uploading the data:  
+    const submitImage = async (productID) => {
+        try {
+            let id = localStorage.getItem("usrId") || undefined;
+            let authorization = localStorage.getItem("AstToken") || undefined;
+
+            let headersList = {
+                "Accept": "*/*",
+                "Authorization": authorization,
+                "id": id
             }
-    
-        };
+
+            let formdata = new FormData();
+            images.forEach((image) => {
+                formdata.append("image", image.image);
+            });
+
+            let bodyContent = formdata;
+
+            let reqOptions = {
+                url: `${process.env.REACT_APP_URL}/upload/${productID}`,
+                method: "POST",
+                headers: headersList,
+                data: bodyContent,
+            }
+
+            let response = await axios.request(reqOptions)
+            console.log(response.data);
+        } catch (error) {
+
+        }
+
+    };
 
     const handlepinfetch = (e) => {
-        let val = e.target.value; 
+        let val = e.target.value;
         setPincode(val);
         if (val.length == 6) {
             pinfetch(val);
@@ -659,7 +659,7 @@ const FarmHouse = () => {
                             placeholder={"Enter No. of Bathrooms"}
                             onChange={(e) => setBathroom(NumberInput(e.target.value))}
                             value={bathroom}
-                            maxLength={"2"} 
+                            maxLength={"2"}
                             required
                         // padding={"0 2px"}
                         />
@@ -670,7 +670,7 @@ const FarmHouse = () => {
                             placeholder={"Enter No. of Balconies"}
                             onChange={(e) => setBalcony(NumberInput(e.target.value))}
                             value={balconey}
-                            maxLength={"2"} 
+                            maxLength={"2"}
                             required
                         // padding={"0 2px"}
                         />
@@ -1396,14 +1396,14 @@ const FarmHouse = () => {
                                     type="text"
                                     value={pricedetail}
                                     required
-                                    maxLength={"12"} 
+                                    maxLength={"12"}
                                     onChange={(e) => {
                                         setPricedetail(NumericString(e.target.value));
                                         areaCalucation();
                                     }}
                                 />
                             </InputGroup>
-                        </Box> 
+                        </Box>
                     </Box>
                 </Box>
                 <Box display={"flex"} gap={10} marginTop={"10px"} flexWrap={"wrap"}>

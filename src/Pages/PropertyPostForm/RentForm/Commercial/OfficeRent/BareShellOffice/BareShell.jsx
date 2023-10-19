@@ -248,7 +248,8 @@ const BareShell = () => {
                             description: e.data.msg,
                             status: "success",
                             duration: 2000,
-                        });
+                        });  
+                        submitImage(e.data.id); 
                     });
             } catch (error) {
                 toast({
@@ -270,7 +271,39 @@ const BareShell = () => {
         }
     };
 
+  // image uploading after uploading the data:  
+  const submitImage = async (productID) => {
+    try {
+        let id = localStorage.getItem("usrId") || undefined;
+        let authorization = localStorage.getItem("AstToken") || undefined;
 
+        let headersList = {
+            "Accept": "*/*",
+            "Authorization": authorization,
+            "id": id
+        }
+
+        let formdata = new FormData();
+        images.forEach((image) => {
+            formdata.append("image", image.image);
+        });
+
+        let bodyContent = formdata;
+
+        let reqOptions = {
+            url: `${process.env.REACT_APP_URL}/upload/${productID}`,
+            method: "POST", 
+            headers: headersList,
+            data: bodyContent,
+        }
+
+        let response = await axios.request(reqOptions)
+        console.log(response.data);
+    } catch (error) {
+
+    }
+
+};  
 
     const handlepinfetch = (e) => {
         setPincode(e.target.value);

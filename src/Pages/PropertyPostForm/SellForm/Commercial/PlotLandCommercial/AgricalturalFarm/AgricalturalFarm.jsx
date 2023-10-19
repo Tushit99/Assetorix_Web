@@ -228,9 +228,7 @@ const AgricalturalFarm = () => {
           duration: 2000,
         })
         console.log(error);
-      }
-      // }
-
+      } 
     }
     else {
       toast({

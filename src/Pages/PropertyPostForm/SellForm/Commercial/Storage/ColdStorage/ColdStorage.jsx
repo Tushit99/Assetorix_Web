@@ -264,7 +264,7 @@ const ColdStorage = () =>{
                 description: "Please fill all required fields.",
                 status: 'info',
                 duration: 2000,
-                position: 'top-right'
+                position: 'top-right' 
             })
         }
     }; 
