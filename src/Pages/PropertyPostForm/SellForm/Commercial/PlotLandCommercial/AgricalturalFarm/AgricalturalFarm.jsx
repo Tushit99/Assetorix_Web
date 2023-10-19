@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Box,
   Button,
@@ -20,7 +20,7 @@ import { Checkbox } from "@chakra-ui/react";
 import style from "../PlotLandCommercial.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io" 
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 // import { ChevronDownIcon } from "@chakra-ui/icons";
 import { CleanInputText, NumericString, WordandNumber } from "../../../../code";
 
@@ -44,7 +44,7 @@ const AgricalturalFarm = () => {
   const [constructionType, setConstructionType] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
-   const [additinalft, setAdditinalFeature] = useState([]);
+  const [additinalft, setAdditinalFeature] = useState([]);
   const [otherFeature, setOtherFeature] = useState([]);
   const [propertyFacing, setPropertyFacing] = useState("");
   const [facing, setFacing] = useState("Meter");
@@ -65,16 +65,19 @@ const AgricalturalFarm = () => {
   const [annualRentIncrease, setAnnualRentIncrease] = useState("");
   const [businessType, setBusinessType] = useState("");
   const [plotBreadth, setPlotBreadth] = useState("");
-  const [availability, setAvailability] = useState(""); 
+  const [availability, setAvailability] = useState("");
   const [fromyear, setFromyear] = useState("");
-  const [industryType, setIndustryType] = useState([]); 
+  const [industryType, setIndustryType] = useState([]);
 
   const [plotLength, setplotLength] = useState("");
   const [expectedBy, setexpectedBy] = useState([]);
   const [ConstructionOnProperty, setConstructionOnProperty] = useState("");
   const [expectedByYear, setExpectedByYear] = useState("");
-  const [authorisedBy, setAuthorisedBy] = useState([]); 
-
+  const [authorisedBy, setAuthorisedBy] = useState([]);
+  // state for drop box images
+  const [images, setImages] = useState([]);
+  const [isDraging, setIsDraging] = useState(false);
+  const fileInputRef = useRef(null);  
 
   // please don'nt change any function without any prior knowledge
 
@@ -110,7 +113,7 @@ const AgricalturalFarm = () => {
       price: +pricedetail,
       priceUnit: +priceSqr,
       inclusivePrices,
-      openSides, 
+      openSides,
       amenities,
       propertyFeatures,
       preLeased_Rented: preLeased,
@@ -120,12 +123,12 @@ const AgricalturalFarm = () => {
       roadFacingWidth: facingwidth,
       roadFacingWidthType: facing,
       totalFloors: +totalfloors,
-      plotArea, 
+      plotArea,
       plotAreaUnit: areaPer,
-      propertyApprovalAuthorityList : authorisedBy, 
-      carpetArea: plotArea, 
+      propertyApprovalAuthorityList: authorisedBy,
+      carpetArea: plotArea,
       expectedByYear,
-      carpetAreaUnit: areaPer, 
+      carpetAreaUnit: areaPer,
       // otherRoom: extraroom,
       description: desc,
       constructionOnProperty: ConstructionOnProperty,
@@ -136,8 +139,8 @@ const AgricalturalFarm = () => {
         maintenanceTimePeriod,
         bookingAmount,
         annualDuesPayable: annualDuesPayble
-      }, 
-     };
+      },
+    };
 
 
 
@@ -170,7 +173,7 @@ const AgricalturalFarm = () => {
     if (
       ownership &&
       pricedetail &&
-      
+
       inclusivePrices &&
       amenities &&
       propertyFeatures &&
@@ -218,7 +221,7 @@ const AgricalturalFarm = () => {
               description: e.data.msg,
               status: 'success',
               duration: 2000,
-            });  
+            });
             submitImage(e.data.id);
           });
       } catch (error) {
@@ -228,7 +231,7 @@ const AgricalturalFarm = () => {
           duration: 2000,
         })
         console.log(error);
-      } 
+      }
     }
     else {
       toast({
@@ -239,44 +242,44 @@ const AgricalturalFarm = () => {
         position: 'top-right'
       })
     }
-  }; 
+  };
 
-    // image uploading after uploading the data:  
-    const submitImage = async (productID) => {
-      try {
-          let id = localStorage.getItem("usrId") || undefined;
-          let authorization = localStorage.getItem("AstToken") || undefined;
+  // image uploading after uploading the data:  
+  const submitImage = async (productID) => {
+    try {
+      let id = localStorage.getItem("usrId") || undefined;
+      let authorization = localStorage.getItem("AstToken") || undefined;
 
-          let headersList = {
-              "Accept": "*/*",
-              "Authorization": authorization,
-              "id": id
-          }
-
-          let formdata = new FormData();
-          images.forEach((image) => {
-              formdata.append("image", image.image);
-          });
-
-          let bodyContent = formdata;
-
-          let reqOptions = {
-              url: `${process.env.REACT_APP_URL}/upload/${productID}`,
-              method: "POST", 
-              headers: headersList,
-              data: bodyContent,
-          }
-
-          let response = await axios.request(reqOptions)
-          console.log(response.data);
-      } catch (error) {
-
+      let headersList = {
+        "Accept": "*/*",
+        "Authorization": authorization,
+        "id": id
       }
+
+      let formdata = new FormData();
+      images.forEach((image) => {
+        formdata.append("image", image.image);
+      });
+
+      let bodyContent = formdata;
+
+      let reqOptions = {
+        url: `${process.env.REACT_APP_URL}/upload/${productID}`,
+        method: "POST",
+        headers: headersList,
+        data: bodyContent,
+      }
+
+      let response = await axios.request(reqOptions)
+      console.log(response.data);
+    } catch (error) {
+
+    }
 
   };
 
-  const handlepinfetch = (e) => { 
-    let val = NumericString(e.target.value); 
+  const handlepinfetch = (e) => {
+    let val = NumericString(e.target.value);
     setPincode(val);
     if (val.length == 6) {
       pinfetch(val);
@@ -293,7 +296,7 @@ const AgricalturalFarm = () => {
 
   const pinfetch = async (pin) => {
     try {
-      
+
       let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
       setState(res.data[0].state);
       setCity(res.data[0].city);
@@ -353,7 +356,7 @@ const AgricalturalFarm = () => {
     e.preventDefault();
     setOwnerShip(e.target.value);
   };
- 
+
 
   const handleAminities = (e) => {
     e.preventDefault();
@@ -381,7 +384,7 @@ const AgricalturalFarm = () => {
     setPropertyFeature(newarr);
   };
 
- 
+
 
   const handleotherfeature = (e) => {
     e.preventDefault();
@@ -455,7 +458,7 @@ const AgricalturalFarm = () => {
 
           <Input
             type="text"
-            padding={"0 10px"} 
+            padding={"0 10px"}
             maxLength={"12"}
             required
             placeholder="Plot number (optional)"
@@ -468,7 +471,7 @@ const AgricalturalFarm = () => {
             type="text"
             placeholder={"Enter pincode"}
             padding={"0 10px"}
-            required 
+            required
             maxLength={6}
             fontSize={"md"}
             value={pincode}
@@ -478,7 +481,7 @@ const AgricalturalFarm = () => {
             type="text"
             padding={"0 10px"}
             required
-            placeholder="Locality" 
+            placeholder="Locality"
             maxLength={"100"}
             list="browsers"
             value={locality}
@@ -599,7 +602,7 @@ const AgricalturalFarm = () => {
           <Box display={"flex"} gap={"20px"} w={"300px"} >
             <Input type="text" variant='flushed' maxLength={"20"} flex={1} required value={facingwidth} onChange={(e) => {
               e.preventDefault();
-              setFacingWidth(NumericString(e.target.value)); 
+              setFacingWidth(NumericString(e.target.value));
             }} />
             <Select flex={1} onChange={(e) => setFacing(e.target.value)} value={facing}>
               <option value="Meter"> Meter </option>
@@ -895,14 +898,14 @@ const AgricalturalFarm = () => {
                 <Input
                   type="text"
                   value={pricedetail}
-                  required 
+                  required
                   maxLength={"12"}
                   onChange={(e) => {
                     setPricedetail(NumericString(e.target.value));
                     areaCalucation();
                   }}
                 />
-              </Box> 
+              </Box>
             </Box>
           </Box>
           <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
@@ -947,7 +950,7 @@ const AgricalturalFarm = () => {
                 <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
                   <option value="Monthly">Monthly</option>
                   <option value="Yearly">Yearly</option>
-                </Select>  
+                </Select>
               </InputGroup>
               <Input type="text" w={"300px"} maxLength={"12"} value={bookingAmount} onChange={(e) => setBookingAmount(NumericString(e.target.value))} placeholder="Booking Amount" margin={"10px 0 0 0"} />
               <Input type="text" w={"300px"} maxLength={"12"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(NumericString(e.target.value))} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
@@ -1007,8 +1010,35 @@ const AgricalturalFarm = () => {
           </Box>
         </Box>
 
-        
 
+ {/* image Drag and Drop area  */}
+ <Box>
+                <Box className={style.top}>
+                    <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
+                </Box>
+                <Box className={style.card}>
+                    <Box className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+                        {isDraging ? (
+                            <Text className={style.select}>Drop image here</Text>
+                        ) : (
+                            <>
+                                Drag & Drop image here or
+                                <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
+                            </>
+                        )}
+                        <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+                    </Box>
+                    <Box className={style.container}>
+                        {/* {images.map((image, index) => (
+                            <Box className={style.image} key={index}>
+                                {console.log(image)}  s
+                            </Box>
+                        ))} 
+                    */} 
+
+                    </Box>
+                </Box>
+            </Box>
 
 
         {/* ============================ Property unique discription ============================ */}
@@ -1153,12 +1183,12 @@ const AgricalturalFarm = () => {
               value={"Intercom Facility"}
               onClick={handlePropertyFeature}
             >
-              Intercom Facility 
+              Intercom Facility
             </button>
           </Box>
         </Box>
 
-    
+
 
         {/* ============================ Other Features ============================ */}
         <Box>

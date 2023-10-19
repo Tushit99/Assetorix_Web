@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
     Box,
     Button,
@@ -17,7 +17,7 @@ import style from "../../RentComercial.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
-import { CleanInputText, NumericString } from "../../../../code";
+import { CleanInputText, NumericString, WordandNumber } from "../../../../code";
 
 
 const FactoryRent = () => {
@@ -53,7 +53,10 @@ const FactoryRent = () => {
     const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
     const [bookingAmount, setBookingAmount] = useState("");
     const [annualDuesPayble, setAnnualDuesPayble] = useState("");
-
+    // state for drop box images
+    const [images, setImages] = useState([]);
+    const [isDraging, setIsDraging] = useState(false);
+    const fileInputRef = useRef(null); 
     // please don'nt change any function without any prior knowledge
 
 
@@ -224,10 +227,11 @@ const FactoryRent = () => {
 
     }; 
 
-    const handlepinfetch = (e) => {
-        setPincode(NumericString(e.target.value));
-        if (e.target.value.length == 6) {
-            pinfetch(NumericString(e.target.value));
+    const handlepinfetch = (e) => { 
+        let val = NumericString(e.target.value)
+        setPincode(val);
+        if (val == 6) {
+            pinfetch(val);
         }
     }
 
@@ -373,18 +377,18 @@ const FactoryRent = () => {
 
                     <Input
                         type="text"
-                        padding={"0 10px"}
+                        maxLength={"100"}
                         required
                         placeholder="Address (optional)"
                         value={address}
-                        onChange={(e) => setaddress(e.target.value)}
+                        onChange={(e) => setaddress(WordandNumber(e.target.value))}
                         fontSize={"md"}
                         variant="flushed"
                     />
                     <Input
                         type="text"
                         placeholder={"Enter pincode"}
-                        padding={"0 10px"}
+                        maxLength={"6"}
                         required
                         fontSize={"md"}
                         value={pincode}
@@ -393,12 +397,12 @@ const FactoryRent = () => {
 
                     <Input
                         type="text"
-                        padding={"0 10px"}
+                        maxLength={"100"}
                         required
                         placeholder="Locality"
                         list="browsers"
                         value={locality}
-                        onChange={(e) => setLocality(e.target.value)}
+                        onChange={(e) => setLocality(WordandNumber(e.target.value))}
                         fontSize={"md"}
                         variant="flushed"
                     />
@@ -412,31 +416,31 @@ const FactoryRent = () => {
 
                     <Input
                         type="text"
-                        padding={"0 10px"}
+                        maxLength={"100"}
                         required
                         placeholder="Enter City"
                         fontSize={"md"}
                         value={city}
-                        onChange={(e) => setCity(e.target.value)}
+                        onChange={(e) => setCity(WordandNumber(e.target.value))}
                         variant="flushed"
                     />
                     <Input
                         type="text"
-                        padding={"0 10px"}
+                        maxLength={"100"} 
                         required
                         placeholder="Enter State"
                         value={state}
-                        onChange={(e) => setState(e.target.value)}
+                        onChange={(e) => setState(WordandNumber(e.target.value))}
                         fontSize={"md"}
                         variant="flushed"
                     />
                     <Input
                         type="text"
-                        padding={"0 10px"}
+                        maxLength={"100"}
                         required
                         placeholder="Enter Country"
                         value={country}
-                        onChange={(e) => setCountry(e.target.value)}
+                        onChange={(e) => setCountry(WordandNumber(e.target.value))}
                         fontSize={"md"}
                         variant="flushed"
                     />
@@ -456,7 +460,7 @@ const FactoryRent = () => {
                         <Input
                             type="text"
                             variant="flushed"
-                            padding={"0 2px"}
+                            maxLength={"2"}
                             onChange={(e) => setwashrooms(NumericString(e.target.value))}
                             value={washrooms}
                             required
@@ -478,11 +482,11 @@ const FactoryRent = () => {
                     >
                         <Input
                             type="text"
-                            padding={"0 2px"}
+                            maxLength={"9"}
                             value={plotArea}
                             onChange={(e) => {
-                                areaCalucation();
                                 setPlotArea(NumericString(e.target.value));
+                                areaCalucation();
                             }}
                             required
                         />
@@ -653,7 +657,8 @@ const FactoryRent = () => {
                                 </Heading>
                                 <Input
                                     type="text"
-                                    value={pricedetail}
+                                    value={pricedetail} 
+                                    maxLength={"10"}
                                     required
                                     onChange={(e) => {
                                         setPricedetail(e.target.value);
@@ -701,19 +706,19 @@ const FactoryRent = () => {
 
                             Price Negotiable
                         </Checkbox>
-                    </Box>
+                    </Box> 
                     <Box>
                         {additionalPrice && <>
                             <InputGroup w={"300px"} margin={"10 0 0 0"}>
-                                <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
+                                <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(NumericString(e.target.value))} value={maintenancePrice} placeholder={"Maintenance Price"} />
                                 <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
                                     <option value="Monthly">Monthly</option>
                                     <option value="Yearly">Yearly</option>
                                 </Select>
                             </InputGroup>
                             <Box display={"grid"}>
-                                <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-                                <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
+                                <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(NumericString(e.target.value))} placeholder="Booking Amount" margin={"10px 0 0 0"} />
+                                <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(NumericString(e.target.value))} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
                             </Box>
 
                         </>
@@ -732,6 +737,34 @@ const FactoryRent = () => {
                     </Box>
                 </Box>
 
+ {/* image Drag and Drop area  */}
+ <Box>
+                <Box className={style.top}>
+                    <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
+                </Box>
+                <Box className={style.card}>
+                    <Box className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+                        {isDraging ? (
+                            <Text className={style.select}>Drop image here</Text>
+                        ) : (
+                            <>
+                                Drag & Drop image here or
+                                <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
+                            </>
+                        )}
+                        <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+                    </Box>
+                    <Box className={style.container}>
+                        {/* {images.map((image, index) => (
+                            <Box className={style.image} key={index}>
+                                {console.log(image)}  s
+                            </Box>
+                        ))} 
+                    */} 
+
+                    </Box>
+                </Box>
+            </Box>
 
                 {/* ============================ Property unique discription ============================ */}
                 <Box>

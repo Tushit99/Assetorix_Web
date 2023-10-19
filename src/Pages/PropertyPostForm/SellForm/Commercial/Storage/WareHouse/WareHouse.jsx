@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
     Box,
     Button,
@@ -35,8 +35,6 @@ const WareHouse = () => {
     const [locality, setLocality] = useState("");
     const [address, setAddress] = useState("");
     const [washrooms, setwashrooms] = useState(0);
-    const [bathroom, setBathroom] = useState(0);
-    const [balconey, setBalcony] = useState(0);
     const [parking, setParking] = useState(0);
     const [openparking, setOpenparking] = useState(0);
     const [light, setLight] = useState(0);
@@ -84,7 +82,10 @@ const WareHouse = () => {
     const [leaseTenureInYear, setLeaseTenureInYear] = useState("");
     const [annualRentIncrease, setAnnualRentIncrease] = useState("");
     const [businessType, setBusinessType] = useState("");
-
+    // state for drop box images
+    const [images, setImages] = useState([]);
+    const [isDraging, setIsDraging] = useState(false);
+    const fileInputRef = useRef(null);
     // please don'nt change any function without any prior knowledge
 
 
@@ -824,7 +825,7 @@ const WareHouse = () => {
                                         setPricedetail(e.target.value);
                                         areaCalucation();
                                     }}
-                                /> 
+                                />
                             </Box>
                             <Box display={"grid"} gap={0}>
                                 <Heading
@@ -835,12 +836,9 @@ const WareHouse = () => {
                                 >
                                     {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
                                 </Heading>
-                                <NumberInput value={priceSqr}>
-                                    <NumberInputField
-
-
-                                    />
-                                </NumberInput>
+                                <Input type="text"
+                                    value={priceSqr}
+                                />
                             </Box>
                         </Box>
                     </Box>
@@ -941,6 +939,34 @@ const WareHouse = () => {
                                 e.preventDefault();
                                 setBusinessType((e.target.value));
                             }} placeholder="Leased to - Business Type (Optional)" />
+                        </Box>
+                    </Box>
+                </Box>
+
+                {/* image Drag and Drop area  */}
+                <Box>
+                    <Box className={style.top}>
+                        <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
+                    </Box>
+                    <Box className={style.card}>
+                        <Box className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+                            {isDraging ? (
+                                <Text className={style.select}>Drop image here</Text>
+                            ) : (
+                                <>
+                                    Drag & Drop image here or
+                                    <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
+                                </>
+                            )}
+                            <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+                        </Box>
+                        <Box className={style.container}>
+                            {/* {images.map((image, index) => (
+                            <Box className={style.image} key={index}>
+                                {console.log(image)}  
+                            </Box>
+                        ))} 
+                        */}
                         </Box>
                     </Box>
                 </Box>

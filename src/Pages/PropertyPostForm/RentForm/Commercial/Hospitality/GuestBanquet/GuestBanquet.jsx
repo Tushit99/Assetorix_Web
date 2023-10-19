@@ -1,23 +1,22 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
     Box,
     Button,
-    ButtonGroup,
     Heading,
     Input,
-    InputGroup, 
+    InputGroup,
     Select,
     Text,
     Textarea,
     useToast,
 } from "@chakra-ui/react";
-import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { Checkbox } from "@chakra-ui/react";
 import style from "../../RentComercial.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
-import { AlphabetString, CleanInputText, NumericString, WordandNumber } from "../../../../code";
+import { CleanInputText, NumericString, WordandNumber } from "../../../../code";
+// import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 
 
 
@@ -57,7 +56,10 @@ const GuestBanquetRent = () => {
     const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
     const [bookingAmount, setBookingAmount] = useState("");
     const [annualDuesPayble, setAnnualDuesPayble] = useState("");
-
+    // state for drop box images
+    const [images, setImages] = useState([]);
+    const [isDraging, setIsDraging] = useState(false);
+    const fileInputRef = useRef(null);
 
 
     const handleSubmitData = async (e) => {
@@ -182,8 +184,8 @@ const GuestBanquetRent = () => {
                             description: e.data.msg,
                             status: 'success',
                             duration: 2000,
-                        }); 
-                        submitImage(e.data.id); 
+                        });
+                        submitImage(e.data.id);
                     });
             } catch (error) {
                 toast({
@@ -207,8 +209,8 @@ const GuestBanquetRent = () => {
         }
     };
 
-      // image uploading after uploading the data:  
-      const submitImage = async (productID) => {
+    // image uploading after uploading the data:  
+    const submitImage = async (productID) => {
         try {
             let id = localStorage.getItem("usrId") || undefined;
             let authorization = localStorage.getItem("AstToken") || undefined;
@@ -228,7 +230,7 @@ const GuestBanquetRent = () => {
 
             let reqOptions = {
                 url: `${process.env.REACT_APP_URL}/upload/${productID}`,
-                method: "POST", 
+                method: "POST",
                 headers: headersList,
                 data: bodyContent,
             }
@@ -239,15 +241,15 @@ const GuestBanquetRent = () => {
 
         }
 
-    };  
+    };
 
-    const handlepinfetch = (e) => { 
-        let val = e.target.vlaue; 
+    const handlepinfetch = (e) => {
+        let val = e.target.vlaue;
         setPincode(val);
         if (val.length == 6) {
             pinfetch(val);
         }
-    } 
+    }
 
 
     const pinfetch = async (pin) => {
@@ -518,11 +520,11 @@ const GuestBanquetRent = () => {
                         Add Area Details
                     </Heading>
                     <Text margin={"5px 0"}> Atleast one area type is mandatory </Text>
-                    <InputGroup 
+                    <InputGroup
                         className={style.select_land}
                         size="sm"
                         isAttached
-                        variant="outline" 
+                        variant="outline"
                     >
                         <Input type="text" maxLength={"9"} placeholder="Enter Plot Area" value={plotArea}
                             onChange={(e) => {
@@ -573,7 +575,7 @@ const GuestBanquetRent = () => {
                         onClick={handleAvailable}
                         backgroundColor={"blue.50"}
                     >
-                        Ready to move 
+                        Ready to move
                     </button>
                     <button
                         className={
@@ -799,13 +801,13 @@ const GuestBanquetRent = () => {
                             {isCountry.country == "india" ? "₹" : "$"} Expected Rent
                         </Heading>
                         <Input
-                            type="text" 
+                            type="text"
                             maxLength={"9"}
                             value={pricedetail}
                             required
                             onChange={(e) => {
                                 setPricedetail(NumericString(e.target.value));
-                                areaCalucation();  
+                                areaCalucation();
                             }}
                         />
                     </Box>
@@ -848,19 +850,19 @@ const GuestBanquetRent = () => {
 
                         Price Negotiable
                     </Checkbox>
-                </Box> 
+                </Box>
                 <Box>
                     {additionalPrice && <>
                         <InputGroup w={"300px"} margin={"10 0 0 0"}>
-                            <Input w={"60%"} type='text' maxLength={"10"} onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
+                            <Input w={"60%"} type='text' maxLength={"10"} onChange={(e) => setMaintenancePrice(NumericString(e.target.value))} value={maintenancePrice} placeholder={"Maintenance Price"} />
                             <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
                                 <option value="Monthly">Monthly</option>
                                 <option value="Yearly">Yearly</option>
                             </Select>
                         </InputGroup>
                         <Box display={"grid"}>
-                            <Input type="text" w={"300px"}  maxLength={"10"}    value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-                            <Input type="text" w={"300px"}  maxLength={"10"}    value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
+                            <Input type="text" w={"300px"} maxLength={"10"} value={bookingAmount} onChange={(e) => setBookingAmount(NumericString(e.target.value))} placeholder="Booking Amount" margin={"10px 0 0 0"} />
+                            <Input type="text" w={"300px"} maxLength={"10"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(NumericString(e.target.value))} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
                         </Box>
 
                     </>
@@ -879,6 +881,34 @@ const GuestBanquetRent = () => {
                 </Box>
             </Box>
 
+            {/* image Drag and Drop area  */}
+            <Box>
+                <Box className={style.top}>
+                    <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
+                </Box>
+                <Box className={style.card}>
+                    <Box className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+                        {isDraging ? (
+                            <Text className={style.select}>Drop image here</Text>
+                        ) : (
+                            <>
+                                Drag & Drop image here or
+                                <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
+                            </>
+                        )}
+                        <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+                    </Box>
+                    <Box className={style.container}>
+                        {/* {images.map((image, index) => (
+                            <Box className={style.image} key={index}>
+                                {console.log(image)}  s
+                            </Box>
+                        ))} 
+                    */}
+
+                    </Box>
+                </Box>
+            </Box>
 
             {/* ============================ Property unique discription ============================ */}
             <Box>

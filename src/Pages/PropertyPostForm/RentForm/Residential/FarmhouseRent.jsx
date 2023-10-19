@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
     Box,
     Button,
@@ -80,7 +80,10 @@ const FarmhouseRent = () => {
     const [agreementDuration, setagreementDuration] = useState("");
     const [noticePeriod, setNoticePeriod] = useState("");
     const [availableFrom, setavailableFrom] = useState("");
-
+    // state for drop box images
+    const [images, setImages] = useState([]);
+    const [isDraging, setIsDraging] = useState(false);
+    const fileInputRef = useRef(null); 
 
     const handleSubmitData = async (e) => {
         e.preventDefault();

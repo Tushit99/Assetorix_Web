@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
     Box,
     Button,
@@ -72,14 +72,17 @@ const CommercialShopRent = () => {
     const [washroomType, setWashroomType] = useState("");
     const [privateWashroom, setPrivateWashroom] = useState(0);
     const [sharedWashroom, setSharedWashroom] = useState(0);
-    const [buildupArea, setBuildupArea] = useState(""); 
-    const [buildupAreaUnit, setBuildupAreaUnit] = useState("sq.ft"); 
-    const [availableFrom, setavailableFrom] = useState(""); 
+    const [buildupArea, setBuildupArea] = useState("");
+    const [buildupAreaUnit, setBuildupAreaUnit] = useState("sq.ft");
+    const [availableFrom, setavailableFrom] = useState("");
     const [rentIncreasePercent, setRentIncreasePercent] = useState("");
     const [lockPeriod, setlockPeriod] = useState("");
     const [depositAmount, setDepositAmount] = useState("");
     const [securityDeposit, setSecurityDeposit] = useState("");
-
+    // state for drop box images
+    const [images, setImages] = useState([]);
+    const [isDraging, setIsDraging] = useState(false);
+    const fileInputRef = useRef(null);
 
 
     // please don'nt change any function without any prior knowledge 
@@ -97,7 +100,7 @@ const CommercialShopRent = () => {
                 locality,
                 pincode,
                 city,
-                state, 
+                state,
                 country,
             },
             price: +pricedetail,
@@ -113,8 +116,8 @@ const CommercialShopRent = () => {
             additionalFeatures: additinalft,
             otherFeatures: otherFeature,
             fireSafety: fireSafty,
-            expectedYearlyRent :rentIncreasePercent,
-            lockInPeriod: lockPeriod, 
+            expectedYearlyRent: rentIncreasePercent,
+            lockInPeriod: lockPeriod,
             securityDeposit,
             propertyFacing,
             washrooms: washroomType,
@@ -130,8 +133,8 @@ const CommercialShopRent = () => {
             },
             carpetArea: plotArea,
             carpetAreaUnit: areaPer,
-            builtupArea: buildupArea,  
-            builtupAreaUnit: buildupAreaUnit, 
+            builtupArea: buildupArea,
+            builtupAreaUnit: buildupAreaUnit,
             description: desc,
             countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
             additionalPricingDetails: {
@@ -139,7 +142,7 @@ const CommercialShopRent = () => {
                 maintenanceTimePeriod,
                 bookingAmount,
             },
-            locationAdv: locationAdv 
+            locationAdv: locationAdv
         };
 
         const showToastError = (message) => {
@@ -173,7 +176,7 @@ const CommercialShopRent = () => {
             locality &&
             type &&
             pricedetail &&
-            
+
             inclusivePrices &&
             additinalft &&
             propertyFacing &&
@@ -208,9 +211,9 @@ const CommercialShopRent = () => {
 
             if (availability == "Ready to move" && fromyear != "") {
                 obj["propertyStatus"] = fromyear;
-                obj["availabilityStatus"] = availability; 
-                obj["availableFrom"] = availableFrom; 
-            } 
+                obj["availabilityStatus"] = availability;
+                obj["availableFrom"] = availableFrom;
+            }
 
             if (securityDeposit == "Fixed") {
                 obj["depositValue"] = depositAmount;
@@ -218,7 +221,7 @@ const CommercialShopRent = () => {
 
             if (securityDeposit == "Multiple of Rent") {
                 obj["multipleOfRent"] = depositAmount;
-            }     
+            }
 
             if (availability == "Under construction" && expectedyear != "") {
                 obj["expectedByYear"] = expectedyear;
@@ -245,8 +248,8 @@ const CommercialShopRent = () => {
                             description: e.data.msg,
                             status: 'success',
                             duration: 2000,
-                        });  
-                        submitImage(e.data.id); 
+                        });
+                        submitImage(e.data.id);
                     });
             } catch (error) {
                 toast({
@@ -270,8 +273,8 @@ const CommercialShopRent = () => {
         }
     };
 
-      // image uploading after uploading the data:  
-      const submitImage = async (productID) => {
+    // image uploading after uploading the data:  
+    const submitImage = async (productID) => {
         try {
             let id = localStorage.getItem("usrId") || undefined;
             let authorization = localStorage.getItem("AstToken") || undefined;
@@ -291,7 +294,7 @@ const CommercialShopRent = () => {
 
             let reqOptions = {
                 url: `${process.env.REACT_APP_URL}/upload/${productID}`,
-                method: "POST", 
+                method: "POST",
                 headers: headersList,
                 data: bodyContent,
             }
@@ -302,7 +305,7 @@ const CommercialShopRent = () => {
 
         }
 
-    };  
+    };
 
     // pincode of 3 letter
     const handlepinfetch = (e) => {
@@ -1002,7 +1005,7 @@ const CommercialShopRent = () => {
                                     </Heading>
                                     <Input value={availableFrom} onChange={(e) => setavailableFrom(e.target.value)} color='blue' type={"date"} w={300} />
                                 </Box>
-                            </Box> 
+                            </Box>
                         )}
 
                         {availability == "Under construction" && (
@@ -1038,30 +1041,30 @@ const CommercialShopRent = () => {
                                         Select business type
                                     </MenuButton>
                                     <MenuList display={"grid"} borderRadius={0} marginTop={"-8px"} marginBottom={"-8px"} overflowY={"scroll"} h={"200px"} padding={"4px 10px"}>
-                                        <Checkbox isChecked={suitableFor.includes("ATM") ? true : false } value={"ATM"} className={style.select} onChange={handlebusinessType} > ATM </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Bakery") ? true : false } value={"Bakery"} className={style.select} onChange={handlebusinessType} > Bakery </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Boutique") ? true : false } value={"Boutique"} className={style.select} onChange={handlebusinessType} > Boutique </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Clinic") ? true : false } value={"Clinic"} className={style.select} onChange={handlebusinessType} > Clinic </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Clothes") ? true : false } value={"Clothes"} className={style.select} onChange={handlebusinessType} > Clothes </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Cloud Kitchen") ? true : false } value={"Cloud Kitchen"} className={style.select} onChange={handlebusinessType} > Cloud Kitchen </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Coffee") ? true : false } value={"Coffee"} className={style.select} onChange={handlebusinessType} > Coffee </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Dental Clinic") ? true : false } value={"Dental Clinic"} className={style.select} onChange={handlebusinessType} > Dental Clinic </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Fast Food") ? true : false } value={"Fast Food"} className={style.select} onChange={handlebusinessType} > Fast Food </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Footwear") ? true : false } value={"Footwear"} className={style.select} onChange={handlebusinessType} > Footwear </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Gym") ? true : false } value={"Gym"} className={style.select} onChange={handlebusinessType} > Gym </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Jewellery") ? true : false } value={"Jewellery"} className={style.select} onChange={handlebusinessType} > Jewellery </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Juice") ? true : false } value={"Juice"} className={style.select} onChange={handlebusinessType} > Juice </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Meat") ? true : false } value={"Meat"} className={style.select} onChange={handlebusinessType} > Meat </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Medical") ? true : false } value={"Medical"} className={style.select} onChange={handlebusinessType} > Medical </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Mobile") ? true : false } value={"Mobile"} className={style.select} onChange={handlebusinessType} > Mobile </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Pub/Bar") ? true : false } value={"Pub/Bar"} className={style.select} onChange={handlebusinessType} > Pub/Bar </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Restaurants") ? true : false } value={"Restaurants"} className={style.select} onChange={handlebusinessType} > Restaurants </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Salon/Spa") ? true : false } value={"Salon/Spa"} className={style.select} onChange={handlebusinessType} > Salon/Spa </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Mobile") ? true : false } value={"Mobile"} className={style.select} onChange={handlebusinessType} > Mobile </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Stationery") ? true : false } value={"Stationery"} className={style.select} onChange={handlebusinessType} > Stationery </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Sweet") ? true : false } value={"Sweet"} className={style.select} onChange={handlebusinessType} > Sweet </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Tea Stall") ? true : false } value={"Tea Stall"} className={style.select} onChange={handlebusinessType} > Tea Stall </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Other business type") ? true : false } value={"Other business type"} className={style.select} onChange={handlebusinessType} > Other business type </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("ATM") ? true : false} value={"ATM"} className={style.select} onChange={handlebusinessType} > ATM </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Bakery") ? true : false} value={"Bakery"} className={style.select} onChange={handlebusinessType} > Bakery </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Boutique") ? true : false} value={"Boutique"} className={style.select} onChange={handlebusinessType} > Boutique </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Clinic") ? true : false} value={"Clinic"} className={style.select} onChange={handlebusinessType} > Clinic </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Clothes") ? true : false} value={"Clothes"} className={style.select} onChange={handlebusinessType} > Clothes </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Cloud Kitchen") ? true : false} value={"Cloud Kitchen"} className={style.select} onChange={handlebusinessType} > Cloud Kitchen </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Coffee") ? true : false} value={"Coffee"} className={style.select} onChange={handlebusinessType} > Coffee </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Dental Clinic") ? true : false} value={"Dental Clinic"} className={style.select} onChange={handlebusinessType} > Dental Clinic </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Fast Food") ? true : false} value={"Fast Food"} className={style.select} onChange={handlebusinessType} > Fast Food </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Footwear") ? true : false} value={"Footwear"} className={style.select} onChange={handlebusinessType} > Footwear </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Gym") ? true : false} value={"Gym"} className={style.select} onChange={handlebusinessType} > Gym </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Jewellery") ? true : false} value={"Jewellery"} className={style.select} onChange={handlebusinessType} > Jewellery </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Juice") ? true : false} value={"Juice"} className={style.select} onChange={handlebusinessType} > Juice </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Meat") ? true : false} value={"Meat"} className={style.select} onChange={handlebusinessType} > Meat </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Medical") ? true : false} value={"Medical"} className={style.select} onChange={handlebusinessType} > Medical </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Mobile") ? true : false} value={"Mobile"} className={style.select} onChange={handlebusinessType} > Mobile </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Pub/Bar") ? true : false} value={"Pub/Bar"} className={style.select} onChange={handlebusinessType} > Pub/Bar </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Restaurants") ? true : false} value={"Restaurants"} className={style.select} onChange={handlebusinessType} > Restaurants </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Salon/Spa") ? true : false} value={"Salon/Spa"} className={style.select} onChange={handlebusinessType} > Salon/Spa </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Mobile") ? true : false} value={"Mobile"} className={style.select} onChange={handlebusinessType} > Mobile </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Stationery") ? true : false} value={"Stationery"} className={style.select} onChange={handlebusinessType} > Stationery </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Sweet") ? true : false} value={"Sweet"} className={style.select} onChange={handlebusinessType} > Sweet </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Tea Stall") ? true : false} value={"Tea Stall"} className={style.select} onChange={handlebusinessType} > Tea Stall </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Other business type") ? true : false} value={"Other business type"} className={style.select} onChange={handlebusinessType} > Other business type </Checkbox>
                                     </MenuList>
                                 </Menu>
                             </Box>
@@ -1232,6 +1235,35 @@ const CommercialShopRent = () => {
                                 Yearly rent is expected to increase by
                             </Heading>
                             <Input type="text" placeholder="Percentage (%) of increase in rent" onChange={(e) => setRentIncreasePercent(e.target.value)} value={rentIncreasePercent} />
+                        </Box>
+
+                        {/* image Drag and Drop area  */}
+                        <Box>
+                            <Box className={style.top}>
+                                <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
+                            </Box>
+                            <Box className={style.card}>
+                                <Box className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+                                    {isDraging ? (
+                                        <Text className={style.select}>Drop image here</Text>
+                                    ) : (
+                                        <>
+                                            Drag & Drop image here or
+                                            <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
+                                        </>
+                                    )}
+                                    <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+                                </Box>
+                                <Box className={style.container}>
+                                    {/* {images.map((image, index) => (
+                            <Box className={style.image} key={index}>
+                                {console.log(image)}  s
+                            </Box>
+                        ))} 
+                    */}
+
+                                </Box>
+                            </Box>
                         </Box>
 
                         {/* ============================ Property unique discription ============================ */}

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { useState } from "react";
 import {
     Box,
@@ -77,7 +77,10 @@ const Independentbuilder = () => {
     const [expectedRentel, setExpectedRentel] = useState("");
     const [bookingAmount, setBookingAmount] = useState("");
     const [annualDuesPayble, setAnnualDuesPayble] = useState("");
-
+    // state for drop box images
+    const [images, setImages] = useState([]);
+    const [isDraging, setIsDraging] = useState(false);
+    const fileInputRef = useRef(null); 
 
     const handleSubmitData = async (e) => {
         e.preventDefault();
@@ -1506,9 +1509,39 @@ const Independentbuilder = () => {
                         textAlign={"left"}>
                         {additionalPrice ? <IoIosArrowUp style={{ display: "inline" }} /> : <IoIosArrowDown style={{ display: "inline" }} />} Add more pricing details
                     </Heading>
+                </Box> 
+
+ {/* image Drag and Drop area  */}
+ <Box>
+                <Box className={style.top}>
+                    <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
                 </Box>
+                <Box className={style.card}>
+                    <Box className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+                        {isDraging ? (
+                            <Text className={style.select}>Drop image here</Text>
+                        ) : (
+                            <>
+                                Drag & Drop image here or
+                                <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
+                            </>
+                        )}
+                        <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+                    </Box>
+                    <Box className={style.container}>
+                        {/* {images.map((image, index) => (
+                            <Box className={style.image} key={index}>
+                                {console.log(image)}  s
+                            </Box>
+                        ))} 
+                    */} 
+
+                    </Box>
+                </Box>
+            </Box> 
+
                 <Box>
-                    <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                     <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
                         What makes your property unique
                     </Heading>
                     <Heading as={"h3"} size={"xs"} margin={"10px 0"} textAlign={"left"}>

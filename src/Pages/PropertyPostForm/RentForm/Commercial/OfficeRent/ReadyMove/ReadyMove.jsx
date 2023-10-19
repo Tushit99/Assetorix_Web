@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
     Box,
     Button,
@@ -92,7 +92,10 @@ const ReadyMove = () => {
     const [zoneType, setZoneType] = useState("");
     const [rentIncreasePercent, setRentIncreasePercent] = useState("");
     const [fireNocCertificate, setFireNocCertificate] = useState("");
-
+    // state for drop box images
+    const [images, setImages] = useState([]);
+    const [isDraging, setIsDraging] = useState(false);
+    const fileInputRef = useRef(null); 
     // please don'nt change any function without any prior knowledge   
 
     const handleSubmitData = async (e) => {
@@ -1501,6 +1504,35 @@ const ReadyMove = () => {
                     </Box>
                 </Box>
 
+
+ {/* image Drag and Drop area  */}
+ <Box>
+                <Box className={style.top}>
+                    <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
+                </Box>
+                <Box className={style.card}>
+                    <Box className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+                        {isDraging ? (
+                            <Text className={style.select}>Drop image here</Text>
+                        ) : (
+                            <>
+                                Drag & Drop image here or
+                                <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
+                            </>
+                        )}
+                        <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+                    </Box>
+                    <Box className={style.container}>
+                        {/* {images.map((image, index) => (
+                            <Box className={style.image} key={index}>
+                                {console.log(image)}  s
+                            </Box>
+                        ))} 
+                    */} 
+
+                    </Box>
+                </Box>
+            </Box>
 
                 {/* property Description */}
                 <Box>

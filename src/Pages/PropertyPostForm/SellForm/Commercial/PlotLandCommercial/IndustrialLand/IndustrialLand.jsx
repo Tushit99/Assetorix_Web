@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Box,
   Button,
@@ -8,7 +8,7 @@ import {
   InputGroup,
   Menu,
   MenuButton,
-  MenuList, 
+  MenuList,
   Select,
   Text,
   Textarea,
@@ -49,8 +49,8 @@ const IndustrialLand = () => {
   const [locationAdv, setLocationAdv] = useState([]);
   // const [totalfloors, setTotalFloors] = useState("");  
   const [plotArea, setPlotArea] = useState("");
-  const [desc, setDesc] = useState(""); 
-  const [pincollection, setPinCollection] = useState([]); 
+  const [desc, setDesc] = useState("");
+  const [pincollection, setPinCollection] = useState([]);
   const [additionalPrice, setAdditionalPrice] = useState(false);
   const [maintenancePrice, setMaintenancePrice] = useState("");
   const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
@@ -69,7 +69,10 @@ const IndustrialLand = () => {
   const [expectedByYear, setExpectedByYear] = useState("");
   const [authorisedBy, setAuthorisedBy] = useState([]);
   const [industryType, setIndustryType] = useState([]);
-
+  // state for drop box images
+  const [images, setImages] = useState([]);
+  const [isDraging, setIsDraging] = useState(false);
+  const fileInputRef = useRef(null);  
 
   // please don'nt change any function without any prior knowledge
 
@@ -211,8 +214,8 @@ const IndustrialLand = () => {
               description: e.data.msg,
               status: 'success',
               duration: 2000,
-            }); 
-            submitImage(e.data.id); 
+            });
+            submitImage(e.data.id);
           });
       } catch (error) {
         toast({
@@ -234,39 +237,39 @@ const IndustrialLand = () => {
         position: 'top-right'
       })
     }
-  };  
+  };
 
-    // image uploading after uploading the data:  
-    const submitImage = async (productID) => {
-      try {
-          let id = localStorage.getItem("usrId") || undefined;
-          let authorization = localStorage.getItem("AstToken") || undefined;
+  // image uploading after uploading the data:  
+  const submitImage = async (productID) => {
+    try {
+      let id = localStorage.getItem("usrId") || undefined;
+      let authorization = localStorage.getItem("AstToken") || undefined;
 
-          let headersList = {
-              "Accept": "*/*",
-              "Authorization": authorization,
-              "id": id
-          }
-
-          let formdata = new FormData();
-          images.forEach((image) => {
-              formdata.append("image", image.image);
-          });
-
-          let bodyContent = formdata;
-
-          let reqOptions = {
-              url: `${process.env.REACT_APP_URL}/upload/${productID}`,
-              method: "POST", 
-              headers: headersList,
-              data: bodyContent,
-          }
-
-          let response = await axios.request(reqOptions)
-          console.log(response.data);
-      } catch (error) {
-
+      let headersList = {
+        "Accept": "*/*",
+        "Authorization": authorization,
+        "id": id
       }
+
+      let formdata = new FormData();
+      images.forEach((image) => {
+        formdata.append("image", image.image);
+      });
+
+      let bodyContent = formdata;
+
+      let reqOptions = {
+        url: `${process.env.REACT_APP_URL}/upload/${productID}`,
+        method: "POST",
+        headers: headersList,
+        data: bodyContent,
+      }
+
+      let response = await axios.request(reqOptions)
+      console.log(response.data);
+    } catch (error) {
+
+    }
 
   };
 
@@ -311,7 +314,7 @@ const IndustrialLand = () => {
       newarr.push(value);
     }
     setConstructionType(newarr);
-  } 
+  }
 
   const handleAuthorityBy = (e) => {
     e.preventDefault();
@@ -440,7 +443,7 @@ const IndustrialLand = () => {
             padding={"0 10px"}
             required
             placeholder="Plot number (optional)"
-            value={Plotnumber} 
+            value={Plotnumber}
             maxLength={"20"}
             onChange={(e) => setPlotnumber(e.target.value)}
             fontSize={"md"}
@@ -462,7 +465,7 @@ const IndustrialLand = () => {
             required
             placeholder="Locality"
             list="browsers"
-            value={locality} 
+            value={locality}
             maxLength={"100"}
             onChange={(e) => setLocality(NumericString(e.target.value))}
             fontSize={"md"}
@@ -477,30 +480,30 @@ const IndustrialLand = () => {
           ) : ""}
 
           <Input
-            type="text" 
+            type="text"
             required
             placeholder="Enter City"
             fontSize={"md"}
-            value={city} 
+            value={city}
             maxLength={"100"}
             onChange={(e) => setCity(NumericString(e.target.value))}
             variant="flushed"
           />
           <Input
-            type="text" 
+            type="text"
             required
             placeholder="Enter State"
-            value={state} 
+            value={state}
             maxLength={"100"}
             onChange={(e) => setState(NumericString(e.target.value))}
             fontSize={"md"}
             variant="flushed"
           />
           <Input
-            type="text" 
+            type="text"
             required
             placeholder="Enter Country"
-            value={country} 
+            value={country}
             maxLength={"100"}
             onChange={(e) => setCountry(NumericString(e.target.value))}
             fontSize={"md"}
@@ -884,7 +887,7 @@ const IndustrialLand = () => {
                     areaCalucation();
                   }}
                 />
-              </Box> 
+              </Box>
             </Box>
           </Box>
           <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
@@ -945,7 +948,7 @@ const IndustrialLand = () => {
               onClick={() => setAdditionalPrice(!additionalPrice)}
               textAlign={"left"}>
               {additionalPrice ? <IoIosArrowUp style={{ display: "inline" }} /> : <IoIosArrowDown style={{ display: "inline" }} />} Add more pricing details
-            </Heading> 
+            </Heading>
           </Box>
         </Box>
 
@@ -1025,7 +1028,34 @@ const IndustrialLand = () => {
           </Menu>
         </Box>
 
+ {/* image Drag and Drop area  */}
+ <Box>
+                <Box className={style.top}>
+                    <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
+                </Box>
+                <Box className={style.card}>
+                    <Box className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+                        {isDraging ? (
+                            <Text className={style.select}>Drop image here</Text>
+                        ) : (
+                            <>
+                                Drag & Drop image here or
+                                <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
+                            </>
+                        )}
+                        <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+                    </Box>
+                    <Box className={style.container}>
+                        {/* {images.map((image, index) => (
+                            <Box className={style.image} key={index}>
+                                {console.log(image)}  s
+                            </Box>
+                        ))} 
+                    */} 
 
+                    </Box>
+                </Box>
+            </Box>
 
         {/* ============================ Property unique discription ============================ */}
         <Box>

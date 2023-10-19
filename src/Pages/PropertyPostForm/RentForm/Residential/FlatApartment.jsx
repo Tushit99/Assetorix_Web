@@ -4,7 +4,7 @@ import {
   Button,
   ButtonGroup,
   Heading,
-  Input, 
+  Input,
   Select,
   Text,
   Textarea,
@@ -18,15 +18,16 @@ import style from "../RentForm.module.css";
 import { CleanInputText, IndianDateConverter, NumericString, WordandNumber } from "../../code";
 import { InputGroup } from "@chakra-ui/react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { useRef } from "react";
 
 
 const FlatApartment = () => {
   const isCountry = useSelector((state) => state.gloalval);
   const toast = useToast();
   const [country, setCountry] = useState("");
-  const [facingwidth, setFacingWidth] = useState(""); 
+  const [facingwidth, setFacingWidth] = useState("");
   const [city, setCity] = useState("");
-  const [appartment, setApartment] = useState(""); 
+  const [appartment, setApartment] = useState("");
   const [pincode, setPincode] = useState(0);
   const [state, setState] = useState("");
   const [locality, setLocality] = useState("");
@@ -79,7 +80,10 @@ const FlatApartment = () => {
   const [agreementDuration, setagreementDuration] = useState("");
   const [noticePeriod, setNoticePeriod] = useState("");
   const [availableFrom, setavailableFrom] = useState("");
-
+  // state for drop box images
+  const [images, setImages] = useState([]);
+  const [isDraging, setIsDraging] = useState(false);
+  const fileInputRef = useRef(null);
 
   const handleSubmitData = async (e) => {
     e.preventDefault();
@@ -266,8 +270,8 @@ const FlatApartment = () => {
               description: e.data.msg,
               status: "success",
               duration: 2000,
-            }); 
-            submitImage(e.data.id);   
+            });
+            submitImage(e.data.id);
           });
       } catch (error) {
         toast({
@@ -287,41 +291,41 @@ const FlatApartment = () => {
         position: "top-right",
       });
     }
-  }; 
+  };
 
-    // image uploading after uploading the data:  
-    const submitImage = async (productID) => {
-      try {
-          let id = localStorage.getItem("usrId") || undefined;
-          let authorization = localStorage.getItem("AstToken") || undefined;
+  // image uploading after uploading the data:  
+  const submitImage = async (productID) => {
+    try {
+      let id = localStorage.getItem("usrId") || undefined;
+      let authorization = localStorage.getItem("AstToken") || undefined;
 
-          let headersList = {
-              "Accept": "*/*",
-              "Authorization": authorization,
-              "id": id
-          }
-
-          let formdata = new FormData();
-          images.forEach((image) => {
-              formdata.append("image", image.image);
-          });
-
-          let bodyContent = formdata;
-
-          let reqOptions = {
-              url: `${process.env.REACT_APP_URL}/upload/${productID}`,
-              method: "POST", 
-              headers: headersList,
-              data: bodyContent,
-          }
-
-          let response = await axios.request(reqOptions)
-          console.log(response.data);
-      } catch (error) {
-
+      let headersList = {
+        "Accept": "*/*",
+        "Authorization": authorization,
+        "id": id
       }
 
-  };  
+      let formdata = new FormData();
+      images.forEach((image) => {
+        formdata.append("image", image.image);
+      });
+
+      let bodyContent = formdata;
+
+      let reqOptions = {
+        url: `${process.env.REACT_APP_URL}/upload/${productID}`,
+        method: "POST",
+        headers: headersList,
+        data: bodyContent,
+      }
+
+      let response = await axios.request(reqOptions)
+      console.log(response.data);
+    } catch (error) {
+
+    }
+
+  };
 
   const handlepinfetch = (e) => {
     let val = NumericString(e.target.value)
@@ -529,7 +533,7 @@ const FlatApartment = () => {
 
         <Input
           type="text"
-          
+
           maxlength={"100"}
           required
           placeholder="House No. (optional)"
@@ -540,7 +544,7 @@ const FlatApartment = () => {
         />
         <Input
           type="text"
-          
+
           maxlength={"100"}
           required
           placeholder="Apartment / Society"
@@ -559,13 +563,13 @@ const FlatApartment = () => {
           onChange={handlepinfetch}
         />
         <Input
-          type="text" 
+          type="text"
           required
-          maxlength={"100"} 
+          maxlength={"100"}
           placeholder="Locality"
           list="browsers"
           value={locality}
-          onChange={(e) => setLocality(WordandNumber(e.target.value))} 
+          onChange={(e) => setLocality(WordandNumber(e.target.value))}
           fontSize={"md"}
           variant="flushed"
         />
@@ -580,7 +584,7 @@ const FlatApartment = () => {
         )}
 
         <Input
-          type="text" 
+          type="text"
           required
           placeholder="Enter City"
           fontSize={"md"}
@@ -591,7 +595,7 @@ const FlatApartment = () => {
         />
         <Input
           type="text"
-          
+
           required
           maxlength={"100"}
           placeholder="Enter State"
@@ -602,7 +606,7 @@ const FlatApartment = () => {
         />
         <Input
           type="text"
-          
+
           required
           maxlength={"100"}
           placeholder="Enter Country"
@@ -627,7 +631,7 @@ const FlatApartment = () => {
               type="text"
               maxlength={"2"}
               variant="flushed"
-              
+
               onChange={(e) => setBedRoom(NumericString(e.target.value))}
               value={bedroom}
               required
@@ -642,7 +646,7 @@ const FlatApartment = () => {
               onChange={(e) => setBathroom(NumericString(e.target.value))}
               value={bathroom}
               required
-              
+
             />
           </Box>
           <Box textAlign={"left"}>
@@ -654,7 +658,7 @@ const FlatApartment = () => {
               onChange={(e) => setBalcony(NumericString(e.target.value))}
               value={balconey}
               required
-              
+
             />
           </Box>
         </Box>
@@ -671,10 +675,10 @@ const FlatApartment = () => {
             isAttached
             variant="outline"
           >
-            <Input 
-              type="text" 
-              value={plotArea} 
-              maxlength={"9"} 
+            <Input
+              type="text"
+              value={plotArea}
+              maxlength={"9"}
               onChange={(e) => {
                 setPlotArea(NumericString(e.target.value));
               }}
@@ -1149,10 +1153,10 @@ const FlatApartment = () => {
             Total no of floors and your floor details
           </Text>
           <Box display={"flex"} alignItems={"center"} gap={5}>
-            <Input 
+            <Input
               type="text"
               value={totalfloors}
-              maxlength={"2"} 
+              maxlength={"2"}
               onChange={(e) => {
                 const nowval = NumericString(e.target.value) > 90;
                 if (nowval) {
@@ -1359,7 +1363,7 @@ const FlatApartment = () => {
                 <Input
                   w={"60%"}
                   type='text'
-                  maxlength={"9"} 
+                  maxlength={"9"}
                   onChange={(e) => setMaintenancePrice(NumericString(e.target.value))}
                   value={maintenancePrice} placeholder={"Maintenance Price"}
                 />
@@ -1376,9 +1380,9 @@ const FlatApartment = () => {
               as={"h3"}
               size={"sm"}
               margin={"10px 0"}
-              color={"#002aff"} 
+              color={"#002aff"}
               fontWeight={500}
-              cursor={"pointer"} 
+              cursor={"pointer"}
               onClick={() => setAdditionalPrice(!additionalPrice)}
               textAlign={"left"}>
               {additionalPrice ? <IoIosArrowUp style={{ display: "inline" }} /> : <IoIosArrowDown style={{ display: "inline" }} />} Add more pricing details
@@ -1413,7 +1417,7 @@ const FlatApartment = () => {
             <option value="2">2</option>
             <option value="3">3</option>
             <option value="4">4</option>
-            <option value="5">5</option>  
+            <option value="5">5</option>
           </Select>
         </Box>
 
@@ -1498,11 +1502,36 @@ const FlatApartment = () => {
             </button>
           </Box>
         </Box>
-
-
       </Box>
 
+      {/* image Drag and Drop area  */}
+      <Box>
+        <Box className={style.top}>
+          <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
+        </Box>
+        <Box className={style.card}>
+          <Box className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+            {isDraging ? (
+              <Text className={style.select}>Drop image here</Text>
+            ) : (
+              <>
+                Drag & Drop image here or
+                <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
+              </>
+            )}
+            <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+          </Box>
+          <Box className={style.container}>
+            {/* {images.map((image, index) => (
+                            <Box className={style.image} key={index}>
+                                {console.log(image)}  s
+                            </Box>
+                        ))} 
+                    */}
 
+          </Box>
+        </Box>
+      </Box>
 
       {/* ========================== What makes your property unique================================  */}
       <Box>
@@ -1514,8 +1543,8 @@ const FlatApartment = () => {
         </Heading>
         <Textarea
           height={140}
-          value={desc} 
-          required 
+          value={desc}
+          required
           onChange={(e) => {
             let my_cleantext = CleanInputText(e.target.value);
             setDesc(my_cleantext);
@@ -1545,7 +1574,7 @@ const FlatApartment = () => {
         <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
           Amenities
         </Heading>
-        <Box>   
+        <Box>
           <button
             className={
               amenities.includes("Maintenance Staff") ? style.setbtn : style.btn
@@ -2107,7 +2136,7 @@ const FlatApartment = () => {
             variant="flushed"
             flex={1}
             required
-            value={facingwidth} 
+            value={facingwidth}
             maxLength={"9"}
             onChange={(e) => {
               e.preventDefault();

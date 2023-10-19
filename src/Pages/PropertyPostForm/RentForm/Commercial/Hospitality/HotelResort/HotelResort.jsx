@@ -1,23 +1,23 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
     Box,
     Button,
     ButtonGroup,
     Heading,
     Input,
-    InputGroup, 
+    InputGroup,
     Select,
     Text,
     Textarea,
     useToast,
 } from "@chakra-ui/react";
-import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { Checkbox } from "@chakra-ui/react";
 import style from "../../RentComercial.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
-import { AlphabetString, CleanInputText, NumericString } from "../../../../code";
+import { CleanInputText, NumericString } from "../../../../code";
+// import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 
 
 
@@ -57,7 +57,10 @@ const HotelResortRent = () => {
     const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
     const [bookingAmount, setBookingAmount] = useState("");
     const [annualDuesPayble, setAnnualDuesPayble] = useState("");
-
+    // state for drop box images
+    const [images, setImages] = useState([]);
+    const [isDraging, setIsDraging] = useState(false);
+    const fileInputRef = useRef(null);
 
 
     const handleSubmitData = async (e) => {
@@ -182,8 +185,8 @@ const HotelResortRent = () => {
                             description: e.data.msg,
                             status: 'success',
                             duration: 2000,
-                        }); 
-                        submitImage(e.data.id); 
+                        });
+                        submitImage(e.data.id);
                     });
             } catch (error) {
                 toast({
@@ -207,8 +210,8 @@ const HotelResortRent = () => {
         }
     };
 
-      // image uploading after uploading the data:  
-      const submitImage = async (productID) => {
+    // image uploading after uploading the data:  
+    const submitImage = async (productID) => {
         try {
             let id = localStorage.getItem("usrId") || undefined;
             let authorization = localStorage.getItem("AstToken") || undefined;
@@ -228,7 +231,7 @@ const HotelResortRent = () => {
 
             let reqOptions = {
                 url: `${process.env.REACT_APP_URL}/upload/${productID}`,
-                method: "POST", 
+                method: "POST",
                 headers: headersList,
                 data: bodyContent,
             }
@@ -239,7 +242,7 @@ const HotelResortRent = () => {
 
         }
 
-    };  
+    };
 
     const handlepinfetch = (e) => {
         setPincode(NumericString(e.target.value));
@@ -802,7 +805,7 @@ const HotelResortRent = () => {
                             value={pricedetail}
                             required
                             onChange={(e) => {
-                                setPricedetail(e.target.value);
+                                setPricedetail(NumericString(e.target.value));
                                 areaCalucation();
                             }}
                         />
@@ -849,15 +852,15 @@ const HotelResortRent = () => {
                 <Box>
                     {additionalPrice && <>
                         <InputGroup w={"300px"} margin={"10 0 0 0"}>
-                            <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
+                            <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(NumericString(e.target.value))} value={maintenancePrice} placeholder={"Maintenance Price"} />
                             <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
                                 <option value="Monthly">Monthly</option>
                                 <option value="Yearly">Yearly</option>
                             </Select>
                         </InputGroup>
                         <Box display={"grid"}>
-                            <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-                            <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
+                            <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(NumericString(e.target.value))} placeholder="Booking Amount" margin={"10px 0 0 0"} />
+                            <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(NumericString(e.target.value))} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
                         </Box>
 
                     </>
@@ -876,6 +879,34 @@ const HotelResortRent = () => {
                 </Box>
             </Box>
 
+            {/* image Drag and Drop area  */}
+            <Box>
+                <Box className={style.top}>
+                    <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
+                </Box>
+                <Box className={style.card}>
+                    <Box className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+                        {isDraging ? (
+                            <Text className={style.select}>Drop image here</Text>
+                        ) : (
+                            <>
+                                Drag & Drop image here or
+                                <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
+                            </>
+                        )}
+                        <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+                    </Box>
+                    <Box className={style.container}>
+                        {/* {images.map((image, index) => (
+                            <Box className={style.image} key={index}>
+                                {console.log(image)}  s
+                            </Box>
+                        ))} 
+                    */}
+
+                    </Box>
+                </Box>
+            </Box>
 
             {/* ============================ Property unique discription ============================ */}
             <Box>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   Box,
   Button,
@@ -76,7 +76,10 @@ const CommercialShowRoomRent = () => {
   const [securityDeposit, setSecurityDeposit] = useState("");
   const [depositAmount, setDepositAmount] = useState("");
   const [availableFrom, setavailableFrom] = useState(""); 
-
+    // state for drop box images
+    const [images, setImages] = useState([]);
+    const [isDraging, setIsDraging] = useState(false);
+    const fileInputRef = useRef(null); 
 
   // please don'nt change any function without any prior knowledge 
 
@@ -1175,6 +1178,35 @@ const CommercialShowRoomRent = () => {
                 Yearly rent is expected to increase by
               </Heading>
               <Input type="text" placeholder="Percentage (%) of increase in rent" onChange={(e) => setRentIncreasePercent(NumericString(e.target.value))} value={rentIncreasePercent} />
+            </Box> 
+
+             {/* image Drag and Drop area  */}
+             <Box>
+                <Box className={style.top}>
+                    <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
+                </Box>
+                <Box className={style.card}>
+                    <Box className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+                        {isDraging ? (
+                            <Text className={style.select}>Drop image here</Text>
+                        ) : (
+                            <>
+                                Drag & Drop image here or
+                                <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
+                            </>
+                        )}
+                        <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+                    </Box>
+                    <Box className={style.container}>
+                        {/* {images.map((image, index) => (
+                            <Box className={style.image} key={index}>
+                                {console.log(image)}  s
+                            </Box>
+                        ))} 
+                    */} 
+
+                    </Box>
+                </Box>
             </Box>
 
             {/* ============================ Property unique discription ============================ */}

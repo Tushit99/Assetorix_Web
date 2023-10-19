@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
     Box,
     Button,
     ButtonGroup,
     Heading,
     Input,
-    InputGroup,
-    NumberInput,
-    NumberInputField,
+    InputGroup, 
     Select,
     Text,
     Textarea,
@@ -73,7 +71,10 @@ const CoWorkingspace = () => {
     const [maintenancePrice, setMaintenancePrice] = useState("");
     const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
     const [zoneType, setZoneType] = useState("");
-
+    // state for drop box images
+    const [images, setImages] = useState([]);
+    const [isDraging, setIsDraging] = useState(false);
+    const fileInputRef = useRef(null); 
     // please don'nt change any function without any prior knowledge   
 
     const handleSubmitData = async (e) => {
@@ -961,7 +962,36 @@ const CoWorkingspace = () => {
                         Based on cost of the property & current monthly rent
                     </Heading>
                     <Input type="text" w={"300px"} value={expectedAnnual} onChange={(e) => setExpectedAnnual(NumericString(e.target.value))} />
+                </Box> 
+
+                 {/* image Drag and Drop area  */}
+            <Box>
+                <Box className={style.top}>
+                    <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
                 </Box>
+                <Box className={style.card}>
+                    <Box className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+                        {isDraging ? (
+                            <Text className={style.select}>Drop image here</Text>
+                        ) : (
+                            <>
+                                Drag & Drop image here or
+                                <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
+                            </>
+                        )}
+                        <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+                    </Box>
+                    <Box className={style.container}>
+                        {/* {images.map((image, index) => (
+                            <Box className={style.image} key={index}>
+                                {console.log(image)}  s
+                            </Box>
+                        ))} 
+                    */} 
+
+                    </Box>
+                </Box>
+            </Box>
 
                 {/* property Description */}
                 <Box>
