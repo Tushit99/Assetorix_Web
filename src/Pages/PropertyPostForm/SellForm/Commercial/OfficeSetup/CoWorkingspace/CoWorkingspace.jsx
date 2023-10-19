@@ -5,7 +5,7 @@ import {
     ButtonGroup,
     Heading,
     Input,
-    InputGroup, 
+    InputGroup,
     Select,
     Text,
     Textarea,
@@ -74,7 +74,7 @@ const CoWorkingspace = () => {
     // state for drop box images
     const [images, setImages] = useState([]);
     const [isDraging, setIsDraging] = useState(false);
-    const fileInputRef = useRef(null); 
+    const fileInputRef = useRef(null);
     // please don'nt change any function without any prior knowledge   
 
     const handleSubmitData = async (e) => {
@@ -200,8 +200,8 @@ const CoWorkingspace = () => {
                     title: error.response.data.msg,
                     status: "error",
                     duration: 2000,
-                }); 
-                
+                });
+
                 console.log(error);
             }
             // }
@@ -216,8 +216,8 @@ const CoWorkingspace = () => {
         }
     };
 
-      // image uploading after uploading the data:  
-      const submitImage = async (productID) => {
+    // image uploading after uploading the data:  
+    const submitImage = async (productID) => {
         try {
             let id = localStorage.getItem("usrId") || undefined;
             let authorization = localStorage.getItem("AstToken") || undefined;
@@ -237,7 +237,7 @@ const CoWorkingspace = () => {
 
             let reqOptions = {
                 url: `${process.env.REACT_APP_URL}/upload/${productID}`,
-                method: "POST", 
+                method: "POST",
                 headers: headersList,
                 data: bodyContent,
             }
@@ -409,11 +409,33 @@ const CoWorkingspace = () => {
             newarr.push(value);
         }
         setOtherFeatures(newarr);
+    }
+
+    // ======--- image upload function   
+
+    const selectFiles = () => {
+        fileInputRef.current.click();
     }  
 
-     // ======--- image upload function  
+    const onFileSelect = (e) => {
+        let files = e.target.files;
+        if (files.length === 0) {
+            return
+        }
+        for (let i = 0; i < files.length; i++) {
+            if (files[i].type.split('/')[0] !== 'image') {
+                continue;
+            }
+            if (!images.some((e) => e.name === files[i].name)) {
+                setImages((prev) => [...prev, {
+                    name: files[i].name,
+                    image: files[i],
+                },])
+            } 
+        }
+    }
 
-     const ondragleave = (event) => {
+    const ondragleave = (event) => {
         event.preventDefault();
         setIsDraging(false);
         console.log("leave")
@@ -598,7 +620,7 @@ const CoWorkingspace = () => {
                                 areaCalucation();
                             }}
                             required
-                        /> 
+                        />
                         <Select
                             value={areaPer}
                             onChange={(e) => {
@@ -828,14 +850,14 @@ const CoWorkingspace = () => {
                             </Heading>
                             <Input
                                 type="text"
-                                value={pricedetail} 
+                                value={pricedetail}
                                 maxLength={"12"}
                                 required
                                 onChange={(e) => {
                                     areaCalucation();
                                     setPricedetail(NumericString(e.target.value));
                                 }}
-                            /> 
+                            />
                         </Box>
                         {/* <Box display={"grid"} gap={0}>
                             <Heading
@@ -902,7 +924,7 @@ const CoWorkingspace = () => {
                     <InputGroup w={"300px"} margin={"10px 0"}>
                         <Input
                             w={"60%"}
-                            type="text" 
+                            type="text"
                             maxLength={"12"}
                             onChange={(e) => setMaintenancePrice(e.target.value)}
                             value={maintenancePrice}
@@ -1001,36 +1023,36 @@ const CoWorkingspace = () => {
                         Based on cost of the property & current monthly rent
                     </Heading>
                     <Input type="text" w={"300px"} value={expectedAnnual} onChange={(e) => setExpectedAnnual(NumericString(e.target.value))} />
-                </Box> 
-
-                 {/* image Drag and Drop area  */}
-            <Box>
-                <Box className={style.top}>
-                    <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
                 </Box>
-                <Box className={style.card}>
-                    <Box className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
-                        {isDraging ? (
-                            <Text className={style.select}>Drop image here</Text>
-                        ) : (
-                            <>
-                                Drag & Drop image here or
-                                <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
-                            </>
-                        )}
-                        <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+
+                {/* image Drag and Drop area  */}
+                <Box>
+                    <Box className={style.top}>
+                        <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
                     </Box>
-                    <Box className={style.container}>
-                        {/* {images.map((image, index) => (
+                    <Box className={style.card}>
+                        <Box className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+                            {isDraging ? (
+                                <Text className={style.select}>Drop image here</Text>
+                            ) : (
+                                <>
+                                    Drag & Drop image here or
+                                    <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
+                                </>
+                            )}
+                            <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+                        </Box>
+                        <Box className={style.container}>
+                            {/* {images.map((image, index) => (
                             <Box className={style.image} key={index}>
                                 {console.log(image)}  s
                             </Box>
                         ))} 
-                    */} 
+                    */}
 
+                        </Box>
                     </Box>
                 </Box>
-            </Box>
 
                 {/* property Description */}
                 <Box>

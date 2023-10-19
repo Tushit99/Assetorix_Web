@@ -6,11 +6,11 @@ import {
     ButtonGroup,
     Heading,
     Input,
-    InputGroup, 
+    InputGroup,
     Select,
     Text,
     Textarea,
-    useToast, 
+    useToast,
 } from "@chakra-ui/react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { Checkbox } from "@chakra-ui/react";
@@ -80,7 +80,7 @@ const Independentbuilder = () => {
     // state for drop box images
     const [images, setImages] = useState([]);
     const [isDraging, setIsDraging] = useState(false);
-    const fileInputRef = useRef(null); 
+    const fileInputRef = useRef(null);
 
     const handleSubmitData = async (e) => {
         e.preventDefault();
@@ -269,7 +269,7 @@ const Independentbuilder = () => {
                             status: 'success',
                             duration: 2000,
                         })
-                        submitImage(e.data.id); 
+                        submitImage(e.data.id);
                     });
             } catch (error) {
                 toast({
@@ -291,23 +291,23 @@ const Independentbuilder = () => {
                 position: 'top-right'
             })
         }
-    }; 
+    };
 
-       // image uploading after uploading the data:  
-       const submitImage = async (productID) => {  
-        try {   
-            let id = localStorage.getItem("usrId") || undefined; 
-            let authorization = localStorage.getItem("AstToken") || undefined; 
-    
-            let headersList = { 
+    // image uploading after uploading the data:  
+    const submitImage = async (productID) => {
+        try {
+            let id = localStorage.getItem("usrId") || undefined;
+            let authorization = localStorage.getItem("AstToken") || undefined;
+
+            let headersList = {
                 "Accept": "*/*",
                 "Authorization": authorization,
-                "id": id 
+                "id": id
             }
 
             let formdata = new FormData();
-            images.forEach((image) => { 
-                formdata.append("image", image.image); 
+            images.forEach((image) => {
+                formdata.append("image", image.image);
             });
 
             let bodyContent = formdata;
@@ -317,7 +317,7 @@ const Independentbuilder = () => {
                 method: "POST",
                 headers: headersList,
                 data: bodyContent,
-            } 
+            }
 
             let response = await axios.request(reqOptions)
             console.log(response.data);
@@ -331,12 +331,12 @@ const Independentbuilder = () => {
         let val = NumericString(e.target.value);
         setPincode(val);
         if (val.length == 6) {
-            pinfetch(val); 
-        } 
-        else {
-            console.log(val); 
+            pinfetch(val);
         }
-    } 
+        else {
+            console.log(val);
+        }
+    }
 
 
     const pinfetch = async (pin) => {
@@ -532,44 +532,66 @@ const Independentbuilder = () => {
         }
     }
 
- // ======--- image upload function  
+    // ======--- image upload function   
 
- const ondragleave = (event) => {
-    event.preventDefault();
-    setIsDraging(false);
-    console.log("leave")
-}
-
-const ondragover = (event) => {
-    event.preventDefault();
-    setIsDraging(true);
-    event.dataTransfer.dropEffect = "copy";
-    console.log("over the box");
-}
-
-const ondrop = (event) => {
-    event.preventDefault(); // Add this line
-    setIsDraging(false);
-    const files = event.dataTransfer.files;
-    console.log(event.dataTransfer.files);
-
-    if (files.length === 0) {
-        return;
+    const selectFiles = () => {
+        fileInputRef.current.click();
     }
 
-    for (let i = 0; i < files.length; i++) {
-        if (files[i].type.split('/')[0] !== 'image') {
-            continue;
+    const onFileSelect = (e) => {
+        let files = e.target.files;
+        if (files.length === 0) {
+            return
         }
-        if (!images.some((e) => e.name === files[i].name)) {
-            setImages((prev) => [...prev, {
-                name: files[i].name,
-                image: files[i],
-            }]);
+        for (let i = 0; i < files.length; i++) {
+            if (files[i].type.split('/')[0] !== 'image') {
+                continue;
+            }
+            if (!images.some((e) => e.name === files[i].name)) {
+                setImages((prev) => [...prev, {
+                    name: files[i].name,
+                    image: files[i],
+                },])
+            } 
         }
     }
-    console.log("droped");
-}
+
+    const ondragleave = (event) => {
+        event.preventDefault();
+        setIsDraging(false);
+        console.log("leave")
+    }
+
+    const ondragover = (event) => {
+        event.preventDefault();
+        setIsDraging(true);
+        event.dataTransfer.dropEffect = "copy";
+        console.log("over the box");
+    }
+
+    const ondrop = (event) => {
+        event.preventDefault(); // Add this line
+        setIsDraging(false);
+        const files = event.dataTransfer.files;
+        console.log(event.dataTransfer.files);
+
+        if (files.length === 0) {
+            return;
+        }
+
+        for (let i = 0; i < files.length; i++) {
+            if (files[i].type.split('/')[0] !== 'image') {
+                continue;
+            }
+            if (!images.some((e) => e.name === files[i].name)) {
+                setImages((prev) => [...prev, {
+                    name: files[i].name,
+                    image: files[i],
+                }]);
+            }
+        }
+        console.log("droped");
+    }
 
     // const createtemplatefloors = () => {
     //     let options = "";
@@ -597,7 +619,7 @@ const ondrop = (event) => {
                 <Input
                     type="text"
                     padding={"0 10px"}
-                    required 
+                    required
                     maxLength={100}
                     placeholder="House No. (optional)"
                     value={houseNo}
@@ -609,7 +631,7 @@ const ondrop = (event) => {
                     type="text"
                     padding={"0 10px"}
                     required
-                    maxLength={100} 
+                    maxLength={100}
                     placeholder="Apartment / Society"
                     fontSize={"md"}
                     value={appartment}
@@ -621,7 +643,7 @@ const ondrop = (event) => {
                     placeholder={"Enter pincode"}
                     padding={"0 10px"}
                     required
-                    maxLength={6} 
+                    maxLength={6}
                     fontSize={"md"}
                     value={pincode}
                     onChange={handlepinfetch}
@@ -632,7 +654,7 @@ const ondrop = (event) => {
                     required
                     placeholder="Locality"
                     list="browsers"
-                    value={locality} 
+                    value={locality}
                     maxLength={100}
                     onChange={(e) => setLocality(e.target.value)}
                     fontSize={"md"}
@@ -660,8 +682,8 @@ const ondrop = (event) => {
                     type="text"
                     padding={"0 10px"}
                     required
-                    placeholder="Enter State" 
-                    maxLength={100} 
+                    placeholder="Enter State"
+                    maxLength={100}
                     value={state}
                     onChange={(e) => setState(AlphabetString(e.target.value))}
                     fontSize={"md"}
@@ -671,8 +693,8 @@ const ondrop = (event) => {
                     type="text"
                     padding={"0 10px"}
                     required
-                    placeholder="Enter Country" 
-                    maxLength={100} 
+                    placeholder="Enter Country"
+                    maxLength={100}
                     value={country}
                     onChange={(e) => setCountry(AlphabetString(e.target.value))}
                     fontSize={"md"}
@@ -695,7 +717,7 @@ const ondrop = (event) => {
                             type="text"
                             variant="flushed"
                             padding={"0 2px"}
-                            maxLength={"2"} 
+                            maxLength={"2"}
                             onChange={(e) => setBedRoom(NumericString(e.target.value))}
                             value={bedroom}
                             required
@@ -706,7 +728,7 @@ const ondrop = (event) => {
                         <Input
                             type="text"
                             variant="flushed"
-                            maxLength={"2"} 
+                            maxLength={"2"}
                             onChange={(e) => setBathroom(NumericString(e.target.value))}
                             value={bathroom}
                             required
@@ -718,7 +740,7 @@ const ondrop = (event) => {
                         <Input
                             type="text"
                             variant="flushed"
-                            maxLength={"2"} 
+                            maxLength={"2"}
                             onChange={(e) => setBalcony(NumericString(e.target.value))}
                             value={balconey}
                             required
@@ -1217,7 +1239,7 @@ const ondrop = (event) => {
                         <Input
                             type="text"
                             value={totalfloors}
-                            maxLength={"2"} 
+                            maxLength={"2"}
                             onChange={(e) => {
                                 const nowval = e.target.value > 90;
                                 if (nowval) {
@@ -1234,7 +1256,7 @@ const ondrop = (event) => {
                             }}
                             required
                             w={250}
-                        /> 
+                        />
                         <Select
                             id="floorSelectTag"
                             variant="filled"
@@ -1460,11 +1482,11 @@ const ondrop = (event) => {
                                 textAlign={"left"}
                             >
                                 {isCountry.country == "india" ? "₹" : "$"} Price Details
-                            </Heading> 
+                            </Heading>
                             <Input
                                 type="text"
                                 value={pricedetail}
-                                maxLength={"10"} 
+                                maxLength={"10"}
                                 required
                                 onChange={(e) => {
                                     setPricedetail(NumericString(e.target.value));
@@ -1480,7 +1502,7 @@ const ondrop = (event) => {
                                 textAlign={"left"}
                             >
                                 {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
-                            </Heading> 
+                            </Heading>
                         </Box>
                     </Box>
                 </Box>
@@ -1524,11 +1546,11 @@ const ondrop = (event) => {
                     <Heading as={"h4"} size={"sm"} margin={"10px 0"} fontWeight={700} textAlign={"left"}>
                         Additional Pricing Detail (Optional)
                     </Heading>
-                    <InputGroup w={"300px"}  margin={"10px 0"}>
+                    <InputGroup w={"300px"} margin={"10px 0"}>
                         <Input w={"60%"} type='text' maxLength={"10"} onChange={(e) => setMaintenancePrice(NumericString(e.target.value))} value={maintenancePrice} placeholder={"Maintenance Price"} />
                         <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
                             <option value="Monthly">Monthly</option>
-                            <option value="Yearly">Yearly</option> 
+                            <option value="Yearly">Yearly</option>
                         </Select>
                     </InputGroup>
                     {additionalPrice && <>
@@ -1539,7 +1561,7 @@ const ondrop = (event) => {
                     }
                     <Heading
                         as={"h3"}
-                        size={"sm"} 
+                        size={"sm"}
                         margin={"10px 0"}
                         color={"#002aff"}
                         fontWeight={500}
@@ -1548,39 +1570,39 @@ const ondrop = (event) => {
                         textAlign={"left"}>
                         {additionalPrice ? <IoIosArrowUp style={{ display: "inline" }} /> : <IoIosArrowDown style={{ display: "inline" }} />} Add more pricing details
                     </Heading>
-                </Box> 
-
- {/* image Drag and Drop area  */}
- <Box>
-                <Box className={style.top}>
-                    <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
                 </Box>
-                <Box className={style.card}>
-                    <Box className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
-                        {isDraging ? (
-                            <Text className={style.select}>Drop image here</Text>
-                        ) : (
-                            <>
-                                Drag & Drop image here or
-                                <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
-                            </>
-                        )}
-                        <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+
+                {/* image Drag and Drop area  */}
+                <Box>
+                    <Box className={style.top}>
+                        <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
                     </Box>
-                    <Box className={style.container}>
-                        {/* {images.map((image, index) => (
+                    <Box className={style.card}>
+                        <Box className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+                            {isDraging ? (
+                                <Text className={style.select}>Drop image here</Text>
+                            ) : (
+                                <>
+                                    Drag & Drop image here or
+                                    <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
+                                </>
+                            )}
+                            <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+                        </Box>
+                        <Box className={style.container}>
+                            {/* {images.map((image, index) => (
                             <Box className={style.image} key={index}>
                                 {console.log(image)}  s
                             </Box>
                         ))} 
-                    */} 
+                    */}
 
+                        </Box>
                     </Box>
                 </Box>
-            </Box> 
 
                 <Box>
-                     <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                    <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
                         What makes your property unique
                     </Heading>
                     <Heading as={"h3"} size={"xs"} margin={"10px 0"} textAlign={"left"}>
@@ -1593,7 +1615,7 @@ const ondrop = (event) => {
                 </Box>
             </Box>
             {/* Add amenities/unique features */}
-            <Box> 
+            <Box>
                 <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
                     Add amenities/unique features
                 </Heading>

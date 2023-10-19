@@ -5,7 +5,7 @@ import {
     ButtonGroup,
     Heading,
     Input,
-    InputGroup, 
+    InputGroup,
     Select,
     Text,
     Textarea,
@@ -80,7 +80,7 @@ const GuestBanquet = () => {
     // state for drop box images
     const [images, setImages] = useState([]);
     const [isDraging, setIsDraging] = useState(false);
-    const fileInputRef = useRef(null); 
+    const fileInputRef = useRef(null);
 
 
     const handleSubmitData = async (e) => {
@@ -287,10 +287,10 @@ const GuestBanquet = () => {
                 position: 'top-right'
             })
         }
-    }; 
+    };
 
-     // image uploading after uploading the data:  
-     const submitImage = async (productID) => {
+    // image uploading after uploading the data:  
+    const submitImage = async (productID) => {
         try {
             let id = localStorage.getItem("usrId") || undefined;
             let authorization = localStorage.getItem("AstToken") || undefined;
@@ -310,7 +310,7 @@ const GuestBanquet = () => {
 
             let reqOptions = {
                 url: `${process.env.REACT_APP_URL}/upload/${productID}`,
-                method: "POST", 
+                method: "POST",
                 headers: headersList,
                 data: bodyContent,
             }
@@ -322,7 +322,7 @@ const GuestBanquet = () => {
         }
 
     };
- 
+
 
 
     const handlepinfetch = (e) => {
@@ -508,7 +508,28 @@ const GuestBanquet = () => {
         }
     }
 
-    // ======--- image upload function  
+    // ======--- image upload function   
+    const selectFiles = () => {
+        fileInputRef.current.click();
+    }
+
+    const onFileSelect = (e) => {
+        let files = e.target.files;
+        if (files.length === 0) {
+            return
+        }
+        for (let i = 0; i < files.length; i++) {
+            if (files[i].type.split('/')[0] !== 'image') {
+                continue;
+            }
+            if (!images.some((e) => e.name === files[i].name)) {
+                setImages((prev) => [...prev, {
+                    name: files[i].name,
+                    image: files[i],
+                },])
+            } 
+        }
+    }
 
     const ondragleave = (event) => {
         event.preventDefault();
@@ -585,10 +606,10 @@ const GuestBanquet = () => {
                     maxLength={"6"}
                     required
                     fontSize={"md"}
-                    value={pincode} 
-                    onChange={handlepinfetch} 
+                    value={pincode}
+                    onChange={handlepinfetch}
                 />
-                <Input 
+                <Input
                     type="text"
                     maxLength={"100"}
                     required
@@ -1414,7 +1435,7 @@ const GuestBanquet = () => {
                                 areaCalucation();
                             }}
                         />
-                    </Box> 
+                    </Box>
                 </Box>
                 <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
                     <Checkbox
@@ -1444,7 +1465,7 @@ const GuestBanquet = () => {
                             <Input w={"60%"} type='text' maxLength={"12"} onChange={(e) => setMaintenancePrice(NumericString(e.target.value))} value={maintenancePrice} placeholder={"Maintenance Price"} />
                             <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
                                 <option value="Monthly">Monthly</option>
-                                <option value="Yearly">Yearly</option> 
+                                <option value="Yearly">Yearly</option>
                             </Select>
                         </InputGroup>
                         <Input type="text" w={"300px"} maxLength={"12"} value={expectedRentel} onChange={(e) => setExpectedRentel(NumericString(e.target.value))} placeholder="Expected rental" margin={"0"} />
@@ -1512,8 +1533,8 @@ const GuestBanquet = () => {
                 </Box>
             </Box>
 
-             {/* image Drag and Drop area  */}
-             <Box>
+            {/* image Drag and Drop area  */}
+            <Box>
                 <Box className={style.top}>
                     <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
                 </Box>
@@ -1535,7 +1556,7 @@ const GuestBanquet = () => {
                                 {console.log(image)}  s
                             </Box>
                         ))} 
-                    */} 
+                    */}
 
                     </Box>
                 </Box>

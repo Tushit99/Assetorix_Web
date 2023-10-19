@@ -200,6 +200,7 @@
 
 .card .container {
   width: 100%;
+  position: relative;
   height: auto;
   display: flex;
   justify-content: flex-start;

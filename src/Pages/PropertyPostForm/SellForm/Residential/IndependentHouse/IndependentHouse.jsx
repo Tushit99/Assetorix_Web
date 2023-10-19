@@ -5,7 +5,7 @@ import {
     ButtonGroup,
     Heading,
     Input,
-    InputGroup, 
+    InputGroup,
     Select,
     Text,
     Textarea,
@@ -78,7 +78,7 @@ const IndependentHouse = () => {
     // state for drop box images
     const [images, setImages] = useState([]);
     const [isDraging, setIsDraging] = useState(false);
-    const fileInputRef = useRef(null); 
+    const fileInputRef = useRef(null);
 
 
     const handleSubmitData = async (e) => {
@@ -263,7 +263,7 @@ const IndependentHouse = () => {
                             description: e.data.msg,
                             status: 'success',
                             duration: 2000,
-                        }) 
+                        })
                         submitImage(e.data.id);
                     });
             } catch (error) {
@@ -289,21 +289,21 @@ const IndependentHouse = () => {
     };
 
 
-       // image uploading after uploading the data:  
-       const submitImage = async (productID) => {  
-        try {   
-            let id = localStorage.getItem("usrId") || undefined; 
-            let authorization = localStorage.getItem("AstToken") || undefined; 
-    
-            let headersList = { 
+    // image uploading after uploading the data:  
+    const submitImage = async (productID) => {
+        try {
+            let id = localStorage.getItem("usrId") || undefined;
+            let authorization = localStorage.getItem("AstToken") || undefined;
+
+            let headersList = {
                 "Accept": "*/*",
                 "Authorization": authorization,
-                "id": id 
+                "id": id
             }
 
             let formdata = new FormData();
-            images.forEach((image) => { 
-                formdata.append("image", image.image); 
+            images.forEach((image) => {
+                formdata.append("image", image.image);
             });
 
             let bodyContent = formdata;
@@ -313,7 +313,7 @@ const IndependentHouse = () => {
                 method: "POST",
                 headers: headersList,
                 data: bodyContent,
-            } 
+            }
 
             let response = await axios.request(reqOptions)
             console.log(response.data);
@@ -530,9 +530,31 @@ const IndependentHouse = () => {
     }
 
 
-     // ======--- image upload function  
+    // ======--- image upload function   
 
-     const ondragleave = (event) => {
+    const selectFiles = () => {
+        fileInputRef.current.click();
+    }
+
+    const onFileSelect = (e) => {
+        let files = e.target.files;
+        if (files.length === 0) {
+            return
+        }
+        for (let i = 0; i < files.length; i++) {
+            if (files[i].type.split('/')[0] !== 'image') {
+                continue;
+            }
+            if (!images.some((e) => e.name === files[i].name)) {
+                setImages((prev) => [...prev, {
+                    name: files[i].name,
+                    image: files[i],
+                },])
+            } 
+        }
+    }
+
+    const ondragleave = (event) => {
         event.preventDefault();
         setIsDraging(false);
         console.log("leave")
@@ -678,7 +700,7 @@ const IndependentHouse = () => {
                         <Input
                             type="text"
                             variant="flushed"
-                            maxLength={"2"} 
+                            maxLength={"2"}
                             padding={"0 2px"}
                             onChange={(e) => setBedRoom(NumericString(e.target.value))}
                             value={bedroom}
@@ -1197,26 +1219,26 @@ const IndependentHouse = () => {
                     </Text>
                     <Box display={"flex"} alignItems={"center"} gap={5}>
                         <Input
-                            type="text" 
-                            maxLength={"2"} 
+                            type="text"
+                            maxLength={"2"}
                             value={totalfloors}
-                                onChange={(e) => { 
-                                    const nowval = NumericString(e.target.value) > 90;
-                                    if (nowval) {
-                                        toast({
-                                            title: 'Maximum floor count: 90',
-                                            status: 'error',
-                                            duration: 2000,
-                                            position: 'top-right',
-                                        });
-                                    }
-                                    else {
-                                        setTotalFloors(NumericString(e.target.value));
-                                    }
-                                }}
-                                required
-                                w={250}
-                        /> 
+                            onChange={(e) => {
+                                const nowval = NumericString(e.target.value) > 90;
+                                if (nowval) {
+                                    toast({
+                                        title: 'Maximum floor count: 90',
+                                        status: 'error',
+                                        duration: 2000,
+                                        position: 'top-right',
+                                    });
+                                }
+                                else {
+                                    setTotalFloors(NumericString(e.target.value));
+                                }
+                            }}
+                            required
+                            w={250}
+                        />
                     </Box>
                 </Box>
                 {/* Availability status */}
@@ -1420,7 +1442,7 @@ const IndependentHouse = () => {
                             <Input
                                 type="text"
                                 value={pricedetail}
-                                maxLength={"10"} 
+                                maxLength={"10"}
                                 required
                                 onChange={(e) => {
                                     areaCalucation();
@@ -1440,7 +1462,7 @@ const IndependentHouse = () => {
                             <Input
                                 type="text"
                                 value={priceSqr}
-                                maxLength={"10"} 
+                                maxLength={"10"}
                                 readOnly
                                 onChange={(e) => {
                                     setPlotArea(NumericString(e.target.value));
@@ -1492,7 +1514,7 @@ const IndependentHouse = () => {
                         Additional Pricing Detail (Optional)
                     </Heading>
                     <InputGroup w={"300px"} margin={"10px 0"}>
-                        <Input w={"60%"} type='text' maxLength={"10"}  onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
+                        <Input w={"60%"} type='text' maxLength={"10"} onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
                         <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
                             <option value="Monthly">Monthly</option>
                             <option value="Yearly">Yearly</option>
@@ -1517,34 +1539,34 @@ const IndependentHouse = () => {
                     </Heading>
                 </Box>
 
- {/* image Drag and Drop area  */}
- <Box>
-                <Box className={style.top}>
-                    <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
-                </Box>
-                <Box className={style.card}>
-                    <Box className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
-                        {isDraging ? (
-                            <Text className={style.select}>Drop image here</Text>
-                        ) : (
-                            <>
-                                Drag & Drop image here or
-                                <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
-                            </>
-                        )}
-                        <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+                {/* image Drag and Drop area  */}
+                <Box>
+                    <Box className={style.top}>
+                        <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
                     </Box>
-                    <Box className={style.container}>
-                        {/* {images.map((image, index) => (
+                    <Box className={style.card}>
+                        <Box className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+                            {isDraging ? (
+                                <Text className={style.select}>Drop image here</Text>
+                            ) : (
+                                <>
+                                    Drag & Drop image here or
+                                    <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
+                                </>
+                            )}
+                            <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+                        </Box>
+                        <Box className={style.container}>
+                            {/* {images.map((image, index) => (
                             <Box className={style.image} key={index}>
                                 {console.log(image)}  s
                             </Box>
                         ))} 
-                    */} 
+                    */}
 
+                        </Box>
                     </Box>
                 </Box>
-            </Box>
 
                 <Box>
                     <Heading as={"h3"} size={"md"} fontWeight={600} margin={"10px 0"} textAlign={"left"}>
@@ -2197,7 +2219,7 @@ const IndependentHouse = () => {
                     Width of facing road
                 </Heading>
                 <Box display={"flex"} gap={"20px"} w={"300px"} >
-                    <Input type="text" variant='flushed' maxLength={"10"}  flex={1} required value={facingwidth} onChange={(e) => {
+                    <Input type="text" variant='flushed' maxLength={"10"} flex={1} required value={facingwidth} onChange={(e) => {
                         e.preventDefault();
                         setFacingWidth(NumericString(e.target.value));
                     }} />

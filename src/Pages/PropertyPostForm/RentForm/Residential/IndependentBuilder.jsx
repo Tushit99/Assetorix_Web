@@ -543,6 +543,24 @@ const IndependentBuilderRent = () => {
     fileInputRef.current.click();
   }
 
+  const onFileSelect = (e) => {
+    let files = e.target.files;
+    if (files.length === 0) {
+        return
+    }
+    for (let i = 0; i < files.length; i++) {
+        if (files[i].type.split('/')[0] !== 'image') {
+            continue;
+        }
+        if (!images.some((e) => e.name === files[i].name)) {
+            setImages((prev) => [...prev, {
+                name: files[i].name,
+                image: files[i],
+            },])
+        } 
+    }
+}
+
   const ondragleave = (event) => {
     event.preventDefault();
     setIsDraging(false);

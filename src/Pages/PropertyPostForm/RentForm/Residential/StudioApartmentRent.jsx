@@ -83,7 +83,7 @@ const StudioApartmentRent = () => {
     // state for drop box images
     const [images, setImages] = useState([]);
     const [isDraging, setIsDraging] = useState(false);
-    const fileInputRef = useRef(null); 
+    const fileInputRef = useRef(null);
 
     const handleSubmitData = async (e) => {
         e.preventDefault();
@@ -265,8 +265,8 @@ const StudioApartmentRent = () => {
                             description: e.data.msg,
                             status: "success",
                             duration: 2000,
-                        });  
-                        submitImage(e.data.id); 
+                        });
+                        submitImage(e.data.id);
                     });
             } catch (error) {
                 toast({
@@ -286,10 +286,10 @@ const StudioApartmentRent = () => {
                 position: "top-right",
             });
         }
-    };   
+    };
 
-      // image uploading after uploading the data:  
-      const submitImage = async (productID) => {
+    // image uploading after uploading the data:  
+    const submitImage = async (productID) => {
         try {
             let id = localStorage.getItem("usrId") || undefined;
             let authorization = localStorage.getItem("AstToken") || undefined;
@@ -309,7 +309,7 @@ const StudioApartmentRent = () => {
 
             let reqOptions = {
                 url: `${process.env.REACT_APP_URL}/upload/${productID}`,
-                method: "POST", 
+                method: "POST",
                 headers: headersList,
                 data: bodyContent,
             }
@@ -320,7 +320,7 @@ const StudioApartmentRent = () => {
 
         }
 
-    };  
+    };
 
     const handlepinfetch = (e) => {
         let val = NumericString(e.target.value);
@@ -508,12 +508,34 @@ const StudioApartmentRent = () => {
 
     const handleDepositAmount = (e) => {
         setDepositAmount(NumericString(e.target.value));
-    }  
+    }
 
 
-     // ======--- image upload function  
+    // ======--- image upload function  
 
-     const ondragleave = (event) => {
+    const selectFiles = () => {
+        fileInputRef.current.click();
+    }
+
+    const onFileSelect = (e) => {
+        let files = e.target.files;
+        if (files.length === 0) {
+            return
+        }
+        for (let i = 0; i < files.length; i++) {
+            if (files[i].type.split('/')[0] !== 'image') {
+                continue;
+            }
+            if (!images.some((e) => e.name === files[i].name)) {
+                setImages((prev) => [...prev, {
+                    name: files[i].name,
+                    image: files[i],
+                },])
+            } 
+        }
+    }
+
+    const ondragleave = (event) => {
         event.preventDefault();
         setIsDraging(false);
         console.log("leave")
@@ -1452,8 +1474,8 @@ const StudioApartmentRent = () => {
                 </Box>
             </Box>
 
-             {/* image Drag and Drop area  */}
-             <Box>
+            {/* image Drag and Drop area  */}
+            <Box>
                 <Box className={style.top}>
                     <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
                 </Box>
@@ -1475,7 +1497,7 @@ const StudioApartmentRent = () => {
                                 {console.log(image)}  s
                             </Box>
                         ))} 
-                    */} 
+                    */}
 
                     </Box>
                 </Box>

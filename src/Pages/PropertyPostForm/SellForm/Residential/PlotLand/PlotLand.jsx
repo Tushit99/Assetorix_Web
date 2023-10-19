@@ -6,7 +6,7 @@ import {
     ButtonGroup,
     Heading,
     Input,
-    InputGroup, 
+    InputGroup,
     Select,
     Text,
     Textarea,
@@ -39,7 +39,7 @@ const PlotLand = () => {
     const [priceSqr, setPriceSqr] = useState("");
     const [inclusivePrices, setInclusivePrice] = useState([]);
     const [amenities, setAminity] = useState([]);
-    const [overLook, setoverlook] = useState([]); 
+    const [overLook, setoverlook] = useState([]);
     const [otherFeature, setOtherFeature] = useState([]);
     const [propertyFacing, setPropertyFacing] = useState("");
     const [facing, setFacing] = useState("Meter");
@@ -66,7 +66,7 @@ const PlotLand = () => {
     // state for drop box images
     const [images, setImages] = useState([]);
     const [isDraging, setIsDraging] = useState(false);
-    const fileInputRef = useRef(null); 
+    const fileInputRef = useRef(null);
 
     // please don'nt change any function without any prior knowledge  
 
@@ -221,47 +221,47 @@ const PlotLand = () => {
                 duration: 2000,
                 position: 'top-right'
             })
-        } 
+        }
     };
 
-   // image uploading after uploading the data:  
-   const submitImage = async (productID) => {  
-    try {   
-        let id = localStorage.getItem("usrId") || undefined; 
-        let authorization = localStorage.getItem("AstToken") || undefined; 
+    // image uploading after uploading the data:  
+    const submitImage = async (productID) => {
+        try {
+            let id = localStorage.getItem("usrId") || undefined;
+            let authorization = localStorage.getItem("AstToken") || undefined;
 
-        let headersList = { 
-            "Accept": "*/*",
-            "Authorization": authorization,
-            "id": id 
+            let headersList = {
+                "Accept": "*/*",
+                "Authorization": authorization,
+                "id": id
+            }
+
+            let formdata = new FormData();
+            images.forEach((image) => {
+                formdata.append("image", image.image);
+            });
+
+            let bodyContent = formdata;
+
+            let reqOptions = {
+                url: `${process.env.REACT_APP_URL}/upload/${productID}`,
+                method: "POST",
+                headers: headersList,
+                data: bodyContent,
+            }
+
+            let response = await axios.request(reqOptions)
+            console.log(response.data);
+        } catch (error) {
+
         }
 
-        let formdata = new FormData();
-        images.forEach((image) => { 
-            formdata.append("image", image.image); 
-        });
+    };
 
-        let bodyContent = formdata;
-
-        let reqOptions = {
-            url: `${process.env.REACT_APP_URL}/upload/${productID}`,
-            method: "POST",
-            headers: headersList,
-            data: bodyContent,
-        } 
-
-        let response = await axios.request(reqOptions)
-        console.log(response.data);
-    } catch (error) {
-
-    }
-
-};
-
-    const handlepinfetch = (e) => { 
-        let val = NumericString(e.target.value); 
+    const handlepinfetch = (e) => {
+        let val = NumericString(e.target.value);
         setPincode(val);
-        if (val.length == 6) { 
+        if (val.length == 6) {
             pinfetch(val);
         }
         else {
@@ -404,9 +404,31 @@ const PlotLand = () => {
         setboundaryWall(e.target.value);
     }
 
-     // ======--- image upload function  
+    // ======--- image upload function   
 
-     const ondragleave = (event) => {
+    const selectFiles = () => {
+        fileInputRef.current.click();
+    }
+
+    const onFileSelect = (e) => {
+        let files = e.target.files;
+        if (files.length === 0) {
+            return
+        }
+        for (let i = 0; i < files.length; i++) {
+            if (files[i].type.split('/')[0] !== 'image') {
+                continue;
+            }
+            if (!images.some((e) => e.name === files[i].name)) {
+                setImages((prev) => [...prev, {
+                    name: files[i].name,
+                    image: files[i],
+                },])
+            } 
+        }
+    }
+
+    const ondragleave = (event) => {
         event.preventDefault();
         setIsDraging(false);
         console.log("leave")
@@ -462,7 +484,7 @@ const PlotLand = () => {
                     value={houseNo}
                     onChange={(e) => setHouseNo(WordandNumber(e.target.value))}
                     fontSize={"md"}
-                    variant="flushed" 
+                    variant="flushed"
                 />
                 <Input
                     type="text"
@@ -797,8 +819,8 @@ const PlotLand = () => {
                                     setPricedetail(NumericString(e.target.value));
                                     areaCalucation();
                                 }}
-                            /> 
-                        </Box> 
+                            />
+                        </Box>
                     </Box>
                 </Box>
                 {/* inclusive Prices */}
@@ -843,16 +865,16 @@ const PlotLand = () => {
                         Additional Pricing Detail (Optional)
                     </Heading>
                     <InputGroup w={"300px"} margin={"10px 0"}>
-                        <Input w={"60%"} type='text' maxLength={"12"}  onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
+                        <Input w={"60%"} type='text' maxLength={"12"} onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
                         <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
                             <option value="Monthly">Monthly</option>
                             <option value="Yearly">Yearly</option>
                         </Select>
                     </InputGroup>
                     {additionalPrice && <>
-                        <Input type="text" w={"300px"} value={expectedRental} maxLength={"12"}  onChange={(e) => setExpectedRental(e.target.value)} placeholder="Expected rental" margin={"0"} />
-                        <Input type="text" w={"300px"} value={bookingAmount} maxLength={"12"}  onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-                        <Input type="text" w={"300px"} value={annualDuesPayable} maxLength={"12"}  onChange={(e) => setAnnualDuesPayable(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
+                        <Input type="text" w={"300px"} value={expectedRental} maxLength={"12"} onChange={(e) => setExpectedRental(e.target.value)} placeholder="Expected rental" margin={"0"} />
+                        <Input type="text" w={"300px"} value={bookingAmount} maxLength={"12"} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
+                        <Input type="text" w={"300px"} value={annualDuesPayable} maxLength={"12"} onChange={(e) => setAnnualDuesPayable(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
                     </>
                     }
                     <Heading
@@ -869,35 +891,35 @@ const PlotLand = () => {
                 </Box>
                 {/* what makes property unique */}
 
- {/* image Drag and Drop area  */}
- <Box>
-                <Box className={style.top}>
-                    <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
-                </Box>
-                <Box className={style.card}>
-                    <Box className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
-                        {isDraging ? (
-                            <Text className={style.select}>Drop image here</Text>
-                        ) : (
-                            <>
-                                Drag & Drop image here or
-                                <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
-                            </>
-                        )}
-                        <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+                {/* image Drag and Drop area  */}
+                <Box>
+                    <Box className={style.top}>
+                        <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
                     </Box>
-                    <Box className={style.container}>
-                        {/* {images.map((image, index) => (
+                    <Box className={style.card}>
+                        <Box className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+                            {isDraging ? (
+                                <Text className={style.select}>Drop image here</Text>
+                            ) : (
+                                <>
+                                    Drag & Drop image here or
+                                    <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
+                                </>
+                            )}
+                            <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+                        </Box>
+                        <Box className={style.container}>
+                            {/* {images.map((image, index) => (
                             <Box className={style.image} key={index}>
                                 {console.log(image)}  s
                             </Box>
                         ))} 
-                    */} 
+                    */}
 
+                        </Box>
                     </Box>
                 </Box>
-            </Box>
-            
+
 
                 <Box>
                     <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
@@ -906,7 +928,7 @@ const PlotLand = () => {
                     <Heading as={"h3"} size={"xs"} margin={"10px 0"} textAlign={"left"}>
                         Adding description will increase your listing visibility
                     </Heading>
-                    <Textarea height={140} maxLength={"12"}  value={desc} onChange={(e) => {
+                    <Textarea height={140} maxLength={"12"} value={desc} onChange={(e) => {
                         let my_cleantext = CleanInputText(e.target.value);
                         setDesc(my_cleantext);
                     }} ></Textarea>

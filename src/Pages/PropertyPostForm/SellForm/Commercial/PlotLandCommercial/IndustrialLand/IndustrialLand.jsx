@@ -72,7 +72,7 @@ const IndustrialLand = () => {
   // state for drop box images
   const [images, setImages] = useState([]);
   const [isDraging, setIsDraging] = useState(false);
-  const fileInputRef = useRef(null);  
+  const fileInputRef = useRef(null);
 
   // please don'nt change any function without any prior knowledge
 
@@ -426,34 +426,20 @@ const IndustrialLand = () => {
         return [...prevIndustryType, value];
       }
     });
-  }  
+  }
 
 
-   // ======--- image upload function  
+  // ======--- image upload function   
 
-   const ondragleave = (event) => {
-    event.preventDefault();
-    setIsDraging(false);
-    console.log("leave")
-}
+  const selectFiles = () => {
+    fileInputRef.current.click();
+  }
 
-const ondragover = (event) => {
-    event.preventDefault();
-    setIsDraging(true);
-    event.dataTransfer.dropEffect = "copy";
-    console.log("over the box");
-}
-
-const ondrop = (event) => {
-    event.preventDefault(); // Add this line
-    setIsDraging(false);
-    const files = event.dataTransfer.files;
-    console.log(event.dataTransfer.files);
-
+  const onFileSelect = (e) => {
+    let files = e.target.files;
     if (files.length === 0) {
-        return;
+        return
     }
-
     for (let i = 0; i < files.length; i++) {
         if (files[i].type.split('/')[0] !== 'image') {
             continue;
@@ -462,11 +448,47 @@ const ondrop = (event) => {
             setImages((prev) => [...prev, {
                 name: files[i].name,
                 image: files[i],
-            }]);
-        }
+            },])
+        } 
+    }
+}
+
+  const ondragleave = (event) => {
+    event.preventDefault();
+    setIsDraging(false);
+    console.log("leave")
+  }
+
+  const ondragover = (event) => {
+    event.preventDefault();
+    setIsDraging(true);
+    event.dataTransfer.dropEffect = "copy";
+    console.log("over the box");
+  }
+
+  const ondrop = (event) => {
+    event.preventDefault(); // Add this line
+    setIsDraging(false);
+    const files = event.dataTransfer.files;
+    console.log(event.dataTransfer.files);
+
+    if (files.length === 0) {
+      return;
+    }
+
+    for (let i = 0; i < files.length; i++) {
+      if (files[i].type.split('/')[0] !== 'image') {
+        continue;
+      }
+      if (!images.some((e) => e.name === files[i].name)) {
+        setImages((prev) => [...prev, {
+          name: files[i].name,
+          image: files[i],
+        }]);
+      }
     }
     console.log("droped");
-} 
+  }
 
 
   return (
@@ -1068,34 +1090,34 @@ const ondrop = (event) => {
           </Menu>
         </Box>
 
- {/* image Drag and Drop area  */}
- <Box>
-                <Box className={style.top}>
-                    <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
-                </Box>
-                <Box className={style.card}>
-                    <Box className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
-                        {isDraging ? (
-                            <Text className={style.select}>Drop image here</Text>
-                        ) : (
-                            <>
-                                Drag & Drop image here or
-                                <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
-                            </>
-                        )}
-                        <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
-                    </Box>
-                    <Box className={style.container}>
-                        {/* {images.map((image, index) => (
+        {/* image Drag and Drop area  */}
+        <Box>
+          <Box className={style.top}>
+            <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
+          </Box>
+          <Box className={style.card}>
+            <Box className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+              {isDraging ? (
+                <Text className={style.select}>Drop image here</Text>
+              ) : (
+                <>
+                  Drag & Drop image here or
+                  <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
+                </>
+              )}
+              <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+            </Box>
+            <Box className={style.container}>
+              {/* {images.map((image, index) => (
                             <Box className={style.image} key={index}>
                                 {console.log(image)}  s
                             </Box>
                         ))} 
-                    */} 
+                    */}
 
-                    </Box>
-                </Box>
             </Box>
+          </Box>
+        </Box>
 
         {/* ============================ Property unique discription ============================ */}
         <Box>
