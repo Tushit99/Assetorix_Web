@@ -531,6 +531,12 @@ const CommercialShopRent = () => {
         fileInputRef.current.click();
     }
 
+    const removeImage = (index) => {
+        const newImages = [...images];
+        newImages.splice(index, 1);
+        setImages(newImages);
+    }; 
+
     const onFileSelect = (e) => {
         let files = e.target.files;
         if (files.length === 0) {
