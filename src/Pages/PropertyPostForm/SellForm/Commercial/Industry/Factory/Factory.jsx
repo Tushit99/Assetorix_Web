@@ -468,7 +468,7 @@ const Factory = () => {
                     name: files[i].name,
                     image: files[i],
                 },])
-            } 
+            }
         }
     }
 
@@ -992,13 +992,12 @@ const Factory = () => {
                             <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
                         </Box>
                         <Box className={style.container}>
-                            {/* {images.map((image, index) => (
-                            <Box className={style.image} key={index}>
-                                {console.log(image)}  s
-                            </Box>
-                        ))} 
-                    */}
-
+                            {images.map((image, index) => (
+                                <Box className={style.image} key={index}>
+                                    <Text className={style.delete} onClick={() => removeImage(index)}>&#10006;</Text>
+                                    <img src={URL.createObjectURL(image.image)} alt="images" />
+                                </Box>
+                            ))}
                         </Box>
                     </Box>
                 </Box>
