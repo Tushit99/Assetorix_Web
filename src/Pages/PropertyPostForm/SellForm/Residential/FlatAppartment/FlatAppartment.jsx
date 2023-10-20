@@ -1586,11 +1586,10 @@ const FlatAppartment = () => {
                     </Box>
                     <Box className={style.container}>
                         {images.map((image, index) => (
-                            <Box className={style.image} key={index}>
-                                {console.log(image)}   
-                                <Image src={URL.createObjectURL(image.image)} alt="images" />   
+                            <Box className={style.image} key={index}>  
                                 <button className={style.delete} onClick={() => removeImage(index)}>&#10006;</button> 
-                            </Box>
+                                <img src={URL.createObjectURL(image.image)} alt="images" />   
+                            </Box>  
                         ))}   
                      
                     </Box>

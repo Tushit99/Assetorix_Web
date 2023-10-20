@@ -199,8 +199,7 @@
 }
 
 .card .container {
-  width: 100%;
-  position: relative;
+  width: 100%;  
   height: auto;
   display: flex;
   justify-content: flex-start;
@@ -208,7 +207,7 @@
   max-height: 200px;
   overflow-y: auto;
   margin-top: 10px;
-}
+}  
 
 .card .container .image {
   width: 75px;
@@ -225,13 +224,13 @@
   object-fit: contain;
 }
 
-.card .container .image .delete {
+.card .container .delete {
   position: absolute;
-  top: -2px;
-  right: 9px;
+  top: -2px; 
+  right: 9px;  
   text-shadow: 0 0 3px rgba(31, 30, 30, 0.6);
-  font-size: 20px;
-  cursor: pointer;
+  font-size: 20px;  
+  cursor: pointer;  
 }
 
 .card input,
