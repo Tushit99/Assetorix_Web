@@ -548,7 +548,7 @@ const ServicedApartment = () => {
 
     const onFileSelect = (e) => {
         let files = e.target.files;
-        if (files.length === 0) {  
+        if (files.length === 0) {
             return
         }
         for (let i = 0; i < files.length; i++) {
@@ -560,7 +560,7 @@ const ServicedApartment = () => {
                     name: files[i].name,
                     image: files[i],
                 },])
-            } 
+            }
         }
     }
 
@@ -1586,13 +1586,12 @@ const ServicedApartment = () => {
                             <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
                         </Box>
                         <Box className={style.container}>
-                            {/* {images.map((image, index) => (
-                            <Box className={style.image} key={index}>
-                                {console.log(image)}  s
-                            </Box>
-                        ))} 
-                    */}
-
+                            {images.map((image, index) => (
+                                <Box className={style.image} key={index}>
+                                    <Text className={style.delete} onClick={() => removeImage(index)}>&#10006;</Text>
+                                    <img src={URL.createObjectURL(image.image)} alt="images" />
+                                </Box>
+                            ))}
                         </Box>
                     </Box>
                 </Box>

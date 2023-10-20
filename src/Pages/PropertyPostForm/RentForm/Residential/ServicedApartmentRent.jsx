@@ -524,12 +524,12 @@ const ServicedApartmentRent = () => {
 
     const handleDepositAmount = (e) => {
         setDepositAmount(NumericString(e.target.value));
-    } 
+    }
 
 
-     // ======--- image upload function   
+    // ======--- image upload function   
 
-     const selectFiles = () => {
+    const selectFiles = () => {
         fileInputRef.current.click();
     }
 
@@ -547,11 +547,11 @@ const ServicedApartmentRent = () => {
                     name: files[i].name,
                     image: files[i],
                 },])
-            } 
+            }
         }
     }
 
-     const ondragleave = (event) => {
+    const ondragleave = (event) => {
         event.preventDefault();
         setIsDraging(false);
         console.log("leave")
@@ -1577,13 +1577,12 @@ const ServicedApartmentRent = () => {
                         <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
                     </Box>
                     <Box className={style.container}>
-                        {/* {images.map((image, index) => (
+                        {images.map((image, index) => (
                             <Box className={style.image} key={index}>
-                                {console.log(image)}  s
+                                <Text className={style.delete} onClick={() => removeImage(index)}>&#10006;</Text>
+                                <img src={URL.createObjectURL(image.image)} alt="images" />
                             </Box>
-                        ))} 
-                    */}
-
+                        ))}
                     </Box>
                 </Box>
             </Box>
