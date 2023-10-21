@@ -41,20 +41,20 @@ const Listings = () => {
     <Box position={"relative"} display={"flex"} my={6}>
       {/* property Listing */}
       <Box flex={10} w={"90%"} borderRadius={10} padding={"10px 20px"} marginX={"auto"} backgroundColor={"rgba(255, 255, 255, 0)"} >
-        <Box >
-          <Heading size={"md"} textAlign={"left"} marginLeft={"40px"}> My Posted Property </Heading>
-          <Divider margin={"6px 0"} />
+        <Box>
+          <Heading size={"md"} textAlign={"left"} fontWeight={"500"} marginLeft={"40px"}> My Posted Property </Heading>
+          <Divider w={"98%"} margin={"10px auto 0 auto"} />
           {loading ? <Loader /> :
-            <Box className={style.displaygrid} backgroundColor={"white"} padding={5} borderRadius={10} >
+            <Box className={style.displaygrid} backgroundColor={"white"} padding={4} borderRadius={10} >
               {data && data?.map((e, i) => (
                 <DeleteBox key={i} myListedProperty={myListedProperty} e={e} /> 
               ))}
             </Box>
-          }
+          } 
         </Box>
       </Box>
       {/* addvertise */}
-      <Box 
+      {/* <Box 
         // zIndex={"-4"} 
         // clipPath={"polygon(50% 0, 100% 0, 100% 59%, 100% 100%, 45% 100%, 0 100%, 0 0, 56% 100%, 0 100%, 100% 100%)"} 
         flex={6}
@@ -63,7 +63,7 @@ const Listings = () => {
           position={"sticky"}
           top={"100px"}
           src={buildingimg} alt="png" />
-      </Box>
+      </Box> */}
     </Box>
   )
 }
