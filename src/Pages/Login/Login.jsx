@@ -99,14 +99,14 @@ const Login = ({ onpage }) => {
                 mobile,
                 password
             }
-            dispatch(loginuser(body));
+            dispatch(loginuser(body)); 
         }
     }
 
     useEffect(() => {
         if (data.isError) {
             toast({
-                title: `  ${data.error}`,
+                title: `${data.error}`,
                 status: 'warning',
                 duration: 4000,
                 isClosable: true
@@ -114,7 +114,7 @@ const Login = ({ onpage }) => {
         }
         if (data.success == 0) {
             toast({
-                title: 'Login Succesfull',
+                title: 'Login Succesfull', 
                 status: 'success',
                 duration: 4000,
             })
@@ -124,7 +124,7 @@ const Login = ({ onpage }) => {
             // }else{
             navigate("/");
             // }
-        }
+        } 
     }, [data]);
 
     const handleShow = ()=>{

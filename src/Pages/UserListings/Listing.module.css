@@ -1,45 +1,40 @@
 .displaygrid {
   /* display: grid;  
   grid-template-columns: repeat(3, 1fr); */
-  gap: 16px; 
-  margin: 10px 0 40px 0;  
+  gap: 16px;
+  margin: 10px 0 40px 0;
 }
 
-
-.listhead{
-  text-align: left; 
-  display: flex;   
-  gap: 20px;  
-  height: 180px;  
-  width: 100%;   
+.listhead {
+  text-align: left;
+  display: flex;
+  gap: 16px;
+  min-height: 200px;
+  width: 100%;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   /* border: 2px solid rgb(255, 255, 255) ; */
 }
 
- 
-
-.listhead>*:nth-child(1){ 
-  flex: 4; 
-  height: 180px;  
-  display: flex; 
-  align-items: center; 
-  justify-content: center;   
-  /* border: 1px solid rgba(113, 113, 113, 0.726); */
+.listhead > *:nth-child(1) {
+  flex: 6;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.listhead>*:nth-child(2){ 
-  flex: 8;  
-  padding: 10px 0; 
-  display: flex; 
-  flex-direction: column; 
-  gap: 4px; 
+.listhead > *:nth-child(2) {
+  flex: 8;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
-.listhead>*:nth-child(3){ 
-  flex: 5;    
-  display: grid; 
-
-}  
+.listhead > *:nth-child(3) {
+  flex: 4;
+  display: grid;
+}
 
 .oneline {
   -webkit-line-clamp: 1;
@@ -47,6 +42,13 @@
   overflow: hidden;
   display: -webkit-box;
 }
+
+.detailedit {
+  display: flex;
+  align-items: end;
+  gap: 16px;  
+} 
+ 
  
 
 @media screen and (min-width: 100px) and (max-width: 560px) {
@@ -62,5 +64,3 @@
     gap: 10px;
   }
 }
-
-

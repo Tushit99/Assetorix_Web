@@ -83,10 +83,11 @@ const MainRoute = () => {
         <Route path='/market_research' element={<MarketResearch />} />
         <Route path='/portfolio_planning' element={<PortfolioPlaning />} />
         <Route path='/usa_real_state' element={<UsaRealState />} /> 
-
+  
 
         <Route path='/listing' element={<Listings />} /> 
         <Route path='/listing/:productID' element={<EditingForm />} /> 
+        <Route path='/listingdetail/:id' element={<SingleProductDetailPage />} /> 
 
         {/* Property Detail Page */}  
         <Route path='/product_detail' element={<SingleProductDetailPage />} />

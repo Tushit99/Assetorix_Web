@@ -1,10 +1,9 @@
-import { Box, Button, Divider, Heading, Image, Text } from '@chakra-ui/react';
+import { Box, Divider, Heading } from '@chakra-ui/react';
 import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import style from "./Listing.module.css";
-import Loader from './Loader';
-
-import buildingimg from "./mgpng.png"
+import Loader from './Loader'; 
+// import buildingimg from "./mgpng.png" 
 import DeleteBox from './DeleteBox';
 
 const Listings = () => {
@@ -24,7 +23,7 @@ const Listings = () => {
         console.log(e.data.data);
         setdata(e.data.data);
         setLoading(false);
-      });
+      }).catch((err)=>{console.log(err)})
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -43,7 +42,7 @@ const Listings = () => {
       <Box flex={10} w={"90%"} borderRadius={10} padding={"10px 20px"} marginX={"auto"} backgroundColor={"rgba(255, 255, 255, 0)"} >
         <Box>
           <Heading size={"md"} textAlign={"left"} fontWeight={"500"} marginLeft={"40px"}> My Posted Property </Heading>
-          <Divider w={"98%"} margin={"10px auto 0 auto"} />
+          <Divider w={"98%"} margin={"10px auto 0 auto"} /> 
           {loading ? <Loader /> :
             <Box className={style.displaygrid} backgroundColor={"white"} padding={4} borderRadius={10} >
               {data && data?.map((e, i) => (

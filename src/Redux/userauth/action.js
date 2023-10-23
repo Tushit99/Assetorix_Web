@@ -28,7 +28,7 @@ export const loginuser = (param) => async (dispatch) => {
           return e.status;
         } 
         else{
-            dispatch({ type: USER_lOGIN_ERROR, payload: "Somthing went wrong" }); 
+            dispatch({ type: USER_lOGIN_ERROR, payload: "Somthing went wrong" }); J
         }
       }); 
   } catch (err) { 

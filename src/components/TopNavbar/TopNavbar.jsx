@@ -19,6 +19,8 @@ import {
     TabList,
     TabPanels,
     Checkbox,
+    Avatar,
+    AvatarBadge,
 } from "@chakra-ui/react";
 import { BiSolidUserDetail } from "react-icons/bi";
 import { IoIosArrowDown } from "react-icons/io";
@@ -178,11 +180,11 @@ const TopNavbar = () => {
                                             color="rgb(46,49,146)"
                                         />
                                     }
-                                >
+                                > 
                                     {data.user.name ? (
-                                        <span className={style.alpha}>
-                                            {data.user.name[0].toUpperCase()}
-                                        </span>
+                                        <Avatar size='sm' name={data.user.name} >
+                                            <AvatarBadge boxSize='1em' bg='green.500' />
+                                        </Avatar>
                                     ) : (
                                         <BiSolidUserDetail size={"24px"} color="rgb(46,49,146)" />
                                     )}

@@ -1,4 +1,4 @@
-import { Box, Progress } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import React from 'react' 
 import img from "./Hourglass.gif"; 
 
@@ -10,4 +10,6 @@ const Loader = () => {
   )
 }
 
-export default Loader
+export default Loader;  
+
+
