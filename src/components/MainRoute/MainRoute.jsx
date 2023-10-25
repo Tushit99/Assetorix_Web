@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Home from '../../Pages/Home/Home'
 import About from '../../Pages/About/About'
-import Singup from '../../Pages/Sign/Singup' 
+import Singup from '../../Pages/Sign/Singup'
 import Error from '../../Pages/ErrorPage/Error'
 import Login from '../../Pages/Login/Login'
 import Construction from '../../Pages/CoporateServices/ConstructionManagement/Construction'
@@ -17,12 +17,12 @@ import Contact from '../../Pages/Contact/Contact'
 import Sell from '../../Pages/Sell/Sell'
 import PurchaseTerm from '../../Pages/Footer/HelpCenter/PerchaseTerm/PurchaseTerm'
 import UserTerm from '../../Pages/Footer/HelpCenter/UserTerm/UserTerm'
-import Privacy from '../../Pages/Footer/HelpCenter/Privacy/Privacy' 
+import Privacy from '../../Pages/Footer/HelpCenter/Privacy/Privacy'
 import Disclaimer from '../../Pages/Footer/HelpCenter/Disclaimer/Disclaimer'
 import UserDetail from '../../Pages/UserDetail/UserDetail'
 import PrivateRoute from '../PrivateRoute/PrivateRoute'
 import SellForm from '../../Pages/PropertyPostForm/SellForm'
-import SingleProductDetailPage from '../../Pages/ProductDetailPage/SinglePage' 
+import SingleProductDetailPage from '../../Pages/ProductDetailPage/SinglePage'
 import ResidentialRent from '../../Pages/ProductPage/Residential/ResidentialRent'
 import ResidentialBuy from '../../Pages/ProductPage/Residential/ResidentialBuy'
 import CommercialBuy from '../../Pages/ProductPage/Commercial/CommercialBuy'
@@ -40,68 +40,88 @@ const MainRoute = () => {
         {/* home */}
         <Route path='/' element={<Home />} />
         {/* sell */}
-        <Route path='/sell' element={<Sell />} />
+        {/* <Route path='/sell' element={<Sell />} /> */}
         {/* about */}
         <Route path='/about' element={<About />} />
         {/* contact Page */}
-        <Route path='/contact' element={<Contact />} /> 
+        <Route path='/contact' element={<Contact />} />
         {/* signin Page */}
         <Route path='/signup' element={<Singup />} />
         {/* Login Page */}
-        <Route path='/login' element={<Login />} />   
+        <Route path='/login' element={<Login />} />
 
-        {/* Product Page */} 
+        {/* Product Page */}
         <Route path='/residential_rent' element={<ResidentialRent />} />
-        <Route path='/residential_buy' element={<ResidentialBuy />} /> 
-        <Route path='/commercial_rent' element={<CommercialLease />} />  
-        <Route path='/commercial_buy' element={<CommercialBuy />} /> 
+        <Route path='/residential_buy' element={<ResidentialBuy />} />
+        <Route path='/commercial_rent' element={<CommercialLease />} />
+        <Route path='/commercial_buy' element={<CommercialBuy />} />
 
-        {/* Product Page */} 
-        <Route path='/residential_rent/:id' element={<SingleProductDetailPage  />} />
-        <Route path='/residential_buy/:id' element={<SingleProductDetailPage />} /> 
-        <Route path='/commercial_rent/:id' element={<SingleProductDetailPage />} />  
-        <Route path='/commercial_buy/:id' element={<SingleProductDetailPage />} /> 
+        {/* Product Page */}
+        <Route path='/residential_rent/:id' element={<SingleProductDetailPage />} />
+        <Route path='/residential_buy/:id' element={<SingleProductDetailPage />} />
+        <Route path='/commercial_rent/:id' element={<SingleProductDetailPage />} />
+        <Route path='/commercial_buy/:id' element={<SingleProductDetailPage />} />
 
-        {/* wishlist */} 
-        <Route path='/wishlist' element={<Wishlist />} /> 
-        <Route path='/wishlist/:id' element={<SingleProductDetailPage />} />  
+        {/* wishlist */}
+        <Route path='/wishlist' element={
+          <PrivateRoute>
+            <Wishlist />
+          </PrivateRoute>
+        } />
+        <Route path='/wishlist/:id' element={<SingleProductDetailPage />} />
 
-        {/* Recently Visited */}  
+        {/* Recently Visited */}
         <Route path='/recently_visited' element={<VisitedPage />} />
         <Route path='/recently_visited/:id' element={<SingleProductDetailPage />} />
 
 
         {/* buy rent sale */}
         <Route path='/buy' element={<Buy />} />
- 
+
         {/* Website detail Pages */}
         <Route path='/Construction_Management' element={<Construction />} />
         <Route path='/Property_Marketing' element={<PropertyMarketing />} />
         <Route path='/partner' element={<Partner />} />
-        <Route path='/acquisitions_and_dispositions' element={<Acquisition />} />  
+        <Route path='/acquisitions_and_dispositions' element={<Acquisition />} />
         {/* <Route path='/consulting' element={<ConsultingPage />} />  */}
         <Route path='/market_research' element={<MarketResearch />} />
         <Route path='/portfolio_planning' element={<PortfolioPlaning />} />
-        <Route path='/usa_real_state' element={<UsaRealState />} /> 
-  
+        <Route path='/usa_real_state' element={<UsaRealState />} />
 
-        <Route path='/listing' element={<Listings />} /> 
-        <Route path='/listing/:productID' element={<EditingForm />} /> 
-        <Route path='/listingdetail/:id' element={<SingleProductDetailPage />} /> 
 
-        {/* Property Detail Page */}  
-        <Route path='/product_detail' element={<SingleProductDetailPage />} />
+        <Route path='/listing' element={
+          <PrivateRoute>
+            <Listings />
+          </PrivateRoute>
+        } />
+        <Route path='/listing/:productID' element={
+          <PrivateRoute >
+            <EditingForm />
+          </PrivateRoute>
+        } />
+        <Route path='/listingdetail/:id' element={
+          <PrivateRoute>
+            <SingleProductDetailPage />
+          </PrivateRoute>
+        } />
+
+        {/* Property Detail Page */}
+        <Route path='/product_detail' element={
+          <PrivateRoute>
+            <SingleProductDetailPage />
+          </PrivateRoute> 
+        } />
 
         {/* footer ==> Help Center  */}
         <Route path='/Purchase_term_Condition' element={<PurchaseTerm />} />
         <Route path='/user_term_condition' element={<UserTerm />} />
-        <Route path='/privacy' element={<Privacy />} /> 
-        <Route path='/disclaimer' element={<Disclaimer />} />  
+        <Route path='/privacy' element={<Privacy />} />
+        <Route path='/disclaimer' element={<Disclaimer />} />
 
         {/* after login Details Route */}
         <Route path='/profile' element={<UserDetail />} />
         <Route path='/post' element={
-          <PrivateRoute > 
+          <PrivateRoute >
             <SellForm />
           </PrivateRoute>
         } />

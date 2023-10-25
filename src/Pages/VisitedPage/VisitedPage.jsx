@@ -21,7 +21,7 @@ const VisitedPage = () => {
     let detail = JSON.parse(localStorage.getItem("visited")) || [];
 
     if (detail.length) {
-      handleVisitedData(detail)
+      handleVisitedData(detail); 
     }
 
   }, [])
