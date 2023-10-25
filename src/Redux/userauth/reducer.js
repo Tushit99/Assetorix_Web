@@ -1,4 +1,5 @@
-import { 
+import {
+  USER_AVATAR_UPDATE,
   USER_EMAIL_DATA_UPDATE,
   USER_LOGOUT,
   USER_NAME_DATA_UPDATE,
@@ -18,9 +19,9 @@ const initialState = {
   user: {},
   success: 4,
   token: "",
-  name: "", 
-  productedit: [] 
-}; 
+  name: "",
+  productedit: [],
+};
 
 export const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
@@ -68,7 +69,7 @@ export const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         isLoading: false,
-        token: "", 
+        token: "",
         user: [],
         error: "",
         success: 4,
@@ -80,23 +81,33 @@ export const reducer = (state = initialState, { type, payload }) => {
         isLoading: false,
         token: payload.token,
         user: payload,
-        isError: false, 
+        isError: false,
         success: 0,
         name: payload.name,
       };
-    case USER_NAME_DATA_UPDATE:
+    case USER_AVATAR_UPDATE:
       return {
         ...state,
-        isLoading: false, 
-        user: {...state.user,name:payload}, 
+        isLoading: false,
+        user: { ...state.user, avatar: payload },
         isError: false,
         success: 0,
         name: payload,
       };
-      case USER_EMAIL_DATA_UPDATE: return {
-        ...state, 
-        user: {...state.user, email: payload} 
-      }
+    case USER_NAME_DATA_UPDATE:
+      return {
+        ...state,
+        isLoading: false,
+        user: { ...state.user, name: payload },
+        isError: false,
+        success: 0,
+        name: payload,
+      };
+    case USER_EMAIL_DATA_UPDATE:
+      return {
+        ...state,
+        user: { ...state.user, email: payload },
+      };
     default:
       return state;
   }

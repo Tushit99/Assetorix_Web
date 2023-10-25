@@ -15,7 +15,7 @@ const PrivateRoute = ({ children }) => {
     },[]);  
 
     console.log(user.length); 
-
+ 
     if (success == 0 && isLoading==false){ 
         return children; 
     } else if(isLoading==false && success==4) {   
@@ -27,8 +27,8 @@ const PrivateRoute = ({ children }) => {
             position: 'top-left', 
           })
         return <Navigate to="/login" onpage={page} /> 
-    } 
-  
-  }
+    }   
+  }   
 
 export default PrivateRoute; 
+

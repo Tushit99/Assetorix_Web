@@ -1,5 +1,6 @@
 import axios from "axios"; 
 import { 
+  USER_AVATAR_UPDATE,
   USER_EMAIL_DATA_UPDATE,
   USER_LOGOUT,
   USER_NAME_DATA_UPDATE,
@@ -68,12 +69,13 @@ export const userPreLog = (param) => async (dispatch) => {
   // console.log("param",param);
   try {
     await axios.get(`${process.env.REACT_APP_URL}/user/`, {headers: param}).then((e) => {
-        // console.log("power23",e.data); 
-        let token = localStorage.getItem("AstToken"); 
-        localStorage.setItem("AstUser",e.data.name); 
-        let id = localStorage.getItem("usrId"); 
-        dispatch({ type: USER_PREE_LOGIN, payload: { ...e.data, token, id } });
-      });
+        // console.log("power23",e.data);  
+        let token = localStorage.getItem("AstToken");  
+        localStorage.setItem("AstUser",e.data.name);  
+        let id = localStorage.getItem("usrId");  
+        console.log(e.data);  
+        dispatch({ type: USER_PREE_LOGIN, payload: { ...e.data, token, id } });   
+      }); 
   } catch (err) {
     console.log(err);
   } 
@@ -93,14 +95,17 @@ export const handleChanges = (headers, body) => async (dispatch) => {
   } catch (err) {
     console.error(err);
   }
-};
+}; 
 
 export const handleEmailDataChange = (email) => async (dispatch) => { 
   console.log(email); 
   dispatch({type: USER_EMAIL_DATA_UPDATE, payload: email}); 
-};
+}; 
 
- 
+
+export const handleAddavatar = (images) => async (dispatch) => { 
+  dispatch({type: USER_AVATAR_UPDATE, payload: images}); 
+}; 
 
 
 export const userlogout = () => (dispatch) => {

@@ -37,11 +37,27 @@ const Navebar = () => {
     const [resRentArr, setresRentArr] = useState([]);
     const [comBuyArr, setcomBuyArr] = useState([]);
     const [comRentArr, setcomRentArr] = useState([]);
-    // const navigate = useNavigate(); 
+    const [isOnline, setIsOnline] = useState(navigator.onLine);
+    // const navigate = useNavigate();   
 
     const homeback = () => {
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     }
+
+    // Is online or not // it provide status of being online 
+    useEffect(() => {
+        const handleOnlineStatusChange = () => {
+            setIsOnline(navigator.onLine);
+        };
+
+        window.addEventListener('online', handleOnlineStatusChange);
+        window.addEventListener('offline', handleOnlineStatusChange);
+
+        return () => {
+            window.removeEventListener('online', handleOnlineStatusChange);
+            window.removeEventListener('offline', handleOnlineStatusChange);
+        };
+    }, []);
 
     const handleresbuy = (value) => {
         setresBuyArr((prev) => {
@@ -133,7 +149,7 @@ const Navebar = () => {
         localStorage.setItem("comRent", JSON.stringify([]));
         localStorage.setItem("comRent", JSON.stringify([]));
 
-    }, []);
+    }, [data]);
 
     const handlePageSell = () => {
         dispatch(changeLookingFor("sell"));
@@ -165,8 +181,8 @@ const Navebar = () => {
                     <div className={scroll > 20 ? style.country2 : style.country}>
                         <select
                             onChange={(e) => handlecountry(e.target.value)}
-                            value={country}
-                            style={{ border: "0px", outline: "0px" }}
+                            value={country} 
+                            style={{ border: "0px", outline: "0px", cursor:"pointer" }}
                         >
                             <option value="india">India</option>
                             <option value="usa">USA</option>
@@ -191,11 +207,11 @@ const Navebar = () => {
                                 }
                             >
                                 {data.user.name ? (
-                                    <Avatar size='sm' name={data.user.name} >
-                                        <AvatarBadge boxSize='1em' border={"1px solid white"} bg='green.500' />
+                                    <Avatar size='sm' name={data.user.name} src={data.user.avatar} bg={"rgb(46,49,146)"} color={"white"} >
+                                        {isOnline ? <AvatarBadge boxSize='1em' border={"1px solid white"} bg='green.500' /> : <AvatarBadge boxSize='1em' border={"1px solid white"} bg='red' />} 
                                     </Avatar>
                                 ) : (
-                                    <BiSolidUserDetail size={"24px"} color="rgb(46,49,146)" /> 
+                                    <BiSolidUserDetail size={"24px"} color="rgb(46,49,146)" />
                                 )}
                             </Button>
                         </PopoverTrigger>

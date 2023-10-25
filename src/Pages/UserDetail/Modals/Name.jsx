@@ -4,7 +4,7 @@ import style from "./Allmodal.module.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { handleChanges } from '../../../Redux/userauth/action';
 
-const Name = () => {
+const NameChanger = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const data = useSelector((store) => store.userreducer);
     const [name, setname] = useState("");
@@ -54,4 +54,4 @@ const Name = () => {
     )
 }
 
-export default Name 
+export default NameChanger 

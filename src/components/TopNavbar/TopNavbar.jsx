@@ -121,7 +121,7 @@ const TopNavbar = () => {
             setCountry(storedVal);
         }
 
-    }, []);
+    }, [data]);
 
     const handlePageRent = () => {
         dispatch(changeLookingFor("Rent/Lease"));
@@ -157,7 +157,7 @@ const TopNavbar = () => {
                             <select
                                 onChange={(e) => handlecountry(e.target.value)}
                                 value={country}
-                                style={{ border: "0px", outline: "0px", borderRadius: "0px" }}
+                                style={{ border: "0px", outline: "0px", borderRadius: "0px", cursor:"pointer" }}
                             >
                                 <option value="india">India</option>
                                 <option value="usa">USA</option>
@@ -182,7 +182,7 @@ const TopNavbar = () => {
                                     }
                                 > 
                                     {data.user.name ? (
-                                        <Avatar size='sm' name={data.user.name} >
+                                        <Avatar size='sm' name={data.user.name} src={data.user.avatar} bg={"rgb(46,49,146)"} color={"white"} >
                                             <AvatarBadge boxSize='1em' bg='green.500' />
                                         </Avatar>
                                     ) : (

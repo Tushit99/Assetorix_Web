@@ -226,7 +226,7 @@ const GuestBanquetRent = () => {
                 formdata.append("image", image.image);
             });
 
-            let bodyContent = formdata;
+            let bodyContent = formdata; 
 
             let reqOptions = {
                 url: `${process.env.REACT_APP_URL}/upload/${productID}`,

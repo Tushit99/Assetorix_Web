@@ -167,18 +167,18 @@ const EmailChanger = () => {
     useState(() => {
         if (data.user.email) {
             setNewEmail(data.user.email);
-        }
-    }, []);
+        } 
+    }, []);  
 
     return (
         <Box>
             <button onClick={() => setShowBox(true)} className={style.edit_btn}>Edit</button>
             <Box position={"fixed"} display={showbox == true ? "flex" : "none"} alignItems={"center"} justifyContent={"center"} zIndex={55} backgroundColor={"rgba(232, 232, 232, 0.612)"} top={0} left={0} right={0} bottom={0} >
                 <Box backgroundColor={"white"} padding={"50px 30px 30px 30px"} position={"relative"} boxShadow={"rgba(0, 0, 0, 0.24) 0px 3px 8px"} borderRadius={10}>
-                    <Box className={style.crosebutton}>
-                        <button onClick={() => setShowBox(false)} >
-                            <CloseIcon color={"blackAlpha.600"} />
-                        </button>
+                    <Box className={style.crosebutton}> 
+                        <button onClick={() => setShowBox(false)} >  
+                            <CloseIcon color={"blackAlpha.600"} /> 
+                        </button> 
                     </Box>
                     <Box w={"300px"} display={"grid"} gap={4}>
                         <Input type="text" value={newemail} onChange={handleEmailChange} w={"100%"} placeholder={"Enter New Email"} />

@@ -11,6 +11,9 @@ export const USER_NAME_DATA_UPDATE = "user/data/name/update";
 export const USER_EMAIL_DATA_UPDATE = "user/data/email/update"; 
 
 
+export const USER_AVATAR_UPDATE = "user/data/add/image"; 
+
+
 export const USER_DELETED_DELETE = "user/data/delete";  
 
 export const USER_PREE_LOGIN = "user/prelogin"; 
