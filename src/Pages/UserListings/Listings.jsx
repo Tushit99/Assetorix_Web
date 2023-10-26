@@ -44,11 +44,11 @@ const Listings = () => {
           <Heading size={"md"} textAlign={"left"} fontWeight={"500"} marginLeft={"40px"}> My Posted Property </Heading>
           <Divider w={"98%"} margin={"10px auto 0 auto"} /> 
           {loading ? <Loader /> :
-            <Box className={style.displaygrid} backgroundColor={"white"} padding={4} borderRadius={10} >
+            <Box className={style.displaygrid} backgroundColor={"white"} bord padding={4} borderRadius={10} >
               {data && data?.map((e, i) => (
                 <DeleteBox key={i} myListedProperty={myListedProperty} e={e} /> 
               ))}
-            </Box>
+            </Box> 
           } 
         </Box>
       </Box>

@@ -19,6 +19,7 @@ import { CleanInputText, IndianDateConverter, NumericString, WordandNumber } fro
 import { InputGroup } from "@chakra-ui/react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 const FlatApartment = () => {
@@ -80,6 +81,9 @@ const FlatApartment = () => {
   const [agreementDuration, setagreementDuration] = useState("");
   const [noticePeriod, setNoticePeriod] = useState("");
   const [availableFrom, setavailableFrom] = useState("");
+  const [isClicked, setIsClicked] = useState(false);
+  const [clickCount, setClickCount] = useState(0);
+  const navigate = useNavigate();
   // state for drop box images
   const [images, setImages] = useState([]);
   const [isDraging, setIsDraging] = useState(false);
@@ -87,6 +91,8 @@ const FlatApartment = () => {
 
   const handleSubmitData = async (e) => {
     e.preventDefault();
+    setClickCount((prev) => prev + 12);
+    setIsClicked(true);
     let obj = {
       lookingFor: "Rent",
       propertyGroup: "Residential",
@@ -319,12 +325,16 @@ const FlatApartment = () => {
         data: bodyContent,
       }
 
-      let response = await axios.request(reqOptions)
+      await axios.request(reqOptions).then((e) => {
+        setIsClicked(false);
+        navigate("/listing");
+      })
       console.log(response.data);
     } catch (error) {
-
+      console.log(error);
+      setIsClicked(false);
     }
-
+    setIsClicked(false);
   };
 
   const handlepinfetch = (e) => {
@@ -532,7 +542,7 @@ const FlatApartment = () => {
     const newImages = [...images];
     newImages.splice(index, 1);
     setImages(newImages);
-  }; 
+  };
 
   const onFileSelect = (e) => {
     let files = e.target.files;
@@ -587,6 +597,10 @@ const FlatApartment = () => {
       }
     }
     console.log("droped");
+  }
+
+  if (isClicked) {
+    <Loading />
   }
 
   return (
@@ -2331,6 +2345,7 @@ const FlatApartment = () => {
       <Button
         margin={"20px 0"}
         type="submit"
+        disabled={clickCount<=0 ? true : false }  
         w={"100%"}
         backgroundColor={"rgb(46,49,146)"}
         _hover={{ backgroundColor: "rgb(74, 79, 223)" }}

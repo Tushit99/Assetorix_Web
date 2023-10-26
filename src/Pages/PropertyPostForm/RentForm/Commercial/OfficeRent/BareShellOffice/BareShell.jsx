@@ -24,6 +24,8 @@ import { AddIcon, ChevronDownIcon, MinusIcon } from "@chakra-ui/icons";
 import axios from "axios";
 import { CleanInputText, NumericString } from "../../../../code";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
+import Loading from "../../../../Loading";
 
 
 
@@ -89,9 +91,12 @@ const BareShell = () => {
     const [pincollection, setPinCollection] = useState([]);
     const [maintenancePrice, setMaintenancePrice] = useState("");
     const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
-    const [zoneType, setZoneType] = useState("");
-    // state for drop box images
-    const [images, setImages] = useState([]);
+    const [zoneType, setZoneType] = useState(""); 
+    const [clickCount, setClickCount] = useState(0); 
+    const [isClicked, setIsClicked] = useState(false);
+    const navigate = useNavigate();  
+    // state for drop box images 
+    const [images, setImages] = useState([]); 
     const [isDraging, setIsDraging] = useState(false);
     const fileInputRef = useRef(null);
     // please don'nt change any function without any prior knowledge   
@@ -99,7 +104,9 @@ const BareShell = () => {
 
 
     const handleSubmitData = async (e) => {
-        e.preventDefault();
+        e.preventDefault(); 
+        setClickCount((prev)=>prev+10)
+        setIsClicked(true); 
         let obj = {
             lookingFor: "Rent",
             propertyGroup: "Commercial",
@@ -300,12 +307,16 @@ const BareShell = () => {
                 data: bodyContent,
             }
 
-            let response = await axios.request(reqOptions)
+            let response = await axios.request(reqOptions).then((e)=>{
+                setIsClicked(false);  
+                navigate("/listing");  
+            }) 
             console.log(response.data);
-        } catch (error) {
-
+        } catch (error) { 
+            console.log(error); 
+            setIsClicked(false);  
         }
-
+        setIsClicked(false);  
     };
 
     const handlepinfetch = (e) => {
@@ -532,6 +543,9 @@ const BareShell = () => {
         console.log("droped");
     }
 
+    if(isClicked){
+        <Loading />
+    } 
 
     return (
         <form onSubmit={handleSubmitData}>
@@ -1920,7 +1934,8 @@ const BareShell = () => {
             <Button
                 margin={"20px 0"}
                 type="submit"
-                w={"100%"}
+                w={"100%"} 
+                disabled={clickCount<=0 ? true : false }   
                 backgroundColor={"rgb(46,49,146)"}
                 _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                 color={"#ffffff"}

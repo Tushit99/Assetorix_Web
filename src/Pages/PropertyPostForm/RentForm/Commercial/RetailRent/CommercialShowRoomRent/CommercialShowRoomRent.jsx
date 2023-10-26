@@ -21,6 +21,8 @@ import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { CleanInputText, IndianDateConverter, NumericString } from "../../../../code";
 import axios from "axios";
+import Loading from "../../../../Loading";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -76,8 +78,11 @@ const CommercialShowRoomRent = () => {
   const [securityDeposit, setSecurityDeposit] = useState("");
   const [depositAmount, setDepositAmount] = useState("");
   const [availableFrom, setavailableFrom] = useState("");
+  const [clickCount, setClickCount] = useState(0); 
+  const [isClicked, setIsClicked] = useState(false);   
   // state for drop box images
   const [images, setImages] = useState([]);
+  const navigate = useNavigate();  
   const [isDraging, setIsDraging] = useState(false);
   const fileInputRef = useRef(null);
 
@@ -296,12 +301,16 @@ const CommercialShowRoomRent = () => {
         data: bodyContent,
       }
 
-      let response = await axios.request(reqOptions)
+      let response = await axios.request(reqOptions).then((e)=>{
+        setIsClicked(false);   
+        navigate("/listing"); 
+      })
       console.log(response.data);
     } catch (error) {
-
+      console.log(error); 
+      setIsClicked(false);   
     }
-
+    setIsClicked(false);  
   };
 
   // pincode of 3 letter
@@ -588,6 +597,9 @@ const CommercialShowRoomRent = () => {
     console.log("droped");
   }
 
+  if(isClicked){
+    <Loading />
+} 
 
   return (
     <div>
@@ -1864,7 +1876,8 @@ const CommercialShowRoomRent = () => {
           <Button
             margin={"20px 0"}
             type="submit"
-            w={"100%"}
+            w={"100%"} 
+            disabled={clickCount<=0 ? true : false }    
             backgroundColor={"rgb(46,49,146)"}
             _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
             color={"#ffffff"}

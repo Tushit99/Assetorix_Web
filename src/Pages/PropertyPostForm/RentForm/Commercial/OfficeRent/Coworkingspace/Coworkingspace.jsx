@@ -24,6 +24,8 @@ import { AddIcon, ChevronDownIcon, MinusIcon } from "@chakra-ui/icons";
 import axios from "axios";
 import { CleanInputText, NumericString } from "../../../../code";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
+import Loading from "../../../../Loading";
 
 
 
@@ -89,7 +91,10 @@ const Coworkingspace = () => {
     const [pincollection, setPinCollection] = useState([]);
     const [maintenancePrice, setMaintenancePrice] = useState("");
     const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
-    const [zoneType, setZoneType] = useState("");
+    const [zoneType, setZoneType] = useState("");  
+    const [clickCount, setClickCount] = useState(0); 
+    const [isClicked, setIsClicked] = useState(false);  
+    const navigate = useNavigate(); 
     // state for drop box images
     const [images, setImages] = useState([]);
     const [isDraging, setIsDraging] = useState(false);
@@ -100,6 +105,8 @@ const Coworkingspace = () => {
 
     const handleSubmitData = async (e) => {
         e.preventDefault();
+        setClickCount((prev)=>prev+10)
+        setIsClicked(true);  
         let obj = {
             lookingFor: "Rent",
             propertyGroup: "Commercial",
@@ -302,12 +309,16 @@ const Coworkingspace = () => {
                 data: bodyContent,
             }
 
-            let response = await axios.request(reqOptions)
+            let response = await axios.request(reqOptions).then((e)=>{
+                navigate("/listing"); 
+                setIsClicked(false);   
+            }) 
             console.log(response.data);
         } catch (error) {
-
+            console.log(error); 
+            setIsClicked(false);   
         }
-
+        setIsClicked(false);  
     };
 
 
@@ -533,6 +544,10 @@ const Coworkingspace = () => {
             }
         }
         console.log("droped");
+    }  
+
+    if(isClicked){
+        <Loading />
     }
 
     return (
@@ -1923,6 +1938,7 @@ const Coworkingspace = () => {
             <Button
                 margin={"20px 0"}
                 type="submit"
+                disabled={clickCount<=0 ? true : false }   
                 w={"100%"}
                 backgroundColor={"rgb(46,49,146)"}
                 _hover={{ backgroundColor: "rgb(74, 79, 223)" }}

@@ -24,6 +24,8 @@ import { AddIcon, ChevronDownIcon, MinusIcon } from "@chakra-ui/icons";
 import axios from "axios";
 import { CleanInputText, NumericString } from "../../../../code";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
+import Loading from "../../../../Loading";
 
 
 const ReadyMove = () => {
@@ -92,7 +94,10 @@ const ReadyMove = () => {
     const [zoneType, setZoneType] = useState("");
     const [rentIncreasePercent, setRentIncreasePercent] = useState("");
     const [fireNocCertificate, setFireNocCertificate] = useState("");
-    // state for drop box images
+    const [clickCount, setClickCount] = useState(0);
+    const [isClicked, setIsClicked] = useState(false);
+    const navigate = useNavigate();
+    // state for drop box images 
     const [images, setImages] = useState([]);
     const [isDraging, setIsDraging] = useState(false);
     const fileInputRef = useRef(null);
@@ -100,6 +105,8 @@ const ReadyMove = () => {
 
     const handleSubmitData = async (e) => {
         e.preventDefault();
+        setClickCount((prev) => prev + 10)
+        setIsClicked(true);
         let obj = {
             lookingFor: "Rent",
             propertyGroup: "Commercial",
@@ -264,6 +271,7 @@ const ReadyMove = () => {
                             status: "success",
                             duration: 2000,
                         });
+                        navigate("/listing");
                         submitImage(e.data.id);
                     });
             } catch (error) {
@@ -300,7 +308,7 @@ const ReadyMove = () => {
 
             let formdata = new FormData();
             images.forEach((image) => {
-                formdata.append("image", image.image);
+                formdata.append("image", image.image); 
             });
 
             let bodyContent = formdata;
@@ -312,12 +320,15 @@ const ReadyMove = () => {
                 data: bodyContent,
             }
 
-            let response = await axios.request(reqOptions)
-            console.log(response.data);
+            let response = await axios.request(reqOptions).then((e) => {
+                setIsClicked(false);
+            })
+            console.log(response.data);  
         } catch (error) {
-
+            console.log(error);
+            setIsClicked(false);
         }
-
+        setIsClicked(false);
     };
 
     const handlepinfetch = (e) => {
@@ -476,7 +487,7 @@ const ReadyMove = () => {
         const newImages = [...images];
         newImages.splice(index, 1);
         setImages(newImages);
-      };
+    };
 
     const onFileSelect = (e) => {
         let files = e.target.files;
@@ -532,6 +543,10 @@ const ReadyMove = () => {
         }
         console.log("droped");
     }
+
+
+
+
 
     return (
         <form onSubmit={handleSubmitData}>
@@ -665,7 +680,7 @@ const ReadyMove = () => {
                             value={plotArea}
                             onChange={(e) => {
                                 areaCalucation();
-                                setPlotArea(e.target.value);
+                                setPlotArea(NumericString(e.target.value));
                             }}
                             required
                         />
@@ -1419,7 +1434,7 @@ const ReadyMove = () => {
                             Additional Rent Detail (Optional)
                         </Heading>
                         <InputGroup w={"300px"} margin={"10px 0"}>
-                            <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
+                            <Input w={"60%"} type='text' maxLength={9} onChange={(e) => setMaintenancePrice(NumericString(e.target.value))} value={maintenancePrice} placeholder={"Maintenance Price"} />
                             <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
                                 <option value="Monthly">Monthly</option>
                                 <option value="Yearly">Yearly</option>
@@ -1452,7 +1467,7 @@ const ReadyMove = () => {
                         <button value={""} className={securityDeposit == "" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> None </button>
                     </Box>
                     <Box display={securityDeposit == "" ? "none" : "block"}>
-                        <Input type="text" w={300} value={depositAmount} onChange={handleDepositAmount} placeholder={`${securityDeposit == "Fixed" ? "Deposit Value" : ""} ${securityDeposit == "Multiple of Rent" ? "No. of months (Max 30)" : ""}`} />
+                        <Input type="text" w={300} maxLength={8} value={depositAmount} onChange={handleDepositAmount} placeholder={`${securityDeposit == "Fixed" ? "Deposit Value" : ""} ${securityDeposit == "Multiple of Rent" ? "No. of months (Max 30)" : ""}`} />
                     </Box>
                 </Box>
 
@@ -1467,7 +1482,7 @@ const ReadyMove = () => {
                     >
                         Lock - in Period
                     </Heading>
-                    <Input type="text" value={lockPeriod} onChange={(e) => setlockPeriod(e.target.value)} variant={"flushed"} />
+                    <Input type="text" value={lockPeriod} maxLength={2} onChange={(e) => setlockPeriod(NumericString(e.target.value))} variant={"flushed"} />
                 </Box>
 
                 {/* Yearly rent is expected to increase by */}
@@ -1475,7 +1490,7 @@ const ReadyMove = () => {
                     <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
                         Yearly rent is expected to increase by
                     </Heading>
-                    <Input type="text" placeholder="Percentage (%) of increase in rent" onChange={(e) => setRentIncreasePercent(e.target.value)} value={rentIncreasePercent} />
+                    <Input type="text" maxLength={2} placeholder="Percentage (%) of increase in rent" onChange={(e) => setRentIncreasePercent(NumericString(e.target.value))} value={rentIncreasePercent} />
                 </Box>
 
                 {/* Is your office fire NOC Certified */}
@@ -1884,11 +1899,13 @@ const ReadyMove = () => {
                 *Please provide correct information, otherwise your listing might get
                 blocked
             </Heading>
+            {isClicked && <Loading />}
             {/* form submit button */}
             <Button
                 margin={"20px 0"}
                 type="submit"
                 w={"100%"}
+                disabled={clickCount <= 0 ? true : false}
                 backgroundColor={"rgb(46,49,146)"}
                 _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                 color={"#ffffff"}

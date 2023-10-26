@@ -21,6 +21,8 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import style from "../../RentComercial.module.css";
 import { CleanInputText, NumericString } from "../../../../code";
 import { ChevronDownIcon } from "@chakra-ui/icons";
+import Loading from "../../../../Loading";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -66,6 +68,9 @@ const IndustrialLand = () => {
     const [ConstructionOnProperty, setConstructionOnProperty] = useState("");
     const [expectedByYear, setExpectedByYear] = useState("");
     const [authorisedBy, setAuthorisedBy] = useState([]);
+    const [clickCount, setClickCount] = useState(0);
+    const [isClicked, setIsClicked] = useState(false);
+    const navigate = useNavigate(); 
     // state for drop box images
     const [images, setImages] = useState([]);
     const [isDraging, setIsDraging] = useState(false);
@@ -86,6 +91,8 @@ const IndustrialLand = () => {
 
     const handleSubmitData = async (e) => {
         e.preventDefault();
+        setClickCount((prev) => prev + 10)
+        setIsClicked(true);
         let obj = {
             lookingFor: "Rent",
             propertyGroup: "Commercial",
@@ -248,12 +255,16 @@ const IndustrialLand = () => {
                 data: bodyContent,
             }
 
-            let response = await axios.request(reqOptions)
+            let response = await axios.request(reqOptions).then((e) => {
+                setIsClicked(false);   
+                navigate("/listing");
+            })
             console.log(response.data);
         } catch (error) {
-
+            console.log(error);
+            setIsClicked(false);   
         }
-
+        setIsClicked(false);    
     };
 
     const handlepinfetch = (e) => {
@@ -494,8 +505,11 @@ const IndustrialLand = () => {
             }
         }
         console.log("droped");
-    }
-
+    } 
+    
+    if(isClicked){
+        <Loading />
+    } 
 
     return (
         <Box className="perfectwidth">
@@ -1389,6 +1403,7 @@ const IndustrialLand = () => {
                     margin={"20px 0"}
                     type="submit"
                     w={"100%"}
+                    disabled={clickCount<=0 ? true : false }    
                     backgroundColor={"rgb(46,49,146)"}
                     _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                     color={"#ffffff"}

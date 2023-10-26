@@ -20,6 +20,7 @@ import style from "../RentForm.module.css";
 import { CleanInputText, IndianDateConverter, NumericString, WordandNumber } from "../../code";
 import { InputGroup } from "@chakra-ui/react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -79,7 +80,11 @@ const FarmhouseRent = () => {
     const [depositAmount, setDepositAmount] = useState("");
     const [agreementDuration, setagreementDuration] = useState("");
     const [noticePeriod, setNoticePeriod] = useState("");
-    const [availableFrom, setavailableFrom] = useState("");
+    const [availableFrom, setavailableFrom] = useState(""); 
+    const [isClicked, setIsClicked] = useState(false); 
+    const [clickCount, setClickCount] = useState(0);  
+    const navigate = useNavigate(); 
+    
     // state for drop box images
     const [images, setImages] = useState([]);
     const [isDraging, setIsDraging] = useState(false);
@@ -87,6 +92,8 @@ const FarmhouseRent = () => {
 
     const handleSubmitData = async (e) => {
         e.preventDefault();
+        setClickCount((prev)=>prev+12); 
+        setIsClicked(true);
         let obj = {
             lookingFor: "Rent",
             propertyGroup: "Residential",
@@ -314,12 +321,16 @@ const FarmhouseRent = () => {
                 data: bodyContent,
             }
 
-            let response = await axios.request(reqOptions)
+            let response = await axios.request(reqOptions).then((e)=>{
+                setIsClicked(false);  
+                navigate("/listing"); 
+            })
             console.log(response.data);
         } catch (error) {
-
+            console.log(error);
+            setIsClicked(false);
         }
-
+        setIsClicked(false); 
     };
 
     const handlepinfetch = (e) => {
@@ -576,7 +587,11 @@ const FarmhouseRent = () => {
                 }]);
             }
         }
-        console.log("droped");
+        console.log("droped"); 
+    } 
+    
+    if(isClicked){
+        <Loading />
     }
 
     return (
@@ -2256,6 +2271,7 @@ const FarmhouseRent = () => {
                 margin={"20px 0"}
                 type="submit"
                 w={"100%"}
+                disabled={clickCount<=0 ? true : false }  
                 backgroundColor={"rgb(46,49,146)"}
                 _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                 color={"#ffffff"}

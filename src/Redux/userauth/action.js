@@ -31,7 +31,7 @@ export const loginuser = (param) => async (dispatch) => {
         else{
             dispatch({ type: USER_lOGIN_ERROR, payload: "Somthing went wrong" }); 
         }
-      }); 
+      });  
   } catch (err) { 
     console.log("som wrg", err);
     dispatch({ type: USER_lOGIN_ERROR, payload: err.response.data.msg });

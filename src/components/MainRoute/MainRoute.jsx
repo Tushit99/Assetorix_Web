@@ -31,6 +31,7 @@ import Wishlist from '../../Pages/Wishlist/Wishlist'
 import VisitedPage from '../../Pages/VisitedPage/VisitedPage'
 import Listings from '../../Pages/UserListings/Listings'
 import EditingForm from '../../Pages/UserListings/EditingForm'
+import Loading from '../../Pages/PropertyPostForm/Loading'
 // import ConsultingPage from '../../Pages/CoporateServices/Consulting/consulting'
 
 const MainRoute = () => {
@@ -124,9 +125,9 @@ const MainRoute = () => {
           <PrivateRoute >
             <SellForm />
           </PrivateRoute>
-        } />
+        } /> 
 
-        <Route path='*' element={<Error />} />
+        <Route path='*' element={<Error />} /> 
 
       </Routes>
     </div>

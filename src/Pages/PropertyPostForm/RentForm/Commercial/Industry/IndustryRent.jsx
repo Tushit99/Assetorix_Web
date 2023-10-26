@@ -17,12 +17,9 @@ const IndustryRent = () => {
                     <button value={"Factory"} className={industry == "Factory" ? style.setbtn : style.btn} onClick={(e) => setindustry(e.target.value)} > Factory </button>
                     <button value={"Manufacturing"} className={industry == "Manufacturing" ? style.setbtn : style.btn} onClick={(e) => setindustry(e.target.value)} > Manufacturing </button>
                 </Box>
-            </Box>
-
-            {industry == "Factory" && <FactoryRent />}
-
-            {industry == "Manufacturing" && <ManufactureRent />}
-
+            </Box>  
+            {industry == "Factory" && <FactoryRent />}  
+            {industry == "Manufacturing" && <ManufactureRent />}  
         </Box>
     )
 }

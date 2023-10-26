@@ -20,6 +20,7 @@ import style from "../RentForm.module.css";
 import { CleanInputText, NumericString, WordandNumber } from "../../code";
 import { InputGroup } from "@chakra-ui/react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -83,14 +84,19 @@ const ServicedApartmentRent = () => {
     const [noticePeriod, setNoticePeriod] = useState("");
     const [availableFrom, setavailableFrom] = useState("");
     const [expectedRentel, setExpectedRentel] = useState("");
-    const [annualDuesPayble, setAnnualDuesPayble] = useState("");
+    const [annualDuesPayble, setAnnualDuesPayble] = useState(""); 
+    const [isClicked, setIsClicked] = useState(false); 
+    const [clickCount, setClickCount] = useState(0);  
+    const navigate = useNavigate(); 
     // state for drop box images
     const [images, setImages] = useState([]);
     const [isDraging, setIsDraging] = useState(false);
     const fileInputRef = useRef(null);
 
     const handleSubmitData = async (e) => {
-        e.preventDefault();
+        e.preventDefault(); 
+        setClickCount((prev)=>prev+12); 
+        setIsClicked(true);
         let obj = {
             lookingFor: "Rent",
             propertyGroup: "Residential",
@@ -324,12 +330,16 @@ const ServicedApartmentRent = () => {
                 data: bodyContent,
             }
 
-            let response = await axios.request(reqOptions)
-            console.log(response.data);
-        } catch (error) {
-
-        }
-
+            await axios.request(reqOptions).then((e)=>{
+                setIsClicked(false);  
+                navigate("/listing");  
+              })
+              console.log(response.data);
+            } catch (error) {
+              console.log(error);
+              setIsClicked(false);
+            }
+            setIsClicked(false);   
     };
 
     const handlepinfetch = (e) => {
@@ -594,6 +604,9 @@ const ServicedApartmentRent = () => {
         console.log("droped");
     }
 
+    if(isClicked){
+        <Loading /> 
+    } 
 
     return (
         <form onSubmit={handleSubmitData}>
@@ -2340,7 +2353,8 @@ const ServicedApartmentRent = () => {
             <Button
                 margin={"20px 0"}
                 type="submit"
-                w={"100%"}
+                w={"100%"} 
+                disabled={clickCount<=0 ? true : false }   
                 backgroundColor={"rgb(46,49,146)"}
                 _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                 color={"#ffffff"}

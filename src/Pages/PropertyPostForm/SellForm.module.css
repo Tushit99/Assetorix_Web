@@ -38,4 +38,116 @@
   color: rgb(15, 66, 137);
   padding: 4px 10px;
   border: 1px solid rgb(222, 222, 255);
+} 
+
+
+/* drag and drop box */
+.card {
+  padding: 10px;
+  box-shadow: 0 0 5px #ffdfdf;
+  border-radius: 5px;
+  overflow: hidden;
 }
+
+.card .top {
+  text-align: center;
+}
+
+.card p {
+  font-weight: bold;
+  color: #0086fe;
+}
+
+.card button {
+  outline: 0;
+  border: 0;
+  color: #ffffff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 400;
+  padding: 8px 13px;
+  width: 100%;
+  background-color: #0086fe;
+}
+.card .dragArea {
+  height: 150px;
+  border-radius: 5px;
+}
+
+.card .dragArea {
+  height: 150px;
+  border-radius: 5px; 
+  background: #fcfcff;
+  display: flex;
+  width: 100%;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  -webkit-user-select: none;
+  margin-top: l0px;
+}
+
+.card .dragArea .visible {
+  font-size: 18px;
+}
+ 
+
+.card .select {
+  color: rgb(0, 42, 255);
+  margin-left: 5px;
+  cursor: pointer;
+  height: 24px;
+  width: 80px;
+  text-align: left;
+  transition: 0.4s;
+}
+
+.select:hover {
+  opacity: 0.7;
+  text-decoration: underline;
+}
+
+.card .container {
+  width: 100%;  
+  height: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  max-height: 200px;
+  overflow-y: auto;
+  margin-top: 10px;
+}  
+
+.card .container .image {
+  width: 75px;
+  margin-right: 5px;
+  height: 75px;
+  border: 1px solid rgb(46, 49, 146);
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.card .container .image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.card .container .delete {
+  position: absolute;
+  top: -2px; 
+  color: rgb(46,49,146);
+  right: 9px;  
+  text-shadow: 0 0 3px rgba(245, 245, 245, 0.6);
+  font-size: 18px;     
+  cursor: pointer;  
+}
+ 
+
+.card input,
+.card .dragArea .on-drop,
+.card .dragArea.dragover .visible {
+  display: none;
+}
+

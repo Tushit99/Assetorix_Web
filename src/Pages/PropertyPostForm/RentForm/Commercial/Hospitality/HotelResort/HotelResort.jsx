@@ -16,7 +16,9 @@ import style from "../../RentComercial.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
-import { CleanInputText, NumericString } from "../../../../code";
+import { CleanInputText, NumericString, WordandNumber } from "../../../../code";
+import { useNavigate } from "react-router-dom";
+import Loading from "../../../../Loading";
 // import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 
 
@@ -26,7 +28,7 @@ const HotelResortRent = () => {
     const toast = useToast();
     const [country, setCountry] = useState("");
     const [city, setCity] = useState("");
-    const [pincode, setPincode] = useState(0);
+    const [pincode, setPincode] = useState("");
     const [state, setState] = useState("");
     const [locality, setLocality] = useState("");
     const [address, setaddress] = useState("");
@@ -50,7 +52,9 @@ const HotelResortRent = () => {
     const [desc, setDesc] = useState("");
     const [pincollection, setPinCollection] = useState([]);
     const [qualityRating, setqualityRating] = useState("");
-
+    const navigate = useNavigate(); 
+    const [isClicked, setIsClicked] = useState(false);
+    const [clickCount, setClickCount] = useState(0); 
 
     const [additionalPrice, setAdditionalPrice] = useState(false);
     const [maintenancePrice, setMaintenancePrice] = useState("");
@@ -65,6 +69,8 @@ const HotelResortRent = () => {
 
     const handleSubmitData = async (e) => {
         e.preventDefault();
+        setClickCount((prev)=>prev+5);  
+        setIsClicked(true); 
         let obj = {
             lookingFor: "Rent",
             propertyGroup: "Commercial",
@@ -238,23 +244,25 @@ const HotelResortRent = () => {
 
             let response = await axios.request(reqOptions)
             console.log(response.data);
+            setIsClicked(false); 
+            navigate("/listing");
         } catch (error) {
-
+            console.log(error);
+            setIsClicked(false);
         }
-
+        setIsClicked(false);
     };
 
     const handlepinfetch = (e) => {
-        setPincode(NumericString(e.target.value));
-        if (e.target.value.length == 6) {
-            pinfetch(NumericString(e.target.value));
+        let val = NumericString(e.target.value);
+        setPincode(val);
+        if (val.length == 6) {
+            pinfetch(Number(val));
         }
     }
 
-
     const pinfetch = async (pin) => {
         try {
-
             let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
             setState(res.data[0].state);
             setCity(res.data[0].city);
@@ -265,8 +273,6 @@ const HotelResortRent = () => {
             console.log(err);
         }
     }
-
-
 
     const handleinclusiveandtax = (e) => {
         let newarr = [...inclusivePrices];
@@ -348,7 +354,6 @@ const HotelResortRent = () => {
         setBuildingFeature(newarr);
     };
 
-
     const handleotherfeature = (e) => {
         e.preventDefault();
         let newarr = [...otherFeature];
@@ -375,7 +380,6 @@ const HotelResortRent = () => {
         setLocationAdv(newarr);
     };
 
-
     const areaCalucation = () => {
         if (pricedetail && plotArea) {
             let max = Math.max(Number(pricedetail), Number(plotArea));
@@ -395,7 +399,7 @@ const HotelResortRent = () => {
         const newImages = [...images];
         newImages.splice(index, 1);
         setImages(newImages);
-      };
+    };
 
     const onFileSelect = (e) => {
         let files = e.target.files;
@@ -453,17 +457,19 @@ const HotelResortRent = () => {
     }
 
     // const createtemplatefloors = () => {
-    //     let options = "";
-
+    //     let options = ""; 
     //     let totalFloors = totalfloors;
     //     for (let i = 1; i <= totalFloors; i++) {
     //         let value = `<option value=${i}>${i}</option>`;
     //         options += value;
     //     }
     //     let adding = document.getElementById("floorSelectTag");
-    //     adding.innerHTML = options;
-
+    //     adding.innerHTML = options; 
     // }
+
+    if(isClicked){
+        <Loading />
+    }
 
 
     return (
@@ -476,19 +482,20 @@ const HotelResortRent = () => {
                 </Heading>
                 <Input
                     type="text"
-                    padding={"0 10px"}
                     required
                     placeholder="Address (optional)"
                     value={address}
-                    onChange={(e) => setaddress(e.target.value)}
+                    maxLength={"100"}
+                    onChange={(e) => setaddress(WordandNumber(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
                 />
                 <Input
                     type="text"
                     placeholder={"Enter pincode"}
-                    padding={"0 10px"}
                     required
+                    maxLength={"6"}
+                    variant="flushed"
                     fontSize={"md"}
                     value={pincode}
                     onChange={handlepinfetch}
@@ -496,50 +503,50 @@ const HotelResortRent = () => {
 
                 <Input
                     type="text"
-                    padding={"0 10px"}
                     required
                     placeholder="Locality"
                     list="browsers"
                     value={locality}
-                    onChange={(e) => setLocality(e.target.value)}
+                    maxLength={"60"}
+                    onChange={(e) => setLocality(WordandNumber(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
                 />
                 {pincollection.length ? (
                     <datalist id="browsers">
                         {pincollection.map((e) => (
-                            <option value={e.locality} />
+                            <option key={e._id} value={e.locality} />
                         ))}
                     </datalist>
                 ) : ""}
 
                 <Input
                     type="text"
-                    padding={"0 10px"}
                     required
                     placeholder="Enter City"
                     fontSize={"md"}
+                    maxLength={100}
                     value={city}
-                    onChange={(e) => setCity(e.target.value)}
+                    onChange={(e) => setCity(WordandNumber(e.target.value))}
                     variant="flushed"
                 />
                 <Input
                     type="text"
-                    padding={"0 10px"}
                     required
                     placeholder="Enter State"
                     value={state}
-                    onChange={(e) => setState(e.target.value)}
+                    maxLength={100}
+                    onChange={(e) => setState(WordandNumber(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
                 />
                 <Input
                     type="text"
-                    padding={"0 10px"}
                     required
                     placeholder="Enter Country"
                     value={country}
-                    onChange={(e) => setCountry(e.target.value)}
+                    maxLength={100}
+                    onChange={(e) => setCountry(WordandNumber(e.target.value))}
                     fontSize={"md"}
                     variant="flushed"
                 />
@@ -556,9 +563,10 @@ const HotelResortRent = () => {
                 <Box as={"div"} className={style.inp_form_numbers}>
                     <Box textAlign={"left"} >
                         <Text> No. of rooms </Text>
-                        <Input type="text"
-                            variant="flushed"
-                            padding={"0 2px"}
+                        <Input
+                            type="text"
+                            variant={"outline"}
+                            maxLength={2}
                             onChange={(e) => {
                                 setRoom(NumericString(e.target.value));
                             }}
@@ -567,14 +575,15 @@ const HotelResortRent = () => {
                     </Box>
                     <Box textAlign={"left"}>
                         <Text> No. of washroomss </Text>
-                        <Input type="text"
-                            variant="flushed"
+                        <Input
+                            type="text"
+                            variant={"outline"}
                             onChange={(e) => {
                                 setwashrooms(NumericString(e.target.value));
                             }}
                             value={washrooms}
                             required
-                            padding={"0 2px"} />
+                            maxLength={2} />
                     </Box>
                 </Box>
 
@@ -582,24 +591,25 @@ const HotelResortRent = () => {
 
                 {/* ====================================== */}
                 {/* add area details */}
-                <Box textAlign={"left"} padding={"10px 0"}>
+                <Box textAlign={"left"} padding={"10px 0 0 0"}>
                     <Heading as={"h3"} margin={"5px 0"} size={"md"}>
                         Add Area Details
                     </Heading>
                     <Text margin={"5px 0"}> Atleast one area type is mandatory </Text>
-                    <ButtonGroup
+                    <InputGroup
                         className={style.select_land}
                         size="sm"
-                        isAttached
+                        isAttached 
+                        w={"300px"} 
                         variant="outline"
                     >
-                        <input type="text" placeholder="Enter Plot Area" value={plotArea}
+                        <Input variant={"outline"} type="text" placeholder="Enter Plot Area" value={plotArea}
                             onChange={(e) => {
+                                setPlotArea(NumericString(e.target.value));
                                 areaCalucation();
-                                setPlotArea(e.target.value);
                             }}
                             required />
-                        <select value={areaPer} onChange={(e) => {
+                        <Select value={areaPer} onChange={(e) => {
                             setAreaPer(e.target.value);
                         }} className={style.select} required>
                             <option value="sq.ft">sq.ft</option>
@@ -620,8 +630,8 @@ const HotelResortRent = () => {
                             <option value="rood">rood</option>
                             <option value="chataks">chataks</option>
                             <option value="perch">perch</option>
-                        </select>
-                    </ButtonGroup>
+                        </Select>
+                    </InputGroup>
                 </Box>
             </Box>
 
@@ -744,8 +754,6 @@ const HotelResortRent = () => {
                 </Box>
             )}
 
-
-
             {/* ============================= Quality Rating ====================================== */}
             <Box className={style.optional_box}>
                 <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
@@ -850,7 +858,6 @@ const HotelResortRent = () => {
                     </button>
                 </Box>
             </Box>
-
 
             {/* ====================== Price Details ================================ */}
             <Box marginTop={"50"}>
@@ -986,11 +993,7 @@ const HotelResortRent = () => {
                     let my_cleantext = CleanInputText(e.target.value);
                     setDesc(my_cleantext);
                 }} ></Textarea>
-            </Box>
-
-
-
-
+            </Box> 
 
             {/* =============================== Amenities =============================== */}
             <Box className={style.optional_box}>
@@ -1090,9 +1093,7 @@ const HotelResortRent = () => {
                     </button>
 
                 </Box>
-            </Box>
-
-
+            </Box>  
 
             {/* =============================== Property Features =============================== */}
             <Box className={style.optional_box}>
@@ -1154,9 +1155,7 @@ const HotelResortRent = () => {
                         Feng Shui / Vaastu Compliant
                     </button>
                 </Box>
-            </Box>
-
-
+            </Box> 
 
             {/* =============================== Society/Building feature =============================== */}
             <Box className={style.optional_box}>
@@ -1293,7 +1292,8 @@ const HotelResortRent = () => {
                         Security Personnel
                     </button>
                 </Box>
-            </Box>
+            </Box> 
+
             {/* Additional Features */}
             <Box className={style.optional_box}>
                 <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
@@ -1312,7 +1312,8 @@ const HotelResortRent = () => {
                         Bank Attached Property
                     </button>
                 </Box>
-            </Box>
+            </Box> 
+            
             {/* Other Features */}
             <Box>
                 <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
@@ -1478,6 +1479,7 @@ const HotelResortRent = () => {
             <Button
                 margin={"20px 0"}
                 type="submit"
+                disabled={clickCount<=0 ? true : false }  
                 w={"100%"}
                 backgroundColor={"rgb(46,49,146)"}
                 _hover={{ backgroundColor: "rgb(74, 79, 223)" }}

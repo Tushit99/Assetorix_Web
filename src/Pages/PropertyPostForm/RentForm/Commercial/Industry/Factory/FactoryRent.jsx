@@ -18,6 +18,8 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { CleanInputText, NumericString, WordandNumber } from "../../../../code";
+import Loading from "../../../../Loading";
+import { useNavigate } from "react-router-dom";
 
 
 const FactoryRent = () => {
@@ -53,6 +55,9 @@ const FactoryRent = () => {
     const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
     const [bookingAmount, setBookingAmount] = useState("");
     const [annualDuesPayble, setAnnualDuesPayble] = useState("");
+    const [clickCount, setClickCount] = useState(0); 
+    const [isClicked, setIsClicked] = useState(false);
+    const navigate = useNavigate(); 
     // state for drop box images
     const [images, setImages] = useState([]);
     const [isDraging, setIsDraging] = useState(false);
@@ -61,7 +66,10 @@ const FactoryRent = () => {
 
 
     const handleSubmitData = async (e) => {
-        e.preventDefault();
+        e.preventDefault(); 
+        setClickCount((prev)=>prev+10)
+        setIsClicked(true); 
+
         let obj = {
             lookingFor: "Rent",
             propertyGroup: "Commercial",
@@ -219,12 +227,16 @@ const FactoryRent = () => {
                 data: bodyContent,
             }
 
-            let response = await axios.request(reqOptions)
+            let response = await axios.request(reqOptions).then((e)=>{
+                setIsClicked(false);  
+                navigate("/listing");  
+            })
             console.log(response.data);
         } catch (error) {
-
+            console.log(error); 
+            setIsClicked(false);  
         }
-
+        setIsClicked(false);  
     };
 
     const handlepinfetch = (e) => {
@@ -279,7 +291,7 @@ const FactoryRent = () => {
         setAdditinalFeature(newarr);
     };
 
-    const handleAminities = (e) => {
+    const handleAminities = (e) => { 
         e.preventDefault();
         let newarr = [...amenities];
         let value = e.target.value;
@@ -432,6 +444,9 @@ const FactoryRent = () => {
         console.log("droped");
     }
 
+    if(isClicked){
+        <Loading />
+    }
 
     return (
         <div>
@@ -1443,7 +1458,8 @@ const FactoryRent = () => {
                 </Heading>
                 <Button
                     margin={"20px 0"}
-                    type="submit"
+                    type="submit" 
+                    disabled={clickCount<=0 ? true : false }  
                     w={"100%"}
                     backgroundColor={"rgb(46,49,146)"}
                     _hover={{ backgroundColor: "rgb(74, 79, 223)" }}

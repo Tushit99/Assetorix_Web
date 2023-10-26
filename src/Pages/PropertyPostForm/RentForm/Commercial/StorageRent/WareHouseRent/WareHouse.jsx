@@ -18,6 +18,8 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { CleanInputText, NumericString } from "../../../../code";
+import Loading from "../../../../Loading";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -54,6 +56,9 @@ const WareHouse = () => {
     const [bookingAmount, setBookingAmount] = useState("");
     const [annualDuesPayble, setAnnualDuesPayble] = useState("");
     const [flooring, setFlooring] = useState("");
+    const [clickCount, setClickCount] = useState(0);
+    const [isClicked, setIsClicked] = useState(false);  
+    const navigate = useNavigate(); 
     // state for drop box images
     const [images, setImages] = useState([]);
     const [isDraging, setIsDraging] = useState(false);
@@ -63,6 +68,8 @@ const WareHouse = () => {
 
     const handleSubmitData = async (e) => {
         e.preventDefault();
+        setClickCount((prev) => prev + 10)
+        setIsClicked(true);
         let obj = {
             lookingFor: "Rent",
             propertyGroup: "Commercial",
@@ -201,8 +208,6 @@ const WareHouse = () => {
         }
     };
 
-
-
     const handlepinfetch = (e) => {
         setPincode(NumericString(e.target.value));
         if (e.target.value.length == 6) {
@@ -236,12 +241,16 @@ const WareHouse = () => {
                 data: bodyContent,
             }
 
-            let response = await axios.request(reqOptions)
+            let response = await axios.request(reqOptions).then((e) => {
+                navigate("/listing");
+                setIsClicked(false);
+            })
             console.log(response.data);
         } catch (error) {
-
+            console.log(error);
+            setIsClicked(false);
         }
-
+        setIsClicked(false);
     };
 
 
@@ -384,7 +393,7 @@ const WareHouse = () => {
         const newImages = [...images];
         newImages.splice(index, 1);
         setImages(newImages);
-      };
+    };
 
     const onFileSelect = (e) => {
         let files = e.target.files;
@@ -441,6 +450,9 @@ const WareHouse = () => {
         console.log("droped");
     }
 
+    if(isClicked){
+        <Loading />
+    } 
 
     return (
         <div>
@@ -559,7 +571,7 @@ const WareHouse = () => {
                             value={plotArea}
                             onChange={(e) => {
                                 areaCalucation();
-                                setPlotArea(e.target.value);
+                                setPlotArea(NumericString(e.target.value));
                             }}
                             required
                         />
@@ -1425,6 +1437,7 @@ const WareHouse = () => {
                     margin={"20px 0"}
                     type="submit"
                     w={"100%"}
+                    disabled={clickCount <= 0 ? true : false}  
                     backgroundColor={"rgb(46,49,146)"}
                     _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                     color={"#ffffff"}

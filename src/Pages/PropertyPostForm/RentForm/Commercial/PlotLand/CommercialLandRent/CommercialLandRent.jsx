@@ -21,6 +21,8 @@ import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { CleanInputText, NumericString } from "../../../../code";
 import { ChevronDownIcon } from "@chakra-ui/icons";
+import Loading from "../../../../Loading";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -67,7 +69,10 @@ const CommercialLandRent = () => {
   const [expectedByYear, setExpectedByYear] = useState("");
   const [authorisedBy, setAuthorisedBy] = useState([]);
   const [industryType, setIndustryType] = useState([]);
+  const [clickCount, setClickCount] = useState(0);
+  const [isClicked, setIsClicked] = useState(false);
   // state for drop box images
+  const navigate = useNavigate(); 
   const [images, setImages] = useState([]);
   const [isDraging, setIsDraging] = useState(false);
   const fileInputRef = useRef(null);
@@ -88,6 +93,8 @@ const CommercialLandRent = () => {
 
   const handleSubmitData = async (e) => {
     e.preventDefault();
+    setClickCount((prev) => prev + 10)
+    setIsClicked(true);
     let obj = {
       lookingFor: "Rent",
       propertyGroup: "Commercial",
@@ -259,12 +266,16 @@ const CommercialLandRent = () => {
         data: bodyContent,
       }
 
-      let response = await axios.request(reqOptions)
+      let response = await axios.request(reqOptions).then((e) => {
+        setIsClicked(false); 
+        navigate("/listing");  
+      })
       console.log(response.data);
     } catch (error) {
-
+      console.log(error);
+      setIsClicked(false);
     }
-
+    setIsClicked(false);
   };
 
   const handlepinfetch = (e) => {
@@ -504,6 +515,9 @@ const CommercialLandRent = () => {
     console.log("droped");
   }
 
+  if (isClicked) {
+    <Loading />
+  }
 
   return (
     <Box className="perfectwidth">
@@ -1384,6 +1398,7 @@ const CommercialLandRent = () => {
           margin={"20px 0"}
           type="submit"
           w={"100%"}
+          disabled={clickCount <= 0 ? true : false}
           backgroundColor={"rgb(46,49,146)"}
           _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
           color={"#ffffff"}
