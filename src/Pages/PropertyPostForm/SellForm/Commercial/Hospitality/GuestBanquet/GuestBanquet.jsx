@@ -18,6 +18,8 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { AlphabetString, CleanInputText, NumericString, WordandNumber } from "../../../../code";
+import { useNavigate } from "react-router-dom";
+import Loading from "../../../../Loading";
 
 
 
@@ -77,6 +79,9 @@ const GuestBanquet = () => {
     const [bookingAmount, setBookingAmount] = useState("");
     const [expectedRentel, setExpectedRentel] = useState("");
     const [annualDuesPayble, setAnnualDuesPayble] = useState("");
+    const [isClicked, setIsClicked] = useState(false); 
+    const [clickCount, setClickCount] = useState(0);  
+    const navigate = useNavigate(); 
     // state for drop box images
     const [images, setImages] = useState([]);
     const [isDraging, setIsDraging] = useState(false);
@@ -85,6 +90,8 @@ const GuestBanquet = () => {
 
     const handleSubmitData = async (e) => {
         e.preventDefault();
+        setClickCount((prev)=>prev+12); 
+        setIsClicked(true); 
         let obj = {
             lookingFor: "Sell",
             propertyGroup: "Commercial",
@@ -315,26 +322,29 @@ const GuestBanquet = () => {
                 data: bodyContent,
             }
 
-            let response = await axios.request(reqOptions)
+            let response = await axios.request(reqOptions).then((e)=>{
+                setIsClicked(false);  
+            })
             console.log(response.data);
         } catch (error) {
-
+            navigate("/listing");  
+            setIsClicked(false);   
+            console.log(error)
         }
-
+        navigate("/listing");
     };
 
 
 
     const handlepinfetch = (e) => {
-        let val = e.target.value;
+        let val = NumericString(e.target.value);
         setPincode(val);
         if (val.length == 6) {
             pinfetch(val);
-        }
-        else {
+        } else {
             console.log(val);
         }
-    }
+    };
 
 
 
@@ -586,6 +596,10 @@ const GuestBanquet = () => {
     //     adding.innerHTML = options;
 
     // }
+
+    if(isClicked){
+        <Loading />
+    }
 
 
     return (
@@ -2186,7 +2200,8 @@ const GuestBanquet = () => {
             <Button
                 margin={"20px 0"}
                 type="submit"
-                w={"100%"}
+                w={"100%"} 
+                disabled={clickCount <= 0 ? true : false}  
                 backgroundColor={"rgb(46,49,146)"}
                 _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                 color={"#ffffff"}

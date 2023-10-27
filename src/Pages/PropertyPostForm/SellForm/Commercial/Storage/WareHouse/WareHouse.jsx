@@ -20,6 +20,8 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { CleanInputText } from "../../../../code";
+import { useNavigate } from "react-router-dom";
+import Loading from "../../../../Loading";
 
 
 
@@ -82,6 +84,9 @@ const WareHouse = () => {
     const [leaseTenureInYear, setLeaseTenureInYear] = useState("");
     const [annualRentIncrease, setAnnualRentIncrease] = useState("");
     const [businessType, setBusinessType] = useState("");
+    const [isClicked, setIsClicked] = useState(false);
+    const [clickCount, setClickCount] = useState(0);
+    const navigate = useNavigate();
     // state for drop box images
     const [images, setImages] = useState([]);
     const [isDraging, setIsDraging] = useState(false);
@@ -91,6 +96,8 @@ const WareHouse = () => {
 
     const handleSubmitData = async (e) => {
         e.preventDefault();
+        setClickCount((prev) => prev + 12);
+        setIsClicked(true);
         let obj = {
             lookingFor: "Sell",
             propertyGroup: "Commercial",
@@ -299,12 +306,17 @@ const WareHouse = () => {
                 data: bodyContent,
             }
 
-            let response = await axios.request(reqOptions)
+            await axios.request(reqOptions).then((e) => {
+                setIsClicked(false);
+                navigate("/listing");
+            })
             console.log(response.data);
         } catch (error) {
-
+            console.log(error);
+            setIsClicked(false);
+            navigate("/listing");
         }
-
+        setIsClicked(false);
     };
 
     const handlepinfetch = (e) => {
@@ -461,7 +473,7 @@ const WareHouse = () => {
         const newImages = [...images];
         newImages.splice(index, 1);
         setImages(newImages);
-      };
+    };
 
     const onFileSelect = (e) => {
         let files = e.target.files;
@@ -516,6 +528,10 @@ const WareHouse = () => {
             }
         }
         console.log("droped");
+    }
+
+    if (isClicked) {
+        <Loading />
     }
 
     return (
@@ -1622,6 +1638,7 @@ const WareHouse = () => {
                     margin={"20px 0"}
                     type="submit"
                     w={"100%"}
+                    disabled={clickCount <= 0 ? true : false} 
                     backgroundColor={"rgb(46,49,146)"}
                     _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                     color={"#ffffff"}

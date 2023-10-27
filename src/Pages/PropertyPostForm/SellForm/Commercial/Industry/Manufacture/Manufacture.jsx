@@ -2,14 +2,9 @@ import React, { useRef, useState } from "react";
 import {
   Box,
   Button,
-  ButtonGroup,
   Heading,
   Input,
   InputGroup,
-  NumberInput,
-  NumberInputField,
-  Select,
-  Text,
   Textarea,
   useToast,
 } from "@chakra-ui/react";
@@ -19,6 +14,8 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { CleanInputText, NumericString, WordandNumber } from "../../../../code";
+import { useNavigate } from "react-router-dom";
+import Loading from "../../../../Loading";
 
 
 
@@ -64,6 +61,9 @@ const Manufacture = () => {
   const [leaseTenureInYear, setLeaseTenureInYear] = useState("");
   const [annualRentIncrease, setAnnualRentIncrease] = useState("");
   const [businessType, setBusinessType] = useState("");
+  const [isClicked, setIsClicked] = useState(false);
+  const [clickCount, setClickCount] = useState(0);
+  const navigate = useNavigate();
   // state for drop box images
   const [images, setImages] = useState([]);
   const [isDraging, setIsDraging] = useState(false);
@@ -73,6 +73,8 @@ const Manufacture = () => {
 
   const handleSubmitData = async (e) => {
     e.preventDefault();
+    setClickCount((prev) => prev + 12);
+    setIsClicked(true);
     let obj = {
       lookingFor: "Sell",
       propertyGroup: "Commercial",
@@ -271,12 +273,17 @@ const Manufacture = () => {
         data: bodyContent,
       }
 
-      let response = await axios.request(reqOptions)
+      await axios.request(reqOptions).then((e) => {
+        setIsClicked(false);
+        navigate("/listing");
+      })
       console.log(response.data);
     } catch (error) {
-
+      console.log(error);
+      setIsClicked(false);
+      navigate("/listing");
     }
-
+    setIsClicked(false);
   };
 
   const handlepinfetch = (e) => {
@@ -489,6 +496,10 @@ const Manufacture = () => {
       }
     }
     console.log("droped");
+  }
+
+  if (isClicked) {
+    <Loading />
   }
 
   return (
@@ -1565,6 +1576,7 @@ const Manufacture = () => {
           margin={"20px 0"}
           type="submit"
           w={"100%"}
+          disabled={clickCount <= 0 ? true : false}  
           backgroundColor={"rgb(46,49,146)"}
           _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
           color={"#ffffff"}

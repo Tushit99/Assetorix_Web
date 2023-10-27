@@ -18,6 +18,8 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { CleanInputText, NumericString, WordandNumber } from "../../../code";
+import { useNavigate } from "react-router-dom";
+import Loading from "../../../Loading";
 
 const IndependentHouse = () => {
     const isCountry = useSelector((state) => state.gloalval);
@@ -75,6 +77,9 @@ const IndependentHouse = () => {
     const [expectedRentel, setExpectedRentel] = useState("");
     const [bookingAmount, setBookingAmount] = useState("");
     const [annualDuesPayble, setAnnualDuesPayble] = useState("");
+    const [isClicked, setIsClicked] = useState(false);
+    const [clickCount, setClickCount] = useState(0);
+    const navigate = useNavigate();
     // state for drop box images
     const [images, setImages] = useState([]);
     const [isDraging, setIsDraging] = useState(false);
@@ -83,6 +88,8 @@ const IndependentHouse = () => {
 
     const handleSubmitData = async (e) => {
         e.preventDefault();
+        setClickCount((prev) => prev + 12);
+        setIsClicked(true);
         let obj = {
             lookingFor: "Sell",
             propertyGroup: "Residential",
@@ -315,12 +322,17 @@ const IndependentHouse = () => {
                 data: bodyContent,
             }
 
-            let response = await axios.request(reqOptions)
+            await axios.request(reqOptions).then((e) => {
+                setIsClicked(false);
+                navigate("/listing");
+            })
             console.log(response.data);
         } catch (error) {
-
+            console.log(error);
+            setIsClicked(false);
+            navigate("/listing");
         }
-
+        setIsClicked(false);
     };
 
 
@@ -540,7 +552,7 @@ const IndependentHouse = () => {
         const newImages = [...images];
         newImages.splice(index, 1);
         setImages(newImages);
-      };
+    };
 
     const onFileSelect = (e) => {
         let files = e.target.files;
@@ -597,6 +609,9 @@ const IndependentHouse = () => {
         console.log("droped");
     }
 
+    if (isClicked) {
+        <Loading />  
+    }
 
     return (
         <form onSubmit={handleSubmitData}>

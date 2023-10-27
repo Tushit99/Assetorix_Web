@@ -52,9 +52,9 @@ const HotelResortRent = () => {
     const [desc, setDesc] = useState("");
     const [pincollection, setPinCollection] = useState([]);
     const [qualityRating, setqualityRating] = useState("");
-    const navigate = useNavigate(); 
     const [isClicked, setIsClicked] = useState(false);
     const [clickCount, setClickCount] = useState(0); 
+    const navigate = useNavigate(); 
 
     const [additionalPrice, setAdditionalPrice] = useState(false);
     const [maintenancePrice, setMaintenancePrice] = useState("");
@@ -183,7 +183,9 @@ const HotelResortRent = () => {
                 //     body: JSON.stringify(obj)
                 // });
                 // let data = await response.json();  
-                // console.log("data",data); 
+                // console.log("data",data);  
+                setClickCount((prev) => prev + 12); 
+                setIsClicked(true); 
                 await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
                     .then((e) => {
                         toast({
@@ -200,7 +202,9 @@ const HotelResortRent = () => {
                     status: 'error',
                     duration: 2000,
                 })
-                console.log(error);
+                setClickCount((prev) => prev - 12);
+                setIsClicked(false );
+                console.log(error);  
             }
             // }
 
@@ -213,6 +217,8 @@ const HotelResortRent = () => {
                 duration: 2000,
                 position: 'top-right'
             })
+            setClickCount((prev) => prev - 12);
+            setIsClicked(false); 
         }
     };
 

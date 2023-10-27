@@ -20,6 +20,8 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { CleanInputText } from "../../../../code";
+import { useNavigate } from "react-router-dom";
+import Loading from "../../../../Loading";
 
 
 const ColdStorage = () => {
@@ -34,8 +36,6 @@ const ColdStorage = () => {
     const [locality, setLocality] = useState("");
     const [address, setaddress] = useState("");
     const [washrooms, setwashrooms] = useState(0);
-    const [bathroom, setBathroom] = useState(0);
-    const [balconey, setBalcony] = useState(0);
     const [parking, setParking] = useState(0);
     const [openparking, setOpenparking] = useState(0);
     const [light, setLight] = useState(0);
@@ -83,6 +83,9 @@ const ColdStorage = () => {
     const [leaseTenureInYear, setLeaseTenureInYear] = useState("");
     const [annualRentIncrease, setAnnualRentIncrease] = useState("");
     const [businessType, setBusinessType] = useState("");
+    const [isClicked, setIsClicked] = useState(false);
+    const [clickCount, setClickCount] = useState(0);
+    const navigate = useNavigate(); 
     // state for drop box images
     const [images, setImages] = useState([]);
     const [isDraging, setIsDraging] = useState(false);
@@ -92,6 +95,8 @@ const ColdStorage = () => {
 
     const handleSubmitData = async (e) => {
         e.preventDefault();
+        setClickCount((prev) => prev + 12);
+        setIsClicked(true);
         let obj = {
             lookingFor: "Sell",
             propertyGroup: "Commercial",
@@ -298,12 +303,17 @@ const ColdStorage = () => {
                 data: bodyContent,
             }
 
-            let response = await axios.request(reqOptions)
+            await axios.request(reqOptions).then((e) => {
+                setIsClicked(false);
+                navigate("/listing");
+            })
             console.log(response.data);
         } catch (error) {
-
+            console.log(error);
+            setIsClicked(false);
+            navigate("/listing");
         }
-
+        setIsClicked(false);  
     };
 
     const handlepinfetch = (e) => {
@@ -460,7 +470,7 @@ const ColdStorage = () => {
         const newImages = [...images];
         newImages.splice(index, 1);
         setImages(newImages);
-      };
+    };
 
     const onFileSelect = (e) => {
         let files = e.target.files;
@@ -517,6 +527,9 @@ const ColdStorage = () => {
         console.log("droped");
     }
 
+    if (isClicked) { 
+        <Loading />
+    }
 
     return (
         <div>
@@ -529,7 +542,6 @@ const ColdStorage = () => {
 
                     <Input
                         type="text"
-                        padding={"0 10px"}
                         required
                         placeholder="Address (optional)"
                         value={address}
@@ -537,29 +549,16 @@ const ColdStorage = () => {
                         fontSize={"md"}
                         variant="flushed"
                     />
-                    <NumberInput>
-                        <NumberInputField
-                            placeholder={"Enter pincode"}
-                            padding={"0 10px"}
-                            borderRight={0}
-                            borderLeft={0}
-                            borderTop={0}
-                            borderRadius={0}
-                            _active={{
-                                borderRight: "0",
-                                borderLeft: "0",
-                                borderTop: "0",
-                                borderRadius: "0",
-                            }}
-                            required
-                            fontSize={"md"}
-                            value={pincode}
-                            onChange={handlepinfetch}
-                        />
-                    </NumberInput>
                     <Input
                         type="text"
-                        padding={"0 10px"}
+                        placeholder={"Enter pincode"}
+                        required
+                        fontSize={"md"}
+                        value={pincode}
+                        onChange={handlepinfetch}
+                    />
+                    <Input
+                        type="text"
                         required
                         placeholder="Locality"
                         list="browsers"
@@ -578,7 +577,6 @@ const ColdStorage = () => {
 
                     <Input
                         type="text"
-                        padding={"0 10px"}
                         required
                         placeholder="Enter City"
                         fontSize={"md"}
@@ -588,7 +586,6 @@ const ColdStorage = () => {
                     />
                     <Input
                         type="text"
-                        padding={"0 10px"}
                         required
                         placeholder="Enter State"
                         value={state}
@@ -598,7 +595,6 @@ const ColdStorage = () => {
                     />
                     <Input
                         type="text"
-                        padding={"0 10px"}
                         required
                         placeholder="Enter Country"
                         value={country}
@@ -622,15 +618,14 @@ const ColdStorage = () => {
                 <Box>
                     <Box textAlign={"left"} >
                         <Text> No. of Washrooms </Text>
-                        <NumberInput>
-                            <NumberInputField
-                                variant="flushed"
-                                padding={"0 2px"}
-                                onChange={(e) => setwashrooms(e.target.value)}
-                                value={washrooms}
-                                required
-                            />
-                        </NumberInput>
+                        <Input
+                            type="text"
+                            variant="flushed"
+                            maxLength={2}
+                            onChange={(e) => setwashrooms(e.target.value)}
+                            value={washrooms}
+                            required
+                        />
                     </Box>
                 </Box>
 
@@ -640,24 +635,23 @@ const ColdStorage = () => {
                         Add Area Details
                     </Heading>
                     <Text margin={"5px 0"}> Plot area is mandatory </Text>
-                    <ButtonGroup
+                    <InputGroup
                         className={style.select_land}
                         size="sm"
                         isAttached
                         variant="outline"
                     >
-                        <NumberInput>
-                            <NumberInputField
-                                padding={"0 2px"}
-                                value={plotArea}
-                                onChange={(e) => {
-                                    areaCalucation();
-                                    setPlotArea(e.target.value);
-                                }}
-                                required
-                            />
-                        </NumberInput>
-                        <select value={areaPer} onChange={(e) => {
+                        <Input
+                            type="text"
+                            required
+                            value={plotArea}
+                            variant={"outline"}
+                            onChange={(e) => {
+                                areaCalucation();
+                                setPlotArea(e.target.value);
+                            }}
+                        />
+                        <Select variant={"outline"} value={areaPer} onChange={(e) => {
                             setAreaPer(e.target.value);
                         }} className={style.select} required>
                             <option value="sq.ft">sq.ft</option>
@@ -678,8 +672,8 @@ const ColdStorage = () => {
                             <option value="rood">rood</option>
                             <option value="chataks">chataks</option>
                             <option value="perch">perch</option>
-                        </select>
-                    </ButtonGroup>
+                        </Select>
+                    </InputGroup>
                 </Box>
 
                 {/* ========================== Availability status =============================== */}
@@ -902,12 +896,10 @@ const ColdStorage = () => {
                                 >
                                     {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
                                 </Heading>
-                                <NumberInput value={priceSqr}>
-                                    <NumberInputField
-
-
-                                    />
-                                </NumberInput>
+                                <Input
+                                    type="text"
+                                    value={priceSqr}  
+                                /> 
                             </Box>
                         </Box>
                     </Box>
@@ -1625,6 +1617,7 @@ const ColdStorage = () => {
                     margin={"20px 0"}
                     type="submit"
                     w={"100%"}
+                    disabled={clickCount <= 0 ? true : false}
                     backgroundColor={"rgb(46,49,146)"}
                     _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                     color={"#ffffff"}

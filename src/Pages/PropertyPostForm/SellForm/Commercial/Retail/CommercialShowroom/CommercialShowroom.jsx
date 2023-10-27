@@ -24,6 +24,8 @@ import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { CleanInputText } from "../../../../code";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Loading from "../../../../Loading";
 
 
 
@@ -84,6 +86,9 @@ const CommercialShowroom = () => {
     const [investorsTendReturn, setinvestorsTendReturn] = useState("");
     const [assuredReturns, setAssuredReturns] = useState("");
     const [leaseGuarantee, setLeaseGuarantee] = useState("");
+    const [isClicked, setIsClicked] = useState(false);
+    const [clickCount, setClickCount] = useState(0);
+    const navigate = useNavigate();
     // state for drop box images
     const [images, setImages] = useState([]);
     const [isDraging, setIsDraging] = useState(false);
@@ -95,6 +100,8 @@ const CommercialShowroom = () => {
 
     const handleSubmitData = async (e) => {
         e.preventDefault();
+        setClickCount((prev) => prev + 12);
+        setIsClicked(true);
         let obj = {
             lookingFor: "Sell",
             propertyGroup: "Commercial",
@@ -309,12 +316,17 @@ const CommercialShowroom = () => {
                 data: bodyContent,
             }
 
-            let response = await axios.request(reqOptions)
+            await axios.request(reqOptions).then((e) => {
+                setIsClicked(false);
+                navigate("/listing");
+            })
             console.log(response.data);
         } catch (error) {
-
+            console.log(error);
+            setIsClicked(false);
+            navigate("/listing");
         }
-
+        setIsClicked(false);
     };
 
     // pincode of 3 letter
@@ -535,13 +547,13 @@ const CommercialShowroom = () => {
 
     const selectFiles = () => {
         fileInputRef.current.click();
-    }  
+    }
 
     const removeImage = (index) => {
         const newImages = [...images];
         newImages.splice(index, 1);
         setImages(newImages);
-      };
+    };
 
     const onFileSelect = (e) => {
         let files = e.target.files;
@@ -598,6 +610,9 @@ const CommercialShowroom = () => {
         console.log("droped");
     }
 
+    if (isClicked) {
+        <Loading />
+    }
 
     return (
         <div>
@@ -630,26 +645,14 @@ const CommercialShowroom = () => {
                             fontSize={"md"}
                             variant="flushed"
                         />
-                        <NumberInput>
-                            <NumberInputField
-                                placeholder={"Enter pincode"}
-                                padding={"0 10px"}
-                                borderRight={0}
-                                borderLeft={0}
-                                borderTop={0}
-                                borderRadius={0}
-                                _active={{
-                                    borderRight: "0",
-                                    borderLeft: "0",
-                                    borderTop: "0",
-                                    borderRadius: "0",
-                                }}
-                                required
-                                fontSize={"md"}
-                                value={pincode}
-                                onChange={handlepinfetch}
-                            />
-                        </NumberInput>
+                        <Input
+                            type="text"
+                            placeholder={"Enter pincode"}
+                            required
+                            fontSize={"md"}
+                            value={pincode}
+                            onChange={handlepinfetch}
+                        />
                         <Input
                             type="text"
                             padding={"0 10px"}
@@ -1959,6 +1962,7 @@ const CommercialShowroom = () => {
                         margin={"20px 0"}
                         type="submit"
                         w={"100%"}
+                        disabled={clickCount <= 0 ? true : false}  
                         backgroundColor={"rgb(46,49,146)"}
                         _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                         color={"#ffffff"}

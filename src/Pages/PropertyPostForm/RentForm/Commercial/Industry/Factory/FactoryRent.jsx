@@ -55,9 +55,9 @@ const FactoryRent = () => {
     const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
     const [bookingAmount, setBookingAmount] = useState("");
     const [annualDuesPayble, setAnnualDuesPayble] = useState("");
-    const [clickCount, setClickCount] = useState(0); 
+    const [clickCount, setClickCount] = useState(0);
     const [isClicked, setIsClicked] = useState(false);
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
     // state for drop box images
     const [images, setImages] = useState([]);
     const [isDraging, setIsDraging] = useState(false);
@@ -66,10 +66,7 @@ const FactoryRent = () => {
 
 
     const handleSubmitData = async (e) => {
-        e.preventDefault(); 
-        setClickCount((prev)=>prev+10)
-        setIsClicked(true); 
-
+        e.preventDefault();
         let obj = {
             lookingFor: "Rent",
             propertyGroup: "Commercial",
@@ -168,7 +165,9 @@ const FactoryRent = () => {
                 //     body: JSON.stringify(obj)
                 // });
                 // let data = await response.json();  
-                // console.log("data",data); 
+                // console.log("data",data);  
+                setClickCount((prev) => prev + 12);
+                setIsClicked(true);
                 await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
                     .then((e) => {
                         toast({
@@ -185,6 +184,8 @@ const FactoryRent = () => {
                     status: 'error',
                     duration: 2000,
                 })
+                setClickCount((prev) => prev - 12);
+                setIsClicked(false);
                 console.log(error);
             }
             // }
@@ -198,6 +199,8 @@ const FactoryRent = () => {
                 duration: 2000,
                 position: 'top-right'
             })
+            setClickCount((prev) => prev - 12);
+            setIsClicked(false); 
         }
     };
 
@@ -227,16 +230,16 @@ const FactoryRent = () => {
                 data: bodyContent,
             }
 
-            let response = await axios.request(reqOptions).then((e)=>{
-                setIsClicked(false);  
-                navigate("/listing");  
+            let response = await axios.request(reqOptions).then((e) => {
+                setIsClicked(false);
+                navigate("/listing");
             })
             console.log(response.data);
         } catch (error) {
-            console.log(error); 
-            setIsClicked(false);  
+            console.log(error);
+            setIsClicked(false);
         }
-        setIsClicked(false);  
+        setIsClicked(false);
     };
 
     const handlepinfetch = (e) => {
@@ -291,7 +294,7 @@ const FactoryRent = () => {
         setAdditinalFeature(newarr);
     };
 
-    const handleAminities = (e) => { 
+    const handleAminities = (e) => {
         e.preventDefault();
         let newarr = [...amenities];
         let value = e.target.value;
@@ -387,7 +390,7 @@ const FactoryRent = () => {
         const newImages = [...images];
         newImages.splice(index, 1);
         setImages(newImages);
-      };
+    };
 
     const onFileSelect = (e) => {
         let files = e.target.files;
@@ -403,7 +406,7 @@ const FactoryRent = () => {
                     name: files[i].name,
                     image: files[i],
                 },])
-            } 
+            }
         }
     }
 
@@ -444,7 +447,7 @@ const FactoryRent = () => {
         console.log("droped");
     }
 
-    if(isClicked){
+    if (isClicked) {
         <Loading />
     }
 
@@ -1458,8 +1461,8 @@ const FactoryRent = () => {
                 </Heading>
                 <Button
                     margin={"20px 0"}
-                    type="submit" 
-                    disabled={clickCount<=0 ? true : false }  
+                    type="submit"
+                    disabled={clickCount <= 0 ? true : false}
                     w={"100%"}
                     backgroundColor={"rgb(46,49,146)"}
                     _hover={{ backgroundColor: "rgb(74, 79, 223)" }}

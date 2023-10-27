@@ -23,6 +23,8 @@ import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 // import { ChevronDownIcon } from "@chakra-ui/icons";
 import { CleanInputText, NumericString, WordandNumber } from "../../../../code";
+import Loading from "../../../../Loading";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -64,20 +66,21 @@ const AgricalturalFarm = () => {
   const [leaseTenureInYear, setLeaseTenureInYear] = useState("");
   const [annualRentIncrease, setAnnualRentIncrease] = useState("");
   const [businessType, setBusinessType] = useState("");
-  const [plotBreadth, setPlotBreadth] = useState("");
-  const [availability, setAvailability] = useState("");
-  const [fromyear, setFromyear] = useState("");
-  const [industryType, setIndustryType] = useState([]);
+  const [plotBreadth, setPlotBreadth] = useState(""); 
 
   const [plotLength, setplotLength] = useState("");
   const [expectedBy, setexpectedBy] = useState([]);
   const [ConstructionOnProperty, setConstructionOnProperty] = useState("");
   const [expectedByYear, setExpectedByYear] = useState("");
   const [authorisedBy, setAuthorisedBy] = useState([]);
+  const [isClicked, setIsClicked] = useState(false);
+  const [clickCount, setClickCount] = useState(0);
+  const navigate = useNavigate();
   // state for drop box images
   const [images, setImages] = useState([]);
   const [isDraging, setIsDraging] = useState(false);
   const fileInputRef = useRef(null);
+
 
   // please don'nt change any function without any prior knowledge
 
@@ -94,6 +97,8 @@ const AgricalturalFarm = () => {
 
   const handleSubmitData = async (e) => {
     e.preventDefault();
+    setClickCount((prev) => prev + 12);
+    setIsClicked(true);  
     let obj = {
       lookingFor: "Sell",
       propertyGroup: "Commercial",
@@ -270,12 +275,17 @@ const AgricalturalFarm = () => {
         data: bodyContent,
       }
 
-      let response = await axios.request(reqOptions)
+      await axios.request(reqOptions).then((e) => {
+        setIsClicked(false);
+        navigate("/listing");
+      })
       console.log(response.data);
     } catch (error) {
-
+      console.log(error);
+      setIsClicked(false);
+      navigate("/listing");
     }
-
+    setIsClicked(false);
   };
 
   const handlepinfetch = (e) => {
@@ -308,10 +318,7 @@ const AgricalturalFarm = () => {
     }
   }
 
-  const handleAvailable = (e) => {
-    e.preventDefault();
-    setAvailability(e.target.value);
-  };
+ 
 
   const handleConstructionType = (e) => {
     e.preventDefault();
@@ -324,14 +331,7 @@ const AgricalturalFarm = () => {
       newarr.push(value);
     }
     setConstructionType(newarr);
-  }
-
-
-  const handleyear = (e) => {
-    e.preventDefault();
-    setFromyear(e.target.value);
-  };
-
+  } 
 
   const handleAuthorityBy = (e) => {
     e.preventDefault();
@@ -433,18 +433,18 @@ const AgricalturalFarm = () => {
     }
   }
 
-  const handleIndustryType = (e) => {
-    e.preventDefault();
-    const value = e.target.value;
+  // const handleIndustryType = (e) => {
+  //   e.preventDefault();
+  //   const value = e.target.value;
 
-    setIndustryType((prevIndustryType) => {
-      if (prevIndustryType.includes(value)) {
-        return prevIndustryType.filter((item) => item !== value);
-      } else {
-        return [...prevIndustryType, value];
-      }
-    });
-  }
+  //   setIndustryType((prevIndustryType) => {
+  //     if (prevIndustryType.includes(value)) {
+  //       return prevIndustryType.filter((item) => item !== value);
+  //     } else {
+  //       return [...prevIndustryType, value];
+  //     }
+  //   });
+  // }
 
   // ======--- image upload function   
 
@@ -513,6 +513,9 @@ const AgricalturalFarm = () => {
     console.log("droped");
   }
 
+  if (isClicked) {
+    <Loading />
+  }
 
   return (
     <Box className="perfectwidth">
@@ -1395,6 +1398,7 @@ const AgricalturalFarm = () => {
           margin={"20px 0"}
           type="submit"
           w={"100%"}
+          disabled={clickCount <= 0 ? true : false}
           backgroundColor={"rgb(46,49,146)"}
           _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
           color={"#ffffff"}

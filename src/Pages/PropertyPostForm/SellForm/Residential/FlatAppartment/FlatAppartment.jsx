@@ -20,6 +20,8 @@ import style from "../Residential.module.css";
 import { InputGroup } from "@chakra-ui/react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import Dropzone from 'react-dropzone';
+import Loading from "../../../Loading";
+import { useNavigate } from "react-router-dom";
 
 
 const FlatAppartment = () => {
@@ -80,16 +82,21 @@ const FlatAppartment = () => {
     const [annualDuesPayble, setAnnualDuesPayble] = useState("");
     const [bookingAmount, setBookingAmount] = useState("");
     const [membershipCharge, setMembershipCharge] = useState("");
+    const [isClicked, setIsClicked] = useState(false);
+    const [clickCount, setClickCount] = useState(0);
+    const navigate = useNavigate();
     // state for drop box images
     const [images, setImages] = useState([]);
     const [isDraging, setIsDraging] = useState(false);
-    const fileInputRef = useRef(null); 
+    const fileInputRef = useRef(null);
 
     // please don'nt change any function without any prior knowledge; 
 
     // submit data 
     const handleSubmitData = async (e) => {
         e.preventDefault();
+        setClickCount((prev) => prev + 12);
+        setIsClicked(true);  
         let obj = {
             lookingFor: "Sell",
             propertyGroup: "Residential",
@@ -267,7 +274,7 @@ const FlatAppartment = () => {
                 // let data = await response.json(); 
                 console.log("data", obj);
                 await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
-                    .then((e) => { 
+                    .then((e) => {
                         toast({
                             title: e.data.msg,
                             description: e.data.msg,
@@ -276,13 +283,13 @@ const FlatAppartment = () => {
                         })
                         submitImage(e.data.id);
                     }).catch((err) => console.log(err));
-            } catch (error) { 
+            } catch (error) {
                 toast({
                     title: error.response.data.msg,
                     status: 'error',
                     duration: 2000,
                 })
-            } 
+            }
         }
         else {
             toast({
@@ -293,23 +300,23 @@ const FlatAppartment = () => {
                 position: 'top-right'
             })
         }
-    }; 
+    };
 
     // image uploading after uploading the data:  
-    const submitImage = async (productID) => {  
-        try {   
-            let id = localStorage.getItem("usrId") || undefined; 
-            let authorization = localStorage.getItem("AstToken") || undefined; 
-    
-            let headersList = { 
+    const submitImage = async (productID) => {
+        try {
+            let id = localStorage.getItem("usrId") || undefined;
+            let authorization = localStorage.getItem("AstToken") || undefined;
+
+            let headersList = {
                 "Accept": "*/*",
                 "Authorization": authorization,
-                "id": id 
+                "id": id
             }
 
             let formdata = new FormData();
-            images.forEach((image) => { 
-                formdata.append("image", image.image); 
+            images.forEach((image) => {
+                formdata.append("image", image.image);
             });
 
             let bodyContent = formdata;
@@ -319,16 +326,21 @@ const FlatAppartment = () => {
                 method: "POST",
                 headers: headersList,
                 data: bodyContent,
-            } 
+            }
 
-            let response = await axios.request(reqOptions)
+            await axios.request(reqOptions).then((e) => {
+                setIsClicked(false);
+                navigate("/listing");
+            })
             console.log(response.data);
         } catch (error) {
-
+            console.log(error);
+            setIsClicked(false);
+            navigate("/listing");
         }
-
+        setIsClicked(false);
     };
-    
+
     const handlepinfetch = (e) => {
         let val = NumericString(e.target.value)
         setPincode(val);
@@ -342,7 +354,7 @@ const FlatAppartment = () => {
 
 
     const pinfetch = async (pin) => {
-        try {   
+        try {
             let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
             setState(res.data[0].state);
             setCity(res.data[0].city);
@@ -552,7 +564,7 @@ const FlatAppartment = () => {
                     name: files[i].name,
                     image: files[i],
                 },])
-            } 
+            }
         }
     }
 
@@ -565,7 +577,7 @@ const FlatAppartment = () => {
         const newImages = [...images];
         newImages.splice(index, 1);
         setImages(newImages);
-      };
+    };
 
     const ondragleave = (event) => {
         event.preventDefault();
@@ -617,6 +629,9 @@ const FlatAppartment = () => {
 
     // }
 
+    if (isClicked) {
+        <Loading />
+    }
 
     return (
         <form onSubmit={handleSubmitData}>
@@ -1469,7 +1484,7 @@ const FlatAppartment = () => {
                         Price Details
                     </Heading>
                     <Box display={"flex"} alignItems={"center"} gap={5}>
-                        <InputGroup w={300}> 
+                        <InputGroup w={300}>
                             <Input
                                 type="text"
                                 value={pricedetail}
@@ -1573,25 +1588,25 @@ const FlatAppartment = () => {
                     <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
                 </Box>
                 <Box className={style.card}>
-                    <Box border={isDraging ? "2px dashed rgb(46,49,146)" : "2px dashed #9e9e9e" } className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+                    <Box border={isDraging ? "2px dashed rgb(46,49,146)" : "2px dashed #9e9e9e"} className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
                         {isDraging ? (
                             <Text textAlign={"center"} color={"rgb(0, 134, 254)"} >Drop image here</Text>
-                        ) : ( 
+                        ) : (
                             <>
                                 Drag & Drop image here or
                                 <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
                             </>
-                        )} 
+                        )}
                         <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
                     </Box>
-                    <Box className={style.container}>  
-                        {images.map((image, index) => (  
-                            <Box className={style.image} key={index}>  
-                                <Text className={style.delete} onClick={() => removeImage(index)}>&#10006;</Text> 
-                                <img src={URL.createObjectURL(image.image)} alt="images" />   
-                             </Box>   
-                        ))}     
-                    </Box>  
+                    <Box className={style.container}>
+                        {images.map((image, index) => (
+                            <Box className={style.image} key={index}>
+                                <Text className={style.delete} onClick={() => removeImage(index)}>&#10006;</Text>
+                                <img src={URL.createObjectURL(image.image)} alt="images" />
+                            </Box>
+                        ))}
+                    </Box>
                 </Box>
             </Box>
 
@@ -2433,6 +2448,7 @@ const FlatAppartment = () => {
                 margin={"20px 0"}
                 type="submit"
                 w={"100%"}
+                disabled={clickCount <= 0 ? true : false}
                 backgroundColor={"rgb(46,49,146)"}
                 _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                 color={"#ffffff"}

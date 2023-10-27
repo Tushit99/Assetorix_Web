@@ -20,6 +20,8 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { AlphabetString, CleanInputText, NumericString, WordandNumber } from "../../../../code";
+import { useNavigate } from "react-router-dom";
+import Loading from "../../../../Loading";
 
 
 
@@ -73,15 +75,20 @@ const HotelResort = () => {
     const [leaseTenureInYear, setLeaseTenureInYear] = useState("");
     const [annualRentIncrease, setAnnualRentIncrease] = useState("");
     const [businessType, setBusinessType] = useState("");
-    const [qualityRating, setqualityRating] = useState("");
-    // state for drop box images
+    const [qualityRating, setqualityRating] = useState("");  
+    const [isClicked, setIsClicked] = useState(false);
+    const [clickCount, setClickCount] = useState(0);
+    const navigate = useNavigate();
+    // state for drop box images 
     const [images, setImages] = useState([]);
     const [isDraging, setIsDraging] = useState(false);
     const fileInputRef = useRef(null);
 
 
     const handleSubmitData = async (e) => {
-        e.preventDefault();
+        e.preventDefault(); 
+        setClickCount((prev) => prev + 12);
+        setIsClicked(true); 
         let obj = {
             lookingFor: "Sell",
             propertyGroup: "Commercial",
@@ -251,7 +258,8 @@ const HotelResort = () => {
                             status: 'success',
                             duration: 2000,
                         });
-                        submitImage(e.data.id);
+                        submitImage(e.data.id); 
+                        
                     });
             } catch (error) {
                 toast({
@@ -301,12 +309,17 @@ const HotelResort = () => {
                 data: bodyContent,
             }
 
-            let response = await axios.request(reqOptions)
+            let response = await axios.request(reqOptions).then((e)=>{
+                setIsClicked(false);
+                navigate("/listing"); 
+            })
             console.log(response.data);
         } catch (error) {
-
+            console.log(error); 
+            setIsClicked(false);
+            navigate("/listing"); 
         }
-
+        setIsClicked(false); 
     };
 
     const handlepinfetch = (e) => {
@@ -559,6 +572,10 @@ const HotelResort = () => {
     //     adding.innerHTML = options;
 
     // }
+
+    if (isClicked) {
+        <Loading />
+    }
 
 
     return (
@@ -2093,6 +2110,7 @@ const HotelResort = () => {
                 margin={"20px 0"}
                 type="submit"
                 w={"100%"}
+                disabled={clickCount <= 0 ? true : false}  
                 backgroundColor={"rgb(46,49,146)"}
                 _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                 color={"#ffffff"}

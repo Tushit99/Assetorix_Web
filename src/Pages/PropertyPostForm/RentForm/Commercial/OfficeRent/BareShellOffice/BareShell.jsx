@@ -104,9 +104,7 @@ const BareShell = () => {
 
 
     const handleSubmitData = async (e) => {
-        e.preventDefault(); 
-        setClickCount((prev)=>prev+10)
-        setIsClicked(true); 
+        e.preventDefault();  
         let obj = {
             lookingFor: "Rent",
             propertyGroup: "Commercial",
@@ -247,9 +245,9 @@ const BareShell = () => {
                 //     body: JSON.stringify(obj)
                 // });
                 // let data = await response.json();
-                console.log("data", obj);
-                await axios
-                    .post(`${process.env.REACT_APP_URL}/property/`, obj, {
+                setClickCount((prev) => prev + 12); 
+                setIsClicked(true); 
+                await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, {
                         headers: head,
                     })
                     .then((e) => {
@@ -267,7 +265,9 @@ const BareShell = () => {
                     status: "error",
                     duration: 2000,
                 });
-                console.log(error);
+                setClickCount((prev) => prev - 12);
+                setIsClicked(false );
+                console.log(error);  
             }
             // }
         } else {
@@ -278,6 +278,8 @@ const BareShell = () => {
                 duration: 2000,
                 position: "top-right",
             });
+            setClickCount((prev) => prev - 12);
+            setIsClicked(false); 
         }
     };
 
@@ -314,7 +316,7 @@ const BareShell = () => {
             console.log(response.data);
         } catch (error) { 
             console.log(error); 
-            setIsClicked(false);  
+            setIsClicked(false);   
         }
         setIsClicked(false);  
     };

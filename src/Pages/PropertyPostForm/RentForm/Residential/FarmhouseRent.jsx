@@ -5,8 +5,6 @@ import {
     ButtonGroup,
     Heading,
     Input,
-    NumberInput,
-    NumberInputField,
     Select,
     Text,
     Textarea,
@@ -31,7 +29,7 @@ const FarmhouseRent = () => {
     const [facingwidth, setFacingWidth] = useState("");
     const [city, setCity] = useState("");
     const [appartment, setApartment] = useState("");
-    const [pincode, setPincode] = useState(0);
+    const [pincode, setPincode] = useState("");
     const [state, setState] = useState("");
     const [locality, setLocality] = useState("");
     const [houseNo, setHouseNo] = useState("");
@@ -80,11 +78,10 @@ const FarmhouseRent = () => {
     const [depositAmount, setDepositAmount] = useState("");
     const [agreementDuration, setagreementDuration] = useState("");
     const [noticePeriod, setNoticePeriod] = useState("");
-    const [availableFrom, setavailableFrom] = useState(""); 
-    const [isClicked, setIsClicked] = useState(false); 
-    const [clickCount, setClickCount] = useState(0);  
+    const [availableFrom, setavailableFrom] = useState("");
+    const [isClicked, setIsClicked] = useState(false);
+    const [clickCount, setClickCount] = useState(0);
     const navigate = useNavigate(); 
-    
     // state for drop box images
     const [images, setImages] = useState([]);
     const [isDraging, setIsDraging] = useState(false);
@@ -92,7 +89,7 @@ const FarmhouseRent = () => {
 
     const handleSubmitData = async (e) => {
         e.preventDefault();
-        setClickCount((prev)=>prev+12); 
+        setClickCount((prev) => prev + 12);
         setIsClicked(true);
         let obj = {
             lookingFor: "Rent",
@@ -321,16 +318,17 @@ const FarmhouseRent = () => {
                 data: bodyContent,
             }
 
-            let response = await axios.request(reqOptions).then((e)=>{
-                setIsClicked(false);  
-                navigate("/listing"); 
-            })
+            await axios.request(reqOptions).then((e) => {
+                setIsClicked(false);
+                navigate("/listing");  
+            })  
             console.log(response.data);
-        } catch (error) {
+        } catch (error) { 
             console.log(error);
             setIsClicked(false);
-        }
-        setIsClicked(false); 
+            navigate("/listing");
+        } 
+        setIsClicked(false);
     };
 
     const handlepinfetch = (e) => {
@@ -533,7 +531,7 @@ const FarmhouseRent = () => {
         const newImages = [...images];
         newImages.splice(index, 1);
         setImages(newImages);
-      };
+    };
 
     const onFileSelect = (e) => {
         let files = e.target.files;
@@ -587,11 +585,11 @@ const FarmhouseRent = () => {
                 }]);
             }
         }
-        console.log("droped"); 
-    } 
-    
-    if(isClicked){
-        <Loading />
+        console.log("droped");
+    }
+
+    if (isClicked) {
+        <Loading />  
     }
 
     return (
@@ -605,7 +603,6 @@ const FarmhouseRent = () => {
 
                 <Input
                     type="text"
-                    padding={"0 10px"}
                     required
                     placeholder="House No. (optional)"
                     value={houseNo}
@@ -616,7 +613,6 @@ const FarmhouseRent = () => {
                 />
                 <Input
                     type="text"
-                    padding={"0 10px"}
                     required
                     placeholder="Apartment / Society"
                     fontSize={"md"}
@@ -628,7 +624,6 @@ const FarmhouseRent = () => {
                 <Input
                     type="text"
                     placeholder={"Enter pincode"}
-                    padding={"0 10px"}
                     maxLength={"8"}
                     required
                     fontSize={"md"}
@@ -637,7 +632,6 @@ const FarmhouseRent = () => {
                 />
                 <Input
                     type="text"
-                    padding={"0 10px"}
                     required
                     placeholder="Locality"
                     list="browsers"
@@ -2241,7 +2235,7 @@ const FarmhouseRent = () => {
                     >
                         Close to Mall
                     </button>
-                    <button
+                    <button 
                         className={
                             locationAdv.includes("Close to highway")
                                 ? style.setbtn
@@ -2271,7 +2265,7 @@ const FarmhouseRent = () => {
                 margin={"20px 0"}
                 type="submit"
                 w={"100%"}
-                disabled={clickCount<=0 ? true : false }  
+                disabled={clickCount <= 0 ? true : false} 
                 backgroundColor={"rgb(46,49,146)"}
                 _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                 color={"#ffffff"}

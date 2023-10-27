@@ -19,6 +19,8 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { AlphabetString, CleanInputText, NumericString, WordandNumber } from "../../../code";
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+import { useNavigate } from 'react-router-dom';
+import Loading from '../../../Loading';
 
 const Independentbuilder = () => {
     const isCountry = useSelector((state) => state.gloalval);
@@ -77,6 +79,9 @@ const Independentbuilder = () => {
     const [expectedRentel, setExpectedRentel] = useState("");
     const [bookingAmount, setBookingAmount] = useState("");
     const [annualDuesPayble, setAnnualDuesPayble] = useState("");
+    const [isClicked, setIsClicked] = useState(false);
+    const [clickCount, setClickCount] = useState(0);
+    const navigate = useNavigate();
     // state for drop box images
     const [images, setImages] = useState([]);
     const [isDraging, setIsDraging] = useState(false);
@@ -84,6 +89,8 @@ const Independentbuilder = () => {
 
     const handleSubmitData = async (e) => {
         e.preventDefault();
+        setClickCount((prev) => prev + 12);
+        setIsClicked(true);
         let obj = {
             lookingFor: "Sell",
             propertyGroup: "Residential",
@@ -319,12 +326,17 @@ const Independentbuilder = () => {
                 data: bodyContent,
             }
 
-            let response = await axios.request(reqOptions)
+            await axios.request(reqOptions).then((e) => {
+                setIsClicked(false);
+                navigate("/listing");
+            })
             console.log(response.data);
         } catch (error) {
-
+            console.log(error);
+            setIsClicked(false);
+            navigate("/listing");
         }
-
+        setIsClicked(false);
     };
 
     const handlepinfetch = (e) => {
@@ -542,7 +554,7 @@ const Independentbuilder = () => {
         const newImages = [...images];
         newImages.splice(index, 1);
         setImages(newImages);
-      };
+    };
 
     const onFileSelect = (e) => {
         let files = e.target.files;
@@ -612,6 +624,9 @@ const Independentbuilder = () => {
 
     // }
 
+    if (isClicked) {
+        <Loading />  
+    }
 
     return (
         <form onSubmit={handleSubmitData}>

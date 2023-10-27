@@ -27,6 +27,8 @@ import axios from "axios";
 import { CleanInputText, WordandNumber } from "../../../../code";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { NumericString } from "../../../../../UserListings/PropertyUpdateForm/code";
+import { useNavigate } from "react-router-dom";
+import Loading from "../../../../Loading";
 
 
 
@@ -57,16 +59,11 @@ const Bareshellspace = () => {
     const [pantrySize, setPantrySize] = useState("");
     const [pantryType, setPantryType] = useState("");
     const [floorNumber, setFloorNumber] = useState([]);
-    const [pricedetail, setPricedetail] = useState("");
-
-
+    const [pricedetail, setPricedetail] = useState("");  
     const [additionalPrice, setAdditionalPrice] = useState(false);
     const [expectedRental, setExpectedRental] = useState("");
     const [bookingAmount, setBookingAmount] = useState("");
-    const [annualDuesPayable, setAnnualDuesPayable] = useState("");
-
-
-
+    const [annualDuesPayable, setAnnualDuesPayable] = useState(""); 
     const [previouslyUsedList, setpreviouslyUsedList] = useState([]);
     const [currentRentPerMonth, setCurrentRentPerMonth] = useState("");
     const [leaseTenureInYear, setLeaseTenureInYear] = useState("");
@@ -78,8 +75,6 @@ const Bareshellspace = () => {
     const [flooring, setFlooring] = useState("");
     const [airCondition, setAirCondition] = useState("");
     const [locality, setLocality] = useState("");
-
-
     const [areaPer, setAreaPer] = useState("sq.ft");
     const [availability, setAvailability] = useState("");
     const [fromyear, setFromyear] = useState("");
@@ -96,6 +91,9 @@ const Bareshellspace = () => {
     const [maintenancePrice, setMaintenancePrice] = useState("");
     const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
     const [zoneType, setZoneType] = useState("");
+    const [isClicked, setIsClicked] = useState(false);
+    const [clickCount, setClickCount] = useState(0);
+    const navigate = useNavigate(); 
     // state for drop box images
     const [images, setImages] = useState([]);
     const [isDraging, setIsDraging] = useState(false);
@@ -107,6 +105,8 @@ const Bareshellspace = () => {
 
     const handleSubmitData = async (e) => {
         e.preventDefault();
+        setClickCount((prev) => prev + 12);
+        setIsClicked(true);  
         let obj = {
             lookingFor: "Sell",
             propertyGroup: "Commercial",
@@ -302,12 +302,17 @@ const Bareshellspace = () => {
                 data: bodyContent,
             }
 
-            let response = await axios.request(reqOptions)
+            await axios.request(reqOptions).then((e) => {
+                setIsClicked(false);
+                navigate("/listing");
+            })
             console.log(response.data);
         } catch (error) {
-
+            console.log(error); 
+            setIsClicked(false);
+            navigate("/listing"); 
         }
-
+        setIsClicked(false);
     };
 
     const handlepinfetch = (e) => {
@@ -523,6 +528,10 @@ const Bareshellspace = () => {
             }
         }
         console.log("droped");
+    }
+
+    if (isClicked) {
+        <Loading />
     }
 
     return (
@@ -1943,7 +1952,8 @@ const Bareshellspace = () => {
             <Button
                 margin={"20px 0"}
                 type="submit"
-                w={"100%"}
+                w={"100%"} 
+                disabled={clickCount <= 0 ? true : false}  
                 backgroundColor={"rgb(46,49,146)"}
                 _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                 color={"#ffffff"}

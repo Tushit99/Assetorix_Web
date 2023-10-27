@@ -9,7 +9,7 @@ import {
     Text,
     Textarea,
     useToast,
-} from "@chakra-ui/react";
+} from "@chakra-ui/react"; 
 import { Checkbox } from "@chakra-ui/react";
 import style from "../../RentComercial.module.css";
 import axios from "axios";
@@ -51,15 +51,15 @@ const GuestBanquetRent = () => {
     const [desc, setDesc] = useState("");
     const [pincollection, setPinCollection] = useState([]);
     const [qualityRating, setqualityRating] = useState("");
-    
+
     const [additionalPrice, setAdditionalPrice] = useState(false);
     const [maintenancePrice, setMaintenancePrice] = useState("");
     const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
     const [bookingAmount, setBookingAmount] = useState("");
     const [annualDuesPayble, setAnnualDuesPayble] = useState("");
-    const [isClicked, setIsClicked] = useState(false); 
-    const [clickCount, setClickCount] = useState(0);  
-    const navigate = useNavigate(); 
+    const [isClicked, setIsClicked] = useState(false);
+    const [clickCount, setClickCount] = useState(0);
+    const navigate = useNavigate();
     // state for drop box images
     const [images, setImages] = useState([]);
     const [isDraging, setIsDraging] = useState(false);
@@ -67,9 +67,8 @@ const GuestBanquetRent = () => {
 
 
     const handleSubmitData = async (e) => {
-        e.preventDefault(); 
-        setClickCount((prev)=>prev+12); 
-        setIsClicked(true);
+        e.preventDefault();
+
         let obj = {
             lookingFor: "Rent",
             propertyGroup: "Commercial",
@@ -150,12 +149,11 @@ const GuestBanquetRent = () => {
             locality &&
             address &&
             room &&
-            washrooms &&
-            pricedetail &&
-
+            washrooms && 
+            pricedetail && 
             inclusivePrices &&
             additinalft &&
-            flooring
+            flooring 
         ) {
             let id = localStorage.getItem("usrId") || undefined;
             let authorization = localStorage.getItem("AstToken") || undefined;
@@ -183,6 +181,8 @@ const GuestBanquetRent = () => {
                 // });
                 // let data = await response.json();  
                 // console.log("data",data); 
+                setClickCount((prev) => prev + 12); 
+                setIsClicked(true);
                 await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
                     .then((e) => {
                         toast({
@@ -190,8 +190,7 @@ const GuestBanquetRent = () => {
                             description: e.data.msg,
                             status: 'success',
                             duration: 2000,
-                        });
-
+                        }); 
                         submitImage(e.data.id);
                     });
             } catch (error) {
@@ -200,7 +199,9 @@ const GuestBanquetRent = () => {
                     status: 'error',
                     duration: 2000,
                 })
-                console.log(error);
+                setClickCount((prev) => prev - 12);
+                setIsClicked(false );
+                console.log(error);  
             }
             // }
 
@@ -213,6 +214,8 @@ const GuestBanquetRent = () => {
                 duration: 2000,
                 position: 'top-right'
             })
+            setClickCount((prev) => prev - 12);
+            setIsClicked(false);
         }
     };
 
@@ -242,16 +245,16 @@ const GuestBanquetRent = () => {
                 data: bodyContent,
             }
 
-            await axios.request(reqOptions).then((e)=>{
-                setIsClicked(false);  
-                navigate("/listing");  
+            await axios.request(reqOptions).then((e) => {
+                setIsClicked(false);
+                navigate("/listing");
             })
             // console.log(response.data);
         } catch (error) {
             console.log(error);
             setIsClicked(false);
         }
-        setIsClicked(false);  
+        setIsClicked(false);
     };
 
     const handlepinfetch = (e) => {
@@ -263,11 +266,11 @@ const GuestBanquetRent = () => {
     }
 
     const pinfetch = async (pin) => {
-        try { 
+        try {
             let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
             setState(res.data[0].state);
             setCity(res.data[0].city);
-            setCountry(res.data[0].country);  
+            setCountry(res.data[0].country);
             setPinCollection(res.data);
         }
         catch (err) {
@@ -470,8 +473,8 @@ const GuestBanquetRent = () => {
 
     // }
 
-    if(isClicked){
-        <Loading /> 
+    if (isClicked) { 
+        <Loading />
     }
 
 
@@ -496,11 +499,11 @@ const GuestBanquetRent = () => {
                 <Input
                     type="text"
                     placeholder={"Enter pincode"}
-                    required  
-                    value={pincode}  
-                    onChange={handlepinfetch}  
-                    variant="flushed"  
-                    fontSize={"md"} 
+                    required
+                    value={pincode}
+                    onChange={handlepinfetch}
+                    variant="flushed"
+                    fontSize={"md"}
                     maxLength={"6"}
                 />
 
@@ -600,8 +603,8 @@ const GuestBanquetRent = () => {
                     <InputGroup
                         className={style.select_land}
                         size="sm"
-                        isAttached 
-                        width={"300px"} 
+                        isAttached
+                        width={"300px"}
                         variant="outline"
                     >
                         <Input type="text" maxLength={"9"} placeholder="Enter Plot Area" value={plotArea}
@@ -1438,7 +1441,7 @@ const GuestBanquetRent = () => {
                         Close to Hospital
                     </button>
                     <button
-                        className={  
+                        className={
                             locationAdv.includes("Close to Market") ? style.setbtn : style.btn
                         }
                         value={"Close to Market"}
@@ -1496,18 +1499,18 @@ const GuestBanquetRent = () => {
             <Heading
                 as={"h5"}
                 size={"xs"}
-                color={"rgb(255, 52, 52)"} 
-                fontWeight={200} 
+                color={"rgb(255, 52, 52)"}
+                fontWeight={200}
                 margin={"4px 0"}
                 textAlign={"left"}
             >
-                *Please provide correct information, otherwise your listing might get 
+                *Please provide correct information, otherwise your listing might get
                 blocked
             </Heading>
             <Button
-                margin={"20px 0"} 
-                type="submit"  
-                disabled={clickCount<=0 ? true : false }  
+                margin={"20px 0"}
+                type="submit"
+                disabled={clickCount <= 0 ? true : false}
                 w={"100%"}
                 backgroundColor={"rgb(46,49,146)"}
                 _hover={{ backgroundColor: "rgb(74, 79, 223)" }}

@@ -56,8 +56,8 @@ const ManufactureRent = () => {
   const [bookingAmount, setBookingAmount] = useState("");
   const [annualDuesPayble, setAnnualDuesPayble] = useState("");
   const [clickCount, setClickCount] = useState(0);
-  const [isClicked, setIsClicked] = useState(false); 
-  const navigate = useNavigate(); 
+  const [isClicked, setIsClicked] = useState(false);
+  const navigate = useNavigate();
   // state for drop box images
   const [images, setImages] = useState([]);
   const [isDraging, setIsDraging] = useState(false);
@@ -67,8 +67,6 @@ const ManufactureRent = () => {
 
   const handleSubmitData = async (e) => {
     e.preventDefault();
-    setClickCount((prev)=>prev+10)
-    setIsClicked(true); 
     let obj = {
       lookingFor: "Rent",
       propertyGroup: "Commercial",
@@ -170,6 +168,8 @@ const ManufactureRent = () => {
         // });
         // let data = await response.json();  
         // console.log("data",data); 
+        setClickCount((prev) => prev + 12);
+        setIsClicked(true);
         await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
           .then((e) => {
             toast({
@@ -186,6 +186,8 @@ const ManufactureRent = () => {
           status: 'error',
           duration: 2000,
         })
+        setClickCount((prev) => prev - 12);
+        setIsClicked(false);
         console.log(error);
       }
       // }
@@ -198,7 +200,9 @@ const ManufactureRent = () => {
         status: 'info',
         duration: 2000,
         position: 'top-right'
-      })
+      });
+      setClickCount((prev) => prev - 12);
+      setIsClicked(false);
     }
   };
 
@@ -227,9 +231,9 @@ const ManufactureRent = () => {
         headers: headersList,
         data: bodyContent,
       }
-      let response = await axios.request(reqOptions).then((e)=>{
+      let response = await axios.request(reqOptions).then((e) => {
         setClickCount(false);
-        navigate("/listing");  
+        navigate("/listing");
       })
       console.log(response.data);
     } catch (error) {
@@ -438,13 +442,13 @@ const ManufactureRent = () => {
         setImages((prev) => [...prev, {
           name: files[i].name,
           image: files[i],
-        }]); 
+        }]);
       }
     }
     console.log("droped");
   }
 
-  if (isClicked) { 
+  if (isClicked) {
     <Loading />
   }
 
@@ -1485,7 +1489,7 @@ const ManufactureRent = () => {
           margin={"20px 0"}
           type="submit"
           w={"100%"}
-          backgroundColor={"rgb(46,49,146)"}  
+          backgroundColor={"rgb(46,49,146)"}
           _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
           color={"#ffffff"}
         >
