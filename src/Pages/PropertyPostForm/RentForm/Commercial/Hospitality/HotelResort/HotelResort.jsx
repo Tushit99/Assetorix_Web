@@ -68,9 +68,7 @@ const HotelResortRent = () => {
 
 
     const handleSubmitData = async (e) => {
-        e.preventDefault();
-        setClickCount((prev)=>prev+5);  
-        setIsClicked(true); 
+        e.preventDefault();  
         let obj = {
             lookingFor: "Rent",
             propertyGroup: "Commercial",

@@ -252,7 +252,8 @@ const GuestBanquetRent = () => {
             // console.log(response.data);
         } catch (error) {
             console.log(error);
-            setIsClicked(false);
+            setIsClicked(false); 
+            setClickCount((prev) => prev - 12); 
         }
         setIsClicked(false);
     };

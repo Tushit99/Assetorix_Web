@@ -317,6 +317,7 @@ const BareShell = () => {
         } catch (error) { 
             console.log(error); 
             setIsClicked(false);   
+            setClickCount((prev) => prev - 12);  
         }
         setIsClicked(false);  
     };

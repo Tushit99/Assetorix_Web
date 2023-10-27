@@ -91,10 +91,10 @@ const Coworkingspace = () => {
     const [pincollection, setPinCollection] = useState([]);
     const [maintenancePrice, setMaintenancePrice] = useState("");
     const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
-    const [zoneType, setZoneType] = useState("");  
-    const [clickCount, setClickCount] = useState(0); 
-    const [isClicked, setIsClicked] = useState(false);  
-    const navigate = useNavigate(); 
+    const [zoneType, setZoneType] = useState("");
+    const [clickCount, setClickCount] = useState(0);
+    const [isClicked, setIsClicked] = useState(false);
+    const navigate = useNavigate();
     // state for drop box images
     const [images, setImages] = useState([]);
     const [isDraging, setIsDraging] = useState(false);
@@ -105,8 +105,6 @@ const Coworkingspace = () => {
 
     const handleSubmitData = async (e) => {
         e.preventDefault();
-        setClickCount((prev)=>prev+10)
-        setIsClicked(true);  
         let obj = {
             lookingFor: "Rent",
             propertyGroup: "Commercial",
@@ -248,8 +246,9 @@ const Coworkingspace = () => {
                 // });
                 // let data = await response.json();
                 console.log("data", obj);
-                await axios
-                    .post(`${process.env.REACT_APP_URL}/property/`, obj, {
+                setClickCount((prev) => prev + 10)
+                setIsClicked(true);
+                await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, {
                         headers: head,
                     })
                     .then((e) => {
@@ -269,7 +268,10 @@ const Coworkingspace = () => {
                     title: error.response.data.msg,
                     status: "error",
                     duration: 2000,
-                });
+                }); 
+                setClickCount((prev) => prev - 12);
+                setIsClicked(false );
+                console.log(error);  
             }
             // }
         } else {
@@ -279,7 +281,9 @@ const Coworkingspace = () => {
                 status: "info",
                 duration: 2000,
                 position: "top-right",
-            });
+            }); 
+            setClickCount((prev) => prev - 12);
+            setIsClicked(false); 
         }
     };
 
@@ -309,16 +313,17 @@ const Coworkingspace = () => {
                 data: bodyContent,
             }
 
-            let response = await axios.request(reqOptions).then((e)=>{
-                navigate("/listing"); 
-                setIsClicked(false);   
-            }) 
+            let response = await axios.request(reqOptions).then((e) => {
+                navigate("/listing");
+                setIsClicked(false);
+            })
             console.log(response.data);
         } catch (error) {
-            console.log(error); 
-            setIsClicked(false);   
+            console.log(error);
+            setIsClicked(false);  
+            setClickCount((prev) => prev - 12);  
         }
-        setIsClicked(false);  
+        setIsClicked(false);
     };
 
 
@@ -544,9 +549,9 @@ const Coworkingspace = () => {
             }
         }
         console.log("droped");
-    }  
+    }
 
-    if(isClicked){
+    if (isClicked) {
         <Loading />
     }
 
@@ -1938,7 +1943,7 @@ const Coworkingspace = () => {
             <Button
                 margin={"20px 0"}
                 type="submit"
-                disabled={clickCount<=0 ? true : false }   
+                disabled={clickCount <= 0 ? true : false}
                 w={"100%"}
                 backgroundColor={"rgb(46,49,146)"}
                 _hover={{ backgroundColor: "rgb(74, 79, 223)" }}

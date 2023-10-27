@@ -104,9 +104,7 @@ const ReadyMove = () => {
     // please don'nt change any function without any prior knowledge   
 
     const handleSubmitData = async (e) => {
-        e.preventDefault();
-        setClickCount((prev) => prev + 10)
-        setIsClicked(true);
+        e.preventDefault(); 
         let obj = {
             lookingFor: "Rent",
             propertyGroup: "Commercial",
@@ -259,9 +257,10 @@ const ReadyMove = () => {
                 //     body: JSON.stringify(obj)
                 // });
                 // let data = await response.json();
-                console.log("data", obj);
-                await axios
-                    .post(`${process.env.REACT_APP_URL}/property/`, obj, {
+                console.log("data", obj); 
+                setClickCount((prev) => prev + 12); 
+                setIsClicked(true); 
+                await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, {
                         headers: head,
                     })
                     .then((e) => {
@@ -274,7 +273,7 @@ const ReadyMove = () => {
                         navigate("/listing");
                         submitImage(e.data.id);
                     });
-            } catch (error) {
+            } catch (error) { 
                 toast({
                     title: error.response.data.msg,
                     status: "error",
