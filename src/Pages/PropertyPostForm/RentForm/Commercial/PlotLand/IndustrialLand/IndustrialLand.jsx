@@ -70,7 +70,7 @@ const IndustrialLand = () => {
     const [authorisedBy, setAuthorisedBy] = useState([]);
     const [clickCount, setClickCount] = useState(0);
     const [isClicked, setIsClicked] = useState(false);
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
     // state for drop box images
     const [images, setImages] = useState([]);
     const [isDraging, setIsDraging] = useState(false);
@@ -199,8 +199,8 @@ const IndustrialLand = () => {
                 // });
                 // let data = await response.json();  
                 // console.log("data",data);  
-                setClickCount((prev) => prev + 12); 
-                setIsClicked(true); 
+                setClickCount((prev) => prev + 12);
+                setIsClicked(true);
                 await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
                     .then((e) => {
                         toast({
@@ -218,8 +218,7 @@ const IndustrialLand = () => {
                     duration: 2000,
                 })
                 setClickCount((prev) => prev - 12);
-                setIsClicked(false ); 
-                console.log(error);
+                setIsClicked(false);
             }
         }
         else {
@@ -229,9 +228,9 @@ const IndustrialLand = () => {
                 status: 'info',
                 duration: 2000,
                 position: 'top-right'
-            }) 
+            })
             setClickCount((prev) => prev - 12);
-            setIsClicked(false);  
+            setIsClicked(false);
         }
     };
 
@@ -261,17 +260,15 @@ const IndustrialLand = () => {
                 data: bodyContent,
             }
 
-            let response = await axios.request(reqOptions).then((e) => {
-                setIsClicked(false);   
-                navigate("/listing");
+            await axios.request(reqOptions).then((e) => {
+                setIsClicked(false);
             })
-            console.log(response.data);
         } catch (error) {
             console.log(error);
-            setIsClicked(false);    
-            setClickCount((prev) => prev - 12);  
+            setIsClicked(false);
         }
-        setIsClicked(false);    
+        navigate("/listing");
+        setIsClicked(false);
     };
 
     const handlepinfetch = (e) => {
@@ -512,11 +509,11 @@ const IndustrialLand = () => {
             }
         }
         console.log("droped");
-    } 
-    
-    if(isClicked){
+    }
+
+    if (isClicked) {
         <Loading />
-    } 
+    }
 
     return (
         <Box className="perfectwidth">
@@ -1410,7 +1407,7 @@ const IndustrialLand = () => {
                     margin={"20px 0"}
                     type="submit"
                     w={"100%"}
-                    disabled={clickCount<=0 ? true : false }    
+                    disabled={clickCount <= 0 ? true : false}
                     backgroundColor={"rgb(46,49,146)"}
                     _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                     color={"#ffffff"}

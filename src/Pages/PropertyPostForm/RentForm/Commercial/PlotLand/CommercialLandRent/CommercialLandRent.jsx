@@ -228,10 +228,7 @@ const CommercialLandRent = () => {
         })
         setClickCount((prev) => prev - 12);
         setIsClicked(false);
-        console.log(error);
       }
-      // }
-
     }
     else {
       toast({
@@ -242,7 +239,7 @@ const CommercialLandRent = () => {
         position: 'top-right'
       });
       setClickCount((prev) => prev - 12);
-      setIsClicked(false);  
+      setIsClicked(false);
     }
   };
 
@@ -272,16 +269,14 @@ const CommercialLandRent = () => {
         data: bodyContent,
       }
 
-      let response = await axios.request(reqOptions).then((e) => {
+      await axios.request(reqOptions).then((e) => {
         setIsClicked(false);
-        navigate("/listing");
       })
-      console.log(response.data);  
     } catch (error) {
       console.log(error);
       setIsClicked(false);
-      setClickCount((prev) => prev - 12);  
     }
+    navigate("/listing");
     setIsClicked(false);
   };
 
@@ -520,11 +515,8 @@ const CommercialLandRent = () => {
       }
     }
     console.log("droped");
-  }
+  }  
 
-  if (isClicked) {
-    <Loading />
-  }
 
   return (
     <Box className="perfectwidth">
@@ -1400,7 +1392,8 @@ const CommercialLandRent = () => {
         >
           *Please provide correct information, otherwise your listing might get
           blocked
-        </Heading>
+        </Heading>  
+        {isClicked && <Loading />}  
         <Button
           margin={"20px 0"}
           type="submit"
