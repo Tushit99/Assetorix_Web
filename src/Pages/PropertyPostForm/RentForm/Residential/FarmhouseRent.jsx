@@ -258,6 +258,8 @@ const FarmhouseRent = () => {
                 // console.log("data",obj,response); 
                 // let data = await response.json();
                 // console.log("data",obj,data); 
+                setClickCount((prev) => prev + 12); 
+                setIsClicked(true);  
                 await axios
                     .post(`${process.env.REACT_APP_URL}/property/`, obj, {
                         headers: head,
@@ -278,7 +280,8 @@ const FarmhouseRent = () => {
                     status: "error",
                     duration: 2000,
                 });
-                console.log(error);
+                setClickCount((prev) => prev - 12);
+                setIsClicked(false); 
             }
             // }
         } else {
@@ -289,6 +292,8 @@ const FarmhouseRent = () => {
                 duration: 2000,
                 position: "top-right",
             });
+            setClickCount((prev) => prev - 12);
+            setIsClicked(false);
         }
     };
 
@@ -325,8 +330,7 @@ const FarmhouseRent = () => {
             console.log(response.data);
         } catch (error) { 
             console.log(error);
-            setIsClicked(false);
-            navigate("/listing");
+            setIsClicked(false);  
         } 
         setIsClicked(false);
     };

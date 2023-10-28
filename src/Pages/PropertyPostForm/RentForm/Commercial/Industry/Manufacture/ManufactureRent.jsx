@@ -188,10 +188,7 @@ const ManufactureRent = () => {
         })
         setClickCount((prev) => prev - 12);
         setIsClicked(false);
-        console.log(error);
       }
-      // }
-
     }
     else {
       toast({
@@ -231,17 +228,15 @@ const ManufactureRent = () => {
         headers: headersList,
         data: bodyContent,
       }
-      let response = await axios.request(reqOptions).then((e) => {
-        setClickCount(false);
-        navigate("/listing");
+      await axios.request(reqOptions).then((e) => {
+        setIsClicked(false);
       })
-      console.log(response.data);
     } catch (error) {
       console.log(error);
-      setClickCount(false);
+      setIsClicked(false);
     }
-    setClickCount(false);
-
+    navigate("/listing");
+    setIsClicked(false); 
   };
 
   const handlepinfetch = (e) => {
@@ -447,11 +442,6 @@ const ManufactureRent = () => {
     }
     console.log("droped");
   }
-
-  if (isClicked) {
-    <Loading />
-  }
-
 
   return (
     <div>
@@ -1484,7 +1474,8 @@ const ManufactureRent = () => {
         >
           *Please provide correct information, otherwise your listing might get
           blocked
-        </Heading>
+        </Heading> 
+        {isClicked && <Loading />}  
         <Button
           margin={"20px 0"}
           type="submit"

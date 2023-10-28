@@ -72,7 +72,7 @@ const CommercialLandRent = () => {
   const [clickCount, setClickCount] = useState(0);
   const [isClicked, setIsClicked] = useState(false);
   // state for drop box images
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const [images, setImages] = useState([]);
   const [isDraging, setIsDraging] = useState(false);
   const fileInputRef = useRef(null);
@@ -208,6 +208,8 @@ const CommercialLandRent = () => {
         // });
         // let data = await response.json();  
         // console.log("data",data); 
+        setClickCount((prev) => prev + 12);
+        setIsClicked(true);
         await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
           .then((e) => {
             toast({
@@ -224,6 +226,8 @@ const CommercialLandRent = () => {
           status: 'error',
           duration: 2000,
         })
+        setClickCount((prev) => prev - 12);
+        setIsClicked(false);
         console.log(error);
       }
       // }
@@ -236,7 +240,9 @@ const CommercialLandRent = () => {
         status: 'info',
         duration: 2000,
         position: 'top-right'
-      })
+      });
+      setClickCount((prev) => prev - 12);
+      setIsClicked(false);  
     }
   };
 
@@ -267,13 +273,14 @@ const CommercialLandRent = () => {
       }
 
       let response = await axios.request(reqOptions).then((e) => {
-        setIsClicked(false); 
-        navigate("/listing");  
+        setIsClicked(false);
+        navigate("/listing");
       })
-      console.log(response.data);
+      console.log(response.data);  
     } catch (error) {
       console.log(error);
       setIsClicked(false);
+      setClickCount((prev) => prev - 12);  
     }
     setIsClicked(false);
   };

@@ -91,12 +91,12 @@ const BareShell = () => {
     const [pincollection, setPinCollection] = useState([]);
     const [maintenancePrice, setMaintenancePrice] = useState("");
     const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
-    const [zoneType, setZoneType] = useState(""); 
-    const [clickCount, setClickCount] = useState(0); 
+    const [zoneType, setZoneType] = useState("");
+    const [clickCount, setClickCount] = useState(0);
     const [isClicked, setIsClicked] = useState(false);
-    const navigate = useNavigate();  
+    const navigate = useNavigate();
     // state for drop box images 
-    const [images, setImages] = useState([]); 
+    const [images, setImages] = useState([]);
     const [isDraging, setIsDraging] = useState(false);
     const fileInputRef = useRef(null);
     // please don'nt change any function without any prior knowledge   
@@ -104,7 +104,7 @@ const BareShell = () => {
 
 
     const handleSubmitData = async (e) => {
-        e.preventDefault();  
+        e.preventDefault();
         let obj = {
             lookingFor: "Rent",
             propertyGroup: "Commercial",
@@ -245,11 +245,11 @@ const BareShell = () => {
                 //     body: JSON.stringify(obj)
                 // });
                 // let data = await response.json();
-                setClickCount((prev) => prev + 12); 
-                setIsClicked(true); 
+                setClickCount((prev) => prev + 12);
+                setIsClicked(true);
                 await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, {
-                        headers: head,
-                    })
+                    headers: head,
+                })
                     .then((e) => {
                         toast({
                             title: e.data.msg,
@@ -266,11 +266,10 @@ const BareShell = () => {
                     duration: 2000,
                 });
                 setClickCount((prev) => prev - 12);
-                setIsClicked(false );
-                console.log(error);  
+                setIsClicked(false);
             }
-            // }
-        } else {
+        }
+        else {
             toast({
                 title: "Form un-filled",
                 description: "Please fill all required fields.",
@@ -279,7 +278,7 @@ const BareShell = () => {
                 position: "top-right",
             });
             setClickCount((prev) => prev - 12);
-            setIsClicked(false); 
+            setIsClicked(false);
         }
     };
 
@@ -309,17 +308,15 @@ const BareShell = () => {
                 data: bodyContent,
             }
 
-            let response = await axios.request(reqOptions).then((e)=>{
-                setIsClicked(false);  
-                navigate("/listing");  
-            }) 
+            let response = await axios.request(reqOptions).then((e) => {
+                setIsClicked(false);
+            })
             console.log(response.data);
         } catch (error) { 
-            console.log(error); 
-            setIsClicked(false);   
-            setClickCount((prev) => prev - 12);  
+            setIsClicked(false); 
         }
-        setIsClicked(false);  
+        navigate("/listing");
+        setIsClicked(false);
     };
 
     const handlepinfetch = (e) => {
@@ -367,20 +364,20 @@ const BareShell = () => {
         setDepositAmount(e.target.value);
     }
 
-    const handleAvailable = (e) => {
-        e.preventDefault();
-        setAvailability(e.target.value);
-    };
+    // const handleAvailable = (e) => {
+    //     e.preventDefault();
+    //     setAvailability(e.target.value);
+    // };
 
     const handleyear = (e) => {
         e.preventDefault();
         setFromyear(e.target.value);
     };
 
-    const handleExpectedYear = (e) => {
-        e.preventDefault();
-        setExpectedYear(e.target.value);
-    };
+    // const handleExpectedYear = (e) => {
+    //     e.preventDefault();
+    //     setExpectedYear(e.target.value);
+    // };
 
     const handleNumberOfParking = (e) => {
         e.preventDefault();
@@ -489,7 +486,7 @@ const BareShell = () => {
         const newImages = [...images];
         newImages.splice(index, 1);
         setImages(newImages);
-      };
+    };
 
     const onFileSelect = (e) => {
         let files = e.target.files;
@@ -505,7 +502,7 @@ const BareShell = () => {
                     name: files[i].name,
                     image: files[i],
                 },])
-            } 
+            }
         }
     }
 
@@ -544,10 +541,6 @@ const BareShell = () => {
             }
         }
         console.log("droped");
-    }
-
-    if(isClicked){
-        <Loading />
     } 
 
     return (
@@ -1933,12 +1926,13 @@ const BareShell = () => {
                 *Please provide correct information, otherwise your listing might get
                 blocked
             </Heading>
-            {/* form submit button */}
+            {/* form submit button */}  
+            {isClicked && <Loading />}   
             <Button
                 margin={"20px 0"}
                 type="submit"
-                w={"100%"} 
-                disabled={clickCount<=0 ? true : false }   
+                w={"100%"}
+                disabled={clickCount <= 0 ? true : false}
                 backgroundColor={"rgb(46,49,146)"}
                 _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                 color={"#ffffff"}

@@ -249,8 +249,8 @@ const Coworkingspace = () => {
                 setClickCount((prev) => prev + 10)
                 setIsClicked(true);
                 await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, {
-                        headers: head,
-                    })
+                    headers: head,
+                })
                     .then((e) => {
                         console.log(e)
                         toast({
@@ -268,12 +268,10 @@ const Coworkingspace = () => {
                     title: error.response.data.msg,
                     status: "error",
                     duration: 2000,
-                }); 
+                });
                 setClickCount((prev) => prev - 12);
-                setIsClicked(false );
-                console.log(error);  
+                setIsClicked(false);
             }
-            // }
         } else {
             toast({
                 title: "Form un-filled",
@@ -281,9 +279,9 @@ const Coworkingspace = () => {
                 status: "info",
                 duration: 2000,
                 position: "top-right",
-            }); 
+            });
             setClickCount((prev) => prev - 12);
-            setIsClicked(false); 
+            setIsClicked(false);
         }
     };
 
@@ -313,16 +311,14 @@ const Coworkingspace = () => {
                 data: bodyContent,
             }
 
-            let response = await axios.request(reqOptions).then((e) => {
-                navigate("/listing");
+            await axios.request(reqOptions).then((e) => {
                 setIsClicked(false);
             })
-            console.log(response.data);
         } catch (error) {
             console.log(error);
-            setIsClicked(false);  
-            setClickCount((prev) => prev - 12);  
+            setIsClicked(false);
         }
+        navigate("/listing");
         setIsClicked(false);
     };
 
@@ -549,11 +545,7 @@ const Coworkingspace = () => {
             }
         }
         console.log("droped");
-    }
-
-    if (isClicked) {
-        <Loading />
-    }
+    } 
 
     return (
         <form onSubmit={handleSubmitData}>
@@ -1939,7 +1931,8 @@ const Coworkingspace = () => {
                 *Please provide correct information, otherwise your listing might get
                 blocked
             </Heading>
-            {/* form submit button */}
+            {/* form submit button */} 
+            {isClicked && <Loading />}  
             <Button
                 margin={"20px 0"}
                 type="submit"

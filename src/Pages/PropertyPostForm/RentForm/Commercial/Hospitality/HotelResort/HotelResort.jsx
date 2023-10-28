@@ -53,8 +53,8 @@ const HotelResortRent = () => {
     const [pincollection, setPinCollection] = useState([]);
     const [qualityRating, setqualityRating] = useState("");
     const [isClicked, setIsClicked] = useState(false);
-    const [clickCount, setClickCount] = useState(0); 
-    const navigate = useNavigate(); 
+    const [clickCount, setClickCount] = useState(0);
+    const navigate = useNavigate();
 
     const [additionalPrice, setAdditionalPrice] = useState(false);
     const [maintenancePrice, setMaintenancePrice] = useState("");
@@ -68,7 +68,7 @@ const HotelResortRent = () => {
 
 
     const handleSubmitData = async (e) => {
-        e.preventDefault();  
+        e.preventDefault();
         let obj = {
             lookingFor: "Rent",
             propertyGroup: "Commercial",
@@ -182,8 +182,8 @@ const HotelResortRent = () => {
                 // });
                 // let data = await response.json();  
                 // console.log("data",data);  
-                setClickCount((prev) => prev + 12); 
-                setIsClicked(true); 
+                setClickCount((prev) => prev + 12);
+                setIsClicked(true);
                 await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
                     .then((e) => {
                         toast({
@@ -201,11 +201,9 @@ const HotelResortRent = () => {
                     duration: 2000,
                 })
                 setClickCount((prev) => prev - 12);
-                setIsClicked(false );
-                console.log(error);  
-            }
-            // }
-
+                setIsClicked(false);
+                console.log(error);
+            } 
         }
         else {
             toast({
@@ -216,7 +214,7 @@ const HotelResortRent = () => {
                 position: 'top-right'
             })
             setClickCount((prev) => prev - 12);
-            setIsClicked(false); 
+            setIsClicked(false);
         }
     };
 
@@ -230,7 +228,7 @@ const HotelResortRent = () => {
                 "Accept": "*/*",
                 "Authorization": authorization,
                 "id": id
-            }
+            } 
 
             let formdata = new FormData();
             images.forEach((image) => {
@@ -246,14 +244,14 @@ const HotelResortRent = () => {
                 data: bodyContent,
             }
 
-            let response = await axios.request(reqOptions)
-            console.log(response.data);
-            setIsClicked(false); 
-            navigate("/listing");
+            await axios.request(reqOptions).then((e) => {
+                setIsClicked(false);
+            })
         } catch (error) {
             console.log(error);
             setIsClicked(false);
         }
+        navigate("/listing");
         setIsClicked(false);
     };
 
@@ -469,11 +467,7 @@ const HotelResortRent = () => {
     //     }
     //     let adding = document.getElementById("floorSelectTag");
     //     adding.innerHTML = options; 
-    // }
-
-    if(isClicked){
-        <Loading />
-    }
+    // } 
 
 
     return (
@@ -603,8 +597,8 @@ const HotelResortRent = () => {
                     <InputGroup
                         className={style.select_land}
                         size="sm"
-                        isAttached 
-                        w={"300px"} 
+                        isAttached
+                        w={"300px"}
                         variant="outline"
                     >
                         <Input variant={"outline"} type="text" placeholder="Enter Plot Area" value={plotArea}
@@ -997,7 +991,7 @@ const HotelResortRent = () => {
                     let my_cleantext = CleanInputText(e.target.value);
                     setDesc(my_cleantext);
                 }} ></Textarea>
-            </Box> 
+            </Box>
 
             {/* =============================== Amenities =============================== */}
             <Box className={style.optional_box}>
@@ -1097,7 +1091,7 @@ const HotelResortRent = () => {
                     </button>
 
                 </Box>
-            </Box>  
+            </Box>
 
             {/* =============================== Property Features =============================== */}
             <Box className={style.optional_box}>
@@ -1159,7 +1153,7 @@ const HotelResortRent = () => {
                         Feng Shui / Vaastu Compliant
                     </button>
                 </Box>
-            </Box> 
+            </Box>
 
             {/* =============================== Society/Building feature =============================== */}
             <Box className={style.optional_box}>
@@ -1296,7 +1290,7 @@ const HotelResortRent = () => {
                         Security Personnel
                     </button>
                 </Box>
-            </Box> 
+            </Box>
 
             {/* Additional Features */}
             <Box className={style.optional_box}>
@@ -1316,8 +1310,8 @@ const HotelResortRent = () => {
                         Bank Attached Property
                     </button>
                 </Box>
-            </Box> 
-            
+            </Box>
+
             {/* Other Features */}
             <Box>
                 <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
@@ -1480,10 +1474,11 @@ const HotelResortRent = () => {
                 *Please provide correct information, otherwise your listing might get
                 blocked
             </Heading>
+            {isClicked && <Loading />}
             <Button
                 margin={"20px 0"}
                 type="submit"
-                disabled={clickCount<=0 ? true : false }  
+                disabled={clickCount <= 0 ? true : false}
                 w={"100%"}
                 backgroundColor={"rgb(46,49,146)"}
                 _hover={{ backgroundColor: "rgb(74, 79, 223)" }}

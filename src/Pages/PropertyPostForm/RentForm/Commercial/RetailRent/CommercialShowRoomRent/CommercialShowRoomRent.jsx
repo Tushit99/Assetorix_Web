@@ -78,11 +78,11 @@ const CommercialShowRoomRent = () => {
   const [securityDeposit, setSecurityDeposit] = useState("");
   const [depositAmount, setDepositAmount] = useState("");
   const [availableFrom, setavailableFrom] = useState("");
-  const [clickCount, setClickCount] = useState(0); 
-  const [isClicked, setIsClicked] = useState(false);   
+  const [clickCount, setClickCount] = useState(0);
+  const [isClicked, setIsClicked] = useState(false);
   // state for drop box images
   const [images, setImages] = useState([]);
-  const navigate = useNavigate();  
+  const navigate = useNavigate();
   const [isDraging, setIsDraging] = useState(false);
   const fileInputRef = useRef(null);
 
@@ -242,7 +242,8 @@ const CommercialShowRoomRent = () => {
         //     body: JSON.stringify(obj)
         // });
         // let data = await response.json();  
-        console.log("data", obj);
+        setClickCount((prev) => prev + 12);
+        setIsClicked(true);
         await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
           .then((e) => {
             toast({
@@ -259,7 +260,8 @@ const CommercialShowRoomRent = () => {
           status: 'error',
           duration: 2000,
         })
-        console.log(error);
+        setClickCount((prev) => prev - 12);
+        setIsClicked(false);
       }
       // }
 
@@ -272,6 +274,8 @@ const CommercialShowRoomRent = () => {
         duration: 2000,
         position: 'top-right'
       })
+      setClickCount((prev) => prev - 12);
+      setIsClicked(false);  
     }
   };
 
@@ -301,16 +305,17 @@ const CommercialShowRoomRent = () => {
         data: bodyContent,
       }
 
-      let response = await axios.request(reqOptions).then((e)=>{
-        setIsClicked(false);   
-        navigate("/listing"); 
+      let response = await axios.request(reqOptions).then((e) => {
+        setIsClicked(false);
+        navigate("/listing");
       })
       console.log(response.data);
     } catch (error) {
-      console.log(error); 
-      setIsClicked(false);   
+      console.log(error);
+      setIsClicked(false);
+      setClickCount((prev) => prev - 12);  
     }
-    setIsClicked(false);  
+    setIsClicked(false);
   };
 
   // pincode of 3 letter
@@ -534,13 +539,13 @@ const CommercialShowRoomRent = () => {
 
   const selectFiles = () => {
     fileInputRef.current.click();
-  }  
+  }
 
   const removeImage = (index) => {
     const newImages = [...images];
     newImages.splice(index, 1);
     setImages(newImages);
-  }; 
+  };
 
   const onFileSelect = (e) => {
     let files = e.target.files;
@@ -597,9 +602,9 @@ const CommercialShowRoomRent = () => {
     console.log("droped");
   }
 
-  if(isClicked){
+  if (isClicked) {
     <Loading />
-} 
+  }
 
   return (
     <div>
@@ -1876,8 +1881,8 @@ const CommercialShowRoomRent = () => {
           <Button
             margin={"20px 0"}
             type="submit"
-            w={"100%"} 
-            disabled={clickCount<=0 ? true : false }    
+            w={"100%"}
+            disabled={clickCount <= 0 ? true : false}
             backgroundColor={"rgb(46,49,146)"}
             _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
             color={"#ffffff"}

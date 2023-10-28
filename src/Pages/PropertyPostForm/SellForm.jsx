@@ -121,7 +121,7 @@ const SellForm = () => {
                             >
                                 Rent/Lease
                             </Tab>
-                            <Tab
+                            {/* <Tab
                                 _selected={{
                                     bg: "blue.50",
                                     border: "1px solid rgba(85, 90, 255, 0.236)",
@@ -129,8 +129,8 @@ const SellForm = () => {
                                 }}
                             >
                                 PG
-                            </Tab>
-                        </TabList>
+                            </Tab> */} 
+                        </TabList> 
                         <Heading textAlign={"left"} margin={"20px 0"} as={"h3"} size={"md"}>
                             What kind of Property do you have?
                         </Heading>
@@ -493,7 +493,7 @@ const SellForm = () => {
                                 </Tabs>
                             </TabPanel>
                             {/* PG options */}
-                            <TabPanel>
+                            {/* <TabPanel>
                                 <Box className={style.grid}>
                                     <button
                                         onClick={() => handlechange("PG", "Flat/Apartment")}
@@ -550,7 +550,7 @@ const SellForm = () => {
                                         1 RK/ Studio Apartment
                                     </button>
                                 </Box>
-                            </TabPanel>
+                            </TabPanel> */}
                         </TabPanels>
                     </Tabs>
                 </Box> 

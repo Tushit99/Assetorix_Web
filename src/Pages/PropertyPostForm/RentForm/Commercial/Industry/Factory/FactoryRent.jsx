@@ -232,13 +232,13 @@ const FactoryRent = () => {
 
             let response = await axios.request(reqOptions).then((e) => {
                 setIsClicked(false);
-                navigate("/listing");
             })
             console.log(response.data);
         } catch (error) {
             console.log(error);
             setIsClicked(false);
         }
+        navigate("/listing");
         setIsClicked(false);
     };
 
@@ -447,9 +447,6 @@ const FactoryRent = () => {
         console.log("droped");
     }
 
-    if (isClicked) {
-        <Loading />
-    }
 
     return (
         <div>
@@ -1458,7 +1455,8 @@ const FactoryRent = () => {
                 >
                     *Please provide correct information, otherwise your listing might get
                     blocked
-                </Heading>
+                </Heading> 
+                {isClicked && <Loading />}  
                 <Button
                     margin={"20px 0"}
                     type="submit"

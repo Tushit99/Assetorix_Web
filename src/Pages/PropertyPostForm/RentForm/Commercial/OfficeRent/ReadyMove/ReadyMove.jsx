@@ -269,8 +269,7 @@ const ReadyMove = () => {
                             description: e.data.msg,
                             status: "success",
                             duration: 2000,
-                        });
-                        navigate("/listing");
+                        }); 
                         submitImage(e.data.id);
                     });
             } catch (error) { 
@@ -279,9 +278,9 @@ const ReadyMove = () => {
                     status: "error",
                     duration: 2000,
                 });
-                console.log(error);
-            }
-            // }
+                setClickCount((prev) => prev - 12); 
+                setIsClicked(false); 
+            } 
         } else {
             toast({
                 title: "Form un-filled",
@@ -290,6 +289,8 @@ const ReadyMove = () => {
                 duration: 2000,
                 position: "top-right",
             });
+            setClickCount((prev) => prev - 12);
+            setIsClicked(false);
         }
     };
 
@@ -319,14 +320,14 @@ const ReadyMove = () => {
                 data: bodyContent,
             }
 
-            let response = await axios.request(reqOptions).then((e) => {
-                setIsClicked(false);
-            })
-            console.log(response.data);  
+            await axios.request(reqOptions).then((e) => {
+                setIsClicked(false);    
+            }) 
         } catch (error) {
             console.log(error);
-            setIsClicked(false);
+            setIsClicked(false);  
         }
+        navigate("/listing");  
         setIsClicked(false);
     };
 
@@ -541,11 +542,7 @@ const ReadyMove = () => {
             }
         }
         console.log("droped");
-    }
-
-
-
-
+    } 
 
     return (
         <form onSubmit={handleSubmitData}>
@@ -1898,8 +1895,8 @@ const ReadyMove = () => {
                 *Please provide correct information, otherwise your listing might get
                 blocked
             </Heading>
-            {isClicked && <Loading />}
             {/* form submit button */}
+            {isClicked && <Loading />}
             <Button
                 margin={"20px 0"}
                 type="submit"

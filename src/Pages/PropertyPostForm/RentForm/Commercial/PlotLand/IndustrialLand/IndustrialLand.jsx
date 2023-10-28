@@ -198,7 +198,9 @@ const IndustrialLand = () => {
                 //     body: JSON.stringify(obj)
                 // });
                 // let data = await response.json();  
-                // console.log("data",data); 
+                // console.log("data",data);  
+                setClickCount((prev) => prev + 12); 
+                setIsClicked(true); 
                 await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
                     .then((e) => {
                         toast({
@@ -215,6 +217,8 @@ const IndustrialLand = () => {
                     status: 'error',
                     duration: 2000,
                 })
+                setClickCount((prev) => prev - 12);
+                setIsClicked(false ); 
                 console.log(error);
             }
         }
@@ -225,7 +229,9 @@ const IndustrialLand = () => {
                 status: 'info',
                 duration: 2000,
                 position: 'top-right'
-            })
+            }) 
+            setClickCount((prev) => prev - 12);
+            setIsClicked(false);  
         }
     };
 
@@ -262,7 +268,8 @@ const IndustrialLand = () => {
             console.log(response.data);
         } catch (error) {
             console.log(error);
-            setIsClicked(false);   
+            setIsClicked(false);    
+            setClickCount((prev) => prev - 12);  
         }
         setIsClicked(false);    
     };

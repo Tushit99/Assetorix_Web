@@ -54,10 +54,10 @@ const ColdStorageRent = () => {
   const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
   const [bookingAmount, setBookingAmount] = useState("");
   const [annualDuesPayble, setAnnualDuesPayble] = useState("");
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   // state for drop box images
-  const [clickCount, setClickCount] = useState(0); 
-  const [isClicked, setIsClicked] = useState(false);  
+  const [clickCount, setClickCount] = useState(0);
+  const [isClicked, setIsClicked] = useState(false);
   const [images, setImages] = useState([]);
   const [isDraging, setIsDraging] = useState(false);
   const fileInputRef = useRef(null);
@@ -67,7 +67,7 @@ const ColdStorageRent = () => {
   const handleSubmitData = async (e) => {
     e.preventDefault();
     setClickCount((prev) => prev + 10)
-    setIsClicked(true); 
+    setIsClicked(true);
     let obj = {
       lookingFor: "Rent",
       propertyGroup: "Commercial",
@@ -169,6 +169,8 @@ const ColdStorageRent = () => {
         // });
         // let data = await response.json();  
         // console.log("data",data); 
+        setClickCount((prev) => prev + 12);
+        setIsClicked(true);
         await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
           .then((e) => {
             toast({
@@ -185,7 +187,8 @@ const ColdStorageRent = () => {
           status: 'error',
           duration: 2000,
         })
-        console.log(error);
+        setClickCount((prev) => prev - 12);
+        setIsClicked(false);
       }
       // }
 
@@ -198,6 +201,8 @@ const ColdStorageRent = () => {
         duration: 2000,
         position: 'top-right'
       })
+      setClickCount((prev) => prev - 12);
+      setIsClicked(false); 
     }
   };
 
@@ -229,12 +234,13 @@ const ColdStorageRent = () => {
 
       let response = await axios.request(reqOptions).then((e) => {
         setIsClicked(false);
-        navigate("/listing");  
+        navigate("/listing");
       })
       console.log(response.data);
     } catch (error) {
       setIsClicked(false);
-      console.log(error);
+      console.log(error); 
+      setClickCount((prev) => prev - 12);  
     }
     setIsClicked(false);
   };
@@ -443,9 +449,9 @@ const ColdStorageRent = () => {
     console.log("droped");
   }
 
-  if(isClicked){
+  if (isClicked) {
     <Loading />
-} 
+  }
 
   return (
     <div>
@@ -1435,7 +1441,7 @@ const ColdStorageRent = () => {
           margin={"20px 0"}
           type="submit"
           w={"100%"}
-          disabled={clickCount<=0 ? true : false }    
+          disabled={clickCount <= 0 ? true : false}
           backgroundColor={"rgb(46,49,146)"}
           _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
           color={"#ffffff"}

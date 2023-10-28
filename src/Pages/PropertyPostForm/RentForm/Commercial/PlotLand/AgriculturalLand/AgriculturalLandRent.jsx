@@ -17,7 +17,7 @@ import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import style from "../../RentComercial.module.css";
 import { CleanInputText, NumericString } from "../../../../code";
-import { ChevronDownIcon } from "@chakra-ui/icons";
+// import { ChevronDownIcon } from "@chakra-ui/icons";
 import Loading from "../../../../Loading";
 import { useNavigate } from "react-router-dom";
 
@@ -66,7 +66,7 @@ const AgriculturalLandRent = () => {
   const [clickCount, setClickCount] = useState(0);
   const [isClicked, setIsClicked] = useState(false);
   // state for drop box images
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const [images, setImages] = useState([]);
   const [isDraging, setIsDraging] = useState(false);
   const fileInputRef = useRef(null);
@@ -86,8 +86,6 @@ const AgriculturalLandRent = () => {
 
   const handleSubmitData = async (e) => {
     e.preventDefault();
-    setClickCount((prev) => prev + 10)
-    setIsClicked(true);
     let obj = {
       lookingFor: "Rent",
       propertyGroup: "Commercial",
@@ -193,7 +191,9 @@ const AgriculturalLandRent = () => {
         //     body: JSON.stringify(obj)
         // });
         // let data = await response.json();  
-        // console.log("data",data); 
+        // console.log("data",data);  
+        setClickCount((prev) => prev + 12);
+        setIsClicked(true);
         await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
           .then((e) => {
             toast({
@@ -210,7 +210,8 @@ const AgriculturalLandRent = () => {
           status: 'error',
           duration: 2000,
         })
-        console.log(error);
+        setClickCount((prev) => prev - 12);
+        setIsClicked(false);
       }
     }
     else {
@@ -221,6 +222,8 @@ const AgriculturalLandRent = () => {
         duration: 2000,
         position: 'top-right'
       })
+      setClickCount((prev) => prev - 12);
+      setIsClicked(false);
     }
   };
 
@@ -250,22 +253,22 @@ const AgriculturalLandRent = () => {
         data: bodyContent,
       }
 
-      let response = await axios.request(reqOptions).then((e) => {
+      await axios.request(reqOptions).then((e) => {
         setIsClicked(false);
-        navigate("/listing"); 
       })
-      console.log(response.data);
     } catch (error) {
       console.log(error);
       setIsClicked(false);
     }
-    setIsClicked(false);
+    navigate("/listing");
+    setIsClicked(false); 
   };
 
   const handlepinfetch = (e) => {
-    setPincode(e.target.value);
-    if (e.target.value.length == 6) {
-      pinfetch(e.target.value);
+    let val = NumericString(e.target.value);
+    setPincode(val);
+    if (val.length == 6) {
+      pinfetch(Number(val));
     }
     else {
       console.log(e.target.value);
@@ -473,11 +476,7 @@ const AgriculturalLandRent = () => {
       }
     }
     console.log("droped");
-  }
-
-  if (isClicked) {
-    <Loading />
-  }
+  } 
 
   return (
     <Box className="perfectwidth">
@@ -1323,7 +1322,8 @@ const AgriculturalLandRent = () => {
         >
           *Please provide correct information, otherwise your listing might get
           blocked
-        </Heading>
+        </Heading>  
+        {isClicked && <Loading />} 
         <Button
           margin={"20px 0"}
           type="submit"

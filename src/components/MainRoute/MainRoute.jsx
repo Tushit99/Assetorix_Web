@@ -14,7 +14,7 @@ import MarketResearch from '../../Pages/CoporateServices/MarketResearch/MarketRe
 import PortfolioPlaning from '../../Pages/CoporateServices/Pertfolio/PortfolioPlaning'
 import UsaRealState from '../../Pages/CoporateServices/UsaRealstate/UsaRealState'
 import Contact from '../../Pages/Contact/Contact'
-import Sell from '../../Pages/Sell/Sell'
+// import Sell from '../../Pages/Sell/Sell' 
 import PurchaseTerm from '../../Pages/Footer/HelpCenter/PerchaseTerm/PurchaseTerm'
 import UserTerm from '../../Pages/Footer/HelpCenter/UserTerm/UserTerm'
 import Privacy from '../../Pages/Footer/HelpCenter/Privacy/Privacy'
@@ -30,8 +30,7 @@ import CommercialLease from '../../Pages/ProductPage/Commercial/CommercialLease'
 import Wishlist from '../../Pages/Wishlist/Wishlist'
 import VisitedPage from '../../Pages/VisitedPage/VisitedPage'
 import Listings from '../../Pages/UserListings/Listings'
-import EditingForm from '../../Pages/UserListings/EditingForm'
-import Loading from '../../Pages/PropertyPostForm/Loading'
+import EditingForm from '../../Pages/UserListings/EditingForm' 
 // import ConsultingPage from '../../Pages/CoporateServices/Consulting/consulting'
 
 const MainRoute = () => {

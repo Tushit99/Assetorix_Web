@@ -67,8 +67,7 @@ const GuestBanquetRent = () => {
 
 
     const handleSubmitData = async (e) => {
-        e.preventDefault();
-
+        e.preventDefault(); 
         let obj = {
             lookingFor: "Rent",
             propertyGroup: "Commercial",
@@ -142,7 +141,7 @@ const GuestBanquetRent = () => {
         if (availability == "Under construction" && expectedyear != "") {
             obj["expectedByYear"] = expectedyear;
             obj["availabilityStatus"] = availability;
-        }
+        }    
 
         if (
             city &&
@@ -182,7 +181,7 @@ const GuestBanquetRent = () => {
                 // let data = await response.json();  
                 // console.log("data",data); 
                 setClickCount((prev) => prev + 12); 
-                setIsClicked(true);
+                setIsClicked(true);  
                 await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
                     .then((e) => {
                         toast({
@@ -191,20 +190,17 @@ const GuestBanquetRent = () => {
                             status: 'success',
                             duration: 2000,
                         }); 
-                        submitImage(e.data.id);
+                        submitImage(e.data.id);    
                     });
             } catch (error) {
                 toast({
                     title: error.response.data.msg,
                     status: 'error',
-                    duration: 2000,
+                    duration: 2000, 
                 })
-                setClickCount((prev) => prev - 12);
-                setIsClicked(false );
-                console.log(error);  
-            }
-            // }
-
+                setClickCount((prev) => prev - 12); 
+                setIsClicked(false); 
+            } 
         }
         else {
             toast({
@@ -213,11 +209,11 @@ const GuestBanquetRent = () => {
                 status: 'info',
                 duration: 2000,
                 position: 'top-right'
-            })
+            }) 
             setClickCount((prev) => prev - 12);
             setIsClicked(false);
         }
-    };
+    }; 
 
     // image uploading after uploading the data:  
     const submitImage = async (productID) => {
@@ -246,15 +242,13 @@ const GuestBanquetRent = () => {
             }
 
             await axios.request(reqOptions).then((e) => {
-                setIsClicked(false);
-                navigate("/listing");
-            })
-            // console.log(response.data);
+                setIsClicked(false);    
+            }) 
         } catch (error) {
             console.log(error);
-            setIsClicked(false); 
-            setClickCount((prev) => prev - 12); 
+            setIsClicked(false);  
         }
+        navigate("/listing");  
         setIsClicked(false);
     };
 
@@ -472,11 +466,7 @@ const GuestBanquetRent = () => {
     //     let adding = document.getElementById("floorSelectTag");
     //     adding.innerHTML = options;
 
-    // }
-
-    if (isClicked) { 
-        <Loading />
-    }
+    // } 
 
 
     return (
@@ -1507,7 +1497,8 @@ const GuestBanquetRent = () => {
             >
                 *Please provide correct information, otherwise your listing might get
                 blocked
-            </Heading>
+            </Heading> 
+            {isClicked && <Loading />} 
             <Button
                 margin={"20px 0"}
                 type="submit"
