@@ -4,9 +4,7 @@ import {
   Button,
   ButtonGroup,
   Heading,
-  Input,
-  NumberInput,
-  NumberInputField,
+  Input, 
   Select,
   Text,
   Textarea,
@@ -21,7 +19,6 @@ import { CleanInputText, NumericString, WordandNumber } from "../../code";
 import { InputGroup } from "@chakra-ui/react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
-
 
 
 
@@ -271,11 +268,12 @@ const IndependentBuilderRent = () => {
         // });
         // console.log("data",obj,response); 
         // let data = await response.json();
-        // console.log("data",obj,data); 
-        await axios
-          .post(`${process.env.REACT_APP_URL}/property/`, obj, {
-            headers: head,
-          })
+        // console.log("data",obj,data);  
+        setClickCount((prev) => prev + 12);
+        setIsClicked(true);
+        await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, {
+          headers: head,
+        })
           .then((e) => {
             // console.log(e, obj);
             toast({
@@ -292,7 +290,8 @@ const IndependentBuilderRent = () => {
           status: "error",
           duration: 2000,
         });
-        console.log(error);
+        setClickCount((prev) => prev - 12);
+        setIsClicked(false);
       }
       // }
     } else {
@@ -303,6 +302,8 @@ const IndependentBuilderRent = () => {
         duration: 2000,
         position: "top-right",
       });
+      setClickCount((prev) => prev - 12);
+      setIsClicked(false);
     }
   };
 
@@ -334,14 +335,13 @@ const IndependentBuilderRent = () => {
 
       await axios.request(reqOptions).then((e) => {
         setIsClicked(false);
-        navigate("/listing");
       })
-      console.log(response.data);
     } catch (error) {
       console.log(error);
       setIsClicked(false);
     }
-    setIsClicked(false);
+    navigate("/listing");
+    setIsClicked(false);  
   };
 
   const handlepinfetch = (e) => {
@@ -613,10 +613,7 @@ const IndependentBuilderRent = () => {
     }
     console.log("droped");
   }
-
-  if (isClicked) {
-    <Loading />
-  } 
+ 
 
   return (
     <form onSubmit={handleSubmitData}>
@@ -2311,12 +2308,13 @@ const IndependentBuilderRent = () => {
       >
         *Please provide correct information, otherwise your listing might get
         blocked
-      </Heading>
+      </Heading>  
+      {isClicked && <Loading />}  
       <Button
         margin={"20px 0"}
         type="submit"
         w={"100%"}
-        disabled={clickCount<=0 ? true : false }  
+        disabled={clickCount <= 0 ? true : false}
         backgroundColor={"rgb(46,49,146)"}
         _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
         color={"#ffffff"}
