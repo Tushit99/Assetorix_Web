@@ -509,11 +509,7 @@ const IndustrialLand = () => {
             }
         }
         console.log("droped");
-    }
-
-    if (isClicked) {
-        <Loading />
-    }
+    } 
 
     return (
         <Box className="perfectwidth">
@@ -1402,7 +1398,8 @@ const IndustrialLand = () => {
                 >
                     *Please provide correct information, otherwise your listing might get
                     blocked
-                </Heading>
+                </Heading> 
+                {isClicked && <Loading />}  
                 <Button
                     margin={"20px 0"}
                     type="submit"

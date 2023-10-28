@@ -216,7 +216,7 @@ const GuestBanquetRent = () => {
     }; 
 
     // image uploading after uploading the data:  
-    const submitImage = async (productID) => {
+    const submitImage = async (productID) => { 
         try {
             let id = localStorage.getItem("usrId") || undefined;
             let authorization = localStorage.getItem("AstToken") || undefined;
@@ -250,13 +250,13 @@ const GuestBanquetRent = () => {
         }
         navigate("/listing");  
         setIsClicked(false);  
-        
+
     };
 
     const handlepinfetch = (e) => {
         let val = NumericString(e.target.value);
         setPincode(val);
-        if (val.length == 6) {
+        if (val.length == 6) { 
             pinfetch(Number(val));
         }
     }

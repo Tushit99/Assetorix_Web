@@ -197,9 +197,7 @@ const WareHouse = () => {
                 console.log(error);
                 setClickCount((prev) => prev - 12);
                 setIsClicked(false);  
-            }
-            // }
-
+            } 
         }
         else {
             toast({
@@ -247,17 +245,15 @@ const WareHouse = () => {
                 data: bodyContent,
             }
 
-            let response = await axios.request(reqOptions).then((e) => {
-                navigate("/listing");
-                setIsClicked(false);
-            })
-            console.log(response.data);
+            await axios.request(reqOptions).then((e) => {
+                setIsClicked(false);    
+            }) 
         } catch (error) {
             console.log(error);
-            setIsClicked(false);
-            setClickCount((prev) => prev - 12);  
+            setIsClicked(false);  
         }
-        setIsClicked(false);
+        navigate("/listing");  
+        setIsClicked(false);  
     };
 
 

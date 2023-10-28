@@ -34,7 +34,7 @@ const CommercialShopRent = () => {
     const [country, setCountry] = useState("");
     const [facingwidth, setFacingWidth] = useState("");
     const [city, setCity] = useState("");
-    const [pincode, setPincode] = useState(""); 
+    const [pincode, setPincode] = useState("");
     const [state, setState] = useState("");
     const [locality, setLocality] = useState("");
     const [type, setType] = useState("");
@@ -59,7 +59,7 @@ const CommercialShopRent = () => {
     const [plotArea, setPlotArea] = useState("");
     const [desc, setDesc] = useState("");
     const [pincollection, setPinCollection] = useState([]);
-    const [ceilingHeight, setceilingHeight] = useState(""); 
+    const [ceilingHeight, setceilingHeight] = useState("");
     const [parking, setParking] = useState("");
     const [parkingType, setParkingType] = useState([]);
     const [fireSafty, setFireSafty] = useState([]);
@@ -80,10 +80,10 @@ const CommercialShopRent = () => {
     const [rentIncreasePercent, setRentIncreasePercent] = useState("");
     const [lockPeriod, setlockPeriod] = useState("");
     const [depositAmount, setDepositAmount] = useState("");
-    const [securityDeposit, setSecurityDeposit] = useState(""); 
-    const [clickCount, setClickCount] = useState(0); 
-    const [isClicked, setIsClicked] = useState(false);   
-    const navigate = useNavigate(); 
+    const [securityDeposit, setSecurityDeposit] = useState("");
+    const [clickCount, setClickCount] = useState(0);
+    const [isClicked, setIsClicked] = useState(false);
+    const navigate = useNavigate();
     // state for drop box images
     const [images, setImages] = useState([]);
     const [isDraging, setIsDraging] = useState(false);
@@ -96,7 +96,7 @@ const CommercialShopRent = () => {
     const handleSubmitData = async (e) => {
         e.preventDefault();
         setClickCount((prev) => prev + 10)
-        setIsClicked(true); 
+        setIsClicked(true);
         let obj = {
             lookingFor: "Rent",
             propertyGroup: "Commercial",
@@ -247,9 +247,9 @@ const CommercialShopRent = () => {
                 //     body: JSON.stringify(obj)
                 // });
                 // let data = await response.json();  
-                console.log("data", obj); 
-                setClickCount((prev) => prev + 12); 
-                setIsClicked(true);  
+                console.log("data", obj);
+                setClickCount((prev) => prev + 12);
+                setIsClicked(true);
                 await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
                     .then((e) => {
                         toast({
@@ -258,19 +258,17 @@ const CommercialShopRent = () => {
                             status: 'success',
                             duration: 2000,
                         });
-                        submitImage(e.data.id); 
+                        submitImage(e.data.id);
                     });
             } catch (error) {
                 toast({
                     title: error.response.data.msg,
                     status: 'error',
                     duration: 2000,
-                }) 
+                })
                 setClickCount((prev) => prev - 12);
-                setIsClicked(false );
-             }
-            // }
-
+                setIsClicked(false);
+            }
         }
         else {
             toast({
@@ -279,9 +277,9 @@ const CommercialShopRent = () => {
                 status: 'info',
                 duration: 2000,
                 position: 'top-right'
-            });  
+            });
             setClickCount((prev) => prev - 12);
-            setIsClicked(false);  
+            setIsClicked(false);
         }
     };
 
@@ -311,17 +309,15 @@ const CommercialShopRent = () => {
                 data: bodyContent,
             }
 
-            let response = await axios.request(reqOptions).then((e)=>{
-                setIsClicked(false);   
-                navigate("/listing"); 
+            await axios.request(reqOptions).then((e) => {
+                setIsClicked(false);
             })
-            console.log(response.data);
         } catch (error) {
-            setIsClicked(false);   
-            console.log(error); 
-            setClickCount((prev) => prev - 12);  
+            console.log(error);
+            setIsClicked(false);
         }
-        setIsClicked(false);   
+        navigate("/listing");
+        setIsClicked(false);
     };
 
     // pincode of 3 letter
@@ -552,7 +548,7 @@ const CommercialShopRent = () => {
         const newImages = [...images];
         newImages.splice(index, 1);
         setImages(newImages);
-    }; 
+    };
 
     const onFileSelect = (e) => {
         let files = e.target.files;
@@ -609,9 +605,6 @@ const CommercialShopRent = () => {
         console.log("droped");
     }
 
-    if(isClicked){
-        <Loading />
-    } 
 
     return (
         <div>
@@ -1945,11 +1938,13 @@ const CommercialShopRent = () => {
                         *Please provide correct information, otherwise your listing might get
                         blocked
                     </Heading>
+                    {/* Loader iffect */}
+                    {isClicked && <Loading />}
                     <Button
                         margin={"20px 0"}
                         type="submit"
                         w={"100%"}
-                        disabled={clickCount<=0 ? true : false }    
+                        disabled={clickCount <= 0 ? true : false}
                         backgroundColor={"rgb(46,49,146)"}
                         _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                         color={"#ffffff"}

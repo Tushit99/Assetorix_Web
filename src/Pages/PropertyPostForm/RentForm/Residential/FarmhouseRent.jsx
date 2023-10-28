@@ -282,8 +282,7 @@ const FarmhouseRent = () => {
                 });
                 setClickCount((prev) => prev - 12);
                 setIsClicked(false); 
-            }
-            // }
+            } 
         } else {
             toast({
                 title: "Form un-filled",
@@ -325,13 +324,11 @@ const FarmhouseRent = () => {
 
             await axios.request(reqOptions).then((e) => {
                 setIsClicked(false);
-                navigate("/listing");  
-            })  
-            console.log(response.data);
-        } catch (error) { 
-            console.log(error);
+            })   
+        } catch (error) {  
             setIsClicked(false);  
         } 
+        navigate("/listing");  
         setIsClicked(false);
     };
 

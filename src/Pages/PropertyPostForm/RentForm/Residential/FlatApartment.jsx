@@ -264,30 +264,29 @@ const FlatApartment = () => {
         // });
         // console.log("data",obj,response); 
         // let data = await response.json();
-        // console.log("data",obj,data); 
-        await axios
-          .post(`${process.env.REACT_APP_URL}/property/`, obj, {
-            headers: head,
-          })
-          .then((e) => {
-            // console.log(e, obj);
-            toast({
-              title: e.data.msg,
-              description: e.data.msg,
-              status: "success",
-              duration: 2000,
-            });
-            submitImage(e.data.id);
+        // console.log("data",obj,data);  
+        setClickCount((prev) => prev + 12);
+        setIsClicked(true);
+        await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, {
+          headers: head,
+        }).then((e) => {
+          toast({
+            title: e.data.msg,
+            description: e.data.msg,
+            status: "success",
+            duration: 2000,
           });
+          submitImage(e.data.id);
+        });
       } catch (error) {
         toast({
           title: error.response.data.msg,
           status: "error",
           duration: 2000,
         });
-        // console.log(error);
+        setClickCount((prev) => prev - 12);
+        setIsClicked(false);
       }
-      // }
     } else {
       toast({
         title: "Form un-filled",
@@ -296,6 +295,8 @@ const FlatApartment = () => {
         duration: 2000,
         position: "top-right",
       });
+      setClickCount((prev) => prev - 12);
+      setIsClicked(false);
     }
   };
 
@@ -327,13 +328,11 @@ const FlatApartment = () => {
 
       await axios.request(reqOptions).then((e) => {
         setIsClicked(false);
-        navigate("/listing");
-      })
-      console.log(response.data);
-    } catch (error) {
-      console.log(error);
+      }) 
+    } catch (error) { 
       setIsClicked(false);
     }
+    navigate("/listing");
     setIsClicked(false);
   };
 
@@ -597,11 +596,8 @@ const FlatApartment = () => {
       }
     }
     console.log("droped");
-  }
+  } 
 
-  if (isClicked) {
-    <Loading />
-  }
 
   return (
     <form onSubmit={handleSubmitData}>
@@ -2341,11 +2337,12 @@ const FlatApartment = () => {
       >
         *Please provide correct information, otherwise your listing might get
         blocked
-      </Heading>
+      </Heading>  
+      {isClicked && <Loading />}   
       <Button
         margin={"20px 0"}
         type="submit"
-        disabled={clickCount<=0 ? true : false }  
+        disabled={clickCount <= 0 ? true : false}
         w={"100%"}
         backgroundColor={"rgb(46,49,146)"}
         _hover={{ backgroundColor: "rgb(74, 79, 223)" }}

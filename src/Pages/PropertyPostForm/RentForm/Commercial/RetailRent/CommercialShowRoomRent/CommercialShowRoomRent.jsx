@@ -263,8 +263,6 @@ const CommercialShowRoomRent = () => {
         setClickCount((prev) => prev - 12);
         setIsClicked(false);
       }
-      // }
-
     }
     else {
       toast({
@@ -275,7 +273,7 @@ const CommercialShowRoomRent = () => {
         position: 'top-right'
       })
       setClickCount((prev) => prev - 12);
-      setIsClicked(false);  
+      setIsClicked(false);
     }
   };
 
@@ -305,28 +303,23 @@ const CommercialShowRoomRent = () => {
         data: bodyContent,
       }
 
-      let response = await axios.request(reqOptions).then((e) => {
+      await axios.request(reqOptions).then((e) => {
         setIsClicked(false);
-        navigate("/listing");
       })
-      console.log(response.data);
     } catch (error) {
       console.log(error);
       setIsClicked(false);
-      setClickCount((prev) => prev - 12);  
     }
+    navigate("/listing");
     setIsClicked(false);
   };
 
   // pincode of 3 letter
   const handlepinfetch = (e) => {
-    if (e.target.value.length == 6 && Number(e.target.value) < 999999) {
-      setPincode(NumericString(e.target.value));
-      pinfetch(e.target.value);
-    }
-    else if (Number(e.target.value) < 999999) {
-      setPincode(NumericString(e.target.value));
-      console.log(e.target.value);
+    let val = NumericString(e.target.value);
+    setPincode(val);
+    if (val.length == 6) {
+        pinfetch(Number(val));
     }
   }
 
@@ -602,9 +595,6 @@ const CommercialShowRoomRent = () => {
     console.log("droped");
   }
 
-  if (isClicked) {
-    <Loading />
-  }
 
   return (
     <div>
@@ -1877,7 +1867,8 @@ const CommercialShowRoomRent = () => {
           >
             *Please provide correct information, otherwise your listing might get
             blocked
-          </Heading>
+          </Heading>  
+          {isClicked && <Loading />} 
           <Button
             margin={"20px 0"}
             type="submit"
