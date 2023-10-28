@@ -206,7 +206,7 @@ const GuestBanquetRent = () => {
             toast({
                 title: 'Form un-filled',
                 description: "Please fill all required fields.",
-                status: 'info',
+                status: 'info', 
                 duration: 2000,
                 position: 'top-right'
             }) 

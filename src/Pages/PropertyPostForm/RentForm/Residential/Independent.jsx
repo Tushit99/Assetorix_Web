@@ -270,11 +270,12 @@ const Independent = () => {
         // });
         // console.log("data",obj,response); 
         // let data = await response.json();
-        // console.log("data",obj,data); 
-        await axios
-          .post(`${process.env.REACT_APP_URL}/property/`, obj, {
-            headers: head,
-          })
+        // console.log("data",obj,data);  
+        setClickCount((prev) => prev + 12);
+        setIsClicked(true);
+        await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, {
+          headers: head,
+        })
           .then((e) => {
             // console.log(e, obj);
             toast({
@@ -291,9 +292,9 @@ const Independent = () => {
           status: "error",
           duration: 2000,
         });
-        console.log(error);
+        setClickCount((prev) => prev - 12);
+        setIsClicked(false);
       }
-      // }
     } else {
       toast({
         title: "Form un-filled",
@@ -302,6 +303,8 @@ const Independent = () => {
         duration: 2000,
         position: "top-right",
       });
+      setClickCount((prev) => prev - 12);
+      setIsClicked(false);
     }
   };
 
@@ -333,13 +336,12 @@ const Independent = () => {
 
       await axios.request(reqOptions).then((e) => {
         setIsClicked(false);
-        navigate("/listing");
       })
-      console.log(response.data);
     } catch (error) {
       console.log(error);
       setIsClicked(false);
     }
+    navigate("/listing");
     setIsClicked(false);
   };
 
@@ -612,10 +614,7 @@ const Independent = () => {
     }
     console.log("droped");
   }
-
-  if (isClicked) {
-    <Loading />
-  }  
+ 
 
   return (
     <form onSubmit={handleSubmitData}>
@@ -2270,11 +2269,12 @@ const Independent = () => {
       >
         *Please provide correct information, otherwise your listing might get
         blocked
-      </Heading>
+      </Heading>  
+      {isClicked && <Loading />} 
       <Button
-        margin={"20px 0"}
+        margin={"20px 0"} 
         type="submit"
-        disabled={clickCount<=0 ? true : false }  
+        disabled={clickCount <= 0 ? true : false}
         w={"100%"}
         backgroundColor={"rgb(46,49,146)"}
         _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
