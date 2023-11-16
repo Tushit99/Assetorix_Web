@@ -53,11 +53,11 @@ const Navebar = () => {
         window.addEventListener('online', handleOnlineStatusChange);
         window.addEventListener('offline', handleOnlineStatusChange);
 
-        return () => {
+        return () => { 
             window.removeEventListener('online', handleOnlineStatusChange);
             window.removeEventListener('offline', handleOnlineStatusChange);
         };
-    }, []);
+    }); 
 
     const handleresbuy = (value) => {
         setresBuyArr((prev) => {

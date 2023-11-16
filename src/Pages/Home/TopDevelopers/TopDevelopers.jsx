@@ -78,7 +78,7 @@ const TopDevelopers = () => {
             <Box>
               <img src={shapoourji} alt="shapoourji_img" />
             </Box>
-            <Box>
+            <Box> 
               <img src={Emaar} alt="Emaar_img" />
             </Box>
             <Box>
@@ -96,7 +96,7 @@ const TopDevelopers = () => {
 
             <Box>
               <img src={trump} alt="trump_img" />
-            </Box>
+            </Box> 
             <Box>
               <img src={cetral} alt="cetral_img" />
             </Box>
