@@ -624,7 +624,7 @@ const SingleProductDetailPage = () => {
                                 >
                                     <Image
                                         src={liftImg}
-                                        height={"26px"}
+                                        height={"26px"} 
                                         objectFit={"contain"}
                                         w={"20px"}
                                         alt="light_images"
@@ -634,7 +634,7 @@ const SingleProductDetailPage = () => {
                             </Box>
                             <Box display={"grid"} gap={3} margin={"20px 0"} >
                                 <Heading fontSize={"2xl"} padding={0}> Features </Heading>
-                                <Text textAlign={"inherit"} fontSize={"xs"} color={"blue"} margin={0}> For more details click on <InfoIcon w={7} color={"blue.400"} /> icon </Text>
+                                {/* <Text textAlign={"inherit"} fontSize={"xs"} color={"blue"} margin={0}> For more details click on </Text> */}
                             </Box>
 
                             <Box>

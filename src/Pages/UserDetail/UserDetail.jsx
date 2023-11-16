@@ -27,8 +27,7 @@ const UserDetail = () => {
     const dispatch = useDispatch();
     const [inpName, setInpName] = useState("");
     const [inpEmail, setInpEmail] = useState("");
-    const [inpMobile, setInpMobile] = useState("");
-    const [keyset, setKeySet] = useState("");
+    const [inpMobile, setInpMobile] = useState(""); 
     const [myimage, setmyimage] = useState("");
     const fileInputRef = useRef(null);
 
@@ -114,10 +113,10 @@ const UserDetail = () => {
                                 </MenuButton>
                                 <MenuList boxShadow={"rgba(0, 0, 0, 0.35) 0px 5px 15px"} maxWidth={"100px"}>
                                     <MenuItem>
-                                        <Text onClick={handleBtnClick}> Change Image </Text>
+                                        <Text onClick={handleBtnClick}> {myimage ? "Change" : "Add"} Image </Text>
                                         <Input display={"none"} type={"file"} accept="image/jpg, image/png, image/jpeg" onChange={handleImageChange} ref={fileInputRef} name='image' formMethod="post" />
                                     </MenuItem>
-                                    <MenuItem>
+                                    <MenuItem display={myimage ? "block" : "none"}>
                                         <Text onClick={handleDeleteImage}> Delete image </Text>
                                     </MenuItem>
                                 </MenuList>
