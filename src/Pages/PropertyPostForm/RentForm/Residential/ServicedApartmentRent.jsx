@@ -21,6 +21,7 @@ import { CleanInputText, NumericString, WordandNumber } from "../../code";
 import { InputGroup } from "@chakra-ui/react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import Loading from "../../Loading";
 
 
 
@@ -84,18 +85,18 @@ const ServicedApartmentRent = () => {
     const [noticePeriod, setNoticePeriod] = useState("");
     const [availableFrom, setavailableFrom] = useState("");
     const [expectedRentel, setExpectedRentel] = useState("");
-    const [annualDuesPayble, setAnnualDuesPayble] = useState(""); 
-    const [isClicked, setIsClicked] = useState(false); 
-    const [clickCount, setClickCount] = useState(0);  
-    const navigate = useNavigate(); 
+    const [annualDuesPayble, setAnnualDuesPayble] = useState("");
+    const [isClicked, setIsClicked] = useState(false);
+    const [clickCount, setClickCount] = useState(0);
+    const navigate = useNavigate();
     // state for drop box images
     const [images, setImages] = useState([]);
     const [isDraging, setIsDraging] = useState(false);
     const fileInputRef = useRef(null);
 
     const handleSubmitData = async (e) => {
-        e.preventDefault(); 
-        setClickCount((prev)=>prev+12); 
+        e.preventDefault();
+        setClickCount((prev) => prev + 12);
         setIsClicked(true);
         let obj = {
             lookingFor: "Rent",
@@ -269,7 +270,9 @@ const ServicedApartmentRent = () => {
                 // });
                 // console.log("data",obj,response); 
                 // let data = await response.json();
-                // console.log("data",obj,data); 
+                // console.log("data",obj,data);  
+                setClickCount((prev) => prev + 12);
+                setIsClicked(true);
                 await axios
                     .post(`${process.env.REACT_APP_URL}/property/`, obj, {
                         headers: head,
@@ -290,9 +293,9 @@ const ServicedApartmentRent = () => {
                     status: "error",
                     duration: 2000,
                 });
-                console.log(error);
+                setClickCount((prev) => prev - 12);
+                setIsClicked(false);
             }
-            // }
         } else {
             toast({
                 title: "Form un-filled",
@@ -301,6 +304,8 @@ const ServicedApartmentRent = () => {
                 duration: 2000,
                 position: "top-right",
             });
+            setClickCount((prev) => prev - 12);
+            setIsClicked(false);
         }
     };
 
@@ -330,16 +335,15 @@ const ServicedApartmentRent = () => {
                 data: bodyContent,
             }
 
-            await axios.request(reqOptions).then((e)=>{
-                setIsClicked(false);  
-                navigate("/listing");  
-              })
-              console.log(response.data);
-            } catch (error) {
-              console.log(error);
-              setIsClicked(false);
-            }
-            setIsClicked(false);   
+            await axios.request(reqOptions).then((e) => {
+                setIsClicked(false);
+            })
+        } catch (error) {
+            console.log(error);
+            setIsClicked(false);
+        }
+        navigate("/listing");
+        setIsClicked(false);
     };
 
     const handlepinfetch = (e) => {
@@ -347,9 +351,7 @@ const ServicedApartmentRent = () => {
         setPincode(val);
         if (val.length == 6) {
             pinfetch(val);
-        } else {
-
-        }
+        }  
     };
 
     const pinfetch = async (pin) => {
@@ -541,13 +543,13 @@ const ServicedApartmentRent = () => {
 
     const selectFiles = () => {
         fileInputRef.current.click();
-    }  
+    }
 
     const removeImage = (index) => {
         const newImages = [...images];
         newImages.splice(index, 1);
         setImages(newImages);
-      };
+    };
 
     const onFileSelect = (e) => {
         let files = e.target.files;
@@ -603,10 +605,7 @@ const ServicedApartmentRent = () => {
         }
         console.log("droped");
     }
-
-    if(isClicked){
-        <Loading /> 
-    } 
+ 
 
     return (
         <form onSubmit={handleSubmitData}>
@@ -2349,12 +2348,13 @@ const ServicedApartmentRent = () => {
                 *Please provide correct information, otherwise your listing might get
                 blocked
             </Heading>
-            {/* =================== submit button =========================== */}
+            {/* =================== submit button =========================== */}  
+            {isClicked && <Loading />}   
             <Button
                 margin={"20px 0"}
                 type="submit"
-                w={"100%"} 
-                disabled={clickCount<=0 ? true : false }   
+                w={"100%"}
+                disabled={clickCount <= 0 ? true : false}
                 backgroundColor={"rgb(46,49,146)"}
                 _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                 color={"#ffffff"}

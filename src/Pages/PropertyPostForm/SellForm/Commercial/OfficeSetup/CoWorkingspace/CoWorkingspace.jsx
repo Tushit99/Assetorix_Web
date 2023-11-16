@@ -10,7 +10,7 @@ import {
     Text,
     Textarea,
     Checkbox,
-    useToast, 
+    useToast,
 } from "@chakra-ui/react";
 import style from "./CoWorkingspace.module.css";
 import { useSelector } from "react-redux";
@@ -66,7 +66,7 @@ const CoWorkingspace = () => {
     const [pincollection, setPinCollection] = useState([]);
     const [maintenancePrice, setMaintenancePrice] = useState("");
     const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
-    const [zoneType, setZoneType] = useState(""); 
+    const [zoneType, setZoneType] = useState("");
     const [isClicked, setIsClicked] = useState(false);
     const [clickCount, setClickCount] = useState(0);
     const navigate = useNavigate();
@@ -77,9 +77,9 @@ const CoWorkingspace = () => {
     // please don'nt change any function without any prior knowledge   
 
     const handleSubmitData = async (e) => {
-        e.preventDefault(); 
+        e.preventDefault();
         setClickCount((prev) => prev + 12);
-        setIsClicked(true); 
+        setIsClicked(true);
         let obj = {
             lookingFor: "Sell",
             propertyGroup: "Commercial",
@@ -202,10 +202,9 @@ const CoWorkingspace = () => {
                     status: "error",
                     duration: 2000,
                 });
-
-                console.log(error);
+                setClickCount((prev) => prev - 12);
+                setIsClicked(false);
             }
-            // }
         } else {
             toast({
                 title: "Form un-filled",
@@ -214,6 +213,8 @@ const CoWorkingspace = () => {
                 duration: 2000,
                 position: "top-right",
             });
+            setClickCount((prev) => prev - 12);
+            setIsClicked(false);
         }
     };
 
@@ -245,15 +246,13 @@ const CoWorkingspace = () => {
 
             await axios.request(reqOptions).then((e) => {
                 setIsClicked(false);
-                navigate("/listing");
             })
-            console.log(response.data);
         } catch (error) {
-            console.log(error); 
+            console.log(error);
             setIsClicked(false);
-            navigate("/listing"); 
         }
-        setIsClicked(false);
+        navigate("/listing");
+        setIsClicked(false);  
     };
 
     const handlepinfetch = (e) => {
@@ -427,7 +426,7 @@ const CoWorkingspace = () => {
         const newImages = [...images];
         newImages.splice(index, 1);
         setImages(newImages);
-      };
+    };
 
     const onFileSelect = (e) => {
         let files = e.target.files;
@@ -483,10 +482,7 @@ const CoWorkingspace = () => {
         }
         console.log("droped");
     }
-
-    if (isClicked) {
-        <Loading />
-    }
+ 
 
     return (
         <form onSubmit={handleSubmitData}>
@@ -1592,12 +1588,13 @@ const CoWorkingspace = () => {
                 *Please provide correct information, otherwise your listing might get
                 blocked
             </Heading>
-            {/* form submit button */}
+            {/* form submit button */} 
+            {isClicked && <Loading />}     sa
             <Button
                 margin={"20px 0"}
                 type="submit"
                 w={"100%"}
-                disabled={clickCount <= 0 ? true : false}   
+                disabled={clickCount <= 0 ? true : false}
                 backgroundColor={"rgb(46,49,146)"}
                 _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                 color={"#ffffff"}

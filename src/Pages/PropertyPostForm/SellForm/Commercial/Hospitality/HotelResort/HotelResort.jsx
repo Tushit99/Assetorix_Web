@@ -75,7 +75,7 @@ const HotelResort = () => {
     const [leaseTenureInYear, setLeaseTenureInYear] = useState("");
     const [annualRentIncrease, setAnnualRentIncrease] = useState("");
     const [businessType, setBusinessType] = useState("");
-    const [qualityRating, setqualityRating] = useState("");  
+    const [qualityRating, setqualityRating] = useState("");
     const [isClicked, setIsClicked] = useState(false);
     const [clickCount, setClickCount] = useState(0);
     const navigate = useNavigate();
@@ -86,9 +86,9 @@ const HotelResort = () => {
 
 
     const handleSubmitData = async (e) => {
-        e.preventDefault(); 
+        e.preventDefault();
         setClickCount((prev) => prev + 12);
-        setIsClicked(true); 
+        setIsClicked(true);
         let obj = {
             lookingFor: "Sell",
             propertyGroup: "Commercial",
@@ -249,7 +249,9 @@ const HotelResort = () => {
                 //     body: JSON.stringify(obj)
                 // });
                 // let data = await response.json();  
-                // console.log("data",data); 
+                // console.log("data",data);  
+                setClickCount((prev) => prev + 12);
+                setIsClicked(true);
                 await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
                     .then((e) => {
                         toast({
@@ -258,8 +260,7 @@ const HotelResort = () => {
                             status: 'success',
                             duration: 2000,
                         });
-                        submitImage(e.data.id); 
-                        
+                        submitImage(e.data.id);
                     });
             } catch (error) {
                 toast({
@@ -268,9 +269,9 @@ const HotelResort = () => {
                     duration: 2000,
                 })
                 console.log(error);
+                setClickCount((prev) => prev - 12);
+                setIsClicked(false);
             }
-            // }
-
         }
         else {
             toast({
@@ -279,7 +280,9 @@ const HotelResort = () => {
                 status: 'info',
                 duration: 2000,
                 position: 'top-right'
-            })
+            });
+            setClickCount((prev) => prev - 12);
+            setIsClicked(false);
         }
     };
 
@@ -309,27 +312,22 @@ const HotelResort = () => {
                 data: bodyContent,
             }
 
-            let response = await axios.request(reqOptions).then((e)=>{
+            await axios.request(reqOptions).then((e) => {
                 setIsClicked(false);
-                navigate("/listing"); 
             })
-            console.log(response.data);
         } catch (error) {
-            console.log(error); 
+            console.log(error);
             setIsClicked(false);
-            navigate("/listing"); 
         }
-        setIsClicked(false); 
+        navigate("/listing");
+        setIsClicked(false);  
     };
 
     const handlepinfetch = (e) => {
-        let val =
-            setPincode(e.target.value);
-        if (e.target.value.length == 6) {
-            pinfetch(e.target.value);
-        }
-        else {
-            console.log(e.target.value);
+        let val = NumericString(e.target.value);
+        setPincode(val);
+        if (val.length == 6) { 
+            pinfetch(Number(val));
         }
     }
 
@@ -497,13 +495,13 @@ const HotelResort = () => {
 
     const selectFiles = () => {
         fileInputRef.current.click();
-    } 
+    }
 
     const removeImage = (index) => {
         const newImages = [...images];
         newImages.splice(index, 1);
         setImages(newImages);
-      };
+    };
 
     const onFileSelect = (e) => {
         let files = e.target.files;
@@ -519,7 +517,7 @@ const HotelResort = () => {
                     name: files[i].name,
                     image: files[i],
                 },])
-            } 
+            }
         }
     }
 
@@ -572,10 +570,6 @@ const HotelResort = () => {
     //     adding.innerHTML = options;
 
     // }
-
-    if (isClicked) {
-        <Loading />
-    }
 
 
     return (
@@ -1496,14 +1490,14 @@ const HotelResort = () => {
                         )}
                         <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
                     </Box>
-                    <Box className={style.container}>  
-                        {images.map((image, index) => (  
-                            <Box className={style.image} key={index}>  
-                                <Text className={style.delete} onClick={() => removeImage(index)}>&#10006;</Text> 
-                                <img src={URL.createObjectURL(image.image)} alt="images" />   
-                             </Box>   
-                        ))}     
-                    </Box>  
+                    <Box className={style.container}>
+                        {images.map((image, index) => (
+                            <Box className={style.image} key={index}>
+                                <Text className={style.delete} onClick={() => removeImage(index)}>&#10006;</Text>
+                                <img src={URL.createObjectURL(image.image)} alt="images" />
+                            </Box>
+                        ))}
+                    </Box>
                 </Box>
             </Box>
 
@@ -2105,12 +2099,13 @@ const HotelResort = () => {
             >
                 *Please provide correct information, otherwise your listing might get
                 blocked
-            </Heading>
+            </Heading> 
+            {isClicked && <Loading />}      
             <Button
                 margin={"20px 0"}
                 type="submit"
                 w={"100%"}
-                disabled={clickCount <= 0 ? true : false}  
+                disabled={clickCount <= 0 ? true : false}
                 backgroundColor={"rgb(46,49,146)"}
                 _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                 color={"#ffffff"}

@@ -32,7 +32,7 @@ const Factory = () => {
     const [state, setState] = useState("");
     const [locality, setLocality] = useState("");
     const [address, setAddress] = useState("");
-    const [washrooms, setwashrooms] = useState(0); 
+    const [washrooms, setwashrooms] = useState(0);
     const [parking, setParking] = useState(0);
     const [openparking, setOpenparking] = useState(0);
     const [light, setLight] = useState(0);
@@ -244,6 +244,8 @@ const Factory = () => {
                 // });
                 // let data = await response.json();  
                 // console.log("data",data); 
+                setClickCount((prev) => prev + 12);
+                setIsClicked(true);
                 await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
                     .then((e) => {
                         toast({
@@ -261,6 +263,8 @@ const Factory = () => {
                     duration: 2000,
                 })
                 console.log(error);
+                setClickCount((prev) => prev - 12);
+                setIsClicked(false);
             }
         }
         else {
@@ -270,7 +274,9 @@ const Factory = () => {
                 status: 'info',
                 duration: 2000,
                 position: 'top-right'
-            })
+            });
+            setClickCount((prev) => prev - 12);
+            setIsClicked(false);
         }
     };
 
@@ -302,15 +308,13 @@ const Factory = () => {
 
             await axios.request(reqOptions).then((e) => {
                 setIsClicked(false);
-                navigate("/listing");
             })
-            console.log(response.data);
         } catch (error) {
             console.log(error);
             setIsClicked(false);
-            navigate("/listing");
         }
-        setIsClicked(false);
+        navigate("/listing");
+        setIsClicked(false);  
 
     };
 
@@ -525,10 +529,7 @@ const Factory = () => {
         }
         console.log("droped");
     }
-
-    if (isClicked) {
-        <Loading />
-    }
+    
 
     return (
         <div>
@@ -1602,12 +1603,13 @@ const Factory = () => {
                 >
                     *Please provide correct information, otherwise your listing might get
                     blocked
-                </Heading>
+                </Heading> 
+                {isClicked && <Loading />}      
                 <Button
                     margin={"20px 0"}
                     type="submit"
                     w={"100%"}
-                    disabled={clickCount <= 0 ? true : false}  
+                    disabled={clickCount <= 0 ? true : false}
                     backgroundColor={"rgb(46,49,146)"}
                     _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                     color={"#ffffff"}

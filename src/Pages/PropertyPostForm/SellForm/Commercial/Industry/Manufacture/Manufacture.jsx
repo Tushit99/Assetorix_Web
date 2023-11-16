@@ -5,6 +5,8 @@ import {
   Heading,
   Input,
   InputGroup,
+  Select,
+  Text,
   Textarea,
   useToast,
 } from "@chakra-ui/react";
@@ -214,7 +216,9 @@ const Manufacture = () => {
         //     body: JSON.stringify(obj)
         // });
         // let data = await response.json();  
-        // console.log("data",data); 
+        // console.log("data",data);  
+        setClickCount((prev) => prev + 12);
+        setIsClicked(true);
         await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
           .then((e) => {
             toast({
@@ -231,10 +235,9 @@ const Manufacture = () => {
           status: 'error',
           duration: 2000,
         })
-        console.log(error);
+        setClickCount((prev) => prev - 12);
+        setIsClicked(false);
       }
-      // }
-
     }
     else {
       toast({
@@ -243,7 +246,9 @@ const Manufacture = () => {
         status: 'info',
         duration: 2000,
         position: 'top-right'
-      })
+      });
+      setClickCount((prev) => prev - 12);
+      setIsClicked(false);
     }
   };
 
@@ -275,14 +280,12 @@ const Manufacture = () => {
 
       await axios.request(reqOptions).then((e) => {
         setIsClicked(false);
-        navigate("/listing");
       })
-      console.log(response.data);
     } catch (error) {
       console.log(error);
       setIsClicked(false);
-      navigate("/listing");
     }
+    navigate("/listing");
     setIsClicked(false);
   };
 
@@ -498,10 +501,7 @@ const Manufacture = () => {
     console.log("droped");
   }
 
-  if (isClicked) {
-    <Loading />
-  }
-
+  
   return (
     <div>
       <form onSubmit={handleSubmitData}>
@@ -1571,12 +1571,13 @@ const Manufacture = () => {
         >
           *Please provide correct information, otherwise your listing might get
           blocked
-        </Heading>
+        </Heading> 
+        {isClicked && <Loading />}  
         <Button
           margin={"20px 0"}
           type="submit"
           w={"100%"}
-          disabled={clickCount <= 0 ? true : false}  
+          disabled={clickCount <= 0 ? true : false}
           backgroundColor={"rgb(46,49,146)"}
           _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
           color={"#ffffff"}

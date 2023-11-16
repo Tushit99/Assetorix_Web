@@ -20,6 +20,7 @@ import { InputGroup } from "@chakra-ui/react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import Loading from "../../Loading";
 
 
 const FlatApartment = () => {

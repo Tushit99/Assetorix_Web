@@ -79,9 +79,9 @@ const GuestBanquet = () => {
     const [bookingAmount, setBookingAmount] = useState("");
     const [expectedRentel, setExpectedRentel] = useState("");
     const [annualDuesPayble, setAnnualDuesPayble] = useState("");
-    const [isClicked, setIsClicked] = useState(false); 
-    const [clickCount, setClickCount] = useState(0);  
-    const navigate = useNavigate(); 
+    const [isClicked, setIsClicked] = useState(false);
+    const [clickCount, setClickCount] = useState(0);
+    const navigate = useNavigate();
     // state for drop box images
     const [images, setImages] = useState([]);
     const [isDraging, setIsDraging] = useState(false);
@@ -90,8 +90,8 @@ const GuestBanquet = () => {
 
     const handleSubmitData = async (e) => {
         e.preventDefault();
-        setClickCount((prev)=>prev+12); 
-        setIsClicked(true); 
+        setClickCount((prev) => prev + 12);
+        setIsClicked(true);
         let obj = {
             lookingFor: "Sell",
             propertyGroup: "Commercial",
@@ -261,7 +261,8 @@ const GuestBanquet = () => {
                 //     body: JSON.stringify(obj)
                 // });
                 // let data = await response.json();  
-                console.log("data", obj);
+                setClickCount((prev) => prev + 12);
+                setIsClicked(true);
                 await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
                     .then((e) => {
                         toast({
@@ -280,10 +281,9 @@ const GuestBanquet = () => {
                     status: 'error',
                     duration: 2000,
                 })
-                console.log(error);
+                setClickCount((prev) => prev - 12);
+                setIsClicked(false);
             }
-            // }
-
         }
         else {
             toast({
@@ -293,6 +293,8 @@ const GuestBanquet = () => {
                 duration: 2000,
                 position: 'top-right'
             })
+            setClickCount((prev) => prev - 12);
+            setIsClicked(false);
         }
     };
 
@@ -322,16 +324,15 @@ const GuestBanquet = () => {
                 data: bodyContent,
             }
 
-            let response = await axios.request(reqOptions).then((e)=>{
-                setIsClicked(false);  
+            await axios.request(reqOptions).then((e) => {
+                setIsClicked(false);
             })
-            console.log(response.data);
         } catch (error) {
-            navigate("/listing");  
-            setIsClicked(false);   
-            console.log(error)
+            console.log(error);
+            setIsClicked(false);
         }
         navigate("/listing");
+        setIsClicked(false); 
     };
 
 
@@ -527,7 +528,7 @@ const GuestBanquet = () => {
         const newImages = [...images];
         newImages.splice(index, 1);
         setImages(newImages);
-      };
+    };
 
     const onFileSelect = (e) => {
         let files = e.target.files;
@@ -543,7 +544,7 @@ const GuestBanquet = () => {
                     name: files[i].name,
                     image: files[i],
                 },])
-            } 
+            }
         }
     }
 
@@ -596,12 +597,7 @@ const GuestBanquet = () => {
     //     adding.innerHTML = options;
 
     // }
-
-    if(isClicked){
-        <Loading />
-    }
-
-
+ 
     return (
         <form onSubmit={handleSubmitData}>
             {/* ============================= property location =========================== */}
@@ -1569,15 +1565,15 @@ const GuestBanquet = () => {
                             </>
                         )}
                         <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
-                    </Box> 
-                    <Box className={style.container}>  
-                        {images.map((image, index) => (  
-                            <Box className={style.image} key={index}>  
-                                <Text className={style.delete} onClick={() => removeImage(index)}>&#10006;</Text> 
-                                <img src={URL.createObjectURL(image.image)} alt="images" />   
-                             </Box>   
-                        ))}     
-                    </Box>  
+                    </Box>
+                    <Box className={style.container}>
+                        {images.map((image, index) => (
+                            <Box className={style.image} key={index}>
+                                <Text className={style.delete} onClick={() => removeImage(index)}>&#10006;</Text>
+                                <img src={URL.createObjectURL(image.image)} alt="images" />
+                            </Box>
+                        ))}
+                    </Box>
                 </Box>
             </Box>
 
@@ -2197,11 +2193,12 @@ const GuestBanquet = () => {
                 *Please provide correct information, otherwise your listing might get
                 blocked
             </Heading>
+            {isClicked && <Loading />}    
             <Button
                 margin={"20px 0"}
                 type="submit"
-                w={"100%"} 
-                disabled={clickCount <= 0 ? true : false}  
+                w={"100%"}
+                disabled={clickCount <= 0 ? true : false}
                 backgroundColor={"rgb(46,49,146)"}
                 _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                 color={"#ffffff"}

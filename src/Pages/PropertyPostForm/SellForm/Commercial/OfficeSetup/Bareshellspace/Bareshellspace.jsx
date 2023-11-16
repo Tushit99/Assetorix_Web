@@ -59,11 +59,11 @@ const Bareshellspace = () => {
     const [pantrySize, setPantrySize] = useState("");
     const [pantryType, setPantryType] = useState("");
     const [floorNumber, setFloorNumber] = useState([]);
-    const [pricedetail, setPricedetail] = useState("");  
+    const [pricedetail, setPricedetail] = useState("");
     const [additionalPrice, setAdditionalPrice] = useState(false);
     const [expectedRental, setExpectedRental] = useState("");
     const [bookingAmount, setBookingAmount] = useState("");
-    const [annualDuesPayable, setAnnualDuesPayable] = useState(""); 
+    const [annualDuesPayable, setAnnualDuesPayable] = useState("");
     const [previouslyUsedList, setpreviouslyUsedList] = useState([]);
     const [currentRentPerMonth, setCurrentRentPerMonth] = useState("");
     const [leaseTenureInYear, setLeaseTenureInYear] = useState("");
@@ -93,7 +93,7 @@ const Bareshellspace = () => {
     const [zoneType, setZoneType] = useState("");
     const [isClicked, setIsClicked] = useState(false);
     const [clickCount, setClickCount] = useState(0);
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
     // state for drop box images
     const [images, setImages] = useState([]);
     const [isDraging, setIsDraging] = useState(false);
@@ -106,7 +106,7 @@ const Bareshellspace = () => {
     const handleSubmitData = async (e) => {
         e.preventDefault();
         setClickCount((prev) => prev + 12);
-        setIsClicked(true);  
+        setIsClicked(true);
         let obj = {
             lookingFor: "Sell",
             propertyGroup: "Commercial",
@@ -242,11 +242,11 @@ const Bareshellspace = () => {
                 //     body: JSON.stringify(obj)
                 // });
                 // let data = await response.json();
-                console.log("data", obj);
-                await axios
-                    .post(`${process.env.REACT_APP_URL}/property/`, obj, {
-                        headers: head,
-                    })
+                setClickCount((prev) => prev + 12);
+                setIsClicked(true);
+                await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, {
+                    headers: head,
+                })
                     .then((e) => {
                         toast({
                             title: e.data.msg,
@@ -262,9 +262,9 @@ const Bareshellspace = () => {
                     status: "error",
                     duration: 2000,
                 });
-                console.log(error);
+                setClickCount((prev) => prev - 12);
+                setIsClicked(false);
             }
-            // }
         } else {
             toast({
                 title: "Form un-filled",
@@ -273,6 +273,8 @@ const Bareshellspace = () => {
                 duration: 2000,
                 position: "top-right",
             });
+            setClickCount((prev) => prev - 12);
+            setIsClicked(false);
         }
     };
 
@@ -304,14 +306,12 @@ const Bareshellspace = () => {
 
             await axios.request(reqOptions).then((e) => {
                 setIsClicked(false);
-                navigate("/listing");
             })
-            console.log(response.data);
         } catch (error) {
-            console.log(error); 
+            console.log(error);
             setIsClicked(false);
-            navigate("/listing"); 
         }
+        navigate("/listing");
         setIsClicked(false);
     };
 
@@ -473,7 +473,7 @@ const Bareshellspace = () => {
         const newImages = [...images];
         newImages.splice(index, 1);
         setImages(newImages);
-      };
+    };
 
     const onFileSelect = (e) => {
         let files = e.target.files;
@@ -529,10 +529,7 @@ const Bareshellspace = () => {
         }
         console.log("droped");
     }
-
-    if (isClicked) {
-        <Loading />
-    }
+ 
 
     return (
         <form onSubmit={handleSubmitData}>
@@ -1948,12 +1945,13 @@ const Bareshellspace = () => {
                 *Please provide correct information, otherwise your listing might get
                 blocked
             </Heading>
-            {/* form submit button */}
+            {/* form submit button */} 
+            {isClicked && <Loading />}      
             <Button
                 margin={"20px 0"}
                 type="submit"
-                w={"100%"} 
-                disabled={clickCount <= 0 ? true : false}  
+                w={"100%"}
+                disabled={clickCount <= 0 ? true : false}
                 backgroundColor={"rgb(46,49,146)"}
                 _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                 color={"#ffffff"}

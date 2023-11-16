@@ -331,8 +331,7 @@ const FlatAppartment = () => {
             await axios.request(reqOptions).then((e) => {
                 setIsClicked(false);
                 navigate("/listing");
-            })
-            console.log(response.data);
+            }) 
         } catch (error) {
             console.log(error);
             setIsClicked(false);

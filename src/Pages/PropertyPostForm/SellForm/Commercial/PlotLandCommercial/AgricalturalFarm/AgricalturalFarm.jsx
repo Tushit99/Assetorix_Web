@@ -279,7 +279,7 @@ const AgricalturalFarm = () => {
         setIsClicked(false);
         navigate("/listing");
       })
-      console.log(response.data);
+      
     } catch (error) {
       console.log(error);
       setIsClicked(false);

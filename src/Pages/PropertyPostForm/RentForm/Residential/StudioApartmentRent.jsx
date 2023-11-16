@@ -21,6 +21,7 @@ import { CleanInputText, NumericString, WordandNumber } from "../../code";
 import { InputGroup } from "@chakra-ui/react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import Loading from "../../Loading";
 
 
 
@@ -277,20 +278,23 @@ const StudioApartmentRent = () => {
             } catch (error) {
                 toast({
                     title: error.response.data.msg,
-                    status: "error",
-                    duration: 2000,
-                });
-                console.log(error);
-            }
-            // }
-        } else {
+                    status: 'error',
+                    duration: 2000, 
+                })
+                setClickCount((prev) => prev - 12); 
+                setIsClicked(false); 
+            } 
+        }
+        else {
             toast({
-                title: "Form un-filled",
+                title: 'Form un-filled',
                 description: "Please fill all required fields.",
-                status: "info",
+                status: 'info', 
                 duration: 2000,
-                position: "top-right",
-            });
+                position: 'top-right'
+            }) 
+            setClickCount((prev) => prev - 12);
+            setIsClicked(false);
         }
     };
 
@@ -321,15 +325,14 @@ const StudioApartmentRent = () => {
             }
 
             await axios.request(reqOptions).then((e) => {
-                setIsClicked(false);
-                navigate("/listing");
-            })
-            console.log(response.data);
+                setIsClicked(false);    
+            }) 
         } catch (error) {
             console.log(error);
-            setIsClicked(false);
+            setIsClicked(false);  
         }
-        setIsClicked(false);
+        navigate("/listing");  
+        setIsClicked(false);  
     };
 
     const handlepinfetch = (e) => {
@@ -586,11 +589,8 @@ const StudioApartmentRent = () => {
             }
         }
         console.log("droped");
-    }
-
-    if(isClicked){
-        <Loading /> 
-    }
+    } 
+    
 
     return (
         <form onSubmit={handleSubmitData}>
@@ -2265,6 +2265,7 @@ const StudioApartmentRent = () => {
                 blocked
             </Heading>
             {/* =================== submit button =========================== */}
+            {isClicked && <Loading />}     
             <Button
                 margin={"20px 0"}
                 type="submit"

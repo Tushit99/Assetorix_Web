@@ -249,8 +249,7 @@ const GuestBanquetRent = () => {
             setIsClicked(false);  
         }
         navigate("/listing");  
-        setIsClicked(false);  
-
+        setIsClicked(false);   
     };
 
     const handlepinfetch = (e) => {
