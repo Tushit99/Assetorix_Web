@@ -20,18 +20,16 @@ import { firstWord } from "./usercode";
 import NameChanger from "./Modals/Name";
 import { AddIcon } from "@chakra-ui/icons";
 import axios from "axios";
-import { handleAddavatar } from "../../Redux/userauth/action";
+import { handleAddavatar, userPreLog } from "../../Redux/userauth/action";
 
 const UserDetail = () => {
     const data = useSelector((store) => store.userreducer);
     const dispatch = useDispatch();
-    const [inpName, setInpName] = useState("");
+    const [inpName, setInpName] = useState(""); 
     const [inpEmail, setInpEmail] = useState("");
     const [inpMobile, setInpMobile] = useState(""); 
     const [myimage, setmyimage] = useState("");
-    const fileInputRef = useRef(null);
-
-    console.log(data);
+    const fileInputRef = useRef(null); 
 
     useEffect(() => {
         setInpName(data.user.name);
@@ -92,7 +90,17 @@ const UserDetail = () => {
             setmyimage(""); 
             dispatch(handleAddavatar(""));
         })
-    }
+    } 
+
+    useEffect(()=>{ 
+
+        let id = localStorage.getItem("usrId") || undefined;
+        let authorization = localStorage.getItem("AstToken") || undefined;
+
+        let head = { id, authorization, 'Content-type': 'application/json' }; 
+        console.log(head); 
+        dispatch(userPreLog(head));  
+    },[]);
 
     return (
         <Box position={"relative"}>
@@ -112,7 +120,7 @@ const UserDetail = () => {
                                     <AddIcon fontSize={"20px"} filter={"drop-shadow(1px -1px 12px rgb(255, 255, 255))"} />
                                 </MenuButton>
                                 <MenuList boxShadow={"rgba(0, 0, 0, 0.35) 0px 5px 15px"} maxWidth={"100px"}>
-                                    <MenuItem>
+                                    <MenuItem> 
                                         <Text onClick={handleBtnClick}> {myimage ? "Change" : "Add"} Image </Text>
                                         <Input display={"none"} type={"file"} accept="image/jpg, image/png, image/jpeg" onChange={handleImageChange} ref={fileInputRef} name='image' formMethod="post" />
                                     </MenuItem>
@@ -125,13 +133,13 @@ const UserDetail = () => {
                     </Box>
                     <Box display={"flex"} alignItems={"center"} textAlign={"center"} padding={"10px 0"} justifyContent={"center"} gap={10} >
                         <Box display={"grid"} textAlign={"center"} >
-                            <Heading size={"2xl"} color={"rgb(30, 30, 30)"}> {data.user.wishlist} </Heading>
+                            <Heading size={"2xl"} color={"rgb(30, 30, 30)"}> {data.user.wishlist || 0} </Heading>
                             <Text fontWeight={"600"} color={"rgb(110, 110, 110)"} fontSize={"lg"} > Wishlist </Text>
                         </Box>
                         <Box display={"grid"} textAlign={"center"} >
-                            <Heading size={"2xl"} color={"rgb(30, 30, 30)"}> {data.user.listings} </Heading>
+                            <Heading size={"2xl"} color={"rgb(30, 30, 30)"}> {data.user.listings || 0} </Heading>
                             <Text fontWeight={"600"} color={"rgb(110, 110, 110)"} fontSize={"lg"} > Listing </Text>
-                        </Box>
+                        </Box> 
                     </Box>
                     <Box display={"grid"} w={"400px"} gap={4}>
                         <Box display={"flex"} alignItems={"center"} >

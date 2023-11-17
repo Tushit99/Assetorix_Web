@@ -25,14 +25,15 @@ import martin from "./amaricon/martin.jpg";
 import perfect from "./amaricon/perfect.png";
 import randr from "./amaricon/randr.webp";
 import cmm from "./amaricon/cmm.jpg";
-import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux'; 
+import MultipleItems from '../ProductSlider/ProductSlider';
 
 
 const TopDevelopers = () => {
   const { country } = useSelector((state) => state.gloalval);
 
   return (
-    <div>
+    <div >   
       {country == "usa" ? (<div className={style.top_dev} >
         <h1> TOP DEVELOPERS IN AMERICA (EAST COAST) </h1>
         <div className={style.devloper}>

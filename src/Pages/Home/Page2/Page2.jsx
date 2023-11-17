@@ -2,17 +2,17 @@ import { Box, Grid, Heading } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import style from "./Page2.module.css";
-import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";  
 
 const Page2 = () => {
   const { country } = useSelector((state) => state.gloalval);
 
 
   return (
-    <div>
+    <div> 
       {country == "usa" ?
         <Box backgroundColor={"rgb(240,239,237)"} padding={"30px"}>
-          <Heading as="h5" size="sm">
+          <Heading as="h5" size="sm"> 
             DISCOVER YOUR PROPERTY IN
           </Heading>
           <Heading as="h3" size="xl">
@@ -58,7 +58,7 @@ const Page2 = () => {
             <Link >BANGALORE</Link>
             <Link >KOLKATA</Link>
           </Grid>
-        </Box> 
+        </Box>
       }
     </div>
   );

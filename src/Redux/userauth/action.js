@@ -69,7 +69,7 @@ export const userPreLog = (param) => async (dispatch) => {
   // console.log("param",param);
   try {
     await axios.get(`${process.env.REACT_APP_URL}/user/`, {headers: param}).then((e) => {
-        // console.log("power23",e.data);  
+        console.log("power23",e.data);  
         let token = localStorage.getItem("AstToken");  
         localStorage.setItem("AstUser",e.data.name);  
         let id = localStorage.getItem("usrId");  
@@ -77,9 +77,9 @@ export const userPreLog = (param) => async (dispatch) => {
         dispatch({ type: USER_PREE_LOGIN, payload: { ...e.data, token, id } });   
       }); 
   } catch (err) {
-    console.log(err);
+    console.log(err); 
   } 
-};  
+};   
 
 export const handleChanges = (headers, body) => async (dispatch) => {
   // console.log(headers,body);
