@@ -2548,7 +2548,7 @@ const FlatAppartmentUpdate = () => {
                 <Button
                     margin={"20px 0"}
                     type="submit"
-                    w={"100%"}
+                    w={"100%"} 
                     disabled={clickCount <= 0 ? true : false}
                     backgroundColor={"rgb(46,49,146)"}
                     _hover={{ backgroundColor: "rgb(74, 79, 223)" }}

@@ -22,6 +22,7 @@ import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import { CleanInputText, NumericString } from '../../../code';
 import { useNavigate, useParams } from 'react-router-dom';
+import LoadingBox from '../../../Loadingbox';
 
 
 const FarmHouseUpdate = () => {
@@ -88,7 +89,7 @@ const FarmHouseUpdate = () => {
     const [savedImages, setSavedImages] = useState([]);
     const [isClicked, setIsClicked] = useState(false);
     const [clickCount, setClickCount] = useState(0);
-
+  
 
     const handleSubmitData = async (e) => {
         e.preventDefault();
@@ -405,7 +406,7 @@ const FarmHouseUpdate = () => {
             setExpectedRental(e?.additionalPricingDetails?.expectedRental)
             setBookingAmount(e?.additionalPricingDetails?.bookingAmount)
             setAnnualDuesPayable(e?.additionalPricingDetails?.annualDuesPayable)
-
+            setSavedImages(e.images);  
         })
     }
 
@@ -2531,11 +2532,13 @@ const FarmHouseUpdate = () => {
                 >
                     *Please provide correct information, otherwise your listing might get
                     blocked
-                </Heading>
+                </Heading> 
+                {isClicked && <LoadingBox />}
                 <Button
                     margin={"20px 0"}
                     type="submit"
-                    w={"100%"}
+                    w={"100%"} 
+                    disabled={clickCount <= 0 ? true : false} 
                     backgroundColor={"rgb(46,49,146)"}
                     _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                     color={"#ffffff"}
