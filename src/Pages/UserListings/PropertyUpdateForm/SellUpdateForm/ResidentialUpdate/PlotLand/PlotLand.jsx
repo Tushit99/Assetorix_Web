@@ -21,6 +21,8 @@ import { useSelector } from "react-redux";
 import { CleanInputText, NumericString } from "../../../code";
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import { useNavigate, useParams } from 'react-router-dom';
+import LoadingBox from '../../../Loadingbox';
+import Extraimg from '../../Extraimg/Extraimg';
 
 
 const PlotLandUpdate = () => {

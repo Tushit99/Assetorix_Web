@@ -22,6 +22,7 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { CleanInputText, NumericString } from "../../../code";
 import { useNavigate, useParams } from "react-router-dom";
 import LoadingBox from "../../../Loadingbox";
+import Extraimg from "../../Extraimg/Extraimg";
 
 const IndependentHouseUpdate = () => {
     const { productID } = useParams();

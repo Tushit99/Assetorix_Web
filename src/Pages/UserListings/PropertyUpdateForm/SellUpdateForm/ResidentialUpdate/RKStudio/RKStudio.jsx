@@ -23,6 +23,7 @@ import { CleanInputText, NumericString } from "../../../code";
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import { useNavigate, useParams } from 'react-router-dom';
 import LoadingBox from '../../../Loadingbox';
+import Extraimg from '../../Extraimg/Extraimg';
 
 
 const RKStudioUpdate = () => {
@@ -368,7 +369,46 @@ const RKStudioUpdate = () => {
                 position: 'top-right'
             })
         }
+    }; 
+
+    const submitImage = async (singleproductID) => {
+        try {
+
+            let id = localStorage.getItem("usrId") || undefined;
+            let authorization = localStorage.getItem("AstToken") || undefined;
+
+            let headersList = {
+                "Accept": "*/*",
+                "Authorization": authorization,
+                "id": id
+            }
+
+            let formdata = new FormData();
+            images.forEach((image) => {
+                formdata.append("image", image.image);
+            });
+
+            let bodyContent = formdata;
+
+            let reqOptions = {
+                url: `${process.env.REACT_APP_URL}/upload/${singleproductID}`,
+                method: "POST",
+                headers: headersList,
+                data: bodyContent,
+            }
+
+            await axios.request(reqOptions).then((e) => {
+                setIsClicked(false);
+                navigate("/listing");
+            })
+        } catch (error) {
+            console.log(error);
+            setIsClicked(false);
+            navigate("/listing");
+        }
+        setIsClicked(false);
     };
+
 
     const handlepinfetch = (e) => {
         setPincode(e.target.value);

@@ -15,7 +15,7 @@ import {
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { Checkbox } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
-import { CleanInputText, NumericString } from "../../../code";
+import { AlphabetString, CleanInputText, NumericString, WordandNumber } from "../../../code";
 import axios from "axios";
 import style from "../Residential.module.css";
 import { InputGroup } from "@chakra-ui/react";
@@ -2383,8 +2383,7 @@ const FlatAppartmentUpdate = () => {
                                 setPropertyFacing(e.target.value)
                             }}
                             value={"South-West"}
-                        >
-
+                        > 
                             South-West
                         </button>
                     </Box>

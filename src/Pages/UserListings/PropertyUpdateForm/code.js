@@ -21,6 +21,13 @@ export const AlphabetString = (e) => {
   let val = e;
   let clear = val.replace(/[^a-zA-Z,\s]/g, "");
   return clear;
+}; 
+
+export const WordandNumber = (e) => {
+  let inputValue = e;
+  let cleanedValue = inputValue.replace(/[^a-zA-Z0-9,.\s]/g, ""); 
+  cleanedValue = cleanedValue.replace(/\s+/g, " ");
+  return cleanedValue;
 };
 
 export const IndianDateConverter = (inputElement) => {

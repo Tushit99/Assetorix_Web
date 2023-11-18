@@ -22,6 +22,8 @@ import { useSelector } from "react-redux";
 import { CleanInputText, NumericString } from "../../../code";
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import { useNavigate, useParams } from 'react-router-dom';
+import Extraimg from '../../Extraimg/Extraimg';
+import LoadingBox from '../../../Loadingbox';
 
 const IndependentbuilderUpdate = () => {
     const { productID } = useParams();
