@@ -607,7 +607,7 @@ const FarmHouseUpdate = () => {
         console.log(newarr);
         setWaterSource(newarr);
     }
-
+ 
     const areaCalucation = () => {
         if (pricedetail && plotArea) {
             let max = Math.max(Number(pricedetail), Number(plotArea));
@@ -655,7 +655,7 @@ const FarmHouseUpdate = () => {
         } catch (error) {
             console.log(error);
         }
-    } 
+    }
 
     const selectFiles = () => {
         fileInputRef.current.click();
@@ -676,15 +676,6 @@ const FarmHouseUpdate = () => {
                     image: files[i],
                 },])
             }
-        }
-    }
-
-    const areaCalucation = () => {
-        if (pricedetail && plotArea) {
-            let max = Math.max(Number(pricedetail), Number(plotArea));
-            let min = Math.min(Number(pricedetail), Number(plotArea));
-            let ans = Math.round(max / min);
-            setPriceSqr(ans);
         }
     }
 
@@ -729,7 +720,7 @@ const FarmHouseUpdate = () => {
             }
         }
         console.log("droped");
-    } 
+    }
 
     useEffect(() => {
         handleDataFetch();
