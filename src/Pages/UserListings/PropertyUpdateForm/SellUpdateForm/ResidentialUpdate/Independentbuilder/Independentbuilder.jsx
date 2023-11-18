@@ -87,7 +87,7 @@ const IndependentbuilderUpdate = () => {
     const [savedImages, setSavedImages] = useState([]);  
     const [isClicked, setIsClicked] = useState(false);  
     const [clickCount, setClickCount] = useState(0);  
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();  
 
     const handleSubmitData = async (e) => {
         e.preventDefault();

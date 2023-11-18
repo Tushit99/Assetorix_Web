@@ -25,7 +25,7 @@ import Extraimg from "../../Extraimg/Extraimg";
 import LoadingBox from "../../../Loadingbox";
 
 const FlatAppartmentUpdate = () => {
-    const { productID } = useParams(); 
+    const { productID } = useParams();
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
@@ -279,9 +279,12 @@ const FlatAppartmentUpdate = () => {
                             status: 'success',
                             duration: 2000,
                         })
-                        if(images.length){
-                            submitImage(productID); 
-                        } 
+                        if (images.length) {
+                            submitImage(productID);
+                        } else {
+                            setClickCount((prev) => prev - 12);
+                            setIsClicked(false);
+                        }
                     });
             } catch (error) {
                 toast({
@@ -305,10 +308,10 @@ const FlatAppartmentUpdate = () => {
             setClickCount((prev) => prev - 12);
             setIsClicked(false);
         }
-    }; 
+    };
 
     const submitImage = async (singleproductID) => {
-        try {  
+        try {
 
             let id = localStorage.getItem("usrId") || undefined;
             let authorization = localStorage.getItem("AstToken") || undefined;
@@ -322,7 +325,7 @@ const FlatAppartmentUpdate = () => {
             let formdata = new FormData();
             images.forEach((image) => {
                 formdata.append("image", image.image);
-            }); 
+            });
 
             let bodyContent = formdata;
 
@@ -607,6 +610,15 @@ const FlatAppartmentUpdate = () => {
         setWaterSource(newarr);
     }
 
+    const areaCalucation = () => {
+        if (pricedetail && plotArea) {
+            let max = Math.max(Number(pricedetail), Number(plotArea));
+            let min = Math.min(Number(pricedetail), Number(plotArea));
+            let ans = Math.round(max / min);
+            setPriceSqr(ans);
+        }
+    }
+
     // ================= 
     const selectFiles = () => {
         fileInputRef.current.click();
@@ -627,15 +639,6 @@ const FlatAppartmentUpdate = () => {
                     image: files[i],
                 },])
             }
-        }
-    }
-
-    const areaCalucation = () => {
-        if (pricedetail && plotArea) {
-            let max = Math.max(Number(pricedetail), Number(plotArea));
-            let min = Math.min(Number(pricedetail), Number(plotArea));
-            let ans = Math.round(max / min);
-            setPriceSqr(ans);
         }
     }
 
@@ -677,7 +680,7 @@ const FlatAppartmentUpdate = () => {
                     name: files[i].name,
                     image: files[i],
                 }]);
-            } 
+            }
         }
         console.log("droped");
     }
@@ -2548,7 +2551,7 @@ const FlatAppartmentUpdate = () => {
                 <Button
                     margin={"20px 0"}
                     type="submit"
-                    w={"100%"} 
+                    w={"100%"}
                     disabled={clickCount <= 0 ? true : false}
                     backgroundColor={"rgb(46,49,146)"}
                     _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
