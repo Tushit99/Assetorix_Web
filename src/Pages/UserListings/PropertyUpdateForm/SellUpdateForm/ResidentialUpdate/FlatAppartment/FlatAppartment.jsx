@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
     Box,
     Button,
     ButtonGroup,
     Heading,
+    Image,
     Input,
-    NumberInput,
-    NumberInputField,
+    InputRightElement,
     Select,
     Text,
     Textarea,
@@ -17,13 +17,15 @@ import { Checkbox } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import { CleanInputText, NumericString } from "../../../code";
 import axios from "axios";
-import style from "./FlatAppartment.module.css";
+import style from "../Residential.module.css";
 import { InputGroup } from "@chakra-ui/react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import Extraimg from "../../Extraimg/Extraimg";
+import LoadingBox from "../../../Loadingbox";
 
 const FlatAppartmentUpdate = () => {
-    const { productID } = useParams();
+    const { productID } = useParams(); 
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
@@ -81,11 +83,18 @@ const FlatAppartmentUpdate = () => {
     const [annualDuesPayble, setAnnualDuesPayble] = useState("");
     const [bookingAmount, setBookingAmount] = useState("");
     const [membershipCharge, setMembershipCharge] = useState("");
-
-
+    const [isDraging, setIsDraging] = useState(false);
+    const fileInputRef = useRef(null);
+    const [images, setImages] = useState([]);
+    const [savedImages, setSavedImages] = useState([]);
+    const [isClicked, setIsClicked] = useState(false);
+    const [clickCount, setClickCount] = useState(0);
+    const navigate = useNavigate();
 
     const handleSubmitData = async (e) => {
         e.preventDefault();
+        setClickCount((prev) => prev + 12);
+        setIsClicked(true);
         let obj = {
             lookingFor: "Sell",
             propertyGroup: "Residential",
@@ -261,7 +270,7 @@ const FlatAppartmentUpdate = () => {
                 //     body: JSON.stringify(obj)
                 // });
                 // let data = await response.json();  
-                // console.log("data",data); 
+                // console.log("data", productID); 
                 await axios.patch(`${process.env.REACT_APP_URL}/property/${productID}`, obj, { headers: head })
                     .then((e) => {
                         toast({
@@ -270,6 +279,9 @@ const FlatAppartmentUpdate = () => {
                             status: 'success',
                             duration: 2000,
                         })
+                        if(images.length){
+                            submitImage(productID); 
+                        } 
                     });
             } catch (error) {
                 toast({
@@ -278,9 +290,9 @@ const FlatAppartmentUpdate = () => {
                     duration: 2000,
                 })
                 console.log(error);
+                setClickCount((prev) => prev - 12);
+                setIsClicked(false);
             }
-            // }
-
         }
         else {
             toast({
@@ -290,13 +302,53 @@ const FlatAppartmentUpdate = () => {
                 duration: 2000,
                 position: 'top-right'
             })
+            setClickCount((prev) => prev - 12);
+            setIsClicked(false);
         }
+    }; 
+
+    const submitImage = async (singleproductID) => {
+        try {  
+
+            let id = localStorage.getItem("usrId") || undefined;
+            let authorization = localStorage.getItem("AstToken") || undefined;
+
+            let headersList = {
+                "Accept": "*/*",
+                "Authorization": authorization,
+                "id": id
+            }
+
+            let formdata = new FormData();
+            images.forEach((image) => {
+                formdata.append("image", image.image);
+            }); 
+
+            let bodyContent = formdata;
+
+            let reqOptions = {
+                url: `${process.env.REACT_APP_URL}/upload/${singleproductID}`,
+                method: "POST",
+                headers: headersList,
+                data: bodyContent,
+            }
+
+            await axios.request(reqOptions).then((e) => {
+                setIsClicked(false);
+                navigate("/listing");
+            })
+        } catch (error) {
+            console.log(error);
+            setIsClicked(false);
+            navigate("/listing");
+        }
+        setIsClicked(false);
     };
 
     const handleDataFetch = async () => {
         await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
             let e = detail.data.data;
-            // ===================
+            // =================== 
             setCountry(e?.address?.country);
             setFacingWidth(e?.roadFacingWidth);
             setCity(e?.address?.city);
@@ -308,8 +360,8 @@ const FlatAppartmentUpdate = () => {
             setBedRoom(e.roomDetails.bedroom);
             setBathroom(e.roomDetails.bathroom);
             setBalcony(e?.roomDetails.balcony);
-            setParking(e?.parking?.closeParking);
-            setOpenparking(e?.parking?.openParking);
+            setParking(e?.parking?.closeParking || 0);
+            setOpenparking(e?.parking?.openParking || 0);
             setFurnished(e?.furnished);
             if (furnished == "Furnished" || furnished == "Semi-Furnished") {
                 setLight(e?.furnishedObj?.light);
@@ -345,8 +397,10 @@ const FlatAppartmentUpdate = () => {
             setTotalFloors(e?.totalFloors);
             setPlotArea(e?.plotArea);
             setDesc(e?.description);
-            // setFloorOn()
-            setAdditionalPrice(e?.additionalPricingDetails ? true : false);
+            // setFloorOn() 
+            setSavedImages(e.images);
+
+            setAdditionalPrice(e?.additionalPricingDetails.maintenancePrice > 0 ? true : false);
             setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice)
             setMaintenanceTimePeriod(e?.additionalPricingDetails?.maintenanceTimePeriod)
             setExpectedRentel(e?.additionalPricingDetails?.expectedRental)
@@ -356,9 +410,7 @@ const FlatAppartmentUpdate = () => {
         })
     }
 
-    useEffect(() => {
-        handleDataFetch();
-    }, []);
+
 
     const handlepinfetch = (e) => {
         setPincode(e.target.value);
@@ -555,12 +607,105 @@ const FlatAppartmentUpdate = () => {
         setWaterSource(newarr);
     }
 
+    // ================= 
+    const selectFiles = () => {
+        fileInputRef.current.click();
+    }
+
+    const onFileSelect = (e) => {
+        let files = e.target.files;
+        if (files.length === 0) {
+            return
+        }
+        for (let i = 0; i < files.length; i++) {
+            if (files[i].type.split('/')[0] !== 'image') {
+                continue;
+            }
+            if (!images.some((e) => e.name === files[i].name)) {
+                setImages((prev) => [...prev, {
+                    name: files[i].name,
+                    image: files[i],
+                },])
+            }
+        }
+    }
+
     const areaCalucation = () => {
         if (pricedetail && plotArea) {
             let max = Math.max(Number(pricedetail), Number(plotArea));
             let min = Math.min(Number(pricedetail), Number(plotArea));
             let ans = Math.round(max / min);
             setPriceSqr(ans);
+        }
+    }
+
+    const removeImage = (index) => {
+        const newImages = [...images];
+        newImages.splice(index, 1);
+        setImages(newImages);
+    };
+
+    const ondragleave = (event) => {
+        event.preventDefault();
+        setIsDraging(false);
+        console.log("leave")
+    }
+
+    const ondragover = (event) => {
+        event.preventDefault();
+        setIsDraging(true);
+        event.dataTransfer.dropEffect = "copy";
+        console.log("over the box");
+    }
+
+    const ondrop = (event) => {
+        event.preventDefault(); // Add this line
+        setIsDraging(false);
+        const files = event.dataTransfer.files;
+        console.log(event.dataTransfer.files);
+
+        if (files.length === 0) {
+            return;
+        }
+
+        for (let i = 0; i < files.length; i++) {
+            if (files[i].type.split('/')[0] !== 'image') {
+                continue;
+            }
+            if (!images.some((e) => e.name === files[i].name)) {
+                setImages((prev) => [...prev, {
+                    name: files[i].name,
+                    image: files[i],
+                }]);
+            } 
+        }
+        console.log("droped");
+    }
+
+    const deleteimagePermanently = async (propertyId, propertyKey) => {
+        try {
+            let userId = localStorage.getItem("usrId") || undefined;
+            let authorizationToken = localStorage.getItem("AstToken") || undefined;
+
+            console.log("id==== ", userId, "token", authorizationToken);
+
+            let headers = {
+                id: userId,
+                authorization: authorizationToken,
+                'Content-type': 'application/json'
+            };
+
+            let data = { key: propertyKey };
+
+            console.log(propertyKey, "--------property------", propertyId, userId, authorizationToken);
+
+            await axios.delete(`${process.env.REACT_APP_URL}/upload/${propertyId}`, { headers, data }).then((response) => {
+                console.log(response);
+                handleDataFetch()
+            });
+
+        } catch (error) {
+            console.log(error);
         }
     }
 
@@ -577,13 +722,20 @@ const FlatAppartmentUpdate = () => {
 
     // }
 
+    useEffect(() => {
+        handleDataFetch();
+    }, []);
+
 
     return (
         <Box w={"94%"} padding={"0 20px"} margin={"auto"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"} >
-            <form onSubmit={handleSubmitData} >
+            <form onSubmit={handleSubmitData}>
                 {/* property location */}
                 <Box className={style.location_form}>
-                    <Heading size={"lg"}> Property location Detail </Heading>
+                    <Heading size={"lg"}>Where is your Flat / Appartment located?</Heading>
+                    <Heading size={"sm"}>
+                        Location Detail
+                    </Heading>
 
                     <Input
                         type="text"
@@ -591,7 +743,8 @@ const FlatAppartmentUpdate = () => {
                         required
                         placeholder="House No. (optional)"
                         value={houseNo}
-                        onChange={(e) => setHouseNo(e.target.value)}
+                        maxLength={"100"}
+                        onChange={(e) => setHouseNo(WordandNumber(e.target.value))}
                         fontSize={"md"}
                         variant="flushed"
                     />
@@ -601,15 +754,20 @@ const FlatAppartmentUpdate = () => {
                         required
                         placeholder="Apartment / Society"
                         fontSize={"md"}
+                        maxLength={"100"}
                         value={appartment}
-                        onChange={(e) => setApartment(e.target.value)}
+                        onChange={(e) => setApartment(WordandNumber(e.target.value))}
                         variant="flushed"
                     />
                     <Input
                         type="text"
-                        value={pincode}
-                        variant="flushed"
+                        placeholder={"Enter pincode"}
+                        padding={"0 10px"}
                         required
+                        maxLength={"6"}
+                        fontSize={"md"}
+                        variant="flushed"
+                        value={pincode}
                         onChange={handlepinfetch}
                     />
                     <Input
@@ -619,14 +777,15 @@ const FlatAppartmentUpdate = () => {
                         placeholder="Locality"
                         list="browsers"
                         value={locality}
-                        onChange={(e) => setLocality(e.target.value)}
+                        maxLength={"100"}
+                        onChange={(e) => setLocality(WordandNumber(e.target.value))}
                         fontSize={"md"}
                         variant="flushed"
                     />
                     {pincollection.length ? (
                         <datalist id="browsers">
                             {pincollection.map((e) => (
-                                <option value={e.locality} />
+                                <option key={e._id} value={e.locality} />
                             ))}
                         </datalist>
                     ) : ""}
@@ -638,7 +797,7 @@ const FlatAppartmentUpdate = () => {
                         placeholder="Enter City"
                         fontSize={"md"}
                         value={city}
-                        onChange={(e) => setCity(e.target.value)}
+                        onChange={(e) => setCity(AlphabetString(e.target.value))}
                         variant="flushed"
                     />
                     <Input
@@ -647,7 +806,7 @@ const FlatAppartmentUpdate = () => {
                         required
                         placeholder="Enter State"
                         value={state}
-                        onChange={(e) => setState(e.target.value)}
+                        onChange={(e) => setState(AlphabetString(e.target.value))}
                         fontSize={"md"}
                         variant="flushed"
                     />
@@ -655,52 +814,46 @@ const FlatAppartmentUpdate = () => {
                         type="text"
                         padding={"0 10px"}
                         required
+                        maxLength={"100"}
                         placeholder="Enter Country"
                         value={country}
-                        onChange={(e) => setCountry(e.target.value)}
+                        onChange={(e) => setCountry(AlphabetString(e.target.value))}
                         fontSize={"md"}
                         variant="flushed"
                     />
 
                 </Box>
                 {/* Property Detail */}
-                <Box marginTop={12}>
-                    <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"}>
-                        Tell us about your property
-                    </Heading>
-                    <Heading as={"h4"} size={"sm"} margin={"0 0 30px 0 "}>
+                <Box marginTop={2}>
+                    <Heading as={"h4"} size={"sm"} textAlign={"left"}>
                         Add Room Details
                     </Heading>
                     <Box as={"div"} className={style.inp_form_numbers}>
                         <Box textAlign={"left"} >
-                            <Text> No. of Bedrooms </Text>
-                            <NumberInput>
-                                <NumberInputField
-                                    variant="flushed"
-                                    padding={"0 2px"}
-                                    onChange={(e) => setBedRoom(e.target.value)}
-                                    value={bedroom}
-                                    required
-                                />
-                            </NumberInput>
-                        </Box>
-                        <Box textAlign={"left"}>
-                            <Text> No. of Bathrooms </Text>
-                            <NumberInput>
-                                <NumberInputField
-                                    variant="flushed"
-                                    onChange={(e) => setBathroom(e.target.value)}
-                                    value={bathroom}
-                                    required
-                                    padding={"0 2px"}
-                                />
-                            </NumberInput>
-                        </Box>
-                        <Box textAlign={"left"}>
-                            <Text> No. of Balconies </Text>
                             <Input
-                                variant="flushed"
                                 type="text"
+                                maxLength={"2"}
+                                placeholder={"Enter No. of Bedrooms"}
+                                onChange={(e) => setBedRoom(NumericString(e.target.value))}
+                                value={bedroom}
+                                required
+                            />
+                        </Box>
+                        <Box textAlign={"left"}>
+                            <Input
+                                type="text"
+                                maxLength={"2"}
+                                placeholder={"Enter No. of Bathrooms"}
+                                onChange={(e) => setBathroom(NumericString(e.target.value))}
+                                value={bathroom}
+                                required
+                            />
+                        </Box>
+                        <Box textAlign={"left"}>
+                            <Input
+                                type="text"
+                                maxLength={"2"}
+                                placeholder={"Enter No. of Balconies"}
                                 onChange={(e) => setBalcony(NumericString(e.target.value))}
                                 value={balconey}
                                 required
@@ -709,57 +862,61 @@ const FlatAppartmentUpdate = () => {
                     </Box>
                     {/* ====================================== */}
                     {/* add area details */}
-                    <Box textAlign={"left"} padding={"10px 0"}>
-                        <Heading as={"h3"} margin={"5px 0"} size={"md"}>
+                    <Box textAlign={"left"}>
+                        <Heading as={"h3"} marginTop={2} size={"sm"}>
                             Add Area Details
                         </Heading>
-                        <Text margin={"5px 0"}> Atleast one area type is mandatory </Text>
-                        <ButtonGroup
-                            className={style.select_land}
-                            size="sm"
+                        <InputGroup
+                            w={300}
+                            size="md"
+                            marginTop={2}
                             isAttached
                             variant="outline"
                         >
                             <Input
                                 type="text"
                                 value={plotArea}
+                                placeholder='Enter area detail'
+                                w={200}
+                                maxLength={"6"}
                                 onChange={(e) => {
                                     areaCalucation();
                                     setPlotArea(NumericString(e.target.value));
                                 }}
                                 required />
-                            <select value={areaPer} onChange={(e) => {
-                                setAreaPer(e.target.value);
-                            }} className={style.select} required>
-                                <option value="sq.ft">sq.ft</option>
-                                <option value="sq.yards">sq.yards</option>
-                                <option value="sq.m">sq.m</option>
-                                <option value="acres">acres</option>
-                                <option value="marla">marla</option>
-                                <option value="cents">cents</option>
-                                <option value="bigha">bigha</option>
-                                <option value="kottah">kottah</option>
-                                <option value="kanal">kanal</option>
-                                <option value="grounds">grounds</option>
-                                <option value="ares">ares</option>
-                                <option value="biswa">biswa</option>
-                                <option value="guntha">guntha</option>
-                                <option value="aankadam">aankadam</option>
-                                <option value="hectares">hectares</option>
-                                <option value="rood">rood</option>
-                                <option value="chataks">chataks</option>
-                                <option value="perch">perch</option>
-                            </select>
-                        </ButtonGroup>
+                            <InputRightElement width={100}>
+                                <Select value={areaPer} borderRadius={0} onChange={(e) => {
+                                    setAreaPer(e.target.value);
+                                }} className={style.select} required>
+                                    <option value="sq.ft">sq.ft</option>
+                                    <option value="sq.yards">sq.yards</option>
+                                    <option value="sq.m">sq.m</option>
+                                    <option value="acres">acres</option>
+                                    <option value="marla">marla</option>
+                                    <option value="cents">cents</option>
+                                    <option value="bigha">bigha</option>
+                                    <option value="kottah">kottah</option>
+                                    <option value="kanal">kanal</option>
+                                    <option value="grounds">grounds</option>
+                                    <option value="ares">ares</option>
+                                    <option value="biswa">biswa</option>
+                                    <option value="guntha">guntha</option>
+                                    <option value="aankadam">aankadam</option>
+                                    <option value="hectares">hectares</option>
+                                    <option value="rood">rood</option>
+                                    <option value="chataks">chataks</option>
+                                    <option value="perch">perch</option>
+                                </Select>
+                            </InputRightElement>
+
+                        </InputGroup>
                     </Box>
                     {/* other Room  */}
                     <Box
-                        padding={"10px 0"}
                         display={"grid"}
-                        gap={6}
                         className={style.optional_box}
                     >
-                        <Heading as={"h3"} size={"md"}>
+                        <Heading as={"h3"} size={"sm"}>
                             Other rooms (optional)
                         </Heading>
                         <Box>
@@ -801,14 +958,14 @@ const FlatAppartmentUpdate = () => {
                             </button>
                         </Box>
                     </Box>
-                    {/* furnish */}
+
+                    {/*  ================== furnishing detail =================  */}
                     <Box
-                        padding={"10px 0"}
                         display={"grid"}
-                        gap={6}
+                        gap={2}
                         className={style.optional_box}
                     >
-                        <Heading as={"h3"} size={"md"}>
+                        <Heading as={"h3"} size={"sm"}>
                             Furnishing (optional)
                         </Heading>
                         <Box>
@@ -851,9 +1008,7 @@ const FlatAppartmentUpdate = () => {
                             padding={"10px 0"}
                             gap={6}
                         >
-                            <Heading as={"h4"} fontWeight={400} size={"sm"} color={"#656565"}>
 
-                            </Heading>
                             <Box className={style.furnished_detail}>
                                 <Box>
                                     <button
@@ -1123,9 +1278,10 @@ const FlatAppartmentUpdate = () => {
                             </Box>
                         </Box>
                     </Box>
+
                     {/* reserved */}
-                    <Box className={style.optional_box}>
-                        <Heading as={"h3"} size={"md"}>
+                    <Box className={style.optional_box} gap={3}>
+                        <Heading as={"h3"} size={"sm"}>
                             Reserved Parking (optional)
                         </Heading>
                         <div className={style.parking}>
@@ -1177,31 +1333,30 @@ const FlatAppartmentUpdate = () => {
                             </Box>
                         </div>
                     </Box>
+
                     {/* floor details */}
-                    <Box textAlign={"left"}>
+                    <Box
+                        textAlign={"left"}
+                        display={"grid"}
+                        margin={"6px 0"}
+                        gap={2}>
                         <Heading
                             as={"h3"}
-                            size={"md"}
-                            margin={"30px 0 10px 0"}
+                            size={"sm"}
                             textAlign={"left"}
                         >
                             Floor Details
                         </Heading>
-                        <Text textAlign={"left"} margin={"10px 0"}>
-                            Total no of floors and your floor details
-                        </Text>
                         <Box display={"flex"} alignItems={"center"} gap={5}>
-                            <NumberInput
-                                value={totalfloors}
-                                className={style.input_borders}>
-                                <NumberInputField
-                                    borderLeft={0}
-                                    borderRight={0}
-                                    borderTop={0}
-                                    borderBottom={"1px solid #4f5bffcf"}
-                                    borderRadius={0}
+                            <InputGroup w={400}>
+                                <Input
+                                    type="text"
+                                    value={totalfloors}
+                                    maxLength={"2"}
+                                    placeholder={"Enter no. of floors"}
                                     onChange={(e) => {
-                                        const nowval = e.target.value > 90;
+                                        let val = NumericString(e.target.value)
+                                        const nowval = val > 90;
                                         if (nowval) {
                                             toast({
                                                 title: 'Maximum floor count: 90',
@@ -1211,44 +1366,32 @@ const FlatAppartmentUpdate = () => {
                                             });
                                         }
                                         else {
-                                            setTotalFloors(e.target.value);
+                                            setTotalFloors(val);
                                         }
                                     }}
                                     required
-                                    w={180}
+                                    w={250}
                                 />
-                            </NumberInput>
-                            <Select
-                                id="floorSelectTag"
-                                variant="filled"
-                                onChange={(e) => setFloorOn(e.target.value)}
-                                value={floorOn}
-                                w={180}
-                                borderRadius={0}
-                                _hover={{
-                                    backgroundColor: "rgb(255, 255, 255)",
-                                    borderBottom: "1px solid blue",
-                                    borderLeft: "0",
-                                    borderRight: "0",
-                                    borderTop: "0",
-                                }}
-                                borderTop={"0"}
-                                borderLeft={"0"}
-                                borderBottom={"1px solid blue"}
-                                backgroundColor={"rgb(255, 255, 255)"}
-                            >
-                                <option value="Ground">Ground</option>
-                                <option value="Basement">Basement</option>
-                                <option value="Lower Ground">Lower Ground</option>
-                                {Array.from(Array(Number(totalfloors)).keys()).map((e) => {
-                                    return <option value={e + 1}>{e + 1}</option>
-                                })}
-                            </Select>
+                                <Select
+                                    onChange={(e) => setFloorOn(e.target.value)}
+                                    value={floorOn}
+                                    borderRadius={0}
+                                    width={150}
+                                >
+                                    <option value="Ground">Ground</option>
+                                    <option value="Basement">Basement</option>
+                                    <option value="Lower Ground">Lower Ground</option>
+                                    {Array.from(Array(Number(totalfloors)).keys()).map((e) => {
+                                        return <option value={e + 1}>{e + 1}</option>
+                                    })}
+                                </Select>
+                            </InputGroup>
                         </Box>
                     </Box>
+
                     {/* Availability status */}
-                    <Box textAlign={"left"} className={style.optional_box}>
-                        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                    <Box textAlign={"left"} className={style.optional_box} display={"grid"} gap={2}>
+                        <Heading as={"h3"} size={"sm"} textAlign={"left"}>
                             Availability Status
                         </Heading>
                         <Box className={style.grid}>
@@ -1280,6 +1423,7 @@ const FlatAppartmentUpdate = () => {
                             </button>
                         </Box>
                     </Box>
+
                     {/* Age of Property */}
                     {availability == "Ready to move" && (
                         <Box textAlign={"left"} className={style.optional_box}>
@@ -1435,41 +1579,25 @@ const FlatAppartmentUpdate = () => {
                             Price Details
                         </Heading>
                         <Box display={"flex"} alignItems={"center"} gap={5}>
-                            <Box display={"grid"} gap={0}>
-                                <Heading
-                                    as={"h3"}
-                                    size={"xs"}
-                                    fontWeight={400}
-                                    textAlign={"left"}
-                                >
-                                    {isCountry.country == "india" ? "₹" : "$"} Price Details
-                                </Heading>
+                            <InputGroup w={300}>
                                 <Input
                                     type="text"
                                     value={pricedetail}
+                                    maxLength={"10"}
+                                    placeholder={`${isCountry.country == "india" ? "₹" : "$"} Price Details`}
                                     required
+                                    w={200}
                                     onChange={(e) => {
-                                        setPricedetail(e.target.value);
+                                        setPricedetail(NumericString(e.target.value));
                                         areaCalucation();
                                     }}
-                                /> 
-                            </Box>
-                            <Box display={"grid"} gap={0}>
-                                <Heading
-                                    as={"h3"}
-                                    size={"xs"}
-                                    fontWeight={400}
-                                    textAlign={"left"}
-                                >
-                                    {isCountry.country == "india" ? "₹" : "$"} Price : Per {areaPer}
-                                </Heading>
-                                <Input type="text" value={priceSqr} readOnly />
-                            </Box>
+                                />
+                            </InputGroup>
                         </Box>
                     </Box>
 
                     {/* ============================== inclusive charges (checkbox) ==============================  */}
-                    <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
+                    <Box display={"flex"} gap={10} marginTop={3} flexWrap={"wrap"}>
                         <Checkbox
                             isChecked={inclusivePrices.includes("All inclusive price")}
                             onChange={(e) => {
@@ -1477,7 +1605,6 @@ const FlatAppartmentUpdate = () => {
                                 handleinclusiveandtax(e.target.value)
                             }}
                             value={"All inclusive price"}
-
                         >
                             All inclusive price
                         </Checkbox>
@@ -1489,7 +1616,6 @@ const FlatAppartmentUpdate = () => {
                             }}
                             value={"Tax and Govt. charges excluded"}
                         >
-
                             Tax and Govt. charges excluded
                         </Checkbox>
                         <Checkbox
@@ -1506,28 +1632,28 @@ const FlatAppartmentUpdate = () => {
                     </Box>
 
                     {/* Additional Pricing Detail (Optional) */}
-                    <Box display={"grid"}>
+                    <Box display={"grid"} marginTop={"6px"}>
                         {additionalPrice && <>
-                            <Heading as={"h4"} size={"sm"} margin={"10px 0"} fontWeight={700} textAlign={"left"}>
+                            <Heading as={"h4"} size={"sm"} fontWeight={700} textAlign={"left"}>
                                 Additional Pricing Detail (Optional)
                             </Heading>
                             <InputGroup w={"300px"} margin={"10px 0"}>
-                                <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
+                                <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(NumericString(e.target.value))} value={maintenancePrice} placeholder={"Maintenance Price"} />
                                 <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
                                     <option value="Monthly">Monthly</option>
                                     <option value="Yearly">Yearly</option>
                                 </Select>
                             </InputGroup>
-                            <Input type="text" w={"300px"} value={expectedRentel} onChange={(e) => setExpectedRentel(e.target.value)} placeholder="Expected rental" margin={"0"} />
-                            <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-                            <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
-                            <Input type="text" w={"300px"} value={membershipCharge} onChange={(e) => setMembershipCharge(e.target.value)} placeholder="Membership charges" margin={"10px 0 0 0"} />
+                            <Input type="text" w={"300px"} value={expectedRentel} onChange={(e) => setExpectedRentel(NumericString(e.target.value))} placeholder="Expected rental" margin={"0"} />
+                            <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(NumericString(e.target.value))} placeholder="Booking Amount" margin={"10px 0 0 0"} />
+                            <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(NumericString(e.target.value))} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
+                            <Input type="text" w={"300px"} value={membershipCharge} onChange={(e) => setMembershipCharge(NumericString(e.target.value))} placeholder="Membership charges" margin={"10px 0 0 0"} />
                         </>
                         }
                         <Heading
                             as={"h3"}
                             size={"sm"}
-                            margin={"10px 0"}
+                            marginTop={2}
                             color={"#002aff"}
                             fontWeight={500}
                             cursor={"pointer"}
@@ -1538,21 +1664,55 @@ const FlatAppartmentUpdate = () => {
                     </Box>
 
                     <Box>
-                        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                        <Heading as={"h3"} size={"sm"} marginTop={2} textAlign={"left"}>
                             What makes your property unique
                         </Heading>
-                        <Heading as={"h3"} size={"xs"} margin={"10px 0"} textAlign={"left"}>
+                        <Text fontSize={"sm"} textAlign={"left"} >
                             Adding description will increase your listing visibility
-                        </Heading>
-                        <Textarea height={140} value={desc} onChange={(e) => {
+                        </Text>
+                        <Textarea height={140} required value={desc} onChange={(e) => {
                             let my_cleantext = CleanInputText(e.target.value);
                             setDesc(my_cleantext);
                         }} ></Textarea>
                     </Box>
                 </Box>
+
+                {/* image Drag and Drop area  */}
+                <Box>
+                    <Box className={style.top}>
+                        <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
+                    </Box>
+                    <Box className={style.savedImages}>
+                        {savedImages?.map((w) => (
+                            <Extraimg e={w} propertyid={productID} deleteimagePermanently={deleteimagePermanently} key={w._id} />
+                        ))}
+                    </Box>
+                    <Box className={style.card}>
+                        <Box border={isDraging ? "2px dashed rgb(46,49,146)" : "2px dashed #9e9e9e"} className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+                            {isDraging ? (
+                                <Text textAlign={"center"} color={"rgb(0, 134, 254)"} >Drop image here</Text>
+                            ) : (
+                                <>
+                                    Drag & Drop image here or
+                                    <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
+                                </>
+                            )}
+                            <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+                        </Box>
+                        <Box className={style.container}>
+                            {images.map((image, index) => (
+                                <Box className={style.image} key={index}>
+                                    <Text className={style.delete} onClick={() => removeImage(index)}>&#10006;</Text>
+                                    <img src={URL.createObjectURL(image.image)} alt="images" />
+                                </Box>
+                            ))}
+                        </Box>
+                    </Box>
+                </Box>
+
                 {/* Add amenities/unique features */}
                 <Box>
-                    <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                    <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                         Add amenities/unique features
                     </Heading>
                     <Heading as={"h5"} size={"xs"} fontWeight={400} margin={"10px 0"} textAlign={"left"}>
@@ -1561,7 +1721,7 @@ const FlatAppartmentUpdate = () => {
                 </Box>
                 {/* Amenities */}
                 <Box className={style.optional_box}>
-                    <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                    <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                         Amenities
                     </Heading>
                     <Box>
@@ -1648,7 +1808,7 @@ const FlatAppartmentUpdate = () => {
                 </Box>
                 {/* Property Features */}
                 <Box className={style.optional_box}>
-                    <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                    <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                         Property Features
                     </Heading>
                     <Box>
@@ -1784,7 +1944,7 @@ const FlatAppartmentUpdate = () => {
                 </Box>
                 {/* Society/Building feature */}
                 <Box className={style.optional_box}>
-                    <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                    <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                         Society/Building feature
                     </Heading>
                     <Box>
@@ -1864,7 +2024,7 @@ const FlatAppartmentUpdate = () => {
                 </Box>
                 {/* Additional Features */}
                 <Box className={style.optional_box}>
-                    <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                    <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                         Additional Features
                     </Heading>
                     <Box>
@@ -1942,7 +2102,7 @@ const FlatAppartmentUpdate = () => {
                 </Box>
                 {/* Water Source */}
                 <Box className={style.optional_box}>
-                    <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                    <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                         Water Source
                     </Heading>
                     <Box>
@@ -1987,7 +2147,7 @@ const FlatAppartmentUpdate = () => {
                 </Box>
                 {/* Overlooking */}
                 <Box className={style.optional_box}>
-                    <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                    <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                         Overlooking
                     </Heading>
                     <Box>
@@ -2039,12 +2199,12 @@ const FlatAppartmentUpdate = () => {
                 </Box>
                 {/* Other Features */}
                 <Box>
-                    <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                    <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                         Other Features
                     </Heading>
                     <Box display={"grid"} textAlign={"left"} gap={2}>
                         <Checkbox
-                            size={"lg"}
+                            size={"md"}
                             isChecked={otherFeature.includes("In a gated society")}
                             value={"In a gated society"}
                             onChange={handleotherfeature}
@@ -2053,7 +2213,7 @@ const FlatAppartmentUpdate = () => {
                             In a gated society
                         </Checkbox>
                         <Checkbox
-                            size={"lg"}
+                            size={"md"}
                             isChecked={otherFeature.includes("Corner Property")}
                             value={"Corner Property"}
                             onChange={handleotherfeature}
@@ -2062,7 +2222,7 @@ const FlatAppartmentUpdate = () => {
                             Corner Property
                         </Checkbox>
                         <Checkbox
-                            size={"lg"}
+                            size={"md"}
                             isChecked={otherFeature.includes("Pet Friendly")}
                             value={"Pet Friendly"}
                             onChange={handleotherfeature}
@@ -2071,7 +2231,7 @@ const FlatAppartmentUpdate = () => {
                             Pet Friendly
                         </Checkbox>
                         <Checkbox
-                            size={"lg"}
+                            size={"md"}
                             isChecked={otherFeature.includes("Wheelchair friendly")}
                             value={"Wheelchair friendly"}
                             onChange={handleotherfeature}
@@ -2083,7 +2243,7 @@ const FlatAppartmentUpdate = () => {
                 </Box>
                 {/* Power Back up */}
                 <Box className={style.optional_box}>
-                    <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                    <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                         Power Back up
                     </Heading>
                     <Box>
@@ -2124,7 +2284,7 @@ const FlatAppartmentUpdate = () => {
                 </Box>
                 {/* Property facing */}
                 <Box className={style.optional_box}>
-                    <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                    <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                         Property facing
                     </Heading>
                     <Box>
@@ -2228,7 +2388,7 @@ const FlatAppartmentUpdate = () => {
                 </Box>
                 {/* Type of flooring */}
                 <Box className={style.optional_box}>
-                    <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                    <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                         Type of flooring
                     </Heading>
                     <Box>
@@ -2256,11 +2416,11 @@ const FlatAppartmentUpdate = () => {
                 </Box>
                 {/* Width of facing road */}
                 <Box className={style.optional_box}>
-                    <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                    <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                         Width of facing road
                     </Heading>
                     <Box display={"flex"} gap={"20px"} w={"300px"} >
-                        <Input type="text" variant='flushed' flex={1} required value={facingwidth} onChange={(e) => {
+                        <Input type="text" variant='flushed' maxLength={3} flex={1} required value={facingwidth} onChange={(e) => {
                             e.preventDefault();
                             setFacingWidth(NumericString(e.target.value));
                         }} />
@@ -2271,7 +2431,7 @@ const FlatAppartmentUpdate = () => {
                     </Box>
                 </Box>
                 <Box className={style.optional_box}>
-                    <Heading size={"md"} margin={"10px 0 4px 0"} textAlign={"left"}>
+                    <Heading size={"sm"} margin={"10px 0 4px 0"} textAlign={"left"}>
                         Location Advantages
                         <Heading
                             size={"xs"}
@@ -2384,10 +2544,12 @@ const FlatAppartmentUpdate = () => {
                     *Please provide correct information, otherwise your listing might get
                     blocked
                 </Heading>
+                {isClicked && <LoadingBox />}
                 <Button
                     margin={"20px 0"}
                     type="submit"
                     w={"100%"}
+                    disabled={clickCount <= 0 ? true : false}
                     backgroundColor={"rgb(46,49,146)"}
                     _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                     color={"#ffffff"}

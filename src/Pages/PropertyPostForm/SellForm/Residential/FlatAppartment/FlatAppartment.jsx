@@ -96,7 +96,7 @@ const FlatAppartment = () => {
     const handleSubmitData = async (e) => {
         e.preventDefault();
         setClickCount((prev) => prev + 12);
-        setIsClicked(true);  
+        setIsClicked(true); 
         let obj = {
             lookingFor: "Sell",
             propertyGroup: "Residential",
@@ -272,7 +272,8 @@ const FlatAppartment = () => {
                 //     body: JSON.stringify(obj)
                 // });
                 // let data = await response.json(); 
-                console.log("data", obj);
+
+                // console.log("data", obj);
                 await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
                     .then((e) => {
                         toast({
@@ -282,13 +283,19 @@ const FlatAppartment = () => {
                             duration: 2000,
                         })
                         submitImage(e.data.id);
-                    }).catch((err) => console.log(err));
+                    }).catch((err) => {
+                        console.log(err);
+                        setClickCount((prev) => prev - 12);
+                        setIsClicked(false);
+                    });
             } catch (error) {
                 toast({
                     title: error.response.data.msg,
                     status: 'error',
                     duration: 2000,
                 })
+                setClickCount((prev) => prev - 12);
+                setIsClicked(false);
             }
         }
         else {
@@ -299,6 +306,8 @@ const FlatAppartment = () => {
                 duration: 2000,
                 position: 'top-right'
             })
+            setClickCount((prev) => prev - 12);
+            setIsClicked(false); 
         }
     };
 
@@ -331,7 +340,7 @@ const FlatAppartment = () => {
             await axios.request(reqOptions).then((e) => {
                 setIsClicked(false);
                 navigate("/listing");
-            }) 
+            })
         } catch (error) {
             console.log(error);
             setIsClicked(false);
@@ -363,7 +372,7 @@ const FlatAppartment = () => {
         catch (err) {
             console.log(err);
         }
-    }
+    } 
 
     const furnisheddetails = (e) => {
         e.preventDefault();
@@ -627,10 +636,7 @@ const FlatAppartment = () => {
     //     adding.innerHTML = options;
 
     // }
-
-    if (isClicked) {
-        <Loading />
-    }
+ 
 
     return (
         <form onSubmit={handleSubmitData}>
@@ -2442,11 +2448,12 @@ const FlatAppartment = () => {
             >
                 *Please provide correct information, otherwise your listing might get
                 blocked
-            </Heading>
+            </Heading> 
+            {isClicked && <Loading />} 
             <Button
                 margin={"20px 0"}
                 type="submit"
-                w={"100%"}
+                w={"100%"} 
                 disabled={clickCount <= 0 ? true : false}
                 backgroundColor={"rgb(46,49,146)"}
                 _hover={{ backgroundColor: "rgb(74, 79, 223)" }}

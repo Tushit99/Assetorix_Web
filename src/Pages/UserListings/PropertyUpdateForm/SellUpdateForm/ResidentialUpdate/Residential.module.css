@@ -1,0 +1,276 @@
+.setbtn {
+  border-radius: 10px;
+  background-color: rgb(149, 152, 241);
+  color: rgb(255, 255, 255);
+  border-radius: 0;
+  padding: 4px 10px;
+  border: 1px solid rgb(222, 222, 255);
+}
+
+.btn {
+  border-radius: 10px;
+  background-color: rgb(242, 249, 255);
+  color: rgb(15, 66, 137);
+  padding: 4px 10px;
+  border-radius: 0;
+  border: 1px solid rgb(222, 222, 255);
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.location_form {
+  margin: 20px 0;
+  display: grid;
+  gap: 10px;
+}
+
+.furnished_detail {
+  display: grid;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 0;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.furnished_detail > * {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px;
+}
+
+.select_opt {
+  padding: 0 10px;
+  outline: 0;
+}
+
+.inp_form_numbers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4%;
+  margin: 5px 0;
+}
+
+.select_land {
+  display: flex;
+  margin-top: 12px;
+  width: 240px;
+}
+
+.parking {
+  display: flex;
+  /* margin-top: 6px ; */
+  align-items: center;
+}
+
+.inc_dec {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  flex: 1;
+  gap: 10px;
+}
+
+.pls_btn {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(122, 193, 255);
+  padding: 6px;
+  border-radius: 50%;
+}
+
+.savedImages{ 
+  width: 100%;  
+  height: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  max-height: 200px;
+  overflow-y: auto;
+  margin-top: 10px; 
+} 
+
+
+.savedImages .image {
+  width: 75px;
+  margin-right: 5px;
+  height: 75px;
+  border: 1px solid rgb(46, 49, 146);
+  position: relative;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+} 
+
+.savedImages .delete {
+  position: absolute;
+  top: -2px; 
+  color: rgb(46,49,146);
+  right: 9px;  
+  text-shadow: 0 0 3px rgba(245, 245, 245, 0.6);
+  font-size: 18px;     
+  cursor: pointer;  
+}
+
+.imagercontain img {
+  object-fit: contain;
+}
+
+.number_btn {
+  border: 1px solid rgb(122, 193, 255);
+  padding: 4px 12px;
+  display: flex;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.mns_btn {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(122, 193, 255);
+  padding: 6px;
+  border-radius: 50%;
+}
+
+.select_land > *:nth-child(1) {
+  flex: 5;
+}
+
+.select_land > *:nth-child(2) {
+  flex: 3;
+}
+
+.optional_box {
+  margin: 10px 0;
+  text-align: left;
+  display: grid;
+  gap: 8px;
+}
+
+.optional_box > *:nth-child(2) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+}
+
+/* drag and drop box */
+.card {
+  padding: 10px;
+  box-shadow: 0 0 5px #ffdfdf;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.card .top {
+  text-align: center;
+}
+
+.card p {
+  font-weight: bold;
+  color: #0086fe;
+}
+
+.card button {
+  outline: 0;
+  border: 0;
+  color: #ffffff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 400;
+  padding: 8px 13px;
+  width: 100%;
+  background-color: #0086fe;
+}
+.card .dragArea {
+  height: 150px;
+  border-radius: 5px;
+}
+
+.card .dragArea {
+  height: 150px;
+  border-radius: 5px; 
+  background: #fcfcff;
+  display: flex;
+  width: 100%;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  -webkit-user-select: none;
+  margin-top: l0px;
+}
+
+.card .dragArea .visible {
+  font-size: 18px;
+}
+ 
+
+.card .select {
+  color: rgb(0, 42, 255);
+  margin-left: 5px;
+  cursor: pointer;
+  height: 24px;
+  width: 80px;
+  text-align: left;
+  transition: 0.4s;
+}
+
+.select:hover {
+  opacity: 0.7;
+  text-decoration: underline;
+}
+
+.card .container {
+  width: 100%;  
+  height: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  max-height: 200px;
+  overflow-y: auto;
+  margin-top: 10px;
+}  
+
+.card .container .image {
+  width: 75px;
+  margin-right: 5px;
+  height: 75px;
+  border: 1px solid rgb(46, 49, 146);
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.card .container .image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.card .container .delete {
+  position: absolute;
+  top: -2px; 
+  color: rgb(46,49,146);
+  right: 9px;  
+  text-shadow: 0 0 3px rgba(245, 245, 245, 0.6);
+  font-size: 18px;     
+  cursor: pointer;  
+}
+ 
+
+.card input,
+.card .dragArea .on-drop,
+.card .dragArea.dragover .visible {
+  display: none;
+}

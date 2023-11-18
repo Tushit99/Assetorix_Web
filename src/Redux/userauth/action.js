@@ -1,4 +1,4 @@
-import axios from "axios"; 
+import axios from "axios";
 import { 
   USER_AVATAR_UPDATE,
   USER_EMAIL_DATA_UPDATE,

@@ -307,7 +307,7 @@ const GuestBanquet = () => {
             let headersList = {
                 "Accept": "*/*",
                 "Authorization": authorization,
-                "id": id
+                "id": id 
             }
 
             let formdata = new FormData();

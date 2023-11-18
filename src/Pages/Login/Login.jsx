@@ -29,7 +29,8 @@ const Login = ({ onpage }) => {
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [show, setshow] = useState(true);
+    const [show, setshow] = useState(true); 
+    const [val, setVal] = useState(0);  
 
 
     const handlelogin = async () => {
@@ -99,7 +100,7 @@ const Login = ({ onpage }) => {
                 mobile,
                 password
             }
-            dispatch(loginuser(body)); 
+            dispatch(loginuser(body));
         }
     }
 
@@ -114,7 +115,7 @@ const Login = ({ onpage }) => {
         }
         if (data.success == 0) {
             toast({
-                title: 'Login Succesfull', 
+                title: 'Login Succesfull',
                 status: 'success',
                 duration: 4000,
             })
@@ -124,11 +125,20 @@ const Login = ({ onpage }) => {
             // }else{
             navigate("/");
             // }
-        } 
+        }
     }, [data]);
 
-    const handleShow = ()=>{
-        setshow(!show); 
+    const handleShow = () => {
+        setshow(!show);
+    }
+
+    const handlekeybox = (e) => {
+        if (e.key === "Enter") {
+            if (mobile.length > 2 && password.length > 3 && val==0) {
+                handlelogin(); 
+                setVal((prev)=>prev+1); 
+            }
+        }
     }
 
     // console.log(data);
@@ -156,12 +166,12 @@ const Login = ({ onpage }) => {
                             <FormControl id="password">
                                 <FormLabel fontSize={{ base: 'md', lg: 'xl' }}>Password</FormLabel>
                                 <InputGroup>
-                                    <Input type={show ? "text":"password"} placeholder={"Enter Password"} onChange={(e) => setPassword(e.target.value)} value={password} required />
+                                    <Input type={show ? "text" : "password"} placeholder={"Enter Password"} onKeyPress={handlekeybox} onChange={(e) => setPassword(e.target.value)} value={password} required />
 
-                                    <InputRightElement width='4.5rem'  > 
-                                        <Button h='1.75rem' marginRight={2} letterSpacing={"1px"} fontWeight={"light"} color={"black"} onClick={handleShow} size='md' border={"1px solid rgb(172, 172, 172)"} backgroundColor={"unset"}  > 
-                                            {show ? 'Hide' : 'Show'} 
-                                        </Button> 
+                                    <InputRightElement width='4.5rem'  >
+                                        <Button h='1.75rem' marginRight={2} letterSpacing={"1px"} fontWeight={"light"} color={"black"} onClick={handleShow} size='md' border={"1px solid rgb(172, 172, 172)"} backgroundColor={"unset"}  >
+                                            {show ? 'Hide' : 'Show'}
+                                        </Button>
                                     </InputRightElement>
                                 </InputGroup>
                             </FormControl>

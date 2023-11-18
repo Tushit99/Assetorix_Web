@@ -411,16 +411,14 @@ const GuestBanquetRentUpdate = () => {
     }
 
     // const createtemplatefloors = () => {
-    //     let options = "";
-
+    //     let options = "";  
     //     let totalFloors = totalfloors;
     //     for (let i = 1; i <= totalFloors; i++) {
     //         let value = `<option value=${i}>${i}</option>`;
     //         options += value;
     //     }
     //     let adding = document.getElementById("floorSelectTag");
-    //     adding.innerHTML = options;
-
+    //     adding.innerHTML = options;  
     // }
 
 
@@ -442,27 +440,15 @@ const GuestBanquetRentUpdate = () => {
                         onChange={(e) => setaddress(e.target.value)}
                         fontSize={"md"}
                         variant="flushed"
-                    />
-                    <NumberInput value={pincode}>
-                        <NumberInputField
-                            placeholder={"Enter pincode"}
-                            padding={"0 10px"}
-                            borderRight={0}
-                            borderLeft={0}
-                            borderTop={0}
-                            borderRadius={0}
-                            _active={{
-                                borderRight: "0",
-                                borderLeft: "0",
-                                borderTop: "0",
-                                borderRadius: "0",
-                            }}
-                            required
-                            fontSize={"md"}
-                            value={pincode}
-                            onChange={handlepinfetch}
                         />
-                    </NumberInput>
+                    <Input
+                        type="text" 
+                        required
+                        fontSize={"md"}
+                        value={pincode}
+                        onChange={handlepinfetch}
+                        placeholder={"Enter pincode"}
+                    /> 
                     <Input
                         type="text"
                         padding={"0 10px"}
@@ -844,7 +830,7 @@ const GuestBanquetRentUpdate = () => {
                                     setPricedetail(e.target.value);
                                     areaCalucation();
                                 }}
-                            /> 
+                            />
                         </Box>
                         <Box display={"grid"} gap={0}>
                             <Heading
