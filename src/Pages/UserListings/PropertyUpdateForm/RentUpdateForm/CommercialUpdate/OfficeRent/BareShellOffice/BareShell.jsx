@@ -133,7 +133,8 @@ const BareShellUpdate = () => {
             setFireSafty(e?.fireSafety);
             setTotalFloors(e?.totalFloors);
             setFloorNumber(e?.floorOn); 
-            setStairCase(e?.)
+            setStairCase(e?.staircases);  
+            setLiftStatus()
         })
     }
 
