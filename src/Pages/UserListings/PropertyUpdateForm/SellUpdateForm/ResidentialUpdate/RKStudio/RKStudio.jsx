@@ -27,11 +27,11 @@ import Extraimg from '../../Extraimg/Extraimg';
 
 
 const RKStudioUpdate = () => {
-    const { productID } = useParams();
+    const { productID } = useParams();  
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
-    const [facingwidth, setFacingWidth] = useState("");
+    const [facingwidth, setFacingWidth] = useState("");  
     const [city, setCity] = useState("");
     const [appartment, setApartment] = useState("");
     const [pincode, setPincode] = useState(0);
@@ -39,7 +39,7 @@ const RKStudioUpdate = () => {
     const [locality, setLocality] = useState("");
     const [houseNo, setHouseNo] = useState("");
     const [bedroom, setBedRoom] = useState(1);
-    const [bathroom, setBathroom] = useState(1);
+    const [bathroom, setBathroom] = useState(1); 
     const [balconey, setBalcony] = useState(0);
     const [parking, setParking] = useState(0);
     const [openparking, setOpenparking] = useState(0);
@@ -149,11 +149,11 @@ const RKStudioUpdate = () => {
             setMaintenanceTimePeriod(e?.additionalPricingDetails?.maintenanceTimePeriod)
             setBookingAmount(e?.additionalPricingDetails?.bookingAmount)
             setAnnualDuesPayable(e?.additionalPricingDetails?.annualDuesPayable)
-            setSavedImages(e.images);
+            setSavedImages(e.images);    
 
         })
     }
-
+ 
     useEffect(() => {
         handleDataFetch();
     }, []);
@@ -804,7 +804,7 @@ const RKStudioUpdate = () => {
                         fontSize={"md"}
                         variant="flushed"
                     />
-                    <Input
+                    <Input 
                         type="text"
                         padding={"0 10px"}
                         required

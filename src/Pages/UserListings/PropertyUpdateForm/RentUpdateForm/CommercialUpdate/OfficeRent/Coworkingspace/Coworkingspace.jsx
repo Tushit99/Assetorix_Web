@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
     Box,
     Button,
@@ -17,7 +17,7 @@ import {
     Stack,
     Radio,
     Menu,
-    MenuButton, 
+    MenuButton,
     MenuList,
 } from "@chakra-ui/react";
 import style from "../../RentComercial.module.css";
@@ -25,7 +25,9 @@ import { useSelector } from "react-redux";
 import { AddIcon, ChevronDownIcon, MinusIcon } from "@chakra-ui/icons";
 import axios from "axios";
 import { CleanInputText, NumericString } from "../../../../code";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"; 
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
+import LoadingBox from "../../../../Loadingbox";
 
 
 
@@ -92,24 +94,97 @@ const Coworkingspace = () => {
     const [maintenancePrice, setMaintenancePrice] = useState("");
     const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
     const [zoneType, setZoneType] = useState("");
-
+    const [isDraging, setIsDraging] = useState(false);
+    const fileInputRef = useRef(null);
+    const [images, setImages] = useState([]);
+    const [savedImages, setSavedImages] = useState([]);
+    const [isClicked, setIsClicked] = useState(false);
+    const [clickCount, setClickCount] = useState(0);
+    const navigate = useNavigate();
     // please don'nt change any function without any prior knowledge   
- 
+
+    const handleDataFetch = async () => {
+        console.log(productID);
+        await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
+            let e = detail.data.data;
+            console.log(e);
+            setCountry(e?.address?.country);
+            setCity(e?.address?.city);
+            setPincode(e?.address?.pincode);
+            setState(e.address.state);
+            setLocality(e?.address.locality);
+            setLocatedInside(e?.address?.locatedInside);
+            setZoneType(e?.address?.zoneType);
+            setPlotArea(e?.superBuiltupArea);
+            setminimumLeasable(e?.superBuiltupArea);
+            setAreaPer(e?.minLeasableSuperBuiltupAreaUnit);
+            setwallConstructionStatus(e?.wallStatus);
+            setdoorConstructed(e?.doorStatus);
+            setWashroomType(e?.washrooms);
+            setPrivateWashroom(e?.washroomDetails?.privateWashrooms || 0);
+            setSharedWashroom(e?.washroomDetails?.sharedWashrooms || 0);
+            setPantryType(e?.pantryType);
+            setPantrySize(e?.pantrySize);
+            setFlooring(e?.flooring);
+            setAirCondition(e?.facilityAvailable?.centralAirConditioning);
+            setOxygenDuct(e?.facilityAvailable?.oxygenDuct);
+            setFireSafty(e?.fireSafety);
+            setTotalFloors(e?.totalFloors);
+            setFloorNumber(e?.floorOn); 
+            setStairCase(e?.staircases);  
+            setLiftStatus(e?.lift); 
+            setLiftPassenger(e?.liftDetails?.passenger);    
+            setLiftService(e?.liftDetails?.service);  
+            setModernLifts(e?.liftDetails?.modern); 
+            setParkingStatus(e?.parking); 
+            setParkingArr(e?.parkingDetailsList); 
+            setParkingTotalNumber(e?.parkingCount);  
+            setFromyear(e?.propertyStatus);  
+            setavailableFrom(e?.availableFrom);  
+            setOwnerShip(e?.ownership); 
+            setPricedetail(e?.price); 
+            setPriceSqr(e?.priceUnit); 
+            setInclusivePrice(e?.inclusivePrices); 
+            if(e.additionalPricingDetails.maintenancePrice>0){
+                setMaintenancePrice(e.additionalPricingDetails.maintenancePrice); 
+                setMaintenanceTimePeriod(e.additionalPricingDetails.maintenanceTimePeriod);  
+            } 
+            setSecurityDeposit(e?.securityDeposit); 
+            setDepositAmount(e?.depositValue);   
+            setlockPeriod(e?.lockInPeriod);  
+            setFireNOC(e?.noc); 
+            setOccupancyCertificate(e?.occupancy);  
+            setpreviouslyUsedList(e?.previouslyUsedList);  
+            setDesc(e?.description);  
+            setAminity(e?.amenities); 
+            setLocationAdv(e?.locationAdv); 
+            setRentIncreasePercent(e?.expectedYearlyRent); 
+            
+            setSavedImages(e?.images);  
+
+        })
+    }
+
+    useEffect(() => {
+        handleDataFetch()
+    }, []);
 
 
     const handleSubmitData = async (e) => {
         e.preventDefault();
+        setClickCount((prev) => prev + 12);
+        setIsClicked(true);
         let obj = {
             lookingFor: "Rent",
             propertyGroup: "Commercial",
             propertyType: "Office",
-            officeType: "Co-working office space", 
+            officeType: "Co-working office space",
             address: {
                 pincode,
                 locality,
                 city,
                 state,
-                country, 
+                country,
                 zoneType,
                 locatedInside
             },
@@ -118,11 +193,11 @@ const Coworkingspace = () => {
             priceUnit: +priceSqr,
             inclusivePrices,
             propertyStatus: fromyear,
-            securityDeposit, 
+            securityDeposit,
             amenities,
             locationAdv,
             minLeasableSuperBuiltupArea: minimumLeasable,
-            minLeasableSuperBuiltupAreaUnit: areaPer ,  
+            minLeasableSuperBuiltupAreaUnit: areaPer,
             plotArea: plotArea,
             plotAreaUnit: areaPer,
             availableFrom,
@@ -144,7 +219,7 @@ const Coworkingspace = () => {
             fireSafety: fireSafty,
             expectedYearlyRent: rentIncreasePercent,
             previouslyUsedList,
-            lockInPeriod :lockPeriod, 
+            lockInPeriod: lockPeriod,
             staircases: stairCase,
             lift: liftStatus,
             parking: parkingStatus,
@@ -179,7 +254,7 @@ const Coworkingspace = () => {
         if (
             city &&
             ownership &&
-            
+
             inclusivePrices &&
             totalfloors
         ) {
@@ -214,7 +289,7 @@ const Coworkingspace = () => {
 
             if (securityDeposit == "Multiple of Rent") {
                 obj["multipleOfRent"] = depositAmount;
-            }     
+            }
 
             if (parkingStatus == "Available") {
                 obj["parkingDetailsList"] = parkingArr;
@@ -241,7 +316,7 @@ const Coworkingspace = () => {
                 // let data = await response.json();
                 console.log("data", obj);
                 await axios
-                    .post(`${process.env.REACT_APP_URL}/property/`, obj, {
+                    .patch(`${process.env.REACT_APP_URL}/property/${propertyId}`, obj, {
                         headers: head,
                     })
                     .then((e) => {
@@ -252,17 +327,22 @@ const Coworkingspace = () => {
                             status: "success",
                             duration: 2000,
                         });
+                        if (images.length) {
+                            submitImage(productID);
+                        } else {
+                            setClickCount((prev) => prev - 12);
+                            setIsClicked(false);
+                        } 
                     });
-            } catch (error) {
-                // console.log(error.response.data.msg);
-                console.log(error); 
+            } catch (error) { 
                 toast({
                     title: error.response.data.msg,
                     status: "error",
-                    duration: 2000, 
+                    duration: 2000,
                 });
-            }
-            // }
+                setClickCount((prev) => prev - 12);
+                setIsClicked(false);  
+            } 
         } else {
             toast({
                 title: "Form un-filled",
@@ -271,6 +351,8 @@ const Coworkingspace = () => {
                 duration: 2000,
                 position: "top-right",
             });
+            setClickCount((prev) => prev - 12);
+            setIsClicked(false);   
         }
     };
 
@@ -431,7 +513,101 @@ const Coworkingspace = () => {
         }
         console.log(newarr);
         setpreviouslyUsedList(newarr);
+    } 
+
+      // ================= 
+      const selectFiles = () => {
+        fileInputRef.current.click();
     }
+
+    const onFileSelect = (e) => {
+        let files = e.target.files;
+        if (files.length === 0) {
+            return
+        }
+        for (let i = 0; i < files.length; i++) {
+            if (files[i].type.split('/')[0] !== 'image') {
+                continue;
+            }
+            if (!images.some((e) => e.name === files[i].name)) {
+                setImages((prev) => [...prev, {
+                    name: files[i].name,
+                    image: files[i],
+                },])
+            }
+        }
+    } 
+
+    const removeImage = (index) => {
+        const newImages = [...images];
+        newImages.splice(index, 1);
+        setImages(newImages);
+    };
+
+    const ondragleave = (event) => {
+        event.preventDefault();
+        setIsDraging(false);
+        console.log("leave")
+    }
+
+    const ondragover = (event) => {
+        event.preventDefault();
+        setIsDraging(true);
+        event.dataTransfer.dropEffect = "copy";
+        console.log("over the box");
+    }
+
+    const ondrop = (event) => {
+        event.preventDefault(); // Add this line
+        setIsDraging(false);
+        const files = event.dataTransfer.files;
+        console.log(event.dataTransfer.files);
+
+        if (files.length === 0) {
+            return;
+        }
+
+        for (let i = 0; i < files.length; i++) {
+            if (files[i].type.split('/')[0] !== 'image') {
+                continue;
+            }
+            if (!images.some((e) => e.name === files[i].name)) {
+                setImages((prev) => [...prev, {
+                    name: files[i].name,
+                    image: files[i],
+                }]);
+            }
+        }
+        console.log("droped");
+    }
+
+    const deleteimagePermanently = async (propertyId, propertyKey) => {
+        try {
+            let userId = localStorage.getItem("usrId") || undefined;
+            let authorizationToken = localStorage.getItem("AstToken") || undefined;
+
+            console.log("id==== ", userId, "token", authorizationToken);
+
+            let headers = {
+                id: userId,
+                authorization: authorizationToken,
+                'Content-type': 'application/json'
+            };
+
+            let data = { key: propertyKey };
+
+            console.log(propertyKey, "--------property------", propertyId, userId, authorizationToken);
+
+            await axios.delete(`${process.env.REACT_APP_URL}/upload/${propertyId}`, { headers, data }).then((response) => {
+                console.log(response);
+                handleDataFetch()
+            });
+
+        } catch (error) {
+            console.log(error);
+        }
+    } 
+
 
     return (
         <form onSubmit={handleSubmitData}>
@@ -480,7 +656,7 @@ const Coworkingspace = () => {
                 <Input
                     type="text"
                     placeholder={"Enter pincode"}
-                    padding={"0 10px"} 
+                    padding={"0 10px"}
                     required
                     fontSize={"md"}
                     value={pincode}
@@ -569,7 +745,7 @@ const Coworkingspace = () => {
                             }} />
                         <Select
                             value={areaPer}
-                            onChange={(e) => {
+                            onChange={(e) => { 
                                 setAreaPer(e.target.value);
                             }}
                             placeholder={"Super built-up Area"}
@@ -606,7 +782,7 @@ const Coworkingspace = () => {
                             value={areaPer}
                             onChange={(e) => {
                                 setAreaPer(e.target.value);
-                            }}
+                            }} 
                             className={style.select}
                             required
                         >
@@ -976,7 +1152,7 @@ const Coworkingspace = () => {
                                     borderLeft={0}
                                     borderTop={0}
                                     _focus={{ boxShadow: 'outline' }} as={Button} rightIcon={<ChevronDownIcon />}>
-                                    { floorNumber.length>0 ? `${floorNumber.length} Floor Selected` : "Your Floor No. (optional)"}
+                                    {floorNumber.length > 0 ? `${floorNumber.length} Floor Selected` : "Your Floor No. (optional)"}
                                 </MenuButton>
                                 <MenuList
                                     display={"flex"}
@@ -984,14 +1160,14 @@ const Coworkingspace = () => {
                                     overflow={"scroll"}
                                     overflowX={"hidden"}
                                     flexDirection={"column"}
-                                    padding={"8px 10px"} > 
+                                    padding={"8px 10px"} >
 
                                     <Checkbox isChecked={floorNumber.includes("Basement")} onChange={handleFloorNumber} value={"Basement"} > Basement </Checkbox>
                                     <Checkbox isChecked={floorNumber.includes("Lower Ground")} onChange={handleFloorNumber} value={"Lower Ground"} > Lower Ground </Checkbox>
                                     <Checkbox isChecked={floorNumber.includes("Ground")} onChange={handleFloorNumber} value={"Ground"} > Ground </Checkbox>
                                     {Array.from(Array(Number(totalfloors)).keys()).map((e, i) => {
                                         return <Checkbox isChecked={floorNumber.includes(`${e + 1}`)} key={i + 3} onChange={handleFloorNumber} value={e + 1} > {e + 1} </Checkbox>
-                                    })} 
+                                    })}
 
                                 </MenuList>
                             </Menu>
@@ -1278,7 +1454,7 @@ const Coworkingspace = () => {
                             </Heading>
                             <NumberInput value={priceSqr}>
                                 <NumberInputField
-                                    
+
                                 />
                             </NumberInput>
                         </Box>
@@ -1348,7 +1524,7 @@ const Coworkingspace = () => {
                         <button value={"Multiple of Rent"} className={securityDeposit == "Multiple of Rent" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> Multiple of Rent </button>
                         <button value={"None"} className={securityDeposit == "None" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> None </button>
                     </Box>
-                    <Box display={securityDeposit == "None" ? "none" : "block"}> 
+                    <Box display={securityDeposit == "None" ? "none" : "block"}>
                         <Input type="text" w={300} value={depositAmount} onChange={handleDepositAmount} placeholder={`${securityDeposit == "Fixed" ? "Deposit Value" : ""} ${securityDeposit == "Multiple of Rent" ? "No. of months (Max 30)" : ""}`} />
                     </Box>
                 </Box>
@@ -1478,27 +1654,27 @@ const Coworkingspace = () => {
                                 Select
                             </MenuButton>
                             <MenuList className={style.menu} >
-                                <Checkbox value={"Backend Office"} onChange={(e) => {
+                                <Checkbox isChecked={previouslyUsedList.includes("Backend Office")} value={"Backend Office"} onChange={(e) => {
                                     e.preventDefault();
                                     FileSystemHandle(e.target.value)
                                 }} > Backend Office </Checkbox>
-                                <Checkbox value={"CA Office"} onChange={(e) => {
+                                <Checkbox isChecked={previouslyUsedList.includes("CA Office")} value={"CA Office"} onChange={(e) => {
                                     e.preventDefault();
                                     FileSystemHandle(e.target.value)
                                 }} > CA Office </Checkbox>
-                                <Checkbox value={"Fronted Office"} onChange={(e) => {
+                                <Checkbox isChecked={previouslyUsedList.includes("Fronted Office")} value={"Fronted Office"} onChange={(e) => {
                                     e.preventDefault();
                                     FileSystemHandle(e.target.value)
                                 }} > Fronted Office </Checkbox>
-                                <Checkbox value={"Small Office Purpose"} onChange={(e) => {
+                                <Checkbox isChecked={previouslyUsedList.includes("Small Office Purpose")} value={"Small Office Purpose"} onChange={(e) => {
                                     e.preventDefault();
                                     FileSystemHandle(e.target.value)
                                 }} > Small Office Purpose </Checkbox>
-                                <Checkbox value={"Traders Office"} onChange={(e) => {
+                                <Checkbox isChecked={previouslyUsedList.includes("Traders Office")} value={"Traders Office"} onChange={(e) => {
                                     e.preventDefault();
                                     FileSystemHandle(e.target.value)
                                 }} > Traders Office </Checkbox>
-                                <Checkbox value={"Advocate Office"} onChange={(e) => {
+                                <Checkbox isChecked={previouslyUsedList.includes("Advocate Office")} value={"Advocate Office"} onChange={(e) => {
                                     e.preventDefault();
                                     FileSystemHandle(e.target.value)
                                 }} > Advocate Office </Checkbox>
@@ -1524,7 +1700,41 @@ const Coworkingspace = () => {
                         }}
                     ></Textarea>
                 </Box>
-            </Box>
+            </Box> 
+
+            
+                {/* image Drag and Drop area  */}
+                <Box>
+                    <Box className={style.top}>
+                        <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
+                    </Box>
+                    <Box className={style.savedImages}>
+                        {savedImages?.map((w) => (
+                            <Extraimg e={w} propertyid={productID} deleteimagePermanently={deleteimagePermanently} key={w._id} />
+                        ))}
+                    </Box>
+                    <Box className={style.card}>
+                        <Box border={isDraging ? "2px dashed rgb(46,49,146)" : "2px dashed #9e9e9e"} className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+                            {isDraging ? (
+                                <Text textAlign={"center"} color={"rgb(0, 134, 254)"} >Drop image here</Text>
+                            ) : (
+                                <>
+                                    Drag & Drop image here or
+                                    <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
+                                </>
+                            )}
+                            <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+                        </Box>
+                        <Box className={style.container}>
+                            {images.map((image, index) => (
+                                <Box className={style.image} key={index}>
+                                    <Text className={style.delete} onClick={() => removeImage(index)}>&#10006;</Text>
+                                    <img src={URL.createObjectURL(image.image)} alt="images" />
+                                </Box>
+                            ))}
+                        </Box>
+                    </Box>
+                </Box> 
 
             {/* Amenities */}
             <Box className={style.optional_box}>
@@ -1790,11 +2000,12 @@ const Coworkingspace = () => {
                 *Please provide correct information, otherwise your listing might get
                 blocked
             </Heading>
-            {/* form submit button */}
+            {isClicked && <LoadingBox />}  
             <Button
                 margin={"20px 0"}
                 type="submit"
                 w={"100%"}
+                disabled={clickCount <= 0 ? true : false} 
                 backgroundColor={"rgb(46,49,146)"}
                 _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                 color={"#ffffff"}
@@ -1805,5 +2016,5 @@ const Coworkingspace = () => {
     );
 };
 
-export default Coworkingspace; 
+export default Coworkingspace;
 

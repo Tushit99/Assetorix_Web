@@ -1440,31 +1440,31 @@ const ReadyMoveUpdate = () => {
                                 Select
                             </MenuButton>
                             <MenuList className={style.menu} >
-                                <Checkbox value={"Backend Office"} onChange={(e) => {
-                                    e.preventDefault();
-                                    FileSystemHandle(e.target.value)
-                                }} > Backend Office </Checkbox>
-                                <Checkbox value={"CA Office"} onChange={(e) => {
-                                    e.preventDefault();
-                                    FileSystemHandle(e.target.value)
-                                }} > CA Office </Checkbox>
-                                <Checkbox value={"Fronted Office"} onChange={(e) => {
-                                    e.preventDefault();
-                                    FileSystemHandle(e.target.value)
-                                }} > Fronted Office </Checkbox>
-                                <Checkbox value={"Small Office Purpose"} onChange={(e) => {
-                                    e.preventDefault();
-                                    FileSystemHandle(e.target.value)
-                                }} > Small Office Purpose </Checkbox>
-                                <Checkbox value={"Traders Office"} onChange={(e) => {
-                                    e.preventDefault();
-                                    FileSystemHandle(e.target.value)
-                                }} > Traders Office </Checkbox>
-                                <Checkbox value={"Advocate Office"} onChange={(e) => {
-                                    e.preventDefault();
-                                    FileSystemHandle(e.target.value)
-                                }} > Advocate Office </Checkbox>
-                            </MenuList>
+                                    <Checkbox isChecked={previouslyUsedList.includes("Backend Office")} value={"Backend Office"} onChange={(e) => {
+                                        e.preventDefault();
+                                        FileSystemHandle(e.target.value)
+                                    }} > Backend Office </Checkbox>
+                                    <Checkbox isChecked={previouslyUsedList.includes("CA Office")} value={"CA Office"} onChange={(e) => {
+                                        e.preventDefault();
+                                        FileSystemHandle(e.target.value)
+                                    }} > CA Office </Checkbox>
+                                    <Checkbox isChecked={previouslyUsedList.includes("Fronted Office")} value={"Fronted Office"} onChange={(e) => {
+                                        e.preventDefault();
+                                        FileSystemHandle(e.target.value)
+                                    }} > Fronted Office </Checkbox>
+                                    <Checkbox isChecked={previouslyUsedList.includes("Small Office Purpose")} value={"Small Office Purpose"} onChange={(e) => {
+                                        e.preventDefault();
+                                        FileSystemHandle(e.target.value)
+                                    }} > Small Office Purpose </Checkbox>
+                                    <Checkbox isChecked={previouslyUsedList.includes("Traders Office")} value={"Traders Office"} onChange={(e) => {
+                                        e.preventDefault();
+                                        FileSystemHandle(e.target.value)
+                                    }} > Traders Office </Checkbox>
+                                    <Checkbox isChecked={previouslyUsedList.includes("Advocate Office")} value={"Advocate Office"} onChange={(e) => {
+                                        e.preventDefault();
+                                        FileSystemHandle(e.target.value)
+                                    }} > Advocate Office </Checkbox>
+                                </MenuList> 
                         </Menu>
                     </Box>
                 </Box>

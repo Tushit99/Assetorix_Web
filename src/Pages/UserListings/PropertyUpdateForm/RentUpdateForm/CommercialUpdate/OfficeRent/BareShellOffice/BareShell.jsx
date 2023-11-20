@@ -65,8 +65,7 @@ const BareShellUpdate = () => {
     const [securityDeposit, setSecurityDeposit] = useState("");
     const [depositAmount, setDepositAmount] = useState("");
     const [lockPeriod, setlockPeriod] = useState("");
-    const [rentIncreasePercent, setRentIncreasePercent] = useState("");
-
+    const [rentIncreasePercent, setRentIncreasePercent] = useState(""); 
     const [previouslyUsedList, setpreviouslyUsedList] = useState([]);
     const [currentRentPerMonth, setCurrentRentPerMonth] = useState("");
     const [leaseTenureInYear, setLeaseTenureInYear] = useState("");
@@ -118,7 +117,7 @@ const BareShellUpdate = () => {
             setLocatedInside(e?.address?.locatedInside);
             setZoneType(e?.address?.zoneType);
             setPlotArea(e?.superBuiltupArea);
-            setminimumLeasable(e?.superBuiltupAreaUnit);
+            setminimumLeasable(e?.superBuiltupArea);
             setAreaPer(e?.minLeasableSuperBuiltupAreaUnit);
             setwallConstructionStatus(e?.wallStatus);
             setdoorConstructed(e?.doorStatus);
@@ -134,7 +133,36 @@ const BareShellUpdate = () => {
             setTotalFloors(e?.totalFloors);
             setFloorNumber(e?.floorOn); 
             setStairCase(e?.staircases);  
-            setLiftStatus()
+            setLiftStatus(e?.lift); 
+            setLiftPassenger(e?.liftDetails?.passenger);    
+            setLiftService(e?.liftDetails?.service);  
+            setModernLifts(e?.liftDetails?.modern); 
+            setParkingStatus(e?.parking); 
+            setParkingArr(e?.parkingDetailsList); 
+            setParkingTotalNumber(e?.parkingCount);  
+            setFromyear(e?.propertyStatus);  
+            setavailableFrom(e?.availableFrom);  
+            setOwnerShip(e?.ownership); 
+            setPricedetail(e?.price); 
+            setPriceSqr(e?.priceUnit); 
+            setInclusivePrice(e?.inclusivePrices); 
+            if(e.additionalPricingDetails.maintenancePrice>0){
+                setMaintenancePrice(e.additionalPricingDetails.maintenancePrice); 
+                setMaintenanceTimePeriod(e.additionalPricingDetails.maintenanceTimePeriod);  
+            } 
+            setSecurityDeposit(e?.securityDeposit); 
+            setDepositAmount(e?.depositValue);   
+            setlockPeriod(e?.lockInPeriod);  
+            setFireNOC(e?.noc); 
+            setOccupancyCertificate(e?.occupancy);  
+            setpreviouslyUsedList(e?.previouslyUsedList);  
+            setDesc(e?.description);  
+            setAminity(e?.amenities); 
+            setLocationAdv(e?.locationAdv); 
+            setRentIncreasePercent(e?.expectedYearlyRent); 
+            
+            setSavedImages(e?.images);  
+
         })
     }
 
@@ -179,8 +207,7 @@ const BareShellUpdate = () => {
             additionalPricingDetails: {
                 maintenancePrice,
                 maintenanceTimePeriod
-            },
-            // preLeased_Rented: preLeased,
+            }, 
             washrooms: washroomType,
             pantryType,
             facilityAvailable: {
@@ -211,7 +238,7 @@ const BareShellUpdate = () => {
                 position: "top-right",
             });
         };
-        // condition to check all imformation are included or not
+        // condition to check all imformation are included or not  
         if (!ownership) {
             showToastError("Provide OwnerShip");
         } else if (!priceSqr) {
@@ -277,9 +304,7 @@ const BareShellUpdate = () => {
                     businessType
                 }
                 obj["preLeased_RentedDetails"] = preLeased_RentedDetails;
-            }
-
-            // else {
+            } 
             try {
                 // let response = await fetch("http://localhost:4500/property/", {
                 //     method: "POST",
@@ -289,8 +314,8 @@ const BareShellUpdate = () => {
                 // let data = await response.json();
                 console.log("data", obj);
                 await axios
-                    .post(`${process.env.REACT_APP_URL}/property/`, obj, {
-                        headers: head,
+                    .patch(`${process.env.REACT_APP_URL}/property/${productID}`, obj, {
+                        headers: head, 
                     })
                     .then((e) => {
                         toast({
@@ -336,7 +361,7 @@ const BareShellUpdate = () => {
             let id = localStorage.getItem("usrId") || undefined;
             let authorization = localStorage.getItem("AstToken") || undefined;
 
-            let headersList = {
+            let headersList = { 
                 "Accept": "*/*",
                 "Authorization": authorization,
                 "id": id
@@ -1230,7 +1255,7 @@ const BareShellUpdate = () => {
                                     className={style.washroom_dec}
                                 >
                                     <AddIcon fontSize={"12px"} />
-                                </button>
+                                </button> 
                                 <Text margin={"0 10px"} flex={4}> Passenger Lifts </Text>
                             </Box>
                             <Box padding={"0 40px"}>
@@ -1664,31 +1689,31 @@ const BareShellUpdate = () => {
                                     Select
                                 </MenuButton>
                                 <MenuList className={style.menu} >
-                                    <Checkbox value={"Backend Office"} onChange={(e) => {
+                                    <Checkbox isChecked={previouslyUsedList.includes("Backend Office")} value={"Backend Office"} onChange={(e) => {
                                         e.preventDefault();
                                         FileSystemHandle(e.target.value)
                                     }} > Backend Office </Checkbox>
-                                    <Checkbox value={"CA Office"} onChange={(e) => {
+                                    <Checkbox isChecked={previouslyUsedList.includes("CA Office")} value={"CA Office"} onChange={(e) => {
                                         e.preventDefault();
                                         FileSystemHandle(e.target.value)
                                     }} > CA Office </Checkbox>
-                                    <Checkbox value={"Fronted Office"} onChange={(e) => {
+                                    <Checkbox isChecked={previouslyUsedList.includes("Fronted Office")} value={"Fronted Office"} onChange={(e) => {
                                         e.preventDefault();
                                         FileSystemHandle(e.target.value)
                                     }} > Fronted Office </Checkbox>
-                                    <Checkbox value={"Small Office Purpose"} onChange={(e) => {
+                                    <Checkbox isChecked={previouslyUsedList.includes("Small Office Purpose")} value={"Small Office Purpose"} onChange={(e) => {
                                         e.preventDefault();
                                         FileSystemHandle(e.target.value)
                                     }} > Small Office Purpose </Checkbox>
-                                    <Checkbox value={"Traders Office"} onChange={(e) => {
+                                    <Checkbox isChecked={previouslyUsedList.includes("Traders Office")} value={"Traders Office"} onChange={(e) => {
                                         e.preventDefault();
                                         FileSystemHandle(e.target.value)
                                     }} > Traders Office </Checkbox>
-                                    <Checkbox value={"Advocate Office"} onChange={(e) => {
+                                    <Checkbox isChecked={previouslyUsedList.includes("Advocate Office")} value={"Advocate Office"} onChange={(e) => {
                                         e.preventDefault();
                                         FileSystemHandle(e.target.value)
                                     }} > Advocate Office </Checkbox>
-                                </MenuList>
+                                </MenuList>  
                             </Menu>
                         </Box>
                     </Box>
