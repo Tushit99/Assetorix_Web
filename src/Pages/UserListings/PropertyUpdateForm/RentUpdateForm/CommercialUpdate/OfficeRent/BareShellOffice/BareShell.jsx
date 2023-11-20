@@ -675,7 +675,7 @@ const BareShellUpdate = () => {
                         variant="flushed"
                         as={"select"}
                         onChange={(e) => setZoneType(e.target.value)}
-                        value={zoneType}
+                        value={zoneType} 
                     >
                         <option value="Industrial">Industrial</option>
                         <option value="Commercial">Commercial</option>

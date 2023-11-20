@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
     Box,
     Button,
@@ -20,7 +20,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { CleanInputText, NumericString } from "../../../../code";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import LoadingBox from "../../../../Loadingbox";
 import Extraimg from "../../../../SellUpdateForm/Extraimg/Extraimg";
 
@@ -59,7 +59,13 @@ const FactoryRentUpdate = () => {
     const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
     const [bookingAmount, setBookingAmount] = useState("");
     const [annualDuesPayble, setAnnualDuesPayble] = useState("");
-
+    const [isDraging, setIsDraging] = useState(false);
+    const fileInputRef = useRef(null);
+    const [images, setImages] = useState([]);
+    const [savedImages, setSavedImages] = useState([]);
+    const [isClicked, setIsClicked] = useState(false);
+    const [clickCount, setClickCount] = useState(0);
+    const navigate = useNavigate();
     // please don'nt change any function without any prior knowledge       
 
     const handleDataFetch = async () => {
@@ -369,6 +375,99 @@ const FactoryRentUpdate = () => {
             newarr.push(value);
         }
         setInclusivePrice(newarr);
+    }
+
+    // ================= 
+    const selectFiles = () => {
+        fileInputRef.current.click();
+    }
+
+    const onFileSelect = (e) => {
+        let files = e.target.files;
+        if (files.length === 0) {
+            return
+        }
+        for (let i = 0; i < files.length; i++) {
+            if (files[i].type.split('/')[0] !== 'image') {
+                continue;
+            }
+            if (!images.some((e) => e.name === files[i].name)) {
+                setImages((prev) => [...prev, {
+                    name: files[i].name,
+                    image: files[i],
+                },])
+            }
+        }
+    }
+
+    const removeImage = (index) => {
+        const newImages = [...images];
+        newImages.splice(index, 1);
+        setImages(newImages);
+    };
+
+    const ondragleave = (event) => {
+        event.preventDefault();
+        setIsDraging(false);
+        console.log("leave")
+    }
+
+    const ondragover = (event) => {
+        event.preventDefault();
+        setIsDraging(true);
+        event.dataTransfer.dropEffect = "copy";
+        console.log("over the box");
+    }
+
+    const ondrop = (event) => {
+        event.preventDefault(); // Add this line
+        setIsDraging(false);
+        const files = event.dataTransfer.files;
+        console.log(event.dataTransfer.files);
+
+        if (files.length === 0) {
+            return;
+        }
+
+        for (let i = 0; i < files.length; i++) {
+            if (files[i].type.split('/')[0] !== 'image') {
+                continue;
+            }
+            if (!images.some((e) => e.name === files[i].name)) {
+                setImages((prev) => [...prev, {
+                    name: files[i].name,
+                    image: files[i],
+                }]);
+            }
+        }
+        console.log("droped");
+    }
+
+    const deleteimagePermanently = async (propertyId, propertyKey) => {
+        try {
+            let userId = localStorage.getItem("usrId") || undefined;
+            let authorizationToken = localStorage.getItem("AstToken") || undefined;
+
+            console.log("id==== ", userId, "token", authorizationToken);
+
+            let headers = {
+                id: userId,
+                authorization: authorizationToken,
+                'Content-type': 'application/json'
+            };
+
+            let data = { key: propertyKey };
+
+            console.log(propertyKey, "--------property------", propertyId, userId, authorizationToken);
+
+            await axios.delete(`${process.env.REACT_APP_URL}/upload/${propertyId}`, { headers, data }).then((response) => {
+                console.log(response);
+                handleDataFetch()
+            });
+
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     const areaCalucation = () => {
