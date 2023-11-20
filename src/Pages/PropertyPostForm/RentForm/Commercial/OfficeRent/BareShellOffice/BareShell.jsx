@@ -34,7 +34,7 @@ const BareShell = () => {
     const toast = useToast();
     const [country, setCountry] = useState("");
     const [city, setCity] = useState("");
-    const [pincode, setPincode] = useState(0);
+    const [pincode, setPincode] = useState("");
     const [state, setState] = useState("");
     const [washroomType, setWashroomType] = useState("");
     const [privateWashroom, setPrivateWashroom] = useState(0);
@@ -49,10 +49,9 @@ const BareShell = () => {
     const [parkingStatus, setParkingStatus] = useState("");
     const [parkingArr, setParkingArr] = useState([]);
     const [parkingTotalNumber, setParkingTotalNumber] = useState("");
-    const [preLeased, setPreLeased] = useState("");
     const [fireNOC, setFireNOC] = useState("");
     const [occupancyCertificate, setOccupancyCertificate] = useState("");
-    const [locatedInside, setLocatedInside] = useState("");
+    const [locatedInside, setLocatedInside] = useState("IT Park");
     const [pantrySize, setPantrySize] = useState("");
     const [pantryType, setPantryType] = useState("");
     const [floorNumber, setFloorNumber] = useState([]);
@@ -64,11 +63,7 @@ const BareShell = () => {
     const [lockPeriod, setlockPeriod] = useState("");
     const [rentIncreasePercent, setRentIncreasePercent] = useState("");
 
-    const [previouslyUsedList, setpreviouslyUsedList] = useState([]);
-    const [currentRentPerMonth, setCurrentRentPerMonth] = useState("");
-    const [leaseTenureInYear, setLeaseTenureInYear] = useState("");
-    const [annualRentIncrease, setAnnualRentIncrease] = useState("");
-    const [businessType, setBusinessType] = useState("");
+    const [previouslyUsedList, setpreviouslyUsedList] = useState([]); 
     const [pantryTypeUnit, setPantryTypeUnit] = useState("sq.ft");
     const [doorConstructed, setdoorConstructed] = useState("");
     const [wallConstructionStatus, setwallConstructionStatus] = useState("");
@@ -91,7 +86,7 @@ const BareShell = () => {
     const [pincollection, setPinCollection] = useState([]);
     const [maintenancePrice, setMaintenancePrice] = useState("");
     const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
-    const [zoneType, setZoneType] = useState("");
+    const [zoneType, setZoneType] = useState("Industrial");
     const [clickCount, setClickCount] = useState(0);
     const [isClicked, setIsClicked] = useState(false);
     const navigate = useNavigate();
@@ -138,7 +133,6 @@ const BareShell = () => {
                 maintenancePrice,
                 maintenanceTimePeriod
             },
-            // preLeased_Rented: preLeased,
             washrooms: washroomType,
             pantryType,
             facilityAvailable: {
@@ -227,16 +221,6 @@ const BareShell = () => {
                 obj["parkingCount"] = parkingTotalNumber;
             }
 
-            if (preLeased == "Yes") {
-                let preLeased_RentedDetails = {
-                    currentRentPerMonth,
-                    leaseTenureInYear,
-                    annualRentIncrease,
-                    businessType
-                }
-                obj["preLeased_RentedDetails"] = preLeased_RentedDetails;
-            }
-
             // else {
             try {
                 // let response = await fetch("http://localhost:4500/property/", {
@@ -312,8 +296,8 @@ const BareShell = () => {
                 setIsClicked(false);
             })
             console.log(response.data);
-        } catch (error) { 
-            setIsClicked(false); 
+        } catch (error) {
+            setIsClicked(false);
         }
         navigate("/listing");
         setIsClicked(false);
@@ -541,7 +525,7 @@ const BareShell = () => {
             }
         }
         console.log("droped");
-    } 
+    }
 
     return (
         <form onSubmit={handleSubmitData}>
@@ -562,7 +546,6 @@ const BareShell = () => {
                     onChange={(e) => setLocatedInside(e.target.value)}
                     value={locatedInside}
                 >
-                    <option value="">Located in side</option>
                     <option value="IT Park">IT Park</option>
                     <option value="Business Park"> Business Park </option>
                     <option value="Other"> Other </option>
@@ -666,7 +649,7 @@ const BareShell = () => {
                         size="sm"
                         display={"flex"}
                         alignItems={"center"}
-                        w={300}
+                        w={400}
                     >
                         <Input type="text"
                             value={plotArea}
@@ -706,7 +689,7 @@ const BareShell = () => {
                         </Select>
                     </InputGroup>
 
-                    <InputGroup w={300} margin={"10px 0"} >
+                    <InputGroup w={400} margin={"10px 0"} >
                         <Input
                             type="text"
                             placeholder={"Minimum leasable super built up area"}
@@ -913,32 +896,32 @@ const BareShell = () => {
                     <Heading as={"h3"} size={"md"} textAlign={"left"} > Pantry Type </Heading>
                     <Box display={"flex"} gap={10} padding={"12px 0"} >
                         <button
-                            value={"Shared Pantry"}
+                            value={"Shared"}
                             margin="auto"
                             onClick={(e) => {
                                 e.preventDefault();
                                 setPantryType(e.target.value);
-                            }}
+                            }} 
                             className={
-                                pantryType === "Shared Pantry" ? style.setbtn : style.btn
+                                pantryType === "Shared" ? style.setbtn : style.btn
                             }
                         >
-                            Shared Pantry
+                            Shared
                         </button>
                         <button
-                            value={"No Shared Pantry"}
+                            value={"No Pantry"}
                             onClick={(e) => {
                                 e.preventDefault();
                                 setPantryType(e.target.value);
                             }}
                             className={
-                                pantryType === "No Shared Pantry" ? style.setbtn : style.btn
+                                pantryType === "No Pantry" ? style.setbtn : style.btn
                             }
                         >
-                            No Shared Pantry
+                            No Pantry
                         </button>
                     </Box>
-                    <Box display={pantryType == "Shared Pantry" ? "flex" : "none"}>
+                    <Box display={pantryType == "Shared" ? "flex" : "none"}>
                         <InputGroup w={340} >
                             <Input type="text" border={"1px solid rgb(222, 222, 255)"}
                                 value={pantrySize}
@@ -1060,7 +1043,7 @@ const BareShell = () => {
                         Total no of floors and your floor details
                     </Text>
                     <Box display={"flex"} alignItems={"center"} gap={5}>
-                        <Input type="text" value={totalfloors} onChange={(e) => {
+                        <Input type="text" placeholder="Enter total floors" value={totalfloors} onChange={(e) => {
                             const nowval = e.target.value > 90;
                             if (nowval) {
                                 toast({
@@ -1456,8 +1439,8 @@ const BareShell = () => {
                         <button value={"Multiple of Rent"} className={securityDeposit == "Multiple of Rent" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> Multiple of Rent </button>
                         <button value={"None"} className={securityDeposit == "None" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> None </button>
                     </Box>
-                    <Box display={securityDeposit == "None" ? "none" : "block"}>
-                        <Input type="text" w={300} value={depositAmount} onChange={handleDepositAmount} placeholder={`${securityDeposit == "Fixed" ? "Deposit Value" : ""} ${securityDeposit == "Multiple of Rent" ? "No. of months (Max 30)" : ""}`} />
+                    <Box display={securityDeposit == "None" ? "none" : "block"} marginTop={2}>
+                        <Input type="text" maxLength={8} placeholder={"Enter amount"} w={300} value={depositAmount} onChange={handleDepositAmount} />
                     </Box>
                 </Box>
 
@@ -1472,7 +1455,11 @@ const BareShell = () => {
                     >
                         Lock - in Period
                     </Heading>
-                    <Input type="text" value={lockPeriod} onChange={(e) => setlockPeriod(e.target.value)} variant={"flushed"} />
+                    <Input type="text" maxLength={2} value={lockPeriod} onChange={(e) => { 
+                        setlockPeriod(e.target.value)
+                    }}
+                        placeholder="Enter months"
+                        variant={"flushed"} />
                 </Box>
 
                 {/* Yearly rent is expected to increase by */}
@@ -1480,47 +1467,8 @@ const BareShell = () => {
                     <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
                         Yearly rent is expected to increase by
                     </Heading>
-                    <Input type="text" placeholder="Percentage (%) of increase in rent" onChange={(e) => setRentIncreasePercent(e.target.value)} value={rentIncreasePercent} />
-                </Box>
-
-                {/* pre-leased / pre-Rented */}
-                <Box display={preLeased == "Yes" ? "grid" : "none"}>
-                    <Heading
-                        as={"h4"}
-                        size={"sm"}
-                        margin={"10px 0"}
-                        fontWeight={700}
-                        textAlign={"left"}
-                    >
-                        Pre-leased / Pre-Rented Details
-                    </Heading>
-                    <Heading size={"xs"}
-                        margin={"10px 0"}
-                        fontWeight={500}
-                        textAlign={"left"}>
-                        Lease / Rent related details Of your property
-                    </Heading>
-                    <Box>
-                        <Input type="text" value={currentRentPerMonth} onChange={(e) => {
-                            e.preventDefault();
-                            setCurrentRentPerMonth(e.target.value);
-                        }} placeholder={"₹ Current rent per month"} />
-                        <Input type="text" value={leaseTenureInYear} onChange={(e) => {
-                            e.preventDefault();
-                            setLeaseTenureInYear((e.target.value));
-                        }} placeholder={"₹ Current rent per month"} />
-                        <Box>
-                            <Input type="text" value={annualRentIncrease} onChange={(e) => {
-                                e.preventDefault();
-                                setAnnualRentIncrease((e.target.value));
-                            }} placeholder="Annual rent increase in % (Optional)" />
-                            <Input type="text" value={businessType} onChange={(e) => {
-                                e.preventDefault();
-                                setBusinessType((e.target.value));
-                            }} placeholder="Leased to - Business Type (Optional)" />
-                        </Box>
-                    </Box>
-                </Box>
+                    <Input type="text" maxLength={2} placeholder="Percentage (%) of increase in rent" onChange={(e) => setRentIncreasePercent(e.target.value)} value={rentIncreasePercent} />
+                </Box> 
 
                 {/* office fire NOC Certified */}
                 <Box className={style.optional_box}>
@@ -1926,8 +1874,8 @@ const BareShell = () => {
                 *Please provide correct information, otherwise your listing might get
                 blocked
             </Heading>
-            {/* form submit button */}  
-            {isClicked && <Loading />}   
+            {/* form submit button */}
+            {isClicked && <Loading />}
             <Button
                 margin={"20px 0"}
                 type="submit"

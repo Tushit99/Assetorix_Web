@@ -86,7 +86,7 @@ const RKStudioUpdate = () => {
     const [membershipCharge, setMembershipCharge] = useState("");
     const [isDraging, setIsDraging] = useState(false);
     const fileInputRef = useRef(null);
-    const [images, setImages] = useState([]);
+    const [images, setImages] = useState([]); 
     const [savedImages, setSavedImages] = useState([]);
     const [isClicked, setIsClicked] = useState(false);
     const [clickCount, setClickCount] = useState(0);
@@ -654,7 +654,7 @@ const RKStudioUpdate = () => {
                 },])
             }
         }
-    }
+    } 
 
     const removeImage = (index) => {
         const newImages = [...images];
@@ -2576,7 +2576,7 @@ const RKStudioUpdate = () => {
                 </Heading>
                 {isClicked && <LoadingBox />}  
                 <Button
-                    margin={"20px 0"}
+                    margin={"20px 0"} 
                     type="submit"
                     w={"100%"} 
                     disabled={clickCount <= 0 ? true : false}
