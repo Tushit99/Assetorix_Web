@@ -784,7 +784,7 @@ const Coworkingspace = () => {
                                 setAreaPer(e.target.value);
                             }} 
                             className={style.select}
-                            required
+                            required 
                         >
                             <option value="sq.ft">sq.ft</option>
                             <option value="sq.yards">sq.yards</option>

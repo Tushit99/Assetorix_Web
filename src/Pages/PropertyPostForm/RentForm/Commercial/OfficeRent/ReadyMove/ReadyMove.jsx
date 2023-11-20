@@ -30,10 +30,10 @@ import Loading from "../../../../Loading";
 
 const ReadyMove = () => {
     const isCountry = useSelector((state) => state.gloalval);
-    const toast = useToast();
+    const toast = useToast(); 
     const [country, setCountry] = useState("");
     const [city, setCity] = useState("");
-    const [pincode, setPincode] = useState(0);
+    const [pincode, setPincode] = useState("");
     const [state, setState] = useState("");
     const [locality, setLocality] = useState("");
     const [minseat, setMinseat] = useState("");
@@ -257,7 +257,7 @@ const ReadyMove = () => {
                 //     body: JSON.stringify(obj)
                 // });
                 // let data = await response.json();
-                console.log("data", obj); 
+                // console.log("data", obj); 
                 setClickCount((prev) => prev + 12); 
                 setIsClicked(true); 
                 await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, {
@@ -277,7 +277,7 @@ const ReadyMove = () => {
                     title: error.response.data.msg,
                     status: "error",
                     duration: 2000,
-                });
+                }); 
                 setClickCount((prev) => prev - 12); 
                 setIsClicked(false); 
             } 
@@ -555,7 +555,11 @@ const ReadyMove = () => {
                     An accurate location helps you connect with the right buyers.
                 </Heading>
 
-                <Input type="text" value={address} onChange={(e) => setAddress(e.target.value)} />
+                <Input 
+                type="text"  
+                placeholder={"Enter address"} 
+                value={address} 
+                onChange={(e) => setAddress(e.target.value)} />
 
                 <Select
                     fontSize={"md"}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
     Box,
     Button,
@@ -26,9 +26,11 @@ import { AddIcon, ChevronDownIcon, MinusIcon } from "@chakra-ui/icons";
 import axios from "axios";
 import { CleanInputText, NumericString } from "../../../../code";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { useNavigate, useParams } from "react-router-dom";
 
 
-const ReadyMoveUpdate = () => {
+const ReadyMoveUpdate = () => { 
+    const { productID } = useParams(); 
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
     const [country, setCountry] = useState("");
@@ -94,7 +96,13 @@ const ReadyMoveUpdate = () => {
     const [zoneType, setZoneType] = useState("");
     const [rentIncreasePercent, setRentIncreasePercent] = useState("");
     const [fireNocCertificate, setFireNocCertificate] = useState("");
-
+    const [isDraging, setIsDraging] = useState(false);
+    const fileInputRef = useRef(null);
+    const [images, setImages] = useState([]);
+    const [savedImages, setSavedImages] = useState([]);
+    const [isClicked, setIsClicked] = useState(false);
+    const [clickCount, setClickCount] = useState(0);
+    const navigate = useNavigate();
     // please don'nt change any function without any prior knowledge   
 
     const handleSubmitData = async (e) => {
@@ -282,7 +290,73 @@ const ReadyMoveUpdate = () => {
                 position: "top-right",
             });
         }
-    };
+    }; 
+
+    const handleDataFetch = async () => {
+        console.log(productID);
+        await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
+            let e = detail.data.data;
+            console.log(e);
+            setCountry(e?.address?.country);
+            setCity(e?.address?.city);
+            setPincode(e?.address?.pincode);
+            setState(e.address.state);
+            setLocality(e?.address.locality);
+            setLocatedInside(e?.address?.locatedInside);
+            setZoneType(e?.address?.zoneType);
+            setPlotArea(e?.superBuiltupArea);
+            setminimumLeasable(e?.superBuiltupArea);
+            setAreaPer(e?.minLeasableSuperBuiltupAreaUnit);
+            setwallConstructionStatus(e?.wallStatus);
+            setdoorConstructed(e?.doorStatus);
+            setWashroomType(e?.washrooms);
+            setPrivateWashroom(e?.washroomDetails?.privateWashrooms || 0);
+            setSharedWashroom(e?.washroomDetails?.sharedWashrooms || 0);
+            setPantryType(e?.pantryType);
+            setPantrySize(e?.pantrySize);
+            setFlooring(e?.flooring);
+            setAirCondition(e?.facilityAvailable?.centralAirConditioning);
+            setOxygenDuct(e?.facilityAvailable?.oxygenDuct);
+            setFireSafty(e?.fireSafety);
+            setTotalFloors(e?.totalFloors);
+            setFloorNumber(e?.floorOn); 
+            setStairCase(e?.staircases);  
+            setLiftStatus(e?.lift); 
+            setLiftPassenger(e?.liftDetails?.passenger);    
+            setLiftService(e?.liftDetails?.service);  
+            setModernLifts(e?.liftDetails?.modern); 
+            setParkingStatus(e?.parking); 
+            setParkingArr(e?.parkingDetailsList); 
+            setParkingTotalNumber(e?.parkingCount);  
+            setFromyear(e?.propertyStatus);  
+            setavailableFrom(e?.availableFrom);  
+            setOwnerShip(e?.ownership); 
+            setPricedetail(e?.price); 
+            setPriceSqr(e?.priceUnit); 
+            setInclusivePrice(e?.inclusivePrices); 
+            if(e.additionalPricingDetails.maintenancePrice>0){
+                setMaintenancePrice(e.additionalPricingDetails.maintenancePrice); 
+                setMaintenanceTimePeriod(e.additionalPricingDetails.maintenanceTimePeriod);  
+            } 
+            setSecurityDeposit(e?.securityDeposit); 
+            setDepositAmount(e?.depositValue);   
+            setlockPeriod(e?.lockInPeriod);  
+            setFireNOC(e?.noc); 
+            setOccupancyCertificate(e?.occupancy);  
+            setpreviouslyUsedList(e?.previouslyUsedList);  
+            setDesc(e?.description);  
+            setAminity(e?.amenities); 
+            setLocationAdv(e?.locationAdv); 
+            setRentIncreasePercent(e?.expectedYearlyRent); 
+            
+            setSavedImages(e?.images);  
+
+        })
+    }
+
+    useEffect(() => {
+        handleDataFetch()
+    }, []);
 
     const handlepinfetch = (e) => {
         setPincode(e.target.value);
