@@ -27,6 +27,7 @@ import axios from "axios";
 import { CleanInputText } from "../../../../code";
 import { useNavigate, useParams } from "react-router-dom";
 import LoadingBox from "../../../../Loadingbox";
+import Extraimg from "../../../Extraimg/Extraimg";
 
 
 const ReadyToMoveUpdate = () => {

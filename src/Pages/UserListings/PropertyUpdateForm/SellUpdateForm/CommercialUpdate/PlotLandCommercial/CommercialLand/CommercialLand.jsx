@@ -23,6 +23,7 @@ import { CleanInputText, NumericString } from "../../../../code";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useNavigate, useParams } from "react-router-dom";
 import LoadingBox from "../../../../Loadingbox";
+import Extraimg from "../../../Extraimg/Extraimg";
 
 
 

@@ -21,6 +21,8 @@ import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { AlphabetString, CleanInputText, NumericString } from "../../../../code";
 import { useNavigate, useParams } from "react-router-dom";
+import Extraimg from "../../../Extraimg/Extraimg";
+import LoadingBox from "../../../../Loadingbox";
 
 
 

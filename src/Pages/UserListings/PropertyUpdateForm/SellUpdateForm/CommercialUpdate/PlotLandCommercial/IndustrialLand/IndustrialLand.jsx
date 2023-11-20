@@ -25,6 +25,7 @@ import { CleanInputText, NumericString } from "../../../../code";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useNavigate, useParams } from "react-router-dom";
 import LoadingBox from "../../../../Loadingbox";
+import Extraimg from "../../../Extraimg/Extraimg";
 
 
 
@@ -1231,39 +1232,6 @@ const IndustrialLandUpdate = () => {
             let my_cleantext = CleanInputText(e.target.value);
             setDesc(my_cleantext);
           }} ></Textarea>
-        </Box>
-
-        {/* image Drag and Drop area  */}
-        <Box>
-          <Box className={style.top}>
-            <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
-          </Box>
-          <Box className={style.savedImages}>
-            {savedImages?.map((w) => (
-              <Extraimg e={w} propertyid={productID} deleteimagePermanently={deleteimagePermanently} key={w._id} />
-            ))}
-          </Box>
-          <Box className={style.card}>
-            <Box border={isDraging ? "2px dashed rgb(46,49,146)" : "2px dashed #9e9e9e"} className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
-              {isDraging ? (
-                <Text textAlign={"center"} color={"rgb(0, 134, 254)"} >Drop image here</Text>
-              ) : (
-                <>
-                  Drag & Drop image here or
-                  <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
-                </>
-              )}
-              <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
-            </Box>
-            <Box className={style.container}>
-              {images.map((image, index) => (
-                <Box className={style.image} key={index}>
-                  <Text className={style.delete} onClick={() => removeImage(index)}>&#10006;</Text>
-                  <img src={URL.createObjectURL(image.image)} alt="images" />
-                </Box>
-              ))}
-            </Box>
-          </Box>
         </Box> 
 
         {/* ============================ Add amenities/unique features ============================ */}
