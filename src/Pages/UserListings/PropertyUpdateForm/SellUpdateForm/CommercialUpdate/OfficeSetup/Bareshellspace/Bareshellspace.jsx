@@ -171,8 +171,7 @@ const BareshellspaceUpdate = () => {
 
     useEffect(() => {
         handleDataFetch();
-    }, []);
-
+    }, []); 
 
     const handleSubmitData = async (e) => {
         e.preventDefault();
