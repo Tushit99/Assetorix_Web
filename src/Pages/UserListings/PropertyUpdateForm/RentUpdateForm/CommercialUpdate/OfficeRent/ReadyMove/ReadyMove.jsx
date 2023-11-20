@@ -305,17 +305,18 @@ const ReadyMoveUpdate = () => {
             setLocatedInside(e?.address?.locatedInside);
             setZoneType(e?.address?.zoneType);
             setPlotArea(e?.superBuiltupArea);
-            setminimumLeasable(e?.superBuiltupArea);
+
+            // setminimumLeasable(e?.superBuiltupArea);
             setAreaPer(e?.minLeasableSuperBuiltupAreaUnit);
-            setwallConstructionStatus(e?.wallStatus);
-            setdoorConstructed(e?.doorStatus);
+            // setwallConstructionStatus(e?.wallStatus);
+            // setdoorConstructed(e?.doorStatus);
             setWashroomType(e?.washrooms);
             setPrivateWashroom(e?.washroomDetails?.privateWashrooms || 0);
             setSharedWashroom(e?.washroomDetails?.sharedWashrooms || 0);
             setPantryType(e?.pantryType);
             setPantrySize(e?.pantrySize);
-            setFlooring(e?.flooring);
-            setAirCondition(e?.facilityAvailable?.centralAirConditioning);
+            // setFlooring(e?.flooring);
+            // setAirCondition(e?.facilityAvailable?.centralAirConditioning);
             setOxygenDuct(e?.facilityAvailable?.oxygenDuct);
             setFireSafty(e?.fireSafety);
             setTotalFloors(e?.totalFloors);
@@ -341,7 +342,7 @@ const ReadyMoveUpdate = () => {
             setSecurityDeposit(e?.securityDeposit); 
             setDepositAmount(e?.depositValue);   
             setlockPeriod(e?.lockInPeriod);  
-            setFireNOC(e?.noc); 
+            // setFireNOC(e?.noc);  
             setOccupancyCertificate(e?.occupancy);  
             setpreviouslyUsedList(e?.previouslyUsedList);  
             setDesc(e?.description);  
