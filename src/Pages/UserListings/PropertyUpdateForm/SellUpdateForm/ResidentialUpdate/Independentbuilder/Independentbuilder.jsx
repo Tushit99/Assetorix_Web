@@ -282,6 +282,9 @@ const IndependentbuilderUpdate = () => {
                         })
                         if (images.length) {
                             submitImage(productID);
+                        } else {
+                            setClickCount((prev) => prev - 12);
+                            setIsClicked(false);
                         }
                     });
             } catch (error) {

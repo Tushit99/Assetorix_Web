@@ -270,12 +270,9 @@ const PlotLandUpdate = () => {
                     status: 'error',
                     duration: 2000,
                 })
-                console.log(error);
                 setClickCount((prev) => prev - 12);
                 setIsClicked(false);
-            }
-            setClickCount((prev) => prev - 12);
-            setIsClicked(false);
+            } 
         }
         else {
             toast({

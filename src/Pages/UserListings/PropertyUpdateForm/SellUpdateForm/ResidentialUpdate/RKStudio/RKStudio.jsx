@@ -90,7 +90,7 @@ const RKStudioUpdate = () => {
     const [savedImages, setSavedImages] = useState([]);
     const [isClicked, setIsClicked] = useState(false);
     const [clickCount, setClickCount] = useState(0);
-    const navigate = useNavigate();
+    const navigate = useNavigate(); 
 
     const handleDataFetch = async () => {
         await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
@@ -162,7 +162,7 @@ const RKStudioUpdate = () => {
     const handleSubmitData = async (e) => {
         e.preventDefault();
         setClickCount((prev) => prev + 12);
-        setIsClicked(true);
+        setIsClicked(true); 
         let obj = {
             lookingFor: "Sell",
             propertyGroup: "Residential",
@@ -348,18 +348,23 @@ const RKStudioUpdate = () => {
                             status: 'success',
                             duration: 2000,
                         })
+                        if (images.length) {
+                            submitImage(productID);
+                        } else {
+                            setClickCount((prev) => prev - 12);
+                            setIsClicked(false);
+                        }  
                     });
-            } catch (error) {
+            } catch (err) {
                 toast({
-                    title: error.response.data.msg,
+                    title: err.response.data.msg,
                     status: 'error',
                     duration: 2000,
-                })
-                console.log(error);
+                }) 
+                setClickCount((prev) => prev - 12);
+                setIsClicked(false);  
             }
-            // }
-
-        }
+        } 
         else {
             toast({
                 title: 'Form un-filled',
@@ -368,8 +373,10 @@ const RKStudioUpdate = () => {
                 duration: 2000,
                 position: 'top-right'
             })
+            setClickCount((prev) => prev - 12);
+            setIsClicked(false);
         }
-    }; 
+    };
 
     const submitImage = async (singleproductID) => {
         try {
@@ -1752,7 +1759,7 @@ const RKStudioUpdate = () => {
                             ))}
                         </Box>
                     </Box>
-                </Box>
+                </Box> 
 
                 {/* Add amenities/unique features */}
                 <Box>
@@ -1860,7 +1867,7 @@ const RKStudioUpdate = () => {
                             High Ceiling Height
                         </button>
                         <button
-                            className={
+                            className={ 
                                 propertyFeatures.includes("False Ceiling Lighting")
                                     ? style.setbtn
                                     : style.btn
@@ -2531,8 +2538,7 @@ const RKStudioUpdate = () => {
                             }
                             value={"Close to Airport"}
                             onClick={handlelocationadvantages}
-                        >
-
+                        > 
                             Close to Airport
                         </button>
                         <button
@@ -2566,14 +2572,14 @@ const RKStudioUpdate = () => {
                     textAlign={"left"}
                 >
                     *Please provide correct information, otherwise your listing might get
-                    blocked
-                </Heading> 
-                {isClicked && <LoadingBox />} 
+                    blocked 
+                </Heading>
+                {isClicked && <LoadingBox />}  
                 <Button
                     margin={"20px 0"}
                     type="submit"
                     w={"100%"} 
-                    disabled={clickCount <= 0 ? true : false}   
+                    disabled={clickCount <= 0 ? true : false}
                     backgroundColor={"rgb(46,49,146)"}
                     _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                     color={"#ffffff"}

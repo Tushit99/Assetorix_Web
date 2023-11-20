@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Box,
   Button,
@@ -19,8 +19,8 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { CleanInputText } from "../../../../code";
-import { useParams } from "react-router-dom";
-
+import { useNavigate, useParams } from "react-router-dom";
+import LoadingBox from "../../../../Loadingbox"; 
 
 
 const ManufactureUpdate = () => {
@@ -65,6 +65,13 @@ const ManufactureUpdate = () => {
   const [leaseTenureInYear, setLeaseTenureInYear] = useState("");
   const [annualRentIncrease, setAnnualRentIncrease] = useState("");
   const [businessType, setBusinessType] = useState("");
+  const [isDraging, setIsDraging] = useState(false);
+  const fileInputRef = useRef(null);
+  const [images, setImages] = useState([]);
+  const [savedImages, setSavedImages] = useState([]);
+  const [isClicked, setIsClicked] = useState(false);
+  const [clickCount, setClickCount] = useState(0);
+  const navigate = useNavigate();
 
   // please don'nt change any function without any prior knowledge
 
@@ -110,7 +117,7 @@ const ManufactureUpdate = () => {
       setOtherFeature(e?.otherFeatures);
       setPropertyFacing(e?.propertyFacing);
       setFlooring(e?.flooring);
-
+      setSavedImages(e.images);
 
     })
   }
@@ -121,6 +128,8 @@ const ManufactureUpdate = () => {
 
   const handleSubmitData = async (e) => {
     e.preventDefault();
+    setClickCount((prev) => prev + 12);
+    setIsClicked(true);
     let obj = {
       lookingFor: "Sell",
       propertyGroup: "Commercial",
@@ -268,7 +277,13 @@ const ManufactureUpdate = () => {
               description: e.data.msg,
               status: 'success',
               duration: 2000,
-            })
+            });
+            if (images.length) {
+              submitImage(productID);
+            } else {
+              setClickCount((prev) => prev - 12);
+              setIsClicked(false);
+            }
           });
       } catch (error) {
         toast({
@@ -276,10 +291,9 @@ const ManufactureUpdate = () => {
           status: 'error',
           duration: 2000,
         })
-        console.log(error);
+        setClickCount((prev) => prev - 12);
+        setIsClicked(false);
       }
-      // }
-
     }
     else {
       toast({
@@ -289,7 +303,47 @@ const ManufactureUpdate = () => {
         duration: 2000,
         position: 'top-right'
       })
+      setClickCount((prev) => prev - 12);
+      setIsClicked(false);
     }
+  };
+
+  const submitImage = async (singleproductID) => {
+    try {
+
+      let id = localStorage.getItem("usrId") || undefined;
+      let authorization = localStorage.getItem("AstToken") || undefined;
+
+      let headersList = {
+        "Accept": "*/*",
+        "Authorization": authorization,
+        "id": id
+      }
+
+      let formdata = new FormData();
+      images.forEach((image) => {
+        formdata.append("image", image.image);
+      });
+
+      let bodyContent = formdata;
+
+      let reqOptions = {
+        url: `${process.env.REACT_APP_URL}/upload/${singleproductID}`,
+        method: "POST",
+        headers: headersList,
+        data: bodyContent,
+      }
+
+      await axios.request(reqOptions).then((e) => {
+        setIsClicked(false);
+        navigate("/listing");
+      })
+    } catch (error) {
+      console.log(error);
+      setIsClicked(false);
+      navigate("/listing");
+    }
+    setIsClicked(false);
   };
 
   const handlepinfetch = (e) => {
@@ -433,6 +487,99 @@ const ManufactureUpdate = () => {
       let min = Math.min(Number(pricedetail), Number(plotArea));
       let ans = Math.round(max / min);
       setPriceSqr(ans);
+    }
+  }
+
+  // ================= 
+  const selectFiles = () => {
+    fileInputRef.current.click();
+  }
+
+  const onFileSelect = (e) => {
+    let files = e.target.files;
+    if (files.length === 0) {
+      return
+    }
+    for (let i = 0; i < files.length; i++) {
+      if (files[i].type.split('/')[0] !== 'image') {
+        continue;
+      }
+      if (!images.some((e) => e.name === files[i].name)) {
+        setImages((prev) => [...prev, {
+          name: files[i].name,
+          image: files[i],
+        },])
+      }
+    }
+  }
+
+  const removeImage = (index) => {
+    const newImages = [...images];
+    newImages.splice(index, 1);
+    setImages(newImages);
+  };
+
+  const ondragleave = (event) => {
+    event.preventDefault();
+    setIsDraging(false);
+    console.log("leave")
+  }
+
+  const ondragover = (event) => {
+    event.preventDefault();
+    setIsDraging(true);
+    event.dataTransfer.dropEffect = "copy";
+    console.log("over the box");
+  }
+
+  const ondrop = (event) => {
+    event.preventDefault(); // Add this line
+    setIsDraging(false);
+    const files = event.dataTransfer.files;
+    console.log(event.dataTransfer.files);
+
+    if (files.length === 0) {
+      return;
+    }
+
+    for (let i = 0; i < files.length; i++) {
+      if (files[i].type.split('/')[0] !== 'image') {
+        continue;
+      }
+      if (!images.some((e) => e.name === files[i].name)) {
+        setImages((prev) => [...prev, {
+          name: files[i].name,
+          image: files[i],
+        }]);
+      }
+    }
+    console.log("droped");
+  }
+
+  const deleteimagePermanently = async (propertyId, propertyKey) => {
+    try {
+      let userId = localStorage.getItem("usrId") || undefined;
+      let authorizationToken = localStorage.getItem("AstToken") || undefined;
+
+      console.log("id==== ", userId, "token", authorizationToken);
+
+      let headers = {
+        id: userId,
+        authorization: authorizationToken,
+        'Content-type': 'application/json'
+      };
+
+      let data = { key: propertyKey };
+
+      console.log(propertyKey, "--------property------", propertyId, userId, authorizationToken);
+
+      await axios.delete(`${process.env.REACT_APP_URL}/upload/${propertyId}`, { headers, data }).then((response) => {
+        console.log(response);
+        handleDataFetch()
+      });
+
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -810,7 +957,7 @@ const ManufactureUpdate = () => {
                     setPricedetail(e.target.value);
                     areaCalucation();
                   }}
-                /> 
+                />
               </Box>
               <Box display={"grid"} gap={0}>
                 <Heading
@@ -944,6 +1091,73 @@ const ManufactureUpdate = () => {
             setDesc(my_cleantext);
           }} ></Textarea>
         </Box>
+
+        {/* image Drag and Drop area  */}
+        <Box>
+          <Box className={style.top}>
+            <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
+          </Box>
+          <Box className={style.savedImages}>
+            {savedImages?.map((w) => (
+              <Extraimg e={w} propertyid={productID} deleteimagePermanently={deleteimagePermanently} key={w._id} />
+            ))}
+          </Box>
+          <Box className={style.card}>
+            <Box border={isDraging ? "2px dashed rgb(46,49,146)" : "2px dashed #9e9e9e"} className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+              {isDraging ? (
+                <Text textAlign={"center"} color={"rgb(0, 134, 254)"} >Drop image here</Text>
+              ) : (
+                <>
+                  Drag & Drop image here or
+                  <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
+                </>
+              )}
+              <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+            </Box>
+            <Box className={style.container}>
+              {images.map((image, index) => (
+                <Box className={style.image} key={index}>
+                  <Text className={style.delete} onClick={() => removeImage(index)}>&#10006;</Text>
+                  <img src={URL.createObjectURL(image.image)} alt="images" />
+                </Box>
+              ))}
+            </Box>
+          </Box>
+        </Box>
+
+        {/* image Drag and Drop area  */}
+        <Box>
+          <Box className={style.top}>
+            <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
+          </Box>
+          <Box className={style.savedImages}>
+            {savedImages?.map((w) => (
+              <Extraimg e={w} propertyid={productID} deleteimagePermanently={deleteimagePermanently} key={w._id} />
+            ))}
+          </Box>
+          <Box className={style.card}>
+            <Box border={isDraging ? "2px dashed rgb(46,49,146)" : "2px dashed #9e9e9e"} className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+              {isDraging ? (
+                <Text textAlign={"center"} color={"rgb(0, 134, 254)"} >Drop image here</Text>
+              ) : (
+                <>
+                  Drag & Drop image here or
+                  <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
+                </>
+              )}
+              <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+            </Box>
+            <Box className={style.container}>
+              {images.map((image, index) => (
+                <Box className={style.image} key={index}>
+                  <Text className={style.delete} onClick={() => removeImage(index)}>&#10006;</Text>
+                  <img src={URL.createObjectURL(image.image)} alt="images" />
+                </Box>
+              ))}
+            </Box>
+          </Box>
+        </Box> 
+
         {/* ============================ Add amenities/unique features ============================ */}
         <Box>
           <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
@@ -1512,9 +1726,11 @@ const ManufactureUpdate = () => {
           *Please provide correct information, otherwise your listing might get
           blocked
         </Heading>
+        {isClicked && <LoadingBox />}
         <Button
           margin={"20px 0"}
           type="submit"
+          disabled={clickCount <= 0 ? true : false}
           w={"100%"}
           backgroundColor={"rgb(46,49,146)"}
           _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
