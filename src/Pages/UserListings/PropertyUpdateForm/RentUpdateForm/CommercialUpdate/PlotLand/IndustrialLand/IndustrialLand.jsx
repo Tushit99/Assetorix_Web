@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
     Box,
     Button,
@@ -23,7 +23,7 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import style from "../../RentComercial.module.css";
 import { CleanInputText, NumericString } from "../../../../code";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import LoadingBox from "../../../../Loadingbox";
 import Extraimg from "../../../../SellUpdateForm/Extraimg/Extraimg";
 
@@ -71,7 +71,13 @@ const IndustrialLandRentUpdate = () => {
     const [ConstructionOnProperty, setConstructionOnProperty] = useState("");
     const [expectedByYear, setExpectedByYear] = useState("");
     const [authorisedBy, setAuthorisedBy] = useState([]);
-
+    const [isDraging, setIsDraging] = useState(false);
+    const fileInputRef = useRef(null);
+    const [images, setImages] = useState([]); 
+    const [savedImages, setSavedImages] = useState([]);
+    const [isClicked, setIsClicked] = useState(false);
+    const [clickCount, setClickCount] = useState(0);
+    const navigate = useNavigate();  
     // please don'nt change any function without any prior knowledge
 
 

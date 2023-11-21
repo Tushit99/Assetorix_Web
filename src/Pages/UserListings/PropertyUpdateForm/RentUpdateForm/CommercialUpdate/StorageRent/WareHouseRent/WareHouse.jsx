@@ -440,6 +440,99 @@ const WareHouseRentUpdate = () => {
         }
     }
 
+    // ================= 
+    const selectFiles = () => {
+        fileInputRef.current.click();
+    }
+
+    const onFileSelect = (e) => {
+        let files = e.target.files;
+        if (files.length === 0) {
+            return
+        }
+        for (let i = 0; i < files.length; i++) {
+            if (files[i].type.split('/')[0] !== 'image') {
+                continue;
+            }
+            if (!images.some((e) => e.name === files[i].name)) {
+                setImages((prev) => [...prev, {
+                    name: files[i].name,
+                    image: files[i],
+                },])
+            }
+        }
+    }
+
+    const removeImage = (index) => {
+        const newImages = [...images];
+        newImages.splice(index, 1);
+        setImages(newImages);
+    };
+
+    const ondragleave = (event) => {
+        event.preventDefault();
+        setIsDraging(false);
+        console.log("leave")
+    }
+
+    const ondragover = (event) => {
+        event.preventDefault();
+        setIsDraging(true);
+        event.dataTransfer.dropEffect = "copy";
+        console.log("over the box");
+    }
+
+    const ondrop = (event) => {
+        event.preventDefault(); // Add this line
+        setIsDraging(false);
+        const files = event.dataTransfer.files;
+        console.log(event.dataTransfer.files);
+
+        if (files.length === 0) {
+            return;
+        }
+
+        for (let i = 0; i < files.length; i++) {
+            if (files[i].type.split('/')[0] !== 'image') {
+                continue;
+            }
+            if (!images.some((e) => e.name === files[i].name)) {
+                setImages((prev) => [...prev, {
+                    name: files[i].name,
+                    image: files[i],
+                }]);
+            }
+        }
+        console.log("droped");
+    }
+
+    const deleteimagePermanently = async (propertyId, propertyKey) => {
+        try {
+            let userId = localStorage.getItem("usrId") || undefined;
+            let authorizationToken = localStorage.getItem("AstToken") || undefined;
+
+            console.log("id==== ", userId, "token", authorizationToken);
+
+            let headers = {
+                id: userId,
+                authorization: authorizationToken,
+                'Content-type': 'application/json'
+            };
+
+            let data = { key: propertyKey };
+
+            console.log(propertyKey, "--------property------", propertyId, userId, authorizationToken);
+
+            await axios.delete(`${process.env.REACT_APP_URL}/upload/${propertyId}`, { headers, data }).then((response) => {
+                console.log(response);
+                handleDataFetch()
+            });
+
+        } catch (error) {
+            console.log(error);
+        }
+    }  
+    
 
     return (
         <Box w={"94%"} padding={"0 20px"} margin={"auto"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"}>
@@ -1424,13 +1517,13 @@ const WareHouseRentUpdate = () => {
                 >
                     *Please provide correct information, otherwise your listing might get
                     blocked
-                </Heading> 
-                {isClicked && <LoadingBox />}  
+                </Heading>
+                {isClicked && <LoadingBox />}
                 <Button
                     margin={"20px 0"}
                     type="submit"
-                    w={"100%"} 
-                    disabled={clickCount <= 0 ? true : false}  
+                    w={"100%"}
+                    disabled={clickCount <= 0 ? true : false}
                     backgroundColor={"rgb(46,49,146)"}
                     _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                     color={"#ffffff"}
