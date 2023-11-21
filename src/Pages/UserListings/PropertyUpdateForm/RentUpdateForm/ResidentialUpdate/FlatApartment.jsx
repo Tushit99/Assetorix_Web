@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Box,
   Button,
@@ -13,12 +13,14 @@ import {
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { Checkbox } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
-import axios from "axios"; 
+import axios from "axios";
 import style from "../RentForm.module.css";
 import { CleanInputText, IndianDateConverter, NumericString } from "../../code";
 import { InputGroup } from "@chakra-ui/react";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"; 
-import { useParams } from "react-router-dom";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { useNavigate, useParams } from "react-router-dom";
+import Extraimg from "../../SellUpdateForm/Extraimg/Extraimg";
+import LoadingBox from "../../Loadingbox";
 
 
 const FlatApartment = () => {
@@ -80,8 +82,14 @@ const FlatApartment = () => {
   const [depositAmount, setDepositAmount] = useState("");
   const [agreementDuration, setagreementDuration] = useState("");
   const [noticePeriod, setNoticePeriod] = useState("");
-  const [availableFrom, setavailableFrom] = useState("");   
-
+  const [availableFrom, setavailableFrom] = useState("");
+  const [isDraging, setIsDraging] = useState(false);
+  const fileInputRef = useRef(null);
+  const [images, setImages] = useState([]);
+  const [savedImages, setSavedImages] = useState([]);
+  const [isClicked, setIsClicked] = useState(false);
+  const [clickCount, setClickCount] = useState(0);
+  const navigate = useNavigate();
 
   // ================================= 
 
@@ -100,26 +108,26 @@ const FlatApartment = () => {
       setBedRoom(e.roomDetails.bedroom);
       setBathroom(e.roomDetails.bathroom);
       setBalcony(e?.roomDetails.balcony);
-      setPlotArea(e?.carpetArea); 
-      setAreaPer(e?.carpetAreaUnit); 
-      setpropertyAge(e?.propertyStatus);   
-      setWillingTo(e?.willingToRent);  
-      setpreferredAgreement(e?.agreementType); 
-      setinclusivePrices(e?.inclusivePrices); 
-      setSecurityDeposit(e?.securityDeposit);  
-      setDepositAmount(e?.depositValue); 
+      setPlotArea(e?.carpetArea);
+      setAreaPer(e?.carpetAreaUnit);
+      setpropertyAge(e?.propertyStatus);
+      setWillingTo(e?.willingToRent);
+      setpreferredAgreement(e?.agreementType);
+      setinclusivePrices(e?.inclusivePrices);
+      setSecurityDeposit(e?.securityDeposit);
+      setDepositAmount(e?.depositValue);
 
-      setagreementDuration(e?.durationAgreement); 
+      setagreementDuration(e?.durationAgreement);
       setNoticePeriod(e?.monthsOfNotice);
 
-      setavailableFrom(e?.availableFrom); 
+      setavailableFrom(e?.availableFrom);
       setParking(e?.parking?.closeParking);
       setOpenparking(e?.parking?.openParking);
       setFurnished(e?.furnished);
       if (furnished == "Furnished" || furnished == "Semi-Furnished") {
         setLight(e?.furnishedObj?.light);
         setFans(e?.furnishedObj?.fans);
-        setAc(e?.furnishedObj?.ac);   
+        setAc(e?.furnishedObj?.ac);
         setTv(e?.furnishedObj?.tv);
         setBeds(e?.furnishedObj?.beds);
         setWardrobe(e?.furnishedObj?.wardrobe);
@@ -132,7 +140,7 @@ const FlatApartment = () => {
       setAminity(e?.amenities);
       setPropertyFeature(e?.propertyFeatures);
       setBuildingFeature(e?.society_buildingFeatures);
-      setAdditinalFeature(e?.additionalFeatures); 
+      setAdditinalFeature(e?.additionalFeatures);
       setOtherFeature(e?.otherFeatures);
       setPowerbackup(e?.powerBackup);
       setPropertyFacing(e?.propertyFacing);
@@ -145,7 +153,8 @@ const FlatApartment = () => {
       setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice)
       setMaintenanceTimePeriod(e?.additionalPricingDetails?.maintenanceTimePeriod)
       setBookingAmount(e?.additionalPricingDetails?.bookingAmount)
-      setMembershipCharge(e?.additionalPricingDetails?.membershipCharge);  
+      setMembershipCharge(e?.additionalPricingDetails?.membershipCharge);
+      setSavedImages(e.images);
 
     })
   }
@@ -158,6 +167,8 @@ const FlatApartment = () => {
 
   const handleSubmitData = async (e) => {
     e.preventDefault();
+    setClickCount((prev) => prev + 12);
+    setIsClicked(true);
     let obj = {
       lookingFor: "Rent",
       propertyGroup: "Residential",
@@ -237,7 +248,7 @@ const FlatApartment = () => {
       showToastError("Provide balconey");
     } else if (!furnishedarr) {
       showToastError("Provide Furnished Field");
-    }  else if (!priceSqr) {
+    } else if (!priceSqr) {
       showToastError("Provide Price Per sq.ft");
     } else if (!additinalft) {
       showToastError("Provide Property description");
@@ -277,7 +288,7 @@ const FlatApartment = () => {
       bedroom &&
       bathroom &&
       balconey &&
-      furnishedarr && 
+      furnishedarr &&
       additinalft &&
       powerbackup &&
       propertyFacing &&
@@ -330,21 +341,29 @@ const FlatApartment = () => {
           .patch(`${process.env.REACT_APP_URL}/property/${productID}`, obj, {
             headers: head,
           })
-          .then((e) => { 
+          .then((e) => {
             toast({
               title: e.data.msg,
               description: e.data.msg,
               status: "success",
               duration: 2000,
             });
+            if (images.length) {
+              submitImage(productID);
+            } else {
+              setClickCount((prev) => prev - 12);
+              setIsClicked(false);
+            }
           });
       } catch (error) {
         toast({
           title: error.response.data.msg,
           status: "error",
           duration: 2000,
-        }); 
-      } 
+        });
+        setClickCount((prev) => prev - 12);
+        setIsClicked(false);
+      }
     } else {
       toast({
         title: "Form un-filled",
@@ -353,10 +372,47 @@ const FlatApartment = () => {
         duration: 2000,
         position: "top-right",
       });
-    } 
+      setClickCount((prev) => prev - 12);
+      setIsClicked(false);
+    }
+  };
 
+  const submitImage = async (singleproductID) => {
+    try {
 
+      let id = localStorage.getItem("usrId") || undefined;
+      let authorization = localStorage.getItem("AstToken") || undefined;
 
+      let headersList = {
+        "Accept": "*/*",
+        "Authorization": authorization,
+        "id": id
+      }
+
+      let formdata = new FormData();
+      images.forEach((image) => {
+        formdata.append("image", image.image);
+      });
+
+      let bodyContent = formdata;
+
+      let reqOptions = {
+        url: `${process.env.REACT_APP_URL}/upload/${singleproductID}`,
+        method: "POST",
+        headers: headersList,
+        data: bodyContent,
+      }
+
+      await axios.request(reqOptions).then((e) => {
+        setIsClicked(false);
+        navigate("/listing");
+      })
+    } catch (error) {
+      console.log(error);
+      setIsClicked(false);
+      navigate("/listing");
+    }
+    setIsClicked(false);
   };
 
   const handlepinfetch = (e) => {
@@ -552,6 +608,99 @@ const FlatApartment = () => {
     setDepositAmount(e.target.value);
   }
 
+  // ================= 
+  const selectFiles = () => {
+    fileInputRef.current.click();
+  }
+
+  const onFileSelect = (e) => {
+    let files = e.target.files;
+    if (files.length === 0) {
+      return
+    }
+    for (let i = 0; i < files.length; i++) {
+      if (files[i].type.split('/')[0] !== 'image') {
+        continue;
+      }
+      if (!images.some((e) => e.name === files[i].name)) {
+        setImages((prev) => [...prev, {
+          name: files[i].name,
+          image: files[i],
+        },])
+      }
+    }
+  }
+
+  const removeImage = (index) => {
+    const newImages = [...images];
+    newImages.splice(index, 1);
+    setImages(newImages);
+  };
+
+  const ondragleave = (event) => {
+    event.preventDefault();
+    setIsDraging(false);
+    console.log("leave")
+  }
+
+  const ondragover = (event) => {
+    event.preventDefault();
+    setIsDraging(true);
+    event.dataTransfer.dropEffect = "copy";
+    console.log("over the box");
+  }
+
+  const ondrop = (event) => {
+    event.preventDefault(); // Add this line
+    setIsDraging(false);
+    const files = event.dataTransfer.files;
+    console.log(event.dataTransfer.files);
+
+    if (files.length === 0) {
+      return;
+    }
+
+    for (let i = 0; i < files.length; i++) {
+      if (files[i].type.split('/')[0] !== 'image') {
+        continue;
+      }
+      if (!images.some((e) => e.name === files[i].name)) {
+        setImages((prev) => [...prev, {
+          name: files[i].name,
+          image: files[i],
+        }]);
+      }
+    }
+    console.log("droped");
+  }
+
+  const deleteimagePermanently = async (propertyId, propertyKey) => {
+    try {
+      let userId = localStorage.getItem("usrId") || undefined;
+      let authorizationToken = localStorage.getItem("AstToken") || undefined;
+
+      console.log("id==== ", userId, "token", authorizationToken);
+
+      let headers = {
+        id: userId,
+        authorization: authorizationToken,
+        'Content-type': 'application/json'
+      };
+
+      let data = { key: propertyKey };
+
+      console.log(propertyKey, "--------property------", propertyId, userId, authorizationToken);
+
+      await axios.delete(`${process.env.REACT_APP_URL}/upload/${propertyId}`, { headers, data }).then((response) => {
+        console.log(response);
+        handleDataFetch()
+      });
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <Box w={"94%"} margin={"auto"} >
       <form onSubmit={handleSubmitData}>
@@ -645,13 +794,13 @@ const FlatApartment = () => {
             required
             maxlength={"40"}
             placeholder="Enter Country"
-            value={country} 
+            value={country}
             onChange={(e) => setCountry(e.target.value)}
             fontSize={"md"}
             variant="flushed"
           />
         </Box>
-        {/* Property Detail */} 
+        {/* Property Detail */}
         <Box marginTop={12}>
           <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"}>
             Tell us about your property
@@ -1471,17 +1620,48 @@ const FlatApartment = () => {
           </Box>
 
           {/* ========================= Add pricing and details ========================= */}
-             <Heading
-              as={"h3"}
-              size={"md"}
-              margin={"30px 0 10px 0"}
-              textAlign={"left"}
-            >
-              Add pricing and details...
-            </Heading>  
+          <Heading
+            as={"h3"}
+            size={"md"}
+            margin={"30px 0 10px 0"}
+            textAlign={"left"}
+          >
+            Add pricing and details...
+          </Heading>
         </Box>
 
-
+        {/* image Drag and Drop area  */}
+        <Box>
+          <Box className={style.top}>
+            <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
+          </Box>
+          <Box className={style.savedImages}>
+            {savedImages?.map((w) => (
+              <Extraimg e={w} propertyid={productID} deleteimagePermanently={deleteimagePermanently} key={w._id} />
+            ))}
+          </Box>
+          <Box className={style.card}>
+            <Box border={isDraging ? "2px dashed rgb(46,49,146)" : "2px dashed #9e9e9e"} className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+              {isDraging ? (
+                <Text textAlign={"center"} color={"rgb(0, 134, 254)"} >Drop image here</Text>
+              ) : (
+                <>
+                  Drag & Drop image here or
+                  <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
+                </>
+              )}
+              <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+            </Box>
+            <Box className={style.container}>
+              {images.map((image, index) => (
+                <Box className={style.image} key={index}>
+                  <Text className={style.delete} onClick={() => removeImage(index)}>&#10006;</Text>
+                  <img src={URL.createObjectURL(image.image)} alt="images" />
+                </Box>
+              ))}
+            </Box>
+          </Box>
+        </Box> 
 
         {/* ========================== What makes your property unique================================  */}
         <Box>
@@ -1500,9 +1680,7 @@ const FlatApartment = () => {
               setDesc(my_cleantext);
             }}
           ></Textarea>
-        </Box>
-
-
+        </Box> 
 
         {/* ========================= Add amenities/unique features ================================== */}
         <Box>
@@ -2210,16 +2388,18 @@ const FlatApartment = () => {
         >
           *Please provide correct information, otherwise your listing might get
           blocked
-        </Heading>
+        </Heading> 
+        {isClicked && <LoadingBox />}  
         <Button
           margin={"20px 0"}
           type="submit"
-          w={"100%"}
+          w={"100%"} 
+          disabled={clickCount <= 0 ? true : false}  
           backgroundColor={"rgb(46,49,146)"}
           _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
           color={"#ffffff"}
         >
-          Update Property 
+          Update Property
         </Button>
       </form>
     </Box>

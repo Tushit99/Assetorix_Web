@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
     Box,
     Button,
@@ -22,7 +22,9 @@ import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { CleanInputText, IndianDateConverter, NumericString } from "../../../../code";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import Extraimg from "../../../../SellUpdateForm/Extraimg/Extraimg";
+import LoadingBox from "../../../../Loadingbox";
 
 
 
@@ -81,7 +83,13 @@ const CommercialShopRentUpdate = () => {
     const [lockPeriod, setlockPeriod] = useState("");
     const [depositAmount, setDepositAmount] = useState("");
     const [securityDeposit, setSecurityDeposit] = useState("");
-
+    const [isDraging, setIsDraging] = useState(false);
+    const fileInputRef = useRef(null);
+    const [images, setImages] = useState([]);
+    const [savedImages, setSavedImages] = useState([]);
+    const [isClicked, setIsClicked] = useState(false);
+    const [clickCount, setClickCount] = useState(0);
+    const navigate = useNavigate();
 
 
     // please don'nt change any function without any prior knowledge  
@@ -117,8 +125,8 @@ const CommercialShopRentUpdate = () => {
             setlockPeriod(e?.lockInPeriod);
             setRentIncreasePercent(e?.expectedYearlyRent);
             setavailableFrom(e?.availableFrom);
-            setSecurityDeposit(e?.securityDeposit); 
-            setDepositAmount(e?.depositValue); 
+            setSecurityDeposit(e?.securityDeposit);
+            setDepositAmount(e?.depositValue);
 
             setPlotArea(e?.carpetArea);
             setPriceSqr(e?.priceUnit);
@@ -140,6 +148,8 @@ const CommercialShopRentUpdate = () => {
             setDesc(e?.description);
             setAminity(e?.amenities);
             setLocationAdv(e?.locationAdv);
+            setSavedImages(e.images);
+
         })
     }
 
@@ -150,6 +160,8 @@ const CommercialShopRentUpdate = () => {
     // submit Form  
     const handleSubmitData = async (e) => {
         e.preventDefault();
+        setClickCount((prev) => prev + 12);
+        setIsClicked(true);
         let obj = {
             lookingFor: "Rent",
             propertyGroup: "Commercial",
@@ -309,6 +321,12 @@ const CommercialShopRentUpdate = () => {
                             status: 'success',
                             duration: 2000,
                         })
+                        if (images.length) {
+                            submitImage(productID);
+                        } else {
+                            setClickCount((prev) => prev - 12);
+                            setIsClicked(false);
+                        }
                     });
             } catch (error) {
                 toast({
@@ -316,10 +334,9 @@ const CommercialShopRentUpdate = () => {
                     status: 'error',
                     duration: 2000,
                 })
-                console.log(error);
+                setClickCount((prev) => prev - 12);
+                setIsClicked(false);
             }
-            // }
-
         }
         else {
             toast({
@@ -329,7 +346,47 @@ const CommercialShopRentUpdate = () => {
                 duration: 2000,
                 position: 'top-right'
             })
+            setClickCount((prev) => prev - 12);
+            setIsClicked(false);
         }
+    };
+
+    const submitImage = async (singleproductID) => {
+        try {
+
+            let id = localStorage.getItem("usrId") || undefined;
+            let authorization = localStorage.getItem("AstToken") || undefined;
+
+            let headersList = {
+                "Accept": "*/*",
+                "Authorization": authorization,
+                "id": id
+            }
+
+            let formdata = new FormData();
+            images.forEach((image) => {
+                formdata.append("image", image.image);
+            });
+
+            let bodyContent = formdata;
+
+            let reqOptions = {
+                url: `${process.env.REACT_APP_URL}/upload/${singleproductID}`,
+                method: "POST",
+                headers: headersList,
+                data: bodyContent,
+            }
+
+            await axios.request(reqOptions).then((e) => {
+                setIsClicked(false);
+                navigate("/listing");
+            })
+        } catch (error) {
+            console.log(error);
+            setIsClicked(false);
+            navigate("/listing");
+        }
+        setIsClicked(false);
     };
 
     // pincode of 3 letter
@@ -548,6 +605,99 @@ const CommercialShopRentUpdate = () => {
             newarr.push(value);
         }
         setsuitableFor(newarr);
+    }
+
+    // ================= 
+    const selectFiles = () => {
+        fileInputRef.current.click();
+    }
+
+    const onFileSelect = (e) => {
+        let files = e.target.files;
+        if (files.length === 0) {
+            return
+        }
+        for (let i = 0; i < files.length; i++) {
+            if (files[i].type.split('/')[0] !== 'image') {
+                continue;
+            }
+            if (!images.some((e) => e.name === files[i].name)) {
+                setImages((prev) => [...prev, {
+                    name: files[i].name,
+                    image: files[i],
+                },])
+            }
+        }
+    }
+
+    const removeImage = (index) => {
+        const newImages = [...images];
+        newImages.splice(index, 1);
+        setImages(newImages);
+    };
+
+    const ondragleave = (event) => {
+        event.preventDefault();
+        setIsDraging(false);
+        console.log("leave")
+    }
+
+    const ondragover = (event) => {
+        event.preventDefault();
+        setIsDraging(true);
+        event.dataTransfer.dropEffect = "copy";
+        console.log("over the box");
+    }
+
+    const ondrop = (event) => {
+        event.preventDefault(); // Add this line
+        setIsDraging(false);
+        const files = event.dataTransfer.files;
+        console.log(event.dataTransfer.files);
+
+        if (files.length === 0) {
+            return;
+        }
+
+        for (let i = 0; i < files.length; i++) {
+            if (files[i].type.split('/')[0] !== 'image') {
+                continue;
+            }
+            if (!images.some((e) => e.name === files[i].name)) {
+                setImages((prev) => [...prev, {
+                    name: files[i].name,
+                    image: files[i],
+                }]);
+            }
+        }
+        console.log("droped");
+    }
+
+    const deleteimagePermanently = async (propertyId, propertyKey) => {
+        try {
+            let userId = localStorage.getItem("usrId") || undefined;
+            let authorizationToken = localStorage.getItem("AstToken") || undefined;
+
+            console.log("id==== ", userId, "token", authorizationToken);
+
+            let headers = {
+                id: userId,
+                authorization: authorizationToken,
+                'Content-type': 'application/json'
+            };
+
+            let data = { key: propertyKey };
+
+            console.log(propertyKey, "--------property------", propertyId, userId, authorizationToken);
+
+            await axios.delete(`${process.env.REACT_APP_URL}/upload/${propertyId}`, { headers, data }).then((response) => {
+                console.log(response);
+                handleDataFetch()
+            });
+
+        } catch (error) {
+            console.log(error);
+        }
     }
 
 
@@ -1066,30 +1216,30 @@ const CommercialShopRentUpdate = () => {
                                         Select business type
                                     </MenuButton>
                                     <MenuList display={"grid"} borderRadius={0} marginTop={"-8px"} marginBottom={"-8px"} overflowY={"scroll"} h={"200px"} padding={"4px 10px"}>
-                                    <Checkbox isChecked={suitableFor.includes("ATM") ? true : false } value={"ATM"} className={style.select} onChange={handlebusinessType} > ATM </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Bakery") ? true : false } value={"Bakery"} className={style.select} onChange={handlebusinessType} > Bakery </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Boutique") ? true : false } value={"Boutique"} className={style.select} onChange={handlebusinessType} > Boutique </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Clinic") ? true : false } value={"Clinic"} className={style.select} onChange={handlebusinessType} > Clinic </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Clothes") ? true : false } value={"Clothes"} className={style.select} onChange={handlebusinessType} > Clothes </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Cloud Kitchen") ? true : false } value={"Cloud Kitchen"} className={style.select} onChange={handlebusinessType} > Cloud Kitchen </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Coffee") ? true : false } value={"Coffee"} className={style.select} onChange={handlebusinessType} > Coffee </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Dental Clinic") ? true : false } value={"Dental Clinic"} className={style.select} onChange={handlebusinessType} > Dental Clinic </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Fast Food") ? true : false } value={"Fast Food"} className={style.select} onChange={handlebusinessType} > Fast Food </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Footwear") ? true : false } value={"Footwear"} className={style.select} onChange={handlebusinessType} > Footwear </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Gym") ? true : false } value={"Gym"} className={style.select} onChange={handlebusinessType} > Gym </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Jewellery") ? true : false } value={"Jewellery"} className={style.select} onChange={handlebusinessType} > Jewellery </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Juice") ? true : false } value={"Juice"} className={style.select} onChange={handlebusinessType} > Juice </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Meat") ? true : false } value={"Meat"} className={style.select} onChange={handlebusinessType} > Meat </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Medical") ? true : false } value={"Medical"} className={style.select} onChange={handlebusinessType} > Medical </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Mobile") ? true : false } value={"Mobile"} className={style.select} onChange={handlebusinessType} > Mobile </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Pub/Bar") ? true : false } value={"Pub/Bar"} className={style.select} onChange={handlebusinessType} > Pub/Bar </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Restaurants") ? true : false } value={"Restaurants"} className={style.select} onChange={handlebusinessType} > Restaurants </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Salon/Spa") ? true : false } value={"Salon/Spa"} className={style.select} onChange={handlebusinessType} > Salon/Spa </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Mobile") ? true : false } value={"Mobile"} className={style.select} onChange={handlebusinessType} > Mobile </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Stationery") ? true : false } value={"Stationery"} className={style.select} onChange={handlebusinessType} > Stationery </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Sweet") ? true : false } value={"Sweet"} className={style.select} onChange={handlebusinessType} > Sweet </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Tea Stall") ? true : false } value={"Tea Stall"} className={style.select} onChange={handlebusinessType} > Tea Stall </Checkbox>
-                                        <Checkbox isChecked={suitableFor.includes("Other business type") ? true : false } value={"Other business type"} className={style.select} onChange={handlebusinessType} > Other business type </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("ATM") ? true : false} value={"ATM"} className={style.select} onChange={handlebusinessType} > ATM </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Bakery") ? true : false} value={"Bakery"} className={style.select} onChange={handlebusinessType} > Bakery </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Boutique") ? true : false} value={"Boutique"} className={style.select} onChange={handlebusinessType} > Boutique </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Clinic") ? true : false} value={"Clinic"} className={style.select} onChange={handlebusinessType} > Clinic </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Clothes") ? true : false} value={"Clothes"} className={style.select} onChange={handlebusinessType} > Clothes </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Cloud Kitchen") ? true : false} value={"Cloud Kitchen"} className={style.select} onChange={handlebusinessType} > Cloud Kitchen </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Coffee") ? true : false} value={"Coffee"} className={style.select} onChange={handlebusinessType} > Coffee </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Dental Clinic") ? true : false} value={"Dental Clinic"} className={style.select} onChange={handlebusinessType} > Dental Clinic </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Fast Food") ? true : false} value={"Fast Food"} className={style.select} onChange={handlebusinessType} > Fast Food </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Footwear") ? true : false} value={"Footwear"} className={style.select} onChange={handlebusinessType} > Footwear </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Gym") ? true : false} value={"Gym"} className={style.select} onChange={handlebusinessType} > Gym </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Jewellery") ? true : false} value={"Jewellery"} className={style.select} onChange={handlebusinessType} > Jewellery </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Juice") ? true : false} value={"Juice"} className={style.select} onChange={handlebusinessType} > Juice </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Meat") ? true : false} value={"Meat"} className={style.select} onChange={handlebusinessType} > Meat </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Medical") ? true : false} value={"Medical"} className={style.select} onChange={handlebusinessType} > Medical </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Mobile") ? true : false} value={"Mobile"} className={style.select} onChange={handlebusinessType} > Mobile </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Pub/Bar") ? true : false} value={"Pub/Bar"} className={style.select} onChange={handlebusinessType} > Pub/Bar </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Restaurants") ? true : false} value={"Restaurants"} className={style.select} onChange={handlebusinessType} > Restaurants </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Salon/Spa") ? true : false} value={"Salon/Spa"} className={style.select} onChange={handlebusinessType} > Salon/Spa </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Mobile") ? true : false} value={"Mobile"} className={style.select} onChange={handlebusinessType} > Mobile </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Stationery") ? true : false} value={"Stationery"} className={style.select} onChange={handlebusinessType} > Stationery </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Sweet") ? true : false} value={"Sweet"} className={style.select} onChange={handlebusinessType} > Sweet </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Tea Stall") ? true : false} value={"Tea Stall"} className={style.select} onChange={handlebusinessType} > Tea Stall </Checkbox>
+                                        <Checkbox isChecked={suitableFor.includes("Other business type") ? true : false} value={"Other business type"} className={style.select} onChange={handlebusinessType} > Other business type </Checkbox>
                                     </MenuList>
                                 </Menu>
                             </Box>
@@ -1276,6 +1426,40 @@ const CommercialShopRentUpdate = () => {
                             }} ></Textarea>
                         </Box>
                     </Box>
+
+                    {/* image Drag and Drop area  */}
+                    <Box>
+                        <Box className={style.top}>
+                            <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
+                        </Box>
+                        <Box className={style.savedImages}>
+                            {savedImages?.map((w) => (
+                                <Extraimg e={w} propertyid={productID} deleteimagePermanently={deleteimagePermanently} key={w._id} />
+                            ))}
+                        </Box>
+                        <Box className={style.card}>
+                            <Box border={isDraging ? "2px dashed rgb(46,49,146)" : "2px dashed #9e9e9e"} className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+                                {isDraging ? (
+                                    <Text textAlign={"center"} color={"rgb(0, 134, 254)"} >Drop image here</Text>
+                                ) : (
+                                    <>
+                                        Drag & Drop image here or
+                                        <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
+                                    </>
+                                )}
+                                <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+                            </Box>
+                            <Box className={style.container}>
+                                {images.map((image, index) => (
+                                    <Box className={style.image} key={index}>
+                                        <Text className={style.delete} onClick={() => removeImage(index)}>&#10006;</Text>
+                                        <img src={URL.createObjectURL(image.image)} alt="images" />
+                                    </Box>
+                                ))}
+                            </Box>
+                        </Box>
+                    </Box>
+
 
                     {/* ============================ Add amenities/unique features ============================ */}
                     <Box>
@@ -1855,10 +2039,12 @@ const CommercialShopRentUpdate = () => {
                         *Please provide correct information, otherwise your listing might get
                         blocked
                     </Heading>
+                    {isClicked && <LoadingBox />}
                     <Button
                         margin={"20px 0"}
                         type="submit"
                         w={"100%"}
+                        disabled={clickCount <= 0 ? true : false}
                         backgroundColor={"rgb(46,49,146)"}
                         _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                         color={"#ffffff"}

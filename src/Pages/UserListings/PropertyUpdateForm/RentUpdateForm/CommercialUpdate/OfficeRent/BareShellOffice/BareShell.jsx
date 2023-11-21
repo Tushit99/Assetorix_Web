@@ -312,7 +312,7 @@ const BareShellUpdate = () => {
                 //     body: JSON.stringify(obj)
                 // });
                 // let data = await response.json();
-                console.log("data", obj);
+                // console.log("data", obj);
                 await axios
                     .patch(`${process.env.REACT_APP_URL}/property/${productID}`, obj, {
                         headers: head, 
@@ -340,9 +340,9 @@ const BareShellUpdate = () => {
                 console.log(error);
                 setClickCount((prev) => prev - 12);
                 setIsClicked(false);
-            }
-            // }
-        } else {
+            } 
+        } 
+        else {
             toast({
                 title: "Form un-filled",
                 description: "Please fill all required fields.",
@@ -653,7 +653,7 @@ const BareShellUpdate = () => {
                     </Heading>
                     <Heading size={"sm"} color={"black"}>
                         An accurate location helps you connect with the right buyers.
-                    </Heading>
+                    </Heading> 
 
                     <Select
                         fontSize={"md"}
@@ -758,7 +758,7 @@ const BareShellUpdate = () => {
                     </Heading>
                     {/* ====================================== */}
                     {/* add area details */}
-                    <Box textAlign={"left"} padding={"10px 0"}>
+                    <Box textAlign={"left"} padding={"10px 0"}> 
                         <Heading as={"h3"} margin={"5px 0"} size={"md"}>
                             Add Area Details
                         </Heading>

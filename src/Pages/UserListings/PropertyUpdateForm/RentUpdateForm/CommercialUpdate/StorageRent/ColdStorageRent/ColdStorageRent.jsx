@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Box,
   Button,
@@ -19,7 +19,9 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { CleanInputText, NumericString } from "../../../../code";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import LoadingBox from "../../../../Loadingbox";
+import Extraimg from "../../../../SellUpdateForm/Extraimg/Extraimg";
 
 
 const ColdStorageRentUpdate = () => {
@@ -56,7 +58,13 @@ const ColdStorageRentUpdate = () => {
   const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
   const [bookingAmount, setBookingAmount] = useState("");
   const [annualDuesPayble, setAnnualDuesPayble] = useState("");
-
+  const [isDraging, setIsDraging] = useState(false);
+  const fileInputRef = useRef(null);
+  const [images, setImages] = useState([]);
+  const [savedImages, setSavedImages] = useState([]);
+  const [isClicked, setIsClicked] = useState(false);
+  const [clickCount, setClickCount] = useState(0);
+  const navigate = useNavigate();
   // please don'nt change any function without any prior knowledge
 
 
@@ -82,7 +90,7 @@ const ColdStorageRentUpdate = () => {
       setBuildingFeature(e.society_buildingFeatures);
       setAdditinalFeature(e.additionalFeatures);
       setPropertyFacing(e.propertyFacing);
-      setwashrooms(e.washrooms); 
+      setwashrooms(e.washrooms);
       setAvailability(e.availabilityStatus);
       if (e.availabilityStatus == "Ready to move") {
         setFromyear(e.propertyStatus);
@@ -100,6 +108,8 @@ const ColdStorageRentUpdate = () => {
       setDesc(e.description);
       setAminity(e.amenities);
       setLocationAdv(e.locationAdv);
+      setSavedImages(e.images);
+
     })
   }
 
@@ -109,6 +119,8 @@ const ColdStorageRentUpdate = () => {
 
   const handleSubmitData = async (e) => {
     e.preventDefault();
+    setClickCount((prev) => prev + 12);
+    setIsClicked(true);
     let obj = {
       lookingFor: "Rent",
       propertyGroup: "Commercial",
@@ -218,6 +230,12 @@ const ColdStorageRentUpdate = () => {
               status: 'success',
               duration: 2000,
             })
+            if (images.length) {
+              submitImage(productID);
+            } else {
+              setClickCount((prev) => prev - 12);
+              setIsClicked(false);
+            } 
           });
       } catch (error) {
         toast({
@@ -225,10 +243,9 @@ const ColdStorageRentUpdate = () => {
           status: 'error',
           duration: 2000,
         })
-        console.log(error);
+        setClickCount((prev) => prev - 12);
+        setIsClicked(false);
       }
-      // }
-
     }
     else {
       toast({
@@ -238,8 +255,48 @@ const ColdStorageRentUpdate = () => {
         duration: 2000,
         position: 'top-right'
       })
+      setClickCount((prev) => prev - 12);
+      setIsClicked(false);
     }
   };
+
+  const submitImage = async (singleproductID) => {
+    try {
+
+        let id = localStorage.getItem("usrId") || undefined;
+        let authorization = localStorage.getItem("AstToken") || undefined;
+
+        let headersList = {
+            "Accept": "*/*",
+            "Authorization": authorization,
+            "id": id
+        }
+
+        let formdata = new FormData();
+        images.forEach((image) => {
+            formdata.append("image", image.image);
+        });
+
+        let bodyContent = formdata;
+
+        let reqOptions = {
+            url: `${process.env.REACT_APP_URL}/upload/${singleproductID}`,
+            method: "POST",
+            headers: headersList,
+            data: bodyContent,
+        }
+
+        await axios.request(reqOptions).then((e) => {
+            setIsClicked(false);
+            navigate("/listing");
+        })
+    } catch (error) {
+        console.log(error);
+        setIsClicked(false);
+        navigate("/listing");
+    }
+    setIsClicked(false);
+};
 
   const handlepinfetch = (e) => {
     setPincode(NumericString(e.target.value));
@@ -301,7 +358,7 @@ const ColdStorageRentUpdate = () => {
       newarr.splice(newarr.indexOf(value), 1);
     } else {
       newarr.push(value);
-    } 
+    }
     setAminity(newarr);
   };
 
@@ -378,11 +435,103 @@ const ColdStorageRentUpdate = () => {
     }
   }
 
+  // ================= 
+  const selectFiles = () => {
+    fileInputRef.current.click();
+  }
+
+  const onFileSelect = (e) => {
+    let files = e.target.files;
+    if (files.length === 0) {
+      return
+    }
+    for (let i = 0; i < files.length; i++) {
+      if (files[i].type.split('/')[0] !== 'image') {
+        continue;
+      }
+      if (!images.some((e) => e.name === files[i].name)) {
+        setImages((prev) => [...prev, {
+          name: files[i].name,
+          image: files[i],
+        },])
+      }
+    }
+  }
+
+  const removeImage = (index) => {
+    const newImages = [...images];
+    newImages.splice(index, 1);
+    setImages(newImages);
+  };
+
+  const ondragleave = (event) => {
+    event.preventDefault();
+    setIsDraging(false);
+    console.log("leave")
+  }
+
+  const ondragover = (event) => {
+    event.preventDefault();
+    setIsDraging(true);
+    event.dataTransfer.dropEffect = "copy";
+    console.log("over the box");
+  }
+
+  const ondrop = (event) => {
+    event.preventDefault(); // Add this line
+    setIsDraging(false);
+    const files = event.dataTransfer.files;
+    console.log(event.dataTransfer.files);
+
+    if (files.length === 0) {
+      return;
+    }
+
+    for (let i = 0; i < files.length; i++) {
+      if (files[i].type.split('/')[0] !== 'image') {
+        continue;
+      }
+      if (!images.some((e) => e.name === files[i].name)) {
+        setImages((prev) => [...prev, {
+          name: files[i].name,
+          image: files[i],
+        }]);
+      }
+    }
+    console.log("droped");
+  }
+
+  const deleteimagePermanently = async (propertyId, propertyKey) => {
+    try {
+      let userId = localStorage.getItem("usrId") || undefined;
+      let authorizationToken = localStorage.getItem("AstToken") || undefined;
+
+      console.log("id==== ", userId, "token", authorizationToken);
+
+      let headers = {
+        id: userId,
+        authorization: authorizationToken,
+        'Content-type': 'application/json'
+      };
+
+      let data = { key: propertyKey };
+
+      console.log(propertyKey, "--------property------", propertyId, userId, authorizationToken);
+
+      await axios.delete(`${process.env.REACT_APP_URL}/upload/${propertyId}`, { headers, data }).then((response) => {
+        console.log(response);
+        handleDataFetch()
+      });
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <Box w={"94%"} padding={"0 20px"} color={"black"} margin={"auto"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"}>
       <form onSubmit={handleSubmitData}>
-        <Box className={style.location_form}> 
+        <Box className={style.location_form}>
           <Heading size={"lg"}> Cold Storage (Update) </Heading>
           <Heading size={"sm"}>
             Location Detail Update
@@ -504,11 +653,11 @@ const ColdStorageRentUpdate = () => {
                 setPlotArea(e.target.value);
               }}
               required
-            />  
+            />
             <Select value={areaPer} borderRadius={0} onChange={(e) => {
               setAreaPer(e.target.value);
             }} className={style.select} required>
-              <option value="sq.ft">sq.ft</option> 
+              <option value="sq.ft">sq.ft</option>
               <option value="sq.yards">sq.yards</option>
               <option value="sq.m">sq.m</option>
               <option value="acres">acres</option>
@@ -691,7 +840,7 @@ const ColdStorageRentUpdate = () => {
                 </Heading>
                 <NumberInput value={priceSqr}>
                   <NumberInputField
-                    required 
+                    required
                   />
                 </NumberInput>
               </Box>
@@ -766,8 +915,38 @@ const ColdStorageRentUpdate = () => {
           }} ></Textarea>
         </Box>
 
-
-
+        {/* image Drag and Drop area  */}
+        <Box>
+          <Box className={style.top}>
+            <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
+          </Box>
+          <Box className={style.savedImages}>
+            {savedImages?.map((w) => (
+              <Extraimg e={w} propertyid={productID} deleteimagePermanently={deleteimagePermanently} key={w._id} />
+            ))}
+          </Box>
+          <Box className={style.card}>
+            <Box border={isDraging ? "2px dashed rgb(46,49,146)" : "2px dashed #9e9e9e"} className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+              {isDraging ? (
+                <Text textAlign={"center"} color={"rgb(0, 134, 254)"} >Drop image here</Text>
+              ) : (
+                <>
+                  Drag & Drop image here or
+                  <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
+                </>
+              )}
+              <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+            </Box>
+            <Box className={style.container}>
+              {images.map((image, index) => (
+                <Box className={style.image} key={index}>
+                  <Text className={style.delete} onClick={() => removeImage(index)}>&#10006;</Text>
+                  <img src={URL.createObjectURL(image.image)} alt="images" />
+                </Box>
+              ))}
+            </Box>
+          </Box>
+        </Box>
 
         {/* ============================ Add amenities/unique features ============================ */}
         <Box marginTop={"50"}>
@@ -1337,17 +1516,19 @@ const ColdStorageRentUpdate = () => {
           textAlign={"left"}
         >
           *Please provide correct information, otherwise your listing might get
-          blocked
+          blocked 
         </Heading>
+        {isClicked && <LoadingBox />}
         <Button
           margin={"20px 0"}
           type="submit"
           w={"100%"}
+          disabled={clickCount <= 0 ? true : false}
           backgroundColor={"rgb(46,49,146)"}
           _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
           color={"#ffffff"}
         >
-          Update Property 
+          Update Property
         </Button>
 
       </form>

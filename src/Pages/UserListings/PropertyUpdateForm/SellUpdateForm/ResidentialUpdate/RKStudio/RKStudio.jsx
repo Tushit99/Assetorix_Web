@@ -164,7 +164,7 @@ const RKStudioUpdate = () => {
         setClickCount((prev) => prev + 12);
         setIsClicked(true); 
         let obj = {
-            lookingFor: "Sell",
+            lookingFor: "Sell", 
             propertyGroup: "Residential",
             propertyType: "1RK / Studio Apartment",
             address: {
@@ -767,7 +767,7 @@ const RKStudioUpdate = () => {
                     />
                     <Input
                         type="text"
-                        padding={"0 10px"}
+                        padding={"0 10px"} 
                         required
                         placeholder="Locality"
                         list="browsers"
@@ -777,7 +777,7 @@ const RKStudioUpdate = () => {
                         variant="flushed"
                     />
                     {pincollection.length ? (
-                        <datalist id="browsers">
+                        <datalist id="browsers"> 
                             {pincollection.map((e) => (
                                 <option value={e.locality} />
                             ))}
@@ -2103,7 +2103,6 @@ const RKStudioUpdate = () => {
                             value={"No open drainage around"}
                             onClick={handleAdditionalFeature}
                         >
-
                             No open drainage around
                         </button>
                         <button
@@ -2115,7 +2114,6 @@ const RKStudioUpdate = () => {
                             value={"Bank Attached Property"}
                             onClick={handleAdditionalFeature}
                         >
-
                             Bank Attached Property
                         </button>
                         <button
@@ -2127,7 +2125,6 @@ const RKStudioUpdate = () => {
                             value={"Low Density Society"}
                             onClick={handleAdditionalFeature}
                         >
-
                             Low Density Society
                         </button>
                     </Box>
@@ -2148,7 +2145,6 @@ const RKStudioUpdate = () => {
                             }}
                             value={"Municipal corporation"}
                         >
-
                             Municipal corporation
                         </button>
                         <button
@@ -2161,7 +2157,6 @@ const RKStudioUpdate = () => {
                             }}
                             value={"Borewell / Tank"}
                         >
-
                             Borewell/Tank
                         </button>
                         <button
@@ -2172,7 +2167,6 @@ const RKStudioUpdate = () => {
                             }}
                             value={"24*7 Water"}
                         >
-
                             24*7 Water
                         </button>
                     </Box>
@@ -2188,7 +2182,6 @@ const RKStudioUpdate = () => {
                             onClick={handleoverlooking}
                             value={"Pool"}
                         >
-
                             Pool
                         </button>
                         <button
@@ -2198,7 +2191,6 @@ const RKStudioUpdate = () => {
                             onClick={handleoverlooking}
                             value={"Park / Garden"}
                         >
-
                             Park/Garden
                         </button>
                         <button
@@ -2206,7 +2198,6 @@ const RKStudioUpdate = () => {
                             onClick={handleoverlooking}
                             value={"Club"}
                         >
-
                             Club
                         </button>
                         <button
@@ -2216,7 +2207,6 @@ const RKStudioUpdate = () => {
                             onClick={handleoverlooking}
                             value={"Main Road"}
                         >
-
                             Main Road
                         </button>
                         <button
@@ -2224,7 +2214,6 @@ const RKStudioUpdate = () => {
                             onClick={handleoverlooking}
                             value={"Other"}
                         >
-
                             Other
                         </button>
                     </Box>
@@ -2241,7 +2230,6 @@ const RKStudioUpdate = () => {
                             value={"In a gated society"}
                             onChange={handleotherfeature}
                         >
-
                             In a gated society
                         </Checkbox>
                         <Checkbox
@@ -2250,7 +2238,6 @@ const RKStudioUpdate = () => {
                             value={"Corner Property"}
                             onChange={handleotherfeature}
                         >
-
                             Corner Property
                         </Checkbox>
                         <Checkbox
@@ -2259,16 +2246,14 @@ const RKStudioUpdate = () => {
                             value={"Pet Friendly"}
                             onChange={handleotherfeature}
                         >
-
                             Pet Friendly
                         </Checkbox>
-                        <Checkbox
+                        <Checkbox  
                             size={"lg"}
                             isChecked={otherFeature.includes("Wheelchair friendly")}
                             value={"Wheelchair friendly"}
                             onChange={handleotherfeature}
-                        >
-
+                        > 
                             Wheelchair friendly
                         </Checkbox>
                     </Box>
@@ -2578,9 +2563,9 @@ const RKStudioUpdate = () => {
                 <Button
                     margin={"20px 0"} 
                     type="submit"
-                    w={"100%"} 
-                    disabled={clickCount <= 0 ? true : false}
-                    backgroundColor={"rgb(46,49,146)"}
+                    w={"100%"}  
+                    disabled={clickCount <= 0 ? true : false} 
+                    backgroundColor={"rgb(46,49,146)"} 
                     _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                     color={"#ffffff"}
                 >

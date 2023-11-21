@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
     Box,
     Button,
     ButtonGroup,
     Heading,
     Input,
-    InputGroup, 
+    InputGroup,
     Select,
     Text,
     Textarea,
@@ -18,7 +18,9 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { CleanInputText, NumericString } from "../../../../code";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import LoadingBox from "../../../../Loadingbox";
+import Extraimg from "../../../../SellUpdateForm/Extraimg/Extraimg";
 
 
 
@@ -56,7 +58,13 @@ const WareHouseRentUpdate = () => {
     const [bookingAmount, setBookingAmount] = useState("");
     const [annualDuesPayble, setAnnualDuesPayble] = useState("");
     const [flooring, setFlooring] = useState("");
-
+    const [isDraging, setIsDraging] = useState(false);
+    const fileInputRef = useRef(null);
+    const [images, setImages] = useState([]);
+    const [savedImages, setSavedImages] = useState([]);
+    const [isClicked, setIsClicked] = useState(false);
+    const [clickCount, setClickCount] = useState(0);
+    const navigate = useNavigate();
     // please don'nt change any function without any prior knowledge
 
     const handleDataFetch = async () => {
@@ -100,6 +108,8 @@ const WareHouseRentUpdate = () => {
             setDesc(e.description);
             setAminity(e.amenities);
             setLocationAdv(e.locationAdv);
+            setSavedImages(e.images);
+
         })
     }
 
@@ -109,6 +119,8 @@ const WareHouseRentUpdate = () => {
 
     const handleSubmitData = async (e) => {
         e.preventDefault();
+        setClickCount((prev) => prev + 12);
+        setIsClicked(true);
         let obj = {
             lookingFor: "Rent",
             propertyGroup: "Commercial",
@@ -220,9 +232,15 @@ const WareHouseRentUpdate = () => {
                         toast({
                             title: e.data.msg,
                             description: e.data.msg,
-                            status: 'success', 
+                            status: 'success',
                             duration: 2000,
                         })
+                        if (images.length) {
+                            submitImage(productID);
+                        } else {
+                            setClickCount((prev) => prev - 12);
+                            setIsClicked(false);
+                        }
                     });
             } catch (error) {
                 toast({
@@ -230,10 +248,9 @@ const WareHouseRentUpdate = () => {
                     status: 'error',
                     duration: 2000,
                 })
-                console.log(error); 
+                setClickCount((prev) => prev - 12);
+                setIsClicked(false);
             }
-            // }
-
         }
         else {
             toast({
@@ -243,7 +260,47 @@ const WareHouseRentUpdate = () => {
                 duration: 2000,
                 position: 'top-right'
             })
+            setClickCount((prev) => prev - 12);
+            setIsClicked(false);
         }
+    };
+
+    const submitImage = async (singleproductID) => {
+        try {
+
+            let id = localStorage.getItem("usrId") || undefined;
+            let authorization = localStorage.getItem("AstToken") || undefined;
+
+            let headersList = {
+                "Accept": "*/*",
+                "Authorization": authorization,
+                "id": id
+            }
+
+            let formdata = new FormData();
+            images.forEach((image) => {
+                formdata.append("image", image.image);
+            });
+
+            let bodyContent = formdata;
+
+            let reqOptions = {
+                url: `${process.env.REACT_APP_URL}/upload/${singleproductID}`,
+                method: "POST",
+                headers: headersList,
+                data: bodyContent,
+            }
+
+            await axios.request(reqOptions).then((e) => {
+                setIsClicked(false);
+                navigate("/listing");
+            })
+        } catch (error) {
+            console.log(error);
+            setIsClicked(false);
+            navigate("/listing");
+        }
+        setIsClicked(false);
     };
 
     const handlepinfetch = (e) => {
@@ -502,9 +559,9 @@ const WareHouseRentUpdate = () => {
                             onChange={(e) => {
                                 areaCalucation();
                                 setPlotArea(e.target.value);
-                            }} 
+                            }}
                             required
-                        /> 
+                        />
                         <Select value={areaPer} borderRadius={0} onChange={(e) => {
                             setAreaPer(e.target.value);
                         }} className={style.select} required>
@@ -524,7 +581,7 @@ const WareHouseRentUpdate = () => {
                             <option value="aankadam">aankadam</option>
                             <option value="hectares">hectares</option>
                             <option value="rood">rood</option>
-                            <option value="chataks">chataks</option> 
+                            <option value="chataks">chataks</option>
                             <option value="perch">perch</option>
                         </Select>
                     </ButtonGroup>
@@ -666,7 +723,7 @@ const WareHouseRentUpdate = () => {
                 <Box>
                     <Box>
                         <Heading as={"h3"} fontSize={"12px"} fontWeight={300} marginBottom={3} textAlign={"left"}>
-                            What price you are expecting for this property? 
+                            What price you are expecting for this property?
                         </Heading>
                         <Box display={"flex"} alignItems={"center"} gap={5}>
                             <Box display={"grid"} gap={0}>
@@ -750,6 +807,38 @@ const WareHouseRentUpdate = () => {
                     </Box>
                 </Box>
 
+                {/* image Drag and Drop area  */}
+                <Box>
+                    <Box className={style.top}>
+                        <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
+                    </Box>
+                    <Box className={style.savedImages}>
+                        {savedImages?.map((w) => (
+                            <Extraimg e={w} propertyid={productID} deleteimagePermanently={deleteimagePermanently} key={w._id} />
+                        ))}
+                    </Box>
+                    <Box className={style.card}>
+                        <Box border={isDraging ? "2px dashed rgb(46,49,146)" : "2px dashed #9e9e9e"} className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+                            {isDraging ? (
+                                <Text textAlign={"center"} color={"rgb(0, 134, 254)"} >Drop image here</Text>
+                            ) : (
+                                <>
+                                    Drag & Drop image here or
+                                    <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
+                                </>
+                            )}
+                            <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+                        </Box>
+                        <Box className={style.container}>
+                            {images.map((image, index) => (
+                                <Box className={style.image} key={index}>
+                                    <Text className={style.delete} onClick={() => removeImage(index)}>&#10006;</Text>
+                                    <img src={URL.createObjectURL(image.image)} alt="images" />
+                                </Box>
+                            ))}
+                        </Box>
+                    </Box>
+                </Box>
 
                 {/* ============================ Property unique discription ============================ */}
                 <Box>
@@ -1335,11 +1424,13 @@ const WareHouseRentUpdate = () => {
                 >
                     *Please provide correct information, otherwise your listing might get
                     blocked
-                </Heading>
+                </Heading> 
+                {isClicked && <LoadingBox />}  
                 <Button
                     margin={"20px 0"}
                     type="submit"
-                    w={"100%"}
+                    w={"100%"} 
+                    disabled={clickCount <= 0 ? true : false}  
                     backgroundColor={"rgb(46,49,146)"}
                     _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                     color={"#ffffff"}
