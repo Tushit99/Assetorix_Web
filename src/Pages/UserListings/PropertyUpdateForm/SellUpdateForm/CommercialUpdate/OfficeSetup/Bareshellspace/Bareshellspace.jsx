@@ -1980,7 +1980,7 @@ const BareshellspaceUpdate = () => {
                     _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                     color={"#ffffff"}
                 >
-                    Post Property
+                    Update Property 
                 </Button>
             </form>
         </Box>

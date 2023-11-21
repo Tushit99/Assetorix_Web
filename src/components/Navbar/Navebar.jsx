@@ -38,7 +38,7 @@ const Navebar = () => {
     const [comBuyArr, setcomBuyArr] = useState([]);
     const [comRentArr, setcomRentArr] = useState([]);
     const [isOnline, setIsOnline] = useState(navigator.onLine);
-    // const navigate = useNavigate();   
+    // const navigate = useNavigate();   z
 
     const homeback = () => {
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
@@ -243,7 +243,7 @@ const Navebar = () => {
                                     </Text>
                                     <Box
                                         display={"flex"}
-                                        justifyContent={"space-around"}
+                                        justifyContent={"space-around"} 
                                         margin={"0 0 8px 0"}
                                         alignItems={"center"}
                                     >

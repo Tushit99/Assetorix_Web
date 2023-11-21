@@ -54,6 +54,7 @@ import { useParams } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io"
 import { useDispatch } from "react-redux";
 import { addRecentlyVisited } from "../../Redux/globalval/action";
+import LoadSection from "./LoadSection";
 
 
 
@@ -61,7 +62,7 @@ const SingleProductDetailPage = () => {
     const { id } = useParams();
     const [data, setData] = useState([]);
     const [price, setPrice] = useState(0);
-    const [created, setCreated] = useState("");
+    const [created, setCreated] = useState(""); 
     const [updated, setUpdated] = useState("");
     const [houseno, setHouseno] = useState("");
     const [apartment, setApartment] = useState("");
@@ -82,16 +83,17 @@ const SingleProductDetailPage = () => {
     const [nametosend, setNametosend] = useState("");
     const [emailtosend, setEmailtosend] = useState("");
     const [phonetosend, setPhonetosend] = useState("");
-    const [message, setMessage] = useState(""); 
+    const [message, setMessage] = useState("");
     const { isOpen, onOpen, onClose } = useDisclosure();
     const dispatch = useDispatch();
+    const [load, setLoad] = useState(false);
 
 
     const dataById = async () => {
         await axios.get(`${process.env.REACT_APP_URL}/property/single/${id}`).then((e) => {
             setData(e.data.data);
             addDatatoList(e.data.data);
-            dispatch(addRecentlyVisited(e.data.data._id));  
+            dispatch(addRecentlyVisited(e.data.data._id));
         });
     };
 
@@ -127,6 +129,7 @@ const SingleProductDetailPage = () => {
 
     const handleTour = async (e) => {
         e.preventDefault();
+        setLoad(true);
 
         const body = {
             propertyID: id,
@@ -135,8 +138,6 @@ const SingleProductDetailPage = () => {
             mobile: phonetosend,
             message: message,
         };
-
-        console.log(body);
 
         try {
             const response = await axios.post(`${process.env.REACT_APP_URL}/property/inquiry`, body, {
@@ -149,18 +150,26 @@ const SingleProductDetailPage = () => {
                 console.log('Request successful');
                 const responseData = response.data;
                 console.log(responseData);
+                setLoad(false);
+                setNametosend("");
+                setEmailtosend("");
+                setPhonetosend("");
+                setMessage("");
             } else {
                 console.error('Request failed with status:', response.status);
+                setLoad(false);
             }
         } catch (error) {
             console.error('Error sending the request:', error);
+            setLoad(false);
         }
     };
 
 
- 
+
     return (
-        <Box >
+        <Box> 
+            <LoadSection />
             <Box className={style.singleProduct} display={{ base: "grid", md: "flex" }} alignItems={"flex-start"} flexWrap={"wrap"} gap={"20px"} margin={{ base: "0px auto", md: "20px auto" }} w={"94%"} >
                 <Box flex={16} >
                     {(Skeleton && apartment && placelocality) ? <Heading
@@ -624,7 +633,7 @@ const SingleProductDetailPage = () => {
                                 >
                                     <Image
                                         src={liftImg}
-                                        height={"26px"} 
+                                        height={"26px"}
                                         objectFit={"contain"}
                                         w={"20px"}
                                         alt="light_images"

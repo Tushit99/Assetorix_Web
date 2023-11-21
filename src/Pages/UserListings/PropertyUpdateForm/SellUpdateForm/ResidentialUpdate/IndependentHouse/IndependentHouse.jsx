@@ -321,12 +321,12 @@ const IndependentHouseUpdate = () => {
             navigate("/listing");
         }
         setIsClicked(false);
-    };   
+    };
 
     const handleDataFetch = async () => {
         await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
-            let e = detail.data.data; 
-            console.log(e); 
+            let e = detail.data.data;
+            console.log(e);
             setCountry(e?.address?.country);
             setFacingWidth(e?.roadFacingWidth);
             setCity(e?.address?.city);
@@ -344,7 +344,7 @@ const IndependentHouseUpdate = () => {
             if (e.furnished == "Furnished" || e.furnished == "Semi-Furnished") {
                 setLight(e?.furnishedObj?.light);
                 setFans(e?.furnishedObj?.fans);
-                setAc(e?.furnishedObj?.ac); 
+                setAc(e?.furnishedObj?.ac);
                 setTv(e?.furnishedObj?.tv);
                 setBeds(e?.furnishedObj?.beds);
                 setWardrobe(e?.furnishedObj?.wardrobe);
@@ -374,14 +374,20 @@ const IndependentHouseUpdate = () => {
             setTotalFloors(e?.totalFloors);
             setPlotArea(e?.plotArea);
             setDesc(e?.description);
-            setAdditionalPrice(e?.additionalPricingDetails ? true : false);
             setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice)
             setMaintenanceTimePeriod(e?.additionalPricingDetails?.maintenanceTimePeriod)
-            setExpectedRentel(e?.additionalPricingDetails?.expectedRental)
-            setBookingAmount(e?.additionalPricingDetails?.bookingAmount)
-            setAnnualDuesPayble(e?.additionalPricingDetails?.annualDuesPayable)
-            setSavedImages(e.images);
 
+            if (e?.additionalPricingDetails?.expectedRental || e?.additionalPricingDetails?.bookingAmount || e?.additionalPricingDetails?.annualDuesPayable) {
+                setAdditionalPrice(true);
+                setExpectedRentel(e?.additionalPricingDetails?.expectedRental); 
+                setBookingAmount(e?.additionalPricingDetails?.bookingAmount); 
+                setAnnualDuesPayble(e?.additionalPricingDetails?.annualDuesPayable); 
+            }else{
+                setAdditionalPrice(false); 
+            }
+
+            setSavedImages(e.images); 
+            
         })
     }
 
@@ -675,7 +681,7 @@ const IndependentHouseUpdate = () => {
 
             let data = { key: propertyKey };
 
-             
+
 
             await axios.delete(`${process.env.REACT_APP_URL}/upload/${propertyId}`, { headers, data }).then((response) => {
                 console.log(response);
@@ -2435,13 +2441,13 @@ const IndependentHouseUpdate = () => {
                 >
                     *Please provide correct information, otherwise your listing might get
                     blocked
-                </Heading> 
-                {isClicked && <LoadingBox />} 
+                </Heading>
+                {isClicked && <LoadingBox />}
                 <Button
                     margin={"20px 0"}
                     type="submit"
-                    w={"100%"} 
-                    disabled={clickCount <= 0 ? true : false} 
+                    w={"100%"}
+                    disabled={clickCount <= 0 ? true : false}
                     backgroundColor={"rgb(46,49,146)"}
                     _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                     color={"#ffffff"}

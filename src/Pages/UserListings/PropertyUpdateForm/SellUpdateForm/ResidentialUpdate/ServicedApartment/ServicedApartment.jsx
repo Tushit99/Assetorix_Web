@@ -273,7 +273,7 @@ const ServicedApartmentUpdate = () => {
                 // });
                 // let data = await response.json();  
                 // console.log("data",data); 
-                await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
+                await axios.patch(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
                     .then((e) => {
                         toast({
                             title: e.data.msg,
