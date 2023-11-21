@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { Checkbox } from "@chakra-ui/react";
-import style from "./ServicedApartment.module.css";
+import style from "../Residential.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { CleanInputText, NumericString } from "../../../code";
@@ -717,7 +717,7 @@ const ServicedApartmentUpdate = () => {
 
             let data = { key: propertyKey };
 
-            console.log(propertyKey, "--------property------", propertyId, userId, authorizationToken);
+             
 
             await axios.delete(`${process.env.REACT_APP_URL}/upload/${propertyId}`, { headers, data }).then((response) => {
                 console.log(response);

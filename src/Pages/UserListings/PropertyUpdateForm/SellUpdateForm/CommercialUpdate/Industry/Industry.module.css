@@ -123,3 +123,42 @@
   }
   
   
+.savedImages{ 
+  width: 100%;  
+  height: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  max-height: 200px;
+  overflow-y: auto;
+  margin-top: 10px; 
+} 
+
+
+.savedImages .image {
+  width: 75px;
+  margin-right: 5px;
+  height: 75px;
+  border: 1px solid rgb(46, 49, 146);
+  position: relative;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+} 
+
+.savedImages .delete {
+  position: absolute;
+  top: -2px; 
+  color: rgb(46,49,146);
+  right: 9px;  
+  text-shadow: 0 0 3px rgba(245, 245, 245, 0.6);
+  font-size: 18px;     
+  cursor: pointer;  
+}
+
+.imagercontain img {
+  object-fit: contain;
+}
+
+  

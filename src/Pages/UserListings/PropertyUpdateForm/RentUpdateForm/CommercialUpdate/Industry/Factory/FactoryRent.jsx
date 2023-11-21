@@ -458,7 +458,7 @@ const FactoryRentUpdate = () => {
 
             let data = { key: propertyKey };
 
-            console.log(propertyKey, "--------property------", propertyId, userId, authorizationToken);
+             
 
             await axios.delete(`${process.env.REACT_APP_URL}/upload/${propertyId}`, { headers, data }).then((response) => {
                 console.log(response);

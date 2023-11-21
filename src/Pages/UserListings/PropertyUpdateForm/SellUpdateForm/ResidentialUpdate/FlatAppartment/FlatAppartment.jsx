@@ -700,7 +700,6 @@ const FlatAppartmentUpdate = () => {
 
             let data = { key: propertyKey };
 
-            console.log(propertyKey, "--------property------", propertyId, userId, authorizationToken);
 
             await axios.delete(`${process.env.REACT_APP_URL}/upload/${propertyId}`, { headers, data }).then((response) => {
                 console.log(response);
@@ -2383,7 +2382,7 @@ const FlatAppartmentUpdate = () => {
                                 setPropertyFacing(e.target.value)
                             }}
                             value={"South-West"}
-                        > 
+                        >
                             South-West
                         </button>
                     </Box>

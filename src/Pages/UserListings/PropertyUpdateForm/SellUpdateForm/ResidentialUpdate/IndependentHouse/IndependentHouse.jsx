@@ -15,7 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { Checkbox } from "@chakra-ui/react";
-import style from "./IndependentHouse.module.css";
+import style from "../Residential.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
@@ -321,11 +321,12 @@ const IndependentHouseUpdate = () => {
             navigate("/listing");
         }
         setIsClicked(false);
-    };
+    };   
 
     const handleDataFetch = async () => {
         await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
-            let e = detail.data.data;
+            let e = detail.data.data; 
+            console.log(e); 
             setCountry(e?.address?.country);
             setFacingWidth(e?.roadFacingWidth);
             setCity(e?.address?.city);
@@ -340,10 +341,10 @@ const IndependentHouseUpdate = () => {
             setParking(e?.parking?.closeParking);
             setOpenparking(e?.parking?.openParking);
             setFurnished(e?.furnished);
-            if (furnished == "Furnished" || furnished == "Semi-Furnished") {
+            if (e.furnished == "Furnished" || e.furnished == "Semi-Furnished") {
                 setLight(e?.furnishedObj?.light);
                 setFans(e?.furnishedObj?.fans);
-                setAc(e?.furnishedObj?.ac);
+                setAc(e?.furnishedObj?.ac); 
                 setTv(e?.furnishedObj?.tv);
                 setBeds(e?.furnishedObj?.beds);
                 setWardrobe(e?.furnishedObj?.wardrobe);
@@ -674,7 +675,7 @@ const IndependentHouseUpdate = () => {
 
             let data = { key: propertyKey };
 
-            console.log(propertyKey, "--------property------", propertyId, userId, authorizationToken);
+             
 
             await axios.delete(`${process.env.REACT_APP_URL}/upload/${propertyId}`, { headers, data }).then((response) => {
                 console.log(response);
