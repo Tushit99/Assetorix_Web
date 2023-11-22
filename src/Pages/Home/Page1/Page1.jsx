@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -27,17 +27,28 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { changeLookingFor } from "../../../Redux/globalval/action";
 import backimg from "./Screenshot 10-12-2023 09.38.37.png"
+import { Blurhash } from "react-blurhash";
 
 
 const Page1 = () => {
   const { country } = useSelector((state) => state.gloalval);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); 
+  // const [imageLoaded, setImageLoaded] = useState(false);  
+  
+  
+  // useState(()=>{
+  //   const img = new Image();  
+  //   img.onload = ()=>{
+  //     setImageLoaded(true);  
+  //   }  
+  //   img.src = backimg; 
+  // },[backimg])
 
-  const handlePageRent = () => {
-    dispatch(changeLookingFor("Rent/Lease"));
-    navigate("/post");
-  }
+  // const handlePageRent = () => {
+  //   dispatch(changeLookingFor("Rent/Lease"));
+  //   navigate("/post");
+  // }
 
   const handlePageSell = () => {
     dispatch(changeLookingFor("sell"));
@@ -45,9 +56,20 @@ const Page1 = () => {
   }
 
   return (
-    <div className={style.pagetop}> 
-    {/* img will be shown untill the video is not there */}
-      <img src={backimg} className={style.video_picture} alt="backimg" />
+    <div className={style.pagetop}>
+      {/* img will be shown untill the video is not there */}
+      <img src={backimg}  className={style.video_picture2} alt="backimg" />
+      <Box className={style.video_picture} >
+        <Blurhash
+          hash="L[H1*rRkWCj[~UV[WCfk?GaeaybH"
+          height={"100vh"}
+          width={"100%"}
+          resolutionX={32}
+          resolutionY={32} 
+          punch={1}
+        />
+      </Box>
+
       {/* video at backr */}
       <video autoPlay loop muted className={style.video_panal}>
         <source src={video} type="video/mp4" />
