@@ -1,4 +1,4 @@
-import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Button, Divider, Heading, Image, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, Textarea, Tooltip, useDisclosure } from "@chakra-ui/react";
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Button, Divider, Heading, Image, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, Textarea, Tooltip, useDisclosure, useToast } from "@chakra-ui/react";
 import axios from "axios";
 import style from "./SinglePage.module.css";
 import React, { useEffect, useState } from "react";
@@ -53,16 +53,14 @@ import { CleanInputText, Emailhandle, NumericString } from "../PropertyPostForm/
 import { useParams } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io"
 import { useDispatch } from "react-redux";
-import { addRecentlyVisited } from "../../Redux/globalval/action";
-import LoadSection from "./LoadSection";
-
+import { addRecentlyVisited } from "../../Redux/globalval/action"; 
 
 
 const SingleProductDetailPage = () => {
     const { id } = useParams();
     const [data, setData] = useState([]);
     const [price, setPrice] = useState(0);
-    const [created, setCreated] = useState(""); 
+    const [created, setCreated] = useState("");
     const [updated, setUpdated] = useState("");
     const [houseno, setHouseno] = useState("");
     const [apartment, setApartment] = useState("");
@@ -87,6 +85,7 @@ const SingleProductDetailPage = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const dispatch = useDispatch();
     const [load, setLoad] = useState(false);
+    const toast = useToast(); 
 
 
     const dataById = async () => {
@@ -154,7 +153,14 @@ const SingleProductDetailPage = () => {
                 setNametosend("");
                 setEmailtosend("");
                 setPhonetosend("");
-                setMessage("");
+                setMessage("");  
+
+                toast({
+                    title: responseData.msg ,
+                    status: 'success',
+                    duration: 2000,
+                    isClosable: true, 
+                  }) 
             } else {
                 console.error('Request failed with status:', response.status);
                 setLoad(false);
@@ -169,7 +175,6 @@ const SingleProductDetailPage = () => {
 
     return (
         <Box> 
-            <LoadSection />
             <Box className={style.singleProduct} display={{ base: "grid", md: "flex" }} alignItems={"flex-start"} flexWrap={"wrap"} gap={"20px"} margin={{ base: "0px auto", md: "20px auto" }} w={"94%"} >
                 <Box flex={16} >
                     {(Skeleton && apartment && placelocality) ? <Heading
@@ -898,7 +903,15 @@ const SingleProductDetailPage = () => {
                                 <Input type="email" required margin={"6px 0"} placeholder={"Your email"} value={emailtosend} onChange={(e) => setEmailtosend(e.target.value)} />
                                 <Input type="text" required margin={"6px 0"} placeholder={"Your phone number"} value={phonetosend} onChange={(e) => setPhonetosend(NumericString(e.target.value))} />
                                 <Textarea type="text" required borderRadius={0} value={message} onChange={(e) => setMessage(e.target.value)} margin={"6px 0"} placeholder="Message..." />
-                                <Button type={"submit"} w={"100%"} borderRadius={0} margin={"6px 0"} colorScheme="whatsapp"> Schedule a Tour</Button>
+                                <Button
+                                    type={"submit"}
+                                    w={"100%"}
+                                    borderRadius={0}
+                                    isLoading={load} 
+                                    loadingText='Sending...'
+                                    spinnerPlacement='start'
+                                    margin={"6px 0"}
+                                    colorScheme="whatsapp"> Schedule a Tour</Button>
                             </form>
                         </Box>
                     </Box>
@@ -935,7 +948,15 @@ const SingleProductDetailPage = () => {
                                     <Input type="email" required margin={"6px 0"} placeholder={"Your email"} value={emailtosend} onChange={(e) => setEmailtosend(e.target.value)} />
                                     <Input type="text" required margin={"6px 0"} placeholder={"Your phone number"} value={phonetosend} onChange={(e) => setPhonetosend(NumericString(e.target.value))} />
                                     <Textarea type="text" required borderRadius={0} value={message} onChange={(e) => setMessage(e.target.value)} margin={"6px 0"} placeholder={"Message..."} />
-                                    <Button type={"submit"} w={"100%"} borderRadius={0} margin={"6px 0"} colorScheme="whatsapp"> Schedule a Tour</Button>
+                                    <Button
+                                        type={"submit"}
+                                        w={"100%"}
+                                        borderRadius={0}
+                                        isLoading={load}
+                                        loadingText='Sending...'
+                                        spinnerPlacement='start' 
+                                        margin={"6px 0"}
+                                        colorScheme="whatsapp"> Schedule a Tour</Button>
                                 </form>
                             </Box>
                         </ModalBody>
