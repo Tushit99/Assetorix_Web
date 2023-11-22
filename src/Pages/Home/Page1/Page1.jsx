@@ -64,7 +64,7 @@ const Page1 = () => {
           hash="L[H1*rRkWCj[~UV[WCfk?GaeaybH"
           height={"100vh"}
           width={"100%"}
-          resolutionX={32}
+          resolutionX={32} 
           resolutionY={32} 
           punch={1}
         />
