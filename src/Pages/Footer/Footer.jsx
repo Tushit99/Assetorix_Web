@@ -41,7 +41,7 @@ const Footer = () => {
 
   }
 
-  return (
+  return ( 
     <div className={style.ft}>
       <Box className={style.footer}>
         {/* footer */}

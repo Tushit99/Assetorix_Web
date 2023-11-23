@@ -11,10 +11,10 @@ const Page2 = () => {
   return (
     <div> 
       {country == "usa" ?
-        <Box backgroundColor={"rgb(240,239,237)"} padding={"30px"}>
+        <Box backgroundColor={"rgb(255, 255, 255)"} padding={"30px"}>
           <Heading as="h5" size="sm"> 
             DISCOVER YOUR PROPERTY IN
-          </Heading>
+          </Heading> 
           <Heading as="h3" size="xl">
             POPULAR NORTH AMERICAN CITIES
           </Heading>

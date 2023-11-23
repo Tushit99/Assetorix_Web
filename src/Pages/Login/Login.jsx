@@ -12,7 +12,10 @@ import {
     Box,
     useToast,
     InputGroup,
-    InputRightElement
+    InputRightElement,
+    Text,
+    UnorderedList,
+    ListItem
 } from '@chakra-ui/react';
 import style from "./Login.module.css";
 import img from "./sideimg.png";
@@ -20,81 +23,48 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginuser } from '../../Redux/userauth/action';
-// import axios from 'axios';
+import BeatLoader from "react-spinners/BeatLoader";
+
 
 const Login = ({ onpage }) => {
     const data = useSelector((store) => store.userreducer);
     const toast = useToast();
     const [mobile, setMobile] = useState("");
-    const [password, setPassword] = useState("");
+    const [password, setPassword] = useState(""); 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [show, setshow] = useState(true); 
-    const [val, setVal] = useState(0);  
-
+    const [show, setshow] = useState(true);
+    const [mobileWarn, setMobileWarn] = useState("");
+    const [warning, setWarning] = useState(""); 
 
     const handlelogin = async () => {
         if (mobile.length <= 9 || mobile.length >= 11) {
-            toast({
-                position: 'top-right',
-                render: () => (
-                    <Box color='white' p={3} bg='blue.500'>
-                        Mobile number is invalide!
-                    </Box>
-                ),
-            })
+            setMobileWarn("Mobile number is invalid!");
+            return;
         }
         var lowerCase = /[a-z]/g;
         var upperCase = /[A-Z]/g;
         var numbers = /[0-9]/g;
         if (password.length == "") {
-            toast({
-                position: "top-right",
-                render: () => (
-                    <Box color="white" p={3} bg="blue.500">
-                        Please Enter your password!
-                    </Box>
-                ),
-            });
+            setMobileWarn("");
+            setWarning("Please Enter your password!");
         }
         else if (!password.match(lowerCase)) {
-            toast({
-                position: "top-right",
-                render: () => (
-                    <Box color="white" p={3} bg="blue.500">
-                        Password should contains lowercase letters!
-                    </Box>
-                ),
-            });
+            setMobileWarn("");
+            setWarning("Password should contains lowercase letters!");
         } else if (!password.match(upperCase)) {
-            toast({
-                position: "top-right",
-                render: () => (
-                    <Box color="white" p={3} bg="blue.500">
-                        Password should contain uppercase letters!
-                    </Box>
-                ),
-            });
+            setMobileWarn("");
+            setWarning("Password should contain uppercase letters!");
         } else if (!password.match(numbers)) {
-            toast({
-                position: "top-right",
-                render: () => (
-                    <Box color="white" p={3} bg="blue.500">
-                        Password should contains numbers also!
-                    </Box>
-                ),
-            });
+            setMobileWarn("");
+            setWarning("Password should contains numbers also!");
         } else if (password.length < 6) {
-            toast({
-                position: "top-right",
-                render: () => (
-                    <Box color="white" p={3} bg="blue.500">
-                        Password length should be more than 5
-                    </Box>
-                ),
-            });
+            setMobileWarn("");
+            setWarning("Password length should be more than 5");
         }
         else {
+            setMobileWarn("");
+            setWarning("");
             // console.log(obj);  
             let body = {
                 mobile,
@@ -132,16 +102,16 @@ const Login = ({ onpage }) => {
         setshow(!show);
     }
 
-    const handlekeybox = (e) => {
-        if (e.key === "Enter") {
-            if (mobile.length > 2 && password.length > 3 && val==0) {
-                handlelogin(); 
-                setVal((prev)=>prev+1); 
-            }
-        }
-    }
+    // const handlekeybox = (e) => {
+    //     if (e.key === "Enter") {
+    //         if (mobile.length > 2 && password.length > 3 && val == 0) {
+    //             handlelogin();
+    //             setVal((prev) => prev + 1);
+    //         }
+    //     }
+    // }
 
-    // console.log(data);
+    // console.log(data); 
 
     return (
         <div className={style.signin_topbox}>
@@ -161,21 +131,31 @@ const Login = ({ onpage }) => {
                             <Heading fontSize={{ base: '2xl', md: '4xl', lg: '2xl' }}>Login to your account</Heading>
                             <FormControl id="number">
                                 <FormLabel fontSize={{ base: 'md', lg: 'xl' }}>Mobile no.</FormLabel>
-                                <Input type="text" placeholder='Enter mobile no.' onChange={(e) => setMobile(e.target.value)} value={mobile} required />
+                                <Input colorScheme='linkedin' type="text" maxLength={10} placeholder='Enter mobile no.' onChange={(e) => setMobile(e.target.value)} value={mobile} required />
+                                <UnorderedList fontSize={"xs"} color={"red"} margin={"0 0 0 20px"} textAlign={"left"} display={mobileWarn.length ? "flex" : "none"}>
+                                    <ListItem>
+                                        {mobileWarn}
+                                    </ListItem>
+                                </UnorderedList>
                             </FormControl>
                             <FormControl id="password">
                                 <FormLabel fontSize={{ base: 'md', lg: 'xl' }}>Password</FormLabel>
                                 <InputGroup>
-                                    <Input type={show ? "text" : "password"} placeholder={"Enter Password"} onKeyPress={handlekeybox} onChange={(e) => setPassword(e.target.value)} value={password} required />
+                                    <Input type={show ? "text" : "password"} maxLength={"25"} placeholder={"Enter Password"} colorScheme='linkedin' onChange={(e) => setPassword(e.target.value)} value={password} required />
 
                                     <InputRightElement width='4.5rem'  >
-                                        <Button h='1.75rem' marginRight={2} letterSpacing={"1px"} fontWeight={"light"} color={"black"} onClick={handleShow} size='md' border={"1px solid rgb(172, 172, 172)"} backgroundColor={"unset"}  >
+                                        <Button h='1.75rem' marginRight={2} letterSpacing={"1px"} fontWeight={"light"} color={"black"} onClick={handleShow} size={'sm'} border={"1px solid rgb(172, 172, 172)"} backgroundColor={"unset"}  >
                                             {show ? 'Hide' : 'Show'}
                                         </Button>
                                     </InputRightElement>
                                 </InputGroup>
+                                <UnorderedList fontSize={"xs"} color={"red"} margin={"0 0 0 20px"} textAlign={"left"} display={warning.length ? "flex" : "none"}>
+                                    <ListItem>
+                                        {warning}
+                                    </ListItem>
+                                </UnorderedList>
                             </FormControl>
-                            <Stack spacing={6} width={"100%"} >
+                            <Box margin={0} width={"100%"} >
                                 {/* <Stack
                                     direction={{ base: 'column', sm: 'row' }}
                                     align={'start'}
@@ -183,10 +163,21 @@ const Login = ({ onpage }) => {
                                     <Checkbox size={{ base: "md", md: 'lg' }}>Remember me</Checkbox>
                                     <Link color={'blue'}>Forgot password?</Link>
                                 </Stack>  */}
-                                <Button className={style.logbtn} variant={'solid'} w={"full"} onClick={handlelogin} fontSize={{ base: '2xl', lg: 'xl' }} >
+                                <Button
+                                    className={style.logbtn}
+                                    variant={data.isLoading ? "outline" : 'solid'}
+                                    w={"full"}
+                                    isLoading={data.isLoading}
+                                    spinner={<BeatLoader size={8} color='white' />}
+                                    loadingText='Login'
+                                    spinnerPlacement='end'
+                                    colorScheme='blue'
+                                    onClick={handlelogin}
+                                    fontSize={{ base: '2xl', lg: 'xl' }}
+                                >
                                     Login
                                 </Button>
-                            </Stack>
+                            </Box>
                         </Box>
                     </Flex>
                 </div>

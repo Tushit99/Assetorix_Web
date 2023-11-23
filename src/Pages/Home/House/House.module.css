@@ -3,13 +3,15 @@
   grid-template-columns: repeat(3, 1fr); 
   padding: 30px;
   gap: 20px;  
+  background-image: url("https://i.ibb.co/k1Z18HV/image-mainhome-3.jpg"); 
 }
 
 .box > div {
   padding: 50px 20px; 
   display: grid;
-  gap: 14px;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+  gap: 14px; 
+  background-color: rgba(255, 255, 255);
+  box-shadow: rgba(255, 255, 255, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
   border-radius: 6px; 
   transform: scale(1);

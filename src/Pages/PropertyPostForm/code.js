@@ -11,7 +11,7 @@ export const NumericString = (e) => {
 };
 
 export const Emailhandle = (e) => {
-  const inputString = e;
+  const inputString = e; 
   console.log(inputString);
   const result = inputString.replace(/[^a-zA-Z0-9. ]/g, "").replace(/ +/g, " ");
   return result.trim();

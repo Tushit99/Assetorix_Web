@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Heading, Image, Menu, MenuButton, MenuItem, MenuList, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, useDisclosure } from '@chakra-ui/react';
+import { Badge, Box, Button, Flex, Heading, Image, Menu, MenuButton, MenuItem, MenuList, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, useDisclosure } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import style from "./Listing.module.css";
@@ -18,7 +18,7 @@ const DeleteBox = ({ e, myListedProperty }) => {
     const [load, setLoad] = useState(false);
     const { isOpen, onOpen, onClose } = useDisclosure();
 
-    // console.log(e);
+    console.log(e);
 
     const handleDetailPage = () => {
         navigate(`/listingdetail/${e._id}`);
@@ -30,7 +30,7 @@ const DeleteBox = ({ e, myListedProperty }) => {
     }
 
     const handleCustomerView = async () => {
-        setLoad(true); 
+        setLoad(true);
         try {
             let id = localStorage.getItem("usrId") || undefined;
             let authorization = localStorage.getItem("AstToken") || undefined;
@@ -197,9 +197,12 @@ const DeleteBox = ({ e, myListedProperty }) => {
                         </Box>
                     </Box>
                     <Flex direction="column" height={"200px"} >
-                        <Heading as="h2" height={"30px"} textAlign={"end"} padding={"20px 30px 0 0"} fontSize="lg" >
-                            {e?.countryCurrency} {e?.price.toLocaleString("en-IN")}
-                        </Heading>
+                        <Box height={"40px"} textAlign={"end"}   >
+                            <Heading as="h2" fontSize="xl" padding={"20px 30px 0 0"} >
+                                {e?.countryCurrency} {e?.price.toLocaleString("en-IN")}
+                            </Heading>
+                            <Text marginRight={"20px"} marginTop={1} fontSize={"14px"} > Status: <Badge variant='outline' fontSize='xs' colorScheme={'blue'} fontWeight='bold'> {e.verificationState} </Badge> </Text>
+                        </Box>
                         <Box display={"flex"} justifyContent={"center"} paddingBottom={"30px"} alignItems={"end"} >
                             <Button
                                 width={"80%"}
@@ -234,12 +237,12 @@ const DeleteBox = ({ e, myListedProperty }) => {
                         </Button>
                         <Button
                             colorScheme='blue'
-                            mr={3} 
+                            mr={3}
                             isLoading={load}
                             loadingText='Changing Status'
                             onClick={handleCustomerView}>Confirm change</Button>
                     </ModalFooter>
-                </ModalContent> 
+                </ModalContent>
             </Modal>
         </>
 

@@ -5,12 +5,13 @@ import React, { useEffect, useRef, useState } from 'react'
 import { BsCheckLg } from "react-icons/bs";
 import { BiPlus } from "react-icons/bi";
 import { BsFillBookmarkHeartFill } from 'react-icons/bs';
-import { Link, useLocation, useSearchParams } from 'react-router-dom'; 
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import LoadingBox from '../LoadingBox/LoadingBox';
 import { useDispatch, useSelector } from 'react-redux';
 import { residentialBuy } from '../../../Redux/Propertysearch/action';
 // import noResult from "../Nodata.png";
 import errorimg from "../eror.png";
+import { TfiRulerAlt2 } from 'react-icons/tfi';
 
 
 const ResidentialBuy = () => {
@@ -29,7 +30,7 @@ const ResidentialBuy = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const btnRef = useRef();
 
- 
+
     const handleLike = () => {
         let id = localStorage.getItem("usrId") || undefined;
         let authorization = localStorage.getItem("AstToken") || undefined;
@@ -42,7 +43,7 @@ const ResidentialBuy = () => {
             headers: head,
         }).then((e) => {
             setWishlist(e.data);
-            console.log(e.data); 
+            console.log(e.data);
         }).catch((err) => console.log(err));
     }
 
@@ -56,7 +57,7 @@ const ResidentialBuy = () => {
             return;
         }
 
-        const axiosConfig = { 
+        const axiosConfig = {
             method: `${wishlist.includes(myid) ? "delete" : "patch"}`,
             url: `${process.env.REACT_APP_URL}/user/wishlist/${myid}`,
             headers: {
@@ -73,25 +74,25 @@ const ResidentialBuy = () => {
                 setWishlist(e.data.wishlistIDs);
                 toast({
                     title: `${wishlist.includes(myid) ? "Removed from Wishlist" : "Added to Wishlist"}`,
-                    status: 'success', 
-                    duration: 2000, 
+                    status: 'success',
+                    duration: 2000,
                 })
                 console.log(e.data);
             })
             .catch((error) => {
                 console.error(error);
             });
-    } 
+    }
 
     // console.log(ResedentialBuydata);
 
 
-    const handleBedroom = (value) => { 
-        setBhk((prev) => { 
-            if (prev.includes(value)) { 
-                return prev.filter((item) => item !== value); 
-            } else { 
-                return [...prev, value]; 
+    const handleBedroom = (value) => {
+        setBhk((prev) => {
+            if (prev.includes(value)) {
+                return prev.filter((item) => item !== value);
+            } else {
+                return [...prev, value];
             }
         });
     }
@@ -118,13 +119,13 @@ const ResidentialBuy = () => {
         });
     }
 
-    useEffect(() => {   
+    useEffect(() => {
         let local = JSON.parse(localStorage.getItem("resBuy")); // fetching data from local storage 
-        local.length>0 && setPropertyType(local); // setting data to usestate  
+        local.length > 0 && setPropertyType(local); // setting data to usestate  
 
         dispatch(residentialBuy(location)); // fetching the data
         handleLike(); // wishlist   
-    }, []);  
+    }, []);
 
     useEffect(() => {
         let param = {}
@@ -137,7 +138,7 @@ const ResidentialBuy = () => {
 
     useEffect(() => {
         dispatch(residentialBuy(location));
-    }, [location.search]);  
+    }, [location.search]);
 
 
     return (
@@ -253,7 +254,7 @@ const ResidentialBuy = () => {
 
                     <Box w={"100%"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"} textAlign={"left"} paddingX={3} paddingY={2} display={"grid"} gridTemplateRows={"auto"} gridTemplateColumns={{ base: "repeat(2,1fr)", md: "repeat(2,1fr)", lg: "repeat(3,1fr)" }} gap={4} >
                         {!ResedentialBuydata.msg && ResedentialBuydata?.data?.map((e, index) => {
-                            const colorstate = wishlist && Array.isArray(wishlist) && wishlist.includes(`${e._id}`); 
+                            const colorstate = wishlist && Array.isArray(wishlist) && wishlist.includes(`${e._id}`);
 
                             // console.log(colorstate);
 
@@ -267,8 +268,41 @@ const ResidentialBuy = () => {
                                             <Box position={"relative"}>
                                                 <Image src="https://mediacdn.99acres.com/582/0/11640476F-1383637447-Amrit_House_-_Sant_Nagr_Delhi.jpeg" w={"100%"} alt="property image" />
                                             </Box>
-                                            <Heading className={style.head_line} size={{ base: "xs", md: "sm" }} textAlign={"left"} color={"rgb(37, 37, 37)"} >  {e.address.houseNumber && e.address.houseNumber} {e.address.apartmentName && e.address.apartmentName} {e.address.locality && e.address.locality} </Heading>
-                                            <Text fontSize={{ base: "xs", md: "sm" }} > Price: {e.countryCurrency}{e.price?.toLocaleString("en-IN")} </Text>
+                                            <Heading className={`${style.boldtext} ${style.oneline}`} size={"sm"} fontWeight={"medium"} > {e.propertyType} </Heading>
+                                            <Heading className={`${style.boldtext} ${style.oneline}`} size={"sm"} fontWeight={"medium"} >
+                                                {e?.address?.houseNumber && `${e?.address?.houseNumber}, `}
+                                                {e?.address?.address && `${e?.address?.address}, `}
+                                                {e?.address?.apartmentName && `${e?.address?.apartmentName}, `}
+                                                {e?.address?.locality}
+                                            </Heading>
+                                            <Heading className={`${style.boldtext} ${style.oneline}`} fontSize={"12px"} fontWeight={"400"} color={"rgb(88, 88, 88)"} > {e?.address?.city}, {e?.address?.state}, {e?.address?.country} , {e?.address?.pincode} {e?.locatedInside} </Heading>
+                                            <Box display={"grid"} color={"rgb(88, 88, 88)"} fontSize={"16px"} >
+                                                {/* Plot area Detail */}
+                                                <Box display={(e.plotArea && e.plotAreaUnit) ? "flex" : "none"} alignItems={"center"} gap={"6px"}> 
+                                                    <TfiRulerAlt2 color={"rgb(88, 88, 88)"} />
+                                                    {e.plotArea} {e.plotAreaUnit} <b>Plot Area</b>
+                                                </Box>
+                                                <Box display={(e.carpetArea && e.carpetAreaUnit) ? "flex" : "none"} alignItems={"center"} gap={"6px"}>
+                                                    <TfiRulerAlt2 color={"rgb(88, 88, 88)"} />
+                                                    {e.carpetArea} {e.carpetAreaUnit} <b>Carpet Area</b> 
+                                                </Box>
+                                                <Box display={(e.builtupArea && e.builtupAreaUnit) ? "flex" : "none"} alignItems={"center"} gap={"6px"}>
+                                                    <TfiRulerAlt2 color={"rgb(88, 88, 88)"} />
+                                                    {e.builtupArea} {e.builtupAreaUnit} <b>Builtup Area</b>
+                                                </Box>
+                                                <Box display={(e.superBuitupArea && e.superBuitupAreaUnit) ? "flex" : "none"} alignItems={"center"} gap={"6px"}>
+                                                    <TfiRulerAlt2 color={"rgb(88, 88, 88)"} />
+                                                    {e.superBuitupArea} {e.superBuitupAreaUnit} <b>Super Builtup Area</b>
+                                                </Box>
+                                            </Box>
+                                            <Box fontSize={{ base: "xs", md: "sm" }} display={"flex"} alignItems={"center"} flexWrap={"nowrap"} >
+                                                <Heading as="h2" fontSize="md" margin={"0 4px"}>
+                                                    Price:
+                                                </Heading>
+                                                <Text fontSize="sm" >
+                                                    {e?.countryCurrency} {e?.price.toLocaleString("en-IN")}
+                                                </Text>
+                                            </Box>
                                         </Box>
                                     </Link>
                                 </Box>
@@ -298,7 +332,7 @@ const ResidentialBuy = () => {
                                 {(ResedentialBuydata?.data?.map((e, index) => {
                                     const colorstate = wishlist && Array.isArray(wishlist) && wishlist.includes(`${e._id}`);
                                     return (
-                                        <Box position={"relative"} key={index} >
+                                        <Box position={"relative"} key={index} className={style.productdetaillist} >
                                             <Tooltip hasArrow label={"Wishlist"}>
                                                 <Text cursor={"pointer"} zIndex={5} onClick={() => handleAddToWishlist(e._id)} position={"absolute"} top={3} right={3} color={colorstate ? "green.500" : "red.500"} > <BsFillBookmarkHeartFill size={"20px"} /> </Text>
                                             </Tooltip>

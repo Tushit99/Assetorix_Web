@@ -25,12 +25,14 @@ const Wishlist = () => {
         })
     } 
 
+    console.log(Wishlist); 
+
     useEffect(() => {
         func();
     }, [])
 
     return (
-        <Box padding={"20px 10px"} minHeight={"80vh"} > 
+        <Box padding={"20px 10px"} minHeight={"80vh"}> 
             <Heading fontSize={"3xl"} margin={"0 0 10px 0"} > Wishlist </Heading>
             <Box display={"grid"} gap={2} width={"94%"} margin={"auto"} >
                 <Box position={"relative"} display={"flex"} className={style.box} >

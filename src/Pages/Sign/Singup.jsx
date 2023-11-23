@@ -9,6 +9,12 @@ import {
   Image,
   useToast,
   Box,
+  UnorderedList,
+  ListItem,
+  List,
+  ListIcon,
+  InputGroup,
+  InputRightElement,
   // useDisclosure,
 } from "@chakra-ui/react";
 import sideimg from "./backimg.png";
@@ -16,16 +22,21 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signinuser } from "../../Redux/userauth/action";
+import { CheckCircleIcon, InfoIcon } from "@chakra-ui/icons";
 
 const Singup = () => {
   const data = useSelector((store) => store.userreducer);
   const toast = useToast();
   const [name, setname] = useState("");
-  const [email, setemail] = useState("");
-  const [password, setpassword] = useState("");
+  const [password, setPassword] = useState("");
   const [number, setnumber] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [nameWarning, setNamewarning] = useState("");
+  const [mobileWarning, setMobilewarning] = useState("");
+  const [requirements, setRequirements] = useState(false);
+  const [show, setShow] = useState(false);
+
   // const [val, setVal] = "";
   // const { isOpen, onOpen, onClose } = useDisclosure(); 
 
@@ -39,7 +50,7 @@ const Singup = () => {
       toast({
         title: 'Special characters are not allowed',
         status: 'warning',
-        duration: 1000, 
+        duration: 1000,
       })
     } else {
       setname(sanitizedValue);
@@ -51,73 +62,33 @@ const Singup = () => {
     var upperCase = /[A-Z]/g;
     var numbers = /[0-9]/g;
     if (name.length <= 2) {
-      toast({
-        position: "top-right",
-        render: () => (
-          <Box color="white" p={3} bg="blue.500">
-            Please fill your name
-          </Box>
-        ),
-      });
+      setNamewarning("Please fill your full name")
     }
     else if (number.length <= 9 || number.length > 10) {
-      toast({
-        position: "top-right",
-        render: () => (
-          <Box color="white" p={3} bg="blue.500">
-            mobile no. should be of 10 digits only
-          </Box>
-        ),
-      });
+      setNamewarning("");
+      setMobilewarning("Mobile no. should be of 10 digits");
     }
-    else if (password.length == "") {
-      toast({
-        position: "top-right",
-        render: () => (
-          <Box color="white" p={3} bg="blue.500">
-            Please Enter your password!
-          </Box>
-        ),
-      });
+    else if (password.length == 0) {
+      setNamewarning("");
+      setMobilewarning("");
     }
     else if (!password.match(lowerCase)) {
-      toast({
-        position: "top-right",
-        render: () => (
-          <Box color="white" p={3} bg="blue.500">
-            Password should contains lowercase letters!
-          </Box>
-        ),
-      });
+      setNamewarning("");
+      setMobilewarning("");
     } else if (!password.match(upperCase)) {
-      toast({
-        position: "top-right",
-        render: () => (
-          <Box color="white" p={3} bg="blue.500">
-            Password should contain uppercase letters!
-          </Box>
-        ),
-      });
+      setNamewarning("");
+      setMobilewarning("");
     } else if (!password.match(numbers)) {
-      toast({
-        position: "top-right",
-        render: () => (
-          <Box color="white" p={3} bg="blue.500">
-            Password should contains numbers also!
-          </Box>
-        ),
-      });
+      setNamewarning("");
+      setMobilewarning("");
     } else if (password.length < 6) {
-      toast({
-        position: "top-right",
-        render: () => (
-          <Box color="white" p={3} bg="blue.500">
-            Password length should be more than 5
-          </Box>
-        ),
-      });
+      setNamewarning("");
+      setMobilewarning("");
     }
     else {
+      setNamewarning("");
+      setMobilewarning("");
+
       let body = {
         name,
         password,
@@ -143,40 +114,60 @@ const Singup = () => {
       })
       navigate("/");
     }
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }); 
-  }, [data]); 
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  }, [data]);
 
-  console.log(data);
 
-  // const handleotp = () => { }; 
+  const handlePassword = (pass) => {
+    var lowerCase = /[a-z]/;
+    var upperCase = /[A-Z]/;
+    var numbers = /[0-9]/;
+
+    const meetsRequirements = pass.length >= 6 &&
+      lowerCase.test(pass) &&
+      upperCase.test(pass) &&
+      numbers.test(pass);
+
+    setRequirements(meetsRequirements);
+
+    const sanitizedPassword = pass.replace(/[^a-zA-Z\s!@#$%&*{}0-9]/g, '');
+    setPassword(sanitizedPassword);
+  };
+
+  const handleshowPassword =()=>{
+    setShow(!show); 
+  }
 
   return (
     <Stack
       minH={"60vh"}
-      direction={{ base: "column", md: "row" }} 
+      marginBottom={"20px"}
+      direction={{ base: "column", md: "row" }}
     >
       <Flex
-        p={{ base: "4", lg: "8" }} 
-        flex={1}
-        align={"baseline"}
+        p={{ base: "4", lg: "8" }}
+        flex={22}
+        // align={"baseline"}
         justify={"center"}
       >
         <Stack
-          spacing={4}
           w={"full"}
-          maxW={"md"}
+          maxW={"xl"}
           padding={"30px"}
-          marginTop={{ base: "20px", lg: "50px" }}
+          marginTop={"10px"}
           boxShadow={"rgba(0, 0, 0, 0.24) 0px 3px 8px "}
           borderRadius={"8px"}
         >
           <Heading fontSize={"3xl"}>Sign up to your account</Heading>
+          {/* Name */}
           <FormControl id="name">
             <FormLabel>Name</FormLabel>
             <Input
               required={true}
               type="text"
+              maxLength={20}
               value={name}
+              borderRadius={0}
               onChange={handleInputChange}
               border={"2px solid rgb(193, 206, 250)"}
               _hover={{ border: "2px solid rgb(171, 81, 255)" }}
@@ -184,6 +175,11 @@ const Singup = () => {
               autoComplete={"off"}
             />
           </FormControl>
+          <UnorderedList fontSize={"xs"} color={"red"} display={nameWarning.length ? "flex" : "none"}>
+            <ListItem>
+              {nameWarning}
+            </ListItem>
+          </UnorderedList>
           {/* <FormControl id="email">
             <FormLabel>Email address</FormLabel>
             <Input
@@ -195,29 +191,64 @@ const Singup = () => {
               autoComplete={"off"}
               />
             </FormControl> */}
+          {/* Mobile no. */}
           <FormControl id="mobile">
             <FormLabel>Mobile no.</FormLabel>
             <Input
               type="text"
               onChange={(e) => setnumber(e.target.value)}
+              maxLength={10}
               border={"2px solid rgb(193, 206, 250)"}
               _hover={{ border: "2px solid rgb(171, 81, 255)" }}
               placeholder="mobile no..."
               autoComplete={"off"}
             />
           </FormControl>
+          <UnorderedList fontSize={"xs"} color={"red"} display={mobileWarning.length ? "flex" : "none"}>
+            <ListItem>
+              {mobileWarning}
+            </ListItem>
+          </UnorderedList>
+          {/* Password */}
           <FormControl id="password">
             <FormLabel>Password</FormLabel>
-            <Input
-              type="password"
-              onChange={(e) => setpassword(e.target.value)}
-              border={"2px solid rgb(193, 206, 250)"}
-              _hover={{ border: "2px solid rgb(171, 81, 255)" }}
-              placeholder="Enter password..."
-              autoComplete={"off"}
-            />
+            <InputGroup size='md'>
+              <Input
+                pr='4.5rem'
+                type={show ? "password" : "text"}
+                onChange={(e) => handlePassword(e.target.value)}
+                maxLength={20}
+                border={"2px solid rgb(193, 206, 250)"}
+                _hover={{ border: "2px solid rgb(171, 81, 255)" }}
+                placeholder="Enter password..."
+                autoComplete={"off"}
+              />
+              <InputRightElement width='4.5rem'>
+                <Button h='1.75rem' variant='outline' colorScheme='linkedin' size='sm' onClick={handleshowPassword}>
+                  {show ? 'Hide' : 'Show'}
+                </Button>
+              </InputRightElement>
+            </InputGroup> 
           </FormControl>
-          <Stack spacing={6}>
+          <List spacing={0} fontSize={"xs"} textAlign={"left"} display={requirements ? "none" : "block"} >
+            <ListItem>
+              <ListIcon as={/[a-z]/.test(password) ? CheckCircleIcon : InfoIcon} color={/[a-z]/.test(password) ? 'green.500' : "red"} />
+              should contains lowercase letters!
+            </ListItem>
+            <ListItem>
+              <ListIcon as={/[A-Z]/.test(password) ? CheckCircleIcon : InfoIcon} color={/[A-Z]/.test(password) ? 'green.500' : "red"} />
+              should contains uppercase letters!
+            </ListItem>
+            <ListItem>
+              <ListIcon as={/[0-9]/.test(password) ? CheckCircleIcon : InfoIcon} color={/[0-9]/.test(password) ? 'green.500' : "red"} />
+              Password should contains numbers!
+            </ListItem>
+            <ListItem>
+              <ListIcon as={password.length > 5 ? CheckCircleIcon : InfoIcon} color={password.length > 5 ? 'green.500' : "red"} />
+              Password length should be more then 5
+            </ListItem>
+          </List>
+          <Stack spacing={0}>
             <Stack
               direction={{ base: "column", sm: "row" }}
               align={"start"}
@@ -231,13 +262,13 @@ const Singup = () => {
         </Stack>
       </Flex>
       <Flex
-        flex={1}
+        flex={18}
         display={{ base: "none", md: "flex" }}
         objectFit={"contain"}
-        padding={"30px"}
-        alignItems={"end"}
+        alignItems={"flex-start"}
+        padding={0}
       >
-        <Image alt={"Login Image"} objectFit={"cover"} src={sideimg} />
+        <Image alt={"Login Image"} padding={"0 20px"} objectFit={"contain"} src={sideimg} />
       </Flex>
     </Stack>
   );

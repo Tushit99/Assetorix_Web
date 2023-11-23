@@ -1,28 +1,25 @@
-.App{
+.App {
   text-align: center;
-  max-width: 100%;   
-  font-family: sans-serif;  
-
+  max-width: 100%;
+  font-family: sans-serif;
 }
 
-
-input[type=text]{
-  border-radius: 0; 
+input[type="text"] {
+  border-radius: 0;
 }
 
-.info {
-  margin-top: 100px;
+.info { 
   max-width: 1700px;
   margin: auto;
 }
 
-.perfectwidth *{ 
-  max-width: 100%;  
+.perfectwidth * {
+  max-width: 100%;
 }
- 
-option{
-  color: black; 
-  padding: 0 20px;  
+
+option {
+  color: black;
+  padding: 0 20px;
 }
 
 .scrole_button {
@@ -37,14 +34,14 @@ option{
   padding: 6px;
   background-color: var(--blue-light);
   color: black;
-  border-radius: 50px; 
+  border-radius: 50px;
   position: relative;
 }
 
 .scrole_button button:hover {
   -webkit-animation: rotate-center 0.6s ease-in-out both;
-  animation: rotate-center 0.6s ease-in-out both;  
-  background-color: rgb(46,49,146); 
+  animation: rotate-center 0.6s ease-in-out both;
+  background-color: rgb(46, 49, 146);
 }
 
 /* down button */
@@ -68,6 +65,3 @@ option{
     transform: rotate(360deg);
   }
 }
-
-
-
