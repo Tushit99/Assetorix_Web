@@ -58,7 +58,7 @@ const Page1 = () => {
   return (
     <div className={style.pagetop}>
       {/* img will be shown untill the video is not there */}
-      <img src={backimg}  className={style.video_picture2} alt="backimg" />
+      <img src={backimg} loading={"lazy"} className={style.video_picture2} alt="backimg" />
       <Box className={style.video_picture} >
         <Blurhash
           hash="L[H1*rRkWCj[~UV[WCfk?GaeaybH"

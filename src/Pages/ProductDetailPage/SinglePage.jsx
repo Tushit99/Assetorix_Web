@@ -53,7 +53,11 @@ import { CleanInputText, Emailhandle, NumericString } from "../PropertyPostForm/
 import { useParams } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io"
 import { useDispatch } from "react-redux";
-import { addRecentlyVisited } from "../../Redux/globalval/action"; 
+import { addRecentlyVisited } from "../../Redux/globalval/action";
+
+import scale from "./scale.png"
+import stairs from "./stairs.png"
+import powerback from "./backup.png"
 
 
 const SingleProductDetailPage = () => {
@@ -85,7 +89,7 @@ const SingleProductDetailPage = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const dispatch = useDispatch();
     const [load, setLoad] = useState(false);
-    const toast = useToast(); 
+    const toast = useToast();
 
 
     const dataById = async () => {
@@ -153,14 +157,14 @@ const SingleProductDetailPage = () => {
                 setNametosend("");
                 setEmailtosend("");
                 setPhonetosend("");
-                setMessage("");  
+                setMessage("");
 
                 toast({
-                    title: responseData.msg ,
+                    title: responseData.msg,
                     status: 'success',
                     duration: 2000,
-                    isClosable: true, 
-                  }) 
+                    isClosable: true,
+                })
             } else {
                 console.error('Request failed with status:', response.status);
                 setLoad(false);
@@ -171,34 +175,34 @@ const SingleProductDetailPage = () => {
         }
     };
 
-
-
     return (
-        <Box> 
+        <Box maxWidth={"100%"} overflow={"hidden"} >
+            {(placelocality) ? <Heading
+                // color={"rgb(13, 20, 66)"} 
+                textAlign={"left"}
+                fontSize={{ base: "lg", md: "2xl" }}
+                display={"flex"}
+                className={style.addressbox}
+                gap={2}
+                textTransform={"uppercase"}
+                alignItems={"center"}
+            >
+                <ImLocation2 color={"rgb(255, 255, 255)"} /> {houseno || <Skeleton width={"200px"} />}, {apartment || <Skeleton width={"200px"} />}, {placelocality || <Skeleton width={"200px"} />}
+            </Heading> : <Skeleton height={"35px"} />}
             <Box className={style.singleProduct} display={{ base: "grid", md: "flex" }} alignItems={"flex-start"} flexWrap={"wrap"} gap={"20px"} margin={{ base: "0px auto", md: "20px auto" }} w={"94%"} >
                 <Box flex={16} >
-                    {(Skeleton && apartment && placelocality) ? <Heading
-                        color={"rgb(13, 20, 66)"}
-                        margin={"0 0 20px 20px"}
-                        textAlign={"left"}
-                        fontSize={{ base: "lg", md: "2xl" }}
-                        display={"flex"}
-                        textTransform={"uppercase"}
-                        alignItems={"center"}
-                    >
-                        <ImLocation2 color={"rgb(46, 49, 146)"} /> {houseno || <Skeleton width={"200px"} />}, {apartment || <Skeleton width={"200px"} />}, {placelocality || <Skeleton width={"200px"} />}
-                    </Heading> : <Skeleton height={"35px"} />}
-                    <Box>
-                        <Box >
-                            <Image
-                                w={"100%"}
-                                objectFit={"contain"}
-                                maxH={"450px"}
-                                // border={"2px solid black"}
-                                src={"https://mediacdn.99acres.com/media1/21619/19/432399374M-1688810188988.jpg"}
-                                alt="property-img"
-                            />
+                    <Box position={"relative"} className={style.propertyimg} height={"450px"} w={"100%"} >
+                        <Box className={style.backimagebox} >
                         </Box>
+                        <Image
+                            w={"100%"}
+                            display={(data && data.images && data?.images[0]?.URL) ? "block" : "none"}
+                            objectFit={"contain"}
+                            maxH={"450px"}
+                            // border={"2px solid black"}
+                            src={(data && data.images && data?.images[0]?.URL) && data?.images[0]?.URL}
+                            alt="property-img"
+                        />
                     </Box>
 
                     {/* ===================== mobile Pricing (Price only for mobile) =================================== */}
@@ -224,19 +228,34 @@ const SingleProductDetailPage = () => {
 
                         {/* ======================================== under construction ==================================== */}
                         {/* Plot Detail */}
-                        <Box marginTop={2} display={"flex"} flexWrap={"wrap"} alignItems={"inherit"} backgroundColor={"rgb(225, 247, 249)"} justifyContent={"space-around"} >
-                            <Box display={data.plotArea ? "flex" : "none"} flexDirection={"column"} padding={"4px 8px"} border={"2px solid rgb(178, 255, 246)"} flex={1} >
-                                <Heading size={"md"}>Plot Area </Heading>
-                                <Text>{data.plotArea || <Skeleton width={"100px"} />} {data.plotAreaUnit || <Skeleton width={"100px"} />}</Text>
+                        <Box marginTop={2} display={"flex"} flexWrap={"wrap"} gap={2} alignItems={"inherit"} justifyContent={"space-around"} >
+                            <Box display={data.plotArea ? "flex" : "none"} clipPath={"polygon(2% 5%, 0 5%, 0 0, 100% 0, 100% 5%, 98% 5%, 98% 95%, 100% 95%, 100% 100%, 0 100%, 0 95%, 2% 95%)"} alignItems={"flex-start"} padding={"4px 12px"} borderBottom={"2px solid rgb(178, 255, 246)"} borderTop={"2px solid rgb(178, 255, 246)"} flex={1} _hover={{ backgroundColor: "rgb(219, 237, 255)" }} >
+                                <Box flex={9}>
+                                    <Heading size={"md"}>Plot Area </Heading>
+                                    <Text>{data.plotArea || <Skeleton width={"100px"} />} {data.plotAreaUnit || <Skeleton width={"100px"} />}</Text>
+                                </Box>
+                                <Box flex={3}>
+                                    <Image width={"60px"} src={scale} alt={"scale"} />
+                                </Box>
                             </Box>
-                            <Box display={data.totalFloors ? "flex" : "none"} flexDirection={"column"} padding={"4px 8px"} border={"2px solid rgb(178, 255, 246)"} flex={1} >
-                                <Heading size={"md"}> Floor </Heading>
-                                <Text> Total floor: {data.totalFloors || <Skeleton width={"100px"} />}</Text>
-                                <Text display={data.floorOn ? "flex" : "none"}> Floor on: {data.floorOn || <Skeleton width={"100px"} />} </Text>
+                            <Box display={data.totalFloors ? "flex" : "none"} clipPath={"polygon(2% 5%, 0 5%, 0 0, 100% 0, 100% 5%, 98% 5%, 98% 95%, 100% 95%, 100% 100%, 0 100%, 0 95%, 2% 95%)"} alignItems={"flex-start"} padding={"4px 12px"} borderBottom={"2px solid rgb(178, 255, 246)"} borderTop={"2px solid rgb(178, 255, 246)"} flex={1} _hover={{ backgroundColor: "rgb(219, 237, 255)" }} >
+                                <Box flex={9}>
+                                    <Heading size={"md"}> Floor </Heading>
+                                    <Text> Total floor: {data.totalFloors || <Skeleton width={"100px"} />}</Text>
+                                    <Text display={data.floorOn ? "flex" : "none"}> Floor: {data.floorOn || <Skeleton width={"100px"} />} Floor </Text>
+                                </Box>
+                                <Box flex={3}>
+                                    <Image width={"60px"} src={stairs} alt={"stairs"} />
+                                </Box>
                             </Box>
-                            <Box display={data.powerBackup ? "flex" : "none"} flexDirection={"column"} padding={"4px 8px"} border={"2px solid rgb(178, 255, 246)"} flex={1} >
-                                <Heading size={"md"}> Power Backup </Heading>
-                                <Text>{data.powerBackup || <Skeleton width={"100px"} />}</Text>
+                            <Box display={data.powerBackup ? "flex" : "none"} clipPath={"polygon(2% 5%, 0 5%, 0 0, 100% 0, 100% 5%, 98% 5%, 98% 95%, 100% 95%, 100% 100%, 0 100%, 0 95%, 2% 95%)"} alignItems={"flex-start"} padding={"4px 12px"} borderBottom={"2px solid rgb(178, 255, 246)"} borderTop={"2px solid rgb(178, 255, 246)"} flex={1} _hover={{ backgroundColor: "rgb(219, 237, 255)" }} >
+                                <Box flex={9}>
+                                    <Heading size={"md"}> Power Backup </Heading>
+                                    <Text>{data.powerBackup || <Skeleton width={"100px"} />}</Text>
+                                </Box>
+                                <Box flex={4}>
+                                    <Image width={"70px"} src={powerback} alt={"powerback"} />
+                                </Box>
                             </Box>
                         </Box>
 
@@ -668,7 +687,7 @@ const SingleProductDetailPage = () => {
                                                 </Box>
                                                 <AccordionIcon />
                                             </AccordionButton>
-                                        </h2>
+                                        </h2> 
                                         <AccordionPanel pb={4} >
                                             <Box display={"flex"} margin={"0 30px"} flexWrap={"wrap"} alignItems={"center"}>
                                                 {data?.otherRoom?.map((e, i) => (
@@ -860,15 +879,15 @@ const SingleProductDetailPage = () => {
                                     <IoIosArrowForward />
                                     <Text> Close to highway </Text>
                                 </Box>
-                                <Box display={location.includes("Close to Mall") ? "flex" : "none"}  >
+                                <Box display={location.includes("Close to Mall") ? "flex" : "none"} alignItems={"center"}  >
                                     <IoIosArrowForward />
                                     <Text> Close to Mall </Text>
                                 </Box>
-                                <Box display={location.includes("Close to Airport") ? "flex" : "none"}  >
+                                <Box display={location.includes("Close to Airport") ? "flex" : "none"} alignItems={"center"}  >
                                     <IoIosArrowForward />
                                     <Text> Close to Airport </Text>
                                 </Box>
-                                <Box display={location.includes("Close to Railway Station") ? "flex" : "none"}  >
+                                <Box display={location.includes("Close to Railway Station") ? "flex" : "none"} alignItems={"center"}  >
                                     <IoIosArrowForward />
                                     <Text> Close to Railway Station </Text>
                                 </Box>
@@ -907,7 +926,7 @@ const SingleProductDetailPage = () => {
                                     type={"submit"}
                                     w={"100%"}
                                     borderRadius={0}
-                                    isLoading={load} 
+                                    isLoading={load}
                                     loadingText='Sending...'
                                     spinnerPlacement='start'
                                     margin={"6px 0"}
@@ -954,7 +973,7 @@ const SingleProductDetailPage = () => {
                                         borderRadius={0}
                                         isLoading={load}
                                         loadingText='Sending...'
-                                        spinnerPlacement='start' 
+                                        spinnerPlacement='start'
                                         margin={"6px 0"}
                                         colorScheme="whatsapp"> Schedule a Tour</Button>
                                 </form>

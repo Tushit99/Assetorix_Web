@@ -1,10 +1,10 @@
-import { Box, Button, Divider, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, Flex, Heading, Image, Select, Text, Tooltip, useDisclosure, useToast } from '@chakra-ui/react';
+import { Badge, Box, Button, Divider, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, Flex, Heading, Image, Select, Text, Tooltip, useDisclosure, useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import style from "../ProductPage.module.css";
 import React, { useEffect, useRef, useState } from 'react'
 import { BsCheckLg } from "react-icons/bs";
 import { BiPlus } from "react-icons/bi";
-import { BsFillBookmarkHeartFill } from 'react-icons/bs';
+import { FaHeart } from 'react-icons/fa';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import LoadingBox from '../LoadingBox/LoadingBox';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,6 +12,8 @@ import { residentialBuy } from '../../../Redux/Propertysearch/action';
 // import noResult from "../Nodata.png";
 import errorimg from "../eror.png";
 import { TfiRulerAlt2 } from 'react-icons/tfi';
+import emptyimg from "../backimg.png";
+import BeatLoader from "react-spinners/BeatLoader";
 
 
 const ResidentialBuy = () => {
@@ -29,6 +31,7 @@ const ResidentialBuy = () => {
     const toast = useToast();
     const { isOpen, onOpen, onClose } = useDisclosure();
     const btnRef = useRef();
+    const [wishload, setWishLoad] = useState(false);
 
 
     const handleLike = () => {
@@ -49,6 +52,7 @@ const ResidentialBuy = () => {
 
 
     const handleAddToWishlist = (myid) => {
+        setWishLoad(true);
         let id = localStorage.getItem("usrId") || undefined;
         let authorization = localStorage.getItem("AstToken") || undefined;
 
@@ -68,20 +72,25 @@ const ResidentialBuy = () => {
             data: {},
         };
 
-        axios(axiosConfig)
-            .then((e) => {
-                setWishlist(e.data);
-                setWishlist(e.data.wishlistIDs);
-                toast({
-                    title: `${wishlist.includes(myid) ? "Removed from Wishlist" : "Added to Wishlist"}`,
-                    status: 'success',
-                    duration: 2000,
+        try {
+            axios(axiosConfig)
+                .then((e) => {
+                    setWishlist(e.data);
+                    setWishlist(e.data.wishlistIDs);
+                    toast({
+                        title: `${wishlist.includes(myid) ? "Removed from Wishlist" : "Added to Wishlist"}`,
+                        status: 'success',
+                        duration: 2000,
+                    })
+                    console.log(e.data);
+                    setWishLoad(false);
                 })
-                console.log(e.data);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+                .catch((err) => {
+                    setWishLoad(false);
+                });
+        } catch (err) {
+            setWishLoad(false);
+        }
     }
 
     // console.log(ResedentialBuydata);
@@ -140,6 +149,7 @@ const ResidentialBuy = () => {
         dispatch(residentialBuy(location));
     }, [location.search]);
 
+    console.log(ResedentialBuydata.data);
 
     return (
         <Box margin={{ base: "0px auto 60px auto", md: "30px auto 60px auto" }} >
@@ -213,7 +223,7 @@ const ResidentialBuy = () => {
             <Flex display={"flex"} marginTop={2} marginX={"auto"} w={"96%"} alignItems={"flex-start"} gap={4} >
                 {/* ===================================  Property Sorting ================================= */}
                 <Box flex={2} padding={5} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"} className={style.side_box_sort} >
-                    <Heading size={{ base: "sm", lg: "md" }}> Sorting Property </Heading>
+                    <Heading size={{ base: "sm", lg: "md" }}> Filter Property </Heading>
                     <Divider backgroundColor={"rgb(227, 226, 226)"} marginTop={"2px"} padding={"1px"} borderRadius={"4px"} />
                     <Box margin={"4px auto"}>
                         <Heading textAlign={"left"} size={{ base: "xs", lg: "sm" }} > No. of Bedrooms </Heading>
@@ -252,21 +262,41 @@ const ResidentialBuy = () => {
                 {/* =========================== product List ====================== */}
                 <Box flex={6} >
 
-                    <Box w={"100%"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"} textAlign={"left"} paddingX={3} paddingY={2} display={"grid"} gridTemplateRows={"auto"} gridTemplateColumns={{ base: "repeat(2,1fr)", md: "repeat(2,1fr)", lg: "repeat(3,1fr)" }} gap={4} >
+                    <Box w={"100%"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"} textAlign={"left"} paddingX={3} paddingY={3} display={"grid"} gridTemplateRows={"auto"} gridTemplateColumns={{ base: "repeat(2,1fr)", md: "repeat(2,1fr)", lg: "repeat(3,1fr)" }} backgroundColor={"rgb(241, 241, 241)"} gap={4} >
                         {!ResedentialBuydata.msg && ResedentialBuydata?.data?.map((e, index) => {
                             const colorstate = wishlist && Array.isArray(wishlist) && wishlist.includes(`${e._id}`);
 
-                            // console.log(colorstate);
-
                             return (
-                                <Box position={"relative"} key={index}  >
+                                <Box position={"relative"} key={index} className={style.showbox} >
                                     <Tooltip hasArrow label={"Wishlist"}>
-                                        <Text cursor={"pointer"} zIndex={5} onClick={() => handleAddToWishlist(e._id)} position={"absolute"} top={3} right={3} color={colorstate ? "green.500" : "red.500"} > <BsFillBookmarkHeartFill size={"20px"} /> </Text>
+                                        <Button
+                                            variant={"unstyled"}
+                                            padding={"-20px"}
+                                            margin={0}
+                                            display={"flex"}
+                                            isLoading={wishload}
+                                            spinner={<BeatLoader size={8} color='white' margin={0} />}
+                                            alignItems={"center"}
+                                            justifyContent={"center"}
+                                            cursor={"pointer"}
+                                            zIndex={5}
+                                            clipPath={"circle(30% at 48% 48%)"}
+                                            filter="drop-shadow(1px 2px 6px rgba(43, 42, 42, 0.587))"
+                                            onClick={() => handleAddToWishlist(e._id)}
+                                            position={"absolute"}
+                                            top={3}
+                                            right={0}
+                                            color={colorstate ? "red.500" : "white"} >
+                                            <FaHeart size={"20px"} />
+                                        </Button>
                                     </Tooltip>
                                     <Link to={`/residential_buy/${e._id}`} >
                                         <Box className={style.property_box}>
                                             <Box position={"relative"}>
-                                                <Image src="https://mediacdn.99acres.com/582/0/11640476F-1383637447-Amrit_House_-_Sant_Nagr_Delhi.jpeg" w={"100%"} alt="property image" />
+                                                {(e && e.images && e?.images[0]?.URL) ?
+                                                    <Image src={(e && e.images) && e?.images[0]?.URL} w={"100%"} height={"200px"} objectFit={"contain"} alt="property image" /> :
+                                                    <Image src={emptyimg} w={"100%"} height={"200px"} objectFit={"contain"} alt='' />
+                                                }
                                             </Box>
                                             <Heading className={`${style.boldtext} ${style.oneline}`} size={"sm"} fontWeight={"medium"} > {e.propertyType} </Heading>
                                             <Heading className={`${style.boldtext} ${style.oneline}`} size={"sm"} fontWeight={"medium"} >
@@ -278,30 +308,22 @@ const ResidentialBuy = () => {
                                             <Heading className={`${style.boldtext} ${style.oneline}`} fontSize={"12px"} fontWeight={"400"} color={"rgb(88, 88, 88)"} > {e?.address?.city}, {e?.address?.state}, {e?.address?.country} , {e?.address?.pincode} {e?.locatedInside} </Heading>
                                             <Box display={"grid"} color={"rgb(88, 88, 88)"} fontSize={"16px"} >
                                                 {/* Plot area Detail */}
-                                                <Box display={(e.plotArea && e.plotAreaUnit) ? "flex" : "none"} alignItems={"center"} gap={"6px"}> 
+                                                <Box display={(e.plotArea && e.plotAreaUnit) ? "flex" : "none"} alignItems={"center"} gap={"3px"}>
                                                     <TfiRulerAlt2 color={"rgb(88, 88, 88)"} />
-                                                    {e.plotArea} {e.plotAreaUnit} <b>Plot Area</b>
+                                                    {e.plotArea} {e.plotAreaUnit} <Badge colorScheme={"blue"} variant={"outline"} fontSize={"10px"} >Plot Area</Badge>
                                                 </Box>
-                                                <Box display={(e.carpetArea && e.carpetAreaUnit) ? "flex" : "none"} alignItems={"center"} gap={"6px"}>
+                                                <Box display={(e.carpetArea && e.carpetAreaUnit) ? "flex" : "none"} alignItems={"center"} gap={"3px"}>
                                                     <TfiRulerAlt2 color={"rgb(88, 88, 88)"} />
-                                                    {e.carpetArea} {e.carpetAreaUnit} <b>Carpet Area</b> 
-                                                </Box>
-                                                <Box display={(e.builtupArea && e.builtupAreaUnit) ? "flex" : "none"} alignItems={"center"} gap={"6px"}>
-                                                    <TfiRulerAlt2 color={"rgb(88, 88, 88)"} />
-                                                    {e.builtupArea} {e.builtupAreaUnit} <b>Builtup Area</b>
-                                                </Box>
-                                                <Box display={(e.superBuitupArea && e.superBuitupAreaUnit) ? "flex" : "none"} alignItems={"center"} gap={"6px"}>
-                                                    <TfiRulerAlt2 color={"rgb(88, 88, 88)"} />
-                                                    {e.superBuitupArea} {e.superBuitupAreaUnit} <b>Super Builtup Area</b>
+                                                    {e.carpetArea} {e.carpetAreaUnit} <Badge colorScheme={"blue"} variant={"outline"} fontSize={"10px"} >Carpet Area</Badge>
                                                 </Box>
                                             </Box>
                                             <Box fontSize={{ base: "xs", md: "sm" }} display={"flex"} alignItems={"center"} flexWrap={"nowrap"} >
-                                                <Heading as="h2" fontSize="md" margin={"0 4px"}>
+                                                <Heading as="h2" fontSize="md" margin={"0 4px"} display={"flex"} alignItems={"center"} gap={1} >
                                                     Price:
+                                                    <Text fontWeight={"light"} fontSize="md" >
+                                                        {e?.countryCurrency} {e?.price.toLocaleString("en-IN")}
+                                                    </Text>
                                                 </Heading>
-                                                <Text fontSize="sm" >
-                                                    {e?.countryCurrency} {e?.price.toLocaleString("en-IN")}
-                                                </Text>
                                             </Box>
                                         </Box>
                                     </Link>
@@ -328,21 +350,68 @@ const ResidentialBuy = () => {
                     {(ResedentialBuydata.msg && isLoading == false && isError == false) && (
                         <Box boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 10px"} top={0} backgroundColor={"white"} display={"grid"} minH={"70vh"} w={"100%"}  >
                             <Heading size={"sm"} w={"100%"} padding={"10px 0 20px 0"} > {ResedentialBuydata.msg}</Heading>
-                            <Box w={"100%"} textAlign={"left"} display={"grid"} gridTemplateRows={"auto"} gridTemplateColumns={"repeat(3,1fr)"} gap={4} >
+                            <Box w={"100%"} textAlign={"left"} display={"grid"} gridTemplateRows={"auto"} gridTemplateColumns={"repeat(3,1fr)"} gap={4} backgroundColor={"rgb(241, 241, 241)"} >
                                 {(ResedentialBuydata?.data?.map((e, index) => {
                                     const colorstate = wishlist && Array.isArray(wishlist) && wishlist.includes(`${e._id}`);
                                     return (
-                                        <Box position={"relative"} key={index} className={style.productdetaillist} >
+                                        <Box position={"relative"} key={index} className={style.productdetaillist} overflow={"hidden"} >
                                             <Tooltip hasArrow label={"Wishlist"}>
-                                                <Text cursor={"pointer"} zIndex={5} onClick={() => handleAddToWishlist(e._id)} position={"absolute"} top={3} right={3} color={colorstate ? "green.500" : "red.500"} > <BsFillBookmarkHeartFill size={"20px"} /> </Text>
+                                                <Button
+                                                    variant={"unstyled"}
+                                                    padding={"-20px"}
+                                                    margin={0}
+                                                    isLoading={wishload}
+                                                    spinner={<BeatLoader size={8} color='white' margin={0} />} 
+                                                    display={"flex"}
+                                                    alignItems={"center"}
+                                                    justifyContent={"center"}
+                                                    cursor={"pointer"}
+                                                    zIndex={5}
+                                                    clipPath={"circle(30% at 48% 48%)"}
+                                                    filter="drop-shadow(1px 2px 6px rgba(43, 42, 42, 0.587))"
+                                                    onClick={() => handleAddToWishlist(e._id)}
+                                                    position={"absolute"}
+                                                    top={3}
+                                                    right={0}
+                                                    color={colorstate ? "red.500" : "white"} >
+                                                    <FaHeart size={"20px"} />
+                                                </Button>
                                             </Tooltip>
                                             <Link to={`/residential_buy/${e._id}`} >
                                                 <Box className={style.property_box}>
                                                     <Box position={"relative"}>
-                                                        <Image src="https://mediacdn.99acres.com/582/0/11640476F-1383637447-Amrit_House_-_Sant_Nagr_Delhi.jpeg" w={"100%"} alt="property image" />
+                                                        {(e && e.images && e?.images[0]?.URL) ?
+                                                            <Image src={(e && e.images) && e?.images[0]?.URL} w={"100%"} height={"200px"} objectFit={"contain"} alt="property image" /> :
+                                                            <Image src={emptyimg} w={"100%"} height={"200px"} objectFit={"contain"} alt='' />
+                                                        }
                                                     </Box>
-                                                    <Heading className={style.head_line} size={"sm"} textAlign={"left"} color={"rgb(37, 37, 37)"} >  {e.address.houseNumber && e.address.houseNumber} {e.address.apartmentName && e.address.apartmentName} {e.address.locality && e.address.locality} </Heading>
-                                                    <Text> Price: {e.countryCurrency}{e.price?.toLocaleString("en-IN")} </Text>
+                                                    <Heading className={`${style.boldtext} ${style.oneline}`} size={"sm"} fontWeight={"medium"} > {e.propertyType} </Heading>
+                                                    <Heading className={`${style.boldtext} ${style.oneline}`} size={"sm"} fontWeight={"medium"} >
+                                                        {e?.address?.houseNumber && `${e?.address?.houseNumber}, `}
+                                                        {e?.address?.address && `${e?.address?.address}, `}
+                                                        {e?.address?.apartmentName && `${e?.address?.apartmentName}, `}
+                                                        {e?.address?.locality}
+                                                    </Heading>
+                                                    <Heading className={`${style.boldtext} ${style.oneline}`} fontSize={"12px"} fontWeight={"400"} color={"rgb(88, 88, 88)"} > {e?.address?.city}, {e?.address?.state}, {e?.address?.country} , {e?.address?.pincode} {e?.locatedInside} </Heading>
+                                                    <Box display={"grid"} color={"rgb(88, 88, 88)"} fontSize={"16px"} >
+                                                        {/* Plot area Detail */}
+                                                        <Box display={(e.plotArea && e.plotAreaUnit) ? "flex" : "none"} alignItems={"center"} gap={"3px"}>
+                                                            <TfiRulerAlt2 color={"rgb(88, 88, 88)"} />
+                                                            {e.plotArea} {e.plotAreaUnit} <Badge colorScheme={"blue"} variant={"outline"} fontSize={"10px"} >Plot Area</Badge>
+                                                        </Box>
+                                                        <Box display={(e.carpetArea && e.carpetAreaUnit) ? "flex" : "none"} alignItems={"center"} gap={"3px"}>
+                                                            <TfiRulerAlt2 color={"rgb(88, 88, 88)"} />
+                                                            {e.carpetArea} {e.carpetAreaUnit} <Badge colorScheme={"blue"} variant={"outline"} fontSize={"10px"} >Carpet Area</Badge>
+                                                        </Box>
+                                                    </Box>
+                                                    <Box fontSize={{ base: "xs", md: "sm" }} display={"flex"} alignItems={"center"} flexWrap={"nowrap"} >
+                                                        <Heading as="h2" fontSize="md" margin={"0 4px"} display={"flex"} alignItems={"center"} gap={1} >
+                                                            Price:
+                                                            <Text fontWeight={"light"} fontSize="md" >
+                                                                {e?.countryCurrency} {e?.price.toLocaleString("en-IN")}
+                                                            </Text>
+                                                        </Heading>
+                                                    </Box>
                                                 </Box>
                                             </Link>
                                         </Box>
