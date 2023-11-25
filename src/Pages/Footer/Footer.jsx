@@ -89,7 +89,7 @@ const Footer = () => {
                 <IoIosArrowForward size={"16px"} />
               </Box>
               <Box flex={9} textAlign={"left"}>
-                <p>Email: <Link href="mailto:info@ametheus.com">info@ametheus.com</Link></p>
+                <p>Email: <a href="mailto:info@ametheus.com">info@ametheus.com</a> </p>
               </Box>
             </Box>
           </Box>
