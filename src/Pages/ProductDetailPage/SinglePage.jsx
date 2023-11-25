@@ -55,6 +55,16 @@ import { IoIosArrowForward } from "react-icons/io"
 import { useDispatch } from "react-redux";
 import { addRecentlyVisited } from "../../Redux/globalval/action";
 
+// location 
+import train from "./location/train.png";
+import mall from "./location/shopping.png";
+import airport from "./location/airport.png";
+import metro from "./location/metro.png";
+import market from "./location/market.png";
+import school from "./location/school.png";
+import highway from "./location/road.png";
+import hospital from "./location/hospital.png";
+
 import scale from "./scale.png"
 import stairs from "./stairs.png"
 import powerback from "./backup.png"
@@ -191,14 +201,14 @@ const SingleProductDetailPage = () => {
             </Heading> : <Skeleton height={"35px"} />}
             <Box className={style.singleProduct} display={{ base: "grid", md: "flex" }} alignItems={"flex-start"} flexWrap={"wrap"} gap={"20px"} margin={{ base: "0px auto", md: "20px auto" }} w={"94%"} >
                 <Box flex={16} >
-                    <Box position={"relative"} className={style.propertyimg} height={"450px"} w={"100%"} >
-                        <Box className={style.backimagebox} >
+                    <Box position={"relative"} className={style.propertyimg} height={{sm:"300px",lg:"450px"}} w={"100%"} >
+                        <Box className={style.backimagebox} display={(data && data.images && data?.images[0]?.URL) ? "none" : "block"} >
                         </Box>
                         <Image
                             w={"100%"}
                             display={(data && data.images && data?.images[0]?.URL) ? "block" : "none"}
                             objectFit={"contain"}
-                            maxH={"450px"}
+                            maxH={{sm:"300px",lg:"450px"}}
                             // border={"2px solid black"}
                             src={(data && data.images && data?.images[0]?.URL) && data?.images[0]?.URL}
                             alt="property-img"
@@ -687,7 +697,7 @@ const SingleProductDetailPage = () => {
                                                 </Box>
                                                 <AccordionIcon />
                                             </AccordionButton>
-                                        </h2> 
+                                        </h2>
                                         <AccordionPanel pb={4} >
                                             <Box display={"flex"} margin={"0 30px"} flexWrap={"wrap"} alignItems={"center"}>
                                                 {data?.otherRoom?.map((e, i) => (
@@ -836,9 +846,8 @@ const SingleProductDetailPage = () => {
                                 </Accordion>
                             </Box>
                         </Box>
-
                         <Box
-                            display={overlooking.length > 0 ? "grid" : "none"}
+                            display={overlooking?.length > 0 ? "grid" : "none"}
                         >
                             <Heading margin={"16px 0 10px 0"} fontSize={"2xl"} w={"100%"}> Over Lookings </Heading>
                             <Divider />
@@ -848,7 +857,8 @@ const SingleProductDetailPage = () => {
                                 border={0}
                                 flexWrap={"wrap"}
                                 alignItems={"center"}
-                                className={style.overlooklist}
+                                margin={"6px 0"}
+                                id={style.overlooklist}
                             >
                                 {overlooking.map((e, index) => (
                                     <Text key={index}>{e}</Text>
@@ -861,35 +871,43 @@ const SingleProductDetailPage = () => {
                             <Box className={style.location_adv} >
                                 <Box display={location.includes("Close to Metro Station") ? "flex" : "none"} alignItems={"center"} >
                                     <IoIosArrowForward />
-                                    <Text> Close to Metro Station </Text>
-                                </Box>
+                                    <Text> Close to Metro Station  </Text>
+                                    <Image textAlign={"right"} src={metro} width={"30px"} margin={"0 0 0 10px"} alt="" />
+                                </Box> 
                                 <Box display={location.includes("Close to School") ? "flex" : "none"} alignItems={"center"} >
                                     <IoIosArrowForward />
-                                    <Text> Close to School </Text>
+                                    <Text> Close to School  </Text>
+                                    <Image textAlign={"right"} src={school} width={"30px"} margin={"0 0 0 10px"} alt="" />
                                 </Box>
                                 <Box display={location.includes("Close to Hospital") ? "flex" : "none"} alignItems={"center"} >
                                     <IoIosArrowForward />
-                                    <Text> Close to Hospital </Text>
+                                    <Text> Close to Hospital  </Text>
+                                    <Image textAlign={"right"} src={hospital} width={"30px"} margin={"0 0 0 10px"} alt="" />
                                 </Box>
                                 <Box display={location.includes("Close to Market") ? "flex" : "none"} alignItems={"center"} >
                                     <IoIosArrowForward />
-                                    <Text> Close to Market </Text>
+                                    <Text> Close to Market  </Text>
+                                    <Image textAlign={"right"} src={market} width={"30px"} margin={"0 0 0 10px"} alt="" />
                                 </Box>
                                 <Box display={location.includes("Close to highway") ? "flex" : "none"} alignItems={"center"} >
                                     <IoIosArrowForward />
-                                    <Text> Close to highway </Text>
+                                    <Text> Close to highway  </Text>
+                                    <Image textAlign={"right"} src={highway} width={"30px"} margin={"0 0 0 10px"} alt="" />
                                 </Box>
                                 <Box display={location.includes("Close to Mall") ? "flex" : "none"} alignItems={"center"}  >
                                     <IoIosArrowForward />
-                                    <Text> Close to Mall </Text>
+                                    <Text> Close to Mall  </Text>
+                                    <Image textAlign={"right"} src={mall} width={"30px"} margin={"0 0 0 10px"} alt="" />
                                 </Box>
                                 <Box display={location.includes("Close to Airport") ? "flex" : "none"} alignItems={"center"}  >
                                     <IoIosArrowForward />
-                                    <Text> Close to Airport </Text>
+                                    <Text> Close to Airport  </Text>
+                                    <Image textAlign={"right"} src={airport} width={"30px"} margin={"0 0 0 10px"} alt="" />
                                 </Box>
                                 <Box display={location.includes("Close to Railway Station") ? "flex" : "none"} alignItems={"center"}  >
                                     <IoIosArrowForward />
-                                    <Text> Close to Railway Station </Text>
+                                    <Text> Close to Railway Station  </Text>
+                                    <Image textAlign={"right"} src={train} width={"30px"} margin={"0 0 0 10px"} alt="" />
                                 </Box>
                             </Box>
                         </Box>
@@ -916,7 +934,7 @@ const SingleProductDetailPage = () => {
                         </Box>
                         {/* contact detail */}
                         <Box borderRadius={0} boxShadow={"rgba(0, 0, 0, 0.24) 0px 3px 8px"} padding={"20px 10px"}>
-                            <Heading fontSize={"2xl"} margin={"0 0 6px 0"}> Schedule tour </Heading>
+                            <Heading fontSize={"2xl"} margin={"0 0 6px 0"}> Inquiry Form </Heading>
                             <form className={style.schedule_div} onSubmit={handleTour} >
                                 <Input type="text" required margin={"6px 0"} placeholder={"Your name"} value={nametosend} onChange={(e) => setNametosend(e.target.value)} />
                                 <Input type="email" required margin={"6px 0"} placeholder={"Your email"} value={emailtosend} onChange={(e) => setEmailtosend(e.target.value)} />
@@ -930,7 +948,7 @@ const SingleProductDetailPage = () => {
                                     loadingText='Sending...'
                                     spinnerPlacement='start'
                                     margin={"6px 0"}
-                                    colorScheme="whatsapp"> Schedule a Tour</Button>
+                                    colorScheme="whatsapp"> Send </Button>
                             </form>
                         </Box>
                     </Box>
@@ -950,7 +968,7 @@ const SingleProductDetailPage = () => {
                     right={"-2px"}
                     backgroundColor="rgb(23, 152, 72)"
                     _hover={{ backgroundColor: "rgb(23, 152, 72)", color: "white" }}
-                    onClick={onOpen}> Schedule Tour
+                    onClick={onOpen}> Inquiry Form 
                 </Button>
 
                 <Modal isOpen={isOpen} onClose={onClose}>
@@ -961,7 +979,7 @@ const SingleProductDetailPage = () => {
                         <ModalCloseButton />
                         <ModalBody>
                             <Box borderRadius={0} boxShadow={"rgba(0, 0, 0, 0.24) 0px 3px 8px"} padding={"20px 10px"}>
-                                <Heading fontSize={"2xl"} margin={"0 0 6px 0"}> Schedule tour </Heading>
+                                <Heading fontSize={"2xl"} margin={"0 0 6px 0"}> Inquiry Form </Heading>
                                 <form className={style.schedule_div} onSubmit={handleTour} >
                                     <Input type="text" required margin={"6px 0"} placeholder={"Your name"} value={nametosend} onChange={(e) => setNametosend(e.target.value)} />
                                     <Input type="email" required margin={"6px 0"} placeholder={"Your email"} value={emailtosend} onChange={(e) => setEmailtosend(e.target.value)} />
@@ -975,7 +993,7 @@ const SingleProductDetailPage = () => {
                                         loadingText='Sending...'
                                         spinnerPlacement='start'
                                         margin={"6px 0"}
-                                        colorScheme="whatsapp"> Schedule a Tour</Button>
+                                        colorScheme="whatsapp"> Send </Button> 
                                 </form>
                             </Box>
                         </ModalBody>

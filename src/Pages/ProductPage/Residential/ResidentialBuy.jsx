@@ -262,12 +262,20 @@ const ResidentialBuy = () => {
                 {/* =========================== product List ====================== */}
                 <Box flex={6} >
 
-                    <Box w={"100%"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"} textAlign={"left"} paddingX={3} paddingY={3} display={"grid"} gridTemplateRows={"auto"} gridTemplateColumns={{ base: "repeat(2,1fr)", md: "repeat(2,1fr)", lg: "repeat(3,1fr)" }} backgroundColor={"rgb(241, 241, 241)"} gap={4} >
+                    <Box w={"100%"} 
+                    boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"} 
+                    textAlign={"left"} 
+                    paddingX={3} 
+                    paddingY={3} 
+                    display={"grid"}  
+                    gridTemplateColumns={{ base: "repeat(1,1fr)", md: "repeat(2,1fr)", lg: "repeat(3,1fr)" }} 
+                    backgroundColor={"rgb(241, 241, 241)"} 
+                    gap={4} >
                         {!ResedentialBuydata.msg && ResedentialBuydata?.data?.map((e, index) => {
                             const colorstate = wishlist && Array.isArray(wishlist) && wishlist.includes(`${e._id}`);
 
                             return (
-                                <Box position={"relative"} key={index} className={style.showbox} >
+                                <Box position={"relative"} key={index} height={"auto"} className={style.showbox} >
                                     <Tooltip hasArrow label={"Wishlist"}>
                                         <Button
                                             variant={"unstyled"}
@@ -292,13 +300,13 @@ const ResidentialBuy = () => {
                                     </Tooltip>
                                     <Link to={`/residential_buy/${e._id}`} >
                                         <Box className={style.property_box}>
-                                            <Box position={"relative"}>
+                                            <Box position={"relative"} >
                                                 {(e && e.images && e?.images[0]?.URL) ?
-                                                    <Image src={(e && e.images) && e?.images[0]?.URL} w={"100%"} height={"200px"} objectFit={"contain"} alt="property image" /> :
-                                                    <Image src={emptyimg} w={"100%"} height={"200px"} objectFit={"contain"} alt='' />
+                                                    <Image src={(e && e.images) && e?.images[0]?.URL} w={"100%"} height={{sm:"300px", md:"200px"}} objectFit={"contain"} alt="property image" /> :
+                                                    <Image src={emptyimg} w={"100%"} height={{sm:"300px", md:"200px"}} objectFit={"contain"} alt='' />
                                                 }
                                             </Box>
-                                            <Heading className={`${style.boldtext} ${style.oneline}`} size={"sm"} fontWeight={"medium"} > {e.propertyType} </Heading>
+                                            <Heading marginTop={2} className={`${style.boldtext} ${style.oneline}`} size={"sm"} fontWeight={"medium"} > {e.propertyType} </Heading>
                                             <Heading className={`${style.boldtext} ${style.oneline}`} size={"sm"} fontWeight={"medium"} >
                                                 {e?.address?.houseNumber && `${e?.address?.houseNumber}, `}
                                                 {e?.address?.address && `${e?.address?.address}, `}
@@ -350,7 +358,7 @@ const ResidentialBuy = () => {
                     {(ResedentialBuydata.msg && isLoading == false && isError == false) && (
                         <Box boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 10px"} top={0} backgroundColor={"white"} display={"grid"} minH={"70vh"} w={"100%"}  >
                             <Heading size={"sm"} w={"100%"} padding={"10px 0 20px 0"} > {ResedentialBuydata.msg}</Heading>
-                            <Box w={"100%"} textAlign={"left"} display={"grid"} gridTemplateRows={"auto"} gridTemplateColumns={"repeat(3,1fr)"} gap={4} backgroundColor={"rgb(241, 241, 241)"} >
+                            <Box w={"100%"} textAlign={"left"} display={"grid"} gridTemplateRows={"auto"} gridTemplateColumns={{ base: "repeat(1,1fr)", md: "repeat(2,1fr)", lg: "repeat(3,1fr)" }} gap={4} backgroundColor={"rgb(241, 241, 241)"} >
                                 {(ResedentialBuydata?.data?.map((e, index) => {
                                     const colorstate = wishlist && Array.isArray(wishlist) && wishlist.includes(`${e._id}`);
                                     return (
@@ -381,8 +389,8 @@ const ResidentialBuy = () => {
                                                 <Box className={style.property_box}>
                                                     <Box position={"relative"}>
                                                         {(e && e.images && e?.images[0]?.URL) ?
-                                                            <Image src={(e && e.images) && e?.images[0]?.URL} w={"100%"} height={"200px"} objectFit={"contain"} alt="property image" /> :
-                                                            <Image src={emptyimg} w={"100%"} height={"200px"} objectFit={"contain"} alt='' />
+                                                            <Image src={(e && e.images) && e?.images[0]?.URL} w={"100%"} height={{sm:"300px", md:"200px"}} objectFit={"contain"} alt="property image" /> :
+                                                            <Image src={emptyimg} w={"100%"} height={{sm:"300px", md:"200px"}} objectFit={"contain"} alt='' />
                                                         }
                                                     </Box>
                                                     <Heading className={`${style.boldtext} ${style.oneline}`} size={"sm"} fontWeight={"medium"} > {e.propertyType} </Heading>
