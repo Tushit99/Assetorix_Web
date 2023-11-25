@@ -13,14 +13,15 @@ import {
   BsTwitter,
 } from "react-icons/bs";
 import { BiLogoLinkedin } from "react-icons/bi";
-import { IoIosArrowForward } from "react-icons/io"; 
+import { IoIosArrowForward } from "react-icons/io";
 // import {FaSquareXTwitter} from "react-icons/fa6";  
-import xwhiteicon from "./whitexicon.png"; 
+import xwhiteicon from "./whitexicon.png";
 import xblackicon from "./blackxicon.png"; 
 import insta from "./insta.png";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { changeLookingFor } from "../../Redux/globalval/action";
+import { changeLookingFor } from "../../Redux/globalval/action"; 
+
 
 const Footer = () => {
   const dispatch = useDispatch();
@@ -41,7 +42,7 @@ const Footer = () => {
 
   }
 
-  return ( 
+  return (
     <div className={style.ft}>
       <Box className={style.footer}>
         {/* footer */}
@@ -68,8 +69,7 @@ const Footer = () => {
             <Link onClick={handleScroltop} to={"/user_term_condition"}>User Terms & Condition </Link>
             <Link onClick={handleScroltop} to={"/Purchase_term_Condition"}>Payment Term & Condition</Link>
             <Link onClick={handleScroltop} to={"/privacy"}>Privacy</Link>
-            <Link onClick={handleScroltop} to={"/disclaimer"}>Disclaimer</Link>
-
+            <Link onClick={handleScroltop} to={"/disclaimer"}>Disclaimer</Link> 
           </Box>
           <Box>
             <h2>CONTACT</h2>
@@ -77,8 +77,11 @@ const Footer = () => {
               <Box flex={1} paddingTop={1} >
                 <IoIosArrowForward size={"16px"} />
               </Box>
-              <Box flex={9} textAlign={"left"} >
-                <p>Ametheus Holdings Pvt Ltd Address: 27, 2nd Floor, Hauz Khas Village, New Delhi 110016, India  Phone: +91-11-41670666, +91-1140074433, +91-9999099538</p>
+              <Box flex={9} textAlign={"left"} >  
+                <p>Ametheus Holdings Pvt Ltd Address: 27, 2nd Floor, Hauz Khas Village, New Delhi 110016,
+                  India.  <br /> <a href={"tel:+91-9990032288"}> Phone: +91 9990032288 </a>  <br />
+                </p>
+                <a href={"tel:+91-9990045588"}> +91 9990045588 </a>
               </Box>
             </Box>
             <Box display={"flex"} alignItems={"flex-start"} w={"100%"}>
@@ -86,7 +89,7 @@ const Footer = () => {
                 <IoIosArrowForward size={"16px"} />
               </Box>
               <Box flex={9} textAlign={"left"}>
-                <p>Email: info@assetorix.com</p>
+                <p>Email: <Link href="mailto:info@ametheus.com">info@ametheus.com</Link></p>
               </Box>
             </Box>
           </Box>
@@ -124,8 +127,8 @@ const Footer = () => {
             <BiLogoLinkedin size={"24px"} />
           </Link>
           <Link target="_blank" to="https://twitter.com/assetorix">
-            <img src={xwhiteicon} alt="whiteIcon" className={style.xicon2} /> 
-            <img src={xblackicon} alt="blackIcon" className={style.xicon1} />  
+            <img src={xwhiteicon} alt="whiteIcon" className={style.xicon2} />
+            <img src={xblackicon} alt="blackIcon" className={style.xicon1} />
           </Link>
           <Link to="#">
             <BsFacebook size={"24px"} />
@@ -149,9 +152,8 @@ const Footer = () => {
           </h3>
         </Box>
         <Box >
-          Email: info@assetorix.com <span className={style.line}> | </span> <br className={style.brs} /> Call Us at: +91-9999099538
-        </Box>
-
+          Email: <a href="mailto:info@ametheus.com">info@ametheus.com</a> <span className={style.line}> | </span> <br className={style.brs} /> Call Us at: <a href="tel:+91-9990032288"> +91 9990032288,</a>
+        </Box>   
       </div>
     </div>
   );
