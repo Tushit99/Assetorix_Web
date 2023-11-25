@@ -13,6 +13,7 @@ import emptyimg from "../backimg.png";
 import { FaHeart } from 'react-icons/fa'; 
 import { TfiRulerAlt2 } from 'react-icons/tfi';
 import BeatLoader from "react-spinners/BeatLoader";
+import errorimg from "../eror.png"; 
 
 
 const ResidentialRent = () => {
