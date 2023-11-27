@@ -97,7 +97,8 @@ const Navebar = () => {
                 return res
             }
         });
-    }
+    } 
+    
     const handleComRent = (value) => {
         setcomRentArr((prev) => {
             if (prev.includes(value)) {

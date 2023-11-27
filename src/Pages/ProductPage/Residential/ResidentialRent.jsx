@@ -27,7 +27,7 @@ const ResidentialRent = () => {
     const [furnished, setfurnish] = useState(paramFurnish || []);
     const [wishlist, setWishlist] = useState([]);
     const location = useLocation();
-    const dispatch = useDispatch();
+    const dispatch = useDispatch(); 
     const toast = useToast();
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = useRef(); 
@@ -52,7 +52,8 @@ const ResidentialRent = () => {
     }
 
 
-    const handleAddToWishlist = (myid) => {
+    const handleAddToWishlist = (myid) => { 
+        setWishLoad(true); 
         let id = localStorage.getItem("usrId") || undefined;
         let authorization = localStorage.getItem("AstToken") || undefined;
 
@@ -71,21 +72,24 @@ const ResidentialRent = () => {
             },
             data: {},
         };
-
-        axios(axiosConfig)
-            .then((e) => {
-                setWishlist(e.data);
-                setWishlist(e.data.wishlistIDs);
-                toast({
-                    title: `${wishlist.includes(myid) ? "Removed from Wishlist" : "Added to Wishlist"}`,
-                    status: 'success',
-                    duration: 2000,
+        try {
+            axios(axiosConfig)
+                .then((e) => {
+                    setWishlist(e.data);
+                    setWishlist(e.data.wishlistIDs);
+                    toast({
+                        title: `${wishlist.includes(myid) ? "Removed from Wishlist" : "Added to Wishlist"}`,
+                        status: 'success',
+                        duration: 2000,
+                    }) 
+                    setWishLoad(false); 
                 })
-                console.log(e.data);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+                .catch((error) => { 
+                    setWishLoad(false); 
+                }); 
+        } catch (err) {
+            setWishLoad(false);  
+        }
     }
 
     // const ProductDetail = async () => {
@@ -266,7 +270,7 @@ const ResidentialRent = () => {
                 {/* =========================== product List ====================== */}
                 <Box flex={6} >
                     <Box w={"100%"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"} textAlign={"left"} paddingX={3} paddingY={2} display={"grid"} gridTemplateRows={"auto"} gridTemplateColumns={{ base: "repeat(1,1fr)", md: "repeat(2,1fr)", lg: "repeat(3,1fr)" }} gap={4} >
-                        {Resedentialrentdata?.data?.map((e, index) => {
+                        {!Resedentialrentdata.msg && Resedentialrentdata?.data?.map((e, index) => {
                             const colorstate = wishlist && Array.isArray(wishlist) && wishlist.includes(`${e._id}`);
                             return (
                                 <Box position={"relative"} key={index} className={style.showbox} >
