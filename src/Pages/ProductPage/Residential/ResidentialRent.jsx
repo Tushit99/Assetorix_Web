@@ -10,10 +10,10 @@ import LoadingBox from '../LoadingBox/LoadingBox';
 import { useDispatch, useSelector } from 'react-redux';
 import { residentialRent } from '../../../Redux/Propertysearch/action';
 import emptyimg from "../backimg.png";
-import { FaHeart } from 'react-icons/fa'; 
+import { FaHeart } from 'react-icons/fa';
 import { TfiRulerAlt2 } from 'react-icons/tfi';
 import BeatLoader from "react-spinners/BeatLoader";
-import errorimg from "../eror.png"; 
+import errorimg from "../eror.png";
 
 
 const ResidentialRent = () => {
@@ -27,10 +27,10 @@ const ResidentialRent = () => {
     const [furnished, setfurnish] = useState(paramFurnish || []);
     const [wishlist, setWishlist] = useState([]);
     const location = useLocation();
-    const dispatch = useDispatch(); 
+    const dispatch = useDispatch();
     const toast = useToast();
     const { isOpen, onOpen, onClose } = useDisclosure()
-    const btnRef = useRef(); 
+    const btnRef = useRef();
     const [wishload, setWishLoad] = useState(false);
 
 
@@ -52,8 +52,8 @@ const ResidentialRent = () => {
     }
 
 
-    const handleAddToWishlist = (myid) => { 
-        setWishLoad(true); 
+    const handleAddToWishlist = (myid) => {
+        setWishLoad(true);
         let id = localStorage.getItem("usrId") || undefined;
         let authorization = localStorage.getItem("AstToken") || undefined;
 
@@ -81,14 +81,14 @@ const ResidentialRent = () => {
                         title: `${wishlist.includes(myid) ? "Removed from Wishlist" : "Added to Wishlist"}`,
                         status: 'success',
                         duration: 2000,
-                    }) 
-                    setWishLoad(false); 
+                    })
+                    setWishLoad(false);
                 })
-                .catch((error) => { 
-                    setWishLoad(false); 
-                }); 
+                .catch((error) => {
+                    setWishLoad(false);
+                });
         } catch (err) {
-            setWishLoad(false);  
+            setWishLoad(false);
         }
     }
 
@@ -142,6 +142,17 @@ const ResidentialRent = () => {
         let local = JSON.parse(localStorage.getItem("resRent")); // fetching data from local storage 
         local.length > 0 && setPropertyType(local); // setting data to usestate  
 
+        // add all parameater 
+        let param = {};
+
+        bhk && (param.bedroom = bhk);
+        propertyType && (param.propertyType = propertyType);
+        furnished && (param.furnished = furnished);
+        // adding 
+        param.lookingFor = "Rent"
+        param.propertyGroup = "Residential"
+        setSearchParam(param); 
+
         dispatch(residentialRent(location)) // fetching the data
         handleLike(); // wishlist 
     }, []);
@@ -152,11 +163,29 @@ const ResidentialRent = () => {
         bhk && (param.bedroom = bhk);
         propertyType && (param.propertyType = propertyType);
         furnished && (param.furnished = furnished);
-        setSearchParam(param);
+        // adding 
+        param.lookingFor = "Rent"
+        param.propertyGroup = "Residential"
+        setSearchParam(param); 
+        
     }, [bhk, propertyType, furnished]);
 
     useEffect(() => {
-        dispatch(residentialRent(location)) // fetching the data
+
+        let param = {};
+
+        bhk && (param.bedroom = bhk);
+        propertyType && (param.propertyType = propertyType);
+        furnished && (param.furnished = furnished);
+        // adding 
+        param.lookingFor = "Rent"
+        param.propertyGroup = "Residential"
+        setSearchParam(param);
+
+        if (location.search) {
+            dispatch(residentialRent(location)) // fetching the data 
+        }
+
     }, [location.search]);
 
 
@@ -300,8 +329,8 @@ const ResidentialRent = () => {
                                         <Box className={style.property_box}>
                                             <Box position={"relative"}>
                                                 {(e && e.images && e?.images[0]?.URL) ?
-                                                    <Image src={(e && e.images) && e?.images[0]?.URL} w={"100%"} height={{sm:"300px", md:"200px"}} objectFit={"contain"} alt="property image" /> :
-                                                    <Image src={emptyimg} w={"100%"} height={{sm:"300px", md:"200px"}} objectFit={"contain"} alt='' />
+                                                    <Image src={(e && e.images) && e?.images[0]?.URL} w={"100%"} height={{ sm: "300px", md: "200px" }} objectFit={"contain"} alt="property image" /> :
+                                                    <Image src={emptyimg} w={"100%"} height={{ sm: "300px", md: "200px" }} objectFit={"contain"} alt='' />
                                                 }
                                             </Box>
                                             <Heading className={`${style.boldtext} ${style.oneline}`} size={"sm"} fontWeight={"medium"} > {e.propertyType} </Heading>
@@ -388,8 +417,8 @@ const ResidentialRent = () => {
                                                 <Box className={style.property_box}>
                                                     <Box position={"relative"}>
                                                         {(e && e.images && e?.images[0]?.URL) ?
-                                                            <Image src={(e && e.images) && e?.images[0]?.URL} w={"100%"} height={{sm:"300px", md:"200px"}} objectFit={"contain"} alt="property image" /> :
-                                                            <Image src={emptyimg} w={"100%"} height={{sm:"300px", md:"200px"}} objectFit={"contain"} alt='' />
+                                                            <Image src={(e && e.images) && e?.images[0]?.URL} w={"100%"} height={{ sm: "300px", md: "200px" }} objectFit={"contain"} alt="property image" /> :
+                                                            <Image src={emptyimg} w={"100%"} height={{ sm: "300px", md: "200px" }} objectFit={"contain"} alt='' />
                                                         }
                                                     </Box>
                                                     <Heading className={`${style.boldtext} ${style.oneline}`} size={"sm"} fontWeight={"medium"} > {e.propertyType} </Heading>

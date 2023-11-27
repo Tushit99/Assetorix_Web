@@ -176,7 +176,7 @@ const Login = ({ onpage }) => {
                                     fontSize={{ base: '2xl', lg: 'xl' }}
                                 >
                                     Login
-                                </Button>
+                                </Button> 
                             </Box>
                         </Box>
                     </Flex>

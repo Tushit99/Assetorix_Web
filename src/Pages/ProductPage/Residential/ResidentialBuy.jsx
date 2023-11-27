@@ -18,7 +18,7 @@ import BeatLoader from "react-spinners/BeatLoader";
 
 const ResidentialBuy = () => {
     const [serchParam, setSearchParam] = useSearchParams();
-    const paramBhk = serchParam.getAll("bhk");
+    const paramBhk = serchParam.getAll("bedroom");
     const paramProperty = serchParam.getAll("propertyType");
     const paramFurnish = serchParam.getAll("furnished");
     const { ResedentialBuydata, isLoading, isError } = useSelector((state) => state.property);
@@ -32,7 +32,6 @@ const ResidentialBuy = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const btnRef = useRef();
     const [wishload, setWishLoad] = useState(false);
-
 
     const handleLike = () => {
         let id = localStorage.getItem("usrId") || undefined;
@@ -91,10 +90,7 @@ const ResidentialBuy = () => {
         } catch (err) {
             setWishLoad(false);
         }
-    }
-
-    // console.log(ResedentialBuydata);
-
+    } 
 
     const handleBedroom = (value) => {
         setBhk((prev) => {
@@ -132,8 +128,19 @@ const ResidentialBuy = () => {
         let local = JSON.parse(localStorage.getItem("resBuy")); // fetching data from local storage 
         local.length > 0 && setPropertyType(local); // setting data to usestate  
 
-        dispatch(residentialBuy(location)); // fetching the data
-        handleLike(); // wishlist   
+        // add all parameater 
+        let param = {};
+
+        bhk && (param.bedroom = bhk);
+        propertyType && (param.propertyType = propertyType);
+        furnished && (param.furnished = furnished);
+        // adding 
+        param.lookingFor = "Sell"
+        param.propertyGroup = "Residential"
+        setSearchParam(param);
+
+        // dispatch(residentialBuy(location)); // fetching the data   
+        handleLike(); // wishlist    
     }, []);
 
     useEffect(() => {
@@ -142,14 +149,30 @@ const ResidentialBuy = () => {
         bhk && (param.bedroom = bhk);
         propertyType && (param.propertyType = propertyType);
         furnished && (param.furnished = furnished);
+        // adding 
+        param.lookingFor = "Sell"
+        param.propertyGroup = "Residential"
         setSearchParam(param);
-    }, [bhk, propertyType, furnished]);
+    }, [bhk, propertyType, furnished]); 
 
-    useEffect(() => {
-        dispatch(residentialBuy(location));
-    }, [location.search]);
+    useEffect(() => { 
+        let param = {};
 
-    console.log(ResedentialBuydata.data);
+        bhk && (param.bedroom = bhk);
+        propertyType && (param.propertyType = propertyType);
+        furnished && (param.furnished = furnished);
+        // adding 
+        param.lookingFor = "Sell"
+        param.propertyGroup = "Residential"
+        setSearchParam(param);
+
+
+        if (location.search) { 
+            dispatch(residentialBuy(location));
+        }
+
+    }, [location.search]); 
+
 
     return (
         <Box margin={{ base: "0px auto 60px auto", md: "30px auto 60px auto" }} >
@@ -262,15 +285,15 @@ const ResidentialBuy = () => {
                 {/* =========================== product List ====================== */}
                 <Box flex={6} >
 
-                    <Box w={"100%"} 
-                    boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"} 
-                    textAlign={"left"} 
-                    paddingX={3} 
-                    paddingY={3} 
-                    display={"grid"}  
-                    gridTemplateColumns={{ base: "repeat(1,1fr)", md: "repeat(2,1fr)", lg: "repeat(3,1fr)" }} 
-                    backgroundColor={"rgb(241, 241, 241)"} 
-                    gap={4} >
+                    <Box w={"100%"}
+                        boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"}
+                        textAlign={"left"}
+                        paddingX={3}
+                        paddingY={3}
+                        display={"grid"}
+                        gridTemplateColumns={{ base: "repeat(1,1fr)", md: "repeat(2,1fr)", lg: "repeat(3,1fr)" }}
+                        backgroundColor={"rgb(241, 241, 241)"}
+                        gap={4} >
                         {!ResedentialBuydata.msg && ResedentialBuydata?.data?.map((e, index) => {
                             const colorstate = wishlist && Array.isArray(wishlist) && wishlist.includes(`${e._id}`);
 
@@ -302,8 +325,8 @@ const ResidentialBuy = () => {
                                         <Box className={style.property_box}>
                                             <Box position={"relative"} >
                                                 {(e && e.images && e?.images[0]?.URL) ?
-                                                    <Image src={(e && e.images) && e?.images[0]?.URL} w={"100%"} height={{sm:"300px", md:"200px"}} objectFit={"contain"} alt="property image" /> :
-                                                    <Image src={emptyimg} w={"100%"} height={{sm:"300px", md:"200px"}} objectFit={"contain"} alt='' />
+                                                    <Image src={(e && e.images) && e?.images[0]?.URL} w={"100%"} height={{ sm: "300px", md: "200px" }} objectFit={"contain"} alt="property image" /> :
+                                                    <Image src={emptyimg} w={"100%"} height={{ sm: "300px", md: "200px" }} objectFit={"contain"} alt='' />
                                                 }
                                             </Box>
                                             <Heading marginTop={2} className={`${style.boldtext} ${style.oneline}`} size={"sm"} fontWeight={"medium"} > {e.propertyType} </Heading>
@@ -369,7 +392,7 @@ const ResidentialBuy = () => {
                                                     padding={"-20px"}
                                                     margin={0}
                                                     isLoading={wishload}
-                                                    spinner={<BeatLoader size={8} color='white' margin={0} />} 
+                                                    spinner={<BeatLoader size={8} color='white' margin={0} />}
                                                     display={"flex"}
                                                     alignItems={"center"}
                                                     justifyContent={"center"}
@@ -389,8 +412,8 @@ const ResidentialBuy = () => {
                                                 <Box className={style.property_box}>
                                                     <Box position={"relative"}>
                                                         {(e && e.images && e?.images[0]?.URL) ?
-                                                            <Image src={(e && e.images) && e?.images[0]?.URL} w={"100%"} height={{sm:"300px", md:"200px"}} objectFit={"contain"} alt="property image" /> :
-                                                            <Image src={emptyimg} w={"100%"} height={{sm:"300px", md:"200px"}} objectFit={"contain"} alt='' />
+                                                            <Image src={(e && e.images) && e?.images[0]?.URL} w={"100%"} height={{ sm: "300px", md: "200px" }} objectFit={"contain"} alt="property image" /> :
+                                                            <Image src={emptyimg} w={"100%"} height={{ sm: "300px", md: "200px" }} objectFit={"contain"} alt='' />
                                                         }
                                                     </Box>
                                                     <Heading className={`${style.boldtext} ${style.oneline}`} size={"sm"} fontWeight={"medium"} > {e.propertyType} </Heading>

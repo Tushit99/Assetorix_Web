@@ -10,7 +10,8 @@
 }
 
 .top_dev {
-    background-color: rgb(240, 239, 237);
+    background-color: rgb(240, 239, 237); 
+    padding-bottom: 40px; 
 }
 
 .devloper>* { 

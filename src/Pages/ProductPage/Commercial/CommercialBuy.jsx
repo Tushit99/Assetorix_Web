@@ -133,8 +133,18 @@ const CommercialBuy = () => {
         let local = JSON.parse(localStorage.getItem("combuy")); // fetching data from local storage 
         local.length > 0 && setPropertyType(local); // setting data to usestate  
 
+        // add all parameater 
+        let param = {};
 
-        dispatch(commercialBuy(location)) // fetching the data
+        bhk && (param.bedroom = bhk);
+        propertyType && (param.propertyType = propertyType);
+        furnished && (param.furnished = furnished);
+        // adding 
+        param.lookingFor = "Sell"
+        param.propertyGroup = "Commercial" 
+        setSearchParam(param);
+
+        // dispatch(commercialBuy(location)) // fetching the data
         handleLike(); // wishlist    
     }, []);
 
@@ -143,11 +153,24 @@ const CommercialBuy = () => {
 
         bhk && (param.bedroom = bhk);
         propertyType && (param.propertyType = propertyType);
-        furnished && (param.furnished = furnished);
+        furnished && (param.furnished = furnished); 
+        param.lookingFor = "Sell"
+        param.propertyGroup = "Commercial"
         setSearchParam(param);
     }, [bhk, propertyType, furnished]);
 
-    useEffect(() => {
+    useEffect(() => { 
+        let param = {};
+
+        bhk && (param.bedroom = bhk);
+        propertyType && (param.propertyType = propertyType);
+        furnished && (param.furnished = furnished);
+        // adding 
+        param.lookingFor = "Sell"
+        param.propertyGroup = "Commercial"
+        setSearchParam(param);
+
+
         dispatch(commercialBuy(location))
     }, [location.search]);
 

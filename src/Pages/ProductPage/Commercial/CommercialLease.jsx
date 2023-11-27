@@ -89,7 +89,7 @@ const CommercialLease = () => {
                     setWishLoad(false);
                 });
         } catch (err) {
-            setWishLoad(false);  
+            setWishLoad(false);
         }
     }
 
@@ -129,6 +129,16 @@ const CommercialLease = () => {
         let local = JSON.parse(localStorage.getItem("comRent")); // fetching data from local storage 
         local.length > 0 && setPropertyType(local); // setting data to usestate  
 
+        // add all parameater 
+        let param = {};
+
+        bhk && (param.bedroom = bhk);
+        propertyType && (param.propertyType = propertyType);
+        furnished && (param.furnished = furnished);
+        // adding 
+        param.lookingFor = "Sell"
+        param.propertyGroup = "Commercial"
+        setSearchParam(param); 
 
         dispatch(commercialRent(location)); // fetching the data
         handleLike(); // wishlist 
@@ -140,10 +150,23 @@ const CommercialLease = () => {
         bhk && (param.bedroom = bhk);
         propertyType && (param.propertyType = propertyType);
         furnished && (param.furnished = furnished);
+        param.lookingFor = "Rent";
+        param.propertyGroup = "Commercial";
+
         setSearchParam(param);
     }, [bhk, propertyType, furnished]);
 
     useEffect(() => {
+        let param = {};
+
+        bhk && (param.bedroom = bhk);
+        propertyType && (param.propertyType = propertyType);
+        furnished && (param.furnished = furnished);
+        // adding 
+        param.lookingFor = "Rent"; 
+        param.propertyGroup = "Commercial";
+        setSearchParam(param);
+
         dispatch(commercialRent(location));
     }, [location.search]);
 

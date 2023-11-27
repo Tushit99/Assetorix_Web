@@ -111,7 +111,7 @@ const TopDevelopers = () => {
               <img src={soba} alt="soba_img" />
             </Box>
           </div>
-          <button className={style.seeall}>SEE ALL</button>
+          {/* <button className={style.seeall}>SEE ALL</button> */}
         </div>)
       } 
     </div>

@@ -192,6 +192,7 @@
 .ft { 
   position: relative;
   margin-top: 40px;  
+  width: 100%; 
   background-image: url("https://i.ibb.co/k1Z18HV/image-mainhome-3.jpg");  
 }
 

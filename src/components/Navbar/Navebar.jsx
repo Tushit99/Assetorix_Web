@@ -57,7 +57,7 @@ const Navebar = () => {
             window.removeEventListener('online', handleOnlineStatusChange);
             window.removeEventListener('offline', handleOnlineStatusChange);
         };
-    }); 
+    });  
 
     const handleresbuy = (value) => {
         setresBuyArr((prev) => {
@@ -365,7 +365,7 @@ const Navebar = () => {
                         >
                             Rent
                         </Button>
-                    </PopoverTrigger>
+                    </PopoverTrigger> 
                     <PopoverContent w={{ base: "320px", md: "400px" }} marginTop={"-5px"} color={"black"}>
                         <PopoverArrow />
                         <PopoverHeader>Rent Property</PopoverHeader>

@@ -10,7 +10,7 @@ import {
 import TopNavbar from "./components/TopNavbar/TopNavbar";
 
 function App() {
-  const location = useLocation(); 
+  const location = useLocation();
 
   const scrollToTop = () => {
     const scrollStep = -window.scrollY / (500 / 15);
@@ -18,7 +18,7 @@ function App() {
       if (window.scrollY !== 0) {
         window.scrollBy(0, scrollStep);
       } else {
-        clearInterval(scrollInterval); 
+        clearInterval(scrollInterval);
       }
     }, 15);
   };
@@ -40,8 +40,8 @@ function App() {
       {location.pathname == "/" ? <Navebar /> : <TopNavbar />}
       <div className="info">
         <MainRoute />
-        <Footer />
       </div>
+      <Footer />
       <div className="scrole_button">
         <button onClick={handleScrollToTop}>
           <MdKeyboardDoubleArrowUp size={"25px"} color="white" />

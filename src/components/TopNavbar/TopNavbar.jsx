@@ -37,10 +37,26 @@ const TopNavbar = () => {
     const [resRentArr, setresRentArr] = useState([]);
     const [comBuyArr, setcomBuyArr] = useState([]);
     const [comRentArr, setcomRentArr] = useState([]);
+    const [isOnline, setIsOnline] = useState(navigator.onLine);  
+
 
     const homeback = () => {
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     }
+
+    useEffect(() => {
+        const handleOnlineStatusChange = () => {
+            setIsOnline(navigator.onLine);
+        };
+
+        window.addEventListener('online', handleOnlineStatusChange);
+        window.addEventListener('offline', handleOnlineStatusChange);
+
+        return () => { 
+            window.removeEventListener('online', handleOnlineStatusChange);
+            window.removeEventListener('offline', handleOnlineStatusChange);
+        };
+    });  
 
     const handleresbuy = (value) => {
         setresBuyArr((prev) => {
@@ -157,7 +173,7 @@ const TopNavbar = () => {
                             <select
                                 onChange={(e) => handlecountry(e.target.value)}
                                 value={country}
-                                style={{ border: "0px", outline: "0px", borderRadius: "0px", cursor:"pointer" }}
+                                style={{ border: "0px", outline: "0px", borderRadius: "0px", cursor: "pointer" }}
                             >
                                 <option value="india">India</option>
                                 <option value="usa">USA</option>
@@ -180,7 +196,7 @@ const TopNavbar = () => {
                                             color="rgb(46,49,146)"
                                         />
                                     }
-                                > 
+                                >
                                     {data.user.name ? (
                                         <Avatar size='sm' name={data.user.name} src={data.user.avatar} bg={"rgb(46,49,146)"} color={"white"} >
                                             <AvatarBadge boxSize='1em' bg='green.500' />
@@ -253,11 +269,7 @@ const TopNavbar = () => {
                                 Buy
                             </Button>
                         </PopoverTrigger>
-                        <PopoverContent
-                            w={{ base: "320px", md: "400px" }}
-                            marginTop={"-5px"}
-                            color={"black"}
-                        >
+                        <PopoverContent w={{ base: "320px", md: "400px" }} marginTop={"-5px"} color={"black"}>
                             <PopoverArrow />
                             <PopoverHeader>Buy Property</PopoverHeader>
                             <PopoverBody>
@@ -292,7 +304,7 @@ const TopNavbar = () => {
                                                     Farmhouse
                                                 </Checkbox>
                                             </Box>
-                                            <Link to="/residential_buy">
+                                            <Link to="/residential_buy" state={{ arr: resBuyArr }} >
                                                 <Button
                                                     backgroundColor={"rgb(46,49,146)"}
                                                     color={"white"}
@@ -300,7 +312,7 @@ const TopNavbar = () => {
                                                     className={style.start_btn}
                                                 >
                                                     Start Now
-                                                </Button>
+                                                </Button> 
                                             </Link>
                                         </TabPanel>
                                         <TabPanel>
@@ -314,7 +326,7 @@ const TopNavbar = () => {
                                                 <Checkbox onChange={() => handleCombuy("Industry")} isChecked={comBuyArr.includes("Industry")} >Industry</Checkbox>
                                                 <Checkbox onChange={() => handleCombuy("Hospitality")} isChecked={comBuyArr.includes("Hospitality")} >Hospitality</Checkbox>
                                             </Box>
-                                            <Link to={"/commercial_buy"}>
+                                            <Link to={"/commercial_buy"} params={{ arr: comBuyArr }} >
                                                 <Button
                                                     backgroundColor={"rgb(46,49,146)"}
                                                     color={"white"}
@@ -348,13 +360,9 @@ const TopNavbar = () => {
                                 Rent
                             </Button>
                         </PopoverTrigger>
-                        <PopoverContent
-                            w={{ base: "320px", md: "400px" }}
-                            marginTop={"-5px"}
-                            color={"black"}
-                        >
+                        <PopoverContent w={{ base: "320px", md: "400px" }} marginTop={"-5px"} color={"black"}>
                             <PopoverArrow />
-                            <PopoverHeader>Buy Property</PopoverHeader>
+                            <PopoverHeader>Rent Property</PopoverHeader>
                             <PopoverBody>
                                 {/* one */}
                                 <Tabs variant="enclosed">
@@ -421,7 +429,7 @@ const TopNavbar = () => {
                                     </TabPanels>
                                 </Tabs>
                             </PopoverBody>
-                        </PopoverContent>
+                        </PopoverContent>  
                     </Popover>
                     <Link>Advertise</Link>
                     <Link>Agent Finder</Link>

@@ -15,7 +15,7 @@ export const residentialRent = (location) => async (dispatch) => {
   try { 
     await axios
       .get(
-        `${process.env.REACT_APP_URL}/property/rent/residential${location.search}`
+        `${process.env.REACT_APP_URL}/property/${location.search}`
       )
       .then((e) => {
         dispatch({ type: DATA_RESIDENTIAL_RENT_DATA, payload: e.data });
@@ -30,7 +30,7 @@ export const commercialRent = (location) => async (dispatch) => {
   try {
     await axios
       .get(
-        `${process.env.REACT_APP_URL}/property/rent/commercial${location.search}`
+        `${process.env.REACT_APP_URL}/property/${location.search}`
       )
       .then((e) => {
         dispatch({ type: DATA_COMMERCIAL_RENT_DATA, payload: e.data });
@@ -46,7 +46,7 @@ export const residentialBuy = (location) => async (dispatch) => {
   try {
     await axios
       .get(
-        `${process.env.REACT_APP_URL}/property/buy/residential${location.search}`
+        `${process.env.REACT_APP_URL}/property/${location.search}`
       )
       .then((e) => {
         dispatch({ type: DATA_RESIDENTIAL_BUY_DATA, payload: e.data });
@@ -61,7 +61,7 @@ export const commercialBuy = (location) => async (dispatch) => {
   try {
     await axios
       .get(
-        `${process.env.REACT_APP_URL}/property/buy/commercial${location.search}`
+        `${process.env.REACT_APP_URL}/property/${location.search}`
       )
       .then((e) => {
         dispatch({ type: DATA_COMMERCIAL_BUY_DATA, payload: e.data });
@@ -111,7 +111,7 @@ export const updatedWishlist = (myid) => (dispatch) => {
       authorization,
       "Content-type": "application/json",
     },
-  }; 
+  };  
 
   axios(axiosConfig)
     .then((e) => { 

@@ -89,7 +89,7 @@ const Footer = () => {
                 <IoIosArrowForward size={"16px"} />
               </Box>
               <Box flex={9} textAlign={"left"}>
-                <p>Email: <a href="mailto:info@ametheus.com">info@ametheus.com</a> </p>
+                <p>Email: <a href="mailto:info@assetorix.com">info@assetorix.com</a> </p>
               </Box>
             </Box>
           </Box>
@@ -152,8 +152,8 @@ const Footer = () => {
           </h3>
         </Box>
         <Box >
-          Email: <a href="mailto:info@ametheus.com">info@ametheus.com</a> <span className={style.line}> | </span> <br className={style.brs} /> Call Us at: <a href="tel:+91-9990032288"> +91 9990032288,</a>
-        </Box>   
+          Email: <a href="mailto:info@assetorix.com">info@assetorix.com</a> <span className={style.line}> | </span> <br className={style.brs} /> Call Us at: <a href="tel:+91-9990032288"> +91 9990032288,</a>
+        </Box>    
       </div>
     </div>
   );

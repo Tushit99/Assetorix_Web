@@ -23,6 +23,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signinuser } from "../../Redux/userauth/action";
 import { CheckCircleIcon, InfoIcon } from "@chakra-ui/icons";
+import BeatLoader from "react-spinners/BeatLoader";
 
 const Singup = () => {
   const data = useSelector((store) => store.userreducer);
@@ -134,8 +135,8 @@ const Singup = () => {
     setPassword(sanitizedPassword);
   };
 
-  const handleshowPassword =()=>{
-    setShow(!show); 
+  const handleshowPassword = () => {
+    setShow(!show);
   }
 
   return (
@@ -228,7 +229,7 @@ const Singup = () => {
                   {show ? 'Hide' : 'Show'}
                 </Button>
               </InputRightElement>
-            </InputGroup> 
+            </InputGroup>
           </FormControl>
           <List spacing={0} fontSize={"xs"} textAlign={"left"} display={requirements ? "none" : "block"} >
             <ListItem>
@@ -254,7 +255,14 @@ const Singup = () => {
               align={"start"}
               justify={"space-between"}
             ></Stack>
-            <Button colorScheme={"blue"} onClick={handlesave} variant={"solid"}>
+            <Button
+              isLoading={data.isLoading}
+              spinner={<BeatLoader size={8} color='white' />}
+              loadingText='Sign up...'
+              spinnerPlacement='end' 
+              colorScheme={"blue"} 
+              onClick={handlesave} 
+              variant={"solid"}> 
               Sign up
             </Button>
             {/* modal box end */}
