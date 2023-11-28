@@ -15,15 +15,17 @@ import {
   ListIcon,
   InputGroup,
   InputRightElement,
+  Text,
   // useDisclosure,
 } from "@chakra-ui/react";
 import sideimg from "./backimg.png";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signinuser } from "../../Redux/userauth/action";
 import { CheckCircleIcon, InfoIcon } from "@chakra-ui/icons";
-import BeatLoader from "react-spinners/BeatLoader";
+import BeatLoader from "react-spinners/BeatLoader"; 
+import style from "./Siginup.module.css"; 
 
 const Singup = () => {
   const data = useSelector((store) => store.userreducer);
@@ -259,14 +261,15 @@ const Singup = () => {
               isLoading={data.isLoading}
               spinner={<BeatLoader size={8} color='white' />}
               loadingText='Sign up...'
-              spinnerPlacement='end' 
-              colorScheme={"blue"} 
-              onClick={handlesave} 
-              variant={"solid"}> 
+              spinnerPlacement='end'
+              colorScheme={"blue"}
+              onClick={handlesave}
+              variant={"solid"}>
               Sign up
             </Button>
-            {/* modal box end */}
-          </Stack>
+            {/* modal box end */} 
+          </Stack> 
+          <Text textAlign={"center"} margin={"10px auto 0 auto"} > Already a user? <Link to={"/login"} className={style.loginpage} >Login</Link> </Text>
         </Stack>
       </Flex>
       <Flex

@@ -164,10 +164,9 @@ const ResidentialBuy = () => {
         // adding 
         param.lookingFor = "Sell"
         param.propertyGroup = "Residential"
-        setSearchParam(param);
+        setSearchParam(param);  
 
-
-        if (location.search) { 
+        if (location.search) {  
             dispatch(residentialBuy(location));
         }
 
@@ -183,11 +182,11 @@ const ResidentialBuy = () => {
                         Filter
                     </Button>
                     <Drawer
-                        isOpen={isOpen}
+                        isOpen={isOpen} 
                         placement='left'
                         onClose={onClose}
                         finalFocusRef={btnRef}
-                    >
+                    > 
                         <DrawerOverlay />
                         <DrawerContent>
                             <DrawerCloseButton />

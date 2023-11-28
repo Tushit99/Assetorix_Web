@@ -10,7 +10,7 @@ import {
     MenuButton,
     MenuItem,
     MenuList,
-    Select, 
+    Select,
     useDisclosure,
 } from "@chakra-ui/react";
 import { useRef } from "react";
@@ -25,7 +25,7 @@ import { ChevronUpIcon } from "@chakra-ui/icons";
 const Hamburger = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const btnRef = useRef();
-    const navigate = useNavigate();  
+    const navigate = useNavigate();
 
     const handlePage = (e) => {
         let value = e.target.value;
@@ -46,7 +46,7 @@ const Hamburger = () => {
         }
         onClose();
 
-    } 
+    }
 
 
     return (
@@ -67,7 +67,8 @@ const Hamburger = () => {
                 placement="left"
                 onClose={onClose}
                 finalFocusRef={btnRef}
-            > 
+                size={"xs"}
+            >
                 <DrawerOverlay />
                 <DrawerContent className={style.drawer}>
                     <DrawerCloseButton />
@@ -84,30 +85,38 @@ const Hamburger = () => {
                         color={"black"}
                         gap={3}
                     >
-                        <Link to={"/about"} onClick={onClose}>
+                        <Link to={"/about"} className={style.outer} onClick={onClose}>
                             About
                         </Link>
-                        <Select variant={"unstyled"} onChange={handlePage} placeholder="Buy" >
+                        <Select w={"100%"} border={"1px solid #2b6cb0"} borderRadius={0} colorScheme={"blue"} margin={0} variant={"outline"} onChange={handlePage} placeholder="Buy" >
                             <option value="Commercial"> Commercial </option>
                             <option value="Residential"> Residential </option>
                         </Select>
-                        <Link to="/post" onClick={onClose}> Sell </Link>
-                        <Select variant={"unstyled"} onChange={handlePageSell} placeholder="Rent" >
+                        <Link to="/post" className={style.outer} onClick={onClose}> Post & Sell </Link>
+                        <Select w={"100%"} border={"1px solid #2b6cb0"} borderRadius={0} colorScheme={"blue"} margin={0} variant={"outline"} onChange={handlePageSell} placeholder="Rent" >
                             <option value="Commercial"> Commercial </option>
                             <option value="Residential"> Residential </option>
                         </Select>
-                        <Link to={"#"} onClick={onClose}>
+                        <Link to={"#"} className={style.outer} onClick={onClose}>
                             Home Loans
                         </Link>
-                        <Link to={"#"} onClick={onClose}>
+                        <Link to={"#"} className={style.outer} onClick={onClose}>
                             Advertise
                         </Link>
-                        <Link to={"#"} onClick={onClose}>
+                        <Link to={"#"} className={style.outer} onClick={onClose}>
                             Agent Finder
                         </Link>
                         {/* ======= Menu ====== */}
-                        <Menu>
-                            <MenuButton as={Button} textAlign={"left"} backgroundColor={"white"} rightIcon={<ChevronUpIcon />}>
+                        <Menu> 
+                            <MenuButton
+                                as={Button}
+                                textAlign={"left"}
+                                _hover={{ border: "1px solid #dae0e8" }}
+                                variant={"outline"}
+                                borderRadius={0}  
+                                border={"1px solid #2b6cb0"} 
+                                colorScheme={"blue"}
+                                rightIcon={<ChevronUpIcon />}>
                                 Actions
                             </MenuButton>
                             <MenuList >
@@ -144,7 +153,7 @@ const Hamburger = () => {
                             </MenuList>
                         </Menu>
                         {/* ======= Contact =======  */}
-                        <Link to={"/contact"} onClick={onClose}>
+                        <Link to={"/contact"} className={style.outer} onClick={onClose}>
                             Contact
                         </Link>
                     </DrawerBody>

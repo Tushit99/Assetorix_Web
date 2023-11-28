@@ -5,8 +5,7 @@ import {
     FormControl,
     FormLabel,
     Heading,
-    Input,
-    Link,
+    Input, 
     Stack,
     Image,
     Box,
@@ -20,7 +19,7 @@ import {
 import style from "./Login.module.css";
 import img from "./sideimg.png";
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginuser } from '../../Redux/userauth/action';
 import BeatLoader from "react-spinners/BeatLoader";
@@ -30,12 +29,12 @@ const Login = ({ onpage }) => {
     const data = useSelector((store) => store.userreducer);
     const toast = useToast();
     const [mobile, setMobile] = useState("");
-    const [password, setPassword] = useState(""); 
+    const [password, setPassword] = useState("");
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [show, setshow] = useState(true);
     const [mobileWarn, setMobileWarn] = useState("");
-    const [warning, setWarning] = useState(""); 
+    const [warning, setWarning] = useState("");
 
     const handlelogin = async () => {
         if (mobile.length <= 9 || mobile.length >= 11) {
@@ -109,13 +108,13 @@ const Login = ({ onpage }) => {
     //             setVal((prev) => prev + 1);
     //         }
     //     }
-    // }
+    // } 
 
     // console.log(data); 
 
     return (
         <div className={style.signin_topbox}>
-            <Box position={"relative"} w={"full"} marginTop={"10px"} maxH={'100vh'} direction={{ base: 'column', md: 'row' }}>
+            <Box position={"relative"} w={"full"} marginTop={"10px"} direction={{ base: 'column', md: 'row' }}>
                 <div className={style.detail}>
                     {/* sigin image */}
                     <Flex className={style.login_img} >
@@ -127,8 +126,8 @@ const Login = ({ onpage }) => {
                     </Flex>
                     {/* Login Form  */}
                     <Flex >
-                        <Box spacing={4} gap={{ base: "10px", md: "20px" }} className={style.log_info} >
-                            <Heading fontSize={{ base: '2xl', md: '4xl', lg: '2xl' }}>Login to your account</Heading>
+                        <Box backgroundColor={"rgb(255, 255, 255)"} spacing={4} gap={{ base: "10px", md: "20px" }} className={style.log_info} >
+                            <Heading fontWeight={"semibold"} fontSize={{ base: '2xl', md: '4xl', lg: '2xl' }}>Login to your account</Heading>
                             <FormControl id="number">
                                 <FormLabel fontSize={{ base: 'md', lg: 'xl' }}>Mobile no.</FormLabel>
                                 <Input colorScheme='linkedin' type="text" maxLength={10} placeholder='Enter mobile no.' onChange={(e) => setMobile(e.target.value)} value={mobile} required />
@@ -155,8 +154,11 @@ const Login = ({ onpage }) => {
                                     </ListItem>
                                 </UnorderedList>
                             </FormControl>
-                            <Box margin={0} width={"100%"} >
-                                {/* <Stack
+                            <Box w={"100%"} display={"flex"} alignItems={"center"} justifyContent={"left"}>
+                                <Checkbox colorScheme={"blue"} className={style.boxback}> Remember me </Checkbox>
+                            </Box>   
+                            <Box margin={0} width={"100%"} > 
+                                {/* <Stack 
                                     direction={{ base: 'column', sm: 'row' }}
                                     align={'start'}
                                     justify={'space-between'}>
@@ -176,8 +178,9 @@ const Login = ({ onpage }) => {
                                     fontSize={{ base: '2xl', lg: 'xl' }}
                                 >
                                     Login
-                                </Button> 
+                                </Button>  
                             </Box>
+                            <Text className={style.resgister}> Don't have an acount? <Link to={"/signup"} className={style.tosign}>Register</Link> </Text>
                         </Box>
                     </Flex>
                 </div>
