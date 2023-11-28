@@ -24,8 +24,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signinuser } from "../../Redux/userauth/action";
 import { CheckCircleIcon, InfoIcon } from "@chakra-ui/icons";
-import BeatLoader from "react-spinners/BeatLoader"; 
-import style from "./Siginup.module.css"; 
+import BeatLoader from "react-spinners/BeatLoader";
+import style from "./Siginup.module.css";
 
 const Singup = () => {
   const data = useSelector((store) => store.userreducer);
@@ -158,7 +158,7 @@ const Singup = () => {
           maxW={"xl"}
           padding={"30px"}
           marginTop={"10px"}
-          boxShadow={"rgba(0, 0, 0, 0.24) 0px 3px 8px "}
+          boxShadow={"rgba(0, 0, 0, 0.24) 0px 3px 8px "} 
           borderRadius={"8px"}
         >
           <Heading fontSize={"3xl"}>Sign up to your account</Heading>
@@ -228,7 +228,7 @@ const Singup = () => {
               />
               <InputRightElement width='4.5rem'>
                 <Button h='1.75rem' variant='outline' colorScheme='linkedin' size='sm' onClick={handleshowPassword}>
-                  {show ? 'Hide' : 'Show'}
+                  {show ? 'Show' : 'Hide'}   
                 </Button>
               </InputRightElement>
             </InputGroup>
@@ -267,8 +267,8 @@ const Singup = () => {
               variant={"solid"}>
               Sign up
             </Button>
-            {/* modal box end */} 
-          </Stack> 
+            {/* modal box end */}
+          </Stack>
           <Text textAlign={"center"} margin={"10px auto 0 auto"} > Already a user? <Link to={"/login"} className={style.loginpage} >Login</Link> </Text>
         </Stack>
       </Flex>
