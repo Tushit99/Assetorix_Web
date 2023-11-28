@@ -6,7 +6,9 @@
     display: flex; 
     align-items: center;  
     justify-content: left;      
+    
 }
+ 
 
 .links>.outer:hover{
     border: 1px solid #dae0e8;  
@@ -14,7 +16,7 @@
  
 .drawer{
     background-color: white;  
-    color: var(--blue-light);  
+    color: var(--blue-light);    
 }
 
 .options *{

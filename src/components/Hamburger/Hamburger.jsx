@@ -83,7 +83,7 @@ const Hamburger = () => {
                         display={"flex"}
                         flexDirection={"column"}
                         color={"black"}
-                        gap={3}
+                        gap={3} 
                     >
                         <Link to={"/about"} className={style.outer} onClick={onClose}>
                             About
@@ -107,14 +107,14 @@ const Hamburger = () => {
                             Agent Finder
                         </Link>
                         {/* ======= Menu ====== */}
-                        <Menu> 
+                        <Menu>
                             <MenuButton
                                 as={Button}
                                 textAlign={"left"}
                                 _hover={{ border: "1px solid #dae0e8" }}
                                 variant={"outline"}
-                                borderRadius={0}  
-                                border={"1px solid #2b6cb0"} 
+                                borderRadius={0}
+                                border={"1px solid #2b6cb0"}
                                 colorScheme={"blue"}
                                 rightIcon={<ChevronUpIcon />}>
                                 Actions
