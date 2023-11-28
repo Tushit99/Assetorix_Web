@@ -1,17 +1,17 @@
 
 
 .links>.outer{ 
-    border: 1px solid #2b6cb0;  
+    border: 1px solid #dae0e8;  
     padding: 6px 17px;   
     display: flex; 
     align-items: center;  
     justify-content: left;      
     
 }
- 
+
 
 .links>.outer:hover{
-    border: 1px solid #dae0e8;  
+    border: 1px solid #2b6cb0;  
 } 
  
 .drawer{

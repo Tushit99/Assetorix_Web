@@ -87,13 +87,13 @@ const Hamburger = () => {
                     >
                         <Link to={"/about"} className={style.outer} onClick={onClose}>
                             About
-                        </Link>
-                        <Select w={"100%"} border={"1px solid #2b6cb0"} borderRadius={0} colorScheme={"blue"} margin={0} variant={"outline"} onChange={handlePage} placeholder="Buy" >
+                        </Link> 
+                        <Select w={"100%"} border={"1px solid #dae0e8"} _hover={{border:"1px solid #2b6cb0"}} borderRadius={0} colorScheme={"blue"} margin={0} variant={"outline"} onChange={handlePage} placeholder="Buy" >
                             <option value="Commercial"> Commercial </option>
                             <option value="Residential"> Residential </option>
                         </Select>
                         <Link to="/post" className={style.outer} onClick={onClose}> Post & Sell </Link>
-                        <Select w={"100%"} border={"1px solid #2b6cb0"} borderRadius={0} colorScheme={"blue"} margin={0} variant={"outline"} onChange={handlePageSell} placeholder="Rent" >
+                        <Select w={"100%"} border={"1px solid #dae0e8"} _hover={{border:"1px solid #2b6cb0"}} borderRadius={0} colorScheme={"blue"} margin={0} variant={"outline"} onChange={handlePageSell} placeholder="Rent" >
                             <option value="Commercial"> Commercial </option>
                             <option value="Residential"> Residential </option>
                         </Select>
@@ -111,13 +111,13 @@ const Hamburger = () => {
                             <MenuButton
                                 as={Button}
                                 textAlign={"left"}
-                                _hover={{ border: "1px solid #dae0e8" }}
+                                _hover={{ border: "1px solid #2b6cb0" }}
                                 variant={"outline"}
                                 borderRadius={0}
-                                border={"1px solid #2b6cb0"}
+                                border={"1px solid #dae0e8"}
                                 colorScheme={"blue"}
                                 rightIcon={<ChevronUpIcon />}>
-                                Actions
+                                Actions 
                             </MenuButton>
                             <MenuList >
                                 <MenuItem onClick={onClose}>
