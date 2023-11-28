@@ -13,8 +13,8 @@
   width: 180px;
   transform: scale(1.3);
   object-fit: contain; 
-  padding: 0 6px; 
-  /* max-height: 45px;  */
+  max-height: 45px;  
+  padding: 0 6px;  
 }
 
 .ham_body {
