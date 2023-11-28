@@ -125,7 +125,7 @@ const Login = ({ onpage }) => {
                         />
                     </Flex>
                     {/* Login Form  */}
-                    <Flex >
+                    <Flex > 
                         <Box backgroundColor={"rgb(255, 255, 255)"} spacing={4} gap={{ base: "10px", md: "20px" }} className={style.log_info} >
                             <Heading fontWeight={"semibold"} fontSize={{ base: '2xl', md: '4xl', lg: '2xl' }}>Login to your account</Heading>
                             <FormControl id="number">
@@ -134,7 +134,9 @@ const Login = ({ onpage }) => {
                                 <UnorderedList fontSize={"xs"} color={"red"} margin={"0 0 0 20px"} textAlign={"left"} display={mobileWarn.length ? "flex" : "none"}>
                                     <ListItem>
                                         {mobileWarn}
-                                    </ListItem>
+                                    </ListItem> 
+
+
                                 </UnorderedList>
                             </FormControl>
                             <FormControl id="password">

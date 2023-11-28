@@ -28,12 +28,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { changeLookingFor } from "../../../Redux/globalval/action";
 import backimg from "./Screenshot 10-12-2023 09.38.37.png"
 import { Blurhash } from "react-blurhash";
+import axios from "axios";
 
 
 const Page1 = () => {
   const { country } = useSelector((state) => state.gloalval);
   const navigate = useNavigate();
-  const dispatch = useDispatch(); 
+  const dispatch = useDispatch();  
+  const [searchinp, setSearchInp] = useState(""); 
   // const [imageLoaded, setImageLoaded] = useState(false);  
   
   
@@ -48,7 +50,15 @@ const Page1 = () => {
   // const handlePageRent = () => {
   //   dispatch(changeLookingFor("Rent/Lease"));
   //   navigate("/post");
-  // }
+  // } 
+
+  const handleSearch = async ()=>{
+    try {  
+      await axios.get(`${process.env.REACT_APP_URL}/property/search?${}`,); 
+    } catch (err) {
+      console.log(err); 
+    }
+  }
 
   const handlePageSell = () => {
     dispatch(changeLookingFor("sell"));
@@ -285,7 +295,7 @@ const Page1 = () => {
                             <Checkbox>Storage</Checkbox>
                             <Checkbox>Industry</Checkbox>
                             <Checkbox>Hospitality</Checkbox>
-                          </Box>
+                          </Box> 
                           <Link to={"/commercial_rent"}>
                             <Button
                               backgroundColor={"rgb(46,49,146)"}
@@ -295,7 +305,7 @@ const Page1 = () => {
                             >
                               Start Now
                             </Button>
-                          </Link>
+                          </Link> 
                         </TabPanel>
                       </TabPanels>
                     </Tabs>
@@ -329,7 +339,8 @@ const Page1 = () => {
                 minWidth={{ base: "85%", lg: "600px" }}
                 marginLeft={"2px"}
                 placeholder={"Search locality, project or builder"}
-                color={"black"}
+                color={"black"} 
+                onChange={(e)=>setSearchInp(e.target.value)} 
                 fontSize={{ base: "xs", lg: "lg" }}
                 _active={{ border: "0px", outline: "0px" }}
                 boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}
@@ -344,8 +355,7 @@ const Page1 = () => {
               <Button
                 _hover={{ backgroundColor: "#d2ab67" }}
                 backgroundColor={"#d2ab67b0"}
-              >
-                {" "}
+              > 
                 <Search2Icon size={"30px"} className={style.white} />{" "}
               </Button>
             </div>
