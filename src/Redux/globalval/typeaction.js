@@ -5,5 +5,7 @@ export const RECENTLY_VISITED = "recentyl/visited";
 
 export const LOOKINGFOR = "looking/for"; 
 
+export const NOTIFICATION = "notification/count"; 
+
 
 

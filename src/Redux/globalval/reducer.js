@@ -1,9 +1,9 @@
-import { COUNTRY_VAL, LOOKINGFOR, RECENTLY_VISITED } from "./typeaction";
+import { COUNTRY_VAL, LOOKINGFOR, NOTIFICATION, RECENTLY_VISITED } from "./typeaction";
 
 const initialState = {
   country: "india",
   visited: [],
-  lookingFor: "",
+  lookingFor: "", 
 };
 
 export const reducer = (state = initialState, { type, payload }) => {
@@ -13,7 +13,7 @@ export const reducer = (state = initialState, { type, payload }) => {
     case RECENTLY_VISITED:
       return { ...state, visited: payload };
     case LOOKINGFOR:
-      return { ...state, lookingFor: payload };
+      return { ...state, lookingFor: payload }; 
     default:
       return state;
   }

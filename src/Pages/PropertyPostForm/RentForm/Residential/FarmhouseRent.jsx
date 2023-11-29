@@ -637,7 +637,7 @@ const FarmhouseRent = () => {
                     required
                     placeholder="Locality"
                     list="browsers"
-                    value={locality}
+                    value={locality} 
                     onChange={(e) => setLocality(e.target.value)}
                     fontSize={"md"}
                     variant="flushed"
