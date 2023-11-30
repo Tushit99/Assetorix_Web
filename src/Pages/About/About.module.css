@@ -1,5 +1,8 @@
-
-.head_line>*:nth-child(1){
-    font-weight: bolder;  
+.head_line > *:nth-child(1) {
+  font-weight: bolder;
 }
 
+.untouch{ 
+    pointer-events: none;
+}
+ 

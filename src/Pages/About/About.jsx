@@ -15,15 +15,15 @@ import { useEffect } from "react";
 export default function About() {
 
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }); 
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   }, [])
 
   return (
-    <Container maxW={"7xl"} margin={"40px auto"}>
+    <Container maxW={"7xl"} margin={"0px auto"}>
       <Stack
         textAlign={"left"}
         spacing={{ base: 8, md: 10 }}
-        py={{ base: 20, md: 28 }}
+        py={{ base: 6, md: 8 }}
         direction={{ base: "column", md: "row" }}
       >
         <Stack flex={1} spacing={{ base: 5, md: 10 }}>
@@ -78,7 +78,8 @@ export default function About() {
             boxShadow={"2xl"}
             padding={"20px"}
             width={"full"}
-            overflow={"hidden"}
+            overflow={"hidden"} 
+            className={style.untouch}
           >
             <IconButton
               aria-label={"Play Button"}
@@ -92,7 +93,7 @@ export default function About() {
               top={"50%"}
               transform={"translateX(-50%) translateY(-50%)"}
             />
-            <video autoPlay muted loop >
+            <video autoPlay muted loop  >
               <source
                 src={"https://www.ametheus.com/Real-Estate-Ametheus.mp4"}
                 type="video/mp4"

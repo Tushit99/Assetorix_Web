@@ -49,18 +49,18 @@ const Footer = () => {
         <Box className={style.footer_description} >
           <Box>
             <h2>Business Line</h2>
-            <Link onClick={handleScroltop} to={"/"}>Buy</Link>
-            <Link onClick={handlePageRent} to={"/post"}>Rent </Link>
+            <Link onClick={handleScroltop} to={"/residential_buy"}>Buy</Link>
+            <Link onClick={handlePageRent} to={"/residential_rent"}>Rent </Link>
             <Link onClick={handlePageSell} to={"/post"}>Sell</Link>
-            <Link onClick={handleScroltop} to={"#"}>Home Loan </Link>
-            <Link onClick={handleScroltop} to={"#"}>Advertise </Link>
+            <Link onClick={handleScroltop} to={"#"}>Home Loan </Link> 
+            <Link onClick={handleScroltop} to={"#"}>Advertise </Link> 
             <Link onClick={handleScroltop} to={"#"}>Agent Finder </Link>
             <Link onClick={handleScroltop} to={"#"}>Corporate Service</Link>
           </Box>
           <Box >
             <h2>Company</h2>
             <Link onClick={handleScroltop} to={"/"}>Home</Link>
-            <Link onClick={handleScroltop} to={"#"}>About Assetorix</Link>
+            <Link onClick={handleScroltop} to={"/about"}>About Assetorix</Link>
             <Link onClick={handleScroltop} to={"#"}> Developer Partners </Link>
             <Link onClick={handleScroltop} to={"/contact"}> Contact </Link>
           </Box>
@@ -140,7 +140,7 @@ const Footer = () => {
         </Box>
       </Box>
       <div className={style.location_detail}>
-        <Box>
+        <Box> 
           <h3 > <span className={style.blue}>assetorix.com </span>
             <span style={{ fontSize: "16px" }}>
               by Ametheus Holdings Pvt Ltd <br />

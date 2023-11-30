@@ -7,7 +7,7 @@ import {
   Input,
   Stack,
   Image,
-  useToast,
+  useToast, 
   Box,
   UnorderedList,
   ListItem,
@@ -71,7 +71,7 @@ const Singup = () => {
       setNamewarning("");
       setMobilewarning("Mobile no. should be of 10 digits");
     }
-    else if (password.length == 0) {
+    else if (password.length == 0) { 
       setNamewarning("");
       setMobilewarning("");
     }

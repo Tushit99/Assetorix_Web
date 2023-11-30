@@ -58,6 +58,10 @@ const Page1 = () => {
   const [showOpt, setShowOpt] = useState([]);
   const [typelook, setLook] = useState("Sell");
   const [typeGroup, setGroup] = useState("Residential");
+  const [resBuyArr, setresBuyArr] = useState([]);
+  const [resRentArr, setresRentArr] = useState([]);
+  const [comBuyArr, setcomBuyArr] = useState([]);
+  const [comRentArr, setcomRentArr] = useState([]);
 
   useEffect(() => {
     const storedNotification = JSON.parse(localStorage.getItem("key")) || null;
@@ -72,6 +76,62 @@ const Page1 = () => {
       localStorage.setItem("key", JSON.stringify(item));
     }
   }, []);
+
+  const handleresbuy = (value) => {
+    setresBuyArr((prev) => {
+      if (prev.includes(value)) {
+        let res = prev.filter((item) => item !== value) || [];
+        localStorage.setItem("resBuy", JSON.stringify(res));
+        return res
+      } else {
+        let res = [...prev, value];
+        localStorage.setItem("resBuy", JSON.stringify(res));
+        return res
+      }
+    });
+  }
+
+  const handleCombuy = (value) => {
+    setcomBuyArr((prev) => {
+      if (prev.includes(value)) {
+        let res = prev.filter((item) => item !== value) || [];
+        localStorage.setItem("combuy", JSON.stringify(res));
+        return res
+      } else {
+        let res = [...prev, value];
+        localStorage.setItem("combuy", JSON.stringify(res));
+        return res
+      }
+    });
+  }
+
+  const handleresrent = (value) => {
+    setresRentArr((prev) => {
+      if (prev.includes(value)) {
+        let res = prev.filter((item) => item !== value) || [];
+        localStorage.setItem("resRent", JSON.stringify(res));
+        return res
+      } else {
+        let res = [...prev, value];
+        localStorage.setItem("resRent", JSON.stringify(res));
+        return res
+      }
+    });
+  }
+
+  const handleComRent = (value) => {
+    setcomRentArr((prev) => {
+      if (prev.includes(value)) {
+        let res = prev.filter((item) => item !== value) || [];
+        localStorage.setItem("comRent", JSON.stringify(res));
+        return res
+      } else {
+        let res = [...prev, value];
+        localStorage.setItem("comRent", JSON.stringify(res));
+        return res
+      }
+    });
+  } 
 
   // useState(()=>{
   //   const img = new Image();  
@@ -119,7 +179,7 @@ const Page1 = () => {
           backdropFilter='blur(3px)' />
         <ModalContent marginTop={"120px"} backgroundColor={""} >
           <ModalHeader> Beta Testing </ModalHeader>
-          <ModalCloseButton />
+          <ModalCloseButton /> 
           <ModalBody paddingBottom={"20px"}>
             <Text className={style.acolor}>
               The beta testing phase is currently in progress.
@@ -209,19 +269,18 @@ const Page1 = () => {
 
               <Popover>
                 <PopoverTrigger>
-                  <Button
+                  <Button  
                     backgroundColor={"#d2ab67cb"}
                     color={"white"}
-                    fontSize={{ base: "sm", lg: "lg" }}
-                    fontWeight={{ base: "500", lg: "bold" }}
-                    _hover={{ color: "white" }}
+                    fontWeight={400}
+                    _hover={{ color: "unset" }}
+                    _active={{ color: "unset" }}
                   >
                     Buy
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent w={{ base: "320px", md: "400px" }}>
+                <PopoverContent w={{ base: "320px", md: "400px" }} marginTop={"-5px"} color={"black"}>
                   <PopoverArrow />
-                  <PopoverCloseButton />
                   <PopoverHeader>Buy Property</PopoverHeader>
                   <PopoverBody>
                     {/* one */}
@@ -233,44 +292,60 @@ const Page1 = () => {
                       <TabPanels>
                         <TabPanel>
                           <Box className={style.buy}>
-                            <Checkbox iconSize={"0px"} colorScheme={"green"}>
+                            <Checkbox onChange={(e) => handleresbuy("Flat / Apartment")} isChecked={resBuyArr.includes("Flat / Apartment")} iconSize={"0px"} colorScheme={"blue"}>
                               Flat/Apartment
                             </Checkbox>
-                            <Checkbox iconSize={"0px"} colorScheme={"green"}>
+                            <Checkbox onChange={(e) => handleresbuy("Independent House / Villa")} isChecked={resBuyArr.includes("Independent House / Villa")} iconSize={"0px"} colorScheme={"blue"}>
                               Independent House/villa
                             </Checkbox>
-                            <Checkbox iconSize={"0px"} colorScheme={"green"}>
+                            <Checkbox onChange={(e) => handleresbuy("Independent / Builder Floor")} isChecked={resBuyArr.includes("Independent / Builder Floor")} iconSize={"0px"} colorScheme={"blue"}>
                               Independent/builder Floor
                             </Checkbox>
-                            <Checkbox iconSize={"0px"} colorScheme={"green"}>
+                            <Checkbox onChange={(e) => handleresbuy("Serviced Apartment")} isChecked={resBuyArr.includes("Serviced Apartment")} iconSize={"0px"} colorScheme={"blue"}>
                               Serviced Apartment
                             </Checkbox>
-                            <Checkbox iconSize={"0px"} colorScheme={"green"}>
+                            <Checkbox onChange={(e) => handleresbuy("Plot / Land")} isChecked={resBuyArr.includes("Plot / Land")} iconSize={"0px"} colorScheme={"blue"}>
                               Plot/Land
                             </Checkbox>
-                            <Checkbox iconSize={"0px"} colorScheme={"green"}>
+                            <Checkbox onChange={(e) => handleresbuy("1 RK / Studio Apartment")} isChecked={resBuyArr.includes("1 RK / Studio Apartment")} iconSize={"0px"} colorScheme={"blue"}>
                               1 RK/ Studio Apartment
                             </Checkbox>
-                            <Checkbox iconSize={"0px"} colorScheme={"green"}>
+                            <Checkbox onChange={(e) => handleresbuy("Farmhouse")} isChecked={resBuyArr.includes("Farmhouse")} iconSize={"0px"} colorScheme={"blue"}>
                               Farmhouse
                             </Checkbox>
-                            <Checkbox iconSize={"0px"} colorScheme={"green"}>
-                              other
-                            </Checkbox>
                           </Box>
-                          <Button backgroundColor={"rgb(46,49,146)"} color={"white"} width={"100%"}>Start Now</Button>
+                          <Link to="/residential_buy" state={{ arr: resBuyArr }} >
+                            <Button
+                              backgroundColor={"rgb(46,49,146)"}
+                              color={"white"}
+                              w={"100%"}
+                              className={style.start_btn}
+                            >
+                              Start Now
+                            </Button>
+                          </Link>
                         </TabPanel>
                         <TabPanel>
-                          <Box className={style.buy}>
-                            <Checkbox size={"md"} color={"black"}> Office </Checkbox>
-                            <Checkbox>Retail</Checkbox>
-                            <Checkbox>Plot/Land</Checkbox>
-                            <Checkbox>Storage</Checkbox>
-                            <Checkbox>Industry</Checkbox>
-                            <Checkbox>Hospitality</Checkbox>
-                            <Checkbox>Other</Checkbox>
+                          <Box className={style.buy}  >
+                            <Checkbox onChange={(e) => handleCombuy(e.target.value)} value={"Office"} isChecked={comBuyArr.includes("Office")} size={"md"} color={"black"}>
+                              Office
+                            </Checkbox>
+                            <Checkbox onChange={() => handleCombuy("Retail")} isChecked={comBuyArr.includes("Retail")} >Retail</Checkbox>
+                            <Checkbox onChange={() => handleCombuy("Plot / Land")} isChecked={comBuyArr.includes("Plot / Land")} >Plot / Land</Checkbox>
+                            <Checkbox onChange={() => handleCombuy("Storage")} isChecked={comBuyArr.includes("Storage")} >Storage</Checkbox>
+                            <Checkbox onChange={() => handleCombuy("Industry")} isChecked={comBuyArr.includes("Industry")} >Industry</Checkbox>
+                            <Checkbox onChange={() => handleCombuy("Hospitality")} isChecked={comBuyArr.includes("Hospitality")} >Hospitality</Checkbox>
                           </Box>
-                          <Button backgroundColor={"rgb(46,49,146)"} color={"white"} width={"100%"} >Start Now</Button>
+                          <Link to={"/commercial_buy"} params={{ arr: comBuyArr }} >
+                            <Button
+                              backgroundColor={"rgb(46,49,146)"}
+                              color={"white"}
+                              w={"100%"}
+                              className={style.start_btn}
+                            >
+                              Start Now
+                            </Button>
+                          </Link>
                         </TabPanel>
                       </TabPanels>
                     </Tabs>
@@ -294,23 +369,20 @@ const Page1 = () => {
               <Popover>
                 <PopoverTrigger>
                   <Button
-                    borderradius={"4px"}
-                    color={"white"}
-                    w={"100%"}
-                    _hover={{ color: "white" }}
-                    boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}
-                    fontSize={{ base: "sm", lg: "lg" }}
-                    fontWeight={{ base: "500", lg: "bold" }}
-                    backgroundColor={"#d2ab67cb"}
+                     backgroundColor={"#d2ab67cb"}
+                     color={"white"} 
+                    fontWeight={400}
+                    _hover={{ color: "unset" }}
+                    _active={{ color: "unset" }}
                   >
                     Rent
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent w={{ base: "320px", md: "400px" }} marginTop={"-5px"} color={"black"}>
-                  <PopoverArrow />
+                  <PopoverArrow /> 
                   <PopoverHeader>Rent Property</PopoverHeader>
                   <PopoverBody>
-                    {/* one */}
+                    {/* one */} 
                     <Tabs variant="enclosed">
                       <TabList>
                         <Tab>Residential</Tab>
@@ -319,25 +391,25 @@ const Page1 = () => {
                       <TabPanels>
                         <TabPanel>
                           <Box className={style.buy}>
-                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                            <Checkbox onChange={() => handleresrent("Flat / Apartment")} isChecked={resRentArr.includes("Flat / Apartment")} iconSize={"0px"} colorScheme={"blue"}>
                               Flat/Apartment
                             </Checkbox>
-                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                            <Checkbox onChange={() => handleresrent("Independent House / villa")} isChecked={resRentArr.includes("Independent House / villa")} iconSize={"0px"} colorScheme={"blue"}>
                               Independent House/villa
                             </Checkbox>
-                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                            <Checkbox onChange={() => handleresrent("Independent / Builder Floor")} isChecked={resRentArr.includes("Independent / Builder Floor")} iconSize={"0px"} colorScheme={"blue"}>
                               Independent/builder Floor
                             </Checkbox>
-                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                            <Checkbox onChange={() => handleresrent("Serviced Apartment")} isChecked={resRentArr.includes("Serviced Apartment")} iconSize={"0px"} colorScheme={"blue"}>
                               Serviced Apartment
                             </Checkbox>
-                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                            <Checkbox onChange={() => handleresrent("Plot / Land")} isChecked={resRentArr.includes("Plot / Land")} iconSize={"0px"} colorScheme={"blue"}>
                               Plot/Land
                             </Checkbox>
-                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                            <Checkbox onChange={() => handleresrent("1RK / Studio Apartment")} isChecked={resRentArr.includes("1RK / Studio Apartment")} iconSize={"0px"} colorScheme={"blue"}>
                               1 RK/ Studio Apartment
                             </Checkbox>
-                            <Checkbox iconSize={"0px"} colorScheme={"blue"}>
+                            <Checkbox onChange={() => handleresrent("Farmhouse")} isChecked={resRentArr.includes("Farmhouse")} iconSize={"0px"} colorScheme={"blue"}>
                               Farmhouse
                             </Checkbox>
                           </Box>
@@ -348,20 +420,18 @@ const Page1 = () => {
                               w={"100%"}
                               className={style.start_btn}
                             >
-                              Start Now
+                              Start Now 
                             </Button>
                           </Link>
                         </TabPanel>
                         <TabPanel>
                           <Box className={style.buy}>
-                            <Checkbox size={"md"} color={"black"}>
-                              Office
-                            </Checkbox>
-                            <Checkbox>Retail</Checkbox>
-                            <Checkbox>Plot/Land</Checkbox>
-                            <Checkbox>Storage</Checkbox>
-                            <Checkbox>Industry</Checkbox>
-                            <Checkbox>Hospitality</Checkbox>
+                            <Checkbox onChange={() => handleComRent("Office")} isChecked={comRentArr.includes("Office")} size={"md"} color={"black"}> Office </Checkbox>
+                            <Checkbox onChange={() => handleComRent("Retail")} isChecked={comRentArr.includes("Retail")} >Retail</Checkbox>
+                            <Checkbox onChange={() => handleComRent("Plot / Land")} isChecked={comRentArr.includes("Plot / Land")} >Plot/Land</Checkbox>
+                            <Checkbox onChange={() => handleComRent("Storage")} isChecked={comRentArr.includes("Storage")} >Storage</Checkbox>
+                            <Checkbox onChange={() => handleComRent("Industry")} isChecked={comRentArr.includes("Industry")} >Industry</Checkbox>
+                            <Checkbox onChange={() => handleComRent("Hospitality")} isChecked={comRentArr.includes("Hospitality")} >Hospitality</Checkbox>
                           </Box>
                           <Link to={"/commercial_rent"}>
                             <Button
@@ -402,26 +472,25 @@ const Page1 = () => {
               <Box height={"38px"} position={"relative"} minWidth={{ base: "85%", lg: "600px" }} display={"flex"} flexDirection={"column"} >
                 <InputGroup className={style.inpbox}>
                   {/* option for sell and buy - commercial and residential */}
-                  <Menu closeOnSelect={false} >
+                  <Menu closeOnSelect={false} zIndex={5}>
                     <MenuButton
                       as={Button}
                       backgroundColor={"rgba(255, 255, 255, 0.767)"}
-                      width={"100px"}
+                      width={"170px"}
                       height={"38px"}
-
                       padding={"0 10px"}
                       borderRadius='xs'
                       color={"rgb(51, 51, 51)"}
                       rightIcon={<IoIosArrowDown />}  >
                       Sell
                     </MenuButton>
-                    <MenuList margin={"-5px auto -5px auto"} borderradius={0} fontSize={{base:"2xs",md:"sm",lg:"md"}} padding={0} >
-                      <MenuOptionGroup defaultValue='Sell' fontSize={{base:"2xs",md:"sm",lg:"md"}} onChange={(e) => setLook(e)} title='Property' type='radio'>
+                    <MenuList minWidth='140px' popperPlacement="bottom-end" margin={"-5px auto -5px auto"} borderradius={0} fontSize={{ base: "2xs", md: "sm", lg: "md" }} padding={0} >
+                      <MenuOptionGroup defaultValue='Sell' fontSize={{ base: "2xs", md: "sm", lg: "md" }} onChange={(e) => setLook(e)} title='Property' type='radio'>
                         <MenuItemOption value='Sell'>Sell</MenuItemOption>
                         <MenuItemOption value='Rent'>Rent</MenuItemOption>
                       </MenuOptionGroup>
                       <MenuDivider />
-                      <MenuOptionGroup title='Property Type' fontSize={{base:"2xs",md:"sm",lg:"md"}} defaultValue={"Residential"} onChange={(e) => setGroup(e)} type='radio'>
+                      <MenuOptionGroup title='Property Type' fontSize={{ base: "2xs", md: "sm", lg: "md" }} defaultValue={"Residential"} onChange={(e) => setGroup(e)} type='radio'>
                         <MenuItemOption value='Residential'>Residential</MenuItemOption>
                         <MenuItemOption value='Commercial'>Commercial</MenuItemOption>
                       </MenuOptionGroup>
@@ -432,7 +501,7 @@ const Page1 = () => {
                     type="text"
                     border={0}
                     height={"38px"}
-                    minWidth={{ base: "75%", lg: "500px" }}
+                    minWidth={{ base: "75%", lg: "360px" }}
                     marginLeft={"2px"}
                     placeholder={"Search locality, project or builder"}
                     color={"black"}
@@ -452,11 +521,12 @@ const Page1 = () => {
                   />
                 </InputGroup>
                 <Box
-                  margin={{ base: "40px 0 0 81px", md: "40px 0 0 90px" }}
-                  zIndex={-1}
-                  position={"absolute"} 
-                  minWidth={{ base: "75%", lg: "510px" }}
-                  padding={"0 10px"} 
+                  margin={{ base: "40px 0 0 101px", md: "40px 0 0 136px" }}
+                  zIndex={1}
+                  border={0}
+                  position={"absolute"}
+                  minWidth={{ base: "75%", lg: "520px" }}
+                  padding={"0 10px"}
                   backgroundColor={"rgb(255, 255, 255)"}
                   display={searchInp.length > 0 ? "grid" : "none"}>
                   {showOpt.map((e) => (
