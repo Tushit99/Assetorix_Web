@@ -8,10 +8,12 @@ import {
   TabList,
   Tab,
   TabPanels,
-  TabPanel 
+  TabPanel,
+  Image
 } from "@chakra-ui/react";
 import React from "react";
 import style from "./construction.module.css";
+import { Blurhash } from "react-blurhash";
 
 const Construction = () => {
   return (
@@ -19,14 +21,16 @@ const Construction = () => {
       display={{ base: "grid", lg: "flex" }}
       w={"90%"}
       margin={"30px auto 40px auto"}
-      gap={{ base: "20px", lg: "50px" }}
-    >
+      gap={{ base: "20px", lg: "50px" }} 
+      >
       <Box
         flex={7}
         textAlign={"left"}
         display={"flex"}
+        paddingBottom={"20px"} 
         flexDirection={"column"}
-        gap={"14px"}
+        gap={"14px"} 
+        boxShadow={"rgba(0, 0, 0, 0.05) 0px 0px 0px 1px"}
         fontSize={"lg"}
         padding={"20px"}
       >
@@ -300,13 +304,26 @@ const Construction = () => {
           </TabPanels>
         </Tabs>
       </Box>
-      <Box flex={3} display={{ base: "none", lg: "block" }}>
-        <img
+      <Box flex={3} display={{ base: "none", lg: "block" }} position={"relative"} >
+        <Image
+          loading={"lazy"}
+          width={"100%"}
+          height={"450px"} 
           src={
             "https://www.ametheus.com/wp-content/uploads/2022/10/aerial-view-of-shanghai-lujiazui-financial-district-royalty-free-image-928266082-1557158532-685x1024.jpg"
           }
           alt="building_image"
-        />
+        /> 
+        <Box position={"absolute"} zIndex={"-2"} top={0} left={0} right={0} bottom={0} >
+          <Blurhash
+            hash="LgJ8bOn4?bjZ~qogjYa}xuR.WBj]"
+            height={"450px"}
+            width={"100%"}
+            resolutionX={32}
+            resolutionY={32}
+            punch={1}
+          />
+        </Box>
       </Box>
     </Box>
   );

@@ -125,7 +125,6 @@ const Login = ({ onpage }) => {
                     {/* Login Form  */}
                     <Flex>
                         <Box
-                            backgroundColor={"rgb(255, 255, 255)"}
                             spacing={4}
                             gap={{ base: "10px", md: "20px" }}
                             className={style.log_info}

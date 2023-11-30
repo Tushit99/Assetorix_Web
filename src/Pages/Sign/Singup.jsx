@@ -170,7 +170,7 @@ const Singup = () => {
               type="text"
               maxLength={20}
               value={name}
-              borderRadius={0}
+              borderRadius={0} 
               onChange={handleInputChange}
               border={"2px solid rgb(193, 206, 250)"}
               _hover={{ border: "2px solid rgb(171, 81, 255)" }}
@@ -230,7 +230,7 @@ const Singup = () => {
                 <Button h='1.75rem' variant='outline' colorScheme='linkedin' size='sm' onClick={handleshowPassword}>
                   {show ? 'Show' : 'Hide'}   
                 </Button>
-              </InputRightElement>
+              </InputRightElement> 
             </InputGroup>
           </FormControl>
           <List spacing={0} fontSize={"xs"} textAlign={"left"} display={requirements ? "none" : "block"} >
