@@ -148,11 +148,11 @@
 
 .fields > div:nth-child(2) .searchbtn {
   border-radius: 0;
-  color: white;
+  color: white; 
   padding: 0 10px 0 15px;
   z-index: 1;
-  margin-left: -8px;
-  clip-path: polygon(26% 0, 100% 1%, 100% 100%, 26% 100%, 1% 50%);
+  margin-left: -6px;
+  clip-path: polygon(0% 0, 100% 1%, 100% 100%, 0% 100%, 20% 50%);
   border: 4px solid rgba(255, 255, 255, 0);
 }
 
@@ -162,11 +162,18 @@
 }
 
 #btn_serch {
-  margin: 0 0 0 -6px;
+  margin: 0 0 0 -14px;
   background-color: #d2ab67b0;
   width: 20px;
   height: 38px;
-  clip-path: polygon(102% 0%, 40% 50%, 102% 100%, 60% 100%, 2% 50%, 60% 0%);
+  clip-path: polygon(0 0, 50% 0, 100% 50%, 50% 100%, 0 100%, 50% 50%);
+} 
+#btn_serch2{
+  margin: 0 0 0 -6px;
+  background-color: rgb(46, 49, 146);
+  width: 20px; 
+  height: 38px;
+  clip-path: polygon(0 0, 50% 0, 100% 50%, 50% 100%, 0 100%, 50% 50%);
 }
 
 .word {

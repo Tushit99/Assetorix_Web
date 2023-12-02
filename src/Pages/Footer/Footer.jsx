@@ -22,7 +22,7 @@ import insta from "./insta.png";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { changeLookingFor } from "../../Redux/globalval/action";
-import topimg from "./backbox.png"; 
+import topimg from "./backbox.png";
 
 const Footer = () => {
   const dispatch = useDispatch();
@@ -44,7 +44,7 @@ const Footer = () => {
   }
 
   return (
-    <Box position={"relative"} > 
+    <Box position={"relative"} >
       <div className={style.ft}>
         <Box className={style.footer}>
           {/* footer */}
@@ -148,15 +148,16 @@ const Footer = () => {
                 by Ametheus Holdings Pvt Ltd <br />
               </span>
             </h3>
-            <h3>
-              <span style={{ display: "flex", alignItems: "center", fontSize: "14px" }}> Marketing partner: </span>
-              <span className={style.red}>Unifie Entertainment technology LLP </span>
-            </h3>
           </Box>
-          <Box >
-            Email: <a href="mailto:info@assetorix.com">info@assetorix.com</a> <span className={style.line}> | </span> <br className={style.brs} /> Call Us at: <a href="tel:+91-9990032288"> +91 9990032288,</a>
+          <Box textAlign={{base:"left",md:"left",lg:"right"}}> Email: <a href="mailto:info@assetorix.com">info@assetorix.com</a>  
+            <br /> Call Us at: <a href={"tel:+91-9990032288"}> Phone: +91 9990032288 </a>
+            <a href={"tel:+91-9990045588"}> +91 9990045588 </a>
           </Box>
-        </div>
+          <Box color={"black"}> 
+            <span style={{ display: "flex", alignItems: "center", fontSize: "14px" }}> Marketing partner: </span>
+            <span className={style.red}>Unifie Entertainment technology LLP </span>
+          </Box>
+        </div> 
       </div>
     </Box>
   );

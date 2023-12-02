@@ -515,8 +515,8 @@ const Page1 = () => {
                     fontWeight={400}
                     backgroundColor={"rgba(255, 255, 255, 0.767)"}
                     clipPath={{
-                      base: "polygon(0 0, 100% 0, 97% 50%, 100% 100%, 0 100%)",
-                      md: "polygon(0 0, 100% 0, 98% 50%, 100% 100%, 0 100%)",
+                      base: "polygon(0 0, 96% 0, 98% 50%, 96% 100%, 0 100%)",
+                      md: "polygon(0 0, 96% 0, 98% 50%, 96% 100%, 0 100%)",
                     }}
                   />
                 </InputGroup>
@@ -535,6 +535,7 @@ const Page1 = () => {
                 </Box>
               </Box>
               <span id={style.btn_serch}></span>
+              <span id={style.btn_serch2}></span>
               <Button
                 className={style.searchbtn}
                 _hover={{ backgroundColor: "#d2ab67" }}
