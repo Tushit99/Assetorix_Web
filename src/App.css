@@ -44,6 +44,12 @@ option {
   background-color: rgb(46, 49, 146);
 }
 
+.inquiry_form{
+  position: fixed;
+  bottom: 20px;  
+  right: 60px;   
+}
+
 /* down button */
 @-webkit-keyframes rotate-center {
   0% {

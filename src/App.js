@@ -8,6 +8,7 @@ import {
   MdKeyboardDoubleArrowUp,
 } from "react-icons/md";
 import TopNavbar from "./components/TopNavbar/TopNavbar";
+import InquiryForm from "./Pages/Inquiry/InquiryForm";
 
 function App() {
   const location = useLocation();
@@ -49,6 +50,9 @@ function App() {
         <button onClick={handleScrollToBottom}>
           <MdKeyboardDoubleArrowDown size={"25px"} color="white" />
         </button>
+      </div> 
+      <div className="inquiry_form"> 
+        <InquiryForm />
       </div>
     </div>
   );

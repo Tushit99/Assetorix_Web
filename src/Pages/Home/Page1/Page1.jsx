@@ -534,7 +534,7 @@ const Page1 = () => {
                   ))}
                 </Box>
               </Box>
-              <span id={style.btn_serch}></span>
+              <span id={style.btn_serch}></span>  
               <span id={style.btn_serch2}></span>
               <Button
                 className={style.searchbtn}
