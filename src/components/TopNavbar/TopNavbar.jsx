@@ -36,7 +36,7 @@ const TopNavbar = () => {
     const [resBuyArr, setresBuyArr] = useState([]);
     const [resRentArr, setresRentArr] = useState([]);
     const [comBuyArr, setcomBuyArr] = useState([]);
-    const [comRentArr, setcomRentArr] = useState([]);
+    const [comRentArr, setcomRentArr] = useState([]);  
     const [isOnline, setIsOnline] = useState(navigator.onLine);  
 
 
@@ -49,7 +49,7 @@ const TopNavbar = () => {
             setIsOnline(navigator.onLine);
         };
 
-        window.addEventListener('online', handleOnlineStatusChange);
+        window.addEventListener('online', handleOnlineStatusChange); 
         window.addEventListener('offline', handleOnlineStatusChange);
 
         return () => { 
@@ -169,16 +169,16 @@ const TopNavbar = () => {
                         <Logo />
                     </div>
                     <div className={style.login_data2}>
-                        <div className={style.country}>
+                        {/* <div className={style.country}> 
                             <select
                                 onChange={(e) => handlecountry(e.target.value)}
                                 value={country}
                                 style={{ border: "0px", outline: "0px", borderRadius: "0px", cursor: "pointer" }}
-                            >
+                            >  
                                 <option value="india">India</option>
                                 <option value="usa">USA</option>
                             </select>
-                        </div>
+                        </div> */}  
                         <Link to={"/"} onClick={homeback}>Home</Link>
                         <Link to={"/about"}>About us</Link>
                         <Link to={"/contact"}>Contact</Link>
@@ -281,7 +281,7 @@ const TopNavbar = () => {
                                     </TabList>
                                     <TabPanels>
                                         <TabPanel>
-                                            <Box className={style.buy}>
+                                            <Box className={style.buy} state={{ arr: resBuyArr }}>
                                                 <Checkbox onChange={(e) => handleresbuy("Flat / Apartment")} isChecked={resBuyArr.includes("Flat / Apartment")} iconSize={"0px"} colorScheme={"blue"}>
                                                     Flat/Apartment
                                                 </Checkbox>

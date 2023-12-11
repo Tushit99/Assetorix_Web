@@ -31,7 +31,8 @@ const ResidentialBuy = () => {
     const toast = useToast();
     const { isOpen, onOpen, onClose } = useDisclosure();
     const btnRef = useRef();
-    const [wishload, setWishLoad] = useState(false);
+    const [wishload, setWishLoad] = useState(false); 
+ 
 
     const handleLike = () => {
         let id = localStorage.getItem("usrId") || undefined;
@@ -143,7 +144,7 @@ const ResidentialBuy = () => {
         handleLike(); // wishlist    
     }, []);
 
-    useEffect(() => {
+    useEffect(() => { 
         let param = {}
 
         bhk && (param.bedroom = bhk);
@@ -167,7 +168,7 @@ const ResidentialBuy = () => {
         setSearchParam(param);  
 
         if (location.search) {  
-            dispatch(residentialBuy(location));
+            dispatch(residentialBuy(location)); 
         }
 
     }, [location.search]); 
@@ -370,14 +371,14 @@ const ResidentialBuy = () => {
                     </Box>
 
                     {/* =================================== Error Line ===================================  */}
-                    {isError == true && (
+                    {/* {isError == true && (
                         <Box display={"flex"} alignItems={"center"} justifyContent={"center"} flexDirection={"column"}>
                             <Image src={errorimg} w={"80%"} height={"400px"} objectFit={"contain"} alt="Error-img" />
                         </Box>
-                    )}
+                    )} */}
 
                     {/* =================================== Related Data =================================== */}
-                    {(ResedentialBuydata.msg && isLoading == false && isError == false) && (
+                    {(ResedentialBuydata.msg && isLoading == false) && (
                         <Box boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 10px"} top={0} backgroundColor={"white"} display={"grid"} minH={"70vh"} w={"100%"}  >
                             <Heading size={"sm"} w={"100%"} padding={"10px 0 20px 0"} > {ResedentialBuydata.msg}</Heading>
                             <Box w={"100%"} textAlign={"left"} display={"grid"} gridTemplateRows={"auto"} gridTemplateColumns={{ base: "repeat(1,1fr)", md: "repeat(2,1fr)", lg: "repeat(3,1fr)" }} gap={4} backgroundColor={"rgb(241, 241, 241)"} >

@@ -166,7 +166,7 @@
 
 .card .dragArea {
   height: 150px;
-  border-radius: 5px; 
+  border-radius: 5px;
   background: #fcfcff;
   display: flex;
   width: 100%;
@@ -181,7 +181,6 @@
 .card .dragArea .visible {
   font-size: 18px;
 }
- 
 
 .card .select {
   color: rgb(0, 42, 255);
@@ -199,7 +198,7 @@
 }
 
 .card .container {
-  width: 100%;  
+  width: 100%;
   height: auto;
   display: flex;
   justify-content: flex-start;
@@ -207,7 +206,7 @@
   max-height: 200px;
   overflow-y: auto;
   margin-top: 10px;
-}  
+}
 
 .card .container .image {
   width: 75px;
@@ -226,17 +225,22 @@
 
 .card .container .delete {
   position: absolute;
-  top: -2px; 
-  color: rgb(46,49,146);
-  right: 9px;  
+  top: -2px;
+  color: rgb(46, 49, 146);
+  right: 9px;
   text-shadow: 0 0 3px rgba(245, 245, 245, 0.6);
-  font-size: 18px;     
-  cursor: pointer;  
+  font-size: 18px;
+  cursor: pointer;
 }
- 
 
 .card input,
 .card .dragArea .on-drop,
 .card .dragArea.dragover .visible {
   display: none;
+}
+
+@media screen and (min-width: 100px) and (max-width: 650px) {
+  .inp_form_numbers {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

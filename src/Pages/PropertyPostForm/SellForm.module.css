@@ -13,15 +13,16 @@
   /* border: 2px solid rgb(0, 60, 255); */
 }
 
-.post_property > *:nth-child(2) {
+.post_property > *:nth-child(2) {   
   flex: 1;
-}
+}   
 
 .grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px; 
-}
+  gap: 8px;   
+  padding: 0;  
+} 
 
 
 .setbtn {
@@ -147,7 +148,15 @@
 
 .card input,
 .card .dragArea .on-drop,
-.card .dragArea.dragover .visible {
+.card .dragArea.dragover .visible { 
   display: none;
 }
+ 
+
+@media screen and (min-width: 100px) and (max-width: 650px) {
+  .inp_form_numbers {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
 

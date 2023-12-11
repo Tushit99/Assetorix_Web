@@ -482,7 +482,7 @@ const Page1 = () => {
                       borderRadius='xs'
                       color={"rgb(51, 51, 51)"}
                       rightIcon={<IoIosArrowDown />}  >
-                      Sell
+                      {typelook} 
                     </MenuButton>
                     <MenuList minWidth='140px' popperPlacement="bottom-end" margin={"-5px auto -5px auto"} borderradius={0} fontSize={{ base: "2xs", md: "sm", lg: "md" }} padding={0} >
                       <MenuOptionGroup defaultValue='Sell' fontSize={{ base: "2xs", md: "sm", lg: "md" }} onChange={(e) => setLook(e)} title='Property' type='radio'>
@@ -508,22 +508,22 @@ const Page1 = () => {
                     onChange={(e) => {
                       setSearchInp(e.target.value)
                       handleSearch(e.target.value);
-                    }}
+                    }} 
                     fontSize={{ base: "xs", lg: "lg" }}
                     _active={{ border: "0px", outline: "0px" }}
                     boxShadow={"rgba(0, 0, 0, 0.817) 4px 15px 18px"}
                     fontWeight={400}
                     backgroundColor={"rgba(255, 255, 255, 0.767)"}
                     clipPath={{
-                      base: "polygon(0 0, 96% 0, 98% 50%, 96% 100%, 0 100%)",
+                      base: "polygon(0 0, 96% 0, 98.5% 50%, 96% 100%, 0 100%)",
                       md: "polygon(0 0, 96% 0, 98% 50%, 96% 100%, 0 100%)",
                     }}
-                  />
+                  /> 
                 </InputGroup>
                 <Box
                   margin={{ base: "40px 0 0 101px", md: "40px 0 0 136px" }}
                   zIndex={1}
-                  border={0}
+                  border={0}  
                   position={"absolute"}
                   minWidth={{ base: "75%", lg: "520px" }}
                   padding={"0 10px"}

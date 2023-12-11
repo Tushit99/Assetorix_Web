@@ -336,11 +336,11 @@ const CommercialBuy = () => {
                     </Box>
 
                     {/* =================================== Error Line ===================================  */}
-                    {isError == true && (
+                    {/* {isError == true && (
                         <Box display={"flex"} alignItems={"center"} justifyContent={"center"} flexDirection={"column"}>
                             <Image src={errorimg} w={"80%"} height={"400px"} objectFit={"contain"} alt="Error-img" />
                         </Box>
-                    )}
+                    )} */}
 
                     {/* =================================== Related Data =================================== */}
 

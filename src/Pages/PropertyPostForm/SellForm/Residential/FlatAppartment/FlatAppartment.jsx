@@ -1255,10 +1255,10 @@ const FlatAppartment = () => {
                         size={"sm"}
                         textAlign={"left"}
                     >
-                        Floor Details
+                        Floor Details 
                     </Heading>
                     <Box display={"flex"} alignItems={"center"} gap={5}>
-                        <InputGroup w={400}>
+                        <InputGroup w={{base:300,md:400}}>
                             <Input
                                 type="text"
                                 value={totalfloors}

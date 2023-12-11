@@ -48,7 +48,8 @@ export const residentialBuy = (location) => async (dispatch) => {
       .get(
         `${process.env.REACT_APP_URL}/property/${location.search}`
       )
-      .then((e) => {
+      .then((e) => { 
+        console.log(e);    
         dispatch({ type: DATA_RESIDENTIAL_BUY_DATA, payload: e.data });
       });
   } catch (error) {

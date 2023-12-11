@@ -6,7 +6,7 @@ import Hamburger from "../Hamburger/Hamburger";
 import {
     Popover,
     PopoverArrow,
-    PopoverBody,
+    PopoverBody,  
     PopoverContent,
     PopoverHeader,
     PopoverTrigger,
@@ -179,7 +179,7 @@ const Navebar = () => {
                     <Logo />
                 </div>
                 <div className={scroll > 20 ? style.login_data2 : style.login_data}>
-                    <div className={scroll > 20 ? style.country2 : style.country}>
+                    {/* <div className={scroll > 20 ? style.country2 : style.country}>
                         <select
                             onChange={(e) => handlecountry(e.target.value)}
                             value={country} 
@@ -188,7 +188,7 @@ const Navebar = () => {
                             <option value="india">India</option>
                             <option value="usa">USA</option>
                         </select>
-                    </div>
+                    </div> */}
                     <Link to={"/"} onClick={homeback}>Home</Link>
                     <Link to={"/about"}>About us</Link>
                     <Link to={"/contact"}>Contact</Link>
@@ -313,8 +313,8 @@ const Navebar = () => {
                                             </Checkbox>
                                         </Box>
                                         <Link to="/residential_buy" state={{ arr: resBuyArr }} >
-                                            <Button
-                                                backgroundColor={"rgb(46,49,146)"}
+                                            <Button 
+                                                backgroundColor={"rgb(46,49,146)"} 
                                                 color={"white"}
                                                 w={"100%"}
                                                 className={style.start_btn}

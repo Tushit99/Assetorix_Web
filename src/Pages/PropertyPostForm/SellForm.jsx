@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import style from "./SellForm.module.css";
 import {
-    Box,
-    Heading,
-    Tab,
-    TabList,
-    TabPanel,
-    TabPanels,
-    Tabs,
+  Box,
+  Heading,
+  Tab,
+  TabIndicator,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import FlatAppartment from "./SellForm/Residential/FlatAppartment/FlatAppartment";
@@ -36,464 +37,478 @@ import RetailRent from "./RentForm/Commercial/RetailRent/RetailRent";
 import IndustryRent from "./RentForm/Commercial/Industry/IndustryRent";
 import HospitalityRent from "./RentForm/Commercial/Hospitality/Hospitality";
 import Retail from "./SellForm/Commercial/Retail";
- 
 
-// this is a page of Property sell and Property Rent routes (please don't change anything without any prior knowledge).  
+// this is a page of Property sell and Property Rent routes (please don't change anything without any prior knowledge).
 
-const SellForm = () => { 
-    const looking = useSelector((state) => state.gloalval.lookingFor); 
-    const [look, setlook] = useState("");
-    const [type, settype] = useState("");
-    const [typeofplace, setTypeOf] = useState("");
-    const dispatch = useDispatch(); 
-    const [selectedTab, setSelectedTab] = useState(0);
+const SellForm = () => {
+  const looking = useSelector((state) => state.gloalval.lookingFor);
+  const [look, setlook] = useState("");
+  const [type, settype] = useState("");
+  const [typeofplace, setTypeOf] = useState("");
+  const dispatch = useDispatch();
+  const [selectedTab, setSelectedTab] = useState(0);
 
-    const handlechange = (type, look) => {
-        settype(type); 
-        setlook(look); 
-        dispatch(changeLookingFor(type));  
-    };  
+  const handlechange = (type, look) => {
+    settype(type);
+    setlook(look);
+    dispatch(changeLookingFor(type));
+  };
 
-    const handleTabChange = (index) => {
-        if (index == 0) { 
-            setlook("sell");
-        }
-        else if (index == 1) {
-            setlook("Rent/Lease");
-        }
-        else if (index == 2) {
-            setlook("PG");
-        }
-        setSelectedTab(index);
-    };
+  const handleTabChange = (index) => {
+    if (index == 0) {
+      setlook("sell");
+    } else if (index == 1) {
+      setlook("Rent/Lease");
+    } else if (index == 2) {
+      setlook("PG");
+    }
+    setSelectedTab(index);
+  };
 
-    useEffect(() => {
+  useEffect(() => {
+    if (looking == "Rent/Lease") {
+      settype("Rent/Lease");
+      setSelectedTab(1);
+    } else if (looking == "sell") {
+      settype("sell");
+      setSelectedTab(0);
+    } else if (looking == "PG") {
+      settype("look");
+      setSelectedTab(2);
+    } else {
+      settype("");
+    }
 
-        if (looking == 'Rent/Lease') {
-            settype("Rent/Lease");
-            setSelectedTab(1);
-        }
-        else if (looking == "sell") {
-            settype("sell");
-            setSelectedTab(0);
-        }
-        else if (looking == "PG") {
-            settype("look");
-            setSelectedTab(2);
-        }  
-        else {
-            settype("");
-        } 
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }, []);
 
-        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-
-    }, [])
-
-
-    return (
-        <div className={style.post_property}>
-            <Box>
-                {/* Property Type (what type of property) */}
-                <Box>
-                    <Heading as={"h1"} size={"xl"} fontWeight={400}> 
-                        Fill out basic details
-                    </Heading>
-                    <Heading textAlign={"left"} margin={"20px 0"} as={"h4"} size={"sm"}>
-                        I am looking to
-                    </Heading>
-                    <Tabs variant="unstyled" index={selectedTab} onChange={handleTabChange} defaultIndex={0} >
-                        <TabList gap={3} margin={"0 20px"}> 
-                            <Tab
-                                _selected={{
-                                    bg: "blue.50",
-                                    border: "1px solid rgba(85, 91, 255, 0.236)",
-                                    borderRadius: "0px",
-                                }}
-                            >
-                                Sell
-                            </Tab>
-                            <Tab
-                                _selected={{
-                                    bg: "blue.50",
-                                    border: "1px solid rgba(85, 90, 255, 0.236)",
-                                    borderRadius: "0px",
-                                }}
-                            >
-                                Rent/Lease
-                            </Tab>
-                            {/* <Tab
-                                _selected={{
-                                    bg: "blue.50",
-                                    border: "1px solid rgba(85, 90, 255, 0.236)",
-                                    borderRadius: "0px",
-                                }}
-                            >
-                                PG
-                            </Tab> */} 
-                        </TabList> 
-                        <Heading textAlign={"left"} margin={"20px 0"} as={"h3"} size={"md"}>
-                            What kind of Property do you have?
-                        </Heading>
-                        <TabPanels>
-                            {/* sell options */}
-                            <TabPanel>
-                                <Tabs variant="unstyled">
-                                    <TabList>
-                                        <Tab
-                                            _selected={{
-                                                bg: "blue.50",
-                                                border: "1px solid rgba(85, 91, 255, 0.236)",
-                                                borderRadius: "0px",
-                                            }}
-                                        >
-                                            Residential
-                                        </Tab>
-                                        <Tab
-                                            _selected={{
-                                                bg: "blue.50",
-                                                border: "1px solid rgba(85, 91, 255, 0.236)",
-                                                borderRadius: "0px",
-                                            }}
-                                            onClick={() => setTypeOf("Commercial")}
-                                        >
-                                            Commercial
-                                        </Tab>
-                                    </TabList>
-                                    <TabPanels>
-                                        <TabPanel>
-                                            <Box className={style.grid}>
-                                                <button
-                                                    onClick={() => handlechange("sell", "Flat/Apartment")}
-                                                    className={
-                                                        look === "Flat/Apartment" && type === "sell"
-                                                            ? style.setbtn
-                                                            : style.btn
-                                                    }
-                                                >
-                                                    Flat/Apartment
-                                                </button>
-                                                <button
-                                                    onClick={() =>
-                                                        handlechange("sell", "Independent House/villa")
-                                                    }
-                                                    className={
-                                                        look === "Independent House/villa" &&
-                                                            type === "sell"
-                                                            ? style.setbtn
-                                                            : style.btn
-                                                    }
-                                                >
-                                                    Independent House/villa
-                                                </button>
-                                                <button
-                                                    onClick={() =>
-                                                        handlechange("sell", "Independent/builder Floor")
-                                                    }
-                                                    className={
-                                                        look === "Independent/builder Floor" &&
-                                                            type === "sell"
-                                                            ? style.setbtn
-                                                            : style.btn
-                                                    }
-                                                >
-                                                    Independent/builder Floor
-                                                </button>
-                                                <button
-                                                    onClick={() =>
-                                                        handlechange("sell", "Serviced Apartment")
-                                                    }
-                                                    className={
-                                                        look === "Serviced Apartment" && type === "sell"
-                                                            ? style.setbtn
-                                                            : style.btn
-                                                    }
-                                                >
-                                                    Serviced Apartment
-                                                </button>
-                                                <button
-                                                    onClick={() => handlechange("sell", "Plot / Land")}
-                                                    className={
-                                                        look === "Plot / Land" && type === "sell"
-                                                            ? style.setbtn
-                                                            : style.btn
-                                                    }
-                                                >
-                                                    Plot/Land
-                                                </button>
-                                                <button
-                                                    onClick={() =>
-                                                        handlechange("sell", "1 RK/ Studio Apartment")
-                                                    }
-                                                    className={
-                                                        look === "1 RK/ Studio Apartment" && type === "sell"
-                                                            ? style.setbtn
-                                                            : style.btn
-                                                    }
-                                                >
-                                                    1 RK/ Studio Apartment
-                                                </button>
-                                                <button
-                                                    onClick={() => handlechange("sell", "Farmhouse")}
-                                                    className={
-                                                        look === "Farmhouse" && type === "sell"
-                                                            ? style.setbtn
-                                                            : style.btn
-                                                    }
-                                                >
-                                                    Farmhouse
-                                                </button>
-                                            </Box>
-                                        </TabPanel>
-                                        <TabPanel>
-                                            <Box className={style.grid}>
-                                                <button
-                                                    onClick={() => handlechange("sell", "Office")}
-                                                    className={
-                                                        look === "Office" && type === "sell"
-                                                            ? style.setbtn
-                                                            : style.btn
-                                                    }
-                                                >
-                                                    Office
-                                                </button>
-                                                <button
-                                                    onClick={() => handlechange("sell", "Retail")}
-                                                    className={
-                                                        look === "Retail" && type === "sell"
-                                                            ? style.setbtn
-                                                            : style.btn
-                                                    }
-                                                >
-                                                    Retail
-                                                </button>
-                                                <button
-                                                    onClick={() => handlechange("sell", "Plot/Land")}
-                                                    className={
-                                                        look === "Plot/Land" && type === "sell"
-                                                            ? style.setbtn
-                                                            : style.btn
-                                                    }
-                                                >
-                                                    Plot/Land
-                                                </button>
-                                                <button
-                                                    onClick={() => handlechange("sell", "Storage")}
-                                                    className={
-                                                        look === "Storage" && type === "sell"
-                                                            ? style.setbtn
-                                                            : style.btn
-                                                    }
-                                                >
-                                                    Storage
-                                                </button>
-                                                <button
-                                                    onClick={() => handlechange("sell", "Industry")}
-                                                    className={
-                                                        look === "Industry" && type === "sell"
-                                                            ? style.setbtn
-                                                            : style.btn
-                                                    }
-                                                >
-                                                    Industry
-                                                </button>
-                                                <button
-                                                    onClick={() => handlechange("sell", "Hospitality")}
-                                                    className={
-                                                        look === "Hospitality" && type === "sell"
-                                                            ? style.setbtn
-                                                            : style.btn
-                                                    }
-                                                >
-                                                    Hospitality
-                                                </button>
-                                            </Box>
-                                        </TabPanel>
-                                    </TabPanels>
-                                </Tabs>
-                            </TabPanel>
-                            {/* rent options */}
-                            <TabPanel>
-                                <Tabs variant="unstyled">
-                                    <TabList>
-                                        <Tab
-                                            _selected={{
-                                                bg: "blue.50",
-                                                border: "1px solid rgba(85, 91, 255, 0.236)",
-                                                borderRadius: "0px",
-                                            }}
-                                        >
-                                            Residential
-                                        </Tab>
-                                        <Tab
-                                            _selected={{
-                                                bg: "blue.50",
-                                                border: "1px solid rgba(85, 91, 255, 0.236)",
-                                                borderRadius: "0px",
-                                            }}
-                                        >
-                                            Commercial
-                                        </Tab>
-                                    </TabList>
-                                    <TabPanels>
-                                        <TabPanel>
-                                            <Box className={style.grid}>
-                                                <button
-                                                    onClick={() =>
-                                                        handlechange("Rent/Lease", "Flat/Apartment")
-                                                    }
-                                                    className={
-                                                        look === "Flat/Apartment" && type === "Rent/Lease"
-                                                            ? style.setbtn
-                                                            : style.btn
-                                                    }
-                                                >
-                                                    Flat/Apartment
-                                                </button>
-                                                <button
-                                                    onClick={() =>
-                                                        handlechange(
-                                                            "Rent/Lease",
-                                                            "Independent House/villa"
-                                                        )
-                                                    }
-                                                    className={
-                                                        look === "Independent House/villa" &&
-                                                            type === "Rent/Lease"
-                                                            ? style.setbtn
-                                                            : style.btn
-                                                    }
-                                                >
-                                                    Independent House/villa
-                                                </button>
-                                                <button
-                                                    onClick={() =>
-                                                        handlechange(
-                                                            "Rent/Lease",
-                                                            "Independent/builder Floor"
-                                                        )
-                                                    }
-                                                    className={
-                                                        look === "Independent/builder Floor" &&
-                                                            type === "Rent/Lease"
-                                                            ? style.setbtn
-                                                            : style.btn
-                                                    }
-                                                >
-                                                    Independent/builder Floor
-                                                </button>
-                                                <button
-                                                    onClick={() =>
-                                                        handlechange("Rent/Lease", "Serviced Apartment")
-                                                    }
-                                                    className={
-                                                        look === "Serviced Apartment" &&
-                                                            type === "Rent/Lease"
-                                                            ? style.setbtn
-                                                            : style.btn
-                                                    }
-                                                >
-                                                    Serviced Apartment
-                                                </button>
-                                                <button
-                                                    onClick={() =>
-                                                        handlechange("Rent/Lease", "1 RK/ Studio Apartment")
-                                                    }
-                                                    className={
-                                                        look === "1 RK/ Studio Apartment" &&
-                                                            type === "Rent/Lease"
-                                                            ? style.setbtn
-                                                            : style.btn
-                                                    }
-                                                >
-                                                    1 RK/ Studio Apartment
-                                                </button>
-                                                <button
-                                                    onClick={() =>
-                                                        handlechange("Rent/Lease", "Farmhouse")
-                                                    }
-                                                    className={
-                                                        look === "Farmhouse" && type === "Rent/Lease"
-                                                            ? style.setbtn
-                                                            : style.btn
-                                                    }
-                                                >
-                                                    Farmhouse
-                                                </button>
-                                            </Box>
-                                        </TabPanel>
-                                        <TabPanel>
-                                            <Box className={style.grid}>
-                                                <button
-                                                    onClick={() => handlechange("Rent/Lease", "Office")}
-                                                    className={
-                                                        look === "Office" && type === "Rent/Lease"
-                                                            ? style.setbtn
-                                                            : style.btn
-                                                    }
-                                                >
-                                                    Office
-                                                </button>
-                                                <button
-                                                    onClick={() => handlechange("Rent/Lease", "Retail")}
-                                                    className={
-                                                        look === "Retail" && type === "Rent/Lease"
-                                                            ? style.setbtn
-                                                            : style.btn
-                                                    }
-                                                >
-                                                    Retail
-                                                </button>
-                                                <button
-                                                    onClick={() =>
-                                                        handlechange("Rent/Lease", "Plot/Land")
-                                                    }
-                                                    className={
-                                                        look === "Plot/Land" && type === "Rent/Lease"
-                                                            ? style.setbtn
-                                                            : style.btn
-                                                    }
-                                                >
-                                                    Plot/Land
-                                                </button>
-                                                <button
-                                                    onClick={() => handlechange("Rent/Lease", "Storage")}
-                                                    className={
-                                                        look === "Storage" && type === "Rent/Lease"
-                                                            ? style.setbtn
-                                                            : style.btn
-                                                    }
-                                                >
-                                                    Storage
-                                                </button>
-                                                <button
-                                                    onClick={() => handlechange("Rent/Lease", "Industry")}
-                                                    className={
-                                                        look === "Industry" && type === "Rent/Lease"
-                                                            ? style.setbtn
-                                                            : style.btn
-                                                    }
-                                                >
-                                                    Industry
-                                                </button>
-                                                <button
-                                                    onClick={() =>
-                                                        handlechange("Rent/Lease", "Hospitality")
-                                                    }
-                                                    className={
-                                                        look === "Hospitality" && type === "Rent/Lease"
-                                                            ? style.setbtn
-                                                            : style.btn
-                                                    }
-                                                >
-                                                    Hospitality
-                                                </button>
-                                            </Box>
-                                        </TabPanel>
-                                    </TabPanels>
-                                </Tabs>
-                            </TabPanel>
-                            {/* PG options */}
-                            {/* <TabPanel>
+  return (
+    <div className={style.post_property}>
+      <Box>
+        {/* Property Type (what type of property) */}
+        <Box>
+          <Heading as={"h1"} size={"xl"} fontWeight={400}>
+            Fill out basic details
+          </Heading>
+          <Heading textAlign={"left"} margin={"20px 0"} as={"h4"} size={"sm"}>
+            I am looking to
+          </Heading>
+          <Tabs
+            variant="unstyled"
+            index={selectedTab}
+            onChange={handleTabChange}
+            defaultIndex={0}
+          >
+            <TabList gap={3} margin={"0 20px"}>
+              <Tab
+                bg="blue.50"
+                border="1px solid rgba(85, 91, 255, 0.236)"
+                borderRadius="0px"
+                _selected={{ color: "white", backgroundColor: "unset" }}
+              >
+                Sell
+              </Tab>
+              <Tab
+                bg="blue.50"
+                border="1px solid rgba(85, 91, 255, 0.236)"
+                borderRadius="0px"
+                _selected={{ color: "white", backgroundColor: "unset" }}
+              >
+                Rent/Lease
+              </Tab>
+              {/* <Tab 
+                _selected={{
+                    bg: "blue.50",
+                    border: "1px solid rgba(85, 90, 255, 0.236)",
+                    borderRadius: "0px",
+                }}
+            >
+                PG
+            </Tab> */}
+            </TabList>
+            <TabIndicator
+              mt="-41px"
+              height="40px"
+              bg="#2e3192"
+              zIndex={"-1"}
+              borderRadius="1px"
+            />
+            <Heading textAlign={"left"} margin={"20px 0"} as={"h3"} size={"md"}>
+              What kind of Property do you have?
+            </Heading>
+            <TabPanels>
+              {/* sell options */}
+              <TabPanel>
+                <Tabs variant="unstyled">
+                  <TabList>
+                    <Tab
+                      bg="blue.50"
+                      border="1px solid rgba(85, 91, 255, 0.236)"
+                      borderRadius="0px"
+                      marginRight={"14px"}
+                      _selected={{ color: "white", backgroundColor: "unset" }}
+                    >
+                      Residential
+                    </Tab>
+                    <Tab
+                      bg="blue.50"
+                      border="1px solid rgba(85, 91, 255, 0.236)"
+                      borderRadius="0px"
+                      _selected={{ color: "white", backgroundColor: "unset" }}
+                      onClick={() => setTypeOf("Commercial")}
+                    >
+                      Commercial
+                    </Tab>
+                  </TabList>
+                  <TabIndicator
+                    mt="-41px"
+                    height="40px"
+                    bg="#d2ab66"
+                    zIndex={"-1"}
+                    borderRadius="1px"
+                  />
+                  <TabPanels >     
+                    <TabPanel>
+                      <Box className={style.grid}>
+                        <button
+                          onClick={() => handlechange("sell", "Flat/Apartment")}
+                          className={
+                            look === "Flat/Apartment" && type === "sell"
+                              ? style.setbtn
+                              : style.btn
+                          }
+                        >
+                          Flat/Apartment
+                        </button>
+                        <button
+                          onClick={() => handlechange("sell", "Plot / Land")}
+                          className={
+                            look === "Plot / Land" && type === "sell"
+                              ? style.setbtn
+                              : style.btn
+                          }
+                        >
+                          Plot/Land
+                        </button>
+                        <button
+                          onClick={() => handlechange("sell", "Farmhouse")}
+                          className={
+                            look === "Farmhouse" && type === "sell"
+                              ? style.setbtn
+                              : style.btn
+                          }
+                        >
+                          Farmhouse
+                        </button>
+                        <button
+                          onClick={() =>
+                            handlechange("sell", "Serviced Apartment")
+                          }
+                          className={
+                            look === "Serviced Apartment" && type === "sell"
+                              ? style.setbtn
+                              : style.btn
+                          }
+                        >
+                          Serviced Apartment
+                        </button>
+                        <button
+                          onClick={() =>
+                            handlechange("sell", "1 RK/ Studio Apartment")
+                          }
+                          className={
+                            look === "1 RK/ Studio Apartment" && type === "sell"
+                              ? style.setbtn
+                              : style.btn
+                          }
+                        >
+                          1 RK/ Studio Apartment
+                        </button>
+                        <button
+                          onClick={() =>
+                            handlechange("sell", "Independent House/villa")
+                          }
+                          className={
+                            look === "Independent House/villa" &&
+                            type === "sell"
+                              ? style.setbtn
+                              : style.btn
+                          }
+                        >
+                          Independent House/villa
+                        </button>
+                        <button
+                          onClick={() =>
+                            handlechange("sell", "Independent/builder Floor")
+                          }
+                          className={
+                            look === "Independent/builder Floor" &&
+                            type === "sell"
+                              ? style.setbtn
+                              : style.btn
+                          }
+                        >
+                          Independent/builder Floor
+                        </button>
+                      </Box>
+                    </TabPanel>
+                    <TabPanel>
+                      <Box className={style.grid}>
+                        <button
+                          onClick={() => handlechange("sell", "Office")}
+                          className={
+                            look === "Office" && type === "sell"
+                              ? style.setbtn
+                              : style.btn
+                          }
+                        >
+                          Office
+                        </button>
+                        <button
+                          onClick={() => handlechange("sell", "Retail")}
+                          className={
+                            look === "Retail" && type === "sell"
+                              ? style.setbtn
+                              : style.btn
+                          }
+                        >
+                          Retail
+                        </button>
+                        <button
+                          onClick={() => handlechange("sell", "Storage")}
+                          className={
+                            look === "Storage" && type === "sell"
+                              ? style.setbtn
+                              : style.btn
+                          }
+                        >
+                          Storage
+                        </button>   
+                        <button
+                          onClick={() => handlechange("sell", "Plot/Land")}
+                          className={
+                            look === "Plot/Land" && type === "sell"
+                              ? style.setbtn
+                              : style.btn
+                          }
+                        >
+                          Plot/Land
+                        </button>
+                        <button
+                          onClick={() => handlechange("sell", "Industry")}
+                          className={
+                            look === "Industry" && type === "sell"
+                              ? style.setbtn
+                              : style.btn
+                          }
+                        >
+                          Industry
+                        </button>
+                        <button
+                          onClick={() => handlechange("sell", "Hospitality")}
+                          className={
+                            look === "Hospitality" && type === "sell"
+                              ? style.setbtn
+                              : style.btn
+                          }
+                        >
+                          Hospitality
+                        </button>
+                      </Box>
+                    </TabPanel>   
+                  </TabPanels>  
+                </Tabs> 
+              </TabPanel>  
+              {/* rent options */}
+              <TabPanel>  
+                <Tabs variant="unstyled">
+                  <TabList>
+                    <Tab
+                      bg="blue.50"
+                      border="1px solid rgba(85, 91, 255, 0.236)"
+                      borderRadius="0px"
+                      marginRight={"14px"}
+                      _selected={{ color: "white", backgroundColor: "unset" }}
+                    >
+                      Residential
+                    </Tab>
+                    <Tab
+                      bg="blue.50"
+                      border="1px solid rgba(85, 91, 255, 0.236)"
+                      borderRadius="0px"
+                      marginRight={"14px"}
+                      _selected={{ color: "white", backgroundColor: "unset" }}
+                    >
+                      Commercial
+                    </Tab>
+                  </TabList>
+                  <TabIndicator
+                    mt="-41px"
+                    height="40px"
+                    bg="#d2ab66"
+                    zIndex={"-1"}
+                    borderRadius="1px"
+                  />
+                  <TabPanels>
+                    <TabPanel>
+                      <Box className={style.grid}>
+                        <button
+                          onClick={() =>
+                            handlechange("Rent/Lease", "Flat/Apartment")
+                          }
+                          className={
+                            look === "Flat/Apartment" && type === "Rent/Lease"
+                              ? style.setbtn
+                              : style.btn
+                          }
+                        >
+                          Flat/Apartment
+                        </button>
+                        <button
+                          onClick={() =>
+                            handlechange(
+                              "Rent/Lease",
+                              "Independent House/villa"
+                            )
+                          }
+                          className={
+                            look === "Independent House/villa" &&
+                            type === "Rent/Lease"
+                              ? style.setbtn
+                              : style.btn
+                          }
+                        >
+                          Independent House/villa
+                        </button>
+                        <button
+                          onClick={() =>
+                            handlechange(
+                              "Rent/Lease",
+                              "Independent/builder Floor"
+                            )
+                          }
+                          className={
+                            look === "Independent/builder Floor" &&
+                            type === "Rent/Lease"
+                              ? style.setbtn
+                              : style.btn
+                          }
+                        >
+                          Independent/builder Floor
+                        </button>
+                        <button
+                          onClick={() =>
+                            handlechange("Rent/Lease", "Serviced Apartment")
+                          }
+                          className={
+                            look === "Serviced Apartment" &&
+                            type === "Rent/Lease"
+                              ? style.setbtn
+                              : style.btn
+                          }
+                        >
+                          Serviced Apartment
+                        </button>
+                        <button
+                          onClick={() =>
+                            handlechange("Rent/Lease", "1 RK/ Studio Apartment")
+                          }
+                          className={
+                            look === "1 RK/ Studio Apartment" &&
+                            type === "Rent/Lease"
+                              ? style.setbtn
+                              : style.btn
+                          }
+                        >
+                          1 RK/ Studio Apartment
+                        </button>
+                        <button
+                          onClick={() =>
+                            handlechange("Rent/Lease", "Farmhouse")
+                          }
+                          className={
+                            look === "Farmhouse" && type === "Rent/Lease"
+                              ? style.setbtn
+                              : style.btn
+                          }
+                        >
+                          Farmhouse
+                        </button>
+                      </Box>
+                    </TabPanel>
+                    <TabPanel>
+                      <Box className={style.grid}>
+                        <button
+                          onClick={() => handlechange("Rent/Lease", "Office")}
+                          className={
+                            look === "Office" && type === "Rent/Lease"
+                              ? style.setbtn
+                              : style.btn
+                          }
+                        >
+                          Office
+                        </button>
+                        <button
+                          onClick={() => handlechange("Rent/Lease", "Retail")}
+                          className={
+                            look === "Retail" && type === "Rent/Lease"
+                              ? style.setbtn
+                              : style.btn
+                          }
+                        >
+                          Retail
+                        </button>
+                        <button
+                          onClick={() =>
+                            handlechange("Rent/Lease", "Plot/Land")
+                          }
+                          className={
+                            look === "Plot/Land" && type === "Rent/Lease"
+                              ? style.setbtn
+                              : style.btn
+                          }
+                        >
+                          Plot/Land
+                        </button>
+                        <button
+                          onClick={() => handlechange("Rent/Lease", "Storage")}
+                          className={
+                            look === "Storage" && type === "Rent/Lease"
+                              ? style.setbtn
+                              : style.btn
+                          }
+                        >
+                          Storage
+                        </button>
+                        <button
+                          onClick={() => handlechange("Rent/Lease", "Industry")}
+                          className={
+                            look === "Industry" && type === "Rent/Lease"
+                              ? style.setbtn
+                              : style.btn
+                          }
+                        >
+                          Industry
+                        </button>
+                        <button
+                          onClick={() =>
+                            handlechange("Rent/Lease", "Hospitality")
+                          }
+                          className={
+                            look === "Hospitality" && type === "Rent/Lease"
+                              ? style.setbtn
+                              : style.btn
+                          }
+                        >
+                          Hospitality
+                        </button>
+                      </Box>
+                    </TabPanel>
+                  </TabPanels>
+                </Tabs>
+              </TabPanel>
+              {/* PG options */}
+              {/* <TabPanel>
                                 <Box className={style.grid}>
                                     <button
                                         onClick={() => handlechange("PG", "Flat/Apartment")}
@@ -551,98 +566,128 @@ const SellForm = () => {
                                     </button>
                                 </Box>
                             </TabPanel> */}
-                        </TabPanels>
-                    </Tabs>
-                </Box> 
+            </TabPanels>
+          </Tabs>
+        </Box>
 
-                {/* Flat/Apartment */}
-                {(type == "sell" && look == "Flat/Apartment") ? <FlatAppartment /> : ""}
+        {/* Flat/Apartment */}
+        {type == "sell" && look == "Flat/Apartment" ? <FlatAppartment /> : ""}
 
-                {/* Independent House/villa */}
-                {(type == "sell" && look == "Independent House/villa") ? <IndependentHouse /> : ""}
+        {/* Independent House/villa */}
+        {type == "sell" && look == "Independent House/villa" ? (
+          <IndependentHouse />
+        ) : (
+          ""
+        )}
 
-                {/* Independent/builder Floor */}
-                {(type == "sell" && look == "Independent/builder Floor") ? <Independentbuilder /> : ""}
+        {/* Independent/builder Floor */}
+        {type == "sell" && look == "Independent/builder Floor" ? (
+          <Independentbuilder />
+        ) : (
+          ""
+        )}
 
+        {/* Serviced Apartment */}
+        {type == "sell" && look == "Serviced Apartment" ? (
+          <ServicedApartment />
+        ) : (
+          ""
+        )}
 
-                {/* Serviced Apartment */}
-                {(type == "sell" && look == "Serviced Apartment") ? <ServicedApartment /> : ""}
+        {/* 1 RK/ Studio Apartment */}
+        {type == "sell" && look == "1 RK/ Studio Apartment" ? <RKStudio /> : ""}
 
-                {/* 1 RK/ Studio Apartment */}
-                {(type == "sell" && look == "1 RK/ Studio Apartment") ? <RKStudio /> : ""}
+        {/* Serviced Apartment */}
+        {type == "sell" && look == "Farmhouse" ? <FarmHouse /> : ""}
 
-                {/* Serviced Apartment */}
-                {(type == "sell" && look == "Farmhouse") ? <FarmHouse /> : ""}
+        {/* Plot/Land */}
+        {type == "sell" && look == "Plot / Land" ? <PlotLand /> : ""}
 
-                {/* Plot/Land */}
-                {(type == "sell" && look == "Plot / Land") ? <PlotLand /> : ""}
+        {/* OfficeSetup */}
+        {type == "sell" && look == "Office" ? <OfficeSetup /> : ""}
 
-                {/* OfficeSetup */}
-                {(type == "sell" && look == "Office") ? <OfficeSetup /> : ""}
+        {/* Retail */}
+        {type === "sell" && look === "Retail" ? <Retail /> : ""}
 
-                {/* Retail */}
-                {(type === "sell" && look === "Retail") ? <Retail /> : ""}
+        {/* Storage */}
+        {type == "sell" && look == "Storage" ? <Storage /> : ""}
 
-                {/* Storage */}
-                {(type == "sell" && look == "Storage") ? <Storage /> : ""}
+        {/* Industry */}
+        {type == "sell" && look == "Industry" ? <Industry /> : ""}
 
-                {/* Industry */}
-                {(type == "sell" && look == "Industry") ? <Industry /> : ""}
+        {/* Hospitality */}
+        {type == "sell" && look == "Hospitality" ? <Hospitality /> : ""}
 
-                {/* Hospitality */}
-                {(type == "sell" && look == "Hospitality") ? <Hospitality /> : ""}
+        {/* Plot / Land */}
+        {type == "sell" && look == "Plot/Land" ? <PlotLandCommercial /> : ""}
 
-                {/* Plot / Land */}
-                {(type == "sell" && look == "Plot/Land") ? <PlotLandCommercial /> : ""}
+        {/* ================================== Rent/Lease ============================== */}
 
-                {/* ================================== Rent/Lease ============================== */}
+        {/*  Rent / Flat or Apartment */}
+        {type == "Rent/Lease" && look == "Flat/Apartment" ? (
+          <FlatApartment />
+        ) : (
+          ""
+        )}
 
-                {/*  Rent / Flat or Apartment */}
-                {(type == "Rent/Lease" && look == "Flat/Apartment") ? <FlatApartment /> : ""}
+        {/* Independent House / Villa */}
+        {type == "Rent/Lease" && look == "Independent House/villa" ? (
+          <Independent />
+        ) : (
+          ""
+        )}
 
-                {/* Independent House / Villa */}
-                {(type == "Rent/Lease" && look == "Independent House/villa") ? <Independent /> : ""}
+        {/* Independent/builder Floor */}
+        {type == "Rent/Lease" && look == "Independent/builder Floor" ? (
+          <IndependentBuilderRent />
+        ) : (
+          ""
+        )}
 
+        {/* Serviced Apartment */}
+        {type == "Rent/Lease" && look == "Serviced Apartment" ? (
+          <ServicedApartmentRent />
+        ) : (
+          ""
+        )}
 
-                {/* Independent/builder Floor */}
-                {(type == "Rent/Lease" && look == "Independent/builder Floor") ? <IndependentBuilderRent /> : ""}
+        {/* 1RK / Studio Apartment  */}
+        {type == "Rent/Lease" && look == "1 RK/ Studio Apartment" ? (
+          <StudioApartmentRent />
+        ) : (
+          ""
+        )}
 
-                {/* Serviced Apartment */}
-                {(type == "Rent/Lease" && look == "Serviced Apartment") ? <ServicedApartmentRent /> : ""}
+        {/* Farmhouse */}
+        {type == "Rent/Lease" && look == "Farmhouse" ? <FarmhouseRent /> : ""}
 
-                {/* 1RK / Studio Apartment  */}
-                {(type == "Rent/Lease" && look == "1 RK/ Studio Apartment") ? <StudioApartmentRent /> : ""}
+        {/* =================================== Rent/Lease (Commercial) ================================ */}
 
-                {/* Farmhouse */}
-                {(type == "Rent/Lease" && look == "Farmhouse") ? <FarmhouseRent /> : ""} 
+        {/* Office */}
+        {type == "Rent/Lease" && look == "Office" ? <OfficeRent /> : ""}
 
-                {/* =================================== Rent/Lease (Commercial) ================================ */}  
+        {/* storage */}
+        {type == "Rent/Lease" && look == "Storage" ? <StorageRent /> : ""}
 
-                {/* Office */} 
-                {(type == "Rent/Lease" && look == "Office") ? <OfficeRent /> : "" } 
+        {/* Plot / Land (Rent)  */}
+        {type == "Rent/Lease" && look == "Plot/Land" ? <PlotLandRent /> : ""}
 
-                {/* storage */}   
-                {(type == "Rent/Lease") && look == "Storage" ? <StorageRent /> : "" } 
+        {/* Retail */}
+        {type == "Rent/Lease" && look == "Retail" ? <RetailRent /> : ""}
 
-                {/* Plot / Land (Rent)  */} 
-                {(type == "Rent/Lease" && look == "Plot/Land" ? <PlotLandRent /> : "" )}  
-  
-                {/* Retail */} 
-                {(type == "Rent/Lease" && look == "Retail" ? <RetailRent /> : "" )}    
+        {/* Industry */}
+        {type == "Rent/Lease" && look == "Industry" ? <IndustryRent /> : ""}
 
-                {/* Industry */}
-                {(type == "Rent/Lease" && look == "Industry" ? <IndustryRent /> : "")}
-
-                {/* Hospitality */}
-                {(type == "Rent/Lease" && look == "Hospitality" ? <HospitalityRent /> : "")}
-
-            </Box> 
-            <Box backgroundColor={"rgb(232, 244, 255)"} borderRadius={10}></Box>
-        </div>
-    );
+        {/* Hospitality */}
+        {type == "Rent/Lease" && look == "Hospitality" ? (
+          <HospitalityRent />
+        ) : (
+          ""
+        )}
+      </Box>
+      <Box backgroundColor={"rgb(232, 244, 255)"} borderRadius={10}></Box>
+    </div>
+  );
 };
 
-export default SellForm;  
-
-
- 
+export default SellForm;
