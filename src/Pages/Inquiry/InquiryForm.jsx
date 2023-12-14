@@ -1,9 +1,16 @@
 import { HamburgerIcon } from '@chakra-ui/icons';
 import { Box, Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from '@chakra-ui/react';
-import React from 'react'
+import React, { useState } from 'react'
 
 const InquiryForm = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure(); 
+  const [name, setName] = useState("");   
+  const [mobile, setMobile] = useState("");   
+  const [email, setEmail] = useState("");   
+  const [formType, steFormType] = useState("");   
+
+
+
   return (
     <Box>
       <Button colorScheme={"blue"} borderRadius={"50%"}  onClick={onOpen}>
@@ -15,7 +22,8 @@ const InquiryForm = () => {
         <ModalContent>
           <ModalHeader>Modal Title</ModalHeader>
           <ModalCloseButton />
-          <ModalBody> 
+          <ModalBody>  
+            
           </ModalBody>
 
           <ModalFooter>
