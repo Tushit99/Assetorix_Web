@@ -53,7 +53,7 @@ function App() {
       </div> 
       <div className="inquiry_form"> 
         <InquiryForm />
-      </div>
+      </div>   
     </div>
   );
 }
