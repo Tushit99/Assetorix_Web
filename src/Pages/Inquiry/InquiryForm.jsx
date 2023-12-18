@@ -20,8 +20,11 @@ import {
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { NumericString } from "./Incript";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const InquiryForm = () => {
+  const username = useSelector((state) => state.userreducer);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [name, setName] = useState("");
   const [mobile, setMobile] = useState("");
@@ -36,12 +39,10 @@ const InquiryForm = () => {
   const [emailWarning, setEmailWarning] = useState("");
   const [formTypeWarning, steFormTypeWarning] = useState("");
   const [PropertyTypeWarning, stePropertyTypeWarning] = useState("");
-  const [disWarning, setDisWarning] = useState("");
+  const [disWarning, setDisWarning] = useState("");  
   const toast = useToast();
-
-  useEffect(() => {
-    console.log(PropertyType);
-  }, [PropertyType]);
+  const navigate = useNavigate(); 
+ 
 
   const handlevisiblelity = (e) => {
     let val = e.target.value;
@@ -51,7 +52,12 @@ const InquiryForm = () => {
     } else {
       setVisible(true);
     }
-  };
+  }; 
+
+  const handletologin = () =>{
+    navigate("/login"); 
+    onClose();  
+  }
 
   const handleSendQuery = async (e) => {
     e.preventDefault();
@@ -80,8 +86,8 @@ const InquiryForm = () => {
       description: dis,
     };
 
-    if(PropertyType){
-      body["propertyType"] = PropertyType
+    if (PropertyType) {
+      body["propertyType"] = PropertyType;
     }
 
     if (name.length < 3) {
@@ -127,16 +133,33 @@ const InquiryForm = () => {
       stePropertyType("");
       setDisWarning("");
     }
-
-    await axios
-      .post(`${process.env.REACT_APP_URL}/leadForm`, body, {
-        headers: head,
-    })
-      .then((e) => {
-        console.log(e.data);
-      }).catch((e)=>{
-        console.log(e)
-      })
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_URL}/leadForm`,
+        body,
+        {
+          headers: head,
+        }
+      );
+      toast({
+        title: response.data.msg,
+        description: "form submited successfully",
+        status: "success",
+        duration: 5000, // Adjust duration as needed
+        isClosable: true,
+      });
+      console.log(response.data);
+      onClose();
+    } catch (error) {
+      toast({
+        title: "Something went wrong",
+        description:
+          "Please check your internet connection or contact us on email",
+        status: "error",
+        duration: 4000,
+      });
+      onClose();
+    }
   };
 
   return (
@@ -155,169 +178,186 @@ const InquiryForm = () => {
         </Button>
       </Tooltip>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} isCentered onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>
-            Inquiry Form{" "}
-            <sub className="inquariTitel">
-              {" "}
-              (login is required to post quiry){" "}
-            </sub>
-          </ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Box>
+        {username.name ? (
+          <ModalContent>
+            <ModalHeader>
+              Inquiry Form{" "}
+              <span className="inquariTitel">
+                (login is required to post quiry)
+              </span>
+            </ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
               <Box>
-                <Text> Name </Text>
-                <Input
-                  type={"text"}
-                  required 
-                  onChange={(e) => setName(e.target.value)}
-                  value={name} 
-                  maxLength={30}
-                  placeholder="Enter Name"
-                  variant="outline"
-                />
-                <Text
-                  color={"red"}
-                  fontSize={"12px"}
-                  display={nameWarning == "" ? "none" : "block"}
+                <Box>
+                  <Text> Name </Text>
+                  <Input
+                    type={"text"}
+                    required
+                    onChange={(e) => setName(e.target.value)}
+                    value={name}
+                    maxLength={30}
+                    placeholder="Enter Name"
+                    variant="outline"
+                  />
+                  <Text
+                    color={"red"}
+                    fontSize={"12px"}
+                    display={nameWarning == "" ? "none" : "block"}
+                  >
+                    ! {nameWarning}
+                  </Text>
+                </Box>
+                <Box>
+                  <Text> mobile </Text>
+                  <Input
+                    type={"number"}
+                    required
+                    onChange={(e) => setMobile(NumericString(e.target.value))}
+                    value={mobile}
+                    maxLength={10}
+                    placeholder="Enter Your mobile no."
+                    variant="outline"
+                  />
+                  <Text
+                    color={"red"}
+                    fontSize={"12px"}
+                    display={mobileWarning == "" ? "none" : "block"}
+                  >
+                    ! {mobileWarning}
+                  </Text>
+                </Box>
+                <Box>
+                  <Text> Email </Text>
+                  <Input
+                    type={"email"}
+                    required
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
+                    maxLength={40}
+                    placeholder="Enter Your Email"
+                    variant="outline"
+                  />
+                  <Text
+                    color={"red"}
+                    fontSize={"12px"}
+                    display={emailWarning == "" ? "none" : "block"}
+                  >
+                    ! {emailWarning}
+                  </Text>
+                </Box>
+                <Box>
+                  <Text> Form Type </Text>
+                  <Select
+                    type={"text"}
+                    onChange={(e) => {
+                      steFormType(e.target.value);
+                    }}
+                    value={formType}
+                    required
+                    variant="outline"
+                    placeholder="Select"
+                    w={"100%"}
+                  >
+                    <option value="Buy"> Buy </option>
+                    <option value="Rent"> Rent </option>
+                    <option value="Sell"> Sell </option>
+                  </Select>
+                  <Text
+                    color={"red"}
+                    fontSize={"12px"}
+                    display={formTypeWarning == "" ? "none" : "block"}
+                  >
+                    ! {formTypeWarning}
+                  </Text>
+                </Box>
+                <Box
+                  display={
+                    formType == "Rent" || formType == "Sell" ? "block" : "none"
+                  }
                 >
-                  ! {nameWarning}
-                </Text>
+                  <Text> Property Type </Text>
+                  <Select
+                    type={"text"}
+                    onChange={(e) => stePropertyType(e.target.value)}
+                    value={PropertyType}
+                    required
+                    variant="outline"
+                    placeholder="Select"
+                    w={"100%"}
+                  >
+                    <option value="Residential"> Residential </option>n
+                    <option value="Commercial"> Commercial </option>
+                  </Select>
+                  <Text
+                    color={"red"}
+                    fontSize={"12px"}
+                    display={PropertyTypeWarning == "" ? "none" : "block"}
+                  >
+                    ! {PropertyTypeWarning}
+                  </Text>
+                </Box>
+                <Box>
+                  <Text> Description </Text>
+                  <Textarea
+                    type="text"
+                    value={dis}
+                    maxLength={400}
+                    onChange={(e) => setDis(e.target.value)}
+                    placeholder="Please Describe Your Query Here..."
+                  />
+                  <Text
+                    color={"red"}
+                    fontSize={"12px"}
+                    display={disWarning == "" ? "none" : "block"}
+                  >
+                    ! {disWarning}
+                  </Text>
+                </Box>
+                <Box margin={"5px 0"}>
+                  <Checkbox
+                    size="md"
+                    value={visible}
+                    onChange={handlevisiblelity}
+                  >
+                    click to make visible your mobile number to others
+                  </Checkbox>
+                </Box>
               </Box>
-              <Box>
-                <Text> mobile </Text>
-                <Input
-                  type={"number"}
-                  required 
-                  onChange={(e) => setMobile(NumericString(e.target.value))}
-                  value={mobile} 
-                  maxLength={10} 
-                  placeholder="Enter Your mobile no."
-                  variant="outline"
-                />
-                <Text
-                  color={"red"}
-                  fontSize={"12px"}
-                  display={mobileWarning == "" ? "none" : "block"}
-                >
-                  ! {mobileWarning}
-                </Text>
-              </Box>
-              <Box>
-                <Text> Email </Text>
-                <Input
-                  type={"email"}
-                  required 
-                  onChange={(e) => setEmail(e.target.value)}
-                  value={email} 
-                  maxLength={40}
-                  placeholder="Enter Your Email"
-                  variant="outline"
-                />
-                <Text
-                  color={"red"}
-                  fontSize={"12px"}
-                  display={emailWarning == "" ? "none" : "block"}
-                >
-                  ! {emailWarning}
-                </Text>
-              </Box>
-              <Box>
-                <Text> Form Type </Text>
-                <Select
-                  type={"text"}
-                  onChange={(e) => {
-                    steFormType(e.target.value);
-                  }}
-                  value={formType}
-                  required
-                  variant="outline"
-                  placeholder="Select"
-                  w={"100%"}
-                >
-                  <option value="Buy"> Buy </option>
-                  <option value="Rent"> Rent </option>
-                  <option value="Sell"> Sell </option>
-                </Select>
-                <Text
-                  color={"red"}
-                  fontSize={"12px"}
-                  display={formTypeWarning == "" ? "none" : "block"}
-                >
-                  ! {formTypeWarning}
-                </Text>
-              </Box>
-              <Box
-                display={
-                  formType == "Rent" || formType == "Sell" ? "block" : "none"
-                }
-              >
-                <Text> Property Type </Text>
-                <Select
-                  type={"text"}
-                  onChange={(e) => stePropertyType(e.target.value)}
-                  value={PropertyType}
-                  required
-                  variant="outline"
-                  placeholder="Select"
-                  w={"100%"}
-                >
-                  <option value="Residential"> Residential </option>n
-                  <option value="Commercial"> Commercial </option>
-                </Select>
-                <Text
-                  color={"red"}
-                  fontSize={"12px"}
-                  display={PropertyTypeWarning == "" ? "none" : "block"}
-                >
-                  ! {PropertyTypeWarning}
-                </Text>
-              </Box>
-              <Box>
-                <Text> Description </Text>
-                <Textarea 
-                  type="text"
-                  value={dis} 
-                  maxLength={400} 
-                  onChange={(e) => setDis(e.target.value)}
-                  placeholder="Please Describe Your Query Here..."
-                />
-                <Text
-                  color={"red"}
-                  fontSize={"12px"}
-                  display={disWarning == "" ? "none" : "block"}
-                >
-                  ! {disWarning}
-                </Text>
-              </Box>
-              <Box margin={"5px 0"}>
-                <Checkbox
-                  size="md"
-                  value={visible}
-                  onChange={handlevisiblelity}
-                >
-                  click to make visible your mobile number to others
-                </Checkbox>
-              </Box>
-            </Box>
-          </ModalBody>
+            </ModalBody>
 
-          <ModalFooter>
-            <Button variant="ghost" mr={3} onClick={onClose}>
-              Discard
-            </Button>
-            <Button
-              colorScheme="blue"
-              onClick={handleSendQuery}
-              backgroundColor={"#2e3192"}
-            >
-              Post Inquiry
-            </Button>
-          </ModalFooter>
-        </ModalContent>
+            <ModalFooter>
+              <Button variant="ghost" mr={3} onClick={onClose}>
+                Discard
+              </Button>
+              <Button
+                colorScheme="blue"
+                onClick={handleSendQuery}
+                backgroundColor={"#2e3192"}
+              >
+                Post Inquiry
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        ) : ( 
+          <ModalContent>
+            <ModalHeader>
+              Query Form 
+            </ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <Text> If you want to Post Query Please Login First </Text>
+            </ModalBody>
+            <ModalFooter>
+                <Button 
+                colorScheme="blue"  
+                onClick={handletologin}
+                backgroundColor={"#2e3192"}> Login </Button>
+            </ModalFooter>
+          </ModalContent>   
+        )}
       </Modal>
     </Box>
   );

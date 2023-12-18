@@ -52,8 +52,8 @@ function App() {
         </button>
       </div> 
       <div className="inquiry_form"> 
-        <InquiryForm />
-      </div>   
+        <InquiryForm />  
+      </div> 
     </div>
   );
 }
