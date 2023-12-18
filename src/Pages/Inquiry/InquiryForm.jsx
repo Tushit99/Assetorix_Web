@@ -15,9 +15,11 @@ import {
   Textarea,
   Tooltip,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { NumericString } from "./Incript";
 
 const InquiryForm = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -35,6 +37,11 @@ const InquiryForm = () => {
   const [formTypeWarning, steFormTypeWarning] = useState("");
   const [PropertyTypeWarning, stePropertyTypeWarning] = useState("");
   const [disWarning, setDisWarning] = useState("");
+  const toast = useToast();
+
+  useEffect(() => {
+    console.log(PropertyType);
+  }, [PropertyType]);
 
   const handlevisiblelity = (e) => {
     let val = e.target.value;
@@ -48,7 +55,6 @@ const InquiryForm = () => {
 
   const handleSendQuery = async (e) => {
     e.preventDefault();
-    console.log("eafui");
     let id = localStorage.getItem("usrId") || undefined;
     let authorization = localStorage.getItem("AstToken") || undefined;
 
@@ -72,21 +78,65 @@ const InquiryForm = () => {
       isMobileVisible: visible,
       formType: formType,
       description: dis,
-    }; 
+    };
 
-    if(name.length<3){
-      setNameWarning("! Enter Your full name"); 
-    }
-    else if(mobile.length<3){ 
-      setNameWarning(""); 
-      setMobileWarning("! Enter Your Mobile number");  
+    if(PropertyType){
+      body["propertyType"] = PropertyType
     }
 
-    // if(PropertyType!=="")
+    if (name.length < 3) {
+      setNameWarning("Enter Your full name");
+      return;
+    } else if (mobile.length < 3) {
+      setNameWarning("");
+      setMobileWarning("Enter Your Mobile number");
+      return;
+    } else if (email.length < 3) {
+      setNameWarning("");
+      setMobileWarning("");
+      setEmailWarning("Enter Your full email");
+      return;
+    } else if (formType.length < 3) {
+      setNameWarning("");
+      setMobileWarning("");
+      setEmailWarning("");
+      steFormTypeWarning("Enter Your form Type");
+      return;
+    } else if (
+      (formType == "Rent" || formType == "Sell") &&
+      PropertyType.length < 3
+    ) {
+      setNameWarning("");
+      setMobileWarning("");
+      setEmailWarning("");
+      steFormTypeWarning("");
+      stePropertyType("Enter Your property Type");
+    } else if (dis.length < 3) {
+      setNameWarning("");
+      setMobileWarning("");
+      setEmailWarning("");
+      steFormTypeWarning("");
+      stePropertyType("");
+      setDisWarning("Enter Your description number");
+      return;
+    } else {
+      setNameWarning("");
+      setMobileWarning("");
+      setEmailWarning("");
+      steFormTypeWarning("");
+      stePropertyType("");
+      setDisWarning("");
+    }
 
-    // await axios
-    //   .post(`${process.env.REACT_APP_URL}/leadForm`, body, head)
-    //   .then((e) => {});
+    await axios
+      .post(`${process.env.REACT_APP_URL}/leadForm`, body, {
+        headers: head,
+    })
+      .then((e) => {
+        console.log(e.data);
+      }).catch((e)=>{
+        console.log(e)
+      })
   };
 
   return (
@@ -109,20 +159,23 @@ const InquiryForm = () => {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>
-            {" "}
-            Inquiry Form <sub> login is required to post query </sub>
+            Inquiry Form{" "}
+            <sub className="inquariTitel">
+              {" "}
+              (login is required to post quiry){" "}
+            </sub>
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <form onSubmit={handleSendQuery}>
+            <Box>
               <Box>
                 <Text> Name </Text>
                 <Input
                   type={"text"}
-                  required
-                  minWidth={3}
+                  required 
                   onChange={(e) => setName(e.target.value)}
-                  value={name}
+                  value={name} 
+                  maxLength={30}
                   placeholder="Enter Name"
                   variant="outline"
                 />
@@ -138,10 +191,10 @@ const InquiryForm = () => {
                 <Text> mobile </Text>
                 <Input
                   type={"number"}
-                  required
-                  minWidth={3}
-                  onChange={(e) => setMobile(e.target.value)}
-                  value={mobile}
+                  required 
+                  onChange={(e) => setMobile(NumericString(e.target.value))}
+                  value={mobile} 
+                  maxLength={10} 
                   placeholder="Enter Your mobile no."
                   variant="outline"
                 />
@@ -157,10 +210,10 @@ const InquiryForm = () => {
                 <Text> Email </Text>
                 <Input
                   type={"email"}
-                  required
-                  minWidth={4}
+                  required 
                   onChange={(e) => setEmail(e.target.value)}
-                  value={email}
+                  value={email} 
+                  maxLength={40}
                   placeholder="Enter Your Email"
                   variant="outline"
                 />
@@ -176,7 +229,9 @@ const InquiryForm = () => {
                 <Text> Form Type </Text>
                 <Select
                   type={"text"}
-                  onChange={(e) => steFormType(e.target.value)}
+                  onChange={(e) => {
+                    steFormType(e.target.value);
+                  }}
                   value={formType}
                   required
                   variant="outline"
@@ -223,9 +278,10 @@ const InquiryForm = () => {
               </Box>
               <Box>
                 <Text> Description </Text>
-                <Textarea
+                <Textarea 
                   type="text"
-                  value={dis}
+                  value={dis} 
+                  maxLength={400} 
                   onChange={(e) => setDis(e.target.value)}
                   placeholder="Please Describe Your Query Here..."
                 />
@@ -246,7 +302,7 @@ const InquiryForm = () => {
                   click to make visible your mobile number to others
                 </Checkbox>
               </Box>
-            </form>
+            </Box>
           </ModalBody>
 
           <ModalFooter>
@@ -255,7 +311,7 @@ const InquiryForm = () => {
             </Button>
             <Button
               colorScheme="blue"
-              type={"submit"}
+              onClick={handleSendQuery}
               backgroundColor={"#2e3192"}
             >
               Post Inquiry

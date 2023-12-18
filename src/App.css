@@ -46,7 +46,7 @@ option {
 
 .inquiry_form{
   position: fixed;
-  bottom: 38px;  
+  bottom: 7%;  
   right: 60px;   
 }
 
@@ -70,4 +70,13 @@ option {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
+}
+
+
+
+/* inquiry form css */
+
+.inquariTitel{
+  font-size: 11px; 
+
 }

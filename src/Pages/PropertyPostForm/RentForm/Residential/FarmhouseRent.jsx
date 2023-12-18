@@ -537,7 +537,7 @@ const FarmhouseRent = () => {
 
     const onFileSelect = (e) => {
         let files = e.target.files;
-        if (files.length === 0) {
+        if (files.length === 0) { 
             return
         }
         for (let i = 0; i < files.length; i++) {

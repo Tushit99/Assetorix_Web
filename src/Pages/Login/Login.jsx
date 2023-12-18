@@ -8,13 +8,13 @@ import {
     Input,
     Stack,
     Image,
-    Box,
-    useToast,
+    Box, 
+    useToast, 
     InputGroup,
     InputRightElement,
     Text,
     UnorderedList,
-    ListItem,
+    ListItem, 
 } from "@chakra-ui/react";
 import style from "./Login.module.css";
 import img from "./sideimg.png";
