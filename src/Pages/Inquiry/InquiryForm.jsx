@@ -174,22 +174,19 @@ const InquiryForm = () => {
           borderRadius={"4px"}
           onClick={onOpen}
         >
-          Q
+          Q 
         </Button>
       </Tooltip>
 
       <Modal isOpen={isOpen} isCentered onClose={onClose}>
-        <ModalOverlay />
+        <ModalOverlay /> 
         {username.name ? (
-          <ModalContent>
+          <ModalContent>  
             <ModalHeader>
-              Inquiry Form{" "}
-              <span className="inquariTitel">
-                (login is required to post quiry)
-              </span>
+              Inquiry Form 
             </ModalHeader>
             <ModalCloseButton />
-            <ModalBody>
+            <ModalBody> 
               <Box>
                 <Box>
                   <Text> Name </Text>

@@ -100,14 +100,14 @@
 
 .topbox > *:nth-child(1) {
   position: absolute;
-  top: 20%;
+  top: 14%;
   left: 5%;
   /* border: 2px solid yellow;  */
 }
 
 .topbox > *:nth-child(2) {
   position: absolute;
-  bottom: 20%;
+  top: 40%;  
 }
 
 .fields {
@@ -116,8 +116,7 @@
   margin: 20px 0;
   text-align: center;
   display: grid;
-  position: absolute;
-  bottom: -40px;
+  position: absolute; 
   gap: 20px;
   /* border: 2px solid burlywood; */
 }
