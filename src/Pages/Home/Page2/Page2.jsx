@@ -2,7 +2,7 @@ import { Box, Grid, Heading } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import style from "./Page2.module.css";
-import { useSelector } from "react-redux";  
+import { useSelector } from "react-redux";   
 
 const Page2 = () => {
   const { country } = useSelector((state) => state.gloalval);
@@ -59,7 +59,7 @@ const Page2 = () => {
             <Link >KOLKATA</Link>
           </Grid>
         </Box>
-      }
+      }  
     </div>
   );
 };

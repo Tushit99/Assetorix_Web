@@ -45,7 +45,7 @@ import { Blurhash } from "react-blurhash";
 import axios from "axios";
 import SearchShow from "./SearchShow";
 import { IoIosArrowDown } from "react-icons/io";
-import { IoIosArrowUp } from "react-icons/io";
+import { IoIosArrowUp } from "react-icons/io"; 
 import WithStyles from "./Query/WithStyles";
 
 
@@ -544,12 +544,12 @@ const Page1 = () => {
               >
                 <Search2Icon size={"30px"} className={style.white} />
               </Button>
-            </Box>
-            <Box maxW={"90%"}>
-              <WithStyles />
-            </Box>
+            </Box> 
           </div>
         </Box>
+      </Box> 
+      <Box>
+        <WithStyles /> 
       </Box>
     </div>
   );

@@ -1,0 +1,36 @@
+
+.mapbox{
+    display: flex; 
+    align-items: center;  
+    justify-content: center;  
+    gap: 10px ; 
+    height: 150px;  
+    max-width: 100%; 
+    background-color: white; 
+    border-radius: 20px; 
+    margin: auto 20px ; 
+    padding: 10px;  
+    position: relative; 
+} 
+
+.placeCenter{
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+}
+ 
+.desbox{
+    --max-lines: 3; 
+    display: -webkit-box; 
+    overflow: hidden; 
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: var(--max-lines) ;
+}
+
+.placeTop{
+       position: absolute; 
+       top: 20px; 
+       right: 20px;    
+}
+
+

@@ -25,8 +25,7 @@ import martin from "./amaricon/martin.jpg";
 import perfect from "./amaricon/perfect.png";
 import randr from "./amaricon/randr.webp";
 import cmm from "./amaricon/cmm.jpg";
-import { useSelector } from 'react-redux'; 
-import MultipleItems from '../ProductSlider/ProductSlider';
+import { useSelector } from 'react-redux';  
 
 
 const TopDevelopers = () => {
