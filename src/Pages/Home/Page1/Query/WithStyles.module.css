@@ -1,4 +1,12 @@
 
+.topbox{
+    background-image: url("../back2.jpg"); 
+    background-position: center;  
+    background-size: cover;  
+    padding: 40px 30px ;  
+}
+
+
 .mapbox{
     display: flex; 
     align-items: center;  
