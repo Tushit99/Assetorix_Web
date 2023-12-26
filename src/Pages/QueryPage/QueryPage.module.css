@@ -1,0 +1,38 @@
+.mapbox {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.mapbox > div { 
+    padding: 20px;  
+    box-shadow: rgba(55, 0, 255, 0.24) 0px 3px 8px;   
+} 
+
+.posttype{
+    position: absolute; 
+    right: 10px; 
+    top: 10px;   
+}
+
+.flex{
+    display: flex;  
+    gap: 20px; 
+    align-items: flex-start; 
+    justify-content: left;  
+    position: relative; 
+}
+
+/* tablet */
+@media screen and (min-width: 560px) and (max-width: 980px) {
+  .mapbox {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* mobile */
+@media screen and (min-width: 100px) and (max-width: 560px) {
+  .mapbox {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

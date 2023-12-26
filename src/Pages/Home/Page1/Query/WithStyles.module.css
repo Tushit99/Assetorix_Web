@@ -1,9 +1,11 @@
 
 .topbox{
-    background-image: url("../back2.jpg"); 
+    background-image: url("../board.png");  
     background-position: center;  
     background-size: cover;  
-    padding: 40px 30px ;  
+    padding: 30px ;    
+    display: grid;   
+    gap: 10px; 
 }
 
 

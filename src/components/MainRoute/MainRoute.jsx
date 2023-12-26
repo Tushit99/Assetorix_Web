@@ -32,6 +32,7 @@ import VisitedPage from '../../Pages/VisitedPage/VisitedPage'
 import Listings from '../../Pages/UserListings/Listings'
 import EditingForm from '../../Pages/UserListings/EditingForm' 
 import WithStyles from '../../Pages/Home/Page1/Query/WithStyles'
+import QueryPage from '../../Pages/QueryPage/QueryPage'
 // import ConsultingPage from '../../Pages/CoporateServices/Consulting/consulting'
 
 const MainRoute = () => {
@@ -126,6 +127,9 @@ const MainRoute = () => {
             <SellForm />
           </PrivateRoute>
         } /> 
+
+        <Route path='/query' element={<QueryPage />} /> 
+        {/* <Route path='/query' element={<QueryPage />} />  */}
 
 
         <Route path='*' element={<Error />} /> 

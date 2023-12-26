@@ -1,24 +1,10 @@
-import { Avatar, Badge, Box, Button } from "@chakra-ui/react";
+import { Avatar, Badge, Box } from "@chakra-ui/react";
 import { Heading, Text } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import style from "./WithStyles.module.css";
-
-
-const Buttonleft =()=>{
-  return <Button>
-    left
-  </Button>
-}
-
-const Buttonright =()=>{
-  return <Button> 
-    right  
-  </Button> 
-}
-
+import style from "./WithStyles.module.css";   
 
 const WithStyles = () => {
   const [data, setData] = useState([]);
@@ -44,25 +30,22 @@ const WithStyles = () => {
   }, []);
 
   return (
-    <Box position={"relative"} className={style.topbox} > 
-      <Heading> Leades </Heading>
+    <Box position={"relative"} className={style.topbox}>
+      <Heading> Query by Assetorix </Heading> 
       <Carousel
         additionalTransfrom={0}
         arrows
         autoPlay
         autoPlaySpeed={5000}
-        centerMode={false}
+        centerMode={false} 
         draggable
-        focusOnSelect={false}
+        focusOnSelect={false}  
         infinite
         keyBoardControl
         minimumTouchDrag={80}
         pauseOnHover
         renderArrowsWhenDisabled={false}
-        renderButtonGroupOutside={false}
-        customLeftArrow={<Buttonleft />}
-        customRightArrow={<Buttonright />}  
-        renderDotsOutside
+        renderButtonGroupOutside={false} 
         responsive={{
           desktop: {
             breakpoint: {
@@ -109,7 +92,7 @@ const WithStyles = () => {
               <Text
                 fontsize={"md"}
                 display={e.propertyType == "None" ? "none" : "block"}
-              >  
+              >
                 <strong>Property Type:</strong> {e.propertyType}
               </Text>
               <Text fontsize={"lg"} className={style.desbox}>
