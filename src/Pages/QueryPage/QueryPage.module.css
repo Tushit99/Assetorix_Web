@@ -1,11 +1,13 @@
+
 .mapbox {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 20px; 
 }
 
 .mapbox > div { 
     padding: 20px;  
+    height: 160px;
     box-shadow: rgba(55, 0, 255, 0.24) 0px 3px 8px;   
 } 
 
@@ -23,6 +25,14 @@
     position: relative; 
 }
 
+.des{
+  --max-lines: 3; 
+  display: -webkit-box; 
+  overflow: hidden; 
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--max-lines) ;
+}
+
 /* tablet */
 @media screen and (min-width: 560px) and (max-width: 980px) {
   .mapbox {
@@ -36,3 +46,5 @@
     grid-template-columns: repeat(1, 1fr);
   }
 }
+
+
