@@ -25,12 +25,15 @@ const QueryPage = () => {
   const demobox = [1, 2, 3, 4, 5, 6, 7, 8, 9]; 
  
 
-  useEffect(() => {
-    let obj = { page, formType:propertyType};  
+  useEffect(() => { 
+    let obj = { page}; 
+    if(propertyType!=""){ 
+      obj["formType"]=propertyType;   
+    }  
     setSearchParam(obj);   
   }, [page, propertyType]);
 
-  useEffect(() => {
+  useEffect(() => { 
     console.log(location.search);
     handelData();
   }, [location.search]);
@@ -41,7 +44,7 @@ const QueryPage = () => {
       await axios
         .get(`${process.env.REACT_APP_URL}/leadForm/all${location.search}`)
         .then((e) => {
-          console.log(e.data);
+          // console.log(e.data); 
           setTotalPages(e.data.totalPages);
           setQueryBox(e.data.data);
           setLoading(false); 
@@ -61,19 +64,17 @@ const QueryPage = () => {
       setPage(serchParam.get("page"));
       let show = { page: serchParam.get("page") };
       if(serchParam.get("formType")!==null){   
-        show["formType"]=serchParam.get("formType")
+        show["formType"]=serchParam.get("formType")  
         setPropertyType(serchParam.get("formType")); 
       } 
-      setSearchParam(show);
-      handelData();
+      setSearchParam(show); 
     } else {
       let obj = { page };
       if(serchParam.get("formType")!==null){ 
         obj["formType"]=serchParam.get("formType"); 
         setPropertyType(serchParam.get("formType")); 
       }  
-      setSearchParam(obj);
-      handelData();
+      setSearchParam(obj); 
     } 
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   }, []);
