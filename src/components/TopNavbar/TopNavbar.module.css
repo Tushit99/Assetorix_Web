@@ -5,8 +5,13 @@
   left: 0;
   width: 100%;
   display: grid;
-  z-index: 50;
+  z-index: 50; 
+  max-width: 100%;   
   box-shadow: 0;
+}
+
+.head_nav *{
+  max-width: 100%;  
 }
 
 #nav_back_space {

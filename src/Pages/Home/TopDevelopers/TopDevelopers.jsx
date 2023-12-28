@@ -66,7 +66,7 @@ const TopDevelopers = () => {
         (<div className={style.top_dev} >
           <h1> TOP DEVELOPERS IN INDIA </h1>
           <div className={style.devloper}>
-            <Box>
+            <Box> 
               <img src={dlf} alt="dlfimg" />
             </Box>
             <Box padding={"40px"}>
