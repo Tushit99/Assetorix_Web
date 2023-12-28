@@ -22,12 +22,12 @@ const QueryPage = () => {
   const location = useLocation();
   const [propertyType, setPropertyType] = useState("");
   const [isLoading, setLoading] = useState(false);
-  const demobox = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const demobox = [1, 2, 3, 4, 5, 6, 7, 8, 9]; 
+ 
 
   useEffect(() => {
-    let obj = { page };
-    propertyType && (obj["formType"] = propertyType);
-    setSearchParam(obj);
+    let obj = { page, formType:propertyType};  
+    setSearchParam(obj);   
   }, [page, propertyType]);
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const QueryPage = () => {
           console.log(e.data);
           setTotalPages(e.data.totalPages);
           setQueryBox(e.data.data);
-          setLoading(false);
+          setLoading(false); 
         })
         .catch((err) => {
           console.log(err);
@@ -57,17 +57,25 @@ const QueryPage = () => {
   };  
 
   useEffect(() => {
-    console.log();
     if (serchParam.get("page") > 0) {
       setPage(serchParam.get("page"));
       let show = { page: serchParam.get("page") };
+      if(serchParam.get("formType")!==null){   
+        show["formType"]=serchParam.get("formType")
+        setPropertyType(serchParam.get("formType")); 
+      } 
       setSearchParam(show);
       handelData();
     } else {
       let obj = { page };
+      if(serchParam.get("formType")!==null){ 
+        obj["formType"]=serchParam.get("formType"); 
+        setPropertyType(serchParam.get("formType")); 
+      }  
       setSearchParam(obj);
       handelData();
-    }
+    } 
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   }, []);
 
   const handleminpage = () => {
@@ -121,7 +129,7 @@ const QueryPage = () => {
           <Text> {page} </Text>
           <Button
             variant={"solid"}
-            isDisabled={page > totalPages ? true : false}
+            isDisabled={page >= totalPages ? true : false}
             colorScheme={"blue"}
             onClick={handleaddpage}
           >

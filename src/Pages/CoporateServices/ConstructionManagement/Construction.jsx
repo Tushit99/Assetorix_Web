@@ -19,8 +19,8 @@ const Construction = () => {
   return (
     <Box
       display={{ base: "grid", lg: "flex" }}
-      w={"90%"}
-      margin={"30px auto 40px auto"}
+      w={"100%"}
+      margin={"30px 0 40px 0"}
       gap={{ base: "20px", lg: "50px" }} 
       >
       <Box
@@ -35,7 +35,7 @@ const Construction = () => {
         padding={"20px"}
       >
         <Text textAlign={"justify"} fontSize={"sm"}>
-          Assetorex provides state-of-the-art construction management services
+          Assetorix provides state-of-the-art construction management services
           for all project types and delivery methods. Project delivery method
           selection depends, among other factors, upon the Client’s risk
           tolerance, in-house staff capabilities, and best method for realizing
@@ -45,12 +45,13 @@ const Construction = () => {
 
         {/* pages */}
         <Tabs display={"flex"}>
-          <TabList display={"flex"} flexDirection={"column"} fontSize={"sm"}>
+          <TabList display={"flex"} flexDirection={"column"} fontSize={"sm"} flex={1}>
             <Tab
               fontSize={{ base: "sm", md: "md" }}
               display={"flex"}
               alignItems={"center"}
               justifyContent={"left"}
+              padding={2}
               textAlign={"left"}
               _selected={{
                 borderLeft: "3px solid rgb(230,37,82)",
@@ -65,6 +66,7 @@ const Construction = () => {
               alignItems={"center"}
               justifyContent={"left"}
               textAlign={"left"}
+              padding={2}
               _selected={{
                 borderLeft: "3px solid rgb(230,37,82)",
                 backgroundColor: "white",
@@ -78,6 +80,7 @@ const Construction = () => {
               alignItems={"center"}
               justifyContent={"left"}
               textAlign={"left"}
+              padding={2}
               _selected={{
                 borderLeft: "3px solid rgb(230,37,82)",
                 backgroundColor: "white",
@@ -90,6 +93,7 @@ const Construction = () => {
               display={"flex"}
               alignItems={"center"}
               justifyContent={"left"}
+              padding={2}
               textAlign={"left"}
               _selected={{
                 borderLeft: "3px solid rgb(230,37,82)",
@@ -101,6 +105,7 @@ const Construction = () => {
             <Tab
               fontSize={{ base: "sm", md: "md" }}
               display={"flex"}
+              padding={2}
               alignItems={"center"}
               justifyContent={"left"}
               textAlign={"left"}
@@ -115,6 +120,7 @@ const Construction = () => {
               fontSize={{ base: "sm", md: "md" }}
               display={"flex"}
               alignItems={"center"}
+              padding={2}
               justifyContent={"left"}
               textAlign={"left"}
               _selected={{
@@ -126,7 +132,7 @@ const Construction = () => {
             </Tab>
           </TabList>
 
-          <TabPanels className={style.management_box}>
+          <TabPanels className={style.management_box} flex={2}>
             {/* Construction Management */}
             <TabPanel>
               <Heading as="h4" size="md" margin={"10px 0"}>
@@ -135,10 +141,10 @@ const Construction = () => {
               <Text
                 display={"flex"}
                 alignItems={"center"}
-                justifyContent={"left"}
-                textAlign={"justify"}
+                justifyContent={"left"}   
+                className={style.textform}
               >
-                Assetorex provides comprehensive pre-construction services and,
+                Assetorix provides comprehensive pre-construction services and,
                 upon sufficient progress of planning and design, typically
                 converts to a Guaranteed Maximum Price (GMP) contract. Ametheus
                 holds all sub-contracts and thus assumes performance risk.

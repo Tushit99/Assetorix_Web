@@ -1,13 +1,16 @@
-import { Avatar, Badge, Box } from "@chakra-ui/react";
+import { Avatar, Badge, Box, Button } from "@chakra-ui/react";
 import { Heading, Text } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import style from "./WithStyles.module.css";   
+import {useNavigate } from "react-router-dom";
+
 
 const WithStyles = () => {
   const [data, setData] = useState([]);
+  const navigate = useNavigate();
 
   const fetchdata = async () => {
     try {
@@ -23,7 +26,10 @@ const WithStyles = () => {
     } catch (err) {
       console.log(err);
     }
-  };
+  }; 
+  const handlequerypage = ()=>{
+    navigate("/query")
+  }
 
   useEffect(() => {
     fetchdata();
@@ -31,7 +37,7 @@ const WithStyles = () => {
 
   return (
     <Box position={"relative"} className={style.topbox}>
-      <Heading> Query by Assetorix </Heading> 
+      <Heading > Query by Other Users </Heading> 
       <Carousel
         additionalTransfrom={0}
         arrows
@@ -116,7 +122,12 @@ const WithStyles = () => {
             </Box>
           </Box>
         ))}
-      </Carousel>
+      </Carousel> 
+      <Box display={"flex"} alignItems={"center"} justifyContent={"right"}>
+        <Button variant={"outline"} colorScheme="blue" onClick={handlequerypage} >
+          Browse More
+        </Button>
+      </Box>
     </Box>
   );
 };

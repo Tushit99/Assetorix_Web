@@ -9,6 +9,10 @@
   background-size: cover;
 }
 
+.signin_topbox *{
+  max-width: 100%;
+}
+
 .detail {
   display: flex; 
   color: rgb(0, 0, 0);

@@ -1,8 +1,8 @@
 
 .topbox{
-    background-image: url("../board.png");  
+    /* background-image: url("../board.png");  
     background-position: center;  
-    background-size: cover;  
+    background-size: cover;   */
     padding: 30px ;    
     display: grid;   
     gap: 10px; 
