@@ -134,7 +134,7 @@ const PropertyMarketing = () => {
         {/* <video width="750" height="500" controls controlsList="nodownload" >
           <source src={video} type="video/mp4" />
         </video> */}
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/Q1x_wnHR-nM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <iframe width="100%" className={style.minhight} src="https://www.youtube.com/embed/Q1x_wnHR-nM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         <Heading as='h4' size='sm' marginTop={"10px"}> 3. VIDEO CONTENT </Heading>
 
         <Text fontSize={"sm"} m={"20px 0"} >

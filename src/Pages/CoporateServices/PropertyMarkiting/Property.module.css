@@ -10,15 +10,30 @@
     gap: 6px; 
 }
 
+.minhight{
+   height: 500px;  
+}
+
 .link_box>*{
     padding: 2px 6px;  
     font-size: large;  
-} 
+}  
 
 .link_box>*:hover{
     background-color: rgb(219, 238, 255);
 }
 
+@media screen and (min-height:100px) and (max-width:560px) { 
+    .minhight{
+        height: 300px;  
+    } 
+}
+
+@media screen and (min-height:560px) and (max-width:980px) { 
+    .minhight{
+        height: 400px;   
+    } 
+}
 
 
 
