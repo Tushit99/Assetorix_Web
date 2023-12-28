@@ -48,7 +48,7 @@
 }
 
 .box > *:nth-child(3) {
-  background-image: url("../homeImage/noida.jpg");
+  background-image: url("../homeImage/noida.png");
   height: 200px; 
   background-size: cover;
   background-repeat: no-repeat;

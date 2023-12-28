@@ -6,6 +6,10 @@
     text-align: left;   
     justify-content: space-around;    
     gap: 10px;    
+    max-width: 100%;  
+}
+.top_head *{
+    max-width: 100%; 
 }
 
 .top_head>*:nth-child(1){ 

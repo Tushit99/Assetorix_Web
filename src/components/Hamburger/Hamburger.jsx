@@ -10,6 +10,7 @@ import {
     MenuButton,
     MenuItem,
     MenuList,
+    Box, 
     Select,
     useDisclosure,
 } from "@chakra-ui/react";
@@ -50,7 +51,7 @@ const Hamburger = () => {
 
 
     return (
-        <>
+        <Box >
             <Button
                 ref={btnRef}
                 backgroundColor={"unset"}
@@ -140,7 +141,7 @@ const Hamburger = () => {
                                     <Link to={"/consulting"}>Consulting</Link>
                                 </MenuItem> */}
                                 <MenuItem onClick={onClose}>
-                                    <Link to={"/marketresearch"}>Market Research</Link>
+                                    <Link to={"/market_research"}>Market Research</Link>
                                 </MenuItem>
                                 <MenuItem onClick={onClose}>
                                     <Link to={"/portfolio_planning"}>
@@ -159,7 +160,7 @@ const Hamburger = () => {
                     </DrawerBody>
                 </DrawerContent>
             </Drawer>
-        </>
+        </Box>
     );
 };
 

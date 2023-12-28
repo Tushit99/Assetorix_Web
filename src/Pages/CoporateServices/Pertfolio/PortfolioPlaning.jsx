@@ -50,7 +50,6 @@ const PortfolioPlaning = () => {
                     <ListItem>Opportunities in the international market from a global perspective up-to-date, highly qualified expertise, enabling us to give you a well-substantiated, clear picture within a short period of time</ListItem>
                     {/* 3 */}
                 </UnorderedList>
-                <Text textAlign={"justify"} as='h3' size='sm'> Our Real-Estate  web-portal is www.assetorix.com </Text>
             </Box>
             <Box padding={"0 40px"} display={{base:"none",md:"block"}}  textAlign={"left"} position={"relative"} flex={2}>
                 <ServiceLink />

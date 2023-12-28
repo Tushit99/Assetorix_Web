@@ -19,7 +19,7 @@ export default function About() {
   }, [])
 
   return (
-    <Container maxW={"7xl"} margin={"0px auto"}>
+    <Container maxW={"7xl"} margin={"0px auto"} >
       <Stack
         textAlign={"left"}
         spacing={{ base: 8, md: 10 }}

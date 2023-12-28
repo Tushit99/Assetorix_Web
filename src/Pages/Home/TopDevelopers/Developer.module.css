@@ -7,28 +7,35 @@
     text-align: center; 
     justify-content: center;
     gap: 16px;
+    max-width: 100%;  
+}
+
+.devloper *{
+    max-width: 100%; 
 }
 
 .top_dev {
     background-color: rgb(240, 239, 237); 
     padding-bottom: 40px; 
-}  
+}
 
 .devloper>* { 
     object-fit: contain; 
     margin: auto; 
     display: flex;
     align-items: center;
-    justify-content: center;  
-    background-color: white; 
+    justify-content: center;
+    height: 120px;
+    object-fit: contain;
+    background-color: white;
+    padding: 30px;
     border-radius: 20px; 
     text-align: center; 
 }
 
-.devloper img{
-    width: 80%; 
+.devloper img {
+    width: 100%;
 }
-
 
 .top_dev>h1 {
     font-size: xx-large;
@@ -52,20 +59,15 @@
 }
 
 @media screen and (min-width: 100px) and (max-width: 550px) {
-    .devloper { 
-        display: grid; 
+    .devloper {
         grid-template-columns: repeat(2, 1fr);
-        padding: 0 20px; 
-        width: 100%;    
-    } 
- 
-} 
+        padding: 0 20px;
+    }
+}
 
 @media screen and (min-width: 550px) and (max-width: 980px) {
     .devloper {
-        display: grid;  
         grid-template-columns: repeat(3, 1fr);
         padding: 0 20px;
-        width: 100%;  
-    } 
+    }
 }
