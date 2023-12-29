@@ -89,7 +89,7 @@ const QueryPage = () => {
   };
 
   return (
-    <Box padding={"30px 40px 60px 40px"}>
+    <Box padding={{base:"30px 20px 60px 20px",md:"30px 40px 60px 40px"}}>
       {/* pagination position fixed */}
       {/* page change button */}
       <Box
@@ -146,7 +146,7 @@ const QueryPage = () => {
           </Select>
         </Box> 
         <Box display={"flex"} alignItems={"center"} gap={"10px"} >
-          <Input type="text" maxW={"200px"} borderRadius={0} variant='outline' border={"1px solid blue"} />  
+          <Input type="text" maxW={"200px"} placeholder={"search..."} borderRadius={0} variant='outline' border={"1px solid blue"} />  
           <Button colorScheme="blue" borderRadius={0} color={"white"}> <FaSearch /> </Button> 
         </Box>
       </Box>
