@@ -132,8 +132,8 @@ const QueryPage = () => {
       >
         {/* property type */}
         <Box>
-          <Select
-            w={"140px"}
+          <Select 
+            minWidth={"120px"}
             variant="outline"
             colorScheme={"blue"}
             value={propertyType}
