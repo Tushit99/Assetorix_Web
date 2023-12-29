@@ -24,7 +24,7 @@
     align-items: flex-start; 
     justify-content: left;  
     position: relative; 
-}
+}   
 
 .des{
   --max-lines: 3; 
