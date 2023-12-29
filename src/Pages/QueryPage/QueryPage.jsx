@@ -128,14 +128,16 @@ const QueryPage = () => {
         display={"flex"}
         alignItems={"center"}
         justifyContent={"space-between"}
-        marginBottom={"10px"} 
+        marginBottom={"10px"}  
+        gap={"10px"} 
       >
         {/* property type */}
         <Box>
           <Select 
             minWidth={"120px"}
             variant="outline"
-            colorScheme={"blue"}
+            colorScheme={"blue"} 
+            size={{base:"sm",md:"md"}}
             value={propertyType}
             onChange={(e) => setPropertyType(e.target.value)}
           >
@@ -146,8 +148,8 @@ const QueryPage = () => {
           </Select>
         </Box> 
         <Box display={"flex"} alignItems={"center"} gap={"10px"} >
-          <Input type="text" maxW={"200px"} placeholder={"search..."} borderRadius={0} variant='outline' border={"1px solid blue"} />  
-          <Button colorScheme="blue" borderRadius={0} color={"white"}> <FaSearch /> </Button> 
+          <Input type="text" maxW={"200px"} size={{base:"sm",md:"md"}} placeholder={"search..."} borderRadius={0} variant='outline' border={"1px solid blue"} />  
+          <Button colorScheme="blue" size={{base:"sm",md:"md"}} borderRadius={0} color={"white"}> <FaSearch /> </Button> 
         </Box>
       </Box>
       <Box></Box>
