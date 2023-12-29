@@ -5,11 +5,11 @@ import {
   Button,
   Heading,
   Select,
-  Input, 
+  Input,
   Text,
 } from "@chakra-ui/react";
-import axios from "axios"; 
-import { FaSearch } from "react-icons/fa";  
+import axios from "axios";
+import { FaSearch } from "react-icons/fa";
 import React, { useEffect, useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
 import style from "./QueryPage.module.css";
@@ -89,24 +89,22 @@ const QueryPage = () => {
   };
 
   return (
-    <Box padding={{base:"30px 20px 60px 20px",md:"30px 40px 60px 40px"}}>
+    <Box padding={{ base: "30px 20px 60px 20px", md: "30px 40px 60px 40px" }}>
       {/* pagination position fixed */}
       {/* page change button */}
       <Box
         display={"flex"}
         alignItems={"center"}
         justifyContent={"right"}
-        gap={"10px"} 
-        position={"fixed"} 
-        top={"53px"} 
-        right={"20px"}
+        gap={"10px"}
+        position={"relative"}
       >
         <Button
           variant={"solid"}
           isDisabled={page <= 1 ? true : false}
           colorScheme={"blue"}
-          onClick={handleminpage} 
-          size={{base:"xs",md:"sm",lg:"md"}}
+          onClick={handleminpage}
+          size={{ base: "xs", md: "sm", lg: "md" }}
         >
           Prev
         </Button>
@@ -116,28 +114,27 @@ const QueryPage = () => {
           isDisabled={page >= totalPages ? true : false}
           colorScheme={"blue"}
           onClick={handleaddpage}
-          size={{base:"xs",md:"sm",lg:"md"}}
-
+          size={{ base: "xs", md: "sm", lg: "md" }}
         >
-          Next 
-        </Button> 
+          Next
+        </Button>
       </Box>
-      {/* heading and other detail */} 
+      {/* heading and other detail */}
       <Heading> Assetorix Query </Heading>
       <Box
         display={"flex"}
         alignItems={"center"}
         justifyContent={"space-between"}
-        marginBottom={"10px"}  
-        gap={"10px"} 
+        marginBottom={"10px"}
+        gap={"10px"}
       >
         {/* property type */}
         <Box>
-          <Select 
+          <Select
             minWidth={"120px"}
             variant="outline"
-            colorScheme={"blue"} 
-            size={{base:"sm",md:"md"}}
+            colorScheme={"blue"}
+            size={{ base: "sm", md: "md" }}
             value={propertyType}
             onChange={(e) => setPropertyType(e.target.value)}
           >
@@ -146,10 +143,26 @@ const QueryPage = () => {
             <option value="Sell"> Sell </option>
             <option value="Rent"> Rent </option>
           </Select>
-        </Box> 
-        <Box display={"flex"} alignItems={"center"} gap={"10px"} >
-          <Input type="text" maxW={"200px"} size={{base:"sm",md:"md"}} placeholder={"search..."} borderRadius={0} variant='outline' border={"1px solid blue"} />  
-          <Button colorScheme="blue" size={{base:"sm",md:"md"}} borderRadius={0} color={"white"}> <FaSearch /> </Button> 
+        </Box>
+        <Box display={"flex"} alignItems={"center"} gap={"10px"}>
+          <Input
+            type="text"
+            maxW={"200px"}
+            size={{ base: "sm", md: "md" }}
+            placeholder={"search..."}
+            borderRadius={0}
+            variant="outline"
+            border={"1px solid blue"}
+          />
+          <Button
+            colorScheme="blue"
+            size={{ base: "sm", md: "md" }}
+            borderRadius={0}
+            color={"white"}
+          >
+            {" "}
+            <FaSearch />{" "}
+          </Button>
         </Box>
       </Box>
       <Box></Box>
@@ -225,6 +238,35 @@ const QueryPage = () => {
             ))}
           </Box>
         )}
+      </Box>
+      {/* page change button */}
+      <Box
+        display={"flex"}
+        alignItems={"center"}
+        justifyContent={"right"}
+        gap={"10px"} 
+        marginTop={"40px"}
+        position={"relative"}
+      >
+        <Button
+          variant={"solid"}
+          isDisabled={page <= 1 ? true : false}
+          colorScheme={"blue"}
+          onClick={handleminpage}
+          size={{ base: "xs", md: "sm", lg: "md" }}
+        >
+          Prev
+        </Button>
+        <Text> {page} </Text>
+        <Button
+          variant={"solid"}
+          isDisabled={page >= totalPages ? true : false}
+          colorScheme={"blue"}
+          onClick={handleaddpage}
+          size={{ base: "xs", md: "sm", lg: "md" }}
+        >
+          Next
+        </Button>
       </Box>
     </Box>
   );

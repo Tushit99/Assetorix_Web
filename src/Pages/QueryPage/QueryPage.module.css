@@ -23,7 +23,8 @@
     gap: 20px; 
     align-items: flex-start; 
     justify-content: left;  
-    position: relative; 
+    position: relative;  
+    border-radius: 2px;  
 }   
 
 .des{
