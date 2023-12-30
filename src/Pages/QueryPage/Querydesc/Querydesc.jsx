@@ -14,6 +14,7 @@ import {
   Badge,
   Input,
   Divider,
+  useToast,
   Heading,
   Text,
 } from "@chakra-ui/react";
@@ -23,24 +24,71 @@ import { convertDateFormat } from "./code/code";
 
 const Querydesc = ({ e }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [replies, setReplies] = useState([]);  
- 
+  const [replies, setReplies] = useState([]);
+  const [message, setMessage] = useState("");
+  const toast = useToast();
 
   const fetchreplies = async () => {
-    onOpen();
+    onOpen(); 
+    console.log("runboy");  
     try {
       await axios
         .get(`${process.env.REACT_APP_URL}/leadForm/single/${e._id}`)
         .then((e) => {
           // console.log(e?.data?.replies);
           // let data = e?.data?.replies.reverse()
-          setReplies(e?.data?.replies);  
+          setReplies(e?.data?.replies.reverse());
         })
         .catch((err) => {
           console.log(err);
         });
     } catch (err) {
       console.log(err);
+    }
+  };
+
+  const submitmessage = async () => {
+    try {  
+      let id = localStorage.getItem("usrId") || undefined;
+      let authorization = localStorage.getItem("AstToken") || undefined;
+
+      let head = { id, authorization, "Content-type": "application/json" };
+
+      if (!id || !authorization) {
+        toast({
+          title: "Kindly log in to send message.", 
+          description: "Login required for sending message.",
+          status: "error",
+          duration: 2000,
+          position: "top-right", 
+        });
+        return;
+      }
+
+      const body = {
+          message: message ,
+        };
+
+      await axios
+        .post(`${process.env.REACT_APP_URL}/leadForm/${e._id}/replies`,body,{ headers: head })
+        .then((e) => { 
+          console.log(e); 
+          setReplies(e?.data?.data?.replies.reverse()); 
+          setMessage("") 
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleKeyPress = (event) => { 
+    if (event.key === "Enter") {   
+      submitmessage(); 
+    }else{
+      return; 
     }
   };
 
@@ -160,16 +208,17 @@ const Querydesc = ({ e }) => {
               />
               {/* replyes detail */}
               <Box flex={6}>
-                <Box  
-                  display={"grid"}
+                <Box
+                  display={"flex"} 
+                  flexDirection={"column"} 
                   gap={"10px"}
-                  overflowY={"scroll"}  
-                  paddingBottom={{base:"40px",md:"0px"}} 
+                  overflowY={"scroll"}
+                  paddingBottom={{ base: "40px", md: "0px" }}
                   height={{ base: "auto", md: "70vh" }}
                 >
-                  {replies.reverse().map((e, i) => (
+                  {replies.map((e, i) => (
                     <Box display={"flex"} key={i} padding={"20px"} gap={"20px"}>
-                      <Box flex={1}>
+                      <Box flex={1}> 
                         <Avatar size="md" name={e.name} />
                       </Box>
                       <Box textAlign={"left"} flex={8}>
@@ -190,9 +239,34 @@ const Querydesc = ({ e }) => {
                     </Box>
                   ))}
                 </Box>
-                <Box display={"flex"} position={{base:"fixed",md:"relative"}} bottom={0} w={"100%"} left={0} right={0} gap={"2px"}>
-                  <Input type="text" flex={8} placeholder={"enter message"} variant={"solid"} border={"1px solid blue"} />
-                  <Button borderRadius={0} colorScheme="blue" variant={"solid"} flex={1}> send </Button>
+                <Box
+                  display={"flex"}
+                  position={{ base: "fixed", md: "relative" }}
+                  bottom={0}
+                  w={"100%"}
+                  left={0}
+                  right={0}
+                  gap={"2px"}
+                >
+                  <Input
+                    type="text"
+                    flex={8}
+                    value={message}
+                    onKeyPress={handleKeyPress}
+                    onChange={(e) => setMessage(e.target.value)}
+                    placeholder={"enter message"}
+                    variant={"solid"}
+                    border={"1px solid blue"}
+                  />
+                  <Button
+                    borderRadius={0}
+                    colorScheme="blue"
+                    variant={"solid"}
+                    flex={1} 
+                    onClick={submitmessage}
+                  > 
+                    send 
+                  </Button>
                 </Box>
               </Box>
             </Box>
