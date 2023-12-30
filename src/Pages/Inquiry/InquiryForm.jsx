@@ -43,9 +43,7 @@ const InquiryForm = () => {
   const [PropertyTypeWarning, stePropertyTypeWarning] = useState("");
   const [disWarning, setDisWarning] = useState("");  
   const toast = useToast();
-  const navigate = useNavigate(); 
- 
-  console.log(loaction);  
+  const navigate = useNavigate();  
 
   const handlevisiblelity = (e) => {
     let val = e.target.value;
