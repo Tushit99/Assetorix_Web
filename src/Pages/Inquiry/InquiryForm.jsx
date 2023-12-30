@@ -21,7 +21,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { NumericString } from "./Incript";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const InquiryForm = () => {
   const username = useSelector((state) => state.userreducer);
@@ -31,7 +31,8 @@ const InquiryForm = () => {
   const [email, setEmail] = useState("");
   const [formType, steFormType] = useState("");
   const [PropertyType, stePropertyType] = useState("");
-  const [dis, setDis] = useState("");
+  const [dis, setDis] = useState(""); 
+  const loaction = useLocation();
   const [visible, setVisible] = useState(false);
 
   const [nameWarning, setNameWarning] = useState("");
@@ -43,6 +44,7 @@ const InquiryForm = () => {
   const toast = useToast();
   const navigate = useNavigate(); 
  
+  console.log(loaction);  
 
   const handlevisiblelity = (e) => {
     let val = e.target.value;
@@ -172,7 +174,8 @@ const InquiryForm = () => {
           colorScheme={"blue"}
           padding={"0px 10px"}
           borderRadius={"4px"}
-          onClick={onOpen}
+          onClick={onOpen} 
+          display={(location.pathname=="/login" || location.pathname=="/signup") ? "none" : "block"}
         >
           Q 
         </Button>
@@ -197,7 +200,7 @@ const InquiryForm = () => {
                     value={name}
                     maxLength={30}
                     placeholder="Enter Name"
-                    variant="outline"
+                    variant="outline" 
                   />
                   <Text
                     color={"red"}

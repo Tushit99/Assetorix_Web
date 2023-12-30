@@ -15,6 +15,7 @@ import { useLocation, useSearchParams } from "react-router-dom";
 import style from "./QueryPage.module.css";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import Querydesc from "./Querydesc/Querydesc";
 
 const QueryPage = () => {
   const [queryBox, setQueryBox] = useState([]);
@@ -24,12 +25,16 @@ const QueryPage = () => {
   const location = useLocation();
   const [propertyType, setPropertyType] = useState("");
   const [isLoading, setLoading] = useState(false);
+  const [search, setSearch] = useState("");
   const demobox = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   useEffect(() => {
     let obj = { page };
     if (propertyType != "") {
       obj["formType"] = propertyType;
+    }
+    if(search){
+      obj["search"] = search; 
     }
     setSearchParam(obj);
   }, [page, propertyType]);
@@ -45,7 +50,7 @@ const QueryPage = () => {
       await axios
         .get(`${process.env.REACT_APP_URL}/leadForm/all${location.search}`)
         .then((e) => {
-          // console.log(e.data);
+          console.log(e.data);
           setTotalPages(e.data.totalPages);
           setQueryBox(e.data.data);
           setLoading(false);
@@ -78,15 +83,39 @@ const QueryPage = () => {
       setSearchParam(obj);
     }
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-  }, []);
+  }, []); 
 
+  // page dec funtion
   const handleminpage = () => {
     setPage((prev) => +prev - 1);
   };
 
+  // page inc function
   const handleaddpage = () => {
     setPage((prev) => +prev + 1);
   };
+
+  // input search function
+  const handlesearchinp = () => {
+    let obj = { page };
+    if (propertyType != "") {
+      obj["formType"] = propertyType;
+    }
+    if(search){
+      obj["search"] = search; 
+    }
+    setSearchParam(obj); 
+  };
+
+  const saveinput =(e)=>{
+    setSearch(e.target.value); 
+  }
+
+  const handleKeyPress =(event)=>{
+    if(event.key === 'Enter'){
+      handlesearchinp()
+    }  
+  }
 
   return (
     <Box padding={{ base: "30px 20px 60px 20px", md: "30px 40px 60px 40px" }}>
@@ -120,7 +149,7 @@ const QueryPage = () => {
         </Button>
       </Box>
       {/* heading and other detail */}
-      <Heading> Assetorix Query </Heading>
+      <Heading> User Queries </Heading>
       <Box
         display={"flex"}
         alignItems={"center"}
@@ -151,17 +180,20 @@ const QueryPage = () => {
             size={{ base: "sm", md: "md" }}
             placeholder={"search..."}
             borderRadius={0}
+            value={search}
+            onChange={saveinput} 
+            onKeyPress={handleKeyPress}
             variant="outline"
             border={"1px solid blue"}
           />
           <Button
             colorScheme="blue"
             size={{ base: "sm", md: "md" }}
-            borderRadius={0}
+            borderRadius={0}   
+            onClick={handlesearchinp} 
             color={"white"}
-          >
-            {" "}
-            <FaSearch />{" "}
+          > 
+            <FaSearch /> 
           </Button>
         </Box>
       </Box>
@@ -185,11 +217,11 @@ const QueryPage = () => {
                     <Skeleton baseColor="#9AE6FF" />
                   </Heading>
                   <Text fontsize={"md"}>
-                    <strong>Property Type:</strong>{" "}
+                    <strong>Property Type:</strong>
                     <Skeleton baseColor="#9AE6FF" />
                   </Text>
                   <Text fontsize={"lg"} className={style.des}>
-                    <strong>Requirement:</strong>{" "}
+                    <strong>Requirement:</strong>
                     <Skeleton baseColor="#9AE6FF" />
                   </Text>
                 </Box>
@@ -200,41 +232,7 @@ const QueryPage = () => {
           // maping data after featching it
           <Box className={style.mapbox}>
             {queryBox.map((e) => (
-              <Box as={"div"} key={e._id} className={style.flex}>
-                <Box flex={1}>
-                  <Avatar size="lg" name={e.name} borderRadius={4} />
-                </Box>
-                <Box textAlign={"left"} flex={3}>
-                  <Box className={style.posttype}>
-                    <Badge
-                      variant="solid"
-                      colorScheme={
-                        e.formType == "Rent"
-                          ? "red"
-                          : e.formType == "Sell"
-                          ? "green"
-                          : "blue"
-                      }
-                      fontWeight={"bold"}
-                      fontSize="0.7em"
-                    >
-                      {e.formType}
-                    </Badge>
-                  </Box>
-                  <Heading size={"md"} as={"h2"}>
-                    {e.name}
-                  </Heading>
-                  <Text
-                    fontsize={"md"}
-                    display={e.propertyType == "None" ? "none" : "block"}
-                  >
-                    <strong>Property Type:</strong> {e.propertyType}
-                  </Text>
-                  <Text fontsize={"lg"} className={style.des}>
-                    <strong>Requirement:</strong> {e.description}
-                  </Text>
-                </Box>
-              </Box>
+              <Querydesc key={e._id} e={e} />
             ))}
           </Box>
         )}
@@ -244,7 +242,7 @@ const QueryPage = () => {
         display={"flex"}
         alignItems={"center"}
         justifyContent={"right"}
-        gap={"10px"} 
+        gap={"10px"}
         marginTop={"40px"}
         position={"relative"}
       >
