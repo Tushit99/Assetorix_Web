@@ -20,8 +20,8 @@ import {
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { NumericString } from "./Incript";
-import { useSelector } from "react-redux";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useSelector, useLocation } from "react-redux";
+import { useNavigate} from "react-router-dom";
 
 const InquiryForm = () => {
   const username = useSelector((state) => state.userreducer);
