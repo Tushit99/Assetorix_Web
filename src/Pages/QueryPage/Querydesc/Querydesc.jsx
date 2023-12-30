@@ -12,7 +12,7 @@ import {
   ModalHeader,
   Avatar,
   Badge,
-  Input, 
+  Input,
   Divider,
   Heading,
   Text,
@@ -23,7 +23,8 @@ import { convertDateFormat } from "./code/code";
 
 const Querydesc = ({ e }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [replies, setReplies] = useState([]);
+  const [replies, setReplies] = useState([]);  
+ 
 
   const fetchreplies = async () => {
     onOpen();
@@ -33,7 +34,7 @@ const Querydesc = ({ e }) => {
         .then((e) => {
           // console.log(e?.data?.replies);
           // let data = e?.data?.replies.reverse()
-          setReplies(e?.data?.replies);
+          setReplies(e?.data?.replies);  
         })
         .catch((err) => {
           console.log(err);
@@ -158,43 +159,44 @@ const Querydesc = ({ e }) => {
                 border={"1px solid black"}
               />
               {/* replyes detail */}
-              <Box
-                flex={6}
-                display={"grid"}
-                gap={"10px"}
-                overflowY={"scroll"}
-                height={{ base: "auto", md: "70vh" }}
-              >
-                {replies.reverse().map((e, i) => (
-                  <Box display={"flex"} key={i} padding={"20px"} gap={"20px"}>
-                    <Box flex={1}>
-                      <Avatar size="md" name={e.name} />
+              <Box flex={6}>
+                <Box  
+                  display={"grid"}
+                  gap={"10px"}
+                  overflowY={"scroll"}  
+                  paddingBottom={{base:"40px",md:"0px"}} 
+                  height={{ base: "auto", md: "70vh" }}
+                >
+                  {replies.reverse().map((e, i) => (
+                    <Box display={"flex"} key={i} padding={"20px"} gap={"20px"}>
+                      <Box flex={1}>
+                        <Avatar size="md" name={e.name} />
+                      </Box>
+                      <Box textAlign={"left"} flex={8}>
+                        <Heading size={"sm"} as={"h2"}>
+                          {e?.name}
+                        </Heading>
+                        <Text fontSize={"10px"} marginTop={1}>
+                          {convertDateFormat(e.createdOn)}
+                        </Text>
+                        <Text
+                          fontsize={"md"}
+                          marginTop={3}
+                          className={style?.des}
+                        >
+                          {e?.message}
+                        </Text>
+                      </Box>
                     </Box>
-                    <Box textAlign={"left"} flex={8}>
-                      <Heading size={"sm"} as={"h2"}>
-                        {e?.name}
-                      </Heading>
-                      <Text fontSize={"10px"} marginTop={1}>
-                        {convertDateFormat(e.createdOn)}
-                      </Text>
-                      <Text
-                        fontsize={"md"}
-                        marginTop={3}
-                        className={style?.des}
-                      >
-                        {e?.message}
-                      </Text>
-                    </Box>
-                  </Box>
-                ))}
+                  ))}
+                </Box>
+                <Box display={"flex"} position={{base:"fixed",md:"relative"}} bottom={0} w={"100%"} left={0} right={0} gap={"2px"}>
+                  <Input type="text" flex={8} placeholder={"enter message"} variant={"solid"} border={"1px solid blue"} />
+                  <Button borderRadius={0} colorScheme="blue" variant={"solid"} flex={1}> send </Button>
+                </Box>
               </Box>
             </Box>
           </ModalBody>
-
-          <ModalFooter >
-            <Input type="text" flex={8} />
-            <Button flex={2} > send </Button>
-          </ModalFooter>
         </ModalContent>
       </Modal>
     </>
