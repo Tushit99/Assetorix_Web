@@ -227,9 +227,10 @@ const Navebar = () => {
                                     <Box className={style.log_links}>
                                         <Link to={"/profile"}> Profile </Link>
                                         <Link to={"/wishlist"}> Wishlist </Link>
-                                        <Link to={"/recently_visited"}> recently visited </Link>
-                                        <Link to={"/listing"}> Listings </Link>
-                                        <Link> Purchased </Link>
+                                        <Link to={"/recently_visited"}> Recently Visited </Link>
+                                        <Link to={"/listing"}> My Listings </Link>
+                                        <Link to="/my_leads"> My Leads </Link>
+                                        {/* <Link> My Purchased </Link> */}
                                     </Box>
                                     <Button onClick={handlelogout} className={style.logout_btn} > Logout </Button>
                                 </PopoverBody>

@@ -16,7 +16,7 @@ import {
   Divider,
   useToast,
   Heading,
-  Text,
+  Text, 
 } from "@chakra-ui/react";
 import style from "../QueryPage.module.css";
 import axios from "axios";
@@ -29,14 +29,13 @@ const Querydesc = ({ e }) => {
   const toast = useToast();
 
   const fetchreplies = async () => {
-    onOpen(); 
-    console.log("runboy");  
+    onOpen();   
     try {
       await axios
         .get(`${process.env.REACT_APP_URL}/leadForm/single/${e._id}`)
         .then((e) => {
           // console.log(e?.data?.replies);
-          // let data = e?.data?.replies.reverse()
+          // let data = e?.data?.replies.reverse() 
           setReplies(e?.data?.replies.reverse());
         })
         .catch((err) => {
@@ -111,7 +110,7 @@ const Querydesc = ({ e }) => {
                 e?.formType == "Rent"
                   ? "red"
                   : e?.formType == "Sell"
-                  ? "green"
+                  ? "green" 
                   : "blue"
               }
               fontWeight={"bold"}
