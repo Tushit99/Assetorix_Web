@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Box, useToast, Heading, Text } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";  
+import { Box, useToast, Heading, Text } from "@chakra-ui/react";  
 import axios from "axios";
 import style from "./MyLeads.module.css"; 
 
@@ -64,3 +64,4 @@ const MyLeads = () => {
 };
 
 export default MyLeads;
+
