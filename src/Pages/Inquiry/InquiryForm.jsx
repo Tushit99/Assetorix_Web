@@ -22,7 +22,7 @@ import React, { useEffect, useState } from "react";
 import { NumericString } from "./Incript";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useLocation } from 'react-router-dom'; 
+import { useLocation } from "react-router-dom";
 
 const InquiryForm = () => {
   const username = useSelector((state) => state.userreducer);
@@ -30,10 +30,10 @@ const InquiryForm = () => {
   const [name, setName] = useState("");
   const [mobile, setMobile] = useState("");
   const [email, setEmail] = useState("");
-  const [formType, steFormType] = useState("");
-  const [PropertyType, stePropertyType] = useState("");
-  const [dis, setDis] = useState(""); 
-  const location = useLocation();  
+  const [formType, steFormType] = useState("Buy");
+  const [PropertyType, stePropertyType] = useState("Residential");
+  const [dis, setDis] = useState("");
+  const location = useLocation();
   const [visible, setVisible] = useState(false);
 
   const [nameWarning, setNameWarning] = useState("");
@@ -41,9 +41,9 @@ const InquiryForm = () => {
   const [emailWarning, setEmailWarning] = useState("");
   const [formTypeWarning, steFormTypeWarning] = useState("");
   const [PropertyTypeWarning, stePropertyTypeWarning] = useState("");
-  const [disWarning, setDisWarning] = useState("");  
+  const [disWarning, setDisWarning] = useState("");
   const toast = useToast();
-  const navigate = useNavigate();  
+  const navigate = useNavigate();
 
   const handlevisiblelity = (e) => {
     let val = e.target.value;
@@ -53,12 +53,12 @@ const InquiryForm = () => {
     } else {
       setVisible(true);
     }
-  }; 
+  };
 
-  const handletologin = () =>{
-    navigate("/login"); 
-    onClose();  
-  }
+  const handletologin = () => {
+    navigate("/login");
+    onClose();
+  };
 
   const handleSendQuery = async (e) => {
     e.preventDefault();
@@ -101,7 +101,7 @@ const InquiryForm = () => {
     } else if (email.length < 3) {
       setNameWarning("");
       setMobileWarning("");
-      setEmailWarning("Enter Your full email");
+      setEmailWarning("email is required"); 
       return;
     } else if (formType.length < 3) {
       setNameWarning("");
@@ -149,8 +149,9 @@ const InquiryForm = () => {
         duration: 5000, // Adjust duration as needed
         isClosable: true,
       });
-      console.log(response.data);
-      onClose();
+      console.log(response.data); 
+      setDis("");
+      onClose();  
     } catch (error) {
       toast({
         title: "Something went wrong",
@@ -163,6 +164,12 @@ const InquiryForm = () => {
     }
   };
 
+  useEffect(() => {
+    setName(username?.user?.name);
+    setEmail(username?.user?.email);
+    setMobile(username?.user?.mobile);
+  }, [username]);
+
   return (
     <Box>
       <Tooltip label="Query Form" aria-label="A tooltip" placement="top">
@@ -173,22 +180,24 @@ const InquiryForm = () => {
           colorScheme={"blue"}
           padding={"0px 10px"}
           borderRadius={"4px"}
-          onClick={onOpen} 
-          display={(location.pathname=="/login" || location.pathname=="/signup") ? "none" : "block"}
+          onClick={onOpen}
+          display={
+            location.pathname == "/login" || location.pathname == "/signup"
+              ? "none"
+              : "block"
+          }
         >
-          Q 
+          Q
         </Button>
       </Tooltip>
 
       <Modal isOpen={isOpen} isCentered onClose={onClose}>
-        <ModalOverlay /> 
+        <ModalOverlay />
         {username.name ? (
-          <ModalContent>  
-            <ModalHeader>
-              Inquiry Form 
-            </ModalHeader>
+          <ModalContent>
+            <ModalHeader>Inquiry Form</ModalHeader>
             <ModalCloseButton />
-            <ModalBody> 
+            <ModalBody>
               <Box>
                 <Box>
                   <Text> Name </Text>
@@ -199,7 +208,7 @@ const InquiryForm = () => {
                     value={name}
                     maxLength={30}
                     placeholder="Enter Name"
-                    variant="outline" 
+                    variant="outline"
                   />
                   <Text
                     color={"red"}
@@ -256,8 +265,7 @@ const InquiryForm = () => {
                     }}
                     value={formType}
                     required
-                    variant="outline"
-                    placeholder="Select"
+                    variant="outline" 
                     w={"100%"}
                   >
                     <option value="Buy"> Buy </option>
@@ -283,8 +291,7 @@ const InquiryForm = () => {
                     onChange={(e) => stePropertyType(e.target.value)}
                     value={PropertyType}
                     required
-                    variant="outline"
-                    placeholder="Select"
+                    variant="outline" 
                     w={"100%"}
                   >
                     <option value="Residential"> Residential </option>n
@@ -340,22 +347,24 @@ const InquiryForm = () => {
               </Button>
             </ModalFooter>
           </ModalContent>
-        ) : ( 
+        ) : (
           <ModalContent>
-            <ModalHeader>
-              Query Form 
-            </ModalHeader>
+            <ModalHeader>Query Form</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
               <Text> If you want to Post Query Please Login First </Text>
             </ModalBody>
             <ModalFooter>
-                <Button 
-                colorScheme="blue"  
+              <Button
+                colorScheme="blue"
                 onClick={handletologin}
-                backgroundColor={"#2e3192"}> Login </Button>
+                backgroundColor={"#2e3192"}
+              >
+                {" "}
+                Login{" "}
+              </Button>
             </ModalFooter>
-          </ModalContent>   
+          </ModalContent>
         )}
       </Modal>
     </Box>

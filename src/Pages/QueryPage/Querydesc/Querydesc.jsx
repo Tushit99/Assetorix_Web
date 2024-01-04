@@ -16,38 +16,49 @@ import {
   Divider,
   useToast,
   Heading,
-  Text, 
+  Text,
 } from "@chakra-ui/react";
 import style from "../QueryPage.module.css";
 import axios from "axios";
-import { convertDateFormat } from "./code/code";
+import { convertDateFormat } from "./code/code"; 
+import { useSelector } from "react-redux";
 
-const Querydesc = ({ e }) => {
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+
+const Querydesc = ({ e }) => { 
+  const { user } = useSelector((state) => state.userreducer);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [replies, setReplies] = useState([]);
   const [message, setMessage] = useState("");
   const toast = useToast();
+  const [loading, setLoading] = useState(false);
 
   const fetchreplies = async () => {
-    onOpen();   
+    onOpen();
+    setLoading(true);
     try {
       await axios
         .get(`${process.env.REACT_APP_URL}/leadForm/single/${e._id}`)
         .then((e) => {
-          // console.log(e?.data?.replies);
-          // let data = e?.data?.replies.reverse() 
+          console.log(e?.data?.replies); 
+          // let data = e?.data?.replies.reverse()
           setReplies(e?.data?.replies.reverse());
+          setLoading(false);
         })
         .catch((err) => {
           console.log(err);
+          setLoading(false);
         });
     } catch (err) {
       console.log(err);
+      setLoading(false);
     }
   };
 
   const submitmessage = async () => {
-    try {  
+    setLoading(true);
+    try {
       let id = localStorage.getItem("usrId") || undefined;
       let authorization = localStorage.getItem("AstToken") || undefined;
 
@@ -55,39 +66,44 @@ const Querydesc = ({ e }) => {
 
       if (!id || !authorization) {
         toast({
-          title: "Kindly log in to send message.", 
+          title: "Kindly log in to send message.",
           description: "Login required for sending message.",
           status: "error",
           duration: 2000,
-          position: "top-right", 
+          position: "top-right",
         });
         return;
       }
 
       const body = {
-          message: message ,
-        };
+        message: message,
+      };
 
       await axios
-        .post(`${process.env.REACT_APP_URL}/leadForm/${e._id}/replies`,body,{ headers: head })
-        .then((e) => { 
+        .post(`${process.env.REACT_APP_URL}/leadForm/${e._id}/replies`, body, {
+          headers: head,
+        })
+        .then((e) => {
           console.log(e); 
-          setReplies(e?.data?.data?.replies.reverse()); 
-          setMessage("") 
+          setReplies(e?.data?.data?.replies.reverse());
+          setMessage("");
+          setLoading(false);
         })
         .catch((err) => {
           console.log(err);
+          setLoading(false);
         });
     } catch (err) {
       console.log(err);
+      setLoading(false);
     }
   };
 
-  const handleKeyPress = (event) => { 
-    if (event.key === "Enter") {   
-      submitmessage(); 
-    }else{
-      return; 
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      submitmessage();
+    } else {
+      return;
     }
   };
 
@@ -110,7 +126,7 @@ const Querydesc = ({ e }) => {
                 e?.formType == "Rent"
                   ? "red"
                   : e?.formType == "Sell"
-                  ? "green" 
+                  ? "green"
                   : "blue"
               }
               fontWeight={"bold"}
@@ -207,36 +223,90 @@ const Querydesc = ({ e }) => {
               />
               {/* replyes detail */}
               <Box flex={6}>
-                <Box
-                  display={"flex"} 
-                  flexDirection={"column"} 
-                  gap={"10px"}
-                  overflowY={"scroll"}
-                  paddingBottom={{ base: "40px", md: "0px" }}
-                  height={{ base: "auto", md: "70vh" }}
-                >
-                  {replies.map((e, i) => (
-                    <Box display={"flex"} key={i} padding={"20px"} gap={"20px"}>
-                      <Box flex={1}> 
-                        <Avatar size="md" name={e.name} />
-                      </Box>
-                      <Box textAlign={"left"} flex={8}>
-                        <Heading size={"sm"} as={"h2"}>
-                          {e?.name}
-                        </Heading>
-                        <Text fontSize={"10px"} marginTop={1}>
-                          {convertDateFormat(e.createdOn)}
-                        </Text>
-                        <Text
-                          fontsize={"md"}
-                          marginTop={3}
-                          className={style?.des}
+                <Box>
+                  {loading == true ? (
+                    <Box
+                      display={"flex"}
+                      flexDirection={"column"}
+                      gap={"10px"}
+                      overflowY={"scroll"}
+                      paddingBottom={{ base: "40px", md: "0px" }}
+                      height={{ base: "auto", md: "70vh" }}
+                    >
+                      {[1, 2, 3, 4, 5, 6].map((e, i) => (
+                        <Box
+                          display={"flex"}
+                          key={i}
+                          padding={"20px"}
+                          gap={"20px"}
                         >
-                          {e?.message}
-                        </Text>
-                      </Box>
+                          <Box flex={1}>
+                            <Skeleton
+                              height={"60px"}
+                              width={"60px"}
+                              borderRadius={"50px"}
+                              baseColor="#9AE6FF"
+                            />
+                          </Box>
+                          <Box textAlign={"left"} flex={8}>
+                            <Heading size={"sm"} as={"h2"}>
+                              <Skeleton baseColor="#9AE6FF" />
+                            </Heading>
+                            <Text fontSize={"10px"} marginTop={1}>
+                              <Skeleton baseColor="#9AE6FF" />
+                            </Text>
+                            <Text
+                              fontsize={"md"}
+                              marginTop={3}
+                              className={style?.des}
+                            >
+                              <Skeleton baseColor="#9AE6FF" />
+                            </Text>
+                          </Box>
+                        </Box>
+                      ))}
                     </Box>
-                  ))}
+                  ) : (
+                    <Box
+                      display={"flex"}
+                      flexDirection={"column"}
+                      gap={"10px"}
+                      overflowY={"scroll"}
+                      paddingBottom={{ base: "40px", md: "0px" }}
+                      height={{ base: "auto", md: "70vh" }}
+                    >
+                      {replies.map((e, i) => (
+                        <Box
+                          display={"flex"}
+                          key={i}
+                          padding={"20px"}
+                          gap={"20px"}
+                        >
+                          <Box flex={1} display={e?.userID!==user?.id ? "block" : "none"}>
+                            <Avatar size="md" name={e.name} />
+                          </Box>
+                          <Box textAlign={e?.userID==user?.id ? "right" : "left"} flex={8}> 
+                            <Heading size={"sm"} as={"h2"}>
+                              {e?.name}
+                            </Heading>
+                            <Text fontSize={"10px"} marginTop={1}> 
+                              {convertDateFormat(e.createdOn)}
+                            </Text>
+                            <Text
+                              fontsize={"md"}
+                              marginTop={3}
+                              className={style?.des}
+                            >
+                              {e?.message}
+                            </Text>
+                          </Box>
+                          <Box flex={1} display={e?.userID==user?.id ? "block" : "none"}>
+                            <Avatar size="md" name={e.name} />
+                          </Box> 
+                        </Box>
+                      ))}
+                    </Box>
+                  )}
                 </Box>
                 <Box
                   display={"flex"}
@@ -261,10 +331,10 @@ const Querydesc = ({ e }) => {
                     borderRadius={0}
                     colorScheme="blue"
                     variant={"solid"}
-                    flex={1} 
+                    flex={1}
                     onClick={submitmessage}
-                  > 
-                    send 
+                  >
+                    send
                   </Button>
                 </Box>
               </Box>

@@ -118,7 +118,7 @@ const QueryPage = () => {
   }
 
   return (
-    <Box padding={{ base: "30px 20px 60px 20px", md: "30px 40px 60px 40px" }}>
+    <Box className={style.maxwidth} padding={{ base: "30px 20px 60px 20px", md: "30px 40px 60px 40px" }}>
       {/* pagination position fixed */}
       {/* page change button */}
       <Box
@@ -229,7 +229,7 @@ const QueryPage = () => {
             ))}
           </Box>
         ) : (
-          // maping data after featching it
+          // maping data after featching it  
           <Box className={style.mapbox}>
             {queryBox.map((e) => (
               <Querydesc key={e._id} e={e} />

@@ -3,13 +3,18 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px; 
+  max-width: 100%;  
+} 
+
+.maxwidth *{
+  max-width: 100%; 
 }
 
 .mapbox > div { 
     padding: 20px;  
-    height: 160px;
+    height: 160px; 
     box-shadow: rgba(55, 0, 255, 0.24) 0px 3px 8px;   
-} 
+}   
 
 .posttype{
     position: absolute; 
