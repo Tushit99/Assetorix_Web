@@ -22,8 +22,6 @@ import { useNavigate } from "react-router-dom";
 import Loading from "../../../../Loading";
 
 
-
-
 const GuestBanquet = () => {
     const isCountry = useSelector((state) => state.gloalval);
     const toast = useToast();
@@ -271,9 +269,20 @@ const GuestBanquet = () => {
                             status: 'success',
                             duration: 2000,
                         })
-                        submitImage(e.data.id);
+                        if(images.length){
+                            submitImage(e.data.id);  
+                        }else{
+                            setIsClicked(false);
+                            navigate("/listing");  
+                        }
                     }).catch((err) => {
-                        console.log(err);
+                        toast({
+                            title: err.response.data.msg,
+                            status: 'error',
+                            duration: 2000,
+                        })
+                        setClickCount((prev) => prev - 12);
+                        setIsClicked(false);  
                     })
             } catch (error) {
                 toast({

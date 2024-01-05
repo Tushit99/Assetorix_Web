@@ -308,7 +308,7 @@ const EditForm = ({ detail, handlechange }) => {
                   onChange={handlevisiblelity}
                 >
                   click to make visible your mobile number to others
-                </Checkbox>
+                </Checkbox> 
               </Box>
             </Box>
           </ModalBody>

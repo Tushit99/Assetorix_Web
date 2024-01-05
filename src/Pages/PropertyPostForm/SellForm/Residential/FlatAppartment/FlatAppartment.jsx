@@ -282,7 +282,12 @@ const FlatAppartment = () => {
                             status: 'success',
                             duration: 2000,
                         })
-                        submitImage(e.data.id);
+                        if(images.length){
+                            submitImage(e.data.id);  
+                        }else{
+                            setIsClicked(false);
+                            navigate("/listing");  
+                        }
                     }).catch((err) => {
                         console.log(err);
                         setClickCount((prev) => prev - 12);

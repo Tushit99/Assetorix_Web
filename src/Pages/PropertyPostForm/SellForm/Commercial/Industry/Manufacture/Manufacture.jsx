@@ -14,13 +14,10 @@ import { Checkbox } from "@chakra-ui/react";
 import style from "../Industry.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { CleanInputText, NumericString, WordandNumber } from "../../../../code";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../../../Loading";
-
-
-
 
 const Manufacture = () => {
   const isCountry = useSelector((state) => state.gloalval);
@@ -72,7 +69,6 @@ const Manufacture = () => {
   const fileInputRef = useRef(null);
   // please don'nt change any function without any prior knowledge
 
-
   const handleSubmitData = async (e) => {
     e.preventDefault();
     setClickCount((prev) => prev + 12);
@@ -121,36 +117,34 @@ const Manufacture = () => {
 
     const showToastError = (message) => {
       toast({
-        title: message + ' un-filled',
-        status: 'error',
+        title: message + " un-filled",
+        status: "error",
         duration: 2000,
-        position: 'top-right'
+        position: "top-right",
       });
-    }
-
+    };
 
     if (!locality) {
-      showToastError('Provide locality');
+      showToastError("Provide locality");
     } else if (!washrooms) {
-      showToastError('Provide washrooms');
+      showToastError("Provide washrooms");
     } else if (!ownership) {
-      showToastError('Provide OwnerShip');
+      showToastError("Provide OwnerShip");
     } else if (!pricedetail) {
-      showToastError('Provide PriceDetail');
+      showToastError("Provide PriceDetail");
     } else if (!priceSqr) {
-      showToastError('Provide Price Per sq.ft');
+      showToastError("Provide Price Per sq.ft");
     } else if (!additinalft) {
-      showToastError('Provide Property description');
+      showToastError("Provide Property description");
     }
 
     if (locationAdv) {
-      obj["locationAdv"] = locationAdv
+      obj["locationAdv"] = locationAdv;
     }
 
     if (
       ownership &&
       pricedetail &&
-
       inclusivePrices &&
       amenities &&
       propertyFeatures &&
@@ -160,17 +154,17 @@ const Manufacture = () => {
       let id = localStorage.getItem("usrId") || undefined;
       let authorization = localStorage.getItem("AstToken") || undefined;
 
-      let head = { id, authorization, 'Content-type': 'application/json' };
+      let head = { id, authorization, "Content-type": "application/json" };
 
       if (!id || !authorization) {
         toast({
-          title: 'Kindly log in to access property posting.',
+          title: "Kindly log in to access property posting.",
           description: "Login required for posting property.",
-          status: 'error',
+          status: "error",
           duration: 2000,
-          position: 'top-right'
-        })
-        return
+          position: "top-right",
+        });
+        return;
       }
 
       if (preLeased == "Yes") {
@@ -178,9 +172,9 @@ const Manufacture = () => {
           currentRentPerMonth,
           leaseTenureInYear,
           annualRentIncrease,
-          businessType
-        }
-        obj["preLeased_RentedDetails"] = preLeased_RentedDetails
+          businessType,
+        };
+        obj["preLeased_RentedDetails"] = preLeased_RentedDetails;
       }
 
       // if (furnished == "Furnished" || furnished == "Semi-Furnished") {
@@ -206,7 +200,6 @@ const Manufacture = () => {
       if (availability == "Under construction" && expectedyear != "") {
         obj["expectedByYear"] = expectedyear;
         obj["availabilityStatus"] = availability;
-
       }
       // else {
       try {
@@ -215,54 +208,61 @@ const Manufacture = () => {
         //     headers: head,
         //     body: JSON.stringify(obj)
         // });
-        // let data = await response.json();  
-        // console.log("data",data);  
+        // let data = await response.json();
+        // console.log("data",data);
         setClickCount((prev) => prev + 12);
         setIsClicked(true);
-        await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
+        await axios
+          .post(`${process.env.REACT_APP_URL}/property/`, obj, {
+            headers: head,
+          })
           .then((e) => {
             toast({
               title: e.data.msg,
               description: e.data.msg,
-              status: 'success',
+              status: "success",
               duration: 2000,
-            })
-            submitImage(e.data.id);
+            });
+            if (images.length) {
+              submitImage(e.data.id);
+            } else {
+              setIsClicked(false);
+              navigate("/listing");
+            }
           });
       } catch (error) {
         toast({
           title: error.response.data.msg,
-          status: 'error',
+          status: "error",
           duration: 2000,
-        })
+        });
         setClickCount((prev) => prev - 12);
         setIsClicked(false);
       }
-    }
-    else {
+    } else {
       toast({
-        title: 'Form un-filled',
+        title: "Form un-filled",
         description: "Please fill all required fields.",
-        status: 'info',
+        status: "info",
         duration: 2000,
-        position: 'top-right'
+        position: "top-right",
       });
       setClickCount((prev) => prev - 12);
       setIsClicked(false);
     }
   };
 
-  // image uploading after uploading the data:  
+  // image uploading after uploading the data:
   const submitImage = async (productID) => {
     try {
       let id = localStorage.getItem("usrId") || undefined;
       let authorization = localStorage.getItem("AstToken") || undefined;
 
       let headersList = {
-        "Accept": "*/*",
-        "Authorization": authorization,
-        "id": id
-      }
+        Accept: "*/*",
+        Authorization: authorization,
+        id: id,
+      };
 
       let formdata = new FormData();
       images.forEach((image) => {
@@ -276,11 +276,11 @@ const Manufacture = () => {
         method: "POST",
         headers: headersList,
         data: bodyContent,
-      }
+      };
 
       await axios.request(reqOptions).then((e) => {
         setIsClicked(false);
-      })
+      });
     } catch (error) {
       console.log(error);
       setIsClicked(false);
@@ -294,26 +294,24 @@ const Manufacture = () => {
     setPincode(val);
     if (val.length == 6) {
       pinfetch(val);
-    }
-    else {
+    } else {
       console.log(val);
     }
-  }
-
+  };
 
   const pinfetch = async (pin) => {
     try {
-
-      let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
+      let res = await axios.get(
+        `${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`
+      );
       setState(res.data[0].state);
       setCity(res.data[0].city);
       setCountry(res.data[0].country);
       setPinCollection(res.data);
-    }
-    catch (err) {
+    } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   const handleAvailable = (e) => {
     e.preventDefault();
@@ -423,7 +421,7 @@ const Manufacture = () => {
       newarr.push(value);
     }
     setInclusivePrice(newarr);
-  }
+  };
 
   const areaCalucation = () => {
     if (pricedetail && plotArea) {
@@ -432,13 +430,13 @@ const Manufacture = () => {
       let ans = Math.round(max / min);
       setPriceSqr(ans);
     }
-  }
+  };
 
-  // ======--- image upload function   
+  // ======--- image upload function
 
   const selectFiles = () => {
     fileInputRef.current.click();
-  }
+  };
 
   const removeImage = (index) => {
     const newImages = [...images];
@@ -449,33 +447,36 @@ const Manufacture = () => {
   const onFileSelect = (e) => {
     let files = e.target.files;
     if (files.length === 0) {
-      return
+      return;
     }
     for (let i = 0; i < files.length; i++) {
-      if (files[i].type.split('/')[0] !== 'image') {
+      if (files[i].type.split("/")[0] !== "image") {
         continue;
       }
       if (!images.some((e) => e.name === files[i].name)) {
-        setImages((prev) => [...prev, {
-          name: files[i].name,
-          image: files[i],
-        },])
+        setImages((prev) => [
+          ...prev,
+          {
+            name: files[i].name,
+            image: files[i],
+          },
+        ]);
       }
     }
-  }
+  };
 
   const ondragleave = (event) => {
     event.preventDefault();
     setIsDraging(false);
-    console.log("leave")
-  }
+    console.log("leave");
+  };
 
   const ondragover = (event) => {
     event.preventDefault();
     setIsDraging(true);
     event.dataTransfer.dropEffect = "copy";
     console.log("over the box");
-  }
+  };
 
   const ondrop = (event) => {
     event.preventDefault(); // Add this line
@@ -488,20 +489,22 @@ const Manufacture = () => {
     }
 
     for (let i = 0; i < files.length; i++) {
-      if (files[i].type.split('/')[0] !== 'image') {
+      if (files[i].type.split("/")[0] !== "image") {
         continue;
       }
       if (!images.some((e) => e.name === files[i].name)) {
-        setImages((prev) => [...prev, {
-          name: files[i].name,
-          image: files[i],
-        }]);
+        setImages((prev) => [
+          ...prev,
+          {
+            name: files[i].name,
+            image: files[i],
+          },
+        ]);
       }
     }
     console.log("droped");
-  }
+  };
 
-  
   return (
     <div>
       <form onSubmit={handleSubmitData}>
@@ -547,7 +550,9 @@ const Manufacture = () => {
                 <option value={e.locality} />
               ))}
             </datalist>
-          ) : ""}
+          ) : (
+            ""
+          )}
 
           <Input
             type="text"
@@ -579,7 +584,6 @@ const Manufacture = () => {
             fontSize={"md"}
             variant="flushed"
           />
-
         </Box>
         {/* =============================== Tell us about your property ============================ */}
         <Box>
@@ -593,7 +597,7 @@ const Manufacture = () => {
 
         {/* ============================== No. of Washrooms ====================================== */}
         <Box>
-          <Box textAlign={"left"} >
+          <Box textAlign={"left"}>
             <Text> No. of Washrooms </Text>
             <Input
               type="text"
@@ -612,7 +616,7 @@ const Manufacture = () => {
             Add Area Details
           </Heading>
           <Text margin={"5px 0"}> Plot area is mandatory </Text>
-          <InputGroup >
+          <InputGroup>
             <Input
               type="text"
               maxLength={10}
@@ -623,9 +627,14 @@ const Manufacture = () => {
               }}
               required
             />
-            <Select value={areaPer} onChange={(e) => {
-              setAreaPer(e.target.value);
-            }} className={style.select} required>
+            <Select
+              value={areaPer}
+              onChange={(e) => {
+                setAreaPer(e.target.value);
+              }}
+              className={style.select}
+              required
+            >
               <option value="sq.ft">sq.ft</option>
               <option value="sq.yards">sq.yards</option>
               <option value="sq.m">sq.m</option>
@@ -867,48 +876,68 @@ const Manufacture = () => {
               isChecked={inclusivePrices.includes("All inclusive price")}
               onChange={(e) => {
                 e.preventDefault();
-                handleinclusiveandtax(e.target.value)
+                handleinclusiveandtax(e.target.value);
               }}
               value={"All inclusive price"}
-
             >
               All inclusive price
             </Checkbox>
             <Checkbox
-              isChecked={inclusivePrices.includes("Tax and Govt. charges excluded")}
+              isChecked={inclusivePrices.includes(
+                "Tax and Govt. charges excluded"
+              )}
               onChange={(e) => {
                 e.preventDefault();
-                handleinclusiveandtax(e.target.value)
+                handleinclusiveandtax(e.target.value);
               }}
               value={"Tax and Govt. charges excluded"}
             >
-
               Tax and Govt. charges excluded
             </Checkbox>
             <Checkbox
               isChecked={inclusivePrices.includes("Price Negotiable")}
               onChange={(e) => {
                 e.preventDefault();
-                handleinclusiveandtax(e.target.value)
+                handleinclusiveandtax(e.target.value);
               }}
               value={"Price Negotiable"}
             >
-
               Price Negotiable
             </Checkbox>
           </Box>
           <Box>
-            {additionalPrice && <>
-              <InputGroup w={"300px"} margin={"10px 0"}>
-                <Input w={"60%"} type='text' maxLength={"12"} onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
-                <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
-                  <option value="Monthly">Monthly</option>
-                  <option value="Yearly">Yearly</option>
-                </Select>
-              </InputGroup>
-              <Input type="text" w={"300px"} maxLength={"12"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-            </>
-            }
+            {additionalPrice && (
+              <>
+                <InputGroup w={"300px"} margin={"10px 0"}>
+                  <Input
+                    w={"60%"}
+                    type="text"
+                    maxLength={"12"}
+                    onChange={(e) => setMaintenancePrice(e.target.value)}
+                    value={maintenancePrice}
+                    placeholder={"Maintenance Price"}
+                  />
+                  <Select
+                    w={"40%"}
+                    borderRadius={0}
+                    value={maintenanceTimePeriod}
+                    onChange={(e) => setMaintenanceTimePeriod(e.target.value)}
+                  >
+                    <option value="Monthly">Monthly</option>
+                    <option value="Yearly">Yearly</option>
+                  </Select>
+                </InputGroup>
+                <Input
+                  type="text"
+                  w={"300px"}
+                  maxLength={"12"}
+                  value={bookingAmount}
+                  onChange={(e) => setBookingAmount(e.target.value)}
+                  placeholder="Booking Amount"
+                  margin={"10px 0 0 0"}
+                />
+              </>
+            )}
             <Heading
               as={"h3"}
               size={"sm"}
@@ -917,8 +946,14 @@ const Manufacture = () => {
               fontWeight={500}
               cursor={"pointer"}
               onClick={() => setAdditionalPrice(!additionalPrice)}
-              textAlign={"left"}>
-              {additionalPrice ? <IoIosArrowUp style={{ display: "inline" }} /> : <IoIosArrowDown style={{ display: "inline" }} />} Add more pricing details
+              textAlign={"left"}
+            >
+              {additionalPrice ? (
+                <IoIosArrowUp style={{ display: "inline" }} />
+              ) : (
+                <IoIosArrowDown style={{ display: "inline" }} />
+              )}{" "}
+              Add more pricing details
             </Heading>
           </Box>
         </Box>
@@ -928,37 +963,81 @@ const Manufacture = () => {
           <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
             Is it Pre-leased / Pre-Rented ?
           </Heading>
-          <Heading as={"h5"} size={"xs"} fontWeight={500} margin={"10px 0"} textAlign={"left"}>
+          <Heading
+            as={"h5"}
+            size={"xs"}
+            fontWeight={500}
+            margin={"10px 0"}
+            textAlign={"left"}
+          >
             for properties that are already rented out
           </Heading>
           <Box display={"flex"} gap={5}>
-            <button value={"Yes"} onClick={(e) => {
-              e.preventDefault();
-              setPreLeased(e.target.value);
-            }} className={preLeased == "Yes" ? style.setbtn : style.btn} > Yes </button>
-            <button value={"No"} onClick={(e) => {
-              e.preventDefault();
-              setPreLeased(e.target.value);
-            }} className={preLeased == "No" ? style.setbtn : style.btn} > No </button>
+            <button
+              value={"Yes"}
+              onClick={(e) => {
+                e.preventDefault();
+                setPreLeased(e.target.value);
+              }}
+              className={preLeased == "Yes" ? style.setbtn : style.btn}
+            >
+              {" "}
+              Yes{" "}
+            </button>
+            <button
+              value={"No"}
+              onClick={(e) => {
+                e.preventDefault();
+                setPreLeased(e.target.value);
+              }}
+              className={preLeased == "No" ? style.setbtn : style.btn}
+            >
+              {" "}
+              No{" "}
+            </button>
           </Box>
           <Box display={preLeased == "Yes" ? "block" : "none"}>
-            <Input type="text" maxLength={10} value={currentRentPerMonth} onChange={(e) => {
-              e.preventDefault();
-              setCurrentRentPerMonth(NumericString(e.target.value));
-            }} placeholder={"₹ Current rent per month"} />
-            <Input type="text" maxLength={10} value={leaseTenureInYear} onChange={(e) => {
-              e.preventDefault();
-              setLeaseTenureInYear(NumericString(e.target.value));
-            }} placeholder={"Lease tenure in years"} />
+            <Input
+              type="text"
+              maxLength={10}
+              value={currentRentPerMonth}
+              onChange={(e) => {
+                e.preventDefault();
+                setCurrentRentPerMonth(NumericString(e.target.value));
+              }}
+              placeholder={"₹ Current rent per month"}
+            />
+            <Input
+              type="text"
+              maxLength={10}
+              value={leaseTenureInYear}
+              onChange={(e) => {
+                e.preventDefault();
+                setLeaseTenureInYear(NumericString(e.target.value));
+              }}
+              placeholder={"Lease tenure in years"}
+            />
             <Box>
-              <Input type="text" maxLength={10} value={annualRentIncrease} onChange={(e) => {
-                e.preventDefault();
-                setAnnualRentIncrease(NumericString(e.target.value));
-              }} placeholder="Annual rent increase in % (Optional)" />
-              <Input type="text" maxLength={"55"} value={businessType} onChange={(e) => {
-                e.preventDefault();
-                setBusinessType(WordandNumber(e.target.value));
-              }} placeholder="Leased to - Business Type (Optional)" />
+              <Input
+                type="text"
+                maxLength={10}
+                value={annualRentIncrease}
+                onChange={(e) => {
+                  e.preventDefault();
+                  setAnnualRentIncrease(NumericString(e.target.value));
+                }}
+                placeholder="Annual rent increase in % (Optional)"
+              />
+              <Input
+                type="text"
+                maxLength={"55"}
+                value={businessType}
+                onChange={(e) => {
+                  e.preventDefault();
+                  setBusinessType(WordandNumber(e.target.value));
+                }}
+                placeholder="Leased to - Business Type (Optional)"
+              />
             </Box>
           </Box>
         </Box>
@@ -966,24 +1045,59 @@ const Manufacture = () => {
         {/* image Drag and Drop area  */}
         <Box>
           <Box className={style.top}>
-            <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
+            <Heading
+              color={"black"}
+              size={"sm"}
+              textAlign={"left"}
+              margin={"10px 0"}
+            >
+              {" "}
+              Upload Your Property image{" "}
+            </Heading>
           </Box>
           <Box className={style.card}>
-            <Box className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+            <Box
+              className={style.dragArea}
+              onDragOver={ondragover}
+              onDragLeave={ondragleave}
+              onDrop={ondrop}
+            >
               {isDraging ? (
                 <Text className={style.select}>Drop image here</Text>
               ) : (
                 <>
                   Drag & Drop image here or
-                  <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
+                  <Text
+                    className={style.select}
+                    role="button"
+                    onClick={selectFiles}
+                  >
+                    {" "}
+                    Browse{" "}
+                  </Text>
                 </>
               )}
-              <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+              <input
+                type={"file"}
+                name="image"
+                accept="image/jpg, image/png, image/jpeg"
+                formMethod="post"
+                formEncType="multipart/form-data"
+                className={style.file}
+                multiple
+                ref={fileInputRef}
+                onChange={onFileSelect}
+              />
             </Box>
             <Box className={style.container}>
               {images.map((image, index) => (
                 <Box className={style.image} key={index}>
-                  <Text className={style.delete} onClick={() => removeImage(index)}>&#10006;</Text>
+                  <Text
+                    className={style.delete}
+                    onClick={() => removeImage(index)}
+                  >
+                    &#10006;
+                  </Text>
                   <img src={URL.createObjectURL(image.image)} alt="images" />
                 </Box>
               ))}
@@ -993,23 +1107,46 @@ const Manufacture = () => {
 
         {/* ============================ Property unique discription ============================ */}
         <Box>
-          <Heading as={"h3"} size={"md"} fontWeight={600} margin={"10px 0"} textAlign={"left"}>
+          <Heading
+            as={"h3"}
+            size={"md"}
+            fontWeight={600}
+            margin={"10px 0"}
+            textAlign={"left"}
+          >
             What makes your property unique
           </Heading>
-          <Heading as={"h3"} size={"xs"} fontWeight={400} color={"#777777"} margin={"10px 0"} textAlign={"left"}>
+          <Heading
+            as={"h3"}
+            size={"xs"}
+            fontWeight={400}
+            color={"#777777"}
+            margin={"10px 0"}
+            textAlign={"left"}
+          >
             Adding description will increase your listing visibility
           </Heading>
-          <Textarea height={140} value={desc} onChange={(e) => {
-            let my_cleantext = CleanInputText(e.target.value);
-            setDesc(my_cleantext);
-          }} ></Textarea>
+          <Textarea
+            height={140}
+            value={desc}
+            onChange={(e) => {
+              let my_cleantext = CleanInputText(e.target.value);
+              setDesc(my_cleantext);
+            }}
+          ></Textarea>
         </Box>
         {/* ============================ Add amenities/unique features ============================ */}
         <Box>
           <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
             Add amenities/unique features
           </Heading>
-          <Heading as={"h5"} size={"xs"} fontWeight={400} margin={"10px 0"} textAlign={"left"}>
+          <Heading
+            as={"h5"}
+            size={"xs"}
+            fontWeight={400}
+            margin={"10px 0"}
+            textAlign={"left"}
+          >
             All fields on this page are optional
           </Heading>
         </Box>
@@ -1022,7 +1159,9 @@ const Manufacture = () => {
           <Box>
             <button
               className={
-                amenities.includes("Maintenance Staff") ? style.setbtn : style.btn
+                amenities.includes("Maintenance Staff")
+                  ? style.setbtn
+                  : style.btn
               }
               onClick={handleAminities}
               value={"Maintenance Staff"}
@@ -1031,7 +1170,9 @@ const Manufacture = () => {
             </button>
             <button
               className={
-                amenities.includes("Rain Water Harvesting") ? style.setbtn : style.btn
+                amenities.includes("Rain Water Harvesting")
+                  ? style.setbtn
+                  : style.btn
               }
               onClick={handleAminities}
               value={"Rain Water Harvesting"}
@@ -1086,7 +1227,9 @@ const Manufacture = () => {
             </button>
             <button
               className={
-                amenities.includes("Access to High Speed Internet") ? style.setbtn : style.btn
+                amenities.includes("Access to High Speed Internet")
+                  ? style.setbtn
+                  : style.btn
               }
               onClick={handleAminities}
               value={"Access to High Speed Internet"}
@@ -1105,7 +1248,11 @@ const Manufacture = () => {
               Security Personnel
             </button>
             <button
-              className={amenities.includes("Feng Shui / Vaastu Compliant") ? style.setbtn : style.btn}
+              className={
+                amenities.includes("Feng Shui / Vaastu Compliant")
+                  ? style.setbtn
+                  : style.btn
+              }
               onClick={handleAminities}
               value={"Feng Shui / Vaastu Compliant"}
             >
@@ -1143,7 +1290,9 @@ const Manufacture = () => {
             </button>
             <button
               className={
-                propertyFeatures.includes("Reserved Parking") ? style.setbtn : style.btn
+                propertyFeatures.includes("Reserved Parking")
+                  ? style.setbtn
+                  : style.btn
               }
               value={"Reserved Parking"}
               onClick={handlePropertyFeature}
@@ -1282,9 +1431,7 @@ const Manufacture = () => {
             </button>
             <button
               className={
-                buildingFeature.includes("Lift")
-                  ? style.setbtn
-                  : style.btn
+                buildingFeature.includes("Lift") ? style.setbtn : style.btn
               }
               onClick={HandleBuildingFeature}
               value={"Lift"}
@@ -1325,7 +1472,6 @@ const Manufacture = () => {
               value={"Wheelchair friendly"}
               onChange={handleotherfeature}
             >
-
               Wheelchair friendly
             </Checkbox>
           </Box>
@@ -1341,7 +1487,7 @@ const Manufacture = () => {
               className={propertyFacing == "North" ? style.setbtn : style.btn}
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"North"}
             >
@@ -1351,7 +1497,7 @@ const Manufacture = () => {
               className={propertyFacing == "South" ? style.setbtn : style.btn}
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"South"}
             >
@@ -1361,7 +1507,7 @@ const Manufacture = () => {
               className={propertyFacing == "East" ? style.setbtn : style.btn}
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"East"}
             >
@@ -1371,7 +1517,7 @@ const Manufacture = () => {
               className={propertyFacing == "West" ? style.setbtn : style.btn}
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"West"}
             >
@@ -1383,7 +1529,7 @@ const Manufacture = () => {
               }
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"North-East"}
             >
@@ -1395,7 +1541,7 @@ const Manufacture = () => {
               }
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"North-West"}
             >
@@ -1407,7 +1553,7 @@ const Manufacture = () => {
               }
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"South-East"}
             >
@@ -1419,7 +1565,7 @@ const Manufacture = () => {
               }
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"South-West"}
             >
@@ -1480,17 +1626,17 @@ const Manufacture = () => {
               value={"Close to Metro Station"}
               onClick={handlelocationadvantages}
             >
-
               Close to Metro Station
             </button>
             <button
               className={
-                locationAdv.includes("Close to School") ? style.setbtn : style.btn
+                locationAdv.includes("Close to School")
+                  ? style.setbtn
+                  : style.btn
               }
               value={"Close to School"}
               onClick={handlelocationadvantages}
             >
-
               Close to School
             </button>
             <button
@@ -1502,17 +1648,17 @@ const Manufacture = () => {
               value={"Close to Hospital"}
               onClick={handlelocationadvantages}
             >
-
               Close to Hospital
             </button>
             <button
               className={
-                locationAdv.includes("Close to Market") ? style.setbtn : style.btn
+                locationAdv.includes("Close to Market")
+                  ? style.setbtn
+                  : style.btn
               }
               value={"Close to Market"}
               onClick={handlelocationadvantages}
             >
-
               Close to Market
             </button>
             <button
@@ -1524,7 +1670,6 @@ const Manufacture = () => {
               value={"Close to Railway Station"}
               onClick={handlelocationadvantages}
             >
-
               Close to Railway Station
             </button>
             <button
@@ -1536,7 +1681,6 @@ const Manufacture = () => {
               value={"Close to Airport"}
               onClick={handlelocationadvantages}
             >
-
               Close to Airport
             </button>
             <button
@@ -1571,8 +1715,8 @@ const Manufacture = () => {
         >
           *Please provide correct information, otherwise your listing might get
           blocked
-        </Heading> 
-        {isClicked && <Loading />}  
+        </Heading>
+        {isClicked && <Loading />}
         <Button
           margin={"20px 0"}
           type="submit"
@@ -1584,10 +1728,9 @@ const Manufacture = () => {
         >
           Post Property
         </Button>
-
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Manufacture;  
+export default Manufacture;

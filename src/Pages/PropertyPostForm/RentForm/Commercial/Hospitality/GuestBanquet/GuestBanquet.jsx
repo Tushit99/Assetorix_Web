@@ -181,7 +181,7 @@ const GuestBanquetRent = () => {
                 // let data = await response.json();  
                 // console.log("data",data); 
                 setClickCount((prev) => prev + 12); 
-                setIsClicked(true);  
+                setIsClicked(true);   
                 await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
                     .then((e) => {
                         toast({

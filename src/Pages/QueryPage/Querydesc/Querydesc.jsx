@@ -6,8 +6,7 @@ import {
   ModalOverlay,
   ModalContent,
   ModalCloseButton,
-  ModalBody,
-  ModalFooter,
+  ModalBody, 
   useDisclosure,
   ModalHeader,
   Avatar,
@@ -341,7 +340,7 @@ const Querydesc = ({ e }) => {
             </Box>
           </ModalBody>
         </ModalContent>
-      </Modal>
+      </Modal> 
     </>
   );
 };

@@ -282,6 +282,12 @@ const ServicedApartment = () => {
                             status: 'success',
                             duration: 2000,
                         })
+                        if(images.length){
+                            submitImage(e.data.id);  
+                        }else{
+                            setIsClicked(false);
+                            navigate("/listing");  
+                        }
                     });
             } catch (error) {
                 toast({
@@ -289,11 +295,9 @@ const ServicedApartment = () => {
                     status: 'error',
                     duration: 2000,
                 })
-                submitImage(e.data.id);
-                console.log(error);
-            }
-            // }
-
+                setClickCount((prev) => prev - 12);
+                setIsClicked(false); 
+            } 
         }
         else {
             toast({
@@ -303,6 +307,8 @@ const ServicedApartment = () => {
                 duration: 2000,
                 position: 'top-right'
             })
+            setClickCount((prev) => prev - 12);
+                setIsClicked(false); 
         }
     };
 

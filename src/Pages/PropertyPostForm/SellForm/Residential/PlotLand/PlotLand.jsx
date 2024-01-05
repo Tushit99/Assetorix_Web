@@ -207,18 +207,22 @@ const PlotLand = () => {
                             status: 'success',
                             duration: 2000,
                         })
+                        if(images.length){
+                            submitImage(e.data.id);  
+                        }else{
+                            setIsClicked(false);
+                            navigate("/listing");  
+                        }  
                     });
             } catch (error) {
                 toast({
                     title: error.response.data.msg,
                     status: 'error',
                     duration: 2000,
-                })
-                submitImage(e.data.id);
-                console.log(error);
-            }
-            // }
-
+                }) 
+                setClickCount((prev) => prev - 12);
+                setIsClicked(false);
+            } 
         }
         else {
             toast({
@@ -228,6 +232,8 @@ const PlotLand = () => {
                 duration: 2000,
                 position: 'top-right'
             })
+            setClickCount((prev) => prev - 12);
+            setIsClicked(false);
         }
     };
 
@@ -539,8 +545,8 @@ const PlotLand = () => {
                 />
                 {pincollection.length ? (
                     <datalist id="browsers">
-                        {pincollection.map((e) => (
-                            <option value={e.locality} />
+                        {pincollection.map((e,i) => ( 
+                            <option key={i} value={e.locality} />
                         ))}
                     </datalist>
                 ) : ""}
@@ -646,7 +652,7 @@ const PlotLand = () => {
                 {/* Floors Allowed For Construction */}
                 <Box textAlign={"left"} padding={"10px 0"}>
                     <Heading as={"h3"} size={"md"} > Floors Allowed For Construction </Heading>
-                    <Input type={"text"} variant='flushed' padding={"0 6px"} maxLength={"12"} margin={"4px 0"} value={totalFloorAllowed} onChange={(e) => {
+                    <Input type={"text"} variant='flushed' padding={"0 6px"} maxLength={"2"} margin={"4px 0"} value={totalFloorAllowed} onChange={(e) => {
                         setTotalFloorAllowed(NumericString(e.target.value));
                     }} placeholder='No. of floors' />
                 </Box>
@@ -696,8 +702,8 @@ const PlotLand = () => {
                             <option value="Immediate">Immediate</option>
                             <option value="Within 3 Months">Within 3 Months</option>
                             <option value="Within 6 Months">Within 6 Months</option>
-                            {expectedBy.map((e) => (
-                                <option value={e}> {e} </option>
+                            {expectedBy.map((e,i) => (
+                                <option key={i} value={e}> {e} </option>
                             ))}
                         </Select>
                     </Box>
@@ -947,7 +953,7 @@ const PlotLand = () => {
                     <Heading as={"h3"} size={"xs"} margin={"10px 0"} textAlign={"left"}>
                         Adding description will increase your listing visibility
                     </Heading>
-                    <Textarea height={140} maxLength={"12"} value={desc} onChange={(e) => {
+                    <Textarea height={140} value={desc} onChange={(e) => {
                         let my_cleantext = CleanInputText(e.target.value);
                         setDesc(my_cleantext);
                     }} ></Textarea>
@@ -1319,7 +1325,8 @@ const PlotLand = () => {
             >
                 *Please provide correct information, otherwise your listing might get
                 blocked
-            </Heading>
+            </Heading> 
+            {isClicked && <Loading />}  
             <Button
                 margin={"20px 0"}
                 type="submit"

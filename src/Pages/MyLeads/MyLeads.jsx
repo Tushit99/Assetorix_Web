@@ -25,11 +25,11 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { MdOutlineEditNote } from "react-icons/md";
 import { DeleteIcon } from "@chakra-ui/icons";
+import Preview from "./Preview/Preview";
 
 const MyLeads = () => {
   const [data, setData] = useState([]);
-  const toast = useToast();
-  const { onClose } = useDisclosure();
+  const toast = useToast(); 
   const [change, setChange] = useState(0);
   const [loading, setLoading] = useState(false);
 
@@ -218,21 +218,14 @@ const MyLeads = () => {
               <Text fontSize={"sm"} className={style.maxline} >
                 {detail.description}  
               </Text>
-            </Box>
+            </Box> 
             <Flex
               width={"100%"}
               marginTop={"10px"}
               alignItems={"center"}
               justifyContent={"space-between"}
             >
-              <Button
-                size="sm"
-                leftIcon={<ViewIcon />}
-                borderRadius={0}
-                colorScheme={"green"}
-              >
-                Preview
-              </Button>
+              <Preview detail={detail} />
               <EditForm detail={detail} handlechange={handlechange} />
               <DeleteForm queryid={detail._id} handlechange={handlechange} />
             </Flex>
