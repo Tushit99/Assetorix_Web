@@ -2179,7 +2179,7 @@ const IndependentBuilderRent = () => {
         <Box display={"flex"} gap={"20px"} w={"300px"}>
           <Input
             type="text"
-            maxLength={"3"}
+            maxLength={5}
             variant="flushed"
             flex={1}
             required

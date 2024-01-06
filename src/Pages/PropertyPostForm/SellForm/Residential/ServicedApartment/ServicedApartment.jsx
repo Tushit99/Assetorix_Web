@@ -636,10 +636,7 @@ const ServicedApartment = () => {
     //     adding.innerHTML = options;
 
     // }
-
-    if (isClicked) {
-        <Loading />  
-    }
+ 
 
     return (
         <form onSubmit={handleSubmitData}>
@@ -2448,7 +2445,8 @@ const ServicedApartment = () => {
             >
                 *Please provide correct information, otherwise your listing might get
                 blocked
-            </Heading>
+            </Heading> 
+            {isClicked && <Loading />}  
             <Button
                 margin={"20px 0"}
                 type="submit"

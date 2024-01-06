@@ -2214,7 +2214,7 @@ const FlatApartment = () => {
             flex={1}
             required
             value={facingwidth}
-            maxLength={"9"}
+            maxLength={7}
             onChange={(e) => {
               e.preventDefault();
               setFacingWidth(NumericString(e.target.value));
