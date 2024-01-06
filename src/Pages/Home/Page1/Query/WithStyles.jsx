@@ -6,6 +6,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import style from "./WithStyles.module.css";   
 import {useNavigate } from "react-router-dom";
+import DetailBox from "./DetailBox";
 
 
 const WithStyles = () => {
@@ -90,7 +91,7 @@ const WithStyles = () => {
           <Box key={e._id} className={style.mapbox}>
             <Box flex={1} className={`${style.placeCenter}`}>
               <Avatar size="md" name={e.name} />
-            </Box>
+            </Box> 
             <Box textAlign={"left"} flex={3}>
               <Heading size={"md"} as={"h2"}>
                 {e.name}
@@ -119,7 +120,8 @@ const WithStyles = () => {
               >
                 {e.formType}
               </Badge>
-            </Box>
+            </Box> 
+            <DetailBox /> 
           </Box>
         ))}
       </Carousel> 
