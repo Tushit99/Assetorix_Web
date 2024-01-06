@@ -2413,7 +2413,7 @@ const RKStudio = () => {
           <Input
             type="text"
             variant="flushed"
-            maxLength={4}
+            maxLength={5}
             flex={1}
             required
             value={facingwidth}

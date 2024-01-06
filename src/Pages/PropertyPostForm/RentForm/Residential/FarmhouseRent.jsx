@@ -2133,7 +2133,7 @@ const FarmhouseRent = () => {
                         variant="flushed"
                         flex={1}
                         required
-                        maxLength={5}
+                        maxLength={4}
                         value={facingwidth}
                         onChange={(e) => {
                             e.preventDefault();

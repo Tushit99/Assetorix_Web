@@ -2132,7 +2132,7 @@ const StudioApartmentRent = () => {
                 <Box display={"flex"} gap={"20px"} w={"300px"}>
                     <Input
                         type="text"
-                        maxLength={"3"}
+                        maxLength={4}
                         variant="flushed"
                         flex={1}
                         required

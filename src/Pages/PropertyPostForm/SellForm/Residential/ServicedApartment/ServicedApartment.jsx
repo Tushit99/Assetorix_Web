@@ -2322,7 +2322,7 @@ const ServicedApartment = () => {
                     Width of facing road
                 </Heading>
                 <Box display={"flex"} gap={"20px"} w={"300px"} >
-                    <Input type="text" variant='flushed' maxLength={"10"} flex={1} required value={facingwidth} onChange={(e) => {
+                    <Input type="text" variant='flushed' maxLength={5} flex={1} required value={facingwidth} onChange={(e) => {
                         e.preventDefault();
                         setFacingWidth(NumericString(e.target.value));
                     }} />
