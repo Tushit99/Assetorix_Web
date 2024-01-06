@@ -2217,13 +2217,14 @@ const IndependentBuilderRentUpdate = () => {
         {/* ============================ Width of facing road ==================================== */}
         <Box className={style.optional_box}>
           <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
-            
+            Width of facing road
           </Heading>
           <Box display={"flex"} gap={"20px"} w={"300px"}>
             <Input
               type="text"
               variant="flushed"
               flex={1}
+              maxLength={4} 
               required
               value={facingwidth}
               onChange={(e) => {

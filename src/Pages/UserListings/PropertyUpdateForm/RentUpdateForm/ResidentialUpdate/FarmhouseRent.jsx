@@ -2251,7 +2251,8 @@ const FarmhouseRentUpdate = () => {
                         <Input
                             type="text"
                             variant="flushed"
-                            flex={1}
+                            flex={1} 
+                            maxLength={4} 
                             required
                             value={facingwidth}
                             onChange={(e) => {

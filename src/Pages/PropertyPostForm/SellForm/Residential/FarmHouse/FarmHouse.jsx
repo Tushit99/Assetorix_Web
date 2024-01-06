@@ -2375,7 +2375,7 @@ const FarmHouse = () => {
           <Input
             type="text"
             variant="flushed"
-            maxLength={"10"}
+            maxLength={4}
             flex={1}
             required
             value={facingwidth}

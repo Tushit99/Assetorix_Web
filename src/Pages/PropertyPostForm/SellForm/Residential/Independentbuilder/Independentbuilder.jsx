@@ -2388,7 +2388,7 @@ const Independentbuilder = () => {
           <Input
             type="text"
             variant="flushed"
-            maxLength={"8"}
+            maxLength={4}
             flex={1}
             required
             value={facingwidth}

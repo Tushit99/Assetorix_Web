@@ -2143,7 +2143,7 @@ const Independent = () => {
             type="text"
             variant="flushed"
             flex={1}
-            maxLength={8}
+            maxLength={5}
             required
             value={facingwidth}
             onChange={(e) => {
