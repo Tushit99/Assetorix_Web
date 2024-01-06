@@ -757,7 +757,7 @@ const IndustrialLandUpdate = () => {
             Width of facing road
           </Heading>
           <Box display={"flex"} gap={"20px"} w={"300px"} >
-            <Input type="text" variant='flushed' flex={1} required value={facingwidth} onChange={(e) => {
+            <Input type="text" maxLength={4} variant='flushed' flex={1} required value={facingwidth} onChange={(e) => {
               e.preventDefault();
               setFacingWidth(e.target.value);
             }} />

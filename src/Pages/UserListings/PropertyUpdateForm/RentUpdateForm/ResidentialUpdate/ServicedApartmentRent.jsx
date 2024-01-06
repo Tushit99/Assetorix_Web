@@ -2251,10 +2251,10 @@ const ServicedApartmentRentUpdate = () => {
                     </Box>
                 </Box>
 
-                {/* ============================ Width of facing road ==================================== */}
+                {/* ============================  ==================================== */}
                 <Box className={style.optional_box}>
                     <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
-                        Width of facing road
+                        
                     </Heading>
                     <Box display={"flex"} gap={"20px"} w={"300px"}>
                         <Input
@@ -2262,6 +2262,7 @@ const ServicedApartmentRentUpdate = () => {
                             variant="flushed"
                             flex={1}
                             required
+                            maxLength={4} 
                             value={facingwidth}
                             onChange={(e) => {
                                 e.preventDefault();
