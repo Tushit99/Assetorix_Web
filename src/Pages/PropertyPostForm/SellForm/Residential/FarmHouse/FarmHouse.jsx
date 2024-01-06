@@ -280,8 +280,7 @@ const FarmHouse = () => {
               status: "success",
               duration: 2000,
               isClosable: true,
-            });
-            submitImage(e.data.id);
+            }); 
             if (images) {
               submitImage(e.data.id);
             } else {
@@ -635,11 +634,7 @@ const FarmHouse = () => {
   //     let adding = document.getElementById("floorSelectTag");
   //     adding.innerHTML = options;
 
-  // }
-
-  if (isClicked) {
-    <Loading />;
-  }
+  // } 
 
   return (
     <form onSubmit={handleSubmitData}>

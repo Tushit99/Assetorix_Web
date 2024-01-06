@@ -636,11 +636,7 @@ const Independentbuilder = () => {
   //     adding.innerHTML = options;
 
   // }
-
-  if (isClicked) {
-    <Loading />;
-  }
-
+ 
   return (
     <form onSubmit={handleSubmitData}>
       {/* property location */}

@@ -202,7 +202,12 @@ const AgriculturalLandRent = () => {
               status: 'success',
               duration: 2000,
             });
-            submitImage(e.data.id);
+            if (images.length) {
+              submitImage(e.data.id);
+            } else {
+              setIsClicked(false);
+              navigate("/listing");
+            }
           });
       } catch (error) {
         toast({
