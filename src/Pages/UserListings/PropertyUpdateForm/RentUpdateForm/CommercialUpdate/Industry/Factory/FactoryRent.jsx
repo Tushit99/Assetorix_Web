@@ -226,6 +226,12 @@ const FactoryRentUpdate = () => {
                             status: 'success',
                             duration: 2000,
                         })
+                        if (images.length) {
+                            submitImage(productID);
+                          } else {
+                            setIsClicked(false);
+                            navigate("/listing");
+                          }
                     });
             } catch (error) {
                 toast({
@@ -234,9 +240,7 @@ const FactoryRentUpdate = () => {
                     duration: 2000,
                 })
                 console.log(error);
-            }
-            // }
-
+            } 
         }
         else {
             toast({
@@ -248,6 +252,42 @@ const FactoryRentUpdate = () => {
             })
         }
     };
+
+    const submitImage = async (productID) => {
+        try {
+          let id = localStorage.getItem("usrId") || undefined;
+          let authorization = localStorage.getItem("AstToken") || undefined;
+    
+          let headersList = {
+            Accept: "*/*",
+            Authorization: authorization,
+            id: id,
+          };
+    
+          let formdata = new FormData();
+          images.forEach((image) => {
+            formdata.append("image", image.image);
+          });
+    
+          let bodyContent = formdata;
+    
+          let reqOptions = {
+            url: `${process.env.REACT_APP_URL}/upload/${productID}`,
+            method: "POST",
+            headers: headersList,
+            data: bodyContent,
+          };
+    
+          await axios.request(reqOptions).then((e) => {
+            setIsClicked(false);
+          });
+        } catch (error) {
+          console.log(error);
+          setIsClicked(false);
+        }
+        navigate("/listing");
+        setIsClicked(false);
+      };
 
     const handlepinfetch = (e) => {
         setPincode(NumericString(e.target.value));

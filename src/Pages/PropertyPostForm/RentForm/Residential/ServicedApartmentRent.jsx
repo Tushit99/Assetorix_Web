@@ -285,7 +285,12 @@ const ServicedApartmentRent = () => {
                             status: "success",
                             duration: 2000,
                         });
-                        submitImage(e.data.id);
+                        if (images.length) {
+                            submitImage(productID);
+                          } else {
+                            setIsClicked(false);
+                            navigate("/listing");
+                          }
                     });
             } catch (error) {
                 toast({
