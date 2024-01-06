@@ -2514,7 +2514,8 @@ const Independentbuilder = () => {
       >
         *Please provide correct information, otherwise your listing might get
         blocked
-      </Heading>
+      </Heading> 
+      {isClicked && <Loading />} 
       <Button
         margin={"20px 0"}
         type="submit"

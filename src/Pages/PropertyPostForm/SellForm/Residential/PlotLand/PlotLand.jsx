@@ -487,10 +487,7 @@ const PlotLand = () => {
         }
         console.log("droped");
     }
-
-    if (isClicked) {
-        <Loading />
-    }
+ 
 
     return (
         <form onSubmit={handleSubmitData}>

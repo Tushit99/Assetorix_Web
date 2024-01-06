@@ -276,7 +276,7 @@ const ReadyToMove = () => {
         duration: 2000,
         position: "top-right",
       }); 
-      setClickCount((prev) => prev - 12);
+      setClickCount((prev) => prev - 12); 
       setIsClicked(false);
     }
   };

@@ -633,10 +633,7 @@ const RKStudio = () => {
   //     adding.innerHTML = options;
 
   // }
-
-  if (isClicked) {
-    <Loading />;
-  }
+ 
 
   return (
     <form onSubmit={handleSubmitData}>
@@ -2542,7 +2539,8 @@ const RKStudio = () => {
       >
         *Please provide correct information, otherwise your listing might get
         blocked
-      </Heading>
+      </Heading> 
+      {isClicked && <Loading />}  
       <Button
         margin={"20px 0"}
         type="submit"

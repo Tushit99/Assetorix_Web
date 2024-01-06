@@ -7,8 +7,7 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
-  InputRightElement,
-  NumberInput,
+  InputRightElement, 
   Select,
   Text,
   Textarea,
@@ -23,6 +22,7 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import {
   AlphabetString,
   CleanInputText,
+  NumberOnly,
   NumericString,
   WordandNumber,
 } from "../../../code";
@@ -745,8 +745,8 @@ const FarmHouse = () => {
             <Input
               type="text"
               placeholder={"Enter No. of Bedrooms"}
-              maxLength={"2"}
-              onChange={(e) => setBedRoom(NumberInput(e.target.value))}
+              maxLength={"2"} 
+              onChange={(e) => setBedRoom(NumberOnly(e.target.value))}
               value={bedroom}
               required
             />
@@ -755,7 +755,7 @@ const FarmHouse = () => {
             <Input
               type="text"
               placeholder={"Enter No. of Bathrooms"}
-              onChange={(e) => setBathroom(NumberInput(e.target.value))}
+              onChange={(e) => setBathroom(NumberOnly(e.target.value))}
               value={bathroom}
               maxLength={"2"}
               required
@@ -766,7 +766,7 @@ const FarmHouse = () => {
             <Input
               type="text"
               placeholder={"Enter No. of Balconies"}
-              onChange={(e) => setBalcony(NumberInput(e.target.value))}
+              onChange={(e) => setBalcony(NumberOnly(e.target.value))}
               value={balconey}
               maxLength={"2"}
               required
@@ -2501,7 +2501,8 @@ const FarmHouse = () => {
       >
         *Please provide correct information, otherwise your listing might get
         blocked
-      </Heading>
+      </Heading> 
+      {isClicked && <Loading />}  
       <Button
         margin={"20px 0"}
         type="submit"
