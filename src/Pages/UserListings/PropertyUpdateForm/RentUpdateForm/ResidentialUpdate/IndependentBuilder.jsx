@@ -2224,7 +2224,7 @@ const IndependentBuilderRentUpdate = () => {
               type="text"
               variant="flushed"
               flex={1}
-              maxLength={4} 
+              maxLength={5} 
               required
               value={facingwidth}
               onChange={(e) => {
