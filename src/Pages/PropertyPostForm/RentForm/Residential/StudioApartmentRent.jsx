@@ -270,7 +270,7 @@ const StudioApartmentRent = () => {
               duration: 2000,
             });
             if (images.length) {
-                submitImage(productID);
+              submitImage(e.data.id);
             } else {
               setIsClicked(false);
               navigate("/listing");
