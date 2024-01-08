@@ -328,7 +328,7 @@ const InquiryForm = () => {
                     value={visible}
                     onChange={handlevisiblelity}
                   >
-                    click to make visible your mobile number to others
+                    click to make your mobile number visible to others
                   </Checkbox>
                 </Box>
               </Box>
@@ -359,8 +359,7 @@ const InquiryForm = () => {
                 colorScheme="blue"
                 onClick={handletologin}
                 backgroundColor={"#2e3192"}
-              >
-                {" "}
+              > 
                 Login{" "}
               </Button>
             </ModalFooter>
