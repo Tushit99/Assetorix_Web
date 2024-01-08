@@ -26,6 +26,7 @@ import { convertDateFormat } from "../../../QueryPage/Querydesc/code/code";
 import { EmailIcon } from "@chakra-ui/icons";
 import { MdCall } from "react-icons/md"; 
 import { FaWhatsapp } from "react-icons/fa";
+import noreply from "./nocomments.png"
 
 const Apendbox = ({ e }) => {
   const { user } = useSelector((state) => state.userreducer);
@@ -229,7 +230,7 @@ const Apendbox = ({ e }) => {
                   <Button
                     size={"sm"} 
                     variant={"solid"} 
-                    leftIcon={<FaWhatsapp />}
+                    leftIcon={<FaWhatsapp size={"18px"} />}
                     colorScheme={"whatsapp"}
                     target="_blank"
                     as="a"
@@ -348,6 +349,11 @@ const Apendbox = ({ e }) => {
                           </Box>
                         </Box>
                       ))}
+                      {replies.length < 1 && (
+                        <>
+                          <img src={noreply} alt="empty" /> 
+                        </>
+                      )}
                     </Box>
                   )}
                 </Box>

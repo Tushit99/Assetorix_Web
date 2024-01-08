@@ -22,7 +22,9 @@ import axios from "axios";
 import { convertDateFormat } from "./code/code";
 import { useSelector } from "react-redux";
 import { EmailIcon } from "@chakra-ui/icons";
-import { MdCall } from "react-icons/md";
+import { MdCall } from "react-icons/md"; 
+import noreply from "./nocomments.png"; 
+import { FaWhatsapp } from "react-icons/fa";
 
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -246,8 +248,8 @@ const Querydesc = ({ e }) => {
                   </Button>
                   <Button
                     size={"sm"} 
-                    variant={"solid"} 
-                    leftIcon={<FaWhatsapp />}
+                    variant={"solid"}
+                    leftIcon={<FaWhatsapp size={"18px"} />} 
                     colorScheme={"whatsapp"}
                     target="_blank"
                     as="a"
@@ -266,7 +268,7 @@ const Querydesc = ({ e }) => {
                   >
                     call
                   </Button>
-                </Box>  
+                </Box>
               </Box>
               <Divider
                 orientation="vertical"
@@ -366,6 +368,12 @@ const Querydesc = ({ e }) => {
                           </Box>
                         </Box>
                       ))}
+
+                      {replies.length < 1 && (
+                        <>
+                          <img src={noreply} alt="empty" />
+                        </>
+                      )}
                     </Box>
                   )}
                 </Box>
