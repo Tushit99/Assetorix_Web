@@ -249,4 +249,11 @@
 }
 
 
+@media screen and (min-width: 100px) and (max-width: 650px) {  
 
+  .furnished_detail {
+    display: grid; 
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+}
