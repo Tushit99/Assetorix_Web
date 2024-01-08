@@ -245,7 +245,10 @@ const Querydesc = ({ e }) => {
                     Email
                   </Button>
                   <Button
-                    size={"sm"}
+                    size={"sm"} 
+                    variant={"solid"} 
+                    leftIcon={<FaWhatsapp />}
+                    colorScheme={"whatsapp"}
                     target="_blank"
                     as="a"
                     href={`https://wa.me/${e.mobile}`}
@@ -254,16 +257,16 @@ const Querydesc = ({ e }) => {
                   </Button>
                   <Button
                     size={"sm"}
-                    rightIcon={<MdCall />}
+                    leftIcon={<MdCall />}
                     colorScheme="blue"
                     target="_blank"
                     as="a"
                     href={`tel:+91-${e.mobile}`}
                     variant="outline"
                   >
-                    mobile
+                    call
                   </Button>
-                </Box>
+                </Box>  
               </Box>
               <Divider
                 orientation="vertical"

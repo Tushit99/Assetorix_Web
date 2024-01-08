@@ -24,7 +24,8 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { useSelector } from "react-redux";
 import { convertDateFormat } from "../../../QueryPage/Querydesc/code/code"; 
 import { EmailIcon } from "@chakra-ui/icons";
-import { MdCall } from "react-icons/md";
+import { MdCall } from "react-icons/md"; 
+import { FaWhatsapp } from "react-icons/fa";
 
 const Apendbox = ({ e }) => {
   const { user } = useSelector((state) => state.userreducer);
@@ -226,7 +227,10 @@ const Apendbox = ({ e }) => {
                     Email
                   </Button>
                   <Button
-                    size={"sm"}
+                    size={"sm"} 
+                    variant={"solid"} 
+                    leftIcon={<FaWhatsapp />}
+                    colorScheme={"whatsapp"}
                     target="_blank"
                     as="a"
                     href={`https://wa.me/${e.mobile}`}
@@ -235,14 +239,14 @@ const Apendbox = ({ e }) => {
                   </Button>
                   <Button
                     size={"sm"}
-                    rightIcon={<MdCall />}
+                    leftIcon={<MdCall />}
                     colorScheme="blue"
                     target="_blank"
                     as="a"
                     href={`tel:+91-${e.mobile}`}
                     variant="outline"
                   >
-                    mobile
+                    call
                   </Button>
                 </Box>
               </Box>
