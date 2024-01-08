@@ -118,7 +118,7 @@ const DeleteBox = ({ e, myListedProperty }) => {
               textTransform={"uppercase"}
               fontSize={"11px"}
               fontWeight={"bold"}
-              width={"max-content"}
+              width={"max-content"}  
               padding={"0 5px"}
               color={"white"}
               backgroundColor={"rgb(68, 68, 66)"}
