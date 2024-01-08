@@ -84,7 +84,7 @@ const SellForm = () => {
 
   return (
     <div className={style.post_property}>
-      <Box>
+      <Box maxWidth={"100%"}>
         {/* Property Type (what type of property) */}
         <Box>
           <Heading as={"h1"} size={"xl"} fontWeight={400}>
@@ -99,7 +99,7 @@ const SellForm = () => {
             onChange={handleTabChange}
             defaultIndex={0}
           >
-            <TabList gap={3} margin={"0 20px"}>
+            <TabList gap={3} margin={"0px"}>
               <Tab
                 bg="blue.50"
                 border="1px solid rgba(85, 91, 255, 0.236)"
@@ -133,20 +133,20 @@ const SellForm = () => {
               zIndex={"-1"}
               borderRadius="1px"
             />
-            <Heading textAlign={"left"} margin={"20px 0"} as={"h3"} size={"md"}>
+            <Heading textAlign={"left"} margin={"20px 0 0 0"} as={"h4"} size={"sm"}>
               What kind of Property do you have?
             </Heading>
-            <TabPanels>
+            <TabPanels marginLeft={"-16px"} w={"100%"}>
               {/* sell options */}
-              <TabPanel>
-                <Tabs variant="unstyled">
-                  <TabList>
+              <TabPanel w={"104%"}>
+                <Tabs variant="unstyled" w={"104%"} >
+                  <TabList w={"100%"}>
                     <Tab
                       bg="blue.50"
                       border="1px solid rgba(85, 91, 255, 0.236)"
                       borderRadius="0px"
-                      marginRight={"14px"}
-                      _selected={{ color: "white", backgroundColor: "unset" }}
+                      marginRight={"14px"} 
+                      _selected={{ color: "white", backgroundColor: "#d2ab66" }}
                     >
                       Residential
                     </Tab>
@@ -154,7 +154,7 @@ const SellForm = () => {
                       bg="blue.50"
                       border="1px solid rgba(85, 91, 255, 0.236)"
                       borderRadius="0px"
-                      _selected={{ color: "white", backgroundColor: "unset" }}
+                      _selected={{ color: "white", backgroundColor: "#d2ab66" }}
                       onClick={() => setTypeOf("Commercial")}
                     >
                       Commercial
@@ -164,11 +164,11 @@ const SellForm = () => {
                     mt="-41px"
                     height="40px"
                     bg="#d2ab66"
-                    zIndex={"-1"}
+                    zIndex={"-1"} 
                     borderRadius="1px"
                   />
-                  <TabPanels >     
-                    <TabPanel>
+                  <TabPanels marginTop={4} marginLeft={2} padding={0}>      
+                    <TabPanel padding={0}>
                       <Box className={style.grid}>
                         <button
                           onClick={() => handlechange("sell", "Flat/Apartment")}
@@ -252,7 +252,7 @@ const SellForm = () => {
                         </button>
                       </Box>
                     </TabPanel>
-                    <TabPanel>
+                    <TabPanel padding={0}>
                       <Box className={style.grid}>
                         <button
                           onClick={() => handlechange("sell", "Office")}
@@ -315,7 +315,7 @@ const SellForm = () => {
                           Hospitality
                         </button>
                       </Box>
-                    </TabPanel>   
+                    </TabPanel>    
                   </TabPanels>  
                 </Tabs> 
               </TabPanel>  
@@ -685,8 +685,8 @@ const SellForm = () => {
           ""
         )}
       </Box>
-      <Box backgroundColor={"rgb(232, 244, 255)"} borderRadius={10}></Box>
-    </div>
+      <Box display={{base:"none",md:"block"}} backgroundColor={"rgb(232, 244, 255)"} borderRadius={10}></Box>
+    </div>  
   );
 };
 
