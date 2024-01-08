@@ -656,7 +656,7 @@ const FlatAppartment = () => {
                     type="text"
                     padding={"0 10px"}
                     required
-                    placeholder="House No. (optional)"
+                    placeholder="House No. / Mobile No."
                     value={houseNo}
                     maxLength={"100"}
                     onChange={(e) => setHouseNo(WordandNumber(e.target.value))}
@@ -667,7 +667,7 @@ const FlatAppartment = () => {
                     type="text"
                     padding={"0 10px"}
                     required
-                    placeholder="Apartment / Society"
+                    placeholder="Apartment / Society Name"
                     fontSize={"md"}
                     maxLength={"100"}
                     value={appartment}
@@ -689,7 +689,7 @@ const FlatAppartment = () => {
                     type="text"
                     padding={"0 10px"}
                     required
-                    placeholder="Locality"
+                    placeholder="Enter Locality"
                     list="browsers"
                     value={locality}
                     maxLength={"100"}

@@ -24,6 +24,8 @@
 
 .location_form {
   margin: 20px 0;
+  width: 100%; 
+  max-width: 100%; 
   display: grid;
   gap: 10px;
 }
@@ -57,7 +59,7 @@
 
 .select_land {
   display: flex;
-  margin-top: 12px;
+  margin-top: 4px;
   width: 240px;
 }
 
