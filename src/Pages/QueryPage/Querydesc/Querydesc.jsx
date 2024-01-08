@@ -6,7 +6,7 @@ import {
   ModalOverlay,
   ModalContent,
   ModalCloseButton,
-  ModalBody, 
+  ModalBody,
   useDisclosure,
   ModalHeader,
   Avatar,
@@ -19,13 +19,15 @@ import {
 } from "@chakra-ui/react";
 import style from "../QueryPage.module.css";
 import axios from "axios";
-import { convertDateFormat } from "./code/code"; 
+import { convertDateFormat } from "./code/code";
 import { useSelector } from "react-redux";
+import { EmailIcon } from "@chakra-ui/icons";
+import { MdCall } from "react-icons/md";
 
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-const Querydesc = ({ e }) => { 
+const Querydesc = ({ e }) => {
   const { user } = useSelector((state) => state.userreducer);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [replies, setReplies] = useState([]);
@@ -38,9 +40,9 @@ const Querydesc = ({ e }) => {
     setLoading(true);
     try {
       await axios
-        .get(`${process.env.REACT_APP_URL}/leadForm/single/${e._id}`) 
+        .get(`${process.env.REACT_APP_URL}/leadForm/single/${e._id}`)
         .then((e) => {
-          console.log(e?.data?.replies); 
+          console.log(e?.data?.replies);
           // let data = e?.data?.replies.reverse()
           setReplies(e?.data?.replies.reverse());
           setLoading(false);
@@ -71,6 +73,7 @@ const Querydesc = ({ e }) => {
           duration: 2000,
           position: "top-right",
         });
+        setLoading(false);
         return;
       }
 
@@ -83,7 +86,7 @@ const Querydesc = ({ e }) => {
           headers: head,
         })
         .then((e) => {
-          console.log(e); 
+          console.log(e);
           setReplies(e?.data?.data?.replies.reverse());
           setMessage("");
           setLoading(false);
@@ -105,7 +108,7 @@ const Querydesc = ({ e }) => {
       return;
     }
   };
- 
+
   return (
     <>
       <Box
@@ -170,8 +173,16 @@ const Querydesc = ({ e }) => {
             <Box display={{ base: "grid", md: "flex" }} gap={"20px"}>
               {/* Querie detail */}
               <Box flex={6}>
-                <Box flex={1}>
+                <Box
+                  flex={1}
+                  display={"flex"}
+                  alignItems={"center"}
+                  justifyContent={"space-between"}
+                >
                   <Avatar size="lg" name={e?.name} borderRadius={4} />
+                  <Badge variant="solid" colorScheme={"blue"} fontSize={"2xs"}>
+                    {convertDateFormat(e.createdOn)}
+                  </Badge>
                 </Box>
                 <Box textAlign={"left"} flex={3}>
                   <Box
@@ -213,6 +224,45 @@ const Querydesc = ({ e }) => {
                   <Text fontsize={"md"} className={style?.des}>
                     <strong>Requirement:</strong> {e?.description}
                   </Text>
+                </Box>
+                {/* Contact Detail */}
+                <Box
+                  display={"flex"}
+                  alignItems={"center"}
+                  justifyContent={"space-between"}
+                  flexWrap={"wrap"}
+                  margin={"10px 0"}
+                >
+                  <Button
+                    size={"sm"}
+                    as="a"
+                    href={`mailto:${e.email}`}
+                    target="_blank"
+                    leftIcon={<EmailIcon />}
+                    colorScheme="teal"
+                    variant="solid"
+                  >
+                    Email
+                  </Button>
+                  <Button
+                    size={"sm"}
+                    target="_blank"
+                    as="a"
+                    href={`https://wa.me/${e.mobile}`}
+                  >
+                    Whatsapp
+                  </Button>
+                  <Button
+                    size={"sm"}
+                    rightIcon={<MdCall />}
+                    colorScheme="blue"
+                    target="_blank"
+                    as="a"
+                    href={`tel:+91-${e.mobile}`}
+                    variant="outline"
+                  >
+                    mobile
+                  </Button>
                 </Box>
               </Box>
               <Divider
@@ -281,14 +331,20 @@ const Querydesc = ({ e }) => {
                           padding={"20px"}
                           gap={"20px"}
                         >
-                          <Box flex={1} display={e?.userID!==user?.id ? "block" : "none"}>
+                          <Box
+                            flex={1}
+                            display={e?.userID !== user?.id ? "block" : "none"}
+                          >
                             <Avatar size="md" name={e.name} />
                           </Box>
-                          <Box textAlign={e?.userID==user?.id ? "right" : "left"} flex={8}> 
+                          <Box
+                            textAlign={e?.userID == user?.id ? "right" : "left"}
+                            flex={8}
+                          >
                             <Heading size={"sm"} as={"h2"}>
                               {e?.name}
                             </Heading>
-                            <Text fontSize={"10px"} marginTop={1}> 
+                            <Text fontSize={"10px"} marginTop={1}>
                               {convertDateFormat(e.createdOn)}
                             </Text>
                             <Text
@@ -299,9 +355,12 @@ const Querydesc = ({ e }) => {
                               {e?.message}
                             </Text>
                           </Box>
-                          <Box flex={1} display={e?.userID==user?.id ? "block" : "none"}>
+                          <Box
+                            flex={1}
+                            display={e?.userID == user?.id ? "block" : "none"}
+                          >
                             <Avatar size="md" name={e.name} />
-                          </Box> 
+                          </Box>
                         </Box>
                       ))}
                     </Box>
@@ -340,7 +399,7 @@ const Querydesc = ({ e }) => {
             </Box>
           </ModalBody>
         </ModalContent>
-      </Modal> 
+      </Modal>
     </>
   );
 };

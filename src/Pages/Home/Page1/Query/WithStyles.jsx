@@ -7,8 +7,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import style from "./WithStyles.module.css";
-import { useNavigate } from "react-router-dom";
+import style from "./WithStyles.module.css"; 
+import { useNavigate } from "react-router-dom"; 
 import Apendbox from "./Apendbox";
 
 const WithStyles = () => {
