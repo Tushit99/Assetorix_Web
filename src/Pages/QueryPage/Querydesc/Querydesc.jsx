@@ -38,7 +38,7 @@ const Querydesc = ({ e }) => {
     setLoading(true);
     try {
       await axios
-        .get(`${process.env.REACT_APP_URL}/leadForm/single/${e._id}`)
+        .get(`${process.env.REACT_APP_URL}/leadForm/single/${e._id}`) 
         .then((e) => {
           console.log(e?.data?.replies); 
           // let data = e?.data?.replies.reverse()
@@ -105,7 +105,7 @@ const Querydesc = ({ e }) => {
       return;
     }
   };
-
+ 
   return (
     <>
       <Box

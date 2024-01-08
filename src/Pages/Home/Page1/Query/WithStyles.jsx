@@ -1,17 +1,20 @@
-import { Avatar, Badge, Box, Button } from "@chakra-ui/react";
+import { 
+  Box,
+  Button,
+} from "@chakra-ui/react";
 import { Heading, Text } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import style from "./WithStyles.module.css";   
-import {useNavigate } from "react-router-dom";
-import DetailBox from "./DetailBox";
-
+import style from "./WithStyles.module.css";
+import { useNavigate } from "react-router-dom";
+import Apendbox from "./Apendbox";
 
 const WithStyles = () => {
   const [data, setData] = useState([]);
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
+  
 
   const fetchdata = async () => {
     try {
@@ -27,10 +30,10 @@ const WithStyles = () => {
     } catch (err) {
       console.log(err);
     }
-  }; 
-  const handlequerypage = ()=>{
-    navigate("/query")
-  }
+  };
+  const handlequerypage = () => {
+    navigate("/query");
+  };
 
   useEffect(() => {
     fetchdata();
@@ -38,21 +41,21 @@ const WithStyles = () => {
 
   return (
     <Box position={"relative"} className={style.topbox}>
-      <Heading > Query by Other Users </Heading> 
+      <Heading> Query by Other Users </Heading>
       <Carousel
         additionalTransfrom={0}
         arrows
         autoPlay
         autoPlaySpeed={5000}
-        centerMode={false} 
+        centerMode={false}
         draggable
-        focusOnSelect={false}  
+        focusOnSelect={false}
         infinite
         keyBoardControl
         minimumTouchDrag={80}
         pauseOnHover
         renderArrowsWhenDisabled={false}
-        renderButtonGroupOutside={false} 
+        renderButtonGroupOutside={false}
         responsive={{
           desktop: {
             breakpoint: {
@@ -88,45 +91,15 @@ const WithStyles = () => {
         swipeable
       >
         {data.map((e) => (
-          <Box key={e._id} className={style.mapbox}>
-            <Box flex={1} className={`${style.placeCenter}`}>
-              <Avatar size="md" name={e.name} />
-            </Box> 
-            <Box textAlign={"left"} flex={3}>
-              <Heading size={"md"} as={"h2"}>
-                {e.name}
-              </Heading>
-              <Text
-                fontsize={"md"}
-                display={e.propertyType == "None" ? "none" : "block"}
-              >
-                <strong>Property Type:</strong> {e.propertyType}
-              </Text>
-              <Text fontsize={"lg"} className={style.desbox}>
-                <strong>Requirement:</strong> {e.description}
-              </Text>
-              <Badge
-                variant="solid"
-                colorScheme={
-                  e.formType == "Rent"
-                    ? "red"
-                    : e.formType == "Sell"
-                    ? "green"
-                    : "blue"
-                }
-                fontWeight={"extrabold"}
-                fontSize="0.8em"
-                className={style.placeTop}
-              >
-                {e.formType}
-              </Badge>
-            </Box> 
-            <DetailBox /> 
-          </Box>
+         <Apendbox e={e} key={e._id}  />
         ))}
-      </Carousel> 
+      </Carousel>
       <Box display={"flex"} alignItems={"center"} justifyContent={"right"}>
-        <Button variant={"outline"} colorScheme="blue" onClick={handlequerypage} >
+        <Button
+          variant={"outline"}
+          colorScheme="blue"
+          onClick={handlequerypage}
+        >
           Browse More
         </Button>
       </Box>
