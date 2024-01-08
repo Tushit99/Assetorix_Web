@@ -264,6 +264,12 @@
   .inp_form_numbers {
     grid-template-columns: repeat(1, 1fr);
   }
+
+  .furnished_detail {
+    display: grid; 
+    grid-template-columns: repeat(1, 1fr);
+  }
+
 }
 
 
