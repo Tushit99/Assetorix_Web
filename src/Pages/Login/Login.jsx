@@ -24,16 +24,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginuser } from "../../Redux/userauth/action";
 import BeatLoader from "react-spinners/BeatLoader";
 
-const Login = ({ onpage }) => {
+const Login = () => {
     const data = useSelector((store) => store.userreducer);
     const toast = useToast();
-    const [mobile, setMobile] = useState("");
+    const [mobile, setMobile] = useState(""); 
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [show, setshow] = useState(true);
     const [mobileWarn, setMobileWarn] = useState("");
-    const [warning, setWarning] = useState("");
+    const [warning, setWarning] = useState(""); 
+
+    // console.log(onpage);    
 
     const handlelogin = async () => {
         if (mobile.length <= 9 || mobile.length >= 11) {

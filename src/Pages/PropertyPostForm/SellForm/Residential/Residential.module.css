@@ -28,11 +28,11 @@
   max-width: 100%; 
   display: grid;
   gap: 10px;
-}
+}  
 
 .furnished_detail {
   display: grid;
-  padding: 10px;
+  padding: 0px;  
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 0;
   grid-template-columns: repeat(3, 1fr);
@@ -64,8 +64,7 @@
 }
 
 .parking {
-  display: flex;
-  /* margin-top: 6px ; */
+  display: flex;  
   align-items: center;
 }
 
@@ -123,14 +122,14 @@
   margin: 10px 0;
   text-align: left;
   display: grid;
-  gap: 8px;
+  gap: 8px; 
 }
 
 .optional_box > *:nth-child(2) {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
 }
 
 /* drag and drop box */
@@ -249,7 +248,17 @@
 
   .furnished_detail {
     display: grid; 
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
+
+  .furnished_detail > * {
+    gap: 5px; 
+  }
+
+  .parking {
+    display: flex ;   
+    flex-direction: column;  
+  }
+ 
 
 }

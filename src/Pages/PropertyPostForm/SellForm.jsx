@@ -36,7 +36,7 @@ import PlotLandRent from "./RentForm/Commercial/PlotLand/PlotLandRent";
 import RetailRent from "./RentForm/Commercial/RetailRent/RetailRent";
 import IndustryRent from "./RentForm/Commercial/Industry/IndustryRent";
 import HospitalityRent from "./RentForm/Commercial/Hospitality/Hospitality";
-import Retail from "./SellForm/Commercial/Retail";
+import Retail from "./SellForm/Commercial/Retail";  
 
 // this is a page of Property sell and Property Rent routes (please don't change anything without any prior knowledge).
 
@@ -46,7 +46,7 @@ const SellForm = () => {
   const [type, settype] = useState("");
   const [typeofplace, setTypeOf] = useState("");
   const dispatch = useDispatch();
-  const [selectedTab, setSelectedTab] = useState(0);
+  const [selectedTab, setSelectedTab] = useState(0); 
 
   const handlechange = (type, look) => {
     settype(type);
@@ -83,10 +83,10 @@ const SellForm = () => {
   }, []);
 
   return (
-    <div className={style.post_property}>
-      <Box maxWidth={"100%"}>
-        {/* Property Type (what type of property) */}
-        <Box>
+    <div className={style.post_property}>  
+      <Box maxWidth={"100%"}>  
+        {/* Property Type (what type of property) */}  
+        <Box>  
           <Heading as={"h1"} size={"xl"} fontWeight={400}>
             Fill out basic details
           </Heading>
@@ -100,7 +100,7 @@ const SellForm = () => {
             defaultIndex={0}
           >
             <TabList gap={3} margin={"0px"}>
-              <Tab
+              <Tab 
                 bg="blue.50"
                 border="1px solid rgba(85, 91, 255, 0.236)"
                 borderRadius="0px"
@@ -181,6 +181,32 @@ const SellForm = () => {
                           Flat/Apartment
                         </button>
                         <button
+                          onClick={() =>
+                            handlechange("sell", "Independent/builder Floor")
+                          }
+                          className={
+                            look === "Independent/builder Floor" &&
+                            type === "sell"
+                              ? style.setbtn
+                              : style.btn
+                          }
+                        >
+                          Independent/builder Floor
+                        </button> 
+                         <button
+                          onClick={() =>
+                            handlechange("sell", "Independent House/villa")
+                          }
+                          className={
+                            look === "Independent House/villa" &&
+                            type === "sell"
+                              ? style.setbtn
+                              : style.btn
+                          }
+                        >
+                          Independent House/villa
+                        </button>
+                        <button
                           onClick={() => handlechange("sell", "Plot / Land")}
                           className={
                             look === "Plot / Land" && type === "sell"
@@ -224,32 +250,8 @@ const SellForm = () => {
                         >
                           1 RK/ Studio Apartment
                         </button>
-                        <button
-                          onClick={() =>
-                            handlechange("sell", "Independent House/villa")
-                          }
-                          className={
-                            look === "Independent House/villa" &&
-                            type === "sell"
-                              ? style.setbtn
-                              : style.btn
-                          }
-                        >
-                          Independent House/villa
-                        </button>
-                        <button
-                          onClick={() =>
-                            handlechange("sell", "Independent/builder Floor")
-                          }
-                          className={
-                            look === "Independent/builder Floor" &&
-                            type === "sell"
-                              ? style.setbtn
-                              : style.btn
-                          }
-                        >
-                          Independent/builder Floor
-                        </button>
+                       
+                       
                       </Box>
                     </TabPanel>
                     <TabPanel padding={0}>

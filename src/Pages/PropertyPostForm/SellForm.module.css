@@ -25,6 +25,8 @@
 } 
 
 
+
+
 .setbtn {
   border-radius: 0px;
   background-color: rgb(149, 152, 241);
@@ -156,6 +158,9 @@
 @media screen and (min-width: 100px) and (max-width: 650px) {
   .inp_form_numbers {
     grid-template-columns: repeat(1, 1fr);
+  } 
+  .grid button{
+    font-size: small;
   }
 }
 
