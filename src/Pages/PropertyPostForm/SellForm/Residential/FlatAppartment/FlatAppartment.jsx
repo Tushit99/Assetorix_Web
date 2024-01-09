@@ -153,8 +153,9 @@ const FlatAppartment = () => {
         expectedRental: expectedRentel,
         bookingAmount,
         annualDuesPayable: annualDuesPayble,
-      },
-    };
+        membershipCharge: membershipCharge
+      }, 
+    }; 
 
     const showToastError = (message) => {
       toast({

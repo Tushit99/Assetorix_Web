@@ -223,7 +223,7 @@ const TopNavbar = () => {
                       <Link to={"/profile"}> Profile </Link>
                       <Link to={"/wishlist"}> Wishlist </Link>
                       <Link to={"/recently_visited"}> Recently Visited </Link>
-                      <Link to={"/listing"}> My Listings </Link>
+                      <Link to={"/listing"}> My Properties </Link> 
                       <Link to="/my_leads"> My Leads </Link>
                       {/* <Link> My Purchased </Link> */}
                     </Box>

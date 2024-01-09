@@ -111,6 +111,9 @@ const SingleProductDetailPage = () => {
     };
 
     const addDatatoList = (list) => {
+
+        console.log(list);  
+
         setPrice(list.price.toLocaleString("en-IN"));
         let creation = list.createdOn.split("at")[0];
         setCreated(creation);
@@ -122,14 +125,14 @@ const SingleProductDetailPage = () => {
         setPin(list.address.pincode);
         setisFurnished(list.furnished);
         if (list.furnished == "Furnished" || list.furnished == "Semi-Furnished") {
-            setLight(`${list.furnishedObj.light}`);
-            setFan(`${list.furnishedObj.fans}`);
-            setAirCondition(`${list.furnishedObj.ac}`);
-            setTv(`${list.furnishedObj.tv}`);
-            setBed(`${list.furnishedObj.beds}`);
-            setwardrobe(`${list.furnishedObj.wardrobe}`);
-            setGeyser(`${list.furnishedObj.geyser}`);
-            setFurnishedAdditionalList(`${list.furnishedList}`);
+            setLight(list.furnishedObj.Light);
+            setFan(list.furnishedObj.Fan);
+            setAirCondition(list.furnishedObj.AC);
+            setTv(list.furnishedObj.TV);
+            setBed(list.furnishedObj.Bed );
+            setwardrobe(list.furnishedObj.Wardrobe);
+            setGeyser(list.furnishedObj.Geyser); 
+            setFurnishedAdditionalList(list.furnishedList); 
         }
         setOverLooking(list.overLookings);
         setLocation(list.locationAdv);
@@ -298,7 +301,7 @@ const SingleProductDetailPage = () => {
                                             w={"20px"}
                                             alt="light_images"
                                         />
-                                        <Text> {light || <Skeleton width={"60px"} />} Light{Number(light) > 1 && "s"} </Text>
+                                        <Text> {light || 0} Light{Number(light) > 1 && "s"} </Text>
                                     </Box>
                                     <Box
                                         display={"flex"}
@@ -313,8 +316,8 @@ const SingleProductDetailPage = () => {
                                             w={"20px"}
                                             alt="fan_images"
                                         />
-                                        <Text> {fan || <Skeleton width={"60px"} />} Fan{Number(fan) > 1 && "s"} </Text>
-                                    </Box>
+                                        <Text> {fan || 0} Fan{Number(fan) > 1 && "s"} </Text>
+                                    </Box> 
                                     <Box
                                         display={"flex"}
                                         alignItems={"center"}
@@ -328,7 +331,7 @@ const SingleProductDetailPage = () => {
                                             w={"20px"}
                                             alt=""
                                         />
-                                        <Text> {aircondition || <Skeleton width={"60px"} />} AC{Number(aircondition) > 1 && "'s"} </Text>
+                                        <Text> {aircondition || 0} AC{Number(aircondition) > 1 && "'s"} </Text>
                                     </Box>
                                     <Box
                                         display={"flex"}
@@ -343,7 +346,7 @@ const SingleProductDetailPage = () => {
                                             w={"20px"}
                                             alt=""
                                         />
-                                        <Text> {tv || <Skeleton width={"60px"} />} Television{Number(tv) > 1 && "s"} </Text>
+                                        <Text> {tv || 0} Television{Number(tv) > 1 && "s"} </Text>
                                     </Box>
                                     <Box
                                         display={"flex"}
@@ -358,7 +361,7 @@ const SingleProductDetailPage = () => {
                                             w={"20px"}
                                             alt=""
                                         />
-                                        <Text> {bed || <Skeleton width={"60px"} />} Beds{Number(bed) > 1 && "s"} </Text>
+                                        <Text> {bed || 0} Beds{Number(bed) > 1 && "s"} </Text>
                                     </Box>
                                     <Box
                                         display={"flex"}
@@ -373,7 +376,7 @@ const SingleProductDetailPage = () => {
                                             w={"20px"}
                                             alt=""
                                         />
-                                        <Text> {wardrobe || <Skeleton width={"60px"} />} wardrobe{Number(wardrobe) > 1 && "s"} </Text>
+                                        <Text> {wardrobe || 0} wardrobe{Number(wardrobe) > 1 && "s"} </Text>
                                     </Box>
                                     <Box
                                         display={"flex"}
@@ -388,7 +391,7 @@ const SingleProductDetailPage = () => {
                                             w={"20px"}
                                             alt=""
                                         />
-                                        <Text> {geyser || <Skeleton width={"60px"} />} geyser{Number(geyser) > 1 && "s"} </Text>
+                                        <Text> {geyser || 0} geyser{Number(geyser) > 1 && "s"} </Text>
                                     </Box>
                                     {/* furnished part 2 */}
                                     <Box
