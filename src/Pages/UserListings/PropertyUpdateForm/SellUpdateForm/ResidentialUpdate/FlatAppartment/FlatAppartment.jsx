@@ -352,6 +352,7 @@ const FlatAppartmentUpdate = () => {
         await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
             let e = detail.data.data;
             // =================== 
+            console.log(e);  
             setCountry(e?.address?.country);
             setFacingWidth(e?.roadFacingWidth);
             setCity(e?.address?.city);
@@ -367,14 +368,14 @@ const FlatAppartmentUpdate = () => {
             setOpenparking(e?.parking?.openParking || 0);
             setFurnished(e?.furnished);
             if (furnished == "Furnished" || furnished == "Semi-Furnished") {
-                setLight(e?.furnishedObj?.light);
-                setFans(e?.furnishedObj?.fans);
-                setAc(e?.furnishedObj?.ac);
-                setTv(e?.furnishedObj?.tv);
-                setBeds(e?.furnishedObj?.beds);
-                setWardrobe(e?.furnishedObj?.wardrobe);
-                setGeyser(e?.furnishedObj?.geyser);
-                setfurnishedarr(e?.furnishedList);
+                setLight(e?.furnishedObj?.Light || 0);
+                setFans(e?.furnishedObj?.Fan || 0);
+                setAc(e?.furnishedObj?.AC || 0);
+                setTv(e?.furnishedObj?.TV || 0);
+                setBeds(e?.furnishedObj?.Bed || 0);
+                setWardrobe(e?.furnishedObj?.Wardrobe || 0);
+                setGeyser(e?.furnishedObj?.Geyser || 0); 
+                setfurnishedarr(e?.furnishedList || 0); 
             }
             setAreaPer(e?.plotAreaUnit);
             setExtraRoom(e?.otherRoom);
@@ -400,8 +401,8 @@ const FlatAppartmentUpdate = () => {
             setTotalFloors(e?.totalFloors);
             setPlotArea(e?.plotArea);
             setDesc(e?.description);
-            // setFloorOn() 
-            setSavedImages(e.images);
+            setFloorOn(e?.floorOn) 
+            setSavedImages(e?.images || []);   
 
             setAdditionalPrice(e?.additionalPricingDetails.maintenancePrice > 0 ? true : false);
             setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice)
@@ -409,6 +410,7 @@ const FlatAppartmentUpdate = () => {
             setExpectedRentel(e?.additionalPricingDetails?.expectedRental)
             setBookingAmount(e?.additionalPricingDetails?.bookingAmount)
             setAnnualDuesPayble(e?.additionalPricingDetails?.annualDuesPayable)
+            setMembershipCharge(e?.additionalPricingDetails?.membershipCharge); 
 
         })
     }
@@ -730,7 +732,7 @@ const FlatAppartmentUpdate = () => {
 
 
     return (
-        <Box w={"94%"} padding={"0 20px"} margin={"auto"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"} >
+        <Box w={"94%"} padding={"0 20px"} margin={"40px auto"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"} >
             <form onSubmit={handleSubmitData}>
                 {/* property location */}
                 <Box className={style.location_form}>
@@ -1169,7 +1171,8 @@ const FlatAppartmentUpdate = () => {
                                 </Box>
                                 <Box>
                                     <Checkbox
-                                        onChange={furnisheddetails}
+                                        onChange={furnisheddetails} 
+                                        defaultChecked={furnishedarr.includes("Sofa")}
                                         isChecked={furnishedarr.includes("Sofa")}
                                         value={"Sofa"}
                                         icon={<AddIcon />}
@@ -1181,6 +1184,7 @@ const FlatAppartmentUpdate = () => {
                                     <Checkbox
                                         onChange={furnisheddetails}
                                         isChecked={furnishedarr.includes("Washing Machine")}
+                                        defaultChecked={furnishedarr.includes("Washing Machine")} 
                                         value={"Washing Machine"}
                                         icon={<AddIcon />}
                                     >
@@ -1191,6 +1195,7 @@ const FlatAppartmentUpdate = () => {
                                     <Checkbox
                                         onChange={furnisheddetails}
                                         isChecked={furnishedarr.includes("Stove")}
+                                        defaultChecked={furnishedarr.includes("Stove")} 
                                         value={"Stove"}
                                         icon={<AddIcon />}
                                     >
@@ -1200,7 +1205,8 @@ const FlatAppartmentUpdate = () => {
                                 <Box>
                                     <Checkbox
                                         onChange={furnisheddetails}
-                                        isChecked={furnishedarr.includes("Fridge")}
+                                        isChecked={furnishedarr.includes("Fridge")} 
+                                        defaultChecked={furnishedarr.includes("Fridge")}
                                         value={"Fridge"}
                                         icon={<AddIcon />}
                                     >
@@ -1209,7 +1215,8 @@ const FlatAppartmentUpdate = () => {
                                 </Box>
                                 <Box>
                                     <Checkbox
-                                        onChange={furnisheddetails}
+                                        onChange={furnisheddetails} 
+                                        defaultChecked={furnishedarr.includes("Water Purifier")}
                                         isChecked={furnishedarr.includes("Water Purifier")}
                                         value={"Water Purifier"}
                                         icon={<AddIcon />}
@@ -1219,7 +1226,8 @@ const FlatAppartmentUpdate = () => {
                                 </Box>
                                 <Box>
                                     <Checkbox
-                                        onChange={furnisheddetails}
+                                        onChange={furnisheddetails} 
+                                        defaultChecked={furnishedarr.includes("Microwave")}
                                         isChecked={furnishedarr.includes("Microwave")}
                                         value={"Microwave"}
                                         icon={<AddIcon />}
@@ -1230,6 +1238,7 @@ const FlatAppartmentUpdate = () => {
                                 <Box>
                                     <Checkbox
                                         onChange={furnisheddetails}
+                                        defaultChecked={furnishedarr.includes("Modular Kitchen")}
                                         isChecked={furnishedarr.includes("Modular Kitchen")}
                                         value={"Modular Kitchen"}
                                         icon={<AddIcon />}
@@ -1241,6 +1250,7 @@ const FlatAppartmentUpdate = () => {
                                     <Checkbox
                                         onChange={furnisheddetails}
                                         isChecked={furnishedarr.includes("Chimney")}
+                                        defaultChecked={furnishedarr.includes("Chimney")}
                                         value={"Chimney"}
                                         icon={<AddIcon />}
                                     >
@@ -1251,6 +1261,7 @@ const FlatAppartmentUpdate = () => {
                                     <Checkbox
                                         onChange={furnisheddetails}
                                         isChecked={furnishedarr.includes("Dining Table")}
+                                        defaultChecked={furnishedarr.includes("Dining Table")}
                                         value={"Dining Table"}
                                         icon={<AddIcon />}
                                     >
@@ -1260,6 +1271,7 @@ const FlatAppartmentUpdate = () => {
                                 <Box>
                                     <Checkbox
                                         onChange={furnisheddetails}
+                                        defaultChecked={furnishedarr.includes("Curtains")}
                                         isChecked={furnishedarr.includes("Curtains")}
                                         value={"Curtains"}
                                         icon={<AddIcon />}
@@ -1270,6 +1282,7 @@ const FlatAppartmentUpdate = () => {
                                 <Box>
                                     <Checkbox
                                         onChange={furnisheddetails}
+                                        defaultChecked={furnishedarr.includes("Exhaust Fan")}
                                         isChecked={furnishedarr.includes("Exhaust Fan")}
                                         value={"Exhaust Fan"}
                                         icon={<AddIcon />}
@@ -2555,7 +2568,7 @@ const FlatAppartmentUpdate = () => {
                     _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
                     color={"#ffffff"}
                 >
-                    Post Property
+                    Update Property
                 </Button>
             </form >
         </Box>
