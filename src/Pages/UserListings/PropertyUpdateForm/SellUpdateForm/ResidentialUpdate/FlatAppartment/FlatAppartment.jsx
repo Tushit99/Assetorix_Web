@@ -367,15 +367,15 @@ const FlatAppartmentUpdate = () => {
             setParking(e?.parking?.closeParking || 0);
             setOpenparking(e?.parking?.openParking || 0);
             setFurnished(e?.furnished);
-            if (furnished == "Furnished" || furnished == "Semi-Furnished") {
-                setLight(e?.furnishedObj?.Light || 0);
+            if (e.furnished == "Furnished" || e.furnished == "Semi-Furnished") {
+                setLight(e?.furnishedObj?.Light || 0); 
                 setFans(e?.furnishedObj?.Fan || 0);
                 setAc(e?.furnishedObj?.AC || 0);
                 setTv(e?.furnishedObj?.TV || 0);
                 setBeds(e?.furnishedObj?.Bed || 0);
                 setWardrobe(e?.furnishedObj?.Wardrobe || 0);
                 setGeyser(e?.furnishedObj?.Geyser || 0); 
-                setfurnishedarr(e?.furnishedList || 0); 
+                setfurnishedarr(e?.furnishedList); 
             }
             setAreaPer(e?.plotAreaUnit);
             setExtraRoom(e?.otherRoom);
@@ -1025,7 +1025,7 @@ const FlatAppartmentUpdate = () => {
                                     >
                                         <MinusIcon fontSize={"12px"} />
                                     </button>
-                                    <h3>{light}</h3>
+                                    <h3>{light}</h3> 
                                     <button
                                         className={style.pls_btn}
                                         onClick={(e) => {
