@@ -15,7 +15,7 @@ export const changeLookingFor = (param) => (dispatch) => {
 };
 
 export const addRecentlyVisited = (param) => (dispatch) => {
-  console.log("data reached", param);
+  // console.log("data reached", param);
 
   let visited_list = JSON.parse(localStorage.getItem("visited")) || [];
 
