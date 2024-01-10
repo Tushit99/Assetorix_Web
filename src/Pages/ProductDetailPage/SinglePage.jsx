@@ -86,7 +86,7 @@ import school from "./location/school.png";
 import highway from "./location/road.png";
 import hospital from "./location/hospital.png";
 
-import scale from "./scale.png";
+import scale from "./scale.jpg";
 import stairs from "./stairs.png";
 import powerback from "./backup.png";
 
@@ -99,7 +99,11 @@ const SingleProductDetailPage = () => {
   const [updated, setUpdated] = useState("");
   const [houseno, setHouseno] = useState("");
   const [apartment, setApartment] = useState("");
-  const [placelocality, setlocality] = useState("");
+  const [placelocality, setlocality] = useState(""); 
+  const [city, setCity] = useState(""); 
+  const [state, setState] = useState(""); 
+  const [country, setCountry] = useState(""); 
+
   const [pin, setPin] = useState("");
   const [isFurnished, setisFurnished] = useState("Un-furnished");
   const [light, setLight] = useState("");
@@ -134,7 +138,7 @@ const SingleProductDetailPage = () => {
 
   const addDatatoList = (list) => {
     console.log(list);
-    setlookingfor(list.lookingFor);
+    setlookingfor(list.lookingFor.toUpperCase());
 
     setPrice(list.price.toLocaleString("en-IN"));
     let creation = list.createdOn.split("at")[0];
@@ -143,7 +147,10 @@ const SingleProductDetailPage = () => {
     setUpdated(updation);
     setHouseno(list.address.houseNumber);
     setApartment(list.address.apartmentName);
-    setlocality(list.address.locality);
+    setlocality(list.address.locality); 
+    setCity(list.address.city); 
+    setState(list.address.state); 
+    setCountry(list.address.country);  
     setPin(list.address.pincode);
     setisFurnished(list.furnished);
     if (list.furnished == "Furnished" || list.furnished == "Semi-Furnished") {
@@ -214,25 +221,28 @@ const SingleProductDetailPage = () => {
   };
 
   return (
-    <Box maxWidth={"100%"} marginTop={{base:"14px",md:"26px"}} overflow={"hidden"}>
+    <Box
+      maxWidth={"100%"}
+      marginTop={{ base: "14px", md: "26px" }}
+      overflow={"hidden"}
+    >
       <Box
         display={"flex"}
         alignItems={"center"}
         margin={"0 3.5%"}
         justifyContent={"space-between"}
       >
-        <Box
-          display={"flex"}
-          flexDirection={"column"}
-          gap={"10px"}
-        >
-          <Heading textAlign={"left"}> {data.propertyType} </Heading>
-          <Text textAlign={"left"}>
+        <Box display={"grid"} gap={"4px"}>
+          <Box display={"flex"} justifyContent={"center"} gap={2} alignItems={"flex-end"}>
+            <Heading textAlign={"left"} fontSize={"3xl"}>
+              {data.propertyType}
+            </Heading>
             <Badge
               textTransform={"capitalize"}
               variant="solid"
-              padding={"3px 6px"}
-              fontSize={"sm"}
+              fontSize="0.7em"
+              position={"relative"} 
+              marginBottom={"4px"}
               colorScheme={
                 data?.formType == "Rent"
                   ? "red"
@@ -241,27 +251,50 @@ const SingleProductDetailPage = () => {
                   : "blue"
               }
             >
-              FOR {data.lookingFor}
+              FOR {lookingfor}
             </Badge>
-          </Text>
-          <Heading
+          </Box>
+          <Text
             textAlign={"left"}
             display={"flex"}
-            gap={1}
-            fontSize={{ base: "sm", md: "lg" }}
-            textTransform={"uppercase"}
+            gap={1} 
+            fontWeight={"600"}
+            fontSize={{ base: "sm", md: "md" }}
             alignItems={"center"}
+            backgroundColor={"rgb(230,230,230)"}
+            padding={"2px 8px 6px 8px"}
+            borderRadius={"10px"}
+            justifyContent={"left"}
             position={"relative"}
           >
-            <ImLocation2 color={"rgb(140,140,140)"} />
-            {houseno ? `${houseno + ","}` : ""}
-            {apartment ? `${apartment + ","}` : ""} {placelocality}
-          </Heading>
+            <span>
+              <ImLocation2 color={"rgb(140,140,140)"} />
+            </span>
+            <span>
+              {houseno ? `${houseno + ", "}` : ""}
+              {apartment ? `${apartment + ", "}` : ""} 
+              {placelocality ? `${placelocality + ", "}` : ""}  
+              {city ? `${city + ", "}` : ""}
+              {state ? `${state + ", "}` : ""}
+              {country}  
+            </span> 
+          </Text> 
         </Box>
-        <Box display={{base:"none",md:"flex"}}>
-          <Heading display={"flex"} fontSize={"xl"}>
-            {data.countryCurrency || <Skeleton width={"100px"} />} 
+        <Box display={{ base: "none", md: "block" }}>
+          <Heading display={"flex"} fontSize={"2xl"}>
+            {data.countryCurrency || <Skeleton width={"100px"} />}
             {price || <Skeleton width={"40px"} />}
+          </Heading>
+          <Heading
+            display={"flex"}
+            justifyContent={"end"}
+            fontSize={"md"}
+            color={"rgb(100,100,100)"}
+          >
+            {data.countryCurrency || <Skeleton width={"100px"} />}
+            {`${data.priceUnit}/${data.plotAreaUnit}` || (
+              <Skeleton width={"40px"} />
+            )}
           </Heading>
         </Box>
       </Box>
@@ -347,7 +380,7 @@ const SingleProductDetailPage = () => {
               justifyContent={"space-around"}
             >
               <Box
-                display={data.plotArea ? "flex" : "none"} 
+                display={data.plotArea ? "flex" : "none"}
                 alignItems={"flex-start"}
                 padding={"4px 12px"}
                 borderBottom={"2px solid rgb(178, 255, 246)"}
@@ -367,7 +400,7 @@ const SingleProductDetailPage = () => {
                 </Box>
               </Box>
               <Box
-                display={data.totalFloors ? "flex" : "none"} 
+                display={data.totalFloors ? "flex" : "none"}
                 alignItems={"flex-start"}
                 padding={"4px 12px"}
                 borderBottom={"2px solid rgb(178, 255, 246)"}
@@ -377,14 +410,12 @@ const SingleProductDetailPage = () => {
               >
                 <Box flex={9}>
                   <Heading size={"md"}> Floor </Heading>
-                  <Text> 
-                    Total floor: 
+                  <Text>
+                    Total floor:
                     {data.totalFloors || <Skeleton width={"100px"} />}
                   </Text>
-                  <Text display={data.floorOn ? "flex" : "none"}> 
-                    Floor: {data.floorOn || (
-                      <Skeleton width={"100px"} />
-                    )} Floor 
+                  <Text display={data.floorOn ? "flex" : "none"}>
+                    Floor: {data.floorOn || <Skeleton width={"100px"} />} Floor
                   </Text>
                 </Box>
                 <Box flex={3}>
@@ -392,7 +423,7 @@ const SingleProductDetailPage = () => {
                 </Box>
               </Box>
               <Box
-                display={data.powerBackup ? "flex" : "none"} 
+                display={data.powerBackup ? "flex" : "none"}
                 alignItems={"flex-start"}
                 padding={"4px 12px"}
                 borderBottom={"2px solid rgb(178, 255, 246)"}
@@ -1399,11 +1430,11 @@ const SingleProductDetailPage = () => {
             display={{ base: "none", md: "block" }}
           >
             {/* price  */}
-            <Box margin={0} padding={"10px 0"}> 
-              <Heading fontSize={"xl"} display={{base:"flex",md:"none"}} > 
-                Price: {data.countryCurrency || <Skeleton width={"100px"} />} 
+            <Box margin={0} padding={"10px 0"}>
+              <Heading fontSize={"xl"} display={{ base: "flex", md: "none" }}>
+                Price: {data.countryCurrency || <Skeleton width={"100px"} />}
                 {price || <Skeleton width={"40px"} />}
-              </Heading> 
+              </Heading>
               {/* <Heading display={"flex"} margin={"6px 0"} fontSize={"md"}>
                                 Price per unit: {data.countryCurrency || <Skeleton width={"100px"} />}
                                 {price || <Skeleton width={"100px"} />}
@@ -1415,8 +1446,8 @@ const SingleProductDetailPage = () => {
               boxShadow={"rgba(0, 0, 0, 0.24) 0px 3px 8px"}
               padding={"20px 10px"}
             >
-              <Heading fontSize={"2xl"} margin={"0 0 6px 0"}> 
-                Inquiry Form 
+              <Heading fontSize={"2xl"} margin={"0 0 6px 0"}>
+                Inquiry Form
               </Heading>
               <form className={style.schedule_div} onSubmit={handleTour}>
                 <Input
@@ -1487,7 +1518,7 @@ const SingleProductDetailPage = () => {
           backgroundColor="rgb(23, 152, 72)"
           _hover={{ backgroundColor: "rgb(23, 152, 72)", color: "white" }}
           onClick={onOpen}
-        > 
+        >
           Inquiry Form
         </Button>
 
