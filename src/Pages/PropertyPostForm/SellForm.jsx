@@ -37,16 +37,19 @@ import RetailRent from "./RentForm/Commercial/RetailRent/RetailRent";
 import IndustryRent from "./RentForm/Commercial/Industry/IndustryRent";
 import HospitalityRent from "./RentForm/Commercial/Hospitality/Hospitality";
 import Retail from "./SellForm/Commercial/Retail";  
+import { useNavigate } from "react-router-dom"; 
 
 // this is a page of Property sell and Property Rent routes (please don't change anything without any prior knowledge).
 
 const SellForm = () => {
   const looking = useSelector((state) => state.gloalval.lookingFor);
+  let { user } = useSelector((state) => state.userreducer);
   const [look, setlook] = useState("");
   const [type, settype] = useState("");
   const [typeofplace, setTypeOf] = useState("");
   const dispatch = useDispatch();
   const [selectedTab, setSelectedTab] = useState(0); 
+  const navigate = useNavigate();  
 
   const handlechange = (type, look) => {
     settype(type);
@@ -80,7 +83,13 @@ const SellForm = () => {
     }
 
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-  }, []);
+  }, []); 
+
+  useEffect(()=>{
+    if(user.length<=0){
+      navigate("/login"); 
+    }
+  },[])
 
   return (
     <div className={style.post_property}>  

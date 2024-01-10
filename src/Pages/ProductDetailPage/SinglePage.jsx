@@ -192,19 +192,19 @@ const SingleProductDetailPage = () => {
         <Box maxWidth={"100%"} overflow={"hidden"} >
             {(placelocality) ? <Heading
                 // color={"rgb(13, 20, 66)"} 
-                textAlign={"left"}
-                fontSize={{ base: "lg", md: "2xl" }}
+                textAlign={"left"} 
                 display={"flex"}
                 className={style.addressbox}
-                gap={2}
+                gap={2} 
+                fontSize={{base:"sm",md:"lg"}}   
                 textTransform={"uppercase"}
                 alignItems={"center"}
             >
-                <ImLocation2 color={"rgb(255, 255, 255)"} /> {houseno || <Skeleton width={"200px"} />}, {apartment || <Skeleton width={"200px"} />}, {placelocality || <Skeleton width={"200px"} />}
+                <ImLocation2 color={"rgb(255, 255, 255)"} /> {houseno ? `${houseno + "," }` : ""}  {apartment ? `${apartment + "," }` : ""} {placelocality} 
             </Heading> : <Skeleton height={"35px"} />}
             <Box className={style.singleProduct} display={{ base: "grid", md: "flex" }} alignItems={"flex-start"} flexWrap={"wrap"} gap={"20px"} margin={{ base: "0px auto", md: "20px auto" }} w={"94%"} >
                 <Box flex={16} >
-                    <Box position={"relative"} className={style.propertyimg} height={{sm:"300px",lg:"450px"}} w={"100%"} >
+                    <Box position={"relative"} className={style.propertyimg} height={{base:"300px",lg:"450px"}} w={"100%"} >
                         <Box className={style.backimagebox} display={(data && data.images && data?.images[0]?.URL) ? "none" : "block"} >
                         </Box>
                         <Image
@@ -222,7 +222,7 @@ const SingleProductDetailPage = () => {
                     <Box display={{ base: "grid", md: "none" }} >
                         {(data.countryCurrency && price) ? <Heading display={"flex"} fontSize={"xl"} margin={"8px 0"}>
                             Price: {data.countryCurrency || <Skeleton width={"100px"} />}
-                            {price || <Skeleton width={"40px"} />}
+                            {price || <Skeleton width={"40px"} />} 
                         </Heading> : <Skeleton />}
                         {/* {(data.countryCurrency && price) ? <Heading display={"flex"} margin={"8px 0"} fontSize={"md"}>
                             Price per unit: {data.countryCurrency || <Skeleton width={"100px"} />}

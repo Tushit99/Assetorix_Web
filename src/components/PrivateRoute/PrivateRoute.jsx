@@ -12,7 +12,7 @@ const PrivateRoute = ({ children }) => {
 
   console.log(user);  
   
-  if (success == 0 && isLoading == false) {
+  if (user.name) { 
     return children;
   } else if (isLoading == false && success == 4) {
     toast({ 
