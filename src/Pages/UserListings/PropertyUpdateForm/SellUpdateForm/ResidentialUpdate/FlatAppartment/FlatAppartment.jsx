@@ -2195,14 +2195,14 @@ const FlatAppartmentUpdate = () => {
           <Box>
             <button
               className={
-                additinalft.includes("Separate entry for sevant room")
+                additinalft.includes("Separate entry for servant room")
                   ? style.setbtn
                   : style.btn
               }
-              value={"Separate entry for sevant room"}
+              value={"Separate entry for servant room"}
               onClick={handleAdditionalFeature}
             >
-              Separate entry for sevant room
+              Separate entry for servant room
             </button>
             <button
               className={

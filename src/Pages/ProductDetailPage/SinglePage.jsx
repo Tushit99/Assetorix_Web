@@ -22,6 +22,20 @@ import {
   Textarea,
   Tooltip,
   useDisclosure,
+  Table,
+  Thead,
+  List,
+  ListItem,
+  ListIcon,
+  TagLeftIcon,
+  Tbody,
+  Tag,
+  TagLabel,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+  TableContainer,
   useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
@@ -61,7 +75,7 @@ import Hoverbox from "./Hoverbox";
 import propertFeatureImg from "./furnishedImages/town.png";
 import societyImg from "./furnishedImages/society.png";
 import additonalImg from "./furnishedImages/settings.png";
-import { InfoIcon } from "@chakra-ui/icons";
+import { InfoIcon, CheckCircleIcon } from "@chakra-ui/icons";
 import watersourceImg from "./furnishedImages/water.png";
 import otherImg from "./furnishedImages/layers.png";
 import RoomImg from "./furnishedImages/living-room.png";
@@ -75,6 +89,7 @@ import { useParams } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import { addRecentlyVisited } from "../../Redux/globalval/action";
+import { PiVan } from "react-icons/pi";
 
 // location
 import train from "./location/train.png";
@@ -99,10 +114,10 @@ const SingleProductDetailPage = () => {
   const [updated, setUpdated] = useState("");
   const [houseno, setHouseno] = useState("");
   const [apartment, setApartment] = useState("");
-  const [placelocality, setlocality] = useState(""); 
-  const [city, setCity] = useState(""); 
-  const [state, setState] = useState(""); 
-  const [country, setCountry] = useState(""); 
+  const [placelocality, setlocality] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [country, setCountry] = useState("");
 
   const [pin, setPin] = useState("");
   const [isFurnished, setisFurnished] = useState("Un-furnished");
@@ -147,10 +162,10 @@ const SingleProductDetailPage = () => {
     setUpdated(updation);
     setHouseno(list.address.houseNumber);
     setApartment(list.address.apartmentName);
-    setlocality(list.address.locality); 
-    setCity(list.address.city); 
-    setState(list.address.state); 
-    setCountry(list.address.country);  
+    setlocality(list.address.locality);
+    setCity(list.address.city);
+    setState(list.address.state);
+    setCountry(list.address.country);
     setPin(list.address.pincode);
     setisFurnished(list.furnished);
     if (list.furnished == "Furnished" || list.furnished == "Semi-Furnished") {
@@ -169,7 +184,7 @@ const SingleProductDetailPage = () => {
 
   useEffect(() => {
     dataById();
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    // window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, []);
 
   const handleTour = async (e) => {
@@ -233,7 +248,12 @@ const SingleProductDetailPage = () => {
         justifyContent={"space-between"}
       >
         <Box display={"grid"} gap={"4px"}>
-          <Box display={"flex"} justifyContent={"center"} gap={2} alignItems={"flex-end"}>
+          <Box
+            display={"flex"}
+            justifyContent={"left"}
+            gap={2}
+            alignItems={"flex-end"}
+          >
             <Heading textAlign={"left"} fontSize={"3xl"}>
               {data.propertyType}
             </Heading>
@@ -241,7 +261,7 @@ const SingleProductDetailPage = () => {
               textTransform={"capitalize"}
               variant="solid"
               fontSize="0.7em"
-              position={"relative"} 
+              position={"relative"}
               marginBottom={"4px"}
               colorScheme={
                 data?.formType == "Rent"
@@ -257,11 +277,11 @@ const SingleProductDetailPage = () => {
           <Text
             textAlign={"left"}
             display={"flex"}
-            gap={1} 
-            fontWeight={"600"}
+            gap={1}
+            fontWeight={"500"}
             fontSize={{ base: "sm", md: "md" }}
             alignItems={"center"}
-            backgroundColor={"rgb(230,230,230)"}
+            backgroundColor={"rgb(225, 246, 255)"}
             padding={"2px 8px 6px 8px"}
             borderRadius={"10px"}
             justifyContent={"left"}
@@ -272,13 +292,14 @@ const SingleProductDetailPage = () => {
             </span>
             <span>
               {houseno ? `${houseno + ", "}` : ""}
-              {apartment ? `${apartment + ", "}` : ""} 
-              {placelocality ? `${placelocality + ", "}` : ""}  
+              {apartment ? `${apartment + ", "}` : ""}
+              {placelocality ? `${placelocality + ", "}` : ""}
               {city ? `${city + ", "}` : ""}
               {state ? `${state + ", "}` : ""}
-              {country}  
-            </span> 
-          </Text> 
+              {country ? `${country + ", "}` : ""}
+              {data?.address?.pincode}
+            </span>
+          </Text>
         </Box>
         <Box display={{ base: "none", md: "block" }}>
           <Heading display={"flex"} fontSize={"2xl"}>
@@ -304,7 +325,7 @@ const SingleProductDetailPage = () => {
         alignItems={"flex-start"}
         flexWrap={"wrap"}
         gap={"20px"}
-        margin={{ base: "0px auto", md: "20px auto" }} 
+        margin={{ base: "0px auto", md: "20px auto" }}
         w={"94%"}
       >
         <Box flex={16}>
@@ -358,6 +379,12 @@ const SingleProductDetailPage = () => {
 
           {/* box 2 */}
           <Box flex={8} padding={"20px 0"} textAlign={"left"} w={"100%"}>
+            {/* ==================================== Room Detail ========================== */}
+
+            <Box>
+              
+            </Box>
+
             {/* ======================= discription =========================== */}
             <Heading fontSize={"2x"} margin={"10px 0"} textAlign={"left"}>
               Description
@@ -391,7 +418,7 @@ const SingleProductDetailPage = () => {
                 <Box flex={9}>
                   <Heading size={"md"}>Plot Area </Heading>
                   <Text>
-                    {data.plotArea || <Skeleton width={"100px"} />}{" "}
+                    {data.plotArea || <Skeleton width={"100px"} />}
                     {data.plotAreaUnit || <Skeleton width={"100px"} />}
                   </Text>
                 </Box>
@@ -443,18 +470,176 @@ const SingleProductDetailPage = () => {
               </Box>
             </Box>
 
+            {/* =============================== Additional Pricing Detail =================================== */}
+            <Box>
+              <Box
+                border={"3px solid rgb(200,200,200)"}
+                padding={"6px 14px 10px 24px"}
+              >
+                <Heading size={"md"} as={"h3"} marginLeft={0} paddingBottom={2}>
+                  Some Additional Pricing Details
+                </Heading>
+                <TableContainer>
+                  <Table variant="striped" colorScheme="teal" size="sm">
+                    <Tbody>
+                      <Tr>
+                        <Td> Maintenance Price </Td>
+                        <Td>
+                          {data?.additionalPricingDetails?.maintenancePrice}
+                          {` ${data?.additionalPricingDetails?.maintenanceTimePeriod}`}
+                        </Td>
+                      </Tr>
+                      <Tr>
+                        <Td> Expected Rental </Td>
+                        <Td>
+                          {data?.additionalPricingDetails?.expectedRental}
+                        </Td>
+                      </Tr>
+                      <Tr>
+                        <Td> Booking Amount </Td>
+                        <Td>{data?.additionalPricingDetails?.bookingAmount}</Td>
+                      </Tr>
+                      <Tr>
+                        <Td> Annual Dues Payable </Td>
+                        <Td>
+                          {data?.additionalPricingDetails?.annualDuesPayable}
+                        </Td>
+                      </Tr>
+                      <Tr>
+                        <Td> Membership Charge </Td>
+                        <Td>
+                          {data?.additionalPricingDetails?.membershipCharge}
+                        </Td>
+                      </Tr>
+                    </Tbody>
+                  </Table>
+                </TableContainer>
+              </Box>
+            </Box>
+
+            {/* =============================== Other Detail ======================================= */}
+
+            <TableContainer>
+              <Table size="sm">
+                <Tbody>
+                  {data?.availabilityStatus && (
+                    <Tr>
+                      <Th color={"black"}> Availability Status </Th>
+                      <Td>
+                        <Tag
+                          size={"md"}
+                          variant="outline"
+                          colorScheme="green"
+                          gap={2}
+                        >
+                          <TagLabel>{data?.availabilityStatus}</TagLabel>
+                          <TagLeftIcon as={PiVan} />
+                        </Tag>
+                      </Td>
+                    </Tr>
+                  )}
+                  {data?.inclusivePrices?.length > 0 && (
+                    <Tr>
+                      <Th color={"black"}> All Inclusive Price </Th>
+                      <Td display={"flex"} gap={2} flexWrap={"wrap"}>
+                        {data?.inclusivePrices?.map((e, i) => (
+                          <Button
+                            cursor={"auto"}
+                            size="xs"
+                            padding={"0 4px"}
+                            leftIcon={<CheckCircleIcon />}
+                            colorScheme={"green"}
+                            key={i}
+                          >
+                            {e}
+                          </Button>
+                        ))}
+                      </Td>
+                    </Tr>
+                  )}
+                  {data?.ownership && (
+                    <Tr>
+                      <Th color={"black"}> Ownership </Th>
+                      <Td> {data?.ownership} </Td>
+                    </Tr>
+                  )}
+                  {data.propertyGroup && (
+                    <Tr>
+                      <Th color={"black"}> Property Group </Th>
+                      <Td> {data.propertyGroup} </Td>
+                    </Tr>
+                  )}
+                  {data?.propertyState && (
+                    <Tr>
+                      <Th color={"black"}> Property State </Th>
+                      <Td> {data?.propertyState} </Td>
+                    </Tr>
+                  )}
+                  {data?.roadFacingWidth && (
+                    <Tr>
+                      <Th color={"black"}> Road Facing Width</Th>
+                      <Td>
+                        {" "}
+                        {data?.roadFacingWidth} {data?.roadFacingWidthType}{" "}
+                      </Td>
+                    </Tr>
+                  )}
+                </Tbody>
+              </Table>
+            </TableContainer>
+
+            {/* ================================= parking ================================= */}
+
+            <Box
+              width={{ base: "100%", md: "400px" }}
+              display={
+                data?.parking?.openParking || data?.parking?.closeParking
+                  ? "block"
+                  : "none"
+              }
+            >
+              <Heading size={"md"} as={"h3"}>
+                Parking Availability
+              </Heading>
+              <Divider
+                backgroundColor={"rgb(120,120,120)"}
+                border={"1px solid rgb(120,120,120)"}
+                margin={"4px 0"}
+              />
+              <Box>
+                <TableContainer>
+                  <Table size="sm">
+                    <Tbody>
+                      {data?.parking?.openParking > 0 && (
+                        <Tr>
+                          <Th fontSize={"lg"} color={"black"}>
+                            {" "}
+                            Open Parking{" "}
+                          </Th>
+                          <Td> {data?.parking?.openParking || 0} </Td>
+                        </Tr>
+                      )}
+                      {data?.parking?.closeParking > 0 && (
+                        <Tr>
+                          <Th fontSize={"lg"} color={"black"}>
+                            {" "}
+                            Open Parking{" "}
+                          </Th>
+                          <Td> {data?.parking?.closeParking || 0} </Td>
+                        </Tr>
+                      )}
+                    </Tbody>
+                  </Table>
+                </TableContainer>
+              </Box>
+            </Box>
+
             {/* ================================= Property details =========================== */}
-            <Heading fontSize={"xl"} margin={"8px 0"}>
-              {" "}
-              Property details{" "}
-            </Heading>
-            <Divider />
             {/* furnished detail */}
             <Box
               backgroundColor={"rgb(218, 218, 218)"}
-              padding={"10px"}
-              margin={"10px 0"}
-              borderRadius={5}
+              padding={"6px"}
+              margin={"16px 0"}
               display={`${isFurnished == "Un-furnished" ? "none" : "block"}`}
             >
               <Box
@@ -463,7 +648,9 @@ const SingleProductDetailPage = () => {
                 borderRadius={5}
               >
                 {/* Property Detail */}
-                <Heading fontSize={"lg"}> Furnishing details </Heading>
+                <Heading fontSize={"lg"}>
+                  Furnishing details ( {data?.furnished} )
+                </Heading>
                 <Divider padding={2} margin={0} />
                 <Box
                   margin={"10px 0"}
@@ -487,8 +674,7 @@ const SingleProductDetailPage = () => {
                       alt="light_images"
                     />
                     <Text>
-                      {" "}
-                      {light || 0} Light{Number(light) > 1 && "s"}{" "}
+                      {light || 0} Light{Number(light) > 1 && "s"}
                     </Text>
                   </Box>
                   <Box
@@ -505,8 +691,7 @@ const SingleProductDetailPage = () => {
                       alt="fan_images"
                     />
                     <Text>
-                      {" "}
-                      {fan || 0} Fan{Number(fan) > 1 && "s"}{" "}
+                      {fan || 0} Fan{Number(fan) > 1 && "s"}
                     </Text>
                   </Box>
                   <Box
@@ -523,8 +708,7 @@ const SingleProductDetailPage = () => {
                       alt=""
                     />
                     <Text>
-                      {" "}
-                      {aircondition || 0} AC{Number(aircondition) > 1 && "'s"}{" "}
+                      {aircondition || 0} AC{Number(aircondition) > 1 && "'s"}
                     </Text>
                   </Box>
                   <Box
@@ -541,8 +725,7 @@ const SingleProductDetailPage = () => {
                       alt=""
                     />
                     <Text>
-                      {" "}
-                      {tv || 0} Television{Number(tv) > 1 && "s"}{" "}
+                      {tv || 0} Television{Number(tv) > 1 && "s"}
                     </Text>
                   </Box>
                   <Box
@@ -559,8 +742,7 @@ const SingleProductDetailPage = () => {
                       alt=""
                     />
                     <Text>
-                      {" "}
-                      {bed || 0} Beds{Number(bed) > 1 && "s"}{" "}
+                      {bed || 0} Beds{Number(bed) > 1 && "s"}
                     </Text>
                   </Box>
                   <Box
@@ -577,8 +759,7 @@ const SingleProductDetailPage = () => {
                       alt=""
                     />
                     <Text>
-                      {" "}
-                      {wardrobe || 0} wardrobe{Number(wardrobe) > 1 && "s"}{" "}
+                      {wardrobe || 0} wardrobe{Number(wardrobe) > 1 && "s"}
                     </Text>
                   </Box>
                   <Box
@@ -595,8 +776,7 @@ const SingleProductDetailPage = () => {
                       alt=""
                     />
                     <Text>
-                      {" "}
-                      {geyser || 0} geyser{Number(geyser) > 1 && "s"}{" "}
+                      {geyser || 0} geyser{Number(geyser) > 1 && "s"}
                     </Text>
                   </Box>
                   {/* furnished part 2 */}
@@ -810,6 +990,7 @@ const SingleProductDetailPage = () => {
                 </Box>
               </Box>
             </Box>
+
             {/* ==============================  Data unfurnished ================================= */}
             <Box display={`${isFurnished == "Un-furnished" ? "flex" : "none"}`}>
               <Text
@@ -818,14 +999,11 @@ const SingleProductDetailPage = () => {
                 gap={1}
                 display={data.propertyFacing == "undefined" ? "none" : "flex"}
               >
-                {" "}
-                <span style={{ fontWeight: "600" }}>
-                  {" "}
-                  Furnished Detail :
-                </span>{" "}
-                {isFurnished || <Skeleton width={"100px"} />}{" "}
+                <span style={{ fontWeight: "600" }}>Furnished Detail :</span>
+                {isFurnished || <Skeleton width={"100px"} />}
               </Text>
             </Box>
+
             {/* ----------------------------------------- */}
             {/* Property Facing / flooring */}
             <Box
@@ -841,12 +1019,8 @@ const SingleProductDetailPage = () => {
                 gap={1}
                 display={data.propertyFacing == "undefined" ? "none" : "flex"}
               >
-                {" "}
-                <span style={{ fontWeight: "600" }}>
-                  {" "}
-                  Property Facing :
-                </span>{" "}
-                {data.propertyFacing || <Skeleton width={"100px"} />}{" "}
+                <span style={{ fontWeight: "600" }}>Property Facing :</span>
+                {data.propertyFacing || <Skeleton width={"100px"} />}
               </Text>
               <Text
                 fontSize={"lg"}
@@ -854,12 +1028,8 @@ const SingleProductDetailPage = () => {
                 gap={1}
                 display={data.flooring == "undefined" ? "none" : "flex"}
               >
-                {" "}
-                <span style={{ fontWeight: "600" }}>
-                  {" "}
-                  Property flooring :
-                </span>{" "}
-                {data.flooring || <Skeleton width={"100px"} />}{" "}
+                <span style={{ fontWeight: "600" }}>Property flooring :</span>
+                {data.flooring || <Skeleton width={"100px"} />}
               </Text>
             </Box>
             {/* ---------------------------------------- */}
@@ -988,8 +1158,7 @@ const SingleProductDetailPage = () => {
               </Box>
               <Box display={"grid"} gap={3} margin={"20px 0"}>
                 <Heading fontSize={"2xl"} padding={0}>
-                  {" "}
-                  Features{" "}
+                  Features
                 </Heading>
                 {/* <Text textAlign={"inherit"} fontSize={"xs"} color={"blue"} margin={0}> For more details click on </Text> */}
               </Box>
@@ -1014,7 +1183,7 @@ const SingleProductDetailPage = () => {
                             objectFit={"contain"}
                             w={"24px"}
                             alt="light_images"
-                          />{" "}
+                          />
                           Room Details
                         </Box>
                         <AccordionIcon />
@@ -1058,7 +1227,7 @@ const SingleProductDetailPage = () => {
                             objectFit={"contain"}
                             w={"24px"}
                             alt="light_images"
-                          />{" "}
+                          />
                           Property Features
                         </Box>
                         <AccordionIcon />
@@ -1101,7 +1270,7 @@ const SingleProductDetailPage = () => {
                             objectFit={"contain"}
                             w={"24px"}
                             alt="light_images"
-                          />{" "}
+                          />
                           Society Building Features
                         </Box>
                         <AccordionIcon />
@@ -1145,7 +1314,7 @@ const SingleProductDetailPage = () => {
                             objectFit={"contain"}
                             w={"24px"}
                             alt="light_images"
-                          />{" "}
+                          />
                           Additional Features
                         </Box>
                         <AccordionIcon />
@@ -1189,7 +1358,7 @@ const SingleProductDetailPage = () => {
                             objectFit={"contain"}
                             w={"24px"}
                             alt="light_images"
-                          />{" "}
+                          />
                           Water Sources
                         </Box>
                         <AccordionIcon />
@@ -1263,8 +1432,7 @@ const SingleProductDetailPage = () => {
             </Box>
             <Box display={overlooking?.length > 0 ? "grid" : "none"}>
               <Heading margin={"16px 0 10px 0"} fontSize={"2xl"} w={"100%"}>
-                {" "}
-                Over Lookings{" "}
+                Over Lookings
               </Heading>
               <Divider />
               <Box
@@ -1283,8 +1451,7 @@ const SingleProductDetailPage = () => {
             </Box>
             <Box display={location.length > 0 ? "grid" : "none"}>
               <Heading fontSize={"xl"} margin={"16px 0 10px 0"}>
-                {" "}
-                Location Advantage{" "}
+                Location Advantage
               </Heading>
               <Divider />
               <Box className={style.location_adv}>
@@ -1495,8 +1662,7 @@ const SingleProductDetailPage = () => {
                   margin={"6px 0"}
                   colorScheme="whatsapp"
                 >
-                  {" "}
-                  Send{" "}
+                  Send
                 </Button>
               </form>
             </Box>
@@ -1534,8 +1700,7 @@ const SingleProductDetailPage = () => {
                 padding={"20px 10px"}
               >
                 <Heading fontSize={"2xl"} margin={"0 0 6px 0"}>
-                  {" "}
-                  Inquiry Form{" "}
+                  Inquiry Form
                 </Heading>
                 <form className={style.schedule_div} onSubmit={handleTour}>
                   <Input
@@ -1583,8 +1748,7 @@ const SingleProductDetailPage = () => {
                     margin={"6px 0"}
                     colorScheme="whatsapp"
                   >
-                    {" "}
-                    Send{" "}
+                    Send
                   </Button>
                 </form>
               </Box>
