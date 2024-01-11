@@ -17,6 +17,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Icon, 
   Badge,
   Text,
   Textarea,
@@ -62,6 +63,7 @@ import sofaImg from "./furnishedImages/sofa.png";
 import stoveImg from "./furnishedImages/stove.png";
 import microwaveImg from "./furnishedImages/oven.png";
 import tableImg from "./furnishedImages/table.png";
+import { MdOutlineBalcony } from "react-icons/md"; 
 
 import MaintenanceImg from "./furnishedImages/staff.png";
 import waterImg from "./furnishedImages/water-tank.png";
@@ -89,7 +91,8 @@ import { useParams } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import { addRecentlyVisited } from "../../Redux/globalval/action";
-import { PiVan } from "react-icons/pi";
+import { PiVan } from "react-icons/pi"; 
+import { FaShower } from "react-icons/fa6"; 
 
 // location
 import train from "./location/train.png";
@@ -100,7 +103,7 @@ import market from "./location/market.png";
 import school from "./location/school.png";
 import highway from "./location/road.png";
 import hospital from "./location/hospital.png";
-
+import { LiaBedSolid } from "react-icons/lia";
 import scale from "./scale.jpg";
 import stairs from "./stairs.png";
 import powerback from "./backup.png";
@@ -382,7 +385,52 @@ const SingleProductDetailPage = () => {
             {/* ==================================== Room Detail ========================== */}
 
             <Box>
-              
+              <Heading size={"md"}> Over View </Heading>
+              <Divider
+                border={"1px solid rgb(200,200,200)"}
+                margin={"10px 0"}
+              />
+              <Box display={"flex"}>
+                <Box>
+                  <Heading size={"sm"} as={"h4"}>
+                    Apartment
+                  </Heading>
+                  <Text fontSize={"sm"}>{data?.propertyGroup}</Text>
+                </Box>
+                <Box textAlign={"center"} display={"grid"} flex={1}>
+                  <Box display={"flex"} gap={2} alignItems={"center"} justifyContent={"center"} >
+                    <Icon as={LiaBedSolid} boxSize={6} />
+                    <Text fontSize={"md"} >
+                      {data?.roomDetails?.bedroom}
+                    </Text>
+                  </Box>
+                  <Heading size={"sm"} as={"h4"}>
+                    Beadroom
+                  </Heading>
+                </Box>
+                <Box textAlign={"center"} display={"grid"} flex={1}>
+                  <Box display={"flex"} gap={2} alignItems={"center"} justifyContent={"center"} >
+                    <Icon as={FaShower} boxSize={6} />
+                    <Text fontSize={"md"} >
+                      {data?.roomDetails?.bathroom}
+                    </Text>
+                  </Box>
+                  <Heading size={"sm"} as={"h4"}>
+                    Bathroom
+                  </Heading>
+                </Box>
+                <Box textAlign={"center"} display={"grid"} flex={1}>
+                  <Box display={"flex"} gap={2} alignItems={"center"} justifyContent={"center"} > 
+                    <Icon as={MdOutlineBalcony } boxSize={6} />  
+                    <Text fontSize={"md"} >
+                      {data?.roomDetails?.balcony}
+                    </Text>
+                  </Box>
+                  <Heading size={"sm"} as={"h4"}>
+                    Balcony
+                  </Heading>
+                </Box>
+              </Box>
             </Box>
 
             {/* ======================= discription =========================== */}
@@ -519,74 +567,82 @@ const SingleProductDetailPage = () => {
 
             {/* =============================== Other Detail ======================================= */}
 
-            <TableContainer>
-              <Table size="sm">
-                <Tbody>
-                  {data?.availabilityStatus && (
-                    <Tr>
-                      <Th color={"black"}> Availability Status </Th>
-                      <Td>
-                        <Tag
-                          size={"md"}
-                          variant="outline"
-                          colorScheme="green"
-                          gap={2}
-                        >
-                          <TagLabel>{data?.availabilityStatus}</TagLabel>
-                          <TagLeftIcon as={PiVan} />
-                        </Tag>
-                      </Td>
-                    </Tr>
-                  )}
-                  {data?.inclusivePrices?.length > 0 && (
-                    <Tr>
-                      <Th color={"black"}> All Inclusive Price </Th>
-                      <Td display={"flex"} gap={2} flexWrap={"wrap"}>
-                        {data?.inclusivePrices?.map((e, i) => (
-                          <Button
-                            cursor={"auto"}
-                            size="xs"
-                            padding={"0 4px"}
-                            leftIcon={<CheckCircleIcon />}
-                            colorScheme={"green"}
-                            key={i}
+            <Box>
+              <Heading as={"h3"} size={"md"}>
+                Other Detail
+              </Heading>
+              <TableContainer>
+                <Table size="sm" variant="simple">
+                  <Tbody>
+                    {data?.availabilityStatus && (
+                      <Tr>
+                        <Th color={"black"} textTransform={"unset"}>
+                          Availability Status
+                        </Th>
+                        <Td>
+                          <Tag
+                            size={"md"}
+                            variant="outline"
+                            colorScheme="green"
+                            gap={2}
                           >
-                            {e}
-                          </Button>
-                        ))}
-                      </Td>
-                    </Tr>
-                  )}
-                  {data?.ownership && (
-                    <Tr>
-                      <Th color={"black"}> Ownership </Th>
-                      <Td> {data?.ownership} </Td>
-                    </Tr>
-                  )}
-                  {data.propertyGroup && (
-                    <Tr>
-                      <Th color={"black"}> Property Group </Th>
-                      <Td> {data.propertyGroup} </Td>
-                    </Tr>
-                  )}
-                  {data?.propertyState && (
-                    <Tr>
-                      <Th color={"black"}> Property State </Th>
-                      <Td> {data?.propertyState} </Td>
-                    </Tr>
-                  )}
-                  {data?.roadFacingWidth && (
-                    <Tr>
-                      <Th color={"black"}> Road Facing Width</Th>
-                      <Td>
-                        {" "}
-                        {data?.roadFacingWidth} {data?.roadFacingWidthType}{" "}
-                      </Td>
-                    </Tr>
-                  )}
-                </Tbody>
-              </Table>
-            </TableContainer>
+                            <TagLabel>{data?.availabilityStatus}</TagLabel>
+                            <TagLeftIcon as={PiVan} />
+                          </Tag>
+                        </Td>
+                      </Tr>
+                    )}
+                    {data?.inclusivePrices?.length > 0 && (
+                      <Tr>
+                        <Th color={"black"} textTransform={"unset"}>
+                          All Inclusive Price
+                        </Th>
+                        <Td display={"flex"} gap={2} flexWrap={"wrap"}>
+                          {data?.inclusivePrices?.map((e, i) => (
+                            <Button
+                              cursor={"auto"}
+                              size="xs"
+                              padding={"0 4px"}
+                              leftIcon={<CheckCircleIcon />}
+                              colorScheme={"green"}
+                              key={i}
+                            >
+                              {e}
+                            </Button>
+                          ))}
+                        </Td>
+                      </Tr>
+                    )}
+                    {data?.ownership && (
+                      <Tr>
+                        <Th color={"black"} textTransform={"unset"}>
+                          Ownership
+                        </Th>
+                        <Td> {data?.ownership} </Td>
+                      </Tr>
+                    )}
+                    {data?.propertyState && (
+                      <Tr>
+                        <Th color={"black"} textTransform={"unset"}>
+                          Property State
+                        </Th>
+                        <Td> {data?.propertyState} </Td>
+                      </Tr>
+                    )}
+                    {data?.roadFacingWidth && (
+                      <Tr>
+                        <Th color={"black"} textTransform={"unset"}>
+                          Road Facing Width
+                        </Th>
+                        <Td>
+                          {data?.roadFacingWidth} {data?.roadFacingWidthType}
+                        </Td>
+                      </Tr>
+                    )}
+                  </Tbody>
+                </Table>
+              </TableContainer>
+            </Box>
 
             {/* ================================= parking ================================= */}
 
@@ -613,8 +669,7 @@ const SingleProductDetailPage = () => {
                       {data?.parking?.openParking > 0 && (
                         <Tr>
                           <Th fontSize={"lg"} color={"black"}>
-                            {" "}
-                            Open Parking{" "}
+                            Open Parking
                           </Th>
                           <Td> {data?.parking?.openParking || 0} </Td>
                         </Tr>
@@ -622,8 +677,7 @@ const SingleProductDetailPage = () => {
                       {data?.parking?.closeParking > 0 && (
                         <Tr>
                           <Th fontSize={"lg"} color={"black"}>
-                            {" "}
-                            Open Parking{" "}
+                            Open Parking
                           </Th>
                           <Td> {data?.parking?.closeParking || 0} </Td>
                         </Tr>
