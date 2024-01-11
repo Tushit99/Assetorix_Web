@@ -304,7 +304,7 @@ const SingleProductDetailPage = () => {
         alignItems={"flex-start"}
         flexWrap={"wrap"}
         gap={"20px"}
-        margin={{ base: "0px auto", md: "20px auto" }}
+        margin={{ base: "0px auto", md: "20px auto" }} 
         w={"94%"}
       >
         <Box flex={16}>
