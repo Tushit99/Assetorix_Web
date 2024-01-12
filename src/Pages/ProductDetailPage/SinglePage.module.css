@@ -11,8 +11,8 @@
 }
 
 .amenities > * {
-  padding: 10px;
-}
+  padding: 10px; 
+} 
 
 /* ================================ */
 
@@ -68,11 +68,17 @@
   }
 }
 
+.stiky{ 
+  border: 1px solid black;
+  position: sticky;
+  top: 10px; 
+}
+
 /* ================================== */
 
 .backimagebox {
   background-image: url("./backimg.png");
-  height: 450px;
+  height: 100%;
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;

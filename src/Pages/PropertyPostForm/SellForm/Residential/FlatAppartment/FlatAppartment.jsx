@@ -220,6 +220,7 @@ const FlatAppartment = () => {
       additinalft &&
       watersource &&
       overLook &&
+      availability && 
       powerbackup &&
       propertyFacing &&
       flooring &&

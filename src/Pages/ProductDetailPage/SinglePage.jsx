@@ -97,8 +97,8 @@ import { IoIosArrowForward } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import { addRecentlyVisited } from "../../Redux/globalval/action";
 import { PiVan } from "react-icons/pi";
-import { FaShower } from "react-icons/fa6"; 
-import { FaRegBuilding } from "react-icons/fa";   
+import { FaShower } from "react-icons/fa6";
+import { FaRegBuilding } from "react-icons/fa";
 
 // location
 import train from "./location/train.png";
@@ -251,93 +251,74 @@ const SingleProductDetailPage = () => {
       overflow={"hidden"}
     >
       <Box
-        display={"flex"}
-        alignItems={"center"}
-        margin={"0 3.5%"}
-        justifyContent={"space-between"}
-      >
-        <Box display={"grid"} gap={"4px"}>
-          <Box
-            display={"flex"}
-            justifyContent={"left"}
-            gap={2}
-            alignItems={"flex-end"}
-          >
-            <Heading textAlign={"left"} fontSize={"3xl"}>
-              {data.propertyType}
-            </Heading>
-            <Badge
-              textTransform={"capitalize"}
-              variant="solid"
-              fontSize="0.7em"
-              position={"relative"}
-              marginBottom={"4px"}
-              colorScheme={
-                data?.formType == "Rent"
-                  ? "red"
-                  : data?.formType == "Sell"
-                  ? "green"
-                  : "blue"
-              }
-            >
-              FOR {lookingfor}
-            </Badge>
-          </Box>
-          <Text
-            textAlign={"left"}
-            display={"flex"}
-            gap={1}
-            fontWeight={"500"}
-            fontSize={{ base: "sm", md: "md" }}
-            alignItems={"center"}
-            backgroundColor={"rgb(225, 246, 255)"}
-            padding={"2px 8px 6px 8px"}
-            borderRadius={"10px"}
-            justifyContent={"left"}
-            position={"relative"}
-          >
-            <span>
-              <ImLocation2 color={"rgb(140,140,140)"} />
-            </span>
-            <span>
-              {houseno ? `${houseno + ", "}` : ""}
-              {apartment ? `${apartment + ", "}` : ""}
-              {placelocality ? `${placelocality + ", "}` : ""}
-              {city ? `${city + ", "}` : ""}
-              {state ? `${state + ", "}` : ""}
-              {country ? `${country + ", "}` : ""}
-              {data?.address?.pincode}
-            </span>
-          </Text>
-        </Box>
-        <Box display={{ base: "none", md: "block" }}>
-          <Heading display={"flex"} fontSize={"2xl"}>
-            {data.countryCurrency || <Skeleton width={"100px"} />}
-            {price || <Skeleton width={"40px"} />}
-          </Heading>
-          <Heading
-            display={"flex"}
-            justifyContent={"end"}
-            fontSize={"md"}
-            color={"rgb(100,100,100)"}
-          >
-            {data.countryCurrency || <Skeleton width={"100px"} />}
-            {`${data.priceUnit}/${data.plotAreaUnit}` || (
-              <Skeleton width={"40px"} />
-            )}
-          </Heading>
-        </Box>
-      </Box>
-      <Box
-        className={style.singleProduct}
         display={{ base: "grid", md: "flex" }}
-        alignItems={"flex-start"}
-        flexWrap={"wrap"}
         gap={"20px"}
         margin={{ base: "0px auto", md: "20px auto" }}
         w={"94%"}
       >
         <Box flex={16}>
+          {/* title and property location Detail */}
+          <Box
+            display={"flex"}
+            alignItems={"center"}
+            marginBottom={"10px"}
+            justifyContent={"space-between"}
+          >
+            <Box display={"grid"} gap={"4px"}>
+              <Box
+                display={"flex"}
+                justifyContent={"left"}
+                gap={2}
+                alignItems={"flex-end"}
+              >
+                <Heading textAlign={"left"} fontSize={"3xl"}>
+                  {data.propertyType}
+                </Heading>
+                <Badge
+                  textTransform={"capitalize"}
+                  variant="solid"
+                  fontSize="0.7em"
+                  position={"relative"}
+                  marginBottom={"4px"}
+                  colorScheme={
+                    data?.formType == "Rent"
+                      ? "red"
+                      : data?.formType == "Sell"
+                      ? "green"
+                      : "blue"
+                  }
+                >
+                  FOR {lookingfor}
+                </Badge>
+              </Box>
+              <Text
+                textAlign={"left"}
+                display={"flex"}
+                gap={1}
+                fontWeight={"500"}
+                fontSize={{ base: "sm", md: "md" }}
+                alignItems={"center"}
+                backgroundColor={"rgb(225, 246, 255)"}
+                padding={"2px 8px 6px 8px"}
+                borderRadius={"10px"}
+                justifyContent={"left"}
+                position={"relative"}
+              >
+                <span>
+                  <ImLocation2 color={"rgb(140,140,140)"} />
+                </span>
+                <span>
+                  {houseno ? `${houseno + ", "}` : ""}
+                  {apartment ? `${apartment + ", "}` : ""}
+                  {placelocality ? `${placelocality + ", "}` : ""}
+                  {city ? `${city + ", "}` : ""}
+                  {state ? `${state + ", "}` : ""}
+                  {country ? `${country + ", "}` : ""}
+                  {data?.address?.pincode}
+                </span>
+              </Text>
+            </Box>
+          </Box>
           <Box
             position={"relative"}
             className={style.propertyimg}
@@ -370,6 +351,9 @@ const SingleProductDetailPage = () => {
               alt="property-img"
             />
           </Box>
+          <Text textAlign={"end"} fontSize={"xs"}> 
+            <strong> Updated on: </strong> {data?.lastUpdated} 
+          </Text>
           {/* ===================== mobile Pricing (Price only for mobile) =================================== */}
           <Box display={{ base: "grid", md: "none" }}>
             {data.countryCurrency && price ? (
@@ -387,10 +371,10 @@ const SingleProductDetailPage = () => {
           </Box>
 
           {/* box 2 */}
-          <Box flex={8} padding={"20px 0"} textAlign={"left"} w={"100%"}>
+          <Box flex={8} padding={"10px 0 20px 0"} textAlign={"left"} w={"100%"}>
             {/* ========================================== Discription ===============================  */}
 
-            <Heading fontSize={"2x"} margin={"10px 0"} textAlign={"left"}>
+            <Heading fontSize={"2x"} margin={"0"} textAlign={"left"}>
               Description
             </Heading>
             <Divider margin={"0 0 4px 0"} />
@@ -402,131 +386,173 @@ const SingleProductDetailPage = () => {
 
             {/* ==================================== Detail ========================== */}
 
-            <Box>
-              <Tabs isFitted variant="enclosed">
+            <Box margin={"10px 0"}>
+              <Tabs size="sm" isFitted>
                 <TabList mb="1em">
-                  <Tab>Flat Detail</Tab>
-                  <Tab> other Detail </Tab>
+                  <Tab
+                    fontWeight={"bold"}
+                    color={"black"}
+                    _selected={{ bg: "#b2f5ea", border: "1px solid #b2f5ea" }}
+                  >
+                    Flat Detail
+                  </Tab>
+                  <Tab
+                    fontWeight={"bold"}
+                    color={"black"}
+                    _selected={{ bg: "#b2f5ea", border: "1px solid #b2f5ea" }}
+                  >
+                    {" "}
+                    Other Detail{" "}
+                  </Tab>
                 </TabList>
                 <TabPanels>
-                  <TabPanel>
-                    <Box height={"100px"}>
-                      <Box display={"flex"}>
-                        <Box>
-                          <Heading size={"sm"} as={"h4"}>
-                            Apartment
-                          </Heading>
-                          <Text fontSize={"sm"}>{data?.propertyGroup}</Text>
+                  <TabPanel marginTop={"-20px"} padding={"20px 0"}>
+                    <Box
+                      display={{ base: "grid", md: "flex" }}
+                      flexWrap={"wrap"}
+                      gridTemplateColumns={"repeat(2, 1fr)"}
+                      gap={4}
+                      justifyContent={"space-around"}
+                    >
+                      <Box>
+                        <Heading size={"sm"} as={"h4"}>
+                          Apartment
+                        </Heading>
+                        <Text fontSize={"sm"}>{data?.propertyGroup}</Text>
+                      </Box>
+                      <Box textAlign={"center"} display={"grid"}>
+                        <Box
+                          display={"flex"}
+                          gap={2}
+                          alignItems={"center"}
+                          justifyContent={"center"}
+                        >
+                          <Icon as={LiaBedSolid} boxSize={6} />
+                          <Text fontSize={"md"}>
+                            {data?.roomDetails?.bedroom}
+                          </Text>
                         </Box>
-                        <Box textAlign={"center"} display={"grid"} flex={1}>
-                          <Box
-                            display={"flex"}
-                            gap={2}
-                            alignItems={"center"}
-                            justifyContent={"center"}
-                          >
-                            <Icon as={LiaBedSolid} boxSize={6} />
-                            <Text fontSize={"md"}>
-                              {data?.roomDetails?.bedroom}
-                            </Text>
-                          </Box>
-                          <Heading size={"sm"} as={"h4"}>
-                            Beadroom
-                          </Heading>
+                        <Heading size={"sm"} as={"h4"}>
+                          Beadroom
+                        </Heading>
+                      </Box>
+                      <Box textAlign={"center"} display={"grid"}>
+                        <Box
+                          display={"flex"}
+                          gap={2}
+                          alignItems={"center"}
+                          justifyContent={"center"}
+                        >
+                          <Icon as={FaShower} boxSize={6} />
+                          <Text fontSize={"md"}>
+                            {data?.roomDetails?.bathroom}
+                          </Text>
                         </Box>
-                        <Box textAlign={"center"} display={"grid"} flex={1}>
-                          <Box
-                            display={"flex"}
-                            gap={2}
-                            alignItems={"center"}
-                            justifyContent={"center"}
-                          >
-                            <Icon as={FaShower} boxSize={6} />
-                            <Text fontSize={"md"}>
-                              {data?.roomDetails?.bathroom}
-                            </Text>
-                          </Box>
-                          <Heading size={"sm"} as={"h4"}>
-                            Bathroom
-                          </Heading>
+                        <Heading size={"sm"} as={"h4"}>
+                          Bathroom
+                        </Heading>
+                      </Box>
+                      <Box textAlign={"center"} display={"grid"}>
+                        <Box
+                          display={"flex"}
+                          gap={2}
+                          alignItems={"center"}
+                          justifyContent={"center"}
+                        >
+                          <Icon as={MdOutlineBalcony} boxSize={6} />
+                          <Text fontSize={"md"}>
+                            {data?.roomDetails?.balcony}
+                          </Text>
                         </Box>
-                        <Box textAlign={"center"} display={"grid"} flex={1}>
-                          <Box
-                            display={"flex"}
-                            gap={2}
-                            alignItems={"center"}
-                            justifyContent={"center"}
-                          >
-                            <Icon as={MdOutlineBalcony} boxSize={6} />
-                            <Text fontSize={"md"}>
-                              {data?.roomDetails?.balcony}
-                            </Text>
-                          </Box>
-                          <Heading size={"sm"} as={"h4"}>
-                            Balcony
-                          </Heading>
-                        </Box>
+                        <Heading size={"sm"} as={"h4"}>
+                          Balcony
+                        </Heading>
                       </Box>
                     </Box>
                   </TabPanel>
-                  <TabPanel>
+                  <TabPanel marginTop={"-20px"} padding={"20px 0"}>
                     <Box
-                      display={"flex"}
+                      display={{ base: "grid", md: "flex" }}
                       flexWrap={"wrap"}
-                      gap={2}
-                      height={"100px"}
-                      alignItems={"inherit"}
+                      gridTemplateColumns={"repeat(2, 1fr)"}
+                      gap={4}
                       justifyContent={"space-around"}
                     >
-                      <Box display={data.plotArea ? "grid" : "none"} flex={1}>
-                        <Box flex={3} display={"flex"} alignItems={"center"}>
-                          <Image width={"40px"} src={scale} alt={"scale"} />
+                      <Box
+                        textAlign={"center"}
+                        display={data.plotArea ? "grid" : "none"}
+                        flex={1}
+                      >
+                        <Box
+                          flex={3}
+                          display={"flex"}
+                          alignItems={"center"}
+                          justifyContent={"center"}
+                        >
+                          <Image width={"30px"} src={scale} alt={"scale"} />
                           <Text>
                             {data.plotArea || <Skeleton width={"100px"} />}
                             {data.plotAreaUnit || <Skeleton width={"100px"} />}
                           </Text>
                         </Box>
-                        <Heading size={"md"}>Plot Area </Heading>
+                        <Heading size={"sm"}>Plot Area </Heading>
                       </Box>
                       <Box
                         display={data.totalFloors ? "grid" : "none"}
                         flex={1}
+                        textAlign={"center"}
                       >
-                        <Box flex={3} display={"flex"} alignItems={"center"}>
-                          <Image width={"40px"} src={stairs} alt={"stairs"} />
-                          <Text> {data.totalFloors || <Skeleton width={"100px"} />} </Text>
-                        </Box>
-                        <Heading size={"md"}> Total floor </Heading>
-                      </Box>
-                      <Box
-                        display={data.totalFloors ? "grid" : "none"}
-                        flex={1}   
-                      >  
-                        <Box flex={3} display={"flex"} alignItems={"center"}> 
-                          <Icon as={FaRegBuilding} />  
-                          {data.floorOn || <Skeleton width={"100px"} />}  
-                        </Box> 
-                        <Heading size={"md"}> On floor </Heading>
-                      </Box> 
-                      <Box
-                        display={data.powerBackup ? "flex" : "none"}
-                        alignItems={"flex-start"}
-                        padding={"4px 12px"}
-                        flex={1}
-                      >
-                        <Box flex={9}>
-                          <Heading size={"md"}> Power Backup </Heading>
+                        <Box
+                          flex={3}
+                          display={"flex"}
+                          alignItems={"center"}
+                          justifyContent={"center"}
+                          gap={2}
+                        >
+                          <Image width={"30px"} src={stairs} alt={"stairs"} />
                           <Text>
-                            {data.powerBackup || <Skeleton width={"100px"} />}
+                            {data.totalFloors || <Skeleton width={"100px"} />}
                           </Text>
                         </Box>
-                        <Box flex={4}>
+                        <Heading size={"sm"}> Total floor </Heading>
+                      </Box>
+                      <Box
+                        display={data.totalFloors ? "grid" : "none"}
+                        flex={1}
+                        textAlign={"center"}
+                      >
+                        <Box
+                          flex={3}
+                          display={"flex"}
+                          alignItems={"center"}
+                          justifyContent={"center"}
+                          gap={2}
+                        >
+                          <Icon as={FaRegBuilding} boxSize={6} />
+                          {data.floorOn || <Skeleton width={"100px"} />}
+                        </Box>
+                        <Heading size={"sm"}> On floor </Heading>
+                      </Box>
+                      <Box
+                        display={data.totalFloors ? "grid" : "none"}
+                        flex={1}
+                        textAlign={"center"}
+                      >
+                        <Box
+                          flex={3}
+                          display={"flex"}
+                          alignItems={"center"}
+                          justifyContent={"center"}
+                          gap={2}
+                        >
                           <Image
-                            width={"60px"}
+                            width={"30px"}
                             src={powerback}
                             alt={"powerback"}
                           />
+                          {data?.powerBackup || <Skeleton width={"100px"} />}
                         </Box>
+                        <Heading size={"sm"}> Power Backup </Heading>
                       </Box>
                     </Box>
                   </TabPanel>
@@ -554,6 +580,7 @@ const SingleProductDetailPage = () => {
                       <Tr>
                         <Td> Maintenance Price </Td>
                         <Td>
+                          {data?.countryCurrency}{" "}
                           {data?.additionalPricingDetails?.maintenancePrice}
                           {` ${data?.additionalPricingDetails?.maintenanceTimePeriod}`}
                         </Td>
@@ -561,22 +588,29 @@ const SingleProductDetailPage = () => {
                       <Tr>
                         <Td> Expected Rental </Td>
                         <Td>
+                          {data?.countryCurrency}{" "}
                           {data?.additionalPricingDetails?.expectedRental}
                         </Td>
                       </Tr>
                       <Tr>
                         <Td> Booking Amount </Td>
-                        <Td>{data?.additionalPricingDetails?.bookingAmount}</Td>
+                        <Td>
+                          {" "}
+                          {data?.countryCurrency}{" "}
+                          {data?.additionalPricingDetails?.bookingAmount}
+                        </Td>
                       </Tr>
                       <Tr>
                         <Td> Annual Dues Payable </Td>
                         <Td>
+                          {data?.countryCurrency}{" "}
                           {data?.additionalPricingDetails?.annualDuesPayable}
                         </Td>
                       </Tr>
                       <Tr>
                         <Td> Membership Charge </Td>
                         <Td>
+                          {data?.countryCurrency}{" "}
                           {data?.additionalPricingDetails?.membershipCharge}
                         </Td>
                       </Tr>
@@ -588,10 +622,15 @@ const SingleProductDetailPage = () => {
 
             {/* =============================== Other Detail ======================================= */}
 
-            <Box>
+            <Box margin={"20px 0"}>
               <Heading as={"h3"} size={"md"}>
                 Other Detail
               </Heading>
+              <Divider
+                backgroundColor={"rgb(120,120,120)"}
+                border={"1px solid rgb(120,120,120)"}
+                margin={"4px 0"}
+              />
               <TableContainer>
                 <Table size="sm" variant="simple">
                   <Tbody>
@@ -642,12 +681,38 @@ const SingleProductDetailPage = () => {
                         <Td> {data?.ownership} </Td>
                       </Tr>
                     )}
-                    {data?.propertyState && (
+                    {data?.furnished == "Un-Furnished" && (
                       <Tr>
                         <Th color={"black"} textTransform={"unset"}>
-                          Property State
+                          furnishing Detail
                         </Th>
-                        <Td> {data?.propertyState} </Td>
+                        <Td> {data?.furnished} </Td>
+                      </Tr>
+                    )}
+                    {data?.availabilityStatus && (
+                      <Tr>
+                        <Th color={"black"} textTransform={"unset"}>
+                          {" "}
+                          Availability Status{" "}
+                        </Th>
+                        <Td> {data.availabilityStatus} </Td>
+                      </Tr>
+                    )}
+                    {data?.expectedByYear && (
+                      <Tr>
+                        <Th color={"black"} textTransform={"unset"}>
+                          {" "}
+                          Expected By Year{" "}
+                        </Th>
+                        <Td> {data.expectedByYear} </Td>
+                      </Tr>
+                    )}
+                    {data?.propertyStatus && (
+                      <Tr>
+                        <Th color={"black"} textTransform={"unset"}>
+                          Property Status
+                        </Th>
+                        <Td> {data?.propertyStatus} </Td>
                       </Tr>
                     )}
                     {data?.roadFacingWidth && (
@@ -689,7 +754,11 @@ const SingleProductDetailPage = () => {
                     <Tbody>
                       {data?.parking?.openParking > 0 && (
                         <Tr>
-                          <Th fontSize={"lg"} color={"black"}>
+                          <Th
+                            fontSize={"md"}
+                            textTransform={"unset"}
+                            color={"black"}
+                          >
                             Open Parking
                           </Th>
                           <Td> {data?.parking?.openParking || 0} </Td>
@@ -697,8 +766,12 @@ const SingleProductDetailPage = () => {
                       )}
                       {data?.parking?.closeParking > 0 && (
                         <Tr>
-                          <Th fontSize={"lg"} color={"black"}>
-                            Open Parking
+                          <Th
+                            fontSize={"md"}
+                            textTransform={"unset"}
+                            color={"black"}
+                          >
+                            Closed Parking
                           </Th>
                           <Td> {data?.parking?.closeParking || 0} </Td>
                         </Tr>
@@ -1664,23 +1737,29 @@ const SingleProductDetailPage = () => {
             </Box>
           </Box>
         </Box>
-        <Box flex={8}>
+        <Box flex={8} position={"relative"}>
           <Box
             textAlign={"left"}
-            marginTop={"8px"}
-            padding={"10px"}
+            padding={"0 10px"}
             display={{ base: "none", md: "block" }}
           >
             {/* price  */}
-            <Box margin={0} padding={"10px 0"}>
-              <Heading fontSize={"xl"} display={{ base: "flex", md: "none" }}>
-                Price: {data.countryCurrency || <Skeleton width={"100px"} />}
+            <Box display={{ base: "none", md: "block" }} margin={"20px 0"}>
+              <Heading display={"flex"} justifyContent={"end"} fontSize={"2xl"}>
+                {data.countryCurrency || <Skeleton width={"100px"} />}
                 {price || <Skeleton width={"40px"} />}
               </Heading>
-              {/* <Heading display={"flex"} margin={"6px 0"} fontSize={"md"}>
-                                Price per unit: {data.countryCurrency || <Skeleton width={"100px"} />}
-                                {price || <Skeleton width={"100px"} />}
-                            </Heading> */}
+              <Heading
+                display={"flex"}
+                justifyContent={"end"}
+                fontSize={"md"}
+                color={"rgb(100,100,100)"}
+              >
+                {data.countryCurrency || <Skeleton width={"100px"} />}
+                {`${data.priceUnit}/${data.plotAreaUnit}` || (
+                  <Skeleton width={"40px"} />
+                )}
+              </Heading>
             </Box>
             {/* contact detail */}
             <Box
