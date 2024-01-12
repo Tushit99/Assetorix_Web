@@ -17,7 +17,12 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Icon, 
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+  Icon,
   Badge,
   Text,
   Textarea,
@@ -63,7 +68,7 @@ import sofaImg from "./furnishedImages/sofa.png";
 import stoveImg from "./furnishedImages/stove.png";
 import microwaveImg from "./furnishedImages/oven.png";
 import tableImg from "./furnishedImages/table.png";
-import { MdOutlineBalcony } from "react-icons/md"; 
+import { MdOutlineBalcony } from "react-icons/md";
 
 import MaintenanceImg from "./furnishedImages/staff.png";
 import waterImg from "./furnishedImages/water-tank.png";
@@ -91,8 +96,9 @@ import { useParams } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import { addRecentlyVisited } from "../../Redux/globalval/action";
-import { PiVan } from "react-icons/pi"; 
+import { PiVan } from "react-icons/pi";
 import { FaShower } from "react-icons/fa6"; 
+import { FaRegBuilding } from "react-icons/fa";   
 
 // location
 import train from "./location/train.png";
@@ -382,58 +388,8 @@ const SingleProductDetailPage = () => {
 
           {/* box 2 */}
           <Box flex={8} padding={"20px 0"} textAlign={"left"} w={"100%"}>
-            {/* ==================================== Room Detail ========================== */}
+            {/* ========================================== Discription ===============================  */}
 
-            <Box>
-              <Heading size={"md"}> Over View </Heading>
-              <Divider
-                border={"1px solid rgb(200,200,200)"}
-                margin={"10px 0"}
-              />
-              <Box display={"flex"}>
-                <Box>
-                  <Heading size={"sm"} as={"h4"}>
-                    Apartment
-                  </Heading>
-                  <Text fontSize={"sm"}>{data?.propertyGroup}</Text>
-                </Box>
-                <Box textAlign={"center"} display={"grid"} flex={1}>
-                  <Box display={"flex"} gap={2} alignItems={"center"} justifyContent={"center"} >
-                    <Icon as={LiaBedSolid} boxSize={6} />
-                    <Text fontSize={"md"} >
-                      {data?.roomDetails?.bedroom}
-                    </Text>
-                  </Box>
-                  <Heading size={"sm"} as={"h4"}>
-                    Beadroom
-                  </Heading>
-                </Box>
-                <Box textAlign={"center"} display={"grid"} flex={1}>
-                  <Box display={"flex"} gap={2} alignItems={"center"} justifyContent={"center"} >
-                    <Icon as={FaShower} boxSize={6} />
-                    <Text fontSize={"md"} >
-                      {data?.roomDetails?.bathroom}
-                    </Text>
-                  </Box>
-                  <Heading size={"sm"} as={"h4"}>
-                    Bathroom
-                  </Heading>
-                </Box>
-                <Box textAlign={"center"} display={"grid"} flex={1}>
-                  <Box display={"flex"} gap={2} alignItems={"center"} justifyContent={"center"} > 
-                    <Icon as={MdOutlineBalcony } boxSize={6} />  
-                    <Text fontSize={"md"} >
-                      {data?.roomDetails?.balcony}
-                    </Text>
-                  </Box>
-                  <Heading size={"sm"} as={"h4"}>
-                    Balcony
-                  </Heading>
-                </Box>
-              </Box>
-            </Box>
-
-            {/* ======================= discription =========================== */}
             <Heading fontSize={"2x"} margin={"10px 0"} textAlign={"left"}>
               Description
             </Heading>
@@ -444,79 +400,144 @@ const SingleProductDetailPage = () => {
               )}
             </Text>
 
+            {/* ==================================== Detail ========================== */}
+
+            <Box>
+              <Tabs isFitted variant="enclosed">
+                <TabList mb="1em">
+                  <Tab>Flat Detail</Tab>
+                  <Tab> other Detail </Tab>
+                </TabList>
+                <TabPanels>
+                  <TabPanel>
+                    <Box height={"100px"}>
+                      <Box display={"flex"}>
+                        <Box>
+                          <Heading size={"sm"} as={"h4"}>
+                            Apartment
+                          </Heading>
+                          <Text fontSize={"sm"}>{data?.propertyGroup}</Text>
+                        </Box>
+                        <Box textAlign={"center"} display={"grid"} flex={1}>
+                          <Box
+                            display={"flex"}
+                            gap={2}
+                            alignItems={"center"}
+                            justifyContent={"center"}
+                          >
+                            <Icon as={LiaBedSolid} boxSize={6} />
+                            <Text fontSize={"md"}>
+                              {data?.roomDetails?.bedroom}
+                            </Text>
+                          </Box>
+                          <Heading size={"sm"} as={"h4"}>
+                            Beadroom
+                          </Heading>
+                        </Box>
+                        <Box textAlign={"center"} display={"grid"} flex={1}>
+                          <Box
+                            display={"flex"}
+                            gap={2}
+                            alignItems={"center"}
+                            justifyContent={"center"}
+                          >
+                            <Icon as={FaShower} boxSize={6} />
+                            <Text fontSize={"md"}>
+                              {data?.roomDetails?.bathroom}
+                            </Text>
+                          </Box>
+                          <Heading size={"sm"} as={"h4"}>
+                            Bathroom
+                          </Heading>
+                        </Box>
+                        <Box textAlign={"center"} display={"grid"} flex={1}>
+                          <Box
+                            display={"flex"}
+                            gap={2}
+                            alignItems={"center"}
+                            justifyContent={"center"}
+                          >
+                            <Icon as={MdOutlineBalcony} boxSize={6} />
+                            <Text fontSize={"md"}>
+                              {data?.roomDetails?.balcony}
+                            </Text>
+                          </Box>
+                          <Heading size={"sm"} as={"h4"}>
+                            Balcony
+                          </Heading>
+                        </Box>
+                      </Box>
+                    </Box>
+                  </TabPanel>
+                  <TabPanel>
+                    <Box
+                      display={"flex"}
+                      flexWrap={"wrap"}
+                      gap={2}
+                      height={"100px"}
+                      alignItems={"inherit"}
+                      justifyContent={"space-around"}
+                    >
+                      <Box display={data.plotArea ? "grid" : "none"} flex={1}>
+                        <Box flex={3} display={"flex"} alignItems={"center"}>
+                          <Image width={"40px"} src={scale} alt={"scale"} />
+                          <Text>
+                            {data.plotArea || <Skeleton width={"100px"} />}
+                            {data.plotAreaUnit || <Skeleton width={"100px"} />}
+                          </Text>
+                        </Box>
+                        <Heading size={"md"}>Plot Area </Heading>
+                      </Box>
+                      <Box
+                        display={data.totalFloors ? "grid" : "none"}
+                        flex={1}
+                      >
+                        <Box flex={3} display={"flex"} alignItems={"center"}>
+                          <Image width={"40px"} src={stairs} alt={"stairs"} />
+                          <Text> {data.totalFloors || <Skeleton width={"100px"} />} </Text>
+                        </Box>
+                        <Heading size={"md"}> Total floor </Heading>
+                      </Box>
+                      <Box
+                        display={data.totalFloors ? "grid" : "none"}
+                        flex={1}   
+                      >  
+                        <Box flex={3} display={"flex"} alignItems={"center"}> 
+                          <Icon as={FaRegBuilding} />  
+                          {data.floorOn || <Skeleton width={"100px"} />}  
+                        </Box> 
+                        <Heading size={"md"}> On floor </Heading>
+                      </Box> 
+                      <Box
+                        display={data.powerBackup ? "flex" : "none"}
+                        alignItems={"flex-start"}
+                        padding={"4px 12px"}
+                        flex={1}
+                      >
+                        <Box flex={9}>
+                          <Heading size={"md"}> Power Backup </Heading>
+                          <Text>
+                            {data.powerBackup || <Skeleton width={"100px"} />}
+                          </Text>
+                        </Box>
+                        <Box flex={4}>
+                          <Image
+                            width={"60px"}
+                            src={powerback}
+                            alt={"powerback"}
+                          />
+                        </Box>
+                      </Box>
+                    </Box>
+                  </TabPanel>
+                </TabPanels>
+              </Tabs>
+            </Box>
+
+            {/* ======================= discription =========================== */}
+
             {/* ======================================== under construction ==================================== */}
             {/* Plot Detail */}
-            <Box
-              marginTop={2}
-              display={"flex"}
-              flexWrap={"wrap"}
-              gap={2}
-              alignItems={"inherit"}
-              justifyContent={"space-around"}
-            >
-              <Box
-                display={data.plotArea ? "flex" : "none"}
-                alignItems={"flex-start"}
-                padding={"4px 12px"}
-                borderBottom={"2px solid rgb(178, 255, 246)"}
-                borderTop={"2px solid rgb(178, 255, 246)"}
-                flex={1}
-                _hover={{ backgroundColor: "rgb(219, 237, 255)" }}
-              >
-                <Box flex={9}>
-                  <Heading size={"md"}>Plot Area </Heading>
-                  <Text>
-                    {data.plotArea || <Skeleton width={"100px"} />}
-                    {data.plotAreaUnit || <Skeleton width={"100px"} />}
-                  </Text>
-                </Box>
-                <Box flex={3}>
-                  <Image width={"50px"} src={scale} alt={"scale"} />
-                </Box>
-              </Box>
-              <Box
-                display={data.totalFloors ? "flex" : "none"}
-                alignItems={"flex-start"}
-                padding={"4px 12px"}
-                borderBottom={"2px solid rgb(178, 255, 246)"}
-                borderTop={"2px solid rgb(178, 255, 246)"}
-                flex={1}
-                _hover={{ backgroundColor: "rgb(219, 237, 255)" }}
-              >
-                <Box flex={9}>
-                  <Heading size={"md"}> Floor </Heading>
-                  <Text>
-                    Total floor:
-                    {data.totalFloors || <Skeleton width={"100px"} />}
-                  </Text>
-                  <Text display={data.floorOn ? "flex" : "none"}>
-                    Floor: {data.floorOn || <Skeleton width={"100px"} />} Floor
-                  </Text>
-                </Box>
-                <Box flex={3}>
-                  <Image width={"50px"} src={stairs} alt={"stairs"} />
-                </Box>
-              </Box>
-              <Box
-                display={data.powerBackup ? "flex" : "none"}
-                alignItems={"flex-start"}
-                padding={"4px 12px"}
-                borderBottom={"2px solid rgb(178, 255, 246)"}
-                borderTop={"2px solid rgb(178, 255, 246)"}
-                flex={1}
-                _hover={{ backgroundColor: "rgb(219, 237, 255)" }}
-              >
-                <Box flex={9}>
-                  <Heading size={"md"}> Power Backup </Heading>
-                  <Text>
-                    {data.powerBackup || <Skeleton width={"100px"} />}
-                  </Text>
-                </Box>
-                <Box flex={4}>
-                  <Image width={"60px"} src={powerback} alt={"powerback"} />
-                </Box>
-              </Box>
-            </Box>
 
             {/* =============================== Additional Pricing Detail =================================== */}
             <Box>
