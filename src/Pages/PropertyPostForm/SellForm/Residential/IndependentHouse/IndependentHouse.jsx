@@ -651,7 +651,7 @@ const IndependentHouse = () => {
           padding={"0 10px"}
           variant="flushed" 
           required
-          maxLength={6}
+          maxLength={6} 
           fontSize={"md"}
           value={pincode}
           onChange={handlepinfetch}

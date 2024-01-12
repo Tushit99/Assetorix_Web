@@ -101,7 +101,7 @@ const SellForm = () => {
           </Heading>
           <Heading textAlign={"left"} margin={"20px 0"} as={"h4"} size={"sm"}>
             I am looking to
-          </Heading>
+          </Heading> 
           <Tabs
             variant="unstyled"
             index={selectedTab}

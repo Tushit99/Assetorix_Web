@@ -34,7 +34,7 @@ const Independentbuilder = () => {
   const [facingwidth, setFacingWidth] = useState("");
   const [city, setCity] = useState("");
   const [appartment, setApartment] = useState("");
-  const [pincode, setPincode] = useState(0);
+  const [pincode, setPincode] = useState("");
   const [state, setState] = useState("");
   const [locality, setLocality] = useState("");
   const [houseNo, setHouseNo] = useState("");
@@ -86,7 +86,8 @@ const Independentbuilder = () => {
   const [annualDuesPayble, setAnnualDuesPayble] = useState("");
   const [isClicked, setIsClicked] = useState(false);
   const [clickCount, setClickCount] = useState(0);
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
+  const [currency, setCurrency] = useState("₹");  
   // state for drop box images
   const [images, setImages] = useState([]);
   const [isDraging, setIsDraging] = useState(false);
@@ -202,8 +203,7 @@ const Independentbuilder = () => {
     if (
       city &&
       appartment &&
-      locality &&
-      houseNo &&
+      locality && 
       bedroom &&
       bathroom &&
       balconey &&
@@ -353,8 +353,6 @@ const Independentbuilder = () => {
     setPincode(val);
     if (val.length == 6) {
       pinfetch(val);
-    } else {
-      console.log(val);
     }
   };
 
@@ -636,7 +634,7 @@ const Independentbuilder = () => {
   //     adding.innerHTML = options;
 
   // }
- 
+
   return (
     <form onSubmit={handleSubmitData}>
       {/* property location */}
@@ -648,10 +646,9 @@ const Independentbuilder = () => {
 
         <Input
           type="text"
-          padding={"0 10px"}
-          required
+          padding={"0 10px"} 
           maxLength={100}
-          placeholder="House No. (optional)"
+          placeholder="House No. / Mobile No."  
           value={houseNo}
           onChange={(e) => setHouseNo(WordandNumber(e.target.value))}
           fontSize={"md"}
@@ -674,6 +671,7 @@ const Independentbuilder = () => {
           padding={"0 10px"}
           required
           maxLength={6}
+          variant="flushed"
           fontSize={"md"}
           value={pincode}
           onChange={handlepinfetch}
@@ -734,20 +732,17 @@ const Independentbuilder = () => {
         />
       </Box>
       {/* Property Detail */}
-      <Box marginTop={12}>
-        <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"}>
-          Tell us about your property
-        </Heading>
-        <Heading as={"h4"} size={"sm"} margin={"0 0 30px 0 "}>
-          Add Room Details
+      <Box marginTop={8}>  
+        <Heading as={"h4"} textAlign={"left"} size={"sm"} margin={"0 0 30px 0 "}>
+          Add Room Details 
         </Heading>
         <Box as={"div"} className={style.inp_form_numbers}>
           <Box textAlign={"left"}>
             <Text> No. of Bedrooms </Text>
             <Input
               type="text"
-              variant="flushed"
               padding={"0 2px"}
+              fontSize={"lg"}
               maxLength={"2"}
               onChange={(e) => setBedRoom(NumericString(e.target.value))}
               value={bedroom}
@@ -758,31 +753,32 @@ const Independentbuilder = () => {
             <Text> No. of Bathrooms </Text>
             <Input
               type="text"
-              variant="flushed"
               maxLength={"2"}
               onChange={(e) => setBathroom(NumericString(e.target.value))}
               value={bathroom}
               required
               padding={"0 2px"}
+              fontSize={"lg"}
             />
           </Box>
           <Box textAlign={"left"}>
             <Text> No. of Balconies </Text>
             <Input
               type="text"
-              variant="flushed"
               maxLength={"2"}
               onChange={(e) => setBalcony(NumericString(e.target.value))}
               value={balconey}
               required
               padding={"0 2px"}
+              fontSize={"lg"}
             />
           </Box>
         </Box>
+
         {/* ====================================== */}
         {/* add area details */}
-        <Box textAlign={"left"} padding={"10px 0"}>
-          <Heading as={"h3"} margin={"5px 0"} size={"md"}>
+        <Box textAlign={"left"} padding={"10px 0 0 0"}>
+          <Heading as={"h3"} margin={"5px 0"} size={"sm"}>
             Add Area Details
           </Heading>
           <Text margin={"5px 0"}> Atleast one area type is mandatory </Text>
@@ -834,11 +830,10 @@ const Independentbuilder = () => {
         {/* other Room  */}
         <Box
           padding={"10px 0"}
-          display={"grid"}
-          gap={6}
+          display={"grid"} 
           className={style.optional_box}
         >
-          <Heading as={"h3"} size={"md"}>
+          <Heading as={"h3"} size={"sm"}>
             Other rooms (optional)
           </Heading>
           <Box>
@@ -883,11 +878,10 @@ const Independentbuilder = () => {
         {/* furnish */}
         <Box
           padding={"10px 0"}
-          display={"grid"}
-          gap={6}
+          display={"grid"} 
           className={style.optional_box}
         >
-          <Heading as={"h3"} size={"md"}>
+          <Heading as={"h3"} size={"sm"}>
             Furnishing (optional)
           </Heading>
           <Box>
@@ -1204,7 +1198,7 @@ const Independentbuilder = () => {
         </Box>
         {/* reserved */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"}>
+          <Heading as={"h3"} size={"sm"}>
             Reserved Parking (optional)
           </Heading>
           <div className={style.parking}>
@@ -1256,71 +1250,52 @@ const Independentbuilder = () => {
             </Box>
           </div>
         </Box>
+
         {/* floor details */}
-        <Box textAlign={"left"}>
-          <Heading
-            as={"h3"}
-            size={"md"}
-            margin={"30px 0 10px 0"}
-            textAlign={"left"}
-          >
+        <Box
+          textAlign={"left"}
+          display={"grid"}
+          marginTop={{ base: 10, md: 5 }}
+          gap={2}
+        >
+          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Floor Details
           </Heading>
-          <Text textAlign={"left"} margin={"10px 0"}>
-            Total no of floors and your floor details
-          </Text>
           <Box display={"flex"} alignItems={"center"} gap={5}>
-            <Input
-              type="text"
-              value={totalfloors}
-              maxLength={"2"}
-              onChange={(e) => {
-                const nowval = e.target.value > 90;
-                if (nowval) {
-                  toast({
-                    title: "Maximum floor count: 90",
-                    status: "error",
-                    duration: 2000,
-                    position: "top-right",
-                  });
-                } else {
-                  setTotalFloors(NumericString(e.target.value));
-                }
-              }}
-              required
-              w={250}
-            />
-            <Select
-              id="floorSelectTag"
-              variant="filled"
-              onChange={(e) => setFloorOn(e.target.value)}
-              value={floorOn}
-              w={180}
-              borderRadius={0}
-              _hover={{
-                backgroundColor: "rgb(255, 255, 255)",
-                borderBottom: "1px solid blue",
-                borderLeft: "0",
-                borderRight: "0",
-                borderTop: "0",
-              }}
-              borderTop={"0"}
-              borderLeft={"0"}
-              borderBottom={"1px solid blue"}
-              backgroundColor={"rgb(255, 255, 255)"}
-            >
-              <option value="Ground">Ground</option>
-              <option value="Basement">Basement</option>
-              <option value="Lower Ground">Lower Ground</option>
-              {Array.from(Array(Number(totalfloors)).keys()).map((e) => {
-                return <option value={e + 1}>{e + 1}</option>;
-              })}
-            </Select>
+            <InputGroup w={{ base: 300, md: 400 }}>
+              <Input
+                type="text"
+                value={totalfloors}
+                maxLength={"2"}
+                placeholder={"Enter no. of floors"}
+                onChange={(e) => {
+                  let val = NumericString(e.target.value);
+                  setTotalFloors(val); 
+                }}
+                required 
+                w={250}
+              />
+              <Select
+                onChange={(e) => setFloorOn(e.target.value)}
+                value={floorOn}
+                borderRadius={0}
+                width={150}
+              >
+                <option value="Ground">Ground</option>
+                <option value="Basement">Basement</option>
+                <option value="Lower Ground">Lower Ground</option>
+                {Array.from(Array(Number(totalfloors)).keys()).map((e) => {
+                  return <option value={e + 1}>{e + 1}</option>;
+                })}
+              </Select>
+            </InputGroup>
           </Box>
         </Box>
+
+        
         {/* Availability status */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Availability Status
           </Heading>
           <Box className={style.grid}>
@@ -1352,6 +1327,7 @@ const Independentbuilder = () => {
             </button>
           </Box>
         </Box>
+        
         {/* Age of Property */}
         {availability == "Ready to move" && (
           <Box textAlign={"left"} className={style.optional_box}>
@@ -1441,10 +1417,10 @@ const Independentbuilder = () => {
           <Heading
             as={"h3"}
             size={"md"}
-            margin={"30px 0 10px 0"}
+            margin={"10px 0"}
             textAlign={"left"}
           >
-            Add pricing and details...
+            Add pricing and details 
           </Heading>
           {/* OwnerShip detail */}
           <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
@@ -1500,46 +1476,41 @@ const Independentbuilder = () => {
               Power of Attorney
             </button>
           </Box>
-        </Box>
+        </Box> 
+
         {/* Price Details */}
         <Box>
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
             Price Details
           </Heading>
-          <Box display={"flex"} alignItems={"center"} gap={5}>
-            <Box display={"grid"} gap={0}>
-              <Heading
-                as={"h3"}
-                size={"xs"}
-                fontWeight={400}
-                textAlign={"left"}
-              >
-                {isCountry.country == "india" ? "₹" : "$"} Price Details
-              </Heading>
+          <Box display={"flex"} alignItems={"center"} gap={5} marginTop={1} >
+            <InputGroup w={300} gap={2}>
+              <Select
+                w={"-moz-fit-content"}
+                value={currency} 
+                borderRadius={0}
+                onClick={(e) => setCurrency(e.target.value)}
+              > 
+                <option value="₹">₹ INR </option>
+                <option value="$">$ USD </option>
+              </Select>
               <Input
                 type="text"
                 value={pricedetail}
                 maxLength={"10"}
+                placeholder={`Price`}
                 required
+                w={200}
                 onChange={(e) => {
                   setPricedetail(NumericString(e.target.value));
                   areaCalucation();
                 }}
               />
-            </Box>
-            <Box display={"grid"} gap={0}>
-              <Heading
-                as={"h3"}
-                size={"xs"}
-                fontWeight={400}
-                textAlign={"left"}
-              >
-                {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per{" "}
-                {areaPer}
-              </Heading>
-            </Box>
+            </InputGroup>
           </Box>
-        </Box>
+        </Box> 
+
+        {/* other price */} 
         <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
           <Checkbox
             isChecked={inclusivePrices.includes("All inclusive price")}
@@ -1573,7 +1544,8 @@ const Independentbuilder = () => {
           >
             Price Negotiable
           </Checkbox>
-        </Box>
+        </Box> 
+        
         {/* Additional Pricing Detail */}
         <Box display={"grid"}>
           <Heading
@@ -2510,8 +2482,8 @@ const Independentbuilder = () => {
       >
         *Please provide correct information, otherwise your listing might get
         blocked
-      </Heading> 
-      {isClicked && <Loading />} 
+      </Heading>
+      {isClicked && <Loading />}
       <Button
         margin={"20px 0"}
         type="submit"
