@@ -86,8 +86,8 @@ const Independentbuilder = () => {
   const [annualDuesPayble, setAnnualDuesPayble] = useState("");
   const [isClicked, setIsClicked] = useState(false);
   const [clickCount, setClickCount] = useState(0);
-  const navigate = useNavigate(); 
-  const [currency, setCurrency] = useState("₹");  
+  const navigate = useNavigate();
+  const [currency, setCurrency] = useState("₹");
   // state for drop box images
   const [images, setImages] = useState([]);
   const [isDraging, setIsDraging] = useState(false);
@@ -141,7 +141,7 @@ const Independentbuilder = () => {
       },
       otherRoom: extraroom,
       description: desc,
-      countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
+      countryCurrency: currency ,
       additionalPricingDetails: {
         maintenancePrice,
         maintenanceTimePeriod,
@@ -203,7 +203,7 @@ const Independentbuilder = () => {
     if (
       city &&
       appartment &&
-      locality && 
+      locality &&
       bedroom &&
       bathroom &&
       balconey &&
@@ -338,12 +338,11 @@ const Independentbuilder = () => {
 
       await axios.request(reqOptions).then((e) => {
         setIsClicked(false);
-        navigate("/listing");
+        navigate("/listing"); 
       });
     } catch (error) {
       console.log(error);
-      setIsClicked(false);
-      navigate("/listing");
+      setIsClicked(false); 
     }
     setIsClicked(false);
   };
@@ -646,9 +645,9 @@ const Independentbuilder = () => {
 
         <Input
           type="text"
-          padding={"0 10px"} 
+          padding={"0 10px"}
           maxLength={100}
-          placeholder="House No. / Mobile No."  
+          placeholder="House No. (optional)"
           value={houseNo}
           onChange={(e) => setHouseNo(WordandNumber(e.target.value))}
           fontSize={"md"}
@@ -659,7 +658,7 @@ const Independentbuilder = () => {
           padding={"0 10px"}
           required
           maxLength={100}
-          placeholder="Apartment / Society"
+          placeholder="Apartment / Society Name"
           fontSize={"md"}
           value={appartment}
           onChange={(e) => setApartment(WordandNumber(e.target.value))}
@@ -680,7 +679,7 @@ const Independentbuilder = () => {
           type="text"
           padding={"0 10px"}
           required
-          placeholder="Locality"
+          placeholder="Enter Locality"
           list="browsers"
           value={locality}
           maxLength={100}
@@ -732,9 +731,14 @@ const Independentbuilder = () => {
         />
       </Box>
       {/* Property Detail */}
-      <Box marginTop={8}>  
-        <Heading as={"h4"} textAlign={"left"} size={"sm"} margin={"0 0 30px 0 "}>
-          Add Room Details 
+      <Box marginTop={8}>
+        <Heading
+          as={"h4"}
+          textAlign={"left"}
+          size={"sm"}
+          margin={"0 0 30px 0 "}
+        >
+          Add Room Details
         </Heading>
         <Box as={"div"} className={style.inp_form_numbers}>
           <Box textAlign={"left"}>
@@ -781,7 +785,6 @@ const Independentbuilder = () => {
           <Heading as={"h3"} margin={"5px 0"} size={"sm"}>
             Add Area Details
           </Heading>
-          <Text margin={"5px 0"}> Atleast one area type is mandatory </Text>
           <ButtonGroup
             className={style.select_land}
             size="sm"
@@ -792,6 +795,7 @@ const Independentbuilder = () => {
               type="text"
               padding={"0 2px"}
               value={plotArea}
+              placeholder="Enter area detail"
               onChange={(e) => {
                 areaCalucation();
                 setPlotArea(NumericString(e.target.value));
@@ -828,11 +832,7 @@ const Independentbuilder = () => {
           </ButtonGroup>
         </Box>
         {/* other Room  */}
-        <Box
-          padding={"10px 0"}
-          display={"grid"} 
-          className={style.optional_box}
-        >
+        <Box padding={"10px 0"} display={"grid"} className={style.optional_box}>
           <Heading as={"h3"} size={"sm"}>
             Other rooms (optional)
           </Heading>
@@ -876,11 +876,7 @@ const Independentbuilder = () => {
           </Box>
         </Box>
         {/* furnish */}
-        <Box
-          padding={"10px 0"}
-          display={"grid"} 
-          className={style.optional_box}
-        >
+        <Box padding={"10px 0"} display={"grid"} className={style.optional_box}>
           <Heading as={"h3"} size={"sm"}>
             Furnishing (optional)
           </Heading>
@@ -902,13 +898,13 @@ const Independentbuilder = () => {
               Semi-Furnished
             </button>
             <button
-              value={"Un-furnished"}
+              value={"Un-Furnished"}
               className={
-                furnished === "Un-furnished" ? style.setbtn : style.btn
+                furnished === "Un-Furnished" ? style.setbtn : style.btn
               }
               onClick={checkFurnished}
             >
-              Un-furnished
+              Un-Furnished
             </button>
           </Box>
           {/* if furnished detail */}
@@ -1270,9 +1266,9 @@ const Independentbuilder = () => {
                 placeholder={"Enter no. of floors"}
                 onChange={(e) => {
                   let val = NumericString(e.target.value);
-                  setTotalFloors(val); 
+                  setTotalFloors(val);
                 }}
-                required 
+                required
                 w={250}
               />
               <Select
@@ -1292,7 +1288,6 @@ const Independentbuilder = () => {
           </Box>
         </Box>
 
-        
         {/* Availability status */}
         <Box textAlign={"left"} className={style.optional_box}>
           <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
@@ -1327,7 +1322,7 @@ const Independentbuilder = () => {
             </button>
           </Box>
         </Box>
-        
+
         {/* Age of Property */}
         {availability == "Ready to move" && (
           <Box textAlign={"left"} className={style.optional_box}>
@@ -1414,13 +1409,8 @@ const Independentbuilder = () => {
 
         {/* Add pricing and details */}
         <Box>
-          <Heading
-            as={"h3"}
-            size={"md"}
-            margin={"10px 0"}
-            textAlign={"left"}
-          >
-            Add pricing and details 
+          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+            Add pricing and details
           </Heading>
           {/* OwnerShip detail */}
           <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
@@ -1476,21 +1466,26 @@ const Independentbuilder = () => {
               Power of Attorney
             </button>
           </Box>
-        </Box> 
+        </Box>
 
         {/* Price Details */}
         <Box>
-          <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
+          <Heading
+            as={"h3"}
+            size={"sm"}
+            marginTop={{ base: 10, md: 5 }}
+            textAlign={"left"}
+          >
             Price Details
           </Heading>
-          <Box display={"flex"} alignItems={"center"} gap={5} marginTop={1} >
+          <Box display={"flex"} alignItems={"center"} gap={5} marginTop={1}>
             <InputGroup w={300} gap={2}>
               <Select
                 w={"-moz-fit-content"}
-                value={currency} 
+                value={currency}
                 borderRadius={0}
                 onClick={(e) => setCurrency(e.target.value)}
-              > 
+              >
                 <option value="₹">₹ INR </option>
                 <option value="$">$ USD </option>
               </Select>
@@ -1508,9 +1503,9 @@ const Independentbuilder = () => {
               />
             </InputGroup>
           </Box>
-        </Box> 
+        </Box>
 
-        {/* other price */} 
+        {/* other price */}
         <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
           <Checkbox
             isChecked={inclusivePrices.includes("All inclusive price")}
@@ -1544,8 +1539,8 @@ const Independentbuilder = () => {
           >
             Price Negotiable
           </Checkbox>
-        </Box> 
-        
+        </Box>
+
         {/* Additional Pricing Detail */}
         <Box display={"grid"}>
           <Heading
@@ -1643,8 +1638,7 @@ const Independentbuilder = () => {
               textAlign={"left"}
               margin={"10px 0"}
             >
-              {" "}
-              Upload Your Property image{" "}
+              Upload Your Property image
             </Heading>
           </Box>
           <Box className={style.card}>
@@ -1697,8 +1691,9 @@ const Independentbuilder = () => {
           </Box>
         </Box>
 
+        {/* ======================== description =================================== */}
         <Box>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             What makes your property unique
           </Heading>
           <Heading as={"h3"} size={"xs"} margin={"10px 0"} textAlign={"left"}>
@@ -1706,7 +1701,8 @@ const Independentbuilder = () => {
           </Heading>
           <Textarea
             height={140}
-            value={desc}
+            value={desc} 
+            placeholder="Add Description" 
             onChange={(e) => {
               let my_cleantext = CleanInputText(e.target.value);
               setDesc(my_cleantext);
@@ -1714,9 +1710,10 @@ const Independentbuilder = () => {
           ></Textarea>
         </Box>
       </Box>
+
       {/* Add amenities/unique features */}
       <Box>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
           Add amenities/unique features
         </Heading>
         <Heading
@@ -1729,9 +1726,10 @@ const Independentbuilder = () => {
           All fields on this page are optional
         </Heading>
       </Box>
+
       {/* Amenities */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
           Amenities
         </Heading>
         <Box>
@@ -1811,9 +1809,10 @@ const Independentbuilder = () => {
           </button>
         </Box>
       </Box>
+
       {/* Property Features */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
           Property Features
         </Heading>
         <Box>
@@ -1940,9 +1939,10 @@ const Independentbuilder = () => {
           </button>
         </Box>
       </Box>
+
       {/* Society/Building feature */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
           Society/Building feature
         </Heading>
         <Box>
@@ -2001,9 +2001,10 @@ const Independentbuilder = () => {
           </button>
         </Box>
       </Box>
+
       {/* Additional Features */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
           Additional Features
         </Heading>
         <Box>
@@ -2053,9 +2054,10 @@ const Independentbuilder = () => {
           </button>
         </Box>
       </Box>
+
       {/* Water Source */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
           Water Source
         </Heading>
         <Box>
@@ -2099,9 +2101,10 @@ const Independentbuilder = () => {
           </button>
         </Box>
       </Box>
+
       {/* Overlooking */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
           Overlooking
         </Heading>
         <Box>
@@ -2146,9 +2149,10 @@ const Independentbuilder = () => {
           </button>
         </Box>
       </Box>
+
       {/* Other Features */}
       <Box>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
           Other Features
         </Heading>
         <Box display={"grid"} textAlign={"left"} gap={2}>
@@ -2186,9 +2190,10 @@ const Independentbuilder = () => {
           </Checkbox>
         </Box>
       </Box>
+
       {/* Power Back up */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
           Power Back up
         </Heading>
         <Box>
@@ -2224,9 +2229,10 @@ const Independentbuilder = () => {
           </button>
         </Box>
       </Box>
+
       {/* Property facing */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
           Property facing
         </Heading>
         <Box>
@@ -2322,7 +2328,7 @@ const Independentbuilder = () => {
       </Box>
 
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
           Type of flooring
         </Heading>
         <Box>
@@ -2349,16 +2355,17 @@ const Independentbuilder = () => {
         </Box>
       </Box>
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
           Width of facing road
         </Heading>
-        <Box display={"flex"} gap={"20px"} w={"300px"}>
+        <Box display={"flex"} gap={"20px"} w={{base:"100%",md:"340px"}}> 
           <Input
             type="text"
             variant="flushed"
             maxLength={4}
             flex={1}
             required
+            placeholder="Enter Facing Width" 
             value={facingwidth}
             onChange={(e) => {
               e.preventDefault();
@@ -2366,7 +2373,7 @@ const Independentbuilder = () => {
             }}
           />
           <Select
-            flex={1}
+            flex={1}  
             onChange={(e) => setFacing(e.target.value)}
             value={facing}
           >
@@ -2376,7 +2383,7 @@ const Independentbuilder = () => {
         </Box>
       </Box>
       <Box className={style.optional_box}>
-        <Heading size={"md"} margin={"10px 0 4px 0"} textAlign={"left"}>
+        <Heading size={"sm"} margin={"10px 0 4px 0"} textAlign={"left"}>
           Location Advantages
           <Heading
             size={"xs"}

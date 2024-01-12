@@ -293,7 +293,7 @@ const FlatAppartment = () => {
               submitImage(e.data.id);
             } else {
               setIsClicked(false);
-              navigate("/listing");
+              // navigate("/listing");
             }
           })
           .catch((err) => {
@@ -351,12 +351,11 @@ const FlatAppartment = () => {
 
       await axios.request(reqOptions).then((e) => {
         setIsClicked(false);
-        navigate("/listing");
+        // navigate("/listing");
       });
     } catch (error) {
       console.log(error);
-      setIsClicked(false);
-      navigate("/listing");
+      setIsClicked(false); 
     }
     setIsClicked(false);
   };
@@ -664,7 +663,7 @@ const FlatAppartment = () => {
         <Input   
           type="text" 
           padding={"0 10px"} 
-          placeholder="House No. / Mobile No."
+          placeholder="House No. (optional)"
           value={houseNo}
           maxLength={"100"}
           onChange={(e) => setHouseNo(WordandNumber(e.target.value))}
@@ -754,33 +753,39 @@ const FlatAppartment = () => {
         </Heading>
         <Box as={"div"} className={style.inp_form_numbers}>
           <Box textAlign={"left"}>
+            <Text> No. of Bedrooms </Text>
             <Input
               type="text"
+              padding={"0 2px"}
+              fontSize={"lg"}
               maxLength={"2"}
-              placeholder={"Enter No. of Bedrooms"}
               onChange={(e) => setBedRoom(NumericString(e.target.value))}
               value={bedroom}
               required
             />
           </Box>
           <Box textAlign={"left"}>
+            <Text> No. of Bathrooms </Text>
             <Input
               type="text"
               maxLength={"2"}
-              placeholder={"Enter No. of Bathrooms"}
               onChange={(e) => setBathroom(NumericString(e.target.value))}
               value={bathroom}
               required
+              padding={"0 2px"}
+              fontSize={"lg"}
             />
           </Box>
           <Box textAlign={"left"}>
+            <Text> No. of Balconies </Text>
             <Input
               type="text"
               maxLength={"2"}
-              placeholder={"Enter No. of Balconies"}
               onChange={(e) => setBalcony(NumericString(e.target.value))}
               value={balconey}
               required
+              padding={"0 2px"}
+              fontSize={"lg"}
             />
           </Box>
         </Box>
@@ -2406,12 +2411,13 @@ const FlatAppartment = () => {
         <Heading as={"h3"} size={"sm"} marginTop={{base:5,md:3}} textAlign={"left"}>
           Width of facing road
         </Heading>
-        <Box display={"flex"} gap={"20px"} w={"300px"}>
+        <Box display={"flex"} gap={"20px"} w={{base:"100%",md:"340px"}}> 
           <Input
             type="text"
             variant="flushed"
             maxLength={4}
-            flex={1}
+            flex={1} 
+            placeholder="Enter Facing Width"
             required
             value={facingwidth}
             onChange={(e) => {
@@ -2420,7 +2426,7 @@ const FlatAppartment = () => {
             }}
           />
           <Select
-            flex={1}
+            flex={1}  
             onChange={(e) => setFacing(e.target.value)}
             value={facing}
           >

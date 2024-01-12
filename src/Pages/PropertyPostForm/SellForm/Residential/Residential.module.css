@@ -243,8 +243,7 @@
 @media screen and (min-width: 100px) and (max-width: 650px) {
   .inp_form_numbers {
     grid-template-columns: repeat(1, 1fr);
-  } 
-
+  }   
 
   .furnished_detail {
     display: grid; 
@@ -258,7 +257,6 @@
   .parking {
     display: flex ;   
     flex-direction: column;  
-  }
- 
+  } 
 
 }

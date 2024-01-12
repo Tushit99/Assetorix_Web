@@ -28,13 +28,13 @@ const IndependentHouse = () => {
   const [facingwidth, setFacingWidth] = useState("");
   const [city, setCity] = useState("");
   const [appartment, setApartment] = useState("");
-  const [pincode, setPincode] = useState(0);
+  const [pincode, setPincode] = useState("");
   const [state, setState] = useState("");
   const [locality, setLocality] = useState("");
   const [houseNo, setHouseNo] = useState("");
-  const [bedroom, setBedRoom] = useState(0);
-  const [bathroom, setBathroom] = useState(0);
-  const [balconey, setBalcony] = useState(0);
+  const [bedroom, setBedRoom] = useState("");
+  const [bathroom, setBathroom] = useState("");
+  const [balconey, setBalcony] = useState("");
   const [parking, setParking] = useState(0);
   const [openparking, setOpenparking] = useState(0);
   const [light, setLight] = useState(0);
@@ -639,7 +639,7 @@ const IndependentHouse = () => {
           padding={"0 10px"}
           required
           maxLength={"100"}
-          placeholder="Apartment / Society"
+          placeholder="Apartment / Society Name"
           fontSize={"md"}
           value={appartment}
           onChange={(e) => setApartment(WordandNumber(e.target.value))}
@@ -713,11 +713,8 @@ const IndependentHouse = () => {
         />
       </Box>
       {/* Property Detail */}
-      <Box marginTop={12}>
-        <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"}>
-          Tell us about your property
-        </Heading>
-        <Heading as={"h4"} size={"sm"} margin={"0 0 30px 0 "}>
+      <Box marginTop={8}> 
+        <Heading as={"h4"} textAlign={"left"} size={"sm"} margin={"0 0 30px 0 "}>
           Add Room Details
         </Heading>
         <Box as={"div"} className={style.inp_form_numbers}>
@@ -761,7 +758,7 @@ const IndependentHouse = () => {
         {/* ====================================== */}
         {/* add area details */}
         <Box textAlign={"left"} padding={"10px 0"}>
-          <Heading as={"h3"} margin={"5px 0"} size={"md"}>
+          <Heading as={"h3"} margin={"5px 0"} size={"sm"}>
             Add Area Details
           </Heading>
           <Text margin={"5px 0"}> Atleast one area type is mandatory </Text>
@@ -816,7 +813,7 @@ const IndependentHouse = () => {
           gap={6}
           className={style.optional_box}
         >
-          <Heading as={"h3"} size={"md"}>
+          <Heading as={"h3"} size={"sm"}>
             Other rooms (optional)
           </Heading>
           <Box>
@@ -865,7 +862,7 @@ const IndependentHouse = () => {
           gap={6}
           className={style.optional_box}
         >
-          <Heading as={"h3"} size={"md"}>
+          <Heading as={"h3"} size={"sm"}>
             Furnishing (optional)
           </Heading>
           <Box>
@@ -1182,7 +1179,7 @@ const IndependentHouse = () => {
         </Box>
         {/* reserved */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"}>
+          <Heading as={"h3"} size={"sm"}>
             Reserved Parking (optional)
           </Heading>
           <div className={style.parking}>
