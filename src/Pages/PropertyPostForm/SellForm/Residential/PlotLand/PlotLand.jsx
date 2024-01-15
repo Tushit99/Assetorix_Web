@@ -167,8 +167,7 @@ const PlotLand = () => {
             city &&
             locality &&
             ownership &&
-            pricedetail &&
-
+            pricedetail && 
             inclusivePrices &&
             overLook &&
             propertyFacing &&
@@ -207,12 +206,12 @@ const PlotLand = () => {
                             status: 'success',
                             duration: 2000,
                         })
-                        if(images.length){
-                            submitImage(e.data.id);  
-                        }else{
-                            setIsClicked(false);
-                            navigate("/listing");  
-                        }  
+                        // if(images.length){
+                        //     submitImage(e.data.id);  
+                        // }else{
+                        //     setIsClicked(false);
+                        //     navigate("/listing");  
+                        // }   
                     });
             } catch (error) {
                 toast({
@@ -513,8 +512,9 @@ const PlotLand = () => {
                     type="text"
                     padding={"0 10px"}
                     maxLength={"100"}
-                    placeholder="Apartment / Society (optional)"
+                    placeholder="Apartment / Society Name"
                     fontSize={"md"}
+                    required 
                     value={appartment}
                     onChange={(e) => setApartment(WordandNumber(e.target.value))}
                     variant="flushed"
@@ -524,6 +524,7 @@ const PlotLand = () => {
                     placeholder={"Enter pincode"}
                     padding={"0 10px"}
                     maxLength={"6"}
+                    variant="flushed" 
                     required
                     fontSize={"md"}
                     value={pincode}
@@ -533,7 +534,7 @@ const PlotLand = () => {
                     type="text"
                     padding={"0 10px"}
                     required
-                    placeholder="Locality"
+                    placeholder="Enter Locality"
                     list="browsers"
                     value={locality}
                     onChange={(e) => setLocality(WordandNumber(e.target.value))}
@@ -648,7 +649,7 @@ const PlotLand = () => {
                 {/* Floors Allowed For Construction */}
                 <Box textAlign={"left"} padding={"10px 0"}>
                     <Heading as={"h3"} size={"md"} > Floors Allowed For Construction </Heading>
-                    <Input type={"text"} variant='flushed' padding={"0 6px"} maxLength={"2"} margin={"4px 0"} value={totalFloorAllowed} onChange={(e) => {
+                    <Input type={"text"} size={"sm"} fontSize={"md"} variant={"outline"} maxW={"300px"} padding={"0 6px"} maxLength={"2"} margin={"4px 0"} value={totalFloorAllowed} onChange={(e) => {
                         setTotalFloorAllowed(NumericString(e.target.value));
                     }} placeholder='No. of floors' />
                 </Box>

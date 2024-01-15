@@ -281,12 +281,12 @@ const Independentbuilder = () => {
               status: "success",
               duration: 2000,
             });
-            if (images) {
-              submitImage(e.data.id);
-            } else {
-              setIsClicked(false);
-              navigate("/listing");
-            }
+            // if (images) {
+            //   submitImage(e.data.id);
+            // } else {
+            //   setIsClicked(false);
+            //   navigate("/listing");
+            // } 
           });
       } catch (error) {
         toast({
@@ -638,7 +638,7 @@ const Independentbuilder = () => {
     <form onSubmit={handleSubmitData}>
       {/* property location */}
       <Box className={style.location_form}>
-        <Heading size={"lg"}>Where is your property located?</Heading>
+        <Heading size={"lg"}>Where is your Independent / builder Floor located?</Heading>
         <Heading size={"sm"}>
           An accurate location helps you connect with the right buyers.
         </Heading>

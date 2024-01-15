@@ -269,13 +269,13 @@ const IndependentHouse = () => {
               description: e.data.msg,
               status: "success",
               duration: 2000,
-            }); 
-            if(images){
-                submitImage(e.data.id);  
-            }else{
-                setIsClicked(false);
-                navigate("/listing");  
-            }
+            });  
+            // if(images){
+            //     submitImage(e.data.id);  
+            // }else{
+            //     setIsClicked(false);
+            //     navigate("/listing");  
+            // }
           });
       } catch (error) {
         toast({
@@ -619,7 +619,7 @@ const IndependentHouse = () => {
     <form onSubmit={handleSubmitData}>
       {/* property location */}
       <Box className={style.location_form}>
-        <Heading size={"lg"}>Where is your property located?</Heading>
+        <Heading size={"lg"}>Where is your Independent House / villa located?</Heading>
         <Heading size={"sm"}>
           An accurate location helps you connect with the right buyers.
         </Heading>
@@ -660,7 +660,7 @@ const IndependentHouse = () => {
           type="text"
           padding={"0 10px"}
           required
-          placeholder="Locality"
+          placeholder="Enter Locality"
           maxLength={"100"}
           list="browsers"
           value={locality}
@@ -1700,6 +1700,7 @@ const IndependentHouse = () => {
           <Textarea
             height={140}
             value={desc}
+            placeholder="Add Description"
             onChange={(e) => {
               let my_cleantext = CleanInputText(e.target.value);
               setDesc(my_cleantext);
