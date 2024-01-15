@@ -53,8 +53,7 @@ const HotelResort = () => {
     const [fromyear, setFromyear] = useState("");
     const [expectedyear, setExpectedYear] = useState("");
     const [ownership, setOwnerShip] = useState("");
-    const [pricedetail, setPricedetail] = useState("");
-    const [priceSqr, setPriceSqr] = useState("");
+    const [pricedetail, setPricedetail] = useState(""); 
     const [inclusivePrices, setInclusivePrice] = useState([]);
     const [amenities, setAminity] = useState([]);
     const [propertyFeatures, setPropertyFeature] = useState("");
@@ -108,8 +107,7 @@ const HotelResort = () => {
                 balcony: balconey,
             },
             ownership,
-            price: +pricedetail,
-            priceUnit: +priceSqr,
+            price: +pricedetail, 
             inclusivePrices,
             amenities,
             propertyFeatures,
@@ -206,17 +204,17 @@ const HotelResort = () => {
             }
 
             if (furnished == "Furnished" || furnished == "Semi-Furnished") {
-                obj.furnishedObj = {
-                    light,
-                    fans,
-                    ac,
-                    tv,
-                    beds: Beds,
-                    wardrobe,
-                    geyser,
-                }
-                obj["furnishedList"] = furnishedarr;
-            }
+        obj.furnishedObj = {
+          Light: light,
+          Fan: fans,
+          AC: ac,
+          TV: tv,
+          Bed: Beds,
+          Wardrobe: wardrobe,
+          Geyser: geyser,
+        };
+        obj["furnishedList"] = furnishedarr;
+      }
 
             if (preLeased == "Yes") {
                 let preLeased_RentedDetails = {
@@ -485,16 +483,7 @@ const HotelResort = () => {
         }
         setLocationAdv(newarr);
     };
-
-
-    const areaCalucation = () => {
-        if (pricedetail && plotArea) {
-            let max = Math.max(Number(pricedetail), Number(plotArea));
-            let min = Math.min(Number(pricedetail), Number(plotArea));
-            let ans = Math.round(max / min);
-            setPriceSqr(ans);
-        }
-    }
+ 
 
     // ======--- image upload function   
 
@@ -718,7 +707,6 @@ const HotelResort = () => {
                             maxLength={12}
                             onChange={(e) => {
                                 setPlotArea(() => NumericString(e.target.value));
-                                areaCalucation();
                             }}
                             required />
                         <Select value={areaPer} onChange={(e) => {
@@ -1425,7 +1413,6 @@ const HotelResort = () => {
                             required
                             onChange={(e) => {
                                 setPricedetail(NumericString(e.target.value));
-                                areaCalucation();
                             }}
                         />
                     </Box>

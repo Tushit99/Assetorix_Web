@@ -75,21 +75,15 @@ const SellForm = () => {
     } else if (looking == "sell") {
       settype("sell");
       setSelectedTab(0);
-    } else if (looking == "PG") {
+    } else if (looking == "PG") {  
       settype("look");
       setSelectedTab(2);
     } else {
-      settype("");
+      settype(""); 
     }
 
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-  }, []); 
-
-  useEffect(()=>{
-    if(user.length<=0){
-      navigate("/login"); 
-    }
-  },[])
+  }, []);  
 
   return (
     <div className={style.post_property}>  

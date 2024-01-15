@@ -55,8 +55,7 @@ const RKStudio = () => {
   const [fromyear, setFromyear] = useState("");
   const [expectedyear, setExpectedYear] = useState("");
   const [ownership, setOwnerShip] = useState("");
-  const [pricedetail, setPricedetail] = useState("");
-  const [priceSqr, setPriceSqr] = useState("");
+  const [pricedetail, setPricedetail] = useState(""); 
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
@@ -112,8 +111,7 @@ const RKStudio = () => {
         balcony: balconey,
       },
       ownership,
-      price: +pricedetail,
-      priceUnit: +priceSqr,
+      price: +pricedetail, 
       inclusivePrices,
       amenities,
       propertyFeatures,
@@ -204,7 +202,7 @@ const RKStudio = () => {
       bedroom &&
       bathroom &&
       balconey &&
-      furnishedarr &&
+      furnishedarr && 
       ownership &&
       pricedetail &&
       inclusivePrices &&
@@ -236,13 +234,13 @@ const RKStudio = () => {
 
       if (furnished == "Furnished" || furnished == "Semi-Furnished") {
         obj.furnishedObj = {
-          light,
-          fans,
-          ac,
-          tv,
-          beds: Beds,
-          wardrobe,
-          geyser,
+          Light: light,
+          Fan: fans,
+          AC: ac,
+          TV: tv,
+          Bed: Beds,
+          Wardrobe: wardrobe,
+          Geyser: geyser,
         };
         obj["furnishedList"] = furnishedarr;
       }
@@ -537,16 +535,7 @@ const RKStudio = () => {
     }
     console.log(newarr);
     setWaterSource(newarr);
-  };
-
-  const areaCalucation = () => {
-    if (pricedetail && plotArea) {
-      let max = Math.max(Number(pricedetail), Number(plotArea));
-      let min = Math.min(Number(pricedetail), Number(plotArea));
-      let ans = Math.round(max / min);
-      setPriceSqr(ans);
-    }
-  };
+  }; 
 
   // ======--- image upload function
 
@@ -809,8 +798,7 @@ const RKStudio = () => {
               type="text"
               value={plotArea}
               onChange={(e) => {
-                areaCalucation();
-                setPlotArea(e.target.value);
+                 setPlotArea(e.target.value);
               }}
               required
             />
@@ -1533,8 +1521,7 @@ const RKStudio = () => {
                 required
                 onChange={(e) => {
                   setPricedetail(e.target.value);
-                  areaCalucation();
-                }}
+                 }}
               />
             </Box>
           </Box>

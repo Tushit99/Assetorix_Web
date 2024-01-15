@@ -56,8 +56,7 @@ const ServicedApartment = () => {
     const [fromyear, setFromyear] = useState("");
     const [expectedyear, setExpectedYear] = useState("");
     const [ownership, setOwnerShip] = useState("");
-    const [pricedetail, setPricedetail] = useState("");
-    const [priceSqr, setPriceSqr] = useState("");
+    const [pricedetail, setPricedetail] = useState(""); 
     const [inclusivePrices, setInclusivePrice] = useState([]);
     const [amenities, setAminity] = useState([]);
     const [propertyFeatures, setPropertyFeature] = useState("");
@@ -115,8 +114,7 @@ const ServicedApartment = () => {
                 balcony: balconey
             },
             ownership,
-            price: +pricedetail,
-            priceUnit: +priceSqr,
+            price: +pricedetail, 
             inclusivePrices,
             amenities,
             propertyFeatures,
@@ -242,16 +240,16 @@ const ServicedApartment = () => {
 
             if (furnished == "Furnished" || furnished == "Semi-Furnished") {
                 obj.furnishedObj = {
-                    light,
-                    fans,
-                    ac,
-                    tv,
-                    beds: Beds,
-                    wardrobe,
-                    geyser,
-                }
+                  Light: light,
+                  Fan: fans,
+                  AC: ac,
+                  TV: tv,
+                  Bed: Beds,
+                  Wardrobe: wardrobe,
+                  Geyser: geyser,
+                };
                 obj["furnishedList"] = furnishedarr;
-            }
+              }
 
             if (furnished.length > 0) {
                 obj["furnished"] = furnished;
@@ -546,15 +544,7 @@ const ServicedApartment = () => {
         // console.log(newarr);
         setWaterSource(newarr);
     }
-
-    const areaCalucation = () => {
-        if (pricedetail && plotArea) {
-            let max = Math.max(Number(pricedetail), Number(plotArea));
-            let min = Math.min(Number(pricedetail), Number(plotArea));
-            let ans = Math.round(max / min);
-            setPriceSqr(ans);
-        }
-    }
+ 
 
 
     // ======--- image upload function  
@@ -795,7 +785,6 @@ const ServicedApartment = () => {
                             value={plotArea}
                             maxLength={"12"}
                             onChange={(e) => {
-                                areaCalucation();
                                 setPlotArea(e.target.value);
                             }}
                             required
@@ -1519,7 +1508,6 @@ const ServicedApartment = () => {
                                 required
                                 onChange={(e) => {
                                     setPricedetail(e.target.value);
-                                    areaCalucation();
                                 }}
                             />
                         </Box>

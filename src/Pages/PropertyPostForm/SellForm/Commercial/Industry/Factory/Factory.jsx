@@ -49,8 +49,7 @@ const Factory = () => {
   const [fromyear, setFromyear] = useState("");
   const [expectedyear, setExpectedYear] = useState("");
   const [ownership, setOwnerShip] = useState("");
-  const [pricedetail, setPricedetail] = useState("");
-  const [priceSqr, setPriceSqr] = useState("");
+  const [pricedetail, setPricedetail] = useState(""); 
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
@@ -107,8 +106,7 @@ const Factory = () => {
       },
       washrooms,
       ownership,
-      price: +pricedetail,
-      priceUnit: +priceSqr,
+      price: +pricedetail, 
       inclusivePrices,
       amenities,
       propertyFeatures,
@@ -208,13 +206,13 @@ const Factory = () => {
 
       if (furnished == "Furnished" || furnished == "Semi-Furnished") {
         obj.furnishedObj = {
-          light,
-          fans,
-          ac,
-          tv,
-          Beds,
-          wardrobe,
-          geyser,
+          Light: light,
+          Fan: fans,
+          AC: ac,
+          TV: tv,
+          Bed: Beds,
+          Wardrobe: wardrobe,
+          Geyser: geyser,
         };
         obj["furnishedList"] = furnishedarr;
       }
@@ -451,16 +449,7 @@ const Factory = () => {
       newarr.push(value);
     }
     setInclusivePrice(newarr);
-  };
-
-  const areaCalucation = () => {
-    if (pricedetail && plotArea) {
-      let max = Math.max(Number(pricedetail), Number(plotArea));
-      let min = Math.min(Number(pricedetail), Number(plotArea));
-      let ans = Math.round(max / min);
-      setPriceSqr(ans);
-    }
-  };
+  }; 
 
   // // ======--- image upload function
 
@@ -655,8 +644,7 @@ const Factory = () => {
               type="text"
               maxLength={"12"}
               value={plotArea}
-              onChange={(e) => {
-                areaCalucation();
+              onChange={(e) => { 
                 setPlotArea(NumericString(e.target.value));
               }}
               required
@@ -898,8 +886,7 @@ const Factory = () => {
                   value={pricedetail}
                   required
                   onChange={(e) => {
-                    setPricedetail(e.target.value);
-                    areaCalucation();
+                    setPricedetail(e.target.value); 
                   }}
                 />
               </Box>

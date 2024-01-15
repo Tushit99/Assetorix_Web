@@ -77,8 +77,7 @@ const Bareshellspace = () => {
   const [availability, setAvailability] = useState("");
   const [fromyear, setFromyear] = useState("");
   const [expectedyear, setExpectedYear] = useState("");
-  const [ownership, setOwnerShip] = useState("");
-  const [priceSqr, setPriceSqr] = useState("");
+  const [ownership, setOwnerShip] = useState(""); 
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [locationAdv, setLocationAdv] = useState([]);
@@ -119,8 +118,7 @@ const Bareshellspace = () => {
         locatedInside,
       },
       ownership,
-      price: +pricedetail,
-      priceUnit: +priceSqr,
+      price: +pricedetail, 
       inclusivePrices,
       amenities,
       locationAdv,
@@ -165,8 +163,6 @@ const Bareshellspace = () => {
     // condition to check all imformation are included or not
     if (!ownership) {
       showToastError("Provide OwnerShip");
-    } else if (!priceSqr) {
-      showToastError("Provide Price Per sq.ft");
     } else if (!totalfloors) {
       showToastError("Provide Total Floors");
     }
@@ -420,16 +416,7 @@ const Bareshellspace = () => {
       newarr.splice(newarr.indexOf(""), 1);
     }
     setFloorNumber(newarr);
-  };
-
-  const areaCalucation = () => {
-    if (pricedetail && plotArea) {
-      let max = Math.max(Number(pricedetail), Number(plotArea));
-      let min = Math.min(Number(pricedetail), Number(plotArea));
-      let ans = Math.round(max / min);
-      setPriceSqr(ans);
-    }
-  };
+  }; 
 
   const handlefireSafty = (e) => {
     e.preventDefault();
@@ -669,8 +656,7 @@ const Bareshellspace = () => {
               maxLength={"12"}
               value={plotArea}
               onChange={(e) => {
-                setPlotArea(NumericString(e.target.value));
-                areaCalucation();
+                setPlotArea(NumericString(e.target.value)); 
               }}
               required
             />
@@ -1631,8 +1617,7 @@ const Bareshellspace = () => {
                 value={pricedetail}
                 required
                 onChange={(e) => {
-                  setPricedetail(NumericString(e.target.value));
-                  areaCalucation();
+                  setPricedetail(NumericString(e.target.value)); 
                 }}
               />
             </Box>

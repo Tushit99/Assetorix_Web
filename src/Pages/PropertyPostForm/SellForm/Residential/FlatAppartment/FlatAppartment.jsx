@@ -60,8 +60,7 @@ const FlatAppartment = () => {
   const [fromyear, setFromyear] = useState("");
   const [expectedyear, setExpectedYear] = useState("");
   const [ownership, setOwnerShip] = useState("");
-  const [pricedetail, setPricedetail] = useState("");
-  const [priceSqr, setPriceSqr] = useState("");
+  const [pricedetail, setPricedetail] = useState(""); 
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
@@ -121,8 +120,7 @@ const FlatAppartment = () => {
         balcony: balconey,
       },
       ownership,
-      price: +pricedetail,
-      priceUnit: +priceSqr,
+      price: +pricedetail, 
       inclusivePrices,
       amenities,
       propertyFeatures,
@@ -551,16 +549,7 @@ const FlatAppartment = () => {
     }
     console.log(newarr);
     setWaterSource(newarr);
-  };
-
-  const areaCalucation = () => {
-    if (pricedetail && plotArea) {
-      let max = Math.max(Number(pricedetail), Number(plotArea));
-      let min = Math.min(Number(pricedetail), Number(plotArea));
-      let ans = Math.round(max / min);
-      setPriceSqr(ans);
-    }
-  };
+  }; 
 
   // select image and save image
 
@@ -809,7 +798,6 @@ const FlatAppartment = () => {
               w={200}
               maxLength={"6"}
               onChange={(e) => {
-                areaCalucation();
                 setPlotArea(NumericString(e.target.value));
               }}
               required
@@ -1515,7 +1503,6 @@ const FlatAppartment = () => {
                 w={200}
                 onChange={(e) => {
                   setPricedetail(NumericString(e.target.value));
-                  areaCalucation();
                 }}
               />
             </InputGroup>

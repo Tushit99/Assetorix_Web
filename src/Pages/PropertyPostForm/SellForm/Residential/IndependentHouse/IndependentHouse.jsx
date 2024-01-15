@@ -52,8 +52,7 @@ const IndependentHouse = () => {
   const [fromyear, setFromyear] = useState("");
   const [expectedyear, setExpectedYear] = useState("");
   const [ownership, setOwnerShip] = useState("");
-  const [pricedetail, setPricedetail] = useState("");
-  const [priceSqr, setPriceSqr] = useState("");
+  const [pricedetail, setPricedetail] = useState(""); 
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
@@ -108,8 +107,7 @@ const IndependentHouse = () => {
         balcony: balconey,
       },
       ownership,
-      price: +pricedetail,
-      priceUnit: +priceSqr,
+      price: +pricedetail, 
       inclusivePrices,
       amenities,
       propertyFeatures,
@@ -228,13 +226,13 @@ const IndependentHouse = () => {
 
       if (furnished == "Furnished" || furnished == "Semi-Furnished") {
         obj.furnishedObj = {
-          light,
-          fans,
-          ac,
-          tv,
-          beds: Beds,
-          wardrobe,
-          geyser,
+          Light: light,
+          Fan: fans,
+          AC: ac,
+          TV: tv,
+          Bed: Beds,
+          Wardrobe: wardrobe,
+          Geyser: geyser,
         };
         obj["furnishedList"] = furnishedarr;
       }
@@ -275,7 +273,9 @@ const IndependentHouse = () => {
             // }else{
             //     setIsClicked(false);
             //     navigate("/listing");  
-            // }
+            // } 
+            setClickCount((prev) => prev - 12);
+            setIsClicked(false);
           });
       } catch (error) {
         toast({
@@ -530,16 +530,7 @@ const IndependentHouse = () => {
     }
     console.log(newarr);
     setWaterSource(newarr);
-  };
-
-  const areaCalucation = () => {
-    if (pricedetail && plotArea) {
-      let max = Math.max(Number(pricedetail), Number(plotArea));
-      let min = Math.min(Number(pricedetail), Number(plotArea));
-      let ans = Math.round(max / min);
-      setPriceSqr(ans);
-    }
-  };
+  }; 
 
   // ======--- image upload function
 
@@ -1471,7 +1462,6 @@ const IndependentHouse = () => {
                 maxLength={"10"}
                 required
                 onChange={(e) => {
-                  areaCalucation();
                   setPricedetail(NumericString(e.target.value));
                 }}
               />

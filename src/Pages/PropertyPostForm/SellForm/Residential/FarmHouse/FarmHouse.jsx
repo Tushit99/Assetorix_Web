@@ -7,7 +7,7 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
-  InputRightElement, 
+  InputRightElement,
   Select,
   Text,
   Textarea,
@@ -61,7 +61,6 @@ const FarmHouse = () => {
   const [expectedyear, setExpectedYear] = useState("");
   const [ownership, setOwnerShip] = useState("");
   const [pricedetail, setPricedetail] = useState("");
-  const [priceSqr, setPriceSqr] = useState("");
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
@@ -117,7 +116,6 @@ const FarmHouse = () => {
       },
       ownership,
       price: +pricedetail,
-      priceUnit: +priceSqr,
       inclusivePrices,
       amenities,
       propertyFeatures,
@@ -202,7 +200,6 @@ const FarmHouse = () => {
       city &&
       appartment &&
       locality &&
-      houseNo &&
       bedroom &&
       bathroom &&
       balconey &&
@@ -241,13 +238,13 @@ const FarmHouse = () => {
 
       if (furnished == "Furnished" || furnished == "Semi-Furnished") {
         obj.furnishedObj = {
-          light,
-          fans,
-          ac,
-          tv,
-          beds: Beds,
-          wardrobe,
-          geyser,
+          Light: light,
+          Fan: fans,
+          AC: ac,
+          TV: tv,
+          Bed: Beds,
+          Wardrobe: wardrobe,
+          Geyser: geyser,
         };
         obj["furnishedList"] = furnishedarr;
       }
@@ -280,13 +277,13 @@ const FarmHouse = () => {
               status: "success",
               duration: 2000,
               isClosable: true,
-            }); 
-            if (images) {
-              submitImage(e.data.id);
-            } else {
-              setIsClicked(false);
-              navigate("/listing");
-            }
+            });
+            // if (images) {
+            //   submitImage(e.data.id);
+            // } else {
+            //   setIsClicked(false);
+            //   navigate("/listing");
+            // }
           });
       } catch (error) {
         toast({
@@ -541,15 +538,6 @@ const FarmHouse = () => {
     setWaterSource(newarr);
   };
 
-  const areaCalucation = () => {
-    if (pricedetail && plotArea) {
-      let max = Math.max(Number(pricedetail), Number(plotArea));
-      let min = Math.min(Number(pricedetail), Number(plotArea));
-      let ans = Math.round(max / min) || 0;
-      setPriceSqr(ans);
-    }
-  };
-
   // ======--- image upload function
 
   const selectFiles = () => {
@@ -634,7 +622,7 @@ const FarmHouse = () => {
   //     let adding = document.getElementById("floorSelectTag");
   //     adding.innerHTML = options;
 
-  // } 
+  // }
 
   return (
     <form onSubmit={handleSubmitData}>
@@ -657,7 +645,6 @@ const FarmHouse = () => {
         />
         <Input
           type="text"
-          padding={"0 10px"}
           required
           placeholder="Enter Apartment / Society Name"
           fontSize={"md"}
@@ -669,7 +656,6 @@ const FarmHouse = () => {
         <Input
           type="text"
           placeholder={"Enter pincode No."}
-          padding={"0 10px"}
           required
           maxLength={"6"}
           variant="flushed"
@@ -679,7 +665,6 @@ const FarmHouse = () => {
         />
         <Input
           type="text"
-          padding={"0 10px"}
           required
           placeholder="Enter Locality Name"
           maxLength={"100"}
@@ -740,7 +725,7 @@ const FarmHouse = () => {
             <Input
               type="text"
               placeholder={"Enter No. of Bedrooms"}
-              maxLength={"2"} 
+              maxLength={"2"}
               onChange={(e) => setBedRoom(NumberOnly(e.target.value))}
               value={bedroom}
               required
@@ -790,7 +775,6 @@ const FarmHouse = () => {
               placeholder="Enter area detail"
               onChange={(e) => {
                 setPlotArea(NumericString(e.target.value));
-                areaCalucation();
               }}
               required
             />
@@ -1463,35 +1447,36 @@ const FarmHouse = () => {
         </Box>
         {/* Price Details */}
         <Box>
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          <Heading
+            as={"h3"}
+            size={"sm"}
+            marginTop={{ base: 10, md: 5 }}
+            textAlign={"left"}
+          >
             Price Details
           </Heading>
           <Box display={"flex"} alignItems={"center"} gap={5}>
-            <Box display={"grid"} gap={0}>
-              <Heading
-                as={"h3"}
-                size={"xs"}
-                fontWeight={400}
-                textAlign={"left"}
+            <InputGroup w={300} gap={2}>
+              <Select
+                w={"-moz-fit-content"}
+                value={currency}
+                onClick={(e) => setCurrency(e.target.value)}
               >
-                {isCountry.country == "india" ? "₹" : "$"} Price Details
-              </Heading>
-              <InputGroup>
-                <InputLeftElement>
-                  {isCountry.country == "india" ? "₹" : "$"}
-                </InputLeftElement>
-                <Input
-                  type="text"
-                  value={pricedetail}
-                  required
-                  maxLength={"12"}
-                  onChange={(e) => {
-                    setPricedetail(NumericString(e.target.value));
-                    areaCalucation();
-                  }}
-                />
-              </InputGroup>
-            </Box>
+                <option value="₹">₹ INR </option>
+                <option value="$">$ USD </option>
+              </Select>
+              <Input
+                type="text"
+                value={pricedetail}
+                maxLength={"10"}
+                placeholder={`Price`}
+                required
+                w={200}
+                onChange={(e) => {
+                  setPricedetail(NumericString(e.target.value));
+                }}
+              />
+            </InputGroup>
           </Box>
         </Box>
         <Box display={"flex"} gap={10} marginTop={"10px"} flexWrap={"wrap"}>
@@ -2496,8 +2481,8 @@ const FarmHouse = () => {
       >
         *Please provide correct information, otherwise your listing might get
         blocked
-      </Heading> 
-      {isClicked && <Loading />}  
+      </Heading>
+      {isClicked && <Loading />}
       <Button
         margin={"20px 0"}
         type="submit"

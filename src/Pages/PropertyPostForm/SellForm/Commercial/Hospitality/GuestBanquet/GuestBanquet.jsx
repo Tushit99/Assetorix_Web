@@ -51,8 +51,7 @@ const GuestBanquet = () => {
     const [fromyear, setFromyear] = useState("");
     const [expectedyear, setExpectedYear] = useState("");
     const [ownership, setOwnerShip] = useState("");
-    const [pricedetail, setPricedetail] = useState("");
-    const [priceSqr, setPriceSqr] = useState("");
+    const [pricedetail, setPricedetail] = useState(""); 
     const [amenities, setAminity] = useState([]);
     const [propertyFeatures, setPropertyFeature] = useState("");
     const [buildingFeature, setBuildingFeature] = useState([]);
@@ -109,8 +108,7 @@ const GuestBanquet = () => {
                 balcony: balconey,
             },
             ownership,
-            price: +pricedetail,
-            priceUnit: +priceSqr,
+            price: +pricedetail, 
             inclusivePrices,
             amenities,
             propertyFeatures,
@@ -216,17 +214,17 @@ const GuestBanquet = () => {
             }
 
             if (furnished == "Furnished" || furnished == "Semi-Furnished") {
-                obj.furnishedObj = {
-                    light,
-                    fans,
-                    ac,
-                    tv,
-                    beds: Beds,
-                    wardrobe,
-                    geyser,
-                }
-                obj["furnishedList"] = furnishedarr;
-            }
+        obj.furnishedObj = {
+          Light: light,
+          Fan: fans,
+          AC: ac,
+          TV: tv,
+          Bed: Beds,
+          Wardrobe: wardrobe,
+          Geyser: geyser,
+        };
+        obj["furnishedList"] = furnishedarr;
+      }
 
             if (preLeased == "Yes") {
                 let preLeased_RentedDetails = {
@@ -516,17 +514,7 @@ const GuestBanquet = () => {
             newarr.push(value);
         }
         setLocationAdv(newarr);
-    };
-
-
-    const areaCalucation = () => {
-        if (pricedetail && plotArea) {
-            let max = Math.max(Number(pricedetail), Number(plotArea));
-            let min = Math.min(Number(pricedetail), Number(plotArea));
-            let ans = Math.round(max / min);
-            setPriceSqr(ans);
-        }
-    }
+    }; 
 
     // ======--- image upload function   
     const selectFiles = () => {
@@ -748,8 +736,7 @@ const GuestBanquet = () => {
                             maxLength={"10"}
                             placeholder="Enter Plot Area"
                             value={plotArea}
-                            onChange={(e) => {
-                                areaCalucation();
+                            onChange={(e) => { 
                                 setPlotArea(NumericString(e.target.value));
                             }}
                             required />
@@ -1457,7 +1444,6 @@ const GuestBanquet = () => {
                             required
                             onChange={(e) => {
                                 setPricedetail(NumericString(e.target.value));
-                                areaCalucation();
                             }}
                         />
                     </Box>

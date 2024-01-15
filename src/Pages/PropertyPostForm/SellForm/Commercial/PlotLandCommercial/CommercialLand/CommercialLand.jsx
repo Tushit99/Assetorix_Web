@@ -38,8 +38,7 @@ const CommercialLand = () => {
   const [Plotnumber, setPlotnumber] = useState("");
   const [areaPer, setAreaPer] = useState("sq.ft");
   const [ownership, setOwnerShip] = useState("");
-  const [pricedetail, setPricedetail] = useState("");
-  const [priceSqr, setPriceSqr] = useState("");
+  const [pricedetail, setPricedetail] = useState(""); 
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [constructionType, setConstructionType] = useState([]);
   const [amenities, setAminity] = useState([]);
@@ -111,8 +110,7 @@ const CommercialLand = () => {
       ownership,
       plotLength,
       plotBreadth,
-      price: +pricedetail,
-      priceUnit: +priceSqr,
+      price: +pricedetail, 
       inclusivePrices,
       openSides,
       amenities,
@@ -157,9 +155,7 @@ const CommercialLand = () => {
       showToastError('Provide OwnerShip');
     } else if (!pricedetail) {
       showToastError('Provide PriceDetail');
-    } else if (!priceSqr) {
-      showToastError('Provide Price Per sq.ft');
-    }
+    } 
 
     if (locationAdv) {
       obj["locationAdv"] = locationAdv
@@ -426,16 +422,7 @@ const CommercialLand = () => {
       newarr.push(value);
     }
     setInclusivePrice(newarr);
-  }
-
-  const areaCalucation = () => {
-    if (pricedetail && plotArea) {
-      let max = Math.max(Number(pricedetail), Number(plotArea));
-      let min = Math.min(Number(pricedetail), Number(plotArea));
-      let ans = Math.round(max / min);
-      setPriceSqr(ans);
-    }
-  }
+  } 
 
   const handleIndustryType = (e) => {
     e.preventDefault();
@@ -623,8 +610,7 @@ const CommercialLand = () => {
             <Input
               type="text"
               value={plotArea}
-              onChange={(e) => {
-                areaCalucation();
+              onChange={(e) => { 
                 setPlotArea(NumericString(e.target.value));
               }}
               required />
@@ -971,8 +957,7 @@ const CommercialLand = () => {
                   required
                   maxLength={"12"}
                   onChange={(e) => {
-                    setPricedetail(NumericString(e.target.value));
-                    areaCalucation();
+                    setPricedetail(NumericString(e.target.value)); 
                   }}
                 />
               </Box>

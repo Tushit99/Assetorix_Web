@@ -44,8 +44,7 @@ const CommercialShop = () => {
     const [fromyear, setFromyear] = useState("");
     const [expectedyear, setExpectedYear] = useState("");
     const [ownership, setOwnerShip] = useState("");
-    const [pricedetail, setPricedetail] = useState("");
-    const [priceSqr, setPriceSqr] = useState("");
+    const [pricedetail, setPricedetail] = useState(""); 
     const [inclusivePrices, setInclusivePrice] = useState([]);
     const [amenities, setAminity] = useState([]);
     const [propertyFeatures, setPropertyFeature] = useState("");
@@ -109,8 +108,7 @@ const CommercialShop = () => {
                 country,
             },
             ownership,
-            price: +pricedetail,
-            priceUnit: +priceSqr,
+            price: +pricedetail, 
             floorOn,
             totalFloors: +totalfloors,
             locatedNear,
@@ -454,15 +452,7 @@ const CommercialShop = () => {
         }
         setInclusivePrice(newarr);
     }
-
-    const areaCalucation = () => {
-        if (pricedetail && plotArea) {
-            let max = Math.max(Number(pricedetail), Number(plotArea));
-            let min = Math.min(Number(pricedetail), Number(plotArea));
-            let ans = Math.round(max / min);
-            setPriceSqr(ans);
-        }
-    }
+ 
 
     const handleEntranceWidth = (e) => {
         e.preventDefault();
@@ -725,8 +715,7 @@ const CommercialShop = () => {
                                     <NumberInputField
                                         padding={"0 2px"}
                                         value={plotArea}
-                                        onChange={(e) => {
-                                            areaCalucation();
+                                        onChange={(e) => { 
                                             setPlotArea(e.target.value);
                                         }}
                                         required
@@ -1206,25 +1195,10 @@ const CommercialShop = () => {
                                             value={pricedetail}
                                             required
                                             onChange={(e) => {
-                                                setPricedetail(e.target.value);
-                                                areaCalucation();
+                                                setPricedetail(e.target.value); 
                                             }}
                                         />
-                                    </Box>
-                                    <Box display={"grid"} gap={0}>
-                                        <Heading
-                                            as={"h3"}
-                                            size={"xs"}
-                                            fontWeight={400}
-                                            textAlign={"left"}
-                                        >
-                                            {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
-                                        </Heading>
-                                        <Input
-                                            type="text"
-                                            value={priceSqr}
-                                        />
-                                    </Box>
+                                    </Box> 
                                 </Box>
                             </Box>
                             <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>

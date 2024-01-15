@@ -35,8 +35,7 @@ const Manufacture = () => {
   const [fromyear, setFromyear] = useState("");
   const [expectedyear, setExpectedYear] = useState("");
   const [ownership, setOwnerShip] = useState("");
-  const [pricedetail, setPricedetail] = useState("");
-  const [priceSqr, setPriceSqr] = useState("");
+  const [pricedetail, setPricedetail] = useState(""); 
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
@@ -88,8 +87,7 @@ const Manufacture = () => {
       },
       washrooms,
       ownership,
-      price: +pricedetail,
-      priceUnit: +priceSqr,
+      price: +pricedetail, 
       inclusivePrices,
       amenities,
       propertyFeatures,
@@ -132,8 +130,6 @@ const Manufacture = () => {
       showToastError("Provide OwnerShip");
     } else if (!pricedetail) {
       showToastError("Provide PriceDetail");
-    } else if (!priceSqr) {
-      showToastError("Provide Price Per sq.ft");
     } else if (!additinalft) {
       showToastError("Provide Property description");
     }
@@ -178,16 +174,16 @@ const Manufacture = () => {
       }
 
       // if (furnished == "Furnished" || furnished == "Semi-Furnished") {
-      //     obj.furnishedObj = {
-      //         light,
-      //         fans,
-      //         ac,
-      //         tv,
-      //         Beds,
-      //         wardrobe,
-      //         geyser,
-      //     }
-      //     obj["furnishedList"] = furnishedarr;
+      //   obj.furnishedObj = {
+      //     Light: light,
+      //     Fan: fans,
+      //     AC: ac, 
+      //     TV: tv,
+      //     Bed: Beds,
+      //     Wardrobe: wardrobe,
+      //     Geyser: geyser,
+      //   };
+      //   obj["furnishedList"] = furnishedarr;
       // }
 
       // if (furnished.length > 0) {
@@ -422,15 +418,7 @@ const Manufacture = () => {
     }
     setInclusivePrice(newarr);
   };
-
-  const areaCalucation = () => {
-    if (pricedetail && plotArea) {
-      let max = Math.max(Number(pricedetail), Number(plotArea));
-      let min = Math.min(Number(pricedetail), Number(plotArea));
-      let ans = Math.round(max / min);
-      setPriceSqr(ans);
-    }
-  };
+ 
 
   // ======--- image upload function
 
@@ -622,8 +610,7 @@ const Manufacture = () => {
               maxLength={10}
               value={plotArea}
               onChange={(e) => {
-                setPlotArea(NumericString(e.target.value));
-                areaCalucation();
+                setPlotArea(NumericString(e.target.value)); 
               }}
               required
             />
@@ -864,8 +851,7 @@ const Manufacture = () => {
                   maxLength={"10"}
                   required
                   onChange={(e) => {
-                    setPricedetail(NumericString(e.target.value));
-                    areaCalucation();
+                    setPricedetail(NumericString(e.target.value)); 
                   }}
                 />
               </Box>

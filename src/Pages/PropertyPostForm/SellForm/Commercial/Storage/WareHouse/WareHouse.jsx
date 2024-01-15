@@ -216,16 +216,16 @@ const WareHouse = () => {
 
             if (furnished == "Furnished" || furnished == "Semi-Furnished") {
                 obj.furnishedObj = {
-                    light,
-                    fans,
-                    ac,
-                    tv,
-                    Beds,
-                    wardrobe,
-                    geyser,
-                }
+                  Light: light,
+                  Fan: fans,
+                  AC: ac,
+                  TV: tv,
+                  Bed: Beds,
+                  Wardrobe: wardrobe,
+                  Geyser: geyser,
+                };
                 obj["furnishedList"] = furnishedarr;
-            }
+              }
 
             if (furnished.length > 0) {
                 obj["furnished"] = furnished;

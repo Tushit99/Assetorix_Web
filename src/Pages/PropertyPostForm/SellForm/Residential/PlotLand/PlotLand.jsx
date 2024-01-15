@@ -37,8 +37,7 @@ const PlotLand = () => {
     const [houseNo, setHouseNo] = useState("");
     const [areaPer, setAreaPer] = useState("sq.ft");
     const [ownership, setOwnerShip] = useState("");
-    const [pricedetail, setPricedetail] = useState("");
-    const [priceSqr, setPriceSqr] = useState("");
+    const [pricedetail, setPricedetail] = useState(""); 
     const [inclusivePrices, setInclusivePrice] = useState([]);
     const [amenities, setAminity] = useState([]);
     const [overLook, setoverlook] = useState([]);
@@ -107,8 +106,7 @@ const PlotLand = () => {
             constructionOnProperty: ConstructionOnProperty,
             constructionOnPropertyList: constructionType,
             ownership,
-            price: +pricedetail,
-            priceUnit: +priceSqr,
+            price: +pricedetail, 
             inclusivePrices,
             amenities,
             expectedByYear,
@@ -212,6 +210,8 @@ const PlotLand = () => {
                         //     setIsClicked(false);
                         //     navigate("/listing");  
                         // }   
+                        setClickCount((prev) => prev - 12);
+                        setIsClicked(false);
                     });
             } catch (error) {
                 toast({
@@ -403,17 +403,7 @@ const PlotLand = () => {
             newarr.push(value);
         }
         setInclusivePrice(newarr);
-    }
-
-
-    const areaCalucation = () => {
-        if (pricedetail && plotArea) {
-            let max = Math.max(Number(pricedetail), Number(plotArea));
-            let min = Math.min(Number(pricedetail), Number(plotArea));
-            let ans = Math.round(max / min);
-            setPriceSqr(ans);
-        }
-    }
+    } 
 
     const handleBoundaryWalls = (e) => {
         e.preventDefault();
@@ -608,7 +598,6 @@ const PlotLand = () => {
                             value={plotArea}
                             onChange={(e) => {
                                 setPlotArea(NumericString(e.target.value));
-                                areaCalucation();
                             }}
                             required
                         />
@@ -840,7 +829,6 @@ const PlotLand = () => {
                                 required
                                 onChange={(e) => {
                                     setPricedetail(NumericString(e.target.value));
-                                    areaCalucation();
                                 }}
                             />
                         </Box>

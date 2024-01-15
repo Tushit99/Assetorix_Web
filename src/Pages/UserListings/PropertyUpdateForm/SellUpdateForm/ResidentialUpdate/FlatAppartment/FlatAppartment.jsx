@@ -251,7 +251,7 @@ const FlatAppartmentUpdate = () => {
           TV: tv,
           Bed: Beds,
           Wardrobe: wardrobe,
-          Geyser: geyser, 
+          Geyser: geyser,
         };
         obj["furnishedList"] = furnishedarr;
       }
@@ -289,9 +289,10 @@ const FlatAppartmentUpdate = () => {
             });
             if (images.length) {
               submitImage(productID);
-            } else {
+            } else { 
               setClickCount((prev) => prev - 12);
               setIsClicked(false);
+              // navigate("/listing");
             }
           });
       } catch (error) {
@@ -756,12 +757,11 @@ const FlatAppartmentUpdate = () => {
       <form onSubmit={handleSubmitData}>
         {/* property location */}
         <Box className={style.location_form}>
-          <Heading size={"lg"}>Where is your Flat / Apartment located?</Heading>
+          <Heading size={"lg"}>Edit your Flat / Apartment Detail </Heading>
           <Heading size={"sm"}>Location Detail</Heading>
 
           <Input
             type="text"
-            padding={"0 10px"}
             placeholder="House No. / Mobile No."
             value={houseNo}
             maxLength={"100"}
@@ -793,7 +793,6 @@ const FlatAppartmentUpdate = () => {
           />
           <Input
             type="text"
-            padding={"0 10px"}
             required
             placeholder="Enter Locality"
             list="browsers"
@@ -815,7 +814,6 @@ const FlatAppartmentUpdate = () => {
 
           <Input
             type="text"
-            padding={"0 10px"}
             required
             placeholder="Enter City"
             fontSize={"md"}
@@ -825,7 +823,6 @@ const FlatAppartmentUpdate = () => {
           />
           <Input
             type="text"
-            padding={"0 10px"}
             required
             placeholder="Enter State"
             value={state}
@@ -835,7 +832,6 @@ const FlatAppartmentUpdate = () => {
           />
           <Input
             type="text"
-            padding={"0 10px"}
             required
             maxLength={"100"}
             placeholder="Enter Country"
@@ -1809,6 +1805,16 @@ const FlatAppartmentUpdate = () => {
             >
               Upload Your Property image
             </Heading>
+          </Box>
+          <Box className={style.savedImages}>
+            {savedImages?.map((w) => (
+              <Extraimg
+                e={w}
+                propertyid={productID}
+                deleteimagePermanently={deleteimagePermanently}
+                key={w._id}
+              />
+            ))}
           </Box>
           <Box className={style.card}>
             <Box

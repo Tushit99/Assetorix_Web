@@ -110,6 +110,7 @@ import school from "./location/school.png";
 import highway from "./location/road.png";
 import hospital from "./location/hospital.png";
 import { LiaBedSolid } from "react-icons/lia";
+import { LuConstruction } from "react-icons/lu"; 
 import scale from "./scale.jpg";
 import stairs from "./stairs.png";
 import powerback from "./backup.png";
@@ -415,10 +416,10 @@ const SingleProductDetailPage = () => {
                       justifyContent={"space-around"}
                     >
                       <Box>
+                        <Text fontSize={"sm"}>{data?.propertyGroup}</Text>
                         <Heading size={"sm"} as={"h4"}>
                           Apartment
                         </Heading>
-                        <Text fontSize={"sm"}>{data?.propertyGroup}</Text>
                       </Box>
                       <Box textAlign={"center"} display={"grid"}>
                         <Box
@@ -485,13 +486,16 @@ const SingleProductDetailPage = () => {
                       >
                         <Box
                           flex={3}
-                          display={"flex"}
+                          display={"flex"}  
+                          gap={2} 
                           alignItems={"center"}
                           justifyContent={"center"}
                         >
                           <Image width={"30px"} src={scale} alt={"scale"} />
                           <Text>
-                            {data.plotArea || <Skeleton width={"100px"} />}
+                            {data.plotArea || <Skeleton width={"100px"} />}  
+                          </Text>
+                          <Text marginLeft={"-5px"}> 
                             {data.plotAreaUnit || <Skeleton width={"100px"} />}
                           </Text>
                         </Box>
@@ -647,9 +651,26 @@ const SingleProductDetailPage = () => {
                             gap={2}
                           >
                             <TagLabel>{data?.availabilityStatus}</TagLabel>
-                            <TagLeftIcon as={PiVan} />
+                            {data?.availabilityStatus=="Under construction" ? <TagLeftIcon as={LuConstruction} /> : <TagLeftIcon as={PiVan} />}
                           </Tag>
                         </Td>
+                      </Tr>
+                    )}  
+                    {data?.propertyStatus && (
+                      <Tr> 
+                        <Th color={"black"} textTransform={"unset"}>
+                          Property Status
+                        </Th>
+                        <Td> {data?.propertyStatus} </Td>
+                      </Tr>
+                    )}
+                    {data?.expectedByYear && (
+                      <Tr>
+                        <Th color={"black"} textTransform={"unset"}>
+                          {" "}
+                          Expected By Year{" "}
+                        </Th>
+                        <Td> {data.expectedByYear} </Td>
                       </Tr>
                     )}
                     {data?.inclusivePrices?.length > 0 && (
@@ -688,33 +709,7 @@ const SingleProductDetailPage = () => {
                         </Th>
                         <Td> {data?.furnished} </Td>
                       </Tr>
-                    )}
-                    {data?.availabilityStatus && (
-                      <Tr>
-                        <Th color={"black"} textTransform={"unset"}>
-                          {" "}
-                          Availability Status{" "}
-                        </Th>
-                        <Td> {data.availabilityStatus} </Td>
-                      </Tr>
-                    )}
-                    {data?.expectedByYear && (
-                      <Tr>
-                        <Th color={"black"} textTransform={"unset"}>
-                          {" "}
-                          Expected By Year{" "}
-                        </Th>
-                        <Td> {data.expectedByYear} </Td>
-                      </Tr>
-                    )}
-                    {data?.propertyStatus && (
-                      <Tr>
-                        <Th color={"black"} textTransform={"unset"}>
-                          Property Status
-                        </Th>
-                        <Td> {data?.propertyStatus} </Td>
-                      </Tr>
-                    )}
+                    )} 
                     {data?.roadFacingWidth && (
                       <Tr>
                         <Th color={"black"} textTransform={"unset"}>

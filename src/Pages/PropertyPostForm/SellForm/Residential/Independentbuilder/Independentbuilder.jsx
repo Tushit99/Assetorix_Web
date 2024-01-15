@@ -58,8 +58,7 @@ const Independentbuilder = () => {
   const [fromyear, setFromyear] = useState("");
   const [expectedyear, setExpectedYear] = useState("");
   const [ownership, setOwnerShip] = useState("");
-  const [pricedetail, setPricedetail] = useState("");
-  const [priceSqr, setPriceSqr] = useState("");
+  const [pricedetail, setPricedetail] = useState(""); 
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
@@ -87,7 +86,7 @@ const Independentbuilder = () => {
   const [isClicked, setIsClicked] = useState(false);
   const [clickCount, setClickCount] = useState(0);
   const navigate = useNavigate();
-  const [currency, setCurrency] = useState("₹");
+  const [currency, setCurrency] = useState("₹"); 
   // state for drop box images
   const [images, setImages] = useState([]);
   const [isDraging, setIsDraging] = useState(false);
@@ -116,8 +115,7 @@ const Independentbuilder = () => {
         balcony: balconey,
       },
       ownership,
-      price: +pricedetail,
-      priceUnit: +priceSqr,
+      price: +pricedetail, 
       inclusivePrices,
       amenities,
       propertyFeatures,
@@ -239,13 +237,13 @@ const Independentbuilder = () => {
 
       if (furnished == "Furnished" || furnished == "Semi-Furnished") {
         obj.furnishedObj = {
-          light,
-          fans,
-          ac,
-          tv,
-          beds: Beds,
-          wardrobe,
-          geyser,
+          Light: light,
+          Fan: fans,
+          AC: ac,
+          TV: tv,
+          Bed: Beds,
+          Wardrobe: wardrobe,
+          Geyser: geyser,
         };
         obj["furnishedList"] = furnishedarr;
       }
@@ -269,7 +267,7 @@ const Independentbuilder = () => {
         //     body: JSON.stringify(obj)
         // });
         // let data = await response.json();
-        // console.log("data",data);
+        console.log("data",obj);    
         await axios
           .post(`${process.env.REACT_APP_URL}/property/`, obj, {
             headers: head,
@@ -281,12 +279,15 @@ const Independentbuilder = () => {
               status: "success",
               duration: 2000,
             });
+
             // if (images) {
             //   submitImage(e.data.id);
             // } else {
             //   setIsClicked(false);
             //   navigate("/listing");
             // } 
+            setClickCount((prev) => prev - 12);
+            setIsClicked(false);
           });
       } catch (error) {
         toast({
@@ -538,15 +539,7 @@ const Independentbuilder = () => {
     console.log(newarr);
     setWaterSource(newarr);
   };
-
-  const areaCalucation = () => {
-    if (pricedetail && plotArea) {
-      let max = Math.max(Number(pricedetail), Number(plotArea));
-      let min = Math.min(Number(pricedetail), Number(plotArea));
-      let ans = Math.round(max / min);
-      setPriceSqr(ans);
-    }
-  };
+ 
 
   // ======--- image upload function
 
@@ -796,8 +789,7 @@ const Independentbuilder = () => {
               padding={"0 2px"}
               value={plotArea}
               placeholder="Enter area detail"
-              onChange={(e) => {
-                areaCalucation();
+              onChange={(e) => { 
                 setPlotArea(NumericString(e.target.value));
               }}
               required
@@ -1497,8 +1489,7 @@ const Independentbuilder = () => {
                 required
                 w={200}
                 onChange={(e) => {
-                  setPricedetail(NumericString(e.target.value));
-                  areaCalucation();
+                  setPricedetail(NumericString(e.target.value)); 
                 }}
               />
             </InputGroup>
@@ -1847,7 +1838,7 @@ const Independentbuilder = () => {
             value={"Internet / wi-fi connectivity"}
             onClick={handlePropertyFeature}
           >
-            Internet/wi-fi connectivity
+            Internet / wi-fi connectivity
           </button>
           <button
             className={
@@ -1862,14 +1853,14 @@ const Independentbuilder = () => {
           </button>
           <button
             className={
-              propertyFeatures.includes("Security/ Fire Alarm")
+              propertyFeatures.includes("Security / Fire Alarm")
                 ? style.setbtn
                 : style.btn
             }
-            value={"Security/ Fire Alarm"}
+            value={"Security / Fire Alarm"}
             onClick={handlePropertyFeature}
           >
-            Security/ Fire Alarm
+            Security / Fire Alarm
           </button>
           <button
             className={

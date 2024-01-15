@@ -53,8 +53,7 @@ const CoWorkingspace = () => {
   const [availability, setAvailability] = useState("");
   const [fromyear, setFromyear] = useState("");
   const [expectedyear, setExpectedYear] = useState("");
-  const [ownership, setOwnerShip] = useState("");
-  const [priceSqr, setPriceSqr] = useState("");
+  const [ownership, setOwnerShip] = useState(""); 
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [locationAdv, setLocationAdv] = useState([]);
@@ -92,8 +91,7 @@ const CoWorkingspace = () => {
         locatedInside,
       },
       ownership,
-      price: +pricedetail,
-      priceUnit: +priceSqr,
+      price: +pricedetail, 
       society_buildingFeatures: buildingFeature,
       inclusivePrices,
       additionalFeatures: additinalft,
@@ -132,9 +130,7 @@ const CoWorkingspace = () => {
       showToastError("Provide locality");
     } else if (!ownership) {
       showToastError("Provide OwnerShip");
-    } else if (!priceSqr) {
-      showToastError("Provide Price Per sq.ft");
-    }
+    } 
 
     if (locationAdv) {
       obj["locationAdv"] = locationAdv;
@@ -331,16 +327,7 @@ const CoWorkingspace = () => {
       newarr.push(value);
     }
     setLocationAdv(newarr);
-  };
-
-  const areaCalucation = () => {
-    if (pricedetail && plotArea) {
-      let max = Math.max(Number(pricedetail), Number(plotArea));
-      let min = Math.min(Number(pricedetail), Number(plotArea));
-      let ans = Math.round(max / min);
-      setPriceSqr(ans);
-    }
-  };
+  }; 
 
   const handleAdditionalFeature = (e) => {
     e.preventDefault();
@@ -624,8 +611,7 @@ const CoWorkingspace = () => {
               maxLength={"10"}
               value={plotArea}
               onChange={(e) => {
-                setPlotArea(NumericString(e.target.value));
-                areaCalucation();
+                setPlotArea(NumericString(e.target.value)); 
               }}
               required
             />
@@ -861,8 +847,7 @@ const CoWorkingspace = () => {
                 value={pricedetail}
                 maxLength={"12"}
                 required
-                onChange={(e) => {
-                  areaCalucation();
+                onChange={(e) => { 
                   setPricedetail(NumericString(e.target.value));
                 }}
               />
