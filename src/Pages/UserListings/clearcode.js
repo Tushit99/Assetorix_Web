@@ -10,11 +10,11 @@ export const NumericString = (e) => {
   return clear;
 };
 
-export const Emailhandle = (e) => {  
-  const inputString = e;   
-  console.log(inputString);   
-  const result = inputString.replace(/[^a-zA-Z0-9. ]/g, "").replace(/ +/g, " ");   
-  return result.trim();  
+export const Emailhandle = (e) => {
+  const inputString = e;
+  console.log(inputString);
+  const result = inputString.replace(/[^a-zA-Z0-9. ]/g, "").replace(/ +/g, " ");
+  return result.trim();
 };
 
 export const AlphabetString = (e) => {
@@ -43,4 +43,12 @@ export const IndianDateConverter = (inputElement) => {
   } else {
     return "Invalid date";
   }
+};
+
+export const handledateshow = (val) => {
+  let date = val.split(" ")[1];
+  let month = val.split(" ")[2].slice(0, 3);
+  let year = val.split(" ")[3]; 
+
+  return `${date} ${month} ${year}`; 
 };

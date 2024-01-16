@@ -28,6 +28,7 @@ import sold from "./sold.png";
 import priv from "./privacy.png";
 import publc from "./search.png";
 import axios from "axios";
+import { handledateshow } from "./clearcode";
 
 const DeleteBox = ({ e, myListedProperty }) => {
   const [other, setOther] = useState("");
@@ -317,8 +318,10 @@ const DeleteBox = ({ e, myListedProperty }) => {
                   fontWeight="bold"
                 >
                   {e.verificationState}
-                </Badge>
-              </Text>
+                </Badge> 
+              </Text>  
+              <Text fontSize={"2xs"} marginRight={"20px"} color={"rgb(100,100,100"} > Created on : {handledateshow(e.createdOn)} </Text>
+              <Text fontSize={"2xs"} marginRight={"20px"} color={"rgb(100,100,100"} > Last Update : {handledateshow(e.lastUpdated)} </Text>
             </Box>
             <Box
               display={"flex"}
