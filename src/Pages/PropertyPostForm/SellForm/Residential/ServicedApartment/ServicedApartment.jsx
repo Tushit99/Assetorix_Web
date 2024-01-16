@@ -633,9 +633,7 @@ const ServicedApartment = () => {
             {/* property location */}
             <Box className={style.location_form}>
                 <Heading size={"lg"}>Where is your property located?</Heading>
-                <Heading size={"sm"}>
-                    An accurate location helps you connect with the right buyers.
-                </Heading>
+                <Heading size={"sm"}>Location Detail</Heading>   
 
                 <Input
                     type="text"
@@ -1609,11 +1607,8 @@ const ServicedApartment = () => {
 
                 <Box>
                     <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
-                        What makes your property unique
-                    </Heading>
-                    <Heading as={"h3"} size={"xs"} margin={"10px 0"} textAlign={"left"}>
-                        Adding description will increase your listing visibility
-                    </Heading>
+                        Add Description and Unique Features of your Property
+                    </Heading> 
                     <Textarea height={140} value={desc} onChange={(e) => {
                         let my_cleantext = CleanInputText(e.target.value);
                         setDesc(my_cleantext);

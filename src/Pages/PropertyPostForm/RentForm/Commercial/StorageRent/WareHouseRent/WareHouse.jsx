@@ -945,7 +945,7 @@ const WareHouse = () => {
             margin={"10px 0"}
             textAlign={"left"}
           >
-            What makes your property unique
+            Add Description and Unique Features of your Property
           </Heading>
           <Heading
             as={"h3"}

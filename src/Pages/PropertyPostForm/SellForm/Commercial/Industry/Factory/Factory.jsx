@@ -1139,18 +1139,8 @@ const Factory = () => {
             margin={"10px 0"}
             textAlign={"left"}
           >
-            What makes your property unique
-          </Heading>
-          <Heading
-            as={"h3"}
-            size={"xs"}
-            fontWeight={400}
-            color={"#777777"}
-            margin={"10px 0"}
-            textAlign={"left"}
-          >
-            Adding description will increase your listing visibility
-          </Heading>
+            Add Description and Unique Features of your Property
+          </Heading> 
           <Textarea
             height={140}
             value={desc}

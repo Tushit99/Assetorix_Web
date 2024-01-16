@@ -56,8 +56,7 @@ const IndependentHouseUpdate = () => {
   const [fromyear, setFromyear] = useState("");
   const [expectedyear, setExpectedYear] = useState("");
   const [ownership, setOwnerShip] = useState("");
-  const [pricedetail, setPricedetail] = useState("");
-  const [priceSqr, setPriceSqr] = useState("");
+  const [pricedetail, setPricedetail] = useState(""); 
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
@@ -113,8 +112,7 @@ const IndependentHouseUpdate = () => {
         balcony: balconey,
       },
       ownership,
-      price: +pricedetail,
-      priceUnit: +priceSqr,
+      price: +pricedetail, 
       inclusivePrices,
       amenities,
       propertyFeatures,
@@ -378,8 +376,7 @@ const IndependentHouseUpdate = () => {
         setFromyear(e?.propertyStatus);
         setExpectedYear(e?.expectedByYear);
         setOwnerShip(e?.ownership);
-        setPricedetail(e?.price);
-        setPriceSqr(e?.priceUnit);
+        setPricedetail(e?.price); 
         setInclusivePrice(e?.inclusivePrices);
         setAminity(e?.amenities);
         setPropertyFeature(e?.propertyFeatures);
@@ -614,15 +611,7 @@ const IndependentHouseUpdate = () => {
     console.log(newarr);
     setWaterSource(newarr);
   };
-
-  const areaCalucation = () => {
-    if (pricedetail && plotArea) {
-      let max = Math.max(Number(pricedetail), Number(plotArea));
-      let min = Math.min(Number(pricedetail), Number(plotArea));
-      let ans = Math.round(max / min);
-      setPriceSqr(ans);
-    }
-  };
+ 
 
   // =================
   const selectFiles = () => {
@@ -729,7 +718,7 @@ const IndependentHouseUpdate = () => {
     <Box
       w={"94%"}
       padding={"0 20px"}
-      margin={"auto"}
+      margin={"40px auto"}   
       boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"}
     >
       <form onSubmit={handleSubmitData}>
@@ -1712,7 +1701,7 @@ const IndependentHouseUpdate = () => {
               margin={"10px 0"}
               textAlign={"left"}
             >
-              What makes your property unique
+              Add Description and Unique Features of your Property
             </Heading>
             <Heading
               as={"h3"}
@@ -2593,7 +2582,7 @@ const IndependentHouseUpdate = () => {
           _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
           color={"#ffffff"}
         >
-          Post Property
+          Update Property{" "}
         </Button>
       </form>
     </Box>

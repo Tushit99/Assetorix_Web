@@ -1776,7 +1776,7 @@ const FlatAppartmentUpdate = () => {
               marginTop={{ base: 10, md: 5 }}
               textAlign={"left"}
             >
-              What makes your property unique
+              Add Description and Unique Features of your Property
             </Heading>
             <Text fontSize={"sm"} textAlign={"left"}>
               Adding description will increase your listing visibility

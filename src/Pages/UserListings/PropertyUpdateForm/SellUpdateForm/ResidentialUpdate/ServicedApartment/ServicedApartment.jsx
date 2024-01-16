@@ -741,7 +741,7 @@ const ServicedApartmentUpdate = () => {
     <Box
       w={"94%"}
       padding={"0 20px"}
-      margin={"auto"}
+      margin={"40px auto"}
       boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"}
     >
       <form onSubmit={handleSubmitData}>
@@ -1743,7 +1743,7 @@ const ServicedApartmentUpdate = () => {
           </Box>
           <Box>
             <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
-              What makes your property unique
+              Add Description and Unique Features of your Property
             </Heading>
             <Heading as={"h3"} size={"xs"} margin={"10px 0"} textAlign={"left"}>
               Adding description will increase your listing visibility

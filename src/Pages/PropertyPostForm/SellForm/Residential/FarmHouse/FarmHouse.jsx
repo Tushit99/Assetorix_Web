@@ -72,12 +72,12 @@ const FarmHouse = () => {
   const [powerbackup, setPowerbackup] = useState("");
   const [propertyFacing, setPropertyFacing] = useState("");
   const [flooring, setFlooring] = useState("");
-  const [facing, setFacing] = useState("Meter");
-  const [locationAdv, setLocationAdv] = useState([]);
-  const [totalfloors, setTotalFloors] = useState("");
-  const [plotArea, setPlotArea] = useState("");
-  const [desc, setDesc] = useState("");
-  const [pincollection, setPinCollection] = useState([]);
+  const [facing, setFacing] = useState("Meter"); 
+  const [locationAdv, setLocationAdv] = useState([]);  
+  const [totalfloors, setTotalFloors] = useState("");   
+  const [plotArea, setPlotArea] = useState("");  
+  const [desc, setDesc] = useState("");  
+  const [pincollection, setPinCollection] = useState([]);  
   const [additionalPrice, setAdditionalPrice] = useState(false);
   const [maintenancePrice, setMaintenancePrice] = useState("");
   const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
@@ -85,7 +85,8 @@ const FarmHouse = () => {
   const [bookingAmount, setBookingAmount] = useState("");
   const [annualDuesPayable, setAnnualDuesPayable] = useState("");
   const [isClicked, setIsClicked] = useState(false);
-  const [clickCount, setClickCount] = useState(0);
+  const [clickCount, setClickCount] = useState(0); 
+  const [currency, setCurrency] = useState("₹");  
   const navigate = useNavigate();
   // state for drop box images
   const [images, setImages] = useState([]);
@@ -629,9 +630,7 @@ const FarmHouse = () => {
       {/* property location */}
       <Box className={style.location_form}>
         <Heading size={"lg"}>Where is your Farm House located?</Heading>
-        <Heading size={"sm"}>
-          An accurate location helps you connect with the right buyers.
-        </Heading>
+        <Heading size={"sm"}>Location Detail</Heading>   
 
         <Input
           type="text"
@@ -1666,11 +1665,9 @@ const FarmHouse = () => {
 
         <Box display={"grid"} gap={2}>
           <Heading as={"h3"} size={"md"} marginTop={"10px"} textAlign={"left"}>
-            What makes your property unique
+            Add Description and Unique Features of your Property
           </Heading>
-          <Heading as={"h3"} size={"xs"} textAlign={"left"}>
-            Adding description will increase your listing visibility
-          </Heading>
+          
           <Textarea
             height={140}
             borderRadius={0}

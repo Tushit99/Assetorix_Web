@@ -235,16 +235,16 @@ const IndependentbuilderUpdate = () => {
 
       if (furnished == "Furnished" || furnished == "Semi-Furnished") {
         obj.furnishedObj = {
-          light,
-          fans,
-          ac,
-          tv,
-          beds: Beds,
-          wardrobe,
-          geyser,
+          Light: light,
+          Fan: fans,
+          AC: ac,
+          TV: tv,
+          Bed: Beds,
+          Wardrobe: wardrobe,
+          Geyser: geyser,
         };
         obj["furnishedList"] = furnishedarr;
-      }
+      } 
 
       if (furnished.length > 0) {
         obj["furnished"] = furnished;
@@ -350,7 +350,7 @@ const IndependentbuilderUpdate = () => {
       .get(`${process.env.REACT_APP_URL}/property/single/${productID}`)
       .then((detail) => {
         let e = detail.data.data;
-        console.log(e);
+        console.log(e); 
         setCountry(e?.address?.country);
         setFacingWidth(e?.roadFacingWidth);
         setCity(e?.address?.city);
@@ -395,7 +395,8 @@ const IndependentbuilderUpdate = () => {
         setFlooring(e?.flooring);
         setFacing(e?.roadFacingWidthType);
         setLocationAdv(e?.locationAdv);
-        setTotalFloors(e?.totalFloors);
+        setTotalFloors(e?.totalFloors); 
+        setFloorOn(e?.floorOn);  
         setPlotArea(e?.plotArea);
         setDesc(e?.description);
         setAdditionalPrice(
@@ -727,13 +728,13 @@ const IndependentbuilderUpdate = () => {
     <Box
       w={"94%"}
       padding={"0 20px"}
-      margin={"auto"}
+      margin={"40px auto"}
       boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"}
     >
       <form onSubmit={handleSubmitData}>
         {/* property location */}
         <Box className={style.location_form}>
-          <Heading size={"lg"}>Edit your Independent Builder Detail</Heading>
+          <Heading size={"lg"}>Edit your Independent / Builder Floor Detail</Heading> 
           <Heading size={"sm"}>Location Detail</Heading>
 
           <Input
@@ -1800,7 +1801,7 @@ const IndependentbuilderUpdate = () => {
           {/* ======================== description =================================== */}
           <Box>
             <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
-              What makes your property unique
+              Add Description and Unique Features of your Property
             </Heading>
             <Heading as={"h3"} size={"xs"} margin={"10px 0"} textAlign={"left"}>
               Adding description will increase your listing visibility
@@ -2613,7 +2614,7 @@ const IndependentbuilderUpdate = () => {
           _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
           color={"#ffffff"}
         >
-          Post Property
+          Update Property
         </Button>
       </form>
     </Box>

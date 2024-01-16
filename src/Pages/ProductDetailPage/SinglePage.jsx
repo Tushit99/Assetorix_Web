@@ -110,7 +110,7 @@ import school from "./location/school.png";
 import highway from "./location/road.png";
 import hospital from "./location/hospital.png";
 import { LiaBedSolid } from "react-icons/lia";
-import { LuConstruction } from "react-icons/lu"; 
+import { LuConstruction } from "react-icons/lu";
 import scale from "./scale.jpg";
 import stairs from "./stairs.png";
 import powerback from "./backup.png";
@@ -352,8 +352,8 @@ const SingleProductDetailPage = () => {
               alt="property-img"
             />
           </Box>
-          <Text textAlign={"end"} fontSize={"xs"}> 
-            <strong> Updated on: </strong> {data?.lastUpdated} 
+          <Text textAlign={"end"} fontSize={"xs"}>
+            <strong> Updated on: </strong> {data?.lastUpdated}
           </Text>
           {/* ===================== mobile Pricing (Price only for mobile) =================================== */}
           <Box display={{ base: "grid", md: "none" }}>
@@ -402,8 +402,7 @@ const SingleProductDetailPage = () => {
                     color={"black"}
                     _selected={{ bg: "#b2f5ea", border: "1px solid #b2f5ea" }}
                   >
-                    {" "}
-                    Other Detail{" "}
+                    Other Detail
                   </Tab>
                 </TabList>
                 <TabPanels>
@@ -486,16 +485,16 @@ const SingleProductDetailPage = () => {
                       >
                         <Box
                           flex={3}
-                          display={"flex"}  
-                          gap={2} 
+                          display={"flex"}
+                          gap={2}
                           alignItems={"center"}
                           justifyContent={"center"}
                         >
                           <Image width={"30px"} src={scale} alt={"scale"} />
                           <Text>
-                            {data.plotArea || <Skeleton width={"100px"} />}  
+                            {data.plotArea || <Skeleton width={"100px"} />}
                           </Text>
-                          <Text marginLeft={"-5px"}> 
+                          <Text marginLeft={"-5px"}>
                             {data.plotAreaUnit || <Skeleton width={"100px"} />}
                           </Text>
                         </Box>
@@ -513,16 +512,16 @@ const SingleProductDetailPage = () => {
                           justifyContent={"center"}
                           gap={2}
                         >
-                          <Image width={"30px"} src={stairs} alt={"stairs"} />
+                          <Icon as={FaRegBuilding} boxSize={6} />     
                           <Text>
                             {data.totalFloors || <Skeleton width={"100px"} />}
                           </Text>
                         </Box>
-                        <Heading size={"sm"}> Total floor </Heading>
+                        <Heading size={"sm"}> Total Floor's </Heading>
                       </Box>
-                      <Box
+                      <Box 
                         display={data.totalFloors ? "grid" : "none"}
-                        flex={1}
+                        flex={1} 
                         textAlign={"center"}
                       >
                         <Box
@@ -532,10 +531,10 @@ const SingleProductDetailPage = () => {
                           justifyContent={"center"}
                           gap={2}
                         >
-                          <Icon as={FaRegBuilding} boxSize={6} />
+                          <Image width={"30px"} src={stairs} alt={"stairs"} />
                           {data.floorOn || <Skeleton width={"100px"} />}
                         </Box>
-                        <Heading size={"sm"}> On floor </Heading>
+                        <Heading size={"sm"}> Property Floor no. </Heading>
                       </Box>
                       <Box
                         display={data.totalFloors ? "grid" : "none"}
@@ -563,55 +562,52 @@ const SingleProductDetailPage = () => {
                 </TabPanels>
               </Tabs>
             </Box>
-
-            {/* ======================= discription =========================== */}
-
             {/* ======================================== under construction ==================================== */}
             {/* Plot Detail */}
 
             {/* =============================== Additional Pricing Detail =================================== */}
             <Box>
-              <Box
-                border={"3px solid rgb(200,200,200)"}
+              <Box 
+              // display={data?.additionalPricingDetails.maintenancePrice ? "block" : "none"}   
+                border={"3px solid rgb(200,200,200)"} 
                 padding={"6px 14px 10px 24px"}
               >
-                <Heading size={"md"} as={"h3"} marginLeft={0} paddingBottom={2}>
+                <Heading size={"md"} as={"h3"} marginLeft={0} paddingBottom={2}>   
                   Some Additional Pricing Details
                 </Heading>
                 <TableContainer>
                   <Table variant="striped" colorScheme="teal" size="sm">
                     <Tbody>
-                      <Tr>
+                      <Tr display={data?.additionalPricingDetails?.maintenancePrice ? "auto":"none"}>
                         <Td> Maintenance Price </Td>
                         <Td>
-                          {data?.countryCurrency}{" "}
+                          {data?.countryCurrency} 
                           {data?.additionalPricingDetails?.maintenancePrice}
                           {` ${data?.additionalPricingDetails?.maintenanceTimePeriod}`}
                         </Td>
                       </Tr>
-                      <Tr>
+                      <Tr display={data?.additionalPricingDetails?.expectedRental ? "auto":"none"}>
                         <Td> Expected Rental </Td>
                         <Td>
-                          {data?.countryCurrency}{" "}
+                          {data?.countryCurrency} 
                           {data?.additionalPricingDetails?.expectedRental}
                         </Td>
                       </Tr>
-                      <Tr>
+                      <Tr display={data?.additionalPricingDetails?.bookingAmount ? "auto":"none"}>
                         <Td> Booking Amount </Td>
-                        <Td>
-                          {" "}
+                        <Td> 
                           {data?.countryCurrency}{" "}
                           {data?.additionalPricingDetails?.bookingAmount}
                         </Td>
                       </Tr>
-                      <Tr>
+                      <Tr display={data?.additionalPricingDetails?.annualDuesPayable ? "auto":"none"}>
                         <Td> Annual Dues Payable </Td>
                         <Td>
                           {data?.countryCurrency}{" "}
                           {data?.additionalPricingDetails?.annualDuesPayable}
                         </Td>
                       </Tr>
-                      <Tr>
+                      <Tr display={data?.additionalPricingDetails?.membershipCharge ? "auto":"none"}>
                         <Td> Membership Charge </Td>
                         <Td>
                           {data?.countryCurrency}{" "}
@@ -651,13 +647,18 @@ const SingleProductDetailPage = () => {
                             gap={2}
                           >
                             <TagLabel>{data?.availabilityStatus}</TagLabel>
-                            {data?.availabilityStatus=="Under construction" ? <TagLeftIcon as={LuConstruction} /> : <TagLeftIcon as={PiVan} />}
+                            {data?.availabilityStatus ==
+                            "Under construction" ? (
+                              <TagLeftIcon as={LuConstruction} />
+                            ) : (
+                              <TagLeftIcon as={PiVan} />
+                            )}
                           </Tag>
                         </Td>
                       </Tr>
-                    )}  
+                    )}
                     {data?.propertyStatus && (
-                      <Tr> 
+                      <Tr>
                         <Th color={"black"} textTransform={"unset"}>
                           Property Status
                         </Th>
@@ -709,7 +710,7 @@ const SingleProductDetailPage = () => {
                         </Th>
                         <Td> {data?.furnished} </Td>
                       </Tr>
-                    )} 
+                    )}
                     {data?.roadFacingWidth && (
                       <Tr>
                         <Th color={"black"} textTransform={"unset"}>

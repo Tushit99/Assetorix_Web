@@ -611,9 +611,7 @@ const IndependentHouse = () => {
       {/* property location */}
       <Box className={style.location_form}>
         <Heading size={"lg"}>Where is your Independent House / villa located?</Heading>
-        <Heading size={"sm"}>
-          An accurate location helps you connect with the right buyers.
-        </Heading>
+        <Heading size={"sm"}>Location Detail</Heading> 
         <Input
           type="text"
           padding={"0 10px"}
@@ -1465,27 +1463,7 @@ const IndependentHouse = () => {
                   setPricedetail(NumericString(e.target.value));
                 }}
               />
-            </Box>
-            <Box display={"grid"} gap={0}>
-              <Heading
-                as={"h3"}
-                size={"xs"}
-                fontWeight={400}
-                textAlign={"left"}
-              >
-                {isCountry.country == "india" ? "₹" : "$"} Price Per {areaPer}
-              </Heading>
-              <Input
-                type="text"
-                value={priceSqr}
-                maxLength={"10"}
-                readOnly
-                onChange={(e) => {
-                  setPlotArea(NumericString(e.target.value));
-                }}
-                required
-              />
-            </Box>
+            </Box>    
           </Box>
         </Box>
         {/* Additional (Checkbox) */}
@@ -1604,100 +1582,89 @@ const IndependentHouse = () => {
           </Heading>
         </Box>
 
-        {/* image Drag and Drop area  */}
         <Box>
-          <Box className={style.top}>
-            <Heading
-              color={"black"}
-              size={"sm"}
-              textAlign={"left"}
-              margin={"10px 0"}
-            >
-              {" "}
-              Upload Your Property image{" "}
-            </Heading>
-          </Box>
-          <Box className={style.card}>
-            <Box
-              className={style.dragArea}
-              onDragOver={ondragover}
-              onDragLeave={ondragleave}
-              onDrop={ondrop}
-            >
-              {isDraging ? (
-                <Text className={style.select}>Drop image here</Text>
-              ) : (
-                <>
-                  Drag & Drop image here or
-                  <Text
-                    className={style.select}
-                    role="button"
-                    onClick={selectFiles}
-                  >
-                    {" "}
-                    Browse{" "}
-                  </Text>
-                </>
-              )}
-              <input
-                type={"file"}
-                name="image"
-                accept="image/jpg, image/png, image/jpeg"
-                formMethod="post"
-                formEncType="multipart/form-data"
-                className={style.file}
-                multiple
-                ref={fileInputRef}
-                onChange={onFileSelect}
-              />
-            </Box>
-            <Box className={style.container}>
-              {images.map((image, index) => (
-                <Box className={style.image} key={index}>
-                  <Text
-                    className={style.delete}
-                    onClick={() => removeImage(index)}
-                  >
-                    &#10006;
-                  </Text>
-                  <img src={URL.createObjectURL(image.image)} alt="images" />
-                </Box>
-              ))}
-            </Box>
-          </Box>
-        </Box>
-
-        <Box>
-          <Heading
-            as={"h3"}
-            size={"md"}
-            fontWeight={600}
-            margin={"10px 0"}
-            textAlign={"left"}
-          >
-            What makes your property unique
-          </Heading>
-          <Heading
-            as={"h3"}
-            size={"xs"}
-            fontWeight={400}
-            color={"#777777"}
-            margin={"10px 0"}
-            textAlign={"left"}
-          >
-            Adding description will increase your listing visibility
-          </Heading>
+          <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
+            Add Description and Unique Features of your Property
+          </Heading> 
           <Textarea
             height={140}
-            value={desc}
+            required
             placeholder="Add Description"
+            value={desc}
             onChange={(e) => {
               let my_cleantext = CleanInputText(e.target.value);
               setDesc(my_cleantext);
             }}
           ></Textarea>
         </Box>
+
+      {/* image Drag and Drop area  */}
+      <Box>
+        <Box className={style.top}>
+          <Heading
+            color={"black"}
+            size={"sm"}
+            textAlign={"left"}
+            marginTop={{base:10,md:5}}
+          > 
+            Upload Your Property image 
+          </Heading>
+        </Box>
+        <Box className={style.card}>
+          <Box
+            border={
+              isDraging ? "2px dashed rgb(46,49,146)" : "2px dashed #9e9e9e"
+            }
+            className={style.dragArea}
+            onDragOver={ondragover}
+            onDragLeave={ondragleave}
+            onDrop={ondrop}
+          >
+            {isDraging ? (
+              <Text textAlign={"center"} color={"rgb(0, 134, 254)"}>
+                Drop image here
+              </Text>
+            ) : (
+              <>
+                Drag & Drop image here or
+                <Text
+                  className={style.select}
+                  role="button"
+                  onClick={selectFiles}
+                >
+                  Browse
+                </Text>
+              </>
+            )}
+            <input
+              type={"file"}
+              name="image"
+              accept="image/jpg, image/png, image/jpeg"
+              formMethod="post"
+              formEncType="multipart/form-data"
+              className={style.file}
+              multiple
+              ref={fileInputRef}
+              onChange={onFileSelect}
+            />
+          </Box>
+          <Box className={style.container}>
+            {images.map((image, index) => (
+              <Box className={style.image} key={index}>
+                <Text
+                  className={style.delete}
+                  onClick={() => removeImage(index)}
+                >
+                  &#10006;
+                </Text>
+                <img src={URL.createObjectURL(image.image)} alt="images" />
+              </Box>
+            ))}
+          </Box>
+        </Box>
       </Box>
+      </Box> 
+
       {/* Add amenities/unique features */}
       <Box>
         <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>

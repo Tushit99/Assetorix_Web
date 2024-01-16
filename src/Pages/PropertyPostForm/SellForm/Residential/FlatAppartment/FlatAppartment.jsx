@@ -1551,37 +1551,38 @@ const FlatAppartment = () => {
         </Box>
 
         {/* Additional Pricing Detail (Optional) */}
+        <Heading
+          as={"h4"}
+          size={"sm"} 
+          marginTop={{base:5,md:10}} 
+          fontWeight={700}
+          textAlign={"left"}
+        >
+          Additional Pricing Detail (Optional)
+        </Heading>
+        <InputGroup w={"300px"} margin={"10px 0"}>
+          <Input
+            w={"60%"}
+            type="text"
+            onChange={(e) =>
+              setMaintenancePrice(NumericString(e.target.value))
+            }
+            value={maintenancePrice}
+            placeholder={"Maintenance Price"}
+          />
+          <Select
+            w={"40%"}
+            borderRadius={0}
+            value={maintenanceTimePeriod}
+            onChange={(e) => setMaintenanceTimePeriod(e.target.value)}
+          >
+            <option value="Monthly">Monthly</option>
+            <option value="Yearly">Yearly</option>
+          </Select>
+        </InputGroup> 
         <Box display={"grid"} marginTop={"6px"}>
           {additionalPrice && (
             <>
-              <Heading
-                as={"h4"}
-                size={"sm"}
-                fontWeight={700}
-                textAlign={"left"}
-              >
-                Additional Pricing Detail (Optional)
-              </Heading>
-              <InputGroup w={"300px"} margin={"10px 0"}>
-                <Input
-                  w={"60%"}
-                  type="text"
-                  onChange={(e) =>
-                    setMaintenancePrice(NumericString(e.target.value))
-                  }
-                  value={maintenancePrice}
-                  placeholder={"Maintenance Price"}
-                />
-                <Select
-                  w={"40%"}
-                  borderRadius={0}
-                  value={maintenanceTimePeriod}
-                  onChange={(e) => setMaintenanceTimePeriod(e.target.value)}
-                >
-                  <option value="Monthly">Monthly</option>
-                  <option value="Yearly">Yearly</option>
-                </Select>
-              </InputGroup>
               <Input
                 type="text"
                 w={"300px"}
@@ -1643,13 +1644,11 @@ const FlatAppartment = () => {
           </Heading>
         </Box>
 
+      </Box>
         <Box>
           <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
-            What makes your property unique
-          </Heading>
-          <Text fontSize={"sm"} textAlign={"left"}>
-            Adding description will increase your listing visibility
-          </Text>
+            Add Description and Unique Features of your Property
+          </Heading> 
           <Textarea
             height={140}
             required
@@ -1661,8 +1660,7 @@ const FlatAppartment = () => {
             }}
           ></Textarea>
         </Box>
-      </Box>
-
+ 
       {/* image Drag and Drop area  */}
       <Box>
         <Box className={style.top}>

@@ -19,10 +19,11 @@ import {
 import style from "./Login.module.css";
 import img from "./sideimg.png";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginuser } from "../../Redux/userauth/action";
-import BeatLoader from "react-spinners/BeatLoader";
+import BeatLoader from "react-spinners/BeatLoader";   
+
 
 const Login = () => {
     const data = useSelector((store) => store.userreducer);
@@ -31,12 +32,11 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const location = useLocation(); 
     const [show, setshow] = useState(true);
     const [mobileWarn, setMobileWarn] = useState("");
     const [warning, setWarning] = useState(""); 
-
-    // console.log(onpage);    
-
+     
     const handlelogin = async () => {
         if (mobile.length <= 9 || mobile.length >= 11) {
             setMobileWarn("Mobile number is invalid!");
@@ -91,7 +91,11 @@ const Login = () => {
             //     console.log()
             //     navigate(`${onpage}`);
             // }else{
-            navigate("/");
+                if(location.state){
+                    navigate(location.state.onpage);   
+                }else{
+                    navigate("/");  
+                }
             // }
         }
     }, [data]);
@@ -171,8 +175,8 @@ const Login = () => {
                                     <Input
                                         type={show ? "text" : "password"}
                                         maxLength={"25"}
-                                        placeholder={"Enter Password"}
-                                        colorScheme="linkedin"
+                                        placeholder={"Enter Password"} 
+                                        colorScheme="linkedin"    
                                         onChange={(e) => {
                                             const result = (e.target.value).replace(/[^a-zA-Z0-9\-!@#$%^&*]/g, "");
                                             setPassword(result)
@@ -213,9 +217,8 @@ const Login = () => {
                                 alignItems={"center"}
                                 justifyContent={"left"}
                             >
-                                <Checkbox colorScheme={"blue"} className={style.boxback}>
-                                    {" "}
-                                    Remember me{" "}
+                                <Checkbox colorScheme={"blue"} className={style.boxback}> 
+                                    Remember me 
                                 </Checkbox>
                             </Box>
                             <Box margin={0} width={"100%"}>
@@ -241,12 +244,11 @@ const Login = () => {
                                     Login
                                 </Button>
                             </Box>
-                            <Text className={style.resgister}>
-                                {" "}
-                                Don't have an acount?{" "}
+                            <Text className={style.resgister}> 
+                                Don't have an acount? 
                                 <Link to={"/signup"} className={style.tosign}>
                                     Register
-                                </Link>{" "}
+                                </Link> 
                             </Text>
                         </Box>
                     </Flex>

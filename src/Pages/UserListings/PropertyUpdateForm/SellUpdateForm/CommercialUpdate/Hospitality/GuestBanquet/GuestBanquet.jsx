@@ -142,15 +142,15 @@ const GuestBanquetUpdate = () => {
         setPropertyFacing(e?.propertyFacing);
         setFlooring(e?.flooring);
         setFurnished(e?.furnished);
-        if (e?.furnished == "Furnished" || e?.furnished == "Semi-Furnished") {
+        if (e.furnished == "Furnished" || e.furnished == "Semi-Furnished") {
+          setLight(e?.furnishedObj?.Light || 0);
+          setFans(e?.furnishedObj?.Fan || 0);
+          setAc(e?.furnishedObj?.AC || 0);
+          setTv(e?.furnishedObj?.TV || 0);
+          setBeds(e?.furnishedObj?.Bed || 0);
+          setWardrobe(e?.furnishedObj?.Wardrobe || 0);
+          setGeyser(e?.furnishedObj?.Geyser || 0);
           setfurnishedarr(e?.furnishedList);
-          setLight(e?.furnishedObj?.light);
-          setFans(e?.furnishedObj?.fans);
-          setAc(e?.furnishedObj?.ac);
-          setTv(e?.furnishedObj?.tv);
-          setBeds(e?.furnishedObj?.beds);
-          setWardrobe(e?.furnishedObj?.wardrobe);
-          setGeyser(e?.furnishedObj?.geyser);
         }
         setSavedImages(e.images);
       });
@@ -687,7 +687,7 @@ const GuestBanquetUpdate = () => {
     <Box
       w={"94%"}
       padding={"0 20px"}
-      margin={"auto"}
+      margin={"40px auto"}
       boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"}
     >
       <form onSubmit={handleSubmitData}>
@@ -1749,7 +1749,7 @@ const GuestBanquetUpdate = () => {
             margin={"10px 0"}
             textAlign={"left"}
           >
-            What makes your property unique
+            Add Description and Unique Features of your Property
           </Heading>
           <Heading
             as={"h3"}

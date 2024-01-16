@@ -600,9 +600,7 @@ const GuestBanquet = () => {
             {/* ============================= property location =========================== */}
             <Box className={style.location_form}>
                 <Heading size={"lg"}>Where is your property located?</Heading>
-                <Heading size={"sm"}>
-                    An accurate location helps you connect with the right buyers.
-                </Heading>
+                <Heading size={"sm"}>Location Detail</Heading>   
                 <Input
                     type="text"
                     maxLength={"100"}
@@ -1575,11 +1573,8 @@ const GuestBanquet = () => {
             {/* ============================ Property unique discription ============================ */}
             <Box>
                 <Heading as={"h3"} size={"md"} fontWeight={600} margin={"10px 0"} textAlign={"left"}>
-                    What makes your property unique
-                </Heading>
-                <Heading as={"h3"} size={"xs"} fontWeight={400} color={"#777777"} margin={"10px 0"} textAlign={"left"}>
-                    Adding description will increase your listing visibility
-                </Heading>
+                    Add Description and Unique Features of your Property
+                </Heading> 
                 <Textarea height={140} value={desc} onChange={(e) => {
                     let my_cleantext = CleanInputText(e.target.value);
                     setDesc(my_cleantext);
