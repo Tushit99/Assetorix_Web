@@ -6,6 +6,7 @@ import {
   Heading,
   Input,
   InputGroup,
+  InputRightElement, 
   Select,
   Text,
   Textarea,
@@ -52,7 +53,7 @@ const IndependentHouse = () => {
   const [fromyear, setFromyear] = useState("");
   const [expectedyear, setExpectedYear] = useState("");
   const [ownership, setOwnerShip] = useState("");
-  const [pricedetail, setPricedetail] = useState(""); 
+  const [pricedetail, setPricedetail] = useState("");
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
@@ -107,7 +108,7 @@ const IndependentHouse = () => {
         balcony: balconey,
       },
       ownership,
-      price: +pricedetail, 
+      price: +pricedetail,
       inclusivePrices,
       amenities,
       propertyFeatures,
@@ -267,13 +268,13 @@ const IndependentHouse = () => {
               description: e.data.msg,
               status: "success",
               duration: 2000,
-            });  
+            });
             // if(images){
-            //     submitImage(e.data.id);  
+            //     submitImage(e.data.id);
             // }else{
             //     setIsClicked(false);
-            //     navigate("/listing");  
-            // } 
+            //     navigate("/listing");
+            // }
             setClickCount((prev) => prev - 12);
             setIsClicked(false);
           });
@@ -296,7 +297,7 @@ const IndependentHouse = () => {
         position: "top-right",
       });
       setClickCount((prev) => prev - 12);
-      setIsClicked(false); 
+      setIsClicked(false);
     }
   };
 
@@ -530,7 +531,7 @@ const IndependentHouse = () => {
     }
     console.log(newarr);
     setWaterSource(newarr);
-  }; 
+  };
 
   // ======--- image upload function
 
@@ -604,14 +605,15 @@ const IndependentHouse = () => {
     }
     console.log("droped");
   };
- 
 
   return (
     <form onSubmit={handleSubmitData}>
       {/* property location */}
       <Box className={style.location_form}>
-        <Heading size={"lg"}>Where is your Independent House / villa located?</Heading>
-        <Heading size={"sm"}>Location Detail</Heading> 
+        <Heading size={"lg"}>
+          Where is your Independent House / villa located?
+        </Heading>
+        <Heading size={"sm"}>Location Detail</Heading>
         <Input
           type="text"
           padding={"0 10px"}
@@ -638,9 +640,9 @@ const IndependentHouse = () => {
           type="text"
           placeholder={"Enter pincode"}
           padding={"0 10px"}
-          variant="flushed" 
+          variant="flushed"
           required
-          maxLength={6} 
+          maxLength={6}
           fontSize={"md"}
           value={pincode}
           onChange={handlepinfetch}
@@ -702,16 +704,20 @@ const IndependentHouse = () => {
         />
       </Box>
       {/* Property Detail */}
-      <Box marginTop={8}> 
-        <Heading as={"h4"} textAlign={"left"} size={"sm"} margin={"0 0 30px 0 "}>
-          Add Room Details
+      <Box marginTop={{base:10,md:5}}>
+        <Heading
+          as={"h4"}
+          textAlign={"left"}
+          size={"sm"} 
+        >
+          Add Room Details 
         </Heading>
         <Box as={"div"} className={style.inp_form_numbers}>
           <Box textAlign={"left"}>
             <Text> No. of Bedrooms </Text>
             <Input
               type="text"
-              variant="flushed"
+              variant={"outline"}
               maxLength={"2"}
               padding={"0 2px"}
               onChange={(e) => setBedRoom(NumericString(e.target.value))}
@@ -723,7 +729,7 @@ const IndependentHouse = () => {
             <Text> No. of Bathrooms </Text>
             <Input
               type="text"
-              variant="flushed"
+              variant={"outline"}
               maxLength={"2"}
               onChange={(e) => setBathroom(NumericString(e.target.value))}
               value={bathroom}
@@ -735,7 +741,7 @@ const IndependentHouse = () => {
             <Text> No. of Balconies </Text>
             <Input
               type="text"
-              variant="flushed"
+              variant={"outline"}
               onChange={(e) => setBalcony(NumericString(e.target.value))}
               value={balconey}
               required
@@ -745,66 +751,70 @@ const IndependentHouse = () => {
           </Box>
         </Box>
         {/* ====================================== */}
-        {/* add area details */}
-        <Box textAlign={"left"} padding={"10px 0"}>
-          <Heading as={"h3"} margin={"5px 0"} size={"sm"}>
+         {/* add area details */}
+         <Box textAlign={"left"}>
+          <Heading as={"h3"} marginTop={{ base: 10, md: 3 }} size={"sm"}>
             Add Area Details
           </Heading>
-          <Text margin={"5px 0"}> Atleast one area type is mandatory </Text>
-          <ButtonGroup
-            className={style.select_land}
-            size="sm"
+          <InputGroup
+            w={300}
+            size="md"
+            marginTop={2}
             isAttached
             variant="outline"
           >
             <Input
+              type="text"
               value={plotArea}
-              maxLength={"10"}
+              placeholder="Enter area detail"
+              w={200}
+              maxLength={"6"}
               onChange={(e) => {
                 setPlotArea(NumericString(e.target.value));
               }}
               required
-              type="text"
             />
-            <Select
-              value={areaPer}
-              onChange={(e) => {
-                setAreaPer(e.target.value);
-              }}
-              className={style.select}
-              required
-            >
-              <option value="sq.ft">sq.ft</option>
-              <option value="sq.yards">sq.yards</option>
-              <option value="sq.m">sq.m</option>
-              <option value="acres">acres</option>
-              <option value="marla">marla</option>
-              <option value="cents">cents</option>
-              <option value="bigha">bigha</option>
-              <option value="kottah">kottah</option>
-              <option value="kanal">kanal</option>
-              <option value="grounds">grounds</option>
-              <option value="ares">ares</option>
-              <option value="biswa">biswa</option>
-              <option value="guntha">guntha</option>
-              <option value="aankadam">aankadam</option>
-              <option value="hectares">hectares</option>
-              <option value="rood">rood</option>
-              <option value="chataks">chataks</option>
-              <option value="perch">perch</option>
-            </Select>
-          </ButtonGroup>
+            <InputRightElement width={100}>
+              <Select
+                value={areaPer}
+                borderRadius={0}
+                onChange={(e) => {
+                  setAreaPer(e.target.value);
+                }}
+                className={style.select}
+                required
+              >
+                <option value="sq.ft">sq.ft</option>
+                <option value="sq.yards">sq.yards</option>
+                <option value="sq.m">sq.m</option>
+                <option value="acres">acres</option>
+                <option value="marla">marla</option>
+                <option value="cents">cents</option>
+                <option value="bigha">bigha</option>
+                <option value="kottah">kottah</option>
+                <option value="kanal">kanal</option>
+                <option value="grounds">grounds</option>
+                <option value="ares">ares</option>
+                <option value="biswa">biswa</option>
+                <option value="guntha">guntha</option>
+                <option value="aankadam">aankadam</option>
+                <option value="hectares">hectares</option>
+                <option value="rood">rood</option>
+                <option value="chataks">chataks</option>
+                <option value="perch">perch</option>
+              </Select>
+            </InputRightElement>
+          </InputGroup>
         </Box>
         {/* other Room  */}
         <Box
           padding={"10px 0"}
-          display={"grid"}
-          gap={6}
+          display={"grid"}  
           className={style.optional_box}
-        >
-          <Heading as={"h3"} size={"sm"}>
+        > 
+          <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}}>
             Other rooms (optional)
-          </Heading>
+          </Heading> 
           <Box>
             <button
               value={"Pooja Room"}
@@ -847,8 +857,8 @@ const IndependentHouse = () => {
         {/* furnish */}
         <Box
           padding={"10px 0"}
-          display={"grid"}
-          gap={6}
+          display={"grid"} 
+          marginTop={{base:10,md:5}} 
           className={style.optional_box}
         >
           <Heading as={"h3"} size={"sm"}>
@@ -888,8 +898,7 @@ const IndependentHouse = () => {
                 ? "grid"
                 : "none"
             }
-            padding={"10px 0"}
-            gap={6}
+            padding={"10px 0"} 
           >
             <Box className={style.furnished_detail}>
               <Box>
@@ -1167,8 +1176,8 @@ const IndependentHouse = () => {
           </Box>
         </Box>
         {/* reserved */}
-        <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"}>
+        <Box className={style.optional_box} >
+          <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}}>
             Reserved Parking (optional)
           </Heading>
           <div className={style.parking}>
@@ -1221,22 +1230,19 @@ const IndependentHouse = () => {
           </div>
         </Box>
         {/* floor details */}
-        <Box textAlign={"left"}>
+        <Box textAlign={"left"} >
           <Heading
-            as={"h3"}
-            size={"md"}
-            margin={"30px 0 10px 0"}
-            textAlign={"left"}
+            as={"h3"} size={"sm"}
+            textAlign={"left"} 
+            marginTop={{base:10,md:5}} 
           >
             Floor Details
-          </Heading>
-          <Text textAlign={"left"} margin={"10px 0"}>
-            Total no of floors
-          </Text>
+          </Heading> 
           <Box display={"flex"} alignItems={"center"} gap={5}>
             <Input
               type="text"
-              maxLength={"2"}
+              maxLength={"2"} 
+              placeholder="Enter total floor" 
               value={totalfloors}
               onChange={(e) => {
                 const nowval = NumericString(e.target.value) > 90;
@@ -1254,11 +1260,11 @@ const IndependentHouse = () => {
               required
               w={250}
             />
-          </Box>
+          </Box> 
         </Box>
         {/* Availability status */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Availability Status
           </Heading>
           <Box className={style.grid}>
@@ -1378,14 +1384,14 @@ const IndependentHouse = () => {
         <Box>
           <Heading
             as={"h3"}
-            size={"md"}
-            margin={"30px 0 10px 0"}
+            size={"sm"} 
+            marginTop={{base:10,md:5}} 
             textAlign={"left"}
           >
             Add pricing and details...
           </Heading>
           {/* OwnerShip detail */}
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Ownership
           </Heading>
           <Box className={style.grid} gap={4}>
@@ -1439,33 +1445,44 @@ const IndependentHouse = () => {
             </button>
           </Box>
         </Box>
-        {/* Price Details */}
-        <Box>
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+       
+         {/* Price Details */}
+         <Box>
+          <Heading
+            as={"h3"}
+            size={"sm"}
+            marginTop={{ base: 10, md: 5 }}
+            textAlign={"left"}
+          >
             Price Details
           </Heading>
-          <Box display={"flex"} alignItems={"center"} gap={5}>
-            <Box display={"grid"} gap={0}>
-              <Heading
-                as={"h3"}
-                size={"xs"}
-                fontWeight={400}
-                textAlign={"left"}
+          <Box display={"flex"} alignItems={"center"} gap={5} marginTop={1}>
+            <InputGroup w={300} gap={2}>
+              <Select
+                w={"-moz-fit-content"}
+                value={currency}
+                borderRadius={0}
+                onClick={(e) => setCurrency(e.target.value)}
               >
-                {isCountry.country == "india" ? "₹" : "$"} Price Details
-              </Heading>
+                <option value="₹">₹ INR </option>
+                <option value="$">$ USD </option>
+              </Select>
               <Input
                 type="text"
                 value={pricedetail}
                 maxLength={"10"}
+                placeholder={`Price`}
                 required
+                w={200}
                 onChange={(e) => {
-                  setPricedetail(NumericString(e.target.value));
-                }}
+                  setPricedetail(NumericString(e.target.value)); 
+                }}   
               />
-            </Box>    
+            </InputGroup>
           </Box>
         </Box>
+       
+
         {/* Additional (Checkbox) */}
         <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
           <Checkbox
@@ -1507,13 +1524,13 @@ const IndependentHouse = () => {
           <Heading
             as={"h4"}
             size={"sm"}
-            margin={"10px 0"}
+            marginTop={{base:10,md:5}}
             fontWeight={700}
             textAlign={"left"}
           >
             Additional Pricing Detail (Optional)
           </Heading>
-          <InputGroup w={"300px"} margin={"10px 0"}>
+          <InputGroup w={"300px"} >
             <Input
               w={"60%"}
               type="text"
@@ -1566,7 +1583,7 @@ const IndependentHouse = () => {
           <Heading
             as={"h3"}
             size={"sm"}
-            margin={"10px 0"}
+            marginTop={{base:10,md:5}}
             color={"#002aff"}
             fontWeight={500}
             cursor={"pointer"}
@@ -1583,9 +1600,14 @@ const IndependentHouse = () => {
         </Box>
 
         <Box>
-          <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
+          <Heading
+            as={"h3"}
+            size={"sm"}
+            marginTop={{ base: 10, md: 5 }}
+            textAlign={"left"}
+          >
             Add Description and Unique Features of your Property
-          </Heading> 
+          </Heading>
           <Textarea
             height={140}
             required
@@ -1598,83 +1620,83 @@ const IndependentHouse = () => {
           ></Textarea>
         </Box>
 
-      {/* image Drag and Drop area  */}
-      <Box>
-        <Box className={style.top}>
-          <Heading
-            color={"black"}
-            size={"sm"}
-            textAlign={"left"}
-            marginTop={{base:10,md:5}}
-          > 
-            Upload Your Property image 
-          </Heading>
-        </Box>
-        <Box className={style.card}>
-          <Box
-            border={
-              isDraging ? "2px dashed rgb(46,49,146)" : "2px dashed #9e9e9e"
-            }
-            className={style.dragArea}
-            onDragOver={ondragover}
-            onDragLeave={ondragleave}
-            onDrop={ondrop}
-          >
-            {isDraging ? (
-              <Text textAlign={"center"} color={"rgb(0, 134, 254)"}>
-                Drop image here
-              </Text>
-            ) : (
-              <>
-                Drag & Drop image here or
-                <Text
-                  className={style.select}
-                  role="button"
-                  onClick={selectFiles}
-                >
-                  Browse
-                </Text>
-              </>
-            )}
-            <input
-              type={"file"}
-              name="image"
-              accept="image/jpg, image/png, image/jpeg"
-              formMethod="post"
-              formEncType="multipart/form-data"
-              className={style.file}
-              multiple
-              ref={fileInputRef}
-              onChange={onFileSelect}
-            />
+        {/* image Drag and Drop area  */}
+        <Box>
+          <Box className={style.top}>
+            <Heading
+              color={"black"}
+              size={"sm"}
+              textAlign={"left"}
+              marginTop={{ base: 10, md: 5 }}
+            >
+              Upload Your Property image
+            </Heading>
           </Box>
-          <Box className={style.container}>
-            {images.map((image, index) => (
-              <Box className={style.image} key={index}>
-                <Text
-                  className={style.delete}
-                  onClick={() => removeImage(index)}
-                >
-                  &#10006;
+          <Box className={style.card}>
+            <Box
+              border={
+                isDraging ? "2px dashed rgb(46,49,146)" : "2px dashed #9e9e9e"
+              }
+              className={style.dragArea}
+              onDragOver={ondragover}
+              onDragLeave={ondragleave}
+              onDrop={ondrop}
+            >
+              {isDraging ? (
+                <Text textAlign={"center"} color={"rgb(0, 134, 254)"}>
+                  Drop image here
                 </Text>
-                <img src={URL.createObjectURL(image.image)} alt="images" />
-              </Box>
-            ))}
+              ) : (
+                <>
+                  Drag & Drop image here or
+                  <Text
+                    className={style.select}
+                    role="button"
+                    onClick={selectFiles}
+                  >
+                    Browse
+                  </Text>
+                </>
+              )}
+              <input
+                type={"file"}
+                name="image"
+                accept="image/jpg, image/png, image/jpeg"
+                formMethod="post"
+                formEncType="multipart/form-data"
+                className={style.file}
+                multiple
+                ref={fileInputRef}
+                onChange={onFileSelect}
+              />
+            </Box>
+            <Box className={style.container}>
+              {images.map((image, index) => (
+                <Box className={style.image} key={index}>
+                  <Text
+                    className={style.delete}
+                    onClick={() => removeImage(index)}
+                  >
+                    &#10006;
+                  </Text>
+                  <img src={URL.createObjectURL(image.image)} alt="images" />
+                </Box>
+              ))}
+            </Box>
           </Box>
         </Box>
       </Box>
-      </Box> 
 
       {/* Add amenities/unique features */}
       <Box>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
           Add amenities/unique features
         </Heading>
         <Heading
           as={"h5"}
           size={"xs"}
           fontWeight={400}
-          margin={"10px 0"}
+          marginTop={{base:10,md:5}}
           textAlign={"left"}
         >
           All fields on this page are optional
@@ -1682,7 +1704,7 @@ const IndependentHouse = () => {
       </Box>
       {/* Amenities */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
           Amenities
         </Heading>
         <Box>
@@ -1785,7 +1807,7 @@ const IndependentHouse = () => {
       </Box>
       {/* Property Features */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
           Property Features
         </Heading>
         <Box>
@@ -1912,7 +1934,7 @@ const IndependentHouse = () => {
       </Box>
       {/* Society/Building feature */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} textAlign={"left"} marginTop={{base:10,md:5}}>
           Society/Building feature
         </Heading>
         <Box>
@@ -1964,7 +1986,7 @@ const IndependentHouse = () => {
       </Box>
       {/* Additional Features */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
           Additional Features
         </Heading>
         <Box>
@@ -1994,7 +2016,7 @@ const IndependentHouse = () => {
       </Box>
       {/* Water Source */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
           Water Source
         </Heading>
         <Box>
@@ -2040,7 +2062,7 @@ const IndependentHouse = () => {
       </Box>
       {/* Overlooking */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
           Overlooking
         </Heading>
         <Box>
@@ -2087,7 +2109,7 @@ const IndependentHouse = () => {
       </Box>
       {/* Other Features */}
       <Box>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
           Other Features
         </Heading>
         <Box display={"grid"} textAlign={"left"} gap={2}>
@@ -2127,7 +2149,7 @@ const IndependentHouse = () => {
       </Box>
       {/* Power Back up */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
           Power Back up
         </Heading>
         <Box>
@@ -2165,7 +2187,7 @@ const IndependentHouse = () => {
       </Box>
       {/* Property facing */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
           Property facing
         </Heading>
         <Box>
@@ -2261,7 +2283,7 @@ const IndependentHouse = () => {
       </Box>
       {/* Type of flooring */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
           Type of flooring
         </Heading>
         <Box>
@@ -2289,7 +2311,7 @@ const IndependentHouse = () => {
       </Box>
       {/* Width of facing road */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
           Width of facing road
         </Heading>
         <Box display={"flex"} gap={"20px"} w={"300px"}>
@@ -2317,7 +2339,7 @@ const IndependentHouse = () => {
       </Box>
       {/* location advantage */}
       <Box className={style.optional_box}>
-        <Heading size={"md"} margin={"10px 0 4px 0"} textAlign={"left"}>
+        <Heading size={"sm"} margin={"10px 0 4px 0"} textAlign={"left"}>
           Location Advantages
           <Heading
             size={"xs"}
@@ -2423,8 +2445,8 @@ const IndependentHouse = () => {
       >
         *Please provide correct information, otherwise your listing might get
         blocked
-      </Heading> 
-      {isClicked && <Loading />} 
+      </Heading>
+      {isClicked && <Loading />}
       <Button
         margin={"20px 0"}
         type="submit"

@@ -234,14 +234,14 @@ const StudioApartmentRent = () => {
       }
 
       if (furnished == "Furnished" || furnished == "Semi-Furnished") {
-        obj["furnishedObj"] = {
-          light,
-          fans,
-          ac,
-          tv,
-          beds: Beds,
-          wardrobe,
-          geyser,
+        obj.furnishedObj = {
+          Light: light,
+          Fan: fans,
+          AC: ac,
+          TV: tv,
+          Bed: Beds,
+          Wardrobe: wardrobe,
+          Geyser: geyser,
         };
         obj["furnishedList"] = furnishedarr;
       }
@@ -857,13 +857,13 @@ const StudioApartmentRent = () => {
               Semi-Furnished
             </button>
             <button
-              value={"Un-furnished"}
+              value={"Un-Furnished"}
               className={
-                furnished === "Un-furnished" ? style.setbtn : style.btn
+                furnished === "Un-Furnished" ? style.setbtn : style.btn
               }
               onClick={checkFurnished}
             >
-              Un-furnished
+              Un-Furnished
             </button>
           </Box>
           {/* if furnished detail */}

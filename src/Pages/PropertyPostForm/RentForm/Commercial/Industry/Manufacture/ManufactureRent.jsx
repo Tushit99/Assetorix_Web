@@ -36,8 +36,7 @@ const ManufactureRent = () => {
   const [availability, setAvailability] = useState("");
   const [fromyear, setFromyear] = useState("");
   const [expectedyear, setExpectedYear] = useState("");
-  const [pricedetail, setPricedetail] = useState("");
-  const [priceSqr, setPriceSqr] = useState("");
+  const [pricedetail, setPricedetail] = useState(""); 
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
@@ -83,8 +82,7 @@ const ManufactureRent = () => {
       washrooms,
       plotArea,
       plotAreaUnit: areaPer,
-      price: +pricedetail,
-      priceUnit: +priceSqr,
+      price: +pricedetail, 
       inclusivePrices,
       additionalPricingDetails: {
         maintenancePrice,
@@ -119,9 +117,7 @@ const ManufactureRent = () => {
       showToastError('Provide washrooms');
     } else if (!pricedetail) {
       showToastError('Provide Expected Rent');
-    } else if (!priceSqr) {
-      showToastError('Provide Price Per sq.ft');
-    }
+    } 
 
     if (locationAdv) {
       obj["locationAdv"] = locationAdv;
@@ -371,15 +367,7 @@ const ManufactureRent = () => {
     }
     setInclusivePrice(newarr);
   }
-
-  const areaCalucation = () => {
-    if (pricedetail && plotArea) {
-      let max = Math.max(Number(pricedetail), Number(plotArea));
-      let min = Math.min(Number(pricedetail), Number(plotArea));
-      let ans = Math.round(max / min);
-      setPriceSqr(ans);
-    }
-  }
+ 
 
   // ======--- image upload function   
 
@@ -566,8 +554,7 @@ const ManufactureRent = () => {
               type="text"
               padding={"0 2px"}
               value={plotArea}
-              onChange={(e) => {
-                areaCalucation();
+              onChange={(e) => { 
                 setPlotArea(NumericString(e.target.value));
               }}
               required
@@ -742,26 +729,10 @@ const ManufactureRent = () => {
                   value={pricedetail}
                   required
                   onChange={(e) => {
-                    setPricedetail(e.target.value);
-                    areaCalucation();
+                    setPricedetail(e.target.value); 
                   }}
                 />
-              </Box>
-              {/* <Box display={"grid"} gap={0}>
-                <Heading
-                  as={"h3"}
-                  size={"xs"}
-                  fontWeight={400}
-                  textAlign={"left"}
-                >
-                  {isCountry.country == "india" ? "₹" : "$"} Price Per {areaPer}
-                </Heading>
-                <Input
-                  type="text" 
-                  readOnly  
-                  value={priceSqr}
-                /> 
-              </Box> */}
+              </Box> 
             </Box>
           </Box>
           <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>

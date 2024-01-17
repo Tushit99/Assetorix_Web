@@ -36,8 +36,7 @@ const FactoryRent = () => {
     const [availability, setAvailability] = useState("");
     const [fromyear, setFromyear] = useState("");
     const [expectedyear, setExpectedYear] = useState("");
-    const [pricedetail, setPricedetail] = useState("");
-    const [priceSqr, setPriceSqr] = useState("");
+    const [pricedetail, setPricedetail] = useState(""); 
     const [inclusivePrices, setInclusivePrice] = useState([]);
     const [amenities, setAminity] = useState([]);
     const [propertyFeatures, setPropertyFeature] = useState("");
@@ -83,8 +82,7 @@ const FactoryRent = () => {
             washrooms,
             plotArea,
             plotAreaUnit: areaPer,
-            price: +pricedetail,
-            priceUnit: +priceSqr,
+            price: +pricedetail, 
             inclusivePrices,
             additionalPricingDetails: {
                 maintenancePrice,
@@ -374,16 +372,7 @@ const FactoryRent = () => {
             newarr.push(value);
         }
         setInclusivePrice(newarr);
-    }
-
-    const areaCalucation = () => {
-        if (pricedetail && plotArea) {
-            let max = Math.max(Number(pricedetail), Number(plotArea));
-            let min = Math.min(Number(pricedetail), Number(plotArea));
-            let ans = Math.round(max / min);
-            setPriceSqr(ans);
-        }
-    }
+    } 
 
     // ======--- image upload function    
 
@@ -572,8 +561,7 @@ const FactoryRent = () => {
                             maxLength={"9"}
                             value={plotArea}
                             onChange={(e) => {
-                                setPlotArea(NumericString(e.target.value));
-                                areaCalucation();
+                                setPlotArea(NumericString(e.target.value)); 
                             }}
                             required
                         />
@@ -748,8 +736,7 @@ const FactoryRent = () => {
                                     maxLength={"10"}
                                     required
                                     onChange={(e) => {
-                                        setPricedetail(e.target.value);
-                                        areaCalucation();
+                                        setPricedetail(e.target.value); 
                                     }}
                                 />
                             </Box>

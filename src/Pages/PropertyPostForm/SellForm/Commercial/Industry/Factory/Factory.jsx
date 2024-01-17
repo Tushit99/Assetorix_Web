@@ -49,7 +49,7 @@ const Factory = () => {
   const [fromyear, setFromyear] = useState("");
   const [expectedyear, setExpectedYear] = useState("");
   const [ownership, setOwnerShip] = useState("");
-  const [pricedetail, setPricedetail] = useState(""); 
+  const [pricedetail, setPricedetail] = useState("");
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
@@ -106,7 +106,7 @@ const Factory = () => {
       },
       washrooms,
       ownership,
-      price: +pricedetail, 
+      price: +pricedetail,
       inclusivePrices,
       amenities,
       propertyFeatures,
@@ -449,7 +449,7 @@ const Factory = () => {
       newarr.push(value);
     }
     setInclusivePrice(newarr);
-  }; 
+  };
 
   // // ======--- image upload function
 
@@ -644,7 +644,7 @@ const Factory = () => {
               type="text"
               maxLength={"12"}
               value={plotArea}
-              onChange={(e) => { 
+              onChange={(e) => {
                 setPlotArea(NumericString(e.target.value));
               }}
               required
@@ -886,7 +886,7 @@ const Factory = () => {
                   value={pricedetail}
                   required
                   onChange={(e) => {
-                    setPricedetail(e.target.value); 
+                    setPricedetail(e.target.value);
                   }}
                 />
               </Box>
@@ -1140,7 +1140,7 @@ const Factory = () => {
             textAlign={"left"}
           >
             Add Description and Unique Features of your Property
-          </Heading> 
+          </Heading>
           <Textarea
             height={140}
             value={desc}

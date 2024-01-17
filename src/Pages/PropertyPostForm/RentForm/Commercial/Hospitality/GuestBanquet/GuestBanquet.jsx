@@ -37,8 +37,7 @@ const GuestBanquetRent = () => {
     const [availability, setAvailability] = useState("");
     const [fromyear, setFromyear] = useState("");
     const [expectedyear, setExpectedYear] = useState("");
-    const [pricedetail, setPricedetail] = useState("");
-    const [priceSqr, setPriceSqr] = useState("");
+    const [pricedetail, setPricedetail] = useState(""); 
     const [inclusivePrices, setInclusivePrice] = useState([]);
     const [amenities, setAminity] = useState([]);
     const [propertyFeatures, setPropertyFeature] = useState("");
@@ -86,8 +85,7 @@ const GuestBanquetRent = () => {
             plotArea,
             plotAreaUnit: areaPer,
             qualityRating,
-            price: +pricedetail,
-            priceUnit: +priceSqr,
+            price: +pricedetail, 
             inclusivePrices,
             additionalPricingDetails: {
                 maintenancePrice,
@@ -382,16 +380,7 @@ const GuestBanquetRent = () => {
             newarr.push(value);
         }
         setLocationAdv(newarr);
-    };
-
-    const areaCalucation = () => {
-        if (pricedetail && plotArea) {
-            let max = Math.max(Number(pricedetail), Number(plotArea));
-            let min = Math.min(Number(pricedetail), Number(plotArea));
-            let ans = Math.round(max / min);
-            setPriceSqr(ans);
-        }
-    }
+    }; 
 
     // ======--- image upload function  
 
@@ -605,8 +594,7 @@ const GuestBanquetRent = () => {
                     >
                         <Input type="text" maxLength={"9"} placeholder="Enter Plot Area" value={plotArea}
                             onChange={(e) => {
-                                setPlotArea(NumericString(e.target.value));
-                                areaCalucation();
+                                setPlotArea(NumericString(e.target.value)); 
                             }}
                             required />
                         <Select value={areaPer} onChange={(e) => {
@@ -883,26 +871,10 @@ const GuestBanquetRent = () => {
                             value={pricedetail}
                             required
                             onChange={(e) => {
-                                setPricedetail(NumericString(e.target.value));
-                                areaCalucation();
+                                setPricedetail(NumericString(e.target.value)); 
                             }}
                         />
-                    </Box>
-                    {/* <Box display={"grid"} gap={0}>
-                        <Heading
-                            as={"h3"}
-                            size={"xs"}
-                            fontWeight={400}
-                            textAlign={"left"}
-                        >
-                            {isCountry.country == "india" ? "₹" : "$"} Price Per {areaPer}
-                        </Heading>
-                        <Input
-                            type="text"
-                            value={priceSqr} 
-                            readOnly 
-                        /> 
-                    </Box> */}
+                    </Box> 
                 </Box>
                 <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
                     <Checkbox

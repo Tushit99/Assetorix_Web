@@ -1554,13 +1554,13 @@ const FlatAppartment = () => {
         <Heading
           as={"h4"}
           size={"sm"} 
-          marginTop={{base:5,md:10}} 
+          marginTop={{base:5,md:8}} 
           fontWeight={700}
           textAlign={"left"}
         >
           Additional Pricing Detail (Optional)
         </Heading>
-        <InputGroup w={"300px"} margin={"10px 0"}>
+        <InputGroup w={"300px"}>
           <Input
             w={"60%"}
             type="text"
@@ -1735,8 +1735,7 @@ const FlatAppartment = () => {
         <Heading
           as={"h5"}
           size={"xs"}
-          fontWeight={400}
-          margin={"10px 0"}
+          fontWeight={400} 
           textAlign={"left"}
         >
           All fields on this page are optional
@@ -1744,7 +1743,7 @@ const FlatAppartment = () => {
       </Box>
       {/* Amenities */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
           Amenities
         </Heading>
         <Box>
@@ -1980,17 +1979,6 @@ const FlatAppartment = () => {
           </button>
           <button
             className={
-              buildingFeature.includes("Fitness Centre / GYM")
-                ? style.setbtn
-                : style.btn
-            }
-            onClick={HandleBuildingFeature}
-            value={"Fitness Centre / GYM"}
-          >
-            Fitness Centre / GYM
-          </button>
-          <button
-            className={
               buildingFeature.includes("Swimming Pool")
                 ? style.setbtn
                 : style.btn
@@ -2000,6 +1988,17 @@ const FlatAppartment = () => {
           >
             Swimming Pool
           </button>
+          <button
+            className={
+              buildingFeature.includes("Fitness Centre / GYM")
+                ? style.setbtn
+                : style.btn
+            }
+            onClick={HandleBuildingFeature}
+            value={"Fitness Centre / GYM"}
+          >
+            Fitness Centre / GYM
+          </button>  
           <button
             className={
               buildingFeature.includes("Club house / Community Center")

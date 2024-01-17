@@ -15,13 +15,17 @@ import { Checkbox } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import style from "../RentForm.module.css";
-import { CleanInputText, IndianDateConverter, NumericString, WordandNumber } from "../../code";
+import {
+  CleanInputText,
+  IndianDateConverter,
+  NumericString,
+  WordandNumber,
+} from "../../code";
 import { InputGroup } from "@chakra-ui/react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../Loading";
-
 
 const FlatApartment = () => {
   const isCountry = useSelector((state) => state.gloalval);
@@ -149,9 +153,9 @@ const FlatApartment = () => {
         maintenancePrice,
         maintenanceTimePeriod,
         bookingAmount,
-        membershipCharge
+        membershipCharge,
       },
-      // brokerContact : brokerContact 
+      // brokerContact : brokerContact
     };
 
     const showToastError = (message) => {
@@ -217,7 +221,6 @@ const FlatApartment = () => {
       balconey &&
       furnishedarr &&
       ownership &&
-
       additinalft &&
       powerbackup &&
       propertyFacing &&
@@ -243,47 +246,49 @@ const FlatApartment = () => {
       }
 
       if (furnished == "Furnished" || furnished == "Semi-Furnished") {
-        obj["furnishedObj"] = {
-          light,
-          fans,
-          ac,
-          tv,
-          beds: Beds,
-          wardrobe,
-          geyser,
+        obj.furnishedObj = {
+          Light: light,
+          Fan: fans,
+          AC: ac,
+          TV: tv,
+          Bed: Beds,
+          Wardrobe: wardrobe,
+          Geyser: geyser,
         };
         obj["furnishedList"] = furnishedarr;
       }
 
       // else {
       try {
-        // console.log("data",obj); 
+        // console.log("data",obj);
         // let response = await fetch(`${process.env.REACT_APP_URL}/property/`, {
         //     method: "POST",
         //     headers: head,
         //     body: JSON.stringify(obj)
         // });
-        // console.log("data",obj,response); 
+        // console.log("data",obj,response);
         // let data = await response.json();
-        // console.log("data",obj,data);  
+        // console.log("data",obj,data);
         setClickCount((prev) => prev + 12);
         setIsClicked(true);
-        await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, {
-          headers: head,
-        }).then((e) => {
-          toast({
-            title: e.data.msg,
-            description: e.data.msg,
-            status: "success",
-            duration: 2000,
+        await axios
+          .post(`${process.env.REACT_APP_URL}/property/`, obj, {
+            headers: head,
+          })
+          .then((e) => {
+            toast({
+              title: e.data.msg,
+              description: e.data.msg,
+              status: "success",
+              duration: 2000,
+            });
+            if (images.length) {
+              submitImage(e.data.id);
+            } else {
+              setIsClicked(false);
+              navigate("/listing");
+            }
           });
-          if (images.length) {
-            submitImage(e.data.id);
-          } else {
-            setIsClicked(false);
-            navigate("/listing");
-          } 
-        });
       } catch (error) {
         toast({
           title: error.response.data.msg,
@@ -306,17 +311,17 @@ const FlatApartment = () => {
     }
   };
 
-  // image uploading after uploading the data:  
+  // image uploading after uploading the data:
   const submitImage = async (productID) => {
     try {
       let id = localStorage.getItem("usrId") || undefined;
       let authorization = localStorage.getItem("AstToken") || undefined;
 
       let headersList = {
-        "Accept": "*/*",
-        "Authorization": authorization,
-        "id": id
-      }
+        Accept: "*/*",
+        Authorization: authorization,
+        id: id,
+      };
 
       let formdata = new FormData();
       images.forEach((image) => {
@@ -330,12 +335,12 @@ const FlatApartment = () => {
         method: "POST",
         headers: headersList,
         data: bodyContent,
-      }
+      };
 
       await axios.request(reqOptions).then((e) => {
         setIsClicked(false);
-      }) 
-    } catch (error) { 
+      });
+    } catch (error) {
       setIsClicked(false);
     }
     navigate("/listing");
@@ -343,18 +348,17 @@ const FlatApartment = () => {
   };
 
   const handlepinfetch = (e) => {
-    let val = NumericString(e.target.value)
+    let val = NumericString(e.target.value);
     if (val.length == 6) {
       pinfetch(val);
     } else if (val.length > 7) {
-      return
+      return;
     }
     setPincode(val);
   };
 
   const pinfetch = async (pin) => {
     try {
-
       let res = await axios.get(
         `${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`
       );
@@ -367,11 +371,10 @@ const FlatApartment = () => {
     }
   };
 
-
   const handlePreferredAgreement = (e) => {
     e.preventDefault();
     setpreferredAgreement(e.target.value);
-  }
+  };
 
   // please don'nt change any function without any prior knowledge
   const furnisheddetails = (e) => {
@@ -419,8 +422,7 @@ const FlatApartment = () => {
       }
     });
     // console.log(willingTo);
-  }
-
+  };
 
   const handlepropertyAge = (e) => {
     e.preventDefault();
@@ -513,7 +515,7 @@ const FlatApartment = () => {
   const handleMonthNotice = (e) => {
     e.preventDefault();
     setNoticePeriod(e.target.value);
-  }
+  };
 
   const handleinclusivePrices = (e) => {
     e.preventDefault();
@@ -526,22 +528,22 @@ const FlatApartment = () => {
       newarr.push(value);
     }
     setinclusivePrices(newarr);
-  }
+  };
 
   const handleSecurityDeposit = (e) => {
     e.preventDefault();
     setSecurityDeposit(NumericString(e.target.value));
-  }
+  };
 
   const handleDepositAmount = (e) => {
     setDepositAmount(NumericString(e.target.value));
-  }
+  };
 
-  // ======--- image upload function   
+  // ======--- image upload function
 
   const selectFiles = () => {
     fileInputRef.current.click();
-  }
+  };
 
   const removeImage = (index) => {
     const newImages = [...images];
@@ -552,33 +554,36 @@ const FlatApartment = () => {
   const onFileSelect = (e) => {
     let files = e.target.files;
     if (files.length === 0) {
-      return
+      return;
     }
     for (let i = 0; i < files.length; i++) {
-      if (files[i].type.split('/')[0] !== 'image') {
+      if (files[i].type.split("/")[0] !== "image") {
         continue;
       }
       if (!images.some((e) => e.name === files[i].name)) {
-        setImages((prev) => [...prev, {
-          name: files[i].name,
-          image: files[i],
-        },])
+        setImages((prev) => [
+          ...prev,
+          {
+            name: files[i].name,
+            image: files[i],
+          },
+        ]);
       }
     }
-  }
+  };
 
   const ondragleave = (event) => {
     event.preventDefault();
     setIsDraging(false);
-    console.log("leave")
-  }
+    console.log("leave");
+  };
 
   const ondragover = (event) => {
     event.preventDefault();
     setIsDraging(true);
     event.dataTransfer.dropEffect = "copy";
     console.log("over the box");
-  }
+  };
 
   const ondrop = (event) => {
     event.preventDefault(); // Add this line
@@ -591,19 +596,21 @@ const FlatApartment = () => {
     }
 
     for (let i = 0; i < files.length; i++) {
-      if (files[i].type.split('/')[0] !== 'image') {
+      if (files[i].type.split("/")[0] !== "image") {
         continue;
       }
       if (!images.some((e) => e.name === files[i].name)) {
-        setImages((prev) => [...prev, {
-          name: files[i].name,
-          image: files[i],
-        }]);
+        setImages((prev) => [
+          ...prev,
+          {
+            name: files[i].name,
+            image: files[i],
+          },
+        ]);
       }
     }
     console.log("droped");
-  } 
-
+  };
 
   return (
     <form onSubmit={handleSubmitData}>
@@ -616,7 +623,6 @@ const FlatApartment = () => {
 
         <Input
           type="text"
-
           maxlength={"100"}
           required
           placeholder="House No. (optional)"
@@ -627,7 +633,6 @@ const FlatApartment = () => {
         />
         <Input
           type="text"
-
           maxlength={"100"}
           required
           placeholder="Apartment / Society"
@@ -678,7 +683,6 @@ const FlatApartment = () => {
         />
         <Input
           type="text"
-
           required
           maxlength={"100"}
           placeholder="Enter State"
@@ -689,7 +693,6 @@ const FlatApartment = () => {
         />
         <Input
           type="text"
-
           required
           maxlength={"100"}
           placeholder="Enter Country"
@@ -714,7 +717,6 @@ const FlatApartment = () => {
               type="text"
               maxlength={"2"}
               variant="flushed"
-
               onChange={(e) => setBedRoom(NumericString(e.target.value))}
               value={bedroom}
               required
@@ -729,7 +731,6 @@ const FlatApartment = () => {
               onChange={(e) => setBathroom(NumericString(e.target.value))}
               value={bathroom}
               required
-
             />
           </Box>
           <Box textAlign={"left"}>
@@ -741,7 +742,6 @@ const FlatApartment = () => {
               onChange={(e) => setBalcony(NumericString(e.target.value))}
               value={balconey}
               required
-
             />
           </Box>
         </Box>
@@ -873,13 +873,13 @@ const FlatApartment = () => {
               Semi-Furnished
             </button>
             <button
-              value={"Un-furnished"}
+              value={"Un-Furnished"}
               className={
-                furnished === "Un-furnished" ? style.setbtn : style.btn
+                furnished === "Un-Furnished" ? style.setbtn : style.btn
               }
               onClick={checkFurnished}
             >
-              Un-furnished
+              Un-Furnished 
             </button>
           </Box>
           {/* if furnished detail */}
@@ -892,7 +892,6 @@ const FlatApartment = () => {
             padding={"10px 0"}
             gap={6}
           >
-
             <Box className={style.furnished_detail}>
               <Box>
                 <button
@@ -1347,7 +1346,13 @@ const FlatApartment = () => {
           <Heading as={"h3"} size={"md"} margin={"4px 0"} textAlign={"left"}>
             Available from
           </Heading>
-          <Input value={availableFrom} onChange={(e) => setavailableFrom(e.target.value)} color='blue' type={"date"} w={300} />
+          <Input
+            value={availableFrom}
+            onChange={(e) => setavailableFrom(e.target.value)}
+            color="blue"
+            type={"date"}
+            w={300}
+          />
         </Box>
 
         {/* ========================= Willing to rent out to ========================= */}
@@ -1355,25 +1360,31 @@ const FlatApartment = () => {
           <Heading as={"h3"} size={"sm"} margin={"14px 0"} textAlign={"left"}>
             Willing to rent out to
           </Heading>
-          <Box textAlign={"left"} display={"flex"} flexWrap={"wrap"} gap={5} >
+          <Box textAlign={"left"} display={"flex"} flexWrap={"wrap"} gap={5}>
             <button
               value={"Family"}
               onClick={handleWillingto}
-              className={willingTo.includes("Family") ? style.setbtn : style.btn}
+              className={
+                willingTo.includes("Family") ? style.setbtn : style.btn
+              }
             >
               Family
             </button>
             <button
               value={"Single men"}
               onClick={handleWillingto}
-              className={willingTo.includes("Single men") ? style.setbtn : style.btn}
+              className={
+                willingTo.includes("Single men") ? style.setbtn : style.btn
+              }
             >
               Single men
             </button>
             <button
               value={"Single women"}
               onClick={handleWillingto}
-              className={willingTo.includes("Single women") ? style.setbtn : style.btn}
+              className={
+                willingTo.includes("Single women") ? style.setbtn : style.btn
+              }
             >
               Single women
             </button>
@@ -1385,7 +1396,7 @@ const FlatApartment = () => {
           <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Are you ok with Agents contacting you?
           </Heading>
-          <Box >
+          <Box>
             <button
               value={"Yes"}
               onClick={(e) => {
@@ -1415,8 +1426,24 @@ const FlatApartment = () => {
             Preferred agreement type
           </Heading>
           <Box>
-            <button onClick={handlePreferredAgreement} value={"Company lease agreement"} className={preferredAgreement == "Company lease agreement" ? style.setbtn : style.btn}  >Company lease agreement</button>
-            <button onClick={handlePreferredAgreement} value={"Any"} className={preferredAgreement == "Any" ? style.setbtn : style.btn}  >Any</button>
+            <button
+              onClick={handlePreferredAgreement}
+              value={"Company lease agreement"}
+              className={
+                preferredAgreement == "Company lease agreement"
+                  ? style.setbtn
+                  : style.btn
+              }
+            >
+              Company lease agreement
+            </button>
+            <button
+              onClick={handlePreferredAgreement}
+              value={"Any"}
+              className={preferredAgreement == "Any" ? style.setbtn : style.btn}
+            >
+              Any
+            </button>
           </Box>
         </Box>
 
@@ -1426,39 +1453,96 @@ const FlatApartment = () => {
             Rent Details
           </Heading>
           <Box>
-            <Input type="text" maxlength={"9"} w={"40%"} borderRadius={0} value={priceSqr} onChange={(e) => {
-              e.preventDefault();
-              setPriceSqr(NumericString(e.target.value));
-            }} placeholder={"₹ Expected Rent"} />
+            <Input
+              type="text"
+              maxlength={"9"}
+              w={"40%"}
+              borderRadius={0}
+              value={priceSqr}
+              onChange={(e) => {
+                e.preventDefault();
+                setPriceSqr(NumericString(e.target.value));
+              }}
+              placeholder={"₹ Expected Rent"}
+            />
           </Box>
           {/* pricing checkbox */}
           <Box display={"flex"} flexWrap={"wrap"} gap={5}>
-            <Checkbox isChecked={inclusivePrices.includes("Electricity & Water charges excluded")} value={"Electricity & Water charges excluded"} onChange={handleinclusivePrices} >Electricity & Water charges excluded</Checkbox>
-            <Checkbox isChecked={inclusivePrices.includes("price Negotiable")} value={"price Negotiable"} onChange={handleinclusivePrices} >price Negotiable</Checkbox>
+            <Checkbox
+              isChecked={inclusivePrices.includes(
+                "Electricity & Water charges excluded"
+              )}
+              value={"Electricity & Water charges excluded"}
+              onChange={handleinclusivePrices}
+            >
+              Electricity & Water charges excluded
+            </Checkbox>
+            <Checkbox
+              isChecked={inclusivePrices.includes("price Negotiable")}
+              value={"price Negotiable"}
+              onChange={handleinclusivePrices}
+            >
+              price Negotiable
+            </Checkbox>
           </Box>
           {/* Additional Pricing Detail (Optional) */}
           <Box display={"grid"}>
-            {additionalPrice && <>
-              <Heading as={"h4"} size={"sm"} margin={"10px 0"} fontWeight={700} textAlign={"left"}>
-                Additional Pricing Detail (Optional)
-              </Heading>
-              <InputGroup w={"300px"} margin={"10px 0"}>
+            {additionalPrice && (
+              <>
+                <Heading
+                  as={"h4"}
+                  size={"sm"}
+                  margin={"10px 0"}
+                  fontWeight={700}
+                  textAlign={"left"}
+                >
+                  Additional Pricing Detail (Optional)
+                </Heading>
+                <InputGroup w={"300px"} margin={"10px 0"}>
+                  <Input
+                    w={"60%"}
+                    type="text"
+                    maxlength={"9"}
+                    onChange={(e) =>
+                      setMaintenancePrice(NumericString(e.target.value))
+                    }
+                    value={maintenancePrice}
+                    placeholder={"Maintenance Price"}
+                  />
+                  <Select
+                    w={"40%"}
+                    borderRadius={0}
+                    value={maintenanceTimePeriod}
+                    onChange={(e) => setMaintenanceTimePeriod(e.target.value)}
+                  >
+                    <option value="Monthly">Monthly</option>
+                    <option value="Yearly">Yearly</option>
+                  </Select>
+                </InputGroup>
                 <Input
-                  w={"60%"}
-                  type='text'
+                  type="text"
+                  w={"300px"}
+                  value={bookingAmount}
                   maxlength={"9"}
-                  onChange={(e) => setMaintenancePrice(NumericString(e.target.value))}
-                  value={maintenancePrice} placeholder={"Maintenance Price"}
+                  onChange={(e) =>
+                    setBookingAmount(NumericString(e.target.value))
+                  }
+                  placeholder="Booking Amount"
+                  margin={"10px 0 0 0"}
                 />
-                <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
-                  <option value="Monthly">Monthly</option>
-                  <option value="Yearly">Yearly</option>
-                </Select>
-              </InputGroup>
-              <Input type="text" w={"300px"} value={bookingAmount} maxlength={"9"} onChange={(e) => setBookingAmount(NumericString(e.target.value))} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-              <Input type="text" w={"300px"} value={membershipCharge} maxlength={"9"} onChange={(e) => setMembershipCharge(NumericString(e.target.value))} placeholder="Membership charges" margin={"10px 0 0 0"} />
-            </>
-            }
+                <Input
+                  type="text"
+                  w={"300px"}
+                  value={membershipCharge}
+                  maxlength={"9"}
+                  onChange={(e) =>
+                    setMembershipCharge(NumericString(e.target.value))
+                  }
+                  placeholder="Membership charges"
+                  margin={"10px 0 0 0"}
+                />
+              </>
+            )}
             <Heading
               as={"h3"}
               size={"sm"}
@@ -1467,8 +1551,14 @@ const FlatApartment = () => {
               fontWeight={500}
               cursor={"pointer"}
               onClick={() => setAdditionalPrice(!additionalPrice)}
-              textAlign={"left"}>
-              {additionalPrice ? <IoIosArrowUp style={{ display: "inline" }} /> : <IoIosArrowDown style={{ display: "inline" }} />} Add more pricing details
+              textAlign={"left"}
+            >
+              {additionalPrice ? (
+                <IoIosArrowUp style={{ display: "inline" }} />
+              ) : (
+                <IoIosArrowDown style={{ display: "inline" }} />
+              )}{" "}
+              Add more pricing details
             </Heading>
           </Box>
         </Box>
@@ -1479,22 +1569,61 @@ const FlatApartment = () => {
             Security deposit
           </Heading>
           <Box>
-            <button value={"Fixed"} className={securityDeposit == "Fixed" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> Fixed </button>
-            <button value={"Multiple of Rent"} className={securityDeposit == "Multiple of Rent" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> Multiple of Rent </button>
-            <button value={"None"} className={securityDeposit == "None" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> None </button>
+            <button
+              value={"Fixed"}
+              className={securityDeposit == "Fixed" ? style.setbtn : style.btn}
+              onClick={handleSecurityDeposit}
+            >
+              {" "}
+              Fixed{" "}
+            </button>
+            <button
+              value={"Multiple of Rent"}
+              className={
+                securityDeposit == "Multiple of Rent" ? style.setbtn : style.btn
+              }
+              onClick={handleSecurityDeposit}
+            >
+              {" "}
+              Multiple of Rent{" "}
+            </button>
+            <button
+              value={"None"}
+              className={securityDeposit == "None" ? style.setbtn : style.btn}
+              onClick={handleSecurityDeposit}
+            >
+              {" "}
+              None{" "}
+            </button>
           </Box>
           <Box display={securityDeposit == "None" ? "none" : "block"}>
-            <Input type="text" w={300} value={depositAmount} maxlength={"9"} onChange={handleDepositAmount} placeholder={`${securityDeposit == "Fixed" ? "Deposit Value" : ""} ${securityDeposit == "Multiple of Rent" ? "No. of months (Max 30)" : ""}`} />
+            <Input
+              type="text"
+              w={300}
+              value={depositAmount}
+              maxlength={"9"}
+              onChange={handleDepositAmount}
+              placeholder={`${
+                securityDeposit == "Fixed" ? "Deposit Value" : ""
+              } ${
+                securityDeposit == "Multiple of Rent"
+                  ? "No. of months (Max 30)"
+                  : ""
+              }`}
+            />
           </Box>
         </Box>
-
 
         {/* Duration of agriment */}
         <Box>
           <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
             Duration of agreement
           </Heading>
-          <Select w={300} onChange={(e) => setagreementDuration(e.target.value)} value={agreementDuration} >
+          <Select
+            w={300}
+            onChange={(e) => setagreementDuration(e.target.value)}
+            value={agreementDuration}
+          >
             <option value="0">0</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -1510,13 +1639,62 @@ const FlatApartment = () => {
             Months of Notice (Optional)
           </Heading>
           <Box>
-            <button onClick={handleMonthNotice} className={noticePeriod == "None" ? style.setbtn : style.btn} value={"None"}> None </button>
-            <button onClick={handleMonthNotice} className={noticePeriod == "1 month" ? style.setbtn : style.btn} value={"1 month"}> 1 month </button>
-            <button onClick={handleMonthNotice} className={noticePeriod == "2 months" ? style.setbtn : style.btn} value={"2 months"}> 2 month </button>
-            <button onClick={handleMonthNotice} className={noticePeriod == "3 months" ? style.setbtn : style.btn} value={"3 months"}> 3 month </button>
-            <button onClick={handleMonthNotice} className={noticePeriod == "4 months" ? style.setbtn : style.btn} value={"4 months"}> 4 month </button>
-            <button onClick={handleMonthNotice} className={noticePeriod == "5 months" ? style.setbtn : style.btn} value={"5 months"}> 5 month </button>
-            <button onClick={handleMonthNotice} className={noticePeriod == "6 months" ? style.setbtn : style.btn} value={"6 months"}> 6 month </button>
+            <button
+              onClick={handleMonthNotice}
+              className={noticePeriod == "None" ? style.setbtn : style.btn}
+              value={"None"}
+            >
+              {" "}
+              None{" "}
+            </button>
+            <button
+              onClick={handleMonthNotice}
+              className={noticePeriod == "1 month" ? style.setbtn : style.btn}
+              value={"1 month"}
+            >
+              {" "}
+              1 month{" "}
+            </button>
+            <button
+              onClick={handleMonthNotice}
+              className={noticePeriod == "2 months" ? style.setbtn : style.btn}
+              value={"2 months"}
+            >
+              {" "}
+              2 month{" "}
+            </button>
+            <button
+              onClick={handleMonthNotice}
+              className={noticePeriod == "3 months" ? style.setbtn : style.btn}
+              value={"3 months"}
+            >
+              {" "}
+              3 month{" "}
+            </button>
+            <button
+              onClick={handleMonthNotice}
+              className={noticePeriod == "4 months" ? style.setbtn : style.btn}
+              value={"4 months"}
+            >
+              {" "}
+              4 month{" "}
+            </button>
+            <button
+              onClick={handleMonthNotice}
+              className={noticePeriod == "5 months" ? style.setbtn : style.btn}
+              value={"5 months"}
+            >
+              {" "}
+              5 month{" "}
+            </button>
+            <button
+              onClick={handleMonthNotice}
+              className={noticePeriod == "6 months" ? style.setbtn : style.btn}
+              value={"6 months"}
+            >
+              {" "}
+              6 month{" "}
+            </button>
           </Box>
         </Box>
 
@@ -1590,24 +1768,59 @@ const FlatApartment = () => {
       {/* image Drag and Drop area  */}
       <Box>
         <Box className={style.top}>
-          <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
+          <Heading
+            color={"black"}
+            size={"sm"}
+            textAlign={"left"}
+            margin={"10px 0"}
+          >
+            {" "}
+            Upload Your Property image{" "}
+          </Heading>
         </Box>
         <Box className={style.card}>
-          <Box className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+          <Box
+            className={style.dragArea}
+            onDragOver={ondragover}
+            onDragLeave={ondragleave}
+            onDrop={ondrop}
+          >
             {isDraging ? (
               <Text className={style.select}>Drop image here</Text>
             ) : (
               <>
                 Drag & Drop image here or
-                <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
+                <Text
+                  className={style.select}
+                  role="button"
+                  onClick={selectFiles}
+                >
+                  {" "}
+                  Browse{" "}
+                </Text>
               </>
             )}
-            <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+            <input
+              type={"file"}
+              name="image"
+              accept="image/jpg, image/png, image/jpeg"
+              formMethod="post"
+              formEncType="multipart/form-data"
+              className={style.file}
+              multiple
+              ref={fileInputRef}
+              onChange={onFileSelect}
+            />
           </Box>
           <Box className={style.container}>
             {images.map((image, index) => (
               <Box className={style.image} key={index}>
-                <Text className={style.delete} onClick={() => removeImage(index)}>&#10006;</Text>
+                <Text
+                  className={style.delete}
+                  onClick={() => removeImage(index)}
+                >
+                  &#10006;
+                </Text>
                 <img src={URL.createObjectURL(image.image)} alt="images" />
               </Box>
             ))}
@@ -1633,8 +1846,6 @@ const FlatApartment = () => {
           }}
         ></Textarea>
       </Box>
-
-
 
       {/* ========================= Add amenities/unique features ================================== */}
       <Box>
@@ -2343,8 +2554,8 @@ const FlatApartment = () => {
       >
         *Please provide correct information, otherwise your listing might get
         blocked
-      </Heading>  
-      {isClicked && <Loading />}   
+      </Heading>
+      {isClicked && <Loading />}
       <Button
         margin={"20px 0"}
         type="submit"

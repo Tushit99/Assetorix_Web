@@ -248,15 +248,16 @@ const Independent = () => {
         return;
       }
 
+     
       if (furnished == "Furnished" || furnished == "Semi-Furnished") {
         obj.furnishedObj = {
-          light,
-          fans,
-          ac,
-          tv,
-          beds: Beds,
-          wardrobe,
-          geyser,
+          Light: light,
+          Fan: fans,
+          AC: ac,
+          TV: tv,
+          Bed: Beds,
+          Wardrobe: wardrobe,
+          Geyser: geyser,
         };
         obj["furnishedList"] = furnishedarr;
       }
@@ -621,10 +622,7 @@ const Independent = () => {
     <form onSubmit={handleSubmitData}>
       {/* property location */}
       <Box className={style.location_form}>
-        <Heading size={"lg"}>Where is your property located?</Heading>
-        <Heading size={"sm"}>
-          An accurate location helps you connect with the right buyers.
-        </Heading>
+        <Heading size={"lg"}>Where is your property located?</Heading> 
 
         <Input
           type="text"
@@ -872,13 +870,13 @@ const Independent = () => {
               Semi-Furnished
             </button>
             <button
-              value={"Un-furnished"}
+              value={"Un-Furnished"}
               className={
-                furnished === "Un-furnished" ? style.setbtn : style.btn
+                furnished === "Un-Furnished" ? style.setbtn : style.btn
               }
               onClick={checkFurnished}
             >
-              Un-furnished
+              Un-Furnished
             </button>
           </Box>
           {/* if furnished detail */}

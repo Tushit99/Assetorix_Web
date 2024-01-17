@@ -7,6 +7,7 @@ import {
   Heading,
   Input,
   InputGroup,
+  InputRightElement, 
   Select,
   Text,
   Textarea,
@@ -722,12 +723,12 @@ const Independentbuilder = () => {
         />
       </Box>
       {/* Property Detail */}
-      <Box marginTop={8}>
+      <Box >
         <Heading
           as={"h4"}
+          marginTop={{base:10,md:5}}
           textAlign={"left"}
-          size={"sm"}
-          margin={"0 0 30px 0 "}
+          size={"sm"} 
         >
           Add Room Details
         </Heading>
@@ -772,59 +773,64 @@ const Independentbuilder = () => {
 
         {/* ====================================== */}
         {/* add area details */}
-        <Box textAlign={"left"} padding={"10px 0 0 0"}>
-          <Heading as={"h3"} margin={"5px 0"} size={"sm"}>
+        <Box textAlign={"left"}>
+          <Heading as={"h3"} marginTop={{ base: 10, md: 3 }} size={"sm"}>
             Add Area Details
           </Heading>
-          <ButtonGroup
-            className={style.select_land}
-            size="sm"
+          <InputGroup
+            w={300}
+            size="md"
+            marginTop={2}
             isAttached
             variant="outline"
           >
             <Input
               type="text"
-              padding={"0 2px"}
               value={plotArea}
               placeholder="Enter area detail"
-              onChange={(e) => { 
+              w={200}
+              maxLength={"6"}
+              onChange={(e) => {
                 setPlotArea(NumericString(e.target.value));
               }}
               required
             />
-            <Select
-              value={areaPer}
-              onChange={(e) => {
-                setAreaPer(e.target.value);
-              }}
-              className={style.select}
-              required
-            >
-              <option value="sq.ft">sq.ft</option>
-              <option value="sq.yards">sq.yards</option>
-              <option value="sq.m">sq.m</option>
-              <option value="acres">acres</option>
-              <option value="marla">marla</option>
-              <option value="cents">cents</option>
-              <option value="bigha">bigha</option>
-              <option value="kottah">kottah</option>
-              <option value="kanal">kanal</option>
-              <option value="grounds">grounds</option>
-              <option value="ares">ares</option>
-              <option value="biswa">biswa</option>
-              <option value="guntha">guntha</option>
-              <option value="aankadam">aankadam</option>
-              <option value="hectares">hectares</option>
-              <option value="rood">rood</option>
-              <option value="chataks">chataks</option>
-              <option value="perch">perch</option>
-            </Select>
-          </ButtonGroup>
+            <InputRightElement width={100}>
+              <Select
+                value={areaPer}
+                borderRadius={0}
+                onChange={(e) => {
+                  setAreaPer(e.target.value);
+                }}
+                className={style.select}
+                required
+              >
+                <option value="sq.ft">sq.ft</option>
+                <option value="sq.yards">sq.yards</option>
+                <option value="sq.m">sq.m</option>
+                <option value="acres">acres</option>
+                <option value="marla">marla</option>
+                <option value="cents">cents</option>
+                <option value="bigha">bigha</option>
+                <option value="kottah">kottah</option>
+                <option value="kanal">kanal</option>
+                <option value="grounds">grounds</option>
+                <option value="ares">ares</option>
+                <option value="biswa">biswa</option>
+                <option value="guntha">guntha</option>
+                <option value="aankadam">aankadam</option>
+                <option value="hectares">hectares</option>
+                <option value="rood">rood</option>
+                <option value="chataks">chataks</option>
+                <option value="perch">perch</option>
+              </Select>
+            </InputRightElement>
+          </InputGroup>
         </Box>
         {/* other Room  */}
-        <Box padding={"10px 0"} display={"grid"} className={style.optional_box}>
+        <Box padding={"10px 0"} marginTop={{base:10,md:5}} display={"grid"} className={style.optional_box}>
           <Heading as={"h3"} size={"sm"}>
-            Other rooms (optional)
+            Other rooms (optional) 
           </Heading>
           <Box>
             <button
@@ -865,7 +871,7 @@ const Independentbuilder = () => {
             </button>
           </Box>
         </Box>
-        {/* furnish */}
+        {/* furnishing */}
         <Box padding={"10px 0"} display={"grid"} className={style.optional_box}>
           <Heading as={"h3"} size={"sm"}>
             Furnishing (optional)
@@ -904,7 +910,7 @@ const Independentbuilder = () => {
                 ? "grid"
                 : "none"
             }
-            padding={"10px 0"}
+            padding={"10px 0"}  
             gap={6}
           >
             <Box className={style.furnished_detail}>
@@ -1183,7 +1189,7 @@ const Independentbuilder = () => {
           </Box>
         </Box>
         {/* reserved */}
-        <Box className={style.optional_box}>
+        <Box className={style.optional_box} marginTop={{base:10,md:5}}>
           <Heading as={"h3"} size={"sm"}>
             Reserved Parking (optional)
           </Heading>
@@ -1279,8 +1285,8 @@ const Independentbuilder = () => {
         </Box>
 
         {/* Availability status */}
-        <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:4}} textAlign={"left"}>
+        <Box textAlign={"left"} marginTop={{base:10,md:5}} className={style.optional_box}>
+          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Availability Status
           </Heading>
           <Box className={style.grid}>
@@ -1403,7 +1409,7 @@ const Independentbuilder = () => {
           <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
             Ownership
           </Heading>
-          <Box className={style.grid} gap={4}>
+          <Box className={style.grid} gap={3}>
             <button 
               className={ownership == "Freehold" ? style.setbtn : style.btn}
               borderRadius={"100px"}
@@ -1414,17 +1420,6 @@ const Independentbuilder = () => {
               backgroundColor={"blue.50"}
             >
               Freehold
-            </button>
-            <button
-              className={ownership == "Leasehold" ? style.setbtn : style.btn}
-              borderRadius={"100px"}
-              border={"1px solid rgba(113, 210, 255, 0.897)"}
-              margin={"8px 6px 0 0"}
-              onClick={handleownership}
-              value={"Leasehold"}
-              backgroundColor={"blue.50"}
-            >
-              Leasehold
             </button>
             <button
               className={
@@ -1438,6 +1433,17 @@ const Independentbuilder = () => {
               backgroundColor={"blue.50"}
             >
               Co-operative society
+            </button> 
+            <button
+              className={ownership == "Leasehold" ? style.setbtn : style.btn}
+              borderRadius={"100px"}
+              border={"1px solid rgba(113, 210, 255, 0.897)"}
+              margin={"8px 6px 0 0"}
+              onClick={handleownership}
+              value={"Leasehold"}
+              backgroundColor={"blue.50"}
+            >
+              Leasehold
             </button>
             <button
               className={
@@ -1497,7 +1503,7 @@ const Independentbuilder = () => {
             isChecked={inclusivePrices.includes("All inclusive price")}
             onChange={(e) => {
               e.preventDefault();
-              handleinclusiveandtax(e.target.value);
+              handleinclusiveandtax(e.target.value); 
             }}
             value={"All inclusive price"}
           >
@@ -1613,7 +1619,7 @@ const Independentbuilder = () => {
 
       {/* Add amenities/unique features */}
       <Box>
-        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} textAlign={"left"}>
           Add amenities/unique features
         </Heading>
         <Heading
@@ -1662,6 +1668,15 @@ const Independentbuilder = () => {
           </button>
           <button
             className={
+              amenities.includes("Visitor Parking") ? style.setbtn : style.btn
+            }
+            onClick={handleAminities}
+            value={"Visitor Parking"}
+          >
+            Visitor Parking
+          </button>
+          <button
+            className={
               amenities.includes("Rain Water Harvesting")
                 ? style.setbtn
                 : style.btn
@@ -1671,15 +1686,7 @@ const Independentbuilder = () => {
           >
             Rain Water Harvesting
           </button>
-          <button
-            className={
-              amenities.includes("Visitor Parking") ? style.setbtn : style.btn
-            }
-            onClick={handleAminities}
-            value={"Visitor Parking"}
-          >
-            Visitor Parking
-          </button>
+          
           <button
             className={amenities.includes("Park") ? style.setbtn : style.btn}
             onClick={handleAminities}
@@ -1726,6 +1733,17 @@ const Independentbuilder = () => {
             onClick={handlePropertyFeature}
           >
             High Ceiling Height
+          </button>
+          <button
+            className={
+              propertyFeatures.includes("Natural Light")
+                ? style.setbtn
+                : style.btn
+            }
+            value={"Natural Light"}
+            onClick={handlePropertyFeature}
+          >
+            Natural Light
           </button>
           <button
             className={
@@ -1804,17 +1822,7 @@ const Independentbuilder = () => {
           >
             Private Garden / Terrace
           </button>
-          <button
-            className={
-              propertyFeatures.includes("Natural Light")
-                ? style.setbtn
-                : style.btn
-            }
-            value={"Natural Light"}
-            onClick={handlePropertyFeature}
-          >
-            Natural Light
-          </button>
+          
           <button
             className={
               propertyFeatures.includes("Airy Roooms")
@@ -2379,8 +2387,8 @@ const Independentbuilder = () => {
           </button>
         </Box>
       </Box>
-      <Heading
-        as={"h5"}
+      <Heading  
+        as={"h5"} 
         size={"xs"}
         color={"rgb(255, 52, 52)"}
         fontWeight={200}
@@ -2391,10 +2399,10 @@ const Independentbuilder = () => {
         blocked
       </Heading>
       {isClicked && <Loading />}
-      <Button
+      <Button 
         margin={"20px 0"}
         type="submit"
-        w={"100%"}
+        w={"100%"}  
         backgroundColor={"rgb(46,49,146)"}
         _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
         color={"#ffffff"}
