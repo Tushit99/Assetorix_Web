@@ -2551,7 +2551,7 @@ const IndependentHouseUpdate = () => {
         _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
         color={"#ffffff"}
       >
-        Udpate Property 
+        Update Property 
       </Button>
     </form>
     </Box>

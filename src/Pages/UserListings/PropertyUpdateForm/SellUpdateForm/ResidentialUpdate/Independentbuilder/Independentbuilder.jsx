@@ -18,7 +18,7 @@ import { Checkbox } from "@chakra-ui/react";
 import style from "../Residential.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { CleanInputText, NumericString, WordandNumber } from "../../../code";
+import { AlphabetString, CleanInputText, NumericString, WordandNumber } from "../../../code";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useNavigate, useParams } from "react-router-dom";
 import Extraimg from "../../Extraimg/Extraimg";
