@@ -18,13 +18,11 @@ import { Checkbox } from "@chakra-ui/react";
 import style from "../PlotLandCommercial.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { CleanInputText, NumericString, WordandNumber } from "../../../../code";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../../../Loading";
-
-
 
 const CommercialLand = () => {
   const isCountry = useSelector((state) => state.gloalval);
@@ -32,13 +30,13 @@ const CommercialLand = () => {
   const [country, setCountry] = useState("");
   const [facingwidth, setFacingWidth] = useState("");
   const [city, setCity] = useState("");
-  const [pincode, setPincode] = useState(0);
+  const [pincode, setPincode] = useState("");
   const [state, setState] = useState("");
   const [locality, setLocality] = useState("");
   const [Plotnumber, setPlotnumber] = useState("");
   const [areaPer, setAreaPer] = useState("sq.ft");
   const [ownership, setOwnerShip] = useState("");
-  const [pricedetail, setPricedetail] = useState(""); 
+  const [pricedetail, setPricedetail] = useState("");
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [constructionType, setConstructionType] = useState([]);
   const [amenities, setAminity] = useState([]);
@@ -76,9 +74,7 @@ const CommercialLand = () => {
   const [isDraging, setIsDraging] = useState(false);
   const fileInputRef = useRef(null);
 
-
   // please don'nt change any function without any prior knowledge
-
 
   useEffect(() => {
     let num = Number(Date().split(" ")[3]);
@@ -88,7 +84,6 @@ const CommercialLand = () => {
     }
     setexpectedBy(yearbox);
   }, []);
-
 
   const handleSubmitData = async (e) => {
     e.preventDefault();
@@ -110,7 +105,7 @@ const CommercialLand = () => {
       ownership,
       plotLength,
       plotBreadth,
-      price: +pricedetail, 
+      price: +pricedetail,
       inclusivePrices,
       openSides,
       amenities,
@@ -133,38 +128,34 @@ const CommercialLand = () => {
         maintenancePrice,
         maintenanceTimePeriod,
         bookingAmount,
-        annualDuesPayable: annualDuesPayble
+        annualDuesPayable: annualDuesPayble,
       },
     };
 
-
-
     const showToastError = (message) => {
       toast({
-        title: message + ' un-filled',
-        status: 'error',
+        title: message + " un-filled",
+        status: "error",
         duration: 2000,
-        position: 'top-right'
+        position: "top-right",
       });
-    }
-
+    };
 
     if (!locality) {
-      showToastError('Provide locality');
+      showToastError("Provide locality");
     } else if (!ownership) {
-      showToastError('Provide OwnerShip');
+      showToastError("Provide OwnerShip");
     } else if (!pricedetail) {
-      showToastError('Provide PriceDetail');
-    } 
+      showToastError("Provide PriceDetail");
+    }
 
     if (locationAdv) {
-      obj["locationAdv"] = locationAdv
+      obj["locationAdv"] = locationAdv;
     }
 
     if (
       ownership &&
       pricedetail &&
-
       inclusivePrices &&
       amenities &&
       propertyFeatures &&
@@ -174,17 +165,17 @@ const CommercialLand = () => {
       let id = localStorage.getItem("usrId") || undefined;
       let authorization = localStorage.getItem("AstToken") || undefined;
 
-      let head = { id, authorization, 'Content-type': 'application/json' };
+      let head = { id, authorization, "Content-type": "application/json" };
 
       if (!id || !authorization) {
         toast({
-          title: 'Kindly log in to access property posting.',
+          title: "Kindly log in to access property posting.",
           description: "Login required for posting property.",
-          status: 'error',
+          status: "error",
           duration: 2000,
-          position: 'top-right'
-        })
-        return
+          position: "top-right",
+        });
+        return;
       }
 
       if (preLeased == "Yes") {
@@ -192,9 +183,9 @@ const CommercialLand = () => {
           currentRentPerMonth,
           leaseTenureInYear,
           annualRentIncrease,
-          businessType
-        }
-        obj["preLeased_RentedDetails"] = preLeased_RentedDetails
+          businessType,
+        };
+        obj["preLeased_RentedDetails"] = preLeased_RentedDetails;
       }
       // else {
       try {
@@ -203,14 +194,17 @@ const CommercialLand = () => {
         //     headers: head,
         //     body: JSON.stringify(obj)
         // });
-        // let data = await response.json();  
-        // console.log("data",data); 
-        await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
+        // let data = await response.json();
+        // console.log("data",data);
+        await axios
+          .post(`${process.env.REACT_APP_URL}/property/`, obj, {
+            headers: head,
+          })
           .then((e) => {
             toast({
               title: e.data.msg,
               description: e.data.msg,
-              status: 'success',
+              status: "success",
               duration: 2000,
             });
             submitImage(e.data.id);
@@ -218,36 +212,34 @@ const CommercialLand = () => {
       } catch (error) {
         toast({
           title: error.response.data.msg,
-          status: 'error',
+          status: "error",
           duration: 2000,
-        })
+        });
         console.log(error);
       }
       // }
-
-    }
-    else {
+    } else {
       toast({
-        title: 'Form un-filled',
+        title: "Form un-filled",
         description: "Please fill all required fields.",
-        status: 'info',
+        status: "info",
         duration: 2000,
-        position: 'top-right'
-      })
+        position: "top-right",
+      });
     }
   };
 
-  // image uploading after uploading the data:  
+  // image uploading after uploading the data:
   const submitImage = async (productID) => {
     try {
       let id = localStorage.getItem("usrId") || undefined;
       let authorization = localStorage.getItem("AstToken") || undefined;
 
       let headersList = {
-        "Accept": "*/*",
-        "Authorization": authorization,
-        "id": id
-      }
+        Accept: "*/*",
+        Authorization: authorization,
+        id: id,
+      };
 
       let formdata = new FormData();
       images.forEach((image) => {
@@ -261,12 +253,12 @@ const CommercialLand = () => {
         method: "POST",
         headers: headersList,
         data: bodyContent,
-      }
+      };
 
       await axios.request(reqOptions).then((e) => {
         setIsClicked(false);
         navigate("/listing");
-      }) 
+      });
     } catch (error) {
       console.log(error);
       setIsClicked(false);
@@ -280,32 +272,29 @@ const CommercialLand = () => {
     setPincode(val);
     if (val.length == 6) {
       pinfetch(val);
-    }
-    else {
+    } else {
       console.log(val);
     }
-  }
+  };
 
   const handleConstructionOnProperty = (e) => {
     e.preventDefault();
     setConstructionOnProperty(e.target.value);
-  }
+  };
 
   const pinfetch = async (pin) => {
     try {
-
-      let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
+      let res = await axios.get(
+        `${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`
+      );
       setState(res.data[0].state);
       setCity(res.data[0].city);
       setCountry(res.data[0].country);
       setPinCollection(res.data);
-    }
-    catch (err) {
+    } catch (err) {
       console.log(err);
     }
-  }
-
-
+  };
 
   const handleConstructionType = (e) => {
     e.preventDefault();
@@ -318,9 +307,7 @@ const CommercialLand = () => {
       newarr.push(value);
     }
     setConstructionType(newarr);
-  }
-
-
+  };
 
   const handleAuthorityBy = (e) => {
     e.preventDefault();
@@ -334,12 +321,12 @@ const CommercialLand = () => {
     }
     console.log(newarr);
     setAuthorisedBy(newarr);
-  }
+  };
 
   const handleOpenSide = (e) => {
     e.preventDefault();
     setOpenSides(e.target.value);
-  }
+  };
 
   const handleownership = (e) => {
     e.preventDefault();
@@ -385,7 +372,6 @@ const CommercialLand = () => {
     setPropertyFeature(newarr);
   };
 
-
   const handleotherfeature = (e) => {
     e.preventDefault();
     let newarr = [...otherFeature];
@@ -422,7 +408,7 @@ const CommercialLand = () => {
       newarr.push(value);
     }
     setInclusivePrice(newarr);
-  } 
+  };
 
   const handleIndustryType = (e) => {
     e.preventDefault();
@@ -435,13 +421,13 @@ const CommercialLand = () => {
         return [...prevIndustryType, value];
       }
     });
-  }
+  };
 
-  // ======--- image upload function  
+  // ======--- image upload function
 
   const selectFiles = () => {
     fileInputRef.current.click();
-  }
+  };
 
   const removeImage = (index) => {
     const newImages = [...images];
@@ -452,33 +438,36 @@ const CommercialLand = () => {
   const onFileSelect = (e) => {
     let files = e.target.files;
     if (files.length === 0) {
-      return
+      return;
     }
     for (let i = 0; i < files.length; i++) {
-      if (files[i].type.split('/')[0] !== 'image') {
+      if (files[i].type.split("/")[0] !== "image") {
         continue;
       }
       if (!images.some((e) => e.name === files[i].name)) {
-        setImages((prev) => [...prev, {
-          name: files[i].name,
-          image: files[i],
-        },])
+        setImages((prev) => [
+          ...prev,
+          {
+            name: files[i].name,
+            image: files[i],
+          },
+        ]);
       }
     }
-  }
+  };
 
   const ondragleave = (event) => {
     event.preventDefault();
     setIsDraging(false);
-    console.log("leave")
-  }
+    console.log("leave");
+  };
 
   const ondragover = (event) => {
     event.preventDefault();
     setIsDraging(true);
     event.dataTransfer.dropEffect = "copy";
     console.log("over the box");
-  }
+  };
 
   const ondrop = (event) => {
     event.preventDefault(); // Add this line
@@ -491,35 +480,39 @@ const CommercialLand = () => {
     }
 
     for (let i = 0; i < files.length; i++) {
-      if (files[i].type.split('/')[0] !== 'image') {
+      if (files[i].type.split("/")[0] !== "image") {
         continue;
       }
       if (!images.some((e) => e.name === files[i].name)) {
-        setImages((prev) => [...prev, {
-          name: files[i].name,
-          image: files[i],
-        }]);
+        setImages((prev) => [
+          ...prev,
+          {
+            name: files[i].name,
+            image: files[i],
+          },
+        ]);
       }
     }
     console.log("droped");
-  }
+  };
 
   if (isClicked) {
-    <Loading />
+    <Loading />;
   }
 
   return (
     <Box className="perfectwidth">
       <form onSubmit={handleSubmitData}>
         <Box className={style.location_form}>
-          <Heading size={"lg"}>Where is your property located?</Heading>
-          <Heading size={"sm"}>
-            An accurate location helps you connect with the right buyers.
+          <Heading size={"lg"} color={"black"} textAlign={"center"}>
+            Where is your Commercial Land / institutional Land located?
+          </Heading>
+          <Heading size={"sm"} color={"black"} textAlign={"center"}>
+            Location Detail
           </Heading>
 
           <Input
             type="text"
-            required
             maxLength={"55"}
             placeholder="Plot number (optional)"
             value={Plotnumber}
@@ -534,6 +527,7 @@ const CommercialLand = () => {
             fontSize={"md"}
             value={pincode}
             maxLength={"6"}
+            variant="flushed"
             onChange={handlepinfetch}
           />
           <Input
@@ -553,7 +547,9 @@ const CommercialLand = () => {
                 <option value={e.locality} />
               ))}
             </datalist>
-          ) : ""}
+          ) : (
+            ""
+          )}
 
           <Input
             type="text"
@@ -585,38 +581,41 @@ const CommercialLand = () => {
             fontSize={"md"}
             variant="flushed"
           />
-
         </Box>
         {/* =============================== Tell us about your property ============================ */}
-        <Box>
-          <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"}>
-            Tell us about your property
-          </Heading>
-        </Box>
-
 
         {/* ============================ add area details =============================== */}
-        <Box textAlign={"left"} padding={"10px 0 0 0"}>
-          <Heading as={"h3"} margin={"5px 0"} size={"md"}>
+        <Box textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"}>
             Add Area Details
           </Heading>
-          <Text margin={"5px 0"}> Atleast one area type is mandatory </Text>
+          <Text> Atleast one area type is mandatory </Text>
           <ButtonGroup
             className={style.select_land}
             size="sm"
             isAttached
+            width={{ base: "100%", md: "300px" }}
             variant="outline"
           >
             <Input
               type="text"
               value={plotArea}
-              onChange={(e) => { 
+              placeholder="Enter Plot Area"
+              onChange={(e) => {
                 setPlotArea(NumericString(e.target.value));
               }}
-              required />
-            <select value={areaPer} onChange={(e) => {
-              setAreaPer(e.target.value);
-            }} className={style.select} required>
+              required
+            />
+            <Select
+              variant={"outline"}
+              borderRadius={0}
+              value={areaPer}
+              onChange={(e) => {
+                setAreaPer(e.target.value);
+              }}
+              className={style.select}
+              required
+            >
               <option value="sq.ft">sq.ft</option>
               <option value="sq.yards">sq.yards</option>
               <option value="sq.m">sq.m</option>
@@ -635,72 +634,201 @@ const CommercialLand = () => {
               <option value="rood">rood</option>
               <option value="chataks">chataks</option>
               <option value="perch">perch</option>
-            </select>
+            </Select>
           </ButtonGroup>
         </Box>
 
         {/* ========================== Property Dimensions ========================== */}
-        <Box as={"div"} textAlign={"left"} padding={"10px 0"} >
-          <Heading as={"h3"} size={"md"} > Property Dimensions (Optional) </Heading>
-          <Input type={"text"} variant='flushed' maxLength={"12"} padding={"0 6px"} margin={"4px 0"} value={plotLength} onChange={(e) => {
-            setplotLength(NumericString(e.target.value));
-          }} placeholder={`Length of plot (in ${areaPer})`} />
-          <Input type={"text"} variant='flushed' maxLength={"12"} padding={"0 6px"} margin={"4px 0"} value={plotBreadth} onChange={(e) => {
-            setPlotBreadth(NumericString(e.target.value));
-          }} placeholder={`Breadth of plot (in ${areaPer})`} />
+        <Box as={"div"} textAlign={"left"} padding={"10px 0"}>
+          <Heading as={"h3"} size={"sm"}>
+            {" "}
+            Property Dimensions (Optional){" "}
+          </Heading>
+          <Input
+            type={"text"}
+            variant="flushed"
+            maxLength={"12"}
+            padding={"0 6px"}
+            margin={"4px 0"}
+            value={plotLength}
+            onChange={(e) => {
+              setplotLength(NumericString(e.target.value));
+            }}
+            placeholder={`Length of plot (in ${areaPer})`}
+          />
+          <Input
+            type={"text"}
+            variant="flushed"
+            maxLength={"12"}
+            padding={"0 6px"}
+            margin={"4px 0"}
+            value={plotBreadth}
+            onChange={(e) => {
+              setPlotBreadth(NumericString(e.target.value));
+            }}
+            placeholder={`Breadth of plot (in ${areaPer})`}
+          />
         </Box>
 
         {/* ========================== Width of facing road ========================== */}
-        <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Box>
+          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Width of facing road
-          </Heading>
-          <Box display={"flex"} gap={"20px"} w={"300px"} >
-            <Input type="text" variant='flushed' maxLength={4} flex={1} required value={facingwidth} onChange={(e) => {
-              e.preventDefault();
-              setFacingWidth(NumericString(e.target.value));
-            }} />
-            <Select flex={1} onChange={(e) => setFacing(e.target.value)} value={facing}>
+          </Heading> 
+          <ButtonGroup display={"flex"} gap={0} width={{base:"100%",md:"300px"}}>
+            <Input
+              type="text" 
+              placeholder={"Enter facing width"}
+              variant={"outline"}
+              maxLength={4}
+              flex={3}
+              required
+              value={facingwidth}
+              onChange={(e) => {
+                e.preventDefault();
+                setFacingWidth(NumericString(e.target.value));
+              }}
+            />
+            <Select 
+            variant={"outline"}
+              borderRadius={0}
+              flex={2}
+              onChange={(e) => setFacing(e.target.value)}
+              value={facing}
+            >
               <option value="Meter"> Meter </option>
               <option value="Feet"> Feet </option>
             </Select>
-          </Box>
+          
+          </ButtonGroup> 
         </Box>
 
         {/* ========================== No of open sides ========================== */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} > No. of open sides </Heading>
+          <Heading as={"h3"} size={"sm"}>
+            {" "}
+            No. of open sides{" "}
+          </Heading>
           <Box textAlign={"left"} padding={"10px 0 0 0"}>
-            <button value={"1"} onClick={handleOpenSide} className={openSides.includes("1") ? style.setbtn : style.btn} >1</button>
-            <button value={"2"} onClick={handleOpenSide} className={openSides.includes("2") ? style.setbtn : style.btn} >2</button>
-            <button value={"3"} onClick={handleOpenSide} className={openSides.includes("3") ? style.setbtn : style.btn} >3</button>
-            <button value={"4 or more"} onClick={handleOpenSide} className={openSides.includes("4 or more") ? style.setbtn : style.btn} >4 or more</button>
+            <button
+              value={"1"}
+              onClick={handleOpenSide}
+              className={openSides.includes("1") ? style.setbtn : style.btn}
+            >
+              1
+            </button>
+            <button
+              value={"2"}
+              onClick={handleOpenSide}
+              className={openSides.includes("2") ? style.setbtn : style.btn}
+            >
+              2
+            </button>
+            <button
+              value={"3"}
+              onClick={handleOpenSide}
+              className={openSides.includes("3") ? style.setbtn : style.btn}
+            >
+              3
+            </button>
+            <button
+              value={"4 or more"}
+              onClick={handleOpenSide}
+              className={
+                openSides.includes("4 or more") ? style.setbtn : style.btn
+              }
+            >
+              4 or more
+            </button>
           </Box>
         </Box>
 
         {/* ============================== Construction Property =============================== */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} > Any construction done on this property? </Heading>
+          <Heading as={"h3"} size={"sm"}>
+            {" "}
+            Any construction done on this property?{" "}
+          </Heading>
           <Box textAlign={"left"} padding={"10px 0 0 0"}>
-            <button onClick={handleConstructionOnProperty} value={"Yes"} className={ConstructionOnProperty.includes("Yes") ? style.setbtn : style.btn} >Yes</button>
-            <button onClick={handleConstructionOnProperty} value={"No"} className={ConstructionOnProperty.includes("No") ? style.setbtn : style.btn} >No</button>
+            <button
+              onClick={handleConstructionOnProperty}
+              value={"Yes"}
+              className={
+                ConstructionOnProperty.includes("Yes")
+                  ? style.setbtn
+                  : style.btn
+              }
+            >
+              Yes
+            </button>
+            <button
+              onClick={handleConstructionOnProperty}
+              value={"No"}
+              className={
+                ConstructionOnProperty.includes("No") ? style.setbtn : style.btn
+              }
+            >
+              No
+            </button>
           </Box>
         </Box>
 
         {/* ============================= Type of construction been done =========================== */}
-        <Box className={style.optional_box} display={ConstructionOnProperty == "Yes" ? "grid" : "none"}>
-          <Heading as={"h3"} size={"md"} > What type of construction has been done? </Heading>
+        <Box
+          className={style.optional_box}
+          display={ConstructionOnProperty == "Yes" ? "grid" : "none"}
+        >
+          <Heading as={"h3"} size={"sm"}>
+            {" "}
+            What type of construction has been done?{" "}
+          </Heading>
           <Box>
-            <button value={"Shed"} onClick={handleConstructionType} className={constructionType.includes("Shed") ? style.setbtn : style.btn} > Shed </button>
-            <button value={"Room(s)"} onClick={handleConstructionType} className={constructionType.includes("Room(s)") ? style.setbtn : style.btn} > Room(s) </button>
-            <button value={"Washroom"} onClick={handleConstructionType} className={constructionType.includes("Washroom") ? style.setbtn : style.btn} > Washroom </button>
-            <button value={"Other"} onClick={handleConstructionType} className={constructionType.includes("Other") ? style.setbtn : style.btn} > Other </button>
+            <button
+              value={"Shed"}
+              onClick={handleConstructionType}
+              className={
+                constructionType.includes("Shed") ? style.setbtn : style.btn
+              }
+            >
+              {" "}
+              Shed{" "}
+            </button>
+            <button
+              value={"Room(s)"}
+              onClick={handleConstructionType}
+              className={
+                constructionType.includes("Room(s)") ? style.setbtn : style.btn
+              }
+            >
+              {" "}
+              Room(s){" "}
+            </button>
+            <button
+              value={"Washroom"}
+              onClick={handleConstructionType}
+              className={
+                constructionType.includes("Washroom") ? style.setbtn : style.btn
+              }
+            >
+              {" "}
+              Washroom{" "}
+            </button>
+            <button
+              value={"Other"}
+              onClick={handleConstructionType}
+              className={
+                constructionType.includes("Other") ? style.setbtn : style.btn
+              }
+            >
+              {" "}
+              Other{" "}
+            </button>
           </Box>
         </Box>
 
         {/* Property facing */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Property facing
           </Heading>
           <Box>
@@ -708,44 +836,40 @@ const CommercialLand = () => {
               className={propertyFacing == "North" ? style.setbtn : style.btn}
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"North"}
             >
-
               North
             </button>
             <button
               className={propertyFacing == "South" ? style.setbtn : style.btn}
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"South"}
             >
-
               South
             </button>
             <button
               className={propertyFacing == "East" ? style.setbtn : style.btn}
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"East"}
             >
-
               East
             </button>
             <button
               className={propertyFacing == "West" ? style.setbtn : style.btn}
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"West"}
             >
-
               West
             </button>
             <button
@@ -754,11 +878,10 @@ const CommercialLand = () => {
               }
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"North-East"}
             >
-
               North-East
             </button>
             <button
@@ -767,11 +890,10 @@ const CommercialLand = () => {
               }
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"North-West"}
             >
-
               North-West
             </button>
             <button
@@ -780,11 +902,10 @@ const CommercialLand = () => {
               }
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"South-East"}
             >
-
               South-East
             </button>
             <button
@@ -793,11 +914,10 @@ const CommercialLand = () => {
               }
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"South-West"}
             >
-
               South-West
             </button>
           </Box>
@@ -809,7 +929,12 @@ const CommercialLand = () => {
             Possession By
           </Heading>
           <Box>
-            <Select variant={"filled"} padding={"0 10px"} value={expectedByYear} onChange={(e) => setExpectedByYear(e.target.value)}>
+            <Select
+              variant={"filled"}
+              padding={"0 10px"}
+              value={expectedByYear}
+              onChange={(e) => setExpectedByYear(e.target.value)}
+            >
               <option value="Immediate">Immediate</option>
               <option value="Within 3 Months">Within 3 Months</option>
               <option value="Within 6 Months">Within 6 Months</option>
@@ -822,7 +947,6 @@ const CommercialLand = () => {
 
         {/* ============================ Add pricing and details (Ownership) ============================ */}
         <Box>
-          
           {/* OwnerShip detail */}
           <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Ownership
@@ -883,7 +1007,7 @@ const CommercialLand = () => {
         <Box>
           <Heading
             as={"h3"}
-            size={"md"}
+            size={"sm"}
             margin={"30px 0 10px 0"}
             textAlign={"left"}
           >
@@ -891,7 +1015,9 @@ const CommercialLand = () => {
           </Heading>
           <Box className={style.grid} gap={4}>
             <button
-              className={authorisedBy.includes("DDA") ? style.setbtn : style.btn}
+              className={
+                authorisedBy.includes("DDA") ? style.setbtn : style.btn
+              }
               borderRadius={"100px"}
               border={"1px solid rgba(113, 210, 255, 0.897)"}
               margin={"8px 6px 0 0"}
@@ -902,7 +1028,9 @@ const CommercialLand = () => {
               DDA
             </button>
             <button
-              className={authorisedBy.includes("MCD") ? style.setbtn : style.btn}
+              className={
+                authorisedBy.includes("MCD") ? style.setbtn : style.btn
+              }
               borderRadius={"100px"}
               border={"1px solid rgba(113, 210, 255, 0.897)"}
               margin={"8px 6px 0 0"}
@@ -950,7 +1078,7 @@ const CommercialLand = () => {
                   required
                   maxLength={"12"}
                   onChange={(e) => {
-                    setPricedetail(NumericString(e.target.value)); 
+                    setPricedetail(NumericString(e.target.value));
                   }}
                 />
               </Box>
@@ -961,49 +1089,83 @@ const CommercialLand = () => {
               isChecked={inclusivePrices.includes("All inclusive price")}
               onChange={(e) => {
                 e.preventDefault();
-                handleinclusiveandtax(e.target.value)
+                handleinclusiveandtax(e.target.value);
               }}
               value={"All inclusive price"}
-
             >
               All inclusive price
             </Checkbox>
             <Checkbox
-              isChecked={inclusivePrices.includes("Tax and Govt. charges excluded")}
+              isChecked={inclusivePrices.includes(
+                "Tax and Govt. charges excluded"
+              )}
               onChange={(e) => {
                 e.preventDefault();
-                handleinclusiveandtax(e.target.value)
+                handleinclusiveandtax(e.target.value);
               }}
               value={"Tax and Govt. charges excluded"}
             >
-
               Tax and Govt. charges excluded
             </Checkbox>
             <Checkbox
               isChecked={inclusivePrices.includes("Price Negotiable")}
               onChange={(e) => {
                 e.preventDefault();
-                handleinclusiveandtax(e.target.value)
+                handleinclusiveandtax(e.target.value);
               }}
               value={"Price Negotiable"}
             >
-
               Price Negotiable
             </Checkbox>
           </Box>
           <Box display={"grid"}>
-            {additionalPrice && <>
-              <InputGroup w={"300px"} margin={"10px 0"}>
-                <Input w={"60%"} type='text' maxLength={"12"} onChange={(e) => setMaintenancePrice(NumericString(e.target.value))} value={maintenancePrice} placeholder={"Maintenance Price"} />
-                <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
-                  <option value="Monthly">Monthly</option>
-                  <option value="Yearly">Yearly</option>
-                </Select>
-              </InputGroup>
-              <Input type="text" maxLength={"12"} w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(NumericString(e.target.value))} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-              <Input type="text" maxLength={"12"} w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(NumericString(e.target.value))} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
-            </>
-            }
+            {additionalPrice && (
+              <>
+                <InputGroup w={"300px"} margin={"10px 0"}>
+                  <Input
+                    w={"60%"}
+                    type="text"
+                    maxLength={"12"}
+                    onChange={(e) =>
+                      setMaintenancePrice(NumericString(e.target.value))
+                    }
+                    value={maintenancePrice}
+                    placeholder={"Maintenance Price"}
+                  />
+                  <Select
+                    w={"40%"}
+                    borderRadius={0}
+                    value={maintenanceTimePeriod}
+                    onChange={(e) => setMaintenanceTimePeriod(e.target.value)}
+                  >
+                    <option value="Monthly">Monthly</option>
+                    <option value="Yearly">Yearly</option>
+                  </Select>
+                </InputGroup>
+                <Input
+                  type="text"
+                  maxLength={"12"}
+                  w={"300px"}
+                  value={bookingAmount}
+                  onChange={(e) =>
+                    setBookingAmount(NumericString(e.target.value))
+                  }
+                  placeholder="Booking Amount"
+                  margin={"10px 0 0 0"}
+                />
+                <Input
+                  type="text"
+                  maxLength={"12"}
+                  w={"300px"}
+                  value={annualDuesPayble}
+                  onChange={(e) =>
+                    setAnnualDuesPayble(NumericString(e.target.value))
+                  }
+                  placeholder="Annual dues payable"
+                  margin={"10px 0 0 0"}
+                />
+              </>
+            )}
             <Heading
               as={"h3"}
               size={"sm"}
@@ -1012,48 +1174,98 @@ const CommercialLand = () => {
               fontWeight={500}
               cursor={"pointer"}
               onClick={() => setAdditionalPrice(!additionalPrice)}
-              textAlign={"left"}>
-              {additionalPrice ? <IoIosArrowUp style={{ display: "inline" }} /> : <IoIosArrowDown style={{ display: "inline" }} />} Add more pricing details
+              textAlign={"left"}
+            >
+              {additionalPrice ? (
+                <IoIosArrowUp style={{ display: "inline" }} />
+              ) : (
+                <IoIosArrowDown style={{ display: "inline" }} />
+              )}{" "}
+              Add more pricing details
             </Heading>
           </Box>
         </Box>
 
         {/* ============================ Is it Pre-leased / Pre-Rented ? ============================ */}
         <Box textAlign={"left"}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Is it Pre-leased / Pre-Rented ?
           </Heading>
-          <Heading as={"h5"} size={"xs"} fontWeight={500} margin={"10px 0"} textAlign={"left"}>
+          <Heading
+            as={"h5"}
+            size={"xs"}
+            fontWeight={500}
+            margin={"10px 0"}
+            textAlign={"left"}
+          >
             for properties that are already rented out
           </Heading>
           <Box display={"flex"} gap={5}>
-            <button value={"Yes"} onClick={(e) => {
-              e.preventDefault();
-              setPreLeased(e.target.value);
-            }} className={preLeased == "Yes" ? style.setbtn : style.btn} > Yes </button>
-            <button value={"No"} onClick={(e) => {
-              e.preventDefault();
-              setPreLeased(e.target.value);
-            }} className={preLeased == "No" ? style.setbtn : style.btn} > No </button>
+            <button
+              value={"Yes"}
+              onClick={(e) => {
+                e.preventDefault();
+                setPreLeased(e.target.value);
+              }}
+              className={preLeased == "Yes" ? style.setbtn : style.btn}
+            >
+              {" "}
+              Yes{" "}
+            </button>
+            <button
+              value={"No"}
+              onClick={(e) => {
+                e.preventDefault();
+                setPreLeased(e.target.value);
+              }}
+              className={preLeased == "No" ? style.setbtn : style.btn}
+            >
+              {" "}
+              No{" "}
+            </button>
           </Box>
           <Box display={preLeased == "Yes" ? "block" : "none"}>
-            <Input type="text" maxLength={"12"} value={currentRentPerMonth} onChange={(e) => {
-              e.preventDefault();
-              setCurrentRentPerMonth(NumericString(e.target.value));
-            }} placeholder={"₹ Current rent per month"} />
-            <Input type="text" maxLength={"12"} value={leaseTenureInYear} onChange={(e) => {
-              e.preventDefault();
-              setLeaseTenureInYear(NumericString(e.target.value));
-            }} placeholder={"Lease tenure in years"} />
+            <Input
+              type="text"
+              maxLength={"12"}
+              value={currentRentPerMonth}
+              onChange={(e) => {
+                e.preventDefault();
+                setCurrentRentPerMonth(NumericString(e.target.value));
+              }}
+              placeholder={"₹ Current rent per month"}
+            />
+            <Input
+              type="text"
+              maxLength={"12"}
+              value={leaseTenureInYear}
+              onChange={(e) => {
+                e.preventDefault();
+                setLeaseTenureInYear(NumericString(e.target.value));
+              }}
+              placeholder={"Lease tenure in years"}
+            />
             <Box>
-              <Input type="text" maxLength={"12"} value={annualRentIncrease} onChange={(e) => {
-                e.preventDefault();
-                setAnnualRentIncrease(NumericString(e.target.value));
-              }} placeholder="Annual rent increase in % (Optional)" />
-              <Input type="text" maxLength={"100"} value={businessType} onChange={(e) => {
-                e.preventDefault();
-                setBusinessType(NumericString(e.target.value));
-              }} placeholder="Leased to - Business Type (Optional)" />
+              <Input
+                type="text"
+                maxLength={"12"}
+                value={annualRentIncrease}
+                onChange={(e) => {
+                  e.preventDefault();
+                  setAnnualRentIncrease(NumericString(e.target.value));
+                }}
+                placeholder="Annual rent increase in % (Optional)"
+              />
+              <Input
+                type="text"
+                maxLength={"100"}
+                value={businessType}
+                onChange={(e) => {
+                  e.preventDefault();
+                  setBusinessType(NumericString(e.target.value));
+                }}
+                placeholder="Leased to - Business Type (Optional)"
+              />
             </Box>
           </Box>
         </Box>
@@ -1064,32 +1276,174 @@ const CommercialLand = () => {
             Approved for Industry Type
           </Heading>
           <Menu>
-            <MenuButton width={"300px"} as={Button} variant={"outline"} borderRadius={0} rightIcon={<ChevronDownIcon />}>
-              {industryType.length == 0 ? "Select Industry Type" : `Selected ${industryType.length} industry`}
+            <MenuButton
+              width={"300px"}
+              as={Button}
+              variant={"outline"}
+              borderRadius={0}
+              rightIcon={<ChevronDownIcon />}
+            >
+              {industryType.length == 0
+                ? "Select Industry Type"
+                : `Selected ${industryType.length} industry`}
             </MenuButton>
-            <MenuList display={"grid"} padding={"4px 20px"} marginTop={"-6px"} >
-              <Checkbox isChecked={industryType.includes("Automobiles")} onChange={handleIndustryType} value={"Automobiles"} >Automobiles</Checkbox>
-              <Checkbox isChecked={industryType.includes("Biotechnology")} onChange={handleIndustryType} value={"Biotechnology"} >Biotechnology</Checkbox>
-              <Checkbox isChecked={industryType.includes("Capital Goods")} onChange={handleIndustryType} value={"Capital Goods"} >Capital Goods</Checkbox>
-              <Checkbox isChecked={industryType.includes("Chemicals")} onChange={handleIndustryType} value={"Chemicals"} >Chemicals</Checkbox>
-              <Checkbox isChecked={industryType.includes("Construction")} onChange={handleIndustryType} value={"Construction"} >Construction</Checkbox>
-              <Checkbox isChecked={industryType.includes("Defence and Aerospace Manufacturing")} onChange={handleIndustryType} value={"Defence and Aerospace Manufacturing"} >Defence and Aerospace Manufacturing</Checkbox>
-              <Checkbox isChecked={industryType.includes("Electronics Hardware")} onChange={handleIndustryType} value={"Electronics Hardware"} >Electronics Hardware</Checkbox>
-              <Checkbox isChecked={industryType.includes("Engineering")} onChange={handleIndustryType} value={"Engineering"} >Engineering</Checkbox>
-              <Checkbox isChecked={industryType.includes("Food processing")} onChange={handleIndustryType} value={"Food processing"} >Food processing</Checkbox>
-              <Checkbox isChecked={industryType.includes("Gems and Jewellery")} onChange={handleIndustryType} value={"Gems and Jewellery"} >Gems and Jewellery</Checkbox>
-              <Checkbox isChecked={industryType.includes("Handicrafts")} onChange={handleIndustryType} value={"Handicrafts"} >Handicrafts</Checkbox>
-              <Checkbox isChecked={industryType.includes("IT and ITes")} onChange={handleIndustryType} value={"IT and ITes"} >IT and ITes</Checkbox>
-              <Checkbox isChecked={industryType.includes("Leather")} onChange={handleIndustryType} value={"Leather"} >Leather</Checkbox>
-              <Checkbox isChecked={industryType.includes("Manufacturing")} onChange={handleIndustryType} value={"Manufacturing"} >Manufacturing</Checkbox>
-              <Checkbox isChecked={industryType.includes("Medical devices")} onChange={handleIndustryType} value={"Medical devices"} >Medical devices</Checkbox>
-              <Checkbox isChecked={industryType.includes("Metals")} onChange={handleIndustryType} value={"Metals"} >Metals</Checkbox>
-              <Checkbox isChecked={industryType.includes("Mixed")} onChange={handleIndustryType} value={"Mixed"} >Mixed</Checkbox>
-              <Checkbox isChecked={industryType.includes("Petroleum")} onChange={handleIndustryType} value={"Petroleum"} >Petroleum</Checkbox>
-              <Checkbox isChecked={industryType.includes("Pharmaceuticals")} onChange={handleIndustryType} value={"Pharmaceuticals"} >Pharmaceuticals</Checkbox>
-              <Checkbox isChecked={industryType.includes("Renewable Energy")} onChange={handleIndustryType} value={"Renewable Energy"} >Renewable Energy</Checkbox>
-              <Checkbox isChecked={industryType.includes("Software")} onChange={handleIndustryType} value={"Software"} >Software</Checkbox>
-              <Checkbox isChecked={industryType.includes("Textiles")} onChange={handleIndustryType} value={"Textiles"} >Textiles</Checkbox>
+            <MenuList display={"grid"} padding={"4px 20px"} marginTop={"-6px"}>
+              <Checkbox
+                isChecked={industryType.includes("Automobiles")}
+                onChange={handleIndustryType}
+                value={"Automobiles"}
+              >
+                Automobiles
+              </Checkbox>
+              <Checkbox
+                isChecked={industryType.includes("Biotechnology")}
+                onChange={handleIndustryType}
+                value={"Biotechnology"}
+              >
+                Biotechnology
+              </Checkbox>
+              <Checkbox
+                isChecked={industryType.includes("Capital Goods")}
+                onChange={handleIndustryType}
+                value={"Capital Goods"}
+              >
+                Capital Goods
+              </Checkbox>
+              <Checkbox
+                isChecked={industryType.includes("Chemicals")}
+                onChange={handleIndustryType}
+                value={"Chemicals"}
+              >
+                Chemicals
+              </Checkbox>
+              <Checkbox
+                isChecked={industryType.includes("Construction")}
+                onChange={handleIndustryType}
+                value={"Construction"}
+              >
+                Construction
+              </Checkbox>
+              <Checkbox
+                isChecked={industryType.includes(
+                  "Defence and Aerospace Manufacturing"
+                )}
+                onChange={handleIndustryType}
+                value={"Defence and Aerospace Manufacturing"}
+              >
+                Defence and Aerospace Manufacturing
+              </Checkbox>
+              <Checkbox
+                isChecked={industryType.includes("Electronics Hardware")}
+                onChange={handleIndustryType}
+                value={"Electronics Hardware"}
+              >
+                Electronics Hardware
+              </Checkbox>
+              <Checkbox
+                isChecked={industryType.includes("Engineering")}
+                onChange={handleIndustryType}
+                value={"Engineering"}
+              >
+                Engineering
+              </Checkbox>
+              <Checkbox
+                isChecked={industryType.includes("Food processing")}
+                onChange={handleIndustryType}
+                value={"Food processing"}
+              >
+                Food processing
+              </Checkbox>
+              <Checkbox
+                isChecked={industryType.includes("Gems and Jewellery")}
+                onChange={handleIndustryType}
+                value={"Gems and Jewellery"}
+              >
+                Gems and Jewellery
+              </Checkbox>
+              <Checkbox
+                isChecked={industryType.includes("Handicrafts")}
+                onChange={handleIndustryType}
+                value={"Handicrafts"}
+              >
+                Handicrafts
+              </Checkbox>
+              <Checkbox
+                isChecked={industryType.includes("IT and ITes")}
+                onChange={handleIndustryType}
+                value={"IT and ITes"}
+              >
+                IT and ITes
+              </Checkbox>
+              <Checkbox
+                isChecked={industryType.includes("Leather")}
+                onChange={handleIndustryType}
+                value={"Leather"}
+              >
+                Leather
+              </Checkbox>
+              <Checkbox
+                isChecked={industryType.includes("Manufacturing")}
+                onChange={handleIndustryType}
+                value={"Manufacturing"}
+              >
+                Manufacturing
+              </Checkbox>
+              <Checkbox
+                isChecked={industryType.includes("Medical devices")}
+                onChange={handleIndustryType}
+                value={"Medical devices"}
+              >
+                Medical devices
+              </Checkbox>
+              <Checkbox
+                isChecked={industryType.includes("Metals")}
+                onChange={handleIndustryType}
+                value={"Metals"}
+              >
+                Metals
+              </Checkbox>
+              <Checkbox
+                isChecked={industryType.includes("Mixed")}
+                onChange={handleIndustryType}
+                value={"Mixed"}
+              >
+                Mixed
+              </Checkbox>
+              <Checkbox
+                isChecked={industryType.includes("Petroleum")}
+                onChange={handleIndustryType}
+                value={"Petroleum"}
+              >
+                Petroleum
+              </Checkbox>
+              <Checkbox
+                isChecked={industryType.includes("Pharmaceuticals")}
+                onChange={handleIndustryType}
+                value={"Pharmaceuticals"}
+              >
+                Pharmaceuticals
+              </Checkbox>
+              <Checkbox
+                isChecked={industryType.includes("Renewable Energy")}
+                onChange={handleIndustryType}
+                value={"Renewable Energy"}
+              >
+                Renewable Energy
+              </Checkbox>
+              <Checkbox
+                isChecked={industryType.includes("Software")}
+                onChange={handleIndustryType}
+                value={"Software"}
+              >
+                Software
+              </Checkbox>
+              <Checkbox
+                isChecked={industryType.includes("Textiles")}
+                onChange={handleIndustryType}
+                value={"Textiles"}
+              >
+                Textiles
+              </Checkbox>
             </MenuList>
           </Menu>
         </Box>
@@ -1097,24 +1451,59 @@ const CommercialLand = () => {
         {/* image Drag and Drop area  */}
         <Box>
           <Box className={style.top}>
-            <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
+            <Heading
+              color={"black"}
+              size={"sm"}
+              textAlign={"left"}
+              margin={"10px 0"}
+            >
+              {" "}
+              Upload Your Property image{" "}
+            </Heading>
           </Box>
           <Box className={style.card}>
-            <Box className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+            <Box
+              className={style.dragArea}
+              onDragOver={ondragover}
+              onDragLeave={ondragleave}
+              onDrop={ondrop}
+            >
               {isDraging ? (
                 <Text className={style.select}>Drop image here</Text>
               ) : (
                 <>
                   Drag & Drop image here or
-                  <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
+                  <Text
+                    className={style.select}
+                    role="button"
+                    onClick={selectFiles}
+                  >
+                    {" "}
+                    Browse{" "}
+                  </Text>
                 </>
               )}
-              <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+              <input
+                type={"file"}
+                name="image"
+                accept="image/jpg, image/png, image/jpeg"
+                formMethod="post"
+                formEncType="multipart/form-data"
+                className={style.file}
+                multiple
+                ref={fileInputRef}
+                onChange={onFileSelect}
+              />
             </Box>
             <Box className={style.container}>
               {images.map((image, index) => (
                 <Box className={style.image} key={index}>
-                  <Text className={style.delete} onClick={() => removeImage(index)}>&#10006;</Text>
+                  <Text
+                    className={style.delete}
+                    onClick={() => removeImage(index)}
+                  >
+                    &#10006;
+                  </Text>
                   <img src={URL.createObjectURL(image.image)} alt="images" />
                 </Box>
               ))}
@@ -1124,23 +1513,46 @@ const CommercialLand = () => {
 
         {/* ============================ Property unique discription ============================ */}
         <Box>
-          <Heading as={"h3"} size={"md"} fontWeight={600} margin={"10px 0"} textAlign={"left"}>
+          <Heading
+            as={"h3"}
+            size={"md"}
+            fontWeight={600}
+            margin={"10px 0"}
+            textAlign={"left"}
+          >
             Add Description and Unique Features of your Property
           </Heading>
-          <Heading as={"h3"} size={"xs"} fontWeight={400} color={"#777777"} margin={"10px 0"} textAlign={"left"}>
+          <Heading
+            as={"h3"}
+            size={"xs"}
+            fontWeight={400}
+            color={"#777777"}
+            margin={"10px 0"}
+            textAlign={"left"}
+          >
             Adding description will increase your listing visibility
           </Heading>
-          <Textarea height={140} value={desc} onChange={(e) => {
-            let my_cleantext = CleanInputText(e.target.value);
-            setDesc(my_cleantext);
-          }} ></Textarea>
+          <Textarea
+            height={140}
+            value={desc}
+            onChange={(e) => {
+              let my_cleantext = CleanInputText(e.target.value);
+              setDesc(my_cleantext);
+            }}
+          ></Textarea>
         </Box>
         {/* ============================ Add amenities/unique features ============================ */}
         <Box>
           <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
             Add amenities/unique features
           </Heading>
-          <Heading as={"h5"} size={"xs"} fontWeight={400} margin={"10px 0"} textAlign={"left"}>
+          <Heading
+            as={"h5"}
+            size={"xs"}
+            fontWeight={400}
+            margin={"10px 0"}
+            textAlign={"left"}
+          >
             All fields on this page are optional
           </Heading>
         </Box>
@@ -1153,7 +1565,9 @@ const CommercialLand = () => {
           <Box>
             <button
               className={
-                amenities.includes("Service / Goods Lift") ? style.setbtn : style.btn
+                amenities.includes("Service / Goods Lift")
+                  ? style.setbtn
+                  : style.btn
               }
               onClick={handleAminities}
               value={"Service / Goods Lift"}
@@ -1162,7 +1576,9 @@ const CommercialLand = () => {
             </button>
             <button
               className={
-                amenities.includes("Rain Water Harvesting") ? style.setbtn : style.btn
+                amenities.includes("Rain Water Harvesting")
+                  ? style.setbtn
+                  : style.btn
               }
               onClick={handleAminities}
               value={"Rain Water Harvesting"}
@@ -1190,7 +1606,9 @@ const CommercialLand = () => {
             </button>
             <button
               className={
-                amenities.includes("Feng Shui / Vaastu Compliant") ? style.setbtn : style.btn
+                amenities.includes("Feng Shui / Vaastu Compliant")
+                  ? style.setbtn
+                  : style.btn
               }
               onClick={handleAminities}
               value={"Feng Shui / Vaastu Compliant"}
@@ -1198,9 +1616,7 @@ const CommercialLand = () => {
               Feng Shui / Vaastu Compliant
             </button>
             <button
-              className={
-                amenities.includes("Lift") ? style.setbtn : style.btn
-              }
+              className={amenities.includes("Lift") ? style.setbtn : style.btn}
               onClick={handleAminities}
               value={"Lift"}
             >
@@ -1239,7 +1655,9 @@ const CommercialLand = () => {
             </button>
             <button
               className={
-                propertyFeatures.includes("Power Back-up") ? style.setbtn : style.btn
+                propertyFeatures.includes("Power Back-up")
+                  ? style.setbtn
+                  : style.btn
               }
               value={"Power Back-up"}
               onClick={handlePropertyFeature}
@@ -1271,7 +1689,6 @@ const CommercialLand = () => {
           </Box>
         </Box>
 
-
         {/* ============================ Other Features ============================ */}
         <Box>
           <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
@@ -1288,7 +1705,6 @@ const CommercialLand = () => {
             </Checkbox>
           </Box>
         </Box>
-
 
         {/* ============================ location advantage ============================ */}
         <Box className={style.optional_box}>
@@ -1313,17 +1729,17 @@ const CommercialLand = () => {
               value={"Close to Metro Station"}
               onClick={handlelocationadvantages}
             >
-
               Close to Metro Station
             </button>
             <button
               className={
-                locationAdv.includes("Close to School") ? style.setbtn : style.btn
+                locationAdv.includes("Close to School")
+                  ? style.setbtn
+                  : style.btn
               }
               value={"Close to School"}
               onClick={handlelocationadvantages}
             >
-
               Close to School
             </button>
             <button
@@ -1335,17 +1751,17 @@ const CommercialLand = () => {
               value={"Close to Hospital"}
               onClick={handlelocationadvantages}
             >
-
               Close to Hospital
             </button>
             <button
               className={
-                locationAdv.includes("Close to Market") ? style.setbtn : style.btn
+                locationAdv.includes("Close to Market")
+                  ? style.setbtn
+                  : style.btn
               }
               value={"Close to Market"}
               onClick={handlelocationadvantages}
             >
-
               Close to Market
             </button>
             <button
@@ -1357,7 +1773,6 @@ const CommercialLand = () => {
               value={"Close to Railway Station"}
               onClick={handlelocationadvantages}
             >
-
               Close to Railway Station
             </button>
             <button
@@ -1369,7 +1784,6 @@ const CommercialLand = () => {
               value={"Close to Airport"}
               onClick={handlelocationadvantages}
             >
-
               Close to Airport
             </button>
             <button
@@ -1411,19 +1825,16 @@ const CommercialLand = () => {
           margin={"20px 0"}
           type="submit"
           w={"100%"}
-          disabled={clickCount <= 0 ? true : false}   
+          disabled={clickCount <= 0 ? true : false}
           backgroundColor={"rgb(46,49,146)"}
           _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
           color={"#ffffff"}
         >
           Post Property
         </Button>
-
       </form>
     </Box>
-  )
-
-}
+  );
+};
 
 export default CommercialLand;
-

@@ -656,7 +656,7 @@ const Manufacture = () => {
 
         {/* ========================== Availability status =============================== */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Availability Status
           </Heading>
           <Box className={style.grid}>
@@ -694,7 +694,7 @@ const Manufacture = () => {
           <Box textAlign={"left"} className={style.optional_box}>
             <Heading
               as={"h3"}
-              size={"md"}
+              size={"sm"}
               margin={"30px 0 10px 0"}
               textAlign={"left"}
             >
@@ -949,7 +949,7 @@ const Manufacture = () => {
 
         {/* ============================ Is it Pre-leased / Pre-Rented ? ============================ */}
         <Box textAlign={"left"}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Is it Pre-leased / Pre-Rented ?
           </Heading>
           <Heading
@@ -1097,11 +1097,11 @@ const Manufacture = () => {
         {/* ============================ Property unique discription ============================ */}
         <Box>
           <Heading
-            as={"h3"}
-            size={"md"}
-            fontWeight={600}
-            margin={"10px 0"}
-            textAlign={"left"}
+             as={"h3"}
+             size={"sm"}
+             fontWeight={700}
+             margin={"18px 0 4px 0"}
+             textAlign={"left"}
           >
             Add Description and Unique Features of your Property
           </Heading> 
@@ -1116,7 +1116,7 @@ const Manufacture = () => {
         </Box>
         {/* ============================ Add amenities/unique features ============================ */}
         <Box>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Add amenities/unique features
           </Heading>
           <Heading
@@ -1132,7 +1132,7 @@ const Manufacture = () => {
 
         {/* ============================ Amenities ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Amenities
           </Heading>
           <Box>
@@ -1241,7 +1241,7 @@ const Manufacture = () => {
         </Box>
         {/* ============================ Property Features ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Property Features
           </Heading>
           <Box>
@@ -1304,7 +1304,7 @@ const Manufacture = () => {
         </Box>
         {/* ============================ Society/Building feature ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Society/Building feature
           </Heading>
           <Box>
@@ -1421,7 +1421,7 @@ const Manufacture = () => {
         </Box>
         {/* ============================ Additional Features ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Additional Features
           </Heading>
           <Box>
@@ -1441,7 +1441,7 @@ const Manufacture = () => {
 
         {/* ============================ Other Features ============================ */}
         <Box>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Other Features
           </Heading>
           <Box display={"grid"} textAlign={"left"} gap={2}>
@@ -1458,7 +1458,7 @@ const Manufacture = () => {
 
         {/* ============================ Property facing ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Property facing
           </Heading>
           <Box>
@@ -1555,11 +1555,13 @@ const Manufacture = () => {
 
         {/* ============================ Type of flooring ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Type of flooring
           </Heading>
           <Box>
-            <Select
+            <Select  
+              width={{base:"100%",md:"300px"}}
+              borderRadius={0} 
               onChange={(e) => setFlooring(e.target.value)}
               value={flooring}
             >
@@ -1584,7 +1586,7 @@ const Manufacture = () => {
 
         {/* ============================ location advantage ============================ */}
         <Box className={style.optional_box}>
-          <Heading size={"md"} margin={"10px 0 4px 0"} textAlign={"left"}>
+          <Heading size={"sm"} margin={"10px 0 4px 0"} textAlign={"left"}>
             Location Advantages
             <Heading
               size={"xs"}
