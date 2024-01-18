@@ -1377,18 +1377,7 @@ const FarmHouse = () => {
         )}
 
         {/* Add pricing and details */}
-        <Box>
-          <Heading
-            as={"h3"}
-            size={"md"}
-            padding={"4px 0"}
-            marginTop={4}
-            borderY={"2px solid rgb(222,222,255)"}
-            textAlign={"center"}
-          >
-            Add pricing and details
-          </Heading>
-
+        <Box>  
           {/* OwnerShip detail */}
           <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Ownership
@@ -1681,14 +1670,13 @@ const FarmHouse = () => {
       </Box>
       {/* Add amenities/unique features */}
       <Box>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"md"} margin={"4px 0"} textAlign={"left"}>
           Add amenities/unique features
         </Heading>
         <Heading
           as={"h5"}
           size={"xs"}
-          fontWeight={400}
-          margin={"10px 0"}
+          fontWeight={400} 
           textAlign={"left"}
         >
           All fields on this page are optional
@@ -1696,7 +1684,7 @@ const FarmHouse = () => {
       </Box>
       {/* Amenities */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"md"} margin={"4px 0"} textAlign={"left"}>
           Amenities
         </Heading>
         <Box>

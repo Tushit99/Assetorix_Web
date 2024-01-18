@@ -1682,14 +1682,13 @@ const IndependentHouse = () => {
 
       {/* Add amenities/unique features */}
       <Box>
-        <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={"4px 0"} textAlign={"left"}>
           Add amenities/unique features
         </Heading>
         <Heading
           as={"h5"}
           size={"xs"}
-          fontWeight={400}
-          marginTop={{base:10,md:5}}
+          fontWeight={400} 
           textAlign={"left"}
         >
           All fields on this page are optional

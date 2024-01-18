@@ -834,7 +834,8 @@ const FlatAppartment = () => {
               </Select>
             </InputRightElement>
           </InputGroup>
-        </Box>
+        </Box> 
+        
         {/* other Room  */}
         <Box display={"grid"} className={style.optional_box}>
           <Heading as={"h3"} size={"sm"} marginTop={{ base: 5, md: 3 }}>
