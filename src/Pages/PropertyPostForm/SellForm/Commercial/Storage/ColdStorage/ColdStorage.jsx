@@ -559,7 +559,7 @@ const ColdStorage = () => {
                     <Input
                         type="text"
                         required
-                        placeholder="Locality"
+                        placeholder="Enter Locality"
                         list="browsers"
                         value={locality}
                         onChange={(e) => setLocality(e.target.value)}

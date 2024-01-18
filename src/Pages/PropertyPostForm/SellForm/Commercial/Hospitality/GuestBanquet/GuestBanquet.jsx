@@ -601,7 +601,7 @@ const GuestBanquet = () => {
     <form onSubmit={handleSubmitData}>
       {/* ============================= property location =========================== */}
       <Box className={style.location_form}>
-        <Heading size={"lg"}>Where is your property located?</Heading>
+        <Heading size={"lg"}>Where is your Guest-House / Banquet-Halls located?</Heading>
         <Heading size={"sm"}>Location Detail</Heading>
         <Input
           type="text"
@@ -626,7 +626,7 @@ const GuestBanquet = () => {
           type="text"
           maxLength={"100"}
           required
-          placeholder="Locality"
+          placeholder="Enter Locality"
           list="browsers"
           value={locality}
           onChange={(e) => setLocality(WordandNumber(e.target.value))}
@@ -867,10 +867,7 @@ const GuestBanquet = () => {
                 ? "grid"
                 : "none"
             }
-          >
-            <Heading as={"h4"} fontWeight={400} size={"sm"} color={"#656565"}>
-              At least three furnishings are mandatory for furnished
-            </Heading>
+          > 
             <Box className={style.furnished_detail}>
               <Box>
                 <button
@@ -1445,7 +1442,7 @@ const GuestBanquet = () => {
                 w={"-moz-fit-content"}
                 borderRadius={0}
                 value={currency}
-                onClick={(e) => setCurrency(e.target.value)}
+                onChange={(e) => setCurrency(e.target.value)}
               >
                 <option value="₹">₹ INR </option>
                 <option value="$">$ USD </option>

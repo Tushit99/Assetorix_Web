@@ -475,7 +475,7 @@ const FactoryRent = () => {
                         type="text"
                         maxLength={"100"}
                         required
-                        placeholder="Locality"
+                        placeholder="Enter Locality"
                         list="browsers"
                         value={locality}
                         onChange={(e) => setLocality(WordandNumber(e.target.value))}

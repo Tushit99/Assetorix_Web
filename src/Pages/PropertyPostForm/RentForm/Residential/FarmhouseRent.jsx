@@ -640,7 +640,7 @@ const FarmhouseRent = () => {
         <Input
           type="text"
           required
-          placeholder="Locality"
+          placeholder="Enter Locality"
           list="browsers"
           value={locality}
           onChange={(e) => setLocality(e.target.value)}
@@ -1642,14 +1642,7 @@ const FarmhouseRent = () => {
 
         {/* ========================= Add pricing and details ========================= */}
         <Box>
-          <Heading
-            as={"h3"}
-            size={"md"}
-            margin={"30px 0 10px 0"}
-            textAlign={"left"}
-          >
-            Add pricing and details...
-          </Heading>
+          
         </Box>
       </Box>
 

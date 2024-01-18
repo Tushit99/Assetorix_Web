@@ -27,11 +27,11 @@ const Factory = () => {
   const [facingwidth, setFacingWidth] = useState("");
   const [city, setCity] = useState("");
   const [appartment, setApartment] = useState("");
-  const [pincode, setPincode] = useState(0);
+  const [pincode, setPincode] = useState("");
   const [state, setState] = useState("");
   const [locality, setLocality] = useState("");
   const [address, setAddress] = useState("");
-  const [washrooms, setwashrooms] = useState(0);
+  const [washrooms, setwashrooms] = useState("");
   const [parking, setParking] = useState(0);
   const [openparking, setOpenparking] = useState(0);
   const [light, setLight] = useState(0);
@@ -80,6 +80,7 @@ const Factory = () => {
   const [businessType, setBusinessType] = useState("");
   const [isClicked, setIsClicked] = useState(false);
   const [clickCount, setClickCount] = useState(0);
+  const [currency, setCurrency] = useState("₹");
   const navigate = useNavigate();
   // state for drop box images
   const [images, setImages] = useState([]);
@@ -528,15 +529,11 @@ const Factory = () => {
     <div>
       <form onSubmit={handleSubmitData}>
         <Box className={style.location_form}>
-          <Heading size={"lg"}>Where is your property located?</Heading>
-          <Heading size={"sm"}>
-            An accurate location helps you connect with the right buyers.
-          </Heading>
-
+          <Heading size={"lg"}>Where is your Factory located?</Heading>
+          <Heading size={"sm"}>Location Detail</Heading>
           <Input
             type="text"
             maxLength={100}
-            required
             placeholder="Address (optional)"
             value={address}
             onChange={(e) => setAddress(WordandNumber(e.target.value))}
@@ -549,13 +546,14 @@ const Factory = () => {
             required
             maxLength={6}
             value={pincode}
+            variant="flushed"
             onChange={handlepinfetch}
           />
           <Input
             type="text"
             maxLength={100}
             required
-            placeholder="Locality"
+            placeholder="Enter Locality"
             list="browsers"
             value={locality}
             onChange={(e) => setLocality(WordandNumber(e.target.value))}
@@ -605,14 +603,15 @@ const Factory = () => {
         </Box>
         {/* =============================== Tell us about your property ============================ */}
         <Box>
-          <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"}>
-            Tell us about your property
-          </Heading>
-          <Heading as={"h4"} size={"sm"} margin={"0 0 30px 0 "}>
+          <Heading
+            as={"h4"}
+            size={"sm"}
+            textAlign={"left"}
+            marginTop={{ base: 10, md: 5 }}
+          >
             Add Room Details
           </Heading>
         </Box>
-
         {/* ============================== No. of Washrooms ====================================== */}
         <Box>
           <Box textAlign={"left"}>
@@ -620,30 +619,35 @@ const Factory = () => {
             <Input
               type="text"
               maxLength={"2"}
-              variant="flushed"
+              width={{ base: "100%", md: "300px" }}
+              variant={"outline"}
               onChange={(e) => setwashrooms(NumericString(e.target.value))}
               value={washrooms}
+              placeholder={"Enter total Washrooms"}
               required
             />
           </Box>
         </Box>
 
         {/* ============================ add area details =============================== */}
-        <Box textAlign={"left"} padding={"10px 0"}>
-          <Heading as={"h3"} margin={"5px 0"} size={"md"}>
+        <Box textAlign={"left"}>
+          <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"}>
             Add Area Details
           </Heading>
-          <Text margin={"5px 0"}> Atleast one area type is mandatory </Text>
           <ButtonGroup
             className={style.select_land}
             size="sm"
             isAttached
+            margin={"2px 0"}
+            padding={0}
+            w={{ base: "100%", md: "300px" }}
             variant="outline"
           >
             <Input
               type="text"
               maxLength={"12"}
               value={plotArea}
+              placeholder="Enter Plot Area"
               onChange={(e) => {
                 setPlotArea(NumericString(e.target.value));
               }}
@@ -651,6 +655,7 @@ const Factory = () => {
             />
             <Select
               value={areaPer}
+              borderRadius={0}
               onChange={(e) => {
                 setAreaPer(e.target.value);
               }}
@@ -681,7 +686,7 @@ const Factory = () => {
 
         {/* ========================== Availability status =============================== */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Availability Status
           </Heading>
           <Box className={style.grid}>
@@ -800,14 +805,6 @@ const Factory = () => {
 
         {/* ============================ Add pricing and details ============================ */}
         <Box>
-          <Heading
-            as={"h3"}
-            size={"md"}
-            margin={"30px 0 10px 0"}
-            textAlign={"left"}
-          >
-            Add pricing and details...
-          </Heading>
           {/* OwnerShip detail */}
           <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Ownership
@@ -870,26 +867,85 @@ const Factory = () => {
             <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
               Price Details
             </Heading>
-            <Box display={"flex"} alignItems={"center"} gap={5}>
-              <Box display={"grid"} gap={0}>
-                <Heading
-                  as={"h3"}
-                  size={"xs"}
-                  fontWeight={400}
-                  textAlign={"left"}
+            <Box display={"flex"} margin={"8px 0 0 0"} alignItems={"center"}>
+              <InputGroup w={300}>
+                <Select
+                  w={"-moz-fit-content"}
+                  borderRadius={0}
+                  value={currency}
+                  onChange={(e) => setCurrency(e.target.value)}
                 >
-                  {isCountry.country == "india" ? "₹" : "$"} Price Details
-                </Heading>
+                  <option value="₹">₹ INR </option>
+                  <option value="$">$ USD </option>
+                </Select>
                 <Input
                   type="text"
-                  maxLength={12}
+                  borderRadius={0}
                   value={pricedetail}
+                  maxLength={"10"}
+                  placeholder={"Enter Price"}
                   required
+                  w={200}
                   onChange={(e) => {
-                    setPricedetail(e.target.value);
+                    setPricedetail(NumericString(e.target.value));
                   }}
                 />
-              </Box>
+              </InputGroup>
+            </Box>
+            <Box>
+              {additionalPrice && (
+                <Box display={"grid"} marginTop={"10px"}> 
+                  <InputGroup w={"300px"}>
+                    <Input
+                      w={"60%"}
+                      type="text"
+                      maxLength={"12"}
+                      onChange={(e) =>
+                        setMaintenancePrice(NumericString(e.target.value))
+                      }
+                      value={maintenancePrice}
+                      placeholder={"Maintenance Price"}
+                    />
+                    <Select
+                      w={"40%"}
+                      borderRadius={0}
+                      value={maintenanceTimePeriod}
+                      onChange={(e) => setMaintenanceTimePeriod(e.target.value)}
+                    >
+                      <option value="Monthly">Monthly</option>
+                      <option value="Yearly">Yearly</option>
+                    </Select>
+                  </InputGroup>
+                  <Input
+                    type="text"
+                    w={"300px"}
+                    value={bookingAmount}
+                    maxLength={"12"}
+                    onChange={(e) =>
+                      setBookingAmount(NumericString(e.target.value))
+                    }
+                    placeholder="Booking Amount"
+                    margin={"10px 0 0 0"}
+                  />
+                </Box>
+              )}
+              <Heading
+                as={"h3"}
+                size={"sm"}
+                margin={"10px 0"}
+                color={"#002aff"}
+                fontWeight={500}
+                cursor={"pointer"}
+                onClick={() => setAdditionalPrice(!additionalPrice)}
+                textAlign={"left"}
+              >
+                {additionalPrice ? (
+                  <IoIosArrowUp style={{ display: "inline" }} />
+                ) : (
+                  <IoIosArrowDown style={{ display: "inline" }} />
+                )} 
+                Add more pricing details
+              </Heading>
             </Box>
           </Box>
           <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
@@ -926,66 +982,11 @@ const Factory = () => {
               Price Negotiable
             </Checkbox>
           </Box>
-          <Box>
-            {additionalPrice && (
-              <>
-                <InputGroup w={"300px"} margin={"10px 0"}>
-                  <Input
-                    w={"60%"}
-                    type="text"
-                    maxLength={"12"}
-                    onChange={(e) =>
-                      setMaintenancePrice(NumericString(e.target.value))
-                    }
-                    value={maintenancePrice}
-                    placeholder={"Maintenance Price"}
-                  />
-                  <Select
-                    w={"40%"}
-                    borderRadius={0}
-                    value={maintenanceTimePeriod}
-                    onChange={(e) => setMaintenanceTimePeriod(e.target.value)}
-                  >
-                    <option value="Monthly">Monthly</option>
-                    <option value="Yearly">Yearly</option>
-                  </Select>
-                </InputGroup>
-                <Input
-                  type="text"
-                  w={"300px"}
-                  value={bookingAmount}
-                  maxLength={"12"}
-                  onChange={(e) =>
-                    setBookingAmount(NumericString(e.target.value))
-                  }
-                  placeholder="Booking Amount"
-                  margin={"10px 0 0 0"}
-                />
-              </>
-            )}
-            <Heading
-              as={"h3"}
-              size={"sm"}
-              margin={"10px 0"}
-              color={"#002aff"}
-              fontWeight={500}
-              cursor={"pointer"}
-              onClick={() => setAdditionalPrice(!additionalPrice)}
-              textAlign={"left"}
-            >
-              {additionalPrice ? (
-                <IoIosArrowUp style={{ display: "inline" }} />
-              ) : (
-                <IoIosArrowDown style={{ display: "inline" }} />
-              )}{" "}
-              Add more pricing details
-            </Heading>
-          </Box>
         </Box>
 
         {/* ============================ Is it Pre-leased / Pre-Rented ? ============================ */}
         <Box textAlign={"left"}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Is it Pre-leased / Pre-Rented ?
           </Heading>
           <Heading
@@ -1133,11 +1134,11 @@ const Factory = () => {
         {/* ============================ Property unique discription ============================ */}
         <Box>
           <Heading
-            as={"h3"}
-            size={"md"}
-            fontWeight={600}
-            margin={"10px 0"}
-            textAlign={"left"}
+             as={"h3"}
+             size={"sm"}
+             fontWeight={700}
+             margin={"18px 0 4px 0"}
+             textAlign={"left"}
           >
             Add Description and Unique Features of your Property
           </Heading>
@@ -1152,7 +1153,7 @@ const Factory = () => {
         </Box>
         {/* ============================ Add amenities/unique features ============================ */}
         <Box>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Add amenities/unique features
           </Heading>
           <Heading
@@ -1168,7 +1169,7 @@ const Factory = () => {
 
         {/* ============================ Amenities ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Amenities
           </Heading>
           <Box>
@@ -1277,7 +1278,7 @@ const Factory = () => {
         </Box>
         {/* ============================ Property Features ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Property Features
           </Heading>
           <Box>
@@ -1340,7 +1341,7 @@ const Factory = () => {
         </Box>
         {/* ============================ Society/Building feature ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Society/Building feature
           </Heading>
           <Box>
@@ -1457,7 +1458,7 @@ const Factory = () => {
         </Box>
         {/* ============================ Additional Features ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Additional Features
           </Heading>
           <Box>
@@ -1477,7 +1478,7 @@ const Factory = () => {
 
         {/* ============================ Other Features ============================ */}
         <Box>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Other Features
           </Heading>
           <Box display={"grid"} textAlign={"left"} gap={2}>
@@ -1494,7 +1495,7 @@ const Factory = () => {
 
         {/* ============================ Property facing ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Property facing
           </Heading>
           <Box>
@@ -1591,7 +1592,7 @@ const Factory = () => {
 
         {/* ============================ Type of flooring ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Type of flooring
           </Heading>
           <Box>
@@ -1620,7 +1621,7 @@ const Factory = () => {
 
         {/* ============================ location advantage ============================ */}
         <Box className={style.optional_box}>
-          <Heading size={"md"} margin={"10px 0 4px 0"} textAlign={"left"}>
+          <Heading size={"sm"} marginTop={{base:10, md:5}} textAlign={"left"}>
             Location Advantages
             <Heading
               size={"xs"}

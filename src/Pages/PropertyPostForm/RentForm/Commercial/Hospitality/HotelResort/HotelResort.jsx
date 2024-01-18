@@ -497,7 +497,7 @@ const HotelResortRent = () => {
                 <Input
                     type="text"
                     required
-                    placeholder="Locality"
+                    placeholder="Enter Locality"
                     list="browsers"
                     value={locality}
                     maxLength={"60"}

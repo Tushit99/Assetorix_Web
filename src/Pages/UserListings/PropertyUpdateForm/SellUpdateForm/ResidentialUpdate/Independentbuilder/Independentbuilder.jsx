@@ -1596,7 +1596,7 @@ const IndependentbuilderUpdate = () => {
                 w={"-moz-fit-content"}
                 value={currency}
                 borderRadius={0}
-                onClick={(e) => setCurrency(e.target.value)}
+                onChange={(e) => setCurrency(e.target.value)}
               >
                 <option value="₹">₹ INR </option>
                 <option value="$">$ USD </option>

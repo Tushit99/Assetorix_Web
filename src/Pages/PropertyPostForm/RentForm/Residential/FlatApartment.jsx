@@ -654,7 +654,7 @@ const FlatApartment = () => {
           type="text"
           required
           maxlength={"100"}
-          placeholder="Locality"
+          placeholder="Enter Locality"
           list="browsers"
           value={locality}
           onChange={(e) => setLocality(WordandNumber(e.target.value))}
@@ -1700,14 +1700,7 @@ const FlatApartment = () => {
 
         {/* ========================= Add pricing and details ========================= */}
         <Box>
-          <Heading
-            as={"h3"}
-            size={"md"}
-            margin={"30px 0 10px 0"}
-            textAlign={"left"}
-          >
-            Add pricing and details...
-          </Heading>
+          
           {/* OwnerShip detail */}
           <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Ownership

@@ -576,7 +576,7 @@ const WareHouse = () => {
                         type="text"
                         padding={"0 10px"}
                         required
-                        placeholder="Locality"
+                        placeholder="Enter Locality"
                         list="browsers"
                         value={locality}
                         onChange={(e) => setLocality(e.target.value)}

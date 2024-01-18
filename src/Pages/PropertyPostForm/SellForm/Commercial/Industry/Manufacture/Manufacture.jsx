@@ -6,6 +6,7 @@ import {
   Input,
   InputGroup,
   Select,
+  ButtonGroup, 
   Text,
   Textarea,
   useToast,
@@ -25,7 +26,7 @@ const Manufacture = () => {
   const [country, setCountry] = useState("");
   const [facingwidth, setFacingWidth] = useState("");
   const [city, setCity] = useState("");
-  const [pincode, setPincode] = useState(0);
+  const [pincode, setPincode] = useState("");
   const [state, setState] = useState("");
   const [locality, setLocality] = useState("");
   const [address, setAddress] = useState("");
@@ -497,15 +498,12 @@ const Manufacture = () => {
     <div>
       <form onSubmit={handleSubmitData}>
         <Box className={style.location_form}>
-          <Heading size={"lg"}>Where is your property located?</Heading>
-          <Heading size={"sm"}>
-            An accurate location helps you connect with the right buyers.
-          </Heading>
+          <Heading size={"lg"}>Where is your Manufacturing located?</Heading>
+          <Heading size={"sm"}>Location Detail</Heading> 
 
           <Input
             type="text"
-            maxLength={100}
-            required
+            maxLength={100} 
             placeholder="Address (optional)"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
@@ -519,13 +517,14 @@ const Manufacture = () => {
             required
             fontSize={"md"}
             value={pincode}
+            variant="flushed" 
             onChange={handlepinfetch}
           />
           <Input
             type="text"
             maxLength={100}
             required
-            placeholder="Locality"
+            placeholder="Enter Locality"
             list="browsers"
             value={locality}
             onChange={(e) => setLocality(WordandNumber(e.target.value))}
@@ -589,33 +588,44 @@ const Manufacture = () => {
             <Text> No. of Washrooms </Text>
             <Input
               type="text"
-              variant="flushed"
-              maxLength={2}
+              maxLength={"2"}
+              width={{ base: "100%", md: "300px" }}
+              variant={"outline"}
               onChange={(e) => setwashrooms(NumericString(e.target.value))}
               value={washrooms}
+              placeholder={"Enter total Washrooms"}
               required
             />
           </Box>
         </Box>
 
         {/* ============================ add area details =============================== */}
-        <Box textAlign={"left"} padding={"10px 0"}>
-          <Heading as={"h3"} margin={"5px 0"} size={"md"}>
+        <Box textAlign={"left"}>
+          <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"}>
             Add Area Details
           </Heading>
-          <Text margin={"5px 0"}> Plot area is mandatory </Text>
-          <InputGroup>
+          <ButtonGroup
+            className={style.select_land}
+            size="sm"
+            isAttached
+            margin={"2px 0"}
+            padding={0}
+            w={{ base: "100%", md: "300px" }}
+            variant="outline"
+          >
             <Input
               type="text"
-              maxLength={10}
+              maxLength={"12"}
               value={plotArea}
+              placeholder="Enter Plot Area"
               onChange={(e) => {
-                setPlotArea(NumericString(e.target.value)); 
+                setPlotArea(NumericString(e.target.value));
               }}
               required
             />
             <Select
               value={areaPer}
+              borderRadius={0}
               onChange={(e) => {
                 setAreaPer(e.target.value);
               }}
@@ -641,7 +651,7 @@ const Manufacture = () => {
               <option value="chataks">chataks</option>
               <option value="perch">perch</option>
             </Select>
-          </InputGroup>
+          </ButtonGroup>
         </Box>
 
         {/* ========================== Availability status =============================== */}
@@ -765,14 +775,7 @@ const Manufacture = () => {
 
         {/* ============================ Add pricing and details (Ownership) ============================ */}
         <Box>
-          <Heading
-            as={"h3"}
-            size={"md"}
-            margin={"30px 0 10px 0"}
-            textAlign={"left"}
-          >
-            Add pricing and details...
-          </Heading>
+          
           {/* OwnerShip detail */}
           <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Ownership

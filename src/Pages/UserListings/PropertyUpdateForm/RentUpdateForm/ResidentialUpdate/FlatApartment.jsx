@@ -749,7 +749,7 @@ const FlatApartment = () => {
             padding={"0 10px"}
             required
             maxlength={"40"}
-            placeholder="Locality"
+            placeholder="Enter Locality"
             list="browsers"
             value={locality}
             onChange={(e) => setLocality(e.target.value)}
@@ -1620,14 +1620,7 @@ const FlatApartment = () => {
           </Box>
 
           {/* ========================= Add pricing and details ========================= */}
-          <Heading
-            as={"h3"}
-            size={"md"}
-            margin={"30px 0 10px 0"}
-            textAlign={"left"}
-          >
-            Add pricing and details...
-          </Heading>
+          
         </Box>
 
         {/* image Drag and Drop area  */}

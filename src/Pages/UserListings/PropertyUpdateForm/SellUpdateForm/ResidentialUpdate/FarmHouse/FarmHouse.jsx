@@ -781,7 +781,7 @@ const FarmHouseUpdate = () => {
           <Input
             type="text"
             required
-            placeholder="Locality"
+            placeholder="Enter Locality"
             list="browsers"
             value={locality}
             onChange={(e) => setLocality(e.target.value)}
@@ -1594,7 +1594,7 @@ const FarmHouseUpdate = () => {
                 <Select
                   w={"-moz-fit-content"}
                   value={currency}
-                  onClick={(e) => setCurrency(e.target.value)}
+                  onChange={(e) => setCurrency(e.target.value)}
                 >
                   <option value="₹">₹ INR </option>
                   <option value="$">$ USD </option>

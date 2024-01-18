@@ -539,7 +539,7 @@ const CommercialLand = () => {
           <Input
             type="text"
             required
-            placeholder="Locality"
+            placeholder="Enter Locality"
             list="browsers"
             maxLength={"10"}
             value={locality}
@@ -822,14 +822,7 @@ const CommercialLand = () => {
 
         {/* ============================ Add pricing and details (Ownership) ============================ */}
         <Box>
-          <Heading
-            as={"h3"}
-            size={"md"}
-            margin={"30px 0 10px 0"}
-            textAlign={"left"}
-          >
-            Add pricing and details...
-          </Heading>
+          
           {/* OwnerShip detail */}
           <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Ownership

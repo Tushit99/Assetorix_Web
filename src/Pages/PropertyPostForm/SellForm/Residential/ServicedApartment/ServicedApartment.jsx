@@ -671,7 +671,7 @@ const ServicedApartment = () => {
                     type="text"
                     padding={"0 10px"}
                     required
-                    placeholder="Locality"
+                    placeholder="Enter Locality"
                     maxLength={"100"}
                     list="browsers"
                     value={locality}

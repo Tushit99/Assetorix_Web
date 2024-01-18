@@ -34,7 +34,7 @@ const HotelResort = () => {
   const [country, setCountry] = useState("");
   const [facingwidth, setFacingWidth] = useState("");
   const [city, setCity] = useState("");
-  const [pincode, setPincode] = useState(0);
+  const [pincode, setPincode] = useState("");
   const [state, setState] = useState("");
   const [locality, setLocality] = useState("");
   const [address, setaddress] = useState("");
@@ -80,6 +80,7 @@ const HotelResort = () => {
   const [qualityRating, setqualityRating] = useState("");
   const [isClicked, setIsClicked] = useState(false);
   const [clickCount, setClickCount] = useState(0);
+  const [currency, setCurrency] = useState("₹"); 
   const navigate = useNavigate();
   // state for drop box images
   const [images, setImages] = useState([]);
@@ -570,13 +571,12 @@ const HotelResort = () => {
     <form onSubmit={handleSubmitData}>
       {/* ============================= property location =========================== */}
       <Box className={style.location_form}>
-        <Heading size={"lg"}>Where is your property located?</Heading>
+        <Heading size={"lg"}>Where is your Hotel / Resorts located?</Heading>
         <Heading size={"sm"}>Location Detail</Heading>
 
         <Input
           type="text"
           maxLength={100}
-          required
           placeholder="Address (optional)"
           value={address}
           onChange={(e) => setaddress(WordandNumber(e.target.value))}
@@ -589,6 +589,7 @@ const HotelResort = () => {
           maxLength={6}
           required
           fontSize={"md"}
+          variant="flushed"
           value={pincode}
           onChange={handlepinfetch}
         />
@@ -596,7 +597,7 @@ const HotelResort = () => {
           type="text"
           maxLength={100}
           required
-          placeholder="Locality"
+          placeholder="Enter Locality"
           list="browsers"
           value={locality}
           onChange={(e) => setLocality(WordandNumber(e.target.value))}
@@ -645,11 +646,8 @@ const HotelResort = () => {
         />
       </Box>
       {/* =============================== Property Detail ============================= */}
-      <Box marginTop={12}>
-        <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"}>
-          Tell us about your property
-        </Heading>
-        <Heading as={"h4"} size={"sm"} margin={"0 0 30px 0 "}>
+      <Box marginTop={8}>
+        <Heading as={"h4"} textAlign={"left"} size={"sm"}>
           Add Room Details
         </Heading>
         <Box as={"div"} className={style.inp_form_numbers}>
@@ -657,7 +655,7 @@ const HotelResort = () => {
             <Text> No. of rooms </Text>
             <Input
               type="text"
-              variant="flushed"
+              variant={"outline"}
               padding={"0 2px"}
               onChange={(e) => {
                 setRoom(NumericString(e.target.value));
@@ -670,7 +668,7 @@ const HotelResort = () => {
             <Text> No. of washroomss </Text>
             <Input
               type="text"
-              variant="flushed"
+              variant={"outline"}
               onChange={(e) => {
                 setwashrooms(NumericString(e.target.value));
               }}
@@ -683,7 +681,7 @@ const HotelResort = () => {
             <Text> No. of Balconies </Text>
             <Input
               type="text"
-              variant="flushed"
+              variant={"outline"}
               onChange={(e) => {
                 setBalcony(NumericString(e.target.value));
               }}
@@ -695,16 +693,16 @@ const HotelResort = () => {
         </Box>
         {/* ====================================== */}
         {/* add area details */}
-        <Box textAlign={"left"} padding={"10px 0"}>
-          <Heading as={"h3"} margin={"5px 0"} size={"md"}>
+        <Box textAlign={"left"}>
+          <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"}>
             Add Area Details
-          </Heading>
-          <Text margin={"5px 0"}> Atleast one area type is mandatory </Text>
-          <ButtonGroup
+          </Heading> 
+          <ButtonGroup 
             className={style.select_land}
             size="sm"
             isAttached
-            variant="outline"
+            variant="outline" 
+            w={{base:"100%",md:"300px"}}
           >
             <Input
               type="text"
@@ -718,6 +716,8 @@ const HotelResort = () => {
             />
             <Select
               value={areaPer}
+              borderRadius={0}
+              variant={"outline"} 
               onChange={(e) => {
                 setAreaPer(e.target.value);
               }}
@@ -746,13 +746,8 @@ const HotelResort = () => {
           </ButtonGroup>
         </Box>
         {/* other Room  */}
-        <Box
-          padding={"10px 0"}
-          display={"grid"}
-          gap={6}
-          className={style.optional_box}
-        >
-          <Heading as={"h3"} size={"md"}>
+        <Box display={"grid"} gap={6} className={style.optional_box}>
+          <Heading as={"h3"} size={"sm"}>
             Other rooms (optional)
           </Heading>
           <Box>
@@ -795,13 +790,8 @@ const HotelResort = () => {
           </Box>
         </Box>
         {/* furnish */}
-        <Box
-          padding={"10px 0"}
-          display={"grid"}
-          gap={6}
-          className={style.optional_box}
-        >
-          <Heading as={"h3"} size={"md"}>
+        <Box className={style.optional_box}>
+          <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"}>
             Furnishing (optional)
           </Heading>
           <Box>
@@ -838,12 +828,7 @@ const HotelResort = () => {
                 ? "grid"
                 : "none"
             }
-            padding={"10px 0"}
-            gap={6}
           >
-            <Heading as={"h4"} fontWeight={400} size={"sm"} color={"#656565"}>
-              At least three furnishings are mandatory for furnished
-            </Heading>
             <Box className={style.furnished_detail}>
               <Box>
                 <button
@@ -1123,7 +1108,12 @@ const HotelResort = () => {
 
       {/* Availability status */}
       <Box textAlign={"left"} className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading
+          as={"h3"}
+          size={"sm"}
+          marginTop={{ base: 10, md: 5 }}
+          textAlign={"left"}
+        >
           Availability Status
         </Heading>
         <Box className={style.grid}>
@@ -1242,7 +1232,12 @@ const HotelResort = () => {
 
       {/* ============================= Quality Rating ====================================== */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading
+          as={"h3"}
+          size={"sm"}
+          marginTop={{ base: 10, md: 5 }}
+          textAlign={"left"}
+        >
           Quality Rating
         </Heading>
         <Box flexWrap={"wrap"}>
@@ -1331,7 +1326,12 @@ const HotelResort = () => {
 
       {/* ============================ OwnerShip detail =========================== */}
       <Box>
-        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+        <Heading
+          as={"h3"}
+          size={"sm"}
+          marginTop={{ base: 10, md: 5 }}
+          textAlign={"left"}
+        >
           Ownership
         </Heading>
         <Box className={style.grid} gap={4}>
@@ -1388,37 +1388,56 @@ const HotelResort = () => {
 
       {/* ====================== Price Details ================================ */}
       <Box>
-        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
-          Price Details
-        </Heading>
-        <Box display={"flex"} alignItems={"center"} gap={5}>
-          <Box display={"grid"} gap={0}>
-            <Heading as={"h3"} size={"xs"} fontWeight={400} textAlign={"left"}>
-              {isCountry.country == "india" ? "₹" : "$"} Price Details
-            </Heading>
-            <Input
-              type="text"
-              value={pricedetail}
-              maxLength={12}
-              required
-              onChange={(e) => {
-                setPricedetail(NumericString(e.target.value));
-              }}
-            />
-          </Box>
-        </Box>
+      <Heading
+            as={"h3"}
+            size={"sm"}
+            marginTop={{ base: 10, md: 5 }}
+            textAlign={"left"}
+          >
+            Price Details 
+          </Heading>
+          <Box display={"flex"} margin={"8px 0 0 0"} alignItems={"center"}>
+            <InputGroup w={300}>
+              <Select
+                w={"-moz-fit-content"}
+                borderRadius={0} 
+                value={currency}
+                onChange={(e) => setCurrency(e.target.value)}
+              >
+                <option value="₹">₹ INR </option>
+                <option value="$">$ USD </option>
+              </Select>
+              <Input
+                type="text"
+                borderRadius={0}
+                value={pricedetail}
+                maxLength={"10"}
+                placeholder={`Price`}
+                required
+                w={200}
+                onChange={(e) => {
+                  setPricedetail(NumericString(e.target.value));
+                }}
+              />
+            </InputGroup>
+          </Box> 
       </Box>
 
       {/* ============================ Is it Pre-leased / Pre-Rented ? ============================ */}
       <Box textAlign={"left"}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading
+          as={"h3"}
+          size={"sm"}
+          marginTop={{ base: 10, md: 5 }}
+          textAlign={"left"}
+        >
           Is it Pre-leased / Pre-Rented ?
         </Heading>
         <Heading
           as={"h5"}
           size={"xs"}
           fontWeight={500}
-          margin={"10px 0"}
+          margin={"0 0 10px 0"}
           textAlign={"left"}
         >
           for properties that are already rented out
@@ -1432,8 +1451,7 @@ const HotelResort = () => {
             }}
             className={preLeased == "Yes" ? style.setbtn : style.btn}
           >
-            {" "}
-            Yes{" "}
+            Yes
           </button>
           <button
             value={"No"}
@@ -1443,8 +1461,7 @@ const HotelResort = () => {
             }}
             className={preLeased == "No" ? style.setbtn : style.btn}
           >
-            {" "}
-            No{" "}
+            No
           </button>
         </Box>
         <Box display={preLeased == "Yes" ? "block" : "none"}>
@@ -1506,10 +1523,9 @@ const HotelResort = () => {
             color={"black"}
             size={"sm"}
             textAlign={"left"}
-            margin={"10px 0"}
+            marginTop={{ base: 10, md: 5 }}
           >
-            {" "}
-            Upload Your Property image{" "}
+            Upload Your Property image
           </Heading>
         </Box>
         <Box className={style.card}>
@@ -1529,8 +1545,7 @@ const HotelResort = () => {
                   role="button"
                   onClick={selectFiles}
                 >
-                  {" "}
-                  Browse{" "}
+                  Browse
                 </Text>
               </>
             )}
@@ -1566,11 +1581,11 @@ const HotelResort = () => {
       <Box>
         <Heading
           as={"h3"}
-          size={"md"}
-          fontWeight={600}
-          margin={"10px 0"}
+          size={"sm"}
+          fontWeight={700}
+          margin={"18px 0 4px 0"}
           textAlign={"left"}
-        >
+        > 
           Add Description and Unique Features of your Property
         </Heading>
         <Textarea
@@ -1585,7 +1600,7 @@ const HotelResort = () => {
 
       {/* =============================== Amenities =============================== */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
           Amenities
         </Heading>
         <Box>
@@ -1680,7 +1695,7 @@ const HotelResort = () => {
 
       {/* =============================== Property Features =============================== */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
           Property Features
         </Heading>
         <Box>
@@ -1741,7 +1756,7 @@ const HotelResort = () => {
       </Box>
       {/* =============================== Society/Building feature =============================== */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
           Society/Building feature
         </Heading>
         <Box>
@@ -1870,7 +1885,7 @@ const HotelResort = () => {
       </Box>
       {/* Additional Features */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
           Additional Features
         </Heading>
         <Box>
@@ -1900,7 +1915,7 @@ const HotelResort = () => {
       </Box>
       {/* Other Features */}
       <Box>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
           Other Features
         </Heading>
         <Box display={"grid"} textAlign={"left"} gap={2}>
@@ -1917,7 +1932,7 @@ const HotelResort = () => {
 
       {/* Property facing */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
           Property facing
         </Heading>
         <Box>
@@ -2014,7 +2029,7 @@ const HotelResort = () => {
 
       {/* type of flooring */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
           Type of flooring
         </Heading>
         <Box>
@@ -2043,7 +2058,7 @@ const HotelResort = () => {
 
       {/* location advantage */}
       <Box className={style.optional_box}>
-        <Heading size={"md"} margin={"10px 0 4px 0"} textAlign={"left"}>
+        <Heading size={"sm"} margin={"10px 0 4px 0"} textAlign={"left"}>
           Location Advantages
           <Heading
             size={"xs"}

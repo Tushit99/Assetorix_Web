@@ -43,8 +43,7 @@
   
   .select_land {
     display: flex;
-    margin: 12px 0;
-    width: 240px;
+    margin-top: 12px ; 
   }
   
   .parking {
@@ -115,9 +114,10 @@
   }
   
   .optional_box {
-    text-align: left; 
-    display: grid; 
-    gap: 0;
+    margin: 10px 0;
+    text-align: left;
+    display: grid;
+    gap: 8px; 
   }
   
   .optional_box > *:nth-child(2) {
