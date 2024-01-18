@@ -77,6 +77,7 @@ const IndependentHouse = () => {
   const [expectedRentel, setExpectedRentel] = useState("");
   const [bookingAmount, setBookingAmount] = useState("");
   const [annualDuesPayble, setAnnualDuesPayble] = useState("");
+  const [currency, setCurrency] = useState("₹");  
   const [isClicked, setIsClicked] = useState(false);
   const [clickCount, setClickCount] = useState(0);
   const navigate = useNavigate();
@@ -131,7 +132,7 @@ const IndependentHouse = () => {
       },
       otherRoom: extraroom,
       description: desc,
-      countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
+      countryCurrency: currency,
       additionalPricingDetails: {
         maintenancePrice,
         maintenanceTimePeriod,
@@ -267,7 +268,7 @@ const IndependentHouse = () => {
               title: e.data.msg,
               description: e.data.msg,
               status: "success",
-              duration: 2000,
+              duration: 20000,
             });
             // if(images){
             //     submitImage(e.data.id);
@@ -280,11 +281,11 @@ const IndependentHouse = () => {
           });
       } catch (error) {
         toast({
-          title: error.response.data.msg,
+          title: error?.response?.data?.msg,
           status: "error",
           duration: 2000,
-        });
-        console.log(error);
+        }); 
+        setIsClicked(false); 
         setClickCount((prev) => prev - 12);
       }
       // }
@@ -1264,7 +1265,7 @@ const IndependentHouse = () => {
         </Box>
         {/* Availability status */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}}  textAlign={"left"}>
             Availability Status
           </Heading>
           <Box className={style.grid}>
@@ -1381,20 +1382,12 @@ const IndependentHouse = () => {
         )}
 
         {/* Add pricing and details */}
-        <Box>
-          <Heading
-            as={"h3"}
-            size={"sm"} 
-            marginTop={{base:10,md:5}} 
-            textAlign={"left"}
-          >
-            Add pricing and details...
-          </Heading>
+        <Box className={style.optional_box}>  
           {/* OwnerShip detail */}
-          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
             Ownership
           </Heading>
-          <Box className={style.grid} gap={4}>
+          <Box className={style.grid}>
             <button
               className={ownership == "Freehold" ? style.setbtn : style.btn}
               borderRadius={"100px"}
@@ -1405,17 +1398,6 @@ const IndependentHouse = () => {
               backgroundColor={"blue.50"}
             >
               Freehold
-            </button>
-            <button
-              className={ownership == "Leasehold" ? style.setbtn : style.btn}
-              borderRadius={"100px"}
-              border={"1px solid rgba(113, 210, 255, 0.897)"}
-              margin={"8px 6px 0 0"}
-              onClick={handleownership}
-              value={"Leasehold"}
-              backgroundColor={"blue.50"}
-            >
-              Leasehold
             </button>
             <button
               className={
@@ -1429,6 +1411,17 @@ const IndependentHouse = () => {
               backgroundColor={"blue.50"}
             >
               Co-operative society
+            </button>             
+            <button
+              className={ownership == "Leasehold" ? style.setbtn : style.btn}
+              borderRadius={"100px"}
+              border={"1px solid rgba(113, 210, 255, 0.897)"}
+              margin={"8px 6px 0 0"}
+              onClick={handleownership}
+              value={"Leasehold"}
+              backgroundColor={"blue.50"}
+            >
+              Leasehold
             </button>
             <button
               className={
@@ -1456,7 +1449,7 @@ const IndependentHouse = () => {
           >
             Price Details
           </Heading>
-          <Box display={"flex"} alignItems={"center"} gap={5} marginTop={1}>
+          <Box display={"flex"} alignItems={"center"} gap={{ base: 2, md: 10 }} marginTop={1}>
             <InputGroup w={300} gap={2}>
               <Select
                 w={"-moz-fit-content"}
@@ -1484,7 +1477,7 @@ const IndependentHouse = () => {
        
 
         {/* Additional (Checkbox) */}
-        <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
+        <Box display={"flex"} gap={{ base: 2, md: 10 }} margin={"20px 0"} flexWrap={"wrap"}>
           <Checkbox
             isChecked={inclusivePrices.includes("All inclusive price")}
             onChange={(e) => {
@@ -1550,7 +1543,7 @@ const IndependentHouse = () => {
             </Select>
           </InputGroup>
           {additionalPrice && (
-            <>
+            <Box display={"grid"} marginTop={2}>  
               <Input
                 type="text"
                 w={"300px"}
@@ -1578,7 +1571,7 @@ const IndependentHouse = () => {
                 placeholder="Annual dues payable"
                 margin={"10px 0 0 0"}
               />
-            </>
+            </Box>
           )}
           <Heading
             as={"h3"}
@@ -1716,10 +1709,19 @@ const IndependentHouse = () => {
             value={"Maintenance Staff"}
           >
             Maintenance Staff
+          </button>          
+          <button
+            className={
+              amenities.includes("Intercom Facility") ? style.setbtn : style.btn
+            }
+            onClick={handleAminities}
+            value={"Intercom Facility"}
+          >
+            Intercom Facility
           </button>
           <button
             className={
-              amenities.includes("Rain Water Harvesting")
+              amenities.includes("Rain Water Harvesting") 
                 ? style.setbtn
                 : style.btn
             }
@@ -1729,6 +1731,13 @@ const IndependentHouse = () => {
             Rain Water Harvesting
           </button>
 
+          <button
+            className={amenities.includes("Lift") ? style.setbtn : style.btn}
+            onClick={handleAminities}
+            value={"Lift"}
+          >
+            Lift(s)
+          </button>
           <button
             className={
               amenities.includes("Water Storage") ? style.setbtn : style.btn
@@ -1767,15 +1776,6 @@ const IndependentHouse = () => {
           </button>
           <button
             className={
-              amenities.includes("Intercom Facility") ? style.setbtn : style.btn
-            }
-            onClick={handleAminities}
-            value={"Intercom Facility"}
-          >
-            Intercom Facility
-          </button>
-          <button
-            className={
               amenities.includes("Feng Shui / Vaastu Compliant")
                 ? style.setbtn
                 : style.btn
@@ -1787,21 +1787,14 @@ const IndependentHouse = () => {
           </button>
           <button
             className={
-              amenities.includes("Pivate Garden / Terrace")
+              amenities.includes("Private Garden / Terrace")
                 ? style.setbtn
                 : style.btn
             }
             onClick={handleAminities}
-            value={"Pivate Garden / Terrace"}
+            value={"Private Garden / Terrace"}
           >
-            Pivate Garden / Terrace
-          </button>
-          <button
-            className={amenities.includes("Lift") ? style.setbtn : style.btn}
-            onClick={handleAminities}
-            value={"Lift"}
-          >
-            Lift(s)
+            Private Garden / Terrace
           </button>
         </Box>
       </Box>
@@ -1885,18 +1878,7 @@ const IndependentHouse = () => {
             onClick={handlePropertyFeature}
           >
             Recently Renovated
-          </button>
-          <button
-            className={
-              propertyFeatures.includes("Security / Fire Alarm")
-                ? style.setbtn
-                : style.btn
-            }
-            value={"Security / Fire Alarm"}
-            onClick={handlePropertyFeature}
-          >
-            Security / Fire Alarm
-          </button>
+          </button> 
           <button
             className={
               propertyFeatures.includes("Natural Light")
@@ -1959,6 +1941,17 @@ const IndependentHouse = () => {
             value={"Swimming Pool"}
           >
             Swimming Pool
+          </button> 
+          <button
+            className={
+              buildingFeature.includes("Security Personnel")
+                ? style.setbtn
+                : style.btn
+            }
+            onClick={HandleBuildingFeature}
+            value={"Security Personnel"}
+          >
+            Security Personnel
           </button>
           <button
             className={
@@ -1970,17 +1963,6 @@ const IndependentHouse = () => {
             value={"Club house / Community Center"}
           >
             Club house / Community Center
-          </button>
-          <button
-            className={
-              buildingFeature.includes("Security Personnel")
-                ? style.setbtn
-                : style.btn
-            }
-            onClick={HandleBuildingFeature}
-            value={"Security Personnel"}
-          >
-            Security Personnel
           </button>
         </Box>
       </Box>
@@ -2314,11 +2296,12 @@ const IndependentHouse = () => {
         <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
           Width of facing road
         </Heading>
-        <Box display={"flex"} gap={"20px"} w={"300px"}>
+        <InputGroup w={{base:"100%",md:"340px"}}> 
           <Input
             type="text"
-            variant="flushed"
+            variant={"outline"}
             maxLength={4}
+            placeholder="Enter Facing Width" 
             flex={1}
             required
             value={facingwidth}
@@ -2328,14 +2311,15 @@ const IndependentHouse = () => {
             }}
           />
           <Select
-            flex={1}
+            flex={1} 
+            borderRadius={0}
             onChange={(e) => setFacing(e.target.value)}
             value={facing}
           >
             <option value="Meter"> Meter </option>
             <option value="Feet"> Feet </option>
           </Select>
-        </Box>
+        </InputGroup>
       </Box>
       {/* location advantage */}
       <Box className={style.optional_box}>
@@ -2390,6 +2374,15 @@ const IndependentHouse = () => {
             onClick={handlelocationadvantages}
           >
             Close to Market
+          </button> 
+          <button
+            className={
+              locationAdv.includes("Close to Mall") ? style.setbtn : style.btn
+            }
+            value={"Close to Mall"}
+            onClick={handlelocationadvantages}
+          >
+            Close to Mall
           </button>
           <button
             className={
@@ -2412,15 +2405,6 @@ const IndependentHouse = () => {
             onClick={handlelocationadvantages}
           >
             Close to Airport
-          </button>
-          <button
-            className={
-              locationAdv.includes("Close to Mall") ? style.setbtn : style.btn
-            }
-            value={"Close to Mall"}
-            onClick={handlelocationadvantages}
-          >
-            Close to Mall
           </button>
           <button
             className={

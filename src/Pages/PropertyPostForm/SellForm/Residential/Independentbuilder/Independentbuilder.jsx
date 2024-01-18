@@ -7,7 +7,7 @@ import {
   Heading,
   Input,
   InputGroup,
-  InputRightElement, 
+  InputRightElement,
   Select,
   Text,
   Textarea,
@@ -22,7 +22,7 @@ import {
   AlphabetString,
   CleanInputText,
   NumericString,
-  WordandNumber,
+  WordandNumber, 
 } from "../../../code";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
@@ -59,7 +59,7 @@ const Independentbuilder = () => {
   const [fromyear, setFromyear] = useState("");
   const [expectedyear, setExpectedYear] = useState("");
   const [ownership, setOwnerShip] = useState("");
-  const [pricedetail, setPricedetail] = useState(""); 
+  const [pricedetail, setPricedetail] = useState("");
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
@@ -87,7 +87,7 @@ const Independentbuilder = () => {
   const [isClicked, setIsClicked] = useState(false);
   const [clickCount, setClickCount] = useState(0);
   const navigate = useNavigate();
-  const [currency, setCurrency] = useState("₹"); 
+  const [currency, setCurrency] = useState("₹");
   // state for drop box images
   const [images, setImages] = useState([]);
   const [isDraging, setIsDraging] = useState(false);
@@ -116,7 +116,7 @@ const Independentbuilder = () => {
         balcony: balconey,
       },
       ownership,
-      price: +pricedetail, 
+      price: +pricedetail,
       inclusivePrices,
       amenities,
       propertyFeatures,
@@ -140,7 +140,7 @@ const Independentbuilder = () => {
       },
       otherRoom: extraroom,
       description: desc,
-      countryCurrency: currency ,
+      countryCurrency: currency,
       additionalPricingDetails: {
         maintenancePrice,
         maintenanceTimePeriod,
@@ -268,7 +268,7 @@ const Independentbuilder = () => {
         //     body: JSON.stringify(obj)
         // });
         // let data = await response.json();
-        console.log("data",obj);    
+        console.log("data", obj);
         await axios
           .post(`${process.env.REACT_APP_URL}/property/`, obj, {
             headers: head,
@@ -279,8 +279,7 @@ const Independentbuilder = () => {
               description: e.data.msg,
               status: "success",
               duration: 2000,
-            });
-
+            }); 
             // if (images) {
             //   submitImage(e.data.id);
             // } else {
@@ -292,7 +291,7 @@ const Independentbuilder = () => {
           });
       } catch (error) {
         toast({
-          title: error.response.data.msg,
+          title: error?.response?.data?.msg,
           status: "error",
           duration: 2000,
         });
@@ -340,11 +339,11 @@ const Independentbuilder = () => {
 
       await axios.request(reqOptions).then((e) => {
         setIsClicked(false);
-        navigate("/listing"); 
+        navigate("/listing");
       });
     } catch (error) {
       console.log(error);
-      setIsClicked(false); 
+      setIsClicked(false);
     }
     setIsClicked(false);
   };
@@ -540,7 +539,6 @@ const Independentbuilder = () => {
     console.log(newarr);
     setWaterSource(newarr);
   };
- 
 
   // ======--- image upload function
 
@@ -632,7 +630,9 @@ const Independentbuilder = () => {
     <form onSubmit={handleSubmitData}>
       {/* property location */}
       <Box className={style.location_form}>
-        <Heading size={"lg"}>Where is your Independent / builder Floor located?</Heading>
+        <Heading size={"lg"}>
+          Where is your Independent / builder Floor located?
+        </Heading>
         <Heading size={"sm"}>Location Detail</Heading>
 
         <Input
@@ -642,7 +642,7 @@ const Independentbuilder = () => {
           placeholder="House No. (optional)"
           value={houseNo}
           onChange={(e) => setHouseNo(WordandNumber(e.target.value))}
-          fontSize={"md"}
+          fontSize={"md"} 
           variant="flushed"
         />
         <Input
@@ -652,7 +652,7 @@ const Independentbuilder = () => {
           maxLength={100}
           placeholder="Apartment / Society Name"
           fontSize={"md"}
-          value={appartment}
+          value={appartment}  
           onChange={(e) => setApartment(WordandNumber(e.target.value))}
           variant="flushed"
         />
@@ -723,12 +723,12 @@ const Independentbuilder = () => {
         />
       </Box>
       {/* Property Detail */}
-      <Box >
+      <Box>
         <Heading
           as={"h4"}
-          marginTop={{base:10,md:5}}
+          marginTop={{ base: 10, md: 5 }}
           textAlign={"left"}
-          size={"sm"} 
+          size={"sm"}
         >
           Add Room Details
         </Heading>
@@ -828,9 +828,14 @@ const Independentbuilder = () => {
           </InputGroup>
         </Box>
         {/* other Room  */}
-        <Box padding={"10px 0"} marginTop={{base:10,md:5}} display={"grid"} className={style.optional_box}>
+        <Box
+          padding={"10px 0"}
+          marginTop={{ base: 10, md: 5 }}
+          display={"grid"}
+          className={style.optional_box}
+        >
           <Heading as={"h3"} size={"sm"}>
-            Other rooms (optional) 
+            Other rooms (optional)
           </Heading>
           <Box>
             <button
@@ -910,7 +915,7 @@ const Independentbuilder = () => {
                 ? "grid"
                 : "none"
             }
-            padding={"10px 0"}  
+            padding={"10px 0"}
             gap={6}
           >
             <Box className={style.furnished_detail}>
@@ -1189,7 +1194,7 @@ const Independentbuilder = () => {
           </Box>
         </Box>
         {/* reserved */}
-        <Box className={style.optional_box} marginTop={{base:10,md:5}}>
+        <Box className={style.optional_box} marginTop={{ base: 10, md: 5 }}>
           <Heading as={"h3"} size={"sm"}>
             Reserved Parking (optional)
           </Heading>
@@ -1285,7 +1290,11 @@ const Independentbuilder = () => {
         </Box>
 
         {/* Availability status */}
-        <Box textAlign={"left"} marginTop={{base:10,md:5}} className={style.optional_box}>
+        <Box
+          textAlign={"left"}
+          marginTop={{ base: 10, md: 5 }}
+          className={style.optional_box}
+        >
           <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Availability Status
           </Heading>
@@ -1404,13 +1413,18 @@ const Independentbuilder = () => {
         )}
 
         {/* Add pricing and details */}
-        <Box> 
+        <Box>
           {/* OwnerShip detail */}
-          <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
+          <Heading
+            as={"h3"}
+            size={"sm"}
+            marginTop={{ base: 10, md: 5 }}
+            textAlign={"left"}
+          >
             Ownership
           </Heading>
           <Box className={style.grid} gap={3}>
-            <button 
+            <button
               className={ownership == "Freehold" ? style.setbtn : style.btn}
               borderRadius={"100px"}
               border={"1px solid rgba(113, 210, 255, 0.897)"}
@@ -1433,7 +1447,7 @@ const Independentbuilder = () => {
               backgroundColor={"blue.50"}
             >
               Co-operative society
-            </button> 
+            </button>
             <button
               className={ownership == "Leasehold" ? style.setbtn : style.btn}
               borderRadius={"100px"}
@@ -1490,54 +1504,150 @@ const Independentbuilder = () => {
                 required
                 w={200}
                 onChange={(e) => {
-                  setPricedetail(NumericString(e.target.value)); 
+                  setPricedetail(NumericString(e.target.value));
                 }}
               />
             </InputGroup>
           </Box>
+          {/* other price */}
+          <Box
+            display={"flex"}
+            gap={{ base: 2, md: 10 }}
+            margin={"20px 0"}
+            flexWrap={"wrap"}
+          >
+            <Checkbox
+              isChecked={inclusivePrices.includes("All inclusive price")}
+              onChange={(e) => {
+                e.preventDefault();
+                handleinclusiveandtax(e.target.value);
+              }}
+              value={"All inclusive price"}
+            >
+              All inclusive price
+            </Checkbox>
+            <Checkbox
+              isChecked={inclusivePrices.includes(
+                "Tax and Govt. charges excluded"
+              )}
+              onChange={(e) => {
+                e.preventDefault();
+                handleinclusiveandtax(e.target.value);
+              }}
+              value={"Tax and Govt. charges excluded"}
+            >
+              Tax and Govt. charges excluded
+            </Checkbox>
+            <Checkbox
+              isChecked={inclusivePrices.includes("Price Negotiable")}
+              onChange={(e) => {
+                e.preventDefault();
+                handleinclusiveandtax(e.target.value);
+              }}
+              value={"Price Negotiable"}
+            >
+              Price Negotiable
+            </Checkbox>
+          </Box>
         </Box>
 
-        {/* other price */}
-        <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
-          <Checkbox
-            isChecked={inclusivePrices.includes("All inclusive price")}
-            onChange={(e) => {
-              e.preventDefault();
-              handleinclusiveandtax(e.target.value); 
-            }}
-            value={"All inclusive price"}
+        {/* Additional Pricing Detail (Optional) */}
+        <Heading
+          as={"h4"}
+          size={"sm"}
+          marginTop={{ base: 5, md: 8 }}
+          fontWeight={700}
+          textAlign={"left"}
+        >
+          Additional Pricing Detail (Optional)
+        </Heading>
+        <InputGroup w={"300px"}>
+          <Input
+            w={"60%"}
+            type="text"
+            onChange={(e) => setMaintenancePrice(NumericString(e.target.value))}
+            value={maintenancePrice}
+            placeholder={"Maintenance Price"}
+          />
+          <Select
+            w={"40%"}
+            borderRadius={0}
+            value={maintenanceTimePeriod}
+            onChange={(e) => setMaintenanceTimePeriod(e.target.value)}
           >
-            All inclusive price
-          </Checkbox>
-          <Checkbox
-            isChecked={inclusivePrices.includes(
-              "Tax and Govt. charges excluded"
+            <option value="Monthly">Monthly</option>
+            <option value="Yearly">Yearly</option>
+          </Select>
+        </InputGroup>
+
+        {/* other pricing  */}
+        <Box display={"grid"} marginTop={"6px"}>
+          {additionalPrice && (
+            <>
+              <Input
+                type="text"
+                w={"300px"}
+                maxLength={"8"}
+                value={expectedRentel}
+                onChange={(e) =>
+                  setExpectedRentel(NumericString(e.target.value))
+                }
+                placeholder="Expected Rental"
+                margin={"0"}
+              />
+              <Input
+                type="text"
+                w={"300px"}
+                maxLength={"8"}
+                value={bookingAmount}
+                onChange={(e) =>
+                  setBookingAmount(NumericString(e.target.value))
+                }
+                placeholder="Booking Amount"
+                margin={"10px 0 0 0"}
+              />
+              <Input
+                type="text"
+                w={"300px"}
+                maxLength={"8"}
+                value={annualDuesPayble}
+                onChange={(e) =>
+                  setAnnualDuesPayble(NumericString(e.target.value))
+                }
+                placeholder="Annual Dues Payable"
+                margin={"10px 0 0 0"}
+              />
+            </>
+          )}
+          <Heading
+            as={"h3"}
+            size={"sm"}
+            marginTop={2}
+            color={"#002aff"}
+            fontWeight={500}
+            cursor={"pointer"}
+            onClick={() => setAdditionalPrice(!additionalPrice)}
+            textAlign={"left"}
+          >
+            {additionalPrice ? (
+              <IoIosArrowUp style={{ display: "inline" }} />
+            ) : (
+              <IoIosArrowDown style={{ display: "inline" }} />
             )}
-            onChange={(e) => {
-              e.preventDefault();
-              handleinclusiveandtax(e.target.value);
-            }}
-            value={"Tax and Govt. charges excluded"}
-          >
-            Tax and Govt. charges excluded
-          </Checkbox>
-          <Checkbox
-            isChecked={inclusivePrices.includes("Price Negotiable")}
-            onChange={(e) => {
-              e.preventDefault();
-              handleinclusiveandtax(e.target.value);
-            }}
-            value={"Price Negotiable"}
-          >
-            Price Negotiable
-          </Checkbox>
+            Add more pricing details
+          </Heading>
         </Box>
 
         <Box>
-          <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
+          <Heading
+            as={"h3"}
+            size={"sm"}
+            marginTop={{ base: 10, md: 5 }}
+            textAlign={"left"}
+          >
             Add Description and Unique Features of your Property
-          </Heading> 
-          <Textarea  
+          </Heading>
+          <Textarea
             height={140}
             required
             placeholder="Add Description"
@@ -1545,76 +1655,75 @@ const Independentbuilder = () => {
             onChange={(e) => {
               let my_cleantext = CleanInputText(e.target.value);
               setDesc(my_cleantext);
-            }} 
+            }}
           ></Textarea>
         </Box>
 
-      {/* image Drag and Drop area  */}
-      <Box>
-        <Box className={style.top}>
-          <Heading
-            color={"black"}
-            size={"sm"}
-            textAlign={"left"}
-            marginTop={{base:10,md:5}}
-          > 
-            Upload Your Property image 
-          </Heading>
-        </Box>
-        <Box className={style.card}>
-          <Box
-            border={
-              isDraging ? "2px dashed rgb(46,49,146)" : "2px dashed #9e9e9e"
-            }
-            className={style.dragArea}
-            onDragOver={ondragover}
-            onDragLeave={ondragleave}
-            onDrop={ondrop}
-          >
-            {isDraging ? (
-              <Text textAlign={"center"} color={"rgb(0, 134, 254)"}>
-                Drop image here
-              </Text>
-            ) : (
-              <>
-                Drag & Drop image here or
-                <Text
-                  className={style.select}
-                  role="button"
-                  onClick={selectFiles}
-                >
-                  Browse
-                </Text>
-              </>
-            )}
-            <input
-              type={"file"}
-              name="image"
-              accept="image/jpg, image/png, image/jpeg"
-              formMethod="post"
-              formEncType="multipart/form-data"
-              className={style.file}
-              multiple
-              ref={fileInputRef}
-              onChange={onFileSelect}
-            />
+        {/* image Drag and Drop area  */}
+        <Box>
+          <Box className={style.top}>
+            <Heading
+              color={"black"}
+              size={"sm"}
+              textAlign={"left"}
+              marginTop={{ base: 10, md: 5 }}
+            >
+              Upload Your Property image
+            </Heading>
           </Box>
-          <Box className={style.container}>
-            {images.map((image, index) => (
-              <Box className={style.image} key={index}>
-                <Text
-                  className={style.delete}
-                  onClick={() => removeImage(index)}
-                >
-                  &#10006;
+          <Box className={style.card}>
+            <Box
+              border={
+                isDraging ? "2px dashed rgb(46,49,146)" : "2px dashed #9e9e9e"
+              }
+              className={style.dragArea}
+              onDragOver={ondragover}
+              onDragLeave={ondragleave}
+              onDrop={ondrop}
+            >
+              {isDraging ? (
+                <Text textAlign={"center"} color={"rgb(0, 134, 254)"}>
+                  Drop image here
                 </Text>
-                <img src={URL.createObjectURL(image.image)} alt="images" />
-              </Box>
-            ))}
+              ) : (
+                <>
+                  Drag & Drop image here or
+                  <Text
+                    className={style.select}
+                    role="button"
+                    onClick={selectFiles}
+                  >
+                    Browse
+                  </Text>
+                </>
+              )}
+              <input
+                type={"file"}
+                name="image"
+                accept="image/jpg, image/png, image/jpeg"
+                formMethod="post"
+                formEncType="multipart/form-data"
+                className={style.file}
+                multiple
+                ref={fileInputRef}
+                onChange={onFileSelect}
+              />
+            </Box>
+            <Box className={style.container}>
+              {images.map((image, index) => (
+                <Box className={style.image} key={index}>
+                  <Text
+                    className={style.delete}
+                    onClick={() => removeImage(index)}
+                  >
+                    &#10006;
+                  </Text>
+                  <img src={URL.createObjectURL(image.image)} alt="images" />
+                </Box>
+              ))}
+            </Box>
           </Box>
         </Box>
-      </Box>
- 
       </Box>
 
       {/* Add amenities/unique features */}
@@ -1686,7 +1795,7 @@ const Independentbuilder = () => {
           >
             Rain Water Harvesting
           </button>
-          
+
           <button
             className={amenities.includes("Park") ? style.setbtn : style.btn}
             onClick={handleAminities}
@@ -1822,7 +1931,7 @@ const Independentbuilder = () => {
           >
             Private Garden / Terrace
           </button>
-          
+
           <button
             className={
               propertyFeatures.includes("Airy Roooms")
@@ -2266,14 +2375,14 @@ const Independentbuilder = () => {
         <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
           Width of facing road
         </Heading>
-        <Box display={"flex"} gap={"20px"} w={{base:"100%",md:"340px"}}> 
+        <InputGroup w={{ base: "100%", md: "340px" }}>
           <Input
             type="text"
-            variant="flushed"
+            variant={"outline"}
             maxLength={4}
             flex={1}
             required
-            placeholder="Enter Facing Width" 
+            placeholder="Enter Facing Width"
             value={facingwidth}
             onChange={(e) => {
               e.preventDefault();
@@ -2281,14 +2390,15 @@ const Independentbuilder = () => {
             }}
           />
           <Select
-            flex={1}  
+            flex={1}
+            borderRadius={0}
             onChange={(e) => setFacing(e.target.value)}
             value={facing}
           >
             <option value="Meter"> Meter </option>
             <option value="Feet"> Feet </option>
           </Select>
-        </Box>
+        </InputGroup>
       </Box>
       <Box className={style.optional_box}>
         <Heading size={"sm"} margin={"10px 0 4px 0"} textAlign={"left"}>
@@ -2387,8 +2497,8 @@ const Independentbuilder = () => {
           </button>
         </Box>
       </Box>
-      <Heading  
-        as={"h5"} 
+      <Heading
+        as={"h5"}
         size={"xs"}
         color={"rgb(255, 52, 52)"}
         fontWeight={200}
@@ -2398,11 +2508,11 @@ const Independentbuilder = () => {
         *Please provide correct information, otherwise your listing might get
         blocked
       </Heading>
-      {isClicked && <Loading />}
-      <Button 
+      {isClicked && <Loading />} 
+      <Button
         margin={"20px 0"}
         type="submit"
-        w={"100%"}  
+        w={"100%"}
         backgroundColor={"rgb(46,49,146)"}
         _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
         color={"#ffffff"}

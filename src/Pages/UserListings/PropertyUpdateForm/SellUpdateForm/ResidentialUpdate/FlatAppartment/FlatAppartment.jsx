@@ -289,7 +289,7 @@ const FlatAppartmentUpdate = () => {
             });
             if (images.length) {
               submitImage(productID);
-            } else { 
+            } else {
               setClickCount((prev) => prev - 12);
               setIsClicked(false);
               // navigate("/listing");
@@ -757,12 +757,13 @@ const FlatAppartmentUpdate = () => {
       <form onSubmit={handleSubmitData}>
         {/* property location */}
         <Box className={style.location_form}>
-          <Heading size={"lg"}>Edit your Flat / Apartment Detail </Heading>
+          <Heading size={"lg"}> Edit your Flat / Apartment Details </Heading>
           <Heading size={"sm"}>Location Detail</Heading>
 
           <Input
             type="text"
-            placeholder="House No. / Mobile No."
+            padding={"0 10px"}
+            placeholder="House No. (optional)"
             value={houseNo}
             maxLength={"100"}
             onChange={(e) => setHouseNo(WordandNumber(e.target.value))}
@@ -793,6 +794,7 @@ const FlatAppartmentUpdate = () => {
           />
           <Input
             type="text"
+            padding={"0 10px"}
             required
             placeholder="Enter Locality"
             list="browsers"
@@ -814,6 +816,7 @@ const FlatAppartmentUpdate = () => {
 
           <Input
             type="text"
+            padding={"0 10px"}
             required
             placeholder="Enter City"
             fontSize={"md"}
@@ -823,6 +826,7 @@ const FlatAppartmentUpdate = () => {
           />
           <Input
             type="text"
+            padding={"0 10px"}
             required
             placeholder="Enter State"
             value={state}
@@ -832,6 +836,7 @@ const FlatAppartmentUpdate = () => {
           />
           <Input
             type="text"
+            padding={"0 10px"}
             required
             maxLength={"100"}
             placeholder="Enter Country"
@@ -848,33 +853,39 @@ const FlatAppartmentUpdate = () => {
           </Heading>
           <Box as={"div"} className={style.inp_form_numbers}>
             <Box textAlign={"left"}>
+              <Text> No. of Bedrooms </Text>
               <Input
                 type="text"
+                padding={"0 2px"}
+                fontSize={"lg"}
                 maxLength={"2"}
-                placeholder={"Enter No. of Bedrooms"}
                 onChange={(e) => setBedRoom(NumericString(e.target.value))}
                 value={bedroom}
                 required
               />
             </Box>
             <Box textAlign={"left"}>
+              <Text> No. of Bathrooms </Text>
               <Input
                 type="text"
                 maxLength={"2"}
-                placeholder={"Enter No. of Bathrooms"}
                 onChange={(e) => setBathroom(NumericString(e.target.value))}
                 value={bathroom}
                 required
+                padding={"0 2px"}
+                fontSize={"lg"}
               />
             </Box>
             <Box textAlign={"left"}>
+              <Text> No. of Balconies </Text>
               <Input
                 type="text"
                 maxLength={"2"}
-                placeholder={"Enter No. of Balconies"}
                 onChange={(e) => setBalcony(NumericString(e.target.value))}
                 value={balconey}
                 required
+                padding={"0 2px"}
+                fontSize={"lg"}
               />
             </Box>
           </Box>
@@ -898,7 +909,6 @@ const FlatAppartmentUpdate = () => {
                 w={200}
                 maxLength={"6"}
                 onChange={(e) => {
-                  areaCalucation();
                   setPlotArea(NumericString(e.target.value));
                 }}
                 required
@@ -1628,7 +1638,6 @@ const FlatAppartmentUpdate = () => {
                   w={200}
                   onChange={(e) => {
                     setPricedetail(NumericString(e.target.value));
-                    areaCalucation();
                   }}
                 />
               </InputGroup>
@@ -1677,37 +1686,38 @@ const FlatAppartmentUpdate = () => {
           </Box>
 
           {/* Additional Pricing Detail (Optional) */}
+          <Heading
+            as={"h4"}
+            size={"sm"}
+            marginTop={{ base: 5, md: 8 }}
+            fontWeight={700}
+            textAlign={"left"}
+          >
+            Additional Pricing Detail (Optional)
+          </Heading>
+          <InputGroup w={"300px"}>
+            <Input
+              w={"60%"}
+              type="text"
+              onChange={(e) =>
+                setMaintenancePrice(NumericString(e.target.value))
+              }
+              value={maintenancePrice}
+              placeholder={"Maintenance Price"}
+            />
+            <Select
+              w={"40%"}
+              borderRadius={0}
+              value={maintenanceTimePeriod}
+              onChange={(e) => setMaintenanceTimePeriod(e.target.value)}
+            >
+              <option value="Monthly">Monthly</option>
+              <option value="Yearly">Yearly</option>
+            </Select>
+          </InputGroup>
           <Box display={"grid"} marginTop={"6px"}>
             {additionalPrice && (
               <>
-                <Heading
-                  as={"h4"}
-                  size={"sm"}
-                  fontWeight={700}
-                  textAlign={"left"}
-                >
-                  Additional Pricing Detail (Optional)
-                </Heading>
-                <InputGroup w={"300px"} margin={"10px 0"}>
-                  <Input
-                    w={"60%"}
-                    type="text"
-                    onChange={(e) =>
-                      setMaintenancePrice(NumericString(e.target.value))
-                    }
-                    value={maintenancePrice}
-                    placeholder={"Maintenance Price"}
-                  />
-                  <Select
-                    w={"40%"}
-                    borderRadius={0}
-                    value={maintenanceTimePeriod}
-                    onChange={(e) => setMaintenanceTimePeriod(e.target.value)}
-                  >
-                    <option value="Monthly">Monthly</option>
-                    <option value="Yearly">Yearly</option>
-                  </Select>
-                </InputGroup>
                 <Input
                   type="text"
                   w={"300px"}
@@ -1768,30 +1778,26 @@ const FlatAppartmentUpdate = () => {
               Add more pricing details
             </Heading>
           </Box>
-
-          <Box>
-            <Heading
-              as={"h3"}
-              size={"sm"}
-              marginTop={{ base: 10, md: 5 }}
-              textAlign={"left"}
-            >
-              Add Description and Unique Features of your Property
-            </Heading>
-            <Text fontSize={"sm"} textAlign={"left"}>
-              Adding description will increase your listing visibility
-            </Text>
-            <Textarea
-              height={140}
-              required
-              placeholder="Add Description"
-              value={desc}
-              onChange={(e) => {
-                let my_cleantext = CleanInputText(e.target.value);
-                setDesc(my_cleantext);
-              }}
-            ></Textarea>
-          </Box>
+        </Box>
+        <Box>
+          <Heading
+            as={"h3"}
+            size={"sm"}
+            marginTop={{ base: 10, md: 5 }}
+            textAlign={"left"}
+          >
+            Add Description and Unique Features of your Property
+          </Heading>
+          <Textarea
+            height={140}
+            required
+            placeholder="Add Description"
+            value={desc}
+            onChange={(e) => {
+              let my_cleantext = CleanInputText(e.target.value);
+              setDesc(my_cleantext);
+            }}
+          ></Textarea>
         </Box>
 
         {/* image Drag and Drop area  */}
@@ -1805,16 +1811,6 @@ const FlatAppartmentUpdate = () => {
             >
               Upload Your Property image
             </Heading>
-          </Box>
-          <Box className={style.savedImages}>
-            {savedImages?.map((w) => (
-              <Extraimg
-                e={w}
-                propertyid={productID}
-                deleteimagePermanently={deleteimagePermanently}
-                key={w._id}
-              />
-            ))}
           </Box>
           <Box className={style.card}>
             <Box
@@ -1880,22 +1876,21 @@ const FlatAppartmentUpdate = () => {
           >
             Add amenities/unique features
           </Heading>
-          <Heading
-            as={"h5"}
-            size={"xs"}
-            fontWeight={400}
-            margin={"10px 0"}
-            textAlign={"left"}
-          >
+          <Heading as={"h5"} size={"xs"} fontWeight={400} textAlign={"left"}>
             All fields on this page are optional
           </Heading>
         </Box>
         {/* Amenities */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          <Heading
+            as={"h3"}
+            size={"sm"}
+            marginTop={{ base: 10, md: 5 }}
+            textAlign={"left"}
+          >
             Amenities
           </Heading>
-          <Box>
+          <Box className={style.paddingbtn}>
             <button
               className={
                 amenities.includes("Maintenance Staff")
@@ -2144,17 +2139,6 @@ const FlatAppartmentUpdate = () => {
             </button>
             <button
               className={
-                buildingFeature.includes("Fitness Centre / GYM")
-                  ? style.setbtn
-                  : style.btn
-              }
-              onClick={HandleBuildingFeature}
-              value={"Fitness Centre / GYM"}
-            >
-              Fitness Centre / GYM
-            </button>
-            <button
-              className={
                 buildingFeature.includes("Swimming Pool")
                   ? style.setbtn
                   : style.btn
@@ -2163,6 +2147,17 @@ const FlatAppartmentUpdate = () => {
               value={"Swimming Pool"}
             >
               Swimming Pool
+            </button>
+            <button
+              className={
+                buildingFeature.includes("Fitness Centre / GYM")
+                  ? style.setbtn
+                  : style.btn
+              }
+              onClick={HandleBuildingFeature}
+              value={"Fitness Centre / GYM"}
+            >
+              Fitness Centre / GYM
             </button>
             <button
               className={
@@ -2604,12 +2599,13 @@ const FlatAppartmentUpdate = () => {
           >
             Width of facing road
           </Heading>
-          <Box display={"flex"} gap={"20px"} w={"300px"}>
+          <InputGroup w={{ base: "100%", md: "340px" }}>
             <Input
               type="text"
-              variant="flushed"
+              variant={"outline"}
               maxLength={4}
               flex={1}
+              placeholder="Enter Facing Width"
               required
               value={facingwidth}
               onChange={(e) => {
@@ -2619,13 +2615,14 @@ const FlatAppartmentUpdate = () => {
             />
             <Select
               flex={1}
+              borderRadius={0}
               onChange={(e) => setFacing(e.target.value)}
               value={facing}
             >
               <option value="Meter"> Meter </option>
               <option value="Feet"> Feet </option>
             </Select>
-          </Box>
+          </InputGroup>
         </Box>
         <Box className={style.optional_box}>
           <Heading

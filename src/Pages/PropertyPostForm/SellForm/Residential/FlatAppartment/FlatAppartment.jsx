@@ -60,7 +60,7 @@ const FlatAppartment = () => {
   const [fromyear, setFromyear] = useState("");
   const [expectedyear, setExpectedYear] = useState("");
   const [ownership, setOwnerShip] = useState("");
-  const [pricedetail, setPricedetail] = useState(""); 
+  const [pricedetail, setPricedetail] = useState("");
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
@@ -120,7 +120,7 @@ const FlatAppartment = () => {
         balcony: balconey,
       },
       ownership,
-      price: +pricedetail, 
+      price: +pricedetail,
       inclusivePrices,
       amenities,
       propertyFeatures,
@@ -151,9 +151,9 @@ const FlatAppartment = () => {
         expectedRental: expectedRentel,
         bookingAmount,
         annualDuesPayable: annualDuesPayble,
-        membershipCharge: membershipCharge
-      }, 
-    }; 
+        membershipCharge: membershipCharge,
+      },
+    };
 
     const showToastError = (message) => {
       toast({
@@ -207,7 +207,7 @@ const FlatAppartment = () => {
     if (
       city &&
       appartment &&
-      locality && 
+      locality &&
       bedroom &&
       bathroom &&
       balconey &&
@@ -218,7 +218,7 @@ const FlatAppartment = () => {
       additinalft &&
       watersource &&
       overLook &&
-      availability && 
+      availability &&
       powerbackup &&
       propertyFacing &&
       flooring &&
@@ -291,6 +291,7 @@ const FlatAppartment = () => {
               submitImage(e.data.id);
             } else {
               setIsClicked(false);
+              setClickCount((prev) => prev - 12);
               // navigate("/listing");
             }
           })
@@ -353,7 +354,7 @@ const FlatAppartment = () => {
       });
     } catch (error) {
       console.log(error);
-      setIsClicked(false); 
+      setIsClicked(false);
     }
     setIsClicked(false);
   };
@@ -549,7 +550,7 @@ const FlatAppartment = () => {
     }
     console.log(newarr);
     setWaterSource(newarr);
-  }; 
+  };
 
   // select image and save image
 
@@ -646,12 +647,12 @@ const FlatAppartment = () => {
     <form onSubmit={handleSubmitData}>
       {/* property location */}
       <Box className={style.location_form}>
-        <Heading size={"lg"}>Where is your Flat / Apartment located?</Heading>
+        <Heading size={"lg"}>Where is your Flat / Apartment located? </Heading>
         <Heading size={"sm"}>Location Detail</Heading>
 
-        <Input   
-          type="text" 
-          padding={"0 10px"} 
+        <Input
+          type="text"
+          padding={"0 10px"}
           placeholder="House No. (optional)"
           value={houseNo}
           maxLength={"100"}
@@ -736,7 +737,7 @@ const FlatAppartment = () => {
         />
       </Box>
       {/* Property Detail */}
-      <Box marginTop={{base:10,md:3}}>
+      <Box marginTop={{ base: 10, md: 3 }}>
         <Heading as={"h4"} size={"sm"} textAlign={"left"}>
           Add Room Details
         </Heading>
@@ -836,7 +837,7 @@ const FlatAppartment = () => {
         </Box>
         {/* other Room  */}
         <Box display={"grid"} className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"} marginTop={{base:5,md:3}}>
+          <Heading as={"h3"} size={"sm"} marginTop={{ base: 5, md: 3 }}>
             Other rooms (optional)
           </Heading>
           <Box>
@@ -881,7 +882,7 @@ const FlatAppartment = () => {
 
         {/*  ================== furnishing detail =================  */}
         <Box display={"grid"} gap={2} className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"} marginTop={{base:5,md:3}} >
+          <Heading as={"h3"} size={"sm"} marginTop={{ base: 5, md: 3 }}>
             Furnishing (optional)
           </Heading>
           <Box>
@@ -1199,7 +1200,7 @@ const FlatAppartment = () => {
 
         {/* reserved */}
         <Box className={style.optional_box} gap={3}>
-          <Heading as={"h3"} size={"sm"} marginTop={{base:5,md:3}}>
+          <Heading as={"h3"} size={"sm"} marginTop={{ base: 5, md: 3 }}>
             Reserved Parking (optional)
           </Heading>
           <div className={style.parking}>
@@ -1253,8 +1254,13 @@ const FlatAppartment = () => {
         </Box>
 
         {/* floor details */}
-        <Box textAlign={"left"} display={"grid"} marginTop={{base:10,md:5}} gap={2}>
-          <Heading as={"h3"} size={"sm"} textAlign={"left"}>   
+        <Box
+          textAlign={"left"}
+          display={"grid"}
+          marginTop={{ base: 10, md: 5 }}
+          gap={2}
+        >
+          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Floor Details
           </Heading>
           <Box display={"flex"} alignItems={"center"} gap={5}>
@@ -1305,7 +1311,12 @@ const FlatAppartment = () => {
           display={"grid"}
           gap={2}
         >
-          <Heading as={"h3"} size={"sm"} textAlign={"left"} marginTop={{base:5,md:3}}>
+          <Heading
+            as={"h3"}
+            size={"sm"}
+            textAlign={"left"}
+            marginTop={{ base: 5, md: 3 }}
+          >
             Availability Status
           </Heading>
           <Box className={style.grid}>
@@ -1425,7 +1436,12 @@ const FlatAppartment = () => {
         {/* pricing and details */}
         <Box>
           {/* OwnerShip detail */}
-          <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
+          <Heading
+            as={"h3"}
+            size={"sm"}
+            marginTop={{ base: 10, md: 5 }}
+            textAlign={"left"}
+          >
             Ownership
           </Heading>
           <Box className={style.grid} gap={2}>
@@ -1481,7 +1497,12 @@ const FlatAppartment = () => {
         </Box>
         {/* Price Details */}
         <Box>
-          <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
+          <Heading
+            as={"h3"}
+            size={"sm"}
+            marginTop={{ base: 10, md: 5 }}
+            textAlign={"left"}
+          >
             Price Details
           </Heading>
           <Box display={"flex"} alignItems={"center"} gap={5}>
@@ -1507,54 +1528,53 @@ const FlatAppartment = () => {
               />
             </InputGroup>
           </Box>
-        </Box>
-
-        {/* ============================== inclusive charges (checkbox) ==============================  */}
-        <Box
-          display={"flex"}
-          gap={{ base: 2, md: 10 }}
-          marginTop={3}
-          flexWrap={"wrap"}
-        >
-          <Checkbox
-            isChecked={inclusivePrices.includes("All inclusive price")}
-            onChange={(e) => {
-              e.preventDefault();
-              handleinclusiveandtax(e.target.value);
-            }}
-            value={"All inclusive price"}
+          {/* ============================== inclusive charges (checkbox) ==============================  */}
+          <Box
+            display={"flex"}
+            gap={{ base: 2, md: 10 }}
+            marginTop={3}
+            flexWrap={"wrap"}
           >
-            All inclusive price
-          </Checkbox>
-          <Checkbox
-            isChecked={inclusivePrices.includes(
-              "Tax and Govt. charges excluded"
-            )}
-            onChange={(e) => {
-              e.preventDefault();
-              handleinclusiveandtax(e.target.value);
-            }}
-            value={"Tax and Govt. charges excluded"}
-          >
-            Tax and Govt. charges excluded
-          </Checkbox>
-          <Checkbox
-            isChecked={inclusivePrices.includes("Price Negotiable")}
-            onChange={(e) => {
-              e.preventDefault();
-              handleinclusiveandtax(e.target.value);
-            }}
-            value={"Price Negotiable"}
-          >
-            Price Negotiable
-          </Checkbox>
+            <Checkbox
+              isChecked={inclusivePrices.includes("All inclusive price")}
+              onChange={(e) => {
+                e.preventDefault();
+                handleinclusiveandtax(e.target.value);
+              }}
+              value={"All inclusive price"}
+            >
+              All inclusive price
+            </Checkbox>
+            <Checkbox
+              isChecked={inclusivePrices.includes(
+                "Tax and Govt. charges excluded"
+              )}
+              onChange={(e) => {
+                e.preventDefault();
+                handleinclusiveandtax(e.target.value);
+              }}
+              value={"Tax and Govt. charges excluded"}
+            >
+              Tax and Govt. charges excluded
+            </Checkbox>
+            <Checkbox
+              isChecked={inclusivePrices.includes("Price Negotiable")}
+              onChange={(e) => {
+                e.preventDefault();
+                handleinclusiveandtax(e.target.value);
+              }}
+              value={"Price Negotiable"}
+            >
+              Price Negotiable
+            </Checkbox>
+          </Box>
         </Box>
 
         {/* Additional Pricing Detail (Optional) */}
         <Heading
           as={"h4"}
-          size={"sm"} 
-          marginTop={{base:5,md:8}} 
+          size={"sm"}
+          marginTop={{ base: 5, md: 8 }}
           fontWeight={700}
           textAlign={"left"}
         >
@@ -1564,9 +1584,7 @@ const FlatAppartment = () => {
           <Input
             w={"60%"}
             type="text"
-            onChange={(e) =>
-              setMaintenancePrice(NumericString(e.target.value))
-            }
+            onChange={(e) => setMaintenancePrice(NumericString(e.target.value))}
             value={maintenancePrice}
             placeholder={"Maintenance Price"}
           />
@@ -1579,7 +1597,8 @@ const FlatAppartment = () => {
             <option value="Monthly">Monthly</option>
             <option value="Yearly">Yearly</option>
           </Select>
-        </InputGroup> 
+        </InputGroup>
+
         <Box display={"grid"} marginTop={"6px"}>
           {additionalPrice && (
             <>
@@ -1643,24 +1662,28 @@ const FlatAppartment = () => {
             Add more pricing details
           </Heading>
         </Box>
-
       </Box>
-        <Box>
-          <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
-            Add Description and Unique Features of your Property
-          </Heading> 
-          <Textarea
-            height={140}
-            required
-            placeholder="Add Description"
-            value={desc}
-            onChange={(e) => {
-              let my_cleantext = CleanInputText(e.target.value);
-              setDesc(my_cleantext);
-            }}
-          ></Textarea>
-        </Box>
- 
+      <Box>
+        <Heading
+          as={"h3"}
+          size={"sm"}
+          marginTop={{ base: 10, md: 5 }}
+          textAlign={"left"}
+        >
+          Add Description and Unique Features of your Property
+        </Heading>
+        <Textarea
+          height={140}
+          required
+          placeholder="Add Description"
+          value={desc}
+          onChange={(e) => {
+            let my_cleantext = CleanInputText(e.target.value);
+            setDesc(my_cleantext);
+          }}
+        ></Textarea>
+      </Box>
+
       {/* image Drag and Drop area  */}
       <Box>
         <Box className={style.top}>
@@ -1668,9 +1691,9 @@ const FlatAppartment = () => {
             color={"black"}
             size={"sm"}
             textAlign={"left"}
-            marginTop={{base:10,md:5}}
-          > 
-            Upload Your Property image 
+            marginTop={{ base: 10, md: 5 }}
+          >
+            Upload Your Property image
           </Heading>
         </Box>
         <Box className={style.card}>
@@ -1729,24 +1752,29 @@ const FlatAppartment = () => {
 
       {/* Add amenities/unique features */}
       <Box>
-        <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
-          Add amenities/unique features
-        </Heading>
         <Heading
-          as={"h5"}
-          size={"xs"}
-          fontWeight={400} 
+          as={"h3"}
+          size={"sm"}
+          marginTop={{ base: 10, md: 5 }}
           textAlign={"left"}
         >
+          Add amenities/unique features
+        </Heading>
+        <Heading as={"h5"} size={"xs"} fontWeight={400} textAlign={"left"}>
           All fields on this page are optional
         </Heading>
       </Box>
       {/* Amenities */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
+        <Heading
+          as={"h3"}
+          size={"sm"}
+          marginTop={{ base: 10, md: 5 }}
+          textAlign={"left"}
+        >
           Amenities
         </Heading>
-        <Box>
+        <Box className={style.paddingbtn}>
           <button
             className={
               amenities.includes("Maintenance Staff") ? style.setbtn : style.btn
@@ -1824,7 +1852,12 @@ const FlatAppartment = () => {
       </Box>
       {/* Property Features */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"sm"} marginTop={{base:5,md:3}} textAlign={"left"}>
+        <Heading
+          as={"h3"}
+          size={"sm"}
+          marginTop={{ base: 5, md: 3 }}
+          textAlign={"left"}
+        >
           Property Features
         </Heading>
         <Box>
@@ -1951,7 +1984,12 @@ const FlatAppartment = () => {
       </Box>
       {/* Society/Building feature */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"sm"} marginTop={{base:5,md:3}} textAlign={"left"}>
+        <Heading
+          as={"h3"}
+          size={"sm"}
+          marginTop={{ base: 5, md: 3 }}
+          textAlign={"left"}
+        >
           Society/Building feature
         </Heading>
         <Box>
@@ -1998,7 +2036,7 @@ const FlatAppartment = () => {
             value={"Fitness Centre / GYM"}
           >
             Fitness Centre / GYM
-          </button>  
+          </button>
           <button
             className={
               buildingFeature.includes("Club house / Community Center")
@@ -2025,7 +2063,12 @@ const FlatAppartment = () => {
       </Box>
       {/* Additional Features */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"sm"} marginTop={{base:5,md:3}} textAlign={"left"}>
+        <Heading
+          as={"h3"}
+          size={"sm"}
+          marginTop={{ base: 5, md: 3 }}
+          textAlign={"left"}
+        >
           Additional Features
         </Heading>
         <Box>
@@ -2097,7 +2140,12 @@ const FlatAppartment = () => {
       </Box>
       {/* Water Source */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"sm"} marginTop={{base:5,md:3}} textAlign={"left"}>
+        <Heading
+          as={"h3"}
+          size={"sm"}
+          marginTop={{ base: 5, md: 3 }}
+          textAlign={"left"}
+        >
           Water Source
         </Heading>
         <Box>
@@ -2143,7 +2191,12 @@ const FlatAppartment = () => {
       </Box>
       {/* Overlooking */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"sm"} marginTop={{base:5,md:3}} textAlign={"left"}>
+        <Heading
+          as={"h3"}
+          size={"sm"}
+          marginTop={{ base: 5, md: 3 }}
+          textAlign={"left"}
+        >
           Overlooking
         </Heading>
         <Box>
@@ -2190,7 +2243,12 @@ const FlatAppartment = () => {
       </Box>
       {/* Other Features */}
       <Box>
-        <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
+        <Heading
+          as={"h3"}
+          size={"sm"}
+          marginTop={{ base: 10, md: 5 }}
+          textAlign={"left"}
+        >
           Other Features
         </Heading>
         <Box display={"grid"} textAlign={"left"} gap={2}>
@@ -2230,7 +2288,12 @@ const FlatAppartment = () => {
       </Box>
       {/* Power Back up */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"sm"} marginTop={{base:5,md:3}} textAlign={"left"}>
+        <Heading
+          as={"h3"}
+          size={"sm"}
+          marginTop={{ base: 5, md: 3 }}
+          textAlign={"left"}
+        >
           Power Back up
         </Heading>
         <Box>
@@ -2268,7 +2331,12 @@ const FlatAppartment = () => {
       </Box>
       {/* Property facing */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"sm"} marginTop={{base:5,md:3}} textAlign={"left"}>
+        <Heading
+          as={"h3"}
+          size={"sm"}
+          marginTop={{ base: 5, md: 3 }}
+          textAlign={"left"}
+        >
           Property facing
         </Heading>
         <Box>
@@ -2364,7 +2432,12 @@ const FlatAppartment = () => {
       </Box>
       {/* Type of flooring */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"sm"} marginTop={{base:5,md:3}} textAlign={"left"}>
+        <Heading
+          as={"h3"}
+          size={"sm"}
+          marginTop={{ base: 5, md: 3 }}
+          textAlign={"left"}
+        >
           Type of flooring
         </Heading>
         <Box>
@@ -2392,15 +2465,20 @@ const FlatAppartment = () => {
       </Box>
       {/* Width of facing road */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"sm"} marginTop={{base:5,md:3}} textAlign={"left"}>
+        <Heading
+          as={"h3"}
+          size={"sm"}
+          marginTop={{ base: 5, md: 3 }}
+          textAlign={"left"}
+        >
           Width of facing road
         </Heading>
-        <Box display={"flex"} gap={"20px"} w={{base:"100%",md:"340px"}}> 
+        <InputGroup w={{ base: "100%", md: "340px" }}>
           <Input
             type="text"
-            variant="flushed"
+            variant={"outline"}
             maxLength={4}
-            flex={1} 
+            flex={1}
             placeholder="Enter Facing Width"
             required
             value={facingwidth}
@@ -2410,17 +2488,18 @@ const FlatAppartment = () => {
             }}
           />
           <Select
-            flex={1}  
+            flex={1}
+            borderRadius={0}
             onChange={(e) => setFacing(e.target.value)}
             value={facing}
           >
             <option value="Meter"> Meter </option>
             <option value="Feet"> Feet </option>
           </Select>
-        </Box>
+        </InputGroup>
       </Box>
       <Box className={style.optional_box}>
-        <Heading size={"sm"} marginTop={{base:5,md:3}} textAlign={"left"}>
+        <Heading size={"sm"} marginTop={{ base: 5, md: 3 }} textAlign={"left"}>
           Location Advantages
           <Heading
             size={"xs"}
@@ -2471,7 +2550,7 @@ const FlatAppartment = () => {
             onClick={handlelocationadvantages}
           >
             Close to Market
-          </button> 
+          </button>
           <button
             className={
               locationAdv.includes("Close to Mall") ? style.setbtn : style.btn
@@ -2480,7 +2559,7 @@ const FlatAppartment = () => {
             onClick={handlelocationadvantages}
           >
             Close to Mall
-          </button> 
+          </button>
           <button
             className={
               locationAdv.includes("Close to Railway Station")
@@ -2503,7 +2582,7 @@ const FlatAppartment = () => {
           >
             Close to Airport
           </button>
-         
+
           <button
             className={
               locationAdv.includes("Close to highway")

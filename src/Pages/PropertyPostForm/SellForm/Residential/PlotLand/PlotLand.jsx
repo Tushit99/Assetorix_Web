@@ -482,13 +482,12 @@ const PlotLand = () => {
         <form onSubmit={handleSubmitData}>
             {/* property location */}
             <Box className={style.location_form}>
-                <Heading size={"lg"}>Where is your property located?</Heading>
+                <Heading size={"lg"}>Where is your Plot / Land located?</Heading>
                 <Heading size={"sm"}>Location Detail</Heading>  
 
                 <Input
                     type="text"
-                    padding={"0 10px"}
-                    required
+                    padding={"0 10px"} 
                     maxLength={"100"}
                     placeholder="Plot No. (optional)"
                     value={houseNo}
@@ -574,24 +573,26 @@ const PlotLand = () => {
             </Box>
             {/* Property Detail */}
             <Box marginTop={12}>
-                <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"}>
+                <Heading as={"h3"} size={"sm"} margin={"30px 0 10px 0"}>
                     Tell us about your Plot
                 </Heading>
                 {/* ====================================== */}
                 {/* add area details */}
                 <Box textAlign={"left"} padding={"10px 0"}>
-                    <Heading as={"h3"} margin={"5px 0"} size={"md"}>
+                    <Heading as={"h3"} margin={"5px 0"} size={"sm"}>
                         Add Area Details
                     </Heading>
                     <ButtonGroup
                         className={style.select_land}
                         size="sm"
-                        isAttached
+                        minW={{base:"100%",md:"300px"}}
+                        isAttached 
                         variant="outline"
                     >
                         <Input
                             type="text"
                             maxLength={"10"}
+                            borderRadius={0} 
                             placeholder={'Enter area detail'}
                             value={plotArea}
                             onChange={(e) => {
@@ -599,7 +600,7 @@ const PlotLand = () => {
                             }}
                             required
                         />
-                        <select value={areaPer} onChange={(e) => {
+                        <Select value={areaPer} borderRadius={0} variant={"outline"} onChange={(e) => {
                             setAreaPer(e.target.value);
                         }} className={style.select} required>
                             <option value="sq.ft">sq.ft</option>
@@ -620,29 +621,29 @@ const PlotLand = () => {
                             <option value="rood">rood</option>
                             <option value="chataks">chataks</option>
                             <option value="perch">perch</option>
-                        </select>
+                        </Select>
                     </ButtonGroup>
                 </Box>
                 {/* Property Dimensions */}
-                <Box as={"div"} textAlign={"left"} padding={"10px 0"} >
-                    <Heading as={"h3"} size={"md"} > Property Dimensions (Optional) </Heading>
-                    <Input type={"text"} variant='flushed' maxLength={"12"} padding={"0 6px"} margin={"4px 0"} value={plotLength} onChange={(e) => {
+                <Box as={"div"} textAlign={"left"} padding={"10px 0"} display={"grid"} >
+                    <Heading as={"h3"} size={"sm"} > Property Dimensions (Optional) </Heading>
+                    <Input type={"text"} width={"300px"} variant='flushed' maxLength={"8"}  margin={"4px 0"} value={plotLength} onChange={(e) => {
                         setplotLength(NumericString(e.target.value));
                     }} placeholder={`Length of plot (in ${areaPer})`} />
-                    <Input type={"text"} variant='flushed' padding={"0 6px"} maxLength={"12"} margin={"4px 0"} value={plotBreadth} onChange={(e) => {
+                    <Input type={"text"} width={"300px"} variant='flushed'  maxLength={"8"} margin={"4px 0"} value={plotBreadth} onChange={(e) => {
                         setPlotBreadth(NumericString(e.target.value));
                     }} placeholder={`Breadth of plot (in ${areaPer})`} />
                 </Box>
                 {/* Floors Allowed For Construction */}
                 <Box textAlign={"left"} padding={"10px 0"}>
-                    <Heading as={"h3"} size={"md"} > Floors Allowed For Construction </Heading>
-                    <Input type={"text"} size={"sm"} fontSize={"md"} variant={"outline"} maxW={"300px"} padding={"0 6px"} maxLength={"2"} margin={"4px 0"} value={totalFloorAllowed} onChange={(e) => {
+                    <Heading as={"h3"} size={"sm"} > Floors Allowed For Construction </Heading>
+                    <Input type={"text"} fontSize={"md"} variant={"outline"} maxW={"300px"} maxLength={"2"} margin={"4px 0"} value={totalFloorAllowed} onChange={(e) => {
                         setTotalFloorAllowed(NumericString(e.target.value));
                     }} placeholder='No. of floors' />
                 </Box>
                 {/* is there a boundary wall around the property */}
                 <Box textAlign={"left"} className={style.optional_box} >
-                    <Heading as={"h3"} size={"md"} > Is there a boundary wall around the property? </Heading>
+                    <Heading as={"h3"} size={"sm"} > Is there a boundary wall around the property? </Heading>
                     <Box textAlign={"left"} padding={"10px 0 0 0"}>
                         <button onClick={handleBoundaryWalls} value={"Yes"} className={boundaryWall.includes("Yes") ? style.setbtn : style.btn} >Yes</button>
                         <button onClick={handleBoundaryWalls} value={"No"} className={boundaryWall.includes("No") ? style.setbtn : style.btn} >No</button>
@@ -650,7 +651,7 @@ const PlotLand = () => {
                 </Box>
                 {/* No of open sides */}
                 <Box textAlign={"left"} className={style.optional_box}>
-                    <Heading as={"h3"} size={"md"} > No. of open sides </Heading>
+                    <Heading as={"h3"} size={"sm"} > No. of open sides </Heading>
                     <Box textAlign={"left"} padding={"10px 0 0 0"}>
                         <button value={"1"} onClick={handleOpenSide} className={openSides.includes("1") ? style.setbtn : style.btn} >1</button>
                         <button value={"2"} onClick={handleOpenSide} className={openSides.includes("2") ? style.setbtn : style.btn} >2</button>
@@ -660,7 +661,7 @@ const PlotLand = () => {
                 </Box>
                 {/* Construction Property */}
                 <Box textAlign={"left"} className={style.optional_box}>
-                    <Heading as={"h3"} size={"md"} > Any construction done on this property? </Heading>
+                    <Heading as={"h3"} size={"sm"} > Any construction done on this property? </Heading>
                     <Box textAlign={"left"} padding={"10px 0 0 0"}>
                         <button onClick={handleConstructionOnProperty} value={"Yes"} className={ConstructionOnProperty.includes("Yes") ? style.setbtn : style.btn} >Yes</button>
                         <button onClick={handleConstructionOnProperty} value={"No"} className={ConstructionOnProperty.includes("No") ? style.setbtn : style.btn} >No</button>
@@ -668,7 +669,7 @@ const PlotLand = () => {
                 </Box>
                 {/* === Type of construction been done === */}
                 <Box className={style.optional_box} display={ConstructionOnProperty == "Yes" ? "grid" : "none"}>
-                    <Heading as={"h3"} size={"md"} > What type of construction has been done? </Heading>
+                    <Heading as={"h3"} size={"sm"} > What type of construction has been done? </Heading>
                     <Box>
                         <button value={"Shed"} onClick={handleConstructionType} className={constructionType.includes("Shed") ? style.setbtn : style.btn} > Shed </button>
                         <button value={"Room(s)"} onClick={handleConstructionType} className={constructionType.includes("Room(s)") ? style.setbtn : style.btn} > Room(s) </button>
@@ -700,7 +701,7 @@ const PlotLand = () => {
                         margin={"30px 0 10px 0"}
                         textAlign={"left"}
                     >
-                        Add pricing and details...
+                        Add pricing and details
                     </Heading>
                     {/* OwnerShip detail */}
                     <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
@@ -761,7 +762,7 @@ const PlotLand = () => {
                 <Box>
                     <Heading
                         as={"h3"}
-                        size={"md"}
+                        size={"sm"} 
                         margin={"30px 0 10px 0"}
                         textAlign={"left"}
                     >
@@ -833,7 +834,7 @@ const PlotLand = () => {
                     </Box>
                 </Box>
                 {/* inclusive Prices */}
-                <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
+                <Box display={"flex"} gap={{ base: 2, md: 10 }} margin={"20px 0"} flexWrap={"wrap"}>
                     <Checkbox
                         isChecked={inclusivePrices.includes("All inclusive price")}
                         onChange={(e) => {
@@ -900,7 +901,7 @@ const PlotLand = () => {
                 </Box>
                 {/* what makes property unique */}
                 <Box>
-                    <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                    <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                         Add Description and Unique Features of your Property
                     </Heading> 
                     <Textarea height={140} value={desc} onChange={(e) => {
@@ -942,7 +943,7 @@ const PlotLand = () => {
             </Box>
             {/* Add amenities/unique features */}
             <Box>
-                <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                     Add amenities/unique features
                 </Heading>
                 <Heading as={"h5"} size={"xs"} fontWeight={400} margin={"10px 0"} textAlign={"left"}>
@@ -951,7 +952,7 @@ const PlotLand = () => {
             </Box>
             {/* Amenities */}
             <Box className={style.optional_box}>
-                <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                     Amenities
                 </Heading>
                 <Box>
@@ -997,7 +998,7 @@ const PlotLand = () => {
             </Box>
             {/* Overlooking */}
             <Box className={style.optional_box}>
-                <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                     Overlooking
                 </Heading>
                 <Box>
@@ -1049,7 +1050,7 @@ const PlotLand = () => {
             </Box>
             {/* Other Features */}
             <Box>
-                <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                     Other Features
                 </Heading>
                 <Box display={"grid"} textAlign={"left"} gap={2}>
@@ -1075,7 +1076,7 @@ const PlotLand = () => {
             </Box>
             {/* Property facing */}
             <Box className={style.optional_box}>
-                <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                     Property facing
                 </Heading>
                 <Box>
@@ -1178,23 +1179,23 @@ const PlotLand = () => {
             </Box>
             {/* facing road */}
             <Box className={style.optional_box}>
-                <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                     Width of facing road
                 </Heading>
-                <Box display={"flex"} gap={"20px"} w={"300px"} >
-                    <Input type="text" maxLength={4} variant='flushed' flex={1} required value={facingwidth} onChange={(e) => {
+                <InputGroup w={{base:"100%",md:"340px"}} >
+                    <Input type="text" maxLength={4} placeholder="Enter Facing Width" variant={"outline"} flex={1} required value={facingwidth} onChange={(e) => {
                         e.preventDefault();
                         setFacingWidth(NumericString(e.target.value));
                     }} />
-                    <Select flex={1} onChange={(e) => setFacing(e.target.value)} value={facing}>
+                    <Select flex={1} borderRadius={0} onChange={(e) => setFacing(e.target.value)} value={facing}>
                         <option value="Meter"> Meter </option>
                         <option value="Feet"> Feet </option>
                     </Select>
-                </Box>
+                </InputGroup>
             </Box>
             {/* Location Advantages */}
             <Box className={style.optional_box}>
-                <Heading size={"md"} margin={"10px 0 4px 0"} textAlign={"left"}>
+                <Heading size={"sm"} margin={"10px 0 4px 0"} textAlign={"left"}>
                     Location Advantages
                     <Heading
                         size={"xs"}

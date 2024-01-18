@@ -43,7 +43,7 @@ import { changeLookingFor } from "../../../Redux/globalval/action";
 import backimg from "./Screenshot 10-12-2023 09.38.37.png"
 import { Blurhash } from "react-blurhash";
 import axios from "axios";
-import SearchShow from "./SearchShow";
+import SearchShow from "./SearchShow"; 
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io"; 
 import WithStyles from "./Query/WithStyles";

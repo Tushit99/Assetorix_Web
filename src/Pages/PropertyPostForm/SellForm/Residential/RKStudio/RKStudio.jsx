@@ -628,7 +628,7 @@ const RKStudio = () => {
     <form onSubmit={handleSubmitData}>
       {/* property location */}
       <Box className={style.location_form}>
-        <Heading size={"lg"}>Where is your property located?</Heading>
+        <Heading size={"lg"}>Where is your 1 RK Studio located?</Heading>
         <Heading size={"sm"}>Location Detail</Heading>  
 
         <Input
@@ -1524,7 +1524,7 @@ const RKStudio = () => {
             </Box>
           </Box>
         </Box>
-        <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
+        <Box display={"flex"} gap={{ base: 2, md: 10 }} margin={"20px 0"} flexWrap={"wrap"}>
           <Checkbox
             isChecked={inclusivePrices.includes("All inclusive price")}
             onChange={(e) => {
@@ -2391,12 +2391,13 @@ const RKStudio = () => {
         <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
           Width of facing road
         </Heading>
-        <Box display={"flex"} gap={"20px"} w={"300px"}>
+        <InputGroup w={{base:"100%",md:"340px"}}>
           <Input
             type="text"
-            variant="flushed"
+            variant={"outline"}
             maxLength={5}
             flex={1}
+            placeholder="Enter Facing Width" 
             required
             value={facingwidth}
             onChange={(e) => {
@@ -2406,13 +2407,14 @@ const RKStudio = () => {
           />
           <Select
             flex={1}
+            borderRadius={0} 
             onChange={(e) => setFacing(e.target.value)}
             value={facing}
           >
             <option value="Meter"> Meter </option>
             <option value="Feet"> Feet </option>
           </Select>
-        </Box>
+        </InputGroup>
       </Box>
       <Box className={style.optional_box}>
         <Heading size={"md"} margin={"10px 0 4px 0"} textAlign={"left"}>

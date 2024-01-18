@@ -7,7 +7,7 @@ export const CleanInputText = (e) => {
 export const NumericString = (e) => {
   let val = e;
   let clear = val.replace(/[^0-9]/g, "");
-  return clear;
+  return clear; 
 };
 
 export const Emailhandle = (e) => {

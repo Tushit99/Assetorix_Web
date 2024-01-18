@@ -632,7 +632,7 @@ const ServicedApartment = () => {
         <form onSubmit={handleSubmitData}>
             {/* property location */}
             <Box className={style.location_form}>
-                <Heading size={"lg"}>Where is your property located?</Heading>
+                <Heading size={"lg"}>Where is your Serviced Apartment located?</Heading>
                 <Heading size={"sm"}>Location Detail</Heading>   
 
                 <Input
@@ -768,8 +768,8 @@ const ServicedApartment = () => {
                 {/* ====================================== */}
                 {/* add area details */}
                 <Box textAlign={"left"} padding={"10px 0"}>
-                    <Heading as={"h3"} margin={"5px 0"} size={"md"}>
-                        Add Area Details
+                    <Heading as={"h3"} marginTop={{base:10,md:5}} size={"md"}>
+                        Add Area Details 
                     </Heading>
                     <Text margin={"5px 0"}> Atleast one area type is mandatory </Text>
                     <ButtonGroup
@@ -1511,7 +1511,7 @@ const ServicedApartment = () => {
                         </Box>
                     </Box>
                 </Box>
-                <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
+                <Box display={"flex"} gap={{ base: 2, md: 10 }} margin={"20px 0"} flexWrap={"wrap"}>
                     <Checkbox
                         isChecked={inclusivePrices.includes("All inclusive price")}
                         onChange={(e) => {
@@ -2304,8 +2304,8 @@ const ServicedApartment = () => {
                 <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
                     Width of facing road
                 </Heading>
-                <Box display={"flex"} gap={"20px"} w={"300px"} >
-                    <Input type="text" variant='flushed' maxLength={5} flex={1} required value={facingwidth} onChange={(e) => {
+                <InputGroup w={{base:"100%",md:"340px"}} >
+                    <Input type="text" variant={"outline"} placeholder="Enter Facing Width" maxLength={5} flex={1} required value={facingwidth} onChange={(e) => {
                         e.preventDefault();
                         setFacingWidth(NumericString(e.target.value));
                     }} />
@@ -2313,7 +2313,7 @@ const ServicedApartment = () => {
                         <option value="Meter"> Meter </option>
                         <option value="Feet"> Feet </option>
                     </Select>
-                </Box>
+                </InputGroup>
             </Box>
             <Box className={style.optional_box}>
                 <Heading size={"md"} margin={"10px 0 4px 0"} textAlign={"left"}>
