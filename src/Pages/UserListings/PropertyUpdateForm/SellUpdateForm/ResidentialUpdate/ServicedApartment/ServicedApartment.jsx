@@ -271,7 +271,7 @@ const ServicedApartmentUpdate = () => {
         // let data = await response.json();
         // console.log("data",data);
         await axios
-          .patch(`${process.env.REACT_APP_URL}/property/`, obj, {
+          .patch(`${process.env.REACT_APP_URL}/property/${productID}`, obj, {
             headers: head,
           })
           .then((e) => {
@@ -1605,6 +1605,7 @@ const ServicedApartmentUpdate = () => {
               <InputGroup w={300} gap={2}>
                 <Select
                   w={"-moz-fit-content"}
+                  borderRadius={0} 
                   value={currency}
                   onChange={(e) => setCurrency(e.target.value)}
                 >
@@ -1615,6 +1616,7 @@ const ServicedApartmentUpdate = () => {
                   type="text"
                   value={pricedetail}
                   maxLength={"10"}
+                  borderRadius={0}
                   placeholder={`Price`}
                   required
                   w={200}

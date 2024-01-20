@@ -18,10 +18,10 @@ import { Checkbox } from "@chakra-ui/react";
 import style from "../Residential.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { CleanInputText, NumericString } from "../../../code";
+import { CleanInputText, NumericString, WordandNumber } from "../../../code";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useNavigate, useParams } from "react-router-dom";
-import LoadingBox from "../../../Loadingbox";
+import Loading from "../../../Loadingbox";
 import Extraimg from "../../Extraimg/Extraimg";
 
 const PlotLandUpdate = () => {
@@ -80,6 +80,7 @@ const PlotLandUpdate = () => {
       .get(`${process.env.REACT_APP_URL}/property/single/${productID}`)
       .then((detail) => {
         let e = detail.data.data;
+        console.log(e);
         setCountry(e?.address?.country);
         setFacingWidth(e?.roadFacingWidth);
         setCity(e?.address?.city);
@@ -104,12 +105,15 @@ const PlotLandUpdate = () => {
         setAdditionalPrice(
           Object.keys(e?.additionalPricingDetails).length == 0 ? false : true
         );
-        setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice);
+        setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice || 0);
         setMaintenanceTimePeriod(
           e?.additionalPricingDetails?.maintenanceTimePeriod
         );
-        setBookingAmount(e?.additionalPricingDetails?.bookingAmount);
-        setAnnualDuesPayable(e?.additionalPricingDetails?.annualDuesPayable);
+        setExpectedRental(e?.additionalPricingDetails?.expectedRental || 0);
+        setBookingAmount(e?.additionalPricingDetails?.bookingAmount || 0);
+        setAnnualDuesPayable(
+          e?.additionalPricingDetails?.annualDuesPayable || 0
+        );
         setplotLength(e?.plotLength);
         setPlotBreadth(e?.plotBreadth);
         setTotalFloorAllowed(e?.totalFloorsAllowed);
@@ -252,7 +256,7 @@ const PlotLandUpdate = () => {
         // let data = await response.json();
         // console.log(obj);
         await axios
-          .patch(`${process.env.REACT_APP_URL}/property/`, obj, {
+          .patch(`${process.env.REACT_APP_URL}/property/${productID}`, obj, {
             headers: head,
           })
           .then((e) => {
@@ -276,6 +280,7 @@ const PlotLandUpdate = () => {
           status: "error",
           duration: 2000,
         });
+        // console.log()
         setClickCount((prev) => prev - 12);
         setIsClicked(false);
       }
@@ -583,47 +588,56 @@ const PlotLandUpdate = () => {
       <form onSubmit={handleSubmitData}>
         {/* property location */}
         <Box className={style.location_form}>
-          <Heading size={"lg"}>Edit your Plot Land Detail</Heading>
+          <Heading size={"lg"}>Edit your Plot / Land Details </Heading>
           <Heading size={"sm"}>Location Detail</Heading>
 
           <Input
             type="text"
-            required
+            padding={"0 10px"}
+            maxLength={"100"}
             placeholder="Plot No. (optional)"
             value={houseNo}
-            onChange={(e) => setHouseNo(e.target.value)}
+            onChange={(e) => setHouseNo(WordandNumber(e.target.value))}
             fontSize={"md"}
             variant="flushed"
           />
           <Input
             type="text"
-            placeholder="Apartment / Society (optional)"
+            padding={"0 10px"}
+            maxLength={"100"}
+            placeholder="Apartment / Society Name"
             fontSize={"md"}
+            required
             value={appartment}
-            onChange={(e) => setApartment(e.target.value)}
+            onChange={(e) => setApartment(WordandNumber(e.target.value))}
             variant="flushed"
           />
           <Input
             type="text"
             placeholder={"Enter pincode"}
+            padding={"0 10px"}
+            maxLength={"6"}
+            variant="flushed"
             required
+            fontSize={"md"}
             value={pincode}
             onChange={handlepinfetch}
           />
           <Input
             type="text"
+            padding={"0 10px"}
             required
             placeholder="Enter Locality"
             list="browsers"
             value={locality}
-            onChange={(e) => setLocality(e.target.value)}
+            onChange={(e) => setLocality(WordandNumber(e.target.value))}
             fontSize={"md"}
             variant="flushed"
           />
           {pincollection.length ? (
             <datalist id="browsers">
-              {pincollection.map((e) => (
-                <option value={e.locality} />
+              {pincollection.map((e, i) => (
+                <option key={i} value={e.locality} />
               ))}
             </datalist>
           ) : (
@@ -632,63 +646,68 @@ const PlotLandUpdate = () => {
 
           <Input
             type="text"
+            padding={"0 10px"}
+            maxLength={"100"}
             required
             placeholder="Enter City"
             fontSize={"md"}
             value={city}
-            onChange={(e) => setCity(e.target.value)}
+            onChange={(e) => setCity(WordandNumber(e.target.value))}
             variant="flushed"
           />
           <Input
             type="text"
+            padding={"0 10px"}
             required
+            maxLength={"100"}
             placeholder="Enter State"
             value={state}
-            onChange={(e) => setState(e.target.value)}
+            onChange={(e) => setState(WordandNumber(e.target.value))}
             fontSize={"md"}
             variant="flushed"
           />
           <Input
             type="text"
+            padding={"0 10px"}
             required
+            maxLength={"100"}
             placeholder="Enter Country"
             value={country}
-            onChange={(e) => setCountry(e.target.value)}
+            onChange={(e) => setCountry(WordandNumber(e.target.value))}
             fontSize={"md"}
             variant="flushed"
           />
         </Box>
         {/* Property Detail */}
         <Box marginTop={12}>
-          <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"}>
-            Tell us about your Plot
-          </Heading>
           {/* ====================================== */}
           {/* add area details */}
           <Box textAlign={"left"} padding={"10px 0"}>
-            <Heading as={"h3"} margin={"5px 0"} size={"md"}>
+            <Heading as={"h3"} margin={"5px 0"} size={"sm"}>
               Add Area Details
             </Heading>
-            <Text margin={"5px 0"}> Atleast one area type is mandatory </Text>
             <ButtonGroup
               className={style.select_land}
               size="sm"
+              minW={{ base: "100%", md: "300px" }}
               isAttached
               variant="outline"
             >
-              <NumberInput>
-                <NumberInputField
-                  padding={"0 2px"}
-                  value={plotArea}
-                  onChange={(e) => {
-                    areaCalucation();
-                    setPlotArea(e.target.value);
-                  }}
-                  required
-                />
-              </NumberInput>
+              <Input
+                type="text"
+                maxLength={"10"}
+                borderRadius={0}
+                placeholder={"Enter area detail"}
+                value={plotArea}
+                onChange={(e) => {
+                  setPlotArea(NumericString(e.target.value));
+                }}
+                required
+              />
               <Select
                 value={areaPer}
+                borderRadius={0}
+                variant={"outline"}
                 onChange={(e) => {
                   setAreaPer(e.target.value);
                 }}
@@ -717,15 +736,21 @@ const PlotLandUpdate = () => {
             </ButtonGroup>
           </Box>
           {/* Property Dimensions */}
-          <Box as={"div"} textAlign={"left"} padding={"10px 0"}>
-            <Heading as={"h3"} size={"md"}>
+          <Box
+            as={"div"}
+            textAlign={"left"}
+            padding={"10px 0"}
+            display={"grid"}
+          >
+            <Heading as={"h3"} size={"sm"}>
               {" "}
               Property Dimensions (Optional){" "}
             </Heading>
             <Input
               type={"text"}
+              width={"300px"}
               variant="flushed"
-              padding={"0 6px"}
+              maxLength={"8"}
               margin={"4px 0"}
               value={plotLength}
               onChange={(e) => {
@@ -735,8 +760,9 @@ const PlotLandUpdate = () => {
             />
             <Input
               type={"text"}
+              width={"300px"}
               variant="flushed"
-              padding={"0 6px"}
+              maxLength={"8"}
               margin={"4px 0"}
               value={plotBreadth}
               onChange={(e) => {
@@ -747,15 +773,16 @@ const PlotLandUpdate = () => {
           </Box>
           {/* Floors Allowed For Construction */}
           <Box textAlign={"left"} padding={"10px 0"}>
-            <Heading as={"h3"} size={"md"}>
+            <Heading as={"h3"} size={"sm"}>
               {" "}
               Floors Allowed For Construction{" "}
             </Heading>
             <Input
               type={"text"}
-              variant="flushed"
+              fontSize={"md"}
+              variant={"outline"}
+              maxW={"300px"}
               maxLength={"2"}
-              padding={"0 6px"}
               margin={"4px 0"}
               value={totalFloorAllowed}
               onChange={(e) => {
@@ -766,9 +793,8 @@ const PlotLandUpdate = () => {
           </Box>
           {/* is there a boundary wall around the property */}
           <Box textAlign={"left"} className={style.optional_box}>
-            <Heading as={"h3"} size={"md"}>
-              {" "}
-              Is there a boundary wall around the property?{" "}
+            <Heading as={"h3"} size={"sm"} marginTop={5}>
+              Is there a boundary wall around the property?
             </Heading>
             <Box textAlign={"left"} padding={"10px 0 0 0"}>
               <button
@@ -793,8 +819,7 @@ const PlotLandUpdate = () => {
           </Box>
           {/* No of open sides */}
           <Box textAlign={"left"} className={style.optional_box}>
-            <Heading as={"h3"} size={"md"}>
-              {" "}
+            <Heading as={"h3"} marginTop={5} size={"sm"}>
               No. of open sides{" "}
             </Heading>
             <Box textAlign={"left"} padding={"10px 0 0 0"}>
@@ -831,8 +856,8 @@ const PlotLandUpdate = () => {
             </Box>
           </Box>
           {/* Construction Property */}
-          <Box textAlign={"left"} className={style.optional_box}>
-            <Heading as={"h3"} size={"md"}>
+          <Box textAlign={"left"} marginTop={5} className={style.optional_box}>
+            <Heading as={"h3"} size={"sm"}>
               {" "}
               Any construction done on this property?{" "}
             </Heading>
@@ -866,8 +891,7 @@ const PlotLandUpdate = () => {
             className={style.optional_box}
             display={ConstructionOnProperty == "Yes" ? "grid" : "none"}
           >
-            <Heading as={"h3"} size={"md"}>
-              {" "}
+            <Heading as={"h3"} size={"sm"} marginTop={5}>
               What type of construction has been done?{" "}
             </Heading>
             <Box>
@@ -919,38 +943,30 @@ const PlotLandUpdate = () => {
           </Box>
           {/* Possession By */}
           <Box>
-            <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+            <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
               Possession By
             </Heading>
             <Box>
               <Select
                 variant={"flushed"}
-                w={"400px"}
-                padding={"0 10px"}
+                width={{ base: "100%", md: "300px" }}
                 value={expectedByYear}
                 onChange={(e) => setExpectedByYear(e.target.value)}
               >
                 <option value="Immediate">Immediate</option>
                 <option value="Within 3 Months">Within 3 Months</option>
                 <option value="Within 6 Months">Within 6 Months</option>
-                {expectedBy.map((e) => (
-                  <option value={e}> {e} </option>
+                {expectedBy.map((e, i) => (
+                  <option key={i} value={e}>
+                    {e}
+                  </option>
                 ))}
               </Select>
             </Box>
           </Box>
-          {/* Add pricing and details */}
+          {/* OwnerShip detail */}
           <Box>
-            <Heading
-              as={"h3"}
-              size={"md"}
-              margin={"30px 0 10px 0"}
-              textAlign={"left"}
-            >
-              Add pricing and details...
-            </Heading>
-            {/* OwnerShip detail */}
-            <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+            <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
               Ownership
             </Heading>
             <Box className={style.grid} gap={4}>
@@ -966,17 +982,6 @@ const PlotLandUpdate = () => {
                 Freehold
               </button>
               <button
-                className={ownership == "Leasehold" ? style.setbtn : style.btn}
-                borderRadius={"100px"}
-                border={"1px solid rgba(113, 210, 255, 0.897)"}
-                margin={"8px 6px 0 0"}
-                onClick={handleownership}
-                value={"Leasehold"}
-                backgroundColor={"blue.50"}
-              >
-                Leasehold
-              </button>
-              <button
                 className={
                   ownership == "Co-operative society" ? style.setbtn : style.btn
                 }
@@ -988,6 +993,17 @@ const PlotLandUpdate = () => {
                 backgroundColor={"blue.50"}
               >
                 Co-operative society
+              </button>
+              <button
+                className={ownership == "Leasehold" ? style.setbtn : style.btn}
+                borderRadius={"100px"}
+                border={"1px solid rgba(113, 210, 255, 0.897)"}
+                margin={"8px 6px 0 0"}
+                onClick={handleownership}
+                value={"Leasehold"}
+                backgroundColor={"blue.50"}
+              >
+                Leasehold
               </button>
               <button
                 className={
@@ -1006,12 +1022,7 @@ const PlotLandUpdate = () => {
           </Box>
           {/* authority approved by */}
           <Box>
-            <Heading
-              as={"h3"}
-              size={"md"}
-              margin={"30px 0 10px 0"}
-              textAlign={"left"}
-            >
+            <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
               Which authority the property is approved by ?
             </Heading>
             <Box className={style.grid} gap={4}>
@@ -1058,40 +1069,40 @@ const PlotLandUpdate = () => {
           </Box>
           {/* Price Details */}
           <Box>
-            <Heading
-              as={"h3"}
-              size={"sm"}
-              marginTop={{ base: 10, md: 5 }}
-              textAlign={"left"}
-            >
+            <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
               Price Details
             </Heading>
-            <Box display={"flex"} alignItems={"center"} gap={5}>
-              <InputGroup w={300} gap={2}>
-                <Select
-                  w={"-moz-fit-content"}
-                  value={currency}
-                  onChange={(e) => setCurrency(e.target.value)}
-                >
-                  <option value="₹">₹ INR </option>
-                  <option value="$">$ USD </option>
-                </Select>
-                <Input
-                  type="text"
-                  value={pricedetail}
-                  maxLength={"10"}
-                  placeholder={`Price`}
-                  required
-                  w={200}
-                  onChange={(e) => {
-                    setPricedetail(NumericString(e.target.value));
-                  }}
-                />
-              </InputGroup>
-            </Box>
+            <InputGroup w={300} gap={2}>
+              <Select
+                w={"-moz-fit-content"}
+                value={currency}
+                borderRadius={0}
+                onChange={(e) => setCurrency(e.target.value)}
+              >
+                <option value="₹">₹ INR </option>
+                <option value="$">$ USD </option>
+              </Select>
+              <Input
+                type="text"
+                borderRadius={0}
+                value={pricedetail}
+                maxLength={"10"}
+                placeholder={`Price`}
+                required
+                w={200}
+                onChange={(e) => {
+                  setPricedetail(NumericString(e.target.value));
+                }}
+              />
+            </InputGroup>
           </Box>
           {/* inclusive Prices */}
-          <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
+          <Box
+            display={"flex"}
+            gap={{ base: 2, md: 10 }}
+            marginTop={5}
+            flexWrap={"wrap"}
+          >
             <Checkbox
               isChecked={inclusivePrices.includes("All inclusive price")}
               onChange={(e) => {
@@ -1140,6 +1151,7 @@ const PlotLandUpdate = () => {
               <Input
                 w={"60%"}
                 type="text"
+                maxLength={"12"}
                 onChange={(e) => setMaintenancePrice(e.target.value)}
                 value={maintenancePrice}
                 placeholder={"Maintenance Price"}
@@ -1160,6 +1172,7 @@ const PlotLandUpdate = () => {
                   type="text"
                   w={"300px"}
                   value={expectedRental}
+                  maxLength={"12"}
                   onChange={(e) => setExpectedRental(e.target.value)}
                   placeholder="Expected rental"
                   margin={"0"}
@@ -1168,6 +1181,7 @@ const PlotLandUpdate = () => {
                   type="text"
                   w={"300px"}
                   value={bookingAmount}
+                  maxLength={"12"}
                   onChange={(e) => setBookingAmount(e.target.value)}
                   placeholder="Booking Amount"
                   margin={"10px 0 0 0"}
@@ -1176,6 +1190,7 @@ const PlotLandUpdate = () => {
                   type="text"
                   w={"300px"}
                   value={annualDuesPayable}
+                  maxLength={"12"}
                   onChange={(e) => setAnnualDuesPayable(e.target.value)}
                   placeholder="Annual dues payable"
                   margin={"10px 0 0 0"}
@@ -1202,118 +1217,95 @@ const PlotLandUpdate = () => {
           </Box>
           {/* what makes property unique */}
           <Box>
-            <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+            <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
               Add Description and Unique Features of your Property
-            </Heading>
-            <Heading as={"h3"} size={"xs"} margin={"10px 0"} textAlign={"left"}>
-              Adding description will increase your listing visibility
             </Heading>
             <Textarea
               height={140}
               value={desc}
+              placeholder="Add Description"
               onChange={(e) => {
                 let my_cleantext = CleanInputText(e.target.value);
                 setDesc(my_cleantext);
               }}
             ></Textarea>
           </Box>
-        </Box>
 
-        {/* image Drag and Drop area  */}
-        <Box>
-          <Box className={style.top}>
-            <Heading
-              color={"black"}
-              size={"sm"}
-              textAlign={"left"}
-              margin={"10px 0"}
-            >
-              Upload Your Property image
-            </Heading>
-          </Box>
-          <Box className={style.savedImages}>
-            {savedImages?.map((w) => (
-              <Extraimg
-                e={w}
-                propertyid={productID}
-                deleteimagePermanently={deleteimagePermanently}
-                key={w._id}
-              />
-            ))}
-          </Box>
-          <Box className={style.card}>
-            <Box
-              border={
-                isDraging ? "2px dashed rgb(46,49,146)" : "2px dashed #9e9e9e"
-              }
-              className={style.dragArea}
-              onDragOver={ondragover}
-              onDragLeave={ondragleave}
-              onDrop={ondrop}
-            >
-              {isDraging ? (
-                <Text textAlign={"center"} color={"rgb(0, 134, 254)"}>
-                  Drop image here
-                </Text>
-              ) : (
-                <>
-                  Drag & Drop image here or
-                  <Text
-                    className={style.select}
-                    role="button"
-                    onClick={selectFiles}
-                  >
-                    {" "}
-                    Browse{" "}
-                  </Text>
-                </>
-              )}
-              <input
-                type={"file"}
-                name="image"
-                accept="image/jpg, image/png, image/jpeg"
-                formMethod="post"
-                formEncType="multipart/form-data"
-                className={style.file}
-                multiple
-                ref={fileInputRef}
-                onChange={onFileSelect}
-              />
+          {/* image Drag and Drop area  */}
+          <Box>
+            <Box className={style.top}>
+              <Heading
+                color={"black"}
+                size={"sm"}
+                textAlign={"left"}
+                margin={"10px 0"}
+              >
+                {" "}
+                Upload Your Property image{" "}
+              </Heading>
             </Box>
-            <Box className={style.container}>
-              {images.map((image, index) => (
-                <Box className={style.image} key={index}>
-                  <Text
-                    className={style.delete}
-                    onClick={() => removeImage(index)}
-                  >
-                    &#10006;
-                  </Text>
-                  <img src={URL.createObjectURL(image.image)} alt="images" />
-                </Box>
-              ))}
+            <Box className={style.card}>
+              <Box
+                className={style.dragArea}
+                onDragOver={ondragover}
+                onDragLeave={ondragleave}
+                onDrop={ondrop}
+              >
+                {isDraging ? (
+                  <Text className={style.select}>Drop image here</Text>
+                ) : (
+                  <>
+                    Drag & Drop image here or
+                    <Text
+                      className={style.select}
+                      role="button"
+                      onClick={selectFiles}
+                    >
+                      {" "}
+                      Browse{" "}
+                    </Text>
+                  </>
+                )}
+                <input
+                  type={"file"}
+                  name="image"
+                  accept="image/jpg, image/png, image/jpeg"
+                  formMethod="post"
+                  formEncType="multipart/form-data"
+                  className={style.file}
+                  multiple
+                  ref={fileInputRef}
+                  onChange={onFileSelect}
+                />
+              </Box>
+              <Box className={style.container}>
+                {images.map((image, index) => (
+                  <Box className={style.image} key={index}>
+                    <Text
+                      className={style.delete}
+                      onClick={() => removeImage(index)}
+                    >
+                      &#10006;
+                    </Text>
+                    <img src={URL.createObjectURL(image.image)} alt="images" />
+                  </Box>
+                ))}
+              </Box>
             </Box>
           </Box>
         </Box>
-
         {/* Add amenities/unique features */}
         <Box>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"4px 0"} textAlign={"left"}>
             Add amenities/unique features
           </Heading>
-          <Heading
-            as={"h5"}
-            size={"xs"}
-            fontWeight={400}
-            margin={"10px 0"}
-            textAlign={"left"}
-          >
+          <Heading as={"h5"} size={"xs"} fontWeight={400} textAlign={"left"}>
             All fields on this page are optional
           </Heading>
         </Box>
         {/* Amenities */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"4px 0"} textAlign={"left"}>
             Amenities
           </Heading>
           <Box>
@@ -1363,7 +1355,7 @@ const PlotLandUpdate = () => {
         </Box>
         {/* Overlooking */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Overlooking
           </Heading>
           <Box>
@@ -1410,7 +1402,7 @@ const PlotLandUpdate = () => {
         </Box>
         {/* Other Features */}
         <Box>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Other Features
           </Heading>
           <Box display={"grid"} textAlign={"left"} gap={2}>
@@ -1434,7 +1426,7 @@ const PlotLandUpdate = () => {
         </Box>
         {/* Property facing */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Property facing
           </Heading>
           <Box>
@@ -1530,14 +1522,15 @@ const PlotLandUpdate = () => {
         </Box>
         {/* facing road */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Width of facing road
           </Heading>
-          <Box display={"flex"} gap={"20px"} w={"300px"}>
+          <InputGroup w={{ base: "100%", md: "340px" }}>
             <Input
               type="text"
-              maxLength={5}
-              variant="flushed"
+              maxLength={4}
+              placeholder="Enter Facing Width"
+              variant={"outline"}
               flex={1}
               required
               value={facingwidth}
@@ -1548,17 +1541,18 @@ const PlotLandUpdate = () => {
             />
             <Select
               flex={1}
+              borderRadius={0}
               onChange={(e) => setFacing(e.target.value)}
               value={facing}
             >
               <option value="Meter"> Meter </option>
               <option value="Feet"> Feet </option>
             </Select>
-          </Box>
+          </InputGroup>
         </Box>
         {/* Location Advantages */}
         <Box className={style.optional_box}>
-          <Heading size={"md"} margin={"10px 0 4px 0"} textAlign={"left"}>
+          <Heading size={"sm"} margin={"10px 0 4px 0"} textAlign={"left"}>
             Location Advantages
             <Heading
               size={"xs"}
@@ -1616,6 +1610,15 @@ const PlotLandUpdate = () => {
             </button>
             <button
               className={
+                locationAdv.includes("Close to Mall") ? style.setbtn : style.btn
+              }
+              value={"Close to Mall"}
+              onClick={handlelocationadvantages}
+            >
+              Close to Mall
+            </button>
+            <button
+              className={
                 locationAdv.includes("Close to Railway Station")
                   ? style.setbtn
                   : style.btn
@@ -1635,15 +1638,6 @@ const PlotLandUpdate = () => {
               onClick={handlelocationadvantages}
             >
               Close to Airport
-            </button>
-            <button
-              className={
-                locationAdv.includes("Close to Mall") ? style.setbtn : style.btn
-              }
-              value={"Close to Mall"}
-              onClick={handlelocationadvantages}
-            >
-              Close to Mall
             </button>
             <button
               className={
@@ -1669,7 +1663,7 @@ const PlotLandUpdate = () => {
           *Please provide correct information, otherwise your listing might get
           blocked
         </Heading>
-        {isClicked && <LoadingBox />}
+        {isClicked && <Loading />}
         <Button
           margin={"20px 0"}
           type="submit"
@@ -1679,7 +1673,7 @@ const PlotLandUpdate = () => {
           _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
           color={"#ffffff"}
         >
-          Update Property 
+          Update Property
         </Button>
       </form>
     </Box>

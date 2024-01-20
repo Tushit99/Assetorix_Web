@@ -611,8 +611,8 @@ const IndependentHouse = () => {
     <form onSubmit={handleSubmitData}>
       {/* property location */}
       <Box className={style.location_form}>
-        <Heading size={"lg"}>
-          Where is your Independent House / villa located?
+        <Heading size={"lg"}> 
+          Where is your Independent House / Villa located?
         </Heading>
         <Heading size={"sm"}>Location Detail</Heading>
         <Input

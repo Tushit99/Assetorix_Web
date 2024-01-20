@@ -641,8 +641,7 @@ const CommercialLand = () => {
         {/* ========================== Property Dimensions ========================== */}
         <Box as={"div"} textAlign={"left"} padding={"10px 0"}>
           <Heading as={"h3"} size={"sm"}>
-            {" "}
-            Property Dimensions (Optional){" "}
+            Property Dimensions (Optional)
           </Heading>
           <Input
             type={"text"}
@@ -674,10 +673,14 @@ const CommercialLand = () => {
         <Box>
           <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Width of facing road
-          </Heading> 
-          <ButtonGroup display={"flex"} gap={0} width={{base:"100%",md:"300px"}}>
+          </Heading>
+          <ButtonGroup
+            display={"flex"}
+            gap={0}
+            width={{ base: "100%", md: "300px" }}
+          >
             <Input
-              type="text" 
+              type="text"
               placeholder={"Enter facing width"}
               variant={"outline"}
               maxLength={4}
@@ -689,8 +692,8 @@ const CommercialLand = () => {
                 setFacingWidth(NumericString(e.target.value));
               }}
             />
-            <Select 
-            variant={"outline"}
+            <Select
+              variant={"outline"}
               borderRadius={0}
               flex={2}
               onChange={(e) => setFacing(e.target.value)}
@@ -699,15 +702,13 @@ const CommercialLand = () => {
               <option value="Meter"> Meter </option>
               <option value="Feet"> Feet </option>
             </Select>
-          
-          </ButtonGroup> 
+          </ButtonGroup>
         </Box>
 
         {/* ========================== No of open sides ========================== */}
         <Box textAlign={"left"} className={style.optional_box}>
           <Heading as={"h3"} size={"sm"}>
-            {" "}
-            No. of open sides{" "}
+            No. of open sides
           </Heading>
           <Box textAlign={"left"} padding={"10px 0 0 0"}>
             <button
@@ -746,8 +747,7 @@ const CommercialLand = () => {
         {/* ============================== Construction Property =============================== */}
         <Box textAlign={"left"} className={style.optional_box}>
           <Heading as={"h3"} size={"sm"}>
-            {" "}
-            Any construction done on this property?{" "}
+            Any construction done on this property?
           </Heading>
           <Box textAlign={"left"} padding={"10px 0 0 0"}>
             <button
@@ -779,8 +779,7 @@ const CommercialLand = () => {
           display={ConstructionOnProperty == "Yes" ? "grid" : "none"}
         >
           <Heading as={"h3"} size={"sm"}>
-            {" "}
-            What type of construction has been done?{" "}
+            What type of construction has been done?
           </Heading>
           <Box>
             <button
@@ -790,8 +789,7 @@ const CommercialLand = () => {
                 constructionType.includes("Shed") ? style.setbtn : style.btn
               }
             >
-              {" "}
-              Shed{" "}
+              Shed
             </button>
             <button
               value={"Room(s)"}
@@ -800,8 +798,7 @@ const CommercialLand = () => {
                 constructionType.includes("Room(s)") ? style.setbtn : style.btn
               }
             >
-              {" "}
-              Room(s){" "}
+              Room(s)
             </button>
             <button
               value={"Washroom"}
@@ -810,8 +807,7 @@ const CommercialLand = () => {
                 constructionType.includes("Washroom") ? style.setbtn : style.btn
               }
             >
-              {" "}
-              Washroom{" "}
+              Washroom
             </button>
             <button
               value={"Other"}
@@ -820,8 +816,7 @@ const CommercialLand = () => {
                 constructionType.includes("Other") ? style.setbtn : style.btn
               }
             >
-              {" "}
-              Other{" "}
+              Other
             </button>
           </Box>
         </Box>
@@ -1180,7 +1175,7 @@ const CommercialLand = () => {
                 <IoIosArrowUp style={{ display: "inline" }} />
               ) : (
                 <IoIosArrowDown style={{ display: "inline" }} />
-              )}{" "}
+              )}
               Add more pricing details
             </Heading>
           </Box>
@@ -1209,8 +1204,7 @@ const CommercialLand = () => {
               }}
               className={preLeased == "Yes" ? style.setbtn : style.btn}
             >
-              {" "}
-              Yes{" "}
+              Yes
             </button>
             <button
               value={"No"}
@@ -1220,8 +1214,7 @@ const CommercialLand = () => {
               }}
               className={preLeased == "No" ? style.setbtn : style.btn}
             >
-              {" "}
-              No{" "}
+              No
             </button>
           </Box>
           <Box display={preLeased == "Yes" ? "block" : "none"}>
@@ -1457,8 +1450,7 @@ const CommercialLand = () => {
               textAlign={"left"}
               margin={"10px 0"}
             >
-              {" "}
-              Upload Your Property image{" "}
+              Upload Your Property image
             </Heading>
           </Box>
           <Box className={style.card}>
@@ -1478,8 +1470,7 @@ const CommercialLand = () => {
                     role="button"
                     onClick={selectFiles}
                   >
-                    {" "}
-                    Browse{" "}
+                    Browse
                   </Text>
                 </>
               )}

@@ -575,9 +575,7 @@ const CoWorkingspace = () => {
       </Box>
       {/* Property Detail */}
       <Box marginTop={10}>
-        <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"}>
-          Tell us about your property
-        </Heading>
+        
         {/* ====================================== */}
         {/* Washrooms */}
         <Box padding={"10px 0 8px 0"} display={"grid"}>

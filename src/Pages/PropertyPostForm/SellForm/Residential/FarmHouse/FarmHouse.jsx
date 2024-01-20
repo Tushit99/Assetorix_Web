@@ -1661,6 +1661,7 @@ const FarmHouse = () => {
             height={140}
             borderRadius={0}
             value={desc}
+            placeholder="Add Description" 
             onChange={(e) => {
               let my_cleantext = CleanInputText(e.target.value);
               setDesc(my_cleantext);
@@ -2342,7 +2343,8 @@ const FarmHouse = () => {
             variant="flushed"
             maxLength={4}
             flex={1}
-            required
+            required 
+            placeholder="Enter road width"
             value={facingwidth}
             onChange={(e) => {
               e.preventDefault();

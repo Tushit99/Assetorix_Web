@@ -1605,6 +1605,7 @@ const IndependentbuilderUpdate = () => {
                 type="text"
                 value={pricedetail}
                 maxLength={"10"}
+                borderRadius={0} 
                 placeholder={`Price`}
                 required
                 w={200}

@@ -6,7 +6,7 @@ import {
   Input,
   InputGroup,
   Select,
-  ButtonGroup, 
+  ButtonGroup,
   Text,
   Textarea,
   useToast,
@@ -30,13 +30,13 @@ const Manufacture = () => {
   const [state, setState] = useState("");
   const [locality, setLocality] = useState("");
   const [address, setAddress] = useState("");
-  const [washrooms, setwashrooms] = useState(0);
+  const [washrooms, setwashrooms] = useState("");
   const [areaPer, setAreaPer] = useState("sq.ft");
   const [availability, setAvailability] = useState("");
   const [fromyear, setFromyear] = useState("");
   const [expectedyear, setExpectedYear] = useState("");
   const [ownership, setOwnerShip] = useState("");
-  const [pricedetail, setPricedetail] = useState(""); 
+  const [pricedetail, setPricedetail] = useState("");
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
@@ -62,6 +62,7 @@ const Manufacture = () => {
   const [businessType, setBusinessType] = useState("");
   const [isClicked, setIsClicked] = useState(false);
   const [clickCount, setClickCount] = useState(0);
+  const [currency, setCurrency] = useState("₹");
   const navigate = useNavigate();
   // state for drop box images
   const [images, setImages] = useState([]);
@@ -88,7 +89,7 @@ const Manufacture = () => {
       },
       washrooms,
       ownership,
-      price: +pricedetail, 
+      price: +pricedetail,
       inclusivePrices,
       amenities,
       propertyFeatures,
@@ -178,7 +179,7 @@ const Manufacture = () => {
       //   obj.furnishedObj = {
       //     Light: light,
       //     Fan: fans,
-      //     AC: ac, 
+      //     AC: ac,
       //     TV: tv,
       //     Bed: Beds,
       //     Wardrobe: wardrobe,
@@ -419,7 +420,6 @@ const Manufacture = () => {
     }
     setInclusivePrice(newarr);
   };
- 
 
   // ======--- image upload function
 
@@ -499,11 +499,11 @@ const Manufacture = () => {
       <form onSubmit={handleSubmitData}>
         <Box className={style.location_form}>
           <Heading size={"lg"}>Where is your Manufacturing located?</Heading>
-          <Heading size={"sm"}>Location Detail</Heading> 
+          <Heading size={"sm"}>Location Detail</Heading>
 
           <Input
             type="text"
-            maxLength={100} 
+            maxLength={100}
             placeholder="Address (optional)"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
@@ -517,7 +517,7 @@ const Manufacture = () => {
             required
             fontSize={"md"}
             value={pincode}
-            variant="flushed" 
+            variant="flushed"
             onChange={handlepinfetch}
           />
           <Input
@@ -775,7 +775,6 @@ const Manufacture = () => {
 
         {/* ============================ Add pricing and details (Ownership) ============================ */}
         <Box>
-          
           {/* OwnerShip detail */}
           <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Ownership
@@ -835,29 +834,33 @@ const Manufacture = () => {
         {/* ============================== Price Details ============================ */}
         <Box>
           <Box>
-            <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+            <Heading as={"h3"} size={"sm"} textAlign={"left"}>
               Price Details
             </Heading>
-            <Box display={"flex"} alignItems={"center"} gap={5}>
-              <Box display={"grid"} gap={0}>
-                <Heading
-                  as={"h3"}
-                  size={"xs"}
-                  fontWeight={400}
-                  textAlign={"left"}
+            <Box display={"flex"} alignItems={"center"}>
+              <InputGroup w={300}>
+                <Select
+                  w={"-moz-fit-content"}
+                  borderRadius={0}
+                  value={currency}
+                  onChange={(e) => setCurrency(e.target.value)}
                 >
-                  {isCountry.country == "india" ? "₹" : "$"} Price Details
-                </Heading>
+                  <option value="₹">₹ INR </option>
+                  <option value="$">$ USD </option>
+                </Select>
                 <Input
                   type="text"
+                  borderRadius={0}
                   value={pricedetail}
                   maxLength={"10"}
+                  placeholder={"Enter Price"}
                   required
+                  w={200}
                   onChange={(e) => {
-                    setPricedetail(NumericString(e.target.value)); 
+                    setPricedetail(NumericString(e.target.value));
                   }}
                 />
-              </Box>
+              </InputGroup>
             </Box>
           </Box>
           <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
@@ -1097,14 +1100,14 @@ const Manufacture = () => {
         {/* ============================ Property unique discription ============================ */}
         <Box>
           <Heading
-             as={"h3"}
-             size={"sm"}
-             fontWeight={700}
-             margin={"18px 0 4px 0"}
-             textAlign={"left"}
+            as={"h3"}
+            size={"sm"}
+            fontWeight={700}
+            margin={"18px 0 4px 0"}
+            textAlign={"left"}
           >
             Add Description and Unique Features of your Property
-          </Heading> 
+          </Heading>
           <Textarea
             height={140}
             value={desc}
@@ -1559,9 +1562,9 @@ const Manufacture = () => {
             Type of flooring
           </Heading>
           <Box>
-            <Select  
-              width={{base:"100%",md:"300px"}}
-              borderRadius={0} 
+            <Select
+              width={{ base: "100%", md: "300px" }}
+              borderRadius={0}
               onChange={(e) => setFlooring(e.target.value)}
               value={flooring}
             >

@@ -1574,6 +1574,7 @@ const IndependentHouseUpdate = () => {
               </Select>
               <Input
                 type="text"
+                borderRadius={0} 
                 value={pricedetail}
                 maxLength={"10"}
                 placeholder={`Price`}
@@ -1585,9 +1586,7 @@ const IndependentHouseUpdate = () => {
               />
             </InputGroup>
           </Box>
-        </Box>
-       
-
+        </Box> 
         {/* Additional (Checkbox) */}
         <Box display={"flex"} gap={{ base: 2, md: 10 }} margin={"20px 0"} flexWrap={"wrap"}>
           <Checkbox
@@ -1716,7 +1715,7 @@ const IndependentHouseUpdate = () => {
           <Textarea
             height={140}
             required
-            placeholder="Add Description"
+            placeholder="Add Description" 
             value={desc}
             onChange={(e) => {
               let my_cleantext = CleanInputText(e.target.value);

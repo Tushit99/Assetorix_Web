@@ -629,9 +629,9 @@ const Independentbuilder = () => {
   return (
     <form onSubmit={handleSubmitData}>
       {/* property location */}
-      <Box className={style.location_form}>
+      <Box className={style.location_form}> 
         <Heading size={"lg"}>
-          Where is your Independent / builder Floor located?
+          Where is your Independent / Builder Floor located?
         </Heading>
         <Heading size={"sm"}>Location Detail</Heading>
 
@@ -1501,6 +1501,7 @@ const Independentbuilder = () => {
                 value={pricedetail}
                 maxLength={"10"}
                 placeholder={`Price`}
+                borderRadius={0} 
                 required
                 w={200}
                 onChange={(e) => {

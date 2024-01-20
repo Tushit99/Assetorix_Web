@@ -1510,7 +1510,8 @@ const FlatAppartment = () => {
             <InputGroup w={300} gap={2}>
               <Select
                 w={"-moz-fit-content"}
-                value={currency}
+                value={currency} 
+                borderRadius={0}
                 onChange={(e) => setCurrency(e.target.value)}
               >
                 <option value="₹">₹ INR </option>
@@ -1522,6 +1523,7 @@ const FlatAppartment = () => {
                 maxLength={"10"}
                 placeholder={`Price`}
                 required
+                borderRadius={0} 
                 w={200}
                 onChange={(e) => {
                   setPricedetail(NumericString(e.target.value));
