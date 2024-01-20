@@ -1817,14 +1817,14 @@ const ServicedApartmentRentUpdate = () => {
                         </button>
                         <button
                             className={
-                                propertyFeatures.includes("Centrally Air Renovated")
+                                propertyFeatures.includes("Centrally Air Conditioned")
                                     ? style.setbtn
                                     : style.btn
                             }
-                            value={"Centrally Air Renovated"}
+                            value={"Centrally Air Conditioned"}
                             onClick={handlePropertyFeature}
                         >
-                            Centrally Air Renovated
+                            Centrally Air Conditioned
                         </button>
                         <button
                             className={

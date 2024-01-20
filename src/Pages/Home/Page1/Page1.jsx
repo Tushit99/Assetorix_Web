@@ -273,9 +273,9 @@ const Page1 = () => {
                   <Button  
                     backgroundColor={"#d2ab67cb"}
                     color={"white"}
-                    fontWeight={400}
-                    _hover={{ color: "unset" }}
-                    _active={{ color: "unset" }}
+                    fontWeight={{base:400,md:600}}
+                    _hover={{ color: "white" }}
+                    _active={{ color: "white" }}
                   >
                     Buy
                   </Button>
@@ -372,9 +372,9 @@ const Page1 = () => {
                   <Button
                      backgroundColor={"#d2ab67cb"}
                      color={"white"} 
-                    fontWeight={400}
-                    _hover={{ color: "unset" }}
-                    _active={{ color: "unset" }}
+                     fontWeight={{base:400,md:600}}
+                    _hover={{ color: "white" }}
+                    _active={{ color: "white" }}
                   >
                     Rent
                   </Button>

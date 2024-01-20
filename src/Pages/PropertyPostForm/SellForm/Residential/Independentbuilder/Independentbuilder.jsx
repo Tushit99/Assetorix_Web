@@ -1900,11 +1900,11 @@ const Independentbuilder = () => {
           </button>
           <button
             className={
-              propertyFeatures.includes("Centrally Air Renovated")
+              propertyFeatures.includes("Centrally Air Conditioned")
                 ? style.setbtn
                 : style.btn
             }
-            value={"Centrally Air Renovated"}
+            value={"Centrally Air Conditioned"}
             onClick={handlePropertyFeature}
           >
             Centrally Air Conditioned

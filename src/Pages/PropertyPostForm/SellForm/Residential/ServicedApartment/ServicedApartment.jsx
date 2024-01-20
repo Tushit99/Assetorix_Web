@@ -9,6 +9,7 @@ import {
   InputGroup,
   NumberInput,
   NumberInputField,
+  InputRightElement,
   Select,
   Text,
   Textarea,
@@ -35,9 +36,9 @@ const ServicedApartment = () => {
   const [state, setState] = useState("");
   const [locality, setLocality] = useState("");
   const [houseNo, setHouseNo] = useState("");
-  const [bedroom, setBedRoom] = useState(0);
-  const [bathroom, setBathroom] = useState(0);
-  const [balconey, setBalcony] = useState(0);
+  const [bedroom, setBedRoom] = useState("");
+  const [bathroom, setBathroom] = useState("");
+  const [balconey, setBalcony] = useState("");
   const [parking, setParking] = useState(0);
   const [openparking, setOpenparking] = useState(0);
   const [light, setLight] = useState(0);
@@ -82,8 +83,8 @@ const ServicedApartment = () => {
   const [annualDuesPayable, setAnnualDuesPayable] = useState("");
   const [membershipCharge, setMembershipCharge] = useState("");
   const [isClicked, setIsClicked] = useState(false);
-  const [clickCount, setClickCount] = useState(0); 
-  const [currency, setCurrency] = useState("₹");  
+  const [clickCount, setClickCount] = useState(0);
+  const [currency, setCurrency] = useState("₹");
   const navigate = useNavigate();
   // state for drop box images
   const [images, setImages] = useState([]);
@@ -628,7 +629,7 @@ const ServicedApartment = () => {
 
   return (
     <form onSubmit={handleSubmitData}>
-      {/* property location */}
+      {/* property location */} 
       <Box className={style.location_form}>
         <Heading size={"lg"}>Where is your Serviced Apartment located?</Heading>
         <Heading size={"sm"}>Location Detail</Heading>
@@ -636,7 +637,6 @@ const ServicedApartment = () => {
         <Input
           type="text"
           padding={"0 10px"}
-          required
           maxLength={"100"}
           placeholder="House No. (optional)"
           value={houseNo}
@@ -649,7 +649,7 @@ const ServicedApartment = () => {
           padding={"0 10px"}
           required
           maxLength={"100"}
-          placeholder="Apartment / Society"
+          placeholder="Apartment / Society Name"
           fontSize={"md"}
           value={appartment}
           onChange={(e) => setApartment(WordandNumber(e.target.value))}
@@ -661,6 +661,7 @@ const ServicedApartment = () => {
           padding={"0 10px"}
           maxLength={"100"}
           required
+          variant="flushed"
           fontSize={"md"}
           value={pincode}
           onChange={handlepinfetch}
@@ -723,8 +724,12 @@ const ServicedApartment = () => {
       </Box>
       {/* Property Detail */}
       <Box marginTop={12}>
-        
-        <Heading as={"h4"} size={"sm"} margin={"0 0 30px 0 "}>
+        <Heading
+          as={"h4"}
+          textAlign={"left"}
+          size={"sm"}
+          marginTop={{ base: 5, md: 8 }}
+        >
           Add Room Details
         </Heading>
         <Box as={"div"} className={style.inp_form_numbers}>
@@ -732,7 +737,7 @@ const ServicedApartment = () => {
             <Text> No. of Bedrooms </Text>
             <Input
               type="text"
-              variant="flushed"
+              variant={"outline"}
               maxLength={"2"}
               onChange={(e) => setBedRoom(NumericString(e.target.value))}
               value={bedroom}
@@ -743,7 +748,7 @@ const ServicedApartment = () => {
             <Text> No. of Bathrooms </Text>
             <Input
               type="text"
-              variant="flushed"
+              variant={"outline"}
               onChange={(e) => setBathroom(NumericString(e.target.value))}
               value={bathroom}
               required
@@ -754,7 +759,7 @@ const ServicedApartment = () => {
             <Text> No. of Balconies </Text>
             <Input
               type="text"
-              variant="flushed"
+              variant={"outline"}
               onChange={(e) => setBalcony(NumericString(e.target.value))}
               value={balconey}
               required
@@ -764,63 +769,63 @@ const ServicedApartment = () => {
         </Box>
         {/* ====================================== */}
         {/* add area details */}
-        <Box textAlign={"left"} padding={"10px 0"}>
-          <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"md"}>
+        <Box textAlign={"left"}>
+          <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"}>
             Add Area Details
           </Heading>
-          <Text margin={"5px 0"}> Atleast one area type is mandatory </Text>
-          <ButtonGroup
-            className={style.select_land}
-            size="sm"
+          <InputGroup
+            w={300}
+            size="md"
+            marginTop={2}
             isAttached
             variant="outline"
           >
             <Input
               type="text"
               value={plotArea}
-              maxLength={"12"}
+              placeholder="Enter area detail"
+              w={200}
+              maxLength={"6"}
               onChange={(e) => {
-                setPlotArea(e.target.value);
+                setPlotArea(NumericString(e.target.value));
               }}
               required
             />
-            <Select
-              value={areaPer}
-              onChange={(e) => {
-                setAreaPer(e.target.value);
-              }}
-              className={style.select}
-              required
-            >
-              <option value="sq.ft">sq.ft</option>
-              <option value="sq.yards">sq.yards</option>
-              <option value="sq.m">sq.m</option>
-              <option value="acres">acres</option>
-              <option value="marla">marla</option>
-              <option value="cents">cents</option>
-              <option value="bigha">bigha</option>
-              <option value="kottah">kottah</option>
-              <option value="kanal">kanal</option>
-              <option value="grounds">grounds</option>
-              <option value="ares">ares</option>
-              <option value="biswa">biswa</option>
-              <option value="guntha">guntha</option>
-              <option value="aankadam">aankadam</option>
-              <option value="hectares">hectares</option>
-              <option value="rood">rood</option>
-              <option value="chataks">chataks</option>
-              <option value="perch">perch</option>
-            </Select>
-          </ButtonGroup>
+            <InputRightElement width={100}>
+              <Select
+                value={areaPer}
+                borderRadius={0}
+                onChange={(e) => {
+                  setAreaPer(e.target.value);
+                }}
+                className={style.select}
+                required
+              >
+                <option value="sq.ft">sq.ft</option>
+                <option value="sq.yards">sq.yards</option>
+                <option value="sq.m">sq.m</option>
+                <option value="acres">acres</option>
+                <option value="marla">marla</option>
+                <option value="cents">cents</option>
+                <option value="bigha">bigha</option>
+                <option value="kottah">kottah</option>
+                <option value="kanal">kanal</option>
+                <option value="grounds">grounds</option>
+                <option value="ares">ares</option>
+                <option value="biswa">biswa</option>
+                <option value="guntha">guntha</option>
+                <option value="aankadam">aankadam</option>
+                <option value="hectares">hectares</option>
+                <option value="rood">rood</option>
+                <option value="chataks">chataks</option>
+                <option value="perch">perch</option>
+              </Select>
+            </InputRightElement>
+          </InputGroup>
         </Box>
         {/* other Room  */}
-        <Box
-          padding={"10px 0"}
-          display={"grid"}
-          gap={6}
-          className={style.optional_box}
-        >
-          <Heading as={"h3"} size={"md"}>
+        <Box className={style.optional_box}>
+          <Heading as={"h3"} marginTop={5} size={"sm"}>
             Other rooms (optional)
           </Heading>
           <Box>
@@ -863,13 +868,8 @@ const ServicedApartment = () => {
           </Box>
         </Box>
         {/* furnish */}
-        <Box
-          padding={"10px 0"}
-          display={"grid"}
-          gap={6}
-          className={style.optional_box}
-        >
-          <Heading as={"h3"} size={"md"}>
+        <Box className={style.optional_box}>
+          <Heading as={"h3"} marginTop={5} size={"sm"}>
             Furnishing (optional)
           </Heading>
           <Box>
@@ -1186,7 +1186,7 @@ const ServicedApartment = () => {
         </Box>
         {/* reserved */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"}>
+          <Heading as={"h3"} marginTop={5} size={"sm"}>
             Reserved Parking (optional)
           </Heading>
           <div className={style.parking}>
@@ -1240,69 +1240,52 @@ const ServicedApartment = () => {
         </Box>
         {/* floor details */}
         <Box textAlign={"left"}>
-          <Heading
-            as={"h3"}
-            size={"md"}
-            margin={"30px 0 10px 0"}
-            textAlign={"left"}
-          >
+          <Heading as={"h3"} marginTop={5} size={"sm"} textAlign={"left"}>
             Floor Details
           </Heading>
-          <Text textAlign={"left"} margin={"10px 0"}>
-            Total no of floors and your floor details
-          </Text>
           <Box display={"flex"} alignItems={"center"} gap={5}>
-            <Input
-              type="text"
-              value={totalfloors}
-              maxLength={2}
-              onChange={(e) => {
-                const nowval = NumericString(e.target.value) > 90;
-                if (nowval) {
-                  toast({
-                    title: "Maximum floor count: 90",
-                    status: "error",
-                    duration: 2000,
-                    position: "top-right",
-                  });
-                } else {
-                  setTotalFloors(NumericString(e.target.value));
-                }
-              }}
-              required
-              w={250}
-            />
-            <Select
-              id="floorSelectTag"
-              variant="filled"
-              onChange={(e) => setFloorOn(e.target.value)}
-              value={floorOn}
-              w={180}
-              borderRadius={0}
-              _hover={{
-                backgroundColor: "rgb(255, 255, 255)",
-                borderBottom: "1px solid blue",
-                borderLeft: "0",
-                borderRight: "0",
-                borderTop: "0",
-              }}
-              borderTop={"0"}
-              borderLeft={"0"}
-              borderBottom={"1px solid blue"}
-              backgroundColor={"rgb(255, 255, 255)"}
-            >
-              <option value="Ground">Ground</option>
-              <option value="Basement">Basement</option>
-              <option value="Lower Ground">Lower Ground</option>
-              {Array.from(Array(Number(totalfloors)).keys()).map((e) => {
-                return <option value={e + 1}>{e + 1}</option>;
-              })}
-            </Select>
+            <InputGroup w={{ base: 300, md: 400 }}>
+              <Input
+                type="text"
+                value={totalfloors}
+                maxLength={"2"}
+                placeholder={"Enter no. of floors"}
+                onChange={(e) => {
+                  let val = NumericString(e.target.value);
+                  const nowval = val > 90;
+                  if (nowval) {
+                    toast({
+                      title: "Maximum floor count: 90",
+                      status: "error",
+                      duration: 2000,
+                      position: "top-right",
+                    });
+                  } else {
+                    setTotalFloors(val);
+                  }
+                }}
+                required
+                w={250}
+              />
+              <Select
+                onChange={(e) => setFloorOn(e.target.value)}
+                value={floorOn}
+                borderRadius={0}
+                width={150}
+              >
+                <option value="Ground">Ground</option>
+                <option value="Basement">Basement</option>
+                <option value="Lower Ground">Lower Ground</option>
+                {Array.from(Array(Number(totalfloors)).keys()).map((e) => {
+                  return <option value={e + 1}>{e + 1}</option>;
+                })}
+              </Select>
+            </InputGroup>
           </Box>
         </Box>
         {/* Availability status */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Availability Status
           </Heading>
           <Box className={style.grid}>
@@ -1418,18 +1401,9 @@ const ServicedApartment = () => {
           </Box>
         )}
 
-        {/* Add pricing and details */}
+        {/* OwnerShip detail */}
         <Box>
-          <Heading
-            as={"h3"}
-            size={"md"}
-            margin={"30px 0 10px 0"}
-            textAlign={"left"}
-          >
-            Add pricing and details...
-          </Heading>
-          {/* OwnerShip detail */}
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Ownership
           </Heading>
           <Box className={style.grid} gap={4}>
@@ -1445,17 +1419,6 @@ const ServicedApartment = () => {
               Freehold
             </button>
             <button
-              className={ownership == "Leasehold" ? style.setbtn : style.btn}
-              borderRadius={"100px"}
-              border={"1px solid rgba(113, 210, 255, 0.897)"}
-              margin={"8px 6px 0 0"}
-              onClick={handleownership}
-              value={"Leasehold"}
-              backgroundColor={"blue.50"}
-            >
-              Leasehold
-            </button>
-            <button
               className={
                 ownership == "Co-operative society" ? style.setbtn : style.btn
               }
@@ -1467,6 +1430,17 @@ const ServicedApartment = () => {
               backgroundColor={"blue.50"}
             >
               Co-operative society
+            </button>
+            <button
+              className={ownership == "Leasehold" ? style.setbtn : style.btn}
+              borderRadius={"100px"}
+              border={"1px solid rgba(113, 210, 255, 0.897)"}
+              margin={"8px 6px 0 0"}
+              onClick={handleownership}
+              value={"Leasehold"}
+              backgroundColor={"blue.50"}
+            >
+              Leasehold
             </button>
             <button
               className={
@@ -1485,13 +1459,14 @@ const ServicedApartment = () => {
         </Box>
         {/* Price Details */}
         <Box>
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Price Details
           </Heading>
           <InputGroup w={300} gap={2}>
             <Select
               w={"-moz-fit-content"}
               value={currency}
+              borderRadius={0}
               onChange={(e) => setCurrency(e.target.value)}
             >
               <option value="₹">₹ INR </option>
@@ -1501,6 +1476,7 @@ const ServicedApartment = () => {
               type="text"
               value={pricedetail}
               maxLength={"10"}
+              borderRadius={0}
               placeholder={`Price`}
               required
               w={200}
@@ -1512,8 +1488,8 @@ const ServicedApartment = () => {
         </Box>
         <Box
           display={"flex"}
-          gap={{ base: 2, md: 10 }}
-          margin={"20px 0"}
+          gap={{ base: 4, md: 10 }}
+          marginTop={5}
           flexWrap={"wrap"}
         >
           <Checkbox
@@ -1553,13 +1529,13 @@ const ServicedApartment = () => {
           <Heading
             as={"h4"}
             size={"sm"}
-            margin={"10px 0"}
+            marginTop={5}
             fontWeight={700}
             textAlign={"left"}
           >
             Additional Pricing Detail (Optional)
           </Heading>
-          <InputGroup w={"300px"} margin={"10px 0"}>
+          <InputGroup w={"300px"}>
             <Input
               w={"60%"}
               type="text"
@@ -1581,7 +1557,7 @@ const ServicedApartment = () => {
             </Select>
           </InputGroup>
           {additionalPrice && (
-            <>
+            <Box display={"grid"} marginTop={"10px"}>
               <Input
                 type="text"
                 w={"300px"}
@@ -1626,12 +1602,12 @@ const ServicedApartment = () => {
                 placeholder="Membership charge"
                 margin={"10px 0 0 0"}
               />
-            </>
+            </Box>
           )}
           <Heading
             as={"h3"}
             size={"sm"}
-            margin={"10px 0"}
+            marginTop={5}
             color={"#002aff"}
             fontWeight={500}
             cursor={"pointer"}
@@ -1654,7 +1630,7 @@ const ServicedApartment = () => {
               color={"black"}
               size={"sm"}
               textAlign={"left"}
-              margin={"10px 0"}
+              marginTop={5}
             >
               {" "}
               Upload Your Property image{" "}
@@ -1711,12 +1687,13 @@ const ServicedApartment = () => {
         </Box>
 
         <Box>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Add Description and Unique Features of your Property
           </Heading>
           <Textarea
             height={140}
             value={desc}
+            placeholder="Add Description"
             onChange={(e) => {
               let my_cleantext = CleanInputText(e.target.value);
               setDesc(my_cleantext);
@@ -1726,7 +1703,7 @@ const ServicedApartment = () => {
       </Box>
       {/* Add amenities/unique features */}
       <Box>
-        <Heading as={"h3"} size={"md"} margin={"4px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} margin={"4px 0"} textAlign={"left"}>
           Add amenities/unique features
         </Heading>
         <Heading as={"h5"} size={"xs"} fontWeight={400} textAlign={"left"}>
@@ -1735,7 +1712,7 @@ const ServicedApartment = () => {
       </Box>
       {/* Amenities */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"4px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
           Amenities
         </Heading>
         <Box>
@@ -1767,6 +1744,13 @@ const ServicedApartment = () => {
             value={"Security / Fire Alarm"}
           >
             Security / Fire Alarm
+          </button>
+          <button
+            className={amenities.includes("Lift") ? style.setbtn : style.btn}
+            onClick={handleAminities}
+            value={"Lift"}
+          >
+            Lift(s)
           </button>
           <button
             className={
@@ -1806,18 +1790,11 @@ const ServicedApartment = () => {
           >
             Feng Shui / Vaastu Compliant
           </button>
-          <button
-            className={amenities.includes("Lift") ? style.setbtn : style.btn}
-            onClick={handleAminities}
-            value={"Lift"}
-          >
-            Lift(s)
-          </button>
         </Box>
       </Box>
       {/* Property Features */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
           Property Features
         </Heading>
         <Box>
@@ -1865,6 +1842,17 @@ const ServicedApartment = () => {
           </button>
           <button
             className={
+              propertyFeatures.includes("Airy Roooms")
+                ? style.setbtn
+                : style.btn
+            }
+            value={"Airy Roooms"}
+            onClick={handlePropertyFeature}
+          >
+            Airy Roooms
+          </button>
+          <button
+            className={
               propertyFeatures.includes("Internet / wi-fi connectivity")
                 ? style.setbtn
                 : style.btn
@@ -1887,11 +1875,11 @@ const ServicedApartment = () => {
           </button>
           <button
             className={
-              propertyFeatures.includes("Centrally Air Renovated")
+              propertyFeatures.includes("Centrally Air Conditioned")
                 ? style.setbtn
                 : style.btn
             }
-            value={"Centrally Air Renovated"}
+            value={"Centrally Air Conditioned"}
             onClick={handlePropertyFeature}
           >
             Centrally Air Conditioned
@@ -1931,17 +1919,6 @@ const ServicedApartment = () => {
           </button>
           <button
             className={
-              propertyFeatures.includes("Airy Roooms")
-                ? style.setbtn
-                : style.btn
-            }
-            value={"Airy Roooms"}
-            onClick={handlePropertyFeature}
-          >
-            Airy Roooms
-          </button>
-          <button
-            className={
               propertyFeatures.includes("Spacious Interiors")
                 ? style.setbtn
                 : style.btn
@@ -1955,20 +1932,20 @@ const ServicedApartment = () => {
       </Box>
       {/* Society/Building feature */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
           Society/Building feature
         </Heading>
         <Box>
           <button
             className={
-              buildingFeature.includes("water softening plant")
+              buildingFeature.includes("Water softening plant")
                 ? style.setbtn
                 : style.btn
             }
             onClick={HandleBuildingFeature}
-            value={"water softening plant"}
+            value={"Water softening plant"}
           >
-            water softening plant
+            Water softening plant
           </button>
           <button
             className={
@@ -1994,17 +1971,6 @@ const ServicedApartment = () => {
           </button>
           <button
             className={
-              buildingFeature.includes("Club house / Community Center")
-                ? style.setbtn
-                : style.btn
-            }
-            onClick={HandleBuildingFeature}
-            value={"Club house / Community Center"}
-          >
-            Club house / Community Center
-          </button>
-          <button
-            className={
               buildingFeature.includes("Shopping Centre")
                 ? style.setbtn
                 : style.btn
@@ -2014,11 +1980,22 @@ const ServicedApartment = () => {
           >
             Shopping Centre
           </button>
+          <button
+            className={
+              buildingFeature.includes("Club house / Community Center")
+                ? style.setbtn
+                : style.btn
+            }
+            onClick={HandleBuildingFeature}
+            value={"Club house / Community Center"}
+          >
+            Club house / Community Center
+          </button>
         </Box>
       </Box>
       {/* Additional Features */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
           Additional Features
         </Heading>
         <Box>
@@ -2041,6 +2018,17 @@ const ServicedApartment = () => {
             onClick={handleAdditionalFeature}
           >
             Waste Disposal
+          </button>
+          <button
+            className={
+              additinalft.includes("Low Density Society")
+                ? style.setbtn
+                : style.btn
+            }
+            value={"Low Density Society"}
+            onClick={handleAdditionalFeature}
+          >
+            Low Density Society
           </button>
           <button
             className={
@@ -2075,22 +2063,11 @@ const ServicedApartment = () => {
           >
             Bank Attached Property
           </button>
-          <button
-            className={
-              additinalft.includes("Low Density Society")
-                ? style.setbtn
-                : style.btn
-            }
-            value={"Low Density Society"}
-            onClick={handleAdditionalFeature}
-          >
-            Low Density Society
-          </button>
         </Box>
       </Box>
       {/* Water Source */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
           Water Source
         </Heading>
         <Box>
@@ -2136,7 +2113,7 @@ const ServicedApartment = () => {
       </Box>
       {/* Overlooking */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
           Overlooking
         </Heading>
         <Box>
@@ -2183,7 +2160,7 @@ const ServicedApartment = () => {
       </Box>
       {/* Other Features */}
       <Box>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
           Other Features
         </Heading>
         <Box display={"grid"} textAlign={"left"} gap={2}>
@@ -2223,7 +2200,7 @@ const ServicedApartment = () => {
       </Box>
       {/* Power Back up */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
           Power Back up
         </Heading>
         <Box>
@@ -2261,7 +2238,7 @@ const ServicedApartment = () => {
       </Box>
       {/* Property facing */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
           Property facing
         </Heading>
         <Box>
@@ -2357,11 +2334,13 @@ const ServicedApartment = () => {
       </Box>
 
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
           Type of flooring
         </Heading>
         <Box>
-          <Select
+          <Select  
+            width={{base:"100%",md:"300px"}} 
+            borderRadius={0}
             onChange={(e) => setFlooring(e.target.value)}
             value={flooring}
           >
@@ -2384,7 +2363,7 @@ const ServicedApartment = () => {
         </Box>
       </Box>
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
           Width of facing road
         </Heading>
         <InputGroup w={{ base: "100%", md: "340px" }}>
@@ -2394,6 +2373,7 @@ const ServicedApartment = () => {
             placeholder="Enter Facing Width"
             maxLength={5}
             flex={1}
+            borderRadius={0}
             required
             value={facingwidth}
             onChange={(e) => {
@@ -2405,6 +2385,7 @@ const ServicedApartment = () => {
             flex={1}
             onChange={(e) => setFacing(e.target.value)}
             value={facing}
+            borderRadius={0}
           >
             <option value="Meter"> Meter </option>
             <option value="Feet"> Feet </option>
@@ -2412,14 +2393,9 @@ const ServicedApartment = () => {
         </InputGroup>
       </Box>
       <Box className={style.optional_box}>
-        <Heading size={"md"} margin={"10px 0 4px 0"} textAlign={"left"}>
+        <Heading size={"sm"} textAlign={"left"}>
           Location Advantages
-          <Heading
-            size={"xs"}
-            fontWeight={200}
-            margin={"4px 0"}
-            textAlign={"left"}
-          >
+          <Heading size={"xs"} fontWeight={200} textAlign={"left"}>
             Highlight the nearby landmarks*
           </Heading>
         </Heading>
@@ -2466,6 +2442,15 @@ const ServicedApartment = () => {
           </button>
           <button
             className={
+              locationAdv.includes("Close to Mall") ? style.setbtn : style.btn
+            }
+            value={"Close to Mall"}
+            onClick={handlelocationadvantages}
+          >
+            Close to Mall
+          </button>
+          <button
+            className={
               locationAdv.includes("Close to Railway Station")
                 ? style.setbtn
                 : style.btn
@@ -2485,15 +2470,6 @@ const ServicedApartment = () => {
             onClick={handlelocationadvantages}
           >
             Close to Airport
-          </button>
-          <button
-            className={
-              locationAdv.includes("Close to Mall") ? style.setbtn : style.btn
-            }
-            value={"Close to Mall"}
-            onClick={handlelocationadvantages}
-          >
-            Close to Mall
           </button>
           <button
             className={
@@ -2535,4 +2511,4 @@ const ServicedApartment = () => {
   );
 };
 
-export default ServicedApartment; 
+export default ServicedApartment;
