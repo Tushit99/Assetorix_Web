@@ -26,7 +26,7 @@ const CoWorkingspace = () => {
   const toast = useToast();
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
-  const [pincode, setPincode] = useState(0);
+  const [pincode, setPincode] = useState("");
   const [state, setState] = useState("");
   const [locality, setLocality] = useState("");
   const [washroom, setWashroom] = useState("");
@@ -65,8 +65,8 @@ const CoWorkingspace = () => {
   const [zoneType, setZoneType] = useState("");
   const [isClicked, setIsClicked] = useState(false);
   const [clickCount, setClickCount] = useState(0);
-  const navigate = useNavigate();
-  // state for drop box images
+  const [currency, setCurrency] = useState("₹"); 
+  const navigate = useNavigate(); 
   const [images, setImages] = useState([]);
   const [isDraging, setIsDraging] = useState(false);
   const fileInputRef = useRef(null);
@@ -479,8 +479,7 @@ const CoWorkingspace = () => {
         </Heading>
 
         <Select
-          fontSize={"md"}
-          padding={"0 10px"}
+          fontSize={"md"} 
           variant="flushed"
           as={"select"}
           onChange={(e) => setLocatedInside(e.target.value)}
@@ -493,8 +492,7 @@ const CoWorkingspace = () => {
         </Select>
 
         <Select
-          fontSize={"md"}
-          padding={"0 10px"}
+          fontSize={"md"} 
           variant="flushed"
           as={"select"}
           onChange={(e) => setZoneType(e.target.value)}
@@ -516,8 +514,9 @@ const CoWorkingspace = () => {
           placeholder={"Enter pincode"}
           maxLength={"6"}
           required
-          fontSize={"md"}
-          value={pincode}
+          fontSize={"md"} 
+          variant="flushed"
+          value={pincode} 
           onChange={handlepinfetch}
         />
         <Input
@@ -528,7 +527,7 @@ const CoWorkingspace = () => {
           list="browsers"
           value={locality}
           onChange={(e) => setLocality(NumericString(e.target.value))}
-          fontSize={"md"}
+          fontSize={"md"} 
           variant="flushed"
         />
         {pincollection.length ? (
@@ -544,12 +543,12 @@ const CoWorkingspace = () => {
         <Input
           type="text"
           maxLength={"100"}
-          required
+          required 
+          variant="flushed"
           placeholder="Enter City"
           fontSize={"md"}
           value={city}
-          onChange={(e) => setCity(NumericString(e.target.value))}
-          variant="flushed"
+          onChange={(e) => setCity(NumericString(e.target.value))} 
         />
         <Input
           type="text"
@@ -558,18 +557,17 @@ const CoWorkingspace = () => {
           placeholder="Enter State"
           value={state}
           onChange={(e) => setState(NumericString(e.target.value))}
-          fontSize={"md"}
-          variant="flushed"
-        />
-
+          fontSize={"md"} 
+          variant="flushed" 
+        /> 
         <Input
           type="text"
-          maxLength={"100"}
+          maxLength={"100"} 
           required
           placeholder="Enter Country"
           value={country}
           onChange={(e) => setCountry(NumericString(e.target.value))}
-          fontSize={"md"}
+          fontSize={"md"} 
           variant="flushed"
         />
       </Box>
@@ -579,42 +577,45 @@ const CoWorkingspace = () => {
         {/* ====================================== */}
         {/* Washrooms */}
         <Box padding={"10px 0 8px 0"} display={"grid"}>
-          <Heading textAlign={"left"} as={"h3"} size={"md"}>
+          <Heading textAlign={"left"} as={"h3"} size={"sm"}>
             Washrooms
           </Heading>
-          <Box margin={"10px 0 0 0"}>
+          <Box margin={"10px 0 0 0"} textAlign={"left"}>  
             <Input
               type="text"
-              maxLength={"2"}
-              value={washroom}
+              maxLength={"2"} 
+              width={{base:"100%",md:300}}  
+              value={washroom} 
               onChange={(e) => setWashroom(NumericString(e.target.value))}
-              placeholder={"Enter No. of washroom"}
-            />
+              placeholder={"Enter No. of washroom"} 
+            /> 
           </Box>
         </Box>
         {/* add area details */}
-        <Box textAlign={"left"} paddingTop={"10px"}>
-          <Heading as={"h3"} marginTop={"5px"} size={"md"}>
+        <Box textAlign={"left"} padding={"10px 0"}>
+          <Heading as={"h3"} margin={"5px 0"} size={"sm"}>
             Add Area Details
           </Heading>
-          <Text marginTop={"5px"}> Atleast one area type is mandatory </Text>
-          <ButtonGroup
-            className={style.select_land}
-            size="sm"
+          <InputGroup
             isAttached
+            width={{ base: "100%", md: 300 }}
             variant="outline"
           >
             <Input
               type="text"
               maxLength={"10"}
-              value={plotArea}
+              value={plotArea} 
+              placeholder="Enter plot area"
+              borderRadius={0}
               onChange={(e) => {
-                setPlotArea(NumericString(e.target.value)); 
+                setPlotArea(e.target.value);
               }}
               required
             />
             <Select
+              borderRadius={0}
               value={areaPer}
+              placeholder="Enter area detail"
               onChange={(e) => {
                 setAreaPer(e.target.value);
               }}
@@ -640,12 +641,12 @@ const CoWorkingspace = () => {
               <option value="chataks">chataks</option>
               <option value="perch">perch</option>
             </Select>
-          </ButtonGroup>
+          </InputGroup>
         </Box>
 
         {/* Availability status */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} marginTop={"10px"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Availability Status
           </Heading>
           <Box className={style.grid}>
@@ -682,8 +683,7 @@ const CoWorkingspace = () => {
           <Box textAlign={"left"} className={style.optional_box}>
             <Heading
               as={"h3"}
-              size={"md"}
-              margin={"30px 0 10px 0"}
+              size={"sm"} 
               textAlign={"left"}
             >
               Age of Property
@@ -741,8 +741,7 @@ const CoWorkingspace = () => {
           <Box>
             <Heading
               as={"h3"}
-              size={"md"}
-              margin={"30px 0 10px 0"}
+              size={"sm"} 
               textAlign={"left"}
             >
               Possession By
@@ -764,15 +763,14 @@ const CoWorkingspace = () => {
         <Box>
           
           {/* OwnerShip detail */}
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Ownership
           </Heading>
           <Box className={style.grid} gap={4}>
             <button
               className={ownership == "Freehold" ? style.setbtn : style.btn}
               borderRadius={"100px"}
-              border={"1px solid rgba(113, 210, 255, 0.897)"}
-              margin={"8px 6px 0 0"}
+              border={"1px solid rgba(113, 210, 255, 0.897)"} 
               onClick={handleownership}
               value={"Freehold"}
               backgroundColor={"blue.50"}
@@ -818,82 +816,81 @@ const CoWorkingspace = () => {
             </button>
           </Box>
         </Box>
-        {/* Priceing Detail  */}
-        <Box>
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          {/* Price Details */}
+          <Box>
+          <Heading
+            as={"h3"}
+            size={"sm"}
+            marginTop={{ base: 10, md: 5 }}
+            textAlign={"left"}
+          >
             Price Details
           </Heading>
           <Box display={"flex"} alignItems={"center"} gap={5}>
-            <Box display={"grid"} gap={0}>
-              <Heading
-                as={"h3"}
-                size={"xs"}
-                fontWeight={400}
-                textAlign={"left"}
+            <InputGroup w={300} gap={2}>
+              <Select
+                w={"-moz-fit-content"}
+                value={currency} 
+                borderRadius={0}
+                onChange={(e) => setCurrency(e.target.value)}
               >
-                {isCountry.country == "india" ? "₹" : "$"} Price Details
-              </Heading>
+                <option value="₹">₹ INR </option>
+                <option value="$">$ USD </option>
+              </Select>
               <Input
                 type="text"
                 value={pricedetail}
-                maxLength={"12"}
+                maxLength={"10"}
+                placeholder={`Price`}
                 required
-                onChange={(e) => { 
+                borderRadius={0} 
+                w={200}
+                onChange={(e) => {
                   setPricedetail(NumericString(e.target.value));
                 }}
               />
-            </Box>
-            {/* <Box display={"grid"} gap={0}>
-                            <Heading
-                                as={"h3"}
-                                size={"xs"}
-                                fontWeight={400}
-                                textAlign={"left"}
-                            >
-                                {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
-                            </Heading>
-                            <NumberInput value={priceSqr}>
-                                <NumberInputField
-
-                                />
-                            </NumberInput>
-                        </Box> */}
+            </InputGroup>
           </Box>
-        </Box>
-        {/* ============================ All inclusive price =========================  */}
-        <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
-          <Checkbox
-            isChecked={inclusivePrices.includes("All inclusive price")}
-            onChange={(e) => {
-              e.preventDefault();
-              handleinclusiveandtax(e.target.value);
-            }}
-            value={"All inclusive price"}
+          {/* ============================== inclusive charges (checkbox) ==============================  */}
+          <Box
+            display={"flex"}
+            gap={{ base: 2, md: 10 }}
+            marginTop={3}
+            flexWrap={"wrap"}
           >
-            All inclusive price
-          </Checkbox>
-          <Checkbox
-            isChecked={inclusivePrices.includes(
-              "Tax and Govt. charges excluded"
-            )}
-            onChange={(e) => {
-              e.preventDefault();
-              handleinclusiveandtax(e.target.value);
-            }}
-            value={"Tax and Govt. charges excluded"}
-          >
-            Tax and Govt. charges excluded
-          </Checkbox>
-          <Checkbox
-            isChecked={inclusivePrices.includes("Price Negotiable")}
-            onChange={(e) => {
-              e.preventDefault();
-              handleinclusiveandtax(e.target.value);
-            }}
-            value={"Price Negotiable"}
-          >
-            Price Negotiable
-          </Checkbox>
+            <Checkbox
+              isChecked={inclusivePrices.includes("All inclusive price")}
+              onChange={(e) => {
+                e.preventDefault();
+                handleinclusiveandtax(e.target.value);
+              }}
+              value={"All inclusive price"}
+            >
+              All inclusive price
+            </Checkbox>
+            <Checkbox
+              isChecked={inclusivePrices.includes(
+                "Tax and Govt. charges excluded"
+              )}
+              onChange={(e) => {
+                e.preventDefault();
+                handleinclusiveandtax(e.target.value);
+              }}
+              value={"Tax and Govt. charges excluded"}
+            >
+              Tax and Govt. charges excluded
+            </Checkbox>
+            <Checkbox
+              isChecked={inclusivePrices.includes("Price Negotiable")}
+              onChange={(e) => {
+                e.preventDefault();
+                handleinclusiveandtax(e.target.value);
+              }}
+              value={"Price Negotiable"}
+            >
+              Price Negotiable
+            </Checkbox>
+          </Box>
         </Box>
 
         {/* Additional Pricing Detail (Optional) */}
@@ -1072,15 +1069,17 @@ const CoWorkingspace = () => {
             </Box>
           </Box>
         </Box>
-        <Box>
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+        <Box textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Expected Annual Returns
           </Heading>
-          <Heading as={"h3"} size={"sm"} margin={0} textAlign={"left"}>
+          <Heading as={"h3"} fontWeight={"400"} size={"xs"} textAlign={"left"}>
             Based on cost of the property & current monthly rent
           </Heading>
           <Input
-            type="text"
+            type="text" 
+            textAlign={"left"} 
+            placeholder="Enter Expected Return"
             w={"300px"}
             value={expectedAnnual}
             onChange={(e) => setExpectedAnnual(NumericString(e.target.value))}
@@ -1116,9 +1115,8 @@ const CoWorkingspace = () => {
                     className={style.select}
                     role="button"
                     onClick={selectFiles}
-                  >
-                    {" "}
-                    Browse{" "}
+                  > 
+                    Browse 
                   </Text>
                 </>
               )}
@@ -1152,12 +1150,13 @@ const CoWorkingspace = () => {
 
         {/* property Description */}
         <Box>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Add Description and Unique Features of your Property
           </Heading> 
           <Textarea
-            height={140}
-            value={desc}
+            height={140} 
+            value={desc} 
+            placeholder="Add Description"  
             onChange={(e) => {
               let my_cleantext = CleanInputText(e.target.value);
               setDesc(my_cleantext);
@@ -1165,9 +1164,10 @@ const CoWorkingspace = () => {
           ></Textarea>
         </Box>
       </Box>
+
       {/* Amenities */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} textAlign={"left"}>
           Amenities
         </Heading>
         <Box>
@@ -1330,9 +1330,10 @@ const CoWorkingspace = () => {
           </button>
         </Box>
       </Box>
+
       {/* Property Features */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} textAlign={"left"}>
           Property Features
         </Heading>
         <Box>
@@ -1401,10 +1402,11 @@ const CoWorkingspace = () => {
             Club house / Community Center
           </button>
         </Box>
-      </Box>
+      </Box> 
+
       {/* Society/Building feature */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} textAlign={"left"}>
           Society/Building feature
         </Heading>
         <Box>
@@ -1475,10 +1477,11 @@ const CoWorkingspace = () => {
             Club house / Community Center
           </button>
         </Box>
-      </Box>
+      </Box> 
+
       {/* Additional Features */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} textAlign={"left"}>
           Additional Features
         </Heading>
         <Box>
@@ -1539,9 +1542,10 @@ const CoWorkingspace = () => {
           </button>
         </Box>
       </Box>
+
       {/* Other Features */}
       <Box>
-        <Heading size={"md"} margin={"10px 0 4px 0"} textAlign={"left"}>
+        <Heading size={"sm"} textAlign={"left"}>
           Other Features
         </Heading>
         <Box display={"flex"} alignItems={"center"} justifyContent={"left"}>
@@ -1552,10 +1556,11 @@ const CoWorkingspace = () => {
             Wheelchair friendly
           </Checkbox>
         </Box>
-      </Box>
+      </Box> 
+
       {/* location advantage (near to which place) */}
       <Box className={style.optional_box}>
-        <Heading size={"md"} margin={"10px 0 4px 0"} textAlign={"left"}>
+        <Heading size={"sm"} textAlign={"left"}>
           Location Advantages
           <Heading
             size={"xs"}
@@ -1664,7 +1669,7 @@ const CoWorkingspace = () => {
         blocked
       </Heading>
       {/* form submit button */}
-      {isClicked && <Loading />} sa
+      {isClicked && <Loading />} 
       <Button
         margin={"20px 0"}
         type="submit"

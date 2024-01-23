@@ -70,6 +70,7 @@ const ReadyToMove = () => {
   const [annualRentIncrease, setAnnualRentIncrease] = useState("");
   const [businessType, setBusinessType] = useState("");
   const [pantryTypeUnit, setPantryTypeUnit] = useState("sq.ft");
+  const [currency, setCurrency] = useState("₹");
 
   const [areaPer, setAreaPer] = useState("sq.ft");
   const [availability, setAvailability] = useState("");
@@ -531,7 +532,7 @@ const ReadyToMove = () => {
       {/* property location */}
       <Box className={style.location_form}>
         <Heading size={"lg"} color={"black"}>
-          Where is your property located?
+          Where is your Ready to move office space located?
         </Heading>
         <Heading size={"sm"}>Location Detail</Heading>
 
@@ -1960,6 +1961,7 @@ const ReadyToMove = () => {
           <Textarea
             height={140}
             value={desc}
+          placeholder="Add Description" 
             onChange={(e) => {
               let my_cleantext = CleanInputText(e.target.value);
               setDesc(my_cleantext);

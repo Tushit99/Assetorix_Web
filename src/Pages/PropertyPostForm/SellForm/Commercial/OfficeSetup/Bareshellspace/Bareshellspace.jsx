@@ -35,7 +35,7 @@ const Bareshellspace = () => {
   const toast = useToast();
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
-  const [pincode, setPincode] = useState(0);
+  const [pincode, setPincode] = useState("");
   const [state, setState] = useState("");
   const [washroomType, setWashroomType] = useState("");
   const [privateWashroom, setPrivateWashroom] = useState(0);
@@ -77,7 +77,7 @@ const Bareshellspace = () => {
   const [availability, setAvailability] = useState("");
   const [fromyear, setFromyear] = useState("");
   const [expectedyear, setExpectedYear] = useState("");
-  const [ownership, setOwnerShip] = useState(""); 
+  const [ownership, setOwnerShip] = useState("");
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [locationAdv, setLocationAdv] = useState([]);
@@ -90,6 +90,7 @@ const Bareshellspace = () => {
   const [zoneType, setZoneType] = useState("");
   const [isClicked, setIsClicked] = useState(false);
   const [clickCount, setClickCount] = useState(0);
+  const [currency, setCurrency] = useState("₹");
   const navigate = useNavigate();
   // state for drop box images
   const [images, setImages] = useState([]);
@@ -118,7 +119,7 @@ const Bareshellspace = () => {
         locatedInside,
       },
       ownership,
-      price: +pricedetail, 
+      price: +pricedetail,
       inclusivePrices,
       amenities,
       locationAdv,
@@ -309,11 +310,12 @@ const Bareshellspace = () => {
   };
 
   const handlepinfetch = (e) => {
-    setPincode(e.target.value);
-    if (e.target.value.length == 6) {
-      pinfetch(e.target.value);
+    let val = NumericString(e.target.value);
+    setPincode(val);
+    if (val.length == 6) {
+      pinfetch(+val);
     } else {
-      console.log(e.target.value);
+      console.log(val);
     }
   };
 
@@ -416,7 +418,7 @@ const Bareshellspace = () => {
       newarr.splice(newarr.indexOf(""), 1);
     }
     setFloorNumber(newarr);
-  }; 
+  };
 
   const handlefireSafty = (e) => {
     e.preventDefault();
@@ -523,15 +525,12 @@ const Bareshellspace = () => {
       {/* property location */}
       <Box className={style.location_form}>
         <Heading size={"lg"} color={"black"}>
-          Where is your property located?
+          Where is your Bare shell office space located?
         </Heading>
-        <Heading size={"sm"} color={"black"}>
-          An accurate location helps you connect with the right buyers.
-        </Heading>
+        <Heading size={"sm"}>Location Detail</Heading>
 
         <Select
           fontSize={"md"}
-          padding={"0 10px"}
           variant="flushed"
           as={"select"}
           onChange={(e) => setLocatedInside(e.target.value)}
@@ -545,7 +544,7 @@ const Bareshellspace = () => {
 
         <Select
           fontSize={"md"}
-          padding={"0 10px"}
+          marginLeft={"10px"}
           variant="flushed"
           as={"select"}
           onChange={(e) => setZoneType(e.target.value)}
@@ -567,15 +566,8 @@ const Bareshellspace = () => {
           placeholder={"Enter pincode"}
           maxLength={"12"}
           required
-          fontSize={"md"}
-          value={pincode}
-          onChange={handlepinfetch}
-        />
-        <Input
-          type="text"
-          placeholder={"Enter pincode"}
-          maxLength={"6"}
-          required
+          variant="flushed"
+          marginLeft={"10px"}
           fontSize={"md"}
           value={pincode}
           onChange={handlepinfetch}
@@ -584,6 +576,7 @@ const Bareshellspace = () => {
           type="text"
           maxLength={"12"}
           required
+          marginLeft={"10px"}
           placeholder="Enter Locality"
           list="browsers"
           value={locality}
@@ -604,6 +597,7 @@ const Bareshellspace = () => {
         <Input
           type="text"
           maxLength={"100"}
+          marginLeft={"10px"}
           required
           placeholder="Enter City"
           fontSize={"md"}
@@ -614,6 +608,7 @@ const Bareshellspace = () => {
         <Input
           type="text"
           maxLength={"100"}
+          marginLeft={"10px"}
           required
           placeholder="Enter State"
           value={state}
@@ -626,6 +621,7 @@ const Bareshellspace = () => {
           type="text"
           maxLength={"100"}
           required
+          marginLeft={"10px"}
           placeholder="Enter Country"
           value={country}
           onChange={(e) => setCountry(e.target.value)}
@@ -634,32 +630,32 @@ const Bareshellspace = () => {
         />
       </Box>
       {/* Property Detail */}
-      <Box marginTop={12}>
-        
+      <Box marginTop={4}>
         {/* ====================================== */}
-        {/* add area details */}
-        <Box textAlign={"left"} padding={"10px 0"}>
-          <Heading as={"h3"} margin={"5px 0"} size={"md"}>
+        <Box textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"}>
             Add Area Details
           </Heading>
-          <Text margin={"5px 0"}> Atleast one area type is mandatory </Text>
-          <ButtonGroup
-            className={style.select_land}
-            size="sm"
+          <InputGroup
             isAttached
+            width={{ base: "100%", md: 300 }}
             variant="outline"
           >
             <Input
               type="text"
-              maxLength={"12"}
+              maxLength={"10"}
               value={plotArea}
+              borderRadius={0}
+              placeholder="Enter area detail"
               onChange={(e) => {
-                setPlotArea(NumericString(e.target.value)); 
+                setPlotArea(e.target.value);
               }}
               required
             />
             <Select
+              borderRadius={0}
               value={areaPer}
+              placeholder="Enter area detail"
               onChange={(e) => {
                 setAreaPer(e.target.value);
               }}
@@ -685,11 +681,12 @@ const Bareshellspace = () => {
               <option value="chataks">chataks</option>
               <option value="perch">perch</option>
             </Select>
-          </ButtonGroup>
+          </InputGroup>
         </Box>
+
         {/* Construction status of walls */}
         <Box className={style.optional_box}>
-          <Heading textAlign={"left"} as={"h3"} size={"md"}>
+          <Heading textAlign={"left"} as={"h3"} size={"sm"}>
             Construction status of walls
           </Heading>
           <Box>
@@ -703,8 +700,7 @@ const Bareshellspace = () => {
               }
               value={"No walls"}
             >
-              {" "}
-              No walls{" "}
+              No walls
             </button>
             <button
               onClick={(e) => {
@@ -718,8 +714,7 @@ const Bareshellspace = () => {
               }
               value={"Brick walls"}
             >
-              {" "}
-              Brick walls{" "}
+              Brick walls
             </button>
             <button
               onClick={(e) => {
@@ -733,8 +728,7 @@ const Bareshellspace = () => {
               }
               value={"Cemented walls"}
             >
-              {" "}
-              Cemented walls{" "}
+              Cemented walls
             </button>
             <button
               onClick={(e) => {
@@ -748,14 +742,14 @@ const Bareshellspace = () => {
               }
               value={"Plastered walls"}
             >
-              {" "}
-              Plastered walls{" "}
+              Plastered walls
             </button>
           </Box>
         </Box>
+
         {/* Are doors constructed */}
         <Box className={style.optional_box}>
-          <Heading textAlign={"left"} as={"h3"} size={"md"}>
+          <Heading textAlign={"left"} as={"h3"} size={"sm"}>
             Are doors constructed
           </Heading>
           <Box>
@@ -781,16 +775,13 @@ const Bareshellspace = () => {
             </button>
           </Box>
         </Box>
+
         {/* Washrooms */}
-        <Box padding={"10px 0 8px 0"} display={"grid"}>
-          <Heading textAlign={"left"} as={"h3"} size={"md"}>
-            Washrooms 
+        <Box display={"grid"}>
+          <Heading textAlign={"left"} as={"h3"} size={"sm"}>
+            Washrooms
           </Heading>
-          <Box
-            display={"grid"} 
-            gridTemplateColumns={"repeat(1,1fr)"}
-            gap={2}
-          >
+          <Box display={"grid"} gridTemplateColumns={"repeat(1,1fr)"} gap={2}>
             <Box display={"flex"} gap={10}>
               <button
                 value={"Available"}
@@ -821,13 +812,13 @@ const Bareshellspace = () => {
             <Box display={washroomType == "Available" ? "block" : "none"}>
               <Box
                 display={"flex"}
-                w={340} 
+                w={340}
                 alignItems={"center"}
                 margin={"10px"}
               >
                 <Heading textAlign={"left"} as={"h3"} size={"md"}>
-                  No. of Private Washrooms 
-                </Heading> 
+                  No. of Private Washrooms
+                </Heading>
                 <button
                   onClick={(e) => {
                     e.preventDefault();
@@ -890,11 +881,11 @@ const Bareshellspace = () => {
             </Box>
           </Box>
         </Box>
+
         {/* Pantry Type */}
-        <Box padding={"10px 0 8px 0"}>
-          <Heading as={"h3"} size={"md"} textAlign={"left"}>
-            {" "}
-            Pantry Type{" "}
+        <Box>
+          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
+            Pantry Type
           </Heading>
           <Box display={"flex"} gap={10} padding={"12px 0"}>
             <button
@@ -972,13 +963,15 @@ const Bareshellspace = () => {
             </InputGroup>
           </Box>
         </Box>
+
         {/* Type of flooring */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Type of flooring
           </Heading>
           <Box>
             <Select
+              width={{ base: "100%", md: 300 }}
               onChange={(e) => setFlooring(e.target.value)}
               value={flooring}
             >
@@ -1000,15 +993,15 @@ const Bareshellspace = () => {
             </Select>
           </Box>
         </Box>
+
         {/* Please select the facilities available */}
         <Box>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Please select the facilities available
           </Heading>
           <Box display={"flex"} margin={"5px 14px"} w={500} gap={6}>
             <Text flex={4} textAlign={"left"}>
-              {" "}
-              Central Air Conditioning{" "}
+              Central Air Conditioning
             </Text>
             <RadioGroup onChange={setAirCondition} value={airCondition}>
               <Stack direction="row">
@@ -1028,10 +1021,11 @@ const Bareshellspace = () => {
               </Stack>
             </RadioGroup>
           </Box>
-        </Box> 
+        </Box>
+
         {/* Fire safety mesures */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"md"}>
+          <Heading as={"h3"} size={"sm"}>
             Fire safety measures include
           </Heading>
           <Box>
@@ -1044,8 +1038,7 @@ const Bareshellspace = () => {
               onClick={handlefireSafty}
               value={"Fire Extinguisher"}
             >
-              {" "}
-              Fire Extinguisher{" "}
+              Fire Extinguisher
             </button>
             <button
               className={
@@ -1054,8 +1047,7 @@ const Bareshellspace = () => {
               onClick={handlefireSafty}
               value={"Fire Sensors"}
             >
-              {" "}
-              Fire Sensors{" "}
+              Fire Sensors
             </button>
             <button
               className={
@@ -1064,8 +1056,7 @@ const Bareshellspace = () => {
               onClick={handlefireSafty}
               value={"Sprinklers"}
             >
-              {" "}
-              Sprinklers{" "}
+              Sprinklers
             </button>
             <button
               className={
@@ -1074,30 +1065,25 @@ const Bareshellspace = () => {
               onClick={handlefireSafty}
               value={"Fire Hose"}
             >
-              {" "}
-              Fire Hose{" "}
+              Fire Hose
             </button>
           </Box>
         </Box>
+
         {/* floor details */}
-        <Box textAlign={"left"} >
-          <Heading
-            as={"h3"}
-            size={"md"} 
-            textAlign={"left"}
-          >
+        <Box textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Floor Details
           </Heading>
-          <Text textAlign={"left"} >
-            Total no of floors and your floor details 
-          </Text>
-          <Box display={"flex"} alignItems={"center"} gap={5}>
+          <Box display={"flex"} alignItems={"center"}>
             <Input
               type="text"
-              value={totalfloors} 
-              maxLength={2} 
-              onChange={(e) => { 
-                  setTotalFloors(NumericString(e.target.value)); 
+              value={totalfloors}
+              placeholder="Enter total floor"
+              width={{ base: "100%", md: 300 }}
+              maxLength={2}
+              onChange={(e) => {
+                setTotalFloors(NumericString(e.target.value));
               }}
               required
               w={250}
@@ -1105,7 +1091,8 @@ const Bareshellspace = () => {
             <Box>
               <Menu>
                 <MenuButton
-                  variant={"outline"} 
+                  variant={"outline"}
+                  borderRadius={0}
                   as={Button}
                   rightIcon={<ChevronDownIcon />}
                 >
@@ -1124,22 +1111,21 @@ const Bareshellspace = () => {
                     onChange={handleFloorNumber}
                     value={"Basement"}
                   >
-                    {" "}
-                    Basement{" "}
+                    Basement
                   </Checkbox>
                   <Checkbox
                     isChecked={floorNumber.includes("Lower Ground")}
                     onChange={handleFloorNumber}
                     value={"Lower Ground"}
-                  > 
-                    Lower Ground 
+                  >
+                    Lower Ground
                   </Checkbox>
                   <Checkbox
                     isChecked={floorNumber.includes("Ground")}
                     onChange={handleFloorNumber}
                     value={"Ground"}
-                  > 
-                    Ground 
+                  >
+                    Ground
                   </Checkbox>
                   {Array.from(Array(Number(totalfloors)).keys()).map((e, i) => {
                     return (
@@ -1147,9 +1133,9 @@ const Bareshellspace = () => {
                         isChecked={floorNumber.includes(`${e + 1}`)}
                         key={i}
                         onChange={handleFloorNumber}
-                        value={e + 1} 
-                      > 
-                        {e + 1} 
+                        value={e + 1}
+                      >
+                        {e + 1}
                       </Checkbox>
                     );
                   })}
@@ -1160,7 +1146,7 @@ const Bareshellspace = () => {
         </Box>
         {/* Staicases */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"}>
+          <Heading as={"h3"} size={"sm"}>
             No. of Staircases (Optional)
           </Heading>
           <Input
@@ -1175,7 +1161,7 @@ const Bareshellspace = () => {
         </Box>
         {/* Lift */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"md"}>
+          <Heading as={"h3"} size={"sm"}>
             Lifts
           </Heading>
           <Box>
@@ -1235,8 +1221,7 @@ const Bareshellspace = () => {
                 <AddIcon fontSize={"12px"} />
               </button>
               <Text margin={"0 10px"} flex={4}>
-                {" "}
-                Passenger Lifts{" "}
+                Passenger Lifts
               </Text>
             </Box>
             <Box padding={"0 40px"}>
@@ -1246,8 +1231,7 @@ const Bareshellspace = () => {
                   console.log(modernLifts);
                 }}
               >
-                {" "}
-                Modern lifts (Optional){" "}
+                Modern lifts (Optional)
               </Checkbox>
             </Box>
           </Box>
@@ -1280,14 +1264,14 @@ const Bareshellspace = () => {
               <AddIcon fontSize={"12px"} />
             </button>
             <Text margin={"0 10px"} flex={4}>
-              {" "}
-              Service Lifts{" "}
+              Service Lifts
             </Text>
           </Box>
         </Box>
+
         {/* Parking */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"}>
+          <Heading as={"h3"} size={"sm"}>
             Parking
           </Heading>
           <Box>
@@ -1316,33 +1300,40 @@ const Bareshellspace = () => {
               Not-Available
             </button>
           </Box>
-          <Box>
-            <Checkbox
-              onChange={handleNumberOfParking}
-              value={"Private Parking in Basement"}
-              isChecked={parkingArr.includes("Private Parking in Basement")}
+          <Box display={parkingStatus == "Available" ? "grid" : "none"} gap={2}>
+            <Box
+              display={"flex"}
+              flexWrap={"wrap"}
+              gap={4}
+              alignItems={"center"}
             >
-              Private Parking in Basement
-            </Checkbox>
-            <Checkbox
-              onChange={handleNumberOfParking}
-              value={"Private Parking Outside"}
-              isChecked={parkingArr.includes("Private Parking Outside")}
-            >
-              Private Parking Outside
-            </Checkbox>
-            <Checkbox
-              onChange={handleNumberOfParking}
-              value={"Private Parking Outside"}
-              isChecked={parkingArr.includes("Private Parking Outside")}
-            >
-              Public Parking
-            </Checkbox>
+              <Checkbox
+                onChange={handleNumberOfParking}
+                value={"Private Parking in Basement"}
+                isChecked={parkingArr.includes("Private Parking in Basement")}
+              >
+                Private Parking in Basement
+              </Checkbox>
+              <Checkbox
+                onChange={handleNumberOfParking}
+                value={"Private Parking Outside"}
+                isChecked={parkingArr.includes("Private Parking Outside")}
+              >
+                Private Parking Outside
+              </Checkbox>
+              <Checkbox
+                onChange={handleNumberOfParking}
+                value={"Private Parking Outside"}
+                isChecked={parkingArr.includes("Private Parking Outside")}
+              >
+                Public Parking
+              </Checkbox>
+            </Box>
             <Input
               type="text"
               placeholder="Enter no. of Parkings"
-              maxLength={"3"}
               value={parkingTotalNumber}
+              maxLength={"4"}
               onChange={(e) => {
                 e.preventDefault();
                 setParkingTotalNumber(NumericString(e.target.value));
@@ -1350,9 +1341,10 @@ const Bareshellspace = () => {
             />
           </Box>
         </Box>
+
         {/* Availability status */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Availability Status
           </Heading>
           <Box className={style.grid}>
@@ -1469,7 +1461,6 @@ const Bareshellspace = () => {
         )}
         {/* Add pricing and details (ownerShip) */}
         <Box>
-          
           {/* OwnerShip detail */}
           <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Ownership
@@ -1525,32 +1516,83 @@ const Bareshellspace = () => {
             </button>
           </Box>
         </Box>
-        {/* Priceing Detail  */}
+
         <Box>
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          <Heading
+            as={"h3"}
+            size={"sm"}
+            marginTop={{ base: 10, md: 5 }}
+            textAlign={"left"}
+          >
             Price Details
           </Heading>
           <Box display={"flex"} alignItems={"center"} gap={5}>
-            <Box display={"grid"} gap={0}>
-              <Heading
-                as={"h3"}
-                size={"xs"}
-                fontWeight={400}
-                textAlign={"left"}
+            <InputGroup w={300} gap={2}>
+              <Select
+                w={"-moz-fit-content"}
+                value={currency}
+                borderRadius={0}
+                onChange={(e) => setCurrency(e.target.value)}
               >
-                {isCountry.country == "india" ? "₹" : "$"} Price Details
-              </Heading>
+                <option value="₹">₹ INR </option>
+                <option value="$">$ USD </option>
+              </Select>
               <Input
                 type="text"
                 value={pricedetail}
+                maxLength={"10"}
+                placeholder={`Price`}
                 required
+                borderRadius={0}
+                w={200}
                 onChange={(e) => {
-                  setPricedetail(NumericString(e.target.value)); 
+                  setPricedetail(NumericString(e.target.value));
                 }}
               />
-            </Box>
+            </InputGroup>
+          </Box>
+          {/* ============================== inclusive charges (checkbox) ==============================  */}
+          <Box
+            display={"flex"}
+            gap={{ base: 2, md: 10 }}
+            marginTop={3}
+            flexWrap={"wrap"}
+          >
+            <Checkbox
+              isChecked={inclusivePrices.includes("All inclusive price")}
+              onChange={(e) => {
+                e.preventDefault();
+                handleinclusiveandtax(e.target.value);
+              }}
+              value={"All inclusive price"}
+            >
+              All inclusive price
+            </Checkbox>
+            <Checkbox
+              isChecked={inclusivePrices.includes(
+                "Tax and Govt. charges excluded"
+              )}
+              onChange={(e) => {
+                e.preventDefault();
+                handleinclusiveandtax(e.target.value);
+              }}
+              value={"Tax and Govt. charges excluded"}
+            >
+              Tax and Govt. charges excluded
+            </Checkbox>
+            <Checkbox
+              isChecked={inclusivePrices.includes("Price Negotiable")}
+              onChange={(e) => {
+                e.preventDefault();
+                handleinclusiveandtax(e.target.value);
+              }}
+              value={"Price Negotiable"}
+            >
+              Price Negotiable
+            </Checkbox>
           </Box>
         </Box>
+
         {/* checkbox */}
         <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
           <Checkbox
@@ -1670,7 +1712,7 @@ const Bareshellspace = () => {
               <IoIosArrowUp style={{ display: "inline" }} />
             ) : (
               <IoIosArrowDown style={{ display: "inline" }} />
-            )}{" "}
+            )}
             Add more pricing details
           </Heading>
         </Box>
@@ -1692,8 +1734,7 @@ const Bareshellspace = () => {
               }}
               className={preLeased == "Yes" ? style.setbtn : style.btn}
             >
-              {" "}
-              Yes{" "}
+              Yes
             </button>
             <button
               value={"No"}
@@ -1703,8 +1744,7 @@ const Bareshellspace = () => {
               }}
               className={preLeased == "No" ? style.setbtn : style.btn}
             >
-              {" "}
-              No{" "}
+              No
             </button>
           </Box>
         </Box>
@@ -1788,8 +1828,7 @@ const Bareshellspace = () => {
               }}
               className={fireNOC == "Yes" ? style.setbtn : style.btn}
             >
-              {" "}
-              Yes{" "}
+              Yes
             </button>
             <button
               value={"No"}
@@ -1799,8 +1838,7 @@ const Bareshellspace = () => {
               }}
               className={fireNOC == "No" ? style.setbtn : style.btn}
             >
-              {" "}
-              No{" "}
+              No
             </button>
           </Box>
         </Box>
@@ -1822,8 +1860,7 @@ const Bareshellspace = () => {
                 occupancyCertificate == "Yes" ? style.setbtn : style.btn
               }
             >
-              {" "}
-              Yes{" "}
+              Yes
             </button>
             <button
               value={"No"}
@@ -1835,8 +1872,7 @@ const Bareshellspace = () => {
                 occupancyCertificate == "No" ? style.setbtn : style.btn
               }
             >
-              {" "}
-              No{" "}
+              No
             </button>
           </Box>
         </Box>
@@ -1873,8 +1909,7 @@ const Bareshellspace = () => {
                     FileSystemHandle(e.target.value);
                   }}
                 >
-                  {" "}
-                  Backend Office{" "}
+                  Backend Office
                 </Checkbox>
                 <Checkbox
                   value={"CA Office"}
@@ -1883,8 +1918,7 @@ const Bareshellspace = () => {
                     FileSystemHandle(e.target.value);
                   }}
                 >
-                  {" "}
-                  CA Office{" "}
+                  CA Office
                 </Checkbox>
                 <Checkbox
                   value={"Fronted Office"}
@@ -1893,8 +1927,7 @@ const Bareshellspace = () => {
                     FileSystemHandle(e.target.value);
                   }}
                 >
-                  {" "}
-                  Fronted Office{" "}
+                  Fronted Office
                 </Checkbox>
                 <Checkbox
                   value={"Small Office Purpose"}
@@ -1903,8 +1936,7 @@ const Bareshellspace = () => {
                     FileSystemHandle(e.target.value);
                   }}
                 >
-                  {" "}
-                  Small Office Purpose{" "}
+                  Small Office Purpose
                 </Checkbox>
                 <Checkbox
                   value={"Traders Office"}
@@ -1913,8 +1945,7 @@ const Bareshellspace = () => {
                     FileSystemHandle(e.target.value);
                   }}
                 >
-                  {" "}
-                  Traders Office{" "}
+                  Traders Office
                 </Checkbox>
                 <Checkbox
                   value={"Advocate Office"}
@@ -1923,8 +1954,7 @@ const Bareshellspace = () => {
                     FileSystemHandle(e.target.value);
                   }}
                 >
-                  {" "}
-                  Advocate Office{" "}
+                  Advocate Office
                 </Checkbox>
               </MenuList>
             </Menu>
@@ -1940,8 +1970,7 @@ const Bareshellspace = () => {
               textAlign={"left"}
               margin={"10px 0"}
             >
-              {" "}
-              Upload Your Property image{" "}
+              Upload Your Property image
             </Heading>
           </Box>
           <Box className={style.card}>
@@ -1961,8 +1990,7 @@ const Bareshellspace = () => {
                     role="button"
                     onClick={selectFiles}
                   >
-                    {" "}
-                    Browse{" "}
+                    Browse
                   </Text>
                 </>
               )}
@@ -1996,12 +2024,13 @@ const Bareshellspace = () => {
 
         {/* property Description */}
         <Box>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Add Description and Unique Features of your Property
-          </Heading> 
+          </Heading>
           <Textarea
             height={140}
             value={desc}
+            placeholder="Add Description" 
             onChange={(e) => {
               let my_cleantext = CleanInputText(e.target.value);
               setDesc(my_cleantext);
@@ -2012,7 +2041,7 @@ const Bareshellspace = () => {
 
       {/* Amenities */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
           Amenities
         </Heading>
         <Box>
@@ -2166,9 +2195,10 @@ const Bareshellspace = () => {
           </button>
         </Box>
       </Box>
+
       {/* location advantage (near to which place) */}
       <Box className={style.optional_box}>
-        <Heading size={"md"} margin={"10px 0 4px 0"} textAlign={"left"}>
+        <Heading size={"sm"} margin={"10px 0 4px 0"} textAlign={"left"}>
           Location Advantages
           <Heading
             size={"xs"}
