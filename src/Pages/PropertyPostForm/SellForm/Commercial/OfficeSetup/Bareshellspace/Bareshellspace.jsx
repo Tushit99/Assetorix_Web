@@ -784,11 +784,10 @@ const Bareshellspace = () => {
         {/* Washrooms */}
         <Box padding={"10px 0 8px 0"} display={"grid"}>
           <Heading textAlign={"left"} as={"h3"} size={"md"}>
-            Washrooms
+            Washrooms 
           </Heading>
           <Box
-            display={"grid"}
-            padding={"10px 0 8px 0"}
+            display={"grid"} 
             gridTemplateColumns={"repeat(1,1fr)"}
             gap={2}
           >
@@ -822,13 +821,13 @@ const Bareshellspace = () => {
             <Box display={washroomType == "Available" ? "block" : "none"}>
               <Box
                 display={"flex"}
-                w={340}
+                w={340} 
                 alignItems={"center"}
                 margin={"10px"}
               >
-                <Text flex={8} textAlign={"left"}>
-                  No. of Private Washrooms
-                </Text>
+                <Heading textAlign={"left"} as={"h3"} size={"md"}>
+                  No. of Private Washrooms 
+                </Heading> 
                 <button
                   onClick={(e) => {
                     e.preventDefault();
@@ -1029,49 +1028,7 @@ const Bareshellspace = () => {
               </Stack>
             </RadioGroup>
           </Box>
-        </Box>
-        {/* facilities available */}
-        {/* <Box textAlign={"left"}>
-                    <Heading as={"h3"} size={"md"} padding={"10px 0"}>
-                        Please select the facilities available
-                    </Heading>
-                    <Box display={"flex"} margin={"5px 14px"} w={500} gap={6}>
-                        <Text flex={4}>Furnishing</Text>
-                        <RadioGroup onChange={setFurnishing} value={furnishing}>
-                            <Stack direction='row'>
-                                <Radio value='Available'>Available</Radio>
-                                <Radio value='Not-Available'>Not-Available</Radio>
-                            </Stack>
-                        </RadioGroup>
-                    </Box>
-                    <Box display={"flex"} margin={"5px 14px"} w={500} gap={6}>
-                        <Text flex={4}>Central Air Conditioning</Text>
-                        <RadioGroup onChange={setcentralAirConditioning} value={centralAirConditioning}>
-                            <Stack direction='row'>
-                                <Radio value='Available'>Available</Radio>
-                                <Radio value='Not-Available'>Not-Available</Radio>
-                            </Stack>
-                        </RadioGroup>
-                    </Box>
-                    <Box display={"flex"} margin={"5px 14px"} w={500} gap={6}>
-                        <Text flex={4}>Oxygen Duct</Text>
-                        <RadioGroup onChange={setOxygenDuct} value={oxygenDuct}>
-                            <Stack direction='row'>
-                                <Radio value='Available'>Available</Radio>
-                                <Radio value='Not-Available'>Not-Available</Radio>
-                            </Stack>
-                        </RadioGroup>
-                    </Box>
-                    <Box display={"flex"} margin={"5px 0 0 14px"} w={500} gap={6}>
-                        <Text flex={4}>UPS</Text>
-                        <RadioGroup onChange={setUps} value={ups}>
-                            <Stack direction='row'>
-                                <Radio value='Available'>Available</Radio>
-                                <Radio value='Not-Available'>Not-Available</Radio>
-                            </Stack>
-                        </RadioGroup>
-                    </Box>
-                </Box> */}
+        </Box> 
         {/* Fire safety mesures */}
         <Box textAlign={"left"} className={style.optional_box}>
           <Heading as={"h3"} size={"md"}>
@@ -1123,34 +1080,24 @@ const Bareshellspace = () => {
           </Box>
         </Box>
         {/* floor details */}
-        <Box textAlign={"left"} margin={"6px 0 14px 0"}>
+        <Box textAlign={"left"} >
           <Heading
             as={"h3"}
-            size={"md"}
-            margin={"30px 0 10px 0"}
+            size={"md"} 
             textAlign={"left"}
           >
             Floor Details
           </Heading>
-          <Text textAlign={"left"} margin={"10px 0"}>
-            Total no of floors and your floor details
+          <Text textAlign={"left"} >
+            Total no of floors and your floor details 
           </Text>
           <Box display={"flex"} alignItems={"center"} gap={5}>
             <Input
               type="text"
-              value={totalfloors}
-              onChange={(e) => {
-                const nowval = e.target.value > 90;
-                if (nowval) {
-                  toast({
-                    title: "Maximum floor count: 90",
-                    status: "error",
-                    duration: 2000,
-                    position: "top-right",
-                  });
-                } else {
-                  setTotalFloors(e.target.value);
-                }
+              value={totalfloors} 
+              maxLength={2} 
+              onChange={(e) => { 
+                  setTotalFloors(NumericString(e.target.value)); 
               }}
               required
               w={250}
@@ -1158,14 +1105,7 @@ const Bareshellspace = () => {
             <Box>
               <Menu>
                 <MenuButton
-                  backgroundColor={"white"}
-                  _hover={{ bg: "white" }}
-                  _expanded={{ bg: "white" }}
-                  borderRadius={0}
-                  borderRight={0}
-                  borderLeft={0}
-                  borderTop={0}
-                  _focus={{ boxShadow: "outline" }}
+                  variant={"outline"} 
                   as={Button}
                   rightIcon={<ChevronDownIcon />}
                 >
@@ -1191,17 +1131,15 @@ const Bareshellspace = () => {
                     isChecked={floorNumber.includes("Lower Ground")}
                     onChange={handleFloorNumber}
                     value={"Lower Ground"}
-                  >
-                    {" "}
-                    Lower Ground{" "}
+                  > 
+                    Lower Ground 
                   </Checkbox>
                   <Checkbox
                     isChecked={floorNumber.includes("Ground")}
                     onChange={handleFloorNumber}
                     value={"Ground"}
-                  >
-                    {" "}
-                    Ground{" "}
+                  > 
+                    Ground 
                   </Checkbox>
                   {Array.from(Array(Number(totalfloors)).keys()).map((e, i) => {
                     return (
@@ -1209,10 +1147,9 @@ const Bareshellspace = () => {
                         isChecked={floorNumber.includes(`${e + 1}`)}
                         key={i}
                         onChange={handleFloorNumber}
-                        value={e + 1}
-                      >
-                        {" "}
-                        {e + 1}{" "}
+                        value={e + 1} 
+                      > 
+                        {e + 1} 
                       </Checkbox>
                     );
                   })}

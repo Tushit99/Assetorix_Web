@@ -119,19 +119,18 @@
   }
   
   .optional_box {
+    margin: 10px 0;
     text-align: left;
-    margin: 20px 0;
     display: grid;
-    gap: 8px;
+    gap: 8px; 
   }
   
   .optional_box > *:nth-child(2) {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 20px;
-  }
-  
+    gap: 10px;
+  } 
 
   .washroom_dec{
     display: flex;

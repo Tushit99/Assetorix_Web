@@ -732,8 +732,8 @@ const ReadyToMove = () => {
             <Input
               type="text"
               placeholder="No. of Meeting Rooms"
-              value={meetingRoom} 
-              width={{base:"100%",md:300}}
+              value={meetingRoom}
+              width={{ base: "100%", md: 300 }}
               maxLength={"10"}
               onChange={(e) => setMeetingRoom(NumericString(e.target.value))}
             />
@@ -744,7 +744,7 @@ const ReadyToMove = () => {
           <Heading textAlign={"left"} as={"h3"} size={"sm"}>
             Washrooms
           </Heading>
-          <Box className={style.optional_box} >
+          <Box display={"grid"} gridTemplateColumns={"repeat(1,1fr)"} gap={2}>
             <Box display={"flex"} gap={10}>
               <button
                 value={"Available"}
@@ -845,11 +845,11 @@ const ReadyToMove = () => {
           </Box>
         </Box>
         {/* Conference Room */}
-        <Box padding={"10px 0 8px 0"}>
-          <Heading as={"h3"} size={"sm"} textAlign={"left"}> 
-            Conference Room 
+        <Box className={style.optional_box}>
+          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
+            Conference Room
           </Heading>
-          <Box display={"flex"} gap={10} padding={"12px 0 0 0"}>
+          <Box>
             <button
               value={"Available"}
               margin="auto"
@@ -879,9 +879,8 @@ const ReadyToMove = () => {
         </Box>
         {/* Reception Area */}
         <Box padding={"10px 0 8px 0"}>
-          <Heading as={"h3"} size={"md"} textAlign={"left"}>
-            {" "}
-            Reception Area{" "}
+          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
+            Reception Area
           </Heading>
           <Box display={"flex"} gap={10} padding={"12px 0 0 0"}>
             <button
@@ -913,10 +912,9 @@ const ReadyToMove = () => {
         </Box>
         {/* Pantry Type */}
         <Box padding={"10px 0 8px 0"}>
-          <Heading as={"h3"} size={"md"} textAlign={"left"}>
-            {" "}
-            Pantry Type{" "}
-          </Heading>
+          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
+            Pantry Type 
+          </Heading> 
           <Box display={"flex"} gap={10} padding={"12px 0"}>
             <button
               value={"Private"}
@@ -1009,7 +1007,7 @@ const ReadyToMove = () => {
         </Box>
         {/* facilities available */}
         <Box textAlign={"left"}>
-          <Heading as={"h3"} size={"md"} padding={"10px 0"}>
+          <Heading as={"h3"} size={"sm"} padding={"10px 0"}>
             Please select the facilities available
           </Heading>
           <Box display={"flex"} margin={"5px 14px"} w={500} gap={6}>
@@ -1054,7 +1052,7 @@ const ReadyToMove = () => {
         </Box>
         {/* Fire safety mesures */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"md"}>
+          <Heading as={"h3"} size={"sm"}> 
             Fire safety measures include
           </Heading>
           <Box>
@@ -1067,8 +1065,7 @@ const ReadyToMove = () => {
               onClick={handlefireSafty}
               value={"Fire Extinguisher"}
             >
-              {" "}
-              Fire Extinguisher{" "}
+              Fire Extinguisher
             </button>
             <button
               className={
@@ -1077,8 +1074,7 @@ const ReadyToMove = () => {
               onClick={handlefireSafty}
               value={"Fire Sensors"}
             >
-              {" "}
-              Fire Sensors{" "}
+              Fire Sensors
             </button>
             <button
               className={
@@ -1087,8 +1083,7 @@ const ReadyToMove = () => {
               onClick={handlefireSafty}
               value={"Sprinklers"}
             >
-              {" "}
-              Sprinklers{" "}
+              Sprinklers
             </button>
             <button
               className={
@@ -1097,55 +1092,37 @@ const ReadyToMove = () => {
               onClick={handlefireSafty}
               value={"Fire Hose"}
             >
-              {" "}
-              Fire Hose{" "}
+              Fire Hose
             </button>
           </Box>
         </Box>
         {/* floor details */}
-        <Box textAlign={"left"} margin={"6px 0 14px 0"}>
+        <Box textAlign={"left"}>
           <Heading
             as={"h3"}
-            size={"md"}
-            margin={"30px 0 10px 0"}
+            size={"sm"} 
             textAlign={"left"}
           >
             Floor Details
-          </Heading>
-          <Text textAlign={"left"} margin={"10px 0"}>
-            Total no of floors and your floor details
-          </Text>
-          <Box display={"flex"} alignItems={"center"} gap={5}>
-            <Input
-              type="text"
-              value={totalfloors}
-              onChange={(e) => {
-                const nowval = e.target.value > 90;
-                if (nowval) {
-                  toast({
-                    title: "Maximum floor count: 90",
-                    status: "error",
-                    duration: 2000,
-                    position: "top-right",
-                  });
-                } else {
-                  setTotalFloors(e.target.value);
-                }
+          </Heading> 
+          <Box display={"flex"} alignItems={"center"}>
+            <Input 
+              type="text"  
+              placeholder="Enter Total floor"
+              value={totalfloors} 
+              variant={"outline"}
+              maxLength={2} 
+              onChange={(e) => { 
+                  setTotalFloors(NumericString(e.target.value)); 
               }}
               required
               w={180}
             />
             <Box>
               <Menu>
-                <MenuButton
-                  backgroundColor={"white"}
-                  _hover={{ bg: "white" }}
-                  _expanded={{ bg: "white" }}
-                  borderRadius={0}
-                  borderRight={0}
-                  borderLeft={0}
-                  borderTop={0}
-                  _focus={{ boxShadow: "outline" }}
+                <MenuButton  
+                  variant={"outline"} 
+                  borderRadius={0}  
                   as={Button}
                   rightIcon={<ChevronDownIcon />}
                 >
@@ -1164,24 +1141,21 @@ const ReadyToMove = () => {
                     onChange={handleFloorNumber}
                     value={"Basement"}
                   >
-                    {" "}
-                    Basement{" "}
+                    Basement
                   </Checkbox>
                   <Checkbox
                     isChecked={floorNumber.includes("Lower Ground")}
                     onChange={handleFloorNumber}
                     value={"Lower Ground"}
                   >
-                    {" "}
-                    Lower Ground{" "}
+                    Lower Ground
                   </Checkbox>
                   <Checkbox
                     isChecked={floorNumber.includes("Ground")}
                     onChange={handleFloorNumber}
                     value={"Ground"}
                   >
-                    {" "}
-                    Ground{" "}
+                    Ground
                   </Checkbox>
                   {Array.from(Array(Number(totalfloors)).keys()).map((e, i) => {
                     return (
@@ -1191,8 +1165,7 @@ const ReadyToMove = () => {
                         onChange={handleFloorNumber}
                         value={e + 1}
                       >
-                        {" "}
-                        {e + 1}{" "}
+                        {e + 1}
                       </Checkbox>
                     );
                   })}
@@ -1203,7 +1176,7 @@ const ReadyToMove = () => {
         </Box>
         {/* Staicases */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"}>
+          <Heading as={"h3"} size={"sm"}>
             No. of Staircases (Optional)
           </Heading>
           <Input
@@ -1211,14 +1184,14 @@ const ReadyToMove = () => {
             type="text"
             placeholder="No. of Staircases"
             variant={"flushed"}
-            maxLength={"12"}
+            maxLength={"5"}
             onChange={(e) => setStairCase(NumericString(e.target.value))}
             value={stairCase}
           />
         </Box>
         {/* Lift */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"md"}>
+          <Heading as={"h3"} size={"sm"}> 
             Lifts
           </Heading>
           <Box>
@@ -1278,8 +1251,7 @@ const ReadyToMove = () => {
                 <AddIcon fontSize={"12px"} />
               </button>
               <Text margin={"0 10px"} flex={4}>
-                {" "}
-                Passenger Lifts{" "}
+                Passenger Lifts
               </Text>
             </Box>
             <Box padding={"0 40px"}>
@@ -1289,8 +1261,7 @@ const ReadyToMove = () => {
                   console.log(modernLifts);
                 }}
               >
-                {" "}
-                Modern lifts (Optional){" "}
+                Modern lifts (Optional)
               </Checkbox>
             </Box>
           </Box>
@@ -1323,14 +1294,13 @@ const ReadyToMove = () => {
               <AddIcon fontSize={"12px"} />
             </button>
             <Text margin={"0 10px"} flex={4}>
-              {" "}
-              Service Lifts{" "}
+              Service Lifts
             </Text>
           </Box>
         </Box>
         {/* Parking */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"}>
+          <Heading as={"h3"} size={"sm"}>
             Parking
           </Heading>
           <Box>
@@ -1402,7 +1372,7 @@ const ReadyToMove = () => {
         </Box>
         {/* Availability status */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Availability Status
           </Heading>
           <Box className={style.grid}>
@@ -1686,8 +1656,7 @@ const ReadyToMove = () => {
               }}
               className={preLeased == "Yes" ? style.setbtn : style.btn}
             >
-              {" "}
-              Yes{" "}
+              Yes
             </button>
             <button
               value={"No"}
@@ -1697,8 +1666,7 @@ const ReadyToMove = () => {
               }}
               className={preLeased == "No" ? style.setbtn : style.btn}
             >
-              {" "}
-              No{" "}
+              No
             </button>
           </Box>
         </Box>
@@ -1782,8 +1750,7 @@ const ReadyToMove = () => {
               }}
               className={fireNOC == "Yes" ? style.setbtn : style.btn}
             >
-              {" "}
-              Yes{" "}
+              Yes
             </button>
             <button
               value={"No"}
@@ -1793,8 +1760,7 @@ const ReadyToMove = () => {
               }}
               className={fireNOC == "No" ? style.setbtn : style.btn}
             >
-              {" "}
-              No{" "}
+              No
             </button>
           </Box>
         </Box>
@@ -1816,8 +1782,7 @@ const ReadyToMove = () => {
                 occupancyCertificate == "Yes" ? style.setbtn : style.btn
               }
             >
-              {" "}
-              Yes{" "}
+              Yes
             </button>
             <button
               value={"No"}
@@ -1829,8 +1794,7 @@ const ReadyToMove = () => {
                 occupancyCertificate == "No" ? style.setbtn : style.btn
               }
             >
-              {" "}
-              No{" "}
+              No
             </button>
           </Box>
         </Box>
@@ -1868,8 +1832,7 @@ const ReadyToMove = () => {
                     FileSystemHandle(e.target.value);
                   }}
                 >
-                  {" "}
-                  Backend Office{" "}
+                  Backend Office
                 </Checkbox>
                 <Checkbox
                   isChecked={previouslyUsedList.includes("CA Office")}
@@ -1879,8 +1842,7 @@ const ReadyToMove = () => {
                     FileSystemHandle(e.target.value);
                   }}
                 >
-                  {" "}
-                  CA Office{" "}
+                  CA Office
                 </Checkbox>
                 <Checkbox
                   isChecked={previouslyUsedList.includes("Fronted Office")}
@@ -1890,8 +1852,7 @@ const ReadyToMove = () => {
                     FileSystemHandle(e.target.value);
                   }}
                 >
-                  {" "}
-                  Fronted Office{" "}
+                  Fronted Office
                 </Checkbox>
                 <Checkbox
                   isChecked={previouslyUsedList.includes(
@@ -1903,8 +1864,7 @@ const ReadyToMove = () => {
                     FileSystemHandle(e.target.value);
                   }}
                 >
-                  {" "}
-                  Small Office Purpose{" "}
+                  Small Office Purpose
                 </Checkbox>
                 <Checkbox
                   isChecked={previouslyUsedList.includes("Traders Office")}
@@ -1914,8 +1874,7 @@ const ReadyToMove = () => {
                     FileSystemHandle(e.target.value);
                   }}
                 >
-                  {" "}
-                  Traders Office{" "}
+                  Traders Office
                 </Checkbox>
                 <Checkbox
                   isChecked={previouslyUsedList.includes("Advocate Office")}
@@ -1925,8 +1884,7 @@ const ReadyToMove = () => {
                     FileSystemHandle(e.target.value);
                   }}
                 >
-                  {" "}
-                  Advocate Office{" "}
+                  Advocate Office
                 </Checkbox>
               </MenuList>
             </Menu>
@@ -1942,8 +1900,7 @@ const ReadyToMove = () => {
               textAlign={"left"}
               margin={"10px 0"}
             >
-              {" "}
-              Upload Your Property image{" "}
+              Upload Your Property image
             </Heading>
           </Box>
           <Box className={style.card}>
@@ -1963,8 +1920,7 @@ const ReadyToMove = () => {
                     role="button"
                     onClick={selectFiles}
                   >
-                    {" "}
-                    Browse{" "}
+                    Browse
                   </Text>
                 </>
               )}
@@ -1998,7 +1954,7 @@ const ReadyToMove = () => {
 
         {/* property Description */}
         <Box>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Add Description and Unique Features of your Property
           </Heading>
           <Textarea
@@ -2014,7 +1970,7 @@ const ReadyToMove = () => {
 
       {/* Amenities */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
           Amenities
         </Heading>
         <Box>
@@ -2170,7 +2126,7 @@ const ReadyToMove = () => {
       </Box>
       {/* location advantage (near to which place) */}
       <Box className={style.optional_box}>
-        <Heading size={"md"} margin={"10px 0 4px 0"} textAlign={"left"}>
+        <Heading size={"sm"} textAlign={"left"}>
           Location Advantages
           <Heading
             size={"xs"}
