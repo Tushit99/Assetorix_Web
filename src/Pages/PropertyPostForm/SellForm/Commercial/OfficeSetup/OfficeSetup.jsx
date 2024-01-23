@@ -10,7 +10,7 @@ const OfficeSetup = () => {
 
     return (
         <Box >
-            <Box display={"flex"} gap={10} justifyContent={"center"} alignItems={"center"} >
+            <Box display={"flex"} gap={10} marginLeft={"8px"} justifyContent={"left"} alignItems={"center"} >
                 <button value={"Ready to move office space"} onClick={(e) => setOfficeOpt(e.target.value)} className={officeOpt == "Ready to move office space" ? style.setbtn : style.btn} >Ready to move office space</button>
                 <button value={"Bare shell office space"} onClick={(e) => setOfficeOpt(e.target.value)} className={officeOpt == "Bare shell office space" ? style.setbtn : style.btn} >Bare shell office space</button>
                 <button value={"Co-working office space"} onClick={(e) => setOfficeOpt(e.target.value)} className={officeOpt == "Co-working office space" ? style.setbtn : style.btn} >Co-working office space</button>   

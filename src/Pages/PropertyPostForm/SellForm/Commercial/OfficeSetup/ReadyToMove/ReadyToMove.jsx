@@ -18,7 +18,7 @@ import {
   MenuButton,
   MenuList,
 } from "@chakra-ui/react";
-import style from "./ReadyToMove.module.css";
+import style from "../OfficeSetup.module.css";
 import { useSelector } from "react-redux";
 import { AddIcon, ChevronDownIcon, MinusIcon } from "@chakra-ui/icons";
 import axios from "axios";
@@ -31,7 +31,7 @@ const ReadyToMove = () => {
   const toast = useToast();
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
-  const [pincode, setPincode] = useState(0);
+  const [pincode, setPincode] = useState("");
   const [state, setState] = useState("");
   const [locality, setLocality] = useState("");
   const [minseat, setMinseat] = useState("");
@@ -75,7 +75,7 @@ const ReadyToMove = () => {
   const [availability, setAvailability] = useState("");
   const [fromyear, setFromyear] = useState("");
   const [expectedyear, setExpectedYear] = useState("");
-  const [ownership, setOwnerShip] = useState(""); 
+  const [ownership, setOwnerShip] = useState("");
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [locationAdv, setLocationAdv] = useState([]);
@@ -115,7 +115,7 @@ const ReadyToMove = () => {
         locatedInside,
       },
       ownership,
-      price: +pricedetail, 
+      price: +pricedetail,
       inclusivePrices,
       amenities,
       locationAdv,
@@ -249,7 +249,7 @@ const ReadyToMove = () => {
               duration: 2000,
             });
             if (images.length) {
-              submitImage(e.data.id); 
+              submitImage(e.data.id);
             } else {
               setIsClicked(false);
               navigate("/listing");
@@ -271,8 +271,8 @@ const ReadyToMove = () => {
         status: "info",
         duration: 2000,
         position: "top-right",
-      }); 
-      setClickCount((prev) => prev - 12); 
+      });
+      setClickCount((prev) => prev - 12);
       setIsClicked(false);
     }
   };
@@ -424,7 +424,7 @@ const ReadyToMove = () => {
       newarr.splice(newarr.indexOf(""), 1);
     }
     setFloorNumber(newarr);
-  }; 
+  };
 
   const handlefireSafty = (e) => {
     e.preventDefault();
@@ -525,7 +525,6 @@ const ReadyToMove = () => {
     }
     console.log("droped");
   };
- 
 
   return (
     <form onSubmit={handleSubmitData}>
@@ -534,9 +533,7 @@ const ReadyToMove = () => {
         <Heading size={"lg"} color={"black"}>
           Where is your property located?
         </Heading>
-        <Heading size={"sm"} color={"black"}>
-          An accurate location helps you connect with the right buyers.
-        </Heading>
+        <Heading size={"sm"}>Location Detail</Heading>
 
         <Select
           fontSize={"md"}
@@ -578,6 +575,7 @@ const ReadyToMove = () => {
           required
           maxLength={6}
           fontSize={"md"}
+          variant="flushed"
           value={pincode}
           onChange={handlepinfetch}
         />
@@ -640,31 +638,31 @@ const ReadyToMove = () => {
       </Box>
       {/* Property Detail */}
       <Box marginTop={12}>
-        
         {/* ====================================== */}
         {/* add area details */}
         <Box textAlign={"left"} padding={"10px 0"}>
-          <Heading as={"h3"} margin={"5px 0"} size={"md"}>
+          <Heading as={"h3"} margin={"5px 0"} size={"sm"}>
             Add Area Details
           </Heading>
-          <Text margin={"5px 0"}> Atleast one area type is mandatory </Text>
-          <ButtonGroup
-            className={style.select_land}
-            size="sm"
+          <InputGroup
             isAttached
+            width={{ base: "100%", md: 300 }}
             variant="outline"
           >
             <Input
               type="text"
               maxLength={"10"}
               value={plotArea}
-              onChange={(e) => { 
+              borderRadius={0}
+              onChange={(e) => {
                 setPlotArea(e.target.value);
               }}
               required
             />
-            <select
+            <Select
+              borderRadius={0}
               value={areaPer}
+              placeholder="Enter area detail"
               onChange={(e) => {
                 setAreaPer(e.target.value);
               }}
@@ -689,37 +687,36 @@ const ReadyToMove = () => {
               <option value="rood">rood</option>
               <option value="chataks">chataks</option>
               <option value="perch">perch</option>
-            </select>
-          </ButtonGroup>
+            </Select>
+          </InputGroup>
         </Box>
         {/* Office Setup  */}
-        <Box
-          padding={"10px 0"}
-          display={"grid"}
-          gap={6}
-          className={style.optional_box}
-        >
-          <Heading as={"h3"} size={"md"}>
+        <Box>
+          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Describe your office setup
           </Heading>
-          <Box>
+          <Box
+            display={{ base: "grid", md: "flex" }}
+            gap={10}
+            flexWrap={"nowrap"}
+          >
             <Input
               type="text"
-              maxLength={"12"}
+              maxLength={"6"}
               placeholder="Min no. of Seats"
               value={minseat}
               onChange={(e) => setMinseat(NumericString(e.target.value))}
             />
             <Input
               type="text"
-              maxLength={"12"}
+              maxLength={"6"}
               placeholder="Max no. of Seats (optional)"
               value={maxseat}
               onChange={(e) => setMaxseat(NumericString(e.target.value))}
             />
             <Input
               type="text"
-              maxLength={"12"}
+              maxLength={"6"}
               placeholder="No. of Cabins"
               value={cabins}
               onChange={(e) => setCabins(NumericString(e.target.value))}
@@ -727,36 +724,27 @@ const ReadyToMove = () => {
           </Box>
         </Box>
         {/* No. of Meeting Rooms */}
-        <Box
-          padding={"10px 0"}
-          display={"grid"}
-          gap={6}
-          className={style.optional_box}
-        >
-          <Heading as={"h3"} size={"md"}>
+        <Box className={style.optional_box}>
+          <Heading as={"h3"} size={"sm"}>
             No. of Meeting Rooms
           </Heading>
           <Box>
             <Input
               type="text"
               placeholder="No. of Meeting Rooms"
-              value={meetingRoom}
+              value={meetingRoom} 
+              width={{base:"100%",md:300}}
               maxLength={"10"}
               onChange={(e) => setMeetingRoom(NumericString(e.target.value))}
             />
           </Box>
         </Box>
         {/* Washrooms */}
-        <Box padding={"10px 0 8px 0"} display={"grid"}>
-          <Heading textAlign={"left"} as={"h3"} size={"md"}>
+        <Box display={"grid"}>
+          <Heading textAlign={"left"} as={"h3"} size={"sm"}>
             Washrooms
           </Heading>
-          <Box
-            display={"grid"}
-            padding={"10px 0 8px 0"}
-            gridTemplateColumns={"repeat(1,1fr)"}
-            gap={2}
-          >
+          <Box className={style.optional_box} >
             <Box display={"flex"} gap={10}>
               <button
                 value={"Available"}
@@ -858,9 +846,8 @@ const ReadyToMove = () => {
         </Box>
         {/* Conference Room */}
         <Box padding={"10px 0 8px 0"}>
-          <Heading as={"h3"} size={"md"} textAlign={"left"}>
-            {" "}
-            Conference Room{" "}
+          <Heading as={"h3"} size={"sm"} textAlign={"left"}> 
+            Conference Room 
           </Heading>
           <Box display={"flex"} gap={10} padding={"12px 0 0 0"}>
             <button
@@ -1532,7 +1519,6 @@ const ReadyToMove = () => {
         )}
         {/* Add pricing and details (ownerShip) */}
         <Box>
-          
           {/* OwnerShip detail */}
           <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Ownership
@@ -1609,7 +1595,7 @@ const ReadyToMove = () => {
                 maxLength={"10"}
                 required
                 onChange={(e) => {
-                  setPricedetail(NumericString(e.target.value)); 
+                  setPricedetail(NumericString(e.target.value));
                 }}
               />
             </Box>
@@ -2014,7 +2000,7 @@ const ReadyToMove = () => {
         <Box>
           <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
             Add Description and Unique Features of your Property
-          </Heading> 
+          </Heading>
           <Textarea
             height={140}
             value={desc}

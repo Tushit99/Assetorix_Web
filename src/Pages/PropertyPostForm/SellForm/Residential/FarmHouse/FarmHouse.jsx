@@ -764,7 +764,7 @@ const FarmHouse = () => {
           </Box>
         </Box>
         {/* ====================================== */}
-        {/* add area details */}
+        {/* add area details */} 
         <Box textAlign={"left"}>
           <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"}>
             Add Area Details
@@ -775,7 +775,7 @@ const FarmHouse = () => {
             marginTop={2}
             isAttached
             variant="outline"
-          >
+          > 
             <Input
               type="text"
               value={plotArea}
