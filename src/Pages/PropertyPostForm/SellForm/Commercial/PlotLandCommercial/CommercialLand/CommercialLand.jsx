@@ -5,6 +5,7 @@ import {
   ButtonGroup,
   Heading,
   Input,
+  InputRightElement,
   InputGroup,
   Menu,
   MenuButton,
@@ -67,6 +68,7 @@ const CommercialLand = () => {
   const [authorisedBy, setAuthorisedBy] = useState([]);
   const [industryType, setIndustryType] = useState([]);
   const [isClicked, setIsClicked] = useState(false);
+  const [currency, setCurrency] = useState("₹");
   const [clickCount, setClickCount] = useState(0);
   const navigate = useNavigate();
   // state for drop box images
@@ -268,7 +270,7 @@ const CommercialLand = () => {
   };
 
   const handlepinfetch = (e) => {
-    let val = e.target.value;
+    let val = NumericString(e.target.value);
     setPincode(val);
     if (val.length == 6) {
       pinfetch(val);
@@ -507,7 +509,7 @@ const CommercialLand = () => {
           <Heading size={"lg"} color={"black"} textAlign={"center"}>
             Where is your Commercial Land / institutional Land located?
           </Heading>
-          <Heading size={"sm"} color={"black"} textAlign={"center"}>
+          <Heading size={"sm"} color={"black"} textAlign={"left"}>
             Location Detail
           </Heading>
 
@@ -586,60 +588,62 @@ const CommercialLand = () => {
 
         {/* ============================ add area details =============================== */}
         <Box textAlign={"left"}>
-          <Heading as={"h3"} size={"sm"}>
+          <Heading as={"h3"} marginTop={{ base: 10, md: 3 }} size={"sm"}>
             Add Area Details
           </Heading>
-          <Text> Atleast one area type is mandatory </Text>
-          <ButtonGroup
-            className={style.select_land}
-            size="sm"
+          <InputGroup
+            w={300}
+            size="md"
+            marginTop={2}
             isAttached
-            width={{ base: "100%", md: "300px" }}
             variant="outline"
           >
             <Input
               type="text"
               value={plotArea}
-              placeholder="Enter Plot Area"
+              placeholder="Enter area detail"
+              w={200}
+              maxLength={"6"}
               onChange={(e) => {
                 setPlotArea(NumericString(e.target.value));
               }}
               required
             />
-            <Select
-              variant={"outline"}
-              borderRadius={0}
-              value={areaPer}
-              onChange={(e) => {
-                setAreaPer(e.target.value);
-              }}
-              className={style.select}
-              required
-            >
-              <option value="sq.ft">sq.ft</option>
-              <option value="sq.yards">sq.yards</option>
-              <option value="sq.m">sq.m</option>
-              <option value="acres">acres</option>
-              <option value="marla">marla</option>
-              <option value="cents">cents</option>
-              <option value="bigha">bigha</option>
-              <option value="kottah">kottah</option>
-              <option value="kanal">kanal</option>
-              <option value="grounds">grounds</option>
-              <option value="ares">ares</option>
-              <option value="biswa">biswa</option>
-              <option value="guntha">guntha</option>
-              <option value="aankadam">aankadam</option>
-              <option value="hectares">hectares</option>
-              <option value="rood">rood</option>
-              <option value="chataks">chataks</option>
-              <option value="perch">perch</option>
-            </Select>
-          </ButtonGroup>
+            <InputRightElement width={100}>
+              <Select
+                value={areaPer}
+                borderRadius={0}
+                onChange={(e) => {
+                  setAreaPer(e.target.value);
+                }}
+                className={style.select}
+                required
+              >
+                <option value="sq.ft">sq.ft</option>
+                <option value="sq.yards">sq.yards</option>
+                <option value="sq.m">sq.m</option>
+                <option value="acres">acres</option>
+                <option value="marla">marla</option>
+                <option value="cents">cents</option>
+                <option value="bigha">bigha</option>
+                <option value="kottah">kottah</option>
+                <option value="kanal">kanal</option>
+                <option value="grounds">grounds</option>
+                <option value="ares">ares</option>
+                <option value="biswa">biswa</option>
+                <option value="guntha">guntha</option>
+                <option value="aankadam">aankadam</option>
+                <option value="hectares">hectares</option>
+                <option value="rood">rood</option>
+                <option value="chataks">chataks</option>
+                <option value="perch">perch</option>
+              </Select>
+            </InputRightElement>
+          </InputGroup>
         </Box>
 
         {/* ========================== Property Dimensions ========================== */}
-        <Box as={"div"} textAlign={"left"} padding={"10px 0"}>
+        <Box as={"div"} textAlign={"left"} display={"grid"}>
           <Heading as={"h3"} size={"sm"}>
             Property Dimensions (Optional)
           </Heading>
@@ -647,8 +651,7 @@ const CommercialLand = () => {
             type={"text"}
             variant="flushed"
             maxLength={"12"}
-            padding={"0 6px"}
-            margin={"4px 0"}
+            width={{ base: "100%", md: 300 }}
             value={plotLength}
             onChange={(e) => {
               setplotLength(NumericString(e.target.value));
@@ -658,9 +661,8 @@ const CommercialLand = () => {
           <Input
             type={"text"}
             variant="flushed"
+            width={{ base: "100%", md: 300 }}
             maxLength={"12"}
-            padding={"0 6px"}
-            margin={"4px 0"}
             value={plotBreadth}
             onChange={(e) => {
               setPlotBreadth(NumericString(e.target.value));
@@ -925,8 +927,8 @@ const CommercialLand = () => {
           </Heading>
           <Box>
             <Select
-              variant={"filled"}
-              padding={"0 10px"}
+              variant={"outline"}
+              width={{ base: "100%", md: 300 }}
               value={expectedByYear}
               onChange={(e) => setExpectedByYear(e.target.value)}
             >
@@ -1052,34 +1054,48 @@ const CommercialLand = () => {
         </Box>
 
         {/* ============================== Price Details ============================ */}
+        {/* Price Details */}
         <Box>
-          <Box>
-            <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
-              Price Details
-            </Heading>
-            <Box display={"flex"} alignItems={"center"} gap={5}>
-              <Box display={"grid"} gap={0}>
-                <Heading
-                  as={"h3"}
-                  size={"xs"}
-                  fontWeight={400}
-                  textAlign={"left"}
-                >
-                  {isCountry.country == "india" ? "₹" : "$"} Price Details
-                </Heading>
-                <Input
-                  type="text"
-                  value={pricedetail}
-                  required
-                  maxLength={"12"}
-                  onChange={(e) => {
-                    setPricedetail(NumericString(e.target.value));
-                  }}
-                />
-              </Box>
-            </Box>
+          <Heading
+            as={"h3"}
+            size={"sm"}
+            marginTop={{ base: 10, md: 5 }}
+            textAlign={"left"}
+          >
+            Price Details
+          </Heading>
+          <Box display={"flex"} alignItems={"center"} gap={5}>
+            <InputGroup w={300} gap={2}>
+              <Select
+                w={"-moz-fit-content"}
+                value={currency}
+                borderRadius={0}
+                onChange={(e) => setCurrency(e.target.value)}
+              >
+                <option value="₹">₹ INR </option>
+                <option value="$">$ USD </option>
+              </Select>
+              <Input
+                type="text"
+                value={pricedetail}
+                maxLength={"10"}
+                placeholder={`Price`}
+                required
+                borderRadius={0}
+                w={200}
+                onChange={(e) => {
+                  setPricedetail(NumericString(e.target.value));
+                }}
+              />
+            </InputGroup>
           </Box>
-          <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
+          {/* ============================== inclusive charges (checkbox) ==============================  */}
+          <Box
+            display={"flex"}
+            gap={{ base: 2, md: 10 }}
+            marginTop={3}
+            flexWrap={"wrap"}
+          >
             <Checkbox
               isChecked={inclusivePrices.includes("All inclusive price")}
               onChange={(e) => {
@@ -1113,72 +1129,73 @@ const CommercialLand = () => {
               Price Negotiable
             </Checkbox>
           </Box>
-          <Box display={"grid"}>
-            {additionalPrice && (
-              <>
-                <InputGroup w={"300px"} margin={"10px 0"}>
-                  <Input
-                    w={"60%"}
-                    type="text"
-                    maxLength={"12"}
-                    onChange={(e) =>
-                      setMaintenancePrice(NumericString(e.target.value))
-                    }
-                    value={maintenancePrice}
-                    placeholder={"Maintenance Price"}
-                  />
-                  <Select
-                    w={"40%"}
-                    borderRadius={0}
-                    value={maintenanceTimePeriod}
-                    onChange={(e) => setMaintenanceTimePeriod(e.target.value)}
-                  >
-                    <option value="Monthly">Monthly</option>
-                    <option value="Yearly">Yearly</option>
-                  </Select>
-                </InputGroup>
-                <Input
-                  type="text"
-                  maxLength={"12"}
-                  w={"300px"}
-                  value={bookingAmount}
-                  onChange={(e) =>
-                    setBookingAmount(NumericString(e.target.value))
-                  }
-                  placeholder="Booking Amount"
-                  margin={"10px 0 0 0"}
-                />
-                <Input
-                  type="text"
-                  maxLength={"12"}
-                  w={"300px"}
-                  value={annualDuesPayble}
-                  onChange={(e) =>
-                    setAnnualDuesPayble(NumericString(e.target.value))
-                  }
-                  placeholder="Annual dues payable"
-                  margin={"10px 0 0 0"}
-                />
-              </>
+        </Box>
+
+        {/* Additional Pricing Detail (Optional) */}
+        <Heading as={"h4"} size={"sm"} fontWeight={700} textAlign={"left"}>
+          Additional Pricing Detail (Optional)
+        </Heading>
+        <InputGroup w={"300px"}>
+          <Input
+            w={"60%"}
+            type="text"
+            onChange={(e) => setMaintenancePrice(NumericString(e.target.value))}
+            value={maintenancePrice}
+            placeholder={"Maintenance Price"}
+          />
+          <Select
+            w={"40%"}
+            borderRadius={0}
+            value={maintenanceTimePeriod}
+            onChange={(e) => setMaintenanceTimePeriod(e.target.value)}
+          >
+            <option value="Monthly">Monthly</option>
+            <option value="Yearly">Yearly</option>
+          </Select>
+        </InputGroup>
+
+        <Box display={"grid"} marginTop={"6px"}>
+          {additionalPrice && (
+            <>
+              <Input
+                type="text"
+                w={"300px"}
+                value={bookingAmount}
+                onChange={(e) =>
+                  setBookingAmount(NumericString(e.target.value))
+                }
+                placeholder="Booking Amount"
+                margin={"10px 0 0 0"}
+              />
+              <Input
+                type="text"
+                w={"300px"}
+                value={annualDuesPayble}
+                onChange={(e) =>
+                  setAnnualDuesPayble(NumericString(e.target.value))
+                }
+                placeholder="Annual Dues Payable"
+                margin={"10px 0 0 0"}
+              />
+            </>
+          )}
+          <Heading
+            as={"h3"}
+            size={"sm"}
+            marginTop={2}
+            color={"#002aff"}
+            fontWeight={500}
+            cursor={"pointer"}
+            onClick={() => setAdditionalPrice(!additionalPrice)}
+            textAlign={"left"}
+          >
+            {additionalPrice ? (
+              <IoIosArrowUp style={{ display: "inline" }} />
+            ) : (
+              <IoIosArrowDown style={{ display: "inline" }} />
             )}
-            <Heading
-              as={"h3"}
-              size={"sm"}
-              margin={"10px 0"}
-              color={"#002aff"}
-              fontWeight={500}
-              cursor={"pointer"}
-              onClick={() => setAdditionalPrice(!additionalPrice)}
-              textAlign={"left"}
-            >
-              {additionalPrice ? (
-                <IoIosArrowUp style={{ display: "inline" }} />
-              ) : (
-                <IoIosArrowDown style={{ display: "inline" }} />
-              )}
-              Add more pricing details
-            </Heading>
-          </Box>
+            Add more pricing details
+          </Heading>
         </Box>
 
         {/* ============================ Is it Pre-leased / Pre-Rented ? ============================ */}
@@ -1265,7 +1282,7 @@ const CommercialLand = () => {
 
         {/* Approved for Industry Type */}
         <Box>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Approved for Industry Type
           </Heading>
           <Menu>
@@ -1447,8 +1464,7 @@ const CommercialLand = () => {
             <Heading
               color={"black"}
               size={"sm"}
-              textAlign={"left"}
-              margin={"10px 0"}
+              textAlign={"left"} 
             >
               Upload Your Property image
             </Heading>
@@ -1506,26 +1522,17 @@ const CommercialLand = () => {
         <Box>
           <Heading
             as={"h3"}
-            size={"md"}
+            size={"sm"}
             fontWeight={600}
             margin={"10px 0"}
             textAlign={"left"}
           >
             Add Description and Unique Features of your Property
-          </Heading>
-          <Heading
-            as={"h3"}
-            size={"xs"}
-            fontWeight={400}
-            color={"#777777"}
-            margin={"10px 0"}
-            textAlign={"left"}
-          >
-            Adding description will increase your listing visibility
-          </Heading>
+          </Heading> 
           <Textarea
             height={140}
-            value={desc}
+          placeholder="Add Description"
+          value={desc}
             onChange={(e) => {
               let my_cleantext = CleanInputText(e.target.value);
               setDesc(my_cleantext);
@@ -1534,14 +1541,14 @@ const CommercialLand = () => {
         </Box>
         {/* ============================ Add amenities/unique features ============================ */}
         <Box>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"}  textAlign={"left"}>
             Add amenities/unique features
           </Heading>
           <Heading
             as={"h5"}
             size={"xs"}
             fontWeight={400}
-            margin={"10px 0"}
+            
             textAlign={"left"}
           >
             All fields on this page are optional
@@ -1550,7 +1557,7 @@ const CommercialLand = () => {
 
         {/* ============================ Amenities ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"}  textAlign={"left"}>
             Amenities
           </Heading>
           <Box>
@@ -1618,7 +1625,7 @@ const CommercialLand = () => {
 
         {/* ============================ Property Features ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Property Features
           </Heading>
           <Box>
@@ -1682,7 +1689,7 @@ const CommercialLand = () => {
 
         {/* ============================ Other Features ============================ */}
         <Box>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Other Features
           </Heading>
           <Box display={"grid"} textAlign={"left"} gap={2}>
@@ -1699,12 +1706,11 @@ const CommercialLand = () => {
 
         {/* ============================ location advantage ============================ */}
         <Box className={style.optional_box}>
-          <Heading size={"md"} margin={"10px 0 4px 0"} textAlign={"left"}>
+          <Heading size={"sm"} textAlign={"left"}>
             Location Advantages
             <Heading
               size={"xs"}
-              fontWeight={200}
-              margin={"4px 0"}
+              fontWeight={200} 
               textAlign={"left"}
             >
               Highlight the nearby landmarks*

@@ -20,7 +20,7 @@ import style from "../Storage.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import { CleanInputText } from "../../../../code";
+import { CleanInputText, NumericString } from "../../../../code";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../../../Loading";
 
@@ -30,25 +30,12 @@ const ColdStorage = () => {
   const [country, setCountry] = useState("");
   const [facingwidth, setFacingWidth] = useState("");
   const [city, setCity] = useState("");
-  const [appartment, setApartment] = useState("");
   const [pincode, setPincode] = useState("");
   const [state, setState] = useState("");
   const [locality, setLocality] = useState("");
   const [address, setaddress] = useState("");
-  const [washrooms, setwashrooms] = useState(0);
-  const [parking, setParking] = useState(0);
-  const [openparking, setOpenparking] = useState(0);
-  const [light, setLight] = useState(0);
-  const [fans, setFans] = useState(0);
-  const [ac, setAc] = useState(0);
-  const [tv, setTv] = useState(0);
-  const [Beds, setBeds] = useState(0);
-  const [wardrobe, setWardrobe] = useState(0);
-  const [geyser, setGeyser] = useState(0);
+  const [washrooms, setwashrooms] = useState("");
   const [areaPer, setAreaPer] = useState("sq.ft");
-  const [furnishedarr, setfurnishedarr] = useState([]);
-  const [extraroom, setExtraRoom] = useState([]);
-  const [furnished, setFurnished] = useState("");
   const [availability, setAvailability] = useState("");
   const [fromyear, setFromyear] = useState("");
   const [expectedyear, setExpectedYear] = useState("");
@@ -74,16 +61,16 @@ const ColdStorage = () => {
   const [pincollection, setPinCollection] = useState([]);
   const [additionalPrice, setAdditionalPrice] = useState(false);
   const [maintenancePrice, setMaintenancePrice] = useState("");
-  const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
-  const [expectedRentel, setExpectedRentel] = useState("");
+  const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly"); 
   const [bookingAmount, setBookingAmount] = useState("");
   const [annualDuesPayble, setAnnualDuesPayble] = useState("");
   const [preLeased, setPreLeased] = useState("");
   const [currentRentPerMonth, setCurrentRentPerMonth] = useState("");
   const [leaseTenureInYear, setLeaseTenureInYear] = useState("");
   const [annualRentIncrease, setAnnualRentIncrease] = useState("");
+  const [currency, setCurrency] = useState("₹"); 
   const [businessType, setBusinessType] = useState("");
-  const [isClicked, setIsClicked] = useState(false);
+  const [isClicked, setIsClicked] = useState(false); 
   const [clickCount, setClickCount] = useState(0);
   const navigate = useNavigate();
   // state for drop box images
@@ -132,17 +119,11 @@ const ColdStorage = () => {
       plotAreaUnit: areaPer,
       carpetArea: plotArea,
       carpetAreaUnit: areaPer,
-      parking: {
-        openParking: openparking.toString(),
-        closeParking: parking.toString(),
-      },
-      otherRoom: extraroom,
       description: desc,
       countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
       additionalPricingDetails: {
         maintenancePrice,
-        maintenanceTimePeriod,
-        expectedRental: expectedRentel,
+        maintenanceTimePeriod, 
         bookingAmount,
         annualDuesPayable: annualDuesPayble,
       },
@@ -161,8 +142,6 @@ const ColdStorage = () => {
       showToastError("Provide locality");
     } else if (!washrooms) {
       showToastError("Provide washrooms");
-    } else if (!furnishedarr) {
-      showToastError("Provide Furnished Field");
     } else if (!ownership) {
       showToastError("Provide OwnerShip");
     } else if (!pricedetail) {
@@ -210,22 +189,6 @@ const ColdStorage = () => {
         obj["preLeased_RentedDetails"] = preLeased_RentedDetails;
       }
 
-      if (furnished == "Furnished" || furnished == "Semi-Furnished") {
-        obj.furnishedObj = {
-          Light: light,
-          Fan: fans,
-          AC: ac,
-          TV: tv,
-          Bed: Beds,
-          Wardrobe: wardrobe,
-          Geyser: geyser,
-        };
-        obj["furnishedList"] = furnishedarr;
-      }
-
-      if (furnished.length > 0) {
-        obj["furnished"] = furnished;
-      }
       if (availability == "Ready to move" && fromyear != "") {
         obj["propertyStatus"] = fromyear;
         obj["availabilityStatus"] = availability;
@@ -314,9 +277,9 @@ const ColdStorage = () => {
   };
 
   const handlepinfetch = (e) => {
-    setPincode(e.target.value);
+    setPincode(NumericString(e.target.value));
     if (e.target.value.length == 6) {
-      pinfetch(e.target.value);
+      pinfetch(Number(e.target.value));
     } else {
       console.log(e.target.value);
     }
@@ -622,19 +585,16 @@ const ColdStorage = () => {
         </Box>
 
         {/* ============================== No. of Washrooms ====================================== */}
-        <Box>
-          <Box textAlign={"left"}>
-            <Text> No. of Washrooms </Text>
-            <Input
-              type="text"
-              variant={"outline"} 
-              width={{base:"100%",md:300}} 
-              maxLength={2}
-              onChange={(e) => setwashrooms(e.target.value)}
-              value={washrooms}
-              required
-            />
-          </Box>
+        <Box textAlign={"left"}> 
+          <Input
+            type="text"
+            variant={"outline"} 
+            placeholder="Enter no. of washroom" 
+            width={{base:"100%",md:300}} 
+            onChange={(e) => setwashrooms(NumericString(e.target.value))}
+            value={washrooms}
+            required 
+          />
         </Box>
 
         {/* ============================ add area details =============================== */}
@@ -802,11 +762,7 @@ const ColdStorage = () => {
         )}
         {/* ============================== property Age-end ============================== */}
 
-        {/* ============================ Add pricing and details ============================ */}
         <Box>
-          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
-            Add pricing and details...
-          </Heading>
           {/* OwnerShip detail */}
           <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Ownership
@@ -863,47 +819,49 @@ const ColdStorage = () => {
           </Box>
         </Box>
 
-        {/* ============================== Price Details ============================ */}
-        <Box>
-          <Box>
-            <Heading as={"h3"} size={"sm"} textAlign={"left"}>
-              Price Details
-            </Heading>
-            <Box display={"flex"} alignItems={"center"} gap={5}>
-              <Box display={"grid"} gap={0}>
-                <Heading
-                  as={"h3"}
-                  size={"xs"}
-                  fontWeight={400}
-                  textAlign={"left"}
-                >
-                  {isCountry.country == "india" ? "₹" : "$"} Price Details
-                </Heading>
-                <Input
-                  type="text"
-                  value={pricedetail}
-                  required
-                  onChange={(e) => {
-                    setPricedetail(e.target.value);
-                    areaCalucation();
-                  }}
-                />
-              </Box>
-              <Box display={"grid"} gap={0}>
-                <Heading
-                  as={"h3"}
-                  size={"xs"}
-                  fontWeight={400}
-                  textAlign={"left"}
-                >
-                  {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per{" "}
-                  {areaPer}
-                </Heading>
-                <Input type="text" value={priceSqr} />
-              </Box>
-            </Box>
+        {/* Additional Pricing Detail (Optional) */}
+         {/* Price Details */}
+         <Box>
+          <Heading
+            as={"h3"}
+            size={"sm"}
+            marginTop={{ base: 10, md: 5 }}
+            textAlign={"left"}
+          >
+            Price Details
+          </Heading>
+          <Box display={"flex"} alignItems={"center"} gap={5}>
+            <InputGroup w={300} gap={2}>
+              <Select
+                w={"-moz-fit-content"}
+                value={currency} 
+                borderRadius={0}
+                onChange={(e) => setCurrency(e.target.value)}
+              >
+                <option value="₹">₹ INR </option>
+                <option value="$">$ USD </option>
+              </Select>
+              <Input
+                type="text"
+                value={pricedetail}
+                maxLength={"10"}
+                placeholder={`Price`}
+                required
+                borderRadius={0} 
+                w={200}
+                onChange={(e) => {
+                  setPricedetail(NumericString(e.target.value));
+                }}
+              />
+            </InputGroup>
           </Box>
-          <Box display={"flex"} gap={10} flexWrap={"wrap"}>
+          {/* ============================== inclusive charges (checkbox) ==============================  */}
+          <Box
+            display={"flex"}
+            gap={{ base: 2, md: 10 }}
+            marginTop={3}
+            flexWrap={"wrap"}
+          >
             <Checkbox
               isChecked={inclusivePrices.includes("All inclusive price")}
               onChange={(e) => {
@@ -937,55 +895,79 @@ const ColdStorage = () => {
               Price Negotiable
             </Checkbox>
           </Box>
-          <Box>
-            {additionalPrice && (
-              <>
-                <InputGroup w={"300px"} margin={"10px 0"}>
-                  <Input
-                    w={"60%"}
-                    type="text"
-                    onChange={(e) => setMaintenancePrice(e.target.value)}
-                    value={maintenancePrice}
-                    placeholder={"Maintenance Price"}
-                  />
-                  <Select
-                    w={"40%"}
-                    borderRadius={0}
-                    value={maintenanceTimePeriod}
-                    onChange={(e) => setMaintenanceTimePeriod(e.target.value)}
-                  >
-                    <option value="Monthly">Monthly</option>
-                    <option value="Yearly">Yearly</option>
-                  </Select>
-                </InputGroup>
-                <Input
-                  type="text"
-                  w={"300px"}
-                  value={bookingAmount}
-                  onChange={(e) => setBookingAmount(e.target.value)}
-                  placeholder="Booking Amount"
-                  margin={"10px 0 0 0"}
-                />
-              </>
-            )}
-            <Heading
-              as={"h3"}
-              size={"sm"}
-              margin={"10px 0"}
-              color={"#002aff"}
-              fontWeight={500}
-              cursor={"pointer"}
-              onClick={() => setAdditionalPrice(!additionalPrice)}
-              textAlign={"left"}
-            >
-              {additionalPrice ? (
-                <IoIosArrowUp style={{ display: "inline" }} />
-              ) : (
-                <IoIosArrowDown style={{ display: "inline" }} />
-              )}{" "}
-              Add more pricing details
-            </Heading>
-          </Box>
+        </Box>
+
+        {/* Additional Pricing Detail (Optional) */}
+        <Heading
+          as={"h4"}
+          size={"sm"}
+          marginTop={{ base: 5, md: 8 }}
+          fontWeight={700}
+          textAlign={"left"}
+        >
+          Additional Pricing Detail (Optional)
+        </Heading>
+        <InputGroup w={"300px"}>
+          <Input
+            w={"60%"}
+            type="text"
+            onChange={(e) => setMaintenancePrice(NumericString(e.target.value))}
+            value={maintenancePrice}
+            placeholder={"Maintenance Price"}
+          />
+          <Select
+            w={"40%"}
+            borderRadius={0}
+            value={maintenanceTimePeriod}
+            onChange={(e) => setMaintenanceTimePeriod(e.target.value)}
+          >
+            <option value="Monthly">Monthly</option>
+            <option value="Yearly">Yearly</option>
+          </Select>
+        </InputGroup>
+
+        <Box display={"grid"} marginTop={"6px"}>
+          {additionalPrice && (
+            <> 
+              <Input
+                type="text"
+                w={"300px"}
+                value={bookingAmount}
+                onChange={(e) =>
+                  setBookingAmount(NumericString(e.target.value))
+                }
+                placeholder="Booking Amount"
+                margin={"10px 0 0 0"}
+              />
+              <Input
+                type="text"
+                w={"300px"}
+                value={annualDuesPayble}
+                onChange={(e) =>
+                  setAnnualDuesPayble(NumericString(e.target.value))
+                }
+                placeholder="Annual Dues Payable"
+                margin={"10px 0 0 0"}
+              /> 
+            </>
+          )}
+          <Heading
+            as={"h3"}
+            size={"sm"}
+            marginTop={2}
+            color={"#002aff"}
+            fontWeight={500}
+            cursor={"pointer"}
+            onClick={() => setAdditionalPrice(!additionalPrice)}
+            textAlign={"left"}
+          >
+            {additionalPrice ? (
+              <IoIosArrowUp style={{ display: "inline" }} />
+            ) : (
+              <IoIosArrowDown style={{ display: "inline" }} />
+            )} 
+            Add more pricing details
+          </Heading>
         </Box>
 
         {/* ============================ Is it Pre-leased / Pre-Rented ? ============================ */}

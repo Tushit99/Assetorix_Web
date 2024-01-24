@@ -7,7 +7,7 @@ import {
   Input,
   InputGroup,
   NumberInput,
-  InputRightElement, 
+  InputRightElement,
   NumberInputField,
   Select,
   Text,
@@ -20,7 +20,7 @@ import style from "../Storage.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import { CleanInputText } from "../../../../code";
+import { CleanInputText, NumericString } from "../../../../code";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../../../Loading";
 
@@ -30,25 +30,12 @@ const WareHouse = () => {
   const [country, setCountry] = useState("");
   const [facingwidth, setFacingWidth] = useState("");
   const [city, setCity] = useState("");
-  const [appartment, setApartment] = useState("");
-  const [pincode, setPincode] = useState(0);
+  const [pincode, setPincode] = useState("");
   const [state, setState] = useState("");
   const [locality, setLocality] = useState("");
   const [address, setAddress] = useState("");
-  const [washrooms, setwashrooms] = useState(0);
-  const [parking, setParking] = useState(0);
-  const [openparking, setOpenparking] = useState(0);
-  const [light, setLight] = useState(0);
-  const [fans, setFans] = useState(0);
-  const [ac, setAc] = useState(0);
-  const [tv, setTv] = useState(0);
-  const [Beds, setBeds] = useState(0);
-  const [wardrobe, setWardrobe] = useState(0);
-  const [geyser, setGeyser] = useState(0);
+  const [washrooms, setwashrooms] = useState("");
   const [areaPer, setAreaPer] = useState("sq.ft");
-  const [furnishedarr, setfurnishedarr] = useState([]);
-  const [extraroom, setExtraRoom] = useState([]);
-  const [furnished, setFurnished] = useState("");
   const [availability, setAvailability] = useState("");
   const [fromyear, setFromyear] = useState("");
   const [expectedyear, setExpectedYear] = useState("");
@@ -60,10 +47,8 @@ const WareHouse = () => {
   const [propertyFeatures, setPropertyFeature] = useState("");
   const [buildingFeature, setBuildingFeature] = useState([]);
   const [additinalft, setAdditinalFeature] = useState([]);
-  const [watersource, setWaterSource] = useState([]);
-  const [overLook, setoverlook] = useState([]);
+  const [currency, setCurrency] = useState("₹");
   const [otherFeature, setOtherFeature] = useState([]);
-  const [powerbackup, setPowerbackup] = useState("");
   const [propertyFacing, setPropertyFacing] = useState("");
   const [flooring, setFlooring] = useState("");
   const [facing, setFacing] = useState("Meter");
@@ -75,9 +60,8 @@ const WareHouse = () => {
   const [additionalPrice, setAdditionalPrice] = useState(false);
   const [maintenancePrice, setMaintenancePrice] = useState("");
   const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
-  const [expectedRentel, setExpectedRentel] = useState("");
-  const [bookingAmount, setBookingAmount] = useState("");
   const [annualDuesPayble, setAnnualDuesPayble] = useState("");
+  const [bookingAmount, setBookingAmount] = useState("");
   const [preLeased, setPreLeased] = useState("");
   const [currentRentPerMonth, setCurrentRentPerMonth] = useState("");
   const [leaseTenureInYear, setLeaseTenureInYear] = useState("");
@@ -119,10 +103,7 @@ const WareHouse = () => {
       preLeased_Rented: preLeased,
       society_buildingFeatures: buildingFeature,
       additionalFeatures: additinalft,
-      waterSources: watersource,
       otherFeatures: otherFeature,
-      powerBackup: powerbackup,
-      overLookings: overLook,
       propertyFacing,
       flooring,
       roadFacingWidth: facingwidth,
@@ -132,17 +113,11 @@ const WareHouse = () => {
       plotAreaUnit: areaPer,
       carpetArea: plotArea,
       carpetAreaUnit: areaPer,
-      parking: {
-        openParking: openparking.toString(),
-        closeParking: parking.toString(),
-      },
-      otherRoom: extraroom,
       description: desc,
       countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
       additionalPricingDetails: {
         maintenancePrice,
         maintenanceTimePeriod,
-        expectedRental: expectedRentel,
         bookingAmount,
         annualDuesPayable: annualDuesPayble,
       },
@@ -161,8 +136,6 @@ const WareHouse = () => {
       showToastError("Provide locality");
     } else if (!washrooms) {
       showToastError("Provide washrooms");
-    } else if (!furnishedarr) {
-      showToastError("Provide Furnished Field");
     } else if (!ownership) {
       showToastError("Provide OwnerShip");
     } else if (!pricedetail) {
@@ -210,22 +183,6 @@ const WareHouse = () => {
         obj["preLeased_RentedDetails"] = preLeased_RentedDetails;
       }
 
-      if (furnished == "Furnished" || furnished == "Semi-Furnished") {
-        obj.furnishedObj = {
-          Light: light,
-          Fan: fans,
-          AC: ac,
-          TV: tv,
-          Bed: Beds,
-          Wardrobe: wardrobe,
-          Geyser: geyser,
-        };
-        obj["furnishedList"] = furnishedarr;
-      }
-
-      if (furnished.length > 0) {
-        obj["furnished"] = furnished;
-      }
       if (availability == "Ready to move" && fromyear != "") {
         obj["propertyStatus"] = fromyear;
         obj["availabilityStatus"] = availability;
@@ -315,9 +272,9 @@ const WareHouse = () => {
   };
 
   const handlepinfetch = (e) => {
-    setPincode(e.target.value);
+    setPincode(NumericString(e.target.value));
     if (e.target.value.length == 6) {
-      pinfetch(e.target.value);
+      pinfetch(NumericString(e.target.value));
     } else {
       console.log(e.target.value);
     }
@@ -537,14 +494,13 @@ const WareHouse = () => {
     <div>
       <form onSubmit={handleSubmitData}>
         <Box className={style.location_form}>
-          <Heading size={"lg"}>Where is your property located?</Heading>
-          <Heading size={"sm"}>
-            An accurate location helps you connect with the right buyers.
+          <Heading size={"lg"} textAlign={"center"}>Where is your property located?</Heading>
+          <Heading size={"sm"} color={"black"} textAlign={"left"}>
+            Location Detail
           </Heading>
 
           <Input
-            type="text"
-            padding={"0 10px"}
+            type="text" 
             required
             placeholder="Address (optional)"
             value={address}
@@ -552,29 +508,18 @@ const WareHouse = () => {
             fontSize={"md"}
             variant="flushed"
           />
-          <NumberInput>
-            <NumberInputField
-              placeholder={"Enter pincode"}
-              padding={"0 10px"}
-              borderRight={0}
-              borderLeft={0}
-              borderTop={0}
-              borderRadius={0}
-              _active={{
-                borderRight: "0",
-                borderLeft: "0",
-                borderTop: "0",
-                borderRadius: "0",
-              }}
-              required
-              fontSize={"md"}
-              value={pincode}
-              onChange={handlepinfetch}
-            />
-          </NumberInput>
-          <Input
+         <Input
             type="text"
-            padding={"0 10px"}
+            placeholder={"Enter pincode"}
+            required
+            fontSize={"md"}
+            value={pincode}
+            maxLength={"6"}
+            variant="flushed"
+            onChange={handlepinfetch} 
+          /> 
+          <Input
+            type="text" 
             required
             placeholder="Enter Locality"
             list="browsers"
@@ -594,8 +539,7 @@ const WareHouse = () => {
           )}
 
           <Input
-            type="text"
-            padding={"0 10px"}
+            type="text" 
             required
             placeholder="Enter City"
             fontSize={"md"}
@@ -604,8 +548,7 @@ const WareHouse = () => {
             variant="flushed"
           />
           <Input
-            type="text"
-            padding={"0 10px"}
+            type="text" 
             required
             placeholder="Enter State"
             value={state}
@@ -614,8 +557,7 @@ const WareHouse = () => {
             variant="flushed"
           />
           <Input
-            type="text"
-            padding={"0 10px"}
+            type="text" 
             required
             placeholder="Enter Country"
             value={country}
@@ -625,24 +567,25 @@ const WareHouse = () => {
           />
         </Box>
         {/* =============================== Tell us about your property ============================ */}
-        <Heading as={"h4"} size={"sm"} margin={"0 0 30px 0 "} textAlign={"left"}> 
+        <Heading
+          as={"h4"}
+          size={"sm"} 
+          textAlign={"left"}
+        >
           Add Room Details
-        </Heading> 
+        </Heading>
 
         {/* ============================== No. of Washrooms ====================================== */}
-        <Box>
-          <Box textAlign={"left"}>
-            <Text> No. of Washrooms </Text>
-            <NumberInput>
-              <NumberInputField
-                variant="flushed"
-                padding={"0 2px"}
-                onChange={(e) => setwashrooms(e.target.value)}
-                value={washrooms}
-                required
-              />
-            </NumberInput>
-          </Box>
+        <Box textAlign={"left"}> 
+          <Input
+            type="text"
+            variant={"outline"} 
+            placeholder="Enter no. of washroom" 
+            width={{base:"100%",md:300}}  
+            onChange={(e) => setwashrooms(NumericString(e.target.value))}
+            value={washrooms}
+            required 
+          />
         </Box>
 
         {/* ============================ add area details =============================== */}
@@ -703,7 +646,7 @@ const WareHouse = () => {
 
         {/* ========================== Availability status =============================== */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Availability Status
           </Heading>
           <Box className={style.grid}>
@@ -741,7 +684,7 @@ const WareHouse = () => {
           <Box textAlign={"left"} className={style.optional_box}>
             <Heading
               as={"h3"}
-              size={"md"}
+              size={"sm"}
               margin={"30px 0 10px 0"}
               textAlign={"left"}
             >
@@ -799,7 +742,7 @@ const WareHouse = () => {
           <Box>
             <Heading
               as={"h3"}
-              size={"md"}
+              size={"sm"}
               margin={"30px 0 10px 0"}
               textAlign={"left"}
             >
@@ -824,7 +767,7 @@ const WareHouse = () => {
         <Box>
           <Heading
             as={"h3"}
-            size={"md"}
+            size={"sm"}
             margin={"30px 0 10px 0"}
             textAlign={"left"}
           >
@@ -888,45 +831,46 @@ const WareHouse = () => {
 
         {/* ============================== Price Details ============================ */}
         <Box>
-          <Box>
-            <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
-              Price Details
-            </Heading>
-            <Box display={"flex"} alignItems={"center"} gap={5}>
-              <Box display={"grid"} gap={0}>
-                <Heading
-                  as={"h3"}
-                  size={"xs"}
-                  fontWeight={400}
-                  textAlign={"left"}
-                >
-                  {isCountry.country == "india" ? "₹" : "$"} Price Details
-                </Heading>
-                <Input
-                  type="text"
-                  value={pricedetail}
-                  required
-                  onChange={(e) => {
-                    setPricedetail(e.target.value);
-                    areaCalucation();
-                  }}
-                />
-              </Box>
-              <Box display={"grid"} gap={0}>
-                <Heading
-                  as={"h3"}
-                  size={"xs"}
-                  fontWeight={400}
-                  textAlign={"left"}
-                >
-                  {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per{" "}
-                  {areaPer}
-                </Heading>
-                <Input type="text" value={priceSqr} />
-              </Box>
-            </Box>
+          <Heading
+            as={"h3"}
+            size={"sm"}
+            marginTop={{ base: 10, md: 5 }}
+            textAlign={"left"}
+          >
+            Price Details
+          </Heading>
+          <Box display={"flex"} alignItems={"center"} gap={5}>
+            <InputGroup w={300} gap={2}>
+              <Select
+                w={"-moz-fit-content"}
+                value={currency}
+                borderRadius={0}
+                onChange={(e) => setCurrency(e.target.value)}
+              >
+                <option value="₹">₹ INR </option>
+                <option value="$">$ USD </option>
+              </Select>
+              <Input
+                type="text"
+                value={pricedetail}
+                maxLength={"10"}
+                placeholder={`Price`}
+                required
+                borderRadius={0}
+                w={200}
+                onChange={(e) => {
+                  setPricedetail(NumericString(e.target.value));
+                }}
+              />
+            </InputGroup>
           </Box>
-          <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
+          {/* ============================== inclusive charges (checkbox) ==============================  */}
+          <Box
+            display={"flex"}
+            gap={{ base: 2, md: 10 }}
+            marginTop={3}
+            flexWrap={"wrap"}
+          >
             <Checkbox
               isChecked={inclusivePrices.includes("All inclusive price")}
               onChange={(e) => {
@@ -960,60 +904,84 @@ const WareHouse = () => {
               Price Negotiable
             </Checkbox>
           </Box>
-          <Box>
-            {additionalPrice && (
-              <>
-                <InputGroup w={"300px"} margin={"10px 0"}>
-                  <Input
-                    w={"60%"}
-                    type="text"
-                    onChange={(e) => setMaintenancePrice(e.target.value)}
-                    value={maintenancePrice}
-                    placeholder={"Maintenance Price"}
-                  />
-                  <Select
-                    w={"40%"}
-                    borderRadius={0}
-                    value={maintenanceTimePeriod}
-                    onChange={(e) => setMaintenanceTimePeriod(e.target.value)}
-                  >
-                    <option value="Monthly">Monthly</option>
-                    <option value="Yearly">Yearly</option>
-                  </Select>
-                </InputGroup>
-                <Input
-                  type="text"
-                  w={"300px"}
-                  value={bookingAmount}
-                  onChange={(e) => setBookingAmount(e.target.value)}
-                  placeholder="Booking Amount"
-                  margin={"10px 0 0 0"}
-                />
-              </>
+        </Box>
+
+        {/* Additional Pricing Detail (Optional) */}
+        <Heading
+          as={"h4"}
+          size={"sm"}
+          marginTop={{ base: 5, md: 8 }}
+          fontWeight={700}
+          textAlign={"left"}
+        >
+          Additional Pricing Detail (Optional)
+        </Heading>
+        <InputGroup w={"300px"}>
+          <Input
+            w={"60%"}
+            type="text"
+            onChange={(e) => setMaintenancePrice(NumericString(e.target.value))}
+            value={maintenancePrice}
+            placeholder={"Maintenance Price"}
+          />
+          <Select
+            w={"40%"}
+            borderRadius={0}
+            value={maintenanceTimePeriod}
+            onChange={(e) => setMaintenanceTimePeriod(e.target.value)}
+          >
+            <option value="Monthly">Monthly</option>
+            <option value="Yearly">Yearly</option>
+          </Select>
+        </InputGroup>
+
+        <Box display={"grid"} marginTop={"6px"}>
+          {additionalPrice && (
+            <>
+              <Input
+                type="text"
+                w={"300px"}
+                value={bookingAmount}
+                onChange={(e) =>
+                  setBookingAmount(NumericString(e.target.value))
+                }
+                placeholder="Booking Amount"
+                margin={"10px 0 0 0"}
+              />
+              <Input
+                type="text"
+                w={"300px"}
+                value={annualDuesPayble}
+                onChange={(e) =>
+                  setAnnualDuesPayble(NumericString(e.target.value))
+                }
+                placeholder="Annual Dues Payable"
+                margin={"10px 0 0 0"}
+              />
+            </>
+          )}
+          <Heading
+            as={"h3"}
+            size={"sm"}
+            marginTop={2}
+            color={"#002aff"}
+            fontWeight={500}
+            cursor={"pointer"}
+            onClick={() => setAdditionalPrice(!additionalPrice)}
+            textAlign={"left"}
+          >
+            {additionalPrice ? (
+              <IoIosArrowUp style={{ display: "inline" }} />
+            ) : (
+              <IoIosArrowDown style={{ display: "inline" }} />
             )}
-            <Heading
-              as={"h3"}
-              size={"sm"}
-              margin={"10px 0"}
-              color={"#002aff"}
-              fontWeight={500}
-              cursor={"pointer"}
-              onClick={() => setAdditionalPrice(!additionalPrice)}
-              textAlign={"left"}
-            >
-              {additionalPrice ? (
-                <IoIosArrowUp style={{ display: "inline" }} />
-              ) : (
-                <IoIosArrowDown style={{ display: "inline" }} />
-              )}{" "}
-              Add more pricing details
-            </Heading>
-          </Box>
+            Add more pricing details
+          </Heading>
         </Box>
 
         {/* ============================ Is it Pre-leased / Pre-Rented ? ============================ */}
         <Box textAlign={"left"}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Is it Pre-leased / Pre-Rented ?
           </Heading>
           <Heading
@@ -1158,51 +1126,28 @@ const WareHouse = () => {
         <Box>
           <Heading
             as={"h3"}
-            size={"md"}
-            fontWeight={600}
-            margin={"10px 0"}
+            size={"sm"}
+            fontWeight={600} 
             textAlign={"left"}
           >
             Add Description and Unique Features of your Property
-          </Heading>
-          <Heading
-            as={"h3"}
-            size={"xs"}
-            fontWeight={400}
-            color={"#777777"}
-            margin={"10px 0"}
-            textAlign={"left"}
-          >
-            Adding description will increase your listing visibility
-          </Heading>
+          </Heading> 
           <Textarea
             height={140}
             value={desc}
-            onChange={(e) => {
+          placeholder="Add Description"
+          onChange={(e) => {
               let my_cleantext = CleanInputText(e.target.value);
               setDesc(my_cleantext);
             }}
           ></Textarea>
         </Box>
         {/* ============================ Add amenities/unique features ============================ */}
-        <Box>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
-            Add amenities/unique features
-          </Heading>
-          <Heading
-            as={"h5"}
-            size={"xs"}
-            fontWeight={400}
-            margin={"10px 0"}
-            textAlign={"left"}
-          >
-            All fields on this page are optional
-          </Heading>
-        </Box>
+
 
         {/* ============================ Amenities ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Amenities
           </Heading>
           <Box>
@@ -1311,7 +1256,7 @@ const WareHouse = () => {
         </Box>
         {/* ============================ Property Features ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Property Features
           </Heading>
           <Box>
@@ -1374,7 +1319,7 @@ const WareHouse = () => {
         </Box>
         {/* ============================ Society/Building feature ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Society/Building feature
           </Heading>
           <Box>
@@ -1491,7 +1436,7 @@ const WareHouse = () => {
         </Box>
         {/* ============================ Additional Features ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Additional Features
           </Heading>
           <Box>
@@ -1511,7 +1456,7 @@ const WareHouse = () => {
 
         {/* ============================ Other Features ============================ */}
         <Box>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Other Features
           </Heading>
           <Box display={"grid"} textAlign={"left"} gap={2}>
@@ -1528,7 +1473,7 @@ const WareHouse = () => {
 
         {/* ============================ Property facing ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Property facing
           </Heading>
           <Box>
@@ -1625,7 +1570,7 @@ const WareHouse = () => {
 
         {/* ============================ Type of flooring ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Type of flooring
           </Heading>
           <Box>
@@ -1654,7 +1599,7 @@ const WareHouse = () => {
 
         {/* ============================ location advantage ============================ */}
         <Box className={style.optional_box}>
-          <Heading size={"md"} margin={"10px 0 4px 0"} textAlign={"left"}>
+          <Heading size={"sm"} textAlign={"left"}>
             Location Advantages
             <Heading
               size={"xs"}
