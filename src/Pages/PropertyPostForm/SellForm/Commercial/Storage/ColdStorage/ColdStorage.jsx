@@ -6,7 +6,7 @@ import {
   Heading,
   Input,
   InputGroup,
-  InputRightElement, 
+  InputRightElement,
   NumberInput,
   NumberInputField,
   Select,
@@ -536,14 +536,18 @@ const ColdStorage = () => {
     <div>
       <form onSubmit={handleSubmitData}>
         <Box className={style.location_form}>
-          <Heading size={"lg"} textAlign={"center"}>Where is your property located?</Heading>
-          <Heading size={"sm"} textAlign={"left"} >Location Detail</Heading>  
+          <Heading size={"lg"} textAlign={"center"}>
+            Where is your property located?
+          </Heading>
+          <Heading size={"sm"} textAlign={"left"}>
+            Location Detail
+          </Heading>
           <Input
-            type="text" 
+            type="text"
             required
             placeholder="Address (optional)"
             value={address}
-            maxLength={100} 
+            maxLength={100}
             onChange={(e) => setaddress(e.target.value)}
             fontSize={"md"}
             variant="flushed"
@@ -551,9 +555,9 @@ const ColdStorage = () => {
           <Input
             type="text"
             placeholder={"Enter pincode"}
-            required 
-            maxLength={8} 
-            variant="flushed" 
+            required
+            maxLength={8}
+            variant="flushed"
             fontSize={"md"}
             value={pincode}
             onChange={handlepinfetch}
@@ -563,8 +567,8 @@ const ColdStorage = () => {
             required
             placeholder="Enter Locality"
             list="browsers"
-            value={locality} 
-            maxLength={16}  
+            value={locality}
+            maxLength={16}
             onChange={(e) => setLocality(e.target.value)}
             fontSize={"md"}
             variant="flushed"
@@ -580,9 +584,9 @@ const ColdStorage = () => {
           )}
 
           <Input
-            type="text" 
+            type="text"
             required
-            maxLength={16}   
+            maxLength={16}
             placeholder="Enter City"
             fontSize={"md"}
             value={city}
@@ -594,7 +598,7 @@ const ColdStorage = () => {
             required
             placeholder="Enter State"
             value={state}
-            maxLength={16}   
+            maxLength={16}
             onChange={(e) => setState(e.target.value)}
             fontSize={"md"}
             variant="flushed"
@@ -604,18 +608,18 @@ const ColdStorage = () => {
             required
             placeholder="Enter Country"
             value={country}
-            maxLength={16}   
+            maxLength={16}
             onChange={(e) => setCountry(e.target.value)}
             fontSize={"md"}
             variant="flushed"
           />
         </Box>
         {/* =============================== Tell us about your property ============================ */}
-        <Box> 
+        <Box>
           <Heading as={"h4"} size={"sm"} textAlign={"left"}>
             Add Room Details
           </Heading>
-        </Box> 
+        </Box>
 
         {/* ============================== No. of Washrooms ====================================== */}
         <Box>
@@ -623,7 +627,8 @@ const ColdStorage = () => {
             <Text> No. of Washrooms </Text>
             <Input
               type="text"
-              variant="flushed"
+              variant={"outline"} 
+              width={{base:"100%",md:300}} 
               maxLength={2}
               onChange={(e) => setwashrooms(e.target.value)}
               value={washrooms}
@@ -686,7 +691,7 @@ const ColdStorage = () => {
               </Select>
             </InputRightElement>
           </InputGroup>
-        </Box> 
+        </Box>
 
         {/* ========================== Availability status =============================== */}
         <Box textAlign={"left"} className={style.optional_box}>
@@ -726,11 +731,7 @@ const ColdStorage = () => {
         {/* ========================== Age of Property ================================= */}
         {availability == "Ready to move" && (
           <Box textAlign={"left"} className={style.optional_box}>
-            <Heading
-              as={"h3"}
-              size={"sm"} 
-              textAlign={"left"}
-            >
+            <Heading as={"h3"} size={"sm"} textAlign={"left"}>
               Age of Property
             </Heading>
             <Box className={style.grid}>
@@ -783,11 +784,7 @@ const ColdStorage = () => {
         )}
         {availability == "Under construction" && (
           <Box>
-            <Heading
-              as={"h3"}
-              size={"sm"} 
-              textAlign={"left"}
-            >
+            <Heading as={"h3"} size={"sm"} textAlign={"left"}>
               Possession By
             </Heading>
             <Select
@@ -807,11 +804,7 @@ const ColdStorage = () => {
 
         {/* ============================ Add pricing and details ============================ */}
         <Box>
-          <Heading
-            as={"h3"}
-            size={"sm"} 
-            textAlign={"left"}
-          >
+          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Add pricing and details...
           </Heading>
           {/* OwnerShip detail */}
@@ -1140,27 +1133,12 @@ const ColdStorage = () => {
 
         {/* ============================ Property unique discription ============================ */}
         <Box>
-          <Heading
-            as={"h3"}
-            size={"md"}
-            fontWeight={600}
-            margin={"10px 0"}
-            textAlign={"left"}
-          >
+          <Heading as={"h3"} size={"sm"} fontWeight={600} textAlign={"left"}>
             Add Description and Unique Features of your Property
-          </Heading>
-          <Heading
-            as={"h3"}
-            size={"xs"}
-            fontWeight={400}
-            color={"#777777"}
-            margin={"10px 0"}
-            textAlign={"left"}
-          >
-            Adding description will increase your listing visibility
           </Heading>
           <Textarea
             height={140}
+            placeholder="Add Description"
             value={desc}
             onChange={(e) => {
               let my_cleantext = CleanInputText(e.target.value);
@@ -1170,23 +1148,17 @@ const ColdStorage = () => {
         </Box>
         {/* ============================ Add amenities/unique features ============================ */}
         <Box>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Add amenities/unique features
           </Heading>
-          <Heading
-            as={"h5"}
-            size={"xs"}
-            fontWeight={400}
-            margin={"10px 0"}
-            textAlign={"left"}
-          >
+          <Heading as={"h5"} size={"xs"} fontWeight={400} textAlign={"left"}>
             All fields on this page are optional
           </Heading>
         </Box>
 
         {/* ============================ Amenities ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Amenities
           </Heading>
           <Box>
@@ -1295,7 +1267,7 @@ const ColdStorage = () => {
         </Box>
         {/* ============================ Property Features ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Property Features
           </Heading>
           <Box>
@@ -1358,7 +1330,7 @@ const ColdStorage = () => {
         </Box>
         {/* ============================ Society/Building feature ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Society/Building feature
           </Heading>
           <Box>
@@ -1475,7 +1447,7 @@ const ColdStorage = () => {
         </Box>
         {/* ============================ Additional Features ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Additional Features
           </Heading>
           <Box>
@@ -1495,7 +1467,7 @@ const ColdStorage = () => {
 
         {/* ============================ Other Features ============================ */}
         <Box>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Other Features
           </Heading>
           <Box display={"grid"} textAlign={"left"} gap={2}>
@@ -1512,7 +1484,7 @@ const ColdStorage = () => {
 
         {/* ============================ Property facing ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Property facing
           </Heading>
           <Box>
@@ -1609,7 +1581,7 @@ const ColdStorage = () => {
 
         {/* ============================ Type of flooring ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Type of flooring
           </Heading>
           <Box>
@@ -1638,14 +1610,9 @@ const ColdStorage = () => {
 
         {/* ============================ location advantage ============================ */}
         <Box className={style.optional_box}>
-          <Heading size={"md"} margin={"10px 0 4px 0"} textAlign={"left"}>
+          <Heading size={"sm"} textAlign={"left"}>
             Location Advantages
-            <Heading
-              size={"xs"}
-              fontWeight={200}
-              margin={"4px 0"}
-              textAlign={"left"}
-            >
+            <Heading size={"xs"} fontWeight={200} textAlign={"left"}>
               Highlight the nearby landmarks*
             </Heading>
           </Heading>
