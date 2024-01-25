@@ -500,8 +500,7 @@ const WareHouse = () => {
           </Heading>
 
           <Input
-            type="text" 
-            required
+            type="text"  
             placeholder="Address (optional)"
             value={address}
             onChange={(e) => setAddress(e.target.value)}

@@ -601,8 +601,8 @@ const GuestBanquet = () => {
     <form onSubmit={handleSubmitData}>
       {/* ============================= property location =========================== */}
       <Box className={style.location_form}>
-        <Heading size={"lg"}>Where is your Guest-House / Banquet-Halls located?</Heading>
-        <Heading size={"sm"}>Location Detail</Heading>
+        <Heading size={"lg"} textAlign={"center"}>Where is your Guest-House / Banquet-Halls located?</Heading>
+        <Heading size={"sm"} textAlign={"left"}>Location Detail</Heading>
         <Input
           type="text"
           maxLength={"100"}

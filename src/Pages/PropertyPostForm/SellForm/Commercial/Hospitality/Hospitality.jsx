@@ -5,7 +5,7 @@ import style from "./Hospitality.module.css";
 import GuestBanquet from './GuestBanquet/GuestBanquet';
 
 const Hospitality = () => { 
-    const [type, setType] = useState("");
+    const [type, setType] = useState(""); 
 
     return (
         <div> 

@@ -503,8 +503,7 @@ const AgricalturalFarm = () => {
 
           <Input
             type="text" 
-            maxLength={"12"}
-            required
+            maxLength={"12"} 
             placeholder="Plot number (optional)"
             value={Plotnumber}
             onChange={(e) => setPlotnumber(NumericString(e.target.value))}

@@ -505,8 +505,7 @@ const IndustrialLand = () => {
           </Heading>
 
           <Input
-            type="text"
-            required
+            type="text" 
             placeholder="Plot number (optional)"
             value={Plotnumber}
             maxLength={"20"} 
@@ -636,7 +635,7 @@ const IndustrialLand = () => {
 
         {/* ========================== Property Dimensions ========================== */}
         <Box as={"div"} textAlign={"left"} display={"grid"}>
-          <Heading as={"h3"} size={"md"}> 
+          <Heading as={"h3"} size={"sm"}> 
             Property Dimensions (Optional) 
           </Heading>
           <Input
@@ -665,7 +664,7 @@ const IndustrialLand = () => {
 
         {/* ========================== Width of facing road ========================== */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"}  textAlign={"left"}>
             Width of facing road
           </Heading>
           <Box display={"flex"} w={"300px"}>
@@ -695,7 +694,7 @@ const IndustrialLand = () => {
 
         {/* ========================== No of open sides ========================== */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"md"}>
+          <Heading as={"h3"} size={"sm"}>
             {" "}
             No. of open sides{" "}
           </Heading>
@@ -735,7 +734,7 @@ const IndustrialLand = () => {
 
         {/* ============================== Construction Property =============================== */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"md"}>
+          <Heading as={"h3"} size={"sm"}>
             {" "}
             Any construction done on this property?{" "}
           </Heading>
@@ -768,7 +767,7 @@ const IndustrialLand = () => {
           className={style.optional_box}
           display={ConstructionOnProperty == "Yes" ? "grid" : "none"}
         >
-          <Heading as={"h3"} size={"md"}>
+          <Heading as={"h3"} size={"sm"}>
             {" "}
             What type of construction has been done?{" "}
           </Heading>
@@ -818,7 +817,7 @@ const IndustrialLand = () => {
 
         {/* Property facing */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"}  textAlign={"left"}>
             Property facing
           </Heading>
           <Box>
@@ -915,7 +914,7 @@ const IndustrialLand = () => {
 
         {/* ================================= Possession By =============================== */}
         <Box>
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"}  textAlign={"left"}>
             Possession By
           </Heading>
           <Box>
@@ -937,7 +936,7 @@ const IndustrialLand = () => {
         {/* ============================ Add pricing and details (Ownership) ============================ */}
         <Box>
           {/* OwnerShip detail */}
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"}  textAlign={"left"}>
             Ownership
           </Heading>
           <Box className={style.grid} gap={4}>
@@ -996,8 +995,7 @@ const IndustrialLand = () => {
         <Box>
           <Heading
             as={"h3"}
-            size={"md"}
-            margin={"30px 0 10px 0"}
+            size={"sm"} 
             textAlign={"left"}
           >
             Which authority the property is approved by ?
@@ -1114,14 +1112,14 @@ const IndustrialLand = () => {
 
         {/* ============================ Is it Pre-leased / Pre-Rented ? ============================ */}
         <Box textAlign={"left"}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"}  textAlign={"left"}>
             Is it Pre-leased / Pre-Rented ?
           </Heading>
           <Heading
             as={"h5"}
             size={"xs"}
             fontWeight={500}
-            margin={"10px 0"}
+            
             textAlign={"left"}
           >
             for properties that are already rented out
@@ -1198,7 +1196,7 @@ const IndustrialLand = () => {
 
         {/* Approved for Industry Type */}
         <Box>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"}  textAlign={"left"}>
             Approved for Industry Type
           </Heading>
           <Menu>
@@ -1381,7 +1379,7 @@ const IndustrialLand = () => {
               color={"black"}
               size={"sm"}
               textAlign={"left"}
-              margin={"10px 0"}
+              
             >
               {" "}
               Upload Your Property image{" "}
@@ -1441,9 +1439,9 @@ const IndustrialLand = () => {
         <Box>
           <Heading
             as={"h3"}
-            size={"md"}
+            size={"sm"}
             fontWeight={600}
-            margin={"10px 0"}
+            
             textAlign={"left"}
           >
             Add Description and Unique Features of your Property
@@ -1453,7 +1451,7 @@ const IndustrialLand = () => {
             size={"xs"}
             fontWeight={400}
             color={"#777777"}
-            margin={"10px 0"}
+            
             textAlign={"left"}
           >
             Adding description will increase your listing visibility
@@ -1470,14 +1468,14 @@ const IndustrialLand = () => {
         </Box>
         {/* ============================ Add amenities/unique features ============================ */}
         <Box>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"}  textAlign={"left"}>
             Add amenities/unique features
           </Heading>
           <Heading
             as={"h5"}
             size={"xs"}
             fontWeight={400}
-            margin={"10px 0"}
+            
             textAlign={"left"}
           >
             All fields on this page are optional
@@ -1486,7 +1484,7 @@ const IndustrialLand = () => {
 
         {/* ============================ Amenities ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"}  textAlign={"left"}>
             Amenities
           </Heading>
           <Box>
@@ -1550,7 +1548,7 @@ const IndustrialLand = () => {
 
         {/* ============================ Property Features ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"}  textAlign={"left"}>
             Property Features
           </Heading>
           <Box>
@@ -1614,7 +1612,7 @@ const IndustrialLand = () => {
 
         {/* ============================ Other Features ============================ */}
         <Box>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"}  textAlign={"left"}>
             Other Features
           </Heading>
           <Box display={"grid"} textAlign={"left"} gap={2}>
@@ -1631,12 +1629,11 @@ const IndustrialLand = () => {
 
         {/* ============================ location advantage ============================ */}
         <Box className={style.optional_box}>
-          <Heading size={"md"} margin={"10px 0 4px 0"} textAlign={"left"}>
+          <Heading size={"sm"}  textAlign={"left"}>
             Location Advantages
             <Heading
               size={"xs"}
-              fontWeight={200}
-              margin={"4px 0"}
+              fontWeight={200} 
               textAlign={"left"}
             >
               Highlight the nearby landmarks*

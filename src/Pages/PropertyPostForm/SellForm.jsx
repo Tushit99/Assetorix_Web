@@ -55,7 +55,7 @@ const SellForm = () => {
     settype(type);
     setlook(look);
     dispatch(changeLookingFor(type));
-  };
+  }; 
 
   const handleTabChange = (index) => {
     if (index == 0) {
@@ -149,6 +149,7 @@ const SellForm = () => {
                       border="1px solid rgba(85, 91, 255, 0.236)"
                       borderRadius="0px"
                       marginRight={"14px"} 
+                      onClick={() => setTypeOf("Residential")} 
                       _selected={{ color: "white", backgroundColor: "#d2ab66" }}
                     >
                       Residential
@@ -333,6 +334,7 @@ const SellForm = () => {
                       border="1px solid rgba(85, 91, 255, 0.236)"
                       borderRadius="0px"
                       marginRight={"14px"}
+                      onClick={() => setTypeOf("Residential")} 
                       _selected={{ color: "white", backgroundColor: "unset" }}
                     >
                       Residential
@@ -342,6 +344,7 @@ const SellForm = () => {
                       border="1px solid rgba(85, 91, 255, 0.236)"
                       borderRadius="0px"
                       marginRight={"14px"}
+                      onClick={() => setTypeOf("Commercial")}
                       _selected={{ color: "white", backgroundColor: "unset" }}
                     >
                       Commercial
@@ -576,115 +579,115 @@ const SellForm = () => {
         </Box>
 
         {/* Flat/Apartment */}
-        {type == "sell" && look == "Flat/Apartment" ? <FlatAppartment /> : ""}
+        {type == "sell" && typeofplace=="Residential" && look == "Flat/Apartment" ? <FlatAppartment /> : ""}
 
         {/* Independent House/villa */}
-        {type == "sell" && look == "Independent House/villa" ? (
+        {type == "sell" && typeofplace=="Residential" && look == "Independent House/villa" ? (
           <IndependentHouse />
         ) : (
           ""
         )}
 
         {/* Independent/builder Floor */}
-        {type == "sell" && look == "Independent/builder Floor" ? (
+        {type == "sell" && typeofplace=="Residential" && look == "Independent/builder Floor" ? (
           <Independentbuilder />
         ) : (
           ""
         )}
 
         {/* Serviced Apartment */}
-        {type == "sell" && look == "Serviced Apartment" ? (
+        {type == "sell" && typeofplace=="Residential" && look == "Serviced Apartment" ? (
           <ServicedApartment />
         ) : (
           ""
         )}
 
         {/* 1 RK/ Studio Apartment */}
-        {type == "sell" && look == "1 RK/ Studio Apartment" ? <RKStudio /> : ""}
+        {type == "sell" && typeofplace=="Residential" && look == "1 RK/ Studio Apartment" ? <RKStudio /> : ""}
 
         {/* Serviced Apartment */}
-        {type == "sell" && look == "Farmhouse" ? <FarmHouse /> : ""}
+        {type == "sell" && typeofplace=="Residential" && look == "Farmhouse" ? <FarmHouse /> : ""}
 
         {/* Plot/Land */}
-        {type == "sell" && look == "Plot / Land" ? <PlotLand /> : ""}
+        {type == "sell" && typeofplace=="Residential" && look == "Plot / Land" ? <PlotLand /> : ""}
 
         {/* OfficeSetup */}
-        {type == "sell" && look == "Office" ? <OfficeSetup /> : ""}
+        {type == "sell"  && typeofplace=="Commercial" && look == "Office" ? <OfficeSetup /> : ""}
 
         {/* Retail */}
-        {type === "sell" && look === "Retail" ? <Retail /> : ""}
+        {type === "sell"  && typeofplace=="Commercial" && look === "Retail" ? <Retail /> : ""}
 
         {/* Storage */}
-        {type == "sell" && look == "Storage" ? <Storage /> : ""}
+        {type == "sell"  && typeofplace=="Commercial" && look == "Storage" ? <Storage /> : ""}
 
         {/* Industry */}
-        {type == "sell" && look == "Industry" ? <Industry /> : ""}
+        {type == "sell"  && typeofplace=="Commercial" && look == "Industry" ? <Industry /> : ""}
 
         {/* Hospitality */}
-        {type == "sell" && look == "Hospitality" ? <Hospitality /> : ""}
+        {type == "sell"  && typeofplace=="Commercial" && look == "Hospitality" ? <Hospitality /> : ""}
 
         {/* Plot / Land */}
-        {type == "sell" && look == "Plot/Land" ? <PlotLandCommercial /> : ""}
+        {type == "sell"  && typeofplace=="Commercial" && look == "Plot/Land" ? <PlotLandCommercial /> : ""}
 
         {/* ================================== Rent/Lease ============================== */}
 
         {/*  Rent / Flat or Apartment */}
-        {type == "Rent/Lease" && look == "Flat/Apartment" ? (
+        {type == "Rent/Lease"   && typeofplace=="Residential" && look == "Flat/Apartment" ? (
           <FlatApartment />
         ) : (
           ""
         )}
 
         {/* Independent House / Villa */}
-        {type == "Rent/Lease" && look == "Independent House/villa" ? (
+        {type == "Rent/Lease"  && typeofplace=="Residential" && look == "Independent House/villa" ? (
           <Independent />
         ) : (
           ""
         )}
 
         {/* Independent/builder Floor */}
-        {type == "Rent/Lease" && look == "Independent/builder Floor" ? (
+        {type == "Rent/Lease"  && typeofplace=="Residential" && look == "Independent/builder Floor" ? (
           <IndependentBuilderRent />
         ) : (
           ""
         )}
 
         {/* Serviced Apartment */}
-        {type == "Rent/Lease" && look == "Serviced Apartment" ? (
+        {type == "Rent/Lease"  && typeofplace=="Residential" && look == "Serviced Apartment" ? (
           <ServicedApartmentRent />
         ) : (
           ""
         )}
 
         {/* 1RK / Studio Apartment  */}
-        {type == "Rent/Lease" && look == "1 RK/ Studio Apartment" ? (
+        {type == "Rent/Lease"  && typeofplace=="Residential" && look == "1 RK/ Studio Apartment" ? (
           <StudioApartmentRent />
         ) : (
           ""
         )}
 
         {/* Farmhouse */}
-        {type == "Rent/Lease" && look == "Farmhouse" ? <FarmhouseRent /> : ""}
+        {type == "Rent/Lease"  && typeofplace=="Residential" && look == "Farmhouse" ? <FarmhouseRent /> : ""}
 
         {/* =================================== Rent/Lease (Commercial) ================================ */}
 
         {/* Office */}
-        {type == "Rent/Lease" && look == "Office" ? <OfficeRent /> : ""}
+        {type == "Rent/Lease"  && typeofplace=="Commercial" && look == "Office" ? <OfficeRent /> : ""}
 
         {/* storage */}
-        {type == "Rent/Lease" && look == "Storage" ? <StorageRent /> : ""}
+        {type == "Rent/Lease"  && typeofplace=="Commercial" && look == "Storage" ? <StorageRent /> : ""}
 
         {/* Plot / Land (Rent)  */}
-        {type == "Rent/Lease" && look == "Plot/Land" ? <PlotLandRent /> : ""}
+        {type == "Rent/Lease"  && typeofplace=="Commercial" && look == "Plot/Land" ? <PlotLandRent /> : ""}
 
         {/* Retail */}
-        {type == "Rent/Lease" && look == "Retail" ? <RetailRent /> : ""}
+        {type == "Rent/Lease"  && typeofplace=="Commercial" && look == "Retail" ? <RetailRent /> : ""}
 
         {/* Industry */}
-        {type == "Rent/Lease" && look == "Industry" ? <IndustryRent /> : ""}
+        {type == "Rent/Lease"  && typeofplace=="Commercial" && look == "Industry" ? <IndustryRent /> : ""}
 
         {/* Hospitality */}
-        {type == "Rent/Lease" && look == "Hospitality" ? (
+        {type == "Rent/Lease"  && typeofplace=="Commercial" && look == "Hospitality" ? (
           <HospitalityRent />
         ) : (
           ""

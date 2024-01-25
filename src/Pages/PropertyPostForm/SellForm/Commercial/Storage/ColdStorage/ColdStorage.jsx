@@ -506,8 +506,7 @@ const ColdStorage = () => {
             Location Detail
           </Heading>
           <Input
-            type="text"
-            required
+            type="text" 
             placeholder="Address (optional)"
             value={address}
             maxLength={100}
