@@ -3,11 +3,15 @@
   max-width: 100%; 
   font-family: sans-serif;
 } 
+ 
 
 input[type="text"] {
   border-radius: 0; 
 }
  
+.App .plot *{
+  max-width: 100%;
+}
 
 .info { 
   max-width: 2400px;

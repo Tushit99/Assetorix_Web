@@ -9,7 +9,7 @@ import {
   Select,
   Text,
   Textarea,
-  Checkbox,
+  Checkbox, 
   useToast,
   RadioGroup,
   Stack,
@@ -642,7 +642,7 @@ const ReadyToMove = () => {
         {/* ====================================== */}
         {/* add area details */}
         <Box textAlign={"left"} padding={"10px 0"}>
-          <Heading as={"h3"} margin={"5px 0"} size={"sm"}>
+          <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"}>
             Add Area Details
           </Heading>
           <InputGroup
@@ -691,9 +691,10 @@ const ReadyToMove = () => {
             </Select>
           </InputGroup>
         </Box>
+
         {/* Office Setup  */}
         <Box>
-          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
+          <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"} textAlign={"left"}>
             Describe your office setup
           </Heading>
           <Box
@@ -724,9 +725,10 @@ const ReadyToMove = () => {
             />
           </Box>
         </Box>
+        
         {/* No. of Meeting Rooms */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"}>
+          <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"}>
             No. of Meeting Rooms
           </Heading>
           <Box>
@@ -740,9 +742,10 @@ const ReadyToMove = () => {
             />
           </Box>
         </Box>
+
         {/* Washrooms */}
         <Box display={"grid"}>
-          <Heading textAlign={"left"} as={"h3"} size={"sm"}>
+          <Heading textAlign={"left"} marginTop={{ base: 10, md: 5 }} as={"h3"} size={"sm"}>
             Washrooms
           </Heading>
           <Box display={"grid"} gridTemplateColumns={"repeat(1,1fr)"} gap={2}>
@@ -845,9 +848,10 @@ const ReadyToMove = () => {
             </Box>
           </Box>
         </Box>
+        
         {/* Conference Room */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
+          <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"} textAlign={"left"}>
             Conference Room
           </Heading>
           <Box>
@@ -878,9 +882,10 @@ const ReadyToMove = () => {
             </button>
           </Box>
         </Box>
+        
         {/* Reception Area */}
-        <Box padding={"10px 0 8px 0"}>
-          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
+        <Box >
+          <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
             Reception Area
           </Heading>
           <Box display={"flex"} gap={10} padding={"12px 0 0 0"}>
@@ -911,15 +916,15 @@ const ReadyToMove = () => {
             </button>
           </Box>
         </Box>
+        
         {/* Pantry Type */}
-        <Box padding={"10px 0 8px 0"}>
-          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
+        <Box >
+          <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
             Pantry Type 
           </Heading> 
-          <Box display={"flex"} gap={10} padding={"12px 0"}>
+          <Box display={"flex"} gap={{base:5,md:10}} flexWrap={"wrap"} textAlign={"left"} >
             <button
-              value={"Private"}
-              margin="auto"
+              value={"Private"} 
               onClick={(e) => {
                 e.preventDefault();
                 setPantryType(e.target.value);
@@ -929,7 +934,7 @@ const ReadyToMove = () => {
               Private
             </button>
             <button
-              value={"Shared"}
+              value={"Shared"} 
               onClick={(e) => {
                 e.preventDefault();
                 setPantryType(e.target.value);
@@ -939,7 +944,7 @@ const ReadyToMove = () => {
               Shared
             </button>
             <button
-              value={"Not-Available"}
+              value={"Not-Available"} 
               onClick={(e) => {
                 e.preventDefault();
                 setPantryType(e.target.value);
@@ -1005,26 +1010,27 @@ const ReadyToMove = () => {
               </Select>
             </InputGroup>
           </Box>
-        </Box>
+        </Box> 
+
         {/* facilities available */}
-        <Box textAlign={"left"}>
-          <Heading as={"h3"} size={"sm"} padding={"10px 0"}>
+        <Box textAlign={"left"} maxWidth={"100%"}> 
+          <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} >
             Please select the facilities available
           </Heading>
-          <Box display={"flex"} margin={"5px 14px"} w={500} gap={6}>
+          <Box display={{base:"grid",md:"flex"}} flexWrap={"wrap"} maxWidth={"96%"} margin={{base:"10px",md:"5px 14px"}} w={500} gap={{base:0,md:6}}>
             <Text flex={4}>Furnishing</Text>
             <RadioGroup onChange={setFurnishing} value={furnishing}>
               <Stack direction="row">
                 <Radio value="Available">Available</Radio>
                 <Radio value="Not-Available">Not-Available</Radio>
               </Stack>
-            </RadioGroup>
+            </RadioGroup> 
           </Box>
-          <Box display={"flex"} margin={"5px 14px"} w={500} gap={6}>
+          <Box display={{base:"grid",md:"flex"}} flexWrap={"wrap"} maxWidth={"96%"} margin={{base:"10px",md:"5px 14px"}} w={500} gap={{base:0,md:6}}>
             <Text flex={4}>Central Air Conditioning</Text>
             <RadioGroup
               onChange={setcentralAirConditioning}
-              value={centralAirConditioning}
+              value={centralAirConditioning} 
             >
               <Stack direction="row">
                 <Radio value="Available">Available</Radio>
@@ -1032,7 +1038,7 @@ const ReadyToMove = () => {
               </Stack>
             </RadioGroup>
           </Box>
-          <Box display={"flex"} margin={"5px 14px"} w={500} gap={6}>
+          <Box display={{base:"grid",md:"flex"}} flexWrap={"wrap"} maxWidth={"96%"} margin={{base:"10px",md:"5px 14px"}} w={500} gap={{base:0,md:6}}>
             <Text flex={4}>Oxygen Duct</Text>
             <RadioGroup onChange={setOxygenDuct} value={oxygenDuct}>
               <Stack direction="row">
@@ -1041,7 +1047,7 @@ const ReadyToMove = () => {
               </Stack>
             </RadioGroup>
           </Box>
-          <Box display={"flex"} margin={"5px 0 0 14px"} w={500} gap={6}>
+          <Box display={{base:"grid",md:"flex"}} flexWrap={"wrap"} maxWidth={"96%"} margin={{base:"10px",md:"5px 14px"}} w={500} gap={{base:0,md:6}}>
             <Text flex={4}>UPS</Text>
             <RadioGroup onChange={setUps} value={ups}>
               <Stack direction="row">
@@ -1051,9 +1057,10 @@ const ReadyToMove = () => {
             </RadioGroup>
           </Box>
         </Box>
+
         {/* Fire safety mesures */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"}> 
+          <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"}> 
             Fire safety measures include
           </Heading>
           <Box>
@@ -1097,11 +1104,13 @@ const ReadyToMove = () => {
             </button>
           </Box>
         </Box>
+
         {/* floor details */}
         <Box textAlign={"left"}>
           <Heading
             as={"h3"}
             size={"sm"} 
+            marginTop={{ base: 10, md: 5 }}
             textAlign={"left"}
           >
             Floor Details
@@ -1175,9 +1184,10 @@ const ReadyToMove = () => {
             </Box>
           </Box>
         </Box>
+
         {/* Staicases */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"}>
+          <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"}>
             No. of Staircases (Optional)
           </Heading>
           <Input
@@ -1189,10 +1199,11 @@ const ReadyToMove = () => {
             onChange={(e) => setStairCase(NumericString(e.target.value))}
             value={stairCase}
           />
-        </Box>
+        </Box> 
+
         {/* Lift */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"}> 
+          <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"}> 
             Lifts
           </Heading>
           <Box>
@@ -1299,9 +1310,10 @@ const ReadyToMove = () => {
             </Text>
           </Box>
         </Box>
+
         {/* Parking */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"}>
+          <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"}>
             Parking
           </Heading>
           <Box>
@@ -1371,9 +1383,10 @@ const ReadyToMove = () => {
             />
           </Box>
         </Box>
+
         {/* Availability status */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
             Availability Status
           </Heading>
           <Box className={style.grid}>
@@ -1405,13 +1418,14 @@ const ReadyToMove = () => {
             </button>
           </Box>
         </Box>
+
         {/* Age of Property */}
         {availability == "Ready to move" && (
           <Box textAlign={"left"} className={style.optional_box}>
             <Heading
               as={"h3"}
               size={"md"}
-              margin={"30px 0 10px 0"}
+              marginTop={5}
               textAlign={"left"}
             >
               Age of Property
@@ -1470,7 +1484,7 @@ const ReadyToMove = () => {
             <Heading
               as={"h3"}
               size={"md"}
-              margin={"30px 0 10px 0"}
+              marginTop={5}
               textAlign={"left"}
             >
               Possession By
@@ -1491,7 +1505,7 @@ const ReadyToMove = () => {
         {/* Add pricing and details (ownerShip) */}
         <Box>
           {/* OwnerShip detail */}
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
             Ownership
           </Heading>
           <Box className={style.grid} gap={4}>
@@ -1545,9 +1559,10 @@ const ReadyToMove = () => {
             </button>
           </Box>
         </Box>
+        
         {/* Priceing Detail  */}
         <Box>
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
             Price Details
           </Heading>
           <Box display={"flex"} alignItems={"center"} gap={5}>
@@ -1572,7 +1587,8 @@ const ReadyToMove = () => {
             </Box>
           </Box>
         </Box>
-        <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
+
+        <Box display={"flex"} gap={10} marginTop={5} flexWrap={"wrap"}>
           <Checkbox
             isChecked={inclusivePrices.includes("All inclusive price")}
             onChange={(e) => {
@@ -1612,13 +1628,13 @@ const ReadyToMove = () => {
           <Heading
             as={"h4"}
             size={"sm"}
-            margin={"10px 0"}
+            marginTop={{ base: 10, md: 5 }}
             fontWeight={700}
             textAlign={"left"}
           >
             Additional Pricing Detail (Optional)
           </Heading>
-          <InputGroup w={"300px"} margin={"10px 0"}>
+          <InputGroup w={"300px"}>
             <Input
               w={"60%"}
               type="text"
@@ -1639,11 +1655,12 @@ const ReadyToMove = () => {
               <option value="Yearly">Yearly</option>
             </Select>
           </InputGroup>
-        </Box>
+        </Box> 
+
         {/* Pre-leased / Pre-Ented */}
         <Box className={style.optional_box}>
           <Box>
-            <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+            <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
               Is it Pre-leased / Pre-Rented ?
             </Heading>
             <Text> for properties that are already rented out </Text>
@@ -1671,12 +1688,13 @@ const ReadyToMove = () => {
             </button>
           </Box>
         </Box>
+
         {/* pre-leased / pre-Rented */}
         <Box display={preLeased == "Yes" ? "grid" : "none"}>
           <Heading
             as={"h4"}
             size={"sm"}
-            margin={"10px 0"}
+            marginTop={{ base: 10, md: 5 }}
             fontWeight={700}
             textAlign={"left"}
           >
@@ -1684,7 +1702,7 @@ const ReadyToMove = () => {
           </Heading>
           <Heading
             size={"xs"}
-            margin={"10px 0"}
+            
             fontWeight={500}
             textAlign={"left"}
           >
@@ -1735,10 +1753,11 @@ const ReadyToMove = () => {
             </Box>
           </Box>
         </Box>
+
         {/* office fire NOC Certified */}
         <Box className={style.optional_box}>
           <Box>
-            <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+            <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
               Is your office fire NOC Certified
             </Heading>
           </Box>
@@ -1765,10 +1784,11 @@ const ReadyToMove = () => {
             </button>
           </Box>
         </Box>
+
         {/* Occupancy Certificate */}
         <Box className={style.optional_box}>
           <Box>
-            <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+            <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
               Occupancy Certificate
             </Heading>
           </Box>
@@ -1798,11 +1818,12 @@ const ReadyToMove = () => {
               No
             </button>
           </Box>
-        </Box>
+        </Box> 
+
         {/* office previously used for */}
         <Box className={style.optional_box}>
           <Box>
-            <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+            <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
               Your office was previously used for (Optional)
             </Heading>
             <Text> * You can select upto 3 </Text>
@@ -1899,7 +1920,7 @@ const ReadyToMove = () => {
               color={"black"}
               size={"sm"}
               textAlign={"left"}
-              margin={"10px 0"}
+              marginTop={{ base: 10, md: 5 }}
             >
               Upload Your Property image
             </Heading>
@@ -1955,7 +1976,7 @@ const ReadyToMove = () => {
 
         {/* property Description */}
         <Box>
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
             Add Description and Unique Features of your Property
           </Heading>
           <Textarea
@@ -1972,7 +1993,7 @@ const ReadyToMove = () => {
 
       {/* Amenities */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
           Amenities
         </Heading>
         <Box>
@@ -2126,6 +2147,7 @@ const ReadyToMove = () => {
           </button>
         </Box>
       </Box>
+      
       {/* location advantage (near to which place) */}
       <Box className={style.optional_box}>
         <Heading size={"sm"} textAlign={"left"}>
@@ -2133,7 +2155,7 @@ const ReadyToMove = () => {
           <Heading
             size={"xs"}
             fontWeight={200}
-            margin={"4px 0"}
+            marginTop={{ base: 10, md: 5 }}
             textAlign={"left"}
           >
             Highlight the nearby landmarks*
@@ -2224,13 +2246,14 @@ const ReadyToMove = () => {
           </button>
         </Box>
       </Box>
+      
       {/* warning line */}
       <Heading
         as={"h5"}
         size={"xs"}
         color={"rgb(255, 52, 52)"}
         fontWeight={200}
-        margin={"4px 0"}
+        marginTop={{ base: 10, md: 5 }}
         textAlign={"left"}
       >
         *Please provide correct information, otherwise your listing might get

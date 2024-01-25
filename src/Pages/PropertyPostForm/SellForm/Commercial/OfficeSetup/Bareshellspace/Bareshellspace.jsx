@@ -20,7 +20,7 @@ import {
   MenuButton,
   MenuList,
 } from "@chakra-ui/react";
-import style from "./Bareshellspace.module.css";
+import style from "../OfficeSetup.module.css";
 import { useSelector } from "react-redux";
 import { AddIcon, ChevronDownIcon, MinusIcon } from "@chakra-ui/icons";
 import axios from "axios";
@@ -521,7 +521,7 @@ const Bareshellspace = () => {
   };
 
   return (
-    <form onSubmit={handleSubmitData}>
+    <form onSubmit={handleSubmitData} >
       {/* property location */}
       <Box className={style.location_form}>
         <Heading size={"lg"} color={"black"}>
@@ -633,7 +633,7 @@ const Bareshellspace = () => {
       <Box marginTop={4}>
         {/* ====================================== */}
         <Box textAlign={"left"}>
-          <Heading as={"h3"} size={"sm"}>
+          <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"}>
             Add Area Details
           </Heading>
           <InputGroup
@@ -686,7 +686,7 @@ const Bareshellspace = () => {
 
         {/* Construction status of walls */}
         <Box className={style.optional_box}>
-          <Heading textAlign={"left"} as={"h3"} size={"sm"}>
+          <Heading textAlign={"left"} marginTop={{ base: 10, md: 5 }} as={"h3"} size={"sm"}>
             Construction status of walls
           </Heading>
           <Box>
@@ -749,7 +749,7 @@ const Bareshellspace = () => {
 
         {/* Are doors constructed */}
         <Box className={style.optional_box}>
-          <Heading textAlign={"left"} as={"h3"} size={"sm"}>
+          <Heading textAlign={"left"} marginTop={{ base: 10, md: 5 }} as={"h3"} size={"sm"}>
             Are doors constructed
           </Heading>
           <Box>
@@ -778,7 +778,7 @@ const Bareshellspace = () => {
 
         {/* Washrooms */}
         <Box display={"grid"}>
-          <Heading textAlign={"left"} as={"h3"} size={"sm"}>
+          <Heading textAlign={"left"} marginTop={{ base: 10, md: 5 }} as={"h3"} size={"sm"}>
             Washrooms
           </Heading>
           <Box display={"grid"} gridTemplateColumns={"repeat(1,1fr)"} gap={2}>
@@ -884,10 +884,10 @@ const Bareshellspace = () => {
 
         {/* Pantry Type */}
         <Box>
-          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
+          <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"} textAlign={"left"}>
             Pantry Type
           </Heading>
-          <Box display={"flex"} gap={10} padding={"12px 0"}>
+          <Box display={{base:"grid",md:"flex"}} gap={10} padding={"12px 0"}>
             <button
               value={"Shared Pantry"}
               margin="auto"
@@ -966,7 +966,7 @@ const Bareshellspace = () => {
 
         {/* Type of flooring */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
+          <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"} textAlign={"left"}>
             Type of flooring
           </Heading>
           <Box>
@@ -996,10 +996,10 @@ const Bareshellspace = () => {
 
         {/* Please select the facilities available */}
         <Box>
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
             Please select the facilities available
           </Heading>
-          <Box display={"flex"} margin={"5px 14px"} w={500} gap={6}>
+          <Box display={{base:"grid",md:"flex"}} flexWrap={"wrap"} maxWidth={"96%"} margin={{base:"10px",md:"5px 14px"}} w={500} gap={{base:0,md:6}}>
             <Text flex={4} textAlign={"left"}>
               Central Air Conditioning
             </Text>
@@ -1010,7 +1010,7 @@ const Bareshellspace = () => {
               </Stack>
             </RadioGroup>
           </Box>
-          <Box display={"flex"} margin={"5px 14px"} w={500} gap={6}>
+          <Box display={{base:"grid",md:"flex"}} flexWrap={"wrap"} maxWidth={"96%"} margin={{base:"10px",md:"5px 14px"}} w={500} gap={{base:0,md:6}}>
             <Text flex={4} textAlign={"left"}>
               Oxygen Duct
             </Text>
@@ -1025,7 +1025,7 @@ const Bareshellspace = () => {
 
         {/* Fire safety mesures */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"}>
+          <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"}>
             Fire safety measures include
           </Heading>
           <Box>
@@ -1072,7 +1072,7 @@ const Bareshellspace = () => {
 
         {/* floor details */}
         <Box textAlign={"left"}>
-          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
+          <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"} textAlign={"left"}>
             Floor Details
           </Heading>
           <Box display={"flex"} alignItems={"center"}>
@@ -1144,9 +1144,10 @@ const Bareshellspace = () => {
             </Box>
           </Box>
         </Box>
+
         {/* Staicases */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"}>
+          <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"}>
             No. of Staircases (Optional)
           </Heading>
           <Input
@@ -1159,9 +1160,10 @@ const Bareshellspace = () => {
             value={stairCase}
           />
         </Box>
+
         {/* Lift */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"}>
+          <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"}>
             Lifts
           </Heading>
           <Box>
@@ -1271,7 +1273,7 @@ const Bareshellspace = () => {
 
         {/* Parking */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"}>
+          <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"}>
             Parking
           </Heading>
           <Box>
@@ -1342,9 +1344,10 @@ const Bareshellspace = () => {
           </Box>
         </Box>
 
+        
         {/* Availability status */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
             Availability Status
           </Heading>
           <Box className={style.grid}>
@@ -1382,7 +1385,7 @@ const Bareshellspace = () => {
             <Heading
               as={"h3"}
               size={"md"}
-              margin={"30px 0 10px 0"}
+              marginTop={{ base: 10, md: 5 }}
               textAlign={"left"}
             >
               Age of Property
@@ -1441,7 +1444,7 @@ const Bareshellspace = () => {
             <Heading
               as={"h3"}
               size={"md"}
-              margin={"30px 0 10px 0"}
+              marginTop={{ base: 10, md: 5 }}
               textAlign={"left"}
             >
               Possession By
@@ -1462,7 +1465,7 @@ const Bareshellspace = () => {
         {/* Add pricing and details (ownerShip) */}
         <Box>
           {/* OwnerShip detail */}
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
             Ownership
           </Heading>
           <Box className={style.grid} gap={4}>
@@ -1594,7 +1597,7 @@ const Bareshellspace = () => {
         </Box>
 
         {/* checkbox */}
-        <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
+        <Box display={"flex"} gap={10} marginTop={{ base: 10, md: 5 }} flexWrap={"wrap"}>
           <Checkbox
             isChecked={inclusivePrices.includes("All inclusive price")}
             onChange={(e) => {
@@ -1634,7 +1637,7 @@ const Bareshellspace = () => {
           <Heading
             as={"h4"}
             size={"sm"}
-            margin={"10px 0"}
+            marginTop={{ base: 10, md: 5 }}
             fontWeight={700}
             textAlign={"left"}
           >
@@ -1720,7 +1723,7 @@ const Bareshellspace = () => {
         {/* Pre-leased / Pre-Ented */}
         <Box className={style.optional_box}>
           <Box>
-            <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+            <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
               Is it Pre-leased / Pre-Rented ?
             </Heading>
             <Text> for properties that are already rented out </Text>
@@ -1753,7 +1756,7 @@ const Bareshellspace = () => {
           <Heading
             as={"h4"}
             size={"sm"}
-            margin={"10px 0"}
+            marginTop={{ base: 10, md: 5 }}
             fontWeight={700}
             textAlign={"left"}
           >
@@ -1815,7 +1818,7 @@ const Bareshellspace = () => {
         {/* office fire NOC Certified */}
         <Box className={style.optional_box}>
           <Box>
-            <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+            <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
               Is your office fire NOC Certified
             </Heading>
           </Box>
@@ -1845,7 +1848,7 @@ const Bareshellspace = () => {
         {/* Occupancy Certificate */}
         <Box className={style.optional_box}>
           <Box>
-            <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+            <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
               Occupancy Certificate
             </Heading>
           </Box>
@@ -1879,7 +1882,7 @@ const Bareshellspace = () => {
         {/* office previously used for */}
         <Box className={style.optional_box}>
           <Box>
-            <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+            <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
               Your office was previously used for (Optional)
             </Heading>
             <Text> * You can select upto 3 </Text>
@@ -1968,7 +1971,7 @@ const Bareshellspace = () => {
               color={"black"}
               size={"sm"}
               textAlign={"left"}
-              margin={"10px 0"}
+              marginTop={{ base: 10, md: 5 }}
             >
               Upload Your Property image
             </Heading>
@@ -2024,7 +2027,7 @@ const Bareshellspace = () => {
 
         {/* property Description */}
         <Box>
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
             Add Description and Unique Features of your Property
           </Heading>
           <Textarea
@@ -2041,7 +2044,7 @@ const Bareshellspace = () => {
 
       {/* Amenities */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
           Amenities
         </Heading>
         <Box>
@@ -2198,7 +2201,7 @@ const Bareshellspace = () => {
 
       {/* location advantage (near to which place) */}
       <Box className={style.optional_box}>
-        <Heading size={"sm"} margin={"10px 0 4px 0"} textAlign={"left"}>
+        <Heading size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
           Location Advantages
           <Heading
             size={"xs"}
@@ -2300,7 +2303,7 @@ const Bareshellspace = () => {
         size={"xs"}
         color={"rgb(255, 52, 52)"}
         fontWeight={200}
-        margin={"4px 0"}
+        marginTop={{ base: 10, md: 5 }}
         textAlign={"left"}
       >
         *Please provide correct information, otherwise your listing might get
