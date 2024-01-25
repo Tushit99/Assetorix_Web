@@ -22,7 +22,7 @@ import { Checkbox } from "@chakra-ui/react";
 import style from "../Retail.module.css";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import { CleanInputText } from "../../../../code";
+import { CleanInputText, NumericString } from "../../../../code";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../../../Loading";
