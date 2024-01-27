@@ -633,7 +633,7 @@ const AgricalturalFarm = () => {
         <Box as={"div"} textAlign={"left"} display={"grid"}>
           <Heading as={"h3"} marginTop={5} size={"sm"}> 
             Property Dimensions (Optional) 
-          </Heading>
+          </Heading> 
           <Input
             type={"text"}
             variant="flushed"
@@ -690,8 +690,7 @@ const AgricalturalFarm = () => {
 
         {/* ========================== No of open sides ========================== */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} marginTop={5} size={"sm"}>
-            
+          <Heading as={"h3"} marginTop={5} size={"sm"}> 
             No. of open sides
           </Heading>
           <Box textAlign={"left"} padding={"10px 0 0 0"}>

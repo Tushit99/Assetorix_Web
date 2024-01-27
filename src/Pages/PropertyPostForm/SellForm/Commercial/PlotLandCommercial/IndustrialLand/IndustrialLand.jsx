@@ -635,7 +635,7 @@ const IndustrialLand = () => {
 
         {/* ========================== Property Dimensions ========================== */}
         <Box as={"div"} textAlign={"left"} display={"grid"}>
-          <Heading as={"h3"} size={"sm"}> 
+          <Heading as={"h3"} marginTop={5} size={"sm"}> 
             Property Dimensions (Optional) 
           </Heading>
           <Input
@@ -664,7 +664,7 @@ const IndustrialLand = () => {
 
         {/* ========================== Width of facing road ========================== */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"}  textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Width of facing road
           </Heading>
           <Box display={"flex"} w={"300px"}>
@@ -694,8 +694,7 @@ const IndustrialLand = () => {
 
         {/* ========================== No of open sides ========================== */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"}>
-            
+          <Heading as={"h3"} marginTop={5} size={"sm"}> 
             No. of open sides
           </Heading>
           <Box textAlign={"left"} padding={"10px 0 0 0"}>
