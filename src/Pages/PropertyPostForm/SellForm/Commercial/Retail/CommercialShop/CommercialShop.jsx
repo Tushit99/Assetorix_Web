@@ -1128,7 +1128,7 @@ const CommercialShop = () => {
             {/* ================= Age of Property ============================ */}
             {availability == "Ready to move" && (
               <Box textAlign={"left"} className={style.optional_box}>
-                <Heading as={"h3"} size={"sm"} textAlign={"left"}>
+                <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
                   Age of Property
                 </Heading>
                 <Box className={style.grid}>
@@ -1190,7 +1190,7 @@ const CommercialShop = () => {
 
             {availability == "Under construction" && (
               <Box>
-                <Heading as={"h3"} size={"sm"} textAlign={"left"}>
+                <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"} textAlign={"left"}>
                   Possession By
                 </Heading>
                 <Select
