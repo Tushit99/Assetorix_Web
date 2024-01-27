@@ -15,14 +15,16 @@ import { Checkbox } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import style from "../RentForm.module.css";
-import { CleanInputText, IndianDateConverter, NumericString, WordandNumber } from "../../code";
+import {
+  CleanInputText,
+  IndianDateConverter,
+  NumericString,
+  WordandNumber,
+} from "../../code";
 import { InputGroup } from "@chakra-ui/react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../Loading";
-
-
-
 
 const Independent = () => {
   const isCountry = useSelector((state) => state.gloalval);
@@ -93,7 +95,6 @@ const Independent = () => {
   const [isDraging, setIsDraging] = useState(false);
   const fileInputRef = useRef(null);
 
-
   const handleSubmitData = async (e) => {
     e.preventDefault();
     setClickCount((prev) => prev + 12);
@@ -154,9 +155,9 @@ const Independent = () => {
         maintenanceTimePeriod,
         expectedRental: expectedRentel,
         bookingAmount,
-        annualDuesPayable: annualDuesPayble
+        annualDuesPayable: annualDuesPayble,
       },
-      // brokerContact : brokerContact 
+      // brokerContact : brokerContact
     };
 
     const showToastError = (message) => {
@@ -204,7 +205,6 @@ const Independent = () => {
       obj["depositValue"] = depositAmount;
     }
 
-
     if (securityDeposit == "Multiple of Rent") {
       obj["multipleOfRent"] = depositAmount;
     }
@@ -223,7 +223,6 @@ const Independent = () => {
       balconey &&
       furnishedarr &&
       ownership &&
-
       additinalft &&
       powerbackup &&
       propertyFacing &&
@@ -248,7 +247,6 @@ const Independent = () => {
         return;
       }
 
-     
       if (furnished == "Furnished" || furnished == "Semi-Furnished") {
         obj.furnishedObj = {
           Light: light,
@@ -264,20 +262,21 @@ const Independent = () => {
 
       // else {
       try {
-        // console.log("data",obj); 
+        // console.log("data",obj);
         // let response = await fetch(`${process.env.REACT_APP_URL}/property/`, {
         //     method: "POST",
         //     headers: head,
         //     body: JSON.stringify(obj)
         // });
-        // console.log("data",obj,response); 
+        // console.log("data",obj,response);
         // let data = await response.json();
-        // console.log("data",obj,data);  
+        // console.log("data",obj,data);
         setClickCount((prev) => prev + 12);
         setIsClicked(true);
-        await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, {
-          headers: head,
-        })
+        await axios
+          .post(`${process.env.REACT_APP_URL}/property/`, obj, {
+            headers: head,
+          })
           .then((e) => {
             // console.log(e, obj);
             toast({
@@ -310,17 +309,17 @@ const Independent = () => {
     }
   };
 
-  // image uploading after uploading the data:  
+  // image uploading after uploading the data:
   const submitImage = async (productID) => {
     try {
       let id = localStorage.getItem("usrId") || undefined;
       let authorization = localStorage.getItem("AstToken") || undefined;
 
       let headersList = {
-        "Accept": "*/*",
-        "Authorization": authorization,
-        "id": id
-      }
+        Accept: "*/*",
+        Authorization: authorization,
+        id: id,
+      };
 
       let formdata = new FormData();
       images.forEach((image) => {
@@ -334,11 +333,11 @@ const Independent = () => {
         method: "POST",
         headers: headersList,
         data: bodyContent,
-      }
+      };
 
       await axios.request(reqOptions).then((e) => {
         setIsClicked(false);
-      })
+      });
     } catch (error) {
       console.log(error);
       setIsClicked(false);
@@ -359,7 +358,6 @@ const Independent = () => {
 
   const pinfetch = async (pin) => {
     try {
-
       let res = await axios.get(
         `${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`
       );
@@ -384,7 +382,7 @@ const Independent = () => {
   const handlePreferredAgreement = (e) => {
     e.preventDefault();
     setpreferredAgreement(e.target.value);
-  }
+  };
 
   // please don'nt change any function without any prior knowledge
   const furnisheddetails = (e) => {
@@ -432,8 +430,7 @@ const Independent = () => {
       }
     });
     console.log(willingTo);
-  }
-
+  };
 
   const handlepropertyAge = (e) => {
     e.preventDefault();
@@ -526,7 +523,7 @@ const Independent = () => {
   const handleMonthNotice = (e) => {
     e.preventDefault();
     setNoticePeriod(e.target.value);
-  }
+  };
 
   const handleinclusivePrices = (e) => {
     e.preventDefault();
@@ -539,22 +536,21 @@ const Independent = () => {
       newarr.push(value);
     }
     setinclusivePrices(newarr);
-  }
+  };
 
   const handleSecurityDeposit = (e) => {
     e.preventDefault();
     setSecurityDeposit(e.target.value);
-  }
+  };
 
   const handleDepositAmount = (e) => {
     setDepositAmount(e.target.value);
-  }
+  };
 
-
-  // ======--- image upload function   
+  // ======--- image upload function
   const selectFiles = () => {
     fileInputRef.current.click();
-  }
+  };
 
   const removeImage = (index) => {
     const newImages = [...images];
@@ -565,33 +561,36 @@ const Independent = () => {
   const onFileSelect = (e) => {
     let files = e.target.files;
     if (files.length === 0) {
-      return
+      return;
     }
     for (let i = 0; i < files.length; i++) {
-      if (files[i].type.split('/')[0] !== 'image') {
+      if (files[i].type.split("/")[0] !== "image") {
         continue;
       }
       if (!images.some((e) => e.name === files[i].name)) {
-        setImages((prev) => [...prev, {
-          name: files[i].name,
-          image: files[i],
-        },])
+        setImages((prev) => [
+          ...prev,
+          {
+            name: files[i].name,
+            image: files[i],
+          },
+        ]);
       }
     }
-  }
+  };
 
   const ondragleave = (event) => {
     event.preventDefault();
     setIsDraging(false);
-    console.log("leave")
-  }
+    console.log("leave");
+  };
 
   const ondragover = (event) => {
     event.preventDefault();
     setIsDraging(true);
     event.dataTransfer.dropEffect = "copy";
     console.log("over the box");
-  }
+  };
 
   const ondrop = (event) => {
     event.preventDefault(); // Add this line
@@ -604,30 +603,34 @@ const Independent = () => {
     }
 
     for (let i = 0; i < files.length; i++) {
-      if (files[i].type.split('/')[0] !== 'image') {
+      if (files[i].type.split("/")[0] !== "image") {
         continue;
       }
       if (!images.some((e) => e.name === files[i].name)) {
-        setImages((prev) => [...prev, {
-          name: files[i].name,
-          image: files[i],
-        }]);
+        setImages((prev) => [
+          ...prev,
+          {
+            name: files[i].name,
+            image: files[i],
+          },
+        ]);
       }
     }
     console.log("droped");
-  }
- 
+  };
 
   return (
     <form onSubmit={handleSubmitData}>
       {/* property location */}
       <Box className={style.location_form}>
-        <Heading size={"lg"}>Where is your Independent House / villa located?</Heading> 
+        <Heading size={"lg"}>
+          Where is your Independent House / villa located?
+        </Heading>
         <Heading size={"sm"} textAlign={"left"}>
           Location Detail
-        </Heading> 
+        </Heading>
         <Input
-          type="text" 
+          type="text"
           required
           maxLength={"100"}
           placeholder="House No. (optional)"
@@ -637,7 +640,7 @@ const Independent = () => {
           variant="flushed"
         />
         <Input
-          type="text" 
+          type="text"
           required
           maxLength={"100"}
           placeholder="Apartment / Society Name"
@@ -648,16 +651,16 @@ const Independent = () => {
         />
         <Input
           type="text"
-          placeholder={"Enter pincode"} 
+          placeholder={"Enter pincode"}
           required
           maxLength={6}
           fontSize={"md"}
           value={pincode}
           onChange={handlepinfetch}
-          variant="flushed" 
+          variant="flushed"
         />
         <Input
-          type="text" 
+          type="text"
           required
           placeholder="Enter Locality"
           maxLength={"100"}
@@ -678,7 +681,7 @@ const Independent = () => {
         )}
 
         <Input
-          type="text" 
+          type="text"
           required
           placeholder="Enter City"
           fontSize={"md"}
@@ -688,7 +691,7 @@ const Independent = () => {
           variant="flushed"
         />
         <Input
-          type="text" 
+          type="text"
           required
           placeholder="Enter State"
           value={state}
@@ -696,9 +699,9 @@ const Independent = () => {
           onChange={(e) => setState(WordandNumber(e.target.value))}
           fontSize={"md"}
           variant="flushed"
-        /> 
+        />
         <Input
-          type="text" 
+          type="text"
           required
           placeholder="Enter Country"
           value={country}
@@ -710,7 +713,6 @@ const Independent = () => {
       </Box>
       {/* Property Detail */}
       <Box marginTop={12}>
-        
         <Heading as={"h4"} size={"sm"} margin={"0 0 30px 0 "}>
           Add Room Details
         </Heading>
@@ -751,54 +753,58 @@ const Independent = () => {
         </Box>
         {/* ====================================== */}
         {/* add area details */}
-        <Box textAlign={"left"} padding={"10px 0"}>
-          <Heading as={"h3"} margin={"5px 0"} size={"md"}>
+        <Box textAlign={"left"}>
+          <Heading as={"h3"} marginTop={5} size={"sm"}>
             Add Area Details
           </Heading>
-          <Text margin={"5px 0"}> Atleast one area type is mandatory </Text>
           <InputGroup
-            className={style.select_land}
-            size="sm"
+            w={300}
+            size="md"
+            marginTop={2}
             isAttached
             variant="outline"
           >
             <Input
               type="text"
               value={plotArea}
-              maxLength={"8"}
+              placeholder="Enter area detail"
+              w={200}
+              maxLength={"6"}
               onChange={(e) => {
-                // areaCalucation();
                 setPlotArea(NumericString(e.target.value));
               }}
               required
             />
-            <select
-              value={areaPer}
-              onChange={(e) => {
-                setAreaPer(e.target.value);
-              }}
-              className={style.select}
-              required
-            >
-              <option value="sq.ft">sq.ft</option>
-              <option value="sq.yards">sq.yards</option>
-              <option value="sq.m">sq.m</option>
-              <option value="acres">acres</option>
-              <option value="marla">marla</option>
-              <option value="cents">cents</option>
-              <option value="bigha">bigha</option>
-              <option value="kottah">kottah</option>
-              <option value="kanal">kanal</option>
-              <option value="grounds">grounds</option>
-              <option value="ares">ares</option>
-              <option value="biswa">biswa</option>
-              <option value="guntha">guntha</option>
-              <option value="aankadam">aankadam</option>
-              <option value="hectares">hectares</option>
-              <option value="rood">rood</option>
-              <option value="chataks">chataks</option>
-              <option value="perch">perch</option>
-            </select>
+            <InputRightElement width={100}>
+              <Select
+                value={areaPer}
+                borderRadius={0}
+                onChange={(e) => {
+                  setAreaPer(e.target.value);
+                }}
+                className={style.select}
+                required
+              >
+                <option value="sq.ft">sq.ft</option>
+                <option value="sq.yards">sq.yards</option>
+                <option value="sq.m">sq.m</option>
+                <option value="acres">acres</option>
+                <option value="marla">marla</option>
+                <option value="cents">cents</option>
+                <option value="bigha">bigha</option>
+                <option value="kottah">kottah</option>
+                <option value="kanal">kanal</option>
+                <option value="grounds">grounds</option>
+                <option value="ares">ares</option>
+                <option value="biswa">biswa</option>
+                <option value="guntha">guntha</option>
+                <option value="aankadam">aankadam</option>
+                <option value="hectares">hectares</option>
+                <option value="rood">rood</option>
+                <option value="chataks">chataks</option>
+                <option value="perch">perch</option>
+              </Select>
+            </InputRightElement>
           </InputGroup>
         </Box>
         {/* other Room  */}
@@ -897,7 +903,6 @@ const Independent = () => {
             padding={"10px 0"}
             gap={6}
           >
-
             <Box className={style.furnished_detail}>
               <Box>
                 <button
@@ -1229,18 +1234,15 @@ const Independent = () => {
         </Box>
         {/* ========================= floor details ========================= */}
         <Box textAlign={"left"}>
-          <Heading
-            as={"h3"}
-            size={"md"}
-            textAlign={"left"}
-          >
+          <Heading as={"h3"} size={"md"} textAlign={"left"}>
             Floor Details
           </Heading>
           <Text textAlign={"left"} margin={"10px 0"}>
             Total no of floors and your floor details
           </Text>
           <Box display={"flex"} alignItems={"center"} gap={5}>
-            <Input type="text"
+            <Input
+              type="text"
               w={300}
               maxLength={"2"}
               onChange={(e) => {
@@ -1257,16 +1259,13 @@ const Independent = () => {
                 }
               }}
               required
-              value={totalfloors} />
+              value={totalfloors}
+            />
           </Box>
         </Box>
         {/* ========================= Age of Property ========================= */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading
-            as={"h3"}
-            size={"md"}
-            textAlign={"left"}
-          >
+          <Heading as={"h3"} size={"md"} textAlign={"left"}>
             Age of Property
           </Heading>
           <Box className={style.grid}>
@@ -1322,7 +1321,13 @@ const Independent = () => {
           <Heading as={"h3"} size={"md"} margin={"4px 0"} textAlign={"left"}>
             Available from
           </Heading>
-          <Input value={availableFrom} onChange={(e) => setavailableFrom(e.target.value)} color='blue' type={"date"} w={300} />
+          <Input
+            value={availableFrom}
+            onChange={(e) => setavailableFrom(e.target.value)}
+            color="blue"
+            type={"date"}
+            w={300}
+          />
         </Box>
 
         {/* ========================= Willing to rent out to ========================= */}
@@ -1330,25 +1335,31 @@ const Independent = () => {
           <Heading as={"h3"} size={"sm"} margin={"14px 0"} textAlign={"left"}>
             Willing to rent out to
           </Heading>
-          <Box textAlign={"left"} display={"flex"} flexWrap={"wrap"} gap={5} >
+          <Box textAlign={"left"} display={"flex"} flexWrap={"wrap"} gap={5}>
             <button
               value={"Family"}
               onClick={handleWillingto}
-              className={willingTo.includes("Family") ? style.setbtn : style.btn}
+              className={
+                willingTo.includes("Family") ? style.setbtn : style.btn
+              }
             >
               Family
             </button>
             <button
               value={"Single men"}
               onClick={handleWillingto}
-              className={willingTo.includes("Single men") ? style.setbtn : style.btn}
+              className={
+                willingTo.includes("Single men") ? style.setbtn : style.btn
+              }
             >
               Single men
             </button>
             <button
               value={"Single women"}
               onClick={handleWillingto}
-              className={willingTo.includes("Single women") ? style.setbtn : style.btn}
+              className={
+                willingTo.includes("Single women") ? style.setbtn : style.btn
+              }
             >
               Single women
             </button>
@@ -1360,7 +1371,7 @@ const Independent = () => {
           <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Are you ok with Agents contacting you?
           </Heading>
-          <Box >
+          <Box>
             <button
               value={"Yes"}
               onClick={(e) => {
@@ -1390,8 +1401,24 @@ const Independent = () => {
             Preferred agreement type
           </Heading>
           <Box>
-            <button onClick={handlePreferredAgreement} value={"Company lease agreement"} className={preferredAgreement == "Company lease agreement" ? style.setbtn : style.btn}  >Company lease agreement</button>
-            <button onClick={handlePreferredAgreement} value={"Any"} className={preferredAgreement == "Any" ? style.setbtn : style.btn}  >Any</button>
+            <button
+              onClick={handlePreferredAgreement}
+              value={"Company lease agreement"}
+              className={
+                preferredAgreement == "Company lease agreement"
+                  ? style.setbtn
+                  : style.btn
+              }
+            >
+              Company lease agreement
+            </button>
+            <button
+              onClick={handlePreferredAgreement}
+              value={"Any"}
+              className={preferredAgreement == "Any" ? style.setbtn : style.btn}
+            >
+              Any
+            </button>
           </Box>
         </Box>
 
@@ -1401,35 +1428,118 @@ const Independent = () => {
             Rent Details
           </Heading>
           <Box>
-            <Input type="text" w={"40%"} maxLength={"8"} borderRadius={0} value={priceSqr} onChange={(e) => {
-              e.preventDefault();
-              setPriceSqr(NumericString(e.target.value));
-            }} placeholder={"₹ Expected Rent"} />
+            <Input
+              type="text"
+              w={"40%"}
+              maxLength={"8"}
+              borderRadius={0}
+              value={priceSqr}
+              onChange={(e) => {
+                e.preventDefault();
+                setPriceSqr(NumericString(e.target.value));
+              }}
+              placeholder={"₹ Expected Rent"}
+            />
           </Box>
           {/* pricing checkbox */}
           <Box display={"flex"} flexWrap={"wrap"} gap={5}>
-            <Checkbox isChecked={inclusivePrices.includes("Electricity & Water charges excluded")} value={"Electricity & Water charges excluded"} onChange={handleinclusivePrices} >Electricity & Water charges excluded</Checkbox>
-            <Checkbox isChecked={inclusivePrices.includes("price Negotiable")} value={"price Negotiable"} onChange={handleinclusivePrices} >price Negotiable</Checkbox>
+            <Checkbox
+              isChecked={inclusivePrices.includes(
+                "Electricity & Water charges excluded"
+              )}
+              value={"Electricity & Water charges excluded"}
+              onChange={handleinclusivePrices}
+            >
+              Electricity & Water charges excluded
+            </Checkbox>
+            <Checkbox
+              isChecked={inclusivePrices.includes("price Negotiable")}
+              value={"price Negotiable"}
+              onChange={handleinclusivePrices}
+            >
+              price Negotiable
+            </Checkbox>
           </Box>
           {/* Additional Pricing Detail (Optional) */}
           <Box display={"grid"}>
-            {additionalPrice && <>
-              <Heading as={"h4"} size={"sm"} margin={"10px 0"} fontWeight={700} textAlign={"left"}>
-                Additional Pricing Detail (Optional)
-              </Heading>
-              <InputGroup w={"300px"} margin={"10px 0"}>
-                <Input w={"60%"} type='text' maxLength={"10"} onChange={(e) => setMaintenancePrice(NumericString(e.target.value))} value={maintenancePrice} placeholder={"Maintenance Price"} />
-                <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
-                  <option value="Monthly">Monthly</option>
-                  <option value="Yearly">Yearly</option>
-                </Select>
-              </InputGroup>
-              <Input type="text" w={"300px"} maxLength={"10"} value={expectedRentel} onChange={(e) => setExpectedRentel(NumericString(e.target.value))} placeholder="Expected rental" margin={"0"} />
-              <Input type="text" w={"300px"} maxLength={"10"} value={bookingAmount} onChange={(e) => setBookingAmount(NumericString(e.target.value))} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-              <Input type="text" w={"300px"} maxLength={"10"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(NumericString(e.target.value))} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
-              <Input type="text" w={"300px"} maxLength={"10"} value={membershipCharge} onChange={(e) => setMembershipCharge(NumericString(e.target.value))} placeholder="Membership charges" margin={"10px 0 0 0"} />
-            </>
-            }
+            {additionalPrice && (
+              <>
+                <Heading
+                  as={"h4"}
+                  size={"sm"}
+                  margin={"10px 0"}
+                  fontWeight={700}
+                  textAlign={"left"}
+                >
+                  Additional Pricing Detail (Optional)
+                </Heading>
+                <InputGroup w={"300px"} margin={"10px 0"}>
+                  <Input
+                    w={"60%"}
+                    type="text"
+                    maxLength={"10"}
+                    onChange={(e) =>
+                      setMaintenancePrice(NumericString(e.target.value))
+                    }
+                    value={maintenancePrice}
+                    placeholder={"Maintenance Price"}
+                  />
+                  <Select
+                    w={"40%"}
+                    borderRadius={0}
+                    value={maintenanceTimePeriod}
+                    onChange={(e) => setMaintenanceTimePeriod(e.target.value)}
+                  >
+                    <option value="Monthly">Monthly</option>
+                    <option value="Yearly">Yearly</option>
+                  </Select>
+                </InputGroup>
+                <Input
+                  type="text"
+                  w={"300px"}
+                  maxLength={"10"}
+                  value={expectedRentel}
+                  onChange={(e) =>
+                    setExpectedRentel(NumericString(e.target.value))
+                  }
+                  placeholder="Expected rental"
+                  margin={"0"}
+                />
+                <Input
+                  type="text"
+                  w={"300px"}
+                  maxLength={"10"}
+                  value={bookingAmount}
+                  onChange={(e) =>
+                    setBookingAmount(NumericString(e.target.value))
+                  }
+                  placeholder="Booking Amount"
+                  margin={"10px 0 0 0"}
+                />
+                <Input
+                  type="text"
+                  w={"300px"}
+                  maxLength={"10"}
+                  value={annualDuesPayble}
+                  onChange={(e) =>
+                    setAnnualDuesPayble(NumericString(e.target.value))
+                  }
+                  placeholder="Annual dues payable"
+                  margin={"10px 0 0 0"}
+                />
+                <Input
+                  type="text"
+                  w={"300px"}
+                  maxLength={"10"}
+                  value={membershipCharge}
+                  onChange={(e) =>
+                    setMembershipCharge(NumericString(e.target.value))
+                  }
+                  placeholder="Membership charges"
+                  margin={"10px 0 0 0"}
+                />
+              </>
+            )}
             <Heading
               as={"h3"}
               size={"sm"}
@@ -1438,8 +1548,14 @@ const Independent = () => {
               fontWeight={500}
               cursor={"pointer"}
               onClick={() => setAdditionalPrice(!additionalPrice)}
-              textAlign={"left"}>
-              {additionalPrice ? <IoIosArrowUp style={{ display: "inline" }} /> : <IoIosArrowDown style={{ display: "inline" }} />} Add more pricing details
+              textAlign={"left"}
+            >
+              {additionalPrice ? (
+                <IoIosArrowUp style={{ display: "inline" }} />
+              ) : (
+                <IoIosArrowDown style={{ display: "inline" }} />
+              )}{" "}
+              Add more pricing details
             </Heading>
           </Box>
         </Box>
@@ -1450,22 +1566,59 @@ const Independent = () => {
             Security deposit
           </Heading>
           <Box>
-            <button value={"Fixed"} className={securityDeposit == "Fixed" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> Fixed </button>
-            <button value={"Multiple of Rent"} className={securityDeposit == "Multiple of Rent" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> Multiple of Rent </button>
-            <button value={"None"} className={securityDeposit == "None" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> None </button>
+            <button
+              value={"Fixed"}
+              className={securityDeposit == "Fixed" ? style.setbtn : style.btn}
+              onClick={handleSecurityDeposit}
+            >
+              {" "}
+              Fixed{" "}
+            </button>
+            <button
+              value={"Multiple of Rent"}
+              className={
+                securityDeposit == "Multiple of Rent" ? style.setbtn : style.btn
+              }
+              onClick={handleSecurityDeposit}
+            >
+              {" "}
+              Multiple of Rent{" "}
+            </button>
+            <button
+              value={"None"}
+              className={securityDeposit == "None" ? style.setbtn : style.btn}
+              onClick={handleSecurityDeposit}
+            >
+              {" "}
+              None{" "}
+            </button>
           </Box>
           <Box display={securityDeposit == "None" ? "none" : "block"}>
-            <Input type="text" w={300} value={depositAmount} onChange={handleDepositAmount} placeholder={`${securityDeposit == "Fixed" ? "Deposit Value" : ""} ${securityDeposit == "Multiple of Rent" ? "No. of months (Max 30)" : ""}`} />
+            <Input
+              type="text"
+              w={300}
+              value={depositAmount}
+              onChange={handleDepositAmount}
+              placeholder={`${
+                securityDeposit == "Fixed" ? "Deposit Value" : ""
+              } ${
+                securityDeposit == "Multiple of Rent"
+                  ? "No. of months (Max 30)"
+                  : ""
+              }`}
+            />
           </Box>
         </Box>
-
 
         {/* Duration of agriment */}
         <Box>
           <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
             Duration of agreement
           </Heading>
-          <Select onChange={(e) => setagreementDuration(e.target.value)} value={agreementDuration} >
+          <Select
+            onChange={(e) => setagreementDuration(e.target.value)}
+            value={agreementDuration}
+          >
             <option value="0">0</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -1481,19 +1634,67 @@ const Independent = () => {
             Months of Notice (Optional)
           </Heading>
           <Box>
-            <button onClick={handleMonthNotice} className={noticePeriod == "None" ? style.setbtn : style.btn} value={"None"}> None </button>
-            <button onClick={handleMonthNotice} className={noticePeriod == "1 month" ? style.setbtn : style.btn} value={"1 month"}> 1 month </button>
-            <button onClick={handleMonthNotice} className={noticePeriod == "2 months" ? style.setbtn : style.btn} value={"2 months"}> 2 month </button>
-            <button onClick={handleMonthNotice} className={noticePeriod == "3 months" ? style.setbtn : style.btn} value={"3 months"}> 3 month </button>
-            <button onClick={handleMonthNotice} className={noticePeriod == "4 months" ? style.setbtn : style.btn} value={"4 months"}> 4 month </button>
-            <button onClick={handleMonthNotice} className={noticePeriod == "5 months" ? style.setbtn : style.btn} value={"5 months"}> 5 month </button>
-            <button onClick={handleMonthNotice} className={noticePeriod == "6 months" ? style.setbtn : style.btn} value={"6 months"}> 6 month </button>
+            <button
+              onClick={handleMonthNotice}
+              className={noticePeriod == "None" ? style.setbtn : style.btn}
+              value={"None"}
+            >
+              {" "}
+              None{" "}
+            </button>
+            <button
+              onClick={handleMonthNotice}
+              className={noticePeriod == "1 month" ? style.setbtn : style.btn}
+              value={"1 month"}
+            >
+              {" "}
+              1 month{" "}
+            </button>
+            <button
+              onClick={handleMonthNotice}
+              className={noticePeriod == "2 months" ? style.setbtn : style.btn}
+              value={"2 months"}
+            >
+              {" "}
+              2 month{" "}
+            </button>
+            <button
+              onClick={handleMonthNotice}
+              className={noticePeriod == "3 months" ? style.setbtn : style.btn}
+              value={"3 months"}
+            >
+              {" "}
+              3 month{" "}
+            </button>
+            <button
+              onClick={handleMonthNotice}
+              className={noticePeriod == "4 months" ? style.setbtn : style.btn}
+              value={"4 months"}
+            >
+              {" "}
+              4 month{" "}
+            </button>
+            <button
+              onClick={handleMonthNotice}
+              className={noticePeriod == "5 months" ? style.setbtn : style.btn}
+              value={"5 months"}
+            >
+              {" "}
+              5 month{" "}
+            </button>
+            <button
+              onClick={handleMonthNotice}
+              className={noticePeriod == "6 months" ? style.setbtn : style.btn}
+              value={"6 months"}
+            >
+              {" "}
+              6 month{" "}
+            </button>
           </Box>
         </Box>
 
         {/* ========================= Add pricing and details ========================= */}
         <Box>
-          
           {/* OwnerShip detail */}
           <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Ownership
@@ -1554,24 +1755,59 @@ const Independent = () => {
       {/* image Drag and Drop area  */}
       <Box>
         <Box className={style.top}>
-          <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
+          <Heading
+            color={"black"}
+            size={"sm"}
+            textAlign={"left"}
+            margin={"10px 0"}
+          >
+            {" "}
+            Upload Your Property image{" "}
+          </Heading>
         </Box>
         <Box className={style.card}>
-          <Box className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+          <Box
+            className={style.dragArea}
+            onDragOver={ondragover}
+            onDragLeave={ondragleave}
+            onDrop={ondrop}
+          >
             {isDraging ? (
               <Text className={style.select}>Drop image here</Text>
             ) : (
               <>
                 Drag & Drop image here or
-                <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
+                <Text
+                  className={style.select}
+                  role="button"
+                  onClick={selectFiles}
+                >
+                  {" "}
+                  Browse{" "}
+                </Text>
               </>
             )}
-            <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+            <input
+              type={"file"}
+              name="image"
+              accept="image/jpg, image/png, image/jpeg"
+              formMethod="post"
+              formEncType="multipart/form-data"
+              className={style.file}
+              multiple
+              ref={fileInputRef}
+              onChange={onFileSelect}
+            />
           </Box>
           <Box className={style.container}>
             {images.map((image, index) => (
               <Box className={style.image} key={index}>
-                <Text className={style.delete} onClick={() => removeImage(index)}>&#10006;</Text>
+                <Text
+                  className={style.delete}
+                  onClick={() => removeImage(index)}
+                >
+                  &#10006;
+                </Text>
                 <img src={URL.createObjectURL(image.image)} alt="images" />
               </Box>
             ))}
@@ -1596,8 +1832,6 @@ const Independent = () => {
           }}
         ></Textarea>
       </Box>
-
-
 
       {/* ========================= Add amenities/unique features ================================== */}
       <Box>
@@ -1676,7 +1910,9 @@ const Independent = () => {
           </button>
           <button
             className={
-              amenities.includes("Private Garden / Terrace") ? style.setbtn : style.btn
+              amenities.includes("Private Garden / Terrace")
+                ? style.setbtn
+                : style.btn
             }
             onClick={handleAminities}
             value={"Private Garden / Terrace"}
@@ -1894,7 +2130,9 @@ const Independent = () => {
           </button>
           <button
             className={
-              additinalft.includes("No open drainage around") ? style.setbtn : style.btn
+              additinalft.includes("No open drainage around")
+                ? style.setbtn
+                : style.btn
             }
             value={"No open drainage around"}
             onClick={handleAdditionalFeature}
@@ -2269,10 +2507,10 @@ const Independent = () => {
       >
         *Please provide correct information, otherwise your listing might get
         blocked
-      </Heading>  
-      {isClicked && <Loading />} 
+      </Heading>
+      {isClicked && <Loading />}
       <Button
-        margin={"20px 0"} 
+        margin={"20px 0"}
         type="submit"
         disabled={clickCount <= 0 ? true : false}
         w={"100%"}
@@ -2287,4 +2525,3 @@ const Independent = () => {
 };
 
 export default Independent;
-
