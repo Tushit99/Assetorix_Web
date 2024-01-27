@@ -1209,7 +1209,7 @@ const CommercialShop = () => {
 
             {/* ============================ Suitable for business types ============================ */}
             <Box textAlign={"left"}>
-              <Heading as={"h3"} size={"sm"}>
+              <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"}>
                 Suitable for business types
               </Heading>
               <Box>
@@ -1407,7 +1407,7 @@ const CommercialShop = () => {
             {/* ============================ Add pricing and details ============================ */}
             <Box>
               {/* OwnerShip detail */}
-              <Heading as={"h3"} size={"sm"} textAlign={"left"}>
+              <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
                 Ownership
               </Heading>
               <Box className={style.grid} gap={4}>
