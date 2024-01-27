@@ -24,7 +24,7 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { AlphabetString, CleanInputText, NumericString, WordandNumber } from "../../../code";
 import { useNavigate, useParams } from "react-router-dom";
 import Loading from "../../../Loadingbox";
-import Extraimg from "../../Extraimg/Extraimg";
+import Extraimg from "../../Extraimg/Extraimg"; 
 
 const FarmHouseUpdate = () => {
   const { productID } = useParams();
