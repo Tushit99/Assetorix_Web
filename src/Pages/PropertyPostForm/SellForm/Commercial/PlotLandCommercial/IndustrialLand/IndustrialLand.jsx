@@ -814,7 +814,7 @@ const IndustrialLand = () => {
 
         {/* Property facing */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"}  textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Property facing
           </Heading>
           <Box>
@@ -911,7 +911,7 @@ const IndustrialLand = () => {
 
         {/* ================================= Possession By =============================== */}
         <Box>
-          <Heading as={"h3"} size={"sm"}  textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Possession By
           </Heading>
           <Box>
@@ -933,7 +933,7 @@ const IndustrialLand = () => {
         {/* ============================ Add pricing and details (Ownership) ============================ */}
         <Box>
           {/* OwnerShip detail */}
-          <Heading as={"h3"} size={"sm"}  textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Ownership
           </Heading>
           <Box className={style.grid} gap={4}>
@@ -992,7 +992,8 @@ const IndustrialLand = () => {
         <Box>
           <Heading
             as={"h3"}
-            size={"sm"} 
+            size={"sm"}  
+            marginTop={5} 
             textAlign={"left"}
           >
             Which authority the property is approved by ?
@@ -1041,7 +1042,7 @@ const IndustrialLand = () => {
         </Box>
 
         {/* ============================== Price Details ============================ */}
-        <Heading as={"h4"} size={"sm"} fontWeight={700} textAlign={"left"}>
+        <Heading as={"h4"} size={"sm"} fontWeight={700} marginTop={5} textAlign={"left"}>
           Additional Pricing Detail (Optional)
         </Heading>
         <InputGroup w={"300px"}>
@@ -1109,7 +1110,7 @@ const IndustrialLand = () => {
 
         {/* ============================ Is it Pre-leased / Pre-Rented ? ============================ */}
         <Box textAlign={"left"}>
-          <Heading as={"h3"} size={"sm"}  textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Is it Pre-leased / Pre-Rented ?
           </Heading>
           <Heading
@@ -1193,7 +1194,7 @@ const IndustrialLand = () => {
 
         {/* Approved for Industry Type */}
         <Box>
-          <Heading as={"h3"} size={"sm"}  textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Approved for Industry Type
           </Heading>
           <Menu>
@@ -1376,9 +1377,8 @@ const IndustrialLand = () => {
               color={"black"}
               size={"sm"}
               textAlign={"left"}
-              
-            >
-              
+              marginTop={5}
+            > 
               Upload Your Property image
             </Heading>
           </Box>
