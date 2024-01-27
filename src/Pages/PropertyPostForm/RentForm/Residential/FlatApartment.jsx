@@ -629,7 +629,7 @@ const FlatApartment = () => {
           placeholder="House No. (optional)"
           value={houseNo}
           onChange={(e) => setHouseNo(WordandNumber(e.target.value))}
-          fontSize={"md"}
+          fontSize={"sm"}
           variant="flushed"
         />
         <Input
@@ -637,7 +637,7 @@ const FlatApartment = () => {
           maxlength={"100"}
           required
           placeholder="Apartment / Society"
-          fontSize={"md"}
+          fontSize={"sm"}
           value={appartment}
           onChange={(e) => setApartment(WordandNumber(e.target.value))}
           variant="flushed"
@@ -648,7 +648,7 @@ const FlatApartment = () => {
           maxlength={"6"}
           required
           variant="flushed"
-          fontSize={"md"}
+          fontSize={"sm"}
           value={pincode}
           onChange={handlepinfetch}
         />
@@ -660,7 +660,7 @@ const FlatApartment = () => {
           list="browsers"
           value={locality}
           onChange={(e) => setLocality(WordandNumber(e.target.value))}
-          fontSize={"md"}
+          fontSize={"sm"}
           variant="flushed"
         />
         {pincollection.length ? (
@@ -677,7 +677,7 @@ const FlatApartment = () => {
           type="text"
           required
           placeholder="Enter City"
-          fontSize={"md"}
+          fontSize={"sm"}
           maxlength={"100"}
           value={city}
           onChange={(e) => setCity(WordandNumber(e.target.value))}
@@ -690,7 +690,7 @@ const FlatApartment = () => {
           placeholder="Enter State"
           value={state}
           onChange={(e) => setState(WordandNumber(e.target.value))}
-          fontSize={"md"}
+          fontSize={"sm"}
           variant="flushed"
         />
         <Input
@@ -700,13 +700,13 @@ const FlatApartment = () => {
           placeholder="Enter Country"
           value={country}
           onChange={(e) => setCountry(WordandNumber(e.target.value))}
-          fontSize={"md"}
+          fontSize={"sm"}
           variant="flushed"
         />
       </Box>
       {/* Property Detail */}
       <Box>
-        <Heading as={"h4"} textAlign={"left"} size={"sm"} marginTop={5}>
+        <Heading as={"h4"} textAlign={"left"} size={"sm"}>
           Add Room Details
         </Heading>
         <Box as={"div"} className={style.inp_form_numbers}>
@@ -752,7 +752,7 @@ const FlatApartment = () => {
           </Heading>
           <InputGroup
             w={300}
-            size="md"
+            size="sm"
             marginTop={2}
             isAttached
             variant="outline"

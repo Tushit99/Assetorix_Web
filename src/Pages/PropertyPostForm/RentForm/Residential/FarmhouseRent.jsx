@@ -603,10 +603,10 @@ const FarmhouseRent = () => {
     <form onSubmit={handleSubmitData}>
       {/* property location */}
       <Box className={style.location_form}>
-        <Heading size={"lg"}>Where is your property located?</Heading>
-        <Heading size={"sm"}>
-          An accurate location helps you connect with the right buyers.
-        </Heading>
+        <Heading size={"lg"}>Where is your Farmhouse located?</Heading>
+        <Heading size={"sm"} textAlign={"left"}>
+          Location Detail
+        </Heading> 
 
         <Input
           type="text"
@@ -615,14 +615,14 @@ const FarmhouseRent = () => {
           value={houseNo}
           maxLength={"100"}
           onChange={(e) => setHouseNo(WordandNumber(e.target.value))}
-          fontSize={"md"}
+          fontSize={"sm"}
           variant="flushed"
         />
         <Input
           type="text"
           required
           placeholder="Apartment / Society"
-          fontSize={"md"}
+          fontSize={"sm"}
           maxLength={"100"}
           value={appartment}
           onChange={(e) => setApartment(WordandNumber(e.target.value))}
@@ -633,7 +633,7 @@ const FarmhouseRent = () => {
           placeholder={"Enter pincode"}
           maxLength={"8"}
           required
-          fontSize={"md"}
+          fontSize={"sm"}
           value={pincode}
           onChange={handlepinfetch}
         />
@@ -644,7 +644,7 @@ const FarmhouseRent = () => {
           list="browsers"
           value={locality}
           onChange={(e) => setLocality(e.target.value)}
-          fontSize={"md"}
+          fontSize={"sm"}
           variant="flushed"
         />
         {pincollection.length ? (
@@ -662,7 +662,7 @@ const FarmhouseRent = () => {
           required
           placeholder="Enter City"
           maxLength={"100"}
-          fontSize={"md"}
+          fontSize={"sm"}
           value={city}
           onChange={(e) => setCity(WordandNumber(e.target.value))}
           variant="flushed"
@@ -674,7 +674,7 @@ const FarmhouseRent = () => {
           maxLength={"100"}
           value={state}
           onChange={(e) => setState(WordandNumber(e.target.value))}
-          fontSize={"md"}
+          fontSize={"sm"}
           variant="flushed"
         />
         <Input
@@ -684,7 +684,7 @@ const FarmhouseRent = () => {
           placeholder="Enter Country"
           value={country}
           onChange={(e) => setCountry(WordandNumber(e.target.value))}
-          fontSize={"md"}
+          fontSize={"sm"}
           variant="flushed"
         />
       </Box>
@@ -731,7 +731,7 @@ const FarmhouseRent = () => {
         {/* ====================================== */}
         {/* ============================ add area details ============================ */}
         <Box textAlign={"left"} padding={"10px 0"}>
-          <Heading as={"h3"} margin={"5px 0"} size={"md"}>
+          <Heading as={"h3"} margin={"5px 0"} size={"sm"}>
             Add Area Details
           </Heading>
           <Text margin={"5px 0"}> Atleast one area type is mandatory </Text>
@@ -788,7 +788,7 @@ const FarmhouseRent = () => {
           gap={6}
           className={style.optional_box}
         >
-          <Heading as={"h3"} size={"md"}>
+          <Heading as={"h3"} size={"sm"}>
             Other rooms (optional)
           </Heading>
           <Box>
@@ -837,7 +837,7 @@ const FarmhouseRent = () => {
           gap={6}
           className={style.optional_box}
         >
-          <Heading as={"h3"} size={"md"}>
+          <Heading as={"h3"} size={"sm"}>
             Furnishing (optional)
           </Heading>
           <Box>
@@ -1155,7 +1155,7 @@ const FarmhouseRent = () => {
 
         {/* ========================= reserved ========================= */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"}>
+          <Heading as={"h3"} size={"sm"}>
             Reserved Parking (optional)
           </Heading>
           <div className={style.parking}>
@@ -1210,7 +1210,7 @@ const FarmhouseRent = () => {
 
         {/* ========================= floor details ========================= */}
         <Box textAlign={"left"}>
-          <Heading as={"h3"} size={"md"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Floor Details
           </Heading>
           <Text textAlign={"left"} margin={"10px 0"}>
@@ -1243,7 +1243,7 @@ const FarmhouseRent = () => {
 
         {/* ========================= Age of Property ========================= */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Age of Property
           </Heading>
           <Box className={style.grid}>
@@ -1296,7 +1296,7 @@ const FarmhouseRent = () => {
 
         {/* ============================= Available from (date) ============================= */}
         <Box textAlign={"left"} display={"grid"}>
-          <Heading as={"h3"} size={"md"} margin={"4px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"4px 0"} textAlign={"left"}>
             Available from
           </Heading>
           <Input
@@ -1506,7 +1506,7 @@ const FarmhouseRent = () => {
 
         {/* ============================ Security deposit ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Security deposit
           </Heading>
           <Box>
@@ -1557,7 +1557,7 @@ const FarmhouseRent = () => {
 
         {/* ============================ Duration of agriment ============================ */}
         <Box>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Duration of agreement
           </Heading>
           <Select
@@ -1575,7 +1575,7 @@ const FarmhouseRent = () => {
 
         {/* ============================ Months of Notice ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Months of Notice (Optional)
           </Heading>
           <Box>
@@ -1709,7 +1709,7 @@ const FarmhouseRent = () => {
 
       {/* ========================== Add Description and Unique Features of your Property ================================  */}
       <Box>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
           Add Description and Unique Features of your Property
         </Heading>
         <Heading as={"h3"} size={"xs"} margin={"10px 0"} textAlign={"left"}>
@@ -1727,7 +1727,7 @@ const FarmhouseRent = () => {
 
       {/* ========================= Add amenities/unique features ================================== */}
       <Box>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
           Add amenities/unique features
         </Heading>
         <Heading
@@ -1743,7 +1743,7 @@ const FarmhouseRent = () => {
 
       {/* ========================= Amenities ================================== */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
           Amenities
         </Heading>
         <Box>
@@ -1826,7 +1826,7 @@ const FarmhouseRent = () => {
 
       {/* ========================= Property Features ================================== */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
           Property Features
         </Heading>
         <Box>
@@ -1965,7 +1965,7 @@ const FarmhouseRent = () => {
 
       {/* ========================= Society/Building feature ================================== */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
           Society/Building feature
         </Heading>
         <Box>
@@ -2029,7 +2029,7 @@ const FarmhouseRent = () => {
 
       {/* ========================= Additional Features ================================== */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
           Additional Features
         </Heading>
         <Box>
@@ -2102,7 +2102,7 @@ const FarmhouseRent = () => {
 
       {/* ============================ Other Features ==================================== */}
       <Box>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
           Other Features
         </Heading>
         <Box display={"grid"} textAlign={"left"} gap={2}>
@@ -2143,7 +2143,7 @@ const FarmhouseRent = () => {
 
       {/* ============================ Power Back up ==================================== */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
           Power Back up
         </Heading>
         <Box>
@@ -2182,7 +2182,7 @@ const FarmhouseRent = () => {
 
       {/* ============================ Property facing ==================================== */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
           Property facing
         </Heading>
         <Box>
@@ -2279,7 +2279,7 @@ const FarmhouseRent = () => {
 
       {/* ============================ Type of flooring ==================================== */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
           Type of flooring
         </Heading>
         <Box>
@@ -2310,7 +2310,7 @@ const FarmhouseRent = () => {
 
       {/* ============================ Width of facing road ==================================== */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
           Width of facing road
         </Heading>
         <Box display={"flex"} gap={"20px"} w={"300px"}>
@@ -2340,7 +2340,7 @@ const FarmhouseRent = () => {
 
       {/* ============================ Location Advantages ==================================== */}
       <Box className={style.optional_box}>
-        <Heading size={"md"} margin={"10px 0 4px 0"} textAlign={"left"}>
+        <Heading size={"sm"} margin={"10px 0 4px 0"} textAlign={"left"}>
           Location Advantages
           <Heading
             size={"xs"}

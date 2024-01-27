@@ -106,7 +106,8 @@ const SellForm = () => {
               <Tab 
                 bg="blue.50"
                 border="1px solid rgba(85, 91, 255, 0.236)"
-                borderRadius="0px"
+                borderRadius="0px" 
+                onClick={()=>setTypeOf("Residential")} 
                 _selected={{ color: "white", backgroundColor: "unset" }}
               >
                 Sell
@@ -115,6 +116,7 @@ const SellForm = () => {
                 bg="blue.50"
                 border="1px solid rgba(85, 91, 255, 0.236)"
                 borderRadius="0px"
+                onClick={()=>setTypeOf("Residential")}
                 _selected={{ color: "white", backgroundColor: "unset" }}
               >
                 Rent/Lease
