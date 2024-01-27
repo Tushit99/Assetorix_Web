@@ -830,7 +830,7 @@ const GuestBanquet = () => {
         </Box>
         {/* furnish */}
         <Box className={style.optional_box}>
-          <Heading as={"h4"} marginTop={{ base: 10, md: 3 }} size={"sm"}>
+          <Heading as={"h4"} marginTop={5} size={"sm"}>
             Furnishing
           </Heading>
           <Box margin={"2px 0"}>
@@ -2241,7 +2241,7 @@ const GuestBanquet = () => {
         <Heading
           as={"h3"}
           size={"sm"}
-          marginTop={{ base: 10, md: 3 }}
+          marginTop={5}
           textAlign={"left"}
         >
           Type of flooring
