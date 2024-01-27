@@ -643,7 +643,7 @@ const CommercialLand = () => {
         </Box>
 
         {/* ========================== Property Dimensions ========================== */}
-        <Box as={"div"} textAlign={"left"} display={"grid"}>
+        <Box as={"div"} textAlign={"left"} marginTop={5} display={"grid"}>
           <Heading as={"h3"} size={"sm"}>
             Property Dimensions (Optional)
           </Heading>
@@ -673,7 +673,7 @@ const CommercialLand = () => {
 
         {/* ========================== Width of facing road ========================== */}
         <Box>
-          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Width of facing road
           </Heading>
           <ButtonGroup
@@ -709,7 +709,7 @@ const CommercialLand = () => {
 
         {/* ========================== No of open sides ========================== */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"}>
+          <Heading as={"h3"} marginTop={5} size={"sm"}>
             No. of open sides
           </Heading>
           <Box textAlign={"left"} padding={"10px 0 0 0"}>
@@ -748,7 +748,7 @@ const CommercialLand = () => {
 
         {/* ============================== Construction Property =============================== */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5}>
             Any construction done on this property?
           </Heading>
           <Box textAlign={"left"} padding={"10px 0 0 0"}>
@@ -780,7 +780,7 @@ const CommercialLand = () => {
           className={style.optional_box}
           display={ConstructionOnProperty == "Yes" ? "grid" : "none"}
         >
-          <Heading as={"h3"} size={"sm"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5}>
             What type of construction has been done?
           </Heading>
           <Box>
@@ -825,7 +825,7 @@ const CommercialLand = () => {
 
         {/* Property facing */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Property facing
           </Heading>
           <Box>
@@ -922,7 +922,7 @@ const CommercialLand = () => {
 
         {/* ================================= Possession By =============================== */}
         <Box>
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Possession By
           </Heading>
           <Box>
@@ -945,7 +945,7 @@ const CommercialLand = () => {
         {/* ============================ Add pricing and details (Ownership) ============================ */}
         <Box>
           {/* OwnerShip detail */}
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Ownership
           </Heading>
           <Box className={style.grid} gap={4}>
@@ -1005,7 +1005,7 @@ const CommercialLand = () => {
           <Heading
             as={"h3"}
             size={"sm"}
-            margin={"30px 0 10px 0"}
+            marginTop={5}
             textAlign={"left"}
           >
             Which authority the property is approved by ?
@@ -1132,7 +1132,7 @@ const CommercialLand = () => {
         </Box>
 
         {/* Additional Pricing Detail (Optional) */}
-        <Heading as={"h4"} size={"sm"} fontWeight={700} textAlign={"left"}>
+        <Heading as={"h4"} size={"sm"} marginTop={5} fontWeight={700} textAlign={"left"}>
           Additional Pricing Detail (Optional)
         </Heading>
         <InputGroup w={"300px"}>
@@ -1200,14 +1200,13 @@ const CommercialLand = () => {
 
         {/* ============================ Is it Pre-leased / Pre-Rented ? ============================ */}
         <Box textAlign={"left"}>
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Is it Pre-leased / Pre-Rented ?
           </Heading>
           <Heading
             as={"h5"}
             size={"xs"}
-            fontWeight={500}
-            margin={"10px 0"}
+            fontWeight={500} 
             textAlign={"left"}
           >
             for properties that are already rented out
@@ -1282,7 +1281,7 @@ const CommercialLand = () => {
 
         {/* Approved for Industry Type */}
         <Box>
-          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Approved for Industry Type
           </Heading>
           <Menu>
@@ -1464,6 +1463,7 @@ const CommercialLand = () => {
             <Heading
               color={"black"}
               size={"sm"}
+              marginTop={5} 
               textAlign={"left"} 
             >
               Upload Your Property image
@@ -1524,7 +1524,7 @@ const CommercialLand = () => {
             as={"h3"}
             size={"sm"}
             fontWeight={600}
-            margin={"10px 0"}
+            marginTop={5}
             textAlign={"left"}
           >
             Add Description and Unique Features of your Property
@@ -1541,7 +1541,7 @@ const CommercialLand = () => {
         </Box>
         {/* ============================ Add amenities/unique features ============================ */}
         <Box>
-          <Heading as={"h3"} size={"sm"}  textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Add amenities/unique features
           </Heading>
           <Heading
@@ -1557,7 +1557,7 @@ const CommercialLand = () => {
 
         {/* ============================ Amenities ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"}  textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Amenities
           </Heading>
           <Box>
@@ -1625,7 +1625,7 @@ const CommercialLand = () => {
 
         {/* ============================ Property Features ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Property Features
           </Heading>
           <Box>
@@ -1689,7 +1689,7 @@ const CommercialLand = () => {
 
         {/* ============================ Other Features ============================ */}
         <Box>
-          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Other Features
           </Heading>
           <Box display={"grid"} textAlign={"left"} gap={2}>
@@ -1706,7 +1706,7 @@ const CommercialLand = () => {
 
         {/* ============================ location advantage ============================ */}
         <Box className={style.optional_box}>
-          <Heading size={"sm"} textAlign={"left"}>
+          <Heading size={"sm"} marginTop={5} textAlign={"left"}>
             Location Advantages
             <Heading
               size={"xs"}
@@ -1812,14 +1812,14 @@ const CommercialLand = () => {
           size={"xs"}
           color={"rgb(255, 52, 52)"}
           fontWeight={200}
-          margin={"4px 0"}
+          margin={"4px 0"} 
           textAlign={"left"}
         >
           *Please provide correct information, otherwise your listing might get
           blocked
         </Heading>
         <Button
-          margin={"20px 0"}
+          margin={"10px 0"}
           type="submit"
           w={"100%"}
           disabled={clickCount <= 0 ? true : false}

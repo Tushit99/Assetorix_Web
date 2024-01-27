@@ -575,7 +575,7 @@ const AgricalturalFarm = () => {
 
         {/* ============================ add area details =============================== */}
         <Box textAlign={"left"}>
-          <Heading as={"h3"} size={"sm"}>
+          <Heading as={"h3"} marginTop={5} size={"sm"}>
             Add Area Details
           </Heading>
           <InputGroup
@@ -631,7 +631,7 @@ const AgricalturalFarm = () => {
 
         {/* ========================== Property Dimensions ========================== */}
         <Box as={"div"} textAlign={"left"} display={"grid"}>
-          <Heading as={"h3"} size={"sm"}> 
+          <Heading as={"h3"} marginTop={5} size={"sm"}> 
             Property Dimensions (Optional) 
           </Heading>
           <Input
@@ -660,7 +660,7 @@ const AgricalturalFarm = () => {
 
         {/* ========================== Width of facing road ========================== */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Width of facing road
           </Heading>
           <Box display={"flex"} gap={"20px"} w={"300px"}>
@@ -690,7 +690,7 @@ const AgricalturalFarm = () => {
 
         {/* ========================== No of open sides ========================== */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"}>
+          <Heading as={"h3"} marginTop={5} size={"sm"}>
             {" "}
             No. of open sides{" "}
           </Heading>
@@ -730,7 +730,7 @@ const AgricalturalFarm = () => {
 
         {/* ============================== Construction Property =============================== */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"}>
+          <Heading as={"h3"} marginTop={5} size={"sm"}>
             {" "}
             Any construction done on this property?{" "}
           </Heading>
@@ -763,7 +763,7 @@ const AgricalturalFarm = () => {
           className={style.optional_box}
           display={ConstructionOnProperty == "Yes" ? "grid" : "none"}
         >
-          <Heading as={"h3"} size={"sm"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5}>
             {" "}
             What type of construction has been done?{" "}
           </Heading>
@@ -813,7 +813,7 @@ const AgricalturalFarm = () => {
 
         {/* Property facing */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Property facing
           </Heading>
           <Box>
@@ -910,7 +910,7 @@ const AgricalturalFarm = () => {
 
         {/* ================================= Possession By =============================== */}
         <Box>
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Possession By
           </Heading>
           <Box>
@@ -933,7 +933,7 @@ const AgricalturalFarm = () => {
         {/* ============================ Add pricing and details (Ownership) ============================ */}
         <Box>
           {/* OwnerShip detail */}
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Ownership
           </Heading>
           <Box className={style.grid} gap={4}>
@@ -993,6 +993,7 @@ const AgricalturalFarm = () => {
           <Heading
             as={"h3"}
             size={"sm"} 
+            marginTop={5} 
             textAlign={"left"}
           >
             Which authority the property is approved by ?
@@ -1118,7 +1119,9 @@ const AgricalturalFarm = () => {
           </Box>
         </Box>
         <Box>
-          <Heading as={"h4"} size={"sm"} fontWeight={700} textAlign={"left"}>
+          <Heading as={"h4"} 
+            marginTop={5}
+           size={"sm"} fontWeight={700} textAlign={"left"}>
             Additional Pricing Detail (Optional)
           </Heading>
           <InputGroup w={"300px"}>
@@ -1189,7 +1192,7 @@ const AgricalturalFarm = () => {
 
         {/* ============================ Is it Pre-leased / Pre-Rented ? ============================ */}
         <Box textAlign={"left"}>
-          <Heading as={"h3"} size={"sm"}textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Is it Pre-leased / Pre-Rented ?
           </Heading>
           <Heading
@@ -1339,7 +1342,7 @@ const AgricalturalFarm = () => {
             as={"h3"}
             size={"sm"}
             fontWeight={600}
-            margin={"10px 0"}
+            marginTop={5}
             textAlign={"left"}
           >
             Add Description and Unique Features of your Property
@@ -1356,7 +1359,7 @@ const AgricalturalFarm = () => {
         </Box>
         {/* ============================ Add amenities/unique features ============================ */}
         <Box>
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Add amenities/unique features
           </Heading>
           <Heading
@@ -1372,7 +1375,7 @@ const AgricalturalFarm = () => {
 
         {/* ============================ Amenities ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Amenities
           </Heading>
           <Box>
@@ -1453,7 +1456,7 @@ const AgricalturalFarm = () => {
 
         {/* ============================ Property Features ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Property Features
           </Heading>
           <Box>
@@ -1506,7 +1509,7 @@ const AgricalturalFarm = () => {
 
         {/* ============================ Other Features ============================ */}
         <Box>
-          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Other Features
           </Heading>
           <Box display={"grid"} textAlign={"left"} gap={2}>
@@ -1523,7 +1526,7 @@ const AgricalturalFarm = () => {
 
         {/* ============================ location advantage ============================ */}
         <Box className={style.optional_box}>
-          <Heading size={"sm"} textAlign={"left"}>
+          <Heading size={"sm"} marginTop={5} textAlign={"left"}>
             Location Advantages
             <Heading
               size={"xs"}
