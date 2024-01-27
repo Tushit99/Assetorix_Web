@@ -1089,7 +1089,7 @@ const CommercialShop = () => {
               <Heading
                 as={"h3"}
                 size={"sm"}
-                margin={"10px 0"}
+                marginTop={{ base: 10, md: 5 }} 
                 textAlign={"left"}
               >
                 Availability Status
