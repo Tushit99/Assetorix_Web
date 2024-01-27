@@ -31,7 +31,7 @@ const Independent = () => {
   const [facingwidth, setFacingWidth] = useState("");
   const [city, setCity] = useState("");
   const [appartment, setApartment] = useState("");
-  const [pincode, setPincode] = useState(0);
+  const [pincode, setPincode] = useState("");
   const [state, setState] = useState("");
   const [locality, setLocality] = useState("");
   const [houseNo, setHouseNo] = useState("");
@@ -625,10 +625,11 @@ const Independent = () => {
         <Heading size={"lg"}>Where is your Independent House / villa located?</Heading> 
         <Heading size={"sm"} textAlign={"left"}>
           Location Detail
-        </Heading>
+        </Heading> 
         <Input
-          type="text"
+          type="text" 
           required
+          maxLength={"100"}
           placeholder="House No. (optional)"
           value={houseNo}
           onChange={(e) => setHouseNo(WordandNumber(e.target.value))}
@@ -636,9 +637,10 @@ const Independent = () => {
           variant="flushed"
         />
         <Input
-          type="text"
+          type="text" 
           required
-          placeholder="Apartment / Society"
+          maxLength={"100"}
+          placeholder="Apartment / Society Name"
           fontSize={"md"}
           value={appartment}
           onChange={(e) => setApartment(WordandNumber(e.target.value))}
@@ -646,17 +648,19 @@ const Independent = () => {
         />
         <Input
           type="text"
-          placeholder={"Enter pincode"}
+          placeholder={"Enter pincode"} 
           required
+          maxLength={6}
           fontSize={"md"}
           value={pincode}
           onChange={handlepinfetch}
           variant="flushed" 
         />
         <Input
-          type="text"
+          type="text" 
           required
           placeholder="Enter Locality"
+          maxLength={"100"}
           list="browsers"
           value={locality}
           onChange={(e) => setLocality(WordandNumber(e.target.value))}
@@ -674,28 +678,31 @@ const Independent = () => {
         )}
 
         <Input
-          type="text"
+          type="text" 
           required
           placeholder="Enter City"
           fontSize={"md"}
           value={city}
+          maxLength={"100"}
           onChange={(e) => setCity(WordandNumber(e.target.value))}
           variant="flushed"
         />
         <Input
-          type="text"
+          type="text" 
           required
           placeholder="Enter State"
           value={state}
+          maxLength={"100"}
           onChange={(e) => setState(WordandNumber(e.target.value))}
           fontSize={"md"}
           variant="flushed"
-        />
+        /> 
         <Input
-          type="text"
+          type="text" 
           required
           placeholder="Enter Country"
           value={country}
+          maxLength={"100"}
           onChange={(e) => setCountry(WordandNumber(e.target.value))}
           fontSize={"md"}
           variant="flushed"

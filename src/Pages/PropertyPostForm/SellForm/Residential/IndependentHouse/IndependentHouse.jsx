@@ -618,8 +618,7 @@ const IndependentHouse = () => {
           Location Detail
         </Heading>
         <Input
-          type="text"
-          padding={"0 10px"}
+          type="text" 
           required
           maxLength={"100"}
           placeholder="House No. (optional)"
@@ -629,8 +628,7 @@ const IndependentHouse = () => {
           variant="flushed"
         />
         <Input
-          type="text"
-          padding={"0 10px"}
+          type="text" 
           required
           maxLength={"100"}
           placeholder="Apartment / Society Name"
@@ -641,8 +639,7 @@ const IndependentHouse = () => {
         />
         <Input
           type="text"
-          placeholder={"Enter pincode"}
-          padding={"0 10px"} 
+          placeholder={"Enter pincode"} 
           required
           maxLength={6}
           fontSize={"md"}
@@ -673,8 +670,7 @@ const IndependentHouse = () => {
         )}
 
         <Input
-          type="text"
-          padding={"0 10px"}
+          type="text" 
           required
           placeholder="Enter City"
           fontSize={"md"}
@@ -684,8 +680,7 @@ const IndependentHouse = () => {
           variant="flushed"
         />
         <Input
-          type="text"
-          padding={"0 10px"}
+          type="text" 
           required
           placeholder="Enter State"
           value={state}
@@ -695,8 +690,7 @@ const IndependentHouse = () => {
           variant="flushed"
         />
         <Input
-          type="text"
-          padding={"0 10px"}
+          type="text" 
           required
           placeholder="Enter Country"
           value={country}
