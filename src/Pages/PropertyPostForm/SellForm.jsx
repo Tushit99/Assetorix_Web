@@ -327,7 +327,7 @@ const SellForm = () => {
               </TabPanel>  
               {/* rent options */}
               <TabPanel>  
-                <Tabs variant="unstyled">
+                <Tabs variant="unstyled" defaultIndex={0}>
                   <TabList>
                     <Tab
                       bg="blue.50"
@@ -335,7 +335,7 @@ const SellForm = () => {
                       borderRadius="0px"
                       marginRight={"14px"}
                       onClick={() => setTypeOf("Residential")} 
-                      _selected={{ color: "white", backgroundColor: "unset" }}
+                      _selected={{ color: "white", backgroundColor: "#d2ab66" }}
                     >
                       Residential
                     </Tab>
@@ -345,7 +345,7 @@ const SellForm = () => {
                       borderRadius="0px"
                       marginRight={"14px"}
                       onClick={() => setTypeOf("Commercial")}
-                      _selected={{ color: "white", backgroundColor: "unset" }}
+                      _selected={{ color: "white", backgroundColor: "#d2ab66" }}
                     >
                       Commercial
                     </Tab>

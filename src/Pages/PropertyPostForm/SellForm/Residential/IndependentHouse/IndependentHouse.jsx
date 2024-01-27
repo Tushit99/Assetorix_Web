@@ -614,7 +614,9 @@ const IndependentHouse = () => {
         <Heading size={"lg"}> 
           Where is your Independent House / Villa located?
         </Heading>
-        <Heading size={"sm"}>Location Detail</Heading>
+        <Heading size={"sm"} textAlign={"left"}>
+          Location Detail
+        </Heading>
         <Input
           type="text"
           padding={"0 10px"}
@@ -640,13 +642,13 @@ const IndependentHouse = () => {
         <Input
           type="text"
           placeholder={"Enter pincode"}
-          padding={"0 10px"}
-          variant="flushed"
+          padding={"0 10px"} 
           required
           maxLength={6}
           fontSize={"md"}
           value={pincode}
           onChange={handlepinfetch}
+          variant="flushed" 
         />
         <Input
           type="text"

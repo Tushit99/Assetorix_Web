@@ -622,8 +622,10 @@ const Independent = () => {
     <form onSubmit={handleSubmitData}>
       {/* property location */}
       <Box className={style.location_form}>
-        <Heading size={"lg"}>Where is your property located?</Heading> 
-
+        <Heading size={"lg"}>Where is your Independent House / villa located?</Heading> 
+        <Heading size={"sm"} textAlign={"left"}>
+          Location Detail
+        </Heading>
         <Input
           type="text"
           required
@@ -649,6 +651,7 @@ const Independent = () => {
           fontSize={"md"}
           value={pincode}
           onChange={handlepinfetch}
+          variant="flushed" 
         />
         <Input
           type="text"

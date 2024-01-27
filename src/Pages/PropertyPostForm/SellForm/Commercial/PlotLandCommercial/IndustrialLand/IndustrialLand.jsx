@@ -1438,7 +1438,7 @@ const IndustrialLand = () => {
             as={"h3"}
             size={"sm"}
             fontWeight={600}
-            
+            marginTop={5}
             textAlign={"left"}
           >
             Add Description and Unique Features of your Property
@@ -1465,7 +1465,7 @@ const IndustrialLand = () => {
         </Box>
         {/* ============================ Add amenities/unique features ============================ */}
         <Box>
-          <Heading as={"h3"} size={"sm"}  textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Add amenities/unique features
           </Heading>
           <Heading
@@ -1481,7 +1481,7 @@ const IndustrialLand = () => {
 
         {/* ============================ Amenities ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"}  textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Amenities
           </Heading>
           <Box>
@@ -1545,7 +1545,7 @@ const IndustrialLand = () => {
 
         {/* ============================ Property Features ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"}  textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Property Features
           </Heading>
           <Box>
@@ -1609,7 +1609,7 @@ const IndustrialLand = () => {
 
         {/* ============================ Other Features ============================ */}
         <Box>
-          <Heading as={"h3"} size={"sm"}  textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Other Features
           </Heading>
           <Box display={"grid"} textAlign={"left"} gap={2}>
@@ -1626,7 +1626,7 @@ const IndustrialLand = () => {
 
         {/* ============================ location advantage ============================ */}
         <Box className={style.optional_box}>
-          <Heading size={"sm"}  textAlign={"left"}>
+          <Heading size={"sm"} marginTop={5} textAlign={"left"}>
             Location Advantages
             <Heading
               size={"xs"}

@@ -530,7 +530,7 @@ const Factory = () => {
       <form onSubmit={handleSubmitData}>
         <Box className={style.location_form}>
           <Heading size={"lg"}>Where is your Factory located?</Heading>
-          <Heading size={"sm"}>Location Detail</Heading>
+          <Heading size={"sm"} textAlign={"left"}>Location Detail</Heading>
           <Input
             type="text"
             maxLength={100}
@@ -686,7 +686,7 @@ const Factory = () => {
 
         {/* ========================== Availability status =============================== */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Availability Status
           </Heading>
           <Box className={style.grid}>
@@ -725,7 +725,7 @@ const Factory = () => {
             <Heading
               as={"h3"}
               size={"md"}
-              margin={"30px 0 10px 0"}
+              marginTop={5}
               textAlign={"left"}
             >
               Age of Property
@@ -783,7 +783,7 @@ const Factory = () => {
             <Heading
               as={"h3"}
               size={"md"}
-              margin={"30px 0 10px 0"}
+              marginTop={5}
               textAlign={"left"}
             >
               Possession By
@@ -800,13 +800,12 @@ const Factory = () => {
               <option value="10 year">10 year</option>
             </Select>
           </Box>
-        )}
-        {/* ============================== property Age-end ============================== */}
+        )} 
 
         {/* ============================ Add pricing and details ============================ */}
         <Box>
           {/* OwnerShip detail */}
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Ownership
           </Heading>
           <Box className={style.grid} gap={4}>
@@ -864,7 +863,7 @@ const Factory = () => {
         {/* ============================== Price Details ============================ */}
         <Box>
           <Box>
-            <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+            <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
               Price Details
             </Heading>
             <Box display={"flex"} margin={"8px 0 0 0"} alignItems={"center"}>
@@ -948,7 +947,7 @@ const Factory = () => {
               </Heading>
             </Box>
           </Box>
-          <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
+          <Box display={"flex"} gap={10} marginTop={5} flexWrap={"wrap"}>
             <Checkbox
               isChecked={inclusivePrices.includes("All inclusive price")}
               onChange={(e) => {
@@ -986,7 +985,7 @@ const Factory = () => {
 
         {/* ============================ Is it Pre-leased / Pre-Rented ? ============================ */}
         <Box textAlign={"left"}>
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Is it Pre-leased / Pre-Rented ?
           </Heading>
           <Heading
@@ -1075,7 +1074,7 @@ const Factory = () => {
               color={"black"}
               size={"sm"}
               textAlign={"left"}
-              margin={"10px 0"}
+              marginTop={5}
             >
               
               Upload Your Property image
@@ -1137,7 +1136,7 @@ const Factory = () => {
              as={"h3"}
              size={"sm"}
              fontWeight={700}
-             margin={"18px 0 4px 0"}
+             marginTop={5}
              textAlign={"left"}
           >
             Add Description and Unique Features of your Property
@@ -1150,17 +1149,17 @@ const Factory = () => {
               setDesc(my_cleantext);
             }}
           ></Textarea>
-        </Box>
+        </Box> 
+
         {/* ============================ Add amenities/unique features ============================ */}
         <Box>
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Add amenities/unique features
           </Heading>
           <Heading
             as={"h5"}
             size={"xs"}
-            fontWeight={400}
-            margin={"10px 0"}
+            fontWeight={400} 
             textAlign={"left"}
           >
             All fields on this page are optional
@@ -1169,7 +1168,7 @@ const Factory = () => {
 
         {/* ============================ Amenities ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Amenities
           </Heading>
           <Box>
@@ -1276,9 +1275,10 @@ const Factory = () => {
             </button>
           </Box>
         </Box>
+
         {/* ============================ Property Features ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Property Features
           </Heading>
           <Box>
@@ -1339,9 +1339,10 @@ const Factory = () => {
             </button>
           </Box>
         </Box>
+
         {/* ============================ Society/Building feature ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Society/Building feature
           </Heading>
           <Box>
@@ -1456,9 +1457,10 @@ const Factory = () => {
             </button>
           </Box>
         </Box>
+
         {/* ============================ Additional Features ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Additional Features
           </Heading>
           <Box>
@@ -1478,7 +1480,7 @@ const Factory = () => {
 
         {/* ============================ Other Features ============================ */}
         <Box>
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Other Features
           </Heading>
           <Box display={"grid"} textAlign={"left"} gap={2}>
@@ -1495,7 +1497,7 @@ const Factory = () => {
 
         {/* ============================ Property facing ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Property facing
           </Heading>
           <Box>
@@ -1592,7 +1594,7 @@ const Factory = () => {
 
         {/* ============================ Type of flooring ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Type of flooring
           </Heading>
           <Box>
@@ -1621,7 +1623,7 @@ const Factory = () => {
 
         {/* ============================ location advantage ============================ */}
         <Box className={style.optional_box}>
-          <Heading size={"sm"} marginTop={{base:10, md:5}} textAlign={"left"}>
+          <Heading size={"sm"} marginTop={5} textAlign={"left"}>
             Location Advantages
             <Heading
               size={"xs"}

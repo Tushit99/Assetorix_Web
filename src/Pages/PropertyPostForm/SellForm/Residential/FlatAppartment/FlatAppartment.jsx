@@ -2500,7 +2500,8 @@ const FlatAppartment = () => {
             <option value="Feet"> Feet </option>
           </Select>
         </InputGroup>
-      </Box>
+      </Box> 
+      {/* Location Advantage */}
       <Box className={style.optional_box}>
         <Heading size={"sm"} marginTop={{ base: 5, md: 3 }} textAlign={"left"}>
           Location Advantages
