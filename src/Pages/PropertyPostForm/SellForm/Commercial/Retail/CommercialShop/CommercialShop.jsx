@@ -730,7 +730,7 @@ const CommercialShop = () => {
           <Box>
             {/* ============================ add area details ============================ */}
             <Box textAlign={"left"}>
-              <Heading as={"h3"} margin={"5px 0"} size={"sm"}>
+              <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"}>
                 Add Area Details
               </Heading>
               <InputGroup
@@ -785,7 +785,7 @@ const CommercialShop = () => {
             </Box>
             {/* Shop facade size (Optional) */}
             <Box>
-              <Heading as={"h3"} size={"sm"}>
+              <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"}>
                 Shop facade size (Optional)
               </Heading>
               <Box display={"flex"} w={"300px"} margin={"10px 0"}>
@@ -831,13 +831,12 @@ const CommercialShop = () => {
             </Box>
 
             {/* washrooms */}
-            <Box padding={"10px 0 8px 0"} display={"grid"}>
-              <Heading textAlign={"left"} as={"h3"} size={"md"}>
+            <Box display={"grid"}>
+              <Heading textAlign={"left"} marginTop={{ base: 10, md: 5 }} as={"h3"} size={"md"}>
                 Washrooms
               </Heading>
               <Box
-                display={"grid"}
-                padding={"10px 0 8px 0"}
+                display={"grid"} 
                 gridTemplateColumns={"repeat(1,1fr)"}
                 gap={2}
               >
@@ -945,7 +944,7 @@ const CommercialShop = () => {
 
             {/* ============================ floor details ============================ */}
             <Box textAlign={"left"}>
-              <Heading as={"h3"} size={"sm"} textAlign={"left"}>
+              <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
                 Floor Details
               </Heading>
               <Box display={"flex"} alignItems={"center"}>
@@ -981,7 +980,7 @@ const CommercialShop = () => {
 
             {/* ============================ Located Near (optional) ============================ */}
             <Box className={style.optional_box}>
-              <Heading as={"h3"} size={"sm"}>
+              <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"}>
                 Located Near (Optional)
               </Heading>
               <Box>
@@ -1017,7 +1016,7 @@ const CommercialShop = () => {
 
             {/* ============================ Parking Type ============================ */}
             <Box className={style.optional_box}>
-              <Heading as={"h3"} size={"sm"}>
+              <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"}>
                 Parking Type
               </Heading>
               <Box>
