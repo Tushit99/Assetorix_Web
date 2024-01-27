@@ -733,8 +733,7 @@ const IndustrialLand = () => {
 
         {/* ============================== Construction Property =============================== */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"}>
-            
+          <Heading as={"h3"} size={"sm"} marginTop={5}> 
             Any construction done on this property?
           </Heading>
           <Box textAlign={"left"} padding={"10px 0 0 0"}>
@@ -766,8 +765,7 @@ const IndustrialLand = () => {
           className={style.optional_box}
           display={ConstructionOnProperty == "Yes" ? "grid" : "none"}
         >
-          <Heading as={"h3"} size={"sm"}>
-            
+          <Heading as={"h3"} size={"sm"} marginTop={5}> 
             What type of construction has been done?
           </Heading>
           <Box>
