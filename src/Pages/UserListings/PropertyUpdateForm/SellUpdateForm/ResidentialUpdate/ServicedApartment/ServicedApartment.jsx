@@ -1739,7 +1739,7 @@ const ServicedApartmentUpdate = () => {
                 <IoIosArrowUp style={{ display: "inline" }} />
               ) : (
                 <IoIosArrowDown style={{ display: "inline" }} />
-              )}{" "}
+              )}
               Add more pricing details
             </Heading>
           </Box>
@@ -1753,8 +1753,8 @@ const ServicedApartmentUpdate = () => {
                 textAlign={"left"}
                 marginTop={5}
               >
-                {" "}
-                Upload Your Property image{" "}
+                
+                Upload Your Property image
               </Heading>
             </Box>
             <Box className={style.card}>
@@ -1774,8 +1774,8 @@ const ServicedApartmentUpdate = () => {
                       role="button"
                       onClick={selectFiles}
                     >
-                      {" "}
-                      Browse{" "}
+                      
+                      Browse
                     </Text>
                   </>
                 )}

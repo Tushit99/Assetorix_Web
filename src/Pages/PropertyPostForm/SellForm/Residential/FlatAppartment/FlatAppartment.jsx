@@ -1661,7 +1661,7 @@ const FlatAppartment = () => {
               <IoIosArrowUp style={{ display: "inline" }} />
             ) : (
               <IoIosArrowDown style={{ display: "inline" }} />
-            )}{" "}
+            )}
             Add more pricing details
           </Heading>
         </Box>

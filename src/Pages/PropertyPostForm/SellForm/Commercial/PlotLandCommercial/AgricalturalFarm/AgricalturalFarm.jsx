@@ -691,8 +691,8 @@ const AgricalturalFarm = () => {
         {/* ========================== No of open sides ========================== */}
         <Box textAlign={"left"} className={style.optional_box}>
           <Heading as={"h3"} marginTop={5} size={"sm"}>
-            {" "}
-            No. of open sides{" "}
+            
+            No. of open sides
           </Heading>
           <Box textAlign={"left"} padding={"10px 0 0 0"}>
             <button
@@ -731,8 +731,8 @@ const AgricalturalFarm = () => {
         {/* ============================== Construction Property =============================== */}
         <Box textAlign={"left"} className={style.optional_box}>
           <Heading as={"h3"} marginTop={5} size={"sm"}>
-            {" "}
-            Any construction done on this property?{" "}
+            
+            Any construction done on this property?
           </Heading>
           <Box textAlign={"left"} padding={"10px 0 0 0"}>
             <button
@@ -764,8 +764,8 @@ const AgricalturalFarm = () => {
           display={ConstructionOnProperty == "Yes" ? "grid" : "none"}
         >
           <Heading as={"h3"} size={"sm"} marginTop={5}>
-            {" "}
-            What type of construction has been done?{" "}
+            
+            What type of construction has been done?
           </Heading>
           <Box>
             <button
@@ -775,8 +775,8 @@ const AgricalturalFarm = () => {
                 constructionType.includes("Shed") ? style.setbtn : style.btn
               }
             >
-              {" "}
-              Shed{" "}
+              
+              Shed
             </button>
             <button
               value={"Room(s)"}
@@ -785,8 +785,8 @@ const AgricalturalFarm = () => {
                 constructionType.includes("Room(s)") ? style.setbtn : style.btn
               }
             >
-              {" "}
-              Room(s){" "}
+              
+              Room(s)
             </button>
             <button
               value={"Washroom"}
@@ -795,8 +795,8 @@ const AgricalturalFarm = () => {
                 constructionType.includes("Washroom") ? style.setbtn : style.btn
               }
             >
-              {" "}
-              Washroom{" "}
+              
+              Washroom
             </button>
             <button
               value={"Other"}
@@ -805,8 +805,8 @@ const AgricalturalFarm = () => {
                 constructionType.includes("Other") ? style.setbtn : style.btn
               }
             >
-              {" "}
-              Other{" "}
+              
+              Other
             </button>
           </Box>
         </Box>
@@ -1212,8 +1212,8 @@ const AgricalturalFarm = () => {
               }}
               className={preLeased == "Yes" ? style.setbtn : style.btn}
             >
-              {" "}
-              Yes{" "}
+              
+              Yes
             </button>
             <button
               value={"No"}
@@ -1223,8 +1223,8 @@ const AgricalturalFarm = () => {
               }}
               className={preLeased == "No" ? style.setbtn : style.btn}
             >
-              {" "}
-              No{" "}
+              
+              No
             </button>
           </Box>
           <Box display={preLeased == "Yes" ? "block" : "none"}>
@@ -1282,8 +1282,8 @@ const AgricalturalFarm = () => {
               textAlign={"left"}
               margin={"10px 0"}
             >
-              {" "}
-              Upload Your Property image{" "}
+              
+              Upload Your Property image
             </Heading>
           </Box>
           <Box className={style.card}>
@@ -1303,8 +1303,8 @@ const AgricalturalFarm = () => {
                     role="button"
                     onClick={selectFiles}
                   >
-                    {" "}
-                    Browse{" "}
+                    
+                    Browse
                   </Text>
                 </>
               )}

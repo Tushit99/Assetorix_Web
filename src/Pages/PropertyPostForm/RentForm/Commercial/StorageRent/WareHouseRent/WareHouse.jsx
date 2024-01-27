@@ -860,7 +860,7 @@ const WareHouse = () => {
                 <IoIosArrowUp style={{ display: "inline" }} />
               ) : (
                 <IoIosArrowDown style={{ display: "inline" }} />
-              )}{" "}
+              )}
               Add more pricing details
             </Heading>
           </Box>
@@ -875,8 +875,8 @@ const WareHouse = () => {
               textAlign={"left"}
               margin={"10px 0"}
             >
-              {" "}
-              Upload Your Property image{" "}
+              
+              Upload Your Property image
             </Heading>
           </Box>
           <Box className={style.card}>
@@ -896,8 +896,8 @@ const WareHouse = () => {
                     role="button"
                     onClick={selectFiles}
                   >
-                    {" "}
-                    Browse{" "}
+                    
+                    Browse
                   </Text>
                 </>
               )}

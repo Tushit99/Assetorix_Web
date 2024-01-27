@@ -51,7 +51,7 @@ const UsaRealState = () => {
                     31% of sales, followed by California (12%), Texas (9%) and Arizona
                     (6%). Almost 80% of foreign-born U.S. residents owned a home in 2009,
                     according to the National Association of Realtors. The national
-                    homeownership rate at that time was 65.4%.{" "}
+                    homeownership rate at that time was 65.4%.
                 </Text>
                 {/* part 2 */}
                 <Heading m={"20px 0"} as="h3" size="md">

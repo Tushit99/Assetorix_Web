@@ -143,12 +143,12 @@ const Querydesc = ({ e }) => {
             {e?.name}
           </Heading>
           <Text display={e?.email ? "block" : "none"}>
-            {" "}
-            <strong>Email:</strong> {e?.email}{" "}
+            
+            <strong>Email:</strong> {e?.email}
           </Text>
           <Text display={e?.mobile ? "block" : "none"}>
-            {" "}
-            <strong>mobile:</strong> {e?.mobile}{" "}
+            
+            <strong>mobile:</strong> {e?.mobile}
           </Text>
           <Text
             fontsize={"md"}

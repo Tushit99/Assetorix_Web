@@ -1555,7 +1555,7 @@ const GuestBanquetUpdate = () => {
                 fontWeight={400}
                 textAlign={"left"}
               >
-                {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per{" "}
+                {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per
                 {areaPer}
               </Heading>
               <NumberInput value={priceSqr}>
@@ -1648,7 +1648,7 @@ const GuestBanquetUpdate = () => {
                 <IoIosArrowUp style={{ display: "inline" }} />
               ) : (
                 <IoIosArrowDown style={{ display: "inline" }} />
-              )}{" "}
+              )}
               Add more pricing details
             </Heading>
           </Box>
@@ -1677,8 +1677,8 @@ const GuestBanquetUpdate = () => {
               }}
               className={preLeased == "Yes" ? style.setbtn : style.btn}
             >
-              {" "}
-              Yes{" "}
+              
+              Yes
             </button>
             <button
               value={"No"}
@@ -1688,8 +1688,8 @@ const GuestBanquetUpdate = () => {
               }}
               className={preLeased == "No" ? style.setbtn : style.btn}
             >
-              {" "}
-              No{" "}
+              
+              No
             </button>
           </Box>
           <Box display={preLeased == "Yes" ? "block" : "none"}>
@@ -1780,8 +1780,8 @@ const GuestBanquetUpdate = () => {
               textAlign={"left"}
               margin={"10px 0"}
             >
-              {" "}
-              Upload Your Property image{" "}
+              
+              Upload Your Property image
             </Heading>
           </Box>
           <Box className={style.savedImages}>
@@ -1816,8 +1816,8 @@ const GuestBanquetUpdate = () => {
                     role="button"
                     onClick={selectFiles}
                   >
-                    {" "}
-                    Browse{" "}
+                    
+                    Browse
                   </Text>
                 </>
               )}

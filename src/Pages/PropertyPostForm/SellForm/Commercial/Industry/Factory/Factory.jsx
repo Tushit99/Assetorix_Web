@@ -1007,8 +1007,8 @@ const Factory = () => {
               }}
               className={preLeased == "Yes" ? style.setbtn : style.btn}
             >
-              {" "}
-              Yes{" "}
+              
+              Yes
             </button>
             <button
               value={"No"}
@@ -1018,8 +1018,8 @@ const Factory = () => {
               }}
               className={preLeased == "No" ? style.setbtn : style.btn}
             >
-              {" "}
-              No{" "}
+              
+              No
             </button>
           </Box>
           <Box display={preLeased == "Yes" ? "block" : "none"}>
@@ -1077,8 +1077,8 @@ const Factory = () => {
               textAlign={"left"}
               margin={"10px 0"}
             >
-              {" "}
-              Upload Your Property image{" "}
+              
+              Upload Your Property image
             </Heading>
           </Box>
           <Box className={style.card}>
@@ -1098,8 +1098,8 @@ const Factory = () => {
                     role="button"
                     onClick={selectFiles}
                   >
-                    {" "}
-                    Browse{" "}
+                    
+                    Browse
                   </Text>
                 </>
               )}

@@ -637,8 +637,8 @@ const PlotLand = () => {
         {/* Property Dimensions */}
         <Box as={"div"} textAlign={"left"} padding={"10px 0"} display={"grid"}>
           <Heading as={"h3"} size={"sm"}>
-            {" "}
-            Property Dimensions (Optional){" "}
+            
+            Property Dimensions (Optional)
           </Heading>
           <Input
             type={"text"}
@@ -668,8 +668,8 @@ const PlotLand = () => {
         {/* Floors Allowed For Construction */}
         <Box textAlign={"left"} padding={"10px 0"}>
           <Heading as={"h3"} size={"sm"}>
-            {" "}
-            Floors Allowed For Construction{" "}
+            
+            Floors Allowed For Construction
           </Heading>
           <Input
             type={"text"}
@@ -712,7 +712,7 @@ const PlotLand = () => {
         {/* No of open sides */}
         <Box textAlign={"left"} className={style.optional_box}>
           <Heading as={"h3"} marginTop={5} size={"sm"}>
-            No. of open sides{" "}
+            No. of open sides
           </Heading>
           <Box textAlign={"left"} padding={"10px 0 0 0"}>
             <button
@@ -750,8 +750,8 @@ const PlotLand = () => {
         {/* Construction Property */}
         <Box textAlign={"left"} marginTop={5} className={style.optional_box}>
           <Heading as={"h3"} size={"sm"}>
-            {" "}
-            Any construction done on this property?{" "}
+            
+            Any construction done on this property?
           </Heading>
           <Box textAlign={"left"} padding={"10px 0 0 0"}>
             <button
@@ -782,7 +782,7 @@ const PlotLand = () => {
           display={ConstructionOnProperty == "Yes" ? "grid" : "none"}
         >
           <Heading as={"h3"} size={"sm"} marginTop={5}>
-            What type of construction has been done?{" "}
+            What type of construction has been done?
           </Heading>
           <Box>
             <button
@@ -792,8 +792,8 @@ const PlotLand = () => {
                 constructionType.includes("Shed") ? style.setbtn : style.btn
               }
             >
-              {" "}
-              Shed{" "}
+              
+              Shed
             </button>
             <button
               value={"Room(s)"}
@@ -802,8 +802,8 @@ const PlotLand = () => {
                 constructionType.includes("Room(s)") ? style.setbtn : style.btn
               }
             >
-              {" "}
-              Room(s){" "}
+              
+              Room(s)
             </button>
             <button
               value={"Washroom"}
@@ -812,8 +812,8 @@ const PlotLand = () => {
                 constructionType.includes("Washroom") ? style.setbtn : style.btn
               }
             >
-              {" "}
-              Washroom{" "}
+              
+              Washroom
             </button>
             <button
               value={"Other"}
@@ -822,8 +822,8 @@ const PlotLand = () => {
                 constructionType.includes("Other") ? style.setbtn : style.btn
               }
             >
-              {" "}
-              Other{" "}
+              
+              Other
             </button>
           </Box>
         </Box>
@@ -1097,7 +1097,7 @@ const PlotLand = () => {
               <IoIosArrowUp style={{ display: "inline" }} />
             ) : (
               <IoIosArrowDown style={{ display: "inline" }} />
-            )}{" "}
+            )}
             Add more pricing details
           </Heading>
         </Box>
@@ -1126,8 +1126,8 @@ const PlotLand = () => {
               textAlign={"left"}
               margin={"10px 0"}
             >
-              {" "}
-              Upload Your Property image{" "}
+              
+              Upload Your Property image
             </Heading>
           </Box>
           <Box className={style.card}>
@@ -1147,8 +1147,8 @@ const PlotLand = () => {
                     role="button"
                     onClick={selectFiles}
                   >
-                    {" "}
-                    Browse{" "}
+                    
+                    Browse
                   </Text>
                 </>
               )}

@@ -944,7 +944,7 @@ const Manufacture = () => {
                 <IoIosArrowUp style={{ display: "inline" }} />
               ) : (
                 <IoIosArrowDown style={{ display: "inline" }} />
-              )}{" "}
+              )}
               Add more pricing details
             </Heading>
           </Box>
@@ -973,8 +973,8 @@ const Manufacture = () => {
               }}
               className={preLeased == "Yes" ? style.setbtn : style.btn}
             >
-              {" "}
-              Yes{" "}
+              
+              Yes
             </button>
             <button
               value={"No"}
@@ -984,8 +984,8 @@ const Manufacture = () => {
               }}
               className={preLeased == "No" ? style.setbtn : style.btn}
             >
-              {" "}
-              No{" "}
+              
+              No
             </button>
           </Box>
           <Box display={preLeased == "Yes" ? "block" : "none"}>
@@ -1043,8 +1043,8 @@ const Manufacture = () => {
               textAlign={"left"}
               margin={"10px 0"}
             >
-              {" "}
-              Upload Your Property image{" "}
+              
+              Upload Your Property image
             </Heading>
           </Box>
           <Box className={style.card}>
@@ -1064,8 +1064,8 @@ const Manufacture = () => {
                     role="button"
                     onClick={selectFiles}
                   >
-                    {" "}
-                    Browse{" "}
+                    
+                    Browse
                   </Text>
                 </>
               )}

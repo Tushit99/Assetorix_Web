@@ -596,21 +596,21 @@ const SingleProductDetailPage = () => {
                       <Tr display={data?.additionalPricingDetails?.bookingAmount ? "auto":"none"}>
                         <Td> Booking Amount </Td>
                         <Td> 
-                          {data?.countryCurrency}{" "}
+                          {data?.countryCurrency}
                           {data?.additionalPricingDetails?.bookingAmount}
                         </Td>
                       </Tr>
                       <Tr display={data?.additionalPricingDetails?.annualDuesPayable ? "auto":"none"}>
                         <Td> Annual Dues Payable </Td>
                         <Td>
-                          {data?.countryCurrency}{" "}
+                          {data?.countryCurrency}
                           {data?.additionalPricingDetails?.annualDuesPayable}
                         </Td>
                       </Tr>
                       <Tr display={data?.additionalPricingDetails?.membershipCharge ? "auto":"none"}>
                         <Td> Membership Charge </Td>
                         <Td>
-                          {data?.countryCurrency}{" "}
+                          {data?.countryCurrency}
                           {data?.additionalPricingDetails?.membershipCharge}
                         </Td>
                       </Tr>
@@ -668,8 +668,8 @@ const SingleProductDetailPage = () => {
                     {data?.expectedByYear && (
                       <Tr>
                         <Th color={"black"} textTransform={"unset"}>
-                          {" "}
-                          Expected By Year{" "}
+                          
+                          Expected By Year
                         </Th>
                         <Td> {data.expectedByYear} </Td>
                       </Tr>

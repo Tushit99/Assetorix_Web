@@ -1597,7 +1597,7 @@ const RKStudio = () => {
               <IoIosArrowUp style={{ display: "inline" }} />
             ) : (
               <IoIosArrowDown style={{ display: "inline" }} />
-            )}{" "}
+            )}
             Add more pricing details
           </Heading>
         </Box>
@@ -1627,8 +1627,8 @@ const RKStudio = () => {
               textAlign={"left"}
               margin={"10px 0"}
             >
-              {" "}
-              Upload Your Property image{" "}
+              
+              Upload Your Property image
             </Heading>
           </Box>
           <Box className={style.card}>
@@ -1648,8 +1648,8 @@ const RKStudio = () => {
                     role="button"
                     onClick={selectFiles}
                   >
-                    {" "}
-                    Browse{" "}
+                    
+                    Browse
                   </Text>
                 </>
               )}

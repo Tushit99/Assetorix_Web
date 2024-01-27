@@ -967,7 +967,7 @@ const CoWorkingspace = () => {
               <IoIosArrowUp style={{ display: "inline" }} />
             ) : (
               <IoIosArrowDown style={{ display: "inline" }} />
-            )}{" "}
+            )}
             Add more pricing details
           </Heading>
         </Box>
@@ -989,8 +989,8 @@ const CoWorkingspace = () => {
               }}
               className={preLeased == "Yes" ? style.setbtn : style.btn}
             >
-              {" "}
-              Yes{" "}
+              
+              Yes
             </button>
             <button
               value={"No"}
@@ -1000,8 +1000,8 @@ const CoWorkingspace = () => {
               }}
               className={preLeased == "No" ? style.setbtn : style.btn}
             >
-              {" "}
-              No{" "}
+              
+              No
             </button>
           </Box>
         </Box>
@@ -1097,8 +1097,8 @@ const CoWorkingspace = () => {
               textAlign={"left"}
               marginTop={5}
             >
-              {" "}
-              Upload Your Property image{" "}
+              
+              Upload Your Property image
             </Heading>
           </Box>
           <Box className={style.card}>

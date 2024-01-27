@@ -1525,7 +1525,7 @@ const StudioApartmentRent = () => {
                 <IoIosArrowUp style={{ display: "inline" }} />
               ) : (
                 <IoIosArrowDown style={{ display: "inline" }} />
-              )}{" "}
+              )}
               Add more pricing details
             </Heading>
           </Box>
@@ -1542,8 +1542,8 @@ const StudioApartmentRent = () => {
               className={securityDeposit == "Fixed" ? style.setbtn : style.btn}
               onClick={handleSecurityDeposit}
             >
-              {" "}
-              Fixed{" "}
+              
+              Fixed
             </button>
             <button
               value={"Multiple of Rent"}
@@ -1552,16 +1552,16 @@ const StudioApartmentRent = () => {
               }
               onClick={handleSecurityDeposit}
             >
-              {" "}
-              Multiple of Rent{" "}
+              
+              Multiple of Rent
             </button>
             <button
               value={"None"}
               className={securityDeposit == "None" ? style.setbtn : style.btn}
               onClick={handleSecurityDeposit}
             >
-              {" "}
-              None{" "}
+              
+              None
             </button>
           </Box>
           <Box display={securityDeposit == "None" ? "none" : "block"}>
@@ -1611,56 +1611,56 @@ const StudioApartmentRent = () => {
               className={noticePeriod == "None" ? style.setbtn : style.btn}
               value={"None"}
             >
-              {" "}
-              None{" "}
+              
+              None
             </button>
             <button
               onClick={handleMonthNotice}
               className={noticePeriod == "1 month" ? style.setbtn : style.btn}
               value={"1 month"}
             >
-              {" "}
-              1 month{" "}
+              
+              1 month
             </button>
             <button
               onClick={handleMonthNotice}
               className={noticePeriod == "2 months" ? style.setbtn : style.btn}
               value={"2 months"}
             >
-              {" "}
-              2 month{" "}
+              
+              2 month
             </button>
             <button
               onClick={handleMonthNotice}
               className={noticePeriod == "3 months" ? style.setbtn : style.btn}
               value={"3 months"}
             >
-              {" "}
-              3 month{" "}
+              
+              3 month
             </button>
             <button
               onClick={handleMonthNotice}
               className={noticePeriod == "4 months" ? style.setbtn : style.btn}
               value={"4 months"}
             >
-              {" "}
-              4 month{" "}
+              
+              4 month
             </button>
             <button
               onClick={handleMonthNotice}
               className={noticePeriod == "5 months" ? style.setbtn : style.btn}
               value={"5 months"}
             >
-              {" "}
-              5 month{" "}
+              
+              5 month
             </button>
             <button
               onClick={handleMonthNotice}
               className={noticePeriod == "6 months" ? style.setbtn : style.btn}
               value={"6 months"}
             >
-              {" "}
-              6 month{" "}
+              
+              6 month
             </button>
           </Box>
         </Box>
@@ -1675,8 +1675,8 @@ const StudioApartmentRent = () => {
             textAlign={"left"}
             margin={"10px 0"}
           >
-            {" "}
-            Upload Your Property image{" "}
+            
+            Upload Your Property image
           </Heading>
         </Box>
         <Box className={style.card}>
@@ -1696,8 +1696,8 @@ const StudioApartmentRent = () => {
                   role="button"
                   onClick={selectFiles}
                 >
-                  {" "}
-                  Browse{" "}
+                  
+                  Browse
                 </Text>
               </>
             )}

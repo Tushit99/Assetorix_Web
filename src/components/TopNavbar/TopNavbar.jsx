@@ -228,8 +228,8 @@ const TopNavbar = () => {
                       {/* <Link> My Purchased </Link> */}
                     </Box>
                     <Button onClick={handlelogout} className={style.logout_btn}>
-                      {" "}
-                      Logout{" "}
+                      
+                      Logout
                     </Button>
                   </PopoverBody>
                 </PopoverContent>
@@ -553,8 +553,8 @@ const TopNavbar = () => {
                           size={"md"}
                           color={"black"}
                         >
-                          {" "}
-                          Office{" "}
+                          
+                          Office
                         </Checkbox>
                         <Checkbox
                           onChange={() => handleComRent("Retail")}

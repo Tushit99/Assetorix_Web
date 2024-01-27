@@ -1547,7 +1547,7 @@ const HotelResortUpdate = () => {
                 fontWeight={400}
                 textAlign={"left"}
               >
-                {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per{" "}
+                {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per
                 {areaPer}
               </Heading>
               <NumberInput value={priceSqr}>
@@ -1580,8 +1580,8 @@ const HotelResortUpdate = () => {
               }}
               className={preLeased == "Yes" ? style.setbtn : style.btn}
             >
-              {" "}
-              Yes{" "}
+              
+              Yes
             </button>
             <button
               value={"No"}
@@ -1591,8 +1591,8 @@ const HotelResortUpdate = () => {
               }}
               className={preLeased == "No" ? style.setbtn : style.btn}
             >
-              {" "}
-              No{" "}
+              
+              No
             </button>
           </Box>
           <Box display={preLeased == "Yes" ? "block" : "none"}>
@@ -1652,8 +1652,8 @@ const HotelResortUpdate = () => {
               textAlign={"left"}
               margin={"10px 0"}
             >
-              {" "}
-              Upload Your Property image{" "}
+              
+              Upload Your Property image
             </Heading>
           </Box>
           <Box className={style.savedImages}>
@@ -1688,8 +1688,8 @@ const HotelResortUpdate = () => {
                     role="button"
                     onClick={selectFiles}
                   >
-                    {" "}
-                    Browse{" "}
+                    
+                    Browse
                   </Text>
                 </>
               )}

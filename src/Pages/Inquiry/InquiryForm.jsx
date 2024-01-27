@@ -360,7 +360,7 @@ const InquiryForm = () => {
                 onClick={handletologin}
                 backgroundColor={"#2e3192"}
               > 
-                Login{" "}
+                Login
               </Button>
             </ModalFooter>
           </ModalContent>

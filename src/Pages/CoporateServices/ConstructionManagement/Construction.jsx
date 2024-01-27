@@ -270,7 +270,7 @@ const Construction = () => {
               <UnorderedList textAlign={"left"} margin={"10px 16px"}>
                 <ListItem>Pre-Construction Services</ListItem>
                 <ListItem>
-                  {" "}
+                  
                   Construction Phasing, scheduling and site logistic planning
                 </ListItem>
                 <ListItem>Constructability Reviews</ListItem>
