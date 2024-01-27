@@ -474,9 +474,7 @@ const CoWorkingspace = () => {
         <Heading size={"lg"} color={"black"}>
           Where is your property located?
         </Heading>
-        <Heading size={"sm"} color={"black"}>
-          An accurate location helps you connect with the right buyers.
-        </Heading>
+        <Heading size={"sm"} color={"black"} textAlign={"left"} >Location Detail</Heading> 
 
         <Select
           fontSize={"md"} 
@@ -572,11 +570,10 @@ const CoWorkingspace = () => {
         />
       </Box>
       {/* Property Detail */}
-      <Box marginTop={10}>
-        
+      <Box> 
         {/* ====================================== */}
         {/* Washrooms */}
-        <Box padding={"10px 0 8px 0"} display={"grid"}>
+        <Box  display={"grid"}>
           <Heading textAlign={"left"} marginTop={{ base: 10, md: 5 }} as={"h3"} size={"sm"}>
             Washrooms
           </Heading>
@@ -592,7 +589,7 @@ const CoWorkingspace = () => {
           </Box>
         </Box>
         {/* add area details */}
-        <Box textAlign={"left"} padding={"10px 0"}>
+        <Box textAlign={"left"} >
           <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"}>
             Add Area Details
           </Heading>

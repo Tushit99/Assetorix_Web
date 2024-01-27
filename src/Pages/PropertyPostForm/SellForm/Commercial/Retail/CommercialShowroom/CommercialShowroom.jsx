@@ -1148,8 +1148,7 @@ const CommercialShowroom = () => {
               <Box textAlign={"left"} className={style.optional_box}>
                 <Heading
                   as={"h3"}
-                  size={"md"}
-                  margin={"30px 0 10px 0"}
+                  size={"md"} 
                   textAlign={"left"}
                 >
                   Age of Property

@@ -531,14 +531,13 @@ const ReadyToMove = () => {
     <form onSubmit={handleSubmitData}>
       {/* property location */}
       <Box className={style.location_form}>
-        <Heading size={"lg"} color={"black"}>
+        <Heading size={"lg"} color={"black"} textAlign={"center"}>
           Where is your Ready to move office space located?
         </Heading>
-        <Heading size={"sm"}>Location Detail</Heading>
+        <Heading size={"sm"} color={"black"} textAlign={"left"}>Location Detail</Heading>
 
         <Select
-          fontSize={"md"}
-          padding={"0 10px"}
+          fontSize={"md"} 
           variant="flushed"
           as={"select"}
           onChange={(e) => setLocatedInside(e.target.value)}
@@ -551,8 +550,7 @@ const ReadyToMove = () => {
         </Select>
 
         <Select
-          fontSize={"md"}
-          padding={"0 10px"}
+          fontSize={"md"} 
           variant="flushed"
           as={"select"}
           onChange={(e) => setZoneType(e.target.value)}
@@ -571,8 +569,7 @@ const ReadyToMove = () => {
         </Select>
         <Input
           type="text"
-          placeholder={"Enter pincode"}
-          padding={"0 10px"}
+          placeholder={"Enter pincode"} 
           required
           maxLength={6}
           fontSize={"md"}
@@ -581,8 +578,7 @@ const ReadyToMove = () => {
           onChange={handlepinfetch}
         />
         <Input
-          type="text"
-          padding={"0 10px"}
+          type="text" 
           required
           placeholder="Enter Locality"
           list="browsers"
@@ -603,8 +599,7 @@ const ReadyToMove = () => {
         )}
 
         <Input
-          type="text"
-          padding={"0 10px"}
+          type="text" 
           required
           placeholder="Enter City"
           fontSize={"md"}
@@ -614,8 +609,7 @@ const ReadyToMove = () => {
           variant="flushed"
         />
         <Input
-          type="text"
-          padding={"0 10px"}
+          type="text" 
           required
           placeholder="Enter State"
           value={state}
@@ -626,8 +620,7 @@ const ReadyToMove = () => {
         />
 
         <Input
-          type="text"
-          padding={"0 10px"}
+          type="text" 
           required
           placeholder="Enter Country"
           value={country}
@@ -638,11 +631,11 @@ const ReadyToMove = () => {
         />
       </Box>
       {/* Property Detail */}
-      <Box marginTop={12}>
+      <Box>
         {/* ====================================== */}
         {/* add area details */}
-        <Box textAlign={"left"} padding={"10px 0"}>
-          <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"}>
+        <Box textAlign={"left"} >
+          <Heading as={"h3"} marginTop={5} size={"sm"}>
             Add Area Details
           </Heading>
           <InputGroup

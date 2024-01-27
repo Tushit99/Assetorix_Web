@@ -727,9 +727,9 @@ const CommercialShop = () => {
             />
           </Box>
           {/* Property Detail */}
-          <Box marginTop={12}>
+          <Box>
             {/* ============================ add area details ============================ */}
-            <Box textAlign={"left"} padding={"10px 0"}>
+            <Box textAlign={"left"}>
               <Heading as={"h3"} margin={"5px 0"} size={"sm"}>
                 Add Area Details
               </Heading>

@@ -524,10 +524,10 @@ const Bareshellspace = () => {
     <form onSubmit={handleSubmitData} >
       {/* property location */}
       <Box className={style.location_form}>
-        <Heading size={"lg"} color={"black"}>
+        <Heading size={"lg"} color={"black"} textAlign={"center"}>
           Where is your Bare shell office space located?
         </Heading>
-        <Heading size={"sm"}>Location Detail</Heading>
+        <Heading size={"sm"} color={"black"} textAlign={"left"} >Location Detail</Heading>
 
         <Select
           fontSize={"md"}
