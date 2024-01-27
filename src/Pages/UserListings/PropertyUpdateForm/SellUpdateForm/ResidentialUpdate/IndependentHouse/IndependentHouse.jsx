@@ -1556,7 +1556,7 @@ const IndependentHouseUpdate = () => {
           <Heading
             as={"h3"}
             size={"sm"}
-            marginTop={{ base: 10, md: 5 }}
+            marginTop={5}
             textAlign={"left"}
           >
             Price Details
@@ -1707,7 +1707,7 @@ const IndependentHouseUpdate = () => {
           <Heading
             as={"h3"}
             size={"sm"}
-            marginTop={{ base: 10, md: 5 }}
+            marginTop={5}
             textAlign={"left"}
           >
             Add Description and Unique Features of your Property
@@ -1731,7 +1731,7 @@ const IndependentHouseUpdate = () => {
               color={"black"}
               size={"sm"}
               textAlign={"left"}
-              marginTop={{ base: 10, md: 5 }}
+              marginTop={5}
             >
               Upload Your Property image
             </Heading>

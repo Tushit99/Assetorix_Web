@@ -721,7 +721,7 @@ const FarmHouse = () => {
           as={"h4"}
           size={"sm"}
           textAlign={"left"}
-          marginTop={{ base: 10, md: 5 }}
+          marginTop={5}
         >
           Add Room Details
         </Heading>
@@ -766,7 +766,7 @@ const FarmHouse = () => {
         {/* ====================================== */}
         {/* add area details */} 
         <Box textAlign={"left"}>
-          <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"}>
+          <Heading as={"h3"} marginTop={5} size={"sm"}>
             Add Area Details
           </Heading>
           <InputGroup
@@ -821,7 +821,7 @@ const FarmHouse = () => {
         </Box>
         {/* other Room  */}
         <Box display={"grid"} className={style.optional_box}>
-          <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"}>
+          <Heading as={"h3"} marginTop={5} size={"sm"}>
             Other rooms (optional)
           </Heading>
           <Box>
@@ -865,7 +865,7 @@ const FarmHouse = () => {
         </Box>
         {/* furnishing  */}
         <Box display={"grid"} className={style.optional_box}>
-          <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"}>
+          <Heading as={"h3"} marginTop={5} size={"sm"}>
             Furnishing (optional)
           </Heading>
           <Box margin={0}>
@@ -1182,7 +1182,7 @@ const FarmHouse = () => {
 
         {/* reserved */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }}>
+          <Heading as={"h3"} size={"sm"} marginTop={5}>
             Reserved Parking (optional)
           </Heading>
           <div className={style.parking}>
@@ -1240,7 +1240,7 @@ const FarmHouse = () => {
           <Heading
             as={"h3"}
             size={"sm"}
-            marginTop={{ base: 10, md: 5 }}
+            marginTop={5}
             textAlign={"left"}
           >
             Floor Details
@@ -1275,7 +1275,7 @@ const FarmHouse = () => {
         <Box textAlign={"left"} className={style.optional_box} display={"grid"}>
           <Heading
             as={"h3"}
-            marginTop={{ base: 10, md: 5 }}
+            marginTop={5}
             size={"sm"}
             textAlign={"left"}
           >
@@ -1397,7 +1397,7 @@ const FarmHouse = () => {
           <Heading
             as={"h3"}
             size={"sm"}
-            marginTop={{ base: 10, md: 5 }}
+            marginTop={5}
             textAlign={"left"}
           >
             Ownership
@@ -1533,7 +1533,7 @@ const FarmHouse = () => {
           <Heading
             as={"h4"}
             size={"sm"}
-            marginTop={{ base: 10, md: 5 }}
+            marginTop={5}
             fontWeight={700}
             textAlign={"left"}
           >
@@ -1623,7 +1623,7 @@ const FarmHouse = () => {
               color={"black"}
               size={"sm"}
               textAlign={"left"}
-              marginTop={{ base: 10, md: 5 }}
+              marginTop={5}
             >
               Upload Your Property image
             </Heading>
@@ -1681,7 +1681,7 @@ const FarmHouse = () => {
           <Heading
             as={"h3"}
             size={"sm"}
-            marginTop={{ base: 10, md: 5 }}
+            marginTop={5}
             textAlign={"left"}
           >
             Add Description and Unique Features of your Property
@@ -1703,7 +1703,7 @@ const FarmHouse = () => {
         <Heading
           as={"h3"}
           size={"sm"}
-          marginTop={{ base: 10, md: 5 }}
+          marginTop={5}
           textAlign={"left"}
         >
           Add amenities/unique features
@@ -1717,7 +1717,7 @@ const FarmHouse = () => {
         <Heading
           as={"h3"}
           size={"sm"}
-          marginTop={{ base: 10, md: 5 }}
+          marginTop={5}
           textAlign={"left"}
         >
           Amenities
@@ -1804,7 +1804,7 @@ const FarmHouse = () => {
         <Heading
           as={"h3"}
           size={"sm"}
-          marginTop={{ base: 10, md: 5 }}
+          marginTop={5}
           textAlign={"left"}
         >
           Property Features
@@ -1947,7 +1947,7 @@ const FarmHouse = () => {
         <Heading
           as={"h3"}
           size={"sm"}
-          marginTop={{ base: 10, md: 5 }}
+          marginTop={5}
           textAlign={"left"}
         >
           Society/Building feature
@@ -2015,7 +2015,7 @@ const FarmHouse = () => {
         <Heading
           as={"h3"}
           size={"sm"}
-          marginTop={{ base: 10, md: 5 }}
+          marginTop={5}
           textAlign={"left"}
         >
           Additional Features
@@ -2092,7 +2092,7 @@ const FarmHouse = () => {
         <Heading
           as={"h3"}
           size={"sm"}
-          marginTop={{ base: 10, md: 5 }}
+          marginTop={5}
           textAlign={"left"}
         >
           Water Source
@@ -2143,7 +2143,7 @@ const FarmHouse = () => {
         <Heading
           as={"h3"}
           size={"sm"}
-          marginTop={{ base: 10, md: 5 }}
+          marginTop={5}
           textAlign={"left"}
         >
           Overlooking
@@ -2195,7 +2195,7 @@ const FarmHouse = () => {
         <Heading
           as={"h3"}
           size={"sm"}
-          marginTop={{ base: 10, md: 5 }}
+          marginTop={5}
           textAlign={"left"}
         >
           Other Features
@@ -2240,7 +2240,7 @@ const FarmHouse = () => {
         <Heading
           as={"h3"}
           size={"sm"}
-          marginTop={{ base: 10, md: 5 }}
+          marginTop={5}
           textAlign={"left"}
         >
           Power Back up
@@ -2283,7 +2283,7 @@ const FarmHouse = () => {
         <Heading
           as={"h3"}
           size={"sm"}
-          marginTop={{ base: 10, md: 5 }}
+          marginTop={5}
           textAlign={"left"}
         >
           Property facing
@@ -2384,7 +2384,7 @@ const FarmHouse = () => {
         <Heading
           as={"h3"}
           size={"sm"}
-          marginTop={{ base: 10, md: 5 }}
+          marginTop={5}
           textAlign={"left"}
         >
           Type of flooring
@@ -2416,7 +2416,7 @@ const FarmHouse = () => {
         <Heading
           as={"h3"}
           size={"sm"}
-          marginTop={{ base: 10, md: 5 }}
+          marginTop={5}
           textAlign={"left"}
         >
           Width of facing road
@@ -2447,7 +2447,7 @@ const FarmHouse = () => {
         </Box>
       </Box>
       <Box className={style.optional_box}>
-        <Heading size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
+        <Heading size={"sm"} marginTop={5} textAlign={"left"}>
           Location Advantages
           <Heading size={"xs"} fontWeight={200} textAlign={"left"}>
             Highlight the nearby landmarks*
@@ -2543,7 +2543,7 @@ const FarmHouse = () => {
         size={"xs"}
         color={"rgb(255, 52, 52)"}
         fontWeight={200}
-        marginTop={{ base: 10, md: 5 }}
+        marginTop={5}
         textAlign={"left"}
       >
         *Please provide correct information, otherwise your listing might get

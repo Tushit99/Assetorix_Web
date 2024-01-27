@@ -726,7 +726,7 @@ const Independentbuilder = () => {
       <Box>
         <Heading
           as={"h4"}
-          marginTop={{ base: 10, md: 5 }}
+          marginTop={5}
           textAlign={"left"}
           size={"sm"}
         >
@@ -830,7 +830,7 @@ const Independentbuilder = () => {
         {/* other Room  */}
         <Box
           padding={"10px 0"}
-          marginTop={{ base: 10, md: 5 }}
+          marginTop={5}
           display={"grid"}
           className={style.optional_box}
         >
@@ -1194,7 +1194,7 @@ const Independentbuilder = () => {
           </Box>
         </Box>
         {/* reserved */}
-        <Box className={style.optional_box} marginTop={{ base: 10, md: 5 }}>
+        <Box className={style.optional_box} marginTop={5}>
           <Heading as={"h3"} size={"sm"}>
             Reserved Parking (optional)
           </Heading>
@@ -1252,7 +1252,7 @@ const Independentbuilder = () => {
         <Box
           textAlign={"left"}
           display={"grid"}
-          marginTop={{ base: 10, md: 5 }}
+          marginTop={5}
           gap={2}
         >
           <Heading as={"h3"} size={"sm"} textAlign={"left"}>
@@ -1292,7 +1292,7 @@ const Independentbuilder = () => {
         {/* Availability status */}
         <Box
           textAlign={"left"}
-          marginTop={{ base: 10, md: 5 }}
+          marginTop={5}
           className={style.optional_box}
         >
           <Heading as={"h3"} size={"sm"} textAlign={"left"}>
@@ -1418,7 +1418,7 @@ const Independentbuilder = () => {
           <Heading
             as={"h3"}
             size={"sm"}
-            marginTop={{ base: 10, md: 5 }}
+            marginTop={5}
             textAlign={"left"}
           >
             Ownership
@@ -1480,7 +1480,7 @@ const Independentbuilder = () => {
           <Heading
             as={"h3"}
             size={"sm"}
-            marginTop={{ base: 10, md: 5 }}
+            marginTop={5}
             textAlign={"left"}
           >
             Price Details
@@ -1643,7 +1643,7 @@ const Independentbuilder = () => {
           <Heading
             as={"h3"}
             size={"sm"}
-            marginTop={{ base: 10, md: 5 }}
+            marginTop={5}
             textAlign={"left"}
           >
             Add Description and Unique Features of your Property
@@ -1667,7 +1667,7 @@ const Independentbuilder = () => {
               color={"black"}
               size={"sm"}
               textAlign={"left"}
-              marginTop={{ base: 10, md: 5 }}
+              marginTop={5}
             >
               Upload Your Property image
             </Heading>

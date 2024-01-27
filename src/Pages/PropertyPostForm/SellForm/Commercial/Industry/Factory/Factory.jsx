@@ -607,7 +607,7 @@ const Factory = () => {
             as={"h4"}
             size={"sm"}
             textAlign={"left"}
-            marginTop={{ base: 10, md: 5 }}
+            marginTop={5}
           >
             Add Room Details
           </Heading>
@@ -631,7 +631,7 @@ const Factory = () => {
 
         {/* ============================ add area details =============================== */}
         <Box textAlign={"left"}>
-          <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"}>
+          <Heading as={"h3"} marginTop={5} size={"sm"}>
             Add Area Details
           </Heading>
           <ButtonGroup

@@ -1367,7 +1367,7 @@ const FlatAppartmentUpdate = () => {
           <Box
             textAlign={"left"}
             display={"grid"}
-            marginTop={{ base: 10, md: 5 }}
+            marginTop={5}
             gap={2}
           >
             <Heading as={"h3"} size={"sm"} textAlign={"left"}>
@@ -1553,7 +1553,7 @@ const FlatAppartmentUpdate = () => {
             <Heading
               as={"h3"}
               size={"sm"}
-              marginTop={{ base: 10, md: 5 }}
+              marginTop={5}
               textAlign={"left"}
             >
               Ownership
@@ -1614,7 +1614,7 @@ const FlatAppartmentUpdate = () => {
             <Heading
               as={"h3"}
               size={"sm"}
-              marginTop={{ base: 10, md: 5 }}
+              marginTop={5}
               textAlign={"left"}
             >
               Price Details
@@ -1785,7 +1785,7 @@ const FlatAppartmentUpdate = () => {
           <Heading
             as={"h3"}
             size={"sm"}
-            marginTop={{ base: 10, md: 5 }}
+            marginTop={5}
             textAlign={"left"}
           >
             Add Description and Unique Features of your Property
@@ -1809,7 +1809,7 @@ const FlatAppartmentUpdate = () => {
               color={"black"}
               size={"sm"}
               textAlign={"left"}
-              marginTop={{ base: 10, md: 5 }}
+              marginTop={5}
             >
               Upload Your Property image
             </Heading>
@@ -1873,7 +1873,7 @@ const FlatAppartmentUpdate = () => {
           <Heading
             as={"h3"}
             size={"sm"}
-            marginTop={{ base: 10, md: 5 }}
+            marginTop={5}
             textAlign={"left"}
           >
             Add amenities/unique features
@@ -1887,7 +1887,7 @@ const FlatAppartmentUpdate = () => {
           <Heading
             as={"h3"}
             size={"sm"}
-            marginTop={{ base: 10, md: 5 }}
+            marginTop={5}
             textAlign={"left"}
           >
             Amenities
@@ -2374,7 +2374,7 @@ const FlatAppartmentUpdate = () => {
           <Heading
             as={"h3"}
             size={"sm"}
-            marginTop={{ base: 10, md: 5 }}
+            marginTop={5}
             textAlign={"left"}
           >
             Other Features

@@ -694,7 +694,7 @@ const HotelResort = () => {
         {/* ====================================== */}
         {/* add area details */}
         <Box textAlign={"left"}>
-          <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"}>
+          <Heading as={"h3"} marginTop={5} size={"sm"}>
             Add Area Details
           </Heading> 
           <ButtonGroup 
@@ -791,7 +791,7 @@ const HotelResort = () => {
         </Box>
         {/* furnish */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"}>
+          <Heading as={"h3"} marginTop={5} size={"sm"}>
             Furnishing (optional)
           </Heading>
           <Box>
@@ -1111,7 +1111,7 @@ const HotelResort = () => {
         <Heading
           as={"h3"}
           size={"sm"}
-          marginTop={{ base: 10, md: 5 }}
+          marginTop={5}
           textAlign={"left"}
         >
           Availability Status
@@ -1235,7 +1235,7 @@ const HotelResort = () => {
         <Heading
           as={"h3"}
           size={"sm"}
-          marginTop={{ base: 10, md: 5 }}
+          marginTop={5}
           textAlign={"left"}
         >
           Quality Rating
@@ -1329,7 +1329,7 @@ const HotelResort = () => {
         <Heading
           as={"h3"}
           size={"sm"}
-          marginTop={{ base: 10, md: 5 }}
+          marginTop={5}
           textAlign={"left"}
         >
           Ownership
@@ -1391,7 +1391,7 @@ const HotelResort = () => {
       <Heading
             as={"h3"}
             size={"sm"}
-            marginTop={{ base: 10, md: 5 }}
+            marginTop={5}
             textAlign={"left"}
           >
             Price Details 
@@ -1428,7 +1428,7 @@ const HotelResort = () => {
         <Heading
           as={"h3"}
           size={"sm"}
-          marginTop={{ base: 10, md: 5 }}
+          marginTop={5}
           textAlign={"left"}
         >
           Is it Pre-leased / Pre-Rented ?
@@ -1523,7 +1523,7 @@ const HotelResort = () => {
             color={"black"}
             size={"sm"}
             textAlign={"left"}
-            marginTop={{ base: 10, md: 5 }}
+            marginTop={5}
           >
             Upload Your Property image
           </Heading>
@@ -1600,7 +1600,7 @@ const HotelResort = () => {
 
       {/* =============================== Amenities =============================== */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
           Amenities
         </Heading>
         <Box>
@@ -1695,7 +1695,7 @@ const HotelResort = () => {
 
       {/* =============================== Property Features =============================== */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
           Property Features
         </Heading>
         <Box>
@@ -1756,7 +1756,7 @@ const HotelResort = () => {
       </Box>
       {/* =============================== Society/Building feature =============================== */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
           Society/Building feature
         </Heading>
         <Box>
@@ -1885,7 +1885,7 @@ const HotelResort = () => {
       </Box>
       {/* Additional Features */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
           Additional Features
         </Heading>
         <Box>
@@ -1915,7 +1915,7 @@ const HotelResort = () => {
       </Box>
       {/* Other Features */}
       <Box>
-        <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
           Other Features
         </Heading>
         <Box display={"grid"} textAlign={"left"} gap={2}>
@@ -1932,7 +1932,7 @@ const HotelResort = () => {
 
       {/* Property facing */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
           Property facing
         </Heading>
         <Box>
@@ -2029,7 +2029,7 @@ const HotelResort = () => {
 
       {/* type of flooring */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
           Type of flooring
         </Heading>
         <Box>

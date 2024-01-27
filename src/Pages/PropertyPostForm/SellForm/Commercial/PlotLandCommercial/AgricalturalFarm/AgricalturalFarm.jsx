@@ -1046,7 +1046,7 @@ const AgricalturalFarm = () => {
           <Heading
             as={"h3"}
             size={"sm"}
-            marginTop={{ base: 10, md: 5 }}
+            marginTop={5}
             textAlign={"left"}
           >
             Price Details

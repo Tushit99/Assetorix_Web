@@ -730,7 +730,7 @@ const CommercialShop = () => {
           <Box>
             {/* ============================ add area details ============================ */}
             <Box textAlign={"left"}>
-              <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"}>
+              <Heading as={"h3"} marginTop={5} size={"sm"}>
                 Add Area Details
               </Heading>
               <InputGroup
@@ -785,7 +785,7 @@ const CommercialShop = () => {
             </Box>
             {/* Shop facade size (Optional) */}
             <Box>
-              <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"}>
+              <Heading as={"h3"} marginTop={5} size={"sm"}>
                 Shop facade size (Optional)
               </Heading>
               <Box display={"flex"} w={"300px"} margin={"10px 0"}>
@@ -832,7 +832,7 @@ const CommercialShop = () => {
 
             {/* washrooms */}
             <Box display={"grid"}>
-              <Heading textAlign={"left"} marginTop={{ base: 10, md: 5 }} as={"h3"} size={"md"}>
+              <Heading textAlign={"left"} marginTop={5} as={"h3"} size={"md"}>
                 Washrooms
               </Heading>
               <Box
@@ -944,7 +944,7 @@ const CommercialShop = () => {
 
             {/* ============================ floor details ============================ */}
             <Box textAlign={"left"}>
-              <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
+              <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
                 Floor Details
               </Heading>
               <Box display={"flex"} alignItems={"center"}>
@@ -980,7 +980,7 @@ const CommercialShop = () => {
 
             {/* ============================ Located Near (optional) ============================ */}
             <Box className={style.optional_box}>
-              <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"}>
+              <Heading as={"h3"} marginTop={5} size={"sm"}>
                 Located Near (Optional)
               </Heading>
               <Box>
@@ -1016,7 +1016,7 @@ const CommercialShop = () => {
 
             {/* ============================ Parking Type ============================ */}
             <Box className={style.optional_box}>
-              <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"}>
+              <Heading as={"h3"} marginTop={5} size={"sm"}>
                 Parking Type
               </Heading>
               <Box>
@@ -1089,7 +1089,7 @@ const CommercialShop = () => {
               <Heading
                 as={"h3"}
                 size={"sm"}
-                marginTop={{ base: 10, md: 5 }} 
+                marginTop={5} 
                 textAlign={"left"}
               >
                 Availability Status
@@ -1128,7 +1128,7 @@ const CommercialShop = () => {
             {/* ================= Age of Property ============================ */}
             {availability == "Ready to move" && (
               <Box textAlign={"left"} className={style.optional_box}>
-                <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
+                <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
                   Age of Property
                 </Heading>
                 <Box className={style.grid}>
@@ -1190,7 +1190,7 @@ const CommercialShop = () => {
 
             {availability == "Under construction" && (
               <Box>
-                <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"} textAlign={"left"}>
+                <Heading as={"h3"} marginTop={5} size={"sm"} textAlign={"left"}>
                   Possession By
                 </Heading>
                 <Select
@@ -1209,7 +1209,7 @@ const CommercialShop = () => {
 
             {/* ============================ Suitable for business types ============================ */}
             <Box textAlign={"left"}>
-              <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"}>
+              <Heading as={"h3"} marginTop={5} size={"sm"}>
                 Suitable for business types
               </Heading>
               <Box>
@@ -1407,7 +1407,7 @@ const CommercialShop = () => {
             {/* ============================ Add pricing and details ============================ */}
             <Box>
               {/* OwnerShip detail */}
-              <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
+              <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
                 Ownership
               </Heading>
               <Box className={style.grid} gap={4}>
@@ -1469,7 +1469,7 @@ const CommercialShop = () => {
             {/* ============================ Price Details ============================ */}
             <Box>
               <Box>
-                <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
+                <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
                   Price Details
                 </Heading>
                 <Box display={"flex"} alignItems={"center"} gap={5}>
@@ -1595,7 +1595,7 @@ const CommercialShop = () => {
               <Heading
                 as={"h3"}
                 size={"sm"} 
-                marginTop={{ base: 10, md: 5 }} 
+                marginTop={5} 
                 textAlign={"left"}
               >
                 Is it Pre-leased / Pre-Rented ?
@@ -1677,7 +1677,7 @@ const CommercialShop = () => {
               <Heading
                 as={"h3"}
                 size={"md"}
-                marginTop={{ base: 10, md: 5 }}
+                marginTop={5}
                 textAlign={"left"}
               >
                 Investors tend to look for (Optional)
@@ -1723,7 +1723,7 @@ const CommercialShop = () => {
                   color={"black"}
                   size={"sm"}
                   textAlign={"left"}
-                  marginTop={{ base: 10, md: 5 }}
+                  marginTop={5}
                 >
                   Upload Your Property image
                 </Heading>
@@ -1782,7 +1782,7 @@ const CommercialShop = () => {
 
             {/* ============================ Property unique discription ============================ */}
             <Box>
-              <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
+              <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
                 Add Description and Unique Features of your Property
               </Heading>
               <Textarea
@@ -1808,7 +1808,7 @@ const CommercialShop = () => {
           
           {/* ============================ Amenities ============================ */}
           <Box className={style.optional_box}>
-            <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
+            <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
               Amenities
             </Heading>
             <Box>
@@ -1929,7 +1929,7 @@ const CommercialShop = () => {
 
           {/* ============================ Property Features ============================ */}
           <Box className={style.optional_box}>
-            <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
+            <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
               Property Features
             </Heading>
             <Box>
@@ -1993,7 +1993,7 @@ const CommercialShop = () => {
 
           {/* ============================ Society/Building feature ============================ */}
           <Box className={style.optional_box}>
-            <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"} textAlign={"left"}>
+            <Heading as={"h3"} marginTop={5} size={"sm"} textAlign={"left"}>
               Society/Building feature
             </Heading>
             <Box>
@@ -2102,7 +2102,7 @@ const CommercialShop = () => {
 
           {/* ============================ Additional Features ============================ */}
           <Box className={style.optional_box}>
-            <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
+            <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
               Additional Features
             </Heading> 
             <Box>
@@ -2122,7 +2122,7 @@ const CommercialShop = () => {
 
           {/* ============================ Other Features ============================ */}
           <Box>
-            <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
+            <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
               Other Features
             </Heading>
             <Box display={"grid"} textAlign={"left"} gap={2}>
@@ -2147,7 +2147,7 @@ const CommercialShop = () => {
 
           {/* ============================ Fire safety mesures ============================ */}
           <Box textAlign={"left"} className={style.optional_box}>
-            <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} >
+            <Heading as={"h3"} size={"sm"} marginTop={5} >
               Fire safety measures include
             </Heading>
             <Box>
@@ -2194,7 +2194,7 @@ const CommercialShop = () => {
 
           {/* ============================ Property facing ============================ */}
           <Box className={style.optional_box}>
-            <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
+            <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
               Property facing
             </Heading>
             <Box>
@@ -2291,7 +2291,7 @@ const CommercialShop = () => {
 
           {/* ============================ Width of facing road ============================ */}
           <Box className={style.optional_box}>
-            <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
+            <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
               Width of facing road
             </Heading>
             <Box display={"flex"} gap={"20px"} w={"300px"}>

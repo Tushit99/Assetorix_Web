@@ -574,7 +574,7 @@ const CoWorkingspace = () => {
         {/* ====================================== */}
         {/* Washrooms */}
         <Box  display={"grid"}>
-          <Heading textAlign={"left"} marginTop={{ base: 10, md: 5 }} as={"h3"} size={"sm"}>
+          <Heading textAlign={"left"} marginTop={5} as={"h3"} size={"sm"}>
             Washrooms
           </Heading>
           <Box margin={"10px 0 0 0"} textAlign={"left"}>  
@@ -590,7 +590,7 @@ const CoWorkingspace = () => {
         </Box>
         {/* add area details */}
         <Box textAlign={"left"} >
-          <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"}>
+          <Heading as={"h3"} marginTop={5} size={"sm"}>
             Add Area Details
           </Heading>
           <InputGroup
@@ -643,7 +643,7 @@ const CoWorkingspace = () => {
 
         {/* Availability status */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Availability Status
           </Heading>
           <Box className={style.grid}>
@@ -681,7 +681,7 @@ const CoWorkingspace = () => {
             <Heading
               as={"h3"}
               size={"sm"} 
-              marginTop={{ base: 10, md: 5 }} 
+              marginTop={5} 
               textAlign={"left"}
             >
               Age of Property
@@ -740,7 +740,7 @@ const CoWorkingspace = () => {
             <Heading
               as={"h3"}
               size={"sm"} 
-              marginTop={{ base: 10, md: 5 }}
+              marginTop={5}
               textAlign={"left"}
             >
               Possession By
@@ -762,7 +762,7 @@ const CoWorkingspace = () => {
         <Box>
           
           {/* OwnerShip detail */}
-          <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"} textAlign={"left"}>
+          <Heading as={"h3"} marginTop={5} size={"sm"} textAlign={"left"}>
             Ownership
           </Heading>
           <Box className={style.grid} gap={4}>
@@ -820,7 +820,7 @@ const CoWorkingspace = () => {
           <Heading
             as={"h3"}
             size={"sm"}
-            marginTop={{ base: 10, md: 5 }}
+            marginTop={5}
             textAlign={"left"}
           >
             Price Details
@@ -897,7 +897,7 @@ const CoWorkingspace = () => {
           <Heading
             as={"h4"}
             size={"sm"}
-            marginTop={{ base: 10, md: 5 }}
+            marginTop={5}
             fontWeight={700}
             textAlign={"left"}
           >
@@ -975,7 +975,7 @@ const CoWorkingspace = () => {
         {/* Pre-leased / Pre-Ented */}
         <Box className={style.optional_box}>
           <Box>
-            <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
+            <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
               Is it Pre-leased / Pre-Rented ?
             </Heading>
             <Text> for properties that are already rented out </Text>
@@ -1011,7 +1011,7 @@ const CoWorkingspace = () => {
           <Heading
             as={"h4"}
             size={"sm"}
-            marginTop={{ base: 10, md: 5 }}
+            marginTop={5}
             fontWeight={700}
             textAlign={"left"}
           >
@@ -1072,7 +1072,7 @@ const CoWorkingspace = () => {
         </Box>
 
         <Box textAlign={"left"}>
-          <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Expected Annual Returns
           </Heading>
           <Heading as={"h3"} fontWeight={"400"} size={"xs"} textAlign={"left"}>
@@ -1095,7 +1095,7 @@ const CoWorkingspace = () => {
               color={"black"}
               size={"sm"}
               textAlign={"left"}
-              marginTop={{ base: 10, md: 5 }}
+              marginTop={5}
             >
               {" "}
               Upload Your Property image{" "}
@@ -1152,7 +1152,7 @@ const CoWorkingspace = () => {
 
         {/* property Description */}
         <Box>
-          <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Add Description and Unique Features of your Property
           </Heading> 
           <Textarea
@@ -1169,7 +1169,7 @@ const CoWorkingspace = () => {
 
       {/* Amenities */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
+        <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
           Amenities
         </Heading>
         <Box>
@@ -1335,7 +1335,7 @@ const CoWorkingspace = () => {
 
       {/* Property Features */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"} textAlign={"left"}>
+        <Heading as={"h3"} marginTop={5} size={"sm"} textAlign={"left"}>
           Property Features
         </Heading>
         <Box>
@@ -1408,7 +1408,7 @@ const CoWorkingspace = () => {
 
       {/* Society/Building feature */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"} textAlign={"left"}>
+        <Heading as={"h3"} marginTop={5} size={"sm"} textAlign={"left"}>
           Society/Building feature
         </Heading>
         <Box>
@@ -1483,7 +1483,7 @@ const CoWorkingspace = () => {
 
       {/* Additional Features */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} marginTop={{ base: 10, md: 5 }} size={"sm"} textAlign={"left"}>
+        <Heading as={"h3"} marginTop={5} size={"sm"} textAlign={"left"}>
           Additional Features
         </Heading>
         <Box>
@@ -1547,7 +1547,7 @@ const CoWorkingspace = () => {
 
       {/* Other Features */}
       <Box>
-        <Heading size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
+        <Heading size={"sm"} marginTop={5} textAlign={"left"}>
           Other Features
         </Heading>
         <Box display={"flex"} alignItems={"center"} justifyContent={"left"}>
@@ -1664,7 +1664,7 @@ const CoWorkingspace = () => {
         size={"xs"}
         color={"rgb(255, 52, 52)"}
         fontWeight={200}
-        marginTop={{ base: 10, md: 5 }}
+        marginTop={5}
         textAlign={"left"}
       >
         *Please provide correct information, otherwise your listing might get

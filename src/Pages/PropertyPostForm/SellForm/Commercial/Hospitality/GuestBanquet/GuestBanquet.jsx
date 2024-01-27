@@ -678,7 +678,7 @@ const GuestBanquet = () => {
       <Box marginTop={8}>
         <Heading
           as={"h4"}
-          marginTop={{ base: 10, md: 5 }}
+          marginTop={5}
           size={"sm"}
           textAlign={"left"}
         >
@@ -731,7 +731,7 @@ const GuestBanquet = () => {
         {/* ====================================== */}
         {/* add area details */}
         <Box textAlign={"left"} padding={"10px 0"}>
-          <Heading as={"h4"} marginTop={{ base: 10, md: 5 }} size={"sm"}>
+          <Heading as={"h4"} marginTop={5} size={"sm"}>
             Add Area Details
           </Heading>
           <ButtonGroup
@@ -786,7 +786,7 @@ const GuestBanquet = () => {
 
         {/* other Room  */}
         <Box className={style.optional_box}>
-          <Heading as={"h4"} marginTop={{ base: 10, md: 5 }} size={"sm"}>
+          <Heading as={"h4"} marginTop={5} size={"sm"}>
             Other rooms (optional)
           </Heading>
           <Box margin={"2px 0"}>
@@ -1149,7 +1149,7 @@ const GuestBanquet = () => {
           <Heading
             as={"h4"}
             size={"sm"}
-            marginTop={{ base: 10, md: 5 }}
+            marginTop={5}
             textAlign={"left"}
           >
             Availability Status
@@ -1273,7 +1273,7 @@ const GuestBanquet = () => {
           <Heading
             as={"h3"}
             size={"sm"}
-            marginTop={{ base: 10, md: 5 }}
+            marginTop={5}
             textAlign={"left"}
           >
             Quality Rating
@@ -1369,7 +1369,7 @@ const GuestBanquet = () => {
           <Heading
             as={"h3"}
             size={"sm"}
-            marginTop={{ base: 10, md: 5 }}
+            marginTop={5}
             textAlign={"left"}
           >
             Ownership
@@ -1431,7 +1431,7 @@ const GuestBanquet = () => {
           <Heading
             as={"h3"}
             size={"sm"}
-            marginTop={{ base: 10, md: 5 }}
+            marginTop={5}
             textAlign={"left"}
           >
             Price Details 
@@ -1568,7 +1568,7 @@ const GuestBanquet = () => {
 
         {/* ============================ Is it Pre-leased / Pre-Rented ? ============================ */}
         <Box textAlign={"left"}>
-          <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Is it Pre-leased / Pre-Rented ?
           </Heading>
           <Heading
@@ -1737,7 +1737,7 @@ const GuestBanquet = () => {
           <Heading
             as={"h3"}
             size={"sm"}
-            marginTop={{ base: 10, md: 5 }}
+            marginTop={5}
             textAlign={"left"}
           >
             Amenities
@@ -1839,7 +1839,7 @@ const GuestBanquet = () => {
           <Heading
             as={"h3"}
             size={"sm"}
-            marginTop={{ base: 10, md: 5 }}
+            marginTop={5}
             textAlign={"left"}
           >
             Property Features
@@ -1907,7 +1907,7 @@ const GuestBanquet = () => {
           <Heading
             as={"h3"}
             size={"sm"}
-            marginTop={{ base: 10, md: 5 }}
+            marginTop={5}
             textAlign={"left"}
           >
             Society/Building feature
@@ -2041,7 +2041,7 @@ const GuestBanquet = () => {
           <Heading
             as={"h3"}
             size={"sm"}
-            marginTop={{ base: 10, md: 5 }}
+            marginTop={5}
             textAlign={"left"}
           >
             Additional Features
@@ -2076,7 +2076,7 @@ const GuestBanquet = () => {
           <Heading
             as={"h3"}
             size={"sm"}
-            marginTop={{ base: 10, md: 5 }}
+            marginTop={5}
             textAlign={"left"}
           >
             Other Features
@@ -2098,7 +2098,7 @@ const GuestBanquet = () => {
           <Heading
             as={"h3"}
             size={"sm"}
-            marginTop={{ base: 10, md: 5 }}
+            marginTop={5}
             textAlign={"left"}
           >
             Property facing
@@ -2201,7 +2201,7 @@ const GuestBanquet = () => {
         <Heading
           as={"h3"}
           size={"sm"}
-          marginTop={{ base: 10, md: 5 }}
+          marginTop={5}
           textAlign={"left"}
         >
           Width of facing road
@@ -2272,7 +2272,7 @@ const GuestBanquet = () => {
 
       {/* location advantage */}
       <Box className={style.optional_box}>
-        <Heading size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
+        <Heading size={"sm"} marginTop={5} textAlign={"left"}>
           Location Advantages
         </Heading>
         <Box marginTop={"4px"}>
