@@ -616,9 +616,9 @@ const Coworkingspace = () => {
                 <Heading size={"lg"} color={"black"}>
                     Where is your property located?
                 </Heading>
-                <Heading size={"sm"} color={"black"}>
-                    An accurate location helps you connect with the right buyers.
-                </Heading>
+                <Heading size={"sm"} textAlign={"left"}>
+          Location Detail
+        </Heading>
 
                 <Select
                     fontSize={"md"}

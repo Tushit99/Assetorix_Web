@@ -625,7 +625,7 @@ const IndependentBuilderRent = () => {
       {/* property location */}
       <Box className={style.location_form}>
         <Heading size={"lg"}>
-          {" "}
+          
           Where is your Independent / builder Floor located?
         </Heading>
         <Heading size={"sm"} textAlign={"left"}>
