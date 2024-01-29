@@ -2090,7 +2090,8 @@ const BareShell = () => {
             LIF(s)
           </button>
         </Box>
-      </Box>
+      </Box> 
+
       {/* location advantage (near to which place) */}
       <Box className={style.optional_box}>
         <Heading size={"sm"} margin={"10px 0 4px 0"} textAlign={"left"}>
@@ -2188,7 +2189,8 @@ const BareShell = () => {
             Close to highway
           </button>
         </Box>
-      </Box>
+      </Box> 
+
       {/* warning line */}
       <Heading
         as={"h5"}
@@ -2200,7 +2202,8 @@ const BareShell = () => {
       >
         *Please provide correct information, otherwise your listing might get
         blocked
-      </Heading>
+      </Heading> 
+      
       {/* form submit button */}
       {isClicked && <Loading />}
       <Button
