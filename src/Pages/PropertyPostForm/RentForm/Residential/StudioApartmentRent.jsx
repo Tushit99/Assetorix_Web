@@ -5,8 +5,7 @@ import {
   ButtonGroup,
   Heading,
   Input,
-  NumberInput,
-  NumberInputField,
+  InputRightElement,  
   Select,
   Text,
   Textarea,
@@ -595,10 +594,12 @@ const StudioApartmentRent = () => {
     <form onSubmit={handleSubmitData}>
       {/* property location */}
       <Box className={style.location_form}>
-        <Heading size={"lg"}>Where is your 1 RK / Studio Apartment located?</Heading>
+        <Heading size={"lg"}>
+          Where is your 1 RK / Studio Apartment located?
+        </Heading>
         <Heading size={"sm"} textAlign={"left"}>
           Location Detail
-        </Heading> 
+        </Heading>
 
         <Input
           type="text"
@@ -698,7 +699,7 @@ const StudioApartmentRent = () => {
             <Text> No. of Bedrooms </Text>
             <Input
               type="text"
-              variant="flushed"
+              variant={"outline"}
               maxLength={"2"}
               onChange={(e) => setBedRoom(NumericString(e.target.value))}
               value={bedroom}
@@ -709,7 +710,7 @@ const StudioApartmentRent = () => {
             <Text> No. of Bathrooms </Text>
             <Input
               type="text"
-              variant="flushed"
+              variant={"outline"}
               maxLength={"2"}
               onChange={(e) => setBathroom(NumericString(e.target.value))}
               value={bathroom}
@@ -720,7 +721,7 @@ const StudioApartmentRent = () => {
             <Text> No. of Balconies </Text>
             <Input
               type="text"
-              variant="flushed"
+              variant={"outline"}
               maxLength={"2"}
               onChange={(e) => setBalcony(NumericString(e.target.value))}
               value={balconey}
@@ -729,56 +730,60 @@ const StudioApartmentRent = () => {
           </Box>
         </Box>
         {/* ====================================== */}
-        {/* ============================ add area details ============================ */}
-        <Box textAlign={"left"} padding={"10px 0"}>
-          <Heading as={"h3"} margin={"5px 0"} size={"sm"}>
+        {/* add area details */}
+        <Box textAlign={"left"}>
+          <Heading as={"h3"} marginTop={5} size={"sm"}>
             Add Area Details
           </Heading>
-          <Text margin={"5px 0"}> Atleast one area type is mandatory </Text>
-          <ButtonGroup
-            className={style.select_land}
-            size="sm"
+          <InputGroup
+            w={300}
+            size="md"
+            marginTop={2}
             isAttached
             variant="outline"
           >
             <Input
               type="text"
-              maxLength={"6"}
               value={plotArea}
+              placeholder="Enter area detail"
+              w={200}
+              maxLength={"6"}
               onChange={(e) => {
-                // areaCalucation();
                 setPlotArea(NumericString(e.target.value));
               }}
               required
             />
-            <select
-              value={areaPer}
-              onChange={(e) => {
-                setAreaPer(e.target.value);
-              }}
-              className={style.select}
-              required
-            >
-              <option value="sq.ft">sq.ft</option>
-              <option value="sq.yards">sq.yards</option>
-              <option value="sq.m">sq.m</option>
-              <option value="acres">acres</option>
-              <option value="marla">marla</option>
-              <option value="cents">cents</option>
-              <option value="bigha">bigha</option>
-              <option value="kottah">kottah</option>
-              <option value="kanal">kanal</option>
-              <option value="grounds">grounds</option>
-              <option value="ares">ares</option>
-              <option value="biswa">biswa</option>
-              <option value="guntha">guntha</option>
-              <option value="aankadam">aankadam</option>
-              <option value="hectares">hectares</option>
-              <option value="rood">rood</option>
-              <option value="chataks">chataks</option>
-              <option value="perch">perch</option>
-            </select>
-          </ButtonGroup>
+            <InputRightElement width={100}>
+              <Select
+                value={areaPer}
+                borderRadius={0}
+                onChange={(e) => {
+                  setAreaPer(e.target.value);
+                }}
+                className={style.select}
+                required
+              >
+                <option value="sq.ft">sq.ft</option>
+                <option value="sq.yards">sq.yards</option>
+                <option value="sq.m">sq.m</option>
+                <option value="acres">acres</option>
+                <option value="marla">marla</option>
+                <option value="cents">cents</option>
+                <option value="bigha">bigha</option>
+                <option value="kottah">kottah</option>
+                <option value="kanal">kanal</option>
+                <option value="grounds">grounds</option>
+                <option value="ares">ares</option>
+                <option value="biswa">biswa</option>
+                <option value="guntha">guntha</option>
+                <option value="aankadam">aankadam</option>
+                <option value="hectares">hectares</option>
+                <option value="rood">rood</option>
+                <option value="chataks">chataks</option>
+                <option value="perch">perch</option>
+              </Select>
+            </InputRightElement>
+          </InputGroup>
         </Box>
         {/* ============================ other Room ============================ */}
         <Box
@@ -1208,62 +1213,48 @@ const StudioApartmentRent = () => {
         </Box>
 
         {/* ========================= floor details ========================= */}
-        <Box textAlign={"left"}>
+        <Box textAlign={"left"} display={"grid"} marginTop={5} gap={2}>
           <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Floor Details
           </Heading>
-          <Text textAlign={"left"} margin={"10px 0"}>
-            Total no of floors and your floor details
-          </Text>
           <Box display={"flex"} alignItems={"center"} gap={5}>
-            <Input
-              type="text"
-              placeholder="Total no of Floor"
-              maxLength={"2"}
-              w={300}
-              variant={"flushed"}
-              onChange={(e) => {
-                const nowval = NumericString(e.target.value) > 90;
-                if (nowval) {
-                  toast({
-                    title: "Maximum floor count: 90",
-                    status: "error",
-                    duration: 2000,
-                    position: "top-right",
-                  });
-                } else {
-                  setTotalFloors(NumericString(e.target.value));
-                }
-              }}
-              required
-              value={totalfloors}
-            />
-            <Select
-              id="floorSelectTag"
-              variant={"flushed"}
-              onChange={(e) => setFloorOn(e.target.value)}
-              value={floorOn}
-              w={180}
-              borderRadius={0}
-              _hover={{
-                backgroundColor: "rgb(255, 255, 255)",
-                borderBottom: "1px solid blue",
-                borderLeft: "0",
-                borderRight: "0",
-                borderTop: "0",
-              }}
-              borderTop={"0"}
-              borderLeft={"0"}
-              borderBottom={"1px solid blue"}
-              backgroundColor={"rgb(255, 255, 255)"}
-            >
-              <option value="Ground">Ground</option>
-              <option value="Basement">Basement</option>
-              <option value="Lower Ground">Lower Ground</option>
-              {Array.from(Array(Number(totalfloors)).keys()).map((e) => {
-                return <option value={e + 1}>{e + 1}</option>;
-              })}
-            </Select>
+            <InputGroup w={{ base: 300, md: 400 }}>
+              <Input
+                type="text"
+                value={totalfloors}
+                maxLength={"2"}
+                placeholder={"Enter no. of floors"}
+                onChange={(e) => {
+                  let val = NumericString(e.target.value);
+                  const nowval = val > 90;
+                  if (nowval) {
+                    toast({
+                      title: "Maximum floor count: 90",
+                      status: "error",
+                      duration: 2000,
+                      position: "top-right",
+                    });
+                  } else {
+                    setTotalFloors(val);
+                  }
+                }}
+                required
+                w={250}
+              />
+              <Select
+                onChange={(e) => setFloorOn(e.target.value)}
+                value={floorOn}
+                borderRadius={0}
+                width={150}
+              >
+                <option value="Ground">Ground</option>
+                <option value="Basement">Basement</option>
+                <option value="Lower Ground">Lower Ground</option>
+                {Array.from(Array(Number(totalfloors)).keys()).map((e) => {
+                  return <option value={e + 1}>{e + 1}</option>;
+                })}
+              </Select>
+            </InputGroup>
           </Box>
         </Box>
 
@@ -1531,8 +1522,8 @@ const StudioApartmentRent = () => {
           </Box>
         </Box>
 
-        {/* ============================ Security deposit ============================ */}
-        <Box className={style.optional_box}>
+         {/* ============================ Security deposit ============================ */}
+         <Box className={style.optional_box}>
           <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Security deposit
           </Heading>
@@ -1542,7 +1533,6 @@ const StudioApartmentRent = () => {
               className={securityDeposit == "Fixed" ? style.setbtn : style.btn}
               onClick={handleSecurityDeposit}
             >
-              
               Fixed
             </button>
             <button
@@ -1552,7 +1542,6 @@ const StudioApartmentRent = () => {
               }
               onClick={handleSecurityDeposit}
             >
-              
               Multiple of Rent
             </button>
             <button
@@ -1560,11 +1549,10 @@ const StudioApartmentRent = () => {
               className={securityDeposit == "None" ? style.setbtn : style.btn}
               onClick={handleSecurityDeposit}
             >
-              
               None
             </button>
           </Box>
-          <Box display={securityDeposit == "None" ? "none" : "block"}>
+          <Box display={(securityDeposit == "Fixed" || securityDeposit == "Multiple of Rent"  ) ? "block" : "none"}>
             <Input
               maxLength={"9"}
               type="text"
@@ -1588,6 +1576,7 @@ const StudioApartmentRent = () => {
             Duration of agreement
           </Heading>
           <Select
+            w={{ base: "100%", md: 300 }} 
             onChange={(e) => setagreementDuration(e.target.value)}
             value={agreementDuration}
           >
@@ -1611,7 +1600,6 @@ const StudioApartmentRent = () => {
               className={noticePeriod == "None" ? style.setbtn : style.btn}
               value={"None"}
             >
-              
               None
             </button>
             <button
@@ -1619,7 +1607,6 @@ const StudioApartmentRent = () => {
               className={noticePeriod == "1 month" ? style.setbtn : style.btn}
               value={"1 month"}
             >
-              
               1 month
             </button>
             <button
@@ -1627,7 +1614,6 @@ const StudioApartmentRent = () => {
               className={noticePeriod == "2 months" ? style.setbtn : style.btn}
               value={"2 months"}
             >
-              
               2 month
             </button>
             <button
@@ -1635,7 +1621,6 @@ const StudioApartmentRent = () => {
               className={noticePeriod == "3 months" ? style.setbtn : style.btn}
               value={"3 months"}
             >
-              
               3 month
             </button>
             <button
@@ -1643,7 +1628,6 @@ const StudioApartmentRent = () => {
               className={noticePeriod == "4 months" ? style.setbtn : style.btn}
               value={"4 months"}
             >
-              
               4 month
             </button>
             <button
@@ -1651,7 +1635,6 @@ const StudioApartmentRent = () => {
               className={noticePeriod == "5 months" ? style.setbtn : style.btn}
               value={"5 months"}
             >
-              
               5 month
             </button>
             <button
@@ -1659,7 +1642,6 @@ const StudioApartmentRent = () => {
               className={noticePeriod == "6 months" ? style.setbtn : style.btn}
               value={"6 months"}
             >
-              
               6 month
             </button>
           </Box>
@@ -1675,7 +1657,6 @@ const StudioApartmentRent = () => {
             textAlign={"left"}
             margin={"10px 0"}
           >
-            
             Upload Your Property image
           </Heading>
         </Box>
@@ -1696,7 +1677,6 @@ const StudioApartmentRent = () => {
                   role="button"
                   onClick={selectFiles}
                 >
-                  
                   Browse
                 </Text>
               </>
@@ -1739,8 +1719,8 @@ const StudioApartmentRent = () => {
         </Heading>
         <Textarea
           height={140}
-          value={desc} 
-          placeholder="Add Description"  
+          value={desc}
+          placeholder="Add Description"
           onChange={(e) => {
             let my_cleantext = CleanInputText(e.target.value);
             setDesc(my_cleantext);
@@ -2307,8 +2287,8 @@ const StudioApartmentRent = () => {
         </Heading>
         <Box>
           <Select
-            w={300}
-            variant={"flushed"}
+            w={{base:"100%",md:300}}
+            variant={"outline"}
             onChange={(e) => setFlooring(e.target.value)}
             value={flooring}
           >
@@ -2331,34 +2311,40 @@ const StudioApartmentRent = () => {
         </Box>
       </Box>
 
-      {/* ============================ Width of facing road ==================================== */}
-      <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+        {/* ============================ Width of facing road ==================================== */}
+        <Box className={style.optional_box}>
+        <Heading
+          as={"h3"}
+          size={"sm"}
+          marginTop={4} 
+          textAlign={"left"}
+        >
           Width of facing road
         </Heading>
-        <Box display={"flex"} gap={"20px"} w={"300px"}>
+        <InputGroup w={{ base: "100%", md: "340px" }}>
           <Input
             type="text"
+            variant={"outline"}
             maxLength={4}
-            variant="flushed"
             flex={1}
+            placeholder="Enter Facing Width"
             required
             value={facingwidth}
             onChange={(e) => {
-              e.preventDefault();
+              e.preventDefault(); 
               setFacingWidth(NumericString(e.target.value));
             }}
           />
           <Select
             flex={1}
-            variant={"flushed"}
+            borderRadius={0}
             onChange={(e) => setFacing(e.target.value)}
             value={facing}
           >
             <option value="Meter"> Meter </option>
             <option value="Feet"> Feet </option>
           </Select>
-        </Box>
+        </InputGroup>
       </Box>
 
       {/* ============================ Location Advantages ==================================== */}

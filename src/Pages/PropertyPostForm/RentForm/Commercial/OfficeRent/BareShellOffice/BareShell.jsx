@@ -544,9 +544,8 @@ const BareShell = () => {
                 </Heading>
 
                 <Select
-                    fontSize={"md"}
-                    padding={"0 10px"}
-                    variant="flushed"
+                    fontSize={"md"} 
+                    variant="flushed" 
                     as={"select"}
                     onChange={(e) => setLocatedInside(e.target.value)}
                     value={locatedInside}
@@ -557,8 +556,7 @@ const BareShell = () => {
                 </Select>
 
                 <Select
-                    fontSize={"md"}
-                    padding={"0 10px"}
+                    fontSize={"md"} 
                     variant="flushed"
                     as={"select"}
                     onChange={(e) => setZoneType(e.target.value)}
@@ -571,17 +569,17 @@ const BareShell = () => {
                         Transport and Communication
                     </option>
                     <option value="Public Utilities">Public Utilities</option>
-                    <option value="Public and Semi Public use">
+                    <option value="Public and Semi Public use"> 
                         Public and Semi Public use
                     </option>
                 </Select>
                 <Input
                     type="text"
-                    placeholder={"Enter pincode"}
-                    padding={"0 10px"}
+                    placeholder={"Enter pincode"} 
                     required
                     fontSize={"md"}
                     value={pincode}
+                    variant="flushed" 
                     onChange={handlepinfetch}
                 />
                 <Input

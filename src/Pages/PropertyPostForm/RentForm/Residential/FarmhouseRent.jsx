@@ -37,9 +37,9 @@ const FarmhouseRent = () => {
   const [state, setState] = useState("");
   const [locality, setLocality] = useState("");
   const [houseNo, setHouseNo] = useState("");
-  const [bedroom, setBedRoom] = useState(0);
-  const [bathroom, setBathroom] = useState(0);
-  const [balconey, setBalcony] = useState(0);
+  const [bedroom, setBedRoom] = useState("");
+  const [bathroom, setBathroom] = useState("");
+  const [balconey, setBalcony] = useState("");
   const [parking, setParking] = useState(0);
   const [openparking, setOpenparking] = useState(0);
   const [light, setLight] = useState(0);
@@ -606,7 +606,7 @@ const FarmhouseRent = () => {
         <Heading size={"lg"}>Where is your Farmhouse located?</Heading>
         <Heading size={"sm"} textAlign={"left"}>
           Location Detail
-        </Heading> 
+        </Heading>
 
         <Input
           type="text"
@@ -631,7 +631,8 @@ const FarmhouseRent = () => {
         <Input
           type="text"
           placeholder={"Enter pincode"}
-          maxLength={"8"}
+          maxLength={"6"}
+          variant="flushed"
           required
           fontSize={"sm"}
           value={pincode}
@@ -689,9 +690,8 @@ const FarmhouseRent = () => {
         />
       </Box>
       {/* Property Detail */}
-      <Box marginTop={12}>
-        
-        <Heading as={"h4"} size={"sm"} margin={"0 0 30px 0 "}>
+      <Box>
+        <Heading as={"h4"} size={"sm"} textAlign={"left"}>
           Add Room Details
         </Heading>
         {/* Room Detail */}
@@ -700,7 +700,7 @@ const FarmhouseRent = () => {
             <Text> No. of Bedrooms </Text>
             <Input
               type="text"
-              variant="flushed"
+              variant={"outline"}
               maxLength={"2"}
               onChange={(e) => setBedRoom(NumericString(e.target.value))}
               value={bedroom}
@@ -711,7 +711,7 @@ const FarmhouseRent = () => {
             <Text> No. of Bathrooms </Text>
             <Input
               type="text"
-              variant="flushed"
+              variant={"outline"}
               onChange={(e) => setBathroom(NumericString(e.target.value))}
               value={bathroom}
               required
@@ -721,7 +721,7 @@ const FarmhouseRent = () => {
             <Text> No. of Balconies </Text>
             <Input
               type="text"
-              variant="flushed"
+              variant={"outline"}
               onChange={(e) => setBalcony(NumericString(e.target.value))}
               value={balconey}
               required
@@ -1213,15 +1213,12 @@ const FarmhouseRent = () => {
           <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Floor Details
           </Heading>
-          <Text textAlign={"left"} margin={"10px 0"}>
-            Total no of floors and your floor details
-          </Text>
           <Box display={"flex"} alignItems={"center"} gap={5}>
             <Input
               type="text"
               placeholder="Total no of Floor"
               w={300}
-              variant={"flushed"}
+              variant={"outline"}
               onChange={(e) => {
                 const nowval = e.target.value > 90;
                 if (nowval) {
@@ -1515,7 +1512,6 @@ const FarmhouseRent = () => {
               className={securityDeposit == "Fixed" ? style.setbtn : style.btn}
               onClick={handleSecurityDeposit}
             >
-              
               Fixed
             </button>
             <button
@@ -1525,7 +1521,6 @@ const FarmhouseRent = () => {
               }
               onClick={handleSecurityDeposit}
             >
-              
               Multiple of Rent
             </button>
             <button
@@ -1533,15 +1528,21 @@ const FarmhouseRent = () => {
               className={securityDeposit == "None" ? style.setbtn : style.btn}
               onClick={handleSecurityDeposit}
             >
-              
               None
             </button>
           </Box>
-          <Box display={securityDeposit == "None" ? "none" : "block"}>
+          <Box
+            display={
+              securityDeposit == "Fixed" ||
+              securityDeposit == "Multiple of Rent"
+                ? "block"
+                : "none"
+            }
+          >
             <Input
+              maxLength={"9"}
               type="text"
               w={300}
-              maxLength={"9"}
               value={depositAmount}
               onChange={handleDepositAmount}
               placeholder={`${
@@ -1561,6 +1562,7 @@ const FarmhouseRent = () => {
             Duration of agreement
           </Heading>
           <Select
+            width={{ base: "100%", md: 300 }}
             onChange={(e) => setagreementDuration(e.target.value)}
             value={agreementDuration}
           >
@@ -1584,7 +1586,6 @@ const FarmhouseRent = () => {
               className={noticePeriod == "None" ? style.setbtn : style.btn}
               value={"None"}
             >
-              
               None
             </button>
             <button
@@ -1592,7 +1593,6 @@ const FarmhouseRent = () => {
               className={noticePeriod == "1 month" ? style.setbtn : style.btn}
               value={"1 month"}
             >
-              
               1 month
             </button>
             <button
@@ -1600,7 +1600,6 @@ const FarmhouseRent = () => {
               className={noticePeriod == "2 months" ? style.setbtn : style.btn}
               value={"2 months"}
             >
-              
               2 month
             </button>
             <button
@@ -1608,7 +1607,6 @@ const FarmhouseRent = () => {
               className={noticePeriod == "3 months" ? style.setbtn : style.btn}
               value={"3 months"}
             >
-              
               3 month
             </button>
             <button
@@ -1616,7 +1614,6 @@ const FarmhouseRent = () => {
               className={noticePeriod == "4 months" ? style.setbtn : style.btn}
               value={"4 months"}
             >
-              
               4 month
             </button>
             <button
@@ -1624,7 +1621,6 @@ const FarmhouseRent = () => {
               className={noticePeriod == "5 months" ? style.setbtn : style.btn}
               value={"5 months"}
             >
-              
               5 month
             </button>
             <button
@@ -1632,16 +1628,13 @@ const FarmhouseRent = () => {
               className={noticePeriod == "6 months" ? style.setbtn : style.btn}
               value={"6 months"}
             >
-              
               6 month
             </button>
           </Box>
         </Box>
 
         {/* ========================= Add pricing and details ========================= */}
-        <Box>
-          
-        </Box>
+        <Box></Box>
       </Box>
 
       {/* image Drag and Drop area  */}
@@ -1653,7 +1646,6 @@ const FarmhouseRent = () => {
             textAlign={"left"}
             margin={"10px 0"}
           >
-            
             Upload Your Property image
           </Heading>
         </Box>
@@ -1674,7 +1666,6 @@ const FarmhouseRent = () => {
                   role="button"
                   onClick={selectFiles}
                 >
-                  
                   Browse
                 </Text>
               </>
@@ -1717,8 +1708,8 @@ const FarmhouseRent = () => {
         </Heading>
         <Textarea
           height={140}
-          value={desc} 
-          placeholder="Add Description"  
+          value={desc}
+          placeholder="Add Description"
           onChange={(e) => {
             let my_cleantext = CleanInputText(e.target.value);
             setDesc(my_cleantext);
@@ -2311,16 +2302,22 @@ const FarmhouseRent = () => {
 
       {/* ============================ Width of facing road ==================================== */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+        <Heading
+          as={"h3"}
+          size={"sm"}
+          marginTop={{ base: 10, md: 5 }}
+          textAlign={"left"}
+        >
           Width of facing road
         </Heading>
-        <Box display={"flex"} gap={"20px"} w={"300px"}>
+        <InputGroup w={{ base: "100%", md: "340px" }}>
           <Input
             type="text"
-            variant="flushed"
+            variant={"outline"}
+            maxLength={4}
+            placeholder="Enter Facing Width"
             flex={1}
             required
-            maxLength={4}
             value={facingwidth}
             onChange={(e) => {
               e.preventDefault();
@@ -2329,14 +2326,14 @@ const FarmhouseRent = () => {
           />
           <Select
             flex={1}
-            variant={"flushed"}
+            borderRadius={0}
             onChange={(e) => setFacing(e.target.value)}
             value={facing}
           >
             <option value="Meter"> Meter </option>
             <option value="Feet"> Feet </option>
           </Select>
-        </Box>
+        </InputGroup>
       </Box>
 
       {/* ============================ Location Advantages ==================================== */}

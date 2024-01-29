@@ -1235,12 +1235,12 @@ const ServicedApartmentRent = () => {
         <Box textAlign={"left"}>
           <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Floor Details
-          </Heading> 
-          <Box display={"flex"} width={{base:"100%",md:300}}>
-            <Input 
+          </Heading>
+          <Box display={"flex"} width={{ base: "100%", md: 300 }}>
+            <Input
               type="text"
               placeholder="Total no of Floor"
-              maxLength={"2"} 
+              maxLength={"2"}
               variant={"outline"}
               onChange={(e) => {
                 const nowval = e.target.value > 90;
@@ -1262,8 +1262,8 @@ const ServicedApartmentRent = () => {
               id="floorSelectTag"
               variant={"outline"}
               onChange={(e) => setFloorOn(e.target.value)}
-              value={floorOn} 
-              borderRadius={0} 
+              value={floorOn}
+              borderRadius={0}
             >
               <option value="Ground">Ground</option>
               <option value="Basement">Basement</option>
@@ -1602,7 +1602,7 @@ const ServicedApartmentRent = () => {
               None
             </button>
           </Box>
-          <Box display={securityDeposit == "None" ? "none" : "block"}>
+          <Box display={(securityDeposit == "Fixed" || securityDeposit == "Multiple of Rent"  ) ? "block" : "none"}>
             <Input
               maxLength={"9"}
               type="text"
@@ -1626,6 +1626,7 @@ const ServicedApartmentRent = () => {
             Duration of agreement
           </Heading>
           <Select
+            w={{ base: "100%", md: 300 }} 
             onChange={(e) => setagreementDuration(e.target.value)}
             value={agreementDuration}
           >
@@ -2469,7 +2470,7 @@ const ServicedApartmentRent = () => {
           </Select>
         </InputGroup>
       </Box>
-      
+
       {/* ============================ Location Advantages ==================================== */}
       <Box className={style.optional_box}>
         <Heading size={"sm"} margin={"10px 0 4px 0"} textAlign={"left"}>

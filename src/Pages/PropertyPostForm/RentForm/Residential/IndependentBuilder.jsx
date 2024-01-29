@@ -1608,7 +1608,7 @@ const IndependentBuilderRent = () => {
               None
             </button>
           </Box>
-          <Box display={securityDeposit == "None" ? "none" : "block"}>
+          <Box display={(securityDeposit == "Fixed" || securityDeposit == "Multiple of Rent"  ) ? "block" : "none"}>
             <Input
               maxLength={"9"}
               type="text"

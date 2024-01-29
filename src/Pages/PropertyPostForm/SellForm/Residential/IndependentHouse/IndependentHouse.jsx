@@ -625,7 +625,7 @@ const IndependentHouse = () => {
           value={houseNo}
           onChange={(e) => setHouseNo(WordandNumber(e.target.value))}
           fontSize={"md"}
-          variant="flushed"
+          variant={"outline"}
         />
         <Input
           type="text" 
@@ -635,7 +635,7 @@ const IndependentHouse = () => {
           fontSize={"md"}
           value={appartment}
           onChange={(e) => setApartment(WordandNumber(e.target.value))}
-          variant="flushed"
+          variant={"outline"}
         />
         <Input
           type="text"
@@ -645,7 +645,7 @@ const IndependentHouse = () => {
           fontSize={"md"}
           value={pincode}
           onChange={handlepinfetch}
-          variant="flushed" 
+          variant={"outline"} 
         />
         <Input
           type="text"
