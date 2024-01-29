@@ -524,7 +524,6 @@ const BareShell = () => {
         <Heading size={"sm"} textAlign={"left"}>
           Location Detail
         </Heading>
-
         <Select
           fontSize={"sm"}
           variant="flushed"
@@ -536,7 +535,6 @@ const BareShell = () => {
           <option value="Business Park"> Business Park </option>
           <option value="Other"> Other </option>
         </Select>
-
         <Select
           fontSize={"sm"}
           variant="flushed"
@@ -555,7 +553,7 @@ const BareShell = () => {
             Public and Semi Public use
           </option>
         </Select>
-        <Input
+        <Input 
           type="text"
           placeholder={"Enter pincode"}
           required
@@ -986,7 +984,7 @@ const BareShell = () => {
           </Heading>
           <Box>
             <Select
-              width={{ base: "100%", md: 300 }} 
+              width={{ base: "100%", md: 300 }}
               onChange={(e) => setFlooring(e.target.value)}
               value={flooring}
             >
@@ -1526,9 +1524,8 @@ const BareShell = () => {
                 type="text"
                 value={pricedetail}
                 required
-                placeholder={`${
-                  isCountry.country == "india" ? "₹" : "$"
-                } Expectes Rent`}
+                placeholder={`${isCountry.country == "india" ? "₹" : "$"
+                  } Expectes Rent`}
                 onChange={(e) => {
                   setPricedetail(NumericString(e.target.value));
                 }}
@@ -1789,9 +1786,9 @@ const BareShell = () => {
             <Menu>
               <MenuButton
                 variant={"outline"}
-                as={Button} 
-                w={{base:"100%",md:300}}
-                textAlign={"left"}  
+                as={Button}
+                w={{ base: "100%", md: 300 }}
+                textAlign={"left"}
                 fontWeight={"medium"}
                 rightIcon={<ChevronDownIcon />}
               >
