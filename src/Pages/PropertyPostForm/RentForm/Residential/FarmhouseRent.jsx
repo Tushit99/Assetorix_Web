@@ -1717,7 +1717,8 @@ const FarmhouseRent = () => {
         </Heading>
         <Textarea
           height={140}
-          value={desc}
+          value={desc} 
+          placeholder="Add Description"  
           onChange={(e) => {
             let my_cleantext = CleanInputText(e.target.value);
             setDesc(my_cleantext);

@@ -4,6 +4,7 @@ import {
   Button,
   ButtonGroup,
   Heading,
+  InputRightElement,
   Input,
   Select,
   Text,
@@ -623,7 +624,10 @@ const IndependentBuilderRent = () => {
     <form onSubmit={handleSubmitData}>
       {/* property location */}
       <Box className={style.location_form}>
-        <Heading size={"lg"}> Where is your Independent / builder Floor located?</Heading> 
+        <Heading size={"lg"}>
+          {" "}
+          Where is your Independent / builder Floor located?
+        </Heading>
         <Heading size={"sm"} textAlign={"left"}>
           Location Detail
         </Heading>
@@ -711,11 +715,7 @@ const IndependentBuilderRent = () => {
       </Box>
       {/* Property Detail */}
       <Box>
-        <Heading
-          as={"h4"}
-          size={"sm"}
-          textAlign={"left"} 
-        >
+        <Heading as={"h4"} size={"sm"} textAlign={"left"}>
           Add Room Details
         </Heading>
         {/* Room Detail */}
@@ -728,7 +728,7 @@ const IndependentBuilderRent = () => {
               maxLength={"2"}
               onChange={(e) => setBedRoom(NumericString(e.target.value))}
               value={bedroom}
-              required 
+              required
             />
           </Box>
           <Box textAlign={"left"}>
@@ -754,59 +754,63 @@ const IndependentBuilderRent = () => {
             />
           </Box>
         </Box>
-        {/* ====================================== */}
+        {/* =========================== add area details =========================== */}
         {/* add area details */}
-        <Box textAlign={"left"} padding={"10px 0"}>
-          <Heading as={"h3"} margin={"5px 0"} size={"sm"}>
+        <Box textAlign={"left"}>
+          <Heading as={"h3"} marginTop={5} size={"sm"}>
             Add Area Details
           </Heading>
-          <Text margin={"5px 0"}> Atleast one area type is mandatory </Text>
-          <ButtonGroup
-            className={style.select_land}
-            size="sm"
+          <InputGroup  
+            w={300}
+            size="md"
+            marginTop={2}
             isAttached
             variant="outline"
           >
             <Input
               type="text"
-              maxLength={"6"}
               value={plotArea}
+              placeholder="Enter area detail"
+              w={200}
+              maxLength={"6"}
               onChange={(e) => {
-                // areaCalucation();
                 setPlotArea(NumericString(e.target.value));
               }}
               required
             />
-            <select
-              value={areaPer}
-              onChange={(e) => {
-                setAreaPer(e.target.value);
-              }}
-              className={style.select}
-              required
-            >
-              <option value="sq.ft">sq.ft</option>
-              <option value="sq.yards">sq.yards</option>
-              <option value="sq.m">sq.m</option>
-              <option value="acres">acres</option>
-              <option value="marla">marla</option>
-              <option value="cents">cents</option>
-              <option value="bigha">bigha</option>
-              <option value="kottah">kottah</option>
-              <option value="kanal">kanal</option>
-              <option value="grounds">grounds</option>
-              <option value="ares">ares</option>
-              <option value="biswa">biswa</option>
-              <option value="guntha">guntha</option>
-              <option value="aankadam">aankadam</option>
-              <option value="hectares">hectares</option>
-              <option value="rood">rood</option>
-              <option value="chataks">chataks</option>
-              <option value="perch">perch</option>
-            </select>
-          </ButtonGroup>
+            <InputRightElement width={100}>
+              <Select
+                value={areaPer}
+                borderRadius={0}
+                onChange={(e) => {
+                  setAreaPer(e.target.value);
+                }}
+                className={style.select}
+                required
+              >
+                <option value="sq.ft">sq.ft</option>
+                <option value="sq.yards">sq.yards</option>
+                <option value="sq.m">sq.m</option>
+                <option value="acres">acres</option>
+                <option value="marla">marla</option>
+                <option value="cents">cents</option>
+                <option value="bigha">bigha</option>
+                <option value="kottah">kottah</option>
+                <option value="kanal">kanal</option>
+                <option value="grounds">grounds</option>
+                <option value="ares">ares</option>
+                <option value="biswa">biswa</option>
+                <option value="guntha">guntha</option>
+                <option value="aankadam">aankadam</option>
+                <option value="hectares">hectares</option>
+                <option value="rood">rood</option>
+                <option value="chataks">chataks</option>
+                <option value="perch">perch</option>
+              </Select>
+            </InputRightElement>
+          </InputGroup>
         </Box>
-        {/* other Room  */}
+        {/* ==================================== other Room ===============================  */}
         <Box
           padding={"10px 0"}
           display={"grid"}
@@ -1237,17 +1241,13 @@ const IndependentBuilderRent = () => {
         <Box textAlign={"left"}>
           <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Floor Details
-          </Heading>
-          <Text textAlign={"left"} margin={"10px 0"}>
-            Total no of floors and your floor details
-          </Text>
-          <Box display={"flex"} alignItems={"center"} gap={5}>
-            <Input
+          </Heading> 
+          <Box display={"flex"} width={{base:"100%",md:300}}>
+            <Input 
               type="text"
               placeholder="Total no of Floor"
-              maxLength={"2"}
-              w={300}
-              variant={"flushed"}
+              maxLength={"2"} 
+              variant={"outline"}
               onChange={(e) => {
                 const nowval = e.target.value > 90;
                 if (nowval) {
@@ -1266,22 +1266,10 @@ const IndependentBuilderRent = () => {
             />
             <Select
               id="floorSelectTag"
-              variant={"flushed"}
+              variant={"outline"}
               onChange={(e) => setFloorOn(e.target.value)}
-              value={floorOn}
-              w={180}
-              borderRadius={0}
-              _hover={{
-                backgroundColor: "rgb(255, 255, 255)",
-                borderBottom: "1px solid blue",
-                borderLeft: "0",
-                borderRight: "0",
-                borderTop: "0",
-              }}
-              borderTop={"0"}
-              borderLeft={"0"}
-              borderBottom={"1px solid blue"}
-              backgroundColor={"rgb(255, 255, 255)"}
+              value={floorOn} 
+              borderRadius={0} 
             >
               <option value="Ground">Ground</option>
               <option value="Basement">Basement</option>
@@ -1601,7 +1589,6 @@ const IndependentBuilderRent = () => {
               className={securityDeposit == "Fixed" ? style.setbtn : style.btn}
               onClick={handleSecurityDeposit}
             >
-              
               Fixed
             </button>
             <button
@@ -1611,7 +1598,6 @@ const IndependentBuilderRent = () => {
               }
               onClick={handleSecurityDeposit}
             >
-              
               Multiple of Rent
             </button>
             <button
@@ -1619,7 +1605,6 @@ const IndependentBuilderRent = () => {
               className={securityDeposit == "None" ? style.setbtn : style.btn}
               onClick={handleSecurityDeposit}
             >
-              
               None
             </button>
           </Box>
@@ -1647,6 +1632,7 @@ const IndependentBuilderRent = () => {
             Duration of agreement
           </Heading>
           <Select
+            w={{ base: "100%", md: 300 }}
             onChange={(e) => setagreementDuration(e.target.value)}
             value={agreementDuration}
           >
@@ -1670,7 +1656,6 @@ const IndependentBuilderRent = () => {
               className={noticePeriod == "None" ? style.setbtn : style.btn}
               value={"None"}
             >
-              
               None
             </button>
             <button
@@ -1678,7 +1663,6 @@ const IndependentBuilderRent = () => {
               className={noticePeriod == "1 month" ? style.setbtn : style.btn}
               value={"1 month"}
             >
-              
               1 month
             </button>
             <button
@@ -1686,7 +1670,6 @@ const IndependentBuilderRent = () => {
               className={noticePeriod == "2 months" ? style.setbtn : style.btn}
               value={"2 months"}
             >
-              
               2 month
             </button>
             <button
@@ -1694,7 +1677,6 @@ const IndependentBuilderRent = () => {
               className={noticePeriod == "3 months" ? style.setbtn : style.btn}
               value={"3 months"}
             >
-              
               3 month
             </button>
             <button
@@ -1702,7 +1684,6 @@ const IndependentBuilderRent = () => {
               className={noticePeriod == "4 months" ? style.setbtn : style.btn}
               value={"4 months"}
             >
-              
               4 month
             </button>
             <button
@@ -1710,7 +1691,6 @@ const IndependentBuilderRent = () => {
               className={noticePeriod == "5 months" ? style.setbtn : style.btn}
               value={"5 months"}
             >
-              
               5 month
             </button>
             <button
@@ -1718,7 +1698,6 @@ const IndependentBuilderRent = () => {
               className={noticePeriod == "6 months" ? style.setbtn : style.btn}
               value={"6 months"}
             >
-              
               6 month
             </button>
           </Box>
@@ -1792,7 +1771,6 @@ const IndependentBuilderRent = () => {
             textAlign={"left"}
             margin={"10px 0"}
           >
-            
             Upload Your Property image
           </Heading>
         </Box>
@@ -1813,7 +1791,6 @@ const IndependentBuilderRent = () => {
                   role="button"
                   onClick={selectFiles}
                 >
-                  
                   Browse
                 </Text>
               </>
@@ -1850,13 +1827,11 @@ const IndependentBuilderRent = () => {
       <Box>
         <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
           Add Description and Unique Features of your Property
-        </Heading>
-        <Heading as={"h3"} size={"xs"} margin={"10px 0"} textAlign={"left"}>
-          Adding description will increase your listing visibility
-        </Heading>
+        </Heading> 
         <Textarea
           height={140}
           value={desc}
+          placeholder="Add Description"
           onChange={(e) => {
             let my_cleantext = CleanInputText(e.target.value);
             setDesc(my_cleantext);
@@ -2388,7 +2363,7 @@ const IndependentBuilderRent = () => {
         <Box>
           <Select
             w={300}
-            variant={"flushed"}
+            variant={"outline"}
             onChange={(e) => setFlooring(e.target.value)}
             value={flooring}
           >
@@ -2412,15 +2387,17 @@ const IndependentBuilderRent = () => {
       </Box>
 
       {/* ============================ Width of facing road ==================================== */}
-      <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+       {/* Width of facing road */}
+       <Box className={style.optional_box}>
+        <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
           Width of facing road
         </Heading>
-        <Box display={"flex"} gap={"20px"} w={"300px"}>
+        <InputGroup w={{base:"100%",md:"340px"}}> 
           <Input
             type="text"
+            variant={"outline"}
             maxLength={4}
-            variant="flushed"
+            placeholder="Enter Facing Width" 
             flex={1}
             required
             value={facingwidth}
@@ -2430,15 +2407,15 @@ const IndependentBuilderRent = () => {
             }}
           />
           <Select
-            flex={1}
-            variant={"flushed"}
+            flex={1} 
+            borderRadius={0}
             onChange={(e) => setFacing(e.target.value)}
             value={facing}
           >
             <option value="Meter"> Meter </option>
             <option value="Feet"> Feet </option>
           </Select>
-        </Box>
+        </InputGroup>
       </Box>
 
       {/* ============================ Location Advantages ==================================== */}
