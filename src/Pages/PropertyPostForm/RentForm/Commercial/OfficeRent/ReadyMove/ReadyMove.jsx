@@ -602,7 +602,7 @@ const ReadyMove = () => {
           type="text"
           placeholder={"Enter pincode"}
           variant={"flushed"}
-          required 
+          required
           value={pincode}
           onChange={handlepinfetch}
         />
@@ -747,13 +747,13 @@ const ReadyMove = () => {
           </Heading>
           <Box>
             <Input
-              type="text" 
-              width={{base:"100%",md:300}}
-              placeholder="No. of Meeting Rooms" 
+              type="text"
+              width={{ base: "100%", md: 300 }}
+              placeholder="No. of Meeting Rooms"
               value={meetingRoom}
               onChange={(e) => setMeetingRoom(NumericString(e.target.value))}
             />
-          </Box> 
+          </Box>
         </Box>
         {/* Washrooms */}
         <Box display={"grid"}>
@@ -863,7 +863,6 @@ const ReadyMove = () => {
         {/* Conference Room */}
         <Box padding={"10px 0 8px 0"}>
           <Heading as={"h3"} size={"sm"} textAlign={"left"}>
-            
             Conference Room
           </Heading>
           <Box display={"flex"} gap={10} padding={"12px 0 0 0"}>
@@ -897,7 +896,6 @@ const ReadyMove = () => {
         {/* Reception Area */}
         <Box padding={"10px 0 8px 0"}>
           <Heading as={"h3"} size={"sm"} textAlign={"left"}>
-            
             Reception Area
           </Heading>
           <Box display={"flex"} gap={10} padding={"12px 0 0 0"}>
@@ -931,7 +929,6 @@ const ReadyMove = () => {
         {/* Pantry Type */}
         <Box padding={"10px 0 8px 0"}>
           <Heading as={"h3"} size={"sm"} textAlign={"left"}>
-            
             Pantry Type
           </Heading>
           <Box display={"flex"} gap={10} padding={"12px 0"}>
@@ -1083,7 +1080,6 @@ const ReadyMove = () => {
               onClick={handlefireSafty}
               value={"Fire Extinguisher"}
             >
-              
               Fire Extinguisher
             </button>
             <button
@@ -1093,7 +1089,6 @@ const ReadyMove = () => {
               onClick={handlefireSafty}
               value={"Fire Sensors"}
             >
-              
               Fire Sensors
             </button>
             <button
@@ -1103,7 +1098,6 @@ const ReadyMove = () => {
               onClick={handlefireSafty}
               value={"Sprinklers"}
             >
-              
               Sprinklers
             </button>
             <button
@@ -1113,7 +1107,6 @@ const ReadyMove = () => {
               onClick={handlefireSafty}
               value={"Fire Hose"}
             >
-              
               Fire Hose
             </button>
           </Box>
@@ -1177,7 +1170,6 @@ const ReadyMove = () => {
                     onChange={handleFloorNumber}
                     value={"Basement"}
                   >
-                    
                     Basement
                   </Checkbox>
                   <Checkbox
@@ -1185,7 +1177,6 @@ const ReadyMove = () => {
                     onChange={handleFloorNumber}
                     value={"Lower Ground"}
                   >
-                    
                     Lower Ground
                   </Checkbox>
                   <Checkbox
@@ -1193,7 +1184,6 @@ const ReadyMove = () => {
                     onChange={handleFloorNumber}
                     value={"Ground"}
                   >
-                    
                     Ground
                   </Checkbox>
                   {Array.from(Array(Number(totalfloors)).keys()).map((e, i) => {
@@ -1204,7 +1194,6 @@ const ReadyMove = () => {
                         onChange={handleFloorNumber}
                         value={e + 1}
                       >
-                        
                         {e + 1}
                       </Checkbox>
                     );
@@ -1291,7 +1280,6 @@ const ReadyMove = () => {
                 <AddIcon fontSize={"12px"} />
               </button>
               <Text margin={"0 10px"} flex={4}>
-                
                 Passenger Lifts
               </Text>
             </Box>
@@ -1302,7 +1290,6 @@ const ReadyMove = () => {
                   console.log(modernLifts);
                 }}
               >
-                
                 Modern lifts (Optional)
               </Checkbox>
             </Box>
@@ -1336,7 +1323,6 @@ const ReadyMove = () => {
               <AddIcon fontSize={"12px"} />
             </button>
             <Text margin={"0 10px"} flex={4}>
-              
               Service Lifts
             </Text>
           </Box>
@@ -1696,7 +1682,6 @@ const ReadyMove = () => {
               className={securityDeposit == "Fixed" ? style.setbtn : style.btn}
               onClick={handleSecurityDeposit}
             >
-              
               Fixed
             </button>
             <button
@@ -1706,7 +1691,6 @@ const ReadyMove = () => {
               }
               onClick={handleSecurityDeposit}
             >
-              
               Multiple of Rent
             </button>
             <button
@@ -1714,7 +1698,6 @@ const ReadyMove = () => {
               className={securityDeposit == "" ? style.setbtn : style.btn}
               onClick={handleSecurityDeposit}
             >
-              
               None
             </button>
           </Box>
@@ -1725,13 +1708,11 @@ const ReadyMove = () => {
               maxLength={8}
               value={depositAmount}
               onChange={handleDepositAmount}
-              placeholder={`${
-                securityDeposit == "Fixed" ? "Deposit Value" : ""
-              } ${
-                securityDeposit == "Multiple of Rent"
+              placeholder={`${securityDeposit == "Fixed" ? "Deposit Value" : ""
+                } ${securityDeposit == "Multiple of Rent"
                   ? "No. of months (Max 30)"
                   : ""
-              }`}
+                }`}
             />
           </Box>
         </Box>
@@ -1815,7 +1796,6 @@ const ReadyMove = () => {
                 occupancyCertificate == "Yes" ? style.setbtn : style.btn
               }
             >
-              
               Yes
             </button>
             <button
@@ -1828,13 +1808,12 @@ const ReadyMove = () => {
                 occupancyCertificate == "No" ? style.setbtn : style.btn
               }
             >
-              
               No
             </button>
           </Box>
         </Box>
 
-        {/* office previously used for */} 
+        {/* office previously used for */}
         <Box className={style.optional_box}>
           <Box>
             <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
@@ -1844,11 +1823,11 @@ const ReadyMove = () => {
           </Box>
           <Box>
             <Menu>
-              <MenuButton 
-                as={Button} 
-                width={300} 
-                variant={"outline"} 
-                textAlign={"left"} 
+              <MenuButton
+                as={Button}
+                width={300}
+                variant={"outline"}
+                textAlign={"left"}
                 rightIcon={<ChevronDownIcon />}
               >
                 Select
@@ -1861,7 +1840,6 @@ const ReadyMove = () => {
                     FileSystemHandle(e.target.value);
                   }}
                 >
-                  
                   Backend Office
                 </Checkbox>
                 <Checkbox
@@ -1871,7 +1849,6 @@ const ReadyMove = () => {
                     FileSystemHandle(e.target.value);
                   }}
                 >
-                  
                   CA Office
                 </Checkbox>
                 <Checkbox
@@ -1881,7 +1858,6 @@ const ReadyMove = () => {
                     FileSystemHandle(e.target.value);
                   }}
                 >
-                  
                   Fronted Office
                 </Checkbox>
                 <Checkbox
@@ -1891,7 +1867,6 @@ const ReadyMove = () => {
                     FileSystemHandle(e.target.value);
                   }}
                 >
-                  
                   Small Office Purpose
                 </Checkbox>
                 <Checkbox
@@ -1901,7 +1876,6 @@ const ReadyMove = () => {
                     FileSystemHandle(e.target.value);
                   }}
                 >
-                  
                   Traders Office
                 </Checkbox>
                 <Checkbox
@@ -1911,7 +1885,6 @@ const ReadyMove = () => {
                     FileSystemHandle(e.target.value);
                   }}
                 >
-                  
                   Advocate Office
                 </Checkbox>
               </MenuList>
@@ -1928,7 +1901,6 @@ const ReadyMove = () => {
               textAlign={"left"}
               margin={"10px 0"}
             >
-              
               Upload Your Property image
             </Heading>
           </Box>
@@ -1949,7 +1921,6 @@ const ReadyMove = () => {
                     role="button"
                     onClick={selectFiles}
                   >
-                    
                     Browse
                   </Text>
                 </>
@@ -1980,8 +1951,8 @@ const ReadyMove = () => {
               ))}
             </Box>
           </Box>
-        </Box>
-
+        </Box>  
+        
         {/* property Description */}
         <Box>
           <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
