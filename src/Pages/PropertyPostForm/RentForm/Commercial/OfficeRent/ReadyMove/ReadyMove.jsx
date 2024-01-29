@@ -1952,7 +1952,7 @@ const ReadyMove = () => {
             </Box>
           </Box>
         </Box>  
-        
+
         {/* property Description */}
         <Box>
           <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
@@ -2224,7 +2224,8 @@ const ReadyMove = () => {
             Close to highway
           </button>
         </Box>
-      </Box>
+      </Box> 
+
       {/* warning line */}
       <Heading
         as={"h5"}
@@ -2236,7 +2237,8 @@ const ReadyMove = () => {
       >
         *Please provide correct information, otherwise your listing might get
         blocked
-      </Heading>
+      </Heading> 
+      
       {/* form submit button */}
       {isClicked && <Loading />}
       <Button
