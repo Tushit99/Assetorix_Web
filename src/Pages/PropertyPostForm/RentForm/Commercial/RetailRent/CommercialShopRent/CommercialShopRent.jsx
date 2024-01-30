@@ -2431,8 +2431,8 @@ const CommercialShopRent = () => {
           <Box className={style.optional_box}>
             <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
               Width of facing road
-            </Heading>
-            <InputGroup isAttached width={{base:"100%",md:300}}>
+            </Heading> 
+            <Box display={"flex"} width={{base:"100%",md:300}}>
               <Input 
                 type="text"
                 variant="outline" 
@@ -2452,7 +2452,7 @@ const CommercialShopRent = () => {
                 <option value="Meter"> Meter </option>
                 <option value="Feet"> Feet </option>
               </Select>
-            </InputGroup>
+            </Box>
           </Box>
 
           {/* ============================ location advantage ============================ */}

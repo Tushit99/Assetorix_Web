@@ -607,9 +607,7 @@ const CommercialShowRoomRent = () => {
   return (
     <div>
       <Box>
-        <Heading size={"sm"}>
-          Your shop is located inside
-        </Heading>
+        <Heading size={"sm"}>Your shop is located inside</Heading>
         <Box display={"flex"} flexWrap={"wrap"} gap={4}>
           <button
             value={"Mall"}
@@ -667,12 +665,14 @@ const CommercialShowRoomRent = () => {
         <form onSubmit={handleSubmitData}>
           {/* property location */}
           <Box className={style.location_form}>
-            <Heading size={"lg"} textAlign={"center"} >Where is your Commercial Showrooms located?</Heading>
+            <Heading size={"lg"} textAlign={"center"}>
+              Where is your Commercial Showrooms located?
+            </Heading>
             <Heading size={"sm"} textAlign={"left"}>
-              Location Detail 
-            </Heading> 
+              Location Detail
+            </Heading>
             <Input
-              type="text" 
+              type="text"
               required
               placeholder={`${located} (optional)`}
               value={type}
@@ -682,7 +682,7 @@ const CommercialShowRoomRent = () => {
             />
             <Input
               type="text"
-              placeholder={"Enter pincode"} 
+              placeholder={"Enter pincode"}
               required
               variant="flushed"
               fontSize={"sm"}
@@ -690,7 +690,7 @@ const CommercialShowRoomRent = () => {
               onChange={handlepinfetch}
             />
             <Input
-              type="text" 
+              type="text"
               required
               placeholder="Enter Locality"
               list="browsers"
@@ -710,7 +710,7 @@ const CommercialShowRoomRent = () => {
             )}
 
             <Input
-              type="text" 
+              type="text"
               required
               placeholder="Enter City"
               fontSize={"sm"}
@@ -719,7 +719,7 @@ const CommercialShowRoomRent = () => {
               variant="flushed"
             />
             <Input
-              type="text" 
+              type="text"
               required
               placeholder="Enter State"
               value={state}
@@ -728,7 +728,7 @@ const CommercialShowRoomRent = () => {
               variant="flushed"
             />
             <Input
-              type="text" 
+              type="text"
               required
               placeholder="Enter Country"
               value={country}
@@ -1261,8 +1261,8 @@ const CommercialShowRoomRent = () => {
                 <Menu>
                   <MenuButton
                     as={Button}
-                    borderRadius={0} 
-                    variant={"outline"} 
+                    borderRadius={0}
+                    variant={"outline"}
                     rightIcon={<ChevronDownIcon />}
                   >
                     Select business type
@@ -1670,15 +1670,15 @@ const CommercialShowRoomRent = () => {
               <Heading
                 as={"h4"}
                 size={"sm"}
-                fontWeight={700} 
-                textAlign={"left"} 
+                fontWeight={700}
+                textAlign={"left"}
               >
                 Lock - in Period
               </Heading>
               <Input
                 type="text"
                 width={{ base: "100%", md: 300 }}
-                placeholder="Enter Lock-in Period" 
+                placeholder="Enter Lock-in Period"
                 variant={"outline"}
                 value={lockPeriod}
                 onChange={(e) => setlockPeriod(NumericString(e.target.value))}
@@ -1775,7 +1775,7 @@ const CommercialShowRoomRent = () => {
                 textAlign={"left"}
               >
                 Add Description and Unique Features of your Property
-              </Heading> 
+              </Heading>
               <Textarea
                 height={140}
                 value={desc}
@@ -1792,11 +1792,11 @@ const CommercialShowRoomRent = () => {
               Add amenities/unique features
             </Heading>
             <Heading
-              as={"h5"} 
-              placeholder="Add Description" 
-              fontWeight={400} 
-              size={"xs"} 
-              textAlign={"left"} 
+              as={"h5"}
+              placeholder="Add Description"
+              fontWeight={400}
+              size={"xs"}
+              textAlign={"left"}
             >
               All fields on this page are optional
             </Heading>
@@ -2283,23 +2283,23 @@ const CommercialShowRoomRent = () => {
           {/* ============================ Width of facing road ============================ */}
           <Box className={style.optional_box}>
             <Heading as={"h3"} size={"sm"} textAlign={"left"}>
-              Width of facing road 
-            </Heading> 
-            <Box display={"flex"} width={{base:"100%",md:300}}>
-              <Input 
-                type="text" 
-                maxLength={6} 
-                variant="outline"  
-                required 
-                placeholder="Enter road width"  
+              Width of facing road
+            </Heading>
+            <Box display={"flex"} width={{ base: "100%", md: 300 }}>
+              <Input
+                type="text"
+                maxLength={6}
+                variant="outline"
+                required
+                placeholder="Enter road width"
                 value={facingwidth}
                 onChange={(e) => {
                   e.preventDefault();
                   setFacingWidth(NumericString(e.target.value));
                 }}
-              /> 
-              <Select  
-                borderRadius={0}  
+              />
+              <Select
+                borderRadius={0}
                 onChange={(e) => setFacing(e.target.value)}
                 value={facing}
               >
