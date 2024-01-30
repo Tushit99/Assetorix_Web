@@ -752,11 +752,12 @@ const CommercialShopRent = () => {
                 Add Area Details
               </Heading>
               <Text margin={"5px 0"}> Carpet area is mandatory </Text>
-              <Box display={"grid"}>
+              <Box display={"grid"} gap={0}>
                 <InputGroup
-                  className={style.select_land} 
-                  isAttached 
-                  width={{base:"100%",md:300}}
+                  className={style.select_land}
+                  isAttached
+                  margin={0}
+                  width={{ base: "100%", md: 300 }}
                   variant="outline"
                 >
                   <Input
@@ -770,6 +771,7 @@ const CommercialShopRent = () => {
                     placeholder={"Carpet Area"}
                   />
                   <Select
+                    borderRadius={0}
                     variant={"outline"}
                     value={areaPer}
                     onChange={(e) => {
@@ -799,9 +801,9 @@ const CommercialShopRent = () => {
                   </Select>
                 </InputGroup>
                 <InputGroup
-                  className={style.select_land} 
+                  className={style.select_land}
                   isAttached
-                  width={{base:"100%",md:300}} 
+                  width={{ base: "100%", md: 300 }}
                   variant="outline"
                 >
                   <Input
@@ -814,9 +816,10 @@ const CommercialShopRent = () => {
                     placeholder={"Build-up Area"}
                   />
                   <Select
+                    borderRadius={0}
                     variant={"outline"}
                     value={buildupAreaUnit}
-                    onChange={(e) => { 
+                    onChange={(e) => {
                       setBuildupAreaUnit(e.target.value);
                     }}
                     className={style.select}
