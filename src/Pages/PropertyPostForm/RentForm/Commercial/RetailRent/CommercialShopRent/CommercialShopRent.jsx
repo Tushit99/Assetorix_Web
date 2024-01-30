@@ -1021,10 +1021,11 @@ const CommercialShopRent = () => {
               <Text textAlign={"left"} margin={"10px 0"}>
                 Total no of floors
               </Text>
-              <Box display={"flex"} alignItems={"center"} gap={5}>
+              <InputGroup isAttached width={{ base: "100%", md: 300 }}>
                 <Input
                   type="text"
                   value={totalfloors}
+                  placeholder="Enter total no. floors"
                   onChange={(e) => {
                     const nowval = e.target.value > 90;
                     if (nowval) {
@@ -1043,22 +1044,11 @@ const CommercialShopRent = () => {
                 />
                 <Select
                   id="floorSelectTag"
-                  variant="filled"
+                  variant={"outline"}
                   onChange={(e) => setFloorOn(e.target.value)}
                   value={floorOn}
                   w={180}
                   borderRadius={0}
-                  _hover={{
-                    backgroundColor: "rgb(255, 255, 255)",
-                    borderBottom: "1px solid blue",
-                    borderLeft: "0",
-                    borderRight: "0",
-                    borderTop: "0",
-                  }}
-                  borderTop={"0"}
-                  borderLeft={"0"}
-                  borderBottom={"1px solid blue"}
-                  backgroundColor={"rgb(255, 255, 255)"}
                 >
                   <option value="Ground">Ground</option>
                   <option value="Basement">Basement</option>
@@ -1067,7 +1057,7 @@ const CommercialShopRent = () => {
                     return <option value={e + 1}>{e + 1}</option>;
                   })}
                 </Select>
-              </Box>
+              </InputGroup>
             </Box>
 
             {/* ============================ Located Near (optional) ============================ */}
@@ -1337,7 +1327,8 @@ const CommercialShopRent = () => {
                 <Menu>
                   <MenuButton
                     as={Button}
-                    borderRadius={0}
+                    borderRadius={0} 
+                    variant={"outline"}
                     rightIcon={<ChevronDownIcon />}
                   >
                     Select business type
@@ -1815,10 +1806,11 @@ const CommercialShopRent = () => {
               </Heading>
               <Input
                 type="text"
+                width={{ base: "100%", md: 300 }}
                 value={lockPeriod}
                 placeholder="Enter Number of Months"
                 onChange={(e) => setlockPeriod(e.target.value)}
-                variant={"filled"}
+                variant={"outline"}
               />
             </Box>
 
@@ -1927,6 +1919,7 @@ const CommercialShopRent = () => {
               </Heading>
               <Textarea
                 height={140}
+                placeholder="Add Description" 
                 value={desc}
                 onChange={(e) => {
                   let my_cleantext = CleanInputText(e.target.value);
@@ -2440,11 +2433,10 @@ const CommercialShopRent = () => {
             <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
               Width of facing road
             </Heading>
-            <Box display={"flex"} gap={"20px"} w={"300px"}>
+            <InputGroup isAttached>
               <Input
                 type="text"
-                variant="flushed"
-                flex={1}
+                variant="flushed" 
                 maxLength={4}
                 required
                 value={facingwidth}
@@ -2453,15 +2445,14 @@ const CommercialShopRent = () => {
                   setFacingWidth(e.target.value);
                 }}
               />
-              <Select
-                flex={1}
+              <Select 
                 onChange={(e) => setFacing(e.target.value)}
                 value={facing}
               >
                 <option value="Meter"> Meter </option>
                 <option value="Feet"> Feet </option>
               </Select>
-            </Box>
+            </InputGroup>
           </Box>
 
           {/* ============================ location advantage ============================ */}

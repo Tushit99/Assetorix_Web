@@ -18,13 +18,15 @@ import { AddIcon, ChevronDownIcon, MinusIcon } from "@chakra-ui/icons";
 import { Checkbox } from "@chakra-ui/react";
 import style from "../../RentComercial.module.css";
 import { useSelector } from "react-redux";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
-import { CleanInputText, IndianDateConverter, NumericString } from "../../../../code";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import {
+  CleanInputText,
+  IndianDateConverter,
+  NumericString,
+} from "../../../../code";
 import axios from "axios";
 import Loading from "../../../../Loading";
 import { useNavigate } from "react-router-dom";
-
-
 
 const CommercialShowRoomRent = () => {
   const isCountry = useSelector((state) => state.gloalval);
@@ -86,10 +88,9 @@ const CommercialShowRoomRent = () => {
   const [isDraging, setIsDraging] = useState(false);
   const fileInputRef = useRef(null);
 
-  // please don'nt change any function without any prior knowledge 
+  // please don'nt change any function without any prior knowledge
 
   // submit function
-
 
   const handleSubmitData = async (e) => {
     e.preventDefault();
@@ -132,7 +133,7 @@ const CommercialShowRoomRent = () => {
         entranceWidth: entranceWidth,
         entranceWidthUnit,
         ceilingHeight,
-        ceilingHeightUnit: ceilingHeightUnit
+        ceilingHeightUnit: ceilingHeightUnit,
       },
       carpetArea: plotArea,
       carpetAreaUnit: areaPer,
@@ -143,35 +144,34 @@ const CommercialShowRoomRent = () => {
         maintenanceTimePeriod,
         bookingAmount,
       },
-      locationAdv: locationAdv
+      locationAdv: locationAdv,
     };
 
     const showToastError = (message) => {
       toast({
-        title: message + ' un-filled',
-        status: 'error',
+        title: message + " un-filled",
+        status: "error",
         duration: 2000,
-        position: 'top-right'
+        position: "top-right",
       });
-    }
-
+    };
 
     if (!locality) {
-      showToastError('Provide locality');
+      showToastError("Provide locality");
     } else if (!pricedetail) {
-      showToastError('Provide PriceDetail');
+      showToastError("Provide PriceDetail");
     } else if (!priceSqr) {
-      showToastError('Provide Price Per sq.ft');
+      showToastError("Provide Price Per sq.ft");
     } else if (!additinalft) {
-      showToastError('Provide Property description');
+      showToastError("Provide Property description");
     } else if (!propertyFacing) {
-      showToastError('Provide Property Facing');
+      showToastError("Provide Property Facing");
     } else if (!facing) {
-      showToastError('Provide Facing');
+      showToastError("Provide Facing");
     } else if (!totalfloors) {
-      showToastError('Provide Total Floors');
+      showToastError("Provide Total Floors");
     } else if (!facingwidth) {
-      showToastError("Provide facing width")
+      showToastError("Provide facing width");
     }
 
     if (
@@ -179,7 +179,6 @@ const CommercialShowRoomRent = () => {
       locality &&
       type &&
       pricedetail &&
-
       inclusivePrices &&
       additinalft &&
       propertyFacing &&
@@ -189,19 +188,18 @@ const CommercialShowRoomRent = () => {
       let id = localStorage.getItem("usrId") || undefined;
       let authorization = localStorage.getItem("AstToken") || undefined;
 
-      let head = { id, authorization, 'Content-type': 'application/json' };
+      let head = { id, authorization, "Content-type": "application/json" };
 
       if (!id || !authorization) {
         toast({
-          title: 'Kindly log in to access property posting.',
+          title: "Kindly log in to access property posting.",
           description: "Login required for posting property.",
-          status: 'error',
+          status: "error",
           duration: 2000,
-          position: 'top-right'
-        })
-        return
+          position: "top-right",
+        });
+        return;
       }
-
 
       if (securityDeposit == "Fixed") {
         obj["depositValue"] = depositAmount;
@@ -215,7 +213,7 @@ const CommercialShowRoomRent = () => {
         let washroomDetails = {
           privateWashrooms: privateWashroom,
           sharedWashrooms: sharedWashroom,
-        }
+        };
         obj["washroomDetails"] = washroomDetails;
       }
 
@@ -241,15 +239,18 @@ const CommercialShowRoomRent = () => {
         //     headers: head,
         //     body: JSON.stringify(obj)
         // });
-        // let data = await response.json();  
+        // let data = await response.json();
         setClickCount((prev) => prev + 12);
         setIsClicked(true);
-        await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
+        await axios
+          .post(`${process.env.REACT_APP_URL}/property/`, obj, {
+            headers: head,
+          })
           .then((e) => {
             toast({
               title: e.data.msg,
               description: e.data.msg,
-              status: 'success',
+              status: "success",
               duration: 2000,
             });
             if (images.length) {
@@ -262,37 +263,36 @@ const CommercialShowRoomRent = () => {
       } catch (error) {
         toast({
           title: error.response.data.msg,
-          status: 'error',
+          status: "error",
           duration: 2000,
-        })
+        });
         setClickCount((prev) => prev - 12);
         setIsClicked(false);
       }
-    }
-    else {
+    } else {
       toast({
-        title: 'Form un-filled',
+        title: "Form un-filled",
         description: "Please fill all required fields.",
-        status: 'info',
+        status: "info",
         duration: 2000,
-        position: 'top-right'
-      })
+        position: "top-right",
+      });
       setClickCount((prev) => prev - 12);
       setIsClicked(false);
     }
   };
 
-  // image uploading after uploading the data:  
+  // image uploading after uploading the data:
   const submitImage = async (productID) => {
     try {
       let id = localStorage.getItem("usrId") || undefined;
       let authorization = localStorage.getItem("AstToken") || undefined;
 
       let headersList = {
-        "Accept": "*/*",
-        "Authorization": authorization,
-        "id": id
-      }
+        Accept: "*/*",
+        Authorization: authorization,
+        id: id,
+      };
 
       let formdata = new FormData();
       images.forEach((image) => {
@@ -306,11 +306,11 @@ const CommercialShowRoomRent = () => {
         method: "POST",
         headers: headersList,
         data: bodyContent,
-      }
+      };
 
       await axios.request(reqOptions).then((e) => {
         setIsClicked(false);
-      })
+      });
     } catch (error) {
       console.log(error);
       setIsClicked(false);
@@ -324,20 +324,21 @@ const CommercialShowRoomRent = () => {
     let val = NumericString(e.target.value);
     setPincode(val);
     if (val.length == 6) {
-        pinfetch(Number(val));
+      pinfetch(Number(val));
     }
-  }
+  };
 
-  // pincode to fetch data  
+  // pincode to fetch data
   const pinfetch = async (pin) => {
     try {
-      let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
+      let res = await axios.get(
+        `${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`
+      );
       setState(res.data[0].state);
       setCity(res.data[0].city);
       setCountry(res.data[0].country);
       setPinCollection(res.data);
-    }
-    catch (err) {
+    } catch (err) {
       console.log(err);
     }
   };
@@ -356,7 +357,6 @@ const CommercialShowRoomRent = () => {
     e.preventDefault();
     setExpectedYear(e.target.value);
   };
-
 
   const handleAdditionalFeature = (e) => {
     e.preventDefault();
@@ -487,7 +487,6 @@ const CommercialShowRoomRent = () => {
       newarr.push(value);
     }
     setlocatedNear(newarr);
-
   };
 
   const handlefireSafty = (e) => {
@@ -517,7 +516,6 @@ const CommercialShowRoomRent = () => {
     }
     console.log(newarr);
     setParkingType(newarr);
-
   };
 
   const handlebusinessType = (e) => {
@@ -533,11 +531,11 @@ const CommercialShowRoomRent = () => {
     setsuitableFor(newarr);
   };
 
-  // ======--- image upload function  
+  // ======--- image upload function
 
   const selectFiles = () => {
     fileInputRef.current.click();
-  }
+  };
 
   const removeImage = (index) => {
     const newImages = [...images];
@@ -548,33 +546,36 @@ const CommercialShowRoomRent = () => {
   const onFileSelect = (e) => {
     let files = e.target.files;
     if (files.length === 0) {
-      return
+      return;
     }
     for (let i = 0; i < files.length; i++) {
-      if (files[i].type.split('/')[0] !== 'image') {
+      if (files[i].type.split("/")[0] !== "image") {
         continue;
       }
       if (!images.some((e) => e.name === files[i].name)) {
-        setImages((prev) => [...prev, {
-          name: files[i].name,
-          image: files[i],
-        },])
+        setImages((prev) => [
+          ...prev,
+          {
+            name: files[i].name,
+            image: files[i],
+          },
+        ]);
       }
     }
-  }
+  };
 
   const ondragleave = (event) => {
     event.preventDefault();
     setIsDraging(false);
-    console.log("leave")
-  }
+    console.log("leave");
+  };
 
   const ondragover = (event) => {
     event.preventDefault();
     setIsDraging(true);
     event.dataTransfer.dropEffect = "copy";
     console.log("over the box");
-  }
+  };
 
   const ondrop = (event) => {
     event.preventDefault(); // Add this line
@@ -587,70 +588,115 @@ const CommercialShowRoomRent = () => {
     }
 
     for (let i = 0; i < files.length; i++) {
-      if (files[i].type.split('/')[0] !== 'image') {
+      if (files[i].type.split("/")[0] !== "image") {
         continue;
       }
       if (!images.some((e) => e.name === files[i].name)) {
-        setImages((prev) => [...prev, {
-          name: files[i].name,
-          image: files[i],
-        }]);
+        setImages((prev) => [
+          ...prev,
+          {
+            name: files[i].name,
+            image: files[i],
+          },
+        ]);
       }
     }
     console.log("droped");
-  }
-
+  };
 
   return (
     <div>
       <Box>
-        <Heading margin={"10px 0"} size={"md"} > Your shop is located inside </Heading>
-        <Box display={"flex"} flexWrap={"wrap"} gap={4} >
-          <button value={"Mall"} className={located == "Mall" ? style.setbtn : style.btn} onClick={(e) => setLocated(e.target.value)} > Mall </button>
-          <button value={"Commercial Project"} className={located == "Commercial Project" ? style.setbtn : style.btn} onClick={(e) => setLocated(e.target.value)} > Commercial Project </button>
-          <button value={"Residential Project"} className={located == "Residential Project" ? style.setbtn : style.btn} onClick={(e) => setLocated(e.target.value)} > Residential Project </button>
-          <button value={"Retail Complex/8uilding"} className={located == "Retail Complex/8uilding" ? style.setbtn : style.btn} onClick={(e) => setLocated(e.target.value)} > Retail Complex/8uilding </button>
-          <button value={"Market / High Street"} className={located == "Market / High Street" ? style.setbtn : style.btn} onClick={(e) => setLocated(e.target.value)} > Market / High Street </button>
-          <button value={"Other"} className={located == "Other" ? style.setbtn : style.btn} onClick={(e) => setLocated(e.target.value)} > Other </button>
+        <Heading margin={"10px 0"} size={"sm"}>
+          Your shop is located inside
+        </Heading>
+        <Box display={"flex"} flexWrap={"wrap"} gap={4}>
+          <button
+            value={"Mall"}
+            className={located == "Mall" ? style.setbtn : style.btn}
+            onClick={(e) => setLocated(e.target.value)}
+          >
+            Mall
+          </button>
+          <button
+            value={"Commercial Project"}
+            className={
+              located == "Commercial Project" ? style.setbtn : style.btn
+            }
+            onClick={(e) => setLocated(e.target.value)}
+          >
+            Commercial Project
+          </button>
+          <button
+            value={"Residential Project"}
+            className={
+              located == "Residential Project" ? style.setbtn : style.btn
+            }
+            onClick={(e) => setLocated(e.target.value)}
+          >
+            Residential Project
+          </button>
+          <button
+            value={"Retail Complex/8uilding"}
+            className={
+              located == "Retail Complex/8uilding" ? style.setbtn : style.btn
+            }
+            onClick={(e) => setLocated(e.target.value)}
+          >
+            Retail Complex/8uilding
+          </button>
+          <button
+            value={"Market / High Street"}
+            className={
+              located == "Market / High Street" ? style.setbtn : style.btn
+            }
+            onClick={(e) => setLocated(e.target.value)}
+          >
+            Market / High Street
+          </button>
+          <button
+            value={"Other"}
+            className={located == "Other" ? style.setbtn : style.btn}
+            onClick={(e) => setLocated(e.target.value)}
+          >
+            Other
+          </button>
         </Box>
       </Box>
       <Box display={located == "" ? "none" : "block"}>
         <form onSubmit={handleSubmitData}>
           {/* property location */}
           <Box className={style.location_form}>
-            <Heading size={"lg"}>Where is your property located?</Heading>
-            <Heading size={"sm"}>
-              An accurate location helps you connect with the right buyers.
-            </Heading>
+            <Heading size={"lg"} textAlign={"center"}>Where is your property located?</Heading>
+            <Heading size={"sm"} textAlign={"left"}>
+              Location Detail 
+            </Heading> 
             <Input
-              type="text"
-              padding={"0 10px"}
+              type="text" 
               required
               placeholder={`${located} (optional)`}
               value={type}
               onChange={(e) => setType(e.target.value)}
-              fontSize={"md"}
+              fontSize={"sm"}
               variant="flushed"
             />
-            < Input
+            <Input
               type="text"
-              placeholder={"Enter pincode"}
-              padding={"0 10px"}
+              placeholder={"Enter pincode"} 
               required
               variant="flushed"
-              fontSize={"md"}
+              fontSize={"sm"}
               value={pincode}
               onChange={handlepinfetch}
             />
             <Input
-              type="text"
-              padding={"0 10px"}
+              type="text" 
               required
               placeholder="Enter Locality"
               list="browsers"
               value={locality}
               onChange={(e) => setLocality(e.target.value)}
-              fontSize={"md"}
+              fontSize={"sm"}
               variant="flushed"
             />
             {pincollection.length ? (
@@ -659,70 +705,74 @@ const CommercialShowRoomRent = () => {
                   <option value={e.locality} />
                 ))}
               </datalist>
-            ) : ""}
+            ) : (
+              ""
+            )}
 
             <Input
-              type="text"
-              padding={"0 10px"}
+              type="text" 
               required
               placeholder="Enter City"
-              fontSize={"md"}
+              fontSize={"sm"}
               value={city}
               onChange={(e) => setCity(e.target.value)}
               variant="flushed"
             />
             <Input
-              type="text"
-              padding={"0 10px"}
+              type="text" 
               required
               placeholder="Enter State"
               value={state}
               onChange={(e) => setState(e.target.value)}
-              fontSize={"md"}
+              fontSize={"sm"}
               variant="flushed"
             />
             <Input
-              type="text"
-              padding={"0 10px"}
+              type="text" 
               required
               placeholder="Enter Country"
               value={country}
               onChange={(e) => setCountry(e.target.value)}
-              fontSize={"md"}
+              fontSize={"sm"}
               variant="flushed"
             />
-
           </Box>
           {/* Property Detail */}
-          <Box marginTop={12}>
-            <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"}>
-              Tell us about your property
-            </Heading>
+          <Box>
             {/* ====================================== */}
             {/* ============================ add area details ============================ */}
             <Box textAlign={"left"} padding={"10px 0"}>
-              <Heading as={"h3"} margin={"5px 0"} size={"md"}>
+              <Heading as={"h3"} size={"sm"}>
                 Add Area Details
               </Heading>
-              <Text margin={"5px 0"}> Carpet area is mandatory </Text>
-              <ButtonGroup
+              <Text> Carpet area is mandatory </Text>
+              <InputGroup
                 className={style.select_land}
-                size="sm"
                 isAttached
+                margin={0}
+                width={{ base: "100%", md: 300 }}
                 variant="outline"
               >
-                <Input type="text"
-                  padding={"0 2px"}
+                <Input
+                  type="text"
                   value={plotArea}
                   onChange={(e) => {
-                    setPlotArea(NumericString(e.target.value));
                     areaCalucation();
+                    setPlotArea(NumericString(e.target.value));
                   }}
                   required
+                  placeholder={"Carpet Area"}
                 />
-                <Select value={areaPer} onChange={(e) => {
-                  setAreaPer(e.target.value);
-                }} className={style.select} required>
+                <Select
+                  borderRadius={0}
+                  variant={"outline"}
+                  value={areaPer}
+                  onChange={(e) => {
+                    setAreaPer(e.target.value);
+                  }}
+                  className={style.select}
+                  required
+                >
                   <option value="sq.ft">sq.ft</option>
                   <option value="sq.yards">sq.yards</option>
                   <option value="sq.m">sq.m</option>
@@ -742,22 +792,54 @@ const CommercialShowRoomRent = () => {
                   <option value="chataks">chataks</option>
                   <option value="perch">perch</option>
                 </Select>
-              </ButtonGroup>
+              </InputGroup>
             </Box>
 
             {/* Shop facade size (Optional) */}
             <Box>
-              <Heading as={"h3"} size={"sm"} > Shop facade size (Optional) </Heading>
+              <Heading as={"h3"} size={"sm"}>
+                Shop facade size (Optional)
+              </Heading>
               <Box display={"flex"} w={"300px"} margin={"10px 0"}>
-                <Input type="text" placeholder={"Entrance width"} flex={5} borderRadius={0} value={entranceWidth} onChange={handleEntranceWidth} />
-                <Select borderRadius={0} borderLeft={0} flex={3} value={entranceWidthUnit} onChange={(e) => setentranceWidthUnit(NumericString(e.target.value))} >
+                <Input
+                  type="text"
+                  placeholder={"Entrance width"}
+                  flex={5}
+                  borderRadius={0}
+                  value={entranceWidth}
+                  onChange={handleEntranceWidth}
+                />
+                <Select
+                  borderRadius={0}
+                  borderLeft={0}
+                  flex={3}
+                  value={entranceWidthUnit}
+                  onChange={(e) =>
+                    setentranceWidthUnit(NumericString(e.target.value))
+                  }
+                >
                   <option value="ft">ft.</option>
                   <option value="mt">mt.</option>
                 </Select>
               </Box>
               <Box display={"flex"} w={"300px"} margin={"10px 0"}>
-                <Input type="text" placeholder={"Ceiling Height"} flex={5} borderRadius={0} value={ceilingHeight} onChange={handleCeilingHeight} />
-                <Select borderRadius={0} borderLeft={0} flex={3} value={ceilingHeightUnit} onChange={(e) => setceilingHeightUnit(NumericString(e.target.value))}  >
+                <Input
+                  type="text"
+                  placeholder={"Ceiling Height"}
+                  flex={5}
+                  borderRadius={0}
+                  value={ceilingHeight}
+                  onChange={handleCeilingHeight}
+                />
+                <Select
+                  borderRadius={0}
+                  borderLeft={0}
+                  flex={3}
+                  value={ceilingHeightUnit}
+                  onChange={(e) =>
+                    setceilingHeightUnit(NumericString(e.target.value))
+                  }
+                >
                   <option value="ft">ft.</option>
                   <option value="mt">mt.</option>
                 </Select>
@@ -765,11 +847,16 @@ const CommercialShowRoomRent = () => {
             </Box>
 
             {/* ============================ washrooms ================================ */}
-            <Box padding={"10px 0 8px 0"} display={"grid"} >
-              <Heading textAlign={"left"} as={"h3"} size={"md"}>
+            <Box padding={"10px 0 8px 0"} display={"grid"}>
+              <Heading textAlign={"left"} as={"h3"} size={"sm"}>
                 Washrooms
               </Heading>
-              <Box display={"grid"} padding={"10px 0 8px 0"} gridTemplateColumns={"repeat(1,1fr)"} gap={2}>
+              <Box
+                display={"grid"}
+                padding={"10px 0 8px 0"}
+                gridTemplateColumns={"repeat(1,1fr)"}
+                gap={2}
+              >
                 <Box display={"flex"} gap={10}>
                   <button
                     value={"Available"}
@@ -791,14 +878,21 @@ const CommercialShowRoomRent = () => {
                       setWashroomType(e.target.value);
                     }}
                     className={
-                      washroomType === "Not-Available" ? style.setbtn : style.btn
+                      washroomType === "Not-Available"
+                        ? style.setbtn
+                        : style.btn
                     }
                   >
                     Not-Available
                   </button>
                 </Box>
-                <Box display={washroomType == "Available" ? "block" : "none"} >
-                  <Box display={"flex"} w={340} alignItems={"center"} margin={"10px"}>
+                <Box display={washroomType == "Available" ? "block" : "none"}>
+                  <Box
+                    display={"flex"}
+                    w={340}
+                    alignItems={"center"}
+                    margin={"10px"}
+                  >
                     <Text flex={8} textAlign={"left"}>
                       No. of Private Washrooms
                     </Text>
@@ -807,7 +901,11 @@ const CommercialShowRoomRent = () => {
                         e.preventDefault();
                         setPrivateWashroom((prev) => prev - 1);
                       }}
-                      className={privateWashroom == 0 ? style.washroom_hide : style.washroom_dec}
+                      className={
+                        privateWashroom == 0
+                          ? style.washroom_hide
+                          : style.washroom_dec
+                      }
                       disabled={privateWashroom == 0}
                     >
                       <MinusIcon fontSize={"12px"} />
@@ -823,7 +921,12 @@ const CommercialShowRoomRent = () => {
                       <AddIcon fontSize={"12px"} />
                     </button>
                   </Box>
-                  <Box display={"flex"} w={340} alignItems={"center"} margin={"10px"}>
+                  <Box
+                    display={"flex"}
+                    w={340}
+                    alignItems={"center"}
+                    margin={"10px"}
+                  >
                     <Text flex={8} textAlign={"left"}>
                       No. of Shared Washrooms
                     </Text>
@@ -832,7 +935,11 @@ const CommercialShowRoomRent = () => {
                         e.preventDefault();
                         setSharedWashroom((prev) => prev - 1);
                       }}
-                      className={sharedWashroom == 0 ? style.washroom_hide : style.washroom_dec}
+                      className={
+                        sharedWashroom == 0
+                          ? style.washroom_hide
+                          : style.washroom_dec
+                      }
                       disabled={sharedWashroom == 0}
                     >
                       <MinusIcon fontSize={"12px"} />
@@ -854,99 +961,153 @@ const CommercialShowRoomRent = () => {
 
             {/* ============================ floor details ============================ */}
             <Box textAlign={"left"}>
-              <Heading
-                as={"h3"}
-                size={"md"}
-                margin={"30px 0 10px 0"}
-                textAlign={"left"}
-              >
+              <Heading as={"h3"} size={"sm"} textAlign={"left"}>
                 Floor Details
               </Heading>
-              <Text textAlign={"left"} margin={"10px 0"}>
-                Total no of floors
-              </Text>
-              <Box display={"flex"} alignItems={"center"} gap={5}>
-                <Input type="text"
+              <Text textAlign={"left"}>Total no of floors</Text>
+              <InputGroup isAttached width={{ base: "100%", md: 300 }}>
+                <Input
+                  type="text"
                   value={totalfloors}
+                  placeholder="Enter total floor"
                   onChange={(e) => {
-                    const nowval = e.target.value > 90;
-                    if (nowval) {
-                      toast({
-                        title: 'Maximum floor count: 90',
-                        status: 'error',
-                        duration: 2000,
-                        position: 'top-right',
-                      });
-                    }
-                    else {
-                      setTotalFloors(NumericString(e.target.value));
-                    }
+                    setTotalFloors(NumericString(e.target.value));
                   }}
                   required
                   w={300}
                 />
                 <Select
                   id="floorSelectTag"
-                  variant="filled"
+                  variant={"outline"}
                   onChange={(e) => setFloorOn(e.target.value)}
                   value={floorOn}
                   w={180}
                   borderRadius={0}
-                  _hover={{
-                    backgroundColor: "rgb(255, 255, 255)",
-                    borderBottom: "1px solid blue",
-                    borderLeft: "0",
-                    borderRight: "0",
-                    borderTop: "0",
-                  }}
-                  borderTop={"0"}
-                  borderLeft={"0"}
-                  borderBottom={"1px solid blue"}
-                  backgroundColor={"rgb(255, 255, 255)"}
                 >
                   <option value="Ground">Ground</option>
                   <option value="Basement">Basement</option>
                   <option value="Lower Ground">Lower Ground</option>
                   {Array.from(Array(Number(totalfloors)).keys()).map((e) => {
-                    return <option value={e + 1}>{e + 1}</option>
+                    return <option value={e + 1}>{e + 1}</option>;
                   })}
                 </Select>
-              </Box>
+              </InputGroup>
             </Box>
 
             {/* ============================ Located Near (optional) ============================ */}
             <Box className={style.optional_box}>
-              <Heading as={"h3"} size={"md"} > Located Near (Optional) </Heading>
+              <Heading as={"h3"} size={"sm"}>
+                Located Near (Optional)
+              </Heading>
               <Box>
-                <button value={"Entrance"} className={locatedNear.includes("Entrance") ? style.setbtn : style.btn} onClick={handleLocatedNear}> Entrance </button>
-                <button value={"Elevator"} className={locatedNear.includes("Elevator") ? style.setbtn : style.btn} onClick={handleLocatedNear}> Elevator </button>
-                <button value={"Stairs"} className={locatedNear.includes("Stairs") ? style.setbtn : style.btn} onClick={handleLocatedNear}> Stairs </button>
+                <button
+                  value={"Entrance"}
+                  className={
+                    locatedNear.includes("Entrance") ? style.setbtn : style.btn
+                  }
+                  onClick={handleLocatedNear}
+                >
+                  Entrance
+                </button>
+                <button
+                  value={"Elevator"}
+                  className={
+                    locatedNear.includes("Elevator") ? style.setbtn : style.btn
+                  }
+                  onClick={handleLocatedNear}
+                >
+                  Elevator
+                </button>
+                <button
+                  value={"Stairs"}
+                  className={
+                    locatedNear.includes("Stairs") ? style.setbtn : style.btn
+                  }
+                  onClick={handleLocatedNear}
+                >
+                  Stairs
+                </button>
               </Box>
             </Box>
 
             {/* ============================ Parking Type ============================ */}
             <Box className={style.optional_box}>
-              <Heading as={"h3"} size={"md"} > Parking Type </Heading>
+              <Heading as={"h3"} size={"sm"}>
+                Parking Type
+              </Heading>
               <Box>
-                <button value={"Available"} className={parking == "Available" ? style.setbtn : style.btn} onClick={(e) => {
-                  e.preventDefault();
-                  setParking(e.target.value)
-                }}>Available</button>
-                <button value={"Not-Available"} className={parking == "Not-Available" ? style.setbtn : style.btn} onClick={(e) => {
-                  e.preventDefault();
-                  setParking(e.target.value)
-                }}>Not-Available</button>
+                <button
+                  value={"Available"}
+                  className={parking == "Available" ? style.setbtn : style.btn}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setParking(e.target.value);
+                  }}
+                >
+                  Available
+                </button>
+                <button
+                  value={"Not-Available"}
+                  className={
+                    parking == "Not-Available" ? style.setbtn : style.btn
+                  }
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setParking(e.target.value);
+                  }}
+                >
+                  Not-Available
+                </button>
               </Box>
-              <Box display={parking == "Available" ? "flex" : "none"} flexWrap={"wrap"} gap={4}>
-                <button value={"Private Parking"} onClick={handleparkingType} className={parkingType.includes("Private Parking") ? style.setbtn : style.btn} > Private Parking </button>
-                <button value={"Public Parking"} onClick={handleparkingType} className={parkingType.includes("Public Parking") ? style.setbtn : style.btn} > Public Parking </button>
-                <button value={"Multilevel Parking"} onClick={handleparkingType} className={parkingType.includes("Multilevel Parking") ? style.setbtn : style.btn} > Multilevel Parking </button>
+              <Box
+                display={parking == "Available" ? "flex" : "none"}
+                flexWrap={"wrap"}
+                gap={4}
+              >
+                <button
+                  value={"Private Parking"}
+                  onClick={handleparkingType}
+                  className={
+                    parkingType.includes("Private Parking")
+                      ? style.setbtn
+                      : style.btn
+                  }
+                >
+                  Private Parking
+                </button>
+                <button
+                  value={"Public Parking"}
+                  onClick={handleparkingType}
+                  className={
+                    parkingType.includes("Public Parking")
+                      ? style.setbtn
+                      : style.btn
+                  }
+                >
+                  Public Parking
+                </button>
+                <button
+                  value={"Multilevel Parking"}
+                  onClick={handleparkingType}
+                  className={
+                    parkingType.includes("Multilevel Parking")
+                      ? style.setbtn
+                      : style.btn
+                  }
+                >
+                  Multilevel Parking
+                </button>
               </Box>
             </Box>
 
             {/* ================= Availability status ============================ */}
             <Box textAlign={"left"} className={style.optional_box}>
-              <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+              <Heading
+                as={"h3"}
+                size={"sm"}
+                margin={"10px 0"}
+                textAlign={"left"}
+              >
                 Availability Status
               </Heading>
               <Box className={style.grid}>
@@ -965,7 +1126,9 @@ const CommercialShowRoomRent = () => {
                 </button>
                 <button
                   className={
-                    availability == "Under construction" ? style.setbtn : style.btn
+                    availability == "Under construction"
+                      ? style.setbtn
+                      : style.btn
                   }
                   borderRadius={"100px"}
                   border={"1px solid rgba(113, 210, 255, 0.897)"}
@@ -984,7 +1147,7 @@ const CommercialShowRoomRent = () => {
               <Box textAlign={"left"} className={style.optional_box}>
                 <Heading
                   as={"h3"}
-                  size={"md"}
+                  size={"sm"}
                   margin={"30px 0 10px 0"}
                   textAlign={"left"}
                 >
@@ -992,7 +1155,9 @@ const CommercialShowRoomRent = () => {
                 </Heading>
                 <Box className={style.grid}>
                   <button
-                    className={fromyear == "0-1 year" ? style.setbtn : style.btn}
+                    className={
+                      fromyear == "0-1 year" ? style.setbtn : style.btn
+                    }
                     borderRadius={"100px"}
                     onClick={handleyear}
                     value={"0-1 year"}
@@ -1003,7 +1168,9 @@ const CommercialShowRoomRent = () => {
                     0-1 years
                   </button>
                   <button
-                    className={fromyear == "1-5 years" ? style.setbtn : style.btn}
+                    className={
+                      fromyear == "1-5 years" ? style.setbtn : style.btn
+                    }
                     borderRadius={"100px"}
                     onClick={handleyear}
                     value={"1-5 years"}
@@ -1014,7 +1181,9 @@ const CommercialShowRoomRent = () => {
                     1-5 years
                   </button>
                   <button
-                    className={fromyear == "5-10 years" ? style.setbtn : style.btn}
+                    className={
+                      fromyear == "5-10 years" ? style.setbtn : style.btn
+                    }
                     borderRadius={"100px"}
                     onClick={handleyear}
                     value={"5-10 years"}
@@ -1025,7 +1194,9 @@ const CommercialShowRoomRent = () => {
                     5-10 years
                   </button>
                   <button
-                    className={fromyear == "10+ years" ? style.setbtn : style.btn}
+                    className={
+                      fromyear == "10+ years" ? style.setbtn : style.btn
+                    }
                     borderRadius={"100px"}
                     onClick={handleyear}
                     value={"10+ years"}
@@ -1038,10 +1209,21 @@ const CommercialShowRoomRent = () => {
                 </Box>
                 {/* ============================= Available form (date) ============================= */}
                 <Box textAlign={"left"} display={"grid"}>
-                  <Heading as={"h3"} size={"md"} margin={"4px 0"} textAlign={"left"}>
+                  <Heading
+                    as={"h3"}
+                    size={"sm"}
+                    margin={"4px 0"}
+                    textAlign={"left"}
+                  >
                     Available from
                   </Heading>
-                  <Input value={availableFrom} onChange={(e) => setavailableFrom(e.target.value)} color='blue' type={"date"} w={300} />
+                  <Input
+                    value={availableFrom}
+                    onChange={(e) => setavailableFrom(e.target.value)}
+                    color="blue"
+                    type={"date"}
+                    w={300}
+                  />
                 </Box>
               </Box>
             )}
@@ -1050,7 +1232,7 @@ const CommercialShowRoomRent = () => {
               <Box>
                 <Heading
                   as={"h3"}
-                  size={"md"}
+                  size={"sm"}
                   margin={"30px 0 10px 0"}
                   textAlign={"left"}
                 >
@@ -1072,37 +1254,195 @@ const CommercialShowRoomRent = () => {
 
             {/* ============================ Suitable for business types ============================ */}
             <Box textAlign={"left"}>
-              <Heading margin={"10px 0"} size={"md"} > Suitable for business types </Heading>
+              <Heading margin={"10px 0"} size={"sm"}>
+                Suitable for business types
+              </Heading>
               <Box>
                 <Menu>
-                  <MenuButton as={Button} borderRadius={0} rightIcon={<ChevronDownIcon />}>
+                  <MenuButton
+                    as={Button}
+                    borderRadius={0}
+                    rightIcon={<ChevronDownIcon />}
+                  >
                     Select business type
                   </MenuButton>
-                  <MenuList display={"grid"} borderRadius={0} marginTop={"-8px"} marginBottom={"-8px"} overflowY={"scroll"} h={"200px"} padding={"4px 10px"}>
-                    <Checkbox value={"ATM"} className={style.select} onChange={handlebusinessType} > ATM </Checkbox>
-                    <Checkbox value={"Bakery"} className={style.select} onChange={handlebusinessType} > Bakery </Checkbox>
-                    <Checkbox value={"Boutique"} className={style.select} onChange={handlebusinessType} > Boutique </Checkbox>
-                    <Checkbox value={"Clinic"} className={style.select} onChange={handlebusinessType} > Clinic </Checkbox>
-                    <Checkbox value={"Clothes"} className={style.select} onChange={handlebusinessType} > Clothes </Checkbox>
-                    <Checkbox value={"Cloud Kitchen"} className={style.select} onChange={handlebusinessType} > Cloud Kitchen </Checkbox>
-                    <Checkbox value={"Coffee"} className={style.select} onChange={handlebusinessType} > Coffee </Checkbox>
-                    <Checkbox value={"Dental Clinic"} className={style.select} onChange={handlebusinessType} > Dental Clinic </Checkbox>
-                    <Checkbox value={"Fast Food"} className={style.select} onChange={handlebusinessType} > Fast Food </Checkbox>
-                    <Checkbox value={"Footwear"} className={style.select} onChange={handlebusinessType} > Footwear </Checkbox>
-                    <Checkbox value={"Gym"} className={style.select} onChange={handlebusinessType} > Gym </Checkbox>
-                    <Checkbox value={"Jewellery"} className={style.select} onChange={handlebusinessType} > Jewellery </Checkbox>
-                    <Checkbox value={"Juice"} className={style.select} onChange={handlebusinessType} > Juice </Checkbox>
-                    <Checkbox value={"Meat"} className={style.select} onChange={handlebusinessType} > Meat </Checkbox>
-                    <Checkbox value={"Medical"} className={style.select} onChange={handlebusinessType} > Medical </Checkbox>
-                    <Checkbox value={"Mobile"} className={style.select} onChange={handlebusinessType} > Mobile </Checkbox>
-                    <Checkbox value={"Pub/Bar"} className={style.select} onChange={handlebusinessType} > Pub/Bar </Checkbox>
-                    <Checkbox value={"Restaurants"} className={style.select} onChange={handlebusinessType} > Restaurants </Checkbox>
-                    <Checkbox value={"Salon/Spa"} className={style.select} onChange={handlebusinessType} > Salon/Spa </Checkbox>
-                    <Checkbox value={"Mobile"} className={style.select} onChange={handlebusinessType} > Mobile </Checkbox>
-                    <Checkbox value={"Stationery"} className={style.select} onChange={handlebusinessType} > Stationery </Checkbox>
-                    <Checkbox value={"Sweet"} className={style.select} onChange={handlebusinessType} > Sweet </Checkbox>
-                    <Checkbox value={"Tea Stall"} className={style.select} onChange={handlebusinessType} > Tea Stall </Checkbox>
-                    <Checkbox value={"Other business type"} className={style.select} onChange={handlebusinessType} > Other business type </Checkbox>
+                  <MenuList
+                    display={"grid"}
+                    borderRadius={0}
+                    marginTop={"-8px"}
+                    marginBottom={"-8px"}
+                    overflowY={"scroll"}
+                    h={"200px"}
+                    padding={"4px 10px"}
+                  >
+                    <Checkbox
+                      value={"ATM"}
+                      className={style.select}
+                      onChange={handlebusinessType}
+                    >
+                      ATM
+                    </Checkbox>
+                    <Checkbox
+                      value={"Bakery"}
+                      className={style.select}
+                      onChange={handlebusinessType}
+                    >
+                      Bakery
+                    </Checkbox>
+                    <Checkbox
+                      value={"Boutique"}
+                      className={style.select}
+                      onChange={handlebusinessType}
+                    >
+                      Boutique
+                    </Checkbox>
+                    <Checkbox
+                      value={"Clinic"}
+                      className={style.select}
+                      onChange={handlebusinessType}
+                    >
+                      Clinic
+                    </Checkbox>
+                    <Checkbox
+                      value={"Clothes"}
+                      className={style.select}
+                      onChange={handlebusinessType}
+                    >
+                      Clothes
+                    </Checkbox>
+                    <Checkbox
+                      value={"Cloud Kitchen"}
+                      className={style.select}
+                      onChange={handlebusinessType}
+                    >
+                      Cloud Kitchen
+                    </Checkbox>
+                    <Checkbox
+                      value={"Coffee"}
+                      className={style.select}
+                      onChange={handlebusinessType}
+                    >
+                      Coffee
+                    </Checkbox>
+                    <Checkbox
+                      value={"Dental Clinic"}
+                      className={style.select}
+                      onChange={handlebusinessType}
+                    >
+                      Dental Clinic
+                    </Checkbox>
+                    <Checkbox
+                      value={"Fast Food"}
+                      className={style.select}
+                      onChange={handlebusinessType}
+                    >
+                      Fast Food
+                    </Checkbox>
+                    <Checkbox
+                      value={"Footwear"}
+                      className={style.select}
+                      onChange={handlebusinessType}
+                    >
+                      Footwear
+                    </Checkbox>
+                    <Checkbox
+                      value={"Gym"}
+                      className={style.select}
+                      onChange={handlebusinessType}
+                    >
+                      Gym
+                    </Checkbox>
+                    <Checkbox
+                      value={"Jewellery"}
+                      className={style.select}
+                      onChange={handlebusinessType}
+                    >
+                      Jewellery
+                    </Checkbox>
+                    <Checkbox
+                      value={"Juice"}
+                      className={style.select}
+                      onChange={handlebusinessType}
+                    >
+                      Juice
+                    </Checkbox>
+                    <Checkbox
+                      value={"Meat"}
+                      className={style.select}
+                      onChange={handlebusinessType}
+                    >
+                      Meat
+                    </Checkbox>
+                    <Checkbox
+                      value={"Medical"}
+                      className={style.select}
+                      onChange={handlebusinessType}
+                    >
+                      Medical
+                    </Checkbox>
+                    <Checkbox
+                      value={"Mobile"}
+                      className={style.select}
+                      onChange={handlebusinessType}
+                    >
+                      Mobile
+                    </Checkbox>
+                    <Checkbox
+                      value={"Pub/Bar"}
+                      className={style.select}
+                      onChange={handlebusinessType}
+                    >
+                      Pub/Bar
+                    </Checkbox>
+                    <Checkbox
+                      value={"Restaurants"}
+                      className={style.select}
+                      onChange={handlebusinessType}
+                    >
+                      Restaurants
+                    </Checkbox>
+                    <Checkbox
+                      value={"Salon/Spa"}
+                      className={style.select}
+                      onChange={handlebusinessType}
+                    >
+                      Salon/Spa
+                    </Checkbox>
+                    <Checkbox
+                      value={"Mobile"}
+                      className={style.select}
+                      onChange={handlebusinessType}
+                    >
+                      Mobile
+                    </Checkbox>
+                    <Checkbox
+                      value={"Stationery"}
+                      className={style.select}
+                      onChange={handlebusinessType}
+                    >
+                      Stationery
+                    </Checkbox>
+                    <Checkbox
+                      value={"Sweet"}
+                      className={style.select}
+                      onChange={handlebusinessType}
+                    >
+                      Sweet
+                    </Checkbox>
+                    <Checkbox
+                      value={"Tea Stall"}
+                      className={style.select}
+                      onChange={handlebusinessType}
+                    >
+                      Tea Stall
+                    </Checkbox>
+                    <Checkbox
+                      value={"Other business type"}
+                      className={style.select}
+                      onChange={handlebusinessType}
+                    >
+                      Other business type
+                    </Checkbox>
                   </MenuList>
                 </Menu>
               </Box>
@@ -1112,7 +1452,7 @@ const CommercialShowRoomRent = () => {
             <Box>
               <Heading
                 as={"h3"}
-                size={"md"}
+                size={"sm"}
                 margin={"30px 0 10px 0"}
                 textAlign={"left"}
               >
@@ -1123,7 +1463,12 @@ const CommercialShowRoomRent = () => {
             {/* ============================ Price Details ============================ */}
             <Box>
               <Box>
-                <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
+                <Heading
+                  as={"h3"}
+                  size={"sm"}
+                  margin={"10px 0"}
+                  textAlign={"left"}
+                >
                   What price you are expecting for this property?
                 </Heading>
                 <Box display={"flex"} alignItems={"center"} gap={5}>
@@ -1136,7 +1481,8 @@ const CommercialShowRoomRent = () => {
                     >
                       {isCountry.country == "india" ? "₹" : "$"} Price Details
                     </Heading>
-                    <Input type="text"
+                    <Input
+                      type="text"
                       value={pricedetail}
                       required
                       onChange={(e) => {
@@ -1161,53 +1507,78 @@ const CommercialShowRoomRent = () => {
                   </Box> */}
                 </Box>
               </Box>
-              <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
+              <Box
+                display={"flex"}
+                gap={10}
+                margin={"20px 0"}
+                flexWrap={"wrap"}
+              >
                 <Checkbox
                   isChecked={inclusivePrices.includes("All inclusive price")}
                   onChange={(e) => {
                     e.preventDefault();
-                    handleinclusiveandtax(e.target.value)
+                    handleinclusiveandtax(e.target.value);
                   }}
                   value={"All inclusive price"}
-
                 >
                   All inclusive price
                 </Checkbox>
                 <Checkbox
-                  isChecked={inclusivePrices.includes("Tax and Govt. charges excluded")}
+                  isChecked={inclusivePrices.includes(
+                    "Tax and Govt. charges excluded"
+                  )}
                   onChange={(e) => {
                     e.preventDefault();
-                    handleinclusiveandtax(e.target.value)
+                    handleinclusiveandtax(e.target.value);
                   }}
                   value={"Tax and Govt. charges excluded"}
                 >
-
                   Tax and Govt. charges excluded
                 </Checkbox>
                 <Checkbox
                   isChecked={inclusivePrices.includes("Price Negotiable")}
                   onChange={(e) => {
                     e.preventDefault();
-                    handleinclusiveandtax(e.target.value)
+                    handleinclusiveandtax(e.target.value);
                   }}
                   value={"Price Negotiable"}
                 >
-
                   Price Negotiable
                 </Checkbox>
               </Box>
               <Box>
-                {additionalPrice && <>
-                  <InputGroup w={"300px"} margin={"10px 0"}>
-                    <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
-                    <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
-                      <option value="Monthly">Monthly</option>
-                      <option value="Yearly">Yearly</option>
-                    </Select>
-                  </InputGroup>
-                  <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-                </>
-                }
+                {additionalPrice && (
+                  <>
+                    <InputGroup w={"300px"} margin={"10px 0"}>
+                      <Input
+                        w={"60%"}
+                        type="text"
+                        onChange={(e) => setMaintenancePrice(e.target.value)}
+                        value={maintenancePrice}
+                        placeholder={"Maintenance Price"}
+                      />
+                      <Select
+                        w={"40%"}
+                        borderRadius={0}
+                        value={maintenanceTimePeriod}
+                        onChange={(e) =>
+                          setMaintenanceTimePeriod(e.target.value)
+                        }
+                      >
+                        <option value="Monthly">Monthly</option>
+                        <option value="Yearly">Yearly</option>
+                      </Select>
+                    </InputGroup>
+                    <Input
+                      type="text"
+                      w={"300px"}
+                      value={bookingAmount}
+                      onChange={(e) => setBookingAmount(e.target.value)}
+                      placeholder="Booking Amount"
+                      margin={"10px 0 0 0"}
+                    />
+                  </>
+                )}
                 <Heading
                   as={"h3"}
                   size={"sm"}
@@ -1216,24 +1587,80 @@ const CommercialShowRoomRent = () => {
                   fontWeight={500}
                   cursor={"pointer"}
                   onClick={() => setAdditionalPrice(!additionalPrice)}
-                  textAlign={"left"}>
-                  {additionalPrice ? <IoIosArrowUp style={{ display: "inline" }} /> : <IoIosArrowDown style={{ display: "inline" }} />} Add more pricing details
+                  textAlign={"left"}
+                >
+                  {additionalPrice ? (
+                    <IoIosArrowUp style={{ display: "inline" }} />
+                  ) : (
+                    <IoIosArrowDown style={{ display: "inline" }} />
+                  )}
+                  Add more pricing details
                 </Heading>
               </Box>
             </Box>
 
             {/* ============================ Security deposit ============================ */}
             <Box className={style.optional_box}>
-              <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+              <Heading
+                as={"h3"}
+                size={"sm"}
+                margin={"10px 0"}
+                textAlign={"left"}
+              >
                 Security deposit
               </Heading>
               <Box>
-                <button value={"Fixed"} className={securityDeposit == "Fixed" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> Fixed </button>
-                <button value={"Multiple of Rent"} className={securityDeposit == "Multiple of Rent" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> Multiple of Rent </button>
-                <button value={"None"} className={securityDeposit == "None" ? style.setbtn : style.btn} onClick={handleSecurityDeposit}> None </button>
+                <button
+                  value={"Fixed"}
+                  className={
+                    securityDeposit == "Fixed" ? style.setbtn : style.btn
+                  }
+                  onClick={handleSecurityDeposit}
+                >
+                  Fixed
+                </button>
+                <button
+                  value={"Multiple of Rent"}
+                  className={
+                    securityDeposit == "Multiple of Rent"
+                      ? style.setbtn
+                      : style.btn
+                  }
+                  onClick={handleSecurityDeposit}
+                >
+                  Multiple of Rent
+                </button>
+                <button
+                  value={"None"}
+                  className={
+                    securityDeposit == "None" ? style.setbtn : style.btn
+                  }
+                  onClick={handleSecurityDeposit}
+                >
+                  None
+                </button>
               </Box>
-              <Box display={securityDeposit == "None" ? "none" : "block"}>
-                <Input type="text" w={300} value={depositAmount} onChange={handleDepositAmount} placeholder={`${securityDeposit == "Fixed" ? "Deposit Value" : ""} ${securityDeposit == "Multiple of Rent" ? "No. of months (Max 30)" : ""}`} />
+              <Box
+                display={
+                  securityDeposit == "Multiple of Rent" ||
+                  securityDeposit == "Fixed"
+                    ? "block"
+                    : "none"
+                }
+              >
+                <Input
+                  type="text"
+                  w={300}
+                  value={depositAmount}
+                  onChange={handleDepositAmount}
+                  placeholder={`${
+                    securityDeposit == "Fixed" ? "Deposit Value" : ""
+                  } ${
+                    securityDeposit == "Multiple of Rent"
+                      ? "No. of months (Max 30)"
+                      : ""
+                  }`}
+                />
               </Box>
             </Box>
 
@@ -1242,45 +1669,94 @@ const CommercialShowRoomRent = () => {
               <Heading
                 as={"h4"}
                 size={"sm"}
-                margin={"10px 0"}
                 fontWeight={700}
                 textAlign={"left"}
               >
                 Lock - in Period
               </Heading>
-              <Input type="text" value={lockPeriod} onChange={(e) => setlockPeriod(NumericString(e.target.value))} variant={"flushed"} />
+              <Input
+                type="text"
+                width={{ base: "100%", md: 300 }}
+                variant={"outline"}
+                value={lockPeriod}
+                onChange={(e) => setlockPeriod(NumericString(e.target.value))}
+              />
             </Box>
 
             {/* Yearly rent is expected to increase by */}
             <Box>
-              <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+              <Heading as={"h3"} size={"sm"} textAlign={"left"}>
                 Yearly rent is expected to increase by
               </Heading>
-              <Input type="text" placeholder="Percentage (%) of increase in rent" onChange={(e) => setRentIncreasePercent(NumericString(e.target.value))} value={rentIncreasePercent} />
+              <Input
+                type="text"
+                width={{ base: "100%", md: 300 }}
+                placeholder="Percentage (%) of increase in rent"
+                onChange={(e) =>
+                  setRentIncreasePercent(NumericString(e.target.value))
+                }
+                value={rentIncreasePercent}
+              />
             </Box>
 
             {/* image Drag and Drop area  */}
             <Box>
               <Box className={style.top}>
-                <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
+                <Heading
+                  color={"black"}
+                  size={"sm"}
+                  textAlign={"left"}
+                  margin={"10px 0"}
+                >
+                  Upload Your Property image
+                </Heading>
               </Box>
               <Box className={style.card}>
-                <Box className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+                <Box
+                  className={style.dragArea}
+                  onDragOver={ondragover}
+                  onDragLeave={ondragleave}
+                  onDrop={ondrop}
+                >
                   {isDraging ? (
                     <Text className={style.select}>Drop image here</Text>
                   ) : (
                     <>
                       Drag & Drop image here or
-                      <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
+                      <Text
+                        className={style.select}
+                        role="button"
+                        onClick={selectFiles}
+                      >
+                        Browse
+                      </Text>
                     </>
                   )}
-                  <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+                  <input
+                    type={"file"}
+                    name="image"
+                    accept="image/jpg, image/png, image/jpeg"
+                    formMethod="post"
+                    formEncType="multipart/form-data"
+                    className={style.file}
+                    multiple
+                    ref={fileInputRef}
+                    onChange={onFileSelect}
+                  />
                 </Box>
                 <Box className={style.container}>
                   {images.map((image, index) => (
                     <Box className={style.image} key={index}>
-                      <Text className={style.delete} onClick={() => removeImage(index)}>&#10006;</Text>
-                      <img src={URL.createObjectURL(image.image)} alt="images" />
+                      <Text
+                        className={style.delete}
+                        onClick={() => removeImage(index)}
+                      >
+                        &#10006;
+                      </Text>
+                      <img
+                        src={URL.createObjectURL(image.image)}
+                        alt="images"
+                      />
                     </Box>
                   ))}
                 </Box>
@@ -1289,36 +1765,61 @@ const CommercialShowRoomRent = () => {
 
             {/* ============================ Property unique discription ============================ */}
             <Box>
-              <Heading as={"h3"} size={"md"} fontWeight={600} margin={"10px 0"} textAlign={"left"}>
+              <Heading
+                as={"h3"}
+                size={"sm"}
+                fontWeight={600}
+                margin={"10px 0"}
+                textAlign={"left"}
+              >
                 Add Description and Unique Features of your Property
               </Heading>
-              <Heading as={"h3"} size={"xs"} fontWeight={400} color={"#777777"} margin={"10px 0"} textAlign={"left"}>
+              <Heading
+                as={"h3"}
+                size={"xs"}
+                fontWeight={400}
+                color={"#777777"}
+                margin={"10px 0"}
+                textAlign={"left"}
+              >
                 Adding description will increase your listing visibility
               </Heading>
-              <Textarea height={140} value={desc} onChange={(e) => {
-                let my_cleantext = CleanInputText(e.target.value);
-                setDesc(my_cleantext);
-              }} ></Textarea>
+              <Textarea
+                height={140}
+                value={desc}
+                onChange={(e) => {
+                  let my_cleantext = CleanInputText(e.target.value);
+                  setDesc(my_cleantext);
+                }}
+              ></Textarea>
             </Box>
           </Box>
           {/* ============================ Add amenities/unique features ============================ */}
           <Box>
-            <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+            <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
               Add amenities/unique features
             </Heading>
-            <Heading as={"h5"} size={"xs"} fontWeight={400} margin={"10px 0"} textAlign={"left"}>
+            <Heading
+              as={"h5"}
+              size={"xs"}
+              fontWeight={400}
+              margin={"10px 0"}
+              textAlign={"left"}
+            >
               All fields on this page are optional
             </Heading>
           </Box>
           {/* ============================ Amenities ============================ */}
           <Box className={style.optional_box}>
-            <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+            <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
               Amenities
             </Heading>
             <Box>
               <button
                 className={
-                  amenities.includes("Service / Goods Lift") ? style.setbtn : style.btn
+                  amenities.includes("Service / Goods Lift")
+                    ? style.setbtn
+                    : style.btn
                 }
                 onClick={handleAminities}
                 value={"Service / Goods Lift"}
@@ -1327,7 +1828,9 @@ const CommercialShowRoomRent = () => {
               </button>
               <button
                 className={
-                  amenities.includes("Maintenance Staff") ? style.setbtn : style.btn
+                  amenities.includes("Maintenance Staff")
+                    ? style.setbtn
+                    : style.btn
                 }
                 onClick={handleAminities}
                 value={"Maintenance Staff"}
@@ -1336,7 +1839,9 @@ const CommercialShowRoomRent = () => {
               </button>
               <button
                 className={
-                  amenities.includes("Rain Water Harvesting") ? style.setbtn : style.btn
+                  amenities.includes("Rain Water Harvesting")
+                    ? style.setbtn
+                    : style.btn
                 }
                 onClick={handleAminities}
                 value={"Rain Water Harvesting"}
@@ -1345,7 +1850,9 @@ const CommercialShowRoomRent = () => {
               </button>
               <button
                 className={
-                  amenities.includes("Waste Disposal") ? style.setbtn : style.btn
+                  amenities.includes("Waste Disposal")
+                    ? style.setbtn
+                    : style.btn
                 }
                 onClick={handleAminities}
                 value={"Waste Disposal"}
@@ -1375,7 +1882,9 @@ const CommercialShowRoomRent = () => {
               </button>
               <button
                 className={
-                  amenities.includes("Visitor Parking") ? style.setbtn : style.btn
+                  amenities.includes("Visitor Parking")
+                    ? style.setbtn
+                    : style.btn
                 }
                 onClick={handleAminities}
                 value={"Visitor Parking"}
@@ -1410,7 +1919,9 @@ const CommercialShowRoomRent = () => {
                 Security Personnel
               </button>
               <button
-                className={amenities.includes("Lift") ? style.setbtn : style.btn}
+                className={
+                  amenities.includes("Lift") ? style.setbtn : style.btn
+                }
                 onClick={handleAminities}
                 value={"Lift"}
               >
@@ -1420,7 +1931,7 @@ const CommercialShowRoomRent = () => {
           </Box>
           {/* ============================ Property Features ============================ */}
           <Box className={style.optional_box}>
-            <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+            <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
               Property Features
             </Heading>
             <Box>
@@ -1448,7 +1959,9 @@ const CommercialShowRoomRent = () => {
               </button>
               <button
                 className={
-                  propertyFeatures.includes("Reserved Parking") ? style.setbtn : style.btn
+                  propertyFeatures.includes("Reserved Parking")
+                    ? style.setbtn
+                    : style.btn
                 }
                 value={"Reserved Parking"}
                 onClick={handlePropertyFeature}
@@ -1481,7 +1994,7 @@ const CommercialShowRoomRent = () => {
           </Box>
           {/* ============================ Society/Building feature ============================ */}
           <Box className={style.optional_box}>
-            <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+            <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
               Society/Building feature
             </Heading>
             <Box>
@@ -1589,7 +2102,7 @@ const CommercialShowRoomRent = () => {
           </Box>
           {/* ============================ Additional Features ============================ */}
           <Box className={style.optional_box}>
-            <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+            <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
               Additional Features
             </Heading>
             <Box>
@@ -1609,7 +2122,7 @@ const CommercialShowRoomRent = () => {
 
           {/* ============================ Other Features ============================ */}
           <Box>
-            <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+            <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
               Other Features
             </Heading>
             <Box display={"grid"} textAlign={"left"} gap={2}>
@@ -1619,7 +2132,6 @@ const CommercialShowRoomRent = () => {
                 value={"Main Road Facing"}
                 onChange={handleotherfeature}
               >
-
                 Main Road Facing
               </Checkbox>
               <Checkbox
@@ -1634,20 +2146,54 @@ const CommercialShowRoomRent = () => {
           </Box>
           {/* ============================ Fire safety mesures ============================ */}
           <Box textAlign={"left"} className={style.optional_box}>
-            <Heading as={"h3"} size={"md"} margin={"10px 0"}>
+            <Heading as={"h3"} size={"sm"} margin={"10px 0"}>
               Fire safety measures include
             </Heading>
             <Box>
-              <button className={fireSafty.includes("Fire Extinguisher") ? style.setbtn : style.btn} onClick={handlefireSafty} value={"Fire Extinguisher"} > Fire Extinguisher </button>
-              <button className={fireSafty.includes("Fire Sensors") ? style.setbtn : style.btn} onClick={handlefireSafty} value={"Fire Sensors"} > Fire Sensors </button>
-              <button className={fireSafty.includes("Sprinklers") ? style.setbtn : style.btn} onClick={handlefireSafty} value={"Sprinklers"} > Sprinklers </button>
-              <button className={fireSafty.includes("Fire Hose") ? style.setbtn : style.btn} onClick={handlefireSafty} value={"Fire Hose"} > Fire Hose </button>
+              <button
+                className={
+                  fireSafty.includes("Fire Extinguisher")
+                    ? style.setbtn
+                    : style.btn
+                }
+                onClick={handlefireSafty}
+                value={"Fire Extinguisher"}
+              >
+                Fire Extinguisher
+              </button>
+              <button
+                className={
+                  fireSafty.includes("Fire Sensors") ? style.setbtn : style.btn
+                }
+                onClick={handlefireSafty}
+                value={"Fire Sensors"}
+              >
+                Fire Sensors
+              </button>
+              <button
+                className={
+                  fireSafty.includes("Sprinklers") ? style.setbtn : style.btn
+                }
+                onClick={handlefireSafty}
+                value={"Sprinklers"}
+              >
+                Sprinklers
+              </button>
+              <button
+                className={
+                  fireSafty.includes("Fire Hose") ? style.setbtn : style.btn
+                }
+                onClick={handlefireSafty}
+                value={"Fire Hose"}
+              >
+                Fire Hose
+              </button>
             </Box>
           </Box>
 
           {/* ============================ Property facing ============================ */}
           <Box className={style.optional_box}>
-            <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+            <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
               Property facing
             </Heading>
             <Box>
@@ -1655,7 +2201,7 @@ const CommercialShowRoomRent = () => {
                 className={propertyFacing == "North" ? style.setbtn : style.btn}
                 onClick={(e) => {
                   e.preventDefault();
-                  setPropertyFacing(e.target.value)
+                  setPropertyFacing(e.target.value);
                 }}
                 value={"North"}
               >
@@ -1665,7 +2211,7 @@ const CommercialShowRoomRent = () => {
                 className={propertyFacing == "South" ? style.setbtn : style.btn}
                 onClick={(e) => {
                   e.preventDefault();
-                  setPropertyFacing(e.target.value)
+                  setPropertyFacing(e.target.value);
                 }}
                 value={"South"}
               >
@@ -1675,7 +2221,7 @@ const CommercialShowRoomRent = () => {
                 className={propertyFacing == "East" ? style.setbtn : style.btn}
                 onClick={(e) => {
                   e.preventDefault();
-                  setPropertyFacing(e.target.value)
+                  setPropertyFacing(e.target.value);
                 }}
                 value={"East"}
               >
@@ -1685,7 +2231,7 @@ const CommercialShowRoomRent = () => {
                 className={propertyFacing == "West" ? style.setbtn : style.btn}
                 onClick={(e) => {
                   e.preventDefault();
-                  setPropertyFacing(e.target.value)
+                  setPropertyFacing(e.target.value);
                 }}
                 value={"West"}
               >
@@ -1697,7 +2243,7 @@ const CommercialShowRoomRent = () => {
                 }
                 onClick={(e) => {
                   e.preventDefault();
-                  setPropertyFacing(e.target.value)
+                  setPropertyFacing(e.target.value);
                 }}
                 value={"North-East"}
               >
@@ -1709,7 +2255,7 @@ const CommercialShowRoomRent = () => {
                 }
                 onClick={(e) => {
                   e.preventDefault();
-                  setPropertyFacing(e.target.value)
+                  setPropertyFacing(e.target.value);
                 }}
                 value={"North-West"}
               >
@@ -1721,7 +2267,7 @@ const CommercialShowRoomRent = () => {
                 }
                 onClick={(e) => {
                   e.preventDefault();
-                  setPropertyFacing(e.target.value)
+                  setPropertyFacing(e.target.value);
                 }}
                 value={"South-East"}
               >
@@ -1733,7 +2279,7 @@ const CommercialShowRoomRent = () => {
                 }
                 onClick={(e) => {
                   e.preventDefault();
-                  setPropertyFacing(e.target.value)
+                  setPropertyFacing(e.target.value);
                 }}
                 value={"South-West"}
               >
@@ -1744,15 +2290,26 @@ const CommercialShowRoomRent = () => {
 
           {/* ============================ Width of facing road ============================ */}
           <Box className={style.optional_box}>
-            <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+            <Heading as={"h3"} size={"sm"} textAlign={"left"}>
               Width of facing road
-            </Heading>
-            <Box display={"flex"} gap={"20px"} w={"300px"} >
-              <Input type="text" maxLength={4} variant='flushed' flex={1} required value={facingwidth} onChange={(e) => {
-                e.preventDefault();
-                setFacingWidth(NumericString(e.target.value));
-              }} />
-              <Select flex={1} onChange={(e) => setFacing(e.target.value)} value={facing}>
+            </Heading> 
+            <Box width={{base:"100%",md:300}}>
+              <Input
+                type="text"
+                maxLength={6} 
+                variant="outline"  
+                required 
+                placeholder="Enter road width" 
+                value={facingwidth}
+                onChange={(e) => {
+                  e.preventDefault();
+                  setFacingWidth(NumericString(e.target.value));
+                }}
+              />
+              <Select 
+                onChange={(e) => setFacing(e.target.value)}
+                value={facing}
+              >
                 <option value="Meter"> Meter </option>
                 <option value="Feet"> Feet </option>
               </Select>
@@ -1760,7 +2317,7 @@ const CommercialShowRoomRent = () => {
           </Box>
           {/* ============================ location advantage ============================ */}
           <Box className={style.optional_box}>
-            <Heading size={"md"} margin={"10px 0 4px 0"} textAlign={"left"}>
+            <Heading size={"sm"} margin={"10px 0 4px 0"} textAlign={"left"}>
               Location Advantages
               <Heading
                 size={"xs"}
@@ -1781,17 +2338,17 @@ const CommercialShowRoomRent = () => {
                 value={"Close to Metro Station"}
                 onClick={handlelocationadvantages}
               >
-
                 Close to Metro Station
               </button>
               <button
                 className={
-                  locationAdv.includes("Close to School") ? style.setbtn : style.btn
+                  locationAdv.includes("Close to School")
+                    ? style.setbtn
+                    : style.btn
                 }
                 value={"Close to School"}
                 onClick={handlelocationadvantages}
               >
-
                 Close to School
               </button>
               <button
@@ -1803,17 +2360,17 @@ const CommercialShowRoomRent = () => {
                 value={"Close to Hospital"}
                 onClick={handlelocationadvantages}
               >
-
                 Close to Hospital
               </button>
               <button
                 className={
-                  locationAdv.includes("Close to Market") ? style.setbtn : style.btn
+                  locationAdv.includes("Close to Market")
+                    ? style.setbtn
+                    : style.btn
                 }
                 value={"Close to Market"}
                 onClick={handlelocationadvantages}
               >
-
                 Close to Market
               </button>
               <button
@@ -1825,7 +2382,6 @@ const CommercialShowRoomRent = () => {
                 value={"Close to Railway Station"}
                 onClick={handlelocationadvantages}
               >
-
                 Close to Railway Station
               </button>
               <button
@@ -1837,12 +2393,13 @@ const CommercialShowRoomRent = () => {
                 value={"Close to Airport"}
                 onClick={handlelocationadvantages}
               >
-
                 Close to Airport
               </button>
               <button
                 className={
-                  locationAdv.includes("Close to Mall") ? style.setbtn : style.btn
+                  locationAdv.includes("Close to Mall")
+                    ? style.setbtn
+                    : style.btn
                 }
                 value={"Close to Mall"}
                 onClick={handlelocationadvantages}
@@ -1870,10 +2427,10 @@ const CommercialShowRoomRent = () => {
             margin={"4px 0"}
             textAlign={"left"}
           >
-            *Please provide correct information, otherwise your listing might get
-            blocked
-          </Heading>  
-          {isClicked && <Loading />} 
+            *Please provide correct information, otherwise your listing might
+            get blocked
+          </Heading>
+          {isClicked && <Loading />}
           <Button
             margin={"20px 0"}
             type="submit"
@@ -1885,11 +2442,10 @@ const CommercialShowRoomRent = () => {
           >
             Post Property
           </Button>
-        </form >
+        </form>
       </Box>
     </div>
   );
 };
 
 export default CommercialShowRoomRent;
-
