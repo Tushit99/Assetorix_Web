@@ -754,8 +754,7 @@ const CommercialShopRent = () => {
               <Text margin={"5px 0"}> Carpet area is mandatory </Text>
               <Box display={"grid"}>
                 <InputGroup
-                  className={style.select_land}
-                  size="sm"
+                  className={style.select_land} 
                   isAttached 
                   width={{base:"100%",md:300}}
                   variant="outline"
@@ -800,8 +799,7 @@ const CommercialShopRent = () => {
                   </Select>
                 </InputGroup>
                 <InputGroup
-                  className={style.select_land}
-                  size="sm"
+                  className={style.select_land} 
                   isAttached
                   width={{base:"100%",md:300}} 
                   variant="outline"
