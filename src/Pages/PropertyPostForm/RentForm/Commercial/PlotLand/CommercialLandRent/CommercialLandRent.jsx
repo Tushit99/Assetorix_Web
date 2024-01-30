@@ -591,8 +591,7 @@ const CommercialLandRent = () => {
         <Box textAlign={"left"} padding={"10px 0 0 0"}>
           <Heading as={"h3"} margin={"5px 0"} size={"sm"}>
             Add Area Details
-          </Heading>
-          <Text margin={"5px 0"}> Atleast one area type is mandatory </Text>
+          </Heading> 
           <InputGroup isAttached width={{ base: "100%", md: 300 }}>
             <Input
               type="text"

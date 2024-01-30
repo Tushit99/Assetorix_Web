@@ -849,7 +849,7 @@ const IndependentBuilderRentUpdate = () => {
             <Heading as={"h3"} margin={"5px 0"} size={"md"}>
               Add Area Details
             </Heading>
-            <Text margin={"5px 0"}> Atleast one area type is mandatory </Text>
+            
             <ButtonGroup
               className={style.select_land}
               size="sm"

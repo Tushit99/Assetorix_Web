@@ -675,16 +675,10 @@ const IndustrialLandRentUpdate = () => {
 
                 {/* ============================ add area details =============================== */}
                 <Box textAlign={"left"} padding={"10px 0 0 0"}>
-                    <Heading as={"h3"} margin={"5px 0"} size={"md"}>
+                    <Heading as={"h3"} size={"md"}>
                         Add Area Details
-                    </Heading>
-                    <Text margin={"5px 0"}> Atleast one area type is mandatory </Text>
-                    <ButtonGroup
-                        className={style.select_land}
-                        size="sm"
-                        isAttached
-                        variant="outline"
-                    >
+                    </Heading> 
+                    <InputGroup isAttached width={{base:"100%",md:300}}>
                         <Input
                             type="text"
                             padding={"0 2px"}
@@ -694,7 +688,7 @@ const IndustrialLandRentUpdate = () => {
                                 setPlotArea(NumericString(e.target.value));
                             }}
                             required />
-                        <select value={areaPer} onChange={(e) => {
+                        <Select value={areaPer} onChange={(e) => {
                             setAreaPer(e.target.value);
                         }} className={style.select} required>
                             <option value="sq.ft">sq.ft</option>
@@ -715,8 +709,8 @@ const IndustrialLandRentUpdate = () => {
                             <option value="rood">rood</option>
                             <option value="chataks">chataks</option>
                             <option value="perch">perch</option>
-                        </select>
-                    </ButtonGroup>
+                        </Select>
+                    </InputGroup>
                 </Box>
 
                 {/* ========================== Property Dimensions ========================== */}

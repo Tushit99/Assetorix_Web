@@ -4,6 +4,7 @@ import {
   Button,
   ButtonGroup,
   Heading,
+  Grid , 
   Input,
   InputGroup,
   Select,
@@ -478,9 +479,11 @@ const AgriculturalLandRent = () => {
     <Box className="perfectwidth">
       <form onSubmit={handleSubmitData}>
         <Box className={style.location_form}>
-          <Heading size={"lg"}>Where is your property located?</Heading>
-          <Heading size={"sm"}>
-            An accurate location helps you connect with the right buyers.
+          <Heading size={"lg"} textAlign={"center"}>
+            Where is your Agricultural / Farm Land located?
+          </Heading>
+          <Heading size={"sm"} textAlign={"left"}>
+            Location Detail
           </Heading>
 
           <Input
@@ -546,14 +549,14 @@ const AgriculturalLandRent = () => {
 
         {/* ============================ add area details =============================== */}
         <Box textAlign={"left"}>
-          <Heading as={"h3"} margin={"5px 0"} size={"sm"}>
+          <Heading as={"h3"} size={"sm"}>
             Add Area Details
-          </Heading>
-          <Text margin={"5px 0"}> Atleast one area type is mandatory </Text>
-          <InputGroup>
+          </Heading> 
+          <InputGroup isAttached width={{ base: "100%", md: 300 }}>
             <Input
-              type="text" 
-              variant={"outline"} 
+              type="text"
+              variant={"outline"}
+              borderRadius={0}
               placeholder="Enter area detail"
               value={plotArea}
               onChange={(e) => {
@@ -562,12 +565,13 @@ const AgriculturalLandRent = () => {
               }}
               required
             />
-            <Select 
-              variant={"outline"} 
+            <Select
+              variant={"outline"}
+              borderRadius={0}
               value={areaPer}
               onChange={(e) => {
                 setAreaPer(e.target.value);
-              }} 
+              }}
               required
             >
               <option value="sq.ft">sq.ft</option>
@@ -595,43 +599,44 @@ const AgriculturalLandRent = () => {
         {/* ========================== Property Dimensions ========================== */}
         <Box as={"div"} textAlign={"left"} padding={"10px 0"}>
           <Heading as={"h3"} size={"sm"}>
-            
             Property Dimensions (Optional)
           </Heading>
-          <Input
-            type={"text"}
-            variant="flushed"
-            padding={"0 6px"}
-            margin={"4px 0"}
-            value={plotLength}
-            onChange={(e) => {
-              setplotLength(NumericString(e.target.value));
-            }}
-            placeholder={`Length of plot (in ${areaPer})`}
-          />
-          <Input
-            type={"text"}
-            variant="flushed"
-            padding={"0 6px"}
-            margin={"4px 0"}
-            value={plotBreadth}
-            onChange={(e) => {
-              setPlotBreadth(NumericString(e.target.value));
-            }}
-            placeholder={`Breadth of plot (in ${areaPer})`}
-          />
+          <Grid gap={2}>
+            <Input
+              type={"text"}
+              variant={"outline"}
+              width={{ base: "100%", md: 300 }}
+              value={plotLength}
+              onChange={(e) => {
+                setplotLength(NumericString(e.target.value));
+              }}
+              placeholder={`Length of plot (in ${areaPer})`}
+            />
+            <Input
+              type={"text"}
+              variant={"outline"} 
+              width={{ base: "100%", md: 300 }}
+              value={plotBreadth}
+              onChange={(e) => {
+                setPlotBreadth(NumericString(e.target.value));
+              }}
+              placeholder={`Breadth of plot (in ${areaPer})`}
+            />
+          </Grid>
         </Box>
 
         {/* ========================== Width of facing road ========================== */}
-        <Box className={style.optional_box}>
+        <Box>
           <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Width of facing road
           </Heading>
-          <Box display={"flex"} gap={"20px"} w={"300px"}>
+          <InputGroup isAttached width={{base:"100%",md:300}}>
             <Input
               type="text"
-              maxLength={4}
-              variant="flushed"
+              maxLength={4} 
+              variant={"outline"} 
+              borderRadius={0} 
+              placeholder="Enter road width" 
               flex={1}
               required
               value={facingwidth}
@@ -642,19 +647,19 @@ const AgriculturalLandRent = () => {
             />
             <Select
               flex={1}
+              borderRadius={0} 
               onChange={(e) => setFacing(e.target.value)}
               value={facing}
             >
               <option value="Meter"> Meter </option>
               <option value="Feet"> Feet </option>
             </Select>
-          </Box>
+          </InputGroup>
         </Box>
 
         {/* ========================== No of open sides ========================== */}
         <Box textAlign={"left"} className={style.optional_box}>
           <Heading as={"h3"} size={"sm"}>
-            
             No. of open sides
           </Heading>
           <Box textAlign={"left"} padding={"10px 0 0 0"}>
@@ -694,7 +699,6 @@ const AgriculturalLandRent = () => {
         {/* ============================== Construction Property =============================== */}
         <Box textAlign={"left"} className={style.optional_box}>
           <Heading as={"h3"} size={"sm"}>
-            
             Any construction done on this property?
           </Heading>
           <Box textAlign={"left"} padding={"10px 0 0 0"}>
@@ -727,7 +731,6 @@ const AgriculturalLandRent = () => {
           display={ConstructionOnProperty == "Yes" ? "grid" : "none"}
         >
           <Heading as={"h3"} size={"sm"}>
-            
             What type of construction has been done?
           </Heading>
           <Box>
@@ -738,7 +741,6 @@ const AgriculturalLandRent = () => {
                 constructionType.includes("Shed") ? style.setbtn : style.btn
               }
             >
-              
               Shed
             </button>
             <button
@@ -748,7 +750,6 @@ const AgriculturalLandRent = () => {
                 constructionType.includes("Room(s)") ? style.setbtn : style.btn
               }
             >
-              
               Room(s)
             </button>
             <button
@@ -758,7 +759,6 @@ const AgriculturalLandRent = () => {
                 constructionType.includes("Washroom") ? style.setbtn : style.btn
               }
             >
-              
               Washroom
             </button>
             <button
@@ -768,7 +768,6 @@ const AgriculturalLandRent = () => {
                 constructionType.includes("Other") ? style.setbtn : style.btn
               }
             >
-              
               Other
             </button>
           </Box>
@@ -876,10 +875,10 @@ const AgriculturalLandRent = () => {
           <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Possession By
           </Heading>
-          <Box>
-            <Select
-              variant={"filled"}
-              padding={"0 10px"}
+          <Box> 
+            <Select  
+              variant={"outline"}
+              width={{base:"100%",md:300}} 
               value={expectedByYear}
               onChange={(e) => setExpectedByYear(e.target.value)}
             >
@@ -1155,7 +1154,6 @@ const AgriculturalLandRent = () => {
               textAlign={"left"}
               margin={"10px 0"}
             >
-              
               Upload Your Property image
             </Heading>
           </Box>
@@ -1176,7 +1174,6 @@ const AgriculturalLandRent = () => {
                     role="button"
                     onClick={selectFiles}
                   >
-                    
                     Browse
                   </Text>
                 </>
@@ -1233,6 +1230,7 @@ const AgriculturalLandRent = () => {
           <Textarea
             height={140}
             value={desc}
+            placeholder="Add Description"  
             onChange={(e) => {
               let my_cleantext = CleanInputText(e.target.value);
               setDesc(my_cleantext);

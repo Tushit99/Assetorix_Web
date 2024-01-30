@@ -660,8 +660,7 @@ const AgriculturalLandRentUpdate = () => {
         <Box textAlign={"left"} padding={"10px 0 0 0"}>
           <Heading as={"h3"} margin={"5px 0"} size={"md"}>
             Add Area Details
-          </Heading>
-          <Text margin={"5px 0"}> Atleast one area type is mandatory </Text>
+          </Heading> 
           <ButtonGroup
             className={style.select_land}
             size="sm"
