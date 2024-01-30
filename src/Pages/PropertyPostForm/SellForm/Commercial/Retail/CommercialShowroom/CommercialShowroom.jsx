@@ -2114,14 +2114,14 @@ const CommercialShowroom = () => {
               </button>
               <button
                 className={
-                  buildingFeature.includes("+ Grocery Shop")
+                  buildingFeature.includes("Grocery Shop")
                     ? style.setbtn
                     : style.btn
                 }
                 onClick={HandleBuildingFeature}
-                value={"+ Grocery Shop"}
+                value={"Grocery Shop"}
               >
-                + Grocery Shop
+                Grocery Shop
               </button>
 
               <button

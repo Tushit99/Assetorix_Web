@@ -1261,7 +1261,8 @@ const CommercialShowRoomRent = () => {
                 <Menu>
                   <MenuButton
                     as={Button}
-                    borderRadius={0}
+                    borderRadius={0} 
+                    variant={"outline"} 
                     rightIcon={<ChevronDownIcon />}
                   >
                     Select business type
@@ -1669,14 +1670,15 @@ const CommercialShowRoomRent = () => {
               <Heading
                 as={"h4"}
                 size={"sm"}
-                fontWeight={700}
-                textAlign={"left"}
+                fontWeight={700} 
+                textAlign={"left"} 
               >
                 Lock - in Period
               </Heading>
               <Input
                 type="text"
                 width={{ base: "100%", md: 300 }}
+                placeholder="Enter Lock-in Period" 
                 variant={"outline"}
                 value={lockPeriod}
                 onChange={(e) => setlockPeriod(NumericString(e.target.value))}
@@ -1773,17 +1775,7 @@ const CommercialShowRoomRent = () => {
                 textAlign={"left"}
               >
                 Add Description and Unique Features of your Property
-              </Heading>
-              <Heading
-                as={"h3"}
-                size={"xs"}
-                fontWeight={400}
-                color={"#777777"}
-                margin={"10px 0"}
-                textAlign={"left"}
-              >
-                Adding description will increase your listing visibility
-              </Heading>
+              </Heading> 
               <Textarea
                 height={140}
                 value={desc}
@@ -1800,11 +1792,11 @@ const CommercialShowRoomRent = () => {
               Add amenities/unique features
             </Heading>
             <Heading
-              as={"h5"}
-              size={"xs"}
+              as={"h5"} 
+              placeholder="Add Description" 
               fontWeight={400}
               margin={"10px 0"}
-              textAlign={"left"}
+              textAlign={"left"} 
             >
               All fields on this page are optional
             </Heading>
@@ -2066,14 +2058,14 @@ const CommercialShowRoomRent = () => {
               </button>
               <button
                 className={
-                  buildingFeature.includes("+ Grocery Shop")
+                  buildingFeature.includes("Grocery Shop")
                     ? style.setbtn
                     : style.btn
                 }
                 onClick={HandleBuildingFeature}
-                value={"+ Grocery Shop"}
+                value={"Grocery Shop"}
               >
-                + Grocery Shop
+                Grocery Shop
               </button>
 
               <button

@@ -852,10 +852,7 @@ const HotelResortRent = () => {
             </Box>
 
             {/* ====================== Price Details ================================ */}
-            <Box marginTop={"50"}>
-                <Heading as={"h2"} size={"md"} margin={"10px 0"} textAlign={"left"}>
-                    What price you are expecting for this property?
-                </Heading>
+            <Box marginTop={"50"}> 
                 <Box display={"flex"} alignItems={"center"} gap={5}>
                     <Box display={"grid"} gap={0}>
                         <Heading
