@@ -607,7 +607,7 @@ const CommercialShowRoomRent = () => {
   return (
     <div>
       <Box>
-        <Heading margin={"10px 0"} size={"sm"}>
+        <Heading size={"sm"}>
           Your shop is located inside
         </Heading>
         <Box display={"flex"} flexWrap={"wrap"} gap={4}>
@@ -667,7 +667,7 @@ const CommercialShowRoomRent = () => {
         <form onSubmit={handleSubmitData}>
           {/* property location */}
           <Box className={style.location_form}>
-            <Heading size={"lg"} textAlign={"center"}>Where is your property located?</Heading>
+            <Heading size={"lg"} textAlign={"center"} >Where is your Commercial Showrooms located?</Heading>
             <Heading size={"sm"} textAlign={"left"}>
               Location Detail 
             </Heading> 
@@ -2286,19 +2286,20 @@ const CommercialShowRoomRent = () => {
               Width of facing road
             </Heading> 
             <InputGroup isAttached width={{base:"100%",md:300}}>
-              <Input
+              <Input 
                 type="text"
                 maxLength={6} 
                 variant="outline"  
                 required 
-                placeholder="Enter road width" 
+                placeholder="Enter road width"  
                 value={facingwidth}
                 onChange={(e) => {
                   e.preventDefault();
                   setFacingWidth(NumericString(e.target.value));
                 }}
-              />
-              <Select 
+              /> 
+              <Select  
+                borderRadius={0} 
                 onChange={(e) => setFacing(e.target.value)}
                 value={facing}
               >

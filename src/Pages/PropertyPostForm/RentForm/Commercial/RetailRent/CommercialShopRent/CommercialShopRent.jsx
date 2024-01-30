@@ -614,7 +614,7 @@ const CommercialShopRent = () => {
     <div>
       <Box>
         <Heading margin={"10px 0"} size={"sm"}>
-          Your shop is located inside
+          Your shop is located inside 
         </Heading>
         <Box display={"flex"} flexWrap={"wrap"} gap={4}>
           <button
@@ -674,8 +674,8 @@ const CommercialShopRent = () => {
           {/* property location */}
           <Box className={style.location_form}>
             <Heading size={"lg"} textAlign={"center"}>
-              Where is your property located?
-            </Heading>
+              Where is your Commercial Shops located? 
+            </Heading> 
             <Heading size={"sm"} textAlign={"left"}>
               Location Detail
             </Heading>
