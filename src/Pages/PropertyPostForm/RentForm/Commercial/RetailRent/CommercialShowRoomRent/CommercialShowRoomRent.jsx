@@ -1779,6 +1779,7 @@ const CommercialShowRoomRent = () => {
               <Textarea
                 height={140}
                 value={desc}
+                placeholder="Add Description"  
                 onChange={(e) => {
                   let my_cleantext = CleanInputText(e.target.value);
                   setDesc(my_cleantext);
@@ -2281,13 +2282,13 @@ const CommercialShowRoomRent = () => {
           </Box>
 
           {/* ============================ Width of facing road ============================ */}
-          <Box className={style.optional_box}>
+          <Box>
             <Heading as={"h3"} size={"sm"} textAlign={"left"}>
               Width of facing road
             </Heading>
-            <Box display={"flex"} width={{ base: "100%", md: 300 }}>
+            <InputGroup isAttached width={{ base: "100%", md: 300 }}>
               <Input
-                type="text"
+                type="text"  
                 maxLength={6}
                 variant="outline"
                 required
@@ -2297,16 +2298,16 @@ const CommercialShowRoomRent = () => {
                   e.preventDefault();
                   setFacingWidth(NumericString(e.target.value));
                 }}
-              />
-              <Select
-                borderRadius={0}
+              /> 
+              <Select  
+                borderRadius={0}  
                 onChange={(e) => setFacing(e.target.value)}
                 value={facing}
               >
                 <option value="Meter"> Meter </option>
                 <option value="Feet"> Feet </option>
               </Select>
-            </Box>
+            </InputGroup>
           </Box>
           {/* ============================ location advantage ============================ */}
           <Box className={style.optional_box}>

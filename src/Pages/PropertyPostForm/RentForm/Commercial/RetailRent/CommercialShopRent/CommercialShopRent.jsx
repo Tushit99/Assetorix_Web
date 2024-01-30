@@ -1825,7 +1825,8 @@ const CommercialShopRent = () => {
                 Yearly rent is expected to increase by
               </Heading>
               <Input
-                type="text"
+                type="text" 
+                width={{base:"100%",md:300}} 
                 placeholder="Percentage (%) of increase in rent"
                 onChange={(e) => setRentIncreasePercent(e.target.value)}
                 value={rentIncreasePercent}
@@ -2425,14 +2426,14 @@ const CommercialShopRent = () => {
                 South-West
               </button>
             </Box>
-          </Box>
+          </Box> 
 
           {/* ============================ Width of facing road ============================ */}
-          <Box className={style.optional_box}>
+          <Box>
             <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
               Width of facing road
             </Heading> 
-            <Box display={"flex"} width={{base:"100%",md:300}}>
+            <InputGroup isAttached width={{base:"100%",md:300}}>
               <Input 
                 type="text"
                 variant="outline" 
@@ -2452,7 +2453,7 @@ const CommercialShopRent = () => {
                 <option value="Meter"> Meter </option>
                 <option value="Feet"> Feet </option>
               </Select>
-            </Box>
+            </InputGroup>
           </Box>
 
           {/* ============================ location advantage ============================ */}
