@@ -1794,8 +1794,8 @@ const CommercialShowRoomRent = () => {
             <Heading
               as={"h5"} 
               placeholder="Add Description" 
-              fontWeight={400}
-              margin={"10px 0"}
+              fontWeight={400} 
+              size={"xs"} 
               textAlign={"left"} 
             >
               All fields on this page are optional
@@ -2285,7 +2285,7 @@ const CommercialShowRoomRent = () => {
             <Heading as={"h3"} size={"sm"} textAlign={"left"}>
               Width of facing road
             </Heading> 
-            <Box width={{base:"100%",md:300}}>
+            <InputGroup isAttached width={{base:"100%",md:300}}>
               <Input
                 type="text"
                 maxLength={6} 
@@ -2305,7 +2305,7 @@ const CommercialShowRoomRent = () => {
                 <option value="Meter"> Meter </option>
                 <option value="Feet"> Feet </option>
               </Select>
-            </Box>
+            </InputGroup>
           </Box>
           {/* ============================ location advantage ============================ */}
           <Box className={style.optional_box}>
