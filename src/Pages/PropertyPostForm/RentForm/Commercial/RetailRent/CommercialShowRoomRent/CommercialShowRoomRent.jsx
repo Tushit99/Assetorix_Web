@@ -2283,11 +2283,11 @@ const CommercialShowRoomRent = () => {
           {/* ============================ Width of facing road ============================ */}
           <Box className={style.optional_box}>
             <Heading as={"h3"} size={"sm"} textAlign={"left"}>
-              Width of facing road
+              Width of facing road 
             </Heading> 
-            <InputGroup isAttached width={{base:"100%",md:300}}>
+            <Box display={"flex"} width={{base:"100%",md:300}}>
               <Input 
-                type="text"
+                type="text" 
                 maxLength={6} 
                 variant="outline"  
                 required 
@@ -2299,14 +2299,14 @@ const CommercialShowRoomRent = () => {
                 }}
               /> 
               <Select  
-                borderRadius={0} 
+                borderRadius={0}  
                 onChange={(e) => setFacing(e.target.value)}
                 value={facing}
               >
                 <option value="Meter"> Meter </option>
                 <option value="Feet"> Feet </option>
               </Select>
-            </InputGroup>
+            </Box>
           </Box>
           {/* ============================ location advantage ============================ */}
           <Box className={style.optional_box}>

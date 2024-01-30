@@ -2432,12 +2432,13 @@ const CommercialShopRent = () => {
             <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
               Width of facing road
             </Heading>
-            <InputGroup isAttached>
-              <Input
+            <InputGroup isAttached width={{base:"100%",md:300}}>
+              <Input 
                 type="text"
-                variant="flushed" 
+                variant="outline" 
                 maxLength={4}
-                required
+                required 
+                placeholder="Enter road width"
                 value={facingwidth}
                 onChange={(e) => {
                   e.preventDefault();
