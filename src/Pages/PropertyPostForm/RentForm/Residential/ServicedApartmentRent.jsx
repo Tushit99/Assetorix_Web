@@ -85,7 +85,8 @@ const ServicedApartmentRent = () => {
   const [availableFrom, setavailableFrom] = useState("");
   const [expectedRentel, setExpectedRentel] = useState("");
   const [annualDuesPayble, setAnnualDuesPayble] = useState("");
-  const [isClicked, setIsClicked] = useState(false);
+  const [isClicked, setIsClicked] = useState(false); 
+  const [currency, setCurrency] = useState("₹"); 
   const [clickCount, setClickCount] = useState(0);
   const navigate = useNavigate();
   // state for drop box images

@@ -79,7 +79,8 @@ const StudioApartmentRent = () => {
   const [agreementDuration, setagreementDuration] = useState("");
   const [noticePeriod, setNoticePeriod] = useState("");
   const [availableFrom, setavailableFrom] = useState("");
-  const [isClicked, setIsClicked] = useState(false);
+  const [isClicked, setIsClicked] = useState(false); 
+  const [currency, setCurrency] = useState("₹"); 
   const [clickCount, setClickCount] = useState(0);
   const navigate = useNavigate();
   // state for drop box images
