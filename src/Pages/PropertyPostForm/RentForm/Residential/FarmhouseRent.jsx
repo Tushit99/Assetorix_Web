@@ -69,6 +69,7 @@ const FarmhouseRent = () => {
   const [floorOn, setFloorOn] = useState("Ground");
   const [plotArea, setPlotArea] = useState("");
   const [desc, setDesc] = useState("");
+  const [currency, setCurrency] = useState("₹"); 
   const [pincollection, setPinCollection] = useState([]);
   const [willingTo, setWillingTo] = useState([]);
   const [preferredAgreement, setpreferredAgreement] = useState("");
@@ -733,7 +734,7 @@ const FarmhouseRent = () => {
         <Box textAlign={"left"} padding={"10px 0"}>
           <Heading as={"h3"} margin={"5px 0"} size={"sm"}>
             Add Area Details
-          </Heading> 
+          </Heading>
           <ButtonGroup
             className={style.select_land}
             size="sm"
@@ -1401,19 +1402,29 @@ const FarmhouseRent = () => {
           <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Rent Details
           </Heading>
-          <Box>
-            <Input
-              type="text"
-              w={"40%"}
-              borderRadius={0}
-              value={priceSqr}
-              onChange={(e) => {
-                e.preventDefault();
-                setPriceSqr(NumericString(e.target.value));
-              }}
-              placeholder={"₹ Expected Rent"}
-            />
-          </Box>
+          <InputGroup w={300} gap={2}>
+              <Select
+                w={"-moz-fit-content"}
+                value={currency}
+                borderRadius={0}
+                onChange={(e) => setCurrency(e.target.value)}
+              >
+                <option value="₹">₹ INR </option>
+                <option value="$">$ USD </option>
+              </Select>
+              <Input
+                type="text"
+                value={pricedetail}
+                maxLength={"10"}
+                placeholder={`Price`}
+                required
+                borderRadius={0}
+                w={200}
+                onChange={(e) => {
+                  setPricedetail(NumericString(e.target.value));
+                }}
+              />
+            </InputGroup> 
           {/* pricing checkbox */}
           <Box display={"flex"} flexWrap={"wrap"} gap={5}>
             <Checkbox

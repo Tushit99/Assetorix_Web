@@ -90,6 +90,7 @@ const Independent = () => {
   const [annualDuesPayble, setAnnualDuesPayble] = useState("");
   const [currency, setCurrency] = useState("₹");
   const [isClicked, setIsClicked] = useState(false);
+  const [currency, setCurrency] = useState("₹"); 
   const [clickCount, setClickCount] = useState(0);
   const navigate = useNavigate();
   // state for drop box images

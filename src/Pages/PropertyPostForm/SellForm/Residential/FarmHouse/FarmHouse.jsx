@@ -1486,7 +1486,7 @@ const FarmHouse = () => {
                   setPricedetail(NumericString(e.target.value));
                 }}
               />
-            </InputGroup>
+            </InputGroup> 
           </Box>
         </Box>
         <Box

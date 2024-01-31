@@ -1440,18 +1440,29 @@ const ServicedApartmentRent = () => {
             Rent Details
           </Heading>
           <Box>
-            <Input
-              maxLength={"10"}
-              type="text"
-              w={"40%"}
-              borderRadius={0}
-              value={priceSqr}
-              onChange={(e) => {
-                e.preventDefault();
-                setPriceSqr(NumericString(e.target.value));
-              }}
-              placeholder={"₹ Expected Rent"}
-            />
+          <InputGroup w={300} gap={2}>
+              <Select
+                w={"-moz-fit-content"}
+                value={currency}
+                borderRadius={0}
+                onChange={(e) => setCurrency(e.target.value)}
+              >
+                <option value="₹">₹ INR </option>
+                <option value="$">$ USD </option>
+              </Select>
+              <Input
+                type="text"
+                value={pricedetail}
+                maxLength={"10"}
+                placeholder={`Price`}
+                required
+                borderRadius={0}
+                w={200}
+                onChange={(e) => {
+                  setPricedetail(NumericString(e.target.value));
+                }}
+              />
+            </InputGroup> 
           </Box>
           {/* pricing checkbox */}
           <Box display={"flex"} flexWrap={"wrap"} gap={5}>
