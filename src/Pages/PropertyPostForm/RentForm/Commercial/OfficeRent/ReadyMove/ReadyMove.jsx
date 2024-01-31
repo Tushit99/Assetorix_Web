@@ -1115,22 +1115,18 @@ const ReadyMove = () => {
         <Box textAlign={"left"} margin={"6px 0 14px 0"}>
           <Heading
             as={"h3"}
-            size={"sm"}
-            margin={"30px 0 10px 0"}
+            size={"sm"} 
             textAlign={"left"}
           >
             Floor Details
-          </Heading>
-          <Text textAlign={"left"} margin={"10px 0"}>
-            Total no of floors and your floor details
-          </Text>
-          <Box display={"flex"} alignItems={"center"}>
+          </Heading> 
+          <Box display={"flex"} alignItems={"center"}> 
             <Input
               type="text"
               value={totalfloors}
               borderRadius={0}
               variant={"outline"}
-              placeholder="Enter total floor"
+              placeholder="Enter total floor" 
               onChange={(e) => {
                 const nowval = e.target.value > 90;
                 if (nowval) {

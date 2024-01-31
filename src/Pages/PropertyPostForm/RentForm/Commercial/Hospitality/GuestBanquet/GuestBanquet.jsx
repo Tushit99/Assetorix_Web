@@ -48,7 +48,7 @@ const GuestBanquetRent = () => {
   const [desc, setDesc] = useState("");
   const [pincollection, setPinCollection] = useState([]);
   const [qualityRating, setqualityRating] = useState("");
-
+  const [currency, setCurrency] = useState("₹"); 
   const [additionalPrice, setAdditionalPrice] = useState(false);
   const [maintenancePrice, setMaintenancePrice] = useState("");
   const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
@@ -847,18 +847,29 @@ const GuestBanquetRent = () => {
               {" "}
               Price Detail{" "}
             </Heading>
-            <Heading as={"h4"} size={"xs"} fontWeight={400} textAlign={"left"}>
-              {isCountry.country == "india" ? "₹" : "$"} Expected Rent
-            </Heading>
-            <Input
-              type="text"
-              maxLength={"9"}
-              value={pricedetail}
-              required
-              onChange={(e) => {
-                setPricedetail(NumericString(e.target.value));
-              }}
-            />
+            <InputGroup w={300} gap={2}>
+              <Select
+                w={"-moz-fit-content"}
+                value={currency}
+                borderRadius={0}
+                onChange={(e) => setCurrency(e.target.value)}
+              >
+                <option value="₹">₹ INR </option>
+                <option value="$">$ USD </option>
+              </Select>
+              <Input
+                type="text"
+                value={pricedetail}
+                maxLength={"10"}
+                placeholder={`Price`}
+                required
+                borderRadius={0}
+                w={200}
+                onChange={(e) => {
+                  setPricedetail(NumericString(e.target.value));
+                }}
+              />
+            </InputGroup> 
           </Box>
         </Box>
         <Box>

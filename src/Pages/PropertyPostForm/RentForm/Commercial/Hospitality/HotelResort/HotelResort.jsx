@@ -52,7 +52,7 @@ const HotelResortRent = () => {
   const [isClicked, setIsClicked] = useState(false);
   const [clickCount, setClickCount] = useState(0);
   const navigate = useNavigate();
-
+  const [currency, setCurrency] = useState("₹"); 
   const [additionalPrice, setAdditionalPrice] = useState(false);
   const [maintenancePrice, setMaintenancePrice] = useState("");
   const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
@@ -842,19 +842,30 @@ const HotelResortRent = () => {
       <Box>
         <Box display={"flex"} alignItems={"center"} gap={5}>
           <Box display={"grid"} gap={0}>
-            <Heading as={"h3"} size={"sm"} textAlign={"left"}> Price Detail </Heading>
-            <Heading as={"h3"} size={"xs"} fontWeight={400} textAlign={"left"}>
-              {isCountry.country == "india" ? "₹" : "$"} Expected Rent
-            </Heading>
-            <Input
-              type="text"
-              value={pricedetail} 
-              width={{base:"100%",md:300}}
-              required
-              onChange={(e) => {
-                setPricedetail(NumericString(e.target.value));
-              }}  
-            />
+            <Heading as={"h3"} size={"sm"} textAlign={"left"}> Price Detail </Heading> 
+            <InputGroup w={300} gap={2}>
+              <Select
+                w={"-moz-fit-content"}
+                value={currency}
+                borderRadius={0}
+                onChange={(e) => setCurrency(e.target.value)}
+              >
+                <option value="₹">₹ INR </option>
+                <option value="$">$ USD </option>
+              </Select>
+              <Input
+                type="text"
+                value={pricedetail}
+                maxLength={"10"}
+                placeholder={`Price`}
+                required
+                borderRadius={0}
+                w={200}
+                onChange={(e) => {
+                  setPricedetail(NumericString(e.target.value));
+                }}
+              />
+            </InputGroup> 
           </Box>
         </Box>
         <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>

@@ -69,10 +69,8 @@ const BareShell = () => {
   const [airCondition, setAirCondition] = useState("");
   const [locality, setLocality] = useState("");
   const [availableFrom, setavailableFrom] = useState("");
-  const [areaPer, setAreaPer] = useState("sq.ft");
-  const [availability, setAvailability] = useState("");
-  const [fromyear, setFromyear] = useState("");
-  const [expectedyear, setExpectedYear] = useState("");
+  const [areaPer, setAreaPer] = useState("sq.ft"); 
+  const [fromyear, setFromyear] = useState(""); 
   const [ownership, setOwnerShip] = useState("");
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [amenities, setAminity] = useState([]);
@@ -85,6 +83,7 @@ const BareShell = () => {
   const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
   const [zoneType, setZoneType] = useState("Industrial");
   const [clickCount, setClickCount] = useState(0);
+  const [currency, setCurrency] = useState("₹");  
   const [isClicked, setIsClicked] = useState(false);
   const navigate = useNavigate();
   // state for drop box images
@@ -553,7 +552,7 @@ const BareShell = () => {
             Public and Semi Public use
           </option>
         </Select>
-        <Input 
+        <Input
           type="text"
           placeholder={"Enter pincode"}
           required
@@ -622,7 +621,7 @@ const BareShell = () => {
           <InputGroup display={"flex"} alignItems={"center"} w={400}>
             <Input
               type="text"
-              value={plotArea}
+              value={plotArea} 
               required
               placeholder={"Super built-up Area"}
               onChange={(e) => {
@@ -1520,16 +1519,29 @@ const BareShell = () => {
               >
                 Expected Lease Rent
               </Heading>
-              <Input
-                type="text"
-                value={pricedetail}
-                required
-                placeholder={`${isCountry.country == "india" ? "₹" : "$"
-                  } Expectes Rent`}
-                onChange={(e) => {
-                  setPricedetail(NumericString(e.target.value));
-                }}
-              />
+              <InputGroup w={300} gap={2}>
+                <Select
+                  w={"-moz-fit-content"}
+                  value={currency}
+                  borderRadius={0}
+                  onChange={(e) => setCurrency(e.target.value)}
+                >
+                  <option value="₹">₹ INR </option>
+                  <option value="$">$ USD </option>
+                </Select>
+                <Input
+                  type="text"
+                  value={pricedetail}
+                  maxLength={"10"}
+                  placeholder={`Price`}
+                  required
+                  borderRadius={0}
+                  w={200}
+                  onChange={(e) => {
+                    setPricedetail(NumericString(e.target.value));
+                  }}
+                />
+              </InputGroup>
             </Box>
             {/* <Box display={"grid"} gap={0}>
                             <Heading
@@ -2090,7 +2102,7 @@ const BareShell = () => {
             LIF(s)
           </button>
         </Box>
-      </Box> 
+      </Box>
 
       {/* location advantage (near to which place) */}
       <Box className={style.optional_box}>
@@ -2189,7 +2201,7 @@ const BareShell = () => {
             Close to highway
           </button>
         </Box>
-      </Box> 
+      </Box>
 
       {/* warning line */}
       <Heading
@@ -2202,8 +2214,8 @@ const BareShell = () => {
       >
         *Please provide correct information, otherwise your listing might get
         blocked
-      </Heading> 
-      
+      </Heading>
+
       {/* form submit button */}
       {isClicked && <Loading />}
       <Button
