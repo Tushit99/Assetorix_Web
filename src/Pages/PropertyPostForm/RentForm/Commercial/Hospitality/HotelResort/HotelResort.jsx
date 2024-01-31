@@ -578,9 +578,7 @@ const HotelResortRent = () => {
                             required
                             maxLength={2} />
                     </Box>
-                </Box>
-
-
+                </Box> 
 
                 {/* ====================================== */}
                 {/* add area details */}

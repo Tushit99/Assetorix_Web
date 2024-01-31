@@ -550,7 +550,8 @@ const GuestBanquetRent = () => {
             <Text> No. of rooms </Text>
             <Input
               type="text"
-              variant={"outline"}
+              variant={"outline"} 
+              placeholder="Enter no. of rooms"
               width={{ base: "100%", md: 300 }}
               maxLength={"2"}
               onChange={(e) => {
@@ -564,7 +565,8 @@ const GuestBanquetRent = () => {
             <Text> No. of washroom </Text>
             <Input
               type="text"
-              variant={"outline"}
+              variant={"outline"} 
+              placeholder="Enter no. of washrooms"
               width={{ base: "100%", md: 300 }}
               onChange={(e) => {
                 setwashrooms(NumericString(e.target.value));
@@ -1040,6 +1042,7 @@ const GuestBanquetRent = () => {
         <Textarea
           height={140}
           value={desc}
+          placeholder="Add Description"  
           onChange={(e) => {
             let my_cleantext = CleanInputText(e.target.value);
             setDesc(my_cleantext);
