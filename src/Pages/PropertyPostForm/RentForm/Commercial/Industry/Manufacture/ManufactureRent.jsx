@@ -16,27 +16,26 @@ import { Checkbox } from "@chakra-ui/react";
 import style from "../../RentComercial.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { CleanInputText, NumericString } from "../../../../code";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../../../Loading";
-
 
 const ManufactureRent = () => {
   const isCountry = useSelector((state) => state.gloalval);
   const toast = useToast();
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
-  const [pincode, setPincode] = useState(0);
+  const [pincode, setPincode] = useState("");
   const [state, setState] = useState("");
   const [locality, setLocality] = useState("");
   const [address, setaddress] = useState("");
-  const [washrooms, setwashrooms] = useState(0);
+  const [washrooms, setwashrooms] = useState("");
   const [areaPer, setAreaPer] = useState("sq.ft");
   const [availability, setAvailability] = useState("");
   const [fromyear, setFromyear] = useState("");
   const [expectedyear, setExpectedYear] = useState("");
-  const [pricedetail, setPricedetail] = useState(""); 
+  const [pricedetail, setPricedetail] = useState("");
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
@@ -63,7 +62,6 @@ const ManufactureRent = () => {
   const fileInputRef = useRef(null);
   // please don'nt change any function without any prior knowledge
 
-
   const handleSubmitData = async (e) => {
     e.preventDefault();
     let obj = {
@@ -82,13 +80,13 @@ const ManufactureRent = () => {
       washrooms,
       plotArea,
       plotAreaUnit: areaPer,
-      price: +pricedetail, 
+      price: +pricedetail,
       inclusivePrices,
       additionalPricingDetails: {
         maintenancePrice,
         maintenanceTimePeriod,
         bookingAmount,
-        annualDuesPayable: annualDuesPayble
+        annualDuesPayable: annualDuesPayble,
       },
       description: desc,
       countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
@@ -98,26 +96,25 @@ const ManufactureRent = () => {
       additionalFeatures: additinalft,
       otherFeatures: otherFeature,
       propertyFacing,
-      flooring
+      flooring,
     };
 
     const showToastError = (message) => {
       toast({
-        title: message + ' un-filled',
-        status: 'error',
+        title: message + " un-filled",
+        status: "error",
         duration: 2000,
-        position: 'top-right'
+        position: "top-right",
       });
-    }
-
+    };
 
     if (!locality) {
-      showToastError('Provide locality');
+      showToastError("Provide locality");
     } else if (!washrooms) {
-      showToastError('Provide washrooms');
+      showToastError("Provide washrooms");
     } else if (!pricedetail) {
-      showToastError('Provide Expected Rent');
-    } 
+      showToastError("Provide Expected Rent");
+    }
 
     if (locationAdv) {
       obj["locationAdv"] = locationAdv;
@@ -134,7 +131,6 @@ const ManufactureRent = () => {
 
     if (
       pricedetail &&
-
       inclusivePrices &&
       amenities &&
       propertyFeatures &&
@@ -143,17 +139,17 @@ const ManufactureRent = () => {
       let id = localStorage.getItem("usrId") || undefined;
       let authorization = localStorage.getItem("AstToken") || undefined;
 
-      let head = { id, authorization, 'Content-type': 'application/json' };
+      let head = { id, authorization, "Content-type": "application/json" };
 
       if (!id || !authorization) {
         toast({
-          title: 'Kindly log in to access property posting.',
+          title: "Kindly log in to access property posting.",
           description: "Login required for posting property.",
-          status: 'error',
+          status: "error",
           duration: 2000,
-          position: 'top-right'
-        })
-        return
+          position: "top-right",
+        });
+        return;
       }
       // else {
       try {
@@ -162,16 +158,19 @@ const ManufactureRent = () => {
         //     headers: head,
         //     body: JSON.stringify(obj)
         // });
-        // let data = await response.json();  
-        // console.log("data",data); 
+        // let data = await response.json();
+        // console.log("data",data);
         setClickCount((prev) => prev + 12);
         setIsClicked(true);
-        await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
+        await axios
+          .post(`${process.env.REACT_APP_URL}/property/`, obj, {
+            headers: head,
+          })
           .then((e) => {
             toast({
               title: e.data.msg,
               description: e.data.msg,
-              status: 'success',
+              status: "success",
               duration: 2000,
             });
             if (images.length) {
@@ -184,37 +183,36 @@ const ManufactureRent = () => {
       } catch (error) {
         toast({
           title: error.response.data.msg,
-          status: 'error',
+          status: "error",
           duration: 2000,
-        })
+        });
         setClickCount((prev) => prev - 12);
         setIsClicked(false);
       }
-    }
-    else {
+    } else {
       toast({
-        title: 'Form un-filled',
+        title: "Form un-filled",
         description: "Please fill all required fields.",
-        status: 'info',
+        status: "info",
         duration: 2000,
-        position: 'top-right'
+        position: "top-right",
       });
       setClickCount((prev) => prev - 12);
       setIsClicked(false);
     }
   };
 
-  // image uploading after uploading the data:  
+  // image uploading after uploading the data:
   const submitImage = async (productID) => {
     try {
       let id = localStorage.getItem("usrId") || undefined;
       let authorization = localStorage.getItem("AstToken") || undefined;
 
       let headersList = {
-        "Accept": "*/*",
-        "Authorization": authorization,
-        "id": id
-      }
+        Accept: "*/*",
+        Authorization: authorization,
+        id: id,
+      };
 
       let formdata = new FormData();
       images.forEach((image) => {
@@ -228,16 +226,16 @@ const ManufactureRent = () => {
         method: "POST",
         headers: headersList,
         data: bodyContent,
-      }
+      };
       await axios.request(reqOptions).then((e) => {
         setIsClicked(false);
-      })
+      });
     } catch (error) {
       console.log(error);
       setIsClicked(false);
     }
     navigate("/listing");
-    setIsClicked(false); 
+    setIsClicked(false);
   };
 
   const handlepinfetch = (e) => {
@@ -245,22 +243,21 @@ const ManufactureRent = () => {
     if (e.target.value.length == 6) {
       pinfetch(NumericString(e.target.value));
     }
-  }
-
+  };
 
   const pinfetch = async (pin) => {
     try {
-
-      let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
+      let res = await axios.get(
+        `${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`
+      );
       setState(res.data[0].state);
       setCity(res.data[0].city);
       setCountry(res.data[0].country);
       setPinCollection(res.data);
-    }
-    catch (err) {
+    } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   const handleAvailable = (e) => {
     e.preventDefault();
@@ -276,7 +273,6 @@ const ManufactureRent = () => {
     e.preventDefault();
     setExpectedYear(e.target.value);
   };
-
 
   const handleAdditionalFeature = (e) => {
     e.preventDefault();
@@ -366,14 +362,13 @@ const ManufactureRent = () => {
       newarr.push(value);
     }
     setInclusivePrice(newarr);
-  }
- 
+  };
 
-  // ======--- image upload function   
+  // ======--- image upload function
 
   const selectFiles = () => {
     fileInputRef.current.click();
-  }
+  };
 
   const removeImage = (index) => {
     const newImages = [...images];
@@ -384,33 +379,36 @@ const ManufactureRent = () => {
   const onFileSelect = (e) => {
     let files = e.target.files;
     if (files.length === 0) {
-      return
+      return;
     }
     for (let i = 0; i < files.length; i++) {
-      if (files[i].type.split('/')[0] !== 'image') {
+      if (files[i].type.split("/")[0] !== "image") {
         continue;
       }
       if (!images.some((e) => e.name === files[i].name)) {
-        setImages((prev) => [...prev, {
-          name: files[i].name,
-          image: files[i],
-        },])
+        setImages((prev) => [
+          ...prev,
+          {
+            name: files[i].name,
+            image: files[i],
+          },
+        ]);
       }
     }
-  }
+  };
 
   const ondragleave = (event) => {
     event.preventDefault();
     setIsDraging(false);
-    console.log("leave")
-  }
+    console.log("leave");
+  };
 
   const ondragover = (event) => {
     event.preventDefault();
     setIsDraging(true);
     event.dataTransfer.dropEffect = "copy";
     console.log("over the box");
-  }
+  };
 
   const ondrop = (event) => {
     event.preventDefault(); // Add this line
@@ -423,57 +421,56 @@ const ManufactureRent = () => {
     }
 
     for (let i = 0; i < files.length; i++) {
-      if (files[i].type.split('/')[0] !== 'image') {
+      if (files[i].type.split("/")[0] !== "image") {
         continue;
       }
       if (!images.some((e) => e.name === files[i].name)) {
-        setImages((prev) => [...prev, {
-          name: files[i].name,
-          image: files[i],
-        }]);
+        setImages((prev) => [
+          ...prev,
+          {
+            name: files[i].name,
+            image: files[i],
+          },
+        ]);
       }
     }
     console.log("droped");
-  }
+  };
 
   return (
     <div>
       <form onSubmit={handleSubmitData}>
         <Box className={style.location_form}>
-          <Heading size={"lg"}>Where is your property located?</Heading>
-          <Heading size={"sm"}>
-            An accurate location helps you connect with the right buyers.
+          <Heading size={"lg"} textAlign={"center"}>
+            Where is your property located?
+          </Heading>
+          <Heading size={"sm"} textAlign={"left"}>
+            Location Detail
           </Heading>
 
           <Input
             type="text"
-            padding={"0 10px"}
             required
             placeholder="Address (optional)"
             value={address}
             onChange={(e) => setaddress(e.target.value)}
-            fontSize={"md"}
             variant="flushed"
           />
           <Input
             type="text"
             placeholder={"Enter pincode"}
-            padding={"0 10px"}
             required
-            fontSize={"md"}
             value={pincode}
+            variant="flushed"
             onChange={handlepinfetch}
           />
-
           <Input
             type="text"
-            padding={"0 10px"}
             required
             placeholder="Enter Locality"
             list="browsers"
             value={locality}
             onChange={(e) => setLocality(e.target.value)}
-            fontSize={"md"}
             variant="flushed"
           />
           {pincollection.length ? (
@@ -482,55 +479,48 @@ const ManufactureRent = () => {
                 <option value={e.locality} />
               ))}
             </datalist>
-          ) : ""}
+          ) : (
+            ""
+          )}
 
           <Input
             type="text"
-            padding={"0 10px"}
             required
             placeholder="Enter City"
-            fontSize={"md"}
             value={city}
             onChange={(e) => setCity(e.target.value)}
             variant="flushed"
           />
           <Input
             type="text"
-            padding={"0 10px"}
             required
             placeholder="Enter State"
             value={state}
             onChange={(e) => setState(e.target.value)}
-            fontSize={"md"}
             variant="flushed"
           />
           <Input
             type="text"
-            padding={"0 10px"}
             required
             placeholder="Enter Country"
             value={country}
             onChange={(e) => setCountry(e.target.value)}
-            fontSize={"md"}
             variant="flushed"
           />
-
-        </Box>
-        {/* =============================== Tell us about your property ============================ */}
-        <Box marginTop={"20"}>
-          <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"}>
-            Tell us about your property
-          </Heading>
         </Box>
 
         {/* ============================== No. of Washrooms ====================================== */}
         <Box>
-          <Box textAlign={"left"} >
+          <Heading textAlign={"left"} as={"h3"} size={"sm"}>
+            Tell us about your property
+          </Heading>
+          <Box textAlign={"left"}>
             <Text> No. of Washrooms </Text>
             <Input
               type="text"
-              variant="flushed"
-              padding={"0 2px"}
+              width={{ base: "100%", md: 300 }}
+              variant={"outline"}
+              placeholder="Enter no. of washrooms"
               onChange={(e) => setwashrooms(e.target.value)}
               value={washrooms}
               required
@@ -540,28 +530,36 @@ const ManufactureRent = () => {
 
         {/* ============================ add area details =============================== */}
         <Box textAlign={"left"} padding={"10px 0"}>
-          <Heading as={"h3"} margin={"5px 0"} size={"md"}>
+          <Heading as={"h3"} margin={"5px 0"} size={"sm"}>
             Add Area Details
           </Heading>
           <Text margin={"5px 0"}> Plot area is mandatory </Text>
-          <ButtonGroup
-            className={style.select_land}
-            size="sm"
+          <InputGroup
             isAttached
+            width={{ base: "100%", md: 300 }}
             variant="outline"
           >
             <Input
               type="text"
-              padding={"0 2px"}
+              width={{ base: "100%", md: 300 }}
+              variant={"outline"}
+              placeholder="Enter area detail"
               value={plotArea}
-              onChange={(e) => { 
+              onChange={(e) => {
                 setPlotArea(NumericString(e.target.value));
               }}
               required
             />
-            <Select value={areaPer} onChange={(e) => {
-              setAreaPer(e.target.value);
-            }} className={style.select} required>
+            <Select
+              value={areaPer}
+              width={{ base: "100%", md: 300 }}
+              variant={"outline"}
+              onChange={(e) => {
+                setAreaPer(e.target.value);
+              }}
+              className={style.select}
+              required
+            >
               <option value="sq.ft">sq.ft</option>
               <option value="sq.yards">sq.yards</option>
               <option value="sq.m">sq.m</option>
@@ -581,12 +579,12 @@ const ManufactureRent = () => {
               <option value="chataks">chataks</option>
               <option value="perch">perch</option>
             </Select>
-          </ButtonGroup>
+          </InputGroup>
         </Box>
 
         {/* ========================== Availability status =============================== */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Availability Status
           </Heading>
           <Box className={style.grid}>
@@ -624,7 +622,7 @@ const ManufactureRent = () => {
           <Box textAlign={"left"} className={style.optional_box}>
             <Heading
               as={"h3"}
-              size={"md"}
+              size={"sm"}
               margin={"30px 0 10px 0"}
               textAlign={"left"}
             >
@@ -682,7 +680,7 @@ const ManufactureRent = () => {
           <Box>
             <Heading
               as={"h3"}
-              size={"md"}
+              size={"sm"}
               margin={"30px 0 10px 0"}
               textAlign={"left"}
             >
@@ -708,7 +706,7 @@ const ManufactureRent = () => {
             <Heading
               as={"h2"}
               marginTop={"10"}
-              size={"md"}
+              size={"sm"}
               fontWeight={700}
               textAlign={"left"}
             >
@@ -729,52 +727,53 @@ const ManufactureRent = () => {
                   value={pricedetail}
                   required
                   onChange={(e) => {
-                    setPricedetail(e.target.value); 
+                    setPricedetail(e.target.value);
                   }}
                 />
-              </Box> 
+              </Box>
             </Box>
           </Box>
-          <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
-            <Checkbox
-              isChecked={inclusivePrices.includes("Electricity & Water charges excluded")}
-              onChange={(e) => {
-                e.preventDefault();
-                handleinclusiveandtax(e.target.value)
-              }}
-              value={"Electricity & Water charges excluded"}
-
-            >
-              Electricity & Water charges excluded
-            </Checkbox>
-            <Checkbox
-              isChecked={inclusivePrices.includes("Price Negotiable")}
-              onChange={(e) => {
-                e.preventDefault();
-                handleinclusiveandtax(e.target.value)
-              }}
-              value={"Price Negotiable"}
-            >
-
-              Price Negotiable
-            </Checkbox>
-          </Box>
           <Box>
-            {additionalPrice && <>
-              <InputGroup w={"300px"} margin={"10 0 0 0"}>
-                <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
-                <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
-                  <option value="Monthly">Monthly</option>
-                  <option value="Yearly">Yearly</option>
-                </Select>
-              </InputGroup>
-              <Box display={"grid"}>
-                <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-                <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
-              </Box>
-
-            </>
-            }
+            {additionalPrice && (
+              <>
+                <InputGroup w={"300px"} margin={"10 0 0 0"}>
+                  <Input
+                    w={"60%"}
+                    type="text"
+                    onChange={(e) => setMaintenancePrice(e.target.value)}
+                    value={maintenancePrice}
+                    placeholder={"Maintenance Price"}
+                  />
+                  <Select
+                    w={"40%"}
+                    borderRadius={0}
+                    value={maintenanceTimePeriod}
+                    onChange={(e) => setMaintenanceTimePeriod(e.target.value)}
+                  >
+                    <option value="Monthly">Monthly</option>
+                    <option value="Yearly">Yearly</option>
+                  </Select>
+                </InputGroup>
+                <Box display={"grid"}>
+                  <Input
+                    type="text"
+                    w={"300px"}
+                    value={bookingAmount}
+                    onChange={(e) => setBookingAmount(e.target.value)}
+                    placeholder="Booking Amount"
+                    margin={"10px 0 0 0"}
+                  />
+                  <Input
+                    type="text"
+                    w={"300px"}
+                    value={annualDuesPayble}
+                    onChange={(e) => setAnnualDuesPayble(e.target.value)}
+                    placeholder="Annual dues payable"
+                    margin={"10px 0 0 0"}
+                  />
+                </Box>
+              </>
+            )}
             <Heading
               as={"h3"}
               size={"sm"}
@@ -783,33 +782,98 @@ const ManufactureRent = () => {
               fontWeight={500}
               cursor={"pointer"}
               onClick={() => setAdditionalPrice(!additionalPrice)}
-              textAlign={"left"}>
-              {additionalPrice ? <IoIosArrowUp style={{ display: "inline" }} /> : <IoIosArrowDown style={{ display: "inline" }} />} Add more pricing details
+              textAlign={"left"}
+            >
+              {additionalPrice ? (
+                <IoIosArrowUp style={{ display: "inline" }} />
+              ) : (
+                <IoIosArrowDown style={{ display: "inline" }} />
+              )}{" "}
+              Add more pricing details
             </Heading>
+          </Box>
+          <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
+            <Checkbox
+              isChecked={inclusivePrices.includes(
+                "Electricity & Water charges excluded"
+              )}
+              onChange={(e) => {
+                e.preventDefault();
+                handleinclusiveandtax(e.target.value);
+              }}
+              value={"Electricity & Water charges excluded"}
+            >
+              Electricity & Water charges excluded
+            </Checkbox>
+            <Checkbox
+              isChecked={inclusivePrices.includes("Price Negotiable")}
+              onChange={(e) => {
+                e.preventDefault();
+                handleinclusiveandtax(e.target.value);
+              }}
+              value={"Price Negotiable"}
+            >
+              Price Negotiable
+            </Checkbox>
           </Box>
         </Box>
 
         {/* image Drag and Drop area  */}
         <Box>
           <Box className={style.top}>
-            <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
+            <Heading
+              color={"black"}
+              size={"sm"}
+              textAlign={"left"}
+              margin={"10px 0"}
+            >
+              {" "}
+              Upload Your Property image{" "}
+            </Heading>
           </Box>
           <Box className={style.card}>
-            <Box className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+            <Box
+              className={style.dragArea}
+              onDragOver={ondragover}
+              onDragLeave={ondragleave}
+              onDrop={ondrop}
+            >
               {isDraging ? (
                 <Text className={style.select}>Drop image here</Text>
               ) : (
                 <>
                   Drag & Drop image here or
-                  <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
+                  <Text
+                    className={style.select}
+                    role="button"
+                    onClick={selectFiles}
+                  >
+                    {" "}
+                    Browse{" "}
+                  </Text>
                 </>
               )}
-              <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+              <input
+                type={"file"}
+                name="image"
+                accept="image/jpg, image/png, image/jpeg"
+                formMethod="post"
+                formEncType="multipart/form-data"
+                className={style.file}
+                multiple
+                ref={fileInputRef}
+                onChange={onFileSelect}
+              />
             </Box>
             <Box className={style.container}>
               {images.map((image, index) => (
                 <Box className={style.image} key={index}>
-                  <Text className={style.delete} onClick={() => removeImage(index)}>&#10006;</Text>
+                  <Text
+                    className={style.delete}
+                    onClick={() => removeImage(index)}
+                  >
+                    &#10006;
+                  </Text>
                   <img src={URL.createObjectURL(image.image)} alt="images" />
                 </Box>
               ))}
@@ -819,34 +883,55 @@ const ManufactureRent = () => {
 
         {/* ============================ Property unique discription ============================ */}
         <Box>
-          <Heading as={"h3"} size={"md"} fontWeight={600} margin={"10px 0"} textAlign={"left"}>
+          <Heading
+            as={"h3"}
+            size={"sm"}
+            fontWeight={600}
+            margin={"10px 0"}
+            textAlign={"left"}
+          >
             Add Description and Unique Features of your Property
           </Heading>
-          <Heading as={"h3"} size={"xs"} fontWeight={400} color={"#777777"} margin={"10px 0"} textAlign={"left"}>
+          <Heading
+            as={"h3"}
+            size={"xs"}
+            fontWeight={400}
+            color={"#777777"}
+            margin={"10px 0"}
+            textAlign={"left"}
+          >
             Adding description will increase your listing visibility
           </Heading>
-          <Textarea height={140} value={desc} onChange={(e) => {
-            let my_cleantext = CleanInputText(e.target.value);
-            setDesc(my_cleantext);
-          }} ></Textarea>
+          <Textarea
+            height={140}
+            value={desc}
+            placeholder="Add Description"
+            onChange={(e) => {
+              let my_cleantext = CleanInputText(e.target.value);
+              setDesc(my_cleantext);
+            }}
+          ></Textarea>
         </Box>
-
-
-
 
         {/* ============================ Add amenities/unique features ============================ */}
         <Box marginTop={"50"}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Add amenities/unique features
           </Heading>
-          <Heading as={"h5"} size={"xs"} fontWeight={400} margin={"10px 0"} textAlign={"left"}>
+          <Heading
+            as={"h5"}
+            size={"xs"}
+            fontWeight={400}
+            margin={"10px 0"}
+            textAlign={"left"}
+          >
             All fields after this are optional
           </Heading>
         </Box>
 
         {/* ============================ Amenities ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Amenities
           </Heading>
           <Box>
@@ -870,7 +955,9 @@ const ManufactureRent = () => {
             </button>
             <button
               className={
-                amenities.includes("Access to High Speed Internet") ? style.setbtn : style.btn
+                amenities.includes("Access to High Speed Internet")
+                  ? style.setbtn
+                  : style.btn
               }
               onClick={handleAminities}
               value={"Access to High Speed Internet"}
@@ -879,7 +966,9 @@ const ManufactureRent = () => {
             </button>
             <button
               className={
-                amenities.includes("Bank Attached Property") ? style.setbtn : style.btn
+                amenities.includes("Bank Attached Property")
+                  ? style.setbtn
+                  : style.btn
               }
               onClick={handleAminities}
               value={"Bank Attached Property"}
@@ -888,7 +977,9 @@ const ManufactureRent = () => {
             </button>
             <button
               className={
-                amenities.includes("Centrally Air Conditioned") ? style.setbtn : style.btn
+                amenities.includes("Centrally Air Conditioned")
+                  ? style.setbtn
+                  : style.btn
               }
               onClick={handleAminities}
               value={"Centrally Air Conditioned"}
@@ -896,9 +987,7 @@ const ManufactureRent = () => {
               Centrally Air Conditioned
             </button>
             <button
-              className={
-                amenities.includes("ATM") ? style.setbtn : style.btn
-              }
+              className={amenities.includes("ATM") ? style.setbtn : style.btn}
               onClick={handleAminities}
               value={"ATM"}
             >
@@ -906,7 +995,9 @@ const ManufactureRent = () => {
             </button>
             <button
               className={
-                amenities.includes("Cafeteria / Food Court") ? style.setbtn : style.btn
+                amenities.includes("Cafeteria / Food Court")
+                  ? style.setbtn
+                  : style.btn
               }
               onClick={handleAminities}
               value={"Cafeteria / Food Court"}
@@ -934,7 +1025,11 @@ const ManufactureRent = () => {
               Security/ Fire Alarm
             </button>
             <button
-              className={amenities.includes("Intercom Facility") ? style.setbtn : style.btn}
+              className={
+                amenities.includes("Intercom Facility")
+                  ? style.setbtn
+                  : style.btn
+              }
               onClick={handleAminities}
               value={"Intercom Facility"}
             >
@@ -943,13 +1038,9 @@ const ManufactureRent = () => {
           </Box>
         </Box>
 
-
-
-
-
         {/* ============================ Property Features ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Property Features
           </Heading>
           <Box>
@@ -978,7 +1069,9 @@ const ManufactureRent = () => {
             </button>
             <button
               className={
-                propertyFeatures.includes("Reserved Parking") ? style.setbtn : style.btn
+                propertyFeatures.includes("Reserved Parking")
+                  ? style.setbtn
+                  : style.btn
               }
               value={"Reserved Parking"}
               onClick={handlePropertyFeature}
@@ -1000,12 +1093,9 @@ const ManufactureRent = () => {
           </Box>
         </Box>
 
-
-
-
         {/* ============================ Society/Building feature ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Society/Building feature
           </Heading>
           <Box>
@@ -1120,7 +1210,6 @@ const ManufactureRent = () => {
               Swimming Pool
             </button>
 
-
             <button
               className={
                 buildingFeature.includes("Club house / Community Center")
@@ -1145,9 +1234,7 @@ const ManufactureRent = () => {
             </button>
             <button
               className={
-                buildingFeature.includes("Lift")
-                  ? style.setbtn
-                  : style.btn
+                buildingFeature.includes("Lift") ? style.setbtn : style.btn
               }
               onClick={HandleBuildingFeature}
               value={"Lift"}
@@ -1157,12 +1244,9 @@ const ManufactureRent = () => {
           </Box>
         </Box>
 
-
-
-
         {/* ============================ Additional Features ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Additional Features
           </Heading>
           <Box>
@@ -1180,13 +1264,9 @@ const ManufactureRent = () => {
           </Box>
         </Box>
 
-
-
-
-
         {/* ============================ Other Features ============================ */}
         <Box>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Other Features
           </Heading>
           <Box display={"grid"} textAlign={"left"} gap={2}>
@@ -1196,18 +1276,14 @@ const ManufactureRent = () => {
               value={"Wheelchair friendly"}
               onChange={handleotherfeature}
             >
-
               Wheelchair friendly
             </Checkbox>
           </Box>
         </Box>
 
-
-
-
         {/* ============================ Property facing ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Property facing
           </Heading>
           <Box>
@@ -1215,7 +1291,7 @@ const ManufactureRent = () => {
               className={propertyFacing == "North" ? style.setbtn : style.btn}
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"North"}
             >
@@ -1225,7 +1301,7 @@ const ManufactureRent = () => {
               className={propertyFacing == "South" ? style.setbtn : style.btn}
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"South"}
             >
@@ -1235,7 +1311,7 @@ const ManufactureRent = () => {
               className={propertyFacing == "East" ? style.setbtn : style.btn}
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"East"}
             >
@@ -1245,7 +1321,7 @@ const ManufactureRent = () => {
               className={propertyFacing == "West" ? style.setbtn : style.btn}
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"West"}
             >
@@ -1257,7 +1333,7 @@ const ManufactureRent = () => {
               }
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"North-East"}
             >
@@ -1269,7 +1345,7 @@ const ManufactureRent = () => {
               }
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"North-West"}
             >
@@ -1281,7 +1357,7 @@ const ManufactureRent = () => {
               }
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"South-East"}
             >
@@ -1293,7 +1369,7 @@ const ManufactureRent = () => {
               }
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"South-West"}
             >
@@ -1302,15 +1378,14 @@ const ManufactureRent = () => {
           </Box>
         </Box>
 
-
-
         {/* ============================ Type of flooring ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Type of flooring
           </Heading>
           <Box>
             <Select
+              width={{ base: "100%", md: 300 }}
               onChange={(e) => setFlooring(e.target.value)}
               value={flooring}
             >
@@ -1333,12 +1408,9 @@ const ManufactureRent = () => {
           </Box>
         </Box>
 
-
-
-
         {/* ============================ location advantage ============================ */}
         <Box className={style.optional_box}>
-          <Heading size={"md"} margin={"10px 0 4px 0"} textAlign={"left"}>
+          <Heading size={"sm"} margin={"10px 0 4px 0"} textAlign={"left"}>
             Location Advantages
             <Heading
               size={"xs"}
@@ -1359,17 +1431,17 @@ const ManufactureRent = () => {
               value={"Close to Metro Station"}
               onClick={handlelocationadvantages}
             >
-
               Close to Metro Station
             </button>
             <button
               className={
-                locationAdv.includes("Close to School") ? style.setbtn : style.btn
+                locationAdv.includes("Close to School")
+                  ? style.setbtn
+                  : style.btn
               }
               value={"Close to School"}
               onClick={handlelocationadvantages}
             >
-
               Close to School
             </button>
             <button
@@ -1381,17 +1453,17 @@ const ManufactureRent = () => {
               value={"Close to Hospital"}
               onClick={handlelocationadvantages}
             >
-
               Close to Hospital
             </button>
             <button
               className={
-                locationAdv.includes("Close to Market") ? style.setbtn : style.btn
+                locationAdv.includes("Close to Market")
+                  ? style.setbtn
+                  : style.btn
               }
               value={"Close to Market"}
               onClick={handlelocationadvantages}
             >
-
               Close to Market
             </button>
             <button
@@ -1403,7 +1475,6 @@ const ManufactureRent = () => {
               value={"Close to Railway Station"}
               onClick={handlelocationadvantages}
             >
-
               Close to Railway Station
             </button>
             <button
@@ -1415,7 +1486,6 @@ const ManufactureRent = () => {
               value={"Close to Airport"}
               onClick={handlelocationadvantages}
             >
-
               Close to Airport
             </button>
             <button
@@ -1450,8 +1520,8 @@ const ManufactureRent = () => {
         >
           *Please provide correct information, otherwise your listing might get
           blocked
-        </Heading> 
-        {isClicked && <Loading />}  
+        </Heading>
+        {isClicked && <Loading />}
         <Button
           margin={"20px 0"}
           type="submit"
@@ -1462,10 +1532,9 @@ const ManufactureRent = () => {
         >
           Post Property
         </Button>
-
       </form>
     </div>
-  )
-}
+  );
+};
 
 export default ManufactureRent;

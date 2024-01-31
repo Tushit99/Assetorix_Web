@@ -36,7 +36,7 @@ const IndustrialLand = () => {
   const [Plotnumber, setPlotnumber] = useState("");
   const [areaPer, setAreaPer] = useState("sq.ft");
   const [ownership, setOwnerShip] = useState("");
-  const [pricedetail, setPricedetail] = useState(""); 
+  const [pricedetail, setPricedetail] = useState("");
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [constructionType, setConstructionType] = useState([]);
   const [amenities, setAminity] = useState([]);
@@ -104,7 +104,7 @@ const IndustrialLand = () => {
       ownership,
       plotLength,
       plotBreadth,
-      price: +pricedetail, 
+      price: +pricedetail,
       inclusivePrices,
       openSides,
       amenities,
@@ -409,7 +409,6 @@ const IndustrialLand = () => {
     }
     setInclusivePrice(newarr);
   };
- 
 
   const handleIndustryType = (e) => {
     e.preventDefault();
@@ -574,19 +573,21 @@ const IndustrialLand = () => {
           <Heading as={"h3"} size={"sm"}>
             Add Area Details
           </Heading>
-          <InputGroup width={{base:"100%",md:300}}>
+          <InputGroup width={{ base: "100%", md: 300 }}>
             <Input
               type="text"
-              value={plotArea}  
+              value={plotArea} 
+              borderRadius={0} 
               placeholder="Enter plot area"
-              onChange={(e) => { 
+              onChange={(e) => {
                 setPlotArea(NumericString(e.target.value));
               }}
-              required  
+              required
             />
             <Select
               variant={"outline"}
-              value={areaPer}
+              value={areaPer} 
+              borderRadius={0}  
               onChange={(e) => {
                 setAreaPer(e.target.value);
               }}
@@ -618,13 +619,12 @@ const IndustrialLand = () => {
         {/* ========================== Property Dimensions ========================== */}
         <Box as={"div"} textAlign={"left"} padding={"10px 0"} display={"grid"}>
           <Heading as={"h3"} size={"sm"}>
-            {" "}
-            Property Dimensions (Optional){" "}
+            Property Dimensions (Optional)
           </Heading>
           <Input
             type={"text"}
             variant="flushed"
-            width={{base:"100%",md:300}} 
+            width={{ base: "100%", md: 300 }}
             value={plotLength}
             onChange={(e) => {
               setplotLength(NumericString(e.target.value));
@@ -634,7 +634,7 @@ const IndustrialLand = () => {
           <Input
             type={"text"}
             variant="flushed"
-            width={{base:"100%",md:300}}  
+            width={{ base: "100%", md: 300 }}
             value={plotBreadth}
             onChange={(e) => {
               setPlotBreadth(NumericString(e.target.value));
@@ -648,21 +648,24 @@ const IndustrialLand = () => {
           <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Width of facing road
           </Heading>
-          <Box display={"flex"} w={{base:"100%",md:"300px"}}> 
+          <Box display={"flex"} w={{ base: "100%", md: "300px" }}>
             <Input
               type="text"
-              variant="flushed"
+              variant={"outline"}
               maxLength={4}
+              borderRadius={0}
+              placeholder="Enter road  width"
               flex={1}
               required
               value={facingwidth}
               onChange={(e) => {
                 e.preventDefault();
-                setFacingWidth(e.target.value); 
-              }} 
+                setFacingWidth(e.target.value);
+              }}
             />
             <Select
               flex={1}
+              borderRadius={0}
               onChange={(e) => setFacing(e.target.value)}
               value={facing}
             >
@@ -675,8 +678,7 @@ const IndustrialLand = () => {
         {/* ========================== No of open sides ========================== */}
         <Box textAlign={"left"} className={style.optional_box}>
           <Heading as={"h3"} size={"sm"}>
-            {" "}
-            No. of open sides{" "}
+            No. of open sides
           </Heading>
           <Box textAlign={"left"} padding={"10px 0 0 0"}>
             <button
@@ -715,8 +717,7 @@ const IndustrialLand = () => {
         {/* ============================== Construction Property =============================== */}
         <Box textAlign={"left"} className={style.optional_box}>
           <Heading as={"h3"} size={"sm"}>
-            {" "}
-            Any construction done on this property?{" "}
+            Any construction done on this property?
           </Heading>
           <Box textAlign={"left"} padding={"10px 0 0 0"}>
             <button
@@ -748,8 +749,7 @@ const IndustrialLand = () => {
           display={ConstructionOnProperty == "Yes" ? "grid" : "none"}
         >
           <Heading as={"h3"} size={"sm"}>
-            {" "}
-            What type of construction has been done?{" "}
+            What type of construction has been done?
           </Heading>
           <Box>
             <button
@@ -759,8 +759,7 @@ const IndustrialLand = () => {
                 constructionType.includes("Shed") ? style.setbtn : style.btn
               }
             >
-              {" "}
-              Shed{" "}
+              Shed
             </button>
             <button
               value={"Room(s)"}
@@ -769,8 +768,7 @@ const IndustrialLand = () => {
                 constructionType.includes("Room(s)") ? style.setbtn : style.btn
               }
             >
-              {" "}
-              Room(s){" "}
+              Room(s)
             </button>
             <button
               value={"Washroom"}
@@ -779,8 +777,7 @@ const IndustrialLand = () => {
                 constructionType.includes("Washroom") ? style.setbtn : style.btn
               }
             >
-              {" "}
-              Washroom{" "}
+              Washroom
             </button>
             <button
               value={"Other"}
@@ -789,8 +786,7 @@ const IndustrialLand = () => {
                 constructionType.includes("Other") ? style.setbtn : style.btn
               }
             >
-              {" "}
-              Other{" "}
+              Other
             </button>
           </Box>
         </Box>
@@ -899,8 +895,8 @@ const IndustrialLand = () => {
           </Heading>
           <Box>
             <Select
-              variant={"filled"}
-              padding={"0 10px"}
+              variant={"outline"}
+              width={{ base: "100%", md: 300 }}
               value={expectedByYear}
               onChange={(e) => setExpectedByYear(e.target.value)}
             >
@@ -1051,63 +1047,15 @@ const IndustrialLand = () => {
                 </Heading>
                 <Input
                   type="text"
+
                   value={pricedetail}
                   required
                   onChange={(e) => {
-                    setPricedetail(NumericString(e.target.value)); 
+                    setPricedetail(NumericString(e.target.value));
                   }}
                 />
               </Box>
-              {/* <Box display={"grid"} gap={0}>
-                                <Heading
-                                    as={"h3"}
-                                    size={"xs"}
-                                    fontWeight={400}
-                                    textAlign={"left"}
-                                >
-                                    {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
-                                </Heading>
-                                <Input
-                                    type="text"
-                                    value={priceSqr}
-                                    readOnly
-                                />
-                            </Box> */}
             </Box>
-          </Box>
-          <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
-            <Checkbox
-              isChecked={inclusivePrices.includes("All inclusive price")}
-              onChange={(e) => {
-                e.preventDefault();
-                handleinclusiveandtax(e.target.value);
-              }}
-              value={"All inclusive price"}
-            >
-              All inclusive price
-            </Checkbox>
-            <Checkbox
-              isChecked={inclusivePrices.includes(
-                "Tax and Govt. charges excluded"
-              )}
-              onChange={(e) => {
-                e.preventDefault();
-                handleinclusiveandtax(e.target.value);
-              }}
-              value={"Tax and Govt. charges excluded"}
-            >
-              Tax and Govt. charges excluded
-            </Checkbox>
-            <Checkbox
-              isChecked={inclusivePrices.includes("Price Negotiable")}
-              onChange={(e) => {
-                e.preventDefault();
-                handleinclusiveandtax(e.target.value);
-              }}
-              value={"Price Negotiable"}
-            >
-              Price Negotiable
-            </Checkbox>
           </Box>
           <Box display={"grid"}>
             {additionalPrice && (
@@ -1168,9 +1116,43 @@ const IndustrialLand = () => {
                 <IoIosArrowUp style={{ display: "inline" }} />
               ) : (
                 <IoIosArrowDown style={{ display: "inline" }} />
-              )}{" "}
+              )}
               Add more pricing details
             </Heading>
+          </Box> 
+          <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
+            <Checkbox
+              isChecked={inclusivePrices.includes("All inclusive price")}
+              onChange={(e) => {
+                e.preventDefault();
+                handleinclusiveandtax(e.target.value);
+              }}
+              value={"All inclusive price"}
+            >
+              All inclusive price
+            </Checkbox>
+            <Checkbox
+              isChecked={inclusivePrices.includes(
+                "Tax and Govt. charges excluded"
+              )}
+              onChange={(e) => {
+                e.preventDefault();
+                handleinclusiveandtax(e.target.value);
+              }}
+              value={"Tax and Govt. charges excluded"}
+            >
+              Tax and Govt. charges excluded
+            </Checkbox>
+            <Checkbox
+              isChecked={inclusivePrices.includes("Price Negotiable")}
+              onChange={(e) => {
+                e.preventDefault();
+                handleinclusiveandtax(e.target.value);
+              }}
+              value={"Price Negotiable"}
+            >
+              Price Negotiable
+            </Checkbox>
           </Box>
         </Box>
 
@@ -1183,7 +1165,8 @@ const IndustrialLand = () => {
             <MenuButton
               width={"300px"}
               as={Button}
-              variant={"outline"}
+              variant={"outline"} 
+              textAlign={"left"}  
               borderRadius={0}
               rightIcon={<ChevronDownIcon />}
             >
@@ -1361,8 +1344,7 @@ const IndustrialLand = () => {
               textAlign={"left"}
               margin={"10px 0"}
             >
-              {" "}
-              Upload Your Property image{" "}
+              Upload Your Property image
             </Heading>
           </Box>
           <Box className={style.card}>
@@ -1382,8 +1364,7 @@ const IndustrialLand = () => {
                     role="button"
                     onClick={selectFiles}
                   >
-                    {" "}
-                    Browse{" "}
+                    Browse
                   </Text>
                 </>
               )}
@@ -1436,9 +1417,10 @@ const IndustrialLand = () => {
           >
             Adding description will increase your listing visibility
           </Heading>
-          <Textarea
+          <Textarea 
             height={140}
             value={desc}
+            placeholder="Add Description" 
             onChange={(e) => {
               let my_cleantext = CleanInputText(e.target.value);
               setDesc(my_cleantext);

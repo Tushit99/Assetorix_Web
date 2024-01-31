@@ -30,13 +30,12 @@ const WareHouse = () => {
   const [state, setState] = useState("");
   const [locality, setLocality] = useState("");
   const [address, setAddress] = useState("");
-  const [washrooms, setwashrooms] = useState(0);
+  const [washrooms, setwashrooms] = useState("");
   const [areaPer, setAreaPer] = useState("sq.ft");
   const [availability, setAvailability] = useState("");
   const [fromyear, setFromyear] = useState("");
   const [expectedyear, setExpectedYear] = useState("");
   const [pricedetail, setPricedetail] = useState("");
-  const [priceSqr, setPriceSqr] = useState("");
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
@@ -82,7 +81,6 @@ const WareHouse = () => {
       },
       washrooms,
       price: +pricedetail,
-      priceUnit: +priceSqr,
       inclusivePrices,
       amenities,
       flooring,
@@ -134,7 +132,6 @@ const WareHouse = () => {
       inclusivePrices &&
       amenities &&
       propertyFeatures &&
-      // preLeased &&
       desc
     ) {
       let id = localStorage.getItem("usrId") || undefined;
@@ -376,15 +373,6 @@ const WareHouse = () => {
     setInclusivePrice(newarr);
   };
 
-  const areaCalucation = () => {
-    if (pricedetail && plotArea) {
-      let max = Math.max(Number(pricedetail), Number(plotArea));
-      let min = Math.min(Number(pricedetail), Number(plotArea));
-      let ans = Math.round(max / min);
-      setPriceSqr(ans);
-    }
-  };
-
   // ======--- image upload function
 
   const selectFiles = () => {
@@ -457,43 +445,39 @@ const WareHouse = () => {
     }
     console.log("droped");
   };
- 
 
   return (
     <div>
       <form onSubmit={handleSubmitData}>
         <Box className={style.location_form}>
           <Heading size={"lg"}>Where is your property located?</Heading>
-          <Heading size={"sm"}>
-            An accurate location helps you connect with the right buyers.
+          <Heading size={"sm"} textAlign={"left"}>
+            Location Detail
           </Heading>
 
           <Input
             type="text"
-            padding={"0 10px"}
             required
             placeholder="Address (optional)"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
-            fontSize={"md"}
             variant="flushed"
-          />
+          /> 
           <Input
             type="text"
             placeholder={"Enter pincode"}
             required
+            variant="flushed"
             onChange={handlepinfetch}
             value={pincode}
           />
           <Input
             type="text"
-            padding={"0 10px"}
             required
             placeholder="Enter Locality"
             list="browsers"
             value={locality}
             onChange={(e) => setLocality(e.target.value)}
-            fontSize={"md"}
             variant="flushed"
           />
           {pincollection.length ? (
@@ -508,51 +492,41 @@ const WareHouse = () => {
 
           <Input
             type="text"
-            padding={"0 10px"}
             required
             placeholder="Enter City"
-            fontSize={"md"}
             value={city}
             onChange={(e) => setCity(e.target.value)}
             variant="flushed"
           />
           <Input
             type="text"
-            padding={"0 10px"}
             required
             placeholder="Enter State"
             value={state}
             onChange={(e) => setState(e.target.value)}
-            fontSize={"md"}
             variant="flushed"
           />
           <Input
             type="text"
-            padding={"0 10px"}
             required
             placeholder="Enter Country"
             value={country}
             onChange={(e) => setCountry(e.target.value)}
-            fontSize={"md"}
             variant="flushed"
           />
-        </Box>
-        {/* =============================== Tell us about your property ============================ */}
-        <Box>
-          <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"}>
-            Tell us about your property
-          </Heading>
-          <Heading as={"h4"} size={"sm"} margin={"0 0 30px 0 "}>
-            Add Room Details
-          </Heading>
         </Box>
 
         {/* ============================== No. of Washrooms ====================================== */}
         <Box>
+          <Heading as={"h4"} size={"sm"} textAlign={"left"}>
+            Add Room Details
+          </Heading>
           <Box textAlign={"left"}>
             <Text> No. of Washrooms </Text>
             <Input
               type="text"
+              placeholder="Enter no. of Washrooms"
+              width={{ base: "100%", md: 300 }}
               onChange={(e) => setwashrooms(NumericString(e.target.value))}
               value={washrooms}
               required
@@ -562,32 +536,27 @@ const WareHouse = () => {
 
         {/* ============================ add area details =============================== */}
         <Box textAlign={"left"} padding={"10px 0"}>
-          <Heading as={"h3"} margin={"5px 0"} size={"md"}>
+          <Heading as={"h3"} margin={"5px 0"} size={"sm"}>
             Add Area Details
           </Heading>
           <Text margin={"5px 0"}> Plot area is mandatory </Text>
-          <ButtonGroup
-            className={style.select_land}
-            size="sm"
-            isAttached
-            variant="outline"
-          >
+          <InputGroup isAttached width={{ base: "100%", md: 300 }}>
             <Input
               type="text"
-              padding={"0 2px"}
               value={plotArea}
+              placeholder="Enter plot area"
               onChange={(e) => {
-                areaCalucation();
                 setPlotArea(NumericString(e.target.value));
               }}
               required
             />
             <Select
               value={areaPer}
+              width={{ base: "100%", md: 300 }}
               onChange={(e) => {
                 setAreaPer(e.target.value);
               }}
-              className={style.select}
+              variant={"outline"}
               required
             >
               <option value="sq.ft">sq.ft</option>
@@ -609,12 +578,12 @@ const WareHouse = () => {
               <option value="chataks">chataks</option>
               <option value="perch">perch</option>
             </Select>
-          </ButtonGroup>
+          </InputGroup>
         </Box>
 
         {/* ========================== Availability status =============================== */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Availability Status
           </Heading>
           <Box className={style.grid}>
@@ -652,7 +621,7 @@ const WareHouse = () => {
           <Box textAlign={"left"} className={style.optional_box}>
             <Heading
               as={"h3"}
-              size={"md"}
+              size={"sm"}
               margin={"30px 0 10px 0"}
               textAlign={"left"}
             >
@@ -710,7 +679,7 @@ const WareHouse = () => {
           <Box>
             <Heading
               as={"h3"}
-              size={"md"}
+              size={"sm"}
               margin={"30px 0 10px 0"}
               textAlign={"left"}
             >
@@ -732,9 +701,7 @@ const WareHouse = () => {
         {/* ============================== property Age-end ============================== */}
 
         {/* ============================ Add pricing and details ============================ */}
-        <Box>
-          
-        </Box>
+        <Box></Box>
 
         {/* ============================== Price Details ============================ */}
         <Box>
@@ -758,46 +725,10 @@ const WareHouse = () => {
                   required
                   onChange={(e) => {
                     setPricedetail(NumericString(e.target.value));
-                    areaCalucation();
                   }}
                 />
               </Box>
-              {/* <Box display={"grid"} gap={0}>
-                                <Heading
-                                    as={"h3"}
-                                    size={"xs"}
-                                    fontWeight={400}
-                                    textAlign={"left"}
-                                >
-                                    {isCountry.country == "india" ? "₹" : "$"} Price Per {areaPer}
-                                </Heading>
-                                <Input type="text" readOnly value={priceSqr} />
-                            </Box> */}
             </Box>
-          </Box>
-          <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
-            <Checkbox
-              isChecked={inclusivePrices.includes(
-                "Electricity & Water charges excluded"
-              )}
-              onChange={(e) => {
-                e.preventDefault();
-                handleinclusiveandtax(e.target.value);
-              }}
-              value={"Electricity & Water charges excluded"}
-            >
-              Electricity & Water charges excluded
-            </Checkbox>
-            <Checkbox
-              isChecked={inclusivePrices.includes("Price Negotiable")}
-              onChange={(e) => {
-                e.preventDefault();
-                handleinclusiveandtax(e.target.value);
-              }}
-              value={"Price Negotiable"}
-            >
-              Price Negotiable
-            </Checkbox>
           </Box>
           <Box>
             {additionalPrice && (
@@ -864,6 +795,30 @@ const WareHouse = () => {
               Add more pricing details
             </Heading>
           </Box>
+          <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
+            <Checkbox
+              isChecked={inclusivePrices.includes(
+                "Electricity & Water charges excluded"
+              )}
+              onChange={(e) => {
+                e.preventDefault();
+                handleinclusiveandtax(e.target.value);
+              }}
+              value={"Electricity & Water charges excluded"}
+            >
+              Electricity & Water charges excluded
+            </Checkbox>
+            <Checkbox
+              isChecked={inclusivePrices.includes("Price Negotiable")}
+              onChange={(e) => {
+                e.preventDefault();
+                handleinclusiveandtax(e.target.value);
+              }}
+              value={"Price Negotiable"}
+            >
+              Price Negotiable
+            </Checkbox>
+          </Box>
         </Box>
 
         {/* image Drag and Drop area  */}
@@ -875,7 +830,6 @@ const WareHouse = () => {
               textAlign={"left"}
               margin={"10px 0"}
             >
-              
               Upload Your Property image
             </Heading>
           </Box>
@@ -896,7 +850,6 @@ const WareHouse = () => {
                     role="button"
                     onClick={selectFiles}
                   >
-                    
                     Browse
                   </Text>
                 </>
@@ -933,7 +886,7 @@ const WareHouse = () => {
         <Box>
           <Heading
             as={"h3"}
-            size={"md"}
+            size={"sm"}
             fontWeight={600}
             margin={"10px 0"}
             textAlign={"left"}
@@ -953,6 +906,7 @@ const WareHouse = () => {
           <Textarea
             height={140}
             value={desc}
+            placeholder="Add Description" 
             onChange={(e) => {
               let my_cleantext = CleanInputText(e.target.value);
               setDesc(my_cleantext);
@@ -962,7 +916,7 @@ const WareHouse = () => {
 
         {/* ============================ Add amenities/unique features ============================ */}
         <Box>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Add amenities/unique features
           </Heading>
           <Heading
@@ -978,7 +932,7 @@ const WareHouse = () => {
 
         {/* ============================ Amenities ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Amenities
           </Heading>
           <Box>
@@ -1088,7 +1042,7 @@ const WareHouse = () => {
 
         {/* ============================ Property Features ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Property Features
           </Heading>
           <Box>
@@ -1152,7 +1106,7 @@ const WareHouse = () => {
 
         {/* ============================ Society/Building feature ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Society/Building feature
           </Heading>
           <Box>
@@ -1270,7 +1224,7 @@ const WareHouse = () => {
 
         {/* ============================ Additional Features ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Additional Features
           </Heading>
           <Box>
@@ -1290,7 +1244,7 @@ const WareHouse = () => {
 
         {/* ============================ Other Features ============================ */}
         <Box>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Other Features
           </Heading>
           <Box display={"grid"} textAlign={"left"} gap={2}>
@@ -1307,7 +1261,7 @@ const WareHouse = () => {
 
         {/* ============================ Property facing ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Property facing
           </Heading>
           <Box>
@@ -1404,11 +1358,12 @@ const WareHouse = () => {
 
         {/* ============================ Type of flooring ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Type of flooring
           </Heading>
           <Box>
             <Select
+              width={{ base: "100%", md: 300 }}
               onChange={(e) => setFlooring(e.target.value)}
               value={flooring}
             >
@@ -1433,7 +1388,7 @@ const WareHouse = () => {
 
         {/* ============================ location advantage ============================ */}
         <Box className={style.optional_box}>
-          <Heading size={"md"} margin={"10px 0 4px 0"} textAlign={"left"}>
+          <Heading size={"sm"} margin={"10px 0 4px 0"} textAlign={"left"}>
             Location Advantages
             <Heading
               size={"xs"}
@@ -1543,8 +1498,8 @@ const WareHouse = () => {
         >
           *Please provide correct information, otherwise your listing might get
           blocked
-        </Heading> 
-        {isClicked && <Loading />}   
+        </Heading>
+        {isClicked && <Loading />}
         <Button
           margin={"20px 0"}
           type="submit"

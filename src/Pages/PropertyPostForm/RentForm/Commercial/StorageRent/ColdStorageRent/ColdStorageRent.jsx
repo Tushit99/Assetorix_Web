@@ -15,11 +15,10 @@ import { Checkbox } from "@chakra-ui/react";
 import style from "../../RentComercial.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { CleanInputText, NumericString } from "../../../../code";
 import Loading from "../../../../Loading";
 import { useNavigate } from "react-router-dom";
-
 
 const ColdStorageRent = () => {
   const isCountry = useSelector((state) => state.gloalval);
@@ -36,7 +35,6 @@ const ColdStorageRent = () => {
   const [fromyear, setFromyear] = useState("");
   const [expectedyear, setExpectedYear] = useState("");
   const [pricedetail, setPricedetail] = useState("");
-  const [priceSqr, setPriceSqr] = useState("");
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
@@ -63,10 +61,9 @@ const ColdStorageRent = () => {
   const fileInputRef = useRef(null);
   // please don'nt change any function without any prior knowledge
 
-
   const handleSubmitData = async (e) => {
     e.preventDefault();
-    setClickCount((prev) => prev + 10)
+    setClickCount((prev) => prev + 10);
     setIsClicked(true);
     let obj = {
       lookingFor: "Rent",
@@ -85,13 +82,12 @@ const ColdStorageRent = () => {
       plotArea,
       plotAreaUnit: areaPer,
       price: +pricedetail,
-      priceUnit: +priceSqr,
       inclusivePrices,
       additionalPricingDetails: {
         maintenancePrice,
         maintenanceTimePeriod,
         bookingAmount,
-        annualDuesPayable: annualDuesPayble
+        annualDuesPayable: annualDuesPayble,
       },
       description: desc,
       countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
@@ -106,22 +102,19 @@ const ColdStorageRent = () => {
 
     const showToastError = (message) => {
       toast({
-        title: message + ' un-filled',
-        status: 'error',
+        title: message + " un-filled",
+        status: "error",
         duration: 2000,
-        position: 'top-right'
+        position: "top-right",
       });
-    }
-
+    };
 
     if (!locality) {
-      showToastError('Provide locality');
+      showToastError("Provide locality");
     } else if (!washrooms) {
-      showToastError('Provide washrooms');
+      showToastError("Provide washrooms");
     } else if (!pricedetail) {
-      showToastError('Provide Expected Rent');
-    } else if (!priceSqr) {
-      showToastError('Provide Price Per sq.ft');
+      showToastError("Provide Expected Rent");
     }
 
     if (locationAdv) {
@@ -139,7 +132,6 @@ const ColdStorageRent = () => {
 
     if (
       pricedetail &&
-
       inclusivePrices &&
       amenities &&
       propertyFeatures &&
@@ -148,17 +140,17 @@ const ColdStorageRent = () => {
       let id = localStorage.getItem("usrId") || undefined;
       let authorization = localStorage.getItem("AstToken") || undefined;
 
-      let head = { id, authorization, 'Content-type': 'application/json' };
+      let head = { id, authorization, "Content-type": "application/json" };
 
       if (!id || !authorization) {
         toast({
-          title: 'Kindly log in to access property posting.',
+          title: "Kindly log in to access property posting.",
           description: "Login required for posting property.",
-          status: 'error',
+          status: "error",
           duration: 2000,
-          position: 'top-right'
-        })
-        return
+          position: "top-right",
+        });
+        return;
       }
       // else {
       try {
@@ -167,16 +159,19 @@ const ColdStorageRent = () => {
         //     headers: head,
         //     body: JSON.stringify(obj)
         // });
-        // let data = await response.json();  
-        // console.log("data",data); 
+        // let data = await response.json();
+        // console.log("data",data);
         setClickCount((prev) => prev + 12);
         setIsClicked(true);
-        await axios.post(`${process.env.REACT_APP_URL}/property/`, obj, { headers: head })
+        await axios
+          .post(`${process.env.REACT_APP_URL}/property/`, obj, {
+            headers: head,
+          })
           .then((e) => {
             toast({
               title: e.data.msg,
               description: e.data.msg,
-              status: 'success',
+              status: "success",
               duration: 2000,
             });
             if (images.length) {
@@ -184,42 +179,41 @@ const ColdStorageRent = () => {
             } else {
               setIsClicked(false);
               navigate("/listing");
-            } 
+            }
           });
       } catch (error) {
         toast({
           title: error.response.data.msg,
-          status: 'error',
+          status: "error",
           duration: 2000,
-        })
+        });
         setClickCount((prev) => prev - 12);
         setIsClicked(false);
       }
-    }
-    else {
+    } else {
       toast({
-        title: 'Form un-filled',
+        title: "Form un-filled",
         description: "Please fill all required fields.",
-        status: 'info',
+        status: "info",
         duration: 2000,
-        position: 'top-right'
-      })
+        position: "top-right",
+      });
       setClickCount((prev) => prev - 12);
       setIsClicked(false);
     }
   };
 
-  // image uploading after uploading the data:  
+  // image uploading after uploading the data:
   const submitImage = async (productID) => {
     try {
       let id = localStorage.getItem("usrId") || undefined;
       let authorization = localStorage.getItem("AstToken") || undefined;
 
       let headersList = {
-        "Accept": "*/*",
-        "Authorization": authorization,
-        "id": id
-      }
+        Accept: "*/*",
+        Authorization: authorization,
+        id: id,
+      };
 
       let formdata = new FormData();
       images.forEach((image) => {
@@ -233,11 +227,11 @@ const ColdStorageRent = () => {
         method: "POST",
         headers: headersList,
         data: bodyContent,
-      }
+      };
 
       await axios.request(reqOptions).then((e) => {
         setIsClicked(false);
-      })
+      });
     } catch (error) {
       console.log(error);
       setIsClicked(false);
@@ -251,22 +245,21 @@ const ColdStorageRent = () => {
     if (e.target.value.length == 6) {
       pinfetch(NumericString(e.target.value));
     }
-  }
-
+  };
 
   const pinfetch = async (pin) => {
     try {
-
-      let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
+      let res = await axios.get(
+        `${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`
+      );
       setState(res.data[0].state);
       setCity(res.data[0].city);
       setCountry(res.data[0].country);
       setPinCollection(res.data);
-    }
-    catch (err) {
+    } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   const handleAvailable = (e) => {
     e.preventDefault();
@@ -282,7 +275,6 @@ const ColdStorageRent = () => {
     e.preventDefault();
     setExpectedYear(e.target.value);
   };
-
 
   const handleAdditionalFeature = (e) => {
     e.preventDefault();
@@ -372,22 +364,13 @@ const ColdStorageRent = () => {
       newarr.push(value);
     }
     setInclusivePrice(newarr);
-  }
+  };
 
-  const areaCalucation = () => {
-    if (pricedetail && plotArea) {
-      let max = Math.max(Number(pricedetail), Number(plotArea));
-      let min = Math.min(Number(pricedetail), Number(plotArea));
-      let ans = Math.round(max / min);
-      setPriceSqr(ans);
-    }
-  }
-
-  // ======--- image upload function  
+  // ======--- image upload function
 
   const selectFiles = () => {
     fileInputRef.current.click();
-  }
+  };
 
   const removeImage = (index) => {
     const newImages = [...images];
@@ -398,33 +381,36 @@ const ColdStorageRent = () => {
   const onFileSelect = (e) => {
     let files = e.target.files;
     if (files.length === 0) {
-      return
+      return;
     }
     for (let i = 0; i < files.length; i++) {
-      if (files[i].type.split('/')[0] !== 'image') {
+      if (files[i].type.split("/")[0] !== "image") {
         continue;
       }
       if (!images.some((e) => e.name === files[i].name)) {
-        setImages((prev) => [...prev, {
-          name: files[i].name,
-          image: files[i],
-        },])
+        setImages((prev) => [
+          ...prev,
+          {
+            name: files[i].name,
+            image: files[i],
+          },
+        ]);
       }
     }
-  }
+  };
 
   const ondragleave = (event) => {
     event.preventDefault();
     setIsDraging(false);
-    console.log("leave")
-  }
+    console.log("leave");
+  };
 
   const ondragover = (event) => {
     event.preventDefault();
     setIsDraging(true);
     event.dataTransfer.dropEffect = "copy";
     console.log("over the box");
-  }
+  };
 
   const ondrop = (event) => {
     event.preventDefault(); // Add this line
@@ -437,57 +423,57 @@ const ColdStorageRent = () => {
     }
 
     for (let i = 0; i < files.length; i++) {
-      if (files[i].type.split('/')[0] !== 'image') {
+      if (files[i].type.split("/")[0] !== "image") {
         continue;
       }
       if (!images.some((e) => e.name === files[i].name)) {
-        setImages((prev) => [...prev, {
-          name: files[i].name,
-          image: files[i],
-        }]);
+        setImages((prev) => [
+          ...prev,
+          {
+            name: files[i].name,
+            image: files[i],
+          },
+        ]);
       }
     }
     console.log("droped");
-  }
- 
+  };
 
   return (
     <div>
       <form onSubmit={handleSubmitData}>
         <Box className={style.location_form}>
           <Heading size={"lg"}>Where is your property located?</Heading>
-          <Heading size={"sm"}>
-            An accurate location helps you connect with the right buyers.
+          <Heading size={"sm"} textAlign={"left"}>
+            Location Detail
           </Heading>
 
           <Input
             type="text"
-            padding={"0 10px"}
             required
             placeholder="Address (optional)"
             value={address}
             onChange={(e) => setaddress(e.target.value)}
-            fontSize={"md"}
+            fontSize={"sm"}
             variant="flushed"
           />
           <Input
             type="text"
             placeholder={"Enter pincode"}
-            padding={"0 10px"}
+            variant="flushed"
             required
-            fontSize={"md"}
+            fontSize={"sm"}
             value={pincode}
             onChange={handlepinfetch}
           />
           <Input
             type="text"
-            padding={"0 10px"}
             required
             placeholder="Enter Locality"
             list="browsers"
             value={locality}
             onChange={(e) => setLocality(e.target.value)}
-            fontSize={"md"}
+            fontSize={"sm"}
             variant="flushed"
           />
           {pincollection.length ? (
@@ -496,57 +482,50 @@ const ColdStorageRent = () => {
                 <option value={e.locality} />
               ))}
             </datalist>
-          ) : ""}
+          ) : (
+            ""
+          )}
 
           <Input
             type="text"
-            padding={"0 10px"}
             required
             placeholder="Enter City"
-            fontSize={"md"}
+            fontSize={"sm"}
             value={city}
             onChange={(e) => setCity(e.target.value)}
             variant="flushed"
           />
           <Input
             type="text"
-            padding={"0 10px"}
             required
             placeholder="Enter State"
             value={state}
             onChange={(e) => setState(e.target.value)}
-            fontSize={"md"}
+            fontSize={"sm"}
             variant="flushed"
           />
           <Input
             type="text"
-            padding={"0 10px"}
             required
             placeholder="Enter Country"
             value={country}
             onChange={(e) => setCountry(e.target.value)}
-            fontSize={"md"}
+            fontSize={"sm"}
             variant="flushed"
           />
-
-        </Box>
-        {/* =============================== Tell us about your property ============================ */}
-        <Box>
-          <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"}>
-            Tell us about your property
-          </Heading>
-          <Heading as={"h4"} size={"sm"} margin={"0 0 30px 0 "}>
-            Add Room Details
-          </Heading>
         </Box>
 
         {/* ============================== No. of Washrooms ====================================== */}
         <Box>
-          <Box textAlign={"left"} >
+          <Box textAlign={"left"}>
+            <Heading as={"h4"} size={"sm"}>
+              Add Room Details
+            </Heading>
             <Text> No. of Washrooms </Text>
             <Input
               type="text"
-              w={"200px"}
+              width={{ base: "100%", md: 300 }}
+              placeholder="Enter no. of washrooms"
               onChange={(e) => setwashrooms(e.target.value)}
               value={washrooms}
               required
@@ -556,28 +535,28 @@ const ColdStorageRent = () => {
 
         {/* ============================ add area details =============================== */}
         <Box textAlign={"left"} padding={"10px 0"}>
-          <Heading as={"h3"} margin={"5px 0"} size={"md"}>
+          <Heading as={"h3"} margin={"5px 0"} size={"sm"}>
             Add Area Details
           </Heading>
           <Text margin={"5px 0"}> Plot area is mandatory </Text>
-          <ButtonGroup
-            className={style.select_land}
-            size="sm"
-            isAttached
-            variant="outline"
-          >
+          <InputGroup isAttached width={{ base: "100%", md: 300 }}>
             <Input
               type="text"
+              placeholder="Enter area details"
               value={plotArea}
               onChange={(e) => {
-                areaCalucation();
                 setPlotArea(NumericString(e.target.value));
               }}
               required
             />
-            <Select value={areaPer} onChange={(e) => {
-              setAreaPer(e.target.value);
-            }} className={style.select} required>
+            <Select
+              value={areaPer}
+              onChange={(e) => {
+                setAreaPer(e.target.value);
+              }}
+              className={style.select}
+              required
+            >
               <option value="sq.ft">sq.ft</option>
               <option value="sq.yards">sq.yards</option>
               <option value="sq.m">sq.m</option>
@@ -597,12 +576,12 @@ const ColdStorageRent = () => {
               <option value="chataks">chataks</option>
               <option value="perch">perch</option>
             </Select>
-          </ButtonGroup>
+          </InputGroup>
         </Box>
 
         {/* ========================== Availability status =============================== */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Availability Status
           </Heading>
           <Box className={style.grid}>
@@ -640,7 +619,7 @@ const ColdStorageRent = () => {
           <Box textAlign={"left"} className={style.optional_box}>
             <Heading
               as={"h3"}
-              size={"md"}
+              size={"sm"}
               margin={"30px 0 10px 0"}
               textAlign={"left"}
             >
@@ -698,7 +677,7 @@ const ColdStorageRent = () => {
           <Box>
             <Heading
               as={"h3"}
-              size={"md"}
+              size={"sm"}
               margin={"30px 0 10px 0"}
               textAlign={"left"}
             >
@@ -724,7 +703,7 @@ const ColdStorageRent = () => {
             <Heading
               as={"h2"}
               marginTop={"10"}
-              size={"md"}
+              size={"sm"}
               fontWeight={700}
               textAlign={"left"}
             >
@@ -746,7 +725,6 @@ const ColdStorageRent = () => {
                   required
                   onChange={(e) => {
                     setPricedetail(e.target.value);
-                    areaCalucation();
                   }}
                 />
               </Box>
@@ -766,46 +744,47 @@ const ColdStorageRent = () => {
               </Box> */}
             </Box>
           </Box>
-          <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
-            <Checkbox
-              isChecked={inclusivePrices.includes("Electricity & Water charges excluded")}
-              onChange={(e) => {
-                e.preventDefault();
-                handleinclusiveandtax(e.target.value)
-              }}
-              value={"Electricity & Water charges excluded"}
-
-            >
-              Electricity & Water charges excluded
-            </Checkbox>
-            <Checkbox
-              isChecked={inclusivePrices.includes("Price Negotiable")}
-              onChange={(e) => {
-                e.preventDefault();
-                handleinclusiveandtax(e.target.value)
-              }}
-              value={"Price Negotiable"}
-            >
-
-              Price Negotiable
-            </Checkbox>
-          </Box>
           <Box>
-            {additionalPrice && <>
-              <InputGroup w={"300px"} margin={"10 0 0 0"}>
-                <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
-                <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
-                  <option value="Monthly">Monthly</option>
-                  <option value="Yearly">Yearly</option>
-                </Select>
-              </InputGroup>
-              <Box display={"grid"}>
-                <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-                <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(e.target.value)} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
-              </Box>
-
-            </>
-            }
+            {additionalPrice && (
+              <>
+                <InputGroup w={"300px"} margin={"10 0 0 0"}>
+                  <Input
+                    w={"60%"}
+                    type="text"
+                    onChange={(e) => setMaintenancePrice(e.target.value)}
+                    value={maintenancePrice}
+                    placeholder={"Maintenance Price"}
+                  />
+                  <Select
+                    w={"40%"}
+                    borderRadius={0}
+                    value={maintenanceTimePeriod}
+                    onChange={(e) => setMaintenanceTimePeriod(e.target.value)}
+                  >
+                    <option value="Monthly">Monthly</option>
+                    <option value="Yearly">Yearly</option>
+                  </Select>
+                </InputGroup>
+                <Box display={"grid"}>
+                  <Input
+                    type="text"
+                    w={"300px"}
+                    value={bookingAmount}
+                    onChange={(e) => setBookingAmount(e.target.value)}
+                    placeholder="Booking Amount"
+                    margin={"10px 0 0 0"}
+                  />
+                  <Input
+                    type="text"
+                    w={"300px"}
+                    value={annualDuesPayble}
+                    onChange={(e) => setAnnualDuesPayble(e.target.value)}
+                    placeholder="Annual dues payable"
+                    margin={"10px 0 0 0"}
+                  />
+                </Box>
+              </>
+            )}
             <Heading
               as={"h3"}
               size={"sm"}
@@ -814,33 +793,98 @@ const ColdStorageRent = () => {
               fontWeight={500}
               cursor={"pointer"}
               onClick={() => setAdditionalPrice(!additionalPrice)}
-              textAlign={"left"}>
-              {additionalPrice ? <IoIosArrowUp style={{ display: "inline" }} /> : <IoIosArrowDown style={{ display: "inline" }} />} Add more pricing details
+              textAlign={"left"}
+            >
+              {additionalPrice ? (
+                <IoIosArrowUp style={{ display: "inline" }} />
+              ) : (
+                <IoIosArrowDown style={{ display: "inline" }} />
+              )}{" "}
+              Add more pricing details
             </Heading>
+          </Box>
+          <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
+            <Checkbox
+              isChecked={inclusivePrices.includes(
+                "Electricity & Water charges excluded"
+              )}
+              onChange={(e) => {
+                e.preventDefault();
+                handleinclusiveandtax(e.target.value);
+              }}
+              value={"Electricity & Water charges excluded"}
+            >
+              Electricity & Water charges excluded
+            </Checkbox>
+            <Checkbox
+              isChecked={inclusivePrices.includes("Price Negotiable")}
+              onChange={(e) => {
+                e.preventDefault();
+                handleinclusiveandtax(e.target.value);
+              }}
+              value={"Price Negotiable"}
+            >
+              Price Negotiable
+            </Checkbox>
           </Box>
         </Box>
 
         {/* image Drag and Drop area  */}
         <Box>
           <Box className={style.top}>
-            <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
+            <Heading
+              color={"black"}
+              size={"sm"}
+              textAlign={"left"}
+              margin={"10px 0"}
+            >
+              {" "}
+              Upload Your Property image{" "}
+            </Heading>
           </Box>
           <Box className={style.card}>
-            <Box className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+            <Box
+              className={style.dragArea}
+              onDragOver={ondragover}
+              onDragLeave={ondragleave}
+              onDrop={ondrop}
+            >
               {isDraging ? (
                 <Text className={style.select}>Drop image here</Text>
               ) : (
                 <>
                   Drag & Drop image here or
-                  <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
+                  <Text
+                    className={style.select}
+                    role="button"
+                    onClick={selectFiles}
+                  >
+                    {" "}
+                    Browse{" "}
+                  </Text>
                 </>
               )}
-              <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+              <input
+                type={"file"}
+                name="image"
+                accept="image/jpg, image/png, image/jpeg"
+                formMethod="post"
+                formEncType="multipart/form-data"
+                className={style.file}
+                multiple
+                ref={fileInputRef}
+                onChange={onFileSelect}
+              />
             </Box>
             <Box className={style.container}>
               {images.map((image, index) => (
                 <Box className={style.image} key={index}>
-                  <Text className={style.delete} onClick={() => removeImage(index)}>&#10006;</Text>
+                  <Text
+                    className={style.delete}
+                    onClick={() => removeImage(index)}
+                  >
+                    &#10006;
+                  </Text>
                   <img src={URL.createObjectURL(image.image)} alt="images" />
                 </Box>
               ))}
@@ -850,34 +894,55 @@ const ColdStorageRent = () => {
 
         {/* ============================ Property unique discription ============================ */}
         <Box>
-          <Heading as={"h3"} size={"md"} fontWeight={600} margin={"10px 0"} textAlign={"left"}>
+          <Heading
+            as={"h3"}
+            size={"sm"}
+            fontWeight={600}
+            margin={"10px 0"}
+            textAlign={"left"}
+          >
             Add Description and Unique Features of your Property
           </Heading>
-          <Heading as={"h3"} size={"xs"} fontWeight={400} color={"#777777"} margin={"10px 0"} textAlign={"left"}>
+          <Heading
+            as={"h3"}
+            size={"xs"}
+            fontWeight={400}
+            color={"#777777"}
+            margin={"10px 0"}
+            textAlign={"left"}
+          >
             Adding description will increase your listing visibility
           </Heading>
-          <Textarea height={140} value={desc} onChange={(e) => {
-            let my_cleantext = CleanInputText(e.target.value);
-            setDesc(my_cleantext);
-          }} ></Textarea>
+          <Textarea
+            height={140}
+            value={desc}
+            placeholder="Add Description"
+            onChange={(e) => {
+              let my_cleantext = CleanInputText(e.target.value);
+              setDesc(my_cleantext);
+            }}
+          ></Textarea>
         </Box>
-
-
-
 
         {/* ============================ Add amenities/unique features ============================ */}
         <Box marginTop={"50"}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Add amenities/unique features
           </Heading>
-          <Heading as={"h5"} size={"xs"} fontWeight={400} margin={"10px 0"} textAlign={"left"}>
+          <Heading
+            as={"h5"}
+            size={"xs"}
+            fontWeight={400}
+            margin={"10px 0"}
+            textAlign={"left"}
+          >
             All fields on this page are optional
           </Heading>
         </Box>
 
         {/* ============================ Amenities ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Amenities
           </Heading>
           <Box>
@@ -892,7 +957,9 @@ const ColdStorageRent = () => {
             </button>
             <button
               className={
-                amenities.includes("Centrally Air Conditioned") ? style.setbtn : style.btn
+                amenities.includes("Centrally Air Conditioned")
+                  ? style.setbtn
+                  : style.btn
               }
               onClick={handleAminities}
               value={"Centrally Air Conditioned"}
@@ -920,7 +987,11 @@ const ColdStorageRent = () => {
               Visitor Parking
             </button>
             <button
-              className={amenities.includes("Feng Shui / Vaastu Compliant") ? style.setbtn : style.btn}
+              className={
+                amenities.includes("Feng Shui / Vaastu Compliant")
+                  ? style.setbtn
+                  : style.btn
+              }
               onClick={handleAminities}
               value={"Feng Shui / Vaastu Compliant"}
             >
@@ -929,13 +1000,9 @@ const ColdStorageRent = () => {
           </Box>
         </Box>
 
-
-
-
-
         {/* ============================ Property Features ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Property Features
           </Heading>
           <Box>
@@ -964,7 +1031,9 @@ const ColdStorageRent = () => {
             </button>
             <button
               className={
-                propertyFeatures.includes("Reserved Parking") ? style.setbtn : style.btn
+                propertyFeatures.includes("Reserved Parking")
+                  ? style.setbtn
+                  : style.btn
               }
               value={"Reserved Parking"}
               onClick={handlePropertyFeature}
@@ -986,12 +1055,9 @@ const ColdStorageRent = () => {
           </Box>
         </Box>
 
-
-
-
         {/* ============================ Society/Building feature ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Society/Building feature
           </Heading>
           <Box>
@@ -1119,9 +1185,7 @@ const ColdStorageRent = () => {
             </button>
             <button
               className={
-                buildingFeature.includes("Lift")
-                  ? style.setbtn
-                  : style.btn
+                buildingFeature.includes("Lift") ? style.setbtn : style.btn
               }
               onClick={HandleBuildingFeature}
               value={"Lift"}
@@ -1131,12 +1195,9 @@ const ColdStorageRent = () => {
           </Box>
         </Box>
 
-
-
-
         {/* ============================ Additional Features ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Additional Features
           </Heading>
           <Box>
@@ -1178,7 +1239,7 @@ const ColdStorageRent = () => {
 
         {/* ============================ Other Features ============================ */}
         <Box>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Other Features
           </Heading>
           <Box display={"grid"} textAlign={"left"} gap={2}>
@@ -1188,7 +1249,6 @@ const ColdStorageRent = () => {
               value={"Wheelchair friendly"}
               onChange={handleotherfeature}
             >
-
               Wheelchair friendly
             </Checkbox>
           </Box>
@@ -1196,7 +1256,7 @@ const ColdStorageRent = () => {
 
         {/* ============================ Property facing ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Property facing
           </Heading>
           <Box>
@@ -1204,7 +1264,7 @@ const ColdStorageRent = () => {
               className={propertyFacing == "North" ? style.setbtn : style.btn}
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"North"}
             >
@@ -1214,7 +1274,7 @@ const ColdStorageRent = () => {
               className={propertyFacing == "South" ? style.setbtn : style.btn}
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"South"}
             >
@@ -1224,7 +1284,7 @@ const ColdStorageRent = () => {
               className={propertyFacing == "East" ? style.setbtn : style.btn}
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"East"}
             >
@@ -1234,7 +1294,7 @@ const ColdStorageRent = () => {
               className={propertyFacing == "West" ? style.setbtn : style.btn}
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"West"}
             >
@@ -1246,7 +1306,7 @@ const ColdStorageRent = () => {
               }
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"North-East"}
             >
@@ -1258,7 +1318,7 @@ const ColdStorageRent = () => {
               }
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"North-West"}
             >
@@ -1270,7 +1330,7 @@ const ColdStorageRent = () => {
               }
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"South-East"}
             >
@@ -1282,7 +1342,7 @@ const ColdStorageRent = () => {
               }
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"South-West"}
             >
@@ -1293,11 +1353,12 @@ const ColdStorageRent = () => {
 
         {/* ============================ Type of flooring ============================ */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+          <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Type of flooring
           </Heading>
           <Box>
-            <Select
+            <Select 
+              width={{ base: "100%", md: 300 }}  
               onChange={(e) => setFlooring(e.target.value)}
               value={flooring}
             >
@@ -1322,7 +1383,7 @@ const ColdStorageRent = () => {
 
         {/* ============================ location advantage ============================ */}
         <Box className={style.optional_box}>
-          <Heading size={"md"} margin={"10px 0 4px 0"} textAlign={"left"}>
+          <Heading size={"sm"} margin={"10px 0 4px 0"} textAlign={"left"}>
             Location Advantages
             <Heading
               size={"xs"}
@@ -1343,17 +1404,17 @@ const ColdStorageRent = () => {
               value={"Close to Metro Station"}
               onClick={handlelocationadvantages}
             >
-
               Close to Metro Station
             </button>
             <button
               className={
-                locationAdv.includes("Close to School") ? style.setbtn : style.btn
+                locationAdv.includes("Close to School")
+                  ? style.setbtn
+                  : style.btn
               }
               value={"Close to School"}
               onClick={handlelocationadvantages}
             >
-
               Close to School
             </button>
             <button
@@ -1365,17 +1426,17 @@ const ColdStorageRent = () => {
               value={"Close to Hospital"}
               onClick={handlelocationadvantages}
             >
-
               Close to Hospital
             </button>
             <button
               className={
-                locationAdv.includes("Close to Market") ? style.setbtn : style.btn
+                locationAdv.includes("Close to Market")
+                  ? style.setbtn
+                  : style.btn
               }
               value={"Close to Market"}
               onClick={handlelocationadvantages}
             >
-
               Close to Market
             </button>
             <button
@@ -1387,7 +1448,6 @@ const ColdStorageRent = () => {
               value={"Close to Railway Station"}
               onClick={handlelocationadvantages}
             >
-
               Close to Railway Station
             </button>
             <button
@@ -1399,7 +1459,6 @@ const ColdStorageRent = () => {
               value={"Close to Airport"}
               onClick={handlelocationadvantages}
             >
-
               Close to Airport
             </button>
             <button
@@ -1434,8 +1493,8 @@ const ColdStorageRent = () => {
         >
           *Please provide correct information, otherwise your listing might get
           blocked
-        </Heading>  
-        {isClicked && <Loading />}  
+        </Heading>
+        {isClicked && <Loading />}
         <Button
           margin={"20px 0"}
           type="submit"
@@ -1447,10 +1506,9 @@ const ColdStorageRent = () => {
         >
           Post Property
         </Button>
-
       </form>
     </div>
-  )
-}
+  );
+};
 
 export default ColdStorageRent;
