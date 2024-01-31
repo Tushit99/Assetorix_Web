@@ -605,7 +605,7 @@ const IndustrialLandRentUpdate = () => {
                         placeholder="Plot number (optional)"
                         value={Plotnumber}
                         onChange={(e) => setPlotnumber(e.target.value)}
-                        fontSize={"md"}
+                        fontSize={"sm"}
                         variant="flushed"
                     />
                     <Input type="text"
@@ -622,7 +622,7 @@ const IndustrialLandRentUpdate = () => {
                         list="browsers"
                         value={locality}
                         onChange={(e) => setLocality(e.target.value)}
-                        fontSize={"md"}
+                        fontSize={"sm"}
                         variant="flushed"
                     />
                     {pincollection.length ? (
@@ -638,7 +638,7 @@ const IndustrialLandRentUpdate = () => {
                         padding={"0 10px"}
                         required
                         placeholder="Enter City"
-                        fontSize={"md"}
+                        fontSize={"sm"}
                         value={city}
                         onChange={(e) => setCity(e.target.value)}
                         variant="flushed"
@@ -650,7 +650,7 @@ const IndustrialLandRentUpdate = () => {
                         placeholder="Enter State"
                         value={state}
                         onChange={(e) => setState(e.target.value)}
-                        fontSize={"md"}
+                        fontSize={"sm"}
                         variant="flushed"
                     />
                     <Input
@@ -660,14 +660,14 @@ const IndustrialLandRentUpdate = () => {
                         placeholder="Enter Country"
                         value={country}
                         onChange={(e) => setCountry(e.target.value)}
-                        fontSize={"md"}
+                        fontSize={"sm"}
                         variant="flushed"
                     />
 
                 </Box>
                 {/* =============================== Tell us about your property ============================ */}
                 <Box>
-                    <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"}>
+                    <Heading as={"h3"} size={"sm"} margin={"30px 0 10px 0"}>
                         Tell us about your property
                     </Heading>
                 </Box>
@@ -675,7 +675,7 @@ const IndustrialLandRentUpdate = () => {
 
                 {/* ============================ add area details =============================== */}
                 <Box textAlign={"left"} padding={"10px 0 0 0"}>
-                    <Heading as={"h3"} size={"md"}>
+                    <Heading as={"h3"} size={"sm"}>
                         Add Area Details
                     </Heading> 
                     <InputGroup isAttached width={{base:"100%",md:300}}>
@@ -715,7 +715,7 @@ const IndustrialLandRentUpdate = () => {
 
                 {/* ========================== Property Dimensions ========================== */}
                 <Box as={"div"} textAlign={"left"} padding={"10px 0"} >
-                    <Heading as={"h3"} size={"md"} > Property Dimensions (Optional) </Heading>
+                    <Heading as={"h3"} size={"sm"} > Property Dimensions (Optional) </Heading>
                     <Input type={"text"} variant='flushed' padding={"0 6px"} margin={"4px 0"} value={plotLength} onChange={(e) => {
                         setplotLength(NumericString(e.target.value));
                     }} placeholder={`Length of plot (in ${areaPer})`} />
@@ -726,7 +726,7 @@ const IndustrialLandRentUpdate = () => {
 
                 {/* ========================== Width of facing road ========================== */}
                 <Box className={style.optional_box}>
-                    <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                    <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                         Width of facing road
                     </Heading>
                     <Box display={"flex"} gap={"20px"} w={"300px"} >
@@ -743,7 +743,7 @@ const IndustrialLandRentUpdate = () => {
 
                 {/* ========================== No of open sides ========================== */}
                 <Box textAlign={"left"} className={style.optional_box}>
-                    <Heading as={"h3"} size={"md"} > No. of open sides </Heading>
+                    <Heading as={"h3"} size={"sm"} > No. of open sides </Heading>
                     <Box textAlign={"left"} padding={"10px 0 0 0"}>
                         <button value={"1"} onClick={handleOpenSide} className={openSides.includes("1") ? style.setbtn : style.btn} >1</button>
                         <button value={"2"} onClick={handleOpenSide} className={openSides.includes("2") ? style.setbtn : style.btn} >2</button>
@@ -754,7 +754,7 @@ const IndustrialLandRentUpdate = () => {
 
                 {/* ============================== Construction Property =============================== */}
                 <Box textAlign={"left"} className={style.optional_box}>
-                    <Heading as={"h3"} size={"md"} > Any construction done on this property? </Heading>
+                    <Heading as={"h3"} size={"sm"} > Any construction done on this property? </Heading>
                     <Box textAlign={"left"} padding={"10px 0 0 0"}>
                         <button onClick={handleConstructionOnProperty} value={"Yes"} className={ConstructionOnProperty.includes("Yes") ? style.setbtn : style.btn} >Yes</button>
                         <button onClick={handleConstructionOnProperty} value={"No"} className={ConstructionOnProperty.includes("No") ? style.setbtn : style.btn} >No</button>
@@ -763,7 +763,7 @@ const IndustrialLandRentUpdate = () => {
 
                 {/* ============================= Type of construction been done =========================== */}
                 <Box className={style.optional_box} display={ConstructionOnProperty == "Yes" ? "grid" : "none"}>
-                    <Heading as={"h3"} size={"md"} > What type of construction has been done? </Heading>
+                    <Heading as={"h3"} size={"sm"} > What type of construction has been done? </Heading>
                     <Box>
                         <button value={"Shed"} onClick={handleConstructionType} className={constructionType.includes("Shed") ? style.setbtn : style.btn} > Shed </button>
                         <button value={"Room(s)"} onClick={handleConstructionType} className={constructionType.includes("Room(s)") ? style.setbtn : style.btn} > Room(s) </button>
@@ -774,7 +774,7 @@ const IndustrialLandRentUpdate = () => {
 
                 {/* Property facing */}
                 <Box className={style.optional_box}>
-                    <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                    <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                         Property facing
                     </Heading>
                     <Box>
@@ -898,7 +898,7 @@ const IndustrialLandRentUpdate = () => {
                 <Box>
                     <Heading
                         as={"h3"}
-                        size={"md"}
+                        size={"sm"}
                         margin={"30px 0 10px 0"}
                         textAlign={"left"}
                     >
@@ -964,7 +964,7 @@ const IndustrialLandRentUpdate = () => {
                 <Box>
                     <Heading
                         as={"h3"}
-                        size={"md"}
+                        size={"sm"}
                         margin={"30px 0 10px 0"}
                         textAlign={"left"}
                     >
@@ -1116,7 +1116,7 @@ const IndustrialLandRentUpdate = () => {
 
                 {/* Approved for Industry Type */}
                 <Box>
-                    <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                    <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                         Approved for Industry Type
                     </Heading>
                     <Menu>
@@ -1152,7 +1152,7 @@ const IndustrialLandRentUpdate = () => {
 
                 {/* ============================ Property unique discription ============================ */}
                 <Box>
-                    <Heading as={"h3"} size={"md"} fontWeight={600} margin={"10px 0"} textAlign={"left"}>
+                    <Heading as={"h3"} size={"sm"} fontWeight={600} margin={"10px 0"} textAlign={"left"}>
                         Add Description and Unique Features of your Property
                     </Heading>
                     <Heading as={"h3"} size={"xs"} fontWeight={400} color={"#777777"} margin={"10px 0"} textAlign={"left"}>
@@ -1199,7 +1199,7 @@ const IndustrialLandRentUpdate = () => {
 
                 {/* ============================ Add amenities/unique features ============================ */}
                 <Box>
-                    <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                    <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                         Add amenities/unique features
                     </Heading>
                     <Heading as={"h5"} size={"xs"} fontWeight={400} margin={"10px 0"} textAlign={"left"}>
@@ -1209,7 +1209,7 @@ const IndustrialLandRentUpdate = () => {
 
                 {/* ============================ Amenities ============================ */}
                 <Box className={style.optional_box}>
-                    <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                    <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                         Amenities
                     </Heading>
                     <Box>
@@ -1291,7 +1291,7 @@ const IndustrialLandRentUpdate = () => {
 
                 {/* ============================ Property Features ============================ */}
                 <Box className={style.optional_box}>
-                    <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                    <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                         Property Features
                     </Heading>
                     <Box>
@@ -1342,7 +1342,7 @@ const IndustrialLandRentUpdate = () => {
 
                 {/* ============================ Other Features ============================ */}
                 <Box>
-                    <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
+                    <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
                         Other Features
                     </Heading>
                     <Box display={"grid"} textAlign={"left"} gap={2}>
@@ -1360,7 +1360,7 @@ const IndustrialLandRentUpdate = () => {
 
                 {/* ============================ location advantage ============================ */}
                 <Box className={style.optional_box}>
-                    <Heading size={"md"} margin={"10px 0 4px 0"} textAlign={"left"}>
+                    <Heading size={"sm"} margin={"10px 0 4px 0"} textAlign={"left"}>
                         Location Advantages
                         <Heading
                             size={"xs"}
