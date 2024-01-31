@@ -550,7 +550,7 @@ const GuestBanquetRent = () => {
             <Text> No. of rooms </Text>
             <Input
               type="text"
-              variant={"outline"} 
+              variant={"outline"}
               width={{ base: "100%", md: 300 }}
               maxLength={"2"}
               onChange={(e) => {
@@ -564,7 +564,7 @@ const GuestBanquetRent = () => {
             <Text> No. of washroom </Text>
             <Input
               type="text"
-              variant={"outline"} 
+              variant={"outline"}
               width={{ base: "100%", md: 300 }}
               onChange={(e) => {
                 setwashrooms(NumericString(e.target.value));
@@ -859,30 +859,6 @@ const GuestBanquetRent = () => {
             />
           </Box>
         </Box>
-        <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
-          <Checkbox
-            isChecked={inclusivePrices.includes(
-              "Electricity & Water charges excluded"
-            )}
-            onChange={(e) => {
-              e.preventDefault();
-              handleinclusiveandtax(e.target.value);
-            }}
-            value={"Electricity & Water charges excluded"}
-          >
-            Electricity & Water charges excluded
-          </Checkbox>
-          <Checkbox
-            isChecked={inclusivePrices.includes("Price Negotiable")}
-            onChange={(e) => {
-              e.preventDefault();
-              handleinclusiveandtax(e.target.value);
-            }}
-            value={"Price Negotiable"}
-          >
-            Price Negotiable
-          </Checkbox>
-        </Box>
         <Box>
           {additionalPrice && (
             <>
@@ -950,6 +926,30 @@ const GuestBanquetRent = () => {
             )}{" "}
             Add more pricing details
           </Heading>
+        </Box>
+        <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
+          <Checkbox
+            isChecked={inclusivePrices.includes(
+              "Electricity & Water charges excluded"
+            )}
+            onChange={(e) => {
+              e.preventDefault();
+              handleinclusiveandtax(e.target.value);
+            }}
+            value={"Electricity & Water charges excluded"}
+          >
+            Electricity & Water charges excluded
+          </Checkbox>
+          <Checkbox
+            isChecked={inclusivePrices.includes("Price Negotiable")}
+            onChange={(e) => {
+              e.preventDefault();
+              handleinclusiveandtax(e.target.value);
+            }}
+            value={"Price Negotiable"}
+          >
+            Price Negotiable
+          </Checkbox>
         </Box>
       </Box>
 
@@ -1396,7 +1396,7 @@ const GuestBanquetRent = () => {
         <Box>
           <Select
             width={{ base: "100%", md: 300 }}
-            onChange={(e) => setFlooring(e.target.value)} 
+            onChange={(e) => setFlooring(e.target.value)}
             value={flooring}
           >
             <option value=""> Select </option>
