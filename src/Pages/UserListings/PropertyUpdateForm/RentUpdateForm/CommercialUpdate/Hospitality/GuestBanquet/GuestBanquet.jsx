@@ -566,9 +566,9 @@ const GuestBanquetRentUpdate = () => {
                 {/* ============================= property location =========================== */}
                 <Box className={style.location_form}>
                     <Heading size={"lg"}>Where is your property located?</Heading>
-                    <Heading size={"sm"}>
-                        An accurate location helps you connect with the right buyers.
-                    </Heading>
+                    <Heading size={"sm"} color={"black"} textAlign={"left"}>
+                        Location detail
+                    </Heading> 
                     <Input
                         type="text"
                         padding={"0 10px"}

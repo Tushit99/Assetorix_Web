@@ -657,9 +657,9 @@ const ReadyMoveUpdate = () => {
                     <Heading size={"lg"} color={"black"}>
                         Where is your property located?
                     </Heading>
-                    <Heading size={"sm"} color={"black"}>
-                        An accurate location helps you connect with the right buyers.
-                    </Heading>
+                    <Heading size={"sm"} color={"black"} textAlign={"left"}>
+                        Location detail
+                    </Heading> 
 
                     <Input type="text" value={address} onChange={(e) => setAddress(e.target.value)} />
 

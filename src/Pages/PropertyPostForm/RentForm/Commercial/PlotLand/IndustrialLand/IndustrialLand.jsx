@@ -505,7 +505,7 @@ const IndustrialLand = () => {
       }
     }
     console.log("droped");
-  };
+  }; 
 
   return (
     <Box className="perfectwidth">
