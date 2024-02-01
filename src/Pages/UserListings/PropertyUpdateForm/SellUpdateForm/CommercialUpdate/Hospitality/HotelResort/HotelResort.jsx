@@ -50,7 +50,7 @@ const HotelResortUpdate = () => {
   const [Beds, setBeds] = useState(0);
   const [wardrobe, setWardrobe] = useState(0);
   const [geyser, setGeyser] = useState(0);
-
+  const [currency, setCurrency] = useState("₹");  
   const [areaPer, setAreaPer] = useState("sq.ft");
   const [furnishedarr, setfurnishedarr] = useState([]);
   const [extraroom, setExtraRoom] = useState([]);

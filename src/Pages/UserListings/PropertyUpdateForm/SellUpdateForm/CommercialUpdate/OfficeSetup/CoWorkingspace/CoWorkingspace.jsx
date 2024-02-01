@@ -83,6 +83,7 @@ const CoWorkingspaceUpdate = () => {
     const [isClicked, setIsClicked] = useState(false);
     const [clickCount, setClickCount] = useState(0);
     const navigate = useNavigate();
+    const [currency, setCurrency] = useState("₹"); 
 
     // please don'nt change any function without any prior knowledge   
 

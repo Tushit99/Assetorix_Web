@@ -66,6 +66,7 @@ const IndustrialLand = () => {
   const [expectedByYear, setExpectedByYear] = useState("");
   const [authorisedBy, setAuthorisedBy] = useState([]);
   const [clickCount, setClickCount] = useState(0);
+  const [currency, setCurrency] = useState("₹");  
   const [isClicked, setIsClicked] = useState(false);
   const navigate = useNavigate();
   // state for drop box images

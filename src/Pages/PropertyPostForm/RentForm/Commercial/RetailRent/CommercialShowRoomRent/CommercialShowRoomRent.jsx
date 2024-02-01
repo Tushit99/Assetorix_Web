@@ -81,6 +81,7 @@ const CommercialShowRoomRent = () => {
   const [depositAmount, setDepositAmount] = useState("");
   const [availableFrom, setavailableFrom] = useState("");
   const [clickCount, setClickCount] = useState(0);
+  const [currency, setCurrency] = useState("₹");  
   const [isClicked, setIsClicked] = useState(false);
   // state for drop box images
   const [images, setImages] = useState([]);

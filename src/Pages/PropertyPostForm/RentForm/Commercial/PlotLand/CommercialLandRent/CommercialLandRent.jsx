@@ -70,6 +70,7 @@ const CommercialLandRent = () => {
   const [clickCount, setClickCount] = useState(0);
   const [isClicked, setIsClicked] = useState(false);
   // state for drop box images
+  const [currency, setCurrency] = useState("₹"); 
   const navigate = useNavigate();
   const [images, setImages] = useState([]);
   const [isDraging, setIsDraging] = useState(false);

@@ -46,6 +46,7 @@ const ColdStorageRent = () => {
   const [locationAdv, setLocationAdv] = useState([]);
   const [plotArea, setPlotArea] = useState("");
   const [desc, setDesc] = useState("");
+  const [currency, setCurrency] = useState("₹");  
   const [pincollection, setPinCollection] = useState([]);
   const [additionalPrice, setAdditionalPrice] = useState(false);
   const [maintenancePrice, setMaintenancePrice] = useState("");

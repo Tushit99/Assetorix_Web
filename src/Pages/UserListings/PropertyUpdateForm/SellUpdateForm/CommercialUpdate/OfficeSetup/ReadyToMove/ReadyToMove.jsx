@@ -75,7 +75,7 @@ const ReadyToMoveUpdate = () => {
     const [annualRentIncrease, setAnnualRentIncrease] = useState("");
     const [businessType, setBusinessType] = useState("");
     const [pantryTypeUnit, setPantryTypeUnit] = useState("sq.ft");
-
+    const [currency, setCurrency] = useState("₹");  
     const [areaPer, setAreaPer] = useState("sq.ft");
     const [availability, setAvailability] = useState("");
     const [fromyear, setFromyear] = useState("");

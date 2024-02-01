@@ -95,9 +95,8 @@ const CommercialShowroom = () => {
     const [isClicked, setIsClicked] = useState(false);
     const [clickCount, setClickCount] = useState(0);
     const navigate = useNavigate();
-
-    // please don'nt change any function without any prior knowledge 
-
+    const [currency, setCurrency] = useState("₹");  
+    // please don'nt change any function without any prior knowledge  
 
 
     const handleDataFetch = async () => {
@@ -253,10 +252,9 @@ const CommercialShowroom = () => {
         if (
             city &&
             locality &&
-            type &&
+            type && 
             ownership &&
-            pricedetail &&
-
+            pricedetail && 
             inclusivePrices &&
             additinalft &&
             propertyFacing &&

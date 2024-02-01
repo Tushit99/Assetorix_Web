@@ -89,6 +89,8 @@ const IndependentUpdate = () => {
   const [isClicked, setIsClicked] = useState(false);
   const [clickCount, setClickCount] = useState(0);
   const navigate = useNavigate();
+  const [currency, setCurrency] = useState("₹"); 
+
   // ================================= 
 
   const handleDataFetch = async () => {

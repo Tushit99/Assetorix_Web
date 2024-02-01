@@ -84,6 +84,7 @@ const CommercialShowroom = () => {
   const [investorsTendReturn, setinvestorsTendReturn] = useState("");
   const [assuredReturns, setAssuredReturns] = useState("");
   const [leaseGuarantee, setLeaseGuarantee] = useState("");
+  const [currency, setCurrency] = useState("₹");  
   const [isClicked, setIsClicked] = useState(false);
   const [clickCount, setClickCount] = useState(0);
   const navigate = useNavigate();

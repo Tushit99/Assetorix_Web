@@ -60,7 +60,7 @@ const AgriculturalLandRentUpdate = () => {
   const [annualDuesPayble, setAnnualDuesPayble] = useState("");
   const [openSides, setOpenSides] = useState("");
   const [plotBreadth, setPlotBreadth] = useState("");
-
+  const [currency, setCurrency] = useState("₹");  
   const [plotLength, setplotLength] = useState("");
   const [expectedBy, setexpectedBy] = useState([]);
   const [ConstructionOnProperty, setConstructionOnProperty] = useState("");

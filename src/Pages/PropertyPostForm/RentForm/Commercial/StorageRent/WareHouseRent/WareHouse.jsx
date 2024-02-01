@@ -56,6 +56,7 @@ const WareHouse = () => {
   const [clickCount, setClickCount] = useState(0);
   const [isClicked, setIsClicked] = useState(false);
   const navigate = useNavigate();
+  const [currency, setCurrency] = useState("₹");  
   // state for drop box images
   const [images, setImages] = useState([]);
   const [isDraging, setIsDraging] = useState(false);

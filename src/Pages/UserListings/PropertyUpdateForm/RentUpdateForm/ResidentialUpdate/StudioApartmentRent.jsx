@@ -92,6 +92,8 @@ const StudioApartmentRentUpdate = () => {
     const [isClicked, setIsClicked] = useState(false);
     const [clickCount, setClickCount] = useState(0);
     const navigate = useNavigate();
+  const [currency, setCurrency] = useState("₹"); 
+
 
     const handleDataFetch = async () => {
         await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {

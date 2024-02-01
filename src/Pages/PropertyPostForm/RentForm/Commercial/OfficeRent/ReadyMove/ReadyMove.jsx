@@ -96,6 +96,7 @@ const ReadyMove = () => {
   const [fireNocCertificate, setFireNocCertificate] = useState("");
   const [clickCount, setClickCount] = useState(0);
   const [isClicked, setIsClicked] = useState(false);
+  const [currency, setCurrency] = useState("₹");  
   const navigate = useNavigate();
   // state for drop box images
   const [images, setImages] = useState([]);
