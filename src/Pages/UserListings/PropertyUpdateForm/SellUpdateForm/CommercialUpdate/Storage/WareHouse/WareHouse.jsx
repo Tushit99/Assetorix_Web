@@ -1537,7 +1537,8 @@ const WareHouseUpdate = () => {
                         Type of flooring
                     </Heading>
                     <Box>
-                        <Select
+                        <Select 
+                        width={{ base: "100%", md: 300 }}
                             onChange={(e) => setFlooring(e.target.value)}
                             value={flooring}
                         >

@@ -2248,6 +2248,7 @@ const GuestBanquet = () => {
         </Heading>
         <Box margin={"4px 0"}>
           <Select
+          width={{ base: "100%", md: 300 }}
             onChange={(e) => setFlooring(e.target.value)}
             value={flooring}
           >

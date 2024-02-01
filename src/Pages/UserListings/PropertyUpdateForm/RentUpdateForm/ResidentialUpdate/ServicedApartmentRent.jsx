@@ -2228,7 +2228,7 @@ const ServicedApartmentRentUpdate = () => {
                     </Heading>
                     <Box>
                         <Select
-                            w={300}
+                            width={{ base: "100%", md: 300 }}
                             variant={"flushed"}
                             onChange={(e) => setFlooring(e.target.value)}
                             value={flooring}

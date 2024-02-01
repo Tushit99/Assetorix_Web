@@ -1391,6 +1391,7 @@ const FactoryRentUpdate = () => {
                     </Heading>
                     <Box>
                         <Select
+                        width={{ base: "100%", md: 300 }}
                             onChange={(e) => setFlooring(e.target.value)}
                             value={flooring}
                         >

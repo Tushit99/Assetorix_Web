@@ -70,7 +70,7 @@ const FarmhouseRent = () => {
   const [floorOn, setFloorOn] = useState("Ground");
   const [plotArea, setPlotArea] = useState("");
   const [desc, setDesc] = useState("");
-  const [currency, setCurrency] = useState("₹"); 
+  const [currency, setCurrency] = useState("₹");
   const [pincollection, setPinCollection] = useState([]);
   const [willingTo, setWillingTo] = useState([]);
   const [preferredAgreement, setpreferredAgreement] = useState("");
@@ -116,7 +116,7 @@ const FarmhouseRent = () => {
         balcony: balconey,
       },
       agreementType: preferredAgreement,
-      price: +pricedetail, 
+      price: +pricedetail,
       willingToRent: willingTo,
       amenities,
       inclusivePrices,
@@ -1404,28 +1404,28 @@ const FarmhouseRent = () => {
             Rent Details
           </Heading>
           <InputGroup w={300} gap={2}>
-              <Select
-                w={"-moz-fit-content"}
-                value={currency}
-                borderRadius={0}
-                onChange={(e) => setCurrency(e.target.value)}
-              >
-                <option value="₹">₹ INR </option>
-                <option value="$">$ USD </option>
-              </Select>
-              <Input
-                type="text"
-                value={pricedetail}
-                maxLength={"10"}
-                placeholder={`Price`}
-                required
-                borderRadius={0}
-                w={200}
-                onChange={(e) => {
-                  setPricedetail(NumericString(e.target.value));
-                }}
-              />
-            </InputGroup> 
+            <Select
+              w={"-moz-fit-content"}
+              value={currency}
+              borderRadius={0}
+              onChange={(e) => setCurrency(e.target.value)}
+            >
+              <option value="₹">₹ INR </option>
+              <option value="$">$ USD </option>
+            </Select>
+            <Input
+              type="text"
+              value={pricedetail}
+              maxLength={"10"}
+              placeholder={`Price`}
+              required
+              borderRadius={0}
+              w={200}
+              onChange={(e) => {
+                setPricedetail(NumericString(e.target.value));
+              }}
+            />
+          </InputGroup>
           {/* pricing checkbox */}
           <Box display={"flex"} flexWrap={"wrap"} gap={5}>
             <Checkbox
@@ -2287,7 +2287,7 @@ const FarmhouseRent = () => {
         </Heading>
         <Box>
           <Select
-            w={300}
+            width={{ base: "100%", md: 300 }}
             variant={"flushed"}
             onChange={(e) => setFlooring(e.target.value)}
             value={flooring}

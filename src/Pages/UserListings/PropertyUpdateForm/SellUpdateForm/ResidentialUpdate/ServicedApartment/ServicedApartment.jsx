@@ -385,7 +385,7 @@ const ServicedApartmentUpdate = () => {
         setExpectedYear(e?.expectedByYear);
         setOwnerShip(e?.ownership);
         setPricedetail(e?.price);
-        setFloorOn(e?.floorOn); 
+        setFloorOn(e?.floorOn);
         setPriceSqr(e?.priceUnit);
         setInclusivePrice(e?.inclusivePrices);
         setAminity(e?.amenities);
@@ -813,7 +813,7 @@ const ServicedApartmentUpdate = () => {
             placeholder="Enter City"
             fontSize={"md"}
             value={city}
-            onChange={(e) => setCity(WordandNumber(e.target.value))}  
+            onChange={(e) => setCity(WordandNumber(e.target.value))}
             variant="flushed"
           />
           <Input
@@ -1753,7 +1753,6 @@ const ServicedApartmentUpdate = () => {
                 textAlign={"left"}
                 marginTop={5}
               >
-                
                 Upload Your Property image
               </Heading>
             </Box>
@@ -1774,7 +1773,6 @@ const ServicedApartmentUpdate = () => {
                       role="button"
                       onClick={selectFiles}
                     >
-                      
                       Browse
                     </Text>
                   </>
@@ -2468,7 +2466,7 @@ const ServicedApartmentUpdate = () => {
           </Heading>
           <Box>
             <Select
-              width={{ base: "100%", md: "300px" }}
+              width={{ base: "100%", md: 300 }}
               borderRadius={0}
               onChange={(e) => setFlooring(e.target.value)}
               value={flooring}

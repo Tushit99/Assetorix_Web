@@ -1559,7 +1559,7 @@ const Manufacture = () => {
           </Heading>
           <Box>
             <Select
-              width={{ base: "100%", md: "300px" }}
+              width={{ base: "100%", md: 300 }}
               borderRadius={0}
               onChange={(e) => setFlooring(e.target.value)}
               value={flooring}
