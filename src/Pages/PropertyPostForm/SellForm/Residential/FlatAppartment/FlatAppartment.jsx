@@ -296,7 +296,12 @@ const FlatAppartment = () => {
             }
           })
           .catch((err) => {
-            console.log(err);
+            toast({
+              title: err.response.data.msg,
+              status: "error",
+              duration: 2000,
+            });   
+            console.log(err?.response?.data?.msg);
             setClickCount((prev) => prev - 12);
             setIsClicked(false);
           });
@@ -2485,7 +2490,7 @@ const FlatAppartment = () => {
           <Input
             type="text"
             variant={"outline"}
-            maxLength={4}
+            maxLength={3}
             flex={1}
             placeholder="Enter Facing Width"
             required

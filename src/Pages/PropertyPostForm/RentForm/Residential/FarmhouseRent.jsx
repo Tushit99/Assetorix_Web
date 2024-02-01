@@ -55,6 +55,7 @@ const FarmhouseRent = () => {
   const [furnished, setFurnished] = useState("");
   const [propertyAge, setpropertyAge] = useState("");
   const [priceSqr, setPriceSqr] = useState("");
+  const [pricedetail, setPricedetail] = useState("");
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
   const [buildingFeature, setBuildingFeature] = useState([]);
@@ -115,7 +116,7 @@ const FarmhouseRent = () => {
         balcony: balconey,
       },
       agreementType: preferredAgreement,
-      price: +priceSqr,
+      price: +pricedetail, 
       willingToRent: willingTo,
       amenities,
       inclusivePrices,
@@ -2324,7 +2325,7 @@ const FarmhouseRent = () => {
           <Input
             type="text"
             variant={"outline"}
-            maxLength={4}
+            maxLength={3}
             placeholder="Enter Facing Width"
             flex={1}
             required

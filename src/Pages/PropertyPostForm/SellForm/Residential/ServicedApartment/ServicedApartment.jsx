@@ -2371,7 +2371,7 @@ const ServicedApartment = () => {
             type="text"
             variant={"outline"}
             placeholder="Enter Facing Width"
-            maxLength={5}
+            maxLength={3}
             flex={1}
             borderRadius={0}
             required

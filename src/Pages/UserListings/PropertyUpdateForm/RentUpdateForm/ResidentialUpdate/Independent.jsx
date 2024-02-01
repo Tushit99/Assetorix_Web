@@ -2171,7 +2171,7 @@ const IndependentUpdate = () => {
               type="text"
               variant="flushed"
               flex={1} 
-              maxLength={5} 
+              maxLength={3} 
               required
               value={facingwidth}
               onChange={(e) => {

@@ -2289,7 +2289,7 @@ const CommercialShowRoomRent = () => {
             <InputGroup isAttached width={{ base: "100%", md: 300 }}>
               <Input
                 type="text"  
-                maxLength={6}
+                maxLength={3}
                 variant="outline"
                 required
                 placeholder="Enter road width"

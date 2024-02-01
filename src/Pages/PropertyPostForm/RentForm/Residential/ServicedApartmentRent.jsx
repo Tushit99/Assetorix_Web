@@ -87,12 +87,13 @@ const ServicedApartmentRent = () => {
   const [annualDuesPayble, setAnnualDuesPayble] = useState("");
   const [isClicked, setIsClicked] = useState(false); 
   const [currency, setCurrency] = useState("₹"); 
+  const [pricedetail, setPricedetail] = useState("");  
   const [clickCount, setClickCount] = useState(0);
   const navigate = useNavigate();
-  // state for drop box images
+  // state for drop box images  
   const [images, setImages] = useState([]);
   const [isDraging, setIsDraging] = useState(false);
-  const fileInputRef = useRef(null);
+  const fileInputRef = useRef(null); 
 
   const handleSubmitData = async (e) => {
     e.preventDefault();
@@ -2461,7 +2462,7 @@ const ServicedApartmentRent = () => {
           <Input
             type="text"
             variant={"outline"}
-            maxLength={4}
+            maxLength={3}
             placeholder="Enter Facing Width"
             flex={1}
             required

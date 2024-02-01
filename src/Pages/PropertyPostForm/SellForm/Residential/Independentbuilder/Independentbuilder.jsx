@@ -2380,7 +2380,7 @@ const Independentbuilder = () => {
           <Input
             type="text"
             variant={"outline"}
-            maxLength={4}
+            maxLength={3}
             flex={1}
             required
             placeholder="Enter Facing Width"

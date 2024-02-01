@@ -2437,7 +2437,7 @@ const CommercialShopRent = () => {
               <Input 
                 type="text"
                 variant="outline" 
-                maxLength={4}
+                maxLength={3} 
                 required 
                 placeholder="Enter road width"
                 value={facingwidth}

@@ -1412,7 +1412,7 @@ const PlotLand = () => {
         <InputGroup w={{ base: "100%", md: "340px" }}>
           <Input
             type="text"
-            maxLength={4}
+            maxLength={3}
             placeholder="Enter Facing Width"
             variant={"outline"}
             flex={1}

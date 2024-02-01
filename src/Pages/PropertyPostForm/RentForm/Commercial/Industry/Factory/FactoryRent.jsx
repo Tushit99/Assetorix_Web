@@ -54,6 +54,7 @@ const FactoryRent = () => {
   const [bookingAmount, setBookingAmount] = useState("");
   const [annualDuesPayble, setAnnualDuesPayble] = useState("");
   const [clickCount, setClickCount] = useState(0);
+  const [currency, setCurrency] = useState("₹"); 
   const [isClicked, setIsClicked] = useState(false);
   const navigate = useNavigate();
   // state for drop box images

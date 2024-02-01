@@ -652,7 +652,7 @@ const IndustrialLand = () => {
             <Input
               type="text"
               variant={"outline"}
-              maxLength={4}
+              maxLength={3} 
               borderRadius={0}
               placeholder="Enter road  width"
               flex={1}

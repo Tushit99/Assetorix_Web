@@ -685,7 +685,7 @@ const CommercialLand = () => {
               type="text"
               placeholder={"Enter facing width"}
               variant={"outline"}
-              maxLength={4}
+              maxLength={3}
               flex={3}
               required
               value={facingwidth}

@@ -121,8 +121,7 @@ const FlatAppartmentUpdate = () => {
         balcony: balconey,
       },
       ownership,
-      price: +pricedetail,
-      priceUnit: +priceSqr,
+      price: +pricedetail, 
       inclusivePrices,
       amenities,
       propertyFeatures,
@@ -294,6 +293,14 @@ const FlatAppartmentUpdate = () => {
               setIsClicked(false);
               // navigate("/listing");
             }
+          })
+          .catch((err) => {
+            toast({
+              title: err?.response?.data?.msg,
+              status: "error",
+              duration: 2000, 
+            });
+            console.log(err?.response?.data?.msg);    
           });
       } catch (error) {
         toast({
@@ -301,7 +308,7 @@ const FlatAppartmentUpdate = () => {
           status: "error",
           duration: 2000,
         });
-        console.log(error);
+        console.log(error?.response?.data?.msg); 
         setClickCount((prev) => prev - 12);
         setIsClicked(false);
       }
@@ -1364,12 +1371,7 @@ const FlatAppartmentUpdate = () => {
           </Box>
 
           {/* floor details */}
-          <Box
-            textAlign={"left"}
-            display={"grid"}
-            marginTop={5}
-            gap={2}
-          >
+          <Box textAlign={"left"} display={"grid"} marginTop={5} gap={2}>
             <Heading as={"h3"} size={"sm"} textAlign={"left"}>
               Floor Details
             </Heading>
@@ -1550,12 +1552,7 @@ const FlatAppartmentUpdate = () => {
           {/* pricing and details */}
           <Box>
             {/* OwnerShip detail */}
-            <Heading
-              as={"h3"}
-              size={"sm"}
-              marginTop={5}
-              textAlign={"left"}
-            >
+            <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
               Ownership
             </Heading>
             <Box className={style.grid} gap={2}>
@@ -1611,12 +1608,7 @@ const FlatAppartmentUpdate = () => {
           </Box>
           {/* Price Details */}
           <Box>
-            <Heading
-              as={"h3"}
-              size={"sm"}
-              marginTop={5}
-              textAlign={"left"}
-            >
+            <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
               Price Details
             </Heading>
             <Box display={"flex"} alignItems={"center"} gap={5}>
@@ -1782,12 +1774,7 @@ const FlatAppartmentUpdate = () => {
           </Box>
         </Box>
         <Box>
-          <Heading
-            as={"h3"}
-            size={"sm"}
-            marginTop={5}
-            textAlign={"left"}
-          >
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Add Description and Unique Features of your Property
           </Heading>
           <Textarea
@@ -1870,12 +1857,7 @@ const FlatAppartmentUpdate = () => {
 
         {/* Add amenities/unique features */}
         <Box>
-          <Heading
-            as={"h3"}
-            size={"sm"}
-            marginTop={5}
-            textAlign={"left"}
-          >
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Add amenities/unique features
           </Heading>
           <Heading as={"h5"} size={"xs"} fontWeight={400} textAlign={"left"}>
@@ -1884,12 +1866,7 @@ const FlatAppartmentUpdate = () => {
         </Box>
         {/* Amenities */}
         <Box className={style.optional_box}>
-          <Heading
-            as={"h3"}
-            size={"sm"}
-            marginTop={5}
-            textAlign={"left"}
-          >
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Amenities
           </Heading>
           <Box className={style.paddingbtn}>
@@ -2371,12 +2348,7 @@ const FlatAppartmentUpdate = () => {
         </Box>
         {/* Other Features */}
         <Box>
-          <Heading
-            as={"h3"}
-            size={"sm"}
-            marginTop={5}
-            textAlign={"left"}
-          >
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Other Features
           </Heading>
           <Box display={"grid"} textAlign={"left"} gap={2}>
@@ -2605,7 +2577,7 @@ const FlatAppartmentUpdate = () => {
             <Input
               type="text"
               variant={"outline"}
-              maxLength={4}
+              maxLength={3}
               flex={1}
               placeholder="Enter Facing Width"
               required

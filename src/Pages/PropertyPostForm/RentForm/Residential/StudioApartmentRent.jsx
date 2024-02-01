@@ -81,6 +81,7 @@ const StudioApartmentRent = () => {
   const [availableFrom, setavailableFrom] = useState("");
   const [isClicked, setIsClicked] = useState(false); 
   const [currency, setCurrency] = useState("₹"); 
+  const [pricedetail, setPricedetail] = useState(""); 
   const [clickCount, setClickCount] = useState(0);
   const navigate = useNavigate();
   // state for drop box images
@@ -2337,7 +2338,7 @@ const StudioApartmentRent = () => {
           <Input
             type="text"
             variant={"outline"}
-            maxLength={4}
+            maxLength={3}
             flex={1}
             placeholder="Enter Facing Width"
             required

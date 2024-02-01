@@ -2295,7 +2295,7 @@ const IndependentHouse = () => {
           <Input
             type="text"
             variant={"outline"}
-            maxLength={4}
+            maxLength={3}
             placeholder="Enter Facing Width" 
             flex={1}
             required

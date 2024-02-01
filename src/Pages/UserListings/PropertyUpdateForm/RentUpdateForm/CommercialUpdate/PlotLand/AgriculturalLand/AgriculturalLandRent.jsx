@@ -718,7 +718,7 @@ const AgriculturalLandRentUpdate = () => {
             Width of facing road
           </Heading>
           <Box display={"flex"} gap={"20px"} w={"300px"} >
-            <Input type="text" maxLength={5} variant='flushed' flex={1} required value={facingwidth} onChange={(e) => {
+            <Input type="text" maxLength={3} variant='flushed' flex={1} required value={facingwidth} onChange={(e) => {
               e.preventDefault();
               setFacingWidth(e.target.value);
             }} />

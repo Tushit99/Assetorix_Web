@@ -2463,7 +2463,7 @@ const FarmHouseUpdate = () => {
           <Input
             type="text"
             variant="flushed"
-            maxLength={4}
+            maxLength={3}
             flex={1}
             borderRadius={0} 
             required 

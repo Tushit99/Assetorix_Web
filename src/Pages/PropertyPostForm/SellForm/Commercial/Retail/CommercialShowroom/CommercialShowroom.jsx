@@ -2348,7 +2348,7 @@ const CommercialShowroom = () => {
                 type="text"
                 variant={"outline"} 
                 flex={1}
-                maxLength={4}
+                maxLength={3}
                 required 
                 placeholder="road facing width"
                 value={facingwidth}

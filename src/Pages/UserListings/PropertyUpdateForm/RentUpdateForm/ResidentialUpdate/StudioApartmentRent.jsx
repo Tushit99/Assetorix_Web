@@ -2281,7 +2281,7 @@ const StudioApartmentRentUpdate = () => {
                             variant="flushed"
                             flex={1}
                             required
-                            maxLength={5} 
+                            maxLength={3} 
                             value={facingwidth}
                             onChange={(e) => {
                                 e.preventDefault();

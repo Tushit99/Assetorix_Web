@@ -2472,7 +2472,7 @@ const RKStudioUpdate = () => {
           <Input
             type="text"
             variant={"outline"}
-            maxLength={5}
+            maxLength={3}
             flex={1}
             placeholder="Enter Facing Width" 
             required

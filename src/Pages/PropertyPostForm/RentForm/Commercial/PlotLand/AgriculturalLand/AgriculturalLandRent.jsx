@@ -633,7 +633,7 @@ const AgriculturalLandRent = () => {
           <InputGroup isAttached width={{base:"100%",md:300}}>
             <Input
               type="text"
-              maxLength={4} 
+              maxLength={3} 
               variant={"outline"} 
               borderRadius={0} 
               placeholder="Enter road width" 

@@ -82,7 +82,9 @@ const IndependentBuilderRent = () => {
   const [noticePeriod, setNoticePeriod] = useState("");
   const [availableFrom, setavailableFrom] = useState("");
   const [expectedRentel, setExpectedRentel] = useState("");
-  const [annualDuesPayble, setAnnualDuesPayble] = useState("");
+  const [annualDuesPayble, setAnnualDuesPayble] = useState(""); 
+  const [currency, setCurrency] = useState("₹");
+  const [pricedetail, setPricedetail] = useState(""); 
   const [isClicked, setIsClicked] = useState(false);
   const [clickCount, setClickCount] = useState(0);
   const navigate = useNavigate();
@@ -115,7 +117,7 @@ const IndependentBuilderRent = () => {
       },
       ownership,
       agreementType: preferredAgreement,
-      price: +priceSqr,
+      price: +pricedetail,
       willingToRent: willingTo,
       amenities,
       inclusivePrices,
@@ -2407,7 +2409,7 @@ const IndependentBuilderRent = () => {
           <Input
             type="text"
             variant={"outline"}
-            maxLength={4}
+            maxLength={3}
             placeholder="Enter Facing Width" 
             flex={1}
             required

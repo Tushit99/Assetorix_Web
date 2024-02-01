@@ -2386,7 +2386,7 @@ const Independent = () => {
             type="text"
             variant="outline"
             flex={1}
-            maxLength={4}
+            maxLength={3}
             placeholder="Enter road width"
             required
             value={facingwidth}
