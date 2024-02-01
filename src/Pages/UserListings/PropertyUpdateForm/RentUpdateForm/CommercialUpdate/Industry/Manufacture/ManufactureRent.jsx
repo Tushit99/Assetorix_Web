@@ -41,7 +41,7 @@ const ManufactureRentUpdate = () => {
   const [fromyear, setFromyear] = useState("");
   const [expectedyear, setExpectedYear] = useState("");
   const [pricedetail, setPricedetail] = useState("");
-  const [priceSqr, setPriceSqr] = useState("");
+  
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
@@ -92,8 +92,7 @@ const ManufactureRentUpdate = () => {
       else if (e?.availabilityStatus == "Under construction") {
         setExpectedYear(e?.expectedByYear);
       }
-      setPricedetail(e?.price);
-      setPriceSqr(e?.priceUnit);
+      setPricedetail(e?.price); 
       setInclusivePrice(e?.inclusivePrices);
       setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice);
       setMaintenanceTimePeriod(e?.additionalPricingDetails?.maintenanceTimePeriod);
@@ -139,8 +138,7 @@ const ManufactureRentUpdate = () => {
       washrooms,
       plotArea,
       plotAreaUnit: areaPer,
-      price: +pricedetail,
-      priceUnit: +priceSqr,
+      price: +pricedetail, 
       inclusivePrices,
       additionalPricingDetails: {
         maintenancePrice,
@@ -175,9 +173,7 @@ const ManufactureRentUpdate = () => {
       showToastError('Provide washrooms');
     } else if (!pricedetail) {
       showToastError('Provide Expected Rent');
-    } else if (!priceSqr) {
-      showToastError('Provide Price Per sq.ft');
-    }
+    } 
 
     if (locationAdv) {
       obj["locationAdv"] = locationAdv;
@@ -427,15 +423,7 @@ const ManufactureRentUpdate = () => {
     }
     setInclusivePrice(newarr);
   }
-
-  const areaCalucation = () => {
-    if (pricedetail && plotArea) {
-      let max = Math.max(Number(pricedetail), Number(plotArea));
-      let min = Math.min(Number(pricedetail), Number(plotArea));
-      let ans = Math.round(max / min);
-      setPriceSqr(ans);
-    }
-  }
+ 
 
   // ================= 
   const selectFiles = () => {
@@ -648,7 +636,7 @@ const ManufactureRentUpdate = () => {
               padding={"0 2px"}
               value={plotArea}
               onChange={(e) => {
-                areaCalucation();
+                
                 setPlotArea(e.target.value);
               }}
               required
@@ -824,26 +812,10 @@ const ManufactureRentUpdate = () => {
                   required
                   onChange={(e) => {
                     setPricedetail(e.target.value);
-                    areaCalucation();
+                    
                   }}
                 />
-              </Box>
-              <Box display={"grid"} gap={0}>
-                <Heading
-                  as={"h3"}
-                  size={"xs"}
-                  fontWeight={400}
-                  textAlign={"left"}
-                >
-                  {isCountry.country == "india" ? "₹" : "$"} Price Per {areaPer}
-                </Heading>
-                <NumberInput value={priceSqr}>
-                  <NumberInputField
-                    required
-
-                  />
-                </NumberInput>
-              </Box>
+              </Box> 
             </Box>
           </Box>
           <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>

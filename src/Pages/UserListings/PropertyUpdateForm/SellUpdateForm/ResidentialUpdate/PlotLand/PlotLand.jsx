@@ -39,7 +39,7 @@ const PlotLandUpdate = () => {
   const [areaPer, setAreaPer] = useState("sq.ft");
   const [ownership, setOwnerShip] = useState("");
   const [pricedetail, setPricedetail] = useState("");
-  const [priceSqr, setPriceSqr] = useState("");
+  
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [overLook, setoverlook] = useState([]);
@@ -92,7 +92,7 @@ const PlotLandUpdate = () => {
         setAreaPer(e?.plotAreaUnit);
         setOwnerShip(e?.ownership);
         setPricedetail(e?.price);
-        setPriceSqr(e?.priceUnit);
+        
         setInclusivePrice(e?.inclusivePrices);
         setAminity(e?.amenities);
         setoverlook(e?.overLookings);
@@ -166,7 +166,7 @@ const PlotLandUpdate = () => {
       constructionOnPropertyList: constructionType,
       ownership,
       price: +pricedetail,
-      priceUnit: +priceSqr,
+     
       inclusivePrices,
       amenities,
       expectedByYear,
@@ -462,15 +462,7 @@ const PlotLandUpdate = () => {
     }
     setInclusivePrice(newarr);
   };
-
-  const areaCalucation = () => {
-    if (pricedetail && plotArea) {
-      let max = Math.max(Number(pricedetail), Number(plotArea));
-      let min = Math.min(Number(pricedetail), Number(plotArea));
-      let ans = Math.round(max / min);
-      setPriceSqr(ans);
-    }
-  };
+ 
 
   const handleBoundaryWalls = (e) => {
     e.preventDefault();

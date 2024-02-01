@@ -66,7 +66,7 @@ const CoWorkingspaceUpdate = () => {
     const [fromyear, setFromyear] = useState("");
     const [expectedyear, setExpectedYear] = useState("");
     const [ownership, setOwnerShip] = useState("");
-    const [priceSqr, setPriceSqr] = useState("");
+    
     const [inclusivePrices, setInclusivePrice] = useState([]);
     const [amenities, setAminity] = useState([]);
     const [locationAdv, setLocationAdv] = useState([]);
@@ -98,8 +98,7 @@ const CoWorkingspaceUpdate = () => {
             setLocatedInside(e.address.locatedInside);
             setZoneType(e.address.zoneType);
             setPlotArea(e.plotArea);
-            setWashroom(e.washrooms);
-            setPriceSqr(e.plotAreaUnit);
+            setWashroom(e.washrooms); 
             setFireSafty(e?.fireSafety);
             setFloorNumber(e?.floorOn);
             setParkingArr(e.parkingDetailsList);
@@ -159,7 +158,7 @@ const CoWorkingspaceUpdate = () => {
             },
             ownership,
             price: +pricedetail,
-            priceUnit: +priceSqr,
+           
             society_buildingFeatures: buildingFeature,
             inclusivePrices,
             additionalFeatures: additinalft,
@@ -201,8 +200,6 @@ const CoWorkingspaceUpdate = () => {
             showToastError("Provide locality");
         } else if (!ownership) {
             showToastError("Provide OwnerShip");
-        } else if (!priceSqr) {
-            showToastError("Provide Price Per sq.ft");
         }
 
         if (locationAdv) {
@@ -412,14 +409,7 @@ const CoWorkingspaceUpdate = () => {
     };
 
 
-    const areaCalucation = () => {
-        if (pricedetail && plotArea) {
-            let max = Math.max(Number(pricedetail), Number(plotArea));
-            let min = Math.min(Number(pricedetail), Number(plotArea));
-            let ans = Math.round(max / min);
-            setPriceSqr(ans);
-        }
-    };
+    ;
 
 
     const handleAdditionalFeature = (e) => {
@@ -720,7 +710,7 @@ const CoWorkingspaceUpdate = () => {
                                 padding={"0 2px"}
                                 value={plotArea}
                                 onChange={(e) => {
-                                    areaCalucation();
+                                    
                                     setPlotArea(e.target.value);
                                 }}
                                 required
@@ -958,25 +948,10 @@ const CoWorkingspaceUpdate = () => {
                                     required
                                     onChange={(e) => {
                                         setPricedetail(e.target.value);
-                                        areaCalucation();
+                                        
                                     }}
                                 />
-                            </Box>
-                            <Box display={"grid"} gap={0}>
-                                <Heading
-                                    as={"h3"}
-                                    size={"xs"}
-                                    fontWeight={400}
-                                    textAlign={"left"}
-                                >
-                                    {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
-                                </Heading>
-                                <NumberInput value={priceSqr}>
-                                    <NumberInputField
-
-                                    />
-                                </NumberInput>
-                            </Box>
+                            </Box> 
                         </Box>
                     </Box>
                     {/* ============================ All inclusive price =========================  */}

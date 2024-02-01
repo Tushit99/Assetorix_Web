@@ -45,8 +45,7 @@ const CommercialShowRoomRent = () => {
   const [availability, setAvailability] = useState("");
   const [fromyear, setFromyear] = useState("");
   const [expectedyear, setExpectedYear] = useState("");
-  const [pricedetail, setPricedetail] = useState("");
-  const [priceSqr, setPriceSqr] = useState("");
+  const [pricedetail, setPricedetail] = useState(""); 
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
@@ -108,8 +107,7 @@ const CommercialShowRoomRent = () => {
         state,
         country,
       },
-      price: +pricedetail,
-      priceUnit: +priceSqr,
+      price: +pricedetail, 
       floorOn,
       totalFloors: +totalfloors,
       locatedNear,
@@ -161,8 +159,6 @@ const CommercialShowRoomRent = () => {
       showToastError("Provide locality");
     } else if (!pricedetail) {
       showToastError("Provide PriceDetail");
-    } else if (!priceSqr) {
-      showToastError("Provide Price Per sq.ft");
     } else if (!additinalft) {
       showToastError("Provide Property description");
     } else if (!propertyFacing) {
@@ -456,16 +452,7 @@ const CommercialShowRoomRent = () => {
       newarr.push(value);
     }
     setInclusivePrice(newarr);
-  };
-
-  const areaCalucation = () => {
-    if (pricedetail && plotArea) {
-      let max = Math.max(Number(pricedetail), Number(plotArea));
-      let min = Math.min(Number(pricedetail), Number(plotArea));
-      let ans = Math.round(max / min);
-      setPriceSqr(ans);
-    }
-  };
+  }; 
 
   const handleEntranceWidth = (e) => {
     e.preventDefault();
@@ -758,8 +745,7 @@ const CommercialShowRoomRent = () => {
                 <Input
                   type="text"
                   value={plotArea}
-                  onChange={(e) => {
-                    areaCalucation();
+                  onChange={(e) => { 
                     setPlotArea(NumericString(e.target.value));
                   }}
                   required

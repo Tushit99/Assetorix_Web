@@ -79,8 +79,7 @@ const BareshellspaceUpdate = () => {
     const [availability, setAvailability] = useState("");
     const [fromyear, setFromyear] = useState("");
     const [expectedyear, setExpectedYear] = useState("");
-    const [ownership, setOwnerShip] = useState("");
-    const [priceSqr, setPriceSqr] = useState("");
+    const [ownership, setOwnerShip] = useState("");   
     const [inclusivePrices, setInclusivePrice] = useState([]);
     const [amenities, setAminity] = useState([]);
     const [locationAdv, setLocationAdv] = useState([]);
@@ -112,8 +111,7 @@ const BareshellspaceUpdate = () => {
             setLocality(e.address.locality);
             setLocatedInside(e.address.locatedInside);
             setZoneType(e.address.zoneType);
-            setPlotArea(e.carpetArea);
-            setPriceSqr(e.pantrySizeUnit);
+            setPlotArea(e.carpetArea); 
             setWashroom(e.washrooms);
             setwallConstructionStatus(e.wallStatus);
             setdoorConstructed(e.doorStatus);
@@ -128,8 +126,8 @@ const BareshellspaceUpdate = () => {
             }
             setFireSafty(e?.fireSafety);
             setFloorNumber(e?.floorOn);
-            setPantryType(e?.pantryType);
-            setPantrySize(e?.pantrySize);
+            setPantryType(e?.pantryType); 
+            setPantryTypeUnit(e?.pantrySizeUnit);
             setFlooring(e?.flooring);
             setAirCondition(e.facilityAvailable.centralAirConditioning);
             setOxygenDuct(e.facilityAvailable.oxygenDuct);
@@ -194,7 +192,7 @@ const BareshellspaceUpdate = () => {
             },
             ownership,
             price: +pricedetail,
-            priceUnit: +priceSqr,
+           
             inclusivePrices,
             amenities,
             locationAdv,
@@ -239,8 +237,6 @@ const BareshellspaceUpdate = () => {
         // condition to check all imformation are included or not
         if (!ownership) {
             showToastError("Provide OwnerShip");
-        } else if (!priceSqr) {
-            showToastError("Provide Price Per sq.ft");
         } else if (!totalfloors) {
             showToastError("Provide Total Floors");
         }
@@ -495,14 +491,7 @@ const BareshellspaceUpdate = () => {
         setFloorNumber(newarr);
     }
 
-    const areaCalucation = () => {
-        if (pricedetail && plotArea) {
-            let max = Math.max(Number(pricedetail), Number(plotArea));
-            let min = Math.min(Number(pricedetail), Number(plotArea));
-            let ans = Math.round(max / min);
-            setPriceSqr(ans);
-        }
-    };
+    ;
 
     const handlefireSafty = (e) => {
         e.preventDefault();
@@ -755,7 +744,7 @@ const BareshellspaceUpdate = () => {
                                 value={plotArea}
                                 onChange={(e) => {
                                     setPlotArea(NumericString(e.target.value));
-                                    areaCalucation();
+                                    
                                 }}
                                 required
                             />
@@ -1419,7 +1408,7 @@ const BareshellspaceUpdate = () => {
                                     required
                                     onChange={(e) => {
                                         setPricedetail(e.target.value);
-                                        areaCalucation();
+                                        
                                     }}
                                 />
                             </Box>

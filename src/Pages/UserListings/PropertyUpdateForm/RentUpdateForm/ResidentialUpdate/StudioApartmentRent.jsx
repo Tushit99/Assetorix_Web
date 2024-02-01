@@ -56,7 +56,7 @@ const StudioApartmentRentUpdate = () => {
     const [extraroom, setExtraRoom] = useState([]);
     const [furnished, setFurnished] = useState("");
     const [propertyAge, setpropertyAge] = useState("");
-    const [priceSqr, setPriceSqr] = useState("");
+    
     const [amenities, setAminity] = useState([]);
     const [propertyFeatures, setPropertyFeature] = useState("");
     const [buildingFeature, setBuildingFeature] = useState([]);
@@ -262,8 +262,6 @@ const StudioApartmentRentUpdate = () => {
             showToastError("Provide balconey");
         } else if (!furnishedarr) {
             showToastError("Provide Furnished Field");
-        } else if (!priceSqr) {
-            showToastError("Provide Price Per sq.ft");
         } else if (!additinalft) {
             showToastError("Provide Property description");
         } else if (!powerbackup) {
@@ -882,7 +880,7 @@ const StudioApartmentRentUpdate = () => {
                                     padding={"0 2px"}
                                     value={plotArea}
                                     onChange={(e) => {
-                                        // areaCalucation();
+                                        // 
                                         setPlotArea(e.target.value);
                                     }}
                                     required

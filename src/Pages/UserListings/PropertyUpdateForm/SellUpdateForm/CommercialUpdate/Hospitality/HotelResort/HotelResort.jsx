@@ -60,7 +60,7 @@ const HotelResortUpdate = () => {
   const [expectedyear, setExpectedYear] = useState("");
   const [ownership, setOwnerShip] = useState("");
   const [pricedetail, setPricedetail] = useState("");
-  const [priceSqr, setPriceSqr] = useState("");
+  
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
@@ -116,7 +116,7 @@ const HotelResortUpdate = () => {
         setqualityRating(e?.qualityRating);
         setOwnerShip(e?.ownership);
         setPricedetail(e?.price);
-        setPriceSqr(e?.priceUnit);
+        
         setPreLeased(e.preLeased_Rented);
         if (e.preLeased_Rented == "Yes") {
           setCurrentRentPerMonth(e.preLeased_RentedDetails.currentRentPerMonth);
@@ -176,7 +176,7 @@ const HotelResortUpdate = () => {
       },
       ownership,
       price: +pricedetail,
-      priceUnit: +priceSqr,
+     
       inclusivePrices,
       amenities,
       propertyFeatures,
@@ -554,14 +554,7 @@ const HotelResortUpdate = () => {
     setLocationAdv(newarr);
   };
 
-  const areaCalucation = () => {
-    if (pricedetail && plotArea) {
-      let max = Math.max(Number(pricedetail), Number(plotArea));
-      let min = Math.min(Number(pricedetail), Number(plotArea));
-      let ans = Math.round(max / min);
-      setPriceSqr(ans);
-    }
-  };
+  ;
 
   // const createtemplatefloors = () => {
   //     let options = "";
@@ -838,7 +831,7 @@ const HotelResortUpdate = () => {
                 placeholder="Enter Plot Area"
                 value={plotArea}
                 onChange={(e) => {
-                  areaCalucation();
+                  
                   setPlotArea(e.target.value);
                 }}
                 required
@@ -1536,7 +1529,7 @@ const HotelResortUpdate = () => {
                 required
                 onChange={(e) => {
                   setPricedetail(e.target.value);
-                  areaCalucation();
+                  
                 }}
               />
             </Box>

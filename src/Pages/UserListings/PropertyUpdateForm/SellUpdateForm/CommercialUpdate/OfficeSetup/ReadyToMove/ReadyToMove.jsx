@@ -81,7 +81,7 @@ const ReadyToMoveUpdate = () => {
     const [fromyear, setFromyear] = useState("");
     const [expectedyear, setExpectedYear] = useState("");
     const [ownership, setOwnerShip] = useState("");
-    const [priceSqr, setPriceSqr] = useState("");
+    
     const [inclusivePrices, setInclusivePrice] = useState([]);
     const [amenities, setAminity] = useState([]);
     const [locationAdv, setLocationAdv] = useState([]);
@@ -116,7 +116,7 @@ const ReadyToMoveUpdate = () => {
             setMinseat(e.officeSetup.minSeats);
             setMaxseat(e.officeSetup.maxSeats);
             setCabins(e.officeSetup.cabins);
-            setPriceSqr(e.priceUnit);
+            
             setMeetingRoom(e.officeSetup.meetingRooms);
             if (e.washroomDetails.privateWashrooms > 0 || e.washroomDetails.sharedWashrooms > 0) {
                 setWashroomType("Available");
@@ -204,7 +204,7 @@ const ReadyToMoveUpdate = () => {
             },
             ownership,
             price: +pricedetail,
-            priceUnit: +priceSqr,
+           
             inclusivePrices,
             amenities,
             locationAdv,
@@ -259,8 +259,6 @@ const ReadyToMoveUpdate = () => {
             showToastError("Provide locality");
         } else if (!ownership) {
             showToastError("Provide OwnerShip");
-        } else if (!priceSqr) {
-            showToastError("Provide Price Per sq.ft");
         } else if (!totalfloors) {
             showToastError("Provide Total Floors");
         }
@@ -526,14 +524,7 @@ const ReadyToMoveUpdate = () => {
         setFloorNumber(newarr);
     }
 
-    const areaCalucation = () => {
-        if (pricedetail && plotArea) {
-            let max = Math.max(Number(pricedetail), Number(plotArea));
-            let min = Math.min(Number(pricedetail), Number(plotArea));
-            let ans = Math.round(max / min);
-            setPriceSqr(ans);
-        }
-    };
+    ;
 
     const handlefireSafty = (e) => {
         e.preventDefault();
@@ -785,7 +776,7 @@ const ReadyToMoveUpdate = () => {
                                 padding={"0 2px"}
                                 value={plotArea}
                                 onChange={(e) => {
-                                    areaCalucation();
+                                    
                                     setPlotArea(e.target.value);
                                 }}
                                 required
@@ -1529,7 +1520,7 @@ const ReadyToMoveUpdate = () => {
                                     required
                                     onChange={(e) => {
                                         setPricedetail(e.target.value);
-                                        areaCalucation();
+                                        
                                     }}
                                 />
                             </Box>

@@ -54,7 +54,7 @@ const FarmhouseRent = () => {
   const [extraroom, setExtraRoom] = useState([]);
   const [furnished, setFurnished] = useState("");
   const [propertyAge, setpropertyAge] = useState("");
-  const [priceSqr, setPriceSqr] = useState("");
+  
   const [pricedetail, setPricedetail] = useState("");
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
@@ -173,8 +173,6 @@ const FarmhouseRent = () => {
       showToastError("Provide balconey");
     } else if (!furnishedarr) {
       showToastError("Provide Furnished Field");
-    } else if (!priceSqr) {
-      showToastError("Provide Price Per sq.ft");
     } else if (!additinalft) {
       showToastError("Provide Property description");
     } else if (!powerbackup) {
@@ -746,8 +744,7 @@ const FarmhouseRent = () => {
               type="text"
               maxLength={9}
               value={plotArea} 
-              onChange={(e) => {
-                // areaCalucation();
+              onChange={(e) => { 
                 setPlotArea(NumericString(e.target.value));
               }}
               required

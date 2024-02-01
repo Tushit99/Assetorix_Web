@@ -53,7 +53,7 @@ const IndependentUpdate = () => {
   const [extraroom, setExtraRoom] = useState([]);
   const [furnished, setFurnished] = useState("");
   const [propertyAge, setpropertyAge] = useState("");
-  const [priceSqr, setPriceSqr] = useState("");
+  const [pricedetail, setPricedetail] = useState(""); 
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
   const [buildingFeature, setBuildingFeature] = useState([]);
@@ -132,8 +132,7 @@ const IndependentUpdate = () => {
         setGeyser(e?.furnishedObj?.geyser);
         setfurnishedarr(e?.furnishedList);
       }
-      setExtraRoom(e?.otherRoom);
-      setPriceSqr(e?.price);
+      setExtraRoom(e?.otherRoom); 
       setAminity(e?.amenities);
       setPropertyFeature(e?.propertyFeatures);
       setBuildingFeature(e?.society_buildingFeatures);
@@ -184,7 +183,7 @@ const IndependentUpdate = () => {
         balcony: balconey,
       },
       agreementType: preferredAgreement,
-      price: +priceSqr,
+      price: +pricedetail,
       willingToRent: willingTo,
       amenities,
       inclusivePrices,
@@ -242,8 +241,6 @@ const IndependentUpdate = () => {
       showToastError("Provide balconey");
     } else if (!furnishedarr) {
       showToastError("Provide Furnished Field");
-    } else if (!priceSqr) {
-      showToastError("Provide Price Per sq.ft");
     } else if (!additinalft) {
       showToastError("Provide Property description");
     } else if (!powerbackup) {
@@ -435,15 +432,7 @@ const IndependentUpdate = () => {
       console.log(err);
     }
   };
-
-  // const areaCalucation = () => {
-  //   if (pricedetail && plotArea) {
-  //     let max = Math.max(Number(pricedetail), Number(plotArea));
-  //     let min = Math.min(Number(pricedetail), Number(plotArea));
-  //     let ans = Math.round(max / min);
-  //     setPriceSqr(ans);
-  //   }
-  // }
+ 
 
   const handlePreferredAgreement = (e) => {
     e.preventDefault();
@@ -855,7 +844,7 @@ const IndependentUpdate = () => {
                 padding={"0 2px"}
                 value={plotArea}
                 onChange={(e) => {
-                  // areaCalucation();
+                  // 
                   setPlotArea(e.target.value);
                 }}
                 required
@@ -1490,9 +1479,9 @@ const IndependentUpdate = () => {
               Rent Details
             </Heading>
             <Box>
-              <Input type="text" w={"40%"} borderRadius={0} value={priceSqr} onChange={(e) => {
+              <Input type="text" w={"40%"} borderRadius={0} value={pricedetail} onChange={(e) => {
                 e.preventDefault();
-                setPriceSqr(NumericString(e.target.value));
+                setPricedetail(NumericString(e.target.value));
               }} placeholder={"₹ Expected Rent"} />
             </Box>
             {/* pricing checkbox */}

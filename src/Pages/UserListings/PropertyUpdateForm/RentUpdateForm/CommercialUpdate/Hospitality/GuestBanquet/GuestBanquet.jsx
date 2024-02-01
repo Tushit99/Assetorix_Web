@@ -42,7 +42,7 @@ const GuestBanquetRentUpdate = () => {
     const [fromyear, setFromyear] = useState("");
     const [expectedyear, setExpectedYear] = useState("");
     const [pricedetail, setPricedetail] = useState("");
-    const [priceSqr, setPriceSqr] = useState("");
+    
     const [inclusivePrices, setInclusivePrice] = useState([]);
     const [amenities, setAminity] = useState([]);
     const [propertyFeatures, setPropertyFeature] = useState("");
@@ -92,8 +92,7 @@ const GuestBanquetRentUpdate = () => {
                 setExpectedYear(e?.expectedByYear);
             }
             setqualityRating(e?.qualityRating);
-            setPricedetail(e?.price);
-            setPriceSqr(e?.priceUnit);
+            setPricedetail(e?.price); 
             setInclusivePrice(e?.inclusivePrices);
             setAdditionalPrice(e?.additionalPricingDetails);
             if (e?.additionalPricingDetails) {
@@ -142,8 +141,7 @@ const GuestBanquetRentUpdate = () => {
             plotArea,
             plotAreaUnit: areaPer,
             qualityRating,
-            price: +pricedetail,
-            priceUnit: +priceSqr,
+            price: +pricedetail, 
             inclusivePrices,
             additionalPricingDetails: {
                 maintenancePrice,
@@ -447,14 +445,7 @@ const GuestBanquetRentUpdate = () => {
     };
 
 
-    const areaCalucation = () => {
-        if (pricedetail && plotArea) {
-            let max = Math.max(Number(pricedetail), Number(plotArea));
-            let min = Math.min(Number(pricedetail), Number(plotArea));
-            let ans = Math.round(max / min);
-            setPriceSqr(ans);
-        }
-    }
+    
 
     // const createtemplatefloors = () => {
     //     let options = "";  
@@ -688,7 +679,7 @@ const GuestBanquetRentUpdate = () => {
                         >
                             <input type="text" placeholder="Enter Plot Area" value={plotArea}
                                 onChange={(e) => {
-                                    areaCalucation();
+                                    
                                     setPlotArea(e.target.value);
                                 }}
                                 required />
@@ -966,7 +957,7 @@ const GuestBanquetRentUpdate = () => {
                                 required
                                 onChange={(e) => {
                                     setPricedetail(e.target.value);
-                                    areaCalucation();
+                                    
                                 }}
                             />
                         </Box>
@@ -978,12 +969,7 @@ const GuestBanquetRentUpdate = () => {
                                 textAlign={"left"}
                             >
                                 {isCountry.country == "india" ? "₹" : "$"} Price Per {areaPer}
-                            </Heading>
-                            <NumberInput value={priceSqr}>
-                                <NumberInputField
-
-                                />
-                            </NumberInput>
+                            </Heading> 
                         </Box>
                     </Box>
                     <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>

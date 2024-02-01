@@ -46,8 +46,7 @@ const CommercialShopRent = () => {
   const [availability, setAvailability] = useState("");
   const [fromyear, setFromyear] = useState("");
   const [expectedyear, setExpectedYear] = useState("");
-  const [pricedetail, setPricedetail] = useState("");
-  const [priceSqr, setPriceSqr] = useState("");
+  const [pricedetail, setPricedetail] = useState(""); 
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
@@ -112,8 +111,7 @@ const CommercialShopRent = () => {
         state,
         country,
       },
-      price: +pricedetail,
-      priceUnit: +priceSqr,
+      price: +pricedetail, 
       floorOn,
       totalFloors: +totalfloors,
       locatedNear,
@@ -455,15 +453,7 @@ const CommercialShopRent = () => {
     }
     setInclusivePrice(newarr);
   };
-
-  const areaCalucation = () => {
-    if (pricedetail && plotArea) {
-      let max = Math.max(Number(pricedetail), Number(plotArea));
-      let min = Math.min(Number(pricedetail), Number(plotArea));
-      let ans = Math.round(max / min);
-      setPriceSqr(ans);
-    }
-  };
+ 
 
   const handleEntranceWidth = (e) => {
     e.preventDefault();
@@ -765,8 +755,7 @@ const CommercialShopRent = () => {
                   <Input
                     type="text"
                     value={plotArea}
-                    onChange={(e) => {
-                      areaCalucation();
+                    onChange={(e) => { 
                       setPlotArea(NumericString(e.target.value));
                     }}
                     required

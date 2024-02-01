@@ -54,7 +54,7 @@ const FarmhouseRentUpdate = () => {
     const [extraroom, setExtraRoom] = useState([]);
     const [furnished, setFurnished] = useState("");
     const [propertyAge, setpropertyAge] = useState("");
-    const [priceSqr, setPriceSqr] = useState("");
+    const [pricedetail, setPricedetail] = useState(""); 
     const [amenities, setAminity] = useState([]);
     const [propertyFeatures, setPropertyFeature] = useState("");
     const [buildingFeature, setBuildingFeature] = useState([]);
@@ -130,8 +130,7 @@ const FarmhouseRentUpdate = () => {
 
             setavailableFrom(e?.availableFrom)
             setTotalFloors(e?.totalFloors);
-            setpropertyAge(e?.propertyStatus);
-            setPriceSqr(e?.price);
+            setpropertyAge(e?.propertyStatus); 
             setinclusivePrices(e?.inclusivePrices);
 
             setAdditionalPrice(e?.additionalPricingDetails);
@@ -197,7 +196,7 @@ const FarmhouseRentUpdate = () => {
                 balcony: balconey,
             },
             agreementType: preferredAgreement,
-            price: +priceSqr,
+            price: +pricedetail,
             willingToRent: willingTo,
             amenities,
             inclusivePrices,
@@ -254,8 +253,6 @@ const FarmhouseRentUpdate = () => {
             showToastError("Provide balconey");
         } else if (!furnishedarr) {
             showToastError("Provide Furnished Field");
-        } else if (!priceSqr) {
-            showToastError("Provide Price Per sq.ft");
         } else if (!additinalft) {
             showToastError("Provide Property description");
         } else if (!powerbackup) {
@@ -875,7 +872,7 @@ const FarmhouseRentUpdate = () => {
                                     padding={"0 2px"}
                                     value={plotArea}
                                     onChange={(e) => {
-                                        // areaCalucation();
+                                        // 
                                         setPlotArea(e.target.value);
                                     }}
                                     required
@@ -1517,9 +1514,9 @@ const FarmhouseRentUpdate = () => {
                             Rent Details
                         </Heading>
                         <Box>
-                            <Input type="text" w={"40%"} borderRadius={0} value={priceSqr} onChange={(e) => {
+                            <Input type="text" w={"40%"} borderRadius={0} value={pricedetail} onChange={(e) => {
                                 e.preventDefault();
-                                setPriceSqr(NumericString(e.target.value));
+                                setPricedetail(NumericString(e.target.value));
                             }} placeholder={"₹ Expected Rent"} />
                         </Box>
                         {/* pricing checkbox */}

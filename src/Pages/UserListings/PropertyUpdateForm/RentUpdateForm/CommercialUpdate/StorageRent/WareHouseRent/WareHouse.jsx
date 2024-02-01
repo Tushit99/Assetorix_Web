@@ -40,7 +40,7 @@ const WareHouseRentUpdate = () => {
     const [fromyear, setFromyear] = useState("");
     const [expectedyear, setExpectedYear] = useState("");
     const [pricedetail, setPricedetail] = useState("");
-    const [priceSqr, setPriceSqr] = useState("");
+    
     const [inclusivePrices, setInclusivePrice] = useState([]);
     const [amenities, setAminity] = useState([]);
     const [propertyFeatures, setPropertyFeature] = useState("");
@@ -101,7 +101,7 @@ const WareHouseRentUpdate = () => {
                 setExpectedYear(e.expectedByYear);
             }
             setPricedetail(e.price);
-            setPriceSqr(e.priceUnit);
+            
             setPropertyFeature(e.propertyFeatures);
             setInclusivePrice(e.inclusivePrices);
             setMaintenancePrice(e.additionalPricingDetails.maintenancePrice);
@@ -138,7 +138,7 @@ const WareHouseRentUpdate = () => {
             },
             washrooms,
             price: +pricedetail,
-            priceUnit: +priceSqr,
+           
             inclusivePrices,
             amenities,
             flooring,
@@ -433,14 +433,7 @@ const WareHouseRentUpdate = () => {
         setInclusivePrice(newarr);
     }
 
-    const areaCalucation = () => {
-        if (pricedetail && plotArea) {
-            let max = Math.max(Number(pricedetail), Number(plotArea));
-            let min = Math.min(Number(pricedetail), Number(plotArea));
-            let ans = Math.round(max / min);
-            setPriceSqr(ans);
-        }
-    }
+    
 
     // ================= 
     const selectFiles = () => {
@@ -652,7 +645,7 @@ const WareHouseRentUpdate = () => {
                             padding={"0 2px"}
                             value={plotArea}
                             onChange={(e) => {
-                                areaCalucation();
+                                
                                 setPlotArea(e.target.value);
                             }}
                             required
@@ -834,20 +827,9 @@ const WareHouseRentUpdate = () => {
                                     required
                                     onChange={(e) => {
                                         setPricedetail(NumericString(e.target.value));
-                                        areaCalucation();
+                                        
                                     }} />
-                            </Box>
-                            <Box display={"grid"} gap={0}>
-                                <Heading
-                                    as={"h3"}
-                                    size={"xs"}
-                                    fontWeight={400}
-                                    textAlign={"left"}
-                                >
-                                    {isCountry.country == "india" ? "₹" : "$"} Price Per {areaPer}
-                                </Heading>
-                                <Input type="text" readOnly value={priceSqr} />
-                            </Box>
+                            </Box> 
                         </Box>
                     </Box>
                     <Box display={"flex"} gap={10} margin={"10px 0"} flexWrap={"wrap"}>

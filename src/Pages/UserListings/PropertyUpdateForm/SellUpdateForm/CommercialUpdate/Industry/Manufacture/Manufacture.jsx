@@ -42,7 +42,7 @@ const ManufactureUpdate = () => {
   const [expectedyear, setExpectedYear] = useState("");
   const [ownership, setOwnerShip] = useState("");
   const [pricedetail, setPricedetail] = useState("");
-  const [priceSqr, setPriceSqr] = useState("");
+  
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
@@ -98,7 +98,7 @@ const ManufactureUpdate = () => {
       }
       setOwnerShip(e?.ownership);
       setPricedetail(e?.price);
-      setPriceSqr(e?.priceUnit);
+      
       setInclusivePrice(e?.inclusivePrices);
       setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice);
       setMaintenanceTimePeriod(e?.additionalPricingDetails?.maintenanceTimePeriod);
@@ -148,7 +148,7 @@ const ManufactureUpdate = () => {
       washrooms,
       ownership,
       price: +pricedetail,
-      priceUnit: +priceSqr,
+     
       inclusivePrices,
       amenities,
       propertyFeatures,
@@ -192,9 +192,7 @@ const ManufactureUpdate = () => {
       showToastError('Provide OwnerShip');
     } else if (!pricedetail) {
       showToastError('Provide PriceDetail');
-    } else if (!priceSqr) {
-      showToastError('Provide Price Per sq.ft');
-    } else if (!additinalft) {
+    }  else if (!additinalft) {
       showToastError('Provide Property description');
     }
 
@@ -483,14 +481,7 @@ const ManufactureUpdate = () => {
     setInclusivePrice(newarr);
   }
 
-  const areaCalucation = () => {
-    if (pricedetail && plotArea) {
-      let max = Math.max(Number(pricedetail), Number(plotArea));
-      let min = Math.min(Number(pricedetail), Number(plotArea));
-      let ans = Math.round(max / min);
-      setPriceSqr(ans);
-    }
-  }
+  
 
   // ================= 
   const selectFiles = () => {
@@ -719,7 +710,7 @@ const ManufactureUpdate = () => {
                 padding={"0 2px"}
                 value={plotArea}
                 onChange={(e) => {
-                  areaCalucation();
+                  
                   setPlotArea(e.target.value);
                 }}
                 required
@@ -950,7 +941,7 @@ const ManufactureUpdate = () => {
                   required
                   onChange={(e) => {
                     setPricedetail(e.target.value);
-                    areaCalucation();
+                    
                   }}
                 />
               </Box>

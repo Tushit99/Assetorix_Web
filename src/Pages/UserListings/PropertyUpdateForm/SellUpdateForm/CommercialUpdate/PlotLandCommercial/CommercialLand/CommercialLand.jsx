@@ -41,7 +41,7 @@ const CommercialLandUpdate = () => {
   const [areaPer, setAreaPer] = useState("sq.ft");
   const [ownership, setOwnerShip] = useState("");
   const [pricedetail, setPricedetail] = useState("");
-  const [priceSqr, setPriceSqr] = useState("");
+  
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [constructionType, setConstructionType] = useState([]);
   const [amenities, setAminity] = useState([]);
@@ -105,7 +105,7 @@ const CommercialLandUpdate = () => {
       setOwnerShip(e?.ownership);
       setAuthorisedBy(e?.propertyApprovalAuthorityList);
       setPricedetail(e?.price);
-      setPriceSqr(e?.priceUnit);
+      
       setInclusivePrice(e?.inclusivePrices);
       setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice);
       setMaintenanceTimePeriod(e?.additionalPricingDetails?.maintenanceTimePeriod);
@@ -166,7 +166,7 @@ const CommercialLandUpdate = () => {
       plotLength,
       plotBreadth,
       price: +pricedetail,
-      priceUnit: +priceSqr,
+     
       inclusivePrices,
       openSides,
       amenities,
@@ -211,9 +211,7 @@ const CommercialLandUpdate = () => {
       showToastError('Provide OwnerShip');
     } else if (!pricedetail) {
       showToastError('Provide PriceDetail');
-    } else if (!priceSqr) {
-      showToastError('Provide Price Per sq.ft');
-    }
+    } 
 
     if (locationAdv) {
       obj["locationAdv"] = locationAdv
@@ -487,14 +485,7 @@ const CommercialLandUpdate = () => {
     setInclusivePrice(newarr);
   }
 
-  const areaCalucation = () => {
-    if (pricedetail && plotArea) {
-      let max = Math.max(Number(pricedetail), Number(plotArea));
-      let min = Math.min(Number(pricedetail), Number(plotArea));
-      let ans = Math.round(max / min);
-      setPriceSqr(ans);
-    }
-  }
+  
 
   const handleIndustryType = (e) => {
     e.preventDefault();
@@ -707,7 +698,7 @@ const CommercialLandUpdate = () => {
               padding={"0 2px"}
               value={plotArea}
               onChange={(e) => {
-                areaCalucation();
+                
                 setPlotArea(NumericString(e.target.value));
               }}
               required />
@@ -1047,7 +1038,7 @@ const CommercialLandUpdate = () => {
                   required
                   onChange={(e) => {
                     setPricedetail(e.target.value);
-                    areaCalucation();
+                    
                   }}
                 />
               </Box>

@@ -80,8 +80,7 @@ const ReadyMove = () => {
 
   const [areaPer, setAreaPer] = useState("sq.ft");
   const [fromyear, setFromyear] = useState("");
-  const [ownership, setOwnerShip] = useState("");
-  const [priceSqr, setPriceSqr] = useState("");
+  const [ownership, setOwnerShip] = useState(""); 
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [locationAdv, setLocationAdv] = useState([]);
@@ -123,8 +122,7 @@ const ReadyMove = () => {
       },
       ownership,
       expectedYearlyRent: rentIncreasePercent,
-      price: +pricedetail,
-      priceUnit: +priceSqr,
+      price: +pricedetail, 
       inclusivePrices,
       amenities,
       locationAdv,
@@ -181,8 +179,6 @@ const ReadyMove = () => {
       showToastError("Provide locality");
     } else if (!ownership) {
       showToastError("Provide OwnerShip");
-    } else if (!priceSqr) {
-      showToastError("Provide Price Per sq.ft");
     } else if (!totalfloors) {
       showToastError("Provide Total Floors");
     }
@@ -438,15 +434,7 @@ const ReadyMove = () => {
     console.log(newarr);
     setFloorNumber(newarr);
   };
-
-  const areaCalucation = () => {
-    if (pricedetail && plotArea) {
-      let max = Math.max(Number(pricedetail), Number(plotArea));
-      let min = Math.min(Number(pricedetail), Number(plotArea));
-      let ans = Math.round(max / min);
-      setPriceSqr(ans);
-    }
-  };
+ 
 
   const handlefireSafty = (e) => {
     e.preventDefault();

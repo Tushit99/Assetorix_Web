@@ -60,7 +60,7 @@ const FarmHouseUpdate = () => {
   const [expectedyear, setExpectedYear] = useState("");
   const [ownership, setOwnerShip] = useState("");
   const [pricedetail, setPricedetail] = useState("");
-  const [priceSqr, setPriceSqr] = useState("");
+  
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
@@ -116,7 +116,7 @@ const FarmHouseUpdate = () => {
       },
       ownership,
       price: +pricedetail,
-      priceUnit: +priceSqr,
+     
       inclusivePrices,
       amenities,
       propertyFeatures,
@@ -388,7 +388,7 @@ const FarmHouseUpdate = () => {
         setExpectedYear(e?.expectedByYear);
         setOwnerShip(e?.ownership);
         setPricedetail(e?.price);
-        setPriceSqr(e?.priceUnit);
+        
         setInclusivePrice(e?.inclusivePrices);
         setAminity(e?.amenities);
         setPropertyFeature(e?.propertyFeatures);
@@ -613,15 +613,7 @@ const FarmHouseUpdate = () => {
     console.log(newarr);
     setWaterSource(newarr);
   };
-
-  const areaCalucation = () => {
-    if (pricedetail && plotArea) {
-      let max = Math.max(Number(pricedetail), Number(plotArea));
-      let min = Math.min(Number(pricedetail), Number(plotArea));
-      let ans = Math.round(max / min);
-      setPriceSqr(ans);
-    }
-  };
+ 
 
   // const createtemplatefloors = () => {
   //     let options = "";

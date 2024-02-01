@@ -49,8 +49,7 @@ const StudioApartmentRent = () => {
   const [furnishedarr, setfurnishedarr] = useState([]);
   const [extraroom, setExtraRoom] = useState([]);
   const [furnished, setFurnished] = useState("");
-  const [propertyAge, setpropertyAge] = useState("");
-  const [priceSqr, setPriceSqr] = useState("");
+  const [propertyAge, setpropertyAge] = useState(""); 
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
   const [buildingFeature, setBuildingFeature] = useState([]);
@@ -112,7 +111,7 @@ const StudioApartmentRent = () => {
         balcony: balconey,
       },
       agreementType: preferredAgreement,
-      price: +priceSqr,
+      price: +pricedetail,
       willingToRent: willingTo,
       amenities,
       inclusivePrices,
@@ -169,8 +168,6 @@ const StudioApartmentRent = () => {
       showToastError("Provide balconey");
     } else if (!furnishedarr) {
       showToastError("Provide Furnished Field");
-    } else if (!priceSqr) {
-      showToastError("Provide Price Per sq.ft");
     } else if (!additinalft) {
       showToastError("Provide Property description");
     } else if (!powerbackup) {

@@ -53,7 +53,7 @@ const FlatApartment = () => {
   const [furnished, setFurnished] = useState("");
   const [propertyAge, setpropertyAge] = useState("");
   const [ownership, setOwnerShip] = useState("");
-  const [priceSqr, setPriceSqr] = useState("");
+  const [pricedetail, setPricedetail] = useState(""); 
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
   const [buildingFeature, setBuildingFeature] = useState([]);
@@ -136,8 +136,7 @@ const FlatApartment = () => {
         setfurnishedarr(e?.furnishedList);
       }
       setExtraRoom(e?.otherRoom);
-      setOwnerShip(e?.ownership);
-      setPriceSqr(e?.price);
+      setOwnerShip(e?.ownership); 
       setAminity(e?.amenities);
       setPropertyFeature(e?.propertyFeatures);
       setBuildingFeature(e?.society_buildingFeatures);
@@ -190,7 +189,7 @@ const FlatApartment = () => {
       },
       ownership,
       agreementType: preferredAgreement,
-      price: +priceSqr,
+      price: +pricedetail,
       willingToRent: willingTo,
       amenities,
       inclusivePrices,
@@ -249,8 +248,6 @@ const FlatApartment = () => {
       showToastError("Provide balconey");
     } else if (!furnishedarr) {
       showToastError("Provide Furnished Field");
-    } else if (!priceSqr) {
-      showToastError("Provide Price Per sq.ft");
     } else if (!additinalft) {
       showToastError("Provide Property description");
     } else if (!powerbackup) {
@@ -1526,9 +1523,9 @@ const FlatApartment = () => {
               Rent Details
             </Heading>
             <Box>
-              <Input type="text" w={"40%"} borderRadius={0} value={priceSqr} onChange={(e) => {
+              <Input type="text" w={"40%"} borderRadius={0} value={pricedetail} onChange={(e) => {
                 e.preventDefault();
-                setPriceSqr(NumericString(e.target.value));
+                setPricedetail(NumericString(e.target.value));
               }} placeholder={"₹ Expected Rent"} />
             </Box>
             {/* pricing checkbox */}

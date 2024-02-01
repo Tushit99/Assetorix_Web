@@ -46,7 +46,7 @@ const CommercialShowRoomRentUpdate = () => {
   const [fromyear, setFromyear] = useState("");
   const [expectedyear, setExpectedYear] = useState("");
   const [pricedetail, setPricedetail] = useState("");
-  const [priceSqr, setPriceSqr] = useState("");
+  
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
@@ -127,7 +127,7 @@ const CommercialShowRoomRentUpdate = () => {
       setParkingType(e?.parkingTypeList)
 
       setPlotArea(e?.carpetArea);
-      setPriceSqr(e?.priceUnit);
+      
       setFireSafty(e?.fireSafety);
       setTotalFloors(e?.totalFloors);
       setAvailability(e?.availabilityStatus);
@@ -177,7 +177,7 @@ const CommercialShowRoomRentUpdate = () => {
         country,
       },
       price: +pricedetail,
-      priceUnit: +priceSqr,
+     
       floorOn,
       totalFloors: +totalfloors,
       locatedNear,
@@ -230,9 +230,7 @@ const CommercialShowRoomRentUpdate = () => {
       showToastError('Provide locality');
     } else if (!pricedetail) {
       showToastError('Provide PriceDetail');
-    } else if (!priceSqr) {
-      showToastError('Provide Price Per sq.ft');
-    } else if (!additinalft) {
+    }  else if (!additinalft) {
       showToastError('Provide Property description');
     } else if (!propertyFacing) {
       showToastError('Provide Property Facing');
@@ -530,14 +528,7 @@ const CommercialShowRoomRentUpdate = () => {
     setInclusivePrice(newarr);
   };
 
-  const areaCalucation = () => {
-    if (pricedetail && plotArea) {
-      let max = Math.max(Number(pricedetail), Number(plotArea));
-      let min = Math.min(Number(pricedetail), Number(plotArea));
-      let ans = Math.round(max / min);
-      setPriceSqr(ans);
-    }
-  };
+  ;
 
   const handleEntranceWidth = (e) => {
     e.preventDefault();
@@ -815,7 +806,7 @@ const CommercialShowRoomRentUpdate = () => {
                   value={plotArea}
                   onChange={(e) => {
                     setPlotArea(NumericString(e.target.value));
-                    areaCalucation();
+                    
                   }}
                   required
                 />
@@ -1240,24 +1231,10 @@ const CommercialShowRoomRentUpdate = () => {
                       required
                       onChange={(e) => {
                         setPricedetail(NumericString(e.target.value));
-                        areaCalucation();
+                        
                       }}
                     />
-                  </Box>
-                  <Box display={"grid"} gap={0}>
-                    <Heading
-                      as={"h3"}
-                      size={"xs"}
-                      fontWeight={400}
-                      textAlign={"left"}
-                    >
-                      {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
-                    </Heading>
-                    <Input type="text"
-                      value={priceSqr}
-
-                    />
-                  </Box>
+                  </Box> 
                 </Box>
               </Box>
               <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>

@@ -56,7 +56,7 @@ const IndependentBuilderRentUpdate = () => {
   const [extraroom, setExtraRoom] = useState([]);
   const [furnished, setFurnished] = useState("");
   const [propertyAge, setpropertyAge] = useState("");
-  const [priceSqr, setPriceSqr] = useState("");
+  
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
   const [buildingFeature, setBuildingFeature] = useState([]);
@@ -862,7 +862,7 @@ const IndependentBuilderRentUpdate = () => {
                 padding={"0 2px"}
                 value={plotArea}
                 onChange={(e) => {
-                  // areaCalucation();
+                  // 
                   setPlotArea(e.target.value);
                 }}
                 required

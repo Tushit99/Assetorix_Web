@@ -38,7 +38,7 @@ const AgricalturalFarmUpdate = () => {
   const [areaPer, setAreaPer] = useState("sq.ft");
   const [ownership, setOwnerShip] = useState("");
   const [pricedetail, setPricedetail] = useState("");
-  const [priceSqr, setPriceSqr] = useState("");
+  
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [constructionType, setConstructionType] = useState([]);
   const [amenities, setAminity] = useState([]);
@@ -107,7 +107,7 @@ const AgricalturalFarmUpdate = () => {
       setOtherFeature(e.otherFeatures);
       setOwnerShip(e.ownership);
       setPricedetail(e.price);
-      setPriceSqr(e.priceUnit);
+      
       setInclusivePrice(e.inclusivePrices);
       setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice);
       setMaintenanceTimePeriod(e?.additionalPricingDetails?.maintenanceTimePeriod);
@@ -161,7 +161,7 @@ const AgricalturalFarmUpdate = () => {
       plotLength,
       plotBreadth,
       price: +pricedetail,
-      priceUnit: +priceSqr,
+     
       inclusivePrices,
       openSides,
       amenities,
@@ -209,9 +209,7 @@ const AgricalturalFarmUpdate = () => {
       showToastError('Provide OwnerShip');
     } else if (!pricedetail) {
       showToastError('Provide PriceDetail');
-    } else if (!priceSqr) {
-      showToastError('Provide Price Per sq.ft');
-    }
+    } 
 
     if (locationAdv) {
       obj["locationAdv"] = locationAdv
@@ -494,14 +492,7 @@ const AgricalturalFarmUpdate = () => {
     setInclusivePrice(newarr);
   }
 
-  const areaCalucation = () => {
-    if (pricedetail && plotArea) {
-      let max = Math.max(Number(pricedetail), Number(plotArea));
-      let min = Math.min(Number(pricedetail), Number(plotArea));
-      let ans = Math.round(max / min);
-      setPriceSqr(ans);
-    }
-  }
+  
 
   const handleIndustryType = (e) => {
     e.preventDefault();
@@ -714,7 +705,7 @@ const AgricalturalFarmUpdate = () => {
               padding={"0 2px"}
               value={plotArea}
               onChange={(e) => {
-                areaCalucation();
+                
                 setPlotArea(NumericString(e.target.value));
               }}
               required />
@@ -1054,7 +1045,7 @@ const AgricalturalFarmUpdate = () => {
                   required
                   onChange={(e) => {
                     setPricedetail(e.target.value);
-                    areaCalucation();
+                    
                   }}
                 />
               </Box>

@@ -56,7 +56,7 @@ const Independent = () => {
   const [furnished, setFurnished] = useState("");
   const [propertyAge, setpropertyAge] = useState("");
   const [ownership, setOwnerShip] = useState("");
-  const [priceSqr, setPriceSqr] = useState("");
+  const [pricedetail, setPricedetail] = useState(""); 
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
   const [buildingFeature, setBuildingFeature] = useState([]);
@@ -121,7 +121,7 @@ const Independent = () => {
       },
       ownership,
       agreementType: preferredAgreement,
-      price: +priceSqr,
+      price: +pricedetail,
       willingToRent: willingTo,
       amenities,
       inclusivePrices,
@@ -183,9 +183,7 @@ const Independent = () => {
       showToastError("Provide Furnished Field");
     } else if (!ownership) {
       showToastError("Provide OwnerShip");
-    } else if (!priceSqr) {
-      showToastError("Provide Price Per sq.ft");
-    } else if (!additinalft) {
+    }  else if (!additinalft) {
       showToastError("Provide Property description");
     } else if (!powerbackup) {
       showToastError("Provide Power Backup");
@@ -370,16 +368,7 @@ const Independent = () => {
     } catch (err) {
       console.log(err);
     }
-  };
-
-  // const areaCalucation = () => {
-  //   if (pricedetail && plotArea) {
-  //     let max = Math.max(Number(pricedetail), Number(plotArea));
-  //     let min = Math.min(Number(pricedetail), Number(plotArea));
-  //     let ans = Math.round(max / min);
-  //     setPriceSqr(ans);
-  //   }
-  // }
+  }; 
 
   const handlePreferredAgreement = (e) => {
     e.preventDefault();
@@ -1443,10 +1432,10 @@ const Independent = () => {
                 w={"40%"}
                 maxLength={"8"}
                 borderRadius={0}
-                value={priceSqr}
+                value={pricedetail} 
                 onChange={(e) => {
                   e.preventDefault();
-                  setPriceSqr(NumericString(e.target.value));
+                  setPricedetail(NumericString(e.target.value));
                 }}
                 placeholder={"Expected Rent"}
               />

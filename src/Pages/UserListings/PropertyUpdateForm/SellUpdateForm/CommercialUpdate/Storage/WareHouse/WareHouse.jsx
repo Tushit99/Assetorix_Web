@@ -44,7 +44,7 @@ const WareHouseUpdate = () => {
     const [expectedyear, setExpectedYear] = useState("");
     const [ownership, setOwnerShip] = useState("");
     const [pricedetail, setPricedetail] = useState("");
-    const [priceSqr, setPriceSqr] = useState("");
+    
     const [inclusivePrices, setInclusivePrice] = useState([]);
     const [amenities, setAminity] = useState([]);
     const [propertyFeatures, setPropertyFeature] = useState("");
@@ -107,7 +107,7 @@ const WareHouseUpdate = () => {
             setFlooring(e.flooring);
 
             setPlotArea(e.carpetArea);
-            setPriceSqr(e.priceUnit);
+            
             setTotalFloors(e.totalFloors);
             setAvailability(e.availabilityStatus);
             if (e.availabilityStatus == "Ready to move") {
@@ -156,7 +156,7 @@ const WareHouseUpdate = () => {
             washrooms,
             ownership,
             price: +pricedetail,
-            priceUnit: +priceSqr,
+           
             inclusivePrices,
             amenities,
             propertyFeatures,
@@ -478,14 +478,7 @@ const WareHouseUpdate = () => {
         setInclusivePrice(newarr);
     }
 
-    const areaCalucation = () => {
-        if (pricedetail && plotArea) {
-            let max = Math.max(Number(pricedetail), Number(plotArea));
-            let min = Math.min(Number(pricedetail), Number(plotArea));
-            let ans = Math.round(max / min);
-            setPriceSqr(ans);
-        }
-    }
+    
 
     // ================= 
     const selectFiles = () => {
@@ -702,7 +695,7 @@ const WareHouseUpdate = () => {
                             padding={"0 2px"}
                             value={plotArea}
                             onChange={(e) => {
-                                areaCalucation();
+                                
                                 setPlotArea(e.target.value);
                             }}
                             required
@@ -939,7 +932,7 @@ const WareHouseUpdate = () => {
                                     required
                                     onChange={(e) => {
                                         setPricedetail(e.target.value);
-                                        areaCalucation();
+                                        
                                     }}
                                 />
                             </Box>

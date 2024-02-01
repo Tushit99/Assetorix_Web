@@ -39,7 +39,7 @@ const AgriculturalLandRentUpdate = () => {
   const [areaPer, setAreaPer] = useState("sq.ft");
   const [ownership, setOwnerShip] = useState("");
   const [pricedetail, setPricedetail] = useState("");
-  const [priceSqr, setPriceSqr] = useState("");
+  
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [constructionType, setConstructionType] = useState([]);
   const [amenities, setAminity] = useState([]);
@@ -107,8 +107,7 @@ const AgriculturalLandRentUpdate = () => {
 
       setOwnerShip(e.ownership);
 
-      setPricedetail(e.price);
-      setPriceSqr(e.priceUnit);
+      setPricedetail(e.price); 
       setInclusivePrice(e.inclusivePrices);
 
       setAdditionalPrice(e?.additionalPricingDetails);
@@ -163,7 +162,7 @@ const AgriculturalLandRentUpdate = () => {
       plotLength,
       plotBreadth,
       price: +pricedetail,
-      priceUnit: +priceSqr,
+     
       inclusivePrices,
       openSides,
       amenities,
@@ -210,9 +209,7 @@ const AgriculturalLandRentUpdate = () => {
       showToastError('Provide OwnerShip');
     } else if (!pricedetail) {
       showToastError('Provide PriceDetail');
-    } else if (!priceSqr) {
-      showToastError('Provide Price Per sq.ft');
-    }
+    }  
 
     if (locationAdv) {
       obj["locationAdv"] = locationAdv
@@ -464,15 +461,7 @@ const AgriculturalLandRentUpdate = () => {
     }
     setInclusivePrice(newarr);
   }
-
-  const areaCalucation = () => {
-    if (pricedetail && plotArea) {
-      let max = Math.max(Number(pricedetail), Number(plotArea));
-      let min = Math.min(Number(pricedetail), Number(plotArea));
-      let ans = Math.round(max / min);
-      setPriceSqr(ans);
-    }
-  }
+ 
 
   // ===============00000000====================
   // =================------====================
@@ -672,7 +661,7 @@ const AgriculturalLandRentUpdate = () => {
               padding={"0 2px"}
               value={plotArea}
               onChange={(e) => {
-                areaCalucation();
+                
                 setPlotArea(NumericString(e.target.value));
               }}
               required />
@@ -1011,25 +1000,10 @@ const AgriculturalLandRentUpdate = () => {
                   required
                   onChange={(e) => {
                     setPricedetail(NumericString(e.target.value));
-                    areaCalucation();
+                    
                   }}
                 />
-              </Box>
-              <Box display={"grid"} gap={0}>
-                <Heading
-                  as={"h3"}
-                  size={"xs"}
-                  fontWeight={400}
-                  textAlign={"left"}
-                >
-                  {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
-                </Heading>
-                <NumberInput value={priceSqr}>
-                  <NumberInputField
-
-                  />
-                </NumberInput>
-              </Box>
+              </Box> 
             </Box>
           </Box>
           <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>

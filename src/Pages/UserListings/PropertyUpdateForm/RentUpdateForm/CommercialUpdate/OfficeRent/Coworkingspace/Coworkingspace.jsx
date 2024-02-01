@@ -83,7 +83,7 @@ const Coworkingspace = () => {
     const [fromyear, setFromyear] = useState("");
     const [expectedyear, setExpectedYear] = useState("");
     const [ownership, setOwnerShip] = useState("");
-    const [priceSqr, setPriceSqr] = useState("");
+    
     const [inclusivePrices, setInclusivePrice] = useState([]);
     const [amenities, setAminity] = useState([]);
     const [locationAdv, setLocationAdv] = useState([]);
@@ -143,7 +143,7 @@ const Coworkingspace = () => {
             setavailableFrom(e?.availableFrom);  
             setOwnerShip(e?.ownership); 
             setPricedetail(e?.price); 
-            setPriceSqr(e?.priceUnit); 
+             
             setInclusivePrice(e?.inclusivePrices); 
             if(e.additionalPricingDetails.maintenancePrice>0){
                 setMaintenancePrice(e.additionalPricingDetails.maintenancePrice); 
@@ -190,7 +190,7 @@ const Coworkingspace = () => {
             },
             ownership,
             price: +pricedetail,
-            priceUnit: +priceSqr,
+           
             inclusivePrices,
             propertyStatus: fromyear,
             securityDeposit,
@@ -241,8 +241,6 @@ const Coworkingspace = () => {
         // condition to check all imformation are included or not
         if (!ownership) {
             showToastError("Provide OwnerShip");
-        } else if (!priceSqr) {
-            showToastError("Provide Price Per sq.ft");
         } else if (!totalfloors) {
             showToastError("Provide Total Floors");
         }
@@ -479,14 +477,7 @@ const Coworkingspace = () => {
         setFloorNumber(newarr);
     }
 
-    const areaCalucation = () => {
-        if (pricedetail && plotArea) {
-            let max = Math.max(Number(pricedetail), Number(plotArea));
-            let min = Math.min(Number(pricedetail), Number(plotArea));
-            let ans = Math.round(max / min);
-            setPriceSqr(ans);
-        }
-    };
+    ;
 
     const handlefireSafty = (e) => {
         e.preventDefault();
@@ -739,7 +730,7 @@ const Coworkingspace = () => {
                             required
                             placeholder={"Super built-up Area"}
                             onChange={(e) => {
-                                areaCalucation();
+                                
                                 setPlotArea(NumericString(e.target.value));
                             }} />
                         <Select
@@ -1439,25 +1430,10 @@ const Coworkingspace = () => {
                                 placeholder={`${isCountry.country == "india" ? "₹" : "$"} Expectes Rent`}
                                 onChange={(e) => {
                                     setPricedetail(NumericString(e.target.value));
-                                    areaCalucation();
+                                    
                                 }}
                             />
-                        </Box>
-                        <Box display={"grid"} gap={0}>
-                            <Heading
-                                as={"h3"}
-                                size={"xs"}
-                                fontWeight={400}
-                                textAlign={"left"}
-                            >
-                                {isCountry.country == "india" ? "₹" : "$"}  Lease rental : Per {areaPer}
-                            </Heading>
-                            <NumberInput value={priceSqr}>
-                                <NumberInputField
-
-                                />
-                            </NumberInput>
-                        </Box>
+                        </Box> 
                     </Box>
                 </Box>
                 {/* rent price detail */}

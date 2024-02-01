@@ -53,7 +53,7 @@ const ServicedApartmentRent = () => {
   const [furnished, setFurnished] = useState("");
   const [propertyAge, setpropertyAge] = useState("");
   const [ownership, setOwnerShip] = useState("");
-  const [priceSqr, setPriceSqr] = useState("");
+  
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
   const [buildingFeature, setBuildingFeature] = useState([]);
@@ -87,7 +87,8 @@ const ServicedApartmentRent = () => {
   const [annualDuesPayble, setAnnualDuesPayble] = useState("");
   const [isClicked, setIsClicked] = useState(false); 
   const [currency, setCurrency] = useState("₹"); 
-  const [pricedetail, setPricedetail] = useState("");  
+  const [pricedetail, setPricedetail] = useState("");
+
   const [clickCount, setClickCount] = useState(0);
   const navigate = useNavigate();
   // state for drop box images  
@@ -119,7 +120,7 @@ const ServicedApartmentRent = () => {
       },
       ownership,
       agreementType: preferredAgreement,
-      price: +priceSqr,
+      price: +pricedetail,
       willingToRent: willingTo,
       amenities,
       inclusivePrices,
@@ -180,8 +181,6 @@ const ServicedApartmentRent = () => {
       showToastError("Provide Furnished Field");
     } else if (!ownership) {
       showToastError("Provide OwnerShip");
-    } else if (!priceSqr) {
-      showToastError("Provide Price Per sq.ft");
     } else if (!additinalft) {
       showToastError("Provide Property description");
     } else if (!powerbackup) {

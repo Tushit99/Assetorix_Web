@@ -51,7 +51,7 @@ const IndependentBuilderRent = () => {
   const [furnished, setFurnished] = useState("");
   const [propertyAge, setpropertyAge] = useState("");
   const [ownership, setOwnerShip] = useState("");
-  const [priceSqr, setPriceSqr] = useState("");
+  
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
   const [buildingFeature, setBuildingFeature] = useState([]);
@@ -178,9 +178,7 @@ const IndependentBuilderRent = () => {
       showToastError("Provide Furnished Field");
     } else if (!ownership) {
       showToastError("Provide OwnerShip");
-    } else if (!priceSqr) {
-      showToastError("Provide Price Per sq.ft");
-    } else if (!additinalft) {
+    }else if (!additinalft) {
       showToastError("Provide Property description");
     } else if (!powerbackup) {
       showToastError("Provide Power Backup");
@@ -371,15 +369,7 @@ const IndependentBuilderRent = () => {
       console.log(err);
     }
   };
-
-  // const areaCalucation = () => {
-  //   if (pricedetail && plotArea) {
-  //     let max = Math.max(Number(pricedetail), Number(plotArea));
-  //     let min = Math.min(Number(pricedetail), Number(plotArea));
-  //     let ans = Math.round(max / min);
-  //     setPriceSqr(ans);
-  //   }
-  // }
+ 
 
   const handlePreferredAgreement = (e) => {
     e.preventDefault();
