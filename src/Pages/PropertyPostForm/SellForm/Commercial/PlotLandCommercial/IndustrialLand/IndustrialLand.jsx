@@ -1045,24 +1045,29 @@ const IndustrialLand = () => {
         <Heading as={"h4"} size={"sm"} fontWeight={700} marginTop={5} textAlign={"left"}>
           Additional Pricing Detail (Optional)
         </Heading>
-        <InputGroup w={"300px"}>
-          <Input
-            w={"60%"}
-            type="text"
-            onChange={(e) => setMaintenancePrice(NumericString(e.target.value))}
-            value={maintenancePrice}
-            placeholder={"Maintenance Price"}
-          />
-          <Select
-            w={"40%"}
-            borderRadius={0}
-            value={maintenanceTimePeriod}
-            onChange={(e) => setMaintenanceTimePeriod(e.target.value)}
-          >
-            <option value="Monthly">Monthly</option>
-            <option value="Yearly">Yearly</option>
-          </Select>
-        </InputGroup>
+        <InputGroup w={300} gap={2}>
+              <Select
+                w={"-moz-fit-content"}
+                value={currency} 
+                borderRadius={0}
+                onChange={(e) => setCurrency(e.target.value)}
+              >
+                <option value="₹">₹ INR </option>
+                <option value="$">$ USD </option>
+              </Select>
+              <Input
+                type="text"
+                value={pricedetail}
+                maxLength={"10"}
+                placeholder={`Price`}
+                required
+                borderRadius={0} 
+                w={200}
+                onChange={(e) => {
+                  setPricedetail(NumericString(e.target.value));
+                }}
+              />
+            </InputGroup>
 
         <Box display={"grid"} marginTop={"6px"}>
           {additionalPrice && (

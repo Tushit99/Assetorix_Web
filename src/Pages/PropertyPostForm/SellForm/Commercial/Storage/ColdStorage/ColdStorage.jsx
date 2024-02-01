@@ -61,16 +61,16 @@ const ColdStorage = () => {
   const [pincollection, setPinCollection] = useState([]);
   const [additionalPrice, setAdditionalPrice] = useState(false);
   const [maintenancePrice, setMaintenancePrice] = useState("");
-  const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly"); 
+  const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
   const [bookingAmount, setBookingAmount] = useState("");
   const [annualDuesPayble, setAnnualDuesPayble] = useState("");
   const [preLeased, setPreLeased] = useState("");
   const [currentRentPerMonth, setCurrentRentPerMonth] = useState("");
   const [leaseTenureInYear, setLeaseTenureInYear] = useState("");
   const [annualRentIncrease, setAnnualRentIncrease] = useState("");
-  const [currency, setCurrency] = useState("₹"); 
+  const [currency, setCurrency] = useState("₹");
   const [businessType, setBusinessType] = useState("");
-  const [isClicked, setIsClicked] = useState(false); 
+  const [isClicked, setIsClicked] = useState(false);
   const [clickCount, setClickCount] = useState(0);
   const navigate = useNavigate();
   // state for drop box images
@@ -123,7 +123,7 @@ const ColdStorage = () => {
       countryCurrency: currency,
       additionalPricingDetails: {
         maintenancePrice,
-        maintenanceTimePeriod, 
+        maintenanceTimePeriod,
         bookingAmount,
         annualDuesPayable: annualDuesPayble,
       },
@@ -506,7 +506,7 @@ const ColdStorage = () => {
             Location Detail
           </Heading>
           <Input
-            type="text" 
+            type="text"
             placeholder="Address (optional)"
             value={address}
             maxLength={100}
@@ -584,15 +584,15 @@ const ColdStorage = () => {
         </Box>
 
         {/* ============================== No. of Washrooms ====================================== */}
-        <Box textAlign={"left"}> 
+        <Box textAlign={"left"}>
           <Input
             type="text"
-            variant={"outline"} 
-            placeholder="Enter no. of washroom" 
-            width={{base:"100%",md:300}} 
+            variant={"outline"}
+            placeholder="Enter no. of washroom"
+            width={{ base: "100%", md: 300 }}
             onChange={(e) => setwashrooms(NumericString(e.target.value))}
             value={washrooms}
-            required 
+            required
           />
         </Box>
 
@@ -819,41 +819,34 @@ const ColdStorage = () => {
         </Box>
 
         {/* Additional Pricing Detail (Optional) */}
-         {/* Price Details */}
-         <Box>
-          <Heading
-            as={"h3"}
-            size={"sm"}
-            marginTop={5}
-            textAlign={"left"}
-          >
+        {/* Price Details */}
+        <Box>
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Price Details
           </Heading>
-          <Box display={"flex"} alignItems={"center"} gap={5}>
-            <InputGroup w={300} gap={2}>
-              <Select
-                w={"-moz-fit-content"}
-                value={currency} 
-                borderRadius={0}
-                onChange={(e) => setCurrency(e.target.value)}
-              >
-                <option value="₹">₹ INR </option>
-                <option value="$">$ USD </option>
-              </Select>
-              <Input
-                type="text"
-                value={pricedetail}
-                maxLength={"10"}
-                placeholder={`Price`}
-                required
-                borderRadius={0} 
-                w={200}
-                onChange={(e) => {
-                  setPricedetail(NumericString(e.target.value));
-                }}
-              />
-            </InputGroup>
-          </Box>
+          <InputGroup w={300} gap={2}>
+            <Select
+              w={"-moz-fit-content"}
+              value={currency}
+              borderRadius={0}
+              onChange={(e) => setCurrency(e.target.value)}
+            >
+              <option value="₹">₹ INR </option>
+              <option value="$">$ USD </option>
+            </Select>
+            <Input
+              type="text"
+              value={pricedetail}
+              maxLength={"10"}
+              placeholder={`Price`}
+              required
+              borderRadius={0}
+              w={200}
+              onChange={(e) => {
+                setPricedetail(NumericString(e.target.value));
+              }}
+            />
+          </InputGroup>
           {/* ============================== inclusive charges (checkbox) ==============================  */}
           <Box
             display={"flex"}
@@ -927,7 +920,7 @@ const ColdStorage = () => {
 
         <Box display={"grid"} marginTop={"6px"}>
           {additionalPrice && (
-            <> 
+            <>
               <Input
                 type="text"
                 w={"300px"}
@@ -947,7 +940,7 @@ const ColdStorage = () => {
                 }
                 placeholder="Annual Dues Payable"
                 margin={"10px 0 0 0"}
-              /> 
+              />
             </>
           )}
           <Heading
@@ -964,7 +957,7 @@ const ColdStorage = () => {
               <IoIosArrowUp style={{ display: "inline" }} />
             ) : (
               <IoIosArrowDown style={{ display: "inline" }} />
-            )} 
+            )}
             Add more pricing details
           </Heading>
         </Box>
@@ -992,7 +985,6 @@ const ColdStorage = () => {
               }}
               className={preLeased == "Yes" ? style.setbtn : style.btn}
             >
-              
               Yes
             </button>
             <button
@@ -1003,7 +995,6 @@ const ColdStorage = () => {
               }}
               className={preLeased == "No" ? style.setbtn : style.btn}
             >
-              
               No
             </button>
           </Box>
@@ -1058,7 +1049,6 @@ const ColdStorage = () => {
               textAlign={"left"}
               margin={"10px 0"}
             >
-              
               Upload Your Property image
             </Heading>
           </Box>
@@ -1079,7 +1069,6 @@ const ColdStorage = () => {
                     role="button"
                     onClick={selectFiles}
                   >
-                    
                     Browse
                   </Text>
                 </>
@@ -1567,7 +1556,7 @@ const ColdStorage = () => {
           </Heading>
           <Box>
             <Select
-            width={{ base: "100%", md: 300 }}
+              width={{ base: "100%", md: 300 }}
               onChange={(e) => setFlooring(e.target.value)}
               value={flooring}
             >

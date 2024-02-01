@@ -1428,20 +1428,20 @@ const GuestBanquet = () => {
 
         {/* ====================== Price Details ================================ */}
         <Box>
-          <Heading
+        <Heading
             as={"h3"}
             size={"sm"}
             marginTop={5}
             textAlign={"left"}
           >
-            Price Details 
+            Price Details
           </Heading>
-          <Box display={"flex"} margin={"8px 0 0 0"} alignItems={"center"}>
-            <InputGroup w={300}>
+          <Box display={"flex"} alignItems={"center"} gap={5}>
+            <InputGroup w={300} gap={2}>
               <Select
                 w={"-moz-fit-content"}
+                value={currency} 
                 borderRadius={0}
-                value={currency}
                 onChange={(e) => setCurrency(e.target.value)}
               >
                 <option value="₹">₹ INR </option>
@@ -1449,11 +1449,11 @@ const GuestBanquet = () => {
               </Select>
               <Input
                 type="text"
-                borderRadius={0}
                 value={pricedetail}
-                maxLength={9}
+                maxLength={"10"}
                 placeholder={`Price`}
                 required
+                borderRadius={0} 
                 w={200}
                 onChange={(e) => {
                   setPricedetail(NumericString(e.target.value));

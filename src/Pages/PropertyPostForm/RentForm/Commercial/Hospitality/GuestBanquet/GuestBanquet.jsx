@@ -850,7 +850,7 @@ const GuestBanquetRent = () => {
             <InputGroup w={300} gap={2}>
               <Select
                 w={"-moz-fit-content"}
-                value={currency}
+                value={currency} 
                 borderRadius={0}
                 onChange={(e) => setCurrency(e.target.value)}
               >
@@ -863,13 +863,13 @@ const GuestBanquetRent = () => {
                 maxLength={"10"}
                 placeholder={`Price`}
                 required
-                borderRadius={0}
+                borderRadius={0} 
                 w={200}
                 onChange={(e) => {
                   setPricedetail(NumericString(e.target.value));
                 }}
               />
-            </InputGroup> 
+            </InputGroup>
           </Box>
         </Box>
         <Box>

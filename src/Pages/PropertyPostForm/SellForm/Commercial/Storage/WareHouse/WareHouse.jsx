@@ -494,20 +494,22 @@ const WareHouse = () => {
     <div>
       <form onSubmit={handleSubmitData}>
         <Box className={style.location_form}>
-          <Heading size={"lg"} textAlign={"center"}>Where is your property located?</Heading>
+          <Heading size={"lg"} textAlign={"center"}>
+            Where is your property located?
+          </Heading>
           <Heading size={"sm"} color={"black"} textAlign={"left"}>
             Location Detail
           </Heading>
 
           <Input
-            type="text"  
+            type="text"
             placeholder="Address (optional)"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             fontSize={"md"}
             variant="flushed"
           />
-         <Input
+          <Input
             type="text"
             placeholder={"Enter pincode"}
             required
@@ -515,10 +517,10 @@ const WareHouse = () => {
             value={pincode}
             maxLength={"6"}
             variant="flushed"
-            onChange={handlepinfetch} 
-          /> 
+            onChange={handlepinfetch}
+          />
           <Input
-            type="text" 
+            type="text"
             required
             placeholder="Enter Locality"
             list="browsers"
@@ -538,7 +540,7 @@ const WareHouse = () => {
           )}
 
           <Input
-            type="text" 
+            type="text"
             required
             placeholder="Enter City"
             fontSize={"md"}
@@ -547,7 +549,7 @@ const WareHouse = () => {
             variant="flushed"
           />
           <Input
-            type="text" 
+            type="text"
             required
             placeholder="Enter State"
             value={state}
@@ -556,7 +558,7 @@ const WareHouse = () => {
             variant="flushed"
           />
           <Input
-            type="text" 
+            type="text"
             required
             placeholder="Enter Country"
             value={country}
@@ -566,24 +568,20 @@ const WareHouse = () => {
           />
         </Box>
         {/* =============================== Tell us about your property ============================ */}
-        <Heading
-          as={"h4"}
-          size={"sm"} 
-          textAlign={"left"}
-        >
+        <Heading as={"h4"} size={"sm"} textAlign={"left"}>
           Add Room Details
         </Heading>
 
         {/* ============================== No. of Washrooms ====================================== */}
-        <Box textAlign={"left"}> 
+        <Box textAlign={"left"}>
           <Input
             type="text"
-            variant={"outline"} 
-            placeholder="Enter no. of washroom" 
-            width={{base:"100%",md:300}}  
+            variant={"outline"}
+            placeholder="Enter no. of washroom"
+            width={{ base: "100%", md: 300 }}
             onChange={(e) => setwashrooms(NumericString(e.target.value))}
             value={washrooms}
-            required 
+            required
           />
         </Box>
 
@@ -830,39 +828,32 @@ const WareHouse = () => {
 
         {/* ============================== Price Details ============================ */}
         <Box>
-          <Heading
-            as={"h3"}
-            size={"sm"}
-            marginTop={5}
-            textAlign={"left"}
-          >
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Price Details
           </Heading>
-          <Box display={"flex"} alignItems={"center"} gap={5}>
-            <InputGroup w={300} gap={2}>
-              <Select
-                w={"-moz-fit-content"}
-                value={currency}
-                borderRadius={0}
-                onChange={(e) => setCurrency(e.target.value)}
-              >
-                <option value="₹">₹ INR </option>
-                <option value="$">$ USD </option>
-              </Select>
-              <Input
-                type="text"
-                value={pricedetail}
-                maxLength={"10"}
-                placeholder={`Price`}
-                required
-                borderRadius={0}
-                w={200}
-                onChange={(e) => {
-                  setPricedetail(NumericString(e.target.value));
-                }}
-              />
-            </InputGroup>
-          </Box>
+          <InputGroup w={300} gap={2}>
+            <Select
+              w={"-moz-fit-content"}
+              value={currency}
+              borderRadius={0}
+              onChange={(e) => setCurrency(e.target.value)}
+            >
+              <option value="₹">₹ INR </option>
+              <option value="$">$ USD </option>
+            </Select>
+            <Input
+              type="text"
+              value={pricedetail}
+              maxLength={"10"}
+              placeholder={`Price`}
+              required
+              borderRadius={0}
+              w={200}
+              onChange={(e) => {
+                setPricedetail(NumericString(e.target.value));
+              }}
+            />
+          </InputGroup>
           {/* ============================== inclusive charges (checkbox) ==============================  */}
           <Box
             display={"flex"}
@@ -1001,7 +992,6 @@ const WareHouse = () => {
               }}
               className={preLeased == "Yes" ? style.setbtn : style.btn}
             >
-              
               Yes
             </button>
             <button
@@ -1012,7 +1002,6 @@ const WareHouse = () => {
               }}
               className={preLeased == "No" ? style.setbtn : style.btn}
             >
-              
               No
             </button>
           </Box>
@@ -1067,7 +1056,6 @@ const WareHouse = () => {
               textAlign={"left"}
               margin={"10px 0"}
             >
-              
               Upload Your Property image
             </Heading>
           </Box>
@@ -1088,7 +1076,6 @@ const WareHouse = () => {
                     role="button"
                     onClick={selectFiles}
                   >
-                    
                     Browse
                   </Text>
                 </>
@@ -1123,26 +1110,20 @@ const WareHouse = () => {
 
         {/* ============================ Property unique discription ============================ */}
         <Box>
-          <Heading
-            as={"h3"}
-            size={"sm"}
-            fontWeight={600} 
-            textAlign={"left"}
-          >
+          <Heading as={"h3"} size={"sm"} fontWeight={600} textAlign={"left"}>
             Add Description and Unique Features of your Property
-          </Heading> 
+          </Heading>
           <Textarea
             height={140}
             value={desc}
-          placeholder="Add Description"
-          onChange={(e) => {
+            placeholder="Add Description"
+            onChange={(e) => {
               let my_cleantext = CleanInputText(e.target.value);
               setDesc(my_cleantext);
             }}
           ></Textarea>
         </Box>
         {/* ============================ Add amenities/unique features ============================ */}
-
 
         {/* ============================ Amenities ============================ */}
         <Box className={style.optional_box}>
@@ -1574,7 +1555,7 @@ const WareHouse = () => {
           </Heading>
           <Box>
             <Select
-            width={{ base: "100%", md: 300 }}
+              width={{ base: "100%", md: 300 }}
               onChange={(e) => setFlooring(e.target.value)}
               value={flooring}
             >

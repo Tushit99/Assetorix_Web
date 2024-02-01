@@ -54,7 +54,7 @@ const FactoryRent = () => {
   const [bookingAmount, setBookingAmount] = useState("");
   const [annualDuesPayble, setAnnualDuesPayble] = useState("");
   const [clickCount, setClickCount] = useState(0);
-  const [currency, setCurrency] = useState("₹"); 
+  const [currency, setCurrency] = useState("₹");
   const [isClicked, setIsClicked] = useState(false);
   const navigate = useNavigate();
   // state for drop box images
@@ -722,35 +722,34 @@ const FactoryRent = () => {
             >
               What price you are expecting for this property?
             </Heading>
-            <Box display={"flex"} alignItems={"center"} gap={5}>
-              <Box display={"grid"} >  
-                <Heading as={"h3"} fontSize={"sm"}> Rent Detail </Heading>
-                <InputGroup w={300} gap={2}>
-                  <Select
-                    w={"-moz-fit-content"}
-                    value={currency}
-                    borderRadius={0}
-                    onChange={(e) => setCurrency(e.target.value)}
-                  >
-                    <option value="₹">₹ INR </option>
-                    <option value="$">$ USD </option>
-                  </Select>
-                  <Input
-                    type="text"
-                    value={pricedetail}
-                    maxLength={"10"}
-                    placeholder={`Price`}
-                    required
-                    borderRadius={0}
-                    w={200}
-                    onChange={(e) => {
-                      setPricedetail(NumericString(e.target.value));
-                    }}
-                  />
-                </InputGroup>
-              </Box>
-            </Box>
-          </Box> 
+            <Heading as={"h3"} fontSize={"sm"}>
+              {" "}
+              Rent Detail{" "}
+            </Heading>
+            <InputGroup w={300} gap={2}>
+              <Select
+                w={"-moz-fit-content"}
+                value={currency}
+                borderRadius={0}
+                onChange={(e) => setCurrency(e.target.value)}
+              >
+                <option value="₹">₹ INR </option>
+                <option value="$">$ USD </option>
+              </Select>
+              <Input
+                type="text"
+                value={pricedetail}
+                maxLength={"10"}
+                placeholder={`Price`}
+                required
+                borderRadius={0}
+                w={200}
+                onChange={(e) => {
+                  setPricedetail(NumericString(e.target.value));
+                }}
+              />
+            </InputGroup> 
+          </Box>
           <Box>
             {additionalPrice && (
               <>

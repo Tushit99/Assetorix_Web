@@ -9,7 +9,7 @@ import {
   Select,
   Text,
   Textarea,
-  Checkbox, 
+  Checkbox,
   useToast,
   RadioGroup,
   Stack,
@@ -534,10 +534,12 @@ const ReadyToMove = () => {
         <Heading size={"lg"} color={"black"} textAlign={"center"}>
           Where is your Ready to move office space located?
         </Heading>
-        <Heading size={"sm"} color={"black"} textAlign={"left"}>Location Detail</Heading>
+        <Heading size={"sm"} color={"black"} textAlign={"left"}>
+          Location Detail
+        </Heading>
 
         <Select
-          fontSize={"md"} 
+          fontSize={"md"}
           variant="flushed"
           as={"select"}
           onChange={(e) => setLocatedInside(e.target.value)}
@@ -550,7 +552,7 @@ const ReadyToMove = () => {
         </Select>
 
         <Select
-          fontSize={"md"} 
+          fontSize={"md"}
           variant="flushed"
           as={"select"}
           onChange={(e) => setZoneType(e.target.value)}
@@ -569,7 +571,7 @@ const ReadyToMove = () => {
         </Select>
         <Input
           type="text"
-          placeholder={"Enter pincode"} 
+          placeholder={"Enter pincode"}
           required
           maxLength={6}
           fontSize={"md"}
@@ -578,7 +580,7 @@ const ReadyToMove = () => {
           onChange={handlepinfetch}
         />
         <Input
-          type="text" 
+          type="text"
           required
           placeholder="Enter Locality"
           list="browsers"
@@ -599,7 +601,7 @@ const ReadyToMove = () => {
         )}
 
         <Input
-          type="text" 
+          type="text"
           required
           placeholder="Enter City"
           fontSize={"md"}
@@ -609,7 +611,7 @@ const ReadyToMove = () => {
           variant="flushed"
         />
         <Input
-          type="text" 
+          type="text"
           required
           placeholder="Enter State"
           value={state}
@@ -620,7 +622,7 @@ const ReadyToMove = () => {
         />
 
         <Input
-          type="text" 
+          type="text"
           required
           placeholder="Enter Country"
           value={country}
@@ -634,7 +636,7 @@ const ReadyToMove = () => {
       <Box>
         {/* ====================================== */}
         {/* add area details */}
-        <Box textAlign={"left"} >
+        <Box textAlign={"left"}>
           <Heading as={"h3"} marginTop={5} size={"sm"}>
             Add Area Details
           </Heading>
@@ -718,7 +720,7 @@ const ReadyToMove = () => {
             />
           </Box>
         </Box>
-        
+
         {/* No. of Meeting Rooms */}
         <Box className={style.optional_box}>
           <Heading as={"h3"} marginTop={5} size={"sm"}>
@@ -841,7 +843,7 @@ const ReadyToMove = () => {
             </Box>
           </Box>
         </Box>
-        
+
         {/* Conference Room */}
         <Box className={style.optional_box}>
           <Heading as={"h3"} marginTop={5} size={"sm"} textAlign={"left"}>
@@ -875,9 +877,9 @@ const ReadyToMove = () => {
             </button>
           </Box>
         </Box>
-        
+
         {/* Reception Area */}
-        <Box >
+        <Box>
           <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Reception Area
           </Heading>
@@ -909,15 +911,20 @@ const ReadyToMove = () => {
             </button>
           </Box>
         </Box>
-        
+
         {/* Pantry Type */}
-        <Box >
+        <Box>
           <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
-            Pantry Type 
-          </Heading> 
-          <Box display={"flex"} gap={{base:5,md:10}} flexWrap={"wrap"} textAlign={"left"} >
+            Pantry Type
+          </Heading>
+          <Box
+            display={"flex"}
+            gap={{ base: 5, md: 10 }}
+            flexWrap={"wrap"}
+            textAlign={"left"}
+          >
             <button
-              value={"Private"} 
+              value={"Private"}
               onClick={(e) => {
                 e.preventDefault();
                 setPantryType(e.target.value);
@@ -927,7 +934,7 @@ const ReadyToMove = () => {
               Private
             </button>
             <button
-              value={"Shared"} 
+              value={"Shared"}
               onClick={(e) => {
                 e.preventDefault();
                 setPantryType(e.target.value);
@@ -937,7 +944,7 @@ const ReadyToMove = () => {
               Shared
             </button>
             <button
-              value={"Not-Available"} 
+              value={"Not-Available"}
               onClick={(e) => {
                 e.preventDefault();
                 setPantryType(e.target.value);
@@ -1003,27 +1010,41 @@ const ReadyToMove = () => {
               </Select>
             </InputGroup>
           </Box>
-        </Box> 
+        </Box>
 
         {/* facilities available */}
-        <Box textAlign={"left"} maxWidth={"100%"}> 
-          <Heading as={"h3"} size={"sm"} marginTop={5} >
+        <Box textAlign={"left"} maxWidth={"100%"}>
+          <Heading as={"h3"} size={"sm"} marginTop={5}>
             Please select the facilities available
           </Heading>
-          <Box display={{base:"grid",md:"flex"}} flexWrap={"wrap"} maxWidth={"96%"} margin={{base:"10px",md:"5px 14px"}} w={500} gap={{base:0,md:6}}>
+          <Box
+            display={{ base: "grid", md: "flex" }}
+            flexWrap={"wrap"}
+            maxWidth={"96%"}
+            margin={{ base: "10px", md: "5px 14px" }}
+            w={500}
+            gap={{ base: 0, md: 6 }}
+          >
             <Text flex={4}>Furnishing</Text>
             <RadioGroup onChange={setFurnishing} value={furnishing}>
               <Stack direction="row">
                 <Radio value="Available">Available</Radio>
                 <Radio value="Not-Available">Not-Available</Radio>
               </Stack>
-            </RadioGroup> 
+            </RadioGroup>
           </Box>
-          <Box display={{base:"grid",md:"flex"}} flexWrap={"wrap"} maxWidth={"96%"} margin={{base:"10px",md:"5px 14px"}} w={500} gap={{base:0,md:6}}>
+          <Box
+            display={{ base: "grid", md: "flex" }}
+            flexWrap={"wrap"}
+            maxWidth={"96%"}
+            margin={{ base: "10px", md: "5px 14px" }}
+            w={500}
+            gap={{ base: 0, md: 6 }}
+          >
             <Text flex={4}>Central Air Conditioning</Text>
             <RadioGroup
               onChange={setcentralAirConditioning}
-              value={centralAirConditioning} 
+              value={centralAirConditioning}
             >
               <Stack direction="row">
                 <Radio value="Available">Available</Radio>
@@ -1031,7 +1052,14 @@ const ReadyToMove = () => {
               </Stack>
             </RadioGroup>
           </Box>
-          <Box display={{base:"grid",md:"flex"}} flexWrap={"wrap"} maxWidth={"96%"} margin={{base:"10px",md:"5px 14px"}} w={500} gap={{base:0,md:6}}>
+          <Box
+            display={{ base: "grid", md: "flex" }}
+            flexWrap={"wrap"}
+            maxWidth={"96%"}
+            margin={{ base: "10px", md: "5px 14px" }}
+            w={500}
+            gap={{ base: 0, md: 6 }}
+          >
             <Text flex={4}>Oxygen Duct</Text>
             <RadioGroup onChange={setOxygenDuct} value={oxygenDuct}>
               <Stack direction="row">
@@ -1040,7 +1068,14 @@ const ReadyToMove = () => {
               </Stack>
             </RadioGroup>
           </Box>
-          <Box display={{base:"grid",md:"flex"}} flexWrap={"wrap"} maxWidth={"96%"} margin={{base:"10px",md:"5px 14px"}} w={500} gap={{base:0,md:6}}>
+          <Box
+            display={{ base: "grid", md: "flex" }}
+            flexWrap={"wrap"}
+            maxWidth={"96%"}
+            margin={{ base: "10px", md: "5px 14px" }}
+            w={500}
+            gap={{ base: 0, md: 6 }}
+          >
             <Text flex={4}>UPS</Text>
             <RadioGroup onChange={setUps} value={ups}>
               <Stack direction="row">
@@ -1053,7 +1088,7 @@ const ReadyToMove = () => {
 
         {/* Fire safety mesures */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} marginTop={5} size={"sm"}> 
+          <Heading as={"h3"} marginTop={5} size={"sm"}>
             Fire safety measures include
           </Heading>
           <Box>
@@ -1100,32 +1135,27 @@ const ReadyToMove = () => {
 
         {/* floor details */}
         <Box textAlign={"left"}>
-          <Heading
-            as={"h3"}
-            size={"sm"} 
-            marginTop={5}
-            textAlign={"left"}
-          >
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Floor Details
-          </Heading> 
+          </Heading>
           <Box display={"flex"} alignItems={"center"}>
-            <Input 
-              type="text"  
+            <Input
+              type="text"
               placeholder="Enter Total floor"
-              value={totalfloors} 
+              value={totalfloors}
               variant={"outline"}
-              maxLength={2} 
-              onChange={(e) => { 
-                  setTotalFloors(NumericString(e.target.value)); 
+              maxLength={2}
+              onChange={(e) => {
+                setTotalFloors(NumericString(e.target.value));
               }}
               required
               w={180}
             />
             <Box>
               <Menu>
-                <MenuButton  
-                  variant={"outline"} 
-                  borderRadius={0}  
+                <MenuButton
+                  variant={"outline"}
+                  borderRadius={0}
                   as={Button}
                   rightIcon={<ChevronDownIcon />}
                 >
@@ -1192,11 +1222,11 @@ const ReadyToMove = () => {
             onChange={(e) => setStairCase(NumericString(e.target.value))}
             value={stairCase}
           />
-        </Box> 
+        </Box>
 
         {/* Lift */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} marginTop={5} size={"sm"}> 
+          <Heading as={"h3"} marginTop={5} size={"sm"}>
             Lifts
           </Heading>
           <Box>
@@ -1415,12 +1445,7 @@ const ReadyToMove = () => {
         {/* Age of Property */}
         {availability == "Ready to move" && (
           <Box textAlign={"left"} className={style.optional_box}>
-            <Heading
-              as={"h3"}
-              size={"md"}
-              marginTop={5}
-              textAlign={"left"}
-            >
+            <Heading as={"h3"} size={"md"} marginTop={5} textAlign={"left"}>
               Age of Property
             </Heading>
             <Box className={style.grid}>
@@ -1474,12 +1499,7 @@ const ReadyToMove = () => {
         {/* total Time for development */}
         {availability == "Under construction" && (
           <Box>
-            <Heading
-              as={"h3"}
-              size={"md"}
-              marginTop={5}
-              textAlign={"left"}
-            >
+            <Heading as={"h3"} size={"md"} marginTop={5} textAlign={"left"}>
               Possession By
             </Heading>
             <Select
@@ -1552,33 +1572,35 @@ const ReadyToMove = () => {
             </button>
           </Box>
         </Box>
-        
+
         {/* Priceing Detail  */}
         <Box>
           <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Price Details
           </Heading>
-          <Box display={"flex"} alignItems={"center"} gap={5}>
-            <Box display={"grid"} gap={0}>
-              <Heading
-                as={"h3"}
-                size={"xs"}
-                fontWeight={400}
-                textAlign={"left"}
-              >
-                {isCountry.country == "india" ? "₹" : "$"} Price Details
-              </Heading>
-              <Input
-                type="text"
-                value={pricedetail}
-                maxLength={"10"}
-                required
-                onChange={(e) => {
-                  setPricedetail(NumericString(e.target.value));
-                }}
-              />
-            </Box>
-          </Box>
+          <InputGroup w={300} gap={2}>
+            <Select
+              w={"-moz-fit-content"}
+              value={currency}
+              borderRadius={0}
+              onChange={(e) => setCurrency(e.target.value)}
+            >
+              <option value="₹">₹ INR </option>
+              <option value="$">$ USD </option>
+            </Select>
+            <Input
+              type="text"
+              value={pricedetail}
+              maxLength={"10"}
+              placeholder={`Price`}
+              required
+              borderRadius={0}
+              w={200}
+              onChange={(e) => {
+                setPricedetail(NumericString(e.target.value));
+              }}
+            />
+          </InputGroup>
         </Box>
 
         <Box display={"flex"} gap={10} marginTop={5} flexWrap={"wrap"}>
@@ -1648,7 +1670,7 @@ const ReadyToMove = () => {
               <option value="Yearly">Yearly</option>
             </Select>
           </InputGroup>
-        </Box> 
+        </Box>
 
         {/* Pre-leased / Pre-Ented */}
         <Box className={style.optional_box}>
@@ -1693,12 +1715,7 @@ const ReadyToMove = () => {
           >
             Pre-leased / Pre-Rented Details
           </Heading>
-          <Heading
-            size={"xs"}
-            
-            fontWeight={500}
-            textAlign={"left"}
-          >
+          <Heading size={"xs"} fontWeight={500} textAlign={"left"}>
             Lease / Rent related details Of your property
           </Heading>
           <Box>
@@ -1811,7 +1828,7 @@ const ReadyToMove = () => {
               No
             </button>
           </Box>
-        </Box> 
+        </Box>
 
         {/* office previously used for */}
         <Box className={style.optional_box}>
@@ -1975,7 +1992,7 @@ const ReadyToMove = () => {
           <Textarea
             height={140}
             value={desc}
-          placeholder="Add Description" 
+            placeholder="Add Description"
             onChange={(e) => {
               let my_cleantext = CleanInputText(e.target.value);
               setDesc(my_cleantext);
@@ -2140,7 +2157,7 @@ const ReadyToMove = () => {
           </button>
         </Box>
       </Box>
-      
+
       {/* location advantage (near to which place) */}
       <Box className={style.optional_box}>
         <Heading size={"sm"} textAlign={"left"}>
@@ -2239,7 +2256,7 @@ const ReadyToMove = () => {
           </button>
         </Box>
       </Box>
-      
+
       {/* warning line */}
       <Heading
         as={"h5"}

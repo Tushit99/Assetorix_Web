@@ -84,7 +84,7 @@ const CommercialShowroom = () => {
   const [investorsTendReturn, setinvestorsTendReturn] = useState("");
   const [assuredReturns, setAssuredReturns] = useState("");
   const [leaseGuarantee, setLeaseGuarantee] = useState("");
-  const [currency, setCurrency] = useState("₹");  
+  const [currency, setCurrency] = useState("₹");
   const [isClicked, setIsClicked] = useState(false);
   const [clickCount, setClickCount] = useState(0);
   const navigate = useNavigate();
@@ -684,9 +684,9 @@ const CommercialShowroom = () => {
               required
               placeholder={`${located} (optional)`}
               value={type}
-              maxLength={100}  
+              maxLength={100}
               onChange={(e) => setType(e.target.value)}
-              fontSize={"md"} 
+              fontSize={"md"}
               variant="flushed"
             />
             <Input
@@ -695,7 +695,7 @@ const CommercialShowroom = () => {
               required
               variant="flushed"
               fontSize={"md"}
-              maxLength={8}  
+              maxLength={8}
               value={pincode}
               onChange={handlepinfetch}
             />
@@ -705,7 +705,7 @@ const CommercialShowroom = () => {
               placeholder="Enter Locality"
               list="browsers"
               value={locality}
-              maxLength={16}  
+              maxLength={16}
               onChange={(e) => setLocality(e.target.value)}
               fontSize={"md"}
               variant="flushed"
@@ -725,8 +725,8 @@ const CommercialShowroom = () => {
               required
               placeholder="Enter City"
               fontSize={"md"}
-              value={city} 
-              maxLength={16}  
+              value={city}
+              maxLength={16}
               onChange={(e) => setCity(e.target.value)}
               variant="flushed"
             />
@@ -736,8 +736,8 @@ const CommercialShowroom = () => {
               placeholder="Enter State"
               value={state}
               onChange={(e) => setState(e.target.value)}
-              fontSize={"md"} 
-              maxLength={16}  
+              fontSize={"md"}
+              maxLength={16}
               variant="flushed"
             />
             <Input
@@ -745,14 +745,14 @@ const CommercialShowroom = () => {
               required
               placeholder="Enter Country"
               value={country}
-              maxLength={16} 
+              maxLength={16}
               onChange={(e) => setCountry(e.target.value)}
               fontSize={"md"}
               variant="flushed"
             />
           </Box>
           {/* Property Detail */}
-          <Box >
+          <Box>
             {/* ============================ add area details ============================ */}
             <Box textAlign={"left"}>
               <Heading as={"h3"} marginTop={5} size={"sm"}>
@@ -860,7 +860,7 @@ const CommercialShowroom = () => {
               </Heading>
               <Box
                 display={"grid"}
-               Box
+                Box
                 gridTemplateColumns={"repeat(1,1fr)"}
                 gap={2}
               >
@@ -1147,12 +1147,7 @@ const CommercialShowroom = () => {
             {/* ================= Age of Property ============================ */}
             {availability == "Ready to move" && (
               <Box textAlign={"left"} className={style.optional_box}>
-                <Heading
-                  as={"h3"}
-                  size={"md"} 
-                  marginTop={5} 
-                  textAlign={"left"}
-                >
+                <Heading as={"h3"} size={"md"} marginTop={5} textAlign={"left"}>
                   Age of Property
                 </Heading>
                 <Box className={style.grid}>
@@ -1214,12 +1209,7 @@ const CommercialShowroom = () => {
 
             {availability == "Under construction" && (
               <Box>
-                <Heading
-                  as={"h3"}
-                  size={"md"}
-                  marginTop={5}
-                  textAlign={"left"}
-                >
+                <Heading as={"h3"} size={"md"} marginTop={5} textAlign={"left"}>
                   Possession By
                 </Heading>
                 <Select
@@ -1497,33 +1487,34 @@ const CommercialShowroom = () => {
             {/* ============================ Price Details ============================ */}
             <Box>
               <Box>
-                <Heading
-                  as={"h3"}
-                  size={"sm"}
-                  marginTop={5}
-                  textAlign={"left"}
-                >
+                <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
                   Price Details
                 </Heading>
                 <Box display={"flex"} alignItems={"center"} gap={5}>
                   <Box display={"grid"} gap={0}>
-                    <Heading
-                      as={"h3"}
-                      size={"xs"}
-                      fontWeight={400}
-                      textAlign={"left"}
-                    >
-                      {isCountry.country == "india" ? "₹" : "$"} Price Details
-                    </Heading>
-                    <Input
-                      type="text"
-                      value={pricedetail}
-                      required
-                      onChange={(e) => {
-                        setPricedetail(e.target.value);
-                        areaCalucation();
-                      }}
-                    />
+                    <InputGroup w={300} gap={2}>
+                      <Select
+                        w={"-moz-fit-content"}
+                        value={currency}
+                        borderRadius={0}
+                        onChange={(e) => setCurrency(e.target.value)}
+                      >
+                        <option value="₹">₹ INR </option>
+                        <option value="$">$ USD </option>
+                      </Select>
+                      <Input
+                        type="text"
+                        value={pricedetail}
+                        maxLength={"10"}
+                        placeholder={`Price`}
+                        required
+                        borderRadius={0}
+                        w={200}
+                        onChange={(e) => {
+                          setPricedetail(NumericString(e.target.value));
+                        }}
+                      />
+                    </InputGroup>
                   </Box>
                   <Box display={"grid"} gap={0}>
                     <Heading
@@ -1819,7 +1810,7 @@ const CommercialShowroom = () => {
               <Heading
                 as={"h3"}
                 size={"sm"}
-                marginTop={5} 
+                marginTop={5}
                 fontWeight={600}
                 textAlign={"left"}
               >
@@ -1844,7 +1835,7 @@ const CommercialShowroom = () => {
                 }}
               ></Textarea>
             </Box>
-          </Box> 
+          </Box>
 
           {/* ============================ Add amenities/unique features ============================ */}
           <Box>
@@ -1853,8 +1844,8 @@ const CommercialShowroom = () => {
             </Heading>
             <Heading as={"h5"} size={"xs"} fontWeight={400} textAlign={"left"}>
               All fields on this page are optional
-            </Heading> 
-          </Box> 
+            </Heading>
+          </Box>
 
           {/* ============================ Amenities ============================ */}
           <Box className={style.optional_box}>
@@ -1976,7 +1967,7 @@ const CommercialShowroom = () => {
               </button>
             </Box>
           </Box>
-          
+
           {/* ============================ Property Features ============================ */}
           <Box className={style.optional_box}>
             <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
@@ -2040,7 +2031,7 @@ const CommercialShowroom = () => {
               </button>
             </Box>
           </Box>
-          
+
           {/* ============================ Society/Building feature ============================ */}
           <Box className={style.optional_box}>
             <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
@@ -2193,7 +2184,7 @@ const CommercialShowroom = () => {
                 Corner Property
               </Checkbox>
             </Box>
-          </Box> 
+          </Box>
 
           {/* ============================ Fire safety mesures ============================ */}
           <Box textAlign={"left"} className={style.optional_box}>
@@ -2344,13 +2335,13 @@ const CommercialShowroom = () => {
             <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
               Width of facing road
             </Heading>
-            <Box display={"flex"} w={{base:"100%",md:300}}>
+            <Box display={"flex"} w={{ base: "100%", md: 300 }}>
               <Input
                 type="text"
-                variant={"outline"} 
+                variant={"outline"}
                 flex={1}
                 maxLength={3}
-                required 
+                required
                 placeholder="road facing width"
                 value={facingwidth}
                 onChange={(e) => {
@@ -2477,13 +2468,13 @@ const CommercialShowroom = () => {
             as={"h5"}
             size={"xs"}
             color={"rgb(255, 52, 52)"}
-            fontWeight={200} 
+            fontWeight={200}
             textAlign={"left"}
           >
             *Please provide correct information, otherwise your listing might
             get blocked
           </Heading>
-          <Button 
+          <Button
             type="submit"
             w={"100%"}
             disabled={clickCount <= 0 ? true : false}
