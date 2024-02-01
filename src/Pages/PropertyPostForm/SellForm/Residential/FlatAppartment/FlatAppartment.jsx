@@ -1587,6 +1587,7 @@ const FlatAppartment = () => {
           <Input
             w={"60%"}
             type="text"
+            maxLength={9}
             onChange={(e) => setMaintenancePrice(NumericString(e.target.value))}
             value={maintenancePrice}
             placeholder={"Maintenance Price"}
@@ -1607,7 +1608,8 @@ const FlatAppartment = () => {
             <>
               <Input
                 type="text"
-                w={"300px"}
+            maxLength={9}
+            w={"300px"}
                 value={expectedRentel}
                 onChange={(e) =>
                   setExpectedRentel(NumericString(e.target.value))
@@ -1617,7 +1619,8 @@ const FlatAppartment = () => {
               />
               <Input
                 type="text"
-                w={"300px"}
+            maxLength={9}
+            w={"300px"}
                 value={bookingAmount}
                 onChange={(e) =>
                   setBookingAmount(NumericString(e.target.value))
@@ -1628,7 +1631,8 @@ const FlatAppartment = () => {
               <Input
                 type="text"
                 w={"300px"}
-                value={annualDuesPayble}
+            maxLength={9}
+            value={annualDuesPayble}
                 onChange={(e) =>
                   setAnnualDuesPayble(NumericString(e.target.value))
                 }
@@ -1638,7 +1642,8 @@ const FlatAppartment = () => {
               <Input
                 type="text"
                 w={"300px"}
-                value={membershipCharge}
+            maxLength={9}
+            value={membershipCharge}
                 onChange={(e) =>
                   setMembershipCharge(NumericString(e.target.value))
                 }
@@ -1677,7 +1682,7 @@ const FlatAppartment = () => {
         </Heading>
         <Textarea
           height={140}
-          required
+          required 
           placeholder="Add Description"
           value={desc}
           onChange={(e) => {

@@ -1565,6 +1565,7 @@ const Independentbuilder = () => {
         <InputGroup w={"300px"}>
           <Input
             w={"60%"}
+            maxLength={9}
             type="text"
             onChange={(e) => setMaintenancePrice(NumericString(e.target.value))}
             value={maintenancePrice}
