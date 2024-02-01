@@ -530,7 +530,9 @@ const Factory = () => {
       <form onSubmit={handleSubmitData}>
         <Box className={style.location_form}>
           <Heading size={"lg"}>Where is your Factory located?</Heading>
-          <Heading size={"sm"} textAlign={"left"}>Location Detail</Heading>
+          <Heading size={"sm"} textAlign={"left"}>
+            Location Detail
+          </Heading>
           <Input
             type="text"
             maxLength={100}
@@ -603,12 +605,7 @@ const Factory = () => {
         </Box>
         {/* =============================== Tell us about your property ============================ */}
         <Box>
-          <Heading
-            as={"h4"}
-            size={"sm"}
-            textAlign={"left"}
-            marginTop={5}
-          >
+          <Heading as={"h4"} size={"sm"} textAlign={"left"} marginTop={5}>
             Add Room Details
           </Heading>
         </Box>
@@ -722,12 +719,7 @@ const Factory = () => {
         {/* ========================== Age of Property ================================= */}
         {availability == "Ready to move" && (
           <Box textAlign={"left"} className={style.optional_box}>
-            <Heading
-              as={"h3"}
-              size={"md"}
-              marginTop={5}
-              textAlign={"left"}
-            >
+            <Heading as={"h3"} size={"md"} marginTop={5} textAlign={"left"}>
               Age of Property
             </Heading>
             <Box className={style.grid}>
@@ -780,12 +772,7 @@ const Factory = () => {
         )}
         {availability == "Under construction" && (
           <Box>
-            <Heading
-              as={"h3"}
-              size={"md"}
-              marginTop={5}
-              textAlign={"left"}
-            >
+            <Heading as={"h3"} size={"md"} marginTop={5} textAlign={"left"}>
               Possession By
             </Heading>
             <Select
@@ -800,9 +787,9 @@ const Factory = () => {
               <option value="10 year">10 year</option>
             </Select>
           </Box>
-        )} 
-
-        {/* ============================ Add pricing and details ============================ */}
+        )}
+        
+        {/* ===================== owner ship ================================ */}
         <Box>
           {/* OwnerShip detail */}
           <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
@@ -881,7 +868,7 @@ const Factory = () => {
                   type="text"
                   borderRadius={0}
                   value={pricedetail}
-                  maxLength={"10"}
+                  maxLength={9}
                   placeholder={"Enter Price"}
                   required
                   w={200}
@@ -893,12 +880,12 @@ const Factory = () => {
             </Box>
             <Box>
               {additionalPrice && (
-                <Box display={"grid"} marginTop={"10px"}> 
+                <Box display={"grid"} marginTop={"10px"}>
                   <InputGroup w={"300px"}>
                     <Input
                       w={"60%"}
                       type="text"
-                      maxLength={"12"}
+                      maxLength={9}
                       onChange={(e) =>
                         setMaintenancePrice(NumericString(e.target.value))
                       }
@@ -919,7 +906,7 @@ const Factory = () => {
                     type="text"
                     w={"300px"}
                     value={bookingAmount}
-                    maxLength={"12"}
+                    maxLength={9}
                     onChange={(e) =>
                       setBookingAmount(NumericString(e.target.value))
                     }
@@ -942,7 +929,7 @@ const Factory = () => {
                   <IoIosArrowUp style={{ display: "inline" }} />
                 ) : (
                   <IoIosArrowDown style={{ display: "inline" }} />
-                )} 
+                )}
                 Add more pricing details
               </Heading>
             </Box>
@@ -1006,7 +993,6 @@ const Factory = () => {
               }}
               className={preLeased == "Yes" ? style.setbtn : style.btn}
             >
-              
               Yes
             </button>
             <button
@@ -1017,7 +1003,6 @@ const Factory = () => {
               }}
               className={preLeased == "No" ? style.setbtn : style.btn}
             >
-              
               No
             </button>
           </Box>
@@ -1076,7 +1061,6 @@ const Factory = () => {
               textAlign={"left"}
               marginTop={5}
             >
-              
               Upload Your Property image
             </Heading>
           </Box>
@@ -1097,7 +1081,6 @@ const Factory = () => {
                     role="button"
                     onClick={selectFiles}
                   >
-                    
                     Browse
                   </Text>
                 </>
@@ -1133,11 +1116,11 @@ const Factory = () => {
         {/* ============================ Property unique discription ============================ */}
         <Box>
           <Heading
-             as={"h3"}
-             size={"sm"}
-             fontWeight={700}
-             marginTop={5}
-             textAlign={"left"}
+            as={"h3"}
+            size={"sm"}
+            fontWeight={700}
+            marginTop={5}
+            textAlign={"left"}
           >
             Add Description and Unique Features of your Property
           </Heading>
@@ -1149,19 +1132,14 @@ const Factory = () => {
               setDesc(my_cleantext);
             }}
           ></Textarea>
-        </Box> 
+        </Box>
 
         {/* ============================ Add amenities/unique features ============================ */}
         <Box>
           <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Add amenities/unique features
           </Heading>
-          <Heading
-            as={"h5"}
-            size={"xs"}
-            fontWeight={400} 
-            textAlign={"left"}
-          >
+          <Heading as={"h5"} size={"xs"} fontWeight={400} textAlign={"left"}>
             All fields on this page are optional
           </Heading>
         </Box>

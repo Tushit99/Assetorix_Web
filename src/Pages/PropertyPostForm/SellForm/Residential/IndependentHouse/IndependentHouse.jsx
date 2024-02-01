@@ -1523,7 +1523,7 @@ const IndependentHouse = () => {
             <Input
               w={"60%"}
               type="text"
-              maxLength={"10"}
+              maxLength={"9"}
               onChange={(e) => setMaintenancePrice(e.target.value)}
               value={maintenancePrice}
               placeholder={"Maintenance Price"}
@@ -1543,7 +1543,7 @@ const IndependentHouse = () => {
               <Input
                 type="text"
                 w={"300px"}
-                maxLength={"10"}
+                maxLength={"9"}
                 value={expectedRentel}
                 onChange={(e) => setExpectedRentel(e.target.value)}
                 placeholder="Expected rental"
@@ -1552,7 +1552,7 @@ const IndependentHouse = () => {
               <Input
                 type="text"
                 w={"300px"}
-                maxLength={"10"}
+                maxLength={"9"}
                 value={bookingAmount}
                 onChange={(e) => setBookingAmount(e.target.value)}
                 placeholder="Booking Amount"
@@ -1561,7 +1561,7 @@ const IndependentHouse = () => {
               <Input
                 type="text"
                 w={"300px"}
-                maxLength={"10"}
+                maxLength={"9"}
                 value={annualDuesPayble}
                 onChange={(e) => setAnnualDuesPayble(e.target.value)}
                 placeholder="Annual dues payable"

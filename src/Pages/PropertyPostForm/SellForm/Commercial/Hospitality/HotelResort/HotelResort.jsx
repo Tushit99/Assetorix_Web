@@ -1411,7 +1411,7 @@ const HotelResort = () => {
                 type="text"
                 borderRadius={0}
                 value={pricedetail}
-                maxLength={"10"}
+                maxLength={9}
                 placeholder={`Price`}
                 required
                 w={200}
@@ -1467,7 +1467,7 @@ const HotelResort = () => {
         <Box display={preLeased == "Yes" ? "block" : "none"}>
           <Input
             type="text"
-            maxLength={"12"}
+            maxLength={9}
             value={currentRentPerMonth}
             onChange={(e) => {
               e.preventDefault();
@@ -1477,7 +1477,7 @@ const HotelResort = () => {
           />
           <Input
             type="text"
-            maxLength={"12"}
+            maxLength={9}
             value={leaseTenureInYear}
             onChange={(e) => {
               e.preventDefault();
@@ -1490,7 +1490,7 @@ const HotelResort = () => {
           />
           <Box>
             <Input
-              maxLength={"12"}
+              maxLength={9}
               type="text"
               value={annualRentIncrease}
               onChange={(e) => {

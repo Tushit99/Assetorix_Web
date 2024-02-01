@@ -1529,7 +1529,7 @@ const RKStudio = () => {
             <Input
               w={"60%"}
               type="text"
-              maxLength={"12"}
+              maxLength={9}
               onChange={(e) =>
                 setMaintenancePrice(NumericString(e.target.value))
               }
@@ -1551,7 +1551,7 @@ const RKStudio = () => {
               <Input
                 type="text"
                 w={"300px"}
-                maxLength={"12"}
+                maxLength={9}
                 value={bookingAmount}
                 onChange={(e) =>
                   setBookingAmount(NumericString(e.target.value))
@@ -1562,7 +1562,7 @@ const RKStudio = () => {
               <Input
                 type="text"
                 w={"300px"}
-                maxLength={"12"}
+                maxLength={9}
                 value={annualDuesPayable}
                 onChange={(e) =>
                   setAnnualDuesPayable(NumericString(e.target.value))
@@ -1573,7 +1573,7 @@ const RKStudio = () => {
               <Input
                 type="text"
                 w={"300px"}
-                maxLength={"12"}
+                maxLength={9}
                 value={membershipCharge}
                 onChange={(e) =>
                   setMembershipCharge(NumericString(e.target.value))

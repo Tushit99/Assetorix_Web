@@ -1037,7 +1037,7 @@ const PlotLand = () => {
             <Input
               w={"60%"}
               type="text"
-              maxLength={"12"}
+              maxLength={"9"}
               onChange={(e) => setMaintenancePrice(e.target.value)}
               value={maintenancePrice}
               placeholder={"Maintenance Price"}
@@ -1058,7 +1058,7 @@ const PlotLand = () => {
                 type="text"
                 w={"300px"}
                 value={expectedRental}
-                maxLength={"12"}
+                maxLength={"0"}
                 onChange={(e) => setExpectedRental(e.target.value)}
                 placeholder="Expected rental"
                 margin={"0"}
@@ -1067,7 +1067,7 @@ const PlotLand = () => {
                 type="text"
                 w={"300px"}
                 value={bookingAmount}
-                maxLength={"12"}
+                maxLength={"0"}
                 onChange={(e) => setBookingAmount(e.target.value)}
                 placeholder="Booking Amount"
                 margin={"10px 0 0 0"}
@@ -1076,7 +1076,7 @@ const PlotLand = () => {
                 type="text"
                 w={"300px"}
                 value={annualDuesPayable}
-                maxLength={"12"}
+                maxLength={"0"}
                 onChange={(e) => setAnnualDuesPayable(e.target.value)}
                 placeholder="Annual dues payable"
                 margin={"10px 0 0 0"}
