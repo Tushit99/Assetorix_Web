@@ -36,26 +36,25 @@ import PlotLandRent from "./RentForm/Commercial/PlotLand/PlotLandRent";
 import RetailRent from "./RentForm/Commercial/RetailRent/RetailRent";
 import IndustryRent from "./RentForm/Commercial/Industry/IndustryRent";
 import HospitalityRent from "./RentForm/Commercial/Hospitality/Hospitality";
-import Retail from "./SellForm/Commercial/Retail";  
-import { useNavigate } from "react-router-dom"; 
+import Retail from "./SellForm/Commercial/Retail";
+import { useNavigate } from "react-router-dom";
 
-// this is a page of Property sell and Property Rent routes (please don't change anything without any prior knowledge).
 
 const SellForm = () => {
   const looking = useSelector((state) => state.gloalval.lookingFor);
   let { user } = useSelector((state) => state.userreducer);
   const [look, setlook] = useState("");
   const [type, settype] = useState("");
-  const [typeofplace, setTypeOf] = useState("Residential"); 
+  const [typeofplace, setTypeOf] = useState("Residential");
   const dispatch = useDispatch();
-  const [selectedTab, setSelectedTab] = useState(0); 
-  const navigate = useNavigate();  
+  const [selectedTab, setSelectedTab] = useState(0);
+  const navigate = useNavigate();
 
   const handlechange = (type, look) => {
     settype(type);
     setlook(look);
     dispatch(changeLookingFor(type));
-  }; 
+  };
 
   const handleTabChange = (index) => {
     if (index == 0) {
@@ -75,27 +74,27 @@ const SellForm = () => {
     } else if (looking == "sell") {
       settype("sell");
       setSelectedTab(0);
-    } else if (looking == "PG") {  
+    } else if (looking == "PG") {
       settype("look");
       setSelectedTab(2);
     } else {
-      settype(""); 
+      settype("");
     }
 
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-  }, []);  
+  }, []);
 
   return (
-    <div className={style.post_property}>  
-      <Box maxWidth={"100%"}>  
-        {/* Property Type (what type of property) */}  
-        <Box>  
+    <div className={style.post_property}>
+      <Box maxWidth={"100%"}>
+        {/* Property Type (what type of property) */}
+        <Box>
           <Heading as={"h1"} size={"xl"} fontWeight={400}>
             Fill out basic details
           </Heading>
           <Heading textAlign={"left"} margin={"20px 0"} as={"h4"} size={"sm"}>
             I am looking to
-          </Heading> 
+          </Heading>
           <Tabs
             variant="unstyled"
             index={selectedTab}
@@ -103,11 +102,11 @@ const SellForm = () => {
             defaultIndex={0}
           >
             <TabList gap={3} margin={"0px"}>
-              <Tab 
+              <Tab
                 bg="blue.50"
                 border="1px solid rgba(85, 91, 255, 0.236)"
-                borderRadius="0px" 
-                onClick={()=>setTypeOf("Residential")} 
+                borderRadius="0px"
+                onClick={() => setTypeOf("Residential")}
                 _selected={{ color: "white", backgroundColor: "unset" }}
               >
                 Sell
@@ -116,7 +115,7 @@ const SellForm = () => {
                 bg="blue.50"
                 border="1px solid rgba(85, 91, 255, 0.236)"
                 borderRadius="0px"
-                onClick={()=>setTypeOf("Residential")}
+                onClick={() => setTypeOf("Residential")}
                 _selected={{ color: "white", backgroundColor: "unset" }}
               >
                 Rent/Lease
@@ -138,23 +137,28 @@ const SellForm = () => {
               zIndex={"-1"}
               borderRadius="1px"
             />
-            <Heading textAlign={"left"} margin={"20px 0 0 0"} as={"h4"} size={"sm"}>
+            <Heading
+              textAlign={"left"}
+              margin={"20px 0 0 0"}
+              as={"h4"}
+              size={"sm"}
+            >
               What kind of Property do you have?
             </Heading>
             <TabPanels marginLeft={"-16px"} w={"100%"}>
               {/* sell options */}
               <TabPanel w={"104%"}>
-                <Tabs variant="unstyled" w={"104%"} >
+                <Tabs variant="unstyled" w={"104%"}>
                   <TabList w={"100%"}>
                     <Tab
                       bg="blue.50"
                       border="1px solid rgba(85, 91, 255, 0.236)"
                       borderRadius="0px"
-                      marginRight={"14px"} 
-                      onClick={() => setTypeOf("Residential")} 
+                      marginRight={"14px"}
+                      onClick={() => setTypeOf("Residential")}
                       _selected={{ color: "white", backgroundColor: "#d2ab66" }}
                     >
-                      Residential
+                      Residential 
                     </Tab>
                     <Tab
                       bg="blue.50"
@@ -170,10 +174,10 @@ const SellForm = () => {
                     mt="-41px"
                     height="40px"
                     bg="#d2ab66"
-                    zIndex={"-1"} 
+                    zIndex={"-1"}
                     borderRadius="1px"
                   />
-                  <TabPanels marginTop={4} marginLeft={2} padding={0}>      
+                  <TabPanels marginTop={4} marginLeft={2} padding={0}>
                     <TabPanel padding={0}>
                       <Box className={style.grid}>
                         <button
@@ -198,8 +202,8 @@ const SellForm = () => {
                           }
                         >
                           Independent/builder Floor
-                        </button> 
-                         <button
+                        </button>
+                        <button
                           onClick={() =>
                             handlechange("sell", "Independent House/villa")
                           }
@@ -256,8 +260,6 @@ const SellForm = () => {
                         >
                           1 RK/ Studio Apartment
                         </button>
-                       
-                       
                       </Box>
                     </TabPanel>
                     <TabPanel padding={0}>
@@ -291,7 +293,7 @@ const SellForm = () => {
                           }
                         >
                           Storage
-                        </button>   
+                        </button>
                         <button
                           onClick={() => handlechange("sell", "Plot/Land")}
                           className={
@@ -323,12 +325,12 @@ const SellForm = () => {
                           Hospitality
                         </button>
                       </Box>
-                    </TabPanel>    
-                  </TabPanels>  
-                </Tabs> 
-              </TabPanel>  
+                    </TabPanel>
+                  </TabPanels>
+                </Tabs>
+              </TabPanel>
               {/* rent options */}
-              <TabPanel>  
+              <TabPanel>
                 <Tabs variant="unstyled" defaultIndex={0}>
                   <TabList>
                     <Tab
@@ -336,7 +338,7 @@ const SellForm = () => {
                       border="1px solid rgba(85, 91, 255, 0.236)"
                       borderRadius="0px"
                       marginRight={"14px"}
-                      onClick={() => setTypeOf("Residential")} 
+                      onClick={() => setTypeOf("Residential")}
                       _selected={{ color: "white", backgroundColor: "#d2ab66" }}
                     >
                       Residential
@@ -581,122 +583,186 @@ const SellForm = () => {
         </Box>
 
         {/* Flat/Apartment */}
-        {type == "sell" && typeofplace=="Residential" && look == "Flat/Apartment" ? <FlatAppartment /> : ""}
+        {type == "sell" && look == "Flat/Apartment" ? <FlatAppartment /> : ""}
 
         {/* Independent House/villa */}
-        {type == "sell" && typeofplace=="Residential" && look == "Independent House/villa" ? (
+        {type == "sell" && look == "Independent House/villa" ? (
           <IndependentHouse />
         ) : (
-          ""
+          "" 
         )}
 
         {/* Independent/builder Floor */}
-        {type == "sell" && typeofplace=="Residential" && look == "Independent/builder Floor" ? (
+        {type == "sell" && look == "Independent/builder Floor" ? (
           <Independentbuilder />
         ) : (
           ""
         )}
 
         {/* Serviced Apartment */}
-        {type == "sell" && typeofplace=="Residential" && look == "Serviced Apartment" ? (
+        {type == "sell" && look == "Serviced Apartment" ? (
           <ServicedApartment />
         ) : (
           ""
         )}
 
         {/* 1 RK/ Studio Apartment */}
-        {type == "sell" && typeofplace=="Residential" && look == "1 RK/ Studio Apartment" ? <RKStudio /> : ""}
+        {type == "sell" && look == "1 RK/ Studio Apartment" ? <RKStudio /> : ""}
 
         {/* Serviced Apartment */}
-        {type == "sell" && typeofplace=="Residential" && look == "Farmhouse" ? <FarmHouse /> : ""}
+        {type == "sell" && look == "Farmhouse" ? <FarmHouse /> : ""}
 
         {/* Plot/Land */}
-        {type == "sell" && typeofplace=="Residential" && look == "Plot / Land" ? <PlotLand /> : ""}
+        {type == "sell" && look == "Plot / Land" ? <PlotLand /> : ""}
 
         {/* OfficeSetup */}
-        {type == "sell"  && typeofplace=="Commercial" && look == "Office" ? <OfficeSetup /> : ""}
+        {type == "sell" && typeofplace == "Commercial" && look == "Office" ? (
+          <OfficeSetup />
+        ) : (
+          ""
+        )}
 
         {/* Retail */}
-        {type === "sell"  && typeofplace=="Commercial" && look === "Retail" ? <Retail /> : ""}
+        {type === "sell" && typeofplace == "Commercial" && look === "Retail" ? (
+          <Retail />
+        ) : (
+          ""
+        )}
 
         {/* Storage */}
-        {type == "sell"  && typeofplace=="Commercial" && look == "Storage" ? <Storage /> : ""}
+        {type == "sell" && typeofplace == "Commercial" && look == "Storage" ? (
+          <Storage />
+        ) : (
+          ""
+        )}
 
         {/* Industry */}
-        {type == "sell"  && typeofplace=="Commercial" && look == "Industry" ? <Industry /> : ""}
+        {type == "sell" && typeofplace == "Commercial" && look == "Industry" ? (
+          <Industry />
+        ) : (
+          ""
+        )}
 
         {/* Hospitality */}
-        {type == "sell"  && typeofplace=="Commercial" && look == "Hospitality" ? <Hospitality /> : ""}
+        {type == "sell" &&
+        typeofplace == "Commercial" &&
+        look == "Hospitality" ? (
+          <Hospitality />
+        ) : (
+          ""
+        )}
 
         {/* Plot / Land */}
-        {type == "sell"  && typeofplace=="Commercial" && look == "Plot/Land" ? <PlotLandCommercial /> : ""}
+        {type == "sell" &&
+        typeofplace == "Commercial" &&
+        look == "Plot/Land" ? (
+          <PlotLandCommercial />
+        ) : (
+          ""
+        )}
 
         {/* ================================== Rent/Lease ============================== */}
 
         {/*  Rent / Flat or Apartment */}
-        {type == "Rent/Lease"   && typeofplace=="Residential" && look == "Flat/Apartment" ? (
+        {type == "Rent/Lease" && look == "Flat/Apartment" ? (
           <FlatApartment />
         ) : (
           ""
         )}
 
         {/* Independent House / Villa */}
-        {type == "Rent/Lease"  && typeofplace=="Residential" && look == "Independent House/villa" ? (
+        {type == "Rent/Lease" && look == "Independent House/villa" ? (
           <Independent />
         ) : (
           ""
         )}
 
         {/* Independent/builder Floor */}
-        {type == "Rent/Lease"  && typeofplace=="Residential" && look == "Independent/builder Floor" ? (
+        {type == "Rent/Lease" && look == "Independent/builder Floor" ? (
           <IndependentBuilderRent />
         ) : (
           ""
         )}
 
         {/* Serviced Apartment */}
-        {type == "Rent/Lease"  && typeofplace=="Residential" && look == "Serviced Apartment" ? (
+        {type == "Rent/Lease" && look == "Serviced Apartment" ? (
           <ServicedApartmentRent />
         ) : (
           ""
         )}
 
         {/* 1RK / Studio Apartment  */}
-        {type == "Rent/Lease"  && typeofplace=="Residential" && look == "1 RK/ Studio Apartment" ? (
+        {type == "Rent/Lease" && look == "1 RK/ Studio Apartment" ? (
           <StudioApartmentRent />
         ) : (
           ""
         )}
 
         {/* Farmhouse */}
-        {type == "Rent/Lease"  && typeofplace=="Residential" && look == "Farmhouse" ? <FarmhouseRent /> : ""}
+        {type == "Rent/Lease" && look == "Farmhouse" ? <FarmhouseRent /> : ""}
 
         {/* =================================== Rent/Lease (Commercial) ================================ */}
 
         {/* Office */}
-        {type == "Rent/Lease"  && typeofplace=="Commercial" && look == "Office" ? <OfficeRent /> : ""}
+        {type == "Rent/Lease" &&
+        typeofplace == "Commercial" &&
+        look == "Office" ? (
+          <OfficeRent />
+        ) : (
+          ""
+        )}
 
         {/* storage */}
-        {type == "Rent/Lease"  && typeofplace=="Commercial" && look == "Storage" ? <StorageRent /> : ""}
+        {type == "Rent/Lease" &&
+        typeofplace == "Commercial" &&
+        look == "Storage" ? (
+          <StorageRent />
+        ) : (
+          ""
+        )}
 
         {/* Plot / Land (Rent)  */}
-        {type == "Rent/Lease"  && typeofplace=="Commercial" && look == "Plot/Land" ? <PlotLandRent /> : ""}
+        {type == "Rent/Lease" &&
+        typeofplace == "Commercial" &&
+        look == "Plot/Land" ? (
+          <PlotLandRent />
+        ) : (
+          ""
+        )}
 
         {/* Retail */}
-        {type == "Rent/Lease"  && typeofplace=="Commercial" && look == "Retail" ? <RetailRent /> : ""}
+        {type == "Rent/Lease" &&
+        typeofplace == "Commercial" &&
+        look == "Retail" ? (
+          <RetailRent />
+        ) : (
+          ""
+        )}
 
         {/* Industry */}
-        {type == "Rent/Lease"  && typeofplace=="Commercial" && look == "Industry" ? <IndustryRent /> : ""}
+        {type == "Rent/Lease" &&
+        typeofplace == "Commercial" &&
+        look == "Industry" ? (
+          <IndustryRent />
+        ) : (
+          ""
+        )}
 
         {/* Hospitality */}
-        {type == "Rent/Lease"  && typeofplace=="Commercial" && look == "Hospitality" ? (
+        {type == "Rent/Lease" &&
+        typeofplace == "Commercial" &&
+        look == "Hospitality" ? (
           <HospitalityRent />
         ) : (
           ""
         )}
       </Box>
-      <Box display={{base:"none",md:"block"}} backgroundColor={"rgb(232, 244, 255)"} borderRadius={10}></Box>
-    </div>  
+      <Box
+        display={{ base: "none", md: "block" }}
+        backgroundColor={"rgb(232, 244, 255)"}
+        borderRadius={10}
+      ></Box>
+    </div>
   );
 };
 
