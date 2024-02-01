@@ -46,7 +46,7 @@ const SellForm = () => {
   let { user } = useSelector((state) => state.userreducer);
   const [look, setlook] = useState("");
   const [type, settype] = useState("");
-  const [typeofplace, setTypeOf] = useState("");
+  const [typeofplace, setTypeOf] = useState("Residential");
   const dispatch = useDispatch();
   const [selectedTab, setSelectedTab] = useState(0); 
   const navigate = useNavigate();  

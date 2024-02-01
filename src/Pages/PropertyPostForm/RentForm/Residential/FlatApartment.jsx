@@ -57,7 +57,7 @@ const FlatApartment = () => {
   const [furnished, setFurnished] = useState("");
   const [propertyAge, setpropertyAge] = useState("");
   const [ownership, setOwnerShip] = useState("");
-  const [priceSqr, setPriceSqr] = useState("");
+  const [pricedetail, setPricedetail] = useState("");
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
   const [buildingFeature, setBuildingFeature] = useState([]);
@@ -72,7 +72,7 @@ const FlatApartment = () => {
   const [floorOn, setFloorOn] = useState("Ground");
   const [plotArea, setPlotArea] = useState("");
   const [desc, setDesc] = useState("");
-  const [pincollection, setPinCollection] = useState([]);
+  const [pincollection, setPinCollection] = useState([]); 
   const [willingTo, setWillingTo] = useState([]);
   const [preferredAgreement, setpreferredAgreement] = useState("");
   const [agentContact, setagentContact] = useState("No");
@@ -120,7 +120,7 @@ const FlatApartment = () => {
       },
       ownership,
       agreementType: preferredAgreement,
-      price: +priceSqr,
+      price: +pricedetail,
       willingToRent: willingTo,
       amenities,
       inclusivePrices,
@@ -181,8 +181,6 @@ const FlatApartment = () => {
       showToastError("Provide Furnished Field");
     } else if (!ownership) {
       showToastError("Provide OwnerShip");
-    } else if (!priceSqr) {
-      showToastError("Provide Price Per sq.ft");
     } else if (!additinalft) {
       showToastError("Provide Property description");
     } else if (!powerbackup) {
