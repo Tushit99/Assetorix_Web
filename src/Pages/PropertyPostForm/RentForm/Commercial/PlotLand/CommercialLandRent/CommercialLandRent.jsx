@@ -1208,42 +1208,29 @@ const CommercialLandRent = () => {
             <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
               What price you are expecting for this property?
             </Heading>
-            <Box display={"flex"} alignItems={"center"} gap={5}>
-              <Box display={"grid"} gap={0}>
-                <Heading
-                  as={"h3"}
-                  size={"xs"}
-                  fontWeight={400}
-                  textAlign={"left"}
-                >
-                  {isCountry.country == "india" ? "₹" : "$"} Price Details
-                </Heading>
-                <Input
-                  type="text"
-                  value={pricedetail}
-                  required
-                  onChange={(e) => {
-                    setPricedetail(e.target.value);
-                    areaCalucation();
-                  }}
-                />
-              </Box>
-              {/* <Box display={"grid"} gap={0}>
-                <Heading
-                  as={"h3"}
-                  size={"xs"}
-                  fontWeight={400}
-                  textAlign={"left"}
-                >
-                  {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
-                </Heading>
-                <Input
-                  type="text"
-                  value={priceSqr}
-                  readOnly
-                />
-              </Box> */}
-            </Box>
+            <InputGroup w={300} gap={2}>
+              <Select
+                w={"-moz-fit-content"}
+                value={currency} 
+                borderRadius={0}
+                onChange={(e) => setCurrency(e.target.value)}
+              >
+                <option value="₹">₹ INR </option>
+                <option value="$">$ USD </option>
+              </Select>
+              <Input
+                type="text"
+                value={pricedetail}
+                maxLength={"10"}
+                placeholder={`Price`}
+                required
+                borderRadius={0} 
+                w={200}
+                onChange={(e) => {
+                  setPricedetail(NumericString(e.target.value));
+                }}
+              />
+            </InputGroup>
           </Box>
 
           <Box display={"grid"}>

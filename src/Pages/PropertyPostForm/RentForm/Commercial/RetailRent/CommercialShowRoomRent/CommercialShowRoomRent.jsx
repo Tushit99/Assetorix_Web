@@ -81,7 +81,7 @@ const CommercialShowRoomRent = () => {
   const [depositAmount, setDepositAmount] = useState("");
   const [availableFrom, setavailableFrom] = useState("");
   const [clickCount, setClickCount] = useState(0);
-  const [currency, setCurrency] = useState("₹");  
+  const [currency, setCurrency] = useState("₹");
   const [isClicked, setIsClicked] = useState(false);
   // state for drop box images
   const [images, setImages] = useState([]);
@@ -1473,41 +1473,29 @@ const CommercialShowRoomRent = () => {
                 >
                   What price you are expecting for this property?
                 </Heading>
-                <Box display={"flex"} alignItems={"center"} gap={5}>
-                  <Box display={"grid"} gap={0}>
-                    <Heading
-                      as={"h3"}
-                      size={"xs"}
-                      fontWeight={400}
-                      textAlign={"left"}
-                    >
-                      {isCountry.country == "india" ? "₹" : "$"} Price Details
-                    </Heading>
-                    <Input
-                      type="text"
-                      value={pricedetail}
-                      required
-                      onChange={(e) => {
-                        setPricedetail(NumericString(e.target.value));
-                        areaCalucation();
-                      }}
-                    />
-                  </Box>
-                  {/* <Box display={"grid"} gap={0}>
-                    <Heading
-                      as={"h3"}
-                      size={"xs"}
-                      fontWeight={400}
-                      textAlign={"left"}
-                    >
-                      {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
-                    </Heading>
-                    <Input type="text"
-                      value={priceSqr} 
-                      
-                    />
-                  </Box> */}
-                </Box>
+                <InputGroup w={300} gap={2}>
+                  <Select
+                    w={"-moz-fit-content"}
+                    value={currency}
+                    borderRadius={0}
+                    onChange={(e) => setCurrency(e.target.value)}
+                  >
+                    <option value="₹">₹ INR </option>
+                    <option value="$">$ USD </option>
+                  </Select>
+                  <Input
+                    type="text"
+                    value={pricedetail}
+                    maxLength={"10"}
+                    placeholder={`Price`}
+                    required
+                    borderRadius={0}
+                    w={200}
+                    onChange={(e) => {
+                      setPricedetail(NumericString(e.target.value));
+                    }}
+                  />
+                </InputGroup>
               </Box>
               <Box
                 display={"flex"}
@@ -1780,7 +1768,7 @@ const CommercialShowRoomRent = () => {
               <Textarea
                 height={140}
                 value={desc}
-                placeholder="Add Description"  
+                placeholder="Add Description"
                 onChange={(e) => {
                   let my_cleantext = CleanInputText(e.target.value);
                   setDesc(my_cleantext);
@@ -2289,7 +2277,7 @@ const CommercialShowRoomRent = () => {
             </Heading>
             <InputGroup isAttached width={{ base: "100%", md: 300 }}>
               <Input
-                type="text"  
+                type="text"
                 maxLength={3}
                 variant="outline"
                 required
@@ -2299,9 +2287,9 @@ const CommercialShowRoomRent = () => {
                   e.preventDefault();
                   setFacingWidth(NumericString(e.target.value));
                 }}
-              /> 
-              <Select  
-                borderRadius={0}  
+              />
+              <Select
+                borderRadius={0}
                 onChange={(e) => setFacing(e.target.value)}
                 value={facing}
               >

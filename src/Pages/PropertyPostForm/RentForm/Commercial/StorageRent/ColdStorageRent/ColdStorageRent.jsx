@@ -710,40 +710,29 @@ const ColdStorageRent = () => {
             >
               What price you are expecting for this property?
             </Heading>
-            <Box display={"flex"} alignItems={"center"} gap={5}>
-              <Box display={"grid"} gap={0}>
-                <Heading
-                  as={"h3"}
-                  size={"xs"}
-                  fontWeight={400}
-                  textAlign={"left"}
-                >
-                  {isCountry.country == "india" ? "₹" : "$"} Expected Rent
-                </Heading>
-                <Input
-                  type="text"
-                  value={pricedetail}
-                  required
-                  onChange={(e) => {
-                    setPricedetail(e.target.value);
-                  }}
-                />
-              </Box>
-              {/* <Box display={"grid"} gap={0}>
-                <Heading
-                  as={"h3"}
-                  size={"xs"}
-                  fontWeight={400}
-                  textAlign={"left"}
-                >
-                  {isCountry.country == "india" ? "₹" : "$"} Price Per {areaPer}
-                </Heading>
-                <Input
-                  type="text"
-                  value={priceSqr}
-                /> 
-              </Box> */}
-            </Box>
+            <InputGroup w={300} gap={2}>
+              <Select
+                w={"-moz-fit-content"}
+                value={currency} 
+                borderRadius={0}
+                onChange={(e) => setCurrency(e.target.value)}
+              >
+                <option value="₹">₹ INR </option>
+                <option value="$">$ USD </option>
+              </Select>
+              <Input
+                type="text"
+                value={pricedetail}
+                maxLength={"10"}
+                placeholder={`Price`}
+                required
+                borderRadius={0} 
+                w={200}
+                onChange={(e) => {
+                  setPricedetail(NumericString(e.target.value));
+                }}
+              />
+            </InputGroup>
           </Box>
           <Box>
             {additionalPrice && (

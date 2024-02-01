@@ -96,7 +96,7 @@ const ReadyMove = () => {
   const [fireNocCertificate, setFireNocCertificate] = useState("");
   const [clickCount, setClickCount] = useState(0);
   const [isClicked, setIsClicked] = useState(false);
-  const [currency, setCurrency] = useState("₹");  
+  const [currency, setCurrency] = useState("₹");
   const navigate = useNavigate();
   // state for drop box images
   const [images, setImages] = useState([]);
@@ -1114,20 +1114,16 @@ const ReadyMove = () => {
         </Box>
         {/* floor details */}
         <Box textAlign={"left"} margin={"6px 0 14px 0"}>
-          <Heading
-            as={"h3"}
-            size={"sm"} 
-            textAlign={"left"}
-          >
+          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Floor Details
-          </Heading> 
-          <Box display={"flex"} alignItems={"center"}> 
+          </Heading>
+          <Box display={"flex"} alignItems={"center"}>
             <Input
               type="text"
               value={totalfloors}
               borderRadius={0}
               variant={"outline"}
-              placeholder="Enter total floor" 
+              placeholder="Enter total floor"
               onChange={(e) => {
                 const nowval = e.target.value > 90;
                 if (nowval) {
@@ -1577,40 +1573,29 @@ const ReadyMove = () => {
           <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Rent Details
           </Heading>
-          <Box display={"flex"} alignItems={"center"} gap={5}>
-            <Box display={"grid"} gap={0}>
-              <Heading
-                as={"h3"}
-                size={"xs"}
-                fontWeight={400}
-                textAlign={"left"}
-              >
-                {isCountry.country == "india" ? "₹" : "$"} Expected Rent
-              </Heading>
-              <Input
-                type="text"
-                value={pricedetail}
-                required
-                onChange={(e) => {
-                  setPricedetail(NumericString(e.target.value));
-                }}
-              />
-            </Box>
-            {/* <Box display={"grid"} gap={0}>
-                            <Heading
-                                as={"h3"}
-                                size={"xs"}
-                                fontWeight={400}
-                                textAlign={"left"}
-                            >
-                                {isCountry.country == "india" ? "₹" : "$"} Price : Per {areaPer}
-                            </Heading>
-                            <Input
-                                type="text"
-                                value={priceSqr}
-                            /> 
-                        </Box> */}
-          </Box>
+          <InputGroup w={300} gap={2}>
+            <Select
+              w={"-moz-fit-content"}
+              value={currency}
+              borderRadius={0}
+              onChange={(e) => setCurrency(e.target.value)}
+            >
+              <option value="₹">₹ INR </option>
+              <option value="$">$ USD </option>
+            </Select>
+            <Input
+              type="text"
+              value={pricedetail}
+              maxLength={"10"}
+              placeholder={`Price`}
+              required
+              borderRadius={0}
+              w={200}
+              onChange={(e) => {
+                setPricedetail(NumericString(e.target.value));
+              }}
+            />
+          </InputGroup>   
         </Box>
 
         {/* Additional Pricing Detail (Optional) */}
@@ -1705,11 +1690,13 @@ const ReadyMove = () => {
               maxLength={8}
               value={depositAmount}
               onChange={handleDepositAmount}
-              placeholder={`${securityDeposit == "Fixed" ? "Deposit Value" : ""
-                } ${securityDeposit == "Multiple of Rent"
+              placeholder={`${
+                securityDeposit == "Fixed" ? "Deposit Value" : ""
+              } ${
+                securityDeposit == "Multiple of Rent"
                   ? "No. of months (Max 30)"
                   : ""
-                }`}
+              }`}
             />
           </Box>
         </Box>
@@ -1948,7 +1935,7 @@ const ReadyMove = () => {
               ))}
             </Box>
           </Box>
-        </Box>  
+        </Box>
 
         {/* property Description */}
         <Box>
@@ -2221,7 +2208,7 @@ const ReadyMove = () => {
             Close to highway
           </button>
         </Box>
-      </Box> 
+      </Box>
 
       {/* warning line */}
       <Heading
@@ -2234,8 +2221,8 @@ const ReadyMove = () => {
       >
         *Please provide correct information, otherwise your listing might get
         blocked
-      </Heading> 
-      
+      </Heading>
+
       {/* form submit button */}
       {isClicked && <Loading />}
       <Button

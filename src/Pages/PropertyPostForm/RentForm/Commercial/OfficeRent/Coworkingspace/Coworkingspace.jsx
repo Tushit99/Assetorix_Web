@@ -1606,21 +1606,7 @@ const Coworkingspace = () => {
                   areaCalucation();
                 }}
               />
-            </Box>
-            {/* <Box display={"grid"} gap={0}>
-                            <Heading
-                                as={"h3"}
-                                size={"xs"}
-                                fontWeight={400}
-                                textAlign={"left"}
-                            >
-                                {isCountry.country == "india" ? "₹" : "$"}  Lease rental : Per {areaPer}
-                            </Heading>
-                            <Input
-                                type="text"
-                                value={priceSqr}
-                            /> 
-                        </Box> */}
+            </Box> 
           </Box>
         </Box>
         {/* rent price detail */}

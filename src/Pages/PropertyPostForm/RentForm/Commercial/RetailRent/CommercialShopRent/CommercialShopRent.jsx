@@ -84,7 +84,7 @@ const CommercialShopRent = () => {
   const [depositAmount, setDepositAmount] = useState("");
   const [securityDeposit, setSecurityDeposit] = useState("");
   const [clickCount, setClickCount] = useState(0);
-  const [currency, setCurrency] = useState("₹");  
+  const [currency, setCurrency] = useState("₹");
   const [isClicked, setIsClicked] = useState(false);
   const navigate = useNavigate();
   // state for drop box images
@@ -615,7 +615,7 @@ const CommercialShopRent = () => {
     <div>
       <Box>
         <Heading margin={"10px 0"} size={"sm"}>
-          Your shop is located inside 
+          Your shop is located inside
         </Heading>
         <Box display={"flex"} flexWrap={"wrap"} gap={4}>
           <button
@@ -675,8 +675,8 @@ const CommercialShopRent = () => {
           {/* property location */}
           <Box className={style.location_form}>
             <Heading size={"lg"} textAlign={"center"}>
-              Where is your Commercial Shops located? 
-            </Heading> 
+              Where is your Commercial Shops located?
+            </Heading>
             <Heading size={"sm"} textAlign={"left"}>
               Location Detail
             </Heading>
@@ -1328,7 +1328,7 @@ const CommercialShopRent = () => {
                 <Menu>
                   <MenuButton
                     as={Button}
-                    borderRadius={0} 
+                    borderRadius={0}
                     variant={"outline"}
                     rightIcon={<ChevronDownIcon />}
                   >
@@ -1587,42 +1587,29 @@ const CommercialShopRent = () => {
                 >
                   What price you are expecting for this property?
                 </Heading>
-                <Box display={"flex"} alignItems={"center"} gap={5}>
-                  <Box display={"grid"} gap={0}>
-                    <Heading
-                      as={"h3"}
-                      size={"xs"}
-                      fontWeight={400}
-                      textAlign={"left"}
-                    >
-                      {isCountry.country == "india" ? "₹" : "$"} Expected Price
-                    </Heading>
-                    <Input
-                      type="text"
-                      value={pricedetail}
-                      required
-                      onChange={(e) => {
-                        setPricedetail(e.target.value);
-                        areaCalucation();
-                      }}
-                    />
-                  </Box>
-                  {/* <Box display={"grid"} gap={0}>
-                                        <Heading
-                                            as={"h3"}
-                                            size={"xs"}
-                                            fontWeight={400}
-                                            textAlign={"left"}
-                                        >
-                                            {isCountry.country == "india" ? "₹" : "$"} Price Per {areaPer}
-                                        </Heading>
-                                        <Input type="text"
-                                            value={priceSqr}
-                                            required
-                                            
-                                        />
-                                    </Box> */}
-                </Box>
+                <InputGroup w={300} gap={2}>
+                  <Select
+                    w={"-moz-fit-content"}
+                    value={currency}
+                    borderRadius={0}
+                    onChange={(e) => setCurrency(e.target.value)}
+                  >
+                    <option value="₹">₹ INR </option>
+                    <option value="$">$ USD </option>
+                  </Select>
+                  <Input
+                    type="text"
+                    value={pricedetail}
+                    maxLength={"10"}
+                    placeholder={`Price`}
+                    required
+                    borderRadius={0}
+                    w={200}
+                    onChange={(e) => {
+                      setPricedetail(NumericString(e.target.value));
+                    }}
+                  />
+                </InputGroup>
               </Box>
               <Box
                 display={"flex"}
@@ -1826,8 +1813,8 @@ const CommercialShopRent = () => {
                 Yearly rent is expected to increase by
               </Heading>
               <Input
-                type="text" 
-                width={{base:"100%",md:300}} 
+                type="text"
+                width={{ base: "100%", md: 300 }}
                 placeholder="Percentage (%) of increase in rent"
                 onChange={(e) => setRentIncreasePercent(e.target.value)}
                 value={rentIncreasePercent}
@@ -1921,7 +1908,7 @@ const CommercialShopRent = () => {
               </Heading>
               <Textarea
                 height={140}
-                placeholder="Add Description" 
+                placeholder="Add Description"
                 value={desc}
                 onChange={(e) => {
                   let my_cleantext = CleanInputText(e.target.value);
@@ -1936,12 +1923,7 @@ const CommercialShopRent = () => {
             <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
               Add amenities/unique features
             </Heading>
-            <Heading
-              as={"h5"}
-              size={"xs"}
-              fontWeight={400} 
-              textAlign={"left"}
-            >
+            <Heading as={"h5"} size={"xs"} fontWeight={400} textAlign={"left"}>
               All fields on this page are optional
             </Heading>
           </Box>
@@ -2427,19 +2409,19 @@ const CommercialShopRent = () => {
                 South-West
               </button>
             </Box>
-          </Box> 
+          </Box>
 
           {/* ============================ Width of facing road ============================ */}
           <Box>
             <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
               Width of facing road
-            </Heading> 
-            <InputGroup isAttached width={{base:"100%",md:300}}>
-              <Input 
+            </Heading>
+            <InputGroup isAttached width={{ base: "100%", md: 300 }}>
+              <Input
                 type="text"
-                variant="outline" 
-                maxLength={3} 
-                required 
+                variant="outline"
+                maxLength={3}
+                required
                 placeholder="Enter road width"
                 value={facingwidth}
                 onChange={(e) => {
@@ -2447,7 +2429,7 @@ const CommercialShopRent = () => {
                   setFacingWidth(e.target.value);
                 }}
               />
-              <Select 
+              <Select
                 onChange={(e) => setFacing(e.target.value)}
                 value={facing}
               >
