@@ -647,7 +647,7 @@ const ReadyToMove = () => {
           >
             <Input
               type="text"
-              maxLength={"10"}
+              maxLength={9}
               value={plotArea}
               borderRadius={0}
               onChange={(e) => {
@@ -732,7 +732,7 @@ const ReadyToMove = () => {
               placeholder="No. of Meeting Rooms"
               value={meetingRoom}
               width={{ base: "100%", md: 300 }}
-              maxLength={"10"}
+              maxLength={9}
               onChange={(e) => setMeetingRoom(NumericString(e.target.value))}
             />
           </Box>
@@ -966,7 +966,7 @@ const ReadyToMove = () => {
             <InputGroup w={340}>
               <Input
                 type="text"
-                maxLength={"10"}
+                maxLength={9}
                 border={"1px solid rgb(222, 222, 255)"}
                 value={pantrySize}
                 onChange={(e) => setPantrySize(NumericString(e.target.value))}
@@ -1591,7 +1591,7 @@ const ReadyToMove = () => {
             <Input
               type="text"
               value={pricedetail}
-              maxLength={"10"}
+              maxLength={9}
               placeholder={`Price`}
               required
               borderRadius={0}
@@ -1653,7 +1653,7 @@ const ReadyToMove = () => {
             <Input
               w={"60%"}
               type="text"
-              maxLength={"12"}
+              maxLength={9}
               onChange={(e) =>
                 setMaintenancePrice(NumericString(e.target.value))
               }
@@ -1721,7 +1721,7 @@ const ReadyToMove = () => {
           <Box>
             <Input
               type="text"
-              maxLength={"12"}
+              maxLength={9}
               value={currentRentPerMonth}
               onChange={(e) => {
                 e.preventDefault();
@@ -1731,7 +1731,7 @@ const ReadyToMove = () => {
             />
             <Input
               type="text"
-              maxLength={"12"}
+              maxLength={9}
               value={leaseTenureInYear}
               onChange={(e) => {
                 e.preventDefault();
@@ -1742,7 +1742,7 @@ const ReadyToMove = () => {
             <Box>
               <Input
                 type="text"
-                maxLength={"12"}
+                maxLength={9}
                 value={annualRentIncrease}
                 onChange={(e) => {
                   e.preventDefault();

@@ -708,7 +708,7 @@ const HotelResort = () => {
               type="text"
               placeholder="Enter Plot Area"
               value={plotArea}
-              maxLength={12}
+              maxLength={9}
               onChange={(e) => {
                 setPlotArea(() => NumericString(e.target.value));
               }}

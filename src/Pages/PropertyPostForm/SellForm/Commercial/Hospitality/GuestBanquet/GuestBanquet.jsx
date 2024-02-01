@@ -745,7 +745,7 @@ const GuestBanquet = () => {
           >
             <Input
               type="text"
-              maxLength={"10"}
+              maxLength={9}
               placeholder="Enter Plot Area"
               value={plotArea}
               onChange={(e) => {
@@ -1450,7 +1450,7 @@ const GuestBanquet = () => {
               <Input
                 type="text"
                 value={pricedetail}
-                maxLength={"10"}
+                maxLength={9}
                 placeholder={`Price`}
                 required
                 borderRadius={0} 

@@ -503,7 +503,7 @@ const AgricalturalFarm = () => {
 
           <Input
             type="text" 
-            maxLength={"12"} 
+            maxLength={9} 
             placeholder="Plot number (optional)"
             value={Plotnumber}
             onChange={(e) => setPlotnumber(NumericString(e.target.value))}
@@ -637,7 +637,7 @@ const AgricalturalFarm = () => {
           <Input
             type={"text"}
             variant="flushed"
-            maxLength={"12"} 
+            maxLength={9} 
             width={{base:"100%",md:300}}    
             value={plotLength}
             onChange={(e) => {
@@ -649,7 +649,7 @@ const AgricalturalFarm = () => {
             type={"text"}
             variant="flushed"
             width={{base:"100%",md:300}}    
-            maxLength={"12"} 
+            maxLength={9} 
             value={plotBreadth}
             onChange={(e) => {
               setPlotBreadth(NumericString(e.target.value));
@@ -1065,7 +1065,7 @@ const AgricalturalFarm = () => {
               <Input
                 type="text"
                 value={pricedetail}
-                maxLength={"10"}
+                maxLength={9}
                 placeholder={`Price`}
                 required
                 borderRadius={0}
@@ -1229,7 +1229,7 @@ const AgricalturalFarm = () => {
           <Box display={preLeased == "Yes" ? "block" : "none"}>
             <Input
               type="text"
-              maxLength={"12"}
+              maxLength={9}
               value={currentRentPerMonth}
               onChange={(e) => {
                 e.preventDefault();
@@ -1239,7 +1239,7 @@ const AgricalturalFarm = () => {
             />
             <Input
               type="text"
-              maxLength={"12"}
+              maxLength={9}
               value={leaseTenureInYear}
               onChange={(e) => {
                 e.preventDefault();
@@ -1250,7 +1250,7 @@ const AgricalturalFarm = () => {
             <Box>
               <Input
                 type="text"
-                maxLength={"12"}
+                maxLength={9}
                 value={annualRentIncrease}
                 onChange={(e) => {
                   e.preventDefault();

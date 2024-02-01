@@ -771,7 +771,7 @@ const RKStudio = () => {
           >
             <Input
               type="text"
-              maxLength={"10"}
+              maxLength={9}
               borderRadius={0}
               placeholder={"Enter area detail"}
               value={plotArea}
@@ -1470,7 +1470,7 @@ const RKStudio = () => {
               <Input
                 type="text"
                 value={pricedetail}
-                maxLength={"10"} 
+                maxLength={9} 
                 borderRadius={0} 
                 placeholder={`Price`}
                 required

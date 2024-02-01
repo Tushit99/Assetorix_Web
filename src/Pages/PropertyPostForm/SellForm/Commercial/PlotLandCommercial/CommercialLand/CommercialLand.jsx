@@ -537,7 +537,7 @@ const CommercialLand = () => {
             required
             placeholder="Enter Locality"
             list="browsers"
-            maxLength={"10"}
+            maxLength={9}
             value={locality}
             onChange={(e) => setLocality(WordandNumber(e.target.value))}
             fontSize={"md"}
@@ -557,7 +557,7 @@ const CommercialLand = () => {
             type="text"
             required
             placeholder="Enter City"
-            maxLength={"10"}
+            maxLength={9}
             fontSize={"md"}
             value={city}
             onChange={(e) => setCity(WordandNumber(e.target.value))}
@@ -565,7 +565,7 @@ const CommercialLand = () => {
           />
           <Input
             type="text"
-            maxLength={"10"}
+            maxLength={9}
             required
             placeholder="Enter State"
             value={state}
@@ -575,7 +575,7 @@ const CommercialLand = () => {
           />
           <Input
             type="text"
-            maxLength={"10"}
+            maxLength={9}
             required
             placeholder="Enter Country"
             value={country}
@@ -650,7 +650,7 @@ const CommercialLand = () => {
           <Input
             type={"text"}
             variant="flushed"
-            maxLength={"12"}
+            maxLength={9}
             width={{ base: "100%", md: 300 }}
             value={plotLength}
             onChange={(e) => {
@@ -662,7 +662,7 @@ const CommercialLand = () => {
             type={"text"}
             variant="flushed"
             width={{ base: "100%", md: 300 }}
-            maxLength={"12"}
+            maxLength={9}
             value={plotBreadth}
             onChange={(e) => {
               setPlotBreadth(NumericString(e.target.value));
@@ -1078,7 +1078,7 @@ const CommercialLand = () => {
               <Input
                 type="text"
                 value={pricedetail}
-                maxLength={"10"}
+                maxLength={9}
                 placeholder={`Price`}
                 required
                 borderRadius={0}
@@ -1236,7 +1236,7 @@ const CommercialLand = () => {
           <Box display={preLeased == "Yes" ? "block" : "none"}>
             <Input
               type="text"
-              maxLength={"12"}
+              maxLength={9}
               value={currentRentPerMonth}
               onChange={(e) => {
                 e.preventDefault();
@@ -1246,7 +1246,7 @@ const CommercialLand = () => {
             />
             <Input
               type="text"
-              maxLength={"12"}
+              maxLength={9}
               value={leaseTenureInYear}
               onChange={(e) => {
                 e.preventDefault();
@@ -1257,7 +1257,7 @@ const CommercialLand = () => {
             <Box>
               <Input
                 type="text"
-                maxLength={"12"}
+                maxLength={9}
                 value={annualRentIncrease}
                 onChange={(e) => {
                   e.preventDefault();

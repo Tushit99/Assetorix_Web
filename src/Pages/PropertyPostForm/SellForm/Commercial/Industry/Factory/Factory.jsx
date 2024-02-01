@@ -642,7 +642,7 @@ const Factory = () => {
           >
             <Input
               type="text"
-              maxLength={"12"}
+              maxLength={9}
               value={plotArea}
               placeholder="Enter Plot Area"
               onChange={(e) => {
@@ -1009,7 +1009,7 @@ const Factory = () => {
           <Box display={preLeased == "Yes" ? "block" : "none"}>
             <Input
               type="text"
-              maxLength={12}
+              maxLength={9}
               value={currentRentPerMonth}
               onChange={(e) => {
                 e.preventDefault();
@@ -1019,7 +1019,7 @@ const Factory = () => {
             />
             <Input
               type="text"
-              maxLength={12}
+              maxLength={9}
               value={leaseTenureInYear}
               onChange={(e) => {
                 e.preventDefault();
@@ -1030,7 +1030,7 @@ const Factory = () => {
             <Box>
               <Input
                 type="text"
-                maxLength={12}
+                maxLength={9}
                 value={annualRentIncrease}
                 onChange={(e) => {
                   e.preventDefault();

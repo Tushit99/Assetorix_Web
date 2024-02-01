@@ -1488,7 +1488,7 @@ const Independent = () => {
                   <Input
                     w={"60%"}
                     type="text"
-                    maxLength={"10"}
+                    maxLength={9}
                     onChange={(e) =>
                       setMaintenancePrice(NumericString(e.target.value))
                     }
@@ -1508,7 +1508,7 @@ const Independent = () => {
                 <Input
                   type="text"
                   w={"300px"}
-                  maxLength={"10"}
+                  maxLength={9}
                   value={expectedRentel}
                   onChange={(e) =>
                     setExpectedRentel(NumericString(e.target.value))
@@ -1519,7 +1519,7 @@ const Independent = () => {
                 <Input
                   type="text"
                   w={"300px"}
-                  maxLength={"10"}
+                  maxLength={9}
                   value={bookingAmount}
                   onChange={(e) =>
                     setBookingAmount(NumericString(e.target.value))
@@ -1530,7 +1530,7 @@ const Independent = () => {
                 <Input
                   type="text"
                   w={"300px"}
-                  maxLength={"10"}
+                  maxLength={9}
                   value={annualDuesPayble}
                   onChange={(e) =>
                     setAnnualDuesPayble(NumericString(e.target.value))
@@ -1541,7 +1541,7 @@ const Independent = () => {
                 <Input
                   type="text"
                   w={"300px"}
-                  maxLength={"10"}
+                  maxLength={9}
                   value={membershipCharge}
                   onChange={(e) =>
                     setMembershipCharge(NumericString(e.target.value))

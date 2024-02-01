@@ -623,6 +623,7 @@ const BareShell = () => {
               type="text"
               value={plotArea} 
               required
+              maxLength={9} 
               placeholder={"Super built-up Area"}
               onChange={(e) => {
                 setPlotArea(NumericString(e.target.value));
@@ -1532,7 +1533,7 @@ const BareShell = () => {
                 <Input
                   type="text"
                   value={pricedetail}
-                  maxLength={"10"}
+                  maxLength={9}
                   placeholder={`Price`}
                   required
                   borderRadius={0}

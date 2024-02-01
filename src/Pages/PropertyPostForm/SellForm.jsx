@@ -158,7 +158,7 @@ const SellForm = () => {
                       onClick={() => setTypeOf("Residential")}
                       _selected={{ color: "white", backgroundColor: "#d2ab66" }}
                     >
-                      Residential 
+                      Residential  
                     </Tab>
                     <Tab
                       bg="blue.50"

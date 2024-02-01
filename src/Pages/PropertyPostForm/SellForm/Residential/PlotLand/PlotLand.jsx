@@ -594,7 +594,7 @@ const PlotLand = () => {
           >
             <Input
               type="text"
-              maxLength={"10"}
+              maxLength={9}
               borderRadius={0}
               placeholder={"Enter area detail"}
               value={plotArea}
@@ -972,7 +972,7 @@ const PlotLand = () => {
               type="text"
               borderRadius={0}
               value={pricedetail}
-              maxLength={"10"}
+              maxLength={9}
               placeholder={`Price`}
               required
               w={200}

@@ -1459,7 +1459,7 @@ const IndependentHouse = () => {
               <Input
                 type="text"
                 value={pricedetail}
-                maxLength={"10"}
+                maxLength={9}
                 placeholder={`Price`}
                 required
                 w={200}

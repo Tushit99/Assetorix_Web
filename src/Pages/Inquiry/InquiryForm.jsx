@@ -225,7 +225,7 @@ const InquiryForm = () => {
                     required
                     onChange={(e) => setMobile(NumericString(e.target.value))}
                     value={mobile}
-                    maxLength={10}
+                    maxLength={9}
                     placeholder="Enter Your mobile no."
                     variant="outline"
                   />

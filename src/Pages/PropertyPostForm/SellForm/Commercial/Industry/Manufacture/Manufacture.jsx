@@ -612,7 +612,7 @@ const Manufacture = () => {
           >
             <Input
               type="text"
-              maxLength={"12"}
+              maxLength={9}
               value={plotArea}
               placeholder="Enter Plot Area"
               onChange={(e) => {
@@ -848,7 +848,7 @@ const Manufacture = () => {
                   type="text"
                   borderRadius={0}
                   value={pricedetail}
-                  maxLength={"10"}
+                  maxLength={9}
                   placeholder={"Enter Price"}
                   required
                   w={200}
@@ -900,7 +900,7 @@ const Manufacture = () => {
                   <Input
                     w={"60%"}
                     type="text"
-                    maxLength={"12"}
+                    maxLength={9}
                     onChange={(e) => setMaintenancePrice(e.target.value)}
                     value={maintenancePrice}
                     placeholder={"Maintenance Price"}
@@ -918,7 +918,7 @@ const Manufacture = () => {
                 <Input
                   type="text"
                   w={"300px"}
-                  maxLength={"12"}
+                  maxLength={9}
                   value={bookingAmount}
                   onChange={(e) => setBookingAmount(e.target.value)}
                   placeholder="Booking Amount"
@@ -987,7 +987,7 @@ const Manufacture = () => {
           <Box display={preLeased == "Yes" ? "block" : "none"}>
             <Input
               type="text"
-              maxLength={10}
+              maxLength={9}
               value={currentRentPerMonth}
               onChange={(e) => {
                 e.preventDefault();
@@ -997,7 +997,7 @@ const Manufacture = () => {
             />
             <Input
               type="text"
-              maxLength={10}
+              maxLength={9}
               value={leaseTenureInYear}
               onChange={(e) => {
                 e.preventDefault();
@@ -1008,7 +1008,7 @@ const Manufacture = () => {
             <Box>
               <Input
                 type="text"
-                maxLength={10}
+                maxLength={9}
                 value={annualRentIncrease}
                 onChange={(e) => {
                   e.preventDefault();

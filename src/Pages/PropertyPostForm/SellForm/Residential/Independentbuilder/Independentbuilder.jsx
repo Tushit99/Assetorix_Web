@@ -1499,7 +1499,7 @@ const Independentbuilder = () => {
               <Input
                 type="text"
                 value={pricedetail}
-                maxLength={"10"}
+                maxLength={9}
                 placeholder={`Price`}
                 borderRadius={0} 
                 required

@@ -200,7 +200,7 @@ const Singup = () => {
             <Input
               type="text"
               onChange={(e) => setnumber(e.target.value)}
-              maxLength={10}
+              maxLength={9}
               border={"2px solid rgb(193, 206, 250)"}
               _hover={{ border: "2px solid rgb(171, 81, 255)" }}
               placeholder="mobile no..."

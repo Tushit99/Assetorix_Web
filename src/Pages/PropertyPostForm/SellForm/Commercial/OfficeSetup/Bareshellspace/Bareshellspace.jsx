@@ -564,7 +564,7 @@ const Bareshellspace = () => {
         <Input
           type="text"
           placeholder={"Enter pincode"}
-          maxLength={"12"}
+          maxLength={9}
           required
           variant="flushed"
           marginLeft={"10px"}
@@ -574,7 +574,7 @@ const Bareshellspace = () => {
         />
         <Input
           type="text"
-          maxLength={"12"}
+          maxLength={9}
           required
           marginLeft={"10px"}
           placeholder="Enter Locality"
@@ -643,7 +643,7 @@ const Bareshellspace = () => {
           >
             <Input
               type="text"
-              maxLength={"10"}
+              maxLength={9}
               value={plotArea}
               borderRadius={0}
               placeholder="Enter area detail"
@@ -918,7 +918,7 @@ const Bareshellspace = () => {
             <InputGroup w={340}>
               <Input
                 type="text"
-                maxLength={"12"}
+                maxLength={9}
                 border={"1px solid rgb(222, 222, 255)"}
                 value={pantrySize}
                 onChange={(e) => setPantrySize(NumericString(e.target.value))}
@@ -1153,7 +1153,7 @@ const Bareshellspace = () => {
           <Input
             width={300}
             type="text"
-            maxLength={"10"}
+            maxLength={9}
             placeholder="No. of Staircases"
             variant={"flushed"}
             onChange={(e) => setStairCase(e.target.value)}
@@ -1543,7 +1543,7 @@ const Bareshellspace = () => {
               <Input
                 type="text"
                 value={pricedetail}
-                maxLength={"10"}
+                maxLength={9}
                 placeholder={`Price`}
                 required
                 borderRadius={0}
@@ -1773,7 +1773,7 @@ const Bareshellspace = () => {
           <Box>
             <Input
               type="text"
-              maxLength={"10"}
+              maxLength={9}
               value={currentRentPerMonth}
               onChange={(e) => {
                 e.preventDefault();
@@ -1783,7 +1783,7 @@ const Bareshellspace = () => {
             />
             <Input
               type="text"
-              maxLength={"10"}
+              maxLength={9}
               value={leaseTenureInYear}
               onChange={(e) => {
                 e.preventDefault();
@@ -1794,7 +1794,7 @@ const Bareshellspace = () => {
             <Box>
               <Input
                 type="text"
-                maxLength={"10"}
+                maxLength={9}
                 value={annualRentIncrease}
                 onChange={(e) => {
                   e.preventDefault();

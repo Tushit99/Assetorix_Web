@@ -640,7 +640,7 @@ const IndustrialLand = () => {
           </Heading>
           <Input
             type={"text"}
-            maxLength={"12"}
+            maxLength={9}
             variant="flushed" 
             width={{base:"100%",md:300}}    
             value={plotLength}
@@ -651,7 +651,7 @@ const IndustrialLand = () => {
           />
           <Input
             type={"text"}
-            maxLength={"12"}
+            maxLength={9}
             width={{base:"100%",md:300}}    
             variant="flushed" 
             value={plotBreadth}
@@ -1058,7 +1058,7 @@ const IndustrialLand = () => {
               <Input
                 type="text"
                 value={pricedetail}
-                maxLength={"10"}
+                maxLength={9}
                 placeholder={`Price`}
                 required
                 borderRadius={0} 

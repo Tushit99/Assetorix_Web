@@ -600,7 +600,7 @@ const CoWorkingspace = () => {
           >
             <Input
               type="text"
-              maxLength={"10"}
+              maxLength={9}
               value={plotArea} 
               placeholder="Enter plot area"
               borderRadius={0}
@@ -839,7 +839,7 @@ const CoWorkingspace = () => {
               <Input
                 type="text"
                 value={pricedetail}
-                maxLength={"10"}
+                maxLength={9}
                 placeholder={`Price`}
                 required
                 borderRadius={0} 
@@ -907,7 +907,7 @@ const CoWorkingspace = () => {
             <Input
               w={"60%"}
               type="text"
-              maxLength={"12"}
+              maxLength={9}
               onChange={(e) => setMaintenancePrice(e.target.value)}
               value={maintenancePrice}
               placeholder={"Maintenance Price"}
@@ -927,7 +927,7 @@ const CoWorkingspace = () => {
               <Input
                 type="text"
                 w={"300px"}
-                maxLength={"12"}
+                maxLength={9}
                 value={expectedRentel}
                 onChange={(e) => setExpectedRentel(e.target.value)}
                 placeholder="Expected rental"
@@ -936,7 +936,7 @@ const CoWorkingspace = () => {
               <Input
                 type="text"
                 w={"300px"}
-                maxLength={"12"}
+                maxLength={9}
                 value={bookingAmount}
                 onChange={(e) => setBookingAmount(e.target.value)}
                 placeholder="Booking Amount"
@@ -945,7 +945,7 @@ const CoWorkingspace = () => {
               <Input
                 type="text"
                 w={"300px"}
-                maxLength={"12"}
+                maxLength={9}
                 value={annualDuesPayble}
                 onChange={(e) => setAnnualDuesPayble(e.target.value)}
                 placeholder="Annual dues payable"
@@ -1028,7 +1028,7 @@ const CoWorkingspace = () => {
           <Box>
             <Input
               type="text"
-              maxLength={"12"}
+              maxLength={9}
               value={currentRentPerMonth}
               onChange={(e) => {
                 e.preventDefault();
@@ -1038,7 +1038,7 @@ const CoWorkingspace = () => {
             />
             <Input
               type="text"
-              maxLength={"12"}
+              maxLength={9}
               value={leaseTenureInYear}
               onChange={(e) => {
                 e.preventDefault();
@@ -1049,7 +1049,7 @@ const CoWorkingspace = () => {
             <Box>
               <Input
                 type="text"
-                maxLength={"12"}
+                maxLength={9}
                 value={annualRentIncrease}
                 onChange={(e) => {
                   e.preventDefault();

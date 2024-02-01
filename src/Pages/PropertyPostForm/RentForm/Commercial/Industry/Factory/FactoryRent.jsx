@@ -554,7 +554,7 @@ const FactoryRent = () => {
           >
             <Input
               type="text"
-              maxLength={"9"}
+              maxLength={9}
               placeholder="Enter plot area"
               value={plotArea}
               onChange={(e) => {
@@ -739,7 +739,7 @@ const FactoryRent = () => {
               <Input
                 type="text"
                 value={pricedetail}
-                maxLength={"10"}
+                maxLength={9}
                 placeholder={`Price`}
                 required
                 borderRadius={0}

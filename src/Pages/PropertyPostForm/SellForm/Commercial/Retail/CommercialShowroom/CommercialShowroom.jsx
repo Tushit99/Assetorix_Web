@@ -765,7 +765,7 @@ const CommercialShowroom = () => {
               >
                 <Input
                   type="text"
-                  maxLength={"10"}
+                  maxLength={9}
                   value={plotArea}
                   borderRadius={0}
                   placeholder="Enter area detail"
@@ -1505,7 +1505,7 @@ const CommercialShowroom = () => {
                       <Input
                         type="text"
                         value={pricedetail}
-                        maxLength={"10"}
+                        maxLength={9}
                         placeholder={`Price`}
                         required
                         borderRadius={0}

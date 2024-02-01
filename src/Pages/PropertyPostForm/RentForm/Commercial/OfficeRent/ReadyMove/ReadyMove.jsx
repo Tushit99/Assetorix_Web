@@ -671,9 +671,9 @@ const ReadyMove = () => {
             <Input
               type="text"
               value={plotArea}
+              maxLength={9}
               placeholder="Enter area detail"
-              w={200}
-              maxLength={"6"}
+              w={200} 
               onChange={(e) => {
                 setPlotArea(NumericString(e.target.value));
               }}
@@ -1586,7 +1586,7 @@ const ReadyMove = () => {
             <Input
               type="text"
               value={pricedetail}
-              maxLength={"10"}
+              maxLength={9}
               placeholder={`Price`}
               required
               borderRadius={0}

@@ -579,6 +579,7 @@ const IndustrialLand = () => {
               type="text"
               value={plotArea} 
               borderRadius={0} 
+              maxLength={9} 
               placeholder="Enter plot area"
               onChange={(e) => {
                 setPlotArea(NumericString(e.target.value));
@@ -1049,7 +1050,7 @@ const IndustrialLand = () => {
               <Input
                 type="text"
                 value={pricedetail}
-                maxLength={"10"}
+                maxLength={9}
                 placeholder={`Price`}
                 required
                 borderRadius={0} 

@@ -592,6 +592,7 @@ const HotelResortRent = () => {
             <Input
               variant={"outline"}
               type="text"
+              maxLength={9} 
               placeholder="Enter Plot Area"
               value={plotArea}
               onChange={(e) => {
@@ -856,7 +857,7 @@ const HotelResortRent = () => {
               <Input
                 type="text"
                 value={pricedetail}
-                maxLength={"10"}
+                maxLength={9}
                 placeholder={`Price`}
                 required
                 borderRadius={0} 

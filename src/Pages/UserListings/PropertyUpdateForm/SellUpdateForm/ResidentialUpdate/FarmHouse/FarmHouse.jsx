@@ -894,7 +894,7 @@ const FarmHouseUpdate = () => {
               type="text"
               value={plotArea}
               w={200}
-              maxLength={"12"}
+              maxLength={9}
               placeholder="Enter area detail"
               onChange={(e) => {
                 setPlotArea(NumericString(e.target.value));
@@ -1580,7 +1580,7 @@ const FarmHouseUpdate = () => {
               <Input
                 type="text"
                 value={pricedetail}
-                maxLength={"10"}
+                maxLength={9}
                 placeholder={`Price`}
                 required
                 borderRadius={0} 
@@ -1641,7 +1641,7 @@ const FarmHouseUpdate = () => {
             <Input
               w={"60%"}
               type="text"
-              maxLength={"10"}
+              maxLength={9}
               onChange={(e) =>
                 setMaintenancePrice(NumericString(e.target.value))
               }
@@ -1663,7 +1663,7 @@ const FarmHouseUpdate = () => {
               <Input
                 type="text"
                 w={"300px"}
-                maxLength={"10"}
+                maxLength={9}
                 value={expectedRental}
                 onChange={(e) =>
                   setExpectedRental(NumericString(e.target.value))
@@ -1674,7 +1674,7 @@ const FarmHouseUpdate = () => {
               <Input
                 type="text"
                 w={"300px"}
-                maxLength={"10"}
+                maxLength={9}
                 value={bookingAmount}
                 onChange={(e) =>
                   setBookingAmount(NumericString(e.target.value))
@@ -1685,7 +1685,7 @@ const FarmHouseUpdate = () => {
               <Input
                 type="text"
                 w={"300px"}
-                maxLength={"10"}
+                maxLength={9}
                 value={annualDuesPayable}
                 onChange={(e) =>
                   setAnnualDuesPayable(NumericString(e.target.value))

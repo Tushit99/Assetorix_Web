@@ -744,9 +744,8 @@ const FarmhouseRent = () => {
           >
             <Input
               type="text"
-              padding={"0 2px"}
-              value={plotArea}
-              maxLength={"10"}
+              maxLength={9}
+              value={plotArea} 
               onChange={(e) => {
                 // areaCalucation();
                 setPlotArea(NumericString(e.target.value));
@@ -1416,7 +1415,7 @@ const FarmhouseRent = () => {
             <Input
               type="text"
               value={pricedetail}
-              maxLength={"10"}
+              maxLength={9}
               placeholder={`Price`}
               required
               borderRadius={0}

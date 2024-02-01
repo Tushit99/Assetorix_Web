@@ -757,6 +757,7 @@ const CommercialShopRent = () => {
                 <InputGroup
                   className={style.select_land}
                   isAttached
+                  maxLength={9} 
                   margin={0}
                   width={{ base: "100%", md: 300 }}
                   variant="outline"
@@ -1600,7 +1601,7 @@ const CommercialShopRent = () => {
                   <Input
                     type="text"
                     value={pricedetail}
-                    maxLength={"10"}
+                    maxLength={9}
                     placeholder={`Price`}
                     required
                     borderRadius={0}

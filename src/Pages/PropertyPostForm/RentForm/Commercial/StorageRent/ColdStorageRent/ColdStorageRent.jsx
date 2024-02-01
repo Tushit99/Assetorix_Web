@@ -544,7 +544,8 @@ const ColdStorageRent = () => {
             <Input
               type="text"
               placeholder="Enter area details"
-              value={plotArea}
+              value={plotArea} 
+              maxLength={9} 
               onChange={(e) => {
                 setPlotArea(NumericString(e.target.value));
               }}
@@ -723,7 +724,7 @@ const ColdStorageRent = () => {
               <Input
                 type="text"
                 value={pricedetail}
-                maxLength={"10"}
+                maxLength={9}
                 placeholder={`Price`}
                 required
                 borderRadius={0} 

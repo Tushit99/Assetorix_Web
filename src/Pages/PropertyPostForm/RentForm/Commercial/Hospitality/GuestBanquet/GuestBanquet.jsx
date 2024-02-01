@@ -860,7 +860,7 @@ const GuestBanquetRent = () => {
               <Input
                 type="text"
                 value={pricedetail}
-                maxLength={"10"}
+                maxLength={9}
                 placeholder={`Price`}
                 required
                 borderRadius={0} 
@@ -879,7 +879,7 @@ const GuestBanquetRent = () => {
                 <Input
                   w={"60%"}
                   type="text"
-                  maxLength={"10"}
+                  maxLength={9}
                   onChange={(e) =>
                     setMaintenancePrice(NumericString(e.target.value))
                   }
@@ -900,7 +900,7 @@ const GuestBanquetRent = () => {
                 <Input
                   type="text"
                   w={"300px"}
-                  maxLength={"10"}
+                  maxLength={9}
                   value={bookingAmount}
                   onChange={(e) =>
                     setBookingAmount(NumericString(e.target.value))
@@ -911,7 +911,7 @@ const GuestBanquetRent = () => {
                 <Input
                   type="text"
                   w={"300px"}
-                  maxLength={"10"}
+                  maxLength={9}
                   value={annualDuesPayble}
                   onChange={(e) =>
                     setAnnualDuesPayble(NumericString(e.target.value))

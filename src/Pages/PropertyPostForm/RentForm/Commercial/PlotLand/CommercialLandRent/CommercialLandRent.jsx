@@ -598,6 +598,7 @@ const CommercialLandRent = () => {
               type="text"
               borderRadius={0}
               variant={"outline"}
+              maxLength={9}
               placeholder="Enter area detail"
               value={plotArea}
               onChange={(e) => {
@@ -1221,7 +1222,7 @@ const CommercialLandRent = () => {
               <Input
                 type="text"
                 value={pricedetail}
-                maxLength={"10"}
+                maxLength={9}
                 placeholder={`Price`}
                 required
                 borderRadius={0} 

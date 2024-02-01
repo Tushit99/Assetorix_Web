@@ -670,6 +670,7 @@ const Coworkingspace = () => {
               value={plotArea}
               margin={"4px 0"}
               required
+              maxLength={9}
               placeholder={"Super built-up Area"}
               onChange={(e) => {
                 areaCalucation();
