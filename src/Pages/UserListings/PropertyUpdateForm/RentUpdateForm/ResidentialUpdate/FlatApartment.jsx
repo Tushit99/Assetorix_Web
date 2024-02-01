@@ -219,7 +219,7 @@ const FlatApartment = () => {
       otherRoom: extraroom,
       description: desc,
       availableFrom: availableFrom,
-      countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
+      countryCurrency: currency,
       additionalPricingDetails: {
         maintenancePrice,
         maintenanceTimePeriod,

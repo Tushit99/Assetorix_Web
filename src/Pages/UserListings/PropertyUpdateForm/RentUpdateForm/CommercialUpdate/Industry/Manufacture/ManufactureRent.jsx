@@ -148,7 +148,7 @@ const ManufactureRentUpdate = () => {
         annualDuesPayable: annualDuesPayble
       },
       description: desc,
-      countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
+      countryCurrency: currency,
       amenities,
       propertyFeatures,
       society_buildingFeatures: buildingFeature,

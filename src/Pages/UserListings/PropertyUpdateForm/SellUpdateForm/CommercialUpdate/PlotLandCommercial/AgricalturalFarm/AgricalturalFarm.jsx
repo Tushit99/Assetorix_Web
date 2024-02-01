@@ -180,7 +180,7 @@ const AgricalturalFarmUpdate = () => {
       description: desc,
       constructionOnProperty: ConstructionOnProperty,
       constructionOnPropertyList: constructionType,
-      countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
+      countryCurrency: currency,
       additionalPricingDetails: {
         maintenancePrice,
         maintenanceTimePeriod,

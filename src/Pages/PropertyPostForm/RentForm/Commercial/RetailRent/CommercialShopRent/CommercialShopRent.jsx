@@ -144,7 +144,7 @@ const CommercialShopRent = () => {
       builtupArea: buildupArea,
       builtupAreaUnit: buildupAreaUnit,
       description: desc,
-      countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
+      countryCurrency: currency,
       additionalPricingDetails: {
         maintenancePrice,
         maintenanceTimePeriod,

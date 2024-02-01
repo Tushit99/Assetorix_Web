@@ -129,7 +129,7 @@ const Coworkingspace = () => {
       plotAreaUnit: areaPer,
       availableFrom,
       description: desc,
-      countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
+      countryCurrency: currency,
       additionalPricingDetails: {
         maintenancePrice,
         maintenanceTimePeriod,

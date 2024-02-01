@@ -91,7 +91,7 @@ const GuestBanquetRent = () => {
         annualDuesPayable: annualDuesPayble,
       },
       description: desc,
-      countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
+      countryCurrency: currency,
 
       amenities,
       propertyFeatures,

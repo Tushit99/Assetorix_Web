@@ -126,7 +126,7 @@ const Bareshellspace = () => {
       carpetArea: plotArea,
       carpetAreaUnit: areaPer,
       description: desc,
-      countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
+      countryCurrency: currency,
       additionalPricingDetails: {
         maintenancePrice,
         maintenanceTimePeriod,

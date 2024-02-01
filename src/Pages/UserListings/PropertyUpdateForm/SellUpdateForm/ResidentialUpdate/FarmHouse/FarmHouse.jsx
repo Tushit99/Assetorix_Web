@@ -139,7 +139,7 @@ const FarmHouseUpdate = () => {
       },
       otherRoom: extraroom,
       description: desc,
-      countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
+      countryCurrency: currency,
       additionalPricingDetails: {
         maintenancePrice,
         maintenanceTimePeriod,

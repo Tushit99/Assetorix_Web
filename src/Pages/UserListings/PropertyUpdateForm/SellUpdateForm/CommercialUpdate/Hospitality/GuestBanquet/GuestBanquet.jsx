@@ -206,7 +206,7 @@ const GuestBanquetUpdate = () => {
       plotAreaUnit: areaPer,
       otherRoom: extraroom,
       description: desc,
-      countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
+      countryCurrency: currency,
     };
 
     const showToastError = (message) => {

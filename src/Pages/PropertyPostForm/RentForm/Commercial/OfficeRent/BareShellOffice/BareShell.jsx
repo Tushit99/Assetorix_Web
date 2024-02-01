@@ -121,7 +121,7 @@ const BareShell = () => {
       superBuiltupAreaUnit: areaPer,
       availableFrom,
       description: desc,
-      countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
+      countryCurrency: currency,
       additionalPricingDetails: {
         maintenancePrice,
         maintenanceTimePeriod,

@@ -121,7 +121,7 @@ const PlotLand = () => {
       propertyApprovalAuthorityList: authorisedBy,
       description: desc,
       overLookings: overLook,
-      countryCurrency: `${isCountry.country == "india" ? "₹" : "$"}`,
+      countryCurrency: currency,
       additionalPricingDetails: {
         maintenancePrice,
         maintenanceTimePeriod,
