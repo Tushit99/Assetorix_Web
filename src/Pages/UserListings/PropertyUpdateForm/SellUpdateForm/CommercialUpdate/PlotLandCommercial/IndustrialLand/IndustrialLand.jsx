@@ -1046,23 +1046,7 @@ const IndustrialLandUpdate = () => {
                     
                   }}
                 />
-              </Box>
-              <Box display={"grid"} gap={0}>
-                <Heading
-                  as={"h3"}
-                  size={"xs"}
-                  fontWeight={400}
-                  textAlign={"left"}
-                >
-                  {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
-                </Heading>
-                <NumberInput value={priceSqr}>
-                  <NumberInputField
-
-
-                  />
-                </NumberInput>
-              </Box>
+              </Box> 
             </Box>
           </Box>
           <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>

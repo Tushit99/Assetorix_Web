@@ -983,7 +983,7 @@ const FactoryUpdate = () => {
                                 >
                                     {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
                                 </Heading>
-                                <NumberInput value={priceSqr}>
+                                <NumberInput value={pricedetail}>
                                     <NumberInputField
 
 

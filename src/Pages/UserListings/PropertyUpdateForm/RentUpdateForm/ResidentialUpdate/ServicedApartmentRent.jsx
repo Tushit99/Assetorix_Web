@@ -94,6 +94,7 @@ const ServicedApartmentRentUpdate = () => {
     const [clickCount, setClickCount] = useState(0);
     const navigate = useNavigate();
     const [currency, setCurrency] = useState("₹"); 
+    const [pricedetail, setPricedetail] = useState("");
 
     // ================================= 
 
@@ -137,7 +138,7 @@ const ServicedApartmentRentUpdate = () => {
                 setfurnishedarr(e?.furnishedList);
             }
             setExtraRoom(e?.otherRoom);
-            setPriceSqr(e?.price);
+            setPricedetail(e?.price);
             setAminity(e?.amenities);
             setPropertyFeature(e?.propertyFeatures);
             setBuildingFeature(e?.society_buildingFeatures);
@@ -189,7 +190,7 @@ const ServicedApartmentRentUpdate = () => {
                 balcony: balconey,
             },
             agreementType: preferredAgreement,
-            price: +priceSqr,
+            price: +pricedetail,
             willingToRent: willingTo,
             amenities,
             inclusivePrices,
@@ -1515,9 +1516,9 @@ const ServicedApartmentRentUpdate = () => {
                             Rent Details
                         </Heading>
                         <Box>
-                            <Input type="text" w={"40%"} borderRadius={0} value={priceSqr} onChange={(e) => {
+                            <Input type="text" w={"40%"} borderRadius={0} value={pricedetail} onChange={(e) => {
                                 e.preventDefault();
-                                setPriceSqr(NumericString(e.target.value));
+                                setPricedetail(NumericString(e.target.value));
                             }} placeholder={"₹ Expected Rent"} />
                         </Box>
                         {/* pricing checkbox */}

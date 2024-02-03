@@ -18,7 +18,7 @@ import style from "../Industry.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
-import { CleanInputText } from "../../../../code";
+import { CleanInputText, NumericString } from "../../../../code";
 import { useNavigate, useParams } from "react-router-dom";
 import LoadingBox from "../../../../Loadingbox"; 
 import Extraimg from "../../../Extraimg/Extraimg";
@@ -940,27 +940,10 @@ const ManufactureUpdate = () => {
                   value={pricedetail}
                   required
                   onChange={(e) => {
-                    setPricedetail(e.target.value);
-                    
+                    setPricedetail(NumericString(e.target.value)); 
                   }}
                 />
-              </Box>
-              <Box display={"grid"} gap={0}>
-                <Heading
-                  as={"h3"}
-                  size={"xs"}
-                  fontWeight={400}
-                  textAlign={"left"}
-                >
-                  {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
-                </Heading>
-                <NumberInput value={priceSqr}>
-                  <NumberInputField
-
-
-                  />
-                </NumberInput>
-              </Box>
+              </Box> 
             </Box>
           </Box>
           <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>

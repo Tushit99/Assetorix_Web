@@ -1293,22 +1293,7 @@ const CommercialShop = () => {
                                                 
                                             }}
                                         />
-                                    </Box>
-                                    <Box display={"grid"} gap={0}>
-                                        <Heading
-                                            as={"h3"}
-                                            size={"xs"}
-                                            fontWeight={400}
-                                            textAlign={"left"}
-                                        >
-                                            {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per {areaPer}
-                                        </Heading>
-                                        <Input
-                                            type="text"
-                                            value={priceSqr}
-                                            readOnly
-                                        />
-                                    </Box>
+                                    </Box> 
                                 </Box>
                             </Box>
                             <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>

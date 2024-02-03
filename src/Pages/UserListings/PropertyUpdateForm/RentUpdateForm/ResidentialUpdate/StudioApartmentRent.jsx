@@ -56,7 +56,7 @@ const StudioApartmentRentUpdate = () => {
     const [extraroom, setExtraRoom] = useState([]);
     const [furnished, setFurnished] = useState("");
     const [propertyAge, setpropertyAge] = useState("");
-    
+  const [pricedetail, setPricedetail] = useState("");
     const [amenities, setAminity] = useState([]);
     const [propertyFeatures, setPropertyFeature] = useState("");
     const [buildingFeature, setBuildingFeature] = useState([]);
@@ -132,7 +132,7 @@ const StudioApartmentRentUpdate = () => {
 
             setExtraRoom(e?.otherRoom);
 
-            setPriceSqr(e?.price);
+            setPricedetail(e?.price);
             setinclusivePrices(e?.inclusivePrices);
             setAdditionalPrice(e?.additionalPricingDetails);
             if (e?.additionalPricingDetails) {
@@ -205,7 +205,7 @@ const StudioApartmentRentUpdate = () => {
                 balcony: balconey,
             },
             agreementType: preferredAgreement,
-            price: +priceSqr,
+            price: +pricedetail,
             willingToRent: willingTo,
             amenities,
             inclusivePrices,
@@ -1547,9 +1547,9 @@ const StudioApartmentRentUpdate = () => {
                             Rent Details
                         </Heading>
                         <Box>
-                            <Input type="text" w={"40%"} borderRadius={0} value={priceSqr} onChange={(e) => {
+                            <Input type="text" w={"40%"} borderRadius={0} value={pricedetail} onChange={(e) => {
                                 e.preventDefault();
-                                setPriceSqr(NumericString(e.target.value));
+                                setPricedetail(NumericString(e.target.value));
                             }} placeholder={"₹ Expected Rent"} />
                         </Box>
                         {/* pricing checkbox */}

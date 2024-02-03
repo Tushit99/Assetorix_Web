@@ -96,6 +96,7 @@ const IndependentBuilderRentUpdate = () => {
   const [clickCount, setClickCount] = useState(0);
   const navigate = useNavigate();
   const [currency, setCurrency] = useState("₹"); 
+  const [pricedetail, setPricedetail] = useState("");
 
   // ================================= 
 
@@ -139,7 +140,7 @@ const IndependentBuilderRentUpdate = () => {
         setfurnishedarr(e?.furnishedList);
       }
       setExtraRoom(e?.otherRoom);
-      setPriceSqr(e?.price);
+      setPricedetail(e?.price);
       setAminity(e?.amenities);
       setPropertyFeature(e?.propertyFeatures);
       setBuildingFeature(e?.society_buildingFeatures);
@@ -191,7 +192,7 @@ const IndependentBuilderRentUpdate = () => {
         balcony: balconey,
       },
       agreementType: preferredAgreement,
-      price: +priceSqr,
+      price: +pricedetail,
       willingToRent: willingTo,
       amenities,
       inclusivePrices,
@@ -250,7 +251,7 @@ const IndependentBuilderRentUpdate = () => {
       showToastError("Provide balconey");
     } else if (!furnishedarr) {
       showToastError("Provide Furnished Field");
-    } else if (!priceSqr) {
+    } else if (!pricedetail) {
       showToastError("Provide Price Per sq.ft");
     } else if (!additinalft) {
       showToastError("Provide Property description");
@@ -448,7 +449,7 @@ const IndependentBuilderRentUpdate = () => {
   //     let max = Math.max(Number(pricedetail), Number(plotArea));
   //     let min = Math.min(Number(pricedetail), Number(plotArea));
   //     let ans = Math.round(max / min);
-  //     setPriceSqr(ans);
+  //     setPricedetail(ans);
   //   }
   // } 
 
@@ -1528,9 +1529,9 @@ const IndependentBuilderRentUpdate = () => {
               Rent Details
             </Heading>
             <Box>
-              <Input type="text" w={"40%"} borderRadius={0} value={priceSqr} onChange={(e) => {
+              <Input type="text" w={"40%"} borderRadius={0} value={pricedetail} onChange={(e) => {
                 e.preventDefault();
-                setPriceSqr(NumericString(e.target.value));
+                setPricedetail(NumericString(e.target.value));
               }} placeholder={"₹ Expected Rent"} />
             </Box>
             {/* pricing checkbox */}
