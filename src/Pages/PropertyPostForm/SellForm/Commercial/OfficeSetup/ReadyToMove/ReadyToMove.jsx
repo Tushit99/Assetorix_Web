@@ -1714,9 +1714,9 @@ const ReadyToMove = () => {
               value={currentRentPerMonth}
               onChange={(e) => {
                 e.preventDefault();
-                setCurrentRentPerMonth(e.target.value);
+                setCurrentRentPerMonth(NumericString(e.target.value));
               }}
-              placeholder={"₹ Current rent per month"}
+              placeholder={`${currency} Current rent per month`}
             />
             <Input
               type="text"
@@ -1724,9 +1724,9 @@ const ReadyToMove = () => {
               value={leaseTenureInYear}
               onChange={(e) => {
                 e.preventDefault();
-                setLeaseTenureInYear(e.target.value);
+                setLeaseTenureInYear(NumericString(e.target.value));
               }}
-              placeholder={"₹ Current rent per month"}
+              placeholder={`${currency} Current rent per month`}
             />
             <Box>
               <Input
@@ -1735,7 +1735,7 @@ const ReadyToMove = () => {
                 value={annualRentIncrease}
                 onChange={(e) => {
                   e.preventDefault();
-                  setAnnualRentIncrease(e.target.value);
+                  setAnnualRentIncrease(NumericString(e.target.value));
                 }}
                 placeholder="Annual rent increase in % (Optional)"
               />
@@ -1745,7 +1745,7 @@ const ReadyToMove = () => {
                 value={businessType}
                 onChange={(e) => {
                   e.preventDefault();
-                  setBusinessType(e.target.value);
+                  setBusinessType(WordandNumber(e.target.value));
                 }}
                 placeholder="Leased to - Business Type (Optional)"
               />

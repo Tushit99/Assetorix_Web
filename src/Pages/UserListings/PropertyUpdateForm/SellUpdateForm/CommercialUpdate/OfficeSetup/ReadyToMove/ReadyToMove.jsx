@@ -24,7 +24,7 @@ import style from "./ReadyToMove.module.css";
 import { useSelector } from "react-redux";
 import { AddIcon, ChevronDownIcon, MinusIcon } from "@chakra-ui/icons";
 import axios from "axios";
-import { CleanInputText } from "../../../../code";
+import { CleanInputText, NumericString, WordandNumber } from "../../../../code";
 import { useNavigate, useParams } from "react-router-dom";
 import LoadingBox from "../../../../Loadingbox";
 import Extraimg from "../../../Extraimg/Extraimg";
@@ -1631,20 +1631,20 @@ const ReadyToMoveUpdate = () => {
                         <Box>
                             <Input type="text" value={currentRentPerMonth} onChange={(e) => {
                                 e.preventDefault();
-                                setCurrentRentPerMonth(e.target.value);
-                            }} placeholder={"₹ Current rent per month"} />
+                                setCurrentRentPerMonth(NumericString(e.target.value));
+                            }} placeholder={`${currency} Current rent per month`} />
                             <Input type="text" value={leaseTenureInYear} onChange={(e) => {
                                 e.preventDefault();
-                                setLeaseTenureInYear((e.target.value));
-                            }} placeholder={"₹ Current rent per month"} />
+                                setLeaseTenureInYear(NumericString(e.target.value));
+                            }} placeholder={`${currency} Current rent per month`} /> 
                             <Box>
                                 <Input type="text" value={annualRentIncrease} onChange={(e) => {
                                     e.preventDefault();
-                                    setAnnualRentIncrease((e.target.value));
+                                    setAnnualRentIncrease(NumericString(e.target.value));
                                 }} placeholder="Annual rent increase in % (Optional)" />
                                 <Input type="text" value={businessType} onChange={(e) => {
                                     e.preventDefault();
-                                    setBusinessType((e.target.value));
+                                    setBusinessType(WordandNumber(e.target.value));
                                 }} placeholder="Leased to - Business Type (Optional)" />
                             </Box>
                         </Box>

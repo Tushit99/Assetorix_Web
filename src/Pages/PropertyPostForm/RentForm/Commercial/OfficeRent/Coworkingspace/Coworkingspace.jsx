@@ -22,7 +22,7 @@ import style from "../../RentComercial.module.css";
 import { useSelector } from "react-redux";
 import { AddIcon, ChevronDownIcon, MinusIcon } from "@chakra-ui/icons";
 import axios from "axios";
-import { CleanInputText, NumericString } from "../../../../code";
+import { CleanInputText, NumericString, WordandNumber } from "../../../../code";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../../../Loading";
@@ -1780,18 +1780,18 @@ const Coworkingspace = () => {
               value={currentRentPerMonth}
               onChange={(e) => {
                 e.preventDefault();
-                setCurrentRentPerMonth(e.target.value);
+                setCurrentRentPerMonth(NumericString(e.target.value));
               }}
-              placeholder={"₹ Current rent per month"}
+              placeholder={`${currency} Current rent per month`}
             />
             <Input
               type="text"
               value={leaseTenureInYear}
               onChange={(e) => {
                 e.preventDefault();
-                setLeaseTenureInYear(e.target.value);
+                setLeaseTenureInYear(NumericString(e.target.value));
               }}
-              placeholder={"₹ Current rent per month"}
+              placeholder={`${currency} Current rent per month`}
             />
             <Box>
               <Input
@@ -1799,7 +1799,7 @@ const Coworkingspace = () => {
                 value={annualRentIncrease}
                 onChange={(e) => {
                   e.preventDefault();
-                  setAnnualRentIncrease(e.target.value);
+                  setAnnualRentIncrease(NumericString(e.target.value));
                 }}
                 placeholder="Annual rent increase in % (Optional)"
               />
@@ -1808,7 +1808,7 @@ const Coworkingspace = () => {
                 value={businessType}
                 onChange={(e) => {
                   e.preventDefault();
-                  setBusinessType(e.target.value);
+                  setBusinessType(WordandNumber(e.target.value));
                 }}
                 placeholder="Leased to - Business Type (Optional)"
               />

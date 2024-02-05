@@ -1767,7 +1767,7 @@ const Bareshellspace = () => {
                 e.preventDefault();
                 setCurrentRentPerMonth(NumericString(e.target.value));
               }}
-              placeholder={"₹ Current rent per month"}
+              placeholder={`${currency} Current rent per month`}
             />
             <Input
               type="text"
@@ -1777,7 +1777,7 @@ const Bareshellspace = () => {
                 e.preventDefault();
                 setLeaseTenureInYear(NumericString(e.target.value));
               }}
-              placeholder={"₹ Current rent per month"}
+              placeholder={`${currency} Current rent per month`}
             />
             <Box>
               <Input
