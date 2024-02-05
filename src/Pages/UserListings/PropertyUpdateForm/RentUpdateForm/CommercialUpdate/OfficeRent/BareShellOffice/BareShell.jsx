@@ -1697,10 +1697,7 @@ const BareShellUpdate = () => {
                     <Box>
                         <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
                             Add Description and Unique Features of your Property
-                        </Heading>
-                        <Heading as={"h3"} size={"xs"} margin={"10px 0"} textAlign={"left"}>
-                            Adding description will increase your listing visibility
-                        </Heading>
+                        </Heading> 
                         <Textarea
                             height={140}
                             value={desc}

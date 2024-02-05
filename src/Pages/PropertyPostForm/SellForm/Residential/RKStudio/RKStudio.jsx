@@ -55,7 +55,7 @@ const RKStudio = () => {
   const [fromyear, setFromyear] = useState("");
   const [expectedyear, setExpectedYear] = useState("");
   const [ownership, setOwnerShip] = useState("");
-  const [pricedetail, setPricedetail] = useState(""); 
+  const [pricedetail, setPricedetail] = useState("");
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
@@ -78,7 +78,7 @@ const RKStudio = () => {
   const [maintenancePrice, setMaintenancePrice] = useState("");
   const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
   const [bookingAmount, setBookingAmount] = useState("");
-  const [currency, setCurrency] = useState("₹"); 
+  const [currency, setCurrency] = useState("₹");
   const [annualDuesPayable, setAnnualDuesPayable] = useState("");
   const [membershipCharge, setMembershipCharge] = useState("");
   const [isClicked, setIsClicked] = useState(false);
@@ -112,7 +112,7 @@ const RKStudio = () => {
         balcony: balconey,
       },
       ownership,
-      price: +pricedetail, 
+      price: +pricedetail,
       inclusivePrices,
       amenities,
       propertyFeatures,
@@ -203,7 +203,7 @@ const RKStudio = () => {
       bedroom &&
       bathroom &&
       balconey &&
-      furnishedarr && 
+      furnishedarr &&
       ownership &&
       pricedetail &&
       inclusivePrices &&
@@ -536,7 +536,7 @@ const RKStudio = () => {
     }
     console.log(newarr);
     setWaterSource(newarr);
-  }; 
+  };
 
   // ======--- image upload function
 
@@ -623,14 +623,15 @@ const RKStudio = () => {
   //     adding.innerHTML = options;
 
   // }
- 
 
   return (
     <form onSubmit={handleSubmitData}>
       {/* property location */}
       <Box className={style.location_form}>
         <Heading size={"lg"}>Where is your 1 RK Studio located?</Heading>
-        <Heading size={"sm"}>Location Detail</Heading>  
+        <Heading size={"sm"} textAlign={"left"}>
+          Location Detail
+        </Heading>
 
         <Input
           type="text"
@@ -660,7 +661,7 @@ const RKStudio = () => {
           maxLength={"6"}
           padding={"0 10px"}
           required
-          variant="flushed" 
+          variant="flushed"
           fontSize={"md"}
           value={pincode}
           onChange={handlepinfetch}
@@ -722,25 +723,20 @@ const RKStudio = () => {
         />
       </Box>
       {/* Property Detail */}
-      <Box marginTop={12}> 
-        <Heading as={"h4"} textAlign={"left"} size={"sm"} >
+      <Box marginTop={12}>
+        <Heading as={"h4"} textAlign={"left"} size={"sm"}>
           Add Room Details
         </Heading>
         <Box as={"div"} className={style.inp_form_numbers}>
           <Box textAlign={"left"}>
             <Text> No. of Bedrooms </Text>
-            <Input
-              type="text"
-              variant={"outline"}
-              readOnly  
-              value={bedroom}
-            />
+            <Input type="text" variant={"outline"} readOnly value={bedroom} />
           </Box>
           <Box textAlign={"left"}>
             <Text> No. of Bathrooms </Text>
             <Input
               type="text"
-              variant={"outline"}  
+              variant={"outline"}
               onChange={(e) => setBathroom(e.target.value)}
               value={bathroom}
             />
@@ -757,8 +753,12 @@ const RKStudio = () => {
           </Box>
         </Box>
         {/* ====================================== */}
-         {/* add area details */}
-         <Box textAlign={"left"} marginTop={{base:10,md:5}} padding={"10px 0"}>
+        {/* add area details */}
+        <Box
+          textAlign={"left"}
+          marginTop={{ base: 10, md: 5 }}
+          padding={"10px 0"}
+        >
           <Heading as={"h3"} size={"sm"}>
             Add Area Details
           </Heading>
@@ -812,10 +812,7 @@ const RKStudio = () => {
           </ButtonGroup>
         </Box>
         {/* other Room  */}
-        <Box 
-          display={"grid"}  
-          className={style.optional_box}
-        >
+        <Box display={"grid"} className={style.optional_box}>
           <Heading as={"h3"} size={"sm"} marginTop={5}>
             Other rooms (optional)
           </Heading>
@@ -859,11 +856,8 @@ const RKStudio = () => {
           </Box>
         </Box>
         {/* furnish */}
-        <Box 
-          display={"grid"} 
-          className={style.optional_box}
-        >
-          <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}}>
+        <Box display={"grid"} className={style.optional_box}>
+          <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }}>
             Furnishing (optional)
           </Heading>
           <Box>
@@ -899,7 +893,7 @@ const RKStudio = () => {
               furnished == "Furnished" || furnished == "Semi-Furnished"
                 ? "grid"
                 : "none"
-            }  
+            }
           >
             <Box className={style.furnished_detail}>
               <Box>
@@ -1178,7 +1172,7 @@ const RKStudio = () => {
         </Box>
         {/* reserved */}
         <Box className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}}>
+          <Heading as={"h3"} size={"sm"} marginTop={{ base: 10, md: 5 }}>
             Reserved Parking (optional)
           </Heading>
           <div className={style.parking}>
@@ -1232,17 +1226,13 @@ const RKStudio = () => {
         </Box>
         {/* floor details */}
         <Box textAlign={"left"}>
-          <Heading
-            as={"h3"}
-            size={"sm"} 
-            textAlign={"left"}
-          >
+          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Floor Details
-          </Heading> 
-          <InputGroup width={{base:"100%",md:"300px"}}>
+          </Heading>
+          <InputGroup width={{ base: "100%", md: "300px" }}>
             <Input
-              type="text" 
-              placeholder="Enter no. floors"  
+              type="text"
+              placeholder="Enter no. floors"
               onChange={(e) => {
                 const nowval = e.target.value > 90;
                 if (nowval) {
@@ -1262,9 +1252,9 @@ const RKStudio = () => {
             />
             <Select
               id="floorSelectTag"
-              variant={"outline"}  
+              variant={"outline"}
               onChange={(e) => setFloorOn(e.target.value)}
-              value={floorOn} 
+              value={floorOn}
               borderRadius={0}
             >
               <option value="Ground">Ground</option>
@@ -1278,7 +1268,12 @@ const RKStudio = () => {
         </Box>
         {/* Availability status */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
+          <Heading
+            as={"h3"}
+            size={"sm"}
+            marginTop={{ base: 10, md: 5 }}
+            textAlign={"left"}
+          >
             Availability Status
           </Heading>
           <Box className={style.grid}>
@@ -1396,9 +1391,13 @@ const RKStudio = () => {
 
         {/* Add pricing and details */}
         <Box>
-          
           {/* OwnerShip detail */}
-          <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
+          <Heading
+            as={"h3"}
+            size={"sm"}
+            marginTop={{ base: 10, md: 5 }}
+            textAlign={"left"}
+          >
             Ownership
           </Heading>
           <Box className={style.grid} gap={4}>
@@ -1425,7 +1424,7 @@ const RKStudio = () => {
               backgroundColor={"blue.50"}
             >
               Co-operative society
-            </button> 
+            </button>
             <button
               className={ownership == "Leasehold" ? style.setbtn : style.btn}
               borderRadius={"100px"}
@@ -1454,34 +1453,44 @@ const RKStudio = () => {
         </Box>
         {/* Price Details */}
         <Box>
-          <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
+          <Heading
+            as={"h3"}
+            size={"sm"}
+            marginTop={{ base: 10, md: 5 }}
+            textAlign={"left"}
+          >
             Price Details
           </Heading>
           <InputGroup w={300} gap={2}>
-              <Select
-                w={"-moz-fit-content"}
-                value={currency}
-                borderRadius={0} 
-                onChange={(e) => setCurrency(e.target.value)}
-              >
-                <option value="₹">₹ INR </option> 
-                <option value="$">$ USD </option> 
-              </Select>
-              <Input
-                type="text"
-                value={pricedetail}
-                maxLength={9} 
-                borderRadius={0} 
-                placeholder={`Price`}
-                required
-                w={200}
-                onChange={(e) => {
-                  setPricedetail(NumericString(e.target.value));
-                }}
-              />
-            </InputGroup>
+            <Select
+              w={"-moz-fit-content"}
+              value={currency}
+              borderRadius={0}
+              onChange={(e) => setCurrency(e.target.value)}
+            >
+              <option value="₹">₹ INR </option>
+              <option value="$">$ USD </option>
+            </Select>
+            <Input
+              type="text"
+              value={pricedetail}
+              maxLength={9}
+              borderRadius={0}
+              placeholder={`Price`}
+              required
+              w={200}
+              onChange={(e) => {
+                setPricedetail(NumericString(e.target.value));
+              }}
+            />
+          </InputGroup>
         </Box>
-        <Box display={"flex"} gap={{ base: 2, md: 10 }} marginTop={{base:10,md:5}} flexWrap={"wrap"}>
+        <Box
+          display={"flex"}
+          gap={{ base: 2, md: 10 }}
+          marginTop={{ base: 10, md: 5 }}
+          flexWrap={"wrap"}
+        >
           <Checkbox
             isChecked={inclusivePrices.includes("All inclusive price")}
             onChange={(e) => {
@@ -1606,7 +1615,7 @@ const RKStudio = () => {
         <Box>
           <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Add Description and Unique Features of your Property
-          </Heading> 
+          </Heading>
           <Textarea
             height={140}
             value={desc}
@@ -1627,7 +1636,6 @@ const RKStudio = () => {
               textAlign={"left"}
               margin={"10px 0"}
             >
-              
               Upload Your Property image
             </Heading>
           </Box>
@@ -1648,7 +1656,6 @@ const RKStudio = () => {
                     role="button"
                     onClick={selectFiles}
                   >
-                    
                     Browse
                   </Text>
                 </>
@@ -1680,26 +1687,29 @@ const RKStudio = () => {
             </Box>
           </Box>
         </Box>
-
-        
       </Box>
       {/* Add amenities/unique features */}
       <Box>
-        <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
-          Add amenities/unique features
-        </Heading>
         <Heading
-          as={"h5"}
-          size={"xs"}
-          fontWeight={400} 
+          as={"h3"}
+          size={"sm"}
+          marginTop={{ base: 10, md: 5 }}
           textAlign={"left"}
         >
+          Add amenities/unique features
+        </Heading>
+        <Heading as={"h5"} size={"xs"} fontWeight={400} textAlign={"left"}>
           All fields on this page are optional
         </Heading>
       </Box>
       {/* Amenities */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
+        <Heading
+          as={"h3"}
+          size={"sm"}
+          marginTop={{ base: 10, md: 5 }}
+          textAlign={"left"}
+        >
           Amenities
         </Heading>
         <Box>
@@ -1775,13 +1785,18 @@ const RKStudio = () => {
             onClick={handleAminities}
             value={"Feng Shui / Vaastu Compliant"}
           >
-            Feng Shui / Vaastu Compliant 
-          </button> 
+            Feng Shui / Vaastu Compliant
+          </button>
         </Box>
       </Box>
       {/* Property Features */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
+        <Heading
+          as={"h3"}
+          size={"sm"}
+          marginTop={{ base: 10, md: 5 }}
+          textAlign={"left"}
+        >
           Property Features
         </Heading>
         <Box>
@@ -1816,7 +1831,7 @@ const RKStudio = () => {
           >
             False Ceiling Lighting
           </button>
-          
+
           <button
             className={
               propertyFeatures.includes("Water purifier")
@@ -1880,9 +1895,9 @@ const RKStudio = () => {
             }
             value={"Centrally Air Conditioned"}
             onClick={handlePropertyFeature}
-          > 
+          >
             Centrally Air Conditioned
-          </button> 
+          </button>
           <button
             className={
               propertyFeatures.includes("Private Garden / Terrace")
@@ -1894,7 +1909,7 @@ const RKStudio = () => {
           >
             Private Garden / Terrace
           </button>
-          
+
           <button
             className={
               propertyFeatures.includes("Airy Roooms")
@@ -1921,7 +1936,12 @@ const RKStudio = () => {
       </Box>
       {/* Society/Building feature */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
+        <Heading
+          as={"h3"}
+          size={"sm"}
+          marginTop={{ base: 10, md: 5 }}
+          textAlign={"left"}
+        >
           Society/Building feature
         </Heading>
         <Box>
@@ -1930,7 +1950,7 @@ const RKStudio = () => {
               buildingFeature.includes("Water softening plant")
                 ? style.setbtn
                 : style.btn
-            } 
+            }
             onClick={HandleBuildingFeature}
             value={"Water softening plant"}
           >
@@ -1968,7 +1988,7 @@ const RKStudio = () => {
             value={"Shopping Centre"}
           >
             Shopping Centre
-          </button> 
+          </button>
           <button
             className={
               buildingFeature.includes("Club house / Community Center")
@@ -1984,7 +2004,12 @@ const RKStudio = () => {
       </Box>
       {/* Additional Features */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
+        <Heading
+          as={"h3"}
+          size={"sm"}
+          marginTop={{ base: 10, md: 5 }}
+          textAlign={"left"}
+        >
           Additional Features
         </Heading>
         <Box>
@@ -2056,7 +2081,12 @@ const RKStudio = () => {
       </Box>
       {/* Water Source */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
+        <Heading
+          as={"h3"}
+          size={"sm"}
+          marginTop={{ base: 10, md: 5 }}
+          textAlign={"left"}
+        >
           Water Source
         </Heading>
         <Box>
@@ -2102,7 +2132,12 @@ const RKStudio = () => {
       </Box>
       {/* Overlooking */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
+        <Heading
+          as={"h3"}
+          size={"sm"}
+          marginTop={{ base: 10, md: 5 }}
+          textAlign={"left"}
+        >
           Overlooking
         </Heading>
         <Box>
@@ -2149,7 +2184,12 @@ const RKStudio = () => {
       </Box>
       {/* Other Features */}
       <Box>
-        <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
+        <Heading
+          as={"h3"}
+          size={"sm"}
+          marginTop={{ base: 10, md: 5 }}
+          textAlign={"left"}
+        >
           Other Features
         </Heading>
         <Box display={"grid"} textAlign={"left"} gap={2}>
@@ -2189,7 +2229,12 @@ const RKStudio = () => {
       </Box>
       {/* Power Back up */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
+        <Heading
+          as={"h3"}
+          size={"sm"}
+          marginTop={{ base: 10, md: 5 }}
+          textAlign={"left"}
+        >
           Power Back up
         </Heading>
         <Box>
@@ -2227,7 +2272,12 @@ const RKStudio = () => {
       </Box>
       {/* Property facing */}
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
+        <Heading
+          as={"h3"}
+          size={"sm"}
+          marginTop={{ base: 10, md: 5 }}
+          textAlign={"left"}
+        >
           Property facing
         </Heading>
         <Box>
@@ -2323,12 +2373,17 @@ const RKStudio = () => {
       </Box>
 
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
+        <Heading
+          as={"h3"}
+          size={"sm"}
+          marginTop={{ base: 10, md: 5 }}
+          textAlign={"left"}
+        >
           Type of flooring
         </Heading>
         <Box>
           <Select
-          width={{ base: "100%", md: 300 }}
+            width={{ base: "100%", md: 300 }}
             onChange={(e) => setFlooring(e.target.value)}
             value={flooring}
           >
@@ -2351,16 +2406,21 @@ const RKStudio = () => {
         </Box>
       </Box>
       <Box className={style.optional_box}>
-        <Heading as={"h3"} size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
+        <Heading
+          as={"h3"}
+          size={"sm"}
+          marginTop={{ base: 10, md: 5 }}
+          textAlign={"left"}
+        >
           Width of facing road
         </Heading>
-        <InputGroup w={{base:"100%",md:"340px"}}>
+        <InputGroup w={{ base: "100%", md: "340px" }}>
           <Input
             type="text"
             variant={"outline"}
             maxLength={3}
             flex={1}
-            placeholder="Enter Facing Width" 
+            placeholder="Enter Facing Width"
             required
             value={facingwidth}
             onChange={(e) => {
@@ -2370,7 +2430,7 @@ const RKStudio = () => {
           />
           <Select
             flex={1}
-            borderRadius={0} 
+            borderRadius={0}
             onChange={(e) => setFacing(e.target.value)}
             value={facing}
           >
@@ -2380,7 +2440,7 @@ const RKStudio = () => {
         </InputGroup>
       </Box>
       <Box className={style.optional_box}>
-        <Heading size={"sm"} marginTop={{base:10,md:5}} textAlign={"left"}>
+        <Heading size={"sm"} marginTop={{ base: 10, md: 5 }} textAlign={"left"}>
           Location Advantages
           <Heading
             size={"xs"}
@@ -2486,8 +2546,8 @@ const RKStudio = () => {
       >
         *Please provide correct information, otherwise your listing might get
         blocked
-      </Heading> 
-      {isClicked && <Loading />}  
+      </Heading>
+      {isClicked && <Loading />}
       <Button
         margin={"20px 0"}
         type="submit"

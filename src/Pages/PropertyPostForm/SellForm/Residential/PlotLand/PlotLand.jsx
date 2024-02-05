@@ -489,7 +489,7 @@ const PlotLand = () => {
       <Box className={style.location_form}>
         <Heading size={"lg"}> Where is your Plot / Land located?</Heading>
         <Heading size={"sm"} textAlign={"left"}>
-          Location Detail
+          Location Detail 
         </Heading>
 
         <Input

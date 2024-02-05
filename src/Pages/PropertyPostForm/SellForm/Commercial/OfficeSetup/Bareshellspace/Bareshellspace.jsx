@@ -521,16 +521,17 @@ const Bareshellspace = () => {
   };
 
   return (
-    <form onSubmit={handleSubmitData} >
+    <form onSubmit={handleSubmitData}>
       {/* property location */}
       <Box className={style.location_form}>
         <Heading size={"lg"} color={"black"} textAlign={"center"}>
           Where is your Bare shell office space located?
         </Heading>
-        <Heading size={"sm"} color={"black"} textAlign={"left"} >Location Detail</Heading>
+        <Heading size={"sm"} color={"black"} textAlign={"left"}>
+          Location Detail
+        </Heading>
 
-        <Select
-          fontSize={"md"}
+        <Select 
           variant="flushed"
           as={"select"}
           onChange={(e) => setLocatedInside(e.target.value)}
@@ -542,9 +543,7 @@ const Bareshellspace = () => {
           <option value="Other"> Other </option>
         </Select>
 
-        <Select
-          fontSize={"md"}
-          marginLeft={"10px"}
+        <Select 
           variant="flushed"
           as={"select"}
           onChange={(e) => setZoneType(e.target.value)}
@@ -566,22 +565,18 @@ const Bareshellspace = () => {
           placeholder={"Enter pincode"}
           maxLength={9}
           required
-          variant="flushed"
-          marginLeft={"10px"}
-          fontSize={"md"}
+          variant="flushed" 
           value={pincode}
           onChange={handlepinfetch}
         />
         <Input
           type="text"
           maxLength={9}
-          required
-          marginLeft={"10px"}
+          required 
           placeholder="Enter Locality"
           list="browsers"
           value={locality}
           onChange={(e) => setLocality(e.target.value)}
-          fontSize={"md"}
           variant="flushed"
         />
         {pincollection.length ? (
@@ -596,36 +591,30 @@ const Bareshellspace = () => {
 
         <Input
           type="text"
-          maxLength={"100"}
-          marginLeft={"10px"}
+          maxLength={"100"} 
           required
           placeholder="Enter City"
-          fontSize={"md"}
           value={city}
           onChange={(e) => setCity(e.target.value)}
           variant="flushed"
         />
         <Input
           type="text"
-          maxLength={"100"}
-          marginLeft={"10px"}
+          maxLength={"100"} 
           required
           placeholder="Enter State"
           value={state}
           onChange={(e) => setState(e.target.value)}
-          fontSize={"md"}
           variant="flushed"
         />
 
         <Input
           type="text"
           maxLength={"100"}
-          required
-          marginLeft={"10px"}
+          required 
           placeholder="Enter Country"
           value={country}
           onChange={(e) => setCountry(e.target.value)}
-          fontSize={"md"}
           variant="flushed"
         />
       </Box>
@@ -887,7 +876,11 @@ const Bareshellspace = () => {
           <Heading as={"h3"} marginTop={5} size={"sm"} textAlign={"left"}>
             Pantry Type
           </Heading>
-          <Box display={{base:"grid",md:"flex"}} gap={10} padding={"12px 0"}>
+          <Box
+            display={{ base: "grid", md: "flex" }}
+            gap={10}
+            padding={"12px 0"}
+          >
             <button
               value={"Shared Pantry"}
               margin="auto"
@@ -999,7 +992,14 @@ const Bareshellspace = () => {
           <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Please select the facilities available
           </Heading>
-          <Box display={{base:"grid",md:"flex"}} flexWrap={"wrap"} maxWidth={"96%"} margin={{base:"10px",md:"5px 14px"}} w={500} gap={{base:0,md:6}}>
+          <Box
+            display={{ base: "grid", md: "flex" }}
+            flexWrap={"wrap"}
+            maxWidth={"96%"}
+            margin={{ base: "10px", md: "5px 14px" }}
+            w={500}
+            gap={{ base: 0, md: 6 }}
+          >
             <Text flex={4} textAlign={"left"}>
               Central Air Conditioning
             </Text>
@@ -1010,7 +1010,14 @@ const Bareshellspace = () => {
               </Stack>
             </RadioGroup>
           </Box>
-          <Box display={{base:"grid",md:"flex"}} flexWrap={"wrap"} maxWidth={"96%"} margin={{base:"10px",md:"5px 14px"}} w={500} gap={{base:0,md:6}}>
+          <Box
+            display={{ base: "grid", md: "flex" }}
+            flexWrap={"wrap"}
+            maxWidth={"96%"}
+            margin={{ base: "10px", md: "5px 14px" }}
+            w={500}
+            gap={{ base: 0, md: 6 }}
+          >
             <Text flex={4} textAlign={"left"}>
               Oxygen Duct
             </Text>
@@ -1075,21 +1082,20 @@ const Bareshellspace = () => {
           <Heading as={"h3"} marginTop={5} size={"sm"} textAlign={"left"}>
             Floor Details
           </Heading>
-          <Box display={"flex"} alignItems={"center"}>
-            <Input
+          <InputGroup >  
+            <Input 
               type="text"
               value={totalfloors}
               placeholder="Enter total floor"
-              width={{ base: "100%", md: 300 }}
+              width={{ base: "60%", md: 200 }}
               maxLength={2}
               onChange={(e) => {
                 setTotalFloors(NumericString(e.target.value));
               }}
-              required
-              w={250}
+              required 
             />
             <Box>
-              <Menu>
+              <Menu> 
                 <MenuButton
                   variant={"outline"}
                   borderRadius={0}
@@ -1142,7 +1148,7 @@ const Bareshellspace = () => {
                 </MenuList>
               </Menu>
             </Box>
-          </Box>
+          </InputGroup>
         </Box>
 
         {/* Staicases */}
@@ -1155,7 +1161,7 @@ const Bareshellspace = () => {
             type="text"
             maxLength={9}
             placeholder="No. of Staircases"
-            variant={"flushed"}
+            variant={"outline"} 
             onChange={(e) => setStairCase(e.target.value)}
             value={stairCase}
           />
@@ -1344,7 +1350,6 @@ const Bareshellspace = () => {
           </Box>
         </Box>
 
-        
         {/* Availability status */}
         <Box textAlign={"left"} className={style.optional_box}>
           <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
@@ -1382,12 +1387,7 @@ const Bareshellspace = () => {
         {/* Age of Property */}
         {availability == "Ready to move" && (
           <Box textAlign={"left"} className={style.optional_box}>
-            <Heading
-              as={"h3"}
-              size={"md"}
-              marginTop={5}
-              textAlign={"left"}
-            >
+            <Heading as={"h3"} size={"md"} marginTop={5} textAlign={"left"}>
               Age of Property
             </Heading>
             <Box className={style.grid}>
@@ -1441,12 +1441,7 @@ const Bareshellspace = () => {
         {/* total Time for development */}
         {availability == "Under construction" && (
           <Box>
-            <Heading
-              as={"h3"}
-              size={"md"}
-              marginTop={5}
-              textAlign={"left"}
-            >
+            <Heading as={"h3"} size={"md"} marginTop={5} textAlign={"left"}>
               Possession By
             </Heading>
             <Select
@@ -1521,12 +1516,7 @@ const Bareshellspace = () => {
         </Box>
 
         <Box>
-          <Heading
-            as={"h3"}
-            size={"sm"}
-            marginTop={5}
-            textAlign={"left"}
-          >
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Price Details
           </Heading>
           <Box display={"flex"} alignItems={"center"} gap={5}>
@@ -1904,7 +1894,7 @@ const Bareshellspace = () => {
               >
                 Select
               </MenuButton>
-              <MenuList className={style.menu}>
+              <MenuList className={style.menu} width={{base:"100%",md:300}}>
                 <Checkbox
                   value={"Backend Office"}
                   onChange={(e) => {
@@ -2033,7 +2023,7 @@ const Bareshellspace = () => {
           <Textarea
             height={140}
             value={desc}
-            placeholder="Add Description" 
+            placeholder="Add Description"
             onChange={(e) => {
               let my_cleantext = CleanInputText(e.target.value);
               setDesc(my_cleantext);

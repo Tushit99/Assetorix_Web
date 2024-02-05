@@ -472,7 +472,7 @@ const CoWorkingspace = () => {
       {/* property location */}
       <Box className={style.location_form}>
         <Heading size={"lg"} color={"black"}>
-          Where is your property located?
+          Where is your Co-working office space located?
         </Heading>
         <Heading size={"sm"} color={"black"} textAlign={"left"} >Location Detail</Heading> 
 

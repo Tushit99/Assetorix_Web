@@ -498,7 +498,7 @@ const IndustrialLand = () => {
       <form onSubmit={handleSubmitData}>
         <Box className={style.location_form}>
           <Heading size={"lg"} textAlign={"center"}>
-            Where is your property located?
+            Where is your Industrial Lands/Plots located?
           </Heading>
           <Heading size={"sm"} color={"black"} textAlign={"left"}>
             Location Detail
@@ -915,8 +915,9 @@ const IndustrialLand = () => {
             Possession By
           </Heading>
           <Box>
-            <Select
-              variant={"filled"}
+            <Select 
+            width={{base:"100%",md:300}}
+              variant={"outline"}
               value={expectedByYear}
               onChange={(e) => setExpectedByYear(e.target.value)}
             >
@@ -1447,17 +1448,7 @@ const IndustrialLand = () => {
             textAlign={"left"}
           >
             Add Description and Unique Features of your Property
-          </Heading>
-          <Heading
-            as={"h3"}
-            size={"xs"}
-            fontWeight={400}
-            color={"#777777"}
-            
-            textAlign={"left"}
-          >
-            Adding description will increase your listing visibility
-          </Heading>
+          </Heading> 
           <Textarea
             height={140}
             placeholder="Add Description"

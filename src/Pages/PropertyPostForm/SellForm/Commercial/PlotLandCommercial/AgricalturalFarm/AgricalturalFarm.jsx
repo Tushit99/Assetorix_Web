@@ -496,7 +496,7 @@ const AgricalturalFarm = () => {
     <Box className="perfectwidth">
       <form onSubmit={handleSubmitData}>
         <Box className={style.location_form}>
-          <Heading size={"lg"} textAlign={"center"}>Where is your property located?</Heading>
+          <Heading size={"lg"} textAlign={"center"}>Where is your Agricultural/Farm Land located?</Heading>
           <Heading size={"sm"} color={"black"} textAlign={"left"}>
             Location Detail
           </Heading>

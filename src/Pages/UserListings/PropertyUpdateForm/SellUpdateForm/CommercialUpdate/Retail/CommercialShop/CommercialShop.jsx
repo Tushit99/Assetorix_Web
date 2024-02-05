@@ -1414,10 +1414,7 @@ const CommercialShop = () => {
                         <Box>
                             <Heading as={"h3"} size={"md"} fontWeight={600} margin={"10px 0"} textAlign={"left"}>
                                 Add Description and Unique Features of your Property
-                            </Heading>
-                            <Heading as={"h3"} size={"xs"} fontWeight={400} color={"#777777"} margin={"10px 0"} textAlign={"left"}>
-                                Adding description will increase your listing visibility
-                            </Heading>
+                            </Heading> 
                             <Textarea height={140} value={desc} onChange={(e) => {
                                 let my_cleantext = CleanInputText(e.target.value);
                                 setDesc(my_cleantext);

@@ -11,7 +11,7 @@
   .btn {
     border-radius: 10px;
     background-color: rgb(242, 249, 255);
-    color: rgb(15, 66, 137);
+    color: rgb(15, 66, 137); 
     padding: 4px 10px;
     border-radius: 0; 
     border: 1px solid rgb(222, 222, 255);
@@ -21,6 +21,11 @@
     max-width: 100%; 
   }
   
+  .menu{
+    display: grid; 
+    margin: -8px 0;
+    padding: 0 20px;
+  }
   
   .grid {
       display: flex;

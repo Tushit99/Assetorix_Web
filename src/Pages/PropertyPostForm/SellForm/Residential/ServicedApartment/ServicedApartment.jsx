@@ -632,7 +632,7 @@ const ServicedApartment = () => {
       {/* property location */} 
       <Box className={style.location_form}>
         <Heading size={"lg"}>Where is your Serviced Apartment located?</Heading>
-        <Heading size={"sm"}>Location Detail</Heading>
+        <Heading size={"sm"} textAlign={"left"}>Location Detail</Heading>
 
         <Input
           type="text"
