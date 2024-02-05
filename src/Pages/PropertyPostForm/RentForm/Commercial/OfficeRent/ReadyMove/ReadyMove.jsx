@@ -657,7 +657,7 @@ const ReadyMove = () => {
           </Heading>
           <InputGroup w={300} isAttached variant="outline">
             <Input
-              type="text"
+              type="text" 
               value={plotArea} 
               maxLength={9}
               placeholder="Enter area detail"

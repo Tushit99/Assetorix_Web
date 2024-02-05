@@ -635,8 +635,7 @@ const FlatApartment = () => {
           type="text"
           maxlength={"100"}
           required
-          placeholder="Apartment / Society"
-          fontSize={"sm"}
+          placeholder="Apartment / Society" 
           value={appartment}
           onChange={(e) => setApartment(WordandNumber(e.target.value))}
           variant="flushed"
@@ -646,8 +645,7 @@ const FlatApartment = () => {
           placeholder={"Enter pincode"}
           maxlength={"6"}
           required
-          variant="flushed"
-          fontSize={"sm"}
+          variant="flushed" 
           value={pincode}
           onChange={handlepinfetch}
         />
@@ -658,8 +656,7 @@ const FlatApartment = () => {
           placeholder="Enter Locality"
           list="browsers"
           value={locality}
-          onChange={(e) => setLocality(WordandNumber(e.target.value))}
-          fontSize={"sm"}
+          onChange={(e) => setLocality(WordandNumber(e.target.value))} 
           variant="flushed"
         />
         {pincollection.length ? (
@@ -675,9 +672,8 @@ const FlatApartment = () => {
         <Input
           type="text"
           required
-          placeholder="Enter City"
-          fontSize={"sm"}
-          maxlength={"100"}
+          placeholder="Enter City" 
+          maxlength={"40"}
           value={city}
           onChange={(e) => setCity(WordandNumber(e.target.value))}
           variant="flushed"
@@ -685,21 +681,19 @@ const FlatApartment = () => {
         <Input
           type="text"
           required
-          maxlength={"100"}
+          maxlength={"40"}
           placeholder="Enter State"
           value={state}
-          onChange={(e) => setState(WordandNumber(e.target.value))}
-          fontSize={"sm"}
+          onChange={(e) => setState(WordandNumber(e.target.value))} 
           variant="flushed"
         />
         <Input
           type="text"
           required
-          maxlength={"100"}
+          maxlength={"40"}
           placeholder="Enter Country"
           value={country}
-          onChange={(e) => setCountry(WordandNumber(e.target.value))}
-          fontSize={"sm"}
+          onChange={(e) => setCountry(WordandNumber(e.target.value))} 
           variant="flushed"
         />
       </Box>
@@ -750,8 +744,7 @@ const FlatApartment = () => {
             Add Area Details
           </Heading>
           <InputGroup
-            w={300}
-            size="sm"
+            w={300} 
             marginTop={2}
             isAttached
             variant="outline"
@@ -759,7 +752,7 @@ const FlatApartment = () => {
             <Input
               type="text"
               value={plotArea}
-              placeholder="Enter area detail"
+              placeholder="Enter area detail" 
               w={200}
               maxLength={"6"}
               onChange={(e) => {

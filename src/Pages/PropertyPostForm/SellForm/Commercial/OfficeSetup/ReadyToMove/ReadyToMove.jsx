@@ -648,6 +648,7 @@ const ReadyToMove = () => {
             <Input
               type="text"
               maxLength={9}
+              placeholder="Enter area detail" 
               value={plotArea}
               borderRadius={0}
               onChange={(e) => {

@@ -487,8 +487,10 @@ const PlotLand = () => {
     <form onSubmit={handleSubmitData}>
       {/* property location */}
       <Box className={style.location_form}>
-        <Heading size={"lg"}>Where is your Plot / Land located?</Heading>
-        <Heading size={"sm"}>Location Detail</Heading>
+        <Heading size={"lg"}> Where is your Plot / Land located?</Heading>
+        <Heading size={"sm"} textAlign={"left"}>
+          Location Detail
+        </Heading>
 
         <Input
           type="text"
@@ -637,7 +639,6 @@ const PlotLand = () => {
         {/* Property Dimensions */}
         <Box as={"div"} textAlign={"left"} padding={"10px 0"} display={"grid"}>
           <Heading as={"h3"} size={"sm"}>
-            
             Property Dimensions (Optional)
           </Heading>
           <Input
@@ -668,7 +669,6 @@ const PlotLand = () => {
         {/* Floors Allowed For Construction */}
         <Box textAlign={"left"} padding={"10px 0"}>
           <Heading as={"h3"} size={"sm"}>
-            
             Floors Allowed For Construction
           </Heading>
           <Input
@@ -750,7 +750,6 @@ const PlotLand = () => {
         {/* Construction Property */}
         <Box textAlign={"left"} marginTop={5} className={style.optional_box}>
           <Heading as={"h3"} size={"sm"}>
-            
             Any construction done on this property?
           </Heading>
           <Box textAlign={"left"} padding={"10px 0 0 0"}>
@@ -792,7 +791,6 @@ const PlotLand = () => {
                 constructionType.includes("Shed") ? style.setbtn : style.btn
               }
             >
-              
               Shed
             </button>
             <button
@@ -802,7 +800,6 @@ const PlotLand = () => {
                 constructionType.includes("Room(s)") ? style.setbtn : style.btn
               }
             >
-              
               Room(s)
             </button>
             <button
@@ -812,7 +809,6 @@ const PlotLand = () => {
                 constructionType.includes("Washroom") ? style.setbtn : style.btn
               }
             >
-              
               Washroom
             </button>
             <button
@@ -822,7 +818,6 @@ const PlotLand = () => {
                 constructionType.includes("Other") ? style.setbtn : style.btn
               }
             >
-              
               Other
             </button>
           </Box>
@@ -835,7 +830,7 @@ const PlotLand = () => {
           <Box>
             <Select
               variant={"flushed"}
-              width={{base:"100%",md:"300px"}} 
+              width={{ base: "100%", md: "300px" }}
               value={expectedByYear}
               onChange={(e) => setExpectedByYear(e.target.value)}
             >
@@ -866,7 +861,7 @@ const PlotLand = () => {
               backgroundColor={"blue.50"}
             >
               Freehold
-            </button> 
+            </button>
             <button
               className={
                 ownership == "Co-operative society" ? style.setbtn : style.btn
@@ -1109,7 +1104,7 @@ const PlotLand = () => {
           <Textarea
             height={140}
             value={desc}
-            placeholder="Add Description" 
+            placeholder="Add Description"
             onChange={(e) => {
               let my_cleantext = CleanInputText(e.target.value);
               setDesc(my_cleantext);
@@ -1126,7 +1121,6 @@ const PlotLand = () => {
               textAlign={"left"}
               margin={"10px 0"}
             >
-              
               Upload Your Property image
             </Heading>
           </Box>
@@ -1147,7 +1141,6 @@ const PlotLand = () => {
                     role="button"
                     onClick={selectFiles}
                   >
-                    
                     Browse
                   </Text>
                 </>
@@ -1487,7 +1480,7 @@ const PlotLand = () => {
             onClick={handlelocationadvantages}
           >
             Close to Market
-          </button> 
+          </button>
           <button
             className={
               locationAdv.includes("Close to Mall") ? style.setbtn : style.btn

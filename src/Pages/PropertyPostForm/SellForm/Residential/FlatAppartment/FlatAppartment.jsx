@@ -656,21 +656,17 @@ const FlatAppartment = () => {
         <Heading size={"sm"}>Location Detail</Heading>
 
         <Input
-          type="text"
-          padding={"0 10px"}
+          type="text" 
           placeholder="House No. (optional)"
           value={houseNo}
           maxLength={"100"}
-          onChange={(e) => setHouseNo(WordandNumber(e.target.value))}
-          fontSize={"md"}
+          onChange={(e) => setHouseNo(WordandNumber(e.target.value))} 
           variant="flushed"
         />
         <Input
-          type="text"
-          padding={"0 10px"}
+          type="text" 
           required
-          placeholder="Apartment / Society Name"
-          fontSize={"md"}
+          placeholder="Apartment / Society Name" 
           maxLength={"100"}
           value={appartment}
           onChange={(e) => setApartment(WordandNumber(e.target.value))}
@@ -678,25 +674,21 @@ const FlatAppartment = () => {
         />
         <Input
           type="text"
-          placeholder={"Enter pincode"}
-          padding={"0 10px"}
+          placeholder={"Enter pincode"} 
           required
-          maxLength={"6"}
-          fontSize={"md"}
+          maxLength={"6"} 
           variant="flushed"
           value={pincode}
           onChange={handlepinfetch}
         />
         <Input
-          type="text"
-          padding={"0 10px"}
+          type="text" 
           required
           placeholder="Enter Locality"
           list="browsers"
           value={locality}
           maxLength={"100"}
-          onChange={(e) => setLocality(WordandNumber(e.target.value))}
-          fontSize={"md"}
+          onChange={(e) => setLocality(WordandNumber(e.target.value))} 
           variant="flushed"
         />
         {pincollection.length ? (
@@ -710,34 +702,28 @@ const FlatAppartment = () => {
         )}
 
         <Input
-          type="text"
-          padding={"0 10px"}
+          type="text" 
           required
-          placeholder="Enter City"
-          fontSize={"md"}
+          placeholder="Enter City" 
           value={city}
           onChange={(e) => setCity(AlphabetString(e.target.value))}
           variant="flushed"
         />
         <Input
-          type="text"
-          padding={"0 10px"}
+          type="text" 
           required
           placeholder="Enter State"
           value={state}
-          onChange={(e) => setState(AlphabetString(e.target.value))}
-          fontSize={"md"}
+          onChange={(e) => setState(AlphabetString(e.target.value))} 
           variant="flushed"
         />
         <Input
-          type="text"
-          padding={"0 10px"}
+          type="text" 
           required
           maxLength={"100"}
           placeholder="Enter Country"
           value={country}
-          onChange={(e) => setCountry(AlphabetString(e.target.value))}
-          fontSize={"md"}
+          onChange={(e) => setCountry(AlphabetString(e.target.value))} 
           variant="flushed"
         />
       </Box>
@@ -791,24 +777,23 @@ const FlatAppartment = () => {
             Add Area Details
           </Heading>
           <InputGroup
-            w={300}
-            size="md"
+            width={{base:"100%",md:300}}  
             marginTop={2}
             isAttached
             variant="outline"
           >
             <Input
               type="text"
-              value={plotArea}
-              placeholder="Enter area detail"
-              w={200}
+              value={plotArea} 
+              fontSize={"md"} 
+              placeholder="Enter area detail" 
               maxLength={"6"}
               onChange={(e) => {
                 setPlotArea(NumericString(e.target.value));
               }}
               required
             />
-            <InputRightElement width={100}>
+            <InputRightElement>
               <Select
                 value={areaPer}
                 borderRadius={0}
