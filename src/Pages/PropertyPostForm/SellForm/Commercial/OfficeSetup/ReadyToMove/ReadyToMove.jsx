@@ -651,7 +651,7 @@ const ReadyToMove = () => {
               value={plotArea}
               borderRadius={0}
               onChange={(e) => {
-                setPlotArea(e.target.value);
+                setPlotArea(NumericString(e.target.value));
               }}
               required
             />
@@ -699,21 +699,21 @@ const ReadyToMove = () => {
           >
             <Input
               type="text"
-              maxLength={"6"}
+              maxLength={4}
               placeholder="Min no. of Seats"
               value={minseat}
               onChange={(e) => setMinseat(NumericString(e.target.value))}
             />
             <Input
               type="text"
-              maxLength={"6"}
+              maxLength={5}
               placeholder="Max no. of Seats (optional)"
               value={maxseat}
               onChange={(e) => setMaxseat(NumericString(e.target.value))}
             />
             <Input
               type="text"
-              maxLength={"6"}
+              maxLength={4}
               placeholder="No. of Cabins"
               value={cabins}
               onChange={(e) => setCabins(NumericString(e.target.value))}
@@ -732,7 +732,7 @@ const ReadyToMove = () => {
               placeholder="No. of Meeting Rooms"
               value={meetingRoom}
               width={{ base: "100%", md: 300 }}
-              maxLength={9}
+              maxLength={5}
               onChange={(e) => setMeetingRoom(NumericString(e.target.value))}
             />
           </Box>
@@ -924,49 +924,38 @@ const ReadyToMove = () => {
             textAlign={"left"}
           >
             <button
-              value={"Private"}
-              onClick={(e) => {
-                e.preventDefault();
-                setPantryType(e.target.value);
-              }}
-              className={pantryType === "Private" ? style.setbtn : style.btn}
-            >
-              Private
-            </button>
-            <button
-              value={"Shared"}
-              onClick={(e) => {
-                e.preventDefault();
-                setPantryType(e.target.value);
-              }}
-              className={pantryType === "Shared" ? style.setbtn : style.btn}
-            >
-              Shared
-            </button>
-            <button
-              value={"Not-Available"}
+              value={"Shared Pantry"}
               onClick={(e) => {
                 e.preventDefault();
                 setPantryType(e.target.value);
               }}
               className={
-                pantryType === "Not-Available" ? style.setbtn : style.btn
+                pantryType === "Shared Pantry" ? style.setbtn : style.btn
               }
             >
-              Not-Available
+              Shared Pantry
+            </button>
+            <button
+              value={"No Shared Pantry"}
+              onClick={(e) => {
+                e.preventDefault();
+                setPantryType(e.target.value);
+              }}
+              className={
+                pantryType === "No Shared Pantry" ? style.setbtn : style.btn
+              }
+            >
+              No Shared Pantry
             </button>
           </Box>
           <Box
-            display={
-              pantryType == "Private" || pantryType == "Shared"
-                ? "flex"
-                : "none"
-            }
+            display={pantryType == "Shared Pantry" ? "flex" : "none"}
+            marginTop={2}
           >
             <InputGroup w={340}>
               <Input
                 type="text"
-                maxLength={9}
+                maxLength={6}
                 border={"1px solid rgb(222, 222, 255)"}
                 value={pantrySize}
                 onChange={(e) => setPantrySize(NumericString(e.target.value))}
@@ -977,16 +966,13 @@ const ReadyToMove = () => {
                 placeholder="Pantry Size (optional)"
               />
               <Select
-                variant={"filled"}
+                variant={"outline"}
                 flex={2}
+                borderRadius={0}
                 value={pantryTypeUnit}
-                border={"1px solid rgb(222, 222, 255)"}
-                backgroundColor={"white"}
-                _hover={{ backgroundColor: "#fffff" }}
                 onChange={(e) => {
                   setPantryTypeUnit(e.target.value);
                 }}
-                className={style.select}
                 required
               >
                 <option value="sq.ft">sq.ft</option>
@@ -1159,7 +1145,9 @@ const ReadyToMove = () => {
                   as={Button}
                   rightIcon={<ChevronDownIcon />}
                 >
-                  Your Floor No. (optional)
+                  {floorNumber.length
+                    ? `Selected ${floorNumber.length} floor`
+                    : "Enter Floor No."}
                 </MenuButton>
                 <MenuList
                   display={"flex"}
@@ -1388,8 +1376,8 @@ const ReadyToMove = () => {
               </Checkbox>
               <Checkbox
                 onChange={handleNumberOfParking}
-                value={"Private Parking Outside"}
-                isChecked={parkingArr.includes("Private Parking Outside")}
+                value={"Public Parking"}
+                isChecked={parkingArr.includes("Public Parking")}
               >
                 Public Parking
               </Checkbox>
@@ -1582,7 +1570,7 @@ const ReadyToMove = () => {
             <Select
               w={"-moz-fit-content"}
               value={currency}
-              borderRadius={0}
+              borderRadius={0} 
               onChange={(e) => setCurrency(e.target.value)}
             >
               <option value="₹">₹ INR </option>
@@ -1831,14 +1819,14 @@ const ReadyToMove = () => {
         </Box>
 
         {/* office previously used for */}
-        <Box className={style.optional_box}>
+        <Box>
           <Box>
             <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
               Your office was previously used for (Optional)
             </Heading>
-            <Text> * You can select upto 3 </Text>
+            <Text textAlign={"left"}> * You can select upto 3 </Text>
           </Box>
-          <Box>
+          <Box margin={0} textAlign={"left"}>
             <Menu>
               <MenuButton
                 px={4}
@@ -1847,15 +1835,23 @@ const ReadyToMove = () => {
                 borderRadius="md"
                 borderWidth="1px"
                 textAlign={"left"}
-                width={300}
+                width={{ base: "100%", md: 300 }}
                 _hover={{ bg: "white" }}
                 _expanded={{ bg: "white" }}
                 _focus={{ bg: "white" }}
                 rightIcon={<ChevronDownIcon />}
               >
-                Select
+                {previouslyUsedList.length
+                  ? `selected ${previouslyUsedList.length}`
+                  : "Select"}
               </MenuButton>
-              <MenuList className={style.menu}>
+              <MenuList
+                display={"grid"}
+                padding={"4px 10px"}
+                width={{ base: "100%", md: 300 }}
+                marginTop={"-6px"}
+                marginBottom={"-6px"}
+              >
                 <Checkbox
                   isChecked={previouslyUsedList.includes("Backend Office")}
                   value={"Backend Office"}
@@ -2130,14 +2126,14 @@ const ReadyToMove = () => {
           </button>
           <button
             className={
-              amenities.includes("Securitv Personnel")
+              amenities.includes("Security Personnel")
                 ? style.setbtn
                 : style.btn
             }
             onClick={handleAminities}
-            value={"Securitv Personnel"}
+            value={"Security Personnel"}
           >
-            Securitv Personnel
+            Security Personnel
           </button>
           <button
             className={
@@ -2149,11 +2145,11 @@ const ReadyToMove = () => {
             Intercom Facility
           </button>
           <button
-            className={amenities.includes("LIF") ? style.setbtn : style.btn}
+            className={amenities.includes("Lift") ? style.setbtn : style.btn}
             onClick={handleAminities}
-            value={"LIF"}
+            value={"Lift"}
           >
-            LIF(s)
+            Lift(s)
           </button>
         </Box>
       </Box>

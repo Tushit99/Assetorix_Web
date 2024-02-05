@@ -94,7 +94,7 @@ const ServicedApartmentRentUpdate = () => {
     const [clickCount, setClickCount] = useState(0);
     const navigate = useNavigate();
     const [currency, setCurrency] = useState("₹"); 
-    const [pricedetail, setPricedetail] = useState("");
+    const [pricedetail, setPricedetail] = useState("");  
 
     // ================================= 
 
@@ -1755,7 +1755,7 @@ const ServicedApartmentRentUpdate = () => {
                         </button>
                         <button
                             className={
-                                amenities.includes("Lift(s)")
+                                amenities.includes("Lift")
                                     ? style.setbtn
                                     : style.btn
                             }

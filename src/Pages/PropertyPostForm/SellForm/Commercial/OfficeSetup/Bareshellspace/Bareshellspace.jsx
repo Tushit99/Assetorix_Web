@@ -2171,14 +2171,14 @@ const Bareshellspace = () => {
           </button>
           <button
             className={
-              amenities.includes("Securitv Personnel")
+              amenities.includes("Security Personnel")
                 ? style.setbtn
                 : style.btn
             }
             onClick={handleAminities}
-            value={"Securitv Personnel"}
+            value={"Security Personnel"}
           >
-            Securitv Personnel
+            Security Personnel
           </button>
           <button
             className={
@@ -2190,11 +2190,11 @@ const Bareshellspace = () => {
             Intercom Facility
           </button>
           <button
-            className={amenities.includes("LIF") ? style.setbtn : style.btn}
+            className={amenities.includes("Lift") ? style.setbtn : style.btn}
             onClick={handleAminities}
-            value={"LIF"}
+            value={"Lift"}
           >
-            LIF(s)
+            Lift(s)
           </button>
         </Box>
       </Box>

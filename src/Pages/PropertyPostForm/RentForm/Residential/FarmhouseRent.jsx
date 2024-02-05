@@ -1814,7 +1814,7 @@ const FarmhouseRent = () => {
             Security Personnel
           </button>
           <button
-            className={amenities.includes("Lift(s)") ? style.setbtn : style.btn}
+            className={amenities.includes("Lift") ? style.setbtn : style.btn}
             onClick={handleAminities}
             value={"Lift(s)"}
           >

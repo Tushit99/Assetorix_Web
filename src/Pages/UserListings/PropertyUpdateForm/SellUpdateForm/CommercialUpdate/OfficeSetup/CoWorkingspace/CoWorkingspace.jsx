@@ -1302,12 +1302,12 @@ const CoWorkingspaceUpdate = () => {
                         </button>
                         <button
                             className={
-                                amenities.includes("LIF") ? style.setbtn : style.btn
+                                amenities.includes("Lift") ? style.setbtn : style.btn
                             }
                             onClick={handleAminities}
-                            value={"LIF"}
+                            value={"Lift"}
                         >
-                            LIF(s)
+                            Lift(s)
                         </button>
                     </Box>
                 </Box>

@@ -1743,7 +1743,7 @@ const FarmhouseRentUpdate = () => {
                         </button>
                         <button
                             className={
-                                amenities.includes("Lift(s)")
+                                amenities.includes("Lift")
                                     ? style.setbtn
                                     : style.btn
                             }

@@ -2071,14 +2071,14 @@ const ReadyMove = () => {
           </button>
           <button
             className={
-              amenities.includes("Securitv Personnel")
+              amenities.includes("Security Personnel")
                 ? style.setbtn
                 : style.btn
             }
             onClick={handleAminities}
-            value={"Securitv Personnel"}
+            value={"Security Personnel"}
           >
-            Securitv Personnel
+            Security Personnel
           </button>
           <button
             className={
@@ -2090,9 +2090,9 @@ const ReadyMove = () => {
             Intercom Facility
           </button>
           <button
-            className={amenities.includes("Lift(s)") ? style.setbtn : style.btn}
+            className={amenities.includes("Lift") ? style.setbtn : style.btn}
             onClick={handleAminities}
-            value={"Lift(s)"}
+            value={"Lift(s)"} 
           >
             Lift(s)
           </button>

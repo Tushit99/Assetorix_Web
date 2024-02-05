@@ -1324,11 +1324,11 @@ const CoWorkingspace = () => {
             Intercom Facility
           </button>
           <button
-            className={amenities.includes("LIF") ? style.setbtn : style.btn}
+            className={amenities.includes("Lift") ? style.setbtn : style.btn}
             onClick={handleAminities}
-            value={"LIF"}
+            value={"Lift"}
           >
-            LIF(s)
+            Lift(s)
           </button>
         </Box>
       </Box>

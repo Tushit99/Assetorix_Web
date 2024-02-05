@@ -1872,12 +1872,12 @@ const BareShellUpdate = () => {
                         </button>
                         <button
                             className={
-                                amenities.includes("Securitv Personnel") ? style.setbtn : style.btn
+                                amenities.includes("Security Personnel") ? style.setbtn : style.btn
                             }
                             onClick={handleAminities}
-                            value={"Securitv Personnel"}
+                            value={"Security Personnel"}
                         >
-                            Securitv Personnel
+                            Security Personnel
                         </button>
                         <button
                             className={
@@ -1890,12 +1890,12 @@ const BareShellUpdate = () => {
                         </button>
                         <button
                             className={
-                                amenities.includes("LIF") ? style.setbtn : style.btn
+                                amenities.includes("Lift") ? style.setbtn : style.btn
                             }
                             onClick={handleAminities}
-                            value={"LIF"}
+                            value={"Lift"}
                         >
-                            LIF(s)
+                            Lift(s)
                         </button>
                     </Box>
                 </Box>
