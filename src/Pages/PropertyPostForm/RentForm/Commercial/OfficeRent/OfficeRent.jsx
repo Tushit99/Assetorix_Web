@@ -11,8 +11,8 @@ const OfficeRent = () => {
   const [officeOpt, setOfficeOpt] = useState("");
 
   return (
-    <Box >
-      <Heading size={"md"} margin={"10px 0 14px 0"} textAlign={"left"} >
+    <Box>
+      <Heading size={"sm"} margin={"4px 0"} textAlign={"left"} >
         What kind of office is it ?
       </Heading>
       <Box display={"flex"} gap={10} justifyContent={"left"} alignItems={"center"} >

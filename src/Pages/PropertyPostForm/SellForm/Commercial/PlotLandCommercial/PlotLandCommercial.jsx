@@ -11,7 +11,7 @@ const PlotLandCommercial = () => {
     return (
         <div>
             <Box className={style.optional_box}> 
-                <Heading size={"md"}>
+                <Heading size={"sm"} as={"h4"} textAlign={"left"} >
                     What kind of plot / land is it?
                 </Heading>
                 <Box>

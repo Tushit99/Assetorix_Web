@@ -12,9 +12,9 @@ const PlotLandRent = () => {
     return (
         <div>
             <Box className={style.optional_box}>  
-                <Heading size={"md"}>
+                <Heading size={"sm"} as={"h4"} textAlign={"left"} >
                     What kind of plot / land is it ?
-                </Heading>  
+                </Heading>   
                 <Box>  
                     <button value={"Commercial Land / lnst. Land"} className={plotType == "Commercial Land / lnst. Land" ? style.setbtn : style.btn} onClick={(e) => setPlotType(e.target.value)} >
                         Commercial Land/lnst. Land

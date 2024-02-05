@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
 import style from "./OfficeSetup.module.css";
-import { Box } from '@chakra-ui/react'; 
+import { Box, Heading } from '@chakra-ui/react'; 
 import ReadyToMove from './ReadyToMove/ReadyToMove';
 import Bareshellspace from './Bareshellspace/Bareshellspace';
 import CoWorkingspace from './CoWorkingspace/CoWorkingspace';
 
-const OfficeSetup = () => {
+const OfficeSetup = () => { 
     const [officeOpt, setOfficeOpt] = useState("");
 
     return (
         <Box >
+            <Heading size="sm" as={"h4"} textAlign={"left"} margin={"4px 8px"}> What type of office space it is? </Heading>
             <Box display={"flex"} gap={10} marginLeft={"8px"} justifyContent={"left"} alignItems={"center"} >
                 <button value={"Ready to move office space"} onClick={(e) => setOfficeOpt(e.target.value)} className={officeOpt == "Ready to move office space" ? style.setbtn : style.btn} >Ready to move office space</button>
                 <button value={"Bare shell office space"} onClick={(e) => setOfficeOpt(e.target.value)} className={officeOpt == "Bare shell office space" ? style.setbtn : style.btn} >Bare shell office space</button>
