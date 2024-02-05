@@ -942,8 +942,7 @@ const AgriculturalLandRent = () => {
           <Heading
             as={"h3"}
             size={"sm"}
-            margin={"30px 0 10px 0"}
-            textAlign={"left"}
+            textAlign={"left"} 
           >
             Which authority the property is approved by ?
           </Heading>

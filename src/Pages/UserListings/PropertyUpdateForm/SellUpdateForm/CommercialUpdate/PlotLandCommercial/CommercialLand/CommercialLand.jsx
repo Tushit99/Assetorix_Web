@@ -675,7 +675,7 @@ const CommercialLandUpdate = () => {
         </Box>
         {/* =============================== Tell us about your property ============================ */}
         <Box>
-          <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"}>
+          <Heading as={"h3"} size={"md"} textAlign={"left"}>
             Tell us about your property
           </Heading>
         </Box>
@@ -972,8 +972,7 @@ const CommercialLandUpdate = () => {
           <Heading
             as={"h3"}
             size={"md"}
-            margin={"30px 0 10px 0"}
-            textAlign={"left"}
+            textAlign={"left"} 
           >
             Which authority the property is approved by ?
           </Heading>

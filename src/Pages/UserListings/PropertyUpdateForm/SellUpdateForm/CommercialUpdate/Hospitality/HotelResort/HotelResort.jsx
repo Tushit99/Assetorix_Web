@@ -5,9 +5,7 @@ import {
   ButtonGroup,
   Heading,
   Input,
-  InputGroup,
-  NumberInput,
-  NumberInputField,
+  InputGroup, 
   Select,
   Text,
   Textarea,
@@ -50,7 +48,7 @@ const HotelResortUpdate = () => {
   const [Beds, setBeds] = useState(0);
   const [wardrobe, setWardrobe] = useState(0);
   const [geyser, setGeyser] = useState(0);
-  const [currency, setCurrency] = useState("₹");  
+  const [currency, setCurrency] = useState("₹");
   const [areaPer, setAreaPer] = useState("sq.ft");
   const [furnishedarr, setfurnishedarr] = useState([]);
   const [extraroom, setExtraRoom] = useState([]);
@@ -60,7 +58,7 @@ const HotelResortUpdate = () => {
   const [expectedyear, setExpectedYear] = useState("");
   const [ownership, setOwnerShip] = useState("");
   const [pricedetail, setPricedetail] = useState("");
-  
+
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
@@ -116,7 +114,7 @@ const HotelResortUpdate = () => {
         setqualityRating(e?.qualityRating);
         setOwnerShip(e?.ownership);
         setPricedetail(e?.price);
-        
+
         setPreLeased(e.preLeased_Rented);
         if (e.preLeased_Rented == "Yes") {
           setCurrentRentPerMonth(e.preLeased_RentedDetails.currentRentPerMonth);
@@ -176,7 +174,7 @@ const HotelResortUpdate = () => {
       },
       ownership,
       price: +pricedetail,
-     
+
       inclusivePrices,
       amenities,
       propertyFeatures,
@@ -554,8 +552,6 @@ const HotelResortUpdate = () => {
     setLocationAdv(newarr);
   };
 
-  ;
-
   // const createtemplatefloors = () => {
   //     let options = "";
 
@@ -679,13 +675,10 @@ const HotelResortUpdate = () => {
       <form onSubmit={handleSubmitData}>
         {/* ============================= property location =========================== */}
         <Box className={style.location_form}>
-          <Heading size={"lg"}>Where is your property located?</Heading>
-          <Heading size={"sm"}>
-            An accurate location helps you connect with the right buyers.
-          </Heading>
+          <Heading size={"lg"}>Where is your Hotel / Resorts located?</Heading>
+          <Heading size={"sm"} textAlign={"left"}>Location Detail</Heading>
           <Input
             type="text"
-            padding={"0 10px"}
             required
             placeholder="Address (optional)"
             value={address}
@@ -693,25 +686,15 @@ const HotelResortUpdate = () => {
             fontSize={"md"}
             variant="flushed"
           />
-          <NumberInput value={pincode}>
-            <NumberInputField
-              placeholder={"Enter pincode"}
-              padding={"0 10px"}
-              borderRight={0}
-              borderLeft={0}
-              borderTop={0}
-              borderRadius={0}
-              _active={{
-                borderRight: "0",
-                borderLeft: "0",
-                borderTop: "0",
-                borderRadius: "0",
-              }}
-              required
-              fontSize={"md"}
-              onChange={handlepinfetch}
-            />
-          </NumberInput>
+          <Input
+            type="text"
+            placeholder={"Enter pincode"}
+            required
+            fontSize={"md"}
+            value={pincode}
+            onChange={handlepinfetch}
+            padding={"0 10px"}
+          />
           <Input
             type="text"
             padding={"0 10px"}
@@ -765,10 +748,7 @@ const HotelResortUpdate = () => {
           />
         </Box>
         {/* =============================== Property Detail ============================= */}
-        <Box marginTop={12}>
-          <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"}>
-            Tell us about your property
-          </Heading>
+        <Box marginTop={6}> 
           <Heading as={"h4"} size={"sm"} margin={"0 0 30px 0 "}>
             Add Room Details
           </Heading>
@@ -819,7 +799,7 @@ const HotelResortUpdate = () => {
             <Heading as={"h3"} margin={"5px 0"} size={"md"}>
               Add Area Details
             </Heading>
-            
+
             <ButtonGroup
               className={style.select_land}
               size="sm"
@@ -831,7 +811,6 @@ const HotelResortUpdate = () => {
                 placeholder="Enter Plot Area"
                 value={plotArea}
                 onChange={(e) => {
-                  
                   setPlotArea(e.target.value);
                 }}
                 required
@@ -1282,8 +1261,7 @@ const HotelResortUpdate = () => {
             <Heading
               as={"h3"}
               size={"md"}
-              margin={"30px 0 10px 0"}
-              textAlign={"left"}
+              textAlign={"left"} 
             >
               Age of Property
             </Heading>
@@ -1341,11 +1319,10 @@ const HotelResortUpdate = () => {
             <Heading
               as={"h3"}
               size={"md"}
-              margin={"30px 0 10px 0"}
-              textAlign={"left"}
+              textAlign={"left"} 
             >
               Possession By
-            </Heading>
+            </Heading> 
             <Select
               placeholder="Expected by"
               value={expectedyear}
@@ -1528,10 +1505,10 @@ const HotelResortUpdate = () => {
                 value={pricedetail}
                 required
                 onChange={(e) => {
-                  setPricedetail(e.target.value); 
+                  setPricedetail(e.target.value);
                 }}
               />
-            </Box> 
+            </Box>
           </Box>
         </Box>
 
@@ -1558,7 +1535,6 @@ const HotelResortUpdate = () => {
               }}
               className={preLeased == "Yes" ? style.setbtn : style.btn}
             >
-              
               Yes
             </button>
             <button
@@ -1569,7 +1545,6 @@ const HotelResortUpdate = () => {
               }}
               className={preLeased == "No" ? style.setbtn : style.btn}
             >
-              
               No
             </button>
           </Box>
@@ -1630,7 +1605,6 @@ const HotelResortUpdate = () => {
               textAlign={"left"}
               margin={"10px 0"}
             >
-              
               Upload Your Property image
             </Heading>
           </Box>
@@ -1666,7 +1640,6 @@ const HotelResortUpdate = () => {
                     role="button"
                     onClick={selectFiles}
                   >
-                    
                     Browse
                   </Text>
                 </>
@@ -1710,7 +1683,7 @@ const HotelResortUpdate = () => {
           >
             Add Description and Unique Features of your Property
           </Heading>
-          
+
           <Textarea
             height={140}
             value={desc}
@@ -2161,7 +2134,7 @@ const HotelResortUpdate = () => {
           </Heading>
           <Box>
             <Select
-            width={{ base: "100%", md: 300 }}
+              width={{ base: "100%", md: 300 }}
               onChange={(e) => setFlooring(e.target.value)}
               value={flooring}
             >

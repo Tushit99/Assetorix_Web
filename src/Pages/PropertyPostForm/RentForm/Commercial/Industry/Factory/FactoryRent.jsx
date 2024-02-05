@@ -523,7 +523,7 @@ const FactoryRent = () => {
 
         {/* ============================== No. of Washrooms ====================================== */}
         <Box>
-          <Heading as={"h3"} size={"sm"} margin={"30px 0 10px 0"}>
+          <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Tell us about your property
           </Heading>
           <Box textAlign={"left"}>
@@ -634,8 +634,7 @@ const FactoryRent = () => {
             <Heading
               as={"h3"}
               size={"sm"}
-              margin={"30px 0 10px 0"}
-              textAlign={"left"}
+              textAlign={"left"} 
             >
               Age of Property
             </Heading>
@@ -692,8 +691,7 @@ const FactoryRent = () => {
             <Heading
               as={"h3"}
               size={"sm"}
-              margin={"30px 0 10px 0"}
-              textAlign={"left"}
+              textAlign={"left"} 
             >
               Possession By
             </Heading>

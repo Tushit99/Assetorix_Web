@@ -4,9 +4,7 @@ import {
   Button,
   ButtonGroup,
   Heading,
-  Input,
-  NumberInput,
-  NumberInputField,
+  Input, 
   Select,
   InputRightElement,
   Text,
@@ -704,7 +702,7 @@ const ServicedApartmentRent = () => {
         />
       </Box>
       {/* Property Detail */}
-      <Box marginTop={12}>
+      <Box marginTop={6}>
         <Heading
           as={"h4"}
           size={"sm"}
@@ -1721,8 +1719,7 @@ const ServicedApartmentRent = () => {
           <Heading
             as={"h3"}
             size={"sm"}
-            margin={"30px 0 10px 0"}
-            textAlign={"left"}
+            textAlign={"left"} 
           >
             Add pricing and details...
           </Heading>

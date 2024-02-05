@@ -6,8 +6,10 @@ import {
   Heading,
   Input,
   Select,
+  InputGroup,
   Text,
   Textarea,
+  InputRightAddon,
   useToast,
 } from "@chakra-ui/react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
@@ -21,7 +23,6 @@ import {
   NumericString,
   WordandNumber,
 } from "../../code";
-import { InputGroup } from "@chakra-ui/react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../Loading";
@@ -54,7 +55,7 @@ const FarmhouseRent = () => {
   const [extraroom, setExtraRoom] = useState([]);
   const [furnished, setFurnished] = useState("");
   const [propertyAge, setpropertyAge] = useState("");
-  
+
   const [pricedetail, setPricedetail] = useState("");
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
@@ -615,14 +616,12 @@ const FarmhouseRent = () => {
           value={houseNo}
           maxLength={"100"}
           onChange={(e) => setHouseNo(WordandNumber(e.target.value))}
-          fontSize={"sm"}
           variant="flushed"
         />
         <Input
           type="text"
           required
           placeholder="Apartment / Society"
-          fontSize={"sm"}
           maxLength={"100"}
           value={appartment}
           onChange={(e) => setApartment(WordandNumber(e.target.value))}
@@ -634,7 +633,6 @@ const FarmhouseRent = () => {
           maxLength={"6"}
           variant="flushed"
           required
-          fontSize={"sm"}
           value={pincode}
           onChange={handlepinfetch}
         />
@@ -645,7 +643,6 @@ const FarmhouseRent = () => {
           list="browsers"
           value={locality}
           onChange={(e) => setLocality(e.target.value)}
-          fontSize={"sm"}
           variant="flushed"
         />
         {pincollection.length ? (
@@ -663,7 +660,6 @@ const FarmhouseRent = () => {
           required
           placeholder="Enter City"
           maxLength={"100"}
-          fontSize={"sm"}
           value={city}
           onChange={(e) => setCity(WordandNumber(e.target.value))}
           variant="flushed"
@@ -675,7 +671,6 @@ const FarmhouseRent = () => {
           maxLength={"100"}
           value={state}
           onChange={(e) => setState(WordandNumber(e.target.value))}
-          fontSize={"sm"}
           variant="flushed"
         />
         <Input
@@ -685,7 +680,6 @@ const FarmhouseRent = () => {
           placeholder="Enter Country"
           value={country}
           onChange={(e) => setCountry(WordandNumber(e.target.value))}
-          fontSize={"sm"}
           variant="flushed"
         />
       </Box>
@@ -734,27 +728,29 @@ const FarmhouseRent = () => {
           <Heading as={"h3"} margin={"5px 0"} size={"sm"}>
             Add Area Details
           </Heading>
-          <ButtonGroup
-            className={style.select_land}
-            size="sm"
+          <InputGroup
+            width={{ base: "100%", md: 300 }}
             isAttached
             variant="outline"
           >
             <Input
               type="text"
               maxLength={9}
-              value={plotArea} 
-              onChange={(e) => { 
+              value={plotArea}
+              borderRadius={0}
+              placeholder="Enter plot area"
+              onChange={(e) => {
                 setPlotArea(NumericString(e.target.value));
               }}
               required
             />
-            <select
+            <Select
+              variant={"outline"}
               value={areaPer}
+              borderRadius={0}
               onChange={(e) => {
                 setAreaPer(e.target.value);
               }}
-              className={style.select}
               required
             >
               <option value="sq.ft">sq.ft</option>
@@ -775,8 +771,8 @@ const FarmhouseRent = () => {
               <option value="rood">rood</option>
               <option value="chataks">chataks</option>
               <option value="perch">perch</option>
-            </select>
-          </ButtonGroup>
+            </Select>
+          </InputGroup>
         </Box>
         {/* ============================ other Room ============================ */}
         <Box
@@ -1709,7 +1705,7 @@ const FarmhouseRent = () => {
       <Box>
         <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
           Add Description and Unique Features of your Property
-        </Heading> 
+        </Heading>
         <Textarea
           height={140}
           value={desc}
@@ -2281,7 +2277,7 @@ const FarmhouseRent = () => {
         <Box>
           <Select
             width={{ base: "100%", md: 300 }}
-            variant={"flushed"}
+            variant={"outline"}
             onChange={(e) => setFlooring(e.target.value)}
             value={flooring}
           >
@@ -2314,18 +2310,19 @@ const FarmhouseRent = () => {
         >
           Width of facing road
         </Heading>
-        <InputGroup w={{ base: "100%", md: "340px" }}>
+        <Box display={"flex"} gap={0} w={{ base: "100%", md: "300px" }}>
           <Input
             type="text"
             variant={"outline"}
             maxLength={3}
-            placeholder="Enter Facing Width"
+            borderRadius={0}
+            placeholder="Enter road  width"
             flex={1}
             required
             value={facingwidth}
             onChange={(e) => {
               e.preventDefault();
-              setFacingWidth(NumericString(e.target.value));
+              setFacingWidth(e.target.value);
             }}
           />
           <Select
@@ -2337,7 +2334,7 @@ const FarmhouseRent = () => {
             <option value="Meter"> Meter </option>
             <option value="Feet"> Feet </option>
           </Select>
-        </InputGroup>
+        </Box>
       </Box>
 
       {/* ============================ Location Advantages ==================================== */}

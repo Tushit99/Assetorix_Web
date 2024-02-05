@@ -784,11 +784,7 @@ const CommercialShowRoomRentUpdate = () => {
 
           </Box>
           {/* Property Detail */}
-          <Box marginTop={12}>
-            <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"}>
-              Tell us about your property
-            </Heading>
-            {/* ====================================== */}
+          <Box marginTop={6}> 
             {/* ============================ add area details ============================ */}
             <Box textAlign={"left"} padding={"10px 0"}>
               <Heading as={"h3"} margin={"5px 0"} size={"md"}>
@@ -947,7 +943,7 @@ const CommercialShowRoomRentUpdate = () => {
               <Heading
                 as={"h3"}
                 size={"md"}
-                margin={"30px 0 10px 0"}
+                textAlign={"left"}
                 textAlign={"left"}
               >
                 Floor Details
@@ -1075,7 +1071,7 @@ const CommercialShowRoomRentUpdate = () => {
                 <Heading
                   as={"h3"}
                   size={"md"}
-                  margin={"30px 0 10px 0"}
+                  textAlign={"left"}
                   textAlign={"left"}
                 >
                   Age of Property
@@ -1141,7 +1137,7 @@ const CommercialShowRoomRentUpdate = () => {
                 <Heading
                   as={"h3"}
                   size={"md"}
-                  margin={"30px 0 10px 0"}
+                  textAlign={"left"}
                   textAlign={"left"}
                 >
                   Possession By
@@ -1203,7 +1199,7 @@ const CommercialShowRoomRentUpdate = () => {
               <Heading
                 as={"h3"}
                 size={"md"}
-                margin={"30px 0 10px 0"}
+                textAlign={"left"}
                 textAlign={"left"}
               >
                 Add pricing and details...

@@ -5,9 +5,7 @@ import {
   ButtonGroup,
   Heading,
   Input,
-  InputGroup,
-  NumberInput,
-  NumberInputField,
+  InputGroup, 
   Select,
   Text,
   Textarea,
@@ -601,10 +599,7 @@ const ColdStorageRentUpdate = () => {
 
         </Box>
         {/* =============================== Tell us about your property ============================ */}
-        <Box>
-          <Heading as={"h3"} size={"sm"} margin={"30px 0 10px 0"}>
-            Tell us about your property
-          </Heading>
+        <Box> 
           <Heading as={"h4"} size={"sm"} margin={"0 0 30px 0 "}>
             Add Room Details
           </Heading>
@@ -713,8 +708,7 @@ const ColdStorageRentUpdate = () => {
             <Heading
               as={"h3"}
               size={"sm"}
-              margin={"30px 0 10px 0"}
-              textAlign={"left"}
+              textAlign={"left"} 
             >
               Age of Property
             </Heading>
@@ -771,8 +765,7 @@ const ColdStorageRentUpdate = () => {
             <Heading
               as={"h3"}
               size={"sm"}
-              margin={"30px 0 10px 0"}
-              textAlign={"left"}
+              textAlign={"left"} 
             >
               Possession By
             </Heading>

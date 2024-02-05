@@ -755,8 +755,8 @@ const ReadyToMoveUpdate = () => {
                     />
                 </Box>
                 {/* Property Detail */}
-                <Box marginTop={12}>
-                    <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"}>
+                <Box marginTop={6}>
+                    <Heading as={"h3"} size={"md"} textAlign={"left"} margin={"30px 0 10px 0"}>
                         Tell us about your property
                     </Heading>
                     {/* ====================================== */}

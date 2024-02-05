@@ -645,7 +645,7 @@ const Coworkingspace = () => {
       </Box>
 
       {/* Property Detail */}
-      <Box marginTop={12}>
+      <Box marginTop={6}>
         
         {/* ====================================== */}
         {/* add area details */}
@@ -1138,8 +1138,7 @@ const Coworkingspace = () => {
           <Heading
             as={"h3"}
             size={"md"}
-            margin={"30px 0 10px 0"}
-            textAlign={"left"}
+            textAlign={"left"} 
           >
             Floor Details
           </Heading>
@@ -1442,8 +1441,7 @@ const Coworkingspace = () => {
           <Heading
             as={"h3"}
             size={"md"}
-            margin={"30px 0 10px 0"}
-            textAlign={"left"}
+            textAlign={"left"} 
           >
             Age of Property
           </Heading>

@@ -5,9 +5,7 @@ import {
     ButtonGroup,
     Heading,
     Input,
-    InputGroup,
-    NumberInput,
-    NumberInputField,
+    InputGroup, 
     Select,
     Text,
     Textarea,
@@ -708,8 +706,8 @@ const Coworkingspace = () => {
             </Box>
 
             {/* Property Detail */}
-            <Box marginTop={12}>
-                <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"}>
+            <Box marginTop={6}>
+                <Heading as={"h3"} size={"md"} textAlign={"left"}>
                     Tell us about your property
                 </Heading>
                 {/* ====================================== */}
@@ -1108,8 +1106,7 @@ const Coworkingspace = () => {
                     <Heading
                         as={"h3"}
                         size={"md"}
-                        margin={"30px 0 10px 0"}
-                        textAlign={"left"}
+                        textAlign={"left"} 
                     >
                         Floor Details
                     </Heading>
@@ -1280,8 +1277,7 @@ const Coworkingspace = () => {
                     <Heading
                         as={"h3"}
                         size={"md"}
-                        margin={"30px 0 10px 0"}
-                        textAlign={"left"}
+                        textAlign={"left"} 
                     >
                         Age of Property
                     </Heading>
@@ -1346,8 +1342,7 @@ const Coworkingspace = () => {
                     <Heading
                         as={"h3"}
                         size={"md"}
-                        margin={"30px 0 10px 0"}
-                        textAlign={"left"}
+                        textAlign={"left"} 
                     >
                         Add pricing and details...
                     </Heading>

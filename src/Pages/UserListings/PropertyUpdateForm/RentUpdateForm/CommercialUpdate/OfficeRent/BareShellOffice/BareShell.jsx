@@ -5,9 +5,7 @@ import {
     ButtonGroup,
     Heading,
     Input,
-    InputGroup,
-    NumberInput,
-    NumberInputField,
+    InputGroup, 
     Select,
     Text,
     Textarea,
@@ -742,10 +740,7 @@ const BareShellUpdate = () => {
                 </Box>
 
                 {/* Property Detail */}
-                <Box marginTop={12}>
-                    <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"}>
-                        Tell us about your property
-                    </Heading>
+                <Box marginTop={6}> 
                     {/* ====================================== */}
                     {/* add area details */}
                     <Box textAlign={"left"} padding={"10px 0"}> 
@@ -1141,9 +1136,7 @@ const BareShellUpdate = () => {
                     <Box textAlign={"left"} margin={"6px 0 14px 0"}>
                         <Heading
                             as={"h3"}
-                            size={"md"}
-                            margin={"30px 0 10px 0"}
-                            textAlign={"left"}
+                            size={"md"} 
                         >
                             Floor Details
                         </Heading>
@@ -1314,8 +1307,7 @@ const BareShellUpdate = () => {
                         <Heading
                             as={"h3"}
                             size={"md"}
-                            margin={"30px 0 10px 0"}
-                            textAlign={"left"}
+                            textAlign={"left"} 
                         >
                             Age of Property
                         </Heading>
@@ -1380,8 +1372,7 @@ const BareShellUpdate = () => {
                         <Heading
                             as={"h3"}
                             size={"md"}
-                            margin={"30px 0 10px 0"}
-                            textAlign={"left"}
+                            textAlign={"left"} 
                         >
                             Add pricing and details...
                         </Heading>

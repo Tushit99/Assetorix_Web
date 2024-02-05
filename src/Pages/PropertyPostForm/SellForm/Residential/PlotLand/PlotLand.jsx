@@ -580,7 +580,7 @@ const PlotLand = () => {
         />
       </Box>
       {/* Property Detail */}
-      <Box marginTop={12}>
+      <Box marginTop={6}>
         {/* ====================================== */}
         {/* add area details */}
         <Box textAlign={"left"} padding={"10px 0"}>

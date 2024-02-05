@@ -793,8 +793,8 @@ const CommercialShowroom = () => {
 
                     </Box>
                     {/* Property Detail */}
-                    <Box marginTop={12}>
-                        <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"}>
+                    <Box marginTop={6}>
+                        <Heading as={"h3"} size={"md"} textAlign={"left"}>
                             Tell us about your property
                         </Heading>
                         {/* ====================================== */}
@@ -955,7 +955,7 @@ const CommercialShowroom = () => {
                             <Heading
                                 as={"h3"}
                                 size={"md"}
-                                margin={"30px 0 10px 0"}
+                                textAlign={"left"}
                                 textAlign={"left"}
                             >
                                 Floor Details
@@ -1090,7 +1090,7 @@ const CommercialShowroom = () => {
                                 <Heading
                                     as={"h3"}
                                     size={"md"}
-                                    margin={"30px 0 10px 0"}
+                                    textAlign={"left"}
                                     textAlign={"left"}
                                 >
                                     Age of Property
@@ -1149,7 +1149,7 @@ const CommercialShowroom = () => {
                                 <Heading
                                     as={"h3"}
                                     size={"md"}
-                                    margin={"30px 0 10px 0"}
+                                    textAlign={"left"}
                                     textAlign={"left"}
                                 >
                                     Possession By
@@ -1211,7 +1211,7 @@ const CommercialShowroom = () => {
                             <Heading
                                 as={"h3"}
                                 size={"md"}
-                                margin={"30px 0 10px 0"}
+                                textAlign={"left"}
                                 textAlign={"left"}
                             >
                                 Add pricing and details...

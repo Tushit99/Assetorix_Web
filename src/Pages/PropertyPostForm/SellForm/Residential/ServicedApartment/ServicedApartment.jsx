@@ -6,9 +6,7 @@ import {
   ButtonGroup,
   Heading,
   Input,
-  InputGroup,
-  NumberInput,
-  NumberInputField,
+  InputGroup, 
   InputRightElement,
   Select,
   Text,
@@ -723,7 +721,7 @@ const ServicedApartment = () => {
         />
       </Box>
       {/* Property Detail */}
-      <Box marginTop={12}>
+      <Box marginTop={6}>
         <Heading
           as={"h4"}
           textAlign={"left"}
@@ -1323,8 +1321,7 @@ const ServicedApartment = () => {
             <Heading
               as={"h3"}
               size={"md"}
-              margin={"30px 0 10px 0"}
-              textAlign={"left"}
+              textAlign={"left"} 
             >
               Age of Property
             </Heading>
@@ -1382,8 +1379,7 @@ const ServicedApartment = () => {
             <Heading
               as={"h3"}
               size={"md"}
-              margin={"30px 0 10px 0"}
-              textAlign={"left"}
+              textAlign={"left"} 
             >
               Possession By
             </Heading>

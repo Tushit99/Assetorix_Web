@@ -571,10 +571,7 @@ const Manufacture = () => {
             fontSize={"md"}
             variant="flushed"
           />
-        </Box>
-        {/* =============================== Tell us about your property ============================ */}
-        <Box> 
-        </Box>
+        </Box> 
 
         {/* ============================== No. of Washrooms ====================================== */}
         <Box>

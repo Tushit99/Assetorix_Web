@@ -784,10 +784,7 @@ const IndependentUpdate = () => {
           />
         </Box>
         {/* Property Detail */}
-        <Box marginTop={12}>
-          <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"}>
-            Tell us about your property
-          </Heading>
+        <Box marginTop={6}> 
           <Heading as={"h4"} size={"sm"} margin={"0 0 30px 0 "}>
             Add Room Details
           </Heading>

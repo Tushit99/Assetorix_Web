@@ -655,7 +655,7 @@ const WareHouseUpdate = () => {
                 </Box>
                 {/* =============================== Tell us about your property ============================ */}
                 <Box>
-                    <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"}>
+                    <Heading as={"h3"} size={"md"} textAlign={"left"}>
                         Tell us about your property
                     </Heading>
                     <Heading as={"h4"} size={"sm"} margin={"0 0 30px 0 "}>
@@ -766,8 +766,7 @@ const WareHouseUpdate = () => {
                         <Heading
                             as={"h3"}
                             size={"md"}
-                            margin={"30px 0 10px 0"}
-                            textAlign={"left"}
+                            textAlign={"left"} 
                         >
                             Age of Property
                         </Heading>
@@ -824,8 +823,7 @@ const WareHouseUpdate = () => {
                         <Heading
                             as={"h3"}
                             size={"md"}
-                            margin={"30px 0 10px 0"}
-                            textAlign={"left"}
+                            textAlign={"left"} 
                         >
                             Possession By
                         </Heading>
@@ -849,8 +847,7 @@ const WareHouseUpdate = () => {
                     <Heading
                         as={"h3"}
                         size={"md"}
-                        margin={"30px 0 10px 0"}
-                        textAlign={"left"}
+                        textAlign={"left"} 
                     >
                         Add pricing and details...
                     </Heading>

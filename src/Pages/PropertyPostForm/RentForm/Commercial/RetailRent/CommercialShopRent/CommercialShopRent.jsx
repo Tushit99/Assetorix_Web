@@ -1004,7 +1004,7 @@ const CommercialShopRent = () => {
               <Heading
                 as={"h3"}
                 size={"sm"}
-                margin={"30px 0 10px 0"}
+                textAlign={"left"}
                 textAlign={"left"}
               >
                 Floor Details
@@ -1204,7 +1204,7 @@ const CommercialShopRent = () => {
                 <Heading
                   as={"h3"}
                   size={"sm"}
-                  margin={"30px 0 10px 0"}
+                  textAlign={"left"}
                   textAlign={"left"}
                 >
                   Age of Property
@@ -1290,7 +1290,7 @@ const CommercialShopRent = () => {
                 <Heading
                   as={"h3"}
                   size={"sm"}
-                  margin={"30px 0 10px 0"}
+                  textAlign={"left"}
                   textAlign={"left"}
                 >
                   Possession By
@@ -1559,7 +1559,7 @@ const CommercialShopRent = () => {
               <Heading
                 as={"h3"}
                 size={"sm"}
-                margin={"30px 0 10px 0"}
+                textAlign={"left"}
                 textAlign={"left"}
               >
                 Add pricing and details...

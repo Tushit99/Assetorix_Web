@@ -829,7 +829,7 @@ const RKStudioUpdate = () => {
         />
       </Box>
       {/* Property Detail */}
-      <Box marginTop={12}> 
+      <Box marginTop={6}> 
         <Heading as={"h4"} textAlign={"left"} size={"sm"} >
           Add Room Details
         </Heading>
@@ -1423,8 +1423,7 @@ const RKStudioUpdate = () => {
             <Heading
               as={"h3"}
               size={"sm"}
-              margin={"30px 0 10px 0"}
-              textAlign={"left"}
+              textAlign={"left"} 
             >
               Age of Property
             </Heading>
@@ -1482,8 +1481,7 @@ const RKStudioUpdate = () => {
             <Heading
               as={"h3"}
               size={"sm"}
-              margin={"30px 0 10px 0"}
-              textAlign={"left"}
+              textAlign={"left"} 
             >
               Possession By
             </Heading>

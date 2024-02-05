@@ -603,7 +603,7 @@ const Factory = () => {
             variant="flushed"
           />
         </Box>
-        {/* =============================== Tell us about your property ============================ */}
+        {/* =============================== Room Details ============================ */}
         <Box>
           <Heading as={"h4"} size={"sm"} textAlign={"left"} marginTop={5}>
             Add Room Details

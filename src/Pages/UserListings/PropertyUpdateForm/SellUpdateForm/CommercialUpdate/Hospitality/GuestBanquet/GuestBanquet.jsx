@@ -5,9 +5,7 @@ import {
   ButtonGroup,
   Heading,
   Input,
-  InputGroup,
-  NumberInput,
-  NumberInputField,
+  InputGroup, 
   Select,
   Text,
   Textarea,
@@ -58,7 +56,7 @@ const GuestBanquetUpdate = () => {
   const [expectedyear, setExpectedYear] = useState("");
   const [ownership, setOwnerShip] = useState("");
   const [pricedetail, setPricedetail] = useState("");
-  
+
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
   const [buildingFeature, setBuildingFeature] = useState([]);
@@ -89,8 +87,7 @@ const GuestBanquetUpdate = () => {
   const [isClicked, setIsClicked] = useState(false);
   const [clickCount, setClickCount] = useState(0);
   const navigate = useNavigate();
-  const [currency, setCurrency] = useState("₹"); 
-
+  const [currency, setCurrency] = useState("₹");
 
   const handleDataFetch = async () => {
     await axios
@@ -118,7 +115,7 @@ const GuestBanquetUpdate = () => {
         setqualityRating(e?.qualityRating);
         setOwnerShip(e?.ownership);
         setPricedetail(e?.price);
-        
+
         setInclusivePrice(e?.inclusivePrices);
         setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice);
         setMaintenanceTimePeriod(
@@ -186,7 +183,7 @@ const GuestBanquetUpdate = () => {
       },
       ownership,
       price: +pricedetail,
-     
+
       inclusivePrices,
       additionalPricingDetails: {
         maintenancePrice,
@@ -563,8 +560,6 @@ const GuestBanquetUpdate = () => {
     setLocationAdv(newarr);
   };
 
-  ;
-
   // const createtemplatefloors = () => {
   //     let options = "";
 
@@ -702,26 +697,14 @@ const GuestBanquetUpdate = () => {
             fontSize={"md"}
             variant="flushed"
           />
-          <NumberInput value={pincode}>
-            <NumberInputField
-              placeholder={"Enter pincode"}
-              padding={"0 10px"}
-              borderRight={0}
-              borderLeft={0}
-              borderTop={0}
-              borderRadius={0}
-              _active={{
-                borderRight: "0",
-                borderLeft: "0",
-                borderTop: "0",
-                borderRadius: "0",
-              }}
-              required
-              fontSize={"md"}
-              value={pincode}
-              onChange={handlepinfetch}
-            />
-          </NumberInput>
+          <Input
+            type="text"
+            placeholder={"Enter pincode"}
+            required
+            fontSize={"md"}
+            value={pincode}
+            onChange={handlepinfetch} 
+          />
           <Input
             type="text"
             padding={"0 10px"}
@@ -775,10 +758,7 @@ const GuestBanquetUpdate = () => {
           />
         </Box>
         {/* =============================== Property Detail ============================= */}
-        <Box marginTop={12}>
-          <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"}>
-            Tell us about your property
-          </Heading>
+        <Box marginTop={6}> 
           <Heading as={"h4"} size={"sm"} margin={"0 0 30px 0 "}>
             Add Room Details
           </Heading>
@@ -829,7 +809,7 @@ const GuestBanquetUpdate = () => {
             <Heading as={"h3"} margin={"5px 0"} size={"md"}>
               Add Area Details
             </Heading>
-            
+
             <ButtonGroup
               className={style.select_land}
               size="sm"
@@ -841,7 +821,6 @@ const GuestBanquetUpdate = () => {
                 placeholder="Enter Plot Area"
                 value={plotArea}
                 onChange={(e) => {
-                  
                   setPlotArea(e.target.value);
                 }}
                 required
@@ -1292,8 +1271,7 @@ const GuestBanquetUpdate = () => {
             <Heading
               as={"h3"}
               size={"md"}
-              margin={"30px 0 10px 0"}
-              textAlign={"left"}
+              textAlign={"left"} 
             >
               Age of Property
             </Heading>
@@ -1351,8 +1329,7 @@ const GuestBanquetUpdate = () => {
             <Heading
               as={"h3"}
               size={"md"}
-              margin={"30px 0 10px 0"}
-              textAlign={"left"}
+              textAlign={"left"} 
             >
               Possession By
             </Heading>
@@ -1539,24 +1516,9 @@ const GuestBanquetUpdate = () => {
                 required
                 onChange={(e) => {
                   setPricedetail(e.target.value);
-                  
                 }}
               />
-            </Box>
-            <Box display={"grid"} gap={0}>
-              <Heading
-                as={"h3"}
-                size={"xs"}
-                fontWeight={400}
-                textAlign={"left"}
-              >
-                {isCountry.country == "india" ? "₹" : "$"} PriceareaUnit : Per
-                {areaPer}
-              </Heading>
-              <NumberInput value={pricedetail}>
-                <NumberInputField />
-              </NumberInput>
-            </Box>
+            </Box> 
           </Box>
           <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
             <Checkbox
@@ -1672,7 +1634,6 @@ const GuestBanquetUpdate = () => {
               }}
               className={preLeased == "Yes" ? style.setbtn : style.btn}
             >
-              
               Yes
             </button>
             <button
@@ -1683,7 +1644,6 @@ const GuestBanquetUpdate = () => {
               }}
               className={preLeased == "No" ? style.setbtn : style.btn}
             >
-              
               No
             </button>
           </Box>
@@ -1746,7 +1706,7 @@ const GuestBanquetUpdate = () => {
           >
             Add Description and Unique Features of your Property
           </Heading>
-          
+
           <Textarea
             height={140}
             value={desc}
@@ -1766,7 +1726,6 @@ const GuestBanquetUpdate = () => {
               textAlign={"left"}
               margin={"10px 0"}
             >
-              
               Upload Your Property image
             </Heading>
           </Box>
@@ -1802,7 +1761,6 @@ const GuestBanquetUpdate = () => {
                     role="button"
                     onClick={selectFiles}
                   >
-                    
                     Browse
                   </Text>
                 </>
@@ -2274,8 +2232,8 @@ const GuestBanquetUpdate = () => {
             Type of flooring
           </Heading>
           <Box>
-            <Select 
-            width={{ base: "100%", md: 300 }}
+            <Select
+              width={{ base: "100%", md: 300 }}
               onChange={(e) => setFlooring(e.target.value)}
               value={flooring}
             >

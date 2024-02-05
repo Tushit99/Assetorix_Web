@@ -583,9 +583,8 @@ const CommercialLand = () => {
             fontSize={"md"}
             variant="flushed"
           />
-        </Box>
-        {/* =============================== Tell us about your property ============================ */}
-
+        </Box> 
+        
         {/* ============================ add area details =============================== */}
         <Box textAlign={"left"}>
           <Heading as={"h3"} marginTop={5} size={"sm"}>

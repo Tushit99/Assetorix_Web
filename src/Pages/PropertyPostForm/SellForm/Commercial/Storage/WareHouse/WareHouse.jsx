@@ -5,10 +5,8 @@ import {
   ButtonGroup,
   Heading,
   Input,
-  InputGroup,
-  NumberInput,
-  InputRightElement,
-  NumberInputField,
+  InputGroup, 
+  InputRightElement, 
   Select,
   Text,
   Textarea,
@@ -556,7 +554,7 @@ const WareHouse = () => {
             variant="flushed"
           />
         </Box>
-        {/* =============================== Tell us about your property ============================ */}
+        {/* =============================== Room Details ============================ */}
         <Heading as={"h4"} size={"sm"} textAlign={"left"}>
           Add Room Details
         </Heading>
@@ -671,8 +669,7 @@ const WareHouse = () => {
             <Heading
               as={"h3"}
               size={"sm"}
-              margin={"30px 0 10px 0"}
-              textAlign={"left"}
+              textAlign={"left"} 
             >
               Age of Property
             </Heading>
@@ -729,8 +726,7 @@ const WareHouse = () => {
             <Heading
               as={"h3"}
               size={"sm"}
-              margin={"30px 0 10px 0"}
-              textAlign={"left"}
+              textAlign={"left"} 
             >
               Possession By
             </Heading>
@@ -754,8 +750,7 @@ const WareHouse = () => {
           <Heading
             as={"h3"}
             size={"sm"}
-            margin={"30px 0 10px 0"}
-            textAlign={"left"}
+            textAlign={"left"} 
           >
             Add pricing and details...
           </Heading>

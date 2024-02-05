@@ -640,8 +640,7 @@ const BareshellspaceUpdate = () => {
                     </Select>
 
                     <Select
-                        fontSize={"md"}
-                        padding={"0 10px"}
+                        fontSize={"md"} 
                         variant="flushed"
                         as={"select"}
                         onChange={(e) => setZoneType(e.target.value)}
@@ -664,12 +663,10 @@ const BareshellspaceUpdate = () => {
                         required
                         fontSize={"md"}
                         value={pincode}
-                        onChange={handlepinfetch}
-                        padding={"0 10px"}
+                        onChange={handlepinfetch} 
                     />
                     <Input
-                        type="text"
-                        padding={"0 10px"}
+                        type="text" 
                         required
                         placeholder="Enter Locality"
                         list="browsers"
@@ -689,8 +686,7 @@ const BareshellspaceUpdate = () => {
                     )}
 
                     <Input
-                        type="text"
-                        padding={"0 10px"}
+                        type="text" 
                         required
                         placeholder="Enter City"
                         fontSize={"md"}
@@ -699,8 +695,7 @@ const BareshellspaceUpdate = () => {
                         variant="flushed"
                     />
                     <Input
-                        type="text"
-                        padding={"0 10px"}
+                        type="text" 
                         required
                         placeholder="Enter State"
                         value={state}
@@ -710,8 +705,7 @@ const BareshellspaceUpdate = () => {
                     />
 
                     <Input
-                        type="text"
-                        padding={"0 10px"}
+                        type="text" 
                         required
                         placeholder="Enter Country"
                         value={country}
@@ -721,8 +715,8 @@ const BareshellspaceUpdate = () => {
                     />
                 </Box>
                 {/* Property Detail */}
-                <Box marginTop={12}>
-                    <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"}>
+                <Box marginTop={6}>
+                    <Heading as={"h3"} size={"md"} textAlign={"left"}> 
                         Tell us about your property
                     </Heading>
                     {/* ====================================== */}
@@ -1045,8 +1039,7 @@ const BareshellspaceUpdate = () => {
                         <Heading
                             as={"h3"}
                             size={"md"}
-                            margin={"30px 0 10px 0"}
-                            textAlign={"left"}
+                            textAlign={"left"} 
                         >
                             Floor Details
                         </Heading>
@@ -1244,8 +1237,7 @@ const BareshellspaceUpdate = () => {
                             <Heading
                                 as={"h3"}
                                 size={"md"}
-                                margin={"30px 0 10px 0"}
-                                textAlign={"left"}
+                                textAlign={"left"} 
                             >
                                 Age of Property
                             </Heading>
@@ -1303,8 +1295,7 @@ const BareshellspaceUpdate = () => {
                             <Heading
                                 as={"h3"}
                                 size={"md"}
-                                margin={"30px 0 10px 0"}
-                                textAlign={"left"}
+                                textAlign={"left"} 
                             >
                                 Possession By
                             </Heading>
@@ -1326,8 +1317,7 @@ const BareshellspaceUpdate = () => {
                         <Heading
                             as={"h3"}
                             size={"md"}
-                            margin={"30px 0 10px 0"}
-                            textAlign={"left"}
+                            textAlign={"left"} 
                         >
                             Add pricing and details...
                         </Heading>

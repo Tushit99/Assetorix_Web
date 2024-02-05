@@ -650,7 +650,7 @@ const IndustrialLand = () => {
           <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Width of facing road
           </Heading>
-          <Box display={"flex"} w={{ base: "100%", md: "300px" }}>
+          <Box display={"flex"} gap={0} w={{ base: "100%", md: "300px" }}>
             <Input
               type="text"
               variant={"outline"}
@@ -917,8 +917,7 @@ const IndustrialLand = () => {
           <Heading
             as={"h3"}
             size={"sm"}
-            margin={"30px 0 10px 0"}
-            textAlign={"left"}
+            textAlign={"left"} 
           >
             Add pricing and details...
           </Heading>
@@ -983,8 +982,7 @@ const IndustrialLand = () => {
           <Heading
             as={"h3"}
             size={"sm"}
-            margin={"30px 0 10px 0"}
-            textAlign={"left"}
+            textAlign={"left"} 
           >
             Which authority the property is approved by ?
           </Heading>

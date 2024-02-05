@@ -8,9 +8,7 @@ import {
   InputGroup,
   Menu,
   MenuButton,
-  MenuList,
-  NumberInput,
-  NumberInputField,
+  MenuList, 
   Select,
   Text,
   Textarea,
@@ -679,17 +677,13 @@ const CommercialLandRentUpdate = () => {
             variant="flushed"
           />
 
-        </Box>
-        {/* =============================== Tell us about your property ============================ */}
-        <Box>
-          <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"}>
-            Tell us about your property
-          </Heading>
-        </Box>
-
+        </Box> 
 
         {/* ============================ add area details =============================== */}
         <Box textAlign={"left"} padding={"10px 0 0 0"}>
+          <Heading as={"h3"} size={"md"} textAlign={"left"}>
+            Tell us about your property
+          </Heading>
           <Heading as={"h3"} margin={"5px 0"} size={"md"}>
             Add Area Details
           </Heading> 
@@ -969,8 +963,7 @@ const CommercialLandRentUpdate = () => {
           <Heading
             as={"h3"}
             size={"md"}
-            margin={"30px 0 10px 0"}
-            textAlign={"left"}
+            textAlign={"left"} 
           >
             Which authority the property is approved by ?
           </Heading>

@@ -5,9 +5,7 @@ import {
   ButtonGroup,
   Heading,
   Input,
-  InputGroup,
-  NumberInput,
-  NumberInputField,
+  InputGroup, 
   Select,
   Text,
   Textarea,
@@ -572,8 +570,7 @@ const HotelResort = () => {
       {/* ============================= property location =========================== */}
       <Box className={style.location_form}>
         <Heading size={"lg"}>Where is your Hotel / Resorts located?</Heading>
-        <Heading size={"sm"}>Location Detail</Heading>
-
+        <Heading size={"sm"} textAlign={"left"}>Location Detail</Heading>  
         <Input
           type="text"
           maxLength={100}
@@ -1152,8 +1149,7 @@ const HotelResort = () => {
           <Heading
             as={"h3"}
             size={"md"}
-            margin={"30px 0 10px 0"}
-            textAlign={"left"}
+            textAlign={"left"} 
           >
             Age of Property
           </Heading>
@@ -1211,8 +1207,7 @@ const HotelResort = () => {
           <Heading
             as={"h3"}
             size={"md"}
-            margin={"30px 0 10px 0"}
-            textAlign={"left"}
+            textAlign={"left"} 
           >
             Possession By
           </Heading>

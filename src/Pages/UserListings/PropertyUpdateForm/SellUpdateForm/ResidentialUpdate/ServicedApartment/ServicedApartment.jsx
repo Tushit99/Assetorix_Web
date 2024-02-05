@@ -832,7 +832,7 @@ const ServicedApartmentUpdate = () => {
           />
         </Box>
         {/* Property Detail */}
-        <Box marginTop={12}>
+        <Box marginTop={6}>
           <Heading
             as={"h4"}
             textAlign={"left"}
@@ -1434,7 +1434,7 @@ const ServicedApartmentUpdate = () => {
               <Heading
                 as={"h3"}
                 size={"md"}
-                margin={"30px 0 10px 0"}
+                textAlign={"left"}
                 textAlign={"left"}
               >
                 Age of Property
@@ -1495,7 +1495,7 @@ const ServicedApartmentUpdate = () => {
               <Heading
                 as={"h3"}
                 size={"md"}
-                margin={"30px 0 10px 0"}
+                textAlign={"left"}
                 textAlign={"left"}
               >
                 Possession By

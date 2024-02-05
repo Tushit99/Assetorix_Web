@@ -6,9 +6,7 @@ import {
   Heading,
   Input,
   InputGroup,
-  InputRightElement,
-  NumberInput,
-  NumberInputField,
+  InputRightElement, 
   Select,
   Text,
   Textarea,
@@ -566,7 +564,7 @@ const ColdStorage = () => {
             variant="flushed"
           />
         </Box>
-        {/* =============================== Tell us about your property ============================ */}
+        {/* =============================== Room Details ============================ */}
         <Box>
           <Heading as={"h4"} size={"sm"} textAlign={"left"}>
             Add Room Details

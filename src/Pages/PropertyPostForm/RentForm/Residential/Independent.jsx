@@ -1417,19 +1417,19 @@ const Independent = () => {
             Rent Details
           </Heading>
           <Box>
-            <InputGroup w={300} gap={2}>
+            <InputGroup width={{base:"100%",md:300}} >
               <Select
                 w={"-moz-fit-content"}
                 value={currency}
+                minW={"100px"} 
                 borderRadius={0}
                 onChange={(e) => setCurrency(e.target.value)}
               >
                 <option value="₹">₹ INR </option>
                 <option value="$">$ USD </option>
-              </Select>
+              </Select> 
               <Input
-                type="text"
-                w={"40%"}
+                type="text" 
                 maxLength={"8"}
                 borderRadius={0}
                 value={pricedetail} 

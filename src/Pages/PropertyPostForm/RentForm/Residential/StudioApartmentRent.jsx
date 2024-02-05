@@ -683,7 +683,7 @@ const StudioApartmentRent = () => {
         />
       </Box>
       {/* Property Detail */}
-      <Box marginTop={12}>
+      <Box marginTop={6}>
         <Heading
           as={"h4"}
           size={"sm"}

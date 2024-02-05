@@ -5,9 +5,7 @@ import {
   ButtonGroup,
   Heading,
   Input,
-  InputGroup,
-  NumberInput,
-  NumberInputField,
+  InputGroup, 
   Select,
   Text,
   Textarea,
@@ -599,7 +597,7 @@ const ManufactureRentUpdate = () => {
         </Box>
         {/* =============================== Tell us about your property ============================ */}
         <Box marginTop={"20"}>
-          <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"}>
+          <Heading as={"h3"} size={"md"} textAlign={"left"}>
             Tell us about your property
           </Heading>
         </Box>
@@ -707,8 +705,7 @@ const ManufactureRentUpdate = () => {
             <Heading
               as={"h3"}
               size={"md"}
-              margin={"30px 0 10px 0"}
-              textAlign={"left"}
+              textAlign={"left"} 
             >
               Age of Property
             </Heading>
@@ -765,8 +762,7 @@ const ManufactureRentUpdate = () => {
             <Heading
               as={"h3"}
               size={"md"}
-              margin={"30px 0 10px 0"}
-              textAlign={"left"}
+              textAlign={"left"} 
             >
               Possession By
             </Heading>

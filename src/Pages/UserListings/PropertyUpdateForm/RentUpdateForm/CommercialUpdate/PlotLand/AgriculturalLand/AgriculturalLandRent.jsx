@@ -5,9 +5,7 @@ import {
   ButtonGroup,
   Heading,
   Input,
-  InputGroup,
-  NumberInput,
-  NumberInputField,
+  InputGroup, 
   Select,
   Text,
   Textarea,
@@ -16,14 +14,13 @@ import {
 import { Checkbox } from "@chakra-ui/react";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import style from "../../RentComercial.module.css";
 import { CleanInputText, NumericString } from "../../../../code";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useNavigate, useParams } from "react-router-dom";
 import LoadingBox from "../../../../Loadingbox";
 import Extraimg from "../../../../SellUpdateForm/Extraimg/Extraimg";
-
 
 const AgriculturalLandRentUpdate = () => {
   const { productID } = useParams();
@@ -39,7 +36,7 @@ const AgriculturalLandRentUpdate = () => {
   const [areaPer, setAreaPer] = useState("sq.ft");
   const [ownership, setOwnerShip] = useState("");
   const [pricedetail, setPricedetail] = useState("");
-  
+
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [constructionType, setConstructionType] = useState([]);
   const [amenities, setAminity] = useState([]);
@@ -60,7 +57,7 @@ const AgriculturalLandRentUpdate = () => {
   const [annualDuesPayble, setAnnualDuesPayble] = useState("");
   const [openSides, setOpenSides] = useState("");
   const [plotBreadth, setPlotBreadth] = useState("");
-  const [currency, setCurrency] = useState("₹");  
+  const [currency, setCurrency] = useState("₹");
   const [plotLength, setplotLength] = useState("");
   const [expectedBy, setexpectedBy] = useState([]);
   const [ConstructionOnProperty, setConstructionOnProperty] = useState("");
@@ -76,62 +73,63 @@ const AgriculturalLandRentUpdate = () => {
 
   // please don'nt change any function without any prior knowledge
 
-
   const handleDataFetch = async () => {
-    await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
-      let e = detail.data.data;
-      setCountry(e?.address?.country);
-      setCity(e?.address?.city);
-      setPincode(e?.address?.pincode);
-      setState(e.address.state);
-      setLocality(e.address.locality);
-      setPlotnumber(e.address.plotNumber);
+    await axios
+      .get(`${process.env.REACT_APP_URL}/property/single/${productID}`)
+      .then((detail) => {
+        let e = detail.data.data;
+        setCountry(e?.address?.country);
+        setCity(e?.address?.city);
+        setPincode(e?.address?.pincode);
+        setState(e.address.state);
+        setLocality(e.address.locality);
+        setPlotnumber(e.address.plotNumber);
 
-      setPlotArea(e.plotArea);
-      setAreaPer(e.plotAreaUnit);
+        setPlotArea(e.plotArea);
+        setAreaPer(e.plotAreaUnit);
 
-      setplotLength(e.plotLength);
-      setPlotBreadth(e.plotBreadth);
+        setplotLength(e.plotLength);
+        setPlotBreadth(e.plotBreadth);
 
-      setFacingWidth(e.roadFacingWidth);
-      setFacing(e.roadFacingWidthType);
+        setFacingWidth(e.roadFacingWidth);
+        setFacing(e.roadFacingWidthType);
 
-      setOpenSides(e.openSides);
-      setConstructionOnProperty(e.constructionOnProperty);
-      setConstructionType(e.constructionOnPropertyList);
+        setOpenSides(e.openSides);
+        setConstructionOnProperty(e.constructionOnProperty);
+        setConstructionType(e.constructionOnPropertyList);
 
-      setPropertyFacing(e.propertyFacing);
-      setExpectedByYear(e.expectedByYear);
+        setPropertyFacing(e.propertyFacing);
+        setExpectedByYear(e.expectedByYear);
 
-      setAuthorisedBy(e.propertyApprovalAuthorityList);
+        setAuthorisedBy(e.propertyApprovalAuthorityList);
 
-      setOwnerShip(e.ownership);
+        setOwnerShip(e.ownership);
 
-      setPricedetail(e.price); 
-      setInclusivePrice(e.inclusivePrices);
+        setPricedetail(e.price);
+        setInclusivePrice(e.inclusivePrices);
 
-      setAdditionalPrice(e?.additionalPricingDetails);
-      if (e?.additionalPricingDetails) {
-        setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice)
-        setMaintenanceTimePeriod(e?.additionalPricingDetails?.maintenanceTimePeriod)
-        setBookingAmount(e?.additionalPricingDetails?.bookingAmount)
-        setAnnualDuesPayble(e?.additionalPricingDetails?.annualDuesPayable);
-      }
+        setAdditionalPrice(e?.additionalPricingDetails);
+        if (e?.additionalPricingDetails) {
+          setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice);
+          setMaintenanceTimePeriod(
+            e?.additionalPricingDetails?.maintenanceTimePeriod
+          );
+          setBookingAmount(e?.additionalPricingDetails?.bookingAmount);
+          setAnnualDuesPayble(e?.additionalPricingDetails?.annualDuesPayable);
+        }
 
-      setDesc(e.description);
-      setAminity(e.amenities);
-      setPropertyFeature(e.propertyFeatures);
-      setOtherFeature(e.otherFeatures);
-      setLocationAdv(e.locationAdv);
-      setSavedImages(e.images);
-
-    })
-  }
+        setDesc(e.description);
+        setAminity(e.amenities);
+        setPropertyFeature(e.propertyFeatures);
+        setOtherFeature(e.otherFeatures);
+        setLocationAdv(e.locationAdv);
+        setSavedImages(e.images);
+      });
+  };
 
   useEffect(() => {
     handleDataFetch();
   }, []);
-
 
   useEffect(() => {
     let num = Number(Date().split(" ")[3]);
@@ -141,7 +139,6 @@ const AgriculturalLandRentUpdate = () => {
     }
     setexpectedBy(yearbox);
   }, []);
-
 
   const handleSubmitData = async (e) => {
     e.preventDefault();
@@ -162,7 +159,7 @@ const AgriculturalLandRentUpdate = () => {
       plotLength,
       plotBreadth,
       price: +pricedetail,
-     
+
       inclusivePrices,
       openSides,
       amenities,
@@ -187,38 +184,34 @@ const AgriculturalLandRentUpdate = () => {
         maintenancePrice,
         maintenanceTimePeriod,
         bookingAmount,
-        annualDuesPayable: annualDuesPayble
-      }
+        annualDuesPayable: annualDuesPayble,
+      },
     };
-
-
 
     const showToastError = (message) => {
       toast({
-        title: message + ' un-filled',
-        status: 'error',
+        title: message + " un-filled",
+        status: "error",
         duration: 2000,
-        position: 'top-right'
+        position: "top-right",
       });
-    }
-
+    };
 
     if (!locality) {
-      showToastError('Provide locality');
+      showToastError("Provide locality");
     } else if (!ownership) {
-      showToastError('Provide OwnerShip');
+      showToastError("Provide OwnerShip");
     } else if (!pricedetail) {
-      showToastError('Provide PriceDetail');
-    }  
+      showToastError("Provide PriceDetail");
+    }
 
     if (locationAdv) {
-      obj["locationAdv"] = locationAdv
+      obj["locationAdv"] = locationAdv;
     }
 
     if (
       ownership &&
       pricedetail &&
-
       inclusivePrices &&
       amenities &&
       propertyFeatures &&
@@ -227,19 +220,18 @@ const AgriculturalLandRentUpdate = () => {
       let id = localStorage.getItem("usrId") || undefined;
       let authorization = localStorage.getItem("AstToken") || undefined;
 
-      let head = { id, authorization, 'Content-type': 'application/json' };
+      let head = { id, authorization, "Content-type": "application/json" };
 
       if (!id || !authorization) {
         toast({
-          title: 'Kindly log in to access property posting.',
+          title: "Kindly log in to access property posting.",
           description: "Login required for posting property.",
-          status: 'error',
+          status: "error",
           duration: 2000,
-          position: 'top-right'
-        })
-        return
+          position: "top-right",
+        });
+        return;
       }
-
 
       try {
         // let response = await fetch("http://localhost:4500/property/", {
@@ -247,16 +239,19 @@ const AgriculturalLandRentUpdate = () => {
         //     headers: head,
         //     body: JSON.stringify(obj)
         // });
-        // let data = await response.json();  
-        // console.log("data",data); 
-        await axios.patch(`${process.env.REACT_APP_URL}/property/${productID}`, obj, { headers: head })
+        // let data = await response.json();
+        // console.log("data",data);
+        await axios
+          .patch(`${process.env.REACT_APP_URL}/property/${productID}`, obj, {
+            headers: head,
+          })
           .then((e) => {
             toast({
               title: e.data.msg,
               description: e.data.msg,
-              status: 'success',
+              status: "success",
               duration: 2000,
-            })
+            });
             if (images.length) {
               submitImage(productID);
             } else {
@@ -267,94 +262,89 @@ const AgriculturalLandRentUpdate = () => {
       } catch (error) {
         toast({
           title: error.response.data.msg,
-          status: 'error',
+          status: "error",
           duration: 2000,
-        })
+        });
         setClickCount((prev) => prev - 12);
         setIsClicked(false);
       }
-    }
-    else {
+    } else {
       toast({
-        title: 'Form un-filled',
+        title: "Form un-filled",
         description: "Please fill all required fields.",
-        status: 'info',
+        status: "info",
         duration: 2000,
-        position: 'top-right'
-      })
+        position: "top-right",
+      });
       setClickCount((prev) => prev - 12);
       setIsClicked(false);
     }
-  }; 
+  };
 
   const submitImage = async (singleproductID) => {
     try {
+      let id = localStorage.getItem("usrId") || undefined;
+      let authorization = localStorage.getItem("AstToken") || undefined;
 
-        let id = localStorage.getItem("usrId") || undefined;
-        let authorization = localStorage.getItem("AstToken") || undefined;
+      let headersList = {
+        Accept: "*/*",
+        Authorization: authorization,
+        id: id,
+      };
 
-        let headersList = {
-            "Accept": "*/*",
-            "Authorization": authorization,
-            "id": id
-        }
+      let formdata = new FormData();
+      images.forEach((image) => {
+        formdata.append("image", image.image);
+      });
 
-        let formdata = new FormData();
-        images.forEach((image) => {
-            formdata.append("image", image.image);
-        });
+      let bodyContent = formdata;
 
-        let bodyContent = formdata;
+      let reqOptions = {
+        url: `${process.env.REACT_APP_URL}/upload/${singleproductID}`,
+        method: "POST",
+        headers: headersList,
+        data: bodyContent,
+      };
 
-        let reqOptions = {
-            url: `${process.env.REACT_APP_URL}/upload/${singleproductID}`,
-            method: "POST",
-            headers: headersList,
-            data: bodyContent,
-        }
-
-        await axios.request(reqOptions).then((e) => {
-            setIsClicked(false);
-            navigate("/listing");
-        })
-    } catch (error) {
-        console.log(error);
+      await axios.request(reqOptions).then((e) => {
         setIsClicked(false);
         navigate("/listing");
+      });
+    } catch (error) {
+      console.log(error);
+      setIsClicked(false);
+      navigate("/listing");
     }
     setIsClicked(false);
-};
-
+  };
 
   const handlepinfetch = (e) => {
     setPincode(e.target.value);
     if (e.target.value.length == 6) {
       pinfetch(e.target.value);
-    }
-    else {
+    } else {
       console.log(e.target.value);
     }
-  }
+  };
 
   const handleConstructionOnProperty = (e) => {
     e.preventDefault();
     setConstructionOnProperty(e.target.value);
-  }
+  };
 
   const pinfetch = async (pin) => {
     try {
-
-      let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
+      let res = await axios.get(
+        `${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`
+      );
       setState(res.data[0].state);
       setCity(res.data[0].city);
       setCountry(res.data[0].country);
       setPinCollection(res.data);
-    }
-    catch (err) {
+    } catch (err) {
       console.log(err);
     }
-  }
-
+  };
 
   const handleConstructionType = (e) => {
     e.preventDefault();
@@ -367,10 +357,7 @@ const AgriculturalLandRentUpdate = () => {
       newarr.push(value);
     }
     setConstructionType(newarr);
-  }
-
-
-
+  };
 
   const handleAuthorityBy = (e) => {
     e.preventDefault();
@@ -384,18 +371,17 @@ const AgriculturalLandRentUpdate = () => {
     }
     console.log(newarr);
     setAuthorisedBy(newarr);
-  }
+  };
 
   const handleOpenSide = (e) => {
     e.preventDefault();
     setOpenSides(e.target.value);
-  }
+  };
 
   const handleownership = (e) => {
     e.preventDefault();
     setOwnerShip(e.target.value);
   };
-
 
   const handleAminities = (e) => {
     e.preventDefault();
@@ -422,7 +408,6 @@ const AgriculturalLandRentUpdate = () => {
     }
     setPropertyFeature(newarr);
   };
-
 
   const handleotherfeature = (e) => {
     e.preventDefault();
@@ -460,32 +445,34 @@ const AgriculturalLandRentUpdate = () => {
       newarr.push(value);
     }
     setInclusivePrice(newarr);
-  }
- 
+  };
 
   // ===============00000000====================
   // =================------====================
   const selectFiles = () => {
     fileInputRef.current.click();
-  }
+  };
 
   const onFileSelect = (e) => {
     let files = e.target.files;
     if (files.length === 0) {
-      return
+      return;
     }
     for (let i = 0; i < files.length; i++) {
-      if (files[i].type.split('/')[0] !== 'image') {
+      if (files[i].type.split("/")[0] !== "image") {
         continue;
       }
       if (!images.some((e) => e.name === files[i].name)) {
-        setImages((prev) => [...prev, {
-          name: files[i].name,
-          image: files[i],
-        },])
+        setImages((prev) => [
+          ...prev,
+          {
+            name: files[i].name,
+            image: files[i],
+          },
+        ]);
       }
     }
-  }
+  };
 
   const removeImage = (index) => {
     const newImages = [...images];
@@ -496,15 +483,15 @@ const AgriculturalLandRentUpdate = () => {
   const ondragleave = (event) => {
     event.preventDefault();
     setIsDraging(false);
-    console.log("leave")
-  }
+    console.log("leave");
+  };
 
   const ondragover = (event) => {
     event.preventDefault();
     setIsDraging(true);
     event.dataTransfer.dropEffect = "copy";
     console.log("over the box");
-  }
+  };
 
   const ondrop = (event) => {
     event.preventDefault(); // Add this line
@@ -517,18 +504,21 @@ const AgriculturalLandRentUpdate = () => {
     }
 
     for (let i = 0; i < files.length; i++) {
-      if (files[i].type.split('/')[0] !== 'image') {
+      if (files[i].type.split("/")[0] !== "image") {
         continue;
       }
       if (!images.some((e) => e.name === files[i].name)) {
-        setImages((prev) => [...prev, {
-          name: files[i].name,
-          image: files[i],
-        }]);
+        setImages((prev) => [
+          ...prev,
+          {
+            name: files[i].name,
+            image: files[i],
+          },
+        ]);
       }
     }
     console.log("droped");
-  }
+  };
 
   const deleteimagePermanently = async (propertyId, propertyKey) => {
     try {
@@ -540,26 +530,33 @@ const AgriculturalLandRentUpdate = () => {
       let headers = {
         id: userId,
         authorization: authorizationToken,
-        'Content-type': 'application/json'
+        "Content-type": "application/json",
       };
 
       let data = { key: propertyKey };
 
-       
-
-      await axios.delete(`${process.env.REACT_APP_URL}/upload/${propertyId}`, { headers, data }).then((response) => {
-        console.log(response);
-        handleDataFetch()
-      });
-
+      await axios
+        .delete(`${process.env.REACT_APP_URL}/upload/${propertyId}`, {
+          headers,
+          data,
+        })
+        .then((response) => {
+          console.log(response);
+          handleDataFetch();
+        });
     } catch (error) {
       console.log(error);
     }
-  }
-
+  };
 
   return (
-    <Box className="perfectwidth" w={"94%"} padding={"0 20px"} margin={"auto"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"}>
+    <Box
+      className="perfectwidth"
+      w={"94%"}
+      padding={"0 20px"}
+      margin={"auto"}
+      boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"}
+    >
       <form onSubmit={handleSubmitData}>
         <Box className={style.location_form}>
           <Heading size={"lg"}>Where is your property located?</Heading>
@@ -603,7 +600,9 @@ const AgriculturalLandRentUpdate = () => {
                 <option value={e.locality} />
               ))}
             </datalist>
-          ) : ""}
+          ) : (
+            ""
+          )}
 
           <Input
             type="text"
@@ -635,21 +634,16 @@ const AgriculturalLandRentUpdate = () => {
             fontSize={"md"}
             variant="flushed"
           />
-
-        </Box>
-        {/* =============================== Tell us about your property ============================ */}
-        <Box>
-          <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"}>
-            Tell us about your property
-          </Heading>
-        </Box>
-
+        </Box> 
 
         {/* ============================ add area details =============================== */}
-        <Box textAlign={"left"} padding={"10px 0 0 0"}>
+        <Box textAlign={"left"}>
+          <Heading as={"h3"} size={"md"} textAlign={"left"}>
+            Tell us about your property
+          </Heading>
           <Heading as={"h3"} margin={"5px 0"} size={"md"}>
             Add Area Details
-          </Heading> 
+          </Heading>
           <ButtonGroup
             className={style.select_land}
             size="sm"
@@ -661,13 +655,18 @@ const AgriculturalLandRentUpdate = () => {
               padding={"0 2px"}
               value={plotArea}
               onChange={(e) => {
-                
                 setPlotArea(NumericString(e.target.value));
               }}
-              required />
-            <select value={areaPer} onChange={(e) => {
-              setAreaPer(e.target.value);
-            }} className={style.select} required>
+              required
+            />
+            <select
+              value={areaPer}
+              onChange={(e) => {
+                setAreaPer(e.target.value);
+              }}
+              className={style.select}
+              required
+            >
               <option value="sq.ft">sq.ft</option>
               <option value="sq.yards">sq.yards</option>
               <option value="sq.m">sq.m</option>
@@ -691,14 +690,33 @@ const AgriculturalLandRentUpdate = () => {
         </Box>
 
         {/* ========================== Property Dimensions ========================== */}
-        <Box as={"div"} textAlign={"left"} padding={"10px 0"} >
-          <Heading as={"h3"} size={"md"} > Property Dimensions (Optional) </Heading>
-          <Input type={"text"} variant='flushed' padding={"0 6px"} margin={"4px 0"} value={plotLength} onChange={(e) => {
-            setplotLength(NumericString(e.target.value));
-          }} placeholder={`Length of plot (in ${areaPer})`} />
-          <Input type={"text"} variant='flushed' padding={"0 6px"} margin={"4px 0"} value={plotBreadth} onChange={(e) => {
-            setPlotBreadth(NumericString(e.target.value));
-          }} placeholder={`Breadth of plot (in ${areaPer})`} />
+        <Box as={"div"} textAlign={"left"} padding={"10px 0"}>
+          <Heading as={"h3"} size={"md"}>
+            {" "}
+            Property Dimensions (Optional){" "}
+          </Heading>
+          <Input
+            type={"text"}
+            variant="flushed"
+            padding={"0 6px"}
+            margin={"4px 0"}
+            value={plotLength}
+            onChange={(e) => {
+              setplotLength(NumericString(e.target.value));
+            }}
+            placeholder={`Length of plot (in ${areaPer})`}
+          />
+          <Input
+            type={"text"}
+            variant="flushed"
+            padding={"0 6px"}
+            margin={"4px 0"}
+            value={plotBreadth}
+            onChange={(e) => {
+              setPlotBreadth(NumericString(e.target.value));
+            }}
+            placeholder={`Breadth of plot (in ${areaPer})`}
+          />
         </Box>
 
         {/* ========================== Width of facing road ========================== */}
@@ -706,12 +724,24 @@ const AgriculturalLandRentUpdate = () => {
           <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
             Width of facing road
           </Heading>
-          <Box display={"flex"} gap={"20px"} w={"300px"} >
-            <Input type="text" maxLength={3} variant='flushed' flex={1} required value={facingwidth} onChange={(e) => {
-              e.preventDefault();
-              setFacingWidth(e.target.value);
-            }} />
-            <Select flex={1} onChange={(e) => setFacing(e.target.value)} value={facing}>
+          <Box display={"flex"} gap={"20px"} w={"300px"}>
+            <Input
+              type="text"
+              maxLength={3}
+              variant="flushed"
+              flex={1}
+              required
+              value={facingwidth}
+              onChange={(e) => {
+                e.preventDefault();
+                setFacingWidth(e.target.value);
+              }}
+            />
+            <Select
+              flex={1}
+              onChange={(e) => setFacing(e.target.value)}
+              value={facing}
+            >
               <option value="Meter"> Meter </option>
               <option value="Feet"> Feet </option>
             </Select>
@@ -720,32 +750,124 @@ const AgriculturalLandRentUpdate = () => {
 
         {/* ========================== No of open sides ========================== */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} > No. of open sides </Heading>
+          <Heading as={"h3"} size={"md"}>
+            {" "}
+            No. of open sides{" "}
+          </Heading>
           <Box textAlign={"left"} padding={"10px 0 0 0"}>
-            <button value={"1"} onClick={handleOpenSide} className={openSides.includes("1") ? style.setbtn : style.btn} >1</button>
-            <button value={"2"} onClick={handleOpenSide} className={openSides.includes("2") ? style.setbtn : style.btn} >2</button>
-            <button value={"3"} onClick={handleOpenSide} className={openSides.includes("3") ? style.setbtn : style.btn} >3</button>
-            <button value={"4 or more"} onClick={handleOpenSide} className={openSides.includes("4 or more") ? style.setbtn : style.btn} >4 or more</button>
+            <button
+              value={"1"}
+              onClick={handleOpenSide}
+              className={openSides.includes("1") ? style.setbtn : style.btn}
+            >
+              1
+            </button>
+            <button
+              value={"2"}
+              onClick={handleOpenSide}
+              className={openSides.includes("2") ? style.setbtn : style.btn}
+            >
+              2
+            </button>
+            <button
+              value={"3"}
+              onClick={handleOpenSide}
+              className={openSides.includes("3") ? style.setbtn : style.btn}
+            >
+              3
+            </button>
+            <button
+              value={"4 or more"}
+              onClick={handleOpenSide}
+              className={
+                openSides.includes("4 or more") ? style.setbtn : style.btn
+              }
+            >
+              4 or more
+            </button>
           </Box>
         </Box>
 
         {/* ============================== Construction Property =============================== */}
         <Box textAlign={"left"} className={style.optional_box}>
-          <Heading as={"h3"} size={"md"} > Any construction done on this property? </Heading>
+          <Heading as={"h3"} size={"md"}>
+            {" "}
+            Any construction done on this property?{" "}
+          </Heading>
           <Box textAlign={"left"} padding={"10px 0 0 0"}>
-            <button onClick={handleConstructionOnProperty} value={"Yes"} className={ConstructionOnProperty.includes("Yes") ? style.setbtn : style.btn} >Yes</button>
-            <button onClick={handleConstructionOnProperty} value={"No"} className={ConstructionOnProperty.includes("No") ? style.setbtn : style.btn} >No</button>
+            <button
+              onClick={handleConstructionOnProperty}
+              value={"Yes"}
+              className={
+                ConstructionOnProperty.includes("Yes")
+                  ? style.setbtn
+                  : style.btn
+              }
+            >
+              Yes
+            </button>
+            <button
+              onClick={handleConstructionOnProperty}
+              value={"No"}
+              className={
+                ConstructionOnProperty.includes("No") ? style.setbtn : style.btn
+              }
+            >
+              No
+            </button>
           </Box>
         </Box>
 
         {/* ============================= Type of construction been done =========================== */}
-        <Box className={style.optional_box} display={ConstructionOnProperty == "Yes" ? "grid" : "none"}>
-          <Heading as={"h3"} size={"md"} > What type of construction has been done? </Heading>
+        <Box
+          className={style.optional_box}
+          display={ConstructionOnProperty == "Yes" ? "grid" : "none"}
+        >
+          <Heading as={"h3"} size={"md"}>
+            {" "}
+            What type of construction has been done?{" "}
+          </Heading>
           <Box>
-            <button value={"Shed"} onClick={handleConstructionType} className={constructionType.includes("Shed") ? style.setbtn : style.btn} > Shed </button>
-            <button value={"Room(s)"} onClick={handleConstructionType} className={constructionType.includes("Room(s)") ? style.setbtn : style.btn} > Room(s) </button>
-            <button value={"Washroom"} onClick={handleConstructionType} className={constructionType.includes("Washroom") ? style.setbtn : style.btn} > Washroom </button>
-            <button value={"Other"} onClick={handleConstructionType} className={constructionType.includes("Other") ? style.setbtn : style.btn} > Other </button>
+            <button
+              value={"Shed"}
+              onClick={handleConstructionType}
+              className={
+                constructionType.includes("Shed") ? style.setbtn : style.btn
+              }
+            >
+              {" "}
+              Shed{" "}
+            </button>
+            <button
+              value={"Room(s)"}
+              onClick={handleConstructionType}
+              className={
+                constructionType.includes("Room(s)") ? style.setbtn : style.btn
+              }
+            >
+              {" "}
+              Room(s){" "}
+            </button>
+            <button
+              value={"Washroom"}
+              onClick={handleConstructionType}
+              className={
+                constructionType.includes("Washroom") ? style.setbtn : style.btn
+              }
+            >
+              {" "}
+              Washroom{" "}
+            </button>
+            <button
+              value={"Other"}
+              onClick={handleConstructionType}
+              className={
+                constructionType.includes("Other") ? style.setbtn : style.btn
+              }
+            >
+              {" "}
+              Other{" "}
+            </button>
           </Box>
         </Box>
 
@@ -759,44 +881,40 @@ const AgriculturalLandRentUpdate = () => {
               className={propertyFacing == "North" ? style.setbtn : style.btn}
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"North"}
             >
-
               North
             </button>
             <button
               className={propertyFacing == "South" ? style.setbtn : style.btn}
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"South"}
             >
-
               South
             </button>
             <button
               className={propertyFacing == "East" ? style.setbtn : style.btn}
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"East"}
             >
-
               East
             </button>
             <button
               className={propertyFacing == "West" ? style.setbtn : style.btn}
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"West"}
             >
-
               West
             </button>
             <button
@@ -805,11 +923,10 @@ const AgriculturalLandRentUpdate = () => {
               }
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"North-East"}
             >
-
               North-East
             </button>
             <button
@@ -818,11 +935,10 @@ const AgriculturalLandRentUpdate = () => {
               }
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"North-West"}
             >
-
               North-West
             </button>
             <button
@@ -831,11 +947,10 @@ const AgriculturalLandRentUpdate = () => {
               }
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"South-East"}
             >
-
               South-East
             </button>
             <button
@@ -844,11 +959,10 @@ const AgriculturalLandRentUpdate = () => {
               }
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"South-West"}
             >
-
               South-West
             </button>
           </Box>
@@ -860,7 +974,12 @@ const AgriculturalLandRentUpdate = () => {
             Possession By
           </Heading>
           <Box>
-            <Select variant={"filled"} padding={"0 10px"} value={expectedByYear} onChange={(e) => setExpectedByYear(e.target.value)}>
+            <Select
+              variant={"filled"}
+              padding={"0 10px"}
+              value={expectedByYear}
+              onChange={(e) => setExpectedByYear(e.target.value)}
+            >
               <option value="Immediate">Immediate</option>
               <option value="Within 3 Months">Within 3 Months</option>
               <option value="Within 6 Months">Within 6 Months</option>
@@ -873,7 +992,6 @@ const AgriculturalLandRentUpdate = () => {
 
         {/* ============================ Add pricing and details (Ownership) ============================ */}
         <Box>
-          
           {/* OwnerShip detail */}
           <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Ownership
@@ -935,14 +1053,15 @@ const AgriculturalLandRentUpdate = () => {
           <Heading
             as={"h3"}
             size={"md"}
-            margin={"30px 0 10px 0"}
-            textAlign={"left"}
+            textAlign={"left"} 
           >
             Which authority the property is approved by ?
           </Heading>
           <Box className={style.grid} gap={4}>
             <button
-              className={authorisedBy.includes("DDA") ? style.setbtn : style.btn}
+              className={
+                authorisedBy.includes("DDA") ? style.setbtn : style.btn
+              }
               borderRadius={"100px"}
               border={"1px solid rgba(113, 210, 255, 0.897)"}
               margin={"8px 6px 0 0"}
@@ -953,7 +1072,9 @@ const AgriculturalLandRentUpdate = () => {
               DDA
             </button>
             <button
-              className={authorisedBy.includes("MCD") ? style.setbtn : style.btn}
+              className={
+                authorisedBy.includes("MCD") ? style.setbtn : style.btn
+              }
               borderRadius={"100px"}
               border={"1px solid rgba(113, 210, 255, 0.897)"}
               margin={"8px 6px 0 0"}
@@ -995,15 +1116,15 @@ const AgriculturalLandRentUpdate = () => {
                 >
                   {isCountry.country == "india" ? "₹" : "$"} Price Details
                 </Heading>
-                <Input type="text"
+                <Input
+                  type="text"
                   value={pricedetail}
                   required
                   onChange={(e) => {
                     setPricedetail(NumericString(e.target.value));
-                    
                   }}
                 />
-              </Box> 
+              </Box>
             </Box>
           </Box>
           <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
@@ -1011,49 +1132,80 @@ const AgriculturalLandRentUpdate = () => {
               isChecked={inclusivePrices.includes("All inclusive price")}
               onChange={(e) => {
                 e.preventDefault();
-                handleinclusiveandtax(e.target.value)
+                handleinclusiveandtax(e.target.value);
               }}
               value={"All inclusive price"}
-
             >
               All inclusive price
             </Checkbox>
             <Checkbox
-              isChecked={inclusivePrices.includes("Tax and Govt. charges excluded")}
+              isChecked={inclusivePrices.includes(
+                "Tax and Govt. charges excluded"
+              )}
               onChange={(e) => {
                 e.preventDefault();
-                handleinclusiveandtax(e.target.value)
+                handleinclusiveandtax(e.target.value);
               }}
               value={"Tax and Govt. charges excluded"}
             >
-
               Tax and Govt. charges excluded
             </Checkbox>
             <Checkbox
               isChecked={inclusivePrices.includes("Price Negotiable")}
               onChange={(e) => {
                 e.preventDefault();
-                handleinclusiveandtax(e.target.value)
+                handleinclusiveandtax(e.target.value);
               }}
               value={"Price Negotiable"}
             >
-
               Price Negotiable
             </Checkbox>
           </Box>
           <Box display={"grid"}>
-            {additionalPrice && <>
-              <InputGroup w={"300px"} margin={"10px 0"}>
-                <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(NumericString(e.target.value))} value={maintenancePrice} placeholder={"Maintenance Price"} />
-                <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
-                  <option value="Monthly">Monthly</option>
-                  <option value="Yearly">Yearly</option>
-                </Select>
-              </InputGroup>
-              <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(NumericString(e.target.value))} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-              <Input type="text" w={"300px"} value={annualDuesPayble} onChange={(e) => setAnnualDuesPayble(NumericString(e.target.value))} placeholder="Annual dues payable" margin={"10px 0 0 0"} />
-            </>
-            }
+            {additionalPrice && (
+              <>
+                <InputGroup w={"300px"} margin={"10px 0"}>
+                  <Input
+                    w={"60%"}
+                    type="text"
+                    onChange={(e) =>
+                      setMaintenancePrice(NumericString(e.target.value))
+                    }
+                    value={maintenancePrice}
+                    placeholder={"Maintenance Price"}
+                  />
+                  <Select
+                    w={"40%"}
+                    borderRadius={0}
+                    value={maintenanceTimePeriod}
+                    onChange={(e) => setMaintenanceTimePeriod(e.target.value)}
+                  >
+                    <option value="Monthly">Monthly</option>
+                    <option value="Yearly">Yearly</option>
+                  </Select>
+                </InputGroup>
+                <Input
+                  type="text"
+                  w={"300px"}
+                  value={bookingAmount}
+                  onChange={(e) =>
+                    setBookingAmount(NumericString(e.target.value))
+                  }
+                  placeholder="Booking Amount"
+                  margin={"10px 0 0 0"}
+                />
+                <Input
+                  type="text"
+                  w={"300px"}
+                  value={annualDuesPayble}
+                  onChange={(e) =>
+                    setAnnualDuesPayble(NumericString(e.target.value))
+                  }
+                  placeholder="Annual dues payable"
+                  margin={"10px 0 0 0"}
+                />
+              </>
+            )}
             <Heading
               as={"h3"}
               size={"sm"}
@@ -1062,63 +1214,129 @@ const AgriculturalLandRentUpdate = () => {
               fontWeight={500}
               cursor={"pointer"}
               onClick={() => setAdditionalPrice(!additionalPrice)}
-              textAlign={"left"}>
-              {additionalPrice ? <IoIosArrowUp style={{ display: "inline" }} /> : <IoIosArrowDown style={{ display: "inline" }} />} Add more pricing details
+              textAlign={"left"}
+            >
+              {additionalPrice ? (
+                <IoIosArrowUp style={{ display: "inline" }} />
+              ) : (
+                <IoIosArrowDown style={{ display: "inline" }} />
+              )}{" "}
+              Add more pricing details
             </Heading>
           </Box>
         </Box>
 
-
         {/* ============================ Property unique discription ============================ */}
         <Box>
-          <Heading as={"h3"} size={"md"} fontWeight={600} margin={"10px 0"} textAlign={"left"}>
+          <Heading
+            as={"h3"}
+            size={"md"}
+            fontWeight={600}
+            margin={"10px 0"}
+            textAlign={"left"}
+          >
             Add Description and Unique Features of your Property
-          </Heading> 
-          <Textarea height={140} value={desc} onChange={(e) => {
-            let my_cleantext = CleanInputText(e.target.value);
-            setDesc(my_cleantext);
-          }} ></Textarea>
+          </Heading>
+          <Textarea
+            height={140}
+            value={desc}
+            onChange={(e) => {
+              let my_cleantext = CleanInputText(e.target.value);
+              setDesc(my_cleantext);
+            }}
+          ></Textarea>
         </Box>
 
         {/* image Drag and Drop area  */}
         <Box>
           <Box className={style.top}>
-            <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
+            <Heading
+              color={"black"}
+              size={"sm"}
+              textAlign={"left"}
+              margin={"10px 0"}
+            >
+              {" "}
+              Upload Your Property image{" "}
+            </Heading>
           </Box>
           <Box className={style.savedImages}>
             {savedImages?.map((w) => (
-              <Extraimg e={w} propertyid={productID} deleteimagePermanently={deleteimagePermanently} key={w._id} />
+              <Extraimg
+                e={w}
+                propertyid={productID}
+                deleteimagePermanently={deleteimagePermanently}
+                key={w._id}
+              />
             ))}
           </Box>
           <Box className={style.card}>
-            <Box border={isDraging ? "2px dashed rgb(46,49,146)" : "2px dashed #9e9e9e"} className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+            <Box
+              border={
+                isDraging ? "2px dashed rgb(46,49,146)" : "2px dashed #9e9e9e"
+              }
+              className={style.dragArea}
+              onDragOver={ondragover}
+              onDragLeave={ondragleave}
+              onDrop={ondrop}
+            >
               {isDraging ? (
-                <Text textAlign={"center"} color={"rgb(0, 134, 254)"} >Drop image here</Text>
+                <Text textAlign={"center"} color={"rgb(0, 134, 254)"}>
+                  Drop image here
+                </Text>
               ) : (
                 <>
                   Drag & Drop image here or
-                  <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
+                  <Text
+                    className={style.select}
+                    role="button"
+                    onClick={selectFiles}
+                  >
+                    {" "}
+                    Browse{" "}
+                  </Text>
                 </>
               )}
-              <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+              <input
+                type={"file"}
+                name="image"
+                accept="image/jpg, image/png, image/jpeg"
+                formMethod="post"
+                formEncType="multipart/form-data"
+                className={style.file}
+                multiple
+                ref={fileInputRef}
+                onChange={onFileSelect}
+              />
             </Box>
             <Box className={style.container}>
               {images.map((image, index) => (
                 <Box className={style.image} key={index}>
-                  <Text className={style.delete} onClick={() => removeImage(index)}>&#10006;</Text>
+                  <Text
+                    className={style.delete}
+                    onClick={() => removeImage(index)}
+                  >
+                    &#10006;
+                  </Text>
                   <img src={URL.createObjectURL(image.image)} alt="images" />
                 </Box>
               ))}
             </Box>
           </Box>
-        </Box> 
+        </Box>
 
         {/* ============================ Add amenities/unique features ============================ */}
         <Box>
           <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
             Add amenities/unique features
           </Heading>
-          <Heading as={"h5"} size={"xs"} fontWeight={400} margin={"10px 0"} textAlign={"left"}>
+          <Heading
+            as={"h5"}
+            size={"xs"}
+            fontWeight={400}
+            margin={"10px 0"}
+            textAlign={"left"}
+          >
             All fields on this page are optional
           </Heading>
         </Box>
@@ -1131,7 +1349,9 @@ const AgriculturalLandRentUpdate = () => {
           <Box>
             <button
               className={
-                amenities.includes("Maintenance Staff") ? style.setbtn : style.btn
+                amenities.includes("Maintenance Staff")
+                  ? style.setbtn
+                  : style.btn
               }
               onClick={handleAminities}
               value={"Maintenance Staff"}
@@ -1140,7 +1360,9 @@ const AgriculturalLandRentUpdate = () => {
             </button>
             <button
               className={
-                amenities.includes("Rain Water Harvesting") ? style.setbtn : style.btn
+                amenities.includes("Rain Water Harvesting")
+                  ? style.setbtn
+                  : style.btn
               }
               onClick={handleAminities}
               value={"Rain Water Harvesting"}
@@ -1168,7 +1390,9 @@ const AgriculturalLandRentUpdate = () => {
             </button>
             <button
               className={
-                amenities.includes("Feng Shui / Vaastu Compliant") ? style.setbtn : style.btn
+                amenities.includes("Feng Shui / Vaastu Compliant")
+                  ? style.setbtn
+                  : style.btn
               }
               onClick={handleAminities}
               value={"Feng Shui / Vaastu Compliant"}
@@ -1177,7 +1401,9 @@ const AgriculturalLandRentUpdate = () => {
             </button>
             <button
               className={
-                amenities.includes("Security / Fire Alarm") ? style.setbtn : style.btn
+                amenities.includes("Security / Fire Alarm")
+                  ? style.setbtn
+                  : style.btn
               }
               onClick={handleAminities}
               value={"Security / Fire Alarm"}
@@ -1215,7 +1441,9 @@ const AgriculturalLandRentUpdate = () => {
             </button>
             <button
               className={
-                propertyFeatures.includes("Power Back-up") ? style.setbtn : style.btn
+                propertyFeatures.includes("Power Back-up")
+                  ? style.setbtn
+                  : style.btn
               }
               value={"Power Back-up"}
               onClick={handlePropertyFeature}
@@ -1247,7 +1475,6 @@ const AgriculturalLandRentUpdate = () => {
           </Box>
         </Box>
 
-
         {/* ============================ Other Features ============================ */}
         <Box>
           <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
@@ -1264,7 +1491,6 @@ const AgriculturalLandRentUpdate = () => {
             </Checkbox>
           </Box>
         </Box>
-
 
         {/* ============================ location advantage ============================ */}
         <Box className={style.optional_box}>
@@ -1289,17 +1515,17 @@ const AgriculturalLandRentUpdate = () => {
               value={"Close to Metro Station"}
               onClick={handlelocationadvantages}
             >
-
               Close to Metro Station
             </button>
             <button
               className={
-                locationAdv.includes("Close to School") ? style.setbtn : style.btn
+                locationAdv.includes("Close to School")
+                  ? style.setbtn
+                  : style.btn
               }
               value={"Close to School"}
               onClick={handlelocationadvantages}
             >
-
               Close to School
             </button>
             <button
@@ -1311,17 +1537,17 @@ const AgriculturalLandRentUpdate = () => {
               value={"Close to Hospital"}
               onClick={handlelocationadvantages}
             >
-
               Close to Hospital
             </button>
             <button
               className={
-                locationAdv.includes("Close to Market") ? style.setbtn : style.btn
+                locationAdv.includes("Close to Market")
+                  ? style.setbtn
+                  : style.btn
               }
               value={"Close to Market"}
               onClick={handlelocationadvantages}
             >
-
               Close to Market
             </button>
             <button
@@ -1333,7 +1559,6 @@ const AgriculturalLandRentUpdate = () => {
               value={"Close to Railway Station"}
               onClick={handlelocationadvantages}
             >
-
               Close to Railway Station
             </button>
             <button
@@ -1345,7 +1570,6 @@ const AgriculturalLandRentUpdate = () => {
               value={"Close to Airport"}
               onClick={handlelocationadvantages}
             >
-
               Close to Airport
             </button>
             <button
@@ -1382,25 +1606,22 @@ const AgriculturalLandRentUpdate = () => {
         >
           *Please provide correct information, otherwise your listing might get
           blocked
-        </Heading> 
-        {isClicked && <LoadingBox />}  
+        </Heading>
+        {isClicked && <LoadingBox />}
         <Button
           margin={"20px 0"}
           type="submit"
-          w={"100%"} 
-          disabled={clickCount <= 0 ? true : false} 
+          w={"100%"}
+          disabled={clickCount <= 0 ? true : false}
           backgroundColor={"rgb(46,49,146)"}
           _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
           color={"#ffffff"}
         >
           Update Property
         </Button>
-
       </form>
     </Box>
-  )
-
-}
+  );
+};
 
 export default AgriculturalLandRentUpdate;
-

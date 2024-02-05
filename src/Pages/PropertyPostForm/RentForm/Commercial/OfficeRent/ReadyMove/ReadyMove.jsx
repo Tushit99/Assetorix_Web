@@ -645,10 +645,7 @@ const ReadyMove = () => {
         />
       </Box>
       {/* Property Detail */}
-      <Box marginTop={12}>
-        <Heading as={"h3"} size={"sm"} margin={"30px 0 10px 0"}>
-          Tell us about your property
-        </Heading>
+      <Box marginTop={4}> 
         {/* ====================================== */}
         {/* add area details */}
         <Box textAlign={"left"}>
@@ -1388,8 +1385,7 @@ const ReadyMove = () => {
           <Heading
             as={"h3"}
             size={"sm"}
-            margin={"30px 0 10px 0"}
-            textAlign={"left"}
+            textAlign={"left"} 
           >
             Age of Property
           </Heading>
@@ -1460,8 +1456,7 @@ const ReadyMove = () => {
           <Heading
             as={"h3"}
             size={"sm"}
-            margin={"30px 0 10px 0"}
-            textAlign={"left"}
+            textAlign={"left"} 
           >
             Add pricing and details...
           </Heading>

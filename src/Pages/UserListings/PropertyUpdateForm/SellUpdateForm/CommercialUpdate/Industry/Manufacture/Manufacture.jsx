@@ -6,8 +6,6 @@ import {
   Heading,
   Input,
   InputGroup,
-  NumberInput,
-  NumberInputField,
   Select,
   Text,
   Textarea,
@@ -17,12 +15,11 @@ import { Checkbox } from "@chakra-ui/react";
 import style from "../Industry.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { CleanInputText, NumericString } from "../../../../code";
 import { useNavigate, useParams } from "react-router-dom";
-import LoadingBox from "../../../../Loadingbox"; 
+import LoadingBox from "../../../../Loadingbox";
 import Extraimg from "../../../Extraimg/Extraimg";
-
 
 const ManufactureUpdate = () => {
   const { productID } = useParams();
@@ -42,7 +39,7 @@ const ManufactureUpdate = () => {
   const [expectedyear, setExpectedYear] = useState("");
   const [ownership, setOwnerShip] = useState("");
   const [pricedetail, setPricedetail] = useState("");
-  
+
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
@@ -73,56 +70,58 @@ const ManufactureUpdate = () => {
   const [isClicked, setIsClicked] = useState(false);
   const [clickCount, setClickCount] = useState(0);
   const navigate = useNavigate();
-  const [currency, setCurrency] = useState("₹"); 
+  const [currency, setCurrency] = useState("₹");
 
   // please don'nt change any function without any prior knowledge
 
   const handleDataFetch = async () => {
-    await axios.get(`${process.env.REACT_APP_URL}/property/single/${productID}`).then((detail) => {
-      let e = detail.data.data;
-      setCountry(e?.address?.country);
-      setCity(e?.address?.city);
-      setPincode(e?.address?.pincode);
-      setState(e.address.state);
-      setLocality(e?.address.locality);
-      setAddress(e?.address.address);
-      setwashrooms(e?.washrooms);
-      setPlotArea(e?.plotArea);
-      setAreaPer(e?.plotAreaUnit);
-      setAvailability(e?.availabilityStatus);
-      if (e.availabilityStatus == "Ready to move") {
-        setFromyear(e?.propertyStatus);
-      }
-      else if (e?.availabilityStatus == "Under construction") {
-        setExpectedYear(e?.expectedByYear);
-      }
-      setOwnerShip(e?.ownership);
-      setPricedetail(e?.price);
-      
-      setInclusivePrice(e?.inclusivePrices);
-      setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice);
-      setMaintenanceTimePeriod(e?.additionalPricingDetails?.maintenanceTimePeriod);
-      setBookingAmount(e?.additionalPricingDetails?.bookingAmount);
-      setPreLeased(e.preLeased_Rented);
-      if (e.preLeased_Rented == "Yes") {
-        setCurrentRentPerMonth(e.preLeased_RentedDetails.currentRentPerMonth);
-        setLeaseTenureInYear(e.preLeased_RentedDetails.leaseTenureInYear);
-        setAnnualRentIncrease(e.preLeased_RentedDetails.annualRentIncrease);
-        setBusinessType(e.preLeased_RentedDetails.businessType);
-      }
-      setDesc(e.description);
-      setAminity(e.amenities);
-      setPropertyFeature(e?.propertyFeatures);
-      setLocationAdv(e.locationAdv);
-      setBuildingFeature(e?.society_buildingFeatures);
-      setAdditinalFeature(e?.additionalFeatures);
-      setOtherFeature(e?.otherFeatures);
-      setPropertyFacing(e?.propertyFacing);
-      setFlooring(e?.flooring);
-      setSavedImages(e.images);
+    await axios
+      .get(`${process.env.REACT_APP_URL}/property/single/${productID}`)
+      .then((detail) => {
+        let e = detail.data.data;
+        setCountry(e?.address?.country);
+        setCity(e?.address?.city);
+        setPincode(e?.address?.pincode);
+        setState(e.address.state);
+        setLocality(e?.address.locality);
+        setAddress(e?.address.address);
+        setwashrooms(e?.washrooms);
+        setPlotArea(e?.plotArea);
+        setAreaPer(e?.plotAreaUnit);
+        setAvailability(e?.availabilityStatus);
+        if (e.availabilityStatus == "Ready to move") {
+          setFromyear(e?.propertyStatus);
+        } else if (e?.availabilityStatus == "Under construction") {
+          setExpectedYear(e?.expectedByYear);
+        }
+        setOwnerShip(e?.ownership);
+        setPricedetail(e?.price);
 
-    })
-  }
+        setInclusivePrice(e?.inclusivePrices);
+        setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice);
+        setMaintenanceTimePeriod(
+          e?.additionalPricingDetails?.maintenanceTimePeriod
+        );
+        setBookingAmount(e?.additionalPricingDetails?.bookingAmount);
+        setPreLeased(e.preLeased_Rented);
+        if (e.preLeased_Rented == "Yes") {
+          setCurrentRentPerMonth(e.preLeased_RentedDetails.currentRentPerMonth);
+          setLeaseTenureInYear(e.preLeased_RentedDetails.leaseTenureInYear);
+          setAnnualRentIncrease(e.preLeased_RentedDetails.annualRentIncrease);
+          setBusinessType(e.preLeased_RentedDetails.businessType);
+        }
+        setDesc(e.description);
+        setAminity(e.amenities);
+        setPropertyFeature(e?.propertyFeatures);
+        setLocationAdv(e.locationAdv);
+        setBuildingFeature(e?.society_buildingFeatures);
+        setAdditinalFeature(e?.additionalFeatures);
+        setOtherFeature(e?.otherFeatures);
+        setPropertyFacing(e?.propertyFacing);
+        setFlooring(e?.flooring);
+        setSavedImages(e.images);
+      });
+  };
 
   useEffect(() => {
     handleDataFetch();
@@ -148,7 +147,7 @@ const ManufactureUpdate = () => {
       washrooms,
       ownership,
       price: +pricedetail,
-     
+
       inclusivePrices,
       amenities,
       propertyFeatures,
@@ -176,34 +175,32 @@ const ManufactureUpdate = () => {
 
     const showToastError = (message) => {
       toast({
-        title: message + ' un-filled',
-        status: 'error',
+        title: message + " un-filled",
+        status: "error",
         duration: 2000,
-        position: 'top-right'
+        position: "top-right",
       });
-    }
-
+    };
 
     if (!locality) {
-      showToastError('Provide locality');
+      showToastError("Provide locality");
     } else if (!washrooms) {
-      showToastError('Provide washrooms');
+      showToastError("Provide washrooms");
     } else if (!ownership) {
-      showToastError('Provide OwnerShip');
+      showToastError("Provide OwnerShip");
     } else if (!pricedetail) {
-      showToastError('Provide PriceDetail');
-    }  else if (!additinalft) {
-      showToastError('Provide Property description');
+      showToastError("Provide PriceDetail");
+    } else if (!additinalft) {
+      showToastError("Provide Property description");
     }
 
     if (locationAdv) {
-      obj["locationAdv"] = locationAdv
+      obj["locationAdv"] = locationAdv;
     }
 
     if (
       ownership &&
       pricedetail &&
-
       inclusivePrices &&
       amenities &&
       propertyFeatures &&
@@ -213,17 +210,17 @@ const ManufactureUpdate = () => {
       let id = localStorage.getItem("usrId") || undefined;
       let authorization = localStorage.getItem("AstToken") || undefined;
 
-      let head = { id, authorization, 'Content-type': 'application/json' };
+      let head = { id, authorization, "Content-type": "application/json" };
 
       if (!id || !authorization) {
         toast({
-          title: 'Kindly log in to access property posting.',
+          title: "Kindly log in to access property posting.",
           description: "Login required for posting property.",
-          status: 'error',
+          status: "error",
           duration: 2000,
-          position: 'top-right'
-        })
-        return
+          position: "top-right",
+        });
+        return;
       }
 
       if (preLeased == "Yes") {
@@ -231,9 +228,9 @@ const ManufactureUpdate = () => {
           currentRentPerMonth,
           leaseTenureInYear,
           annualRentIncrease,
-          businessType
-        }
-        obj["preLeased_RentedDetails"] = preLeased_RentedDetails
+          businessType,
+        };
+        obj["preLeased_RentedDetails"] = preLeased_RentedDetails;
       }
 
       // if (furnished == "Furnished" || furnished == "Semi-Furnished") {
@@ -259,7 +256,6 @@ const ManufactureUpdate = () => {
       if (availability == "Under construction" && expectedyear != "") {
         obj["expectedByYear"] = expectedyear;
         obj["availabilityStatus"] = availability;
-
       }
       // else {
       try {
@@ -268,14 +264,17 @@ const ManufactureUpdate = () => {
         //     headers: head,
         //     body: JSON.stringify(obj)
         // });
-        // let data = await response.json();  
-        // console.log("data",data); 
-        await axios.patch(`${process.env.REACT_APP_URL}/property/${productID}`, obj, { headers: head })
+        // let data = await response.json();
+        // console.log("data",data);
+        await axios
+          .patch(`${process.env.REACT_APP_URL}/property/${productID}`, obj, {
+            headers: head,
+          })
           .then((e) => {
             toast({
               title: e.data.msg,
               description: e.data.msg,
-              status: 'success',
+              status: "success",
               duration: 2000,
             });
             if (images.length) {
@@ -288,21 +287,20 @@ const ManufactureUpdate = () => {
       } catch (error) {
         toast({
           title: error.response.data.msg,
-          status: 'error',
+          status: "error",
           duration: 2000,
-        })
+        });
         setClickCount((prev) => prev - 12);
         setIsClicked(false);
       }
-    }
-    else {
+    } else {
       toast({
-        title: 'Form un-filled',
+        title: "Form un-filled",
         description: "Please fill all required fields.",
-        status: 'info',
+        status: "info",
         duration: 2000,
-        position: 'top-right'
-      })
+        position: "top-right",
+      });
       setClickCount((prev) => prev - 12);
       setIsClicked(false);
     }
@@ -310,15 +308,14 @@ const ManufactureUpdate = () => {
 
   const submitImage = async (singleproductID) => {
     try {
-
       let id = localStorage.getItem("usrId") || undefined;
       let authorization = localStorage.getItem("AstToken") || undefined;
 
       let headersList = {
-        "Accept": "*/*",
-        "Authorization": authorization,
-        "id": id
-      }
+        Accept: "*/*",
+        Authorization: authorization,
+        id: id,
+      };
 
       let formdata = new FormData();
       images.forEach((image) => {
@@ -332,12 +329,12 @@ const ManufactureUpdate = () => {
         method: "POST",
         headers: headersList,
         data: bodyContent,
-      }
+      };
 
       await axios.request(reqOptions).then((e) => {
         setIsClicked(false);
         navigate("/listing");
-      })
+      });
     } catch (error) {
       console.log(error);
       setIsClicked(false);
@@ -350,26 +347,24 @@ const ManufactureUpdate = () => {
     setPincode(e.target.value);
     if (e.target.value.length == 6) {
       pinfetch(e.target.value);
-    }
-    else {
+    } else {
       console.log(e.target.value);
     }
-  }
-
+  };
 
   const pinfetch = async (pin) => {
     try {
-
-      let res = await axios.get(`${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`);
+      let res = await axios.get(
+        `${process.env.REACT_APP_URL}/pincode/?pincode=${pin}`
+      );
       setState(res.data[0].state);
       setCity(res.data[0].city);
       setCountry(res.data[0].country);
       setPinCollection(res.data);
-    }
-    catch (err) {
+    } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   const handleAvailable = (e) => {
     e.preventDefault();
@@ -479,32 +474,33 @@ const ManufactureUpdate = () => {
       newarr.push(value);
     }
     setInclusivePrice(newarr);
-  }
+  };
 
-  
-
-  // ================= 
+  // =================
   const selectFiles = () => {
     fileInputRef.current.click();
-  }
+  };
 
   const onFileSelect = (e) => {
     let files = e.target.files;
     if (files.length === 0) {
-      return
+      return;
     }
     for (let i = 0; i < files.length; i++) {
-      if (files[i].type.split('/')[0] !== 'image') {
+      if (files[i].type.split("/")[0] !== "image") {
         continue;
       }
       if (!images.some((e) => e.name === files[i].name)) {
-        setImages((prev) => [...prev, {
-          name: files[i].name,
-          image: files[i],
-        },])
+        setImages((prev) => [
+          ...prev,
+          {
+            name: files[i].name,
+            image: files[i],
+          },
+        ]);
       }
     }
-  }
+  };
 
   const removeImage = (index) => {
     const newImages = [...images];
@@ -515,15 +511,15 @@ const ManufactureUpdate = () => {
   const ondragleave = (event) => {
     event.preventDefault();
     setIsDraging(false);
-    console.log("leave")
-  }
+    console.log("leave");
+  };
 
   const ondragover = (event) => {
     event.preventDefault();
     setIsDraging(true);
     event.dataTransfer.dropEffect = "copy";
     console.log("over the box");
-  }
+  };
 
   const ondrop = (event) => {
     event.preventDefault(); // Add this line
@@ -536,18 +532,21 @@ const ManufactureUpdate = () => {
     }
 
     for (let i = 0; i < files.length; i++) {
-      if (files[i].type.split('/')[0] !== 'image') {
+      if (files[i].type.split("/")[0] !== "image") {
         continue;
       }
       if (!images.some((e) => e.name === files[i].name)) {
-        setImages((prev) => [...prev, {
-          name: files[i].name,
-          image: files[i],
-        }]);
+        setImages((prev) => [
+          ...prev,
+          {
+            name: files[i].name,
+            image: files[i],
+          },
+        ]);
       }
     }
     console.log("droped");
-  }
+  };
 
   const deleteimagePermanently = async (propertyId, propertyKey) => {
     try {
@@ -559,26 +558,32 @@ const ManufactureUpdate = () => {
       let headers = {
         id: userId,
         authorization: authorizationToken,
-        'Content-type': 'application/json'
+        "Content-type": "application/json",
       };
 
       let data = { key: propertyKey };
 
-       
-
-      await axios.delete(`${process.env.REACT_APP_URL}/upload/${propertyId}`, { headers, data }).then((response) => {
-        console.log(response);
-        handleDataFetch()
-      });
-
+      await axios
+        .delete(`${process.env.REACT_APP_URL}/upload/${propertyId}`, {
+          headers,
+          data,
+        })
+        .then((response) => {
+          console.log(response);
+          handleDataFetch();
+        });
     } catch (error) {
       console.log(error);
     }
-  }
-
+  };
 
   return (
-    <Box w={"94%"} padding={"0 20px"} margin={"auto"} boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"} >
+    <Box
+      w={"94%"}
+      padding={"0 20px"}
+      margin={"auto"}
+      boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"}
+    >
       <form onSubmit={handleSubmitData}>
         <Box className={style.location_form}>
           <Heading size={"lg"}>Where is your property located?</Heading>
@@ -596,26 +601,13 @@ const ManufactureUpdate = () => {
             fontSize={"md"}
             variant="flushed"
           />
-          <NumberInput value={pincode}>
-            <NumberInputField
-              placeholder={"Enter pincode"}
-              padding={"0 10px"}
-              borderRight={0}
-              borderLeft={0}
-              borderTop={0}
-              borderRadius={0}
-              _active={{
-                borderRight: "0",
-                borderLeft: "0",
-                borderTop: "0",
-                borderRadius: "0",
-              }}
-              required
-              fontSize={"md"}
-              value={pincode}
-              onChange={handlepinfetch}
-            />
-          </NumberInput>
+          <Input
+            type="text"
+            value={pincode}
+            placeholder={"Enter pincode"}
+            required
+            onChange={handlepinfetch}
+          />
           <Input
             type="text"
             padding={"0 10px"}
@@ -633,7 +625,9 @@ const ManufactureUpdate = () => {
                 <option value={e.locality} />
               ))}
             </datalist>
-          ) : ""}
+          ) : (
+            ""
+          )}
 
           <Input
             type="text"
@@ -665,13 +659,9 @@ const ManufactureUpdate = () => {
             fontSize={"md"}
             variant="flushed"
           />
-
         </Box>
         {/* =============================== Tell us about your property ============================ */}
         <Box>
-          <Heading as={"h3"} size={"md"} margin={"30px 0 10px 0"}>
-            Tell us about your property
-          </Heading>
           <Heading as={"h4"} size={"sm"} margin={"0 0 30px 0 "}>
             Add Room Details
           </Heading>
@@ -679,17 +669,15 @@ const ManufactureUpdate = () => {
 
         {/* ============================== No. of Washrooms ====================================== */}
         <Box>
-          <Box textAlign={"left"} >
+          <Box textAlign={"left"}>
             <Text> No. of Washrooms </Text>
-            <NumberInput value={washrooms}>
-              <NumberInputField
-                variant="flushed"
-                padding={"0 2px"}
-                onChange={(e) => setwashrooms(e.target.value)}
-                value={washrooms}
-                required
-              />
-            </NumberInput>
+            <Input
+              type="text"
+              variant="flushed"
+              onChange={(e) => setwashrooms(e.target.value)}
+              value={washrooms}
+              required
+            />
           </Box>
         </Box>
 
@@ -705,20 +693,22 @@ const ManufactureUpdate = () => {
             isAttached
             variant="outline"
           >
-            <NumberInput value={plotArea}>
-              <NumberInputField
-                padding={"0 2px"}
-                value={plotArea}
-                onChange={(e) => {
-                  
-                  setPlotArea(e.target.value);
-                }}
-                required
-              />
-            </NumberInput>
-            <select value={areaPer} onChange={(e) => {
-              setAreaPer(e.target.value);
-            }} className={style.select} required>
+            <Input 
+            type="text"
+              value={plotArea}
+              onChange={(e) => {
+                setPlotArea(e.target.value);
+              }}
+              required
+             /> 
+            <select
+              value={areaPer}
+              onChange={(e) => {
+                setAreaPer(e.target.value);
+              }}
+              className={style.select}
+              required
+            >
               <option value="sq.ft">sq.ft</option>
               <option value="sq.yards">sq.yards</option>
               <option value="sq.m">sq.m</option>
@@ -779,12 +769,7 @@ const ManufactureUpdate = () => {
         {/* ========================== Age of Property ================================= */}
         {availability == "Ready to move" && (
           <Box textAlign={"left"} className={style.optional_box}>
-            <Heading
-              as={"h3"}
-              size={"md"}
-              margin={"30px 0 10px 0"}
-              textAlign={"left"}
-            >
+            <Heading as={"h3"} size={"md"} textAlign={"left"}>
               Age of Property
             </Heading>
             <Box className={style.grid}>
@@ -837,12 +822,7 @@ const ManufactureUpdate = () => {
         )}
         {availability == "Under construction" && (
           <Box>
-            <Heading
-              as={"h3"}
-              size={"md"}
-              margin={"30px 0 10px 0"}
-              textAlign={"left"}
-            >
+            <Heading as={"h3"} size={"md"} textAlign={"left"}>
               Possession By
             </Heading>
             <Select
@@ -862,7 +842,6 @@ const ManufactureUpdate = () => {
 
         {/* ============================ Add pricing and details (Ownership) ============================ */}
         <Box>
-          
           {/* OwnerShip detail */}
           <Heading as={"h3"} size={"sm"} margin={"10px 0"} textAlign={"left"}>
             Ownership
@@ -940,10 +919,10 @@ const ManufactureUpdate = () => {
                   value={pricedetail}
                   required
                   onChange={(e) => {
-                    setPricedetail(NumericString(e.target.value)); 
+                    setPricedetail(NumericString(e.target.value));
                   }}
                 />
-              </Box> 
+              </Box>
             </Box>
           </Box>
           <Box display={"flex"} gap={10} margin={"20px 0"} flexWrap={"wrap"}>
@@ -951,48 +930,66 @@ const ManufactureUpdate = () => {
               isChecked={inclusivePrices.includes("All inclusive price")}
               onChange={(e) => {
                 e.preventDefault();
-                handleinclusiveandtax(e.target.value)
+                handleinclusiveandtax(e.target.value);
               }}
               value={"All inclusive price"}
-
             >
               All inclusive price
             </Checkbox>
             <Checkbox
-              isChecked={inclusivePrices.includes("Tax and Govt. charges excluded")}
+              isChecked={inclusivePrices.includes(
+                "Tax and Govt. charges excluded"
+              )}
               onChange={(e) => {
                 e.preventDefault();
-                handleinclusiveandtax(e.target.value)
+                handleinclusiveandtax(e.target.value);
               }}
               value={"Tax and Govt. charges excluded"}
             >
-
               Tax and Govt. charges excluded
             </Checkbox>
             <Checkbox
               isChecked={inclusivePrices.includes("Price Negotiable")}
               onChange={(e) => {
                 e.preventDefault();
-                handleinclusiveandtax(e.target.value)
+                handleinclusiveandtax(e.target.value);
               }}
               value={"Price Negotiable"}
             >
-
               Price Negotiable
             </Checkbox>
           </Box>
           <Box>
-            {additionalPrice && <>
-              <InputGroup w={"300px"} margin={"10px 0"}>
-                <Input w={"60%"} type='text' onChange={(e) => setMaintenancePrice(e.target.value)} value={maintenancePrice} placeholder={"Maintenance Price"} />
-                <Select w={"40%"} borderRadius={0} value={maintenanceTimePeriod} onChange={(e) => setMaintenanceTimePeriod(e.target.value)}>
-                  <option value="Monthly">Monthly</option>
-                  <option value="Yearly">Yearly</option>
-                </Select>
-              </InputGroup>
-              <Input type="text" w={"300px"} value={bookingAmount} onChange={(e) => setBookingAmount(e.target.value)} placeholder="Booking Amount" margin={"10px 0 0 0"} />
-            </>
-            }
+            {additionalPrice && (
+              <>
+                <InputGroup w={"300px"} margin={"10px 0"}>
+                  <Input
+                    w={"60%"}
+                    type="text"
+                    onChange={(e) => setMaintenancePrice(e.target.value)}
+                    value={maintenancePrice}
+                    placeholder={"Maintenance Price"}
+                  />
+                  <Select
+                    w={"40%"}
+                    borderRadius={0}
+                    value={maintenanceTimePeriod}
+                    onChange={(e) => setMaintenanceTimePeriod(e.target.value)}
+                  >
+                    <option value="Monthly">Monthly</option>
+                    <option value="Yearly">Yearly</option>
+                  </Select>
+                </InputGroup>
+                <Input
+                  type="text"
+                  w={"300px"}
+                  value={bookingAmount}
+                  onChange={(e) => setBookingAmount(e.target.value)}
+                  placeholder="Booking Amount"
+                  margin={"10px 0 0 0"}
+                />
+              </>
+            )}
             <Heading
               as={"h3"}
               size={"sm"}
@@ -1001,8 +998,14 @@ const ManufactureUpdate = () => {
               fontWeight={500}
               cursor={"pointer"}
               onClick={() => setAdditionalPrice(!additionalPrice)}
-              textAlign={"left"}>
-              {additionalPrice ? <IoIosArrowUp style={{ display: "inline" }} /> : <IoIosArrowDown style={{ display: "inline" }} />} Add more pricing details
+              textAlign={"left"}
+            >
+              {additionalPrice ? (
+                <IoIosArrowUp style={{ display: "inline" }} />
+              ) : (
+                <IoIosArrowDown style={{ display: "inline" }} />
+              )}{" "}
+              Add more pricing details
             </Heading>
           </Box>
         </Box>
@@ -1012,91 +1015,192 @@ const ManufactureUpdate = () => {
           <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
             Is it Pre-leased / Pre-Rented ?
           </Heading>
-          <Heading as={"h5"} size={"xs"} fontWeight={500} margin={"10px 0"} textAlign={"left"}>
+          <Heading
+            as={"h5"}
+            size={"xs"}
+            fontWeight={500}
+            margin={"10px 0"}
+            textAlign={"left"}
+          >
             for properties that are already rented out
           </Heading>
           <Box display={"flex"} gap={5}>
-            <button value={"Yes"} onClick={(e) => {
-              e.preventDefault();
-              setPreLeased(e.target.value);
-            }} className={preLeased == "Yes" ? style.setbtn : style.btn} > Yes </button>
-            <button value={"No"} onClick={(e) => {
-              e.preventDefault();
-              setPreLeased(e.target.value);
-            }} className={preLeased == "No" ? style.setbtn : style.btn} > No </button>
+            <button
+              value={"Yes"}
+              onClick={(e) => {
+                e.preventDefault();
+                setPreLeased(e.target.value);
+              }}
+              className={preLeased == "Yes" ? style.setbtn : style.btn}
+            >
+              {" "}
+              Yes{" "}
+            </button>
+            <button
+              value={"No"}
+              onClick={(e) => {
+                e.preventDefault();
+                setPreLeased(e.target.value);
+              }}
+              className={preLeased == "No" ? style.setbtn : style.btn}
+            >
+              {" "}
+              No{" "}
+            </button>
           </Box>
           <Box display={preLeased == "Yes" ? "block" : "none"}>
-            <Input type="text" value={currentRentPerMonth} onChange={(e) => {
-              e.preventDefault();
-              setCurrentRentPerMonth(e.target.value);
-            }} placeholder={"₹ Current rent per month"} />
-            <Input type="text" value={leaseTenureInYear} onChange={(e) => {
-              e.preventDefault();
-              setLeaseTenureInYear((e.target.value));
-            }} placeholder={"Lease tenure in years"} />
+            <Input
+              type="text"
+              value={currentRentPerMonth}
+              onChange={(e) => {
+                e.preventDefault();
+                setCurrentRentPerMonth(e.target.value);
+              }}
+              placeholder={"₹ Current rent per month"}
+            />
+            <Input
+              type="text"
+              value={leaseTenureInYear}
+              onChange={(e) => {
+                e.preventDefault();
+                setLeaseTenureInYear(e.target.value);
+              }}
+              placeholder={"Lease tenure in years"}
+            />
             <Box>
-              <Input type="text" value={annualRentIncrease} onChange={(e) => {
-                e.preventDefault();
-                setAnnualRentIncrease((e.target.value));
-              }} placeholder="Annual rent increase in % (Optional)" />
-              <Input type="text" value={businessType} onChange={(e) => {
-                e.preventDefault();
-                setBusinessType((e.target.value));
-              }} placeholder="Leased to - Business Type (Optional)" />
+              <Input
+                type="text"
+                value={annualRentIncrease}
+                onChange={(e) => {
+                  e.preventDefault();
+                  setAnnualRentIncrease(e.target.value);
+                }}
+                placeholder="Annual rent increase in % (Optional)"
+              />
+              <Input
+                type="text"
+                value={businessType}
+                onChange={(e) => {
+                  e.preventDefault();
+                  setBusinessType(e.target.value);
+                }}
+                placeholder="Leased to - Business Type (Optional)"
+              />
             </Box>
           </Box>
         </Box>
 
         {/* ============================ Property unique discription ============================ */}
         <Box>
-          <Heading as={"h3"} size={"md"} fontWeight={600} margin={"10px 0"} textAlign={"left"}>
+          <Heading
+            as={"h3"}
+            size={"md"}
+            fontWeight={600}
+            margin={"10px 0"}
+            textAlign={"left"}
+          >
             Add Description and Unique Features of your Property
-          </Heading> 
-          <Textarea height={140} value={desc} onChange={(e) => {
-            let my_cleantext = CleanInputText(e.target.value);
-            setDesc(my_cleantext);
-          }} ></Textarea>
+          </Heading>
+          <Textarea
+            height={140}
+            value={desc}
+            onChange={(e) => {
+              let my_cleantext = CleanInputText(e.target.value);
+              setDesc(my_cleantext);
+            }}
+          ></Textarea>
         </Box>
 
         {/* image Drag and Drop area  */}
         <Box>
           <Box className={style.top}>
-            <Heading color={"black"} size={"sm"} textAlign={"left"} margin={"10px 0"} > Upload Your Property image </Heading>
+            <Heading
+              color={"black"}
+              size={"sm"}
+              textAlign={"left"}
+              margin={"10px 0"}
+            >
+              {" "}
+              Upload Your Property image{" "}
+            </Heading>
           </Box>
           <Box className={style.savedImages}>
             {savedImages?.map((w) => (
-              <Extraimg e={w} propertyid={productID} deleteimagePermanently={deleteimagePermanently} key={w._id} />
+              <Extraimg
+                e={w}
+                propertyid={productID}
+                deleteimagePermanently={deleteimagePermanently}
+                key={w._id}
+              />
             ))}
           </Box>
           <Box className={style.card}>
-            <Box border={isDraging ? "2px dashed rgb(46,49,146)" : "2px dashed #9e9e9e"} className={style.dragArea} onDragOver={ondragover} onDragLeave={ondragleave} onDrop={ondrop} >
+            <Box
+              border={
+                isDraging ? "2px dashed rgb(46,49,146)" : "2px dashed #9e9e9e"
+              }
+              className={style.dragArea}
+              onDragOver={ondragover}
+              onDragLeave={ondragleave}
+              onDrop={ondrop}
+            >
               {isDraging ? (
-                <Text textAlign={"center"} color={"rgb(0, 134, 254)"} >Drop image here</Text>
+                <Text textAlign={"center"} color={"rgb(0, 134, 254)"}>
+                  Drop image here
+                </Text>
               ) : (
                 <>
                   Drag & Drop image here or
-                  <Text className={style.select} role='button' onClick={selectFiles} > Browse </Text>
+                  <Text
+                    className={style.select}
+                    role="button"
+                    onClick={selectFiles}
+                  >
+                    {" "}
+                    Browse{" "}
+                  </Text>
                 </>
               )}
-              <input type={"file"} name='image' accept="image/jpg, image/png, image/jpeg" formMethod="post" formEncType="multipart/form-data" className={style.file} multiple ref={fileInputRef} onChange={onFileSelect} />
+              <input
+                type={"file"}
+                name="image"
+                accept="image/jpg, image/png, image/jpeg"
+                formMethod="post"
+                formEncType="multipart/form-data"
+                className={style.file}
+                multiple
+                ref={fileInputRef}
+                onChange={onFileSelect}
+              />
             </Box>
             <Box className={style.container}>
               {images.map((image, index) => (
                 <Box className={style.image} key={index}>
-                  <Text className={style.delete} onClick={() => removeImage(index)}>&#10006;</Text>
+                  <Text
+                    className={style.delete}
+                    onClick={() => removeImage(index)}
+                  >
+                    &#10006;
+                  </Text>
                   <img src={URL.createObjectURL(image.image)} alt="images" />
                 </Box>
               ))}
             </Box>
           </Box>
-        </Box> 
+        </Box>
 
         {/* ============================ Add amenities/unique features ============================ */}
         <Box>
           <Heading as={"h3"} size={"md"} margin={"10px 0"} textAlign={"left"}>
             Add amenities/unique features
           </Heading>
-          <Heading as={"h5"} size={"xs"} fontWeight={400} margin={"10px 0"} textAlign={"left"}>
+          <Heading
+            as={"h5"}
+            size={"xs"}
+            fontWeight={400}
+            margin={"10px 0"}
+            textAlign={"left"}
+          >
             All fields on this page are optional
           </Heading>
         </Box>
@@ -1109,7 +1213,9 @@ const ManufactureUpdate = () => {
           <Box>
             <button
               className={
-                amenities.includes("Maintenance Staff") ? style.setbtn : style.btn
+                amenities.includes("Maintenance Staff")
+                  ? style.setbtn
+                  : style.btn
               }
               onClick={handleAminities}
               value={"Maintenance Staff"}
@@ -1118,7 +1224,9 @@ const ManufactureUpdate = () => {
             </button>
             <button
               className={
-                amenities.includes("Rain Water Harvesting") ? style.setbtn : style.btn
+                amenities.includes("Rain Water Harvesting")
+                  ? style.setbtn
+                  : style.btn
               }
               onClick={handleAminities}
               value={"Rain Water Harvesting"}
@@ -1173,7 +1281,9 @@ const ManufactureUpdate = () => {
             </button>
             <button
               className={
-                amenities.includes("Access to High Speed Internet") ? style.setbtn : style.btn
+                amenities.includes("Access to High Speed Internet")
+                  ? style.setbtn
+                  : style.btn
               }
               onClick={handleAminities}
               value={"Access to High Speed Internet"}
@@ -1192,7 +1302,11 @@ const ManufactureUpdate = () => {
               Security Personnel
             </button>
             <button
-              className={amenities.includes("Feng Shui / Vaastu Compliant") ? style.setbtn : style.btn}
+              className={
+                amenities.includes("Feng Shui / Vaastu Compliant")
+                  ? style.setbtn
+                  : style.btn
+              }
               onClick={handleAminities}
               value={"Feng Shui / Vaastu Compliant"}
             >
@@ -1230,7 +1344,9 @@ const ManufactureUpdate = () => {
             </button>
             <button
               className={
-                propertyFeatures.includes("Reserved Parking") ? style.setbtn : style.btn
+                propertyFeatures.includes("Reserved Parking")
+                  ? style.setbtn
+                  : style.btn
               }
               value={"Reserved Parking"}
               onClick={handlePropertyFeature}
@@ -1369,9 +1485,7 @@ const ManufactureUpdate = () => {
             </button>
             <button
               className={
-                buildingFeature.includes("Lift")
-                  ? style.setbtn
-                  : style.btn
+                buildingFeature.includes("Lift") ? style.setbtn : style.btn
               }
               onClick={HandleBuildingFeature}
               value={"Lift"}
@@ -1412,7 +1526,6 @@ const ManufactureUpdate = () => {
               value={"Wheelchair friendly"}
               onChange={handleotherfeature}
             >
-
               Wheelchair friendly
             </Checkbox>
           </Box>
@@ -1428,7 +1541,7 @@ const ManufactureUpdate = () => {
               className={propertyFacing == "North" ? style.setbtn : style.btn}
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"North"}
             >
@@ -1438,7 +1551,7 @@ const ManufactureUpdate = () => {
               className={propertyFacing == "South" ? style.setbtn : style.btn}
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"South"}
             >
@@ -1448,7 +1561,7 @@ const ManufactureUpdate = () => {
               className={propertyFacing == "East" ? style.setbtn : style.btn}
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"East"}
             >
@@ -1458,7 +1571,7 @@ const ManufactureUpdate = () => {
               className={propertyFacing == "West" ? style.setbtn : style.btn}
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"West"}
             >
@@ -1470,7 +1583,7 @@ const ManufactureUpdate = () => {
               }
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"North-East"}
             >
@@ -1482,7 +1595,7 @@ const ManufactureUpdate = () => {
               }
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"North-West"}
             >
@@ -1494,7 +1607,7 @@ const ManufactureUpdate = () => {
               }
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"South-East"}
             >
@@ -1506,7 +1619,7 @@ const ManufactureUpdate = () => {
               }
               onClick={(e) => {
                 e.preventDefault();
-                setPropertyFacing(e.target.value)
+                setPropertyFacing(e.target.value);
               }}
               value={"South-West"}
             >
@@ -1522,7 +1635,7 @@ const ManufactureUpdate = () => {
           </Heading>
           <Box>
             <Select
-            width={{ base: "100%", md: 300 }}
+              width={{ base: "100%", md: 300 }}
               onChange={(e) => setFlooring(e.target.value)}
               value={flooring}
             >
@@ -1568,17 +1681,17 @@ const ManufactureUpdate = () => {
               value={"Close to Metro Station"}
               onClick={handlelocationadvantages}
             >
-
               Close to Metro Station
             </button>
             <button
               className={
-                locationAdv.includes("Close to School") ? style.setbtn : style.btn
+                locationAdv.includes("Close to School")
+                  ? style.setbtn
+                  : style.btn
               }
               value={"Close to School"}
               onClick={handlelocationadvantages}
             >
-
               Close to School
             </button>
             <button
@@ -1590,17 +1703,17 @@ const ManufactureUpdate = () => {
               value={"Close to Hospital"}
               onClick={handlelocationadvantages}
             >
-
               Close to Hospital
             </button>
             <button
               className={
-                locationAdv.includes("Close to Market") ? style.setbtn : style.btn
+                locationAdv.includes("Close to Market")
+                  ? style.setbtn
+                  : style.btn
               }
               value={"Close to Market"}
               onClick={handlelocationadvantages}
             >
-
               Close to Market
             </button>
             <button
@@ -1612,7 +1725,6 @@ const ManufactureUpdate = () => {
               value={"Close to Railway Station"}
               onClick={handlelocationadvantages}
             >
-
               Close to Railway Station
             </button>
             <button
@@ -1624,7 +1736,6 @@ const ManufactureUpdate = () => {
               value={"Close to Airport"}
               onClick={handlelocationadvantages}
             >
-
               Close to Airport
             </button>
             <button
@@ -1670,12 +1781,11 @@ const ManufactureUpdate = () => {
           _hover={{ backgroundColor: "rgb(74, 79, 223)" }}
           color={"#ffffff"}
         >
-          Update Property 
+          Update Property
         </Button>
-
       </form>
     </Box>
-  )
-}
+  );
+};
 
-export default ManufactureUpdate;  
+export default ManufactureUpdate;
