@@ -292,7 +292,7 @@ const FlatAppartment = () => {
             } else {
               setIsClicked(false);
               setClickCount((prev) => prev - 12);
-              // navigate("/listing");
+              navigate("/listing");
             }
           })
           .catch((err) => {

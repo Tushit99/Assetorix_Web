@@ -64,7 +64,7 @@ const FlatAppartmentUpdate = () => {
   const [expectedyear, setExpectedYear] = useState("");
   const [ownership, setOwnerShip] = useState("");
   const [pricedetail, setPricedetail] = useState("");
-  
+
   const [inclusivePrices, setInclusivePrice] = useState([]);
   const [amenities, setAminity] = useState([]);
   const [propertyFeatures, setPropertyFeature] = useState("");
@@ -121,7 +121,7 @@ const FlatAppartmentUpdate = () => {
         balcony: balconey,
       },
       ownership,
-      price: +pricedetail, 
+      price: +pricedetail,
       inclusivePrices,
       amenities,
       propertyFeatures,
@@ -298,9 +298,9 @@ const FlatAppartmentUpdate = () => {
             toast({
               title: err?.response?.data?.msg,
               status: "error",
-              duration: 2000, 
+              duration: 2000,
             });
-            console.log(err?.response?.data?.msg);    
+            console.log(err?.response?.data?.msg);
           });
       } catch (error) {
         toast({
@@ -308,7 +308,7 @@ const FlatAppartmentUpdate = () => {
           status: "error",
           duration: 2000,
         });
-        console.log(error?.response?.data?.msg); 
+        console.log(error?.response?.data?.msg);
         setClickCount((prev) => prev - 12);
         setIsClicked(false);
       }
@@ -400,7 +400,7 @@ const FlatAppartmentUpdate = () => {
         setExpectedYear(e?.expectedByYear);
         setOwnerShip(e?.ownership);
         setPricedetail(e?.price);
-        
+        setCurrency(e?.countryCurrency); 
         setInclusivePrice(e?.inclusivePrices);
         setAminity(e?.amenities);
         setPropertyFeature(e?.propertyFeatures);
@@ -626,7 +626,7 @@ const FlatAppartmentUpdate = () => {
     console.log(newarr);
     setWaterSource(newarr);
   };
- 
+
   // =================
   const selectFiles = () => {
     fileInputRef.current.click();
@@ -755,25 +755,20 @@ const FlatAppartmentUpdate = () => {
       <form onSubmit={handleSubmitData}>
         {/* property location */}
         <Box className={style.location_form}>
-          <Heading size={"lg"}> Edit your Flat / Apartment Details </Heading>
+          <Heading size={"lg"}>Update your Flat / Apartment Details</Heading>
           <Heading size={"sm"}>Location Detail</Heading>
-
           <Input
             type="text"
-            padding={"0 10px"}
             placeholder="House No. (optional)"
             value={houseNo}
             maxLength={"100"}
             onChange={(e) => setHouseNo(WordandNumber(e.target.value))}
-            fontSize={"md"}
             variant="flushed"
           />
           <Input
             type="text"
-            padding={"0 10px"}
             required
             placeholder="Apartment / Society Name"
-            fontSize={"md"}
             maxLength={"100"}
             value={appartment}
             onChange={(e) => setApartment(WordandNumber(e.target.value))}
@@ -782,24 +777,20 @@ const FlatAppartmentUpdate = () => {
           <Input
             type="text"
             placeholder={"Enter pincode"}
-            padding={"0 10px"}
             required
             maxLength={"6"}
-            fontSize={"md"}
             variant="flushed"
             value={pincode}
             onChange={handlepinfetch}
           />
           <Input
             type="text"
-            padding={"0 10px"}
             required
             placeholder="Enter Locality"
             list="browsers"
             value={locality}
             maxLength={"100"}
             onChange={(e) => setLocality(WordandNumber(e.target.value))}
-            fontSize={"md"}
             variant="flushed"
           />
           {pincollection.length ? (
@@ -814,33 +805,27 @@ const FlatAppartmentUpdate = () => {
 
           <Input
             type="text"
-            padding={"0 10px"}
             required
             placeholder="Enter City"
-            fontSize={"md"}
             value={city}
             onChange={(e) => setCity(AlphabetString(e.target.value))}
             variant="flushed"
           />
           <Input
             type="text"
-            padding={"0 10px"}
             required
             placeholder="Enter State"
             value={state}
             onChange={(e) => setState(AlphabetString(e.target.value))}
-            fontSize={"md"}
             variant="flushed"
           />
           <Input
             type="text"
-            padding={"0 10px"}
             required
             maxLength={"100"}
             placeholder="Enter Country"
             value={country}
             onChange={(e) => setCountry(AlphabetString(e.target.value))}
-            fontSize={"md"}
             variant="flushed"
           />
         </Box>
@@ -894,8 +879,7 @@ const FlatAppartmentUpdate = () => {
               Add Area Details
             </Heading>
             <InputGroup
-              w={300}
-              size="md"
+              width={{ base: "100%", md: 300 }}
               marginTop={2}
               isAttached
               variant="outline"
@@ -903,15 +887,15 @@ const FlatAppartmentUpdate = () => {
               <Input
                 type="text"
                 value={plotArea}
+                fontSize={"md"}
                 placeholder="Enter area detail"
-                w={200}
                 maxLength={"6"}
                 onChange={(e) => {
                   setPlotArea(NumericString(e.target.value));
                 }}
                 required
               />
-              <InputRightElement width={100}>
+              <InputRightElement>
                 <Select
                   value={areaPer}
                   borderRadius={0}
@@ -943,6 +927,7 @@ const FlatAppartmentUpdate = () => {
               </InputRightElement>
             </InputGroup>
           </Box>
+
           {/* other Room  */}
           <Box display={"grid"} className={style.optional_box}>
             <Heading as={"h3"} size={"sm"} marginTop={{ base: 5, md: 3 }}>
@@ -1457,12 +1442,7 @@ const FlatAppartmentUpdate = () => {
           {/* Age of Property */}
           {availability == "Ready to move" && (
             <Box textAlign={"left"} className={style.optional_box}>
-              <Heading
-                as={"h3"}
-                size={"md"}
-                textAlign={"left"}
-                textAlign={"left"}
-              >
+              <Heading as={"h3"} size={"md"} textAlign={"left"}>
                 Age of Property
               </Heading>
               <Box className={style.grid}>
@@ -1518,12 +1498,7 @@ const FlatAppartmentUpdate = () => {
 
           {availability == "Under construction" && (
             <Box>
-              <Heading
-                as={"h3"}
-                size={"md"}
-                textAlign={"left"}
-                textAlign={"left"}
-              >
+              <Heading as={"h3"} size={"md"} textAlign={"left"}>
                 Possession By
               </Heading>
               <Select
@@ -1627,47 +1602,46 @@ const FlatAppartmentUpdate = () => {
                 />
               </InputGroup>
             </Box>
-          </Box>
-
-          {/* ============================== inclusive charges (checkbox) ==============================  */}
-          <Box
-            display={"flex"}
-            gap={{ base: 2, md: 10 }}
-            marginTop={3}
-            flexWrap={"wrap"}
-          >
-            <Checkbox
-              isChecked={inclusivePrices.includes("All inclusive price")}
-              onChange={(e) => {
-                e.preventDefault();
-                handleinclusiveandtax(e.target.value);
-              }}
-              value={"All inclusive price"}
+            {/* ============================== inclusive charges (checkbox) ==============================  */}
+            <Box
+              display={"flex"}
+              gap={{ base: 2, md: 10 }}
+              marginTop={3}
+              flexWrap={"wrap"}
             >
-              All inclusive price
-            </Checkbox>
-            <Checkbox
-              isChecked={inclusivePrices.includes(
-                "Tax and Govt. charges excluded"
-              )}
-              onChange={(e) => {
-                e.preventDefault();
-                handleinclusiveandtax(e.target.value);
-              }}
-              value={"Tax and Govt. charges excluded"}
-            >
-              Tax and Govt. charges excluded
-            </Checkbox>
-            <Checkbox
-              isChecked={inclusivePrices.includes("Price Negotiable")}
-              onChange={(e) => {
-                e.preventDefault();
-                handleinclusiveandtax(e.target.value);
-              }}
-              value={"Price Negotiable"}
-            >
-              Price Negotiable
-            </Checkbox>
+              <Checkbox
+                isChecked={inclusivePrices.includes("All inclusive price")}
+                onChange={(e) => {
+                  e.preventDefault();
+                  handleinclusiveandtax(e.target.value);
+                }}
+                value={"All inclusive price"}
+              >
+                All inclusive price
+              </Checkbox>
+              <Checkbox
+                isChecked={inclusivePrices.includes(
+                  "Tax and Govt. charges excluded"
+                )}
+                onChange={(e) => {
+                  e.preventDefault();
+                  handleinclusiveandtax(e.target.value);
+                }}
+                value={"Tax and Govt. charges excluded"}
+              >
+                Tax and Govt. charges excluded
+              </Checkbox>
+              <Checkbox
+                isChecked={inclusivePrices.includes("Price Negotiable")}
+                onChange={(e) => {
+                  e.preventDefault();
+                  handleinclusiveandtax(e.target.value);
+                }}
+                value={"Price Negotiable"}
+              >
+                Price Negotiable
+              </Checkbox>
+            </Box>
           </Box>
 
           {/* Additional Pricing Detail (Optional) */}
@@ -1684,6 +1658,7 @@ const FlatAppartmentUpdate = () => {
             <Input
               w={"60%"}
               type="text"
+              maxLength={9}
               onChange={(e) =>
                 setMaintenancePrice(NumericString(e.target.value))
               }
@@ -1700,11 +1675,13 @@ const FlatAppartmentUpdate = () => {
               <option value="Yearly">Yearly</option>
             </Select>
           </InputGroup>
+
           <Box display={"grid"} marginTop={"6px"}>
             {additionalPrice && (
               <>
                 <Input
                   type="text"
+                  maxLength={9}
                   w={"300px"}
                   value={expectedRentel}
                   onChange={(e) =>
@@ -1715,6 +1692,7 @@ const FlatAppartmentUpdate = () => {
                 />
                 <Input
                   type="text"
+                  maxLength={9}
                   w={"300px"}
                   value={bookingAmount}
                   onChange={(e) =>
@@ -1726,6 +1704,7 @@ const FlatAppartmentUpdate = () => {
                 <Input
                   type="text"
                   w={"300px"}
+                  maxLength={9}
                   value={annualDuesPayble}
                   onChange={(e) =>
                     setAnnualDuesPayble(NumericString(e.target.value))
@@ -1736,6 +1715,7 @@ const FlatAppartmentUpdate = () => {
                 <Input
                   type="text"
                   w={"300px"}
+                  maxLength={9}
                   value={membershipCharge}
                   onChange={(e) =>
                     setMembershipCharge(NumericString(e.target.value))
@@ -2533,7 +2513,7 @@ const FlatAppartmentUpdate = () => {
           </Heading>
           <Box>
             <Select
-            width={{ base: "100%", md: 300 }}
+              width={{ base: "100%", md: 300 }}
               onChange={(e) => setFlooring(e.target.value)}
               value={flooring}
             >
@@ -2590,6 +2570,7 @@ const FlatAppartmentUpdate = () => {
             </Select>
           </InputGroup>
         </Box>
+        {/* Location Advantage */}
         <Box className={style.optional_box}>
           <Heading
             size={"sm"}
