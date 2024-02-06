@@ -148,7 +148,7 @@ const Login = () => {
                                 <Input
                                     colorScheme="linkedin"
                                     type="text"
-                                    maxLength={9}
+                                    maxLength={10}
                                     placeholder="Enter mobile no."
                                     onChange={(e) => {
                                         const result = (e.target.value).replace(/[^0-9]/g, "");
