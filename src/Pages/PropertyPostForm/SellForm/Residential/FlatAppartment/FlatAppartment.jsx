@@ -99,6 +99,7 @@ const FlatAppartment = () => {
   // submit data
   const handleSubmitData = async (e) => {
     e.preventDefault();
+    console.log("lisning....");
     setClickCount((prev) => prev + 12);
     setIsClicked(true);
     let obj = {
@@ -178,8 +179,6 @@ const FlatAppartment = () => {
       showToastError("Provide OwnerShip");
     } else if (!pricedetail) {
       showToastError("Provide PriceDetail");
-    } else if (!additinalft) {
-      showToastError("Provide Property description");
     } else if (!watersource) {
       showToastError("Provide Water Source");
     } else if (!overLook) {
@@ -210,26 +209,13 @@ const FlatAppartment = () => {
       locality &&
       bedroom &&
       bathroom &&
-      balconey &&
-      furnishedarr &&
-      ownership &&
-      pricedetail &&
-      inclusivePrices &&
-      additinalft &&
-      watersource &&
-      overLook &&
-      availability &&
-      powerbackup &&
-      propertyFacing &&
-      flooring &&
-      facing &&
-      totalfloors &&
-      floorOn
+      balconey 
     ) {
       let id = localStorage.getItem("usrId") || undefined;
       let authorization = localStorage.getItem("AstToken") || undefined;
 
       let head = { id, authorization, "Content-type": "application/json" };
+      console.log("lisning 9908890"); 
 
       if (!id || !authorization) {
         toast({
@@ -276,6 +262,7 @@ const FlatAppartment = () => {
         // let data = await response.json();
 
         // console.log("data", obj);
+        console.log("lisning222...."); 
         await axios
           .post(`${process.env.REACT_APP_URL}/property/`, obj, {
             headers: head,
@@ -287,10 +274,12 @@ const FlatAppartment = () => {
               status: "success",
               duration: 2000,
             });
+
             if (images.length) {
               submitImage(e.data.id);
             } else {
               setIsClicked(false);
+            console.log("lisning23333...."); 
               setClickCount((prev) => prev - 12);
               navigate("/listing");
             }
@@ -300,7 +289,7 @@ const FlatAppartment = () => {
               title: err.response.data.msg,
               status: "error",
               duration: 2000,
-            });   
+            });
             console.log(err?.response?.data?.msg);
             setClickCount((prev) => prev - 12);
             setIsClicked(false);
@@ -315,13 +304,6 @@ const FlatAppartment = () => {
         setIsClicked(false);
       }
     } else {
-      toast({
-        title: "Form un-filled",
-        description: "Please fill all required fields.",
-        status: "info",
-        duration: 2000,
-        position: "top-right",
-      });
       setClickCount((prev) => prev - 12);
       setIsClicked(false);
     }
@@ -656,17 +638,17 @@ const FlatAppartment = () => {
         <Heading size={"sm"}>Location Detail</Heading>
 
         <Input
-          type="text" 
+          type="text"
           placeholder="House No. (optional)"
           value={houseNo}
           maxLength={"100"}
-          onChange={(e) => setHouseNo(WordandNumber(e.target.value))} 
+          onChange={(e) => setHouseNo(WordandNumber(e.target.value))}
           variant="flushed"
         />
         <Input
-          type="text" 
+          type="text"
           required
-          placeholder="Apartment / Society Name" 
+          placeholder="Apartment / Society Name"
           maxLength={"100"}
           value={appartment}
           onChange={(e) => setApartment(WordandNumber(e.target.value))}
@@ -674,21 +656,21 @@ const FlatAppartment = () => {
         />
         <Input
           type="text"
-          placeholder={"Enter pincode"} 
+          placeholder={"Enter pincode"}
           required
-          maxLength={"6"} 
+          maxLength={"6"}
           variant="flushed"
           value={pincode}
           onChange={handlepinfetch}
         />
         <Input
-          type="text" 
+          type="text"
           required
           placeholder="Enter Locality"
           list="browsers"
           value={locality}
           maxLength={"100"}
-          onChange={(e) => setLocality(WordandNumber(e.target.value))} 
+          onChange={(e) => setLocality(WordandNumber(e.target.value))}
           variant="flushed"
         />
         {pincollection.length ? (
@@ -702,28 +684,28 @@ const FlatAppartment = () => {
         )}
 
         <Input
-          type="text" 
+          type="text"
           required
-          placeholder="Enter City" 
+          placeholder="Enter City"
           value={city}
           onChange={(e) => setCity(AlphabetString(e.target.value))}
           variant="flushed"
         />
         <Input
-          type="text" 
+          type="text"
           required
           placeholder="Enter State"
           value={state}
-          onChange={(e) => setState(AlphabetString(e.target.value))} 
+          onChange={(e) => setState(AlphabetString(e.target.value))}
           variant="flushed"
         />
         <Input
-          type="text" 
+          type="text"
           required
           maxLength={"100"}
           placeholder="Enter Country"
           value={country}
-          onChange={(e) => setCountry(AlphabetString(e.target.value))} 
+          onChange={(e) => setCountry(AlphabetString(e.target.value))}
           variant="flushed"
         />
       </Box>
@@ -776,56 +758,51 @@ const FlatAppartment = () => {
           <Heading as={"h3"} marginTop={5} size={"sm"}>
             Add Area Details
           </Heading>
-          <InputGroup
-            width={{base:"100%",md:300}}  
-            marginTop={2}
-            isAttached
-            variant="outline"
-          >
+          <InputGroup width={{ base: "100%", md: 300 }} marginTop={2}>
             <Input
               type="text"
-              value={plotArea} 
-              fontSize={"md"} 
-              placeholder="Enter area detail" 
+              value={plotArea}
+              fontSize={"md"}
+              w={"60%"}
+              placeholder="Enter area detail"
               maxLength={"6"}
               onChange={(e) => {
                 setPlotArea(NumericString(e.target.value));
               }}
               required
             />
-            <InputRightElement>
-              <Select
-                value={areaPer}
-                borderRadius={0}
-                onChange={(e) => {
-                  setAreaPer(e.target.value);
-                }}
-                className={style.select}
-                required
-              >
-                <option value="sq.ft">sq.ft</option>
-                <option value="sq.yards">sq.yards</option>
-                <option value="sq.m">sq.m</option>
-                <option value="acres">acres</option>
-                <option value="marla">marla</option>
-                <option value="cents">cents</option>
-                <option value="bigha">bigha</option>
-                <option value="kottah">kottah</option>
-                <option value="kanal">kanal</option>
-                <option value="grounds">grounds</option>
-                <option value="ares">ares</option>
-                <option value="biswa">biswa</option>
-                <option value="guntha">guntha</option>
-                <option value="aankadam">aankadam</option>
-                <option value="hectares">hectares</option>
-                <option value="rood">rood</option>
-                <option value="chataks">chataks</option>
-                <option value="perch">perch</option>
-              </Select>
-            </InputRightElement>
+            <Select
+              value={areaPer}
+              w={"40%"}
+              borderRadius={0}
+              onChange={(e) => {
+                setAreaPer(e.target.value);
+              }}
+              className={style.select}
+              required
+            >
+              <option value="sq.ft">sq.ft</option>
+              <option value="sq.yards">sq.yards</option>
+              <option value="sq.m">sq.m</option>
+              <option value="acres">acres</option>
+              <option value="marla">marla</option>
+              <option value="cents">cents</option>
+              <option value="bigha">bigha</option>
+              <option value="kottah">kottah</option>
+              <option value="kanal">kanal</option>
+              <option value="grounds">grounds</option>
+              <option value="ares">ares</option>
+              <option value="biswa">biswa</option>
+              <option value="guntha">guntha</option>
+              <option value="aankadam">aankadam</option>
+              <option value="hectares">hectares</option>
+              <option value="rood">rood</option>
+              <option value="chataks">chataks</option>
+              <option value="perch">perch</option>
+            </Select>
           </InputGroup>
-        </Box> 
-        
+        </Box>
+
         {/* other Room  */}
         <Box display={"grid"} className={style.optional_box}>
           <Heading as={"h3"} size={"sm"} marginTop={{ base: 5, md: 3 }}>
@@ -1245,12 +1222,7 @@ const FlatAppartment = () => {
         </Box>
 
         {/* floor details */}
-        <Box
-          textAlign={"left"}
-          display={"grid"}
-          marginTop={5}
-          gap={2}
-        >
+        <Box textAlign={"left"} display={"grid"} marginTop={5} gap={2}>
           <Heading as={"h3"} size={"sm"} textAlign={"left"}>
             Floor Details
           </Heading>
@@ -1343,11 +1315,7 @@ const FlatAppartment = () => {
         {/* Age of Property */}
         {availability == "Ready to move" && (
           <Box textAlign={"left"} className={style.optional_box}>
-            <Heading
-              as={"h3"}
-              size={"md"}
-              textAlign={"left"} 
-            >
+            <Heading as={"h3"} size={"md"} textAlign={"left"}>
               Age of Property
             </Heading>
             <Box className={style.grid}>
@@ -1401,11 +1369,7 @@ const FlatAppartment = () => {
 
         {availability == "Under construction" && (
           <Box>
-            <Heading
-              as={"h3"}
-              size={"md"}
-              textAlign={"left"} 
-            >
+            <Heading as={"h3"} size={"md"} textAlign={"left"}>
               Possession By
             </Heading>
             <Select
@@ -1425,12 +1389,7 @@ const FlatAppartment = () => {
         {/* pricing and details */}
         <Box>
           {/* OwnerShip detail */}
-          <Heading
-            as={"h3"}
-            size={"sm"}
-            marginTop={5}
-            textAlign={"left"}
-          >
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Ownership
           </Heading>
           <Box className={style.grid} gap={2}>
@@ -1486,19 +1445,14 @@ const FlatAppartment = () => {
         </Box>
         {/* Price Details */}
         <Box>
-          <Heading
-            as={"h3"}
-            size={"sm"}
-            marginTop={5}
-            textAlign={"left"}
-          >
+          <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
             Price Details
           </Heading>
           <Box display={"flex"} alignItems={"center"} gap={5}>
             <InputGroup w={300} gap={2}>
               <Select
                 w={"-moz-fit-content"}
-                value={currency} 
+                value={currency}
                 borderRadius={0}
                 onChange={(e) => setCurrency(e.target.value)}
               >
@@ -1511,7 +1465,7 @@ const FlatAppartment = () => {
                 maxLength={9}
                 placeholder={`Price`}
                 required
-                borderRadius={0} 
+                borderRadius={0}
                 w={200}
                 onChange={(e) => {
                   setPricedetail(NumericString(e.target.value));
@@ -1596,8 +1550,8 @@ const FlatAppartment = () => {
             <>
               <Input
                 type="text"
-            maxLength={9}
-            w={"300px"}
+                maxLength={9}
+                w={"300px"}
                 value={expectedRentel}
                 onChange={(e) =>
                   setExpectedRentel(NumericString(e.target.value))
@@ -1607,8 +1561,8 @@ const FlatAppartment = () => {
               />
               <Input
                 type="text"
-            maxLength={9}
-            w={"300px"}
+                maxLength={9}
+                w={"300px"}
                 value={bookingAmount}
                 onChange={(e) =>
                   setBookingAmount(NumericString(e.target.value))
@@ -1619,8 +1573,8 @@ const FlatAppartment = () => {
               <Input
                 type="text"
                 w={"300px"}
-            maxLength={9}
-            value={annualDuesPayble}
+                maxLength={9}
+                value={annualDuesPayble}
                 onChange={(e) =>
                   setAnnualDuesPayble(NumericString(e.target.value))
                 }
@@ -1630,8 +1584,8 @@ const FlatAppartment = () => {
               <Input
                 type="text"
                 w={"300px"}
-            maxLength={9}
-            value={membershipCharge}
+                maxLength={9}
+                value={membershipCharge}
                 onChange={(e) =>
                   setMembershipCharge(NumericString(e.target.value))
                 }
@@ -1660,17 +1614,12 @@ const FlatAppartment = () => {
         </Box>
       </Box>
       <Box>
-        <Heading
-          as={"h3"}
-          size={"sm"}
-          marginTop={5}
-          textAlign={"left"}
-        >
+        <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
           Add Description and Unique Features of your Property
         </Heading>
         <Textarea
           height={140}
-          required 
+          required
           placeholder="Add Description"
           value={desc}
           onChange={(e) => {
@@ -1683,12 +1632,7 @@ const FlatAppartment = () => {
       {/* image Drag and Drop area  */}
       <Box>
         <Box className={style.top}>
-          <Heading
-            color={"black"}
-            size={"sm"}
-            textAlign={"left"}
-            marginTop={5}
-          >
+          <Heading color={"black"} size={"sm"} textAlign={"left"} marginTop={5}>
             Upload Your Property image
           </Heading>
         </Box>
@@ -1748,12 +1692,7 @@ const FlatAppartment = () => {
 
       {/* Add amenities/unique features */}
       <Box>
-        <Heading
-          as={"h3"}
-          size={"sm"}
-          marginTop={5}
-          textAlign={"left"}
-        >
+        <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
           Add amenities/unique features
         </Heading>
         <Heading as={"h5"} size={"xs"} fontWeight={400} textAlign={"left"}>
@@ -1762,12 +1701,7 @@ const FlatAppartment = () => {
       </Box>
       {/* Amenities */}
       <Box className={style.optional_box}>
-        <Heading
-          as={"h3"}
-          size={"sm"}
-          marginTop={5}
-          textAlign={"left"}
-        >
+        <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
           Amenities
         </Heading>
         <Box className={style.paddingbtn}>
@@ -2239,12 +2173,7 @@ const FlatAppartment = () => {
       </Box>
       {/* Other Features */}
       <Box>
-        <Heading
-          as={"h3"}
-          size={"sm"}
-          marginTop={5}
-          textAlign={"left"}
-        >
+        <Heading as={"h3"} size={"sm"} marginTop={5} textAlign={"left"}>
           Other Features
         </Heading>
         <Box display={"grid"} textAlign={"left"} gap={2}>
@@ -2438,7 +2367,7 @@ const FlatAppartment = () => {
         </Heading>
         <Box>
           <Select
-          width={{ base: "100%", md: 300 }}
+            width={{ base: "100%", md: 300 }}
             onChange={(e) => setFlooring(e.target.value)}
             value={flooring}
           >
@@ -2494,7 +2423,7 @@ const FlatAppartment = () => {
             <option value="Feet"> Feet </option>
           </Select>
         </InputGroup>
-      </Box> 
+      </Box>
       {/* Location Advantage */}
       <Box className={style.optional_box}>
         <Heading size={"sm"} marginTop={{ base: 5, md: 3 }} textAlign={"left"}>
