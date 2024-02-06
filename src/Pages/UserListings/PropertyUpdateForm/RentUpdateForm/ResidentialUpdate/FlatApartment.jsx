@@ -1677,7 +1677,7 @@ const FlatApartment = () => {
             margin={"10px 0"}
             textAlign={"left"}
           >
-            All fields on this page are optional
+            All fields below are optional
           </Heading>
         </Box>
         {/* ========================= Amenities ================================== */}

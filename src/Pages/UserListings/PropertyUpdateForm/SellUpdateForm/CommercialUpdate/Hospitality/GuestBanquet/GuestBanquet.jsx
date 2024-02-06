@@ -133,6 +133,7 @@ const GuestBanquetUpdate = () => {
         }
         setDesc(e.description);
         setAminity(e.amenities);
+        setCurrency(e?.countryCurrency);  
         setPropertyFeature(e?.propertyFeatures);
         setLocationAdv(e.locationAdv);
         setBuildingFeature(e?.society_buildingFeatures);

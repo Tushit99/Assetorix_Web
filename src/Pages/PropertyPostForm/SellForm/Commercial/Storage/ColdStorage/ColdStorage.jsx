@@ -1110,7 +1110,7 @@ const ColdStorage = () => {
             Add amenities/unique features
           </Heading>
           <Heading as={"h5"} size={"xs"} fontWeight={400} textAlign={"left"}>
-            All fields on this page are optional
+            All fields below are optional
           </Heading>
         </Box>
 

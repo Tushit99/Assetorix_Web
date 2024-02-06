@@ -129,7 +129,7 @@ const RKStudioUpdate = () => {
         setExpectedYear(e?.expectedByYear);
         setOwnerShip(e?.ownership);
         setPricedetail(e?.price);
-        
+        setCurrency(e?.countryCurrency);  
         setInclusivePrice(e?.inclusivePrices);
         setAminity(e?.amenities);
         setPropertyFeature(e?.propertyFeatures);
@@ -1799,7 +1799,7 @@ const RKStudioUpdate = () => {
           fontWeight={400} 
           textAlign={"left"}
         >
-          All fields on this page are optional
+          All fields below are optional
         </Heading>
       </Box>
       {/* Amenities */}

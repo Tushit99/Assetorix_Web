@@ -377,6 +377,7 @@ const IndependentHouseUpdate = () => {
         setOwnerShip(e?.ownership);
         setPricedetail(e?.price); 
         setInclusivePrice(e?.inclusivePrices);
+        setCurrency(e?.countryCurrency); 
         setAminity(e?.amenities);
         setPropertyFeature(e?.propertyFeatures);
         setBuildingFeature(e?.society_buildingFeatures);
@@ -1801,7 +1802,7 @@ const IndependentHouseUpdate = () => {
           marginTop={{base:10,md:5}}
           textAlign={"left"}
         >
-          All fields on this page are optional
+          All fields below are optional
         </Heading>
       </Box>
       {/* Amenities */}

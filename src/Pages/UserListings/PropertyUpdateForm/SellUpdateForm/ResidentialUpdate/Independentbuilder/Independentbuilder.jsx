@@ -390,6 +390,7 @@ const IndependentbuilderUpdate = () => {
         setAdditinalFeature(e?.additionalFeatures);
         setWaterSource(e?.waterSources);
         setoverlook(e?.overLookings);
+        setCurrency(e?.countryCurrency);  
         setOtherFeature(e?.otherFeatures);
         setPowerbackup(e?.powerBackup);
         setPropertyFacing(e?.propertyFacing);
@@ -1842,7 +1843,7 @@ const IndependentbuilderUpdate = () => {
           margin={"10px 0"}
           textAlign={"left"}
         >
-          All fields on this page are optional
+          All fields below are optional
         </Heading>
       </Box>
 

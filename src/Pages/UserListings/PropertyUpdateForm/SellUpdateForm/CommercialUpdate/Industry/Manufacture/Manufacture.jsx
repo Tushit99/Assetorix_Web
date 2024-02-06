@@ -96,7 +96,7 @@ const ManufactureUpdate = () => {
         }
         setOwnerShip(e?.ownership);
         setPricedetail(e?.price);
-
+        setCurrency(e?.countryCurrency);  
         setInclusivePrice(e?.inclusivePrices);
         setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice);
         setMaintenanceTimePeriod(
@@ -278,7 +278,7 @@ const ManufactureUpdate = () => {
               duration: 2000,
             });
             if (images.length) {
-              submitImage(productID);
+              submitImage(productID); 
             } else {
               setClickCount((prev) => prev - 12);
               setIsClicked(false);
@@ -1201,7 +1201,7 @@ const ManufactureUpdate = () => {
             margin={"10px 0"}
             textAlign={"left"}
           >
-            All fields on this page are optional
+            All fields below are optional
           </Heading>
         </Box>
 

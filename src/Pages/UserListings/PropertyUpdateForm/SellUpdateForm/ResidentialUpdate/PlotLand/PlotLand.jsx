@@ -116,6 +116,7 @@ const PlotLandUpdate = () => {
         );
         setplotLength(e?.plotLength);
         setPlotBreadth(e?.plotBreadth);
+        setCurrency(e?.countryCurrency);  
         setTotalFloorAllowed(e?.totalFloorsAllowed);
         setboundaryWall(e?.boundaryWall);
         setConstructionOnProperty(e?.constructionOnProperty);
@@ -1292,7 +1293,7 @@ const PlotLandUpdate = () => {
             Add amenities/unique features
           </Heading>
           <Heading as={"h5"} size={"xs"} fontWeight={400} textAlign={"left"}>
-            All fields on this page are optional
+            All fields below are optional
           </Heading>
         </Box>
         {/* Amenities */}

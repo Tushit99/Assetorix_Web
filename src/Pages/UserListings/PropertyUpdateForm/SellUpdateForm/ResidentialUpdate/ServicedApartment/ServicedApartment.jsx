@@ -381,6 +381,7 @@ const ServicedApartmentUpdate = () => {
         }
         setExtraRoom(e?.otherRoom);
         setAvailability(e?.availabilityStatus);
+        setCurrency(e?.countryCurrency); 
         setFromyear(e?.propertyStatus);
         setExpectedYear(e?.expectedByYear);
         setOwnerShip(e?.ownership);
@@ -1434,8 +1435,7 @@ const ServicedApartmentUpdate = () => {
               <Heading
                 as={"h3"}
                 size={"md"}
-                textAlign={"left"}
-                textAlign={"left"}
+                textAlign={"left"} 
               >
                 Age of Property
               </Heading>
@@ -1495,8 +1495,7 @@ const ServicedApartmentUpdate = () => {
               <Heading
                 as={"h3"}
                 size={"md"}
-                textAlign={"left"}
-                textAlign={"left"}
+                textAlign={"left"} 
               >
                 Possession By
               </Heading>
@@ -1818,7 +1817,7 @@ const ServicedApartmentUpdate = () => {
             Add amenities/unique features
           </Heading>
           <Heading as={"h5"} size={"xs"} fontWeight={400} textAlign={"left"}>
-            All fields on this page are optional
+            All fields below are optional
           </Heading>
         </Box>
         {/* Amenities */}

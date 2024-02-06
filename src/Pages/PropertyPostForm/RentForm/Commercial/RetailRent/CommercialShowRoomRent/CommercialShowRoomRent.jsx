@@ -1775,7 +1775,7 @@ const CommercialShowRoomRent = () => {
               size={"xs"}
               textAlign={"left"}
             >
-              All fields on this page are optional
+              All fields below are optional
             </Heading>
           </Box>
           {/* ============================ Amenities ============================ */}

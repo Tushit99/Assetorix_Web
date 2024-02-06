@@ -131,6 +131,7 @@ const HotelResortUpdate = () => {
         setOtherFeature(e?.otherFeatures);
         setPropertyFacing(e?.propertyFacing);
         setFlooring(e?.flooring);
+        setCurrency(e?.countryCurrency); 
         setFurnished(e?.furnished);
         if (e.furnished == "Furnished" || e.furnished == "Semi-Furnished") {
           setLight(e?.furnishedObj?.Light || 0);

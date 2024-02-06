@@ -116,7 +116,7 @@ const FactoryUpdate = () => {
         }
         setOwnerShip(e?.ownership);
         setPricedetail(e?.price);
-
+        setCurrency(e?.countryCurrency);  
         setInclusivePrice(e?.inclusivePrices);
         setMaintenancePrice(e?.additionalPricingDetails?.maintenancePrice);
         setMaintenanceTimePeriod(
@@ -1230,7 +1230,7 @@ const FactoryUpdate = () => {
             margin={"10px 0"}
             textAlign={"left"}
           >
-            All fields on this page are optional
+            All fields below are optional
           </Heading>
         </Box>
 

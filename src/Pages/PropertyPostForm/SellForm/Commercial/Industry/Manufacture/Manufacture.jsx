@@ -1122,7 +1122,7 @@ const Manufacture = () => {
             fontWeight={400} 
             textAlign={"left"}
           >
-            All fields on this page are optional
+            All fields below are optional
           </Heading>
         </Box>
 
