@@ -196,19 +196,7 @@ const IndependentHouse = () => {
       houseNo &&
       bedroom &&
       bathroom &&
-      balconey &&
-      furnishedarr &&
-      ownership &&
-      pricedetail &&
-      inclusivePrices &&
-      additinalft &&
-      watersource &&
-      overLook &&
-      powerbackup &&
-      propertyFacing &&
-      flooring &&
-      facing &&
-      totalfloors
+      balconey  
     ) {
       let id = localStorage.getItem("usrId") || undefined;
       let authorization = localStorage.getItem("AstToken") || undefined;

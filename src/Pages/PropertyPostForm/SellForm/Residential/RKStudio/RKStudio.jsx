@@ -200,20 +200,7 @@ const RKStudio = () => {
       houseNo &&
       bedroom &&
       bathroom &&
-      balconey &&
-      furnishedarr &&
-      ownership &&
-      pricedetail &&
-      inclusivePrices &&
-      additinalft &&
-      watersource &&
-      overLook &&
-      powerbackup &&
-      propertyFacing &&
-      flooring &&
-      facing &&
-      totalfloors &&
-      floorOn
+      balconey  
     ) {
       let id = localStorage.getItem("usrId") || undefined;
       let authorization = localStorage.getItem("AstToken") || undefined;

@@ -164,11 +164,7 @@ const PlotLand = () => {
       city &&
       locality &&
       ownership &&
-      pricedetail &&
-      inclusivePrices &&
-      overLook &&
-      propertyFacing &&
-      facing
+      pricedetail 
     ) {
       let id = localStorage.getItem("usrId") || undefined;
       let authorization = localStorage.getItem("AstToken") || undefined;
