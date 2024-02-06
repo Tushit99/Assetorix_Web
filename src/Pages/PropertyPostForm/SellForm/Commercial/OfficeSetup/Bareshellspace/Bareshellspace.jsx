@@ -51,7 +51,7 @@ const Bareshellspace = () => {
   const [preLeased, setPreLeased] = useState("");
   const [fireNOC, setFireNOC] = useState("");
   const [occupancyCertificate, setOccupancyCertificate] = useState("");
-  const [locatedInside, setLocatedInside] = useState("");
+  const [locatedInside, setLocatedInside] = useState("Located in side");
   const [pantrySize, setPantrySize] = useState("");
   const [pantryType, setPantryType] = useState("");
   const [floorNumber, setFloorNumber] = useState([]);
@@ -85,7 +85,7 @@ const Bareshellspace = () => {
   const [pincollection, setPinCollection] = useState([]);
   const [maintenancePrice, setMaintenancePrice] = useState("");
   const [maintenanceTimePeriod, setMaintenanceTimePeriod] = useState("Monthly");
-  const [zoneType, setZoneType] = useState("");
+  const [zoneType, setZoneType] = useState("Industrial");
   const [isClicked, setIsClicked] = useState(false);
   const [clickCount, setClickCount] = useState(0);
   const [currency, setCurrency] = useState("₹");
@@ -535,7 +535,7 @@ const Bareshellspace = () => {
           onChange={(e) => setLocatedInside(e.target.value)}
           value={locatedInside}
         >
-          <option value="">Located in side</option>
+          <option value="Located in side">Located in side</option>
           <option value="IT Park">IT Park</option>
           <option value="Business Park"> Business Park </option>
           <option value="Other"> Other </option>
@@ -545,7 +545,7 @@ const Bareshellspace = () => {
           variant="flushed"
           as={"select"}
           onChange={(e) => setZoneType(e.target.value)}
-          value={zoneType}
+          value={zoneType} 
         >
           <option value="Industrial">Industrial</option>
           <option value="Commercial">Commercial</option>
@@ -1329,8 +1329,8 @@ const Bareshellspace = () => {
               </Checkbox>
               <Checkbox
                 onChange={handleNumberOfParking}
-                value={"Private Parking Outside"}
-                isChecked={parkingArr.includes("Private Parking Outside")}
+                value={"Public Parking"}
+                isChecked={parkingArr.includes("Public Parking")}
               >
                 Public Parking
               </Checkbox>
@@ -1583,42 +1583,7 @@ const Bareshellspace = () => {
             </Checkbox>
           </Box>
         </Box>
-
-        {/* checkbox */}
-        <Box display={"flex"} gap={10} marginTop={5} flexWrap={"wrap"}>
-          <Checkbox
-            isChecked={inclusivePrices.includes("All inclusive price")}
-            onChange={(e) => {
-              e.preventDefault();
-              handleinclusiveandtax(e.target.value);
-            }}
-            value={"All inclusive price"}
-          >
-            All inclusive price
-          </Checkbox>
-          <Checkbox
-            isChecked={inclusivePrices.includes(
-              "Tax and Govt. charges excluded"
-            )}
-            onChange={(e) => {
-              e.preventDefault();
-              handleinclusiveandtax(e.target.value);
-            }}
-            value={"Tax and Govt. charges excluded"}
-          >
-            Tax and Govt. charges excluded
-          </Checkbox>
-          <Checkbox
-            isChecked={inclusivePrices.includes("Price Negotiable")}
-            onChange={(e) => {
-              e.preventDefault();
-              handleinclusiveandtax(e.target.value);
-            }}
-            value={"Price Negotiable"}
-          >
-            Price Negotiable
-          </Checkbox>
-        </Box>
+ 
 
         {/* Additional Pricing Detail (Optional) */}
         <Box display={"grid"}>
@@ -2064,11 +2029,11 @@ const Bareshellspace = () => {
             Waste Disposal
           </button>
           <button
-            className={amenities.includes("AMT") ? style.setbtn : style.btn}
+            className={amenities.includes("ATM") ? style.setbtn : style.btn}
             onClick={handleAminities}
-            value={"AMT"}
+            value={"ATM"}
           >
-            AMT
+            ATM
           </button>
           <button
             className={

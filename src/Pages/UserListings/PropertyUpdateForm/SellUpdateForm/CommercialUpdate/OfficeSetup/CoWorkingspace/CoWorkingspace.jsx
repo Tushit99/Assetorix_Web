@@ -1184,14 +1184,14 @@ const CoWorkingspaceUpdate = () => {
                         </button>
                         <button
                             className={
-                                amenities.includes("AMT")
+                                amenities.includes("ATM")
                                     ? style.setbtn
                                     : style.btn
                             }
                             onClick={handleAminities}
-                            value={"AMT"}
+                            value={"ATM"}
                         >
-                            AMT
+                            ATM
                         </button>
                         <button
                             className={
